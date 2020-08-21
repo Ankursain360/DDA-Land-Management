@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model List<Libraries.Model.Entity.Country>
+
+    <ul>
+        <li>
+            @foreach (var item in Model)
+            {
+                @item.Name
+            }
+        </li>
+    </ul>
