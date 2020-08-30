@@ -20,6 +20,7 @@ namespace LMS_Encrochment_Management.Controllers
 
         public IActionResult WatchWardApproval()
         {
+            //Added by renu 29 aug 2020
             return View();
         }
 
