@@ -1,48 +1,405 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Demolition</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <title>Admin Dashboard</title>
+
+    <link rel="stylesheet" href="~/Admin/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Admin/css/datepicker3.css" />
+    <link rel="stylesheet" href="~/Admin/css/styles.css" />
+    <link rel="stylesheet" href="~/Admin/css/font-awesome.min.css" />
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
+
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <style>
+        .canvasjs-chart-credit {
+            display: none !important;
+        }
+
+        .btn {
+            width: 100px;
+        }
+
+        .nav li {
+            background: #3e4a9a;
+        }
+    </style>
+
+    <style>
+
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            height: 50px;
+            margin-top: 50px;
+            margin-bottom: -10px;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Demolition</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+
+<body style="font-family:sans-serif">
+    <header class="navbar navbar-custom navbar-fixed-top" style="min-height:30px;height:30px; Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); " role="navigation">
+        <div class="col-md-offset-11" style="color:#fff; padding-top:6px; font-size:13px">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <i class="fa-user-circle fa"></i> Hi, DDA
+                    <span class="caret"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="/Login/Create">Logout</a></li>
+                    <li><a href="#">Profile</a></li>
+                </ul>
             </div>
-        </nav>
+            @*<a data-toggle="collapse" href="#sub-item-4" style="Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); ">
+                     Hi DDA <span data-toggle="collapse" href="#sub-item-4" ><i class="fa-angle-down fa"></i></span>
+                </a>
+                <ul class="children collapse" id="sub-item-4">
+                    <li>
+                        <a class="" href="/PropertyRegistration/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Property Registration
+                        </a>
+                    </li>
+                </ul>*@
+
+            @*<i class="fa-user-circle fa"></i> Hi, DDA <i class="fa-angle-down fa"></i>*@
+        </div>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 col-md-2 sidebar" style="position: fixed;Font-size: 14px; color: #ffffff; Background: #2c3091;margin-top:-30px;">
+        <div role="separator" class="divider">
+            <img src="~/images/DDAL.JPG" height="70" class="img-responsive" alt="">
+        </div>
+        <hr style="color:darkblue; border-top: 1px solid #534e9a ;" />
+        <div style="padding-left:10px; padding-right:10px;">
+            <a href="/Dashboard/Index"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-0" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a>
+        </div>
+        <ul class="nav menu" style="font-family:sans-serif; font-size:13px!important;">
+            @*<li class=""><a href="#"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a></li>*@
+            <li class=""></li>
+
+         
+
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-7">
+                    <em class="fa fa-barcode">&nbsp;</em>Demolition Process Module <span data-toggle="collapse" href="#sub-item-7" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-7">
+                    <li>
+                        <a class="" href="/Demolation/Report">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Diary
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Complaint/Report">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Online Complaint
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-8">
+                    <em class="fa fa-tag">&nbsp;</em>Damage Payee<span data-toggle="collapse" href="#sub-item-8" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-8">
+                    <li>
+                        <a class="" href="/DamagePayeeRegistration/PayeeRegistration">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Registration
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DamagePayeeRegister/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Register
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DamagePayeeApproval/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Register Approval Process
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/NoticeToDamagePayee/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Notice to Damage Payee
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="" href="/DamageCalculationReport/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Calculation Report
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Payment/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Payment
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Door2DoorSurvey/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Door To Door Survey
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DamagePayeeRegistration/DamageCalculator">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Calculator
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/SubstitutionMutationDetails/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Apply For Mutation
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-9">
+                    <em class="fa fa-list-alt">&nbsp;</em>Demand Letters Maintenance Module<span data-toggle="collapse" href="#sub-item-9" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-9">
+                    <li>
+                        <a class="" href="/DemandLetter/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demand Letter
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DuplicateDemandLetter/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Duplicate Demand Letter
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DemandReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demand Report
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-10">
+                    <em class="fa fa-globe">&nbsp;</em>Imposition of Charges <span data-toggle="collapse" href="#sub-item-10" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-10">
+                </ul>
+            </li>
+
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-11">
+                    <em class="fa fa-tasks">&nbsp;</em>Demand & Collection Ledger Program<span data-toggle="collapse" href="#sub-item-11" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-11">
+                    <li>
+                        <a class="" href="/DemandCollectionLedger/Create">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demand & Collection Ledger
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-12">
+                    <em class="fa fa-briefcase">&nbsp;</em>Defaulter Listing Program <span data-toggle="collapse" href="#sub-item-12" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-12">
+
+                    <li>
+                        <a class="" href="/DefaulterListingReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Defaulter Listing Report
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-13">
+                    <em class="fa fa-film">&nbsp;</em>Penalty Imposition and Relief<span data-toggle="collapse" href="#sub-item-13" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-13">
+                    <li>
+                        <a class="" href="/ReliefReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Relief Report
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-14">
+                    <em class="fa fa-leaf">&nbsp;</em>Payment Verification and Reconciliation<span data-toggle="collapse" href="#sub-item-14" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-14">
+                    <li>
+                        <a class="" href="/DuesVsPaidAmountReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Dues Vs Paid Amount Report
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/PaymentTransactionReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Payment Transaction Report
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/PaymentVeridonebyAccSection/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Payment Verification done by Account Section
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/NoticeGenerationReport/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Notice Generation Report
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        
+            <li class="parent divider">
+                <a data-toggle="collapse" href="#sub-item-40">
+                    <em class="fa fa-book">&nbsp;</em>Reports<span data-toggle="collapse" href="#sub-item-40" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                </a>
+                <ul class="children collapse" id="sub-item-40">
+                    <li>
+                        <a class="" href="/Report/Deletedproperties">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Deleted Properties
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/Listofdatauploaded">
+                            <span class="fa fa-arrow-right">&nbsp;</span>List of Data Uploaded
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/userwiselandstatusreport">
+                            <span class="fa fa-arrow-right">&nbsp;</span>User Wise Land Status
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/userwiselandstatusreportwithmobile">
+                            <span class="fa fa-arrow-right">&nbsp;</span>User Wise Land Status With Mobile
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/StatusofVacantLand">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Status of Vacant Land
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/Demolitionstatusreport">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Status Report
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/DiscripencyReport">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Discripency
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/DemolitionUploadedPhotos">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Uploaded Photos
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/VacantPlots">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Vacant Plots
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/Listofdatauploaded">
+                            <span class="fa fa-arrow-right">&nbsp;</span>List of Data Uploaded
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/ListOfLocalities_ImagesNotUploaded">
+                            <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Images Not Uploaded)
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/ListOfLocalities_NotUploadedImage">
+                            <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Not Uploaded Image)
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/IntervalReportsOfPhotosUploaded">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Interval Reports Of Photos Uploaded
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/StatusOfAllotedProperties">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Status Of Alloted Properties
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/StatusReport_Engg_Lm_Hort">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Status Report Engg LM Hort
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/PhotoNotUploadedWithinTime">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded WithinTime
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/Report/PhotoNotUploadedDuringDates">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded During Dates
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+
+
+
+        </ul>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2020 - Demolition - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <partial name="_CookieConsentPartial" />
+    <div class="col-lg-10 col-md-10 col-md-offset-2" style="padding-left:0; margin-top:-2%;">
+        <div class="row">
+            <img src="http://res.cloudinary.com/deb9cwxor/image/upload/v1595791041/oy34mzpbprqa1fwnbxgd.jpg" height="75" style="position: relative; z-index: 0; width:100%;" />
+        </div>
+        @RenderBody()
+    </div>
+
+    <footer style="background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); Color: #ffffff; Font-size: 0.80rem; Font-Family: Open SansRegular;">
+        <div class="col-sm-12" style="color: #f8f8f8; float: none; font-family:sans-serif; font-size:11px; line-height: 150%; padding: 5px 25px 0px 10px; text-align: left; width: auto; ">
+            <div class="pull-left">
+                Terms & Conditions | Privacy Policy | Copyright Policy | Hyperlink policy |  Accessibility Statement | Help <br />
+                © Content Owned by DDA, Government of India.
+            </div>
+
+            <div class="pull-right" style="padding-left:40%; text-align: right; width: auto; ">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="#" style="color:#fff;">
+                                Contact with us: &nbsp; <i class="fa fa-facebook" style="color:#ffffff;"></i> &nbsp; <i class="fa fa-twitter" style="color:#ffffff;"></i>&nbsp; <i class="fa fa-youtube" style="color:#ffffff;"></i><br /><span>Visitors: 137713714, last Updated On: 31/07/2020</span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+
+    <script src="~/Admin/js/jquery-1.11.1.min.js"></script>
+    <script src="~/Admin/js/bootstrap.min.js"></script>
+    <script src="~/Admin/js/chart.min.js"></script>
+    <script src="~/Admin/js/chart-data.js"></script>
+    <script src="~/Admin/js/easypiechart.js"></script>
+    <script src="~/Admin/js/easypiechart-data.js"></script>
+    <script src="~/Admin/js/bootstrap-datepicker.js"></script>
+    <script src="~/Admin/js/custom.js"></script>
+    <script>
+        window.onload = function () {
+            var chart1 = document.getElementById("line-chart").getContext("2d");
+            window.myLine = new Chart(chart1).Line(lineChartData, {
+                responsive: true,
+                scaleLineColor: "rgba(0,0,0,.2)",
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleFontColor: "#c5c7cc"
+            });
+        };
+    </script>
 </body>
+
 </html>

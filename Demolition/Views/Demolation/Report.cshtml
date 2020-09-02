@@ -1,0 +1,253 @@
+﻿@*@model LMS_Encrochment_Management.Models.TblDemolation*@
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+  /*  div.panel-heading {
+        height: 90px;
+        text-align: center;
+    }
+
+    input {
+        border: 0px;
+    }*/
+</style>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Demolition Diary</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+@*<div>
+    @Html.ActionLink("Download ", "Create", "Demolition", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+
+</div>*@
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+        </div>
+        @*<div class="panel-heading  myapp-hed1">
+            <h5 style="color:white;">Delhi Development Authority</h5>
+            <h6 style="color:white;">Land Protection Branch (SEZ)</h6>
+            <h6 style="color:white; text-decoration:underline; ">Demolition Report</h6>
+
+        </div>*@
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">File No.</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Date</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Area</label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm ">Police Station</label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Name of the Area/Site</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Encroachment Since</label>
+                        <input type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Date of Approval of Demolition</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Name of Encroacher, if any</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Start of Demolition Action</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Photographs Before Demolition</label>
+                        <input type="file" class="form-control" multiple>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">End of Demolition Action</label>
+                        <input type="date" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Photographs After Demolition</label>
+                        <input type="file" class="form-control" multiple>
+                    </div>
+                </div>
+
+
+                <div class="container-fluid" id="MainContentForm">
+                    <div class="panel">
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" border="0">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Structure Name</th>
+                                            <th>No. of Structure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>
+                                                Jhuggies
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>
+                                                Pucca Rooms
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>
+                                                Semi-Pucca Rooms
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>4</td>
+                                            <td>
+                                                Commercial Structure
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>5</td>
+                                            <td>
+                                                Boundary Walls
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>6</td>
+                                            <td>
+                                                Others
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>7</td>
+                                            <td>
+                                                Religious Structure
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>8</td>
+                                            <td>
+                                                Temporary Structure
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>9</td>
+                                            <td>
+                                                Tin Sheds
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Area Reclaimed(approx.)</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Remarks, If Any </label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+                <br />
+                @*<div class="row form-group">
+
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Office Incharge <br />Land Owning Agency:DDA</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>*@
+                <br />
+                <div class="row">
+                    <div class="row col-md-12" style="justify-content:center">
+                        <input type="submit" value="Create" disabled class="btn btn-primary myapp-hed1" />
+                        @Html.ActionLink("Back", "Index", "Demolation", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
