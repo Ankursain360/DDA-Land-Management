@@ -1,0 +1,531 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Substitution/Mutation Applicant's Detail</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">File Information</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div id="DivForFileName">
+
+                    <div class="form-row">
+
+                        <div class="col-md-6">
+                            <label class="control-label lb-sm">File No.</label>
+                            <input type="text" required class="form-control" />
+                            <br />
+                        </div>
+
+                    </div>
+
+                </div>
+                <br />
+                <br />
+
+                <div class="form-row">
+                    @*<div class="form-group col-md-6">
+                <label class="control-label lb-sm"> Name/Subject</label><span style="color:red">*</span>
+                <input type="text" required class="form-control" />
+            </div>
+            <div class="form-group col-md-6">
+                <br />
+                <label class="control-label lb-sm">Is part of this main file?</label><span style="color:red">*</span>
+                <label class="radio-inline">
+                    <input type="radio" name="grpMainFile" id="rSubsequent" checked>Yes
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="grpMainFile" id="rOriginal">No
+                </label>
+            </div>*@
+
+                </div>
+
+
+                <div id="DivForSubsequentPurchaser">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Previous Damagee Assessee Detail</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-responsive table-bordered table-card">
+
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Name</th>
+                                            <th>Father's Name</th>
+                                            <th>Date Of GPA/STA</th>
+                                            <th>Upload GPA/STA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="DivForNewDamageAssesseDetails">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">New Damagee Assessee Detail</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table class="table table-responsive table-bordered table-card">
+
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Name</th>
+                                            <th>Father's Name</th>
+                                            <th>Date Of GPA/STA</th>
+                                            <th>Upload GPA/STA</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+
+                                        <tr>
+                                            <td>1</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div id="DivLocation">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Property Identification Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Property/House/Municipal No.</label><span style="color:red">*</span>
+                            <input type="text" required class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Locality Name</label><span style="color:red">*</span>
+                            <input type="text" required class="form-control" />
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Floor No.(if purchased floor wise)</label><span style="color:red">*</span>
+                            <input type="text" required class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Road</label><span style="color:red">*</span>
+                            <input type="text" required class="form-control" />
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Street Name</label><span style="color:red">*</span>
+                            <input type="text" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Pin Code</label><span style="color:red">*</span>
+                            <input type="Number" required class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Upload Photograph Of Property</label><span style="color:red">*</span>
+                            <input type="file" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Pin Code</label><span style="color:red">*</span>
+                            <input type="Number" required class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Plot Area in Sq.Yds</label><span style="color:red">*</span>
+                            <input type="number" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Floor Area in Sq.Yds</label><span style="color:red">*</span>
+                            <input type="Number" required class="form-control" />
+                        </div>
+                    </div>
+                </div>
+                @*<div id="Divflat">*@
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Purpose Of Mutation Change Of/Title</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Purchaser
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Inheritance
+                        </label>
+                    </div>
+
+                </div>
+
+
+
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">If Purchased</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Date Of Purchased</label><span style="color:red">*</span>
+                        <input type="date" required class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload ATS(Agreement To sell)</label><span style="color:red">*</span>
+                        <input type="File" required class="form-control" />
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload GPA(General Power Attorny If any) </label><span style="color:red;width:15px"></span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload Money Receipts(General Power Attorny If any) </label><span style="color:red;width:15px"></span>
+                        <input type="file" required class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload Specimen</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Upload Latest Address Proof</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />House Tax Bill
+                        </label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Electricity Bill
+                        </label>
+                    </div>
+
+
+                    <div class="form-group col-md-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Water Bill
+                        </label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Anyother
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Choose file</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Upload Affidavit On Non-Judicial Stamp</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Affidavit</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <br />
+                    <div class="form-group col-md-4">
+                        <a href="url">click for Download Affidavit Format</a>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Upload indemnity Bond on Non-Judicial Stamp papers(Download Format)</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Indemnity</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Upload</label><span style="color:red;width:15px">*</span>
+                        <input type="file" required class="form-control" />
+                    </div>
+                    <br />
+                    <div class="form-group col-md-4">
+                        <a href="url">click for Download Indemnity Bond Format</a>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Litigation Status</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />The Land/Property is not a subject matter of any Litigation/Court case
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />TheLand/ Property title is under Litigation
+                        </label>
+                    </div>
+
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Details Of Court Case(if any)</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Name Of Court</label><span style="color:red;width:15px"></span>
+                        <input type="text" required class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Number</label><span style="color:red;width:15px">*</span>
+                        <input type="text" required class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Name Of Opposition Party</label><span style="color:red;width:15px"></span>
+                        <input type="text" required class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <br />
+                        <label class="control-label lb-sm">I am</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Petitioner
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Respondent
+                        </label>
+                    </div>
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Declaration</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="checkbox" name="View">
+                            <label class="control-label lb-sm">I am</label>
+                            <p>I/We hereby declare that above information provided is correct</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group  col-md-12" style="justify-content:center">
+                        <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Go To Damage", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-primary myapp-hed1", @style="width:auto" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+    </div>
+
+
+
+  

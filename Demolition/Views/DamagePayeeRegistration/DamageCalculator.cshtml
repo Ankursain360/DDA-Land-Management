@@ -1,0 +1,256 @@
+﻿
+@{
+    ViewData["Title"] = "DamageCalculator";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Damage Calculator</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Damage Property</label><span style="color:red">*</span>
+                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Residential</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Date of Encroachment</label><span style="color:red">*</span>
+                        <input type="date" class="form-control" id="txtEncroachmentDate" />
+                    </div>
+
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">From Date</label><span style="color:red">*</span>
+                        <input type="date" class="form-control" id="txtEncroachmentFromDate" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">To Date</label><span style="color:red">*</span>
+                        <input type="date" class="form-control" id="txtEncroachmentToDate" />
+                    </div>
+
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Locality</label><span style="color:red">*</span>
+                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Puth</option>
+                        </select>
+                    </div>
+
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Area in sq. yds.</label><span style="color:red">*</span>
+                        <input type="text" class="form-control" />
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="row col-md-12" align="center">
+                        <input type="submit" value="Calculate" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+                <br />
+                <div id="DivMainContentForm">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Damage Calculation</label>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Interest Calculation</label>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="row form-group">
+                                <div class="form-group col-md-6">
+                                    <div style="overflow-x:auto;">
+                                        <table class="table table-responsive table-bordered table-card">
+
+                                            <thead class="thead">
+                                                <tr class="myapp-hed1">
+                                                    <th>Sr.No</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Rate</th>
+                                                    <th>Area</th>
+                                                    <th>Month</th>
+                                                    <th>Damage Charges</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>01/08/2008</td>
+                                                    <td>31/03/2009</td>
+                                                    <td>80.05</td>
+                                                    <td>1500</td>
+                                                    <td>8</td>
+                                                    <td>960600</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>01/04/2009</td>
+                                                    <td>31/03/2010</td>
+                                                    <td>80.05</td>
+                                                    <td>1500</td>
+                                                    <td>12</td>
+                                                    <td>1440900</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>01/04/2010</td>
+                                                    <td>31/03/2011</td>
+                                                    <td>88.06</td>
+                                                    <td>1500</td>
+                                                    <td>12</td>
+                                                    <td>174360</td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <div style="overflow-x:auto;">
+                                        <table class="table table-responsive table-bordered table-card">
+
+                                            <thead class="thead">
+                                                <tr class="myapp-hed1">
+                                                    <th>Sr.No</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Month</th>
+                                                    <th>Outstanding Damage</th>
+                                                    <th>Paid Amount as claimed by assessee</th>
+                                                    <th>Interest</th>
+                                                    <th>Cumlative Interest</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>01/08/2008</td>
+                                                    <td>31/03/2009</td>
+                                                    <td>8</td>
+                                                    <td>960600</td>
+                                                    <td>0</td>
+                                                    <td>44828</td>
+                                                    <td>44828</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>01/04/2009</td>
+                                                    <td>31/03/2010</td>
+                                                    <td>12</td>
+                                                    <td>2401500</td>
+                                                    <td>0</td>
+                                                    <td>168105</td>
+                                                    <td>212933</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>01/04/2010</td>
+                                                    <td>31/03/2011</td>
+                                                    <td>12</td>
+                                                    <td>3986530</td>
+                                                    <td>0</td>
+                                                    <td>279061</td>
+                                                    <td>491994</td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        $('#txtEncroachmentDate').attr('max', maxDate);
+        $('#txtEncroachmentFromDate').attr('max', maxDate);
+        $('#txtEncroachmentToDate').attr('max', maxDate);
+    });
+
+
+
+</script>
+
+

@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Payment</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create" method="post" id="1">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                @*<div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Filing Date is between specified period</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+              
+                <div class="container-fluid" id="showcollection">
+
+                    <div class="card  table-card" style="overflow:scroll;">
+
+                        <table class="table table-responsive table-bordered table-card">
+
+
+                            <thead class="thead">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>
+
+                                        Demand No
+
+                                    </th>
+                                    <th>
+                                       Due Date
+                                    </th>
+                                    <th>
+                                        Payee Name
+                                    </th>
+                                    <th>
+                                        Demand Amount
+                                    </th>
+                                    <th>Interest Amount</th>
+                                    <th>Rebate Amount</th>
+                                    <th>Total Amount</th>
+                                    <th colspan="2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        F-1(73)
+
+                                    </td>
+                                    <td>
+                                        11/8/2020
+                                    </td>
+                                    <td>
+                                        Payee name
+                                    </td>
+                                    <td>40000</td>
+                                    <td>1000</td>
+                                    <td>3000</td>
+                                    <td>44000</td>
+                                    <td>
+
+                                        <input type="button" value="PayNow" class="btn btn-primary myapp-hed1" />
+
+
+
+                                    </td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        F-1(73)
+
+                                    </td>
+                                    <td>
+                                        11/8/2020
+                                    </td>
+                                    <td>
+                                        Payee name
+                                    </td>
+                                    <td>40000</td>
+                                    <td>1000</td>
+                                    <td>3000</td>
+                                    <td>44000</td>
+                                    <td>
+
+                                        <input type="button" value="PayNow" class="btn btn-primary myapp-hed1" />
+
+
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <br /><br />
+
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("input[name=btnsubmit]").click(function () {
+                if ($(this).val() == "Search") {
+                    $("#DivForSubsequentPurchaser").show();
+                } else {
+                    $("#DivForSubsequentPurchaser").hide();
+                }
+            });
+        });
+
+    </script>
+
+
+    <script>
+        function showcollection() {
+            $("#showcollection").toggle();
+            $("#showtr").toggle();
+
+        }
+    </script>

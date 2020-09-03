@@ -19,13 +19,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Libraries\Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteMaster", "SiteMaster\SiteMaster.csproj", "{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Demolition", "Demolition\Demolition.csproj", "{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamagePayee", "Demolition\DamagePayee.csproj", "{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandAcquisition", "LandAcquisition\LandAcquisition.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encroachment", "Encroachment\Encroachment.csproj", "{C02A219E-CE05-43CA-9D09-6D850B3B211E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

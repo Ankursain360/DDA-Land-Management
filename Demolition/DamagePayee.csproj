@@ -16,8 +16,36 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\DamageCalculationReport\Create.cshtml" />
+    <None Include="Views\DamagePayeeApproval\Create.cshtml" />
+    <None Include="Views\DamagePayeeApproval\Index.cshtml" />
+    <None Include="Views\DamagePayeeRegister\Create.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\DamageCalculationReport.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\DamageCalculator.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\DamagePayeeRegister.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\DemandLetter.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\NoticeToDamagePayee.cshtml" />
+    <None Include="Views\DamagePayeeRegistration\PayeeRegistration.cshtml" />
+    <None Include="Views\DefaulterListingReport\Index.cshtml" />
+    <None Include="Views\DemandCollectionLedger\Create.cshtml" />
+    <None Include="Views\DemandLetter\Create.cshtml" />
+    <None Include="Views\DemandLetter\GenerateDemandLetter.cshtml" />
+    <None Include="Views\DemandReport\Index.cshtml" />
     <None Include="Views\Demolation\Index.cshtml" />
     <None Include="Views\Demolation\Report.cshtml" />
+    <None Include="Views\Door2DoorSurvey\Create.cshtml" />
+    <None Include="Views\Door2DoorSurvey\Index.cshtml" />
+    <None Include="Views\DuesVsPaidAmountReport\Index.cshtml" />
+    <None Include="Views\DuplicateDemandLetter\DuplicateDemandLetter.cshtml" />
+    <None Include="Views\DuplicateDemandLetter\Index.cshtml" />
+    <None Include="Views\NoticeGenerationReport\Index.cshtml" />
+    <None Include="Views\NoticeToDamagePayee\Create.cshtml" />
+    <None Include="Views\PaymentTransactionReport\Index.cshtml" />
+    <None Include="Views\PaymentVeridonebyAccSection\Index.cshtml" />
+    <None Include="Views\Payment\Index.cshtml" />
+    <None Include="Views\ReliefReport\Index.cshtml" />
+    <None Include="Views\SubstitutionMutationApplicantsDetail\Create.cshtml" />
+    <None Include="Views\SubstitutionMutationDetails\Create.cshtml" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -67,6 +95,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="MySql.Data" Version="8.0.17" />
     <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.17" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.17" />
   </ItemGroup>
 
 </Project>

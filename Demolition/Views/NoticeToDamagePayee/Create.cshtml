@@ -1,0 +1,435 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Notice To Damage Payee</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" />By File Name
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbPayeename" />By Payee Name
+                        </label>
+                    </div>
+                </div>
+                <div id="DivForFileName" style="display:none">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">By File Name</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">File Name</label><span style="color:red">*</span>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div id="DivForPayeeName" style="display:none">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">By Payee Name</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">District</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">---Select---</option>
+                                <option value="1">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Locality</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">---Select---</option>
+                                <option value="1">Inactive</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Payee Name</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">---Select---</option>
+                                <option value="1">Inactive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-row" id="DivForGenerate" style="display:none;">
+                    <div class="row col-md-12">
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Create", "NoticeToDamagePayee", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="content" style="max-width: 1200px; margin: auto; background: white; padding: 10px;">
+
+
+    <div style="margin-left:90px; max-width:80%">
+
+        <div class="row" style="border: groove; height:128px">
+
+            <div class="col-md-3" style="border-right:groove;">
+
+
+                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:110px" class="img-responsive" alt="">
+
+
+
+
+
+
+
+            </div>
+
+            <div class="col-md-6" style="">
+                <div>
+                    <h style="font-size:20px; color:black">
+
+                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+
+                    </h>
+                    <p style="color:black; font-size:16px">
+                        <u>
+                            <b>
+                                IN THE COURT OF ESTATE OFFICER-||<br />
+
+                                Room No.-05, A-Block, Ground Floor,<br />
+
+                                VIKAS SADAN INA, NEW DELHI -110023<br />
+
+                            </b>
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-3" style="border-left:groove;">
+                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:110px" class="img-responsive" alt="">
+
+
+            </div>
+
+        </div>
+
+        <div class="panel-body">
+
+            <div class="row">
+                <div class="col-md-3">
+                    <label> फाइल सं. </label>
+                    <p style="color:black;">File No.</p>
+                </div>
+                <div class="col-md-6"></div>
+                <div class="col-md-3">
+                    <label> दिनांक</label>
+
+                    <p style="color:black">Dated</p>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label> Shri/smt :</label>
+                    <p style="color:black">Add :</p>
+                </div>
+                <div class="col-md-6">
+                    <label> </label>
+                </div>
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
+
+
+                        विषय : सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली ) अधिनियम , 1971  की  धरा 4(1)/7(3) के <br />
+                    </p>  <p style="color:black; margin-left:55px; text-align-last:justify">
+                        अंतर्गत...........................................................................................  दिल्ली  में  स्थित  सम्पति  सं.
+                        <br />
+                        .................................................के संबध में  श्री/श्रीमान................................................. के
+
+
+                    </p>
+
+
+                    <p style="        color: black;
+        margin-left: 55px;
+        margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
+
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
+
+
+                        Sub:
+
+
+
+
+
+                        Proceeedings U/S  4(1) / 7(3)  of the public premises ( Eviction of unauthorised <br />
+                    </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
+                        occupants ) Act , 1971 , against ____________________in respect of permises <br />
+
+
+
+
+                    </p>
+
+
+                    <p style="        color: black;
+        margin-left: 55px;
+        margin-top: -1.2%;">
+                        _________________________________
+
+                    </p>
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
+
+                        सरकारी स्थान (अप्राधिकृत अभिभोगियो की बेदखली ) अधिनियम , 1971 की धरा 4(1)/7(3) के
+
+                        <br />
+                    </p>   <p style="color:black; text-align-last:justify">
+                        अंतर्गत नोटिस के संम्बंध में आपको आयेतंत्द्वारा निर्देश दिया जाता है कि आप नोटिस की अपनी<br />
+                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक..................को
+
+                        <br />
+
+
+
+                    </p>
+                    <p style="        color: black;
+
+        margin-top: -1.2%;
+">02:30 P.M उपस्थित हो |</p>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="        color: black;
+        margin-left: 55px;
+        text-align-last: justify;
+        margin-bottom: -0.2%
+">
+
+                        In connection with the notice under Section 4(1)/7(3) of the Public Premises
+                    </p> <p style="        color: black;
+        margin-top: 0.8%; text-align-last:justify">
+                        ( Eviction of Unauthorised Occupants&nbsp;  ) Act ,&nbsp;  1971 &nbsp;  You are hereby directed  that  you may
+                        produce evidence in support of your objections to the notice and appear before the<br />
+
+
+                    </p>
+                    <p style="        color: black;
+
+        margin-top: -1.2%;
+">court of undersigned on __________ at 02:30 P.M</p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
+
+                        आप उक्त तिथि को उपस्थित होने में विफल रहेंगे, पूर्व-पक्षीय कार्यवाही शुरू की
+
+                        <br />
+                    </p>
+                    <p style="        color: black;
+
+        margin-top: -1.2%;
+"> जाएगी |</p>
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="        color: black;
+        margin-left: 55px;
+        text-align-last: justify;
+
+">
+                        In you fail to appear on the said date ex-parte  proceedings will be started
+                    </p>
+                    <p style="        color: black;
+
+        margin-top: -1.2%;
+">against you</p>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6">
+
+
+                </div>
+
+
+                <div class="col-md-3">
+
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <p style="color:black">
+                        संपदा अधिकारी-II D<br />
+                        Estate Officer-II D
+                    </p>
+
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+
+<script>
+
+    $(function () {
+        $("input[name='grpSearchby']").click(function () {
+            if ($("#rdbFilename").is(":checked")) {
+                $("#DivForFileName").show();
+                $("#DivForPayeeName").hide();
+                $("#DivForGenerate").show();
+            }
+           else if ($("#rdbPayeename").is(":checked")) {
+                $("#DivForFileName").hide();
+                $("#DivForPayeeName").show();
+                $("#DivForGenerate").show();
+            }
+                //else {
+            //    $("#DivForFileName").hide();
+            //    $("#DivForPayeeName").hide();
+            //}
+        });
+    });
+
+
+    @*on generate click show report*@
+    $("#btnGenerate").click(function () {
+        $("DivDemandReport").show();
+    });
+</script>

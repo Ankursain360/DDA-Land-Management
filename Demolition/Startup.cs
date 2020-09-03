@@ -45,18 +45,20 @@ namespace Demolition
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+          //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-          //  services.AddMvc()
-         //  .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-         //   services.AddSession();
-         //   services.AddMvc();
-         //   services.AddMvc().AddSessionStateTempDataProvider();
-         //   services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-         //   services.AddMvc().AddViewOptions(options =>
-         //   {
-         //    //   options.SuppressTempDataAttributePrefix = true;
-         //   });
+
+           // services.AddMvc()
+           //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            services.AddSession();
+            services.AddMvc();
+            services.AddMvc().AddSessionStateTempDataProvider();
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            services.AddMvc().AddViewOptions(options =>
+            {
+                //   options.SuppressTempDataAttributePrefix = true;
+            });
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";
@@ -89,7 +91,10 @@ namespace Demolition
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseSession();
+           // app.UseMvc();
+            app.UseCookiePolicy();
+            app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
