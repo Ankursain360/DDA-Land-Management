@@ -1,0 +1,91 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Nazul Land Information</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "FormN1", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card" style="overflow:scroll;">
+
+        <table class="table table-responsive table-bordered table-card">
+
+            <thead class="thead">
+                <tr>
+                    <th rowspan="2">Sr.No</th>
+                    <th rowspan="2">Khasra No.</th>
+                    <th rowspan="2">Land Area Acquired</th>
+                    <th rowspan="2">Award No. and Date</th>
+                    <th rowspan="2">Date of Possession</th>
+                    <th rowspan="2">Area of which possession taken over</th>
+                    <th rowspan="2">Date on which possession taken over</th>
+                    <th rowspan="2">Scheme for which Acquired</th>
+                    <th rowspan="2">Amount of Award</th>
+                    <th colspan="3">Enhanced compensation if any</th>
+                    <th rowspan="2">Certificate by Land Record Officer to the correctness of entry</th>
+                    <th rowspan="2">Division to Which Land has been transfered</th>
+                    <th rowspan="2">Date of Transfer</th>
+                    <th rowspan="2">Operation</th>
+                </tr>
+                <tr>
+                    <th>ADI Court</th>
+                    <th>High Court</th>
+                    <th>Supreme Court</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+                <tr>
+                    <td>1</td>
+                    <td>234</td>
+                    <td>545</td>
+                    <td>20-July-2020</td>
+                    <td>20-July-2020</td>
+                    <td>567</td>
+                    <td>20-July-2020</td>
+                    <td>xyz</td>
+                    <td>450</td>
+                    <td>xyz</td>
+                    <td>xyz</td>
+                    <td>xyz</td>
+                    <td>yes</td>
+                    <td>Division</td>
+                    <td>20-July-2020</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+

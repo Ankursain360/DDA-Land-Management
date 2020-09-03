@@ -1,0 +1,180 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Property Registration</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card " style="overflow:scroll;">
+
+        <table class="table table-responsive table-bordered table-card">
+
+
+            <thead class="thead">
+                <tr>
+                    <th rowspan="2">Sr.No</th>
+                    <th rowspan="2">Unique ID</th>
+                    <th rowspan="2">Locality</th>
+                    <th rowspan="2">Khasra No</th>
+                    <th rowspan="2">Area</th>
+                    <th colspan="4" style=" text-align:center">Area (in Sq. Mt.)</th>
+                    <th rowspan="2">Buit & type</th>
+                    <th rowspan="2">Layout Plan</th>
+                    <th rowspan="2">Upload File</th>
+                    <th rowspan="2">Land Use</th>
+                    <th colspan="3" style=" text-align:center">Taken Over</th>
+                    <th rowspan="2">Division</th>
+                    <th rowspan="2">Litigation Status</th>
+                    <th rowspan="2">GEO Referencing</th>
+                    <th colspan="3" style=" text-align:center">Handed Over</th>
+                    <th colspan="3" style=" text-align:center">Disposal</th>
+                    <th rowspan="2">Remarks</th>
+                    <th rowspan="2">Operation</th>
+                </tr>
+                <tr>
+                    <th >Boundary</th>
+                    <th >Total Area</th>
+                    <th >Encrochment</th>
+                    <th >Vacant</th>
+                    <th>Taken Over Name</th>
+                    <th>Taken Over/Date</th>
+                    <th>Taken Over/Comments</th>
+                    <th>Handed Over Name/Designation</th>
+                    <th>Handed Over/Date</th>
+                    <th>Handed Over/Comments</th>
+                    <th>Disposal type</th>
+                    <th>Disposal/Date</th>
+                    <th>Disposal/Comments</th>
+
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+                <tr>
+                    <td>1</td>
+                    <td>111</td>
+                    <td>dwarka</td>
+                    <td>1234</td>
+                    <td>dwarka</td>
+                    <td>yes</td>
+                    <td>1258</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>engg</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>lm</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>alloted</td>
+                    <td>7aug2020</td>
+                    <td>no comments</td>
+                    <td>good to use</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>111</td>
+                    <td>dwarka</td>
+                    <td>1234</td>
+                    <td>dwarka</td>
+                    <td>yes</td>
+                    <td>1258</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>engg</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>lm</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>alloted</td>
+                    <td>7aug2020</td>
+                    <td>no comments</td>
+                    <td>good to use</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>111</td>
+                    <td>dwarka</td>
+                    <td>1234</td>
+                    <td>dwarka</td>
+                    <td>yes</td>
+                    <td>1258</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>engg</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>lm</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>alloted</td>
+                    <td>7aug2020</td>
+                    <td>no comments</td>
+                    <td>good to use</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+
