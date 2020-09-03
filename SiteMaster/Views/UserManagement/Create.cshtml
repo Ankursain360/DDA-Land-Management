@@ -1,0 +1,338 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .alert-info {
+        color: #31708F;
+        background-color: rebeccapurple;
+        border-color: #BCE8F1;
+    }
+
+    .hedingcss {
+        background-color: rebeccapurple;
+    }
+
+    .panel-default > .panel-heading-custom {
+        background: #2c3091;
+        color: #fff;
+        height: 44px;
+        margin-bottom: 2px;
+        font-size: 16px;
+    }
+
+    .alert-custom {
+        top: -10px;
+        color: #fff;
+        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
+        position: relative;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .btn {
+        width: 143px !important;
+    }
+</style>
+
+
+<style>
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+    }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 11px;
+            left: 4px;
+            bottom: 2px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+    input:checked + .slider {
+        background-color: #2196F3;
+    }
+
+    input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 20px;
+    }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+</style>
+
+
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">
+                    User Master
+                </h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<br />
+<br />
+
+
+
+
+
+
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">
+                Edit User
+            </h6>
+        </div>
+        <div class="panel-body">
+            <form class="form-horizontal" action="" method="post">
+                <fieldset>
+
+
+                    <!-- Name input-->
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Zone Name </label>
+                            <select style="height:30px; background-color: #dddddd;" type="text" required class="form-control">
+                                <option value="1">-Select-</option>
+                                <option value="dept1">CE (Project)</option>
+                                <option value="dept2">Dwarka</option>
+                                <option value="dept3">South</option>
+                                <option value="dept3">Rohini</option>
+                                <option value="dept3">North</option>
+                                <option value="dept3"> East </option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label class="control-label">Login Name </label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Display Name </label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="control-label">Email ID </label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Contact No </label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="control-label">Role </label>
+                            <select style="height:30px; background-color: #dddddd;" type="text" required class="form-control">
+                                <option value="1">-Select-</option>
+                                <option value="dept1">Role 1</option>
+                                <option value="dept2">Role 2</option>
+                                <option value="dept3">Role 3</option>
+                                <option value="dept3">Role 4</option>
+
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Password </label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="control-label">Confirm Password</label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+
+                        <div class="col-md-6">
+                            <label class="control-label">Aadhar Card No</label>
+                            <input id="email" name="email" type="text" class="form-control">
+
+                        </div>
+
+                       
+
+                    </div>
+
+
+
+
+
+
+                    <div style="margin-left:150px">
+
+
+                        <div class="form-group">
+
+                            <div class="col-md-6">
+                                Set Default Password<br />
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                user must change password at first logon <br />
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+
+                        </div>
+
+
+
+
+                        <div class="form-group">
+
+                            <div class="col-md-6">
+                                Inactive User<br />
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+
+                            <div class="col-md-4" style="margin-right:100px">
+                                Locked User<br />
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider round"></span>
+                                </label>
+
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <br />
+
+
+
+
+                    <div class="form-group">
+                        <div class="row" style="width:500px; margin-left:160px">
+                            <div class="col-md-4">
+                                <button type="submit" style="width:150px" class="btn btn-info btn-md pull-center myapp-hed1">Create</button>
+                            </div>
+
+                            <div class="col-md-4" style="margin-top:10px">
+
+
+                                @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Email input-->
+                    <!-- Form actions -->
+                    <br /><br />
+                </fieldset>
+            </form>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
