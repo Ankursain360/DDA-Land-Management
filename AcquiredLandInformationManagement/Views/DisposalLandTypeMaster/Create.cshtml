@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .btn {
+        Background: linear-gradient(33deg, #8c1f47,#362c85);
+        Font-size: 1.0rem;
+        Font-Family: Open SansSemibold;
+        color: #ffffff
+    }
+</style>
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Disposal Land Type Master</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div id="divname">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> New Land </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Status</label>
+                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "DisposalLandTypeMaster", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*@if (ViewData["Msg"] != null)
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@
