@@ -19,25 +19,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Libraries\Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteMaster", "SiteMaster\SiteMaster.csproj", "{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamagePayee", "Demolition\DamagePayee.csproj", "{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandAcquisition", "LandAcquisition\LandAcquisition.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{5996C9B1-6ED9-4A34-9EB9-E619AC1A5FD0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EncroachmentDemolition", "EncroachmentDemolition\EncroachmentDemolition.csproj", "{35C2F029-B0F5-49AC-ABF6-92F8FD83B6BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AcquiredLandInformationManagement", "AcquiredLandInformationManagement\AcquiredLandInformationManagement.csproj", "{B6E841A7-24A4-4483-A230-93B436B4849B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AcquiredLandInformationManagement", "AcquiredLandInformationManagement\AcquiredLandInformationManagement.csproj", "{B6E841A7-24A4-4483-A230-93B436B4849B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandInventory", "LandInventory\LandInventory.csproj", "{2DC6C0EE-2F5B-4116-864A-CDB84B06D82A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandInventory", "LandInventory\LandInventory.csproj", "{2DC6C0EE-2F5B-4116-864A-CDB84B06D82A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LandTransfer", "LandTransfer\LandTransfer.csproj", "{4090647C-F43C-4AF4-9F49-F6A0B1A42EC1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandTransfer", "LandTransfer\LandTransfer.csproj", "{4090647C-F43C-4AF4-9F49-F6A0B1A42EC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourtCasesManagement", "CourtCasesManagement\CourtCasesManagement.csproj", "{F6779106-652A-493C-8C57-D3BB249D0297}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CourtCasesManagement", "CourtCasesManagement\CourtCasesManagement.csproj", "{F6779106-652A-493C-8C57-D3BB249D0297}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDataLoading", "FileDataLoading\FileDataLoading.csproj", "{BE2910C1-B5B7-484D-91DB-66616B8575B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FileDataLoading", "FileDataLoading\FileDataLoading.csproj", "{BE2910C1-B5B7-484D-91DB-66616B8575B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocumentManagementSystem", "DocumentManagementSystem\DocumentManagementSystem.csproj", "{C98F4396-2C1F-43EC-A54A-39F9A991E0DC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentManagementSystem", "DocumentManagementSystem\DocumentManagementSystem.csproj", "{C98F4396-2C1F-43EC-A54A-39F9A991E0DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamagePayee", "DamagePayee\DamagePayee.csproj", "{73DF8383-AAD7-4980-997D-6917CF122FB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -133,18 +133,6 @@ Global
 		{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}.Release|x64.Build.0 = Release|Any CPU
 		{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}.Release|x86.ActiveCfg = Release|Any CPU
 		{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}.Release|x86.Build.0 = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|x64.Build.0 = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Debug|x86.Build.0 = Debug|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|x64.ActiveCfg = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|x64.Build.0 = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|x86.ActiveCfg = Release|Any CPU
-		{E0D9162D-0C1B-4B1A-9655-E69FFC93F82F}.Release|x86.Build.0 = Release|Any CPU
 		{E3C7DEEE-CA53-4763-B413-E493621568EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E3C7DEEE-CA53-4763-B413-E493621568EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C7DEEE-CA53-4763-B413-E493621568EA}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -253,6 +241,18 @@ Global
 		{C98F4396-2C1F-43EC-A54A-39F9A991E0DC}.Release|x64.Build.0 = Release|Any CPU
 		{C98F4396-2C1F-43EC-A54A-39F9A991E0DC}.Release|x86.ActiveCfg = Release|Any CPU
 		{C98F4396-2C1F-43EC-A54A-39F9A991E0DC}.Release|x86.Build.0 = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|x64.Build.0 = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Debug|x86.Build.0 = Debug|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|x64.ActiveCfg = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|x64.Build.0 = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|x86.ActiveCfg = Release|Any CPU
+		{73DF8383-AAD7-4980-997D-6917CF122FB1}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
