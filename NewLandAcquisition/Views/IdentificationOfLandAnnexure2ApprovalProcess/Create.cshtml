@@ -1,0 +1,663 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Identification Of Land - Annexure II Approval Process</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div id="DivProjectDetails">
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Project Details</h6>
+                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Project/Proposal Name</label>
+                                <input type="text" class="form-control" placeholder="DDa project">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Project No/File No</label>
+                                <input type="text" class="form-control" placeholder="F-1(73)CM">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Required Agency</label>
+                                <input type="text" class="form-control" placeholder="DDA">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Area/Locality</label>
+                                <input type="text" class="form-control" placeholder="Okhla">
+                            </div>
+                        </div>
+                        <div class="form-row">
+
+
+                            <div class="form-group col-md-6">
+
+                                <label class="control-label lb-sm">Total Area Required</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="rha" checked>HA
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="racre">Acre
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="rmt">Square mt.
+                                </label>
+                                <br /> <br />
+                                <label class="control-label lb-sm">Area</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Purpose Of Acquisition</label>
+                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Commercial Use"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Remarks</label>
+                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Land is acquired"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="DivAnnexure1Details">
+                    <a data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Identification Of Land - Annexure I</h6>
+                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="collapse" id="collapseExample2">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Name of Village</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Name of Taluk/Sub-Division/Tehsil/Block(as applicable)</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Name of Municipality</label>
+                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">Nimri</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Name of District</label>
+                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">New Delhi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="Divclsification">
+                            <div class="row" style="margin-bottom:35px;">
+                                <div class="col-sm-12">
+                                    <div class=" myapp-hed2">
+                                        <div class="col-md-12">
+                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Surelly Not to be Required</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-bordered" border="0" id="tbl_posts">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th>Sr.No</th>
+                                                    <th>Khasra No.</th>
+                                                    <th>Area</th>
+                                                    <th>Ownership Status</th>
+                                                    <th>Owner Name</th>
+                                                    <th>Operation</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbl_posts_body">
+                                            </tbody>
+                                            <tbody class="tbody" id="add">
+                                                <tr id="">
+                                                    <td>1</td>
+                                                    <td>
+                                                        <input type="text" id="txtPersonalName" class="form-control" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="txtPersonalName" class="form-control" />
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                                            <option value="0">Private</option>
+                                                            <option value="1">Occupied by other dept.</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" id="txtPersonalAddress" class="form-control" />
+                                                    </td>
+                                                    <td>
+                                                        @*<button id="addToList" class="btn btn-primary myapp-hed1">
+                                            <i class="fa fa-plus"></i>
+                                        </button>*@
+                                                        <a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+                                                        <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Total Area Under Request</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline  ">
+                                            <input type="radio" name="court" id="court" value="" />HA
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline ">
+                                            <input type="radio" name="court" id="court" value="" />Acre
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline ">
+                                            <input type="radio" name="court" id="court" value="" />Sq. Meters
+                                        </label>
+                                    </div>
+                                </div>
+                                <input type="text" class="form-control" />
+                            </div>
+
+                        </div>
+                        <div id="Divclsification">
+                            <div class="row" style="margin-bottom:35px;">
+                                <div class="col-sm-12">
+                                    <div class=" myapp-hed2">
+                                        <div class="col-md-12">
+                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Boundaries of the Area to be Acquired</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label class="control-label lb-sm">East</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label lb-sm">West</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label lb-sm">North</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label class="control-label lb-sm">South</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Area of the Agricultural & Irrigated Multi Cropped Land(in HA/Acre/Sq. mtr)</label>
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Reasons For Inclusion of Agricultural and Irrigated Multi Cropped Land</label>
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div id="DivBuildingDetails">
+                            <div class="row" style="margin-bottom:35px;">
+                                <div class="col-sm-12">
+                                    <div class=" myapp-hed2">
+                                        <div class="col-md-12">
+                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Details of Building and Other Structure</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <table class="table table-responsive table-bordered table-card">
+
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>Structure</th>
+                                                <th>Number</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Building</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Tanks</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Wells</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>Trees</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Religious Building</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>Graveyard or Tomb</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Others</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                                <td><textarea type="text" class="form-control"></textarea></td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Reasons of the Inclusion of Building,Graveyard or Tomb</label>
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Remarks</label>
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <div id="DivAnnexure2Details">
+                    <a data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample1">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Identification Of Land - Annexure II</h6>
+                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="collapse" id="collapseExample1">
+                        <div id="DivBuildingDetails">
+                            <div class="row" style="margin-bottom:35px;">
+                                <div class="col-sm-12">
+                                    <div class=" myapp-hed2">
+                                        <div class="col-md-12">
+                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Details</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Requiring Body Type</label>
+                                    <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
+                                        <option value="1">Department</option>
+                                        <option value="2">Government</option>
+                                        <option value="3">Company</option>
+                                        <option value="4">Local Authority</option>
+                                        <option value="0">Institution</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Official Designation of Requiring Body</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Purpose of Acquisition(in detail)</label>
+                                    <textarea type="text" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <table class="table table-responsive table-bordered table-card">
+
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>Sr.No</th>
+                                                <th>Description</th>
+                                                <th>Value</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Whether the request is filed under section 2(1) of the Act by the Government or Department for its own use hold and control </td>
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" id="drp1" required="" class="form-control">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+
+                                                    <textarea type="text" placeholder="Description" class="form-control" id="txt1" style="display:none; margin-top:10px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Whether the request is filed under section 2(1)(a) to 2(1)(f) of the Act</td>
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" id="drp2" required="" class="form-control">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+
+                                                    <textarea type="text" placeholder="Description" class="form-control" id="txt2" style="display:none;margin-top:10px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>Whether the request is filed under section 2(2)(a) to (b) of the Act</td>
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" id="drp3" required="" class="form-control">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+
+                                                    <textarea type="text" placeholder="Description" class="form-control" id="txt3" style="display:none;margin-top:10px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>How Many families are affected as described under section 3(c)(i) to (vi) of the Act</td>
+                                                <td><input type="text" placeholder="How Many Families in Number" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Whether request is filed under section 40 of the Act </td>
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" id="drp4" required="" class="form-control">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+
+                                                    <textarea type="text" placeholder="Description" class="form-control" id="txt4" style="display:none;margin-top:10px;"></textarea>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>if so, on what ground?</td>
+                                                <td><input type="text" class="form-control" placeholder="On what ground?" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>Has the land for the project been partially purchased from the owners by private negotiation?</td>
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" id="drpHasLand" required="" class="form-control">
+                                                        <option value="0">No</option>
+                                                        <option value="1">Yes</option>
+                                                    </select>
+
+                                                    <input type="date" class="form-control" id="txtDateLand" placeholder="Date" style="display:none;margin-top:10px;" />
+                                                    <input type="text" class="form-control" id="txtLand" placeholder="Description" style="display:none;margin-top:10px;" />
+                                                    <input type="file" class="form-control" id="fileland" style="display:none;margin-top:10px;" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>If so, on what date and on what terms(please state the terms of negotiation in short and attach the copy of it)</td>
+                                                <td>
+                                                    <input type="date" class="form-control" /><br />
+                                                    <input type="text" class="form-control" placeholder="Description" /><br />
+                                                    <input type="file" class="form-control" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>9</td>
+                                                <td>Date of Issue of Administrative approval for the project (copy to be attached) in case of Government or Department or local authority.</td>
+                                                <td>
+                                                    <input type="Date" class="form-control" id="txtDate" style="display:block;" /><br />
+                                                    <input type="file" class="form-control" id="txtFile" style="display:block;" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>10</td>
+                                                <td>Reasons for delay in filling request, if request is filed after six weeks from the date of administrative approval of the project in case of Government or Department or local authority</td>
+                                                <td><input type="text" class="form-control" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>11</td>
+                                                <td>By what time possession of the land is required(in months).</td>
+                                                <td><input type="text" class="form-control" placeholder="In Months (Number only)" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td>12</td>
+                                                <td>Document(if any)</td>
+                                                <td><input type="file" class="form-control" multiple /></td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label lb-sm">Project will be (in yrs.)</label>
+                                <input type="text" class="form-control" placeholder="in Years (Number only)" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label lb-sm">Project will be (in months.)</label>
+                                <input type="text" class="form-control" placeholder="In Months (Number only)" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Estimated Cost of the Project(in Rs.)</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Remarks</label>
+                                <textarea type="text" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    </div>
+
+                <br />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Status</label>
+                        <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
+                            <option value="1">Forward To CLM</option>
+                            <option value="2">Approved</option>
+                            <option value="3">Reject</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "IdentificationOfLandAnnexure2ApprovalProcess", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(function () {
+        $('#drp1').change(function () {
+            var id = $("#drp1").val();
+            if (id == 1) {
+                $("#txt1").show();
+
+            }
+            else {
+                $("#txt1").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp2').change(function () {
+            var id = $("#drp2").val();
+            if (id == 1) {
+                $("#txt2").show();
+
+            }
+            else {
+                $("#txt2").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp3').change(function () {
+            var id = $("#drp3").val();
+            if (id == 1) {
+                $("#txt3").show();
+
+            }
+            else {
+                $("#txt3").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp4').change(function () {
+            var id = $("#drp4").val();
+            if (id == 1) {
+                $("#txt4").show();
+
+            }
+            else {
+                $("#txt4").hide();
+            }
+        });
+    });
+    $(function () {
+        $('#drpHasLand').change(function () {
+            var id = $("#drpHasLand").val();
+            if (id == 0) {
+                $("#txtDateLand").hide();
+                $("#txtLand").hide();
+                $("#fileland").hide();
+            }
+            else {
+                $("#txtDateLand").show();
+                $("#txtLand").show();
+                $("#fileland").show();
+            }
+        });
+    });
+</script>
+
+
+

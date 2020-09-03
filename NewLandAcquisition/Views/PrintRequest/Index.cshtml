@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<style>
+    table, tr, td {
+        border: none !important;
+    }
+</style>
+
+@*<script>
+    $(function () {
+        $("#txtDesignation").keypress(function (e) {
+            var keyCode = e.keyCode || e.which;
+
+            $("#lblError").html("");
+
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z0-9]+$/;
+
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));
+            if (!isValid) {
+                $("#lblError").html("Only Alphabets and Numbers allowed.");
+            }
+
+            return isValid;
+        });
+    });
+
+</script>*@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Request For Acquisition Of Land</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Request For Acquisition Of Land </h6>
+        </div>
+        <div class="panel-body">
+            <form method="post" asp-action="Index" id="1">
+                @*asp-action="Create"*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" name="search" id="searchname" value=""  />By Project Name
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="search" id="searchno" value="" />By Project File No
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+
+                    </div>
+
+                </div>
+
+
+
+                <div id="divname" style="display:none;">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">By Project Name</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Project Name  </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>Project 1</option>
+                                <option>project2</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div id="divfile" style="display:none;">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">By Project File No</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Project File No  </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>PF1021</option>
+                                <option>PF120365</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-row "  style="display:none;" id="DivForGenerate">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;" >
+                        @Html.ActionLink("Generate Letter", "PrintRequest", "PrintRequest", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
+                        @*<input type="submit" value="Generate" class="btn btn-primary myapp-hed1" id="btnprintreq" />*@
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @*@Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })*@
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@*@if (ViewData["Msg"] != null)
+{
+    DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+}*@
+
+
+
+
+<script>
+    $(function () {
+        $("input[name='search']").click(function () {
+            if ($("#searchname").is(":checked")) {
+                $("#divname").show();
+                $("#divfile").hide();
+                $("#DivForGenerate").show();
+            }
+            if ($("#searchno").is(":checked")) {
+                $("#divfile").show();
+                $("#divname").hide();
+                $("#DivForGenerate").show();
+
+            }
+        });
+    });
+</script>
+

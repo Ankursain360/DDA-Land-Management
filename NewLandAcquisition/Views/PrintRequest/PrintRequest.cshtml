@@ -1,0 +1,227 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+<style>
+    table, tr, td {
+        border: none !important;
+    }
+</style>
+
+@*<script>
+    $(function () {
+        $("#txtDesignation").keypress(function (e) {
+            var keyCode = e.keyCode || e.which;
+
+            $("#lblError").html("");
+
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z0-9]+$/;
+
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));
+            if (!isValid) {
+                $("#lblError").html("Only Alphabets and Numbers allowed.");
+            }
+
+            return isValid;
+        });
+    });
+
+</script>*@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Request For Acquisition Of Land</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+       
+        <div class="panel-body">
+            
+
+
+            <div class="container ">
+
+                <div id="printrequest">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+
+                            <table class="table table-responsive" border="0" style="padding:20px;margin-top:30px;">
+                                <tr>
+
+                                    <td style="text-align:center;font-weight:bold;"> The Right to Fair  Compensation and  Transparency in Land Acquisition     (Form)</td>
+
+                                </tr>
+
+                                <tr>
+                                    <td style="text-align:center;font-weight:bold;">   Rehabilitation and Resettlement ( Compensation, Rehabilitation  and Resettlement and  Development  Plan) [Rule 2015]</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="text-align:center;font-weight:bold;">
+                                        FORM 1 <br />
+                                        [See rule 3(I)]
+
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td style="text-align:center;font-weight:bold;">
+                                        REQUEST FOR ACQUISITION OF LAND
+                                        <br />
+                                    </td>
+                                </tr>
+
+
+                                <tr> <td>From</td></tr>
+                                <tr> <td>  Name ……………………………. </td>   </tr>
+                                <tr> <td>And/or Designation of the Requiring Body  </td></tr>
+                                <tr> <td>   To </td>  </tr>
+                                <tr> <td> 1.	The Collector </td> </tr>
+                                <tr> <td> District ……………………  </td>    </tr>
+                                <tr> <td> 2.	Secretary – L&B  </td>  </tr>
+                                <tr> <td>  ……………………………. </td> </tr>
+                                <tr>
+                                    <td class="text-justify">
+                                        It is requested to acquire ………………….hectare(s) of Land for which ……….. project/ purpose and the details are furnished in Annexure I,
+                                        II and III along with three copies of  Combined Sketch (to scale) showing he lands to be acquired.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-justify">
+                                        The gestation period of the project will be ………. Years and …………. Months (applicable only if  gestation  period is more than five years).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-justify">
+                                        Requisite cost of acquisition including cost of the social impact assessment study (SIA) is available and will be deposited in
+                                        your office, as provided under provisions of the Right to Fair Compensation and Transparency in Land Acquisition,
+                                        Rehabilitation and Resettlement Act, 2013 as and when required by you.
+                                        All further necessary information and assistance will be provided on the date/time appointed/stipulated by you.
+                                        <br /><br />
+                                    </td>
+                                </tr>
+
+                                <tr> <td style="text-align:end;">……………………………….<br /><br /><br /> Yours faithfully<br />Requiring Body </td>  </tr>
+                                @*<tr><td> Yours faithfully</td></tr>
+                                    <tr><td> Requiring Body</td></tr>*@
+                                <tr> <td style="text-align:center;font-weight:bold;"><br /><br /> ANNEXURE-I </td></tr>
+                                <tr> <td style="font-weight:bold;">  <br /><br />Name of the Project<br />  </td> </tr>
+
+                                <tr><td style="padding-left:50px;">1.Name of the village :Rajpur</td></tr>
+                                <tr><td style="padding-left:50px;">2.	Name of the Taluk/Sub-division/Tehsil/Block(as applicable):Dwarka</td></tr>
+                                <tr><td style="padding-left:50px;">3.	Name of  the Municipality/Municipal Corporation:Municipal Corporation Delhi</td></tr>
+                                <tr><td style="padding-left:50px;">4.	Name of The District</td></tr>
+                                <tr><td style="padding-left:50px;">5.	Survey No. to be acquired</td></tr>
+                                <tr><td style="padding-left:50px;">6.	Total area under request (in hectares/ sq. metres)</td></tr>
+                                <tr> <td style="padding-left:50px;"> 7.	Boundaries of the area to be acquired.  <br /><br /></td></tr>
+
+
+                                <tr><td>East-</td></tr>
+                                <tr><td>  West-</td></tr>
+                                <tr><td>  North-</td></tr>
+                                <tr><td> South<br /></td></tr>
+
+                                <tr><td style="padding-left:50px;">  8.	Area of the agricultural and irrigated multi-cropped land</td></tr>
+                                <tr><td style="padding-left:50px;">  9.	Reasons for inclusion of agricultural and irrigated multi-cropped Land</td></tr>
+                                <tr><td style="padding-left:50px;"> 10.	 Details of buildings and other structures, tanks, wells, trees, etc</td></tr>
+                                <tr><td style="padding-left:50px;"> 11.	Reason for the inclusion of religions building, graveyard or tomb etc for acquisition, if any</td></tr>
+
+
+                                <tr> <td style="text-align:center;font-weight:bold;"><br /><br /> ANNEXURE-II </td></tr>
+                                <tr> <td style="font-weight:bold;">  <br /><br />Name of the Project<br />  </td> </tr>
+
+
+                                <tr><td style="padding-left:50px;">    1.	Department  or Government or Company, Local Authority, Institution</td></tr>
+                                <tr><td style="padding-left:50px;">   2.	Official  designation of the Requiring Body</td></tr>
+                                <tr><td style="padding-left:50px;">3.	Purpose of acquisition ( in detail)</td></tr>
+                                <tr><td style="padding-left:50px;" class="text-justify">  4.	Whether  the request is filed under  section 2(1) of the Act by the Government or  Department  for its own use hold and control.</td></tr>
+                                <tr><td style="padding-left:50px;">5.	Whether  the request is filed under Section  2(1)(a) to 2(1) (f)n of the Act</td></tr>
+                                <tr><td style="padding-left:50px;"> 6.	Whether the request is filed under section 2(2) (a) or (b)of the Act</td></tr>
+                                <tr> <td style="padding-left:50px;">  7.	How many  families are effected as described under Section 3© (i) to (vi) of the Act. </td></tr>
+                                <tr><td style="padding-left:50px;">  8.	Whether the request is filed under section 40 of the Act</td></tr>
+                                <tr><td style="padding-left:50px;">   9.	If so, on what ground?</td></tr>
+
+
+
+
+
+
+
+
+                                <tr><td style="padding-left:50px;">  10.	Has the land for the  project been partially purchased from the owners by private negotiation?</td></tr>
+                                <tr><td style="padding-left:50px;"> 11.	If so, on what date and  on what terms (Please state the terms of negotiation in short and attach the copy of it).</td></tr>
+                                <tr>
+                                    <td style="padding-left:50px;">
+                                        12.	Date of issue of administrative approval for  the project ( copy to be attached) in case
+                                        of Government or Department  or local authority.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:50px;" class="text-justify">
+                                        13.	Reasons for dealy in filing  request, if  request is filed after six weeks from the date  of administrative approval of
+                                        the project in case of Government  or Department or local authority.
+                                    </td>
+                                </tr>
+                                <tr><td style="padding-left:50px;" class="text-justify">14.	By what time possession of the land is required.</td></tr>
+
+                                <tr> <td style="text-align:center;font-weight:bold;"><br /><br /> ANNEXURE-III <br /><br /> </td></tr>
+                                <tr><td style="font-weight:bold;"> CERTIFICATE TO BE  FURNISHED  ALONG WITH THE REQUEST FOR  ACQUISITION  OF LAND BY THE  REQUIRING  BODY</td></tr>
+
+                                <tr> <td style="font-weight:bold;">  <br /><br />Name of the Project<br />  </td> </tr>
+
+                                <tr>
+                                    <td style="padding-left:50px;" class="text-justify">
+                                        1.	Certified that the  project for which the land is sought  to be  acquired has been administratively
+                                        approved vide  Department letter No. ………………., dated …………… for acquisition under the Act (copy of letter attached),
+                                        (if applicable).
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:50px;" class="text-justify">
+                                        2.	The estimated cost of the project is of Rs…….. and  necessary budget  was  sanctioned and
+                                        funds  are available towards cost of acquisition.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:50px;" class="text-justify">
+                                        3.	The requiring  Body undertakes to  pay the full amount in case of decree by the Land  Acquisition,
+                                        Rehabilitation and  Resettlement Authority/ High Court/ Supreme Court  as and when asked to do so by the Collector.
+                                    </td>
+                                </tr>
+
+                                <tr> <td style="text-align:end;"><br /><br /><br /> Requiring Body </td>  </tr>
+                            </table>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        window.print();
+    });
+
+</script>
