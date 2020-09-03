@@ -22,26 +22,26 @@
 </style>
 
 @*<script>
-    $(function () {
-        $("#txtDesignation").keypress(function (e) {
-            var keyCode = e.keyCode || e.which;
+        $(function () {
+            $("#txtDesignation").keypress(function (e) {
+                var keyCode = e.keyCode || e.which;
 
-            $("#lblError").html("");
+                $("#lblError").html("");
 
-            //Regex for Valid Characters i.e. Alphabets and Numbers.
-            var regex = /^[A-Za-z0-9]+$/;
+                //Regex for Valid Characters i.e. Alphabets and Numbers.
+                var regex = /^[A-Za-z0-9]+$/;
 
-            //Validate TextBox value against the Regex.
-            var isValid = regex.test(String.fromCharCode(keyCode));
-            if (!isValid) {
-                $("#lblError").html("Only Alphabets and Numbers allowed.");
-            }
+                //Validate TextBox value against the Regex.
+                var isValid = regex.test(String.fromCharCode(keyCode));
+                if (!isValid) {
+                    $("#lblError").html("Only Alphabets and Numbers allowed.");
+                }
 
-            return isValid;
+                return isValid;
+            });
         });
-    });
 
-</script>*@
+    </script>*@
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -67,7 +67,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="search" id="searchname" value=""  />By Project Name
+                            <input type="radio" name="search" id="searchname" value="" />By Project Name
                         </label>
                     </div>
                     <div class="form-group col-md-4">
@@ -129,8 +129,8 @@
 
                 </div>
 
-                <div class="form-row "  style="display:none;" id="DivForGenerate">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;" >
+                <div class="form-row " style="display:none;" id="DivForGenerate">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
                         @Html.ActionLink("Generate Letter", "PrintRequest", "PrintRequest", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
                         @*<input type="submit" value="Generate" class="btn btn-primary myapp-hed1" id="btnprintreq" />*@
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
@@ -148,29 +148,22 @@
 
 
 @*@if (ViewData["Msg"] != null)
-{
-    DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}*@
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@
 
 
 
 
-<script>
-    $(function () {
-        $("input[name='search']").click(function () {
-            if ($("#searchname").is(":checked")) {
-                $("#divname").show();
-                $("#divfile").hide();
-                $("#DivForGenerate").show();
-            }
-            if ($("#searchno").is(":checked")) {
-                $("#divfile").show();
-                $("#divname").hide();
-                $("#DivForGenerate").show();
+@*<script src="~/js/printrequestindex.js"></script>*@
 
-            }
-        });
-    });
-</script>
 
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/printrequestindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/printrequestindex.min.js" asp-append-version="true"></script>
+</environment>
