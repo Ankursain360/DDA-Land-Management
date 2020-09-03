@@ -1,0 +1,207 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Request From Planning Department To CLM Approval Process</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div id="DivProjectDetails">
+                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Project Details</h6>
+                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="collapse" id="collapseExample">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Project/Proposal Name</label>
+                                <input type="text" class="form-control" placeholder="DDa project">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Project No/File No</label>
+                                <input type="text" class="form-control" placeholder="F-1(73)CM">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Required Agency</label>
+                                <input type="text" class="form-control" placeholder="DDA">
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Area/Locality</label>
+                                <input type="text" class="form-control" placeholder="Okhla">
+                            </div>
+                        </div>
+                        <div class="form-row">
+
+
+                            <div class="form-group col-md-6">
+
+                                <label class="control-label lb-sm">Total Area Required</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="rha" checked>HA
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="racre">Acre
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpMainFile" id="rmt">Square mt.
+                                </label>
+                                <br /> <br />
+                                <label class="control-label lb-sm">Area</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Purpose Of Acquisition</label>
+                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Commercial Use"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Remarks</label>
+                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Land is acquired"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Status</label>
+                        <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
+                            <option value="1">Forward To CLM</option>
+                            <option value="2">Approved</option>
+                            <option value="3">Reject</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "RequestFromPlanningDepartmentApproval", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    $(function () {
+        $('#drp1').change(function () {
+            var id = $("#drp1").val();
+            if (id == 1) {
+                $("#txt1").show();
+
+            }
+            else {
+                $("#txt1").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp2').change(function () {
+            var id = $("#drp2").val();
+            if (id == 1) {
+                $("#txt2").show();
+
+            }
+            else {
+                $("#txt2").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp3').change(function () {
+            var id = $("#drp3").val();
+            if (id == 1) {
+                $("#txt3").show();
+
+            }
+            else {
+                $("#txt3").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#drp4').change(function () {
+            var id = $("#drp4").val();
+            if (id == 1) {
+                $("#txt4").show();
+
+            }
+            else {
+                $("#txt4").hide();
+            }
+        });
+    });
+    $(function () {
+        $('#drpHasLand').change(function () {
+            var id = $("#drpHasLand").val();
+            if (id == 0) {
+                $("#txtDateLand").hide();
+                $("#txtLand").hide();
+                $("#fileland").hide();
+            }
+            else {
+                $("#txtDateLand").show();
+                $("#txtLand").show();
+                $("#fileland").show();
+            }
+        });
+    });
+</script>
+
+
+
