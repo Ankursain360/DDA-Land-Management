@@ -5,9 +5,7 @@
 }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -18,6 +16,7 @@
         </div>
     </div>
 </div>
+
 <br />
 
 <br />
@@ -106,52 +105,10 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    //For dropdown change event
-    $(document).ready(function () {
-        $("#drpKhasra").change(function () {
-            var courses = $("#txtArea");
-            var semesterName = $("#drpKhasra option:selected").text();
-            $.getJSON('/EncroachmentRegister/GetAreaFromKhasra', { semester: semesterName }, function (response) {
-                console.log(response);
-                var courseField = "";
-                $.each(response, function (key, value) {
-                    if (value == null) {
-                        $("#txtArea").empty();
-                    } else {
-                        courseField += "<div class=\"input-field col s12 l12\">\n" +
-                            "                        <input id=\"" + value.CourseId + "\" type=\"text\" value=\"" + value.CourseCode + "\">\n" +
-                            "                        <label class=\"active\" for=\"course\">" + value.CourseCode + "</label>\n" +
-                            "                    </div>";
-                    }
-                });
-                courses.html(courseField);
-            })
-        });
-    });
-</script>
-
-<script>
-
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-        $('#txtDate').attr('max', maxDate);
-        $('#txtDateRep').attr('max', maxDate);
-    });
-
-
-
-</script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/watchward.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/watchward.min.js" asp-append-version="true"></script>
+</environment>
