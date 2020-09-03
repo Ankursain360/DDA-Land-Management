@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Zone Wise User Mapping</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">zone  </label>
+                        @*<select required style="height:30px;  background-color: #dddddd;" class="form-control" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">*@
+
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">zone 1</option>
+                            <option value="value">zone 2</option>
+                            <option value="value">zone 3</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">role </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">role 1</option>
+                            <option value="value">role 2</option>
+                            <option value="value">role 3</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">user  </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">user 1</option>
+                            <option value="value">user 2</option>
+                            <option value="value">user 3</option>
+                        </select>
+                    </div>
+
+                </div>
+                <br />      <br />      <br />
+                <div class="card  table-card table-responsive">
+
+                    <table class="table  table-bordered table-card">
+
+                        <thead class="thead">
+                            <tr class="myapp-hed1">
+                                <th>Sr.No</th>
+                                <th> Village Name  </th>
+                                <th>Assign    </th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td>1</td>
+                                <td>Yakut Pur</td>
+                                <td><input type="checkbox" /> </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>khizrabad</td>
+                                <td><input type="checkbox" /> </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>kilokari</td>
+                                <td><input type="checkbox" /> </td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>okhla</td>
+                                <td><input type="checkbox" /> </td>
+                            </tr>
+
+
+                    </table>
+
+                </div>
+                <br />      <br />
+
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />
+                            @Html.ActionLink("Back", "Index", "ZoneMaster", null, new { @class = "btn btn-primary myapp-hed1" })*@
+                        <a asp-action="Index" class="btn btn-primary myapp-hed1">Back</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+@if (ViewData["Msg"] != null)
+{
+    EncroachmentDemolition.Models.Message msg = ViewData["Msg"] as EncroachmentDemolition.Models.Message;
+    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+}
+
+
+<script>
+
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        //alert(maxDate);
+    });
+
+
+
+</script>

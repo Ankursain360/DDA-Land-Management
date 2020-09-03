@@ -1,0 +1,99 @@
+﻿@*@model IEnumerable<LMS_Encrochment_Management.Models.TblOlComplaint>*@
+@{ int rowNo = 0;}
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Online Complaint</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card">
+        <div class="table-responsive">
+            <table class="table table-responsive table-bordered table-card">
+                <thead>
+                    <tr class="myapp-hed1">
+
+                        <th>Sr. No</th>
+                        <th rowspan="2">Complaint ID</th>
+                        <th rowspan="2">Complaint Name</th>
+                        <th rowspan="2">Contact No</th>
+                        <th rowspan="2">Area/Address</th>
+                        <th rowspan="2">Complaint Type</th>
+                        <th rowspan="2">Location</th>
+                        <th rowspan="2" colspan="3">Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>Cmp-102-04082020</td>
+                        <td>Encroachment Complaint of ShakurBasti</td>
+                        <td>9874561230</td>
+                        <td> ShakurBasti, North Delhi</td>
+                        <td>Encroachment</td>
+                        <td>ShakurBasti,Delhi</td>
+                        <td>
+
+                            <a asp-action="Report" asp-controller="OlCmplnt" class="btn btn-info"><i class="material-icons"></i>Report</a>
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-controller="OlCmplnt" class="btn btn-primary"><i class="material-icons">Edit</i></a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-controller="OlCmplnt" class="btn btn-danger"><i class="material-icons">Delete</i></a>
+                        </td>
+                    </tr>
+                    @*@if (@Model != null)
+                        {
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@(rowNo += 1)</td>
+                                    <td>@item.CmplntId</td>
+                                    <td>@item.CmplntName</td>
+                                    <td>@item.ContactNo</td>
+                                    <td>@item.AreaAddress</td>
+                                    <td>@item.CmplntType</td>
+                                    <td>@item.Location</td>
+                                    <td colspan="3">
+                                        @Html.ActionLink("Edit", "Edit", new { Id = item.Id, CmplntId = item.CmplntId }) |
+                                        @Html.ActionLink("Report", "Report", new { Id = item.Id, CmplntId = item.CmplntId }) |
+                                        @Html.ActionLink("Delete", "Delete", new { Id = item.Id, CmplntId = item.CmplntId })
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="16"><b> <strong> Data Not Available</strong> </b></td>
+                            </tr>
+                        }*@
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<br />

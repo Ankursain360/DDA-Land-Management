@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewData["Title"] = "EncroachmentRegisterApproval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Inspection/Encroachment Approval Process</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card" style="overflow:scroll;">
+
+
+        <table class="table table-responsive table-bordered table-card">
+            <tr class="myapp-hed1">
+                <th>Sr.No</th>
+                <th>Village</th>
+                <th>Khasra No.</th>
+                <th>Police Station</th>
+                <th>Security Guard on duty</th>
+                <th>Submitted On</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            <tbody class="tbody">
+                <tr>
+                    <td>1</td>
+                    <td>Nimri</td>
+                    <td>0//10</td>
+                    <td>Nimri Police Station</td>
+                    <td>Mahesh </td>
+                    <td>20-July-2020</td>
+                    <td>Pending</td>
+                    <td> <a href="/EncroachmentRegister/EncroachmentRegisterApprovalCreate"><i class="fa fa-pencil" aria-hidden="true"></i> </a></td>
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Saroda</td>
+                    <td>0//10</td>
+                    <td>Saroda Police Station</td>
+                    <td>Darmvir </td>
+                    <td>20-July-2020</td>
+                    <td>Approved</td>
+                    <td> <a href="/EncroachmentRegister/EncroachmentRegisterApprovalCreate"><i class="fa fa-pencil" aria-hidden="true"></i> </a></td>
+
+                </tr>
+                
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+
+
+

@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">My Application</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "AnnexureA", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card">
+        <div style="overflow-x:auto;">
+            <table class="table table-responsive table-bordered table-card" auto>
+                <tr class="myapp-hed1" style="overflow-y:scroll; height:100px;">
+                    <th>Location of proposed Demolition</th>
+                    <th>Total No(for demolition)</th>
+                    <th>Land owning agency</th>
+                    <th>Number of religious(for demolition)</th>
+                    <th>Date of encroachment</th>
+                    <th>Demolition order passed by HOD</th>
+                    <th>Details of cases(for demolition,if any)</th>
+                    <th>Details of stay orders(for demolition,if any)</th>
+                    <th>Details of past cases(for removal encroachment,if any)</th>
+                    <th>Nature of demolition(Major/Minor)</th>
+                    <th>Operation</th>
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+<br />
+<br />
+
+
+

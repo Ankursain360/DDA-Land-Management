@@ -1,0 +1,195 @@
+﻿@*@model LMS_Encrochment_Management.Models.TblOlComplaint*@
+@{
+    ViewData["Title"] = "Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <style>
+        div.panel-heading {
+            height: 90px;
+            text-align: center;
+        }
+
+        input {
+            border: 0px;
+        }
+    </style>
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Online Complaint</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Download ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h5 style="color:white;">Delhi Development Authority</h5>
+            <h6 style="color:white;">Online Complaint Report</h6>
+            @*<h6 class="pull-left" style="color:white; margin-top:-0.4%">New Complaint</h6>*@
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Name of Complaint</label>
+                                <input disabled type="text" class="form-control">
+                            </div><br />
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Contact No.</label>
+                                <input disabled type="text" class="form-control">
+                            </div><br />
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Type of Complaint</label>
+                                <select disabled required="" class="form-control">
+                                    <option value="">-Select-</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-3">
+                        <label class="control-label lb-sm ">Photograph</label>
+                        <img src="~/images/sign.png" height="150" width="150" class="center-block" style=" border:1px solid black;" />
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Area/Address of Complaint</label>
+                        <textarea disabled type="text" class="form-control"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Location</label>
+                        <select disabled class="form-control">
+                            @*<option value="">-Select-</option>*@
+                            <option value="">Delhi</option>
+                        </select>
+                    </div>
+
+                </div>
+                <div class="row">
+
+
+                </div> <br />
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Lattitude</label>
+                        <input disabled type="text" class="form-control">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Longitude</label>
+                        <input disabled type="text" class="form-control">
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="row col-md-12" style="justify-content:center">
+                        <input disabled type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @Html.ActionLink("Back", "Index", "OlCmplnt", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2 style="margin-top:2px;margin-bottom:2px;">Delhi Development Authority</h2>
+                <h3 style="margin-top:5px;">Online Complaint Report</h3>
+
+                <div class="card-body">
+                    <br />
+                    <div class="panel-container">
+                        <div class="col-md-12">
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Complaint ID</label>
+                                            <input class="form-control" type="text" disabled />
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Name of Complaint</label>
+                                            <input class="form-control" type="text" disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <img src="~/images/sign.png" height="150" width="150" class="center-block" style=" border:1px solid black;" />
+                                </div>
+
+                            </div>
+                            <div class="row form-group">
+
+                                <div class="col-md-6">
+                                    <label>Contact No.</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Area/Address of Complaint</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                            </div>
+
+                            <div class="row form-group">
+                                <div class="col-md-6">
+                                    <label>Type of Complaint</label>
+                                    <select class="form-control">
+                                        <option value="0">--Select--</option>
+                                        <option value="0">Encroachment</option>
+                                        <option value="0">Uerhygenic</option>
+                                        <option value="0">Misuse</option>
+                                        <option value="0">Broken boundary wall/fencing</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Location</label>
+                                    <select class="form-control" disabled>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div class="row form-group">
+                                <div class="col-md-6">
+                                    <label>Lattitude</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Longitude</label>
+                                    <input class="form-control" type="text" disabled />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
