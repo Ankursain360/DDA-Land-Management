@@ -20,11 +20,15 @@ namespace SiteMaster.Controllers
             _countryService = countryService;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<Country> result = await _countryService.GetAllCountry();
-            return View(result);
+            return View();
         }
+        //public async Task<IActionResult> Index()
+        //{
+        //    List<Country> result = await _countryService.GetAllCountry();
+        //    return View(result);
+        //}
 
         public IActionResult Privacy()
         {
