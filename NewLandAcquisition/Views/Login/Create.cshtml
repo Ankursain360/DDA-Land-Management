@@ -1,0 +1,220 @@
+﻿@*@model DDAPropertyREG.Models.Tbllogin*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.muicss.com/mui-0.10.3/extra/mui-colors.min.css">
+    <script src="//cdn.muicss.com/mui-0.10.3/extra/mui-combined.min.js"></script>
+    <style>
+        /*.canvasjs-chart-credit {
+                  display: none !important;
+              }
+
+              .btn {
+                  width: 100px !important;
+              }*/
+
+        .body, html {
+            background-image: url("/images/DDAbg.jpg");
+            background-color: #cccccc;
+            height: 100vh;
+            width: 100vw;
+            /*background-position: center;*/
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 2000;
+            position: absolute;
+        }
+
+        .grad {
+            background-image: linear-gradient( 33deg, #4b50a2, #7d3865);
+            background-size: cover;
+            opacity: 1;
+            height: 100vh;
+            width: 100vw;
+            position: absolute;
+        }
+
+        .logo {
+            height: 152px;
+            /*width: 83px;*/
+        }
+
+        #login .container #login-row #login-column #login-box {
+            margin-top: 120px;
+            max-width: 600px;
+            height: 320px;
+            border: 1px solid #9C9C9C;
+            background-color: #EAEAEA;
+        }
+
+            #login .container #login-row #login-column #login-box #login-form {
+                padding: 20px;
+            }
+
+                #login .container #login-row #login-column #login-box #login-form #register-link {
+                    margin-top: -85px;
+                }
+
+
+        .login-container {
+            margin-top: 10%;
+            border: 1px solid #CCD1D1;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            max-width: 50%;
+        }
+
+        .ads {
+            color: #fff;
+            text-align: center;
+        }
+
+            .ads h1 {
+                margin-top: 20%;
+            }
+
+        #fl {
+            font-weight: 600;
+        }
+
+        #sl {
+            font-weight: 100 !important;
+        }
+
+        .profile-img {
+            text-align: center;
+        }
+
+            .profile-img img {
+                border-radius: 50%;
+            }
+
+        .login-form {
+            padding: 15px;
+        }
+
+            .login-form h3 {
+                text-align: center;
+                padding-top: 15px;
+                padding-bottom: 15px;
+            }
+
+        .form-control {
+            font-size: 14px;
+        }
+
+        .forget-password a {
+            font-weight: 500;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .LoginName {
+            color: #2c3091;
+            font-family: Calibri;
+            text-align: start;
+            font-weight: lighter;
+        }
+
+        .ButtonCss {
+            width: 100%;
+            border-radius: 5px;
+            border: 0px;
+            height: 40px;
+            font-size: 1.0rem;
+            background: linear-gradient(33deg,#8c1f47,#362c85);
+            font-family: sans-serif;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .ButtonCssUpcoming {
+            width: 100%;
+            color: black;
+            background: linear-gradient(33deg,#797EC6,#F5ECCE);
+            border-radius: 5px;
+            border: 0px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grad">
+        <div class="container" style="padding-left:8%">
+            <div class="row left">
+                <img src="~/images/DDALG.png" alt="logo" class="logo" style="padding-left:3%" />
+            </div>
+            <div class="row" style="background-color:white;width:95%;">
+                <div class="col-md-6" style="padding:5% 5% 0 6%">
+                    <h1 class="LoginName">LOGIN</h1>
+                    <form>
+                        <div class="mui-textfield">
+                            <input type="text" placeholder="User Name">
+                        </div>
+                        <div class="mui-textfield">
+                            <input  placeholder="Password" type="password">
+                        </div>
+                        <div class=" row form-group">
+
+                            <div class="col-md-5">
+                                <img src="~/images/captcha.jpg" style="width:100%;height:50px;" class="img-responsive" id="imgCaptcha" />
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mui-textfield">
+                                    <input type="text" placeholder="Enter Captcha">
+                                </div>
+
+                            </div>
+                            <div class="col-md-2 " style="text-align:center;">
+                                <img src="~/images/refresh.png" alt="refresh" />
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            @*<a href="/Dashboard/Index"><button class="ButtonCssUpcoming ">Login</button></a>
+        <a href="/Dashboard/Index">
+            <input type="submit" value="Login" asp-action="create" class="ButtonCss" />
+        </a>*@
+                            @Html.ActionLink("Login", "Index", "Dashboard", null, new { @class = "btn btn-primary ButtonCss" })
+                        </div>
+                        <div class="form-group">
+                            <a style="color:black;" href="/Login/ForgetPassword">Forgot Password &nbsp; </a><span style="color:purple;">|</span><a style="color:black;" href="https://parichay.nic.in/Accounts/NIC/index.html?service=Accounts" target="_blank">E-Parichay</a>
+
+                        </div>
+                        @*<div class="form-group">
+                                <button class="ButtonCssUpcoming"><a href="/Dashboard/Index">Upcoming:</a> </button>
+                            </div>*@
+
+                    </form>
+                </div>
+                <div class="col-md-6 ">
+                    <img src="~/images/dda.jpg" alt="dda building" style="height:500px;width:600px;max-height:100%;max-width:100%;" />
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <p style="color:white;font-family:open-sans-regular;">
+                    Copyright &copy 2019-All Rights Reserved-DDA
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
