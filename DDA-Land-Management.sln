@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Encroachment", "Encroachmen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EncroachmentDemolition", "EncroachmentDemolition\EncroachmentDemolition.csproj", "{72823E40-8073-49A2-B9AC-849BE6B95EAB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,18 @@ Global
 		{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}.Release|x64.Build.0 = Release|Any CPU
 		{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}.Release|x86.ActiveCfg = Release|Any CPU
 		{BC4B3C61-21EE-4AAC-A2A8-1FB3D1B0F397}.Release|x86.Build.0 = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|x64.Build.0 = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Debug|x86.Build.0 = Debug|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|x64.ActiveCfg = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|x64.Build.0 = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|x86.ActiveCfg = Release|Any CPU
+		{72823E40-8073-49A2-B9AC-849BE6B95EAB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
