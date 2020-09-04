@@ -1,0 +1,310 @@
+﻿@*@model DDAPropertyREG.Models.TblMasterdivisions*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .bg{
+background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); 
+Color: #ffffff; 
+Font-size: 0.95rem ;
+Font-Family: Open SansRegular;
+   height:28px;      
+  
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Building Planing Department</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12  myapp-hed1">Case Details</div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case No.</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Legal File No. </label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Court Name</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Case Title </label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+
+                <br />
+                <div class="form-row ">
+                    <div class="form-group col-md-12  myapp-hed1"> Add Legal Detail Of Building/Planning Dept. </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Particulars of Property</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+
+                    </div>
+
+
+                </div>
+                <div class="form-row ">
+                    <div class="form-group col-md-12  myapp-hed1">Housing </div>
+
+                </div>
+
+
+                <br />
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Zone</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Locality</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Sector</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Pocket</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Block</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Floor</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Flat Type</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Flat Category</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Flat No.</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12  myapp-hed1">Land </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Branch</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Locality</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Scheme</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Land Use</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Floor</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Sector</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Block</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Pocket</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Category</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Plot/Unit No.</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Name of Allottee/Occupant</label>
+                        <input type="Date" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Address</label>
+                        <input type="Date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Property No.</label>
+                        <input type="Date" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Name of the Schema</label>
+                        <input type="Date" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label  lb-sm">Location of Property</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                </div>
+
+
+                <br />
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "BuildingPlanning", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
