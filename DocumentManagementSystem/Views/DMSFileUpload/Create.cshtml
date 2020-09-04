@@ -1,0 +1,254 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+<style>
+    table, tr, td {
+        border: none !important;
+    }
+</style>
+
+<script>
+    $(function () {
+        $("#txtDesignation").keypress(function (e) {
+            var keyCode = e.keyCode || e.which;
+
+            $("#lblError").html("");
+
+            //Regex for Valid Characters i.e. Alphabets and Numbers.
+            var regex = /^[A-Za-z0-9]+$/;
+
+            //Validate TextBox value against the Regex.
+            var isValid = regex.test(String.fromCharCode(keyCode));
+            if (!isValid) {
+                $("#lblError").html("Only Alphabets and Numbers allowed.");
+            }
+
+            return isValid;
+        });
+    });
+
+</script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">DMS File Upload</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details </h6>
+        </div>
+        <div class="panel-body">
+            <form method="post" asp-action="Index" id="1">
+                @*asp-action="Create"*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" name="upload" id="fileupload" value="" checked />File Upload
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" name="upload" id="bulkfileupload" value="" />Bulk Upload
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+
+                    </div>
+
+                </div>
+
+
+
+                <div id="divfileupload" >
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">File Upload</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> File No   </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Allotee  Name  </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Department    </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>dept 1</option>
+                                <option>dept 2 </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Khasra No   </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option> Khasra 1</option>
+                                <option>Khasra 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Locality    </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>Locality 1</option>
+                                <option>Locality 2 </option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Property No   </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Title    </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Almirah No   </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Select File </label>
+                            <input class="form-control" required type="file" />
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div id="divbulkupload" style="display:none;">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Bulk Upload</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Enter Pdf File Location   </label>
+                            <input class="form-control" required type="text" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Select Csv File </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="D:\VedangWorkFromHome\DDA_LandManagement_Project\ProjectsModules\DDAPropertyREGLatest\DDAPropertyREG\CSVFormat.csv">Download CSV Format</a>
+                            <input class="form-control" required type="file" />
+                        </div>
+                        
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Select Department  </label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>Engg </option>
+                                <option>LM</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        @Html.ActionLink("Upload", "Create", "DMSFileUpload", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
+                        @*<input type="submit" value="Generate" class="btn btn-primary myapp-hed1" id="btnprintreq" />*@
+                        <a asp-action="Index" class="btn btn-primary myapp-hed1 ">Back</a>
+                        @*@Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })*@
+                    </div>
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@if (ViewData["Msg"] != null)
+{
+    DocumentManagementSystem.Models.Message msg = ViewData["Msg"] as DocumentManagementSystem.Models.Message;
+    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+}
+
+
+
+
+<script>
+    $(function () {
+        $("input[name='upload']").click(function () {
+            if ($("#fileupload").is(":checked")) {
+                $("#divfileupload").show();
+                $("#divbulkupload").hide();
+            }
+            if ($("#bulkfileupload").is(":checked")) {
+                $("#divbulkupload").show();
+                $("#divfileupload").hide();
+
+            }
+        });
+    });
+</script>
+
+
+<script>
+    $("#btnprintreq").click(function () {
+
+        $('#printrequest').show();
+    });
+</script>
+
+@*<script>
+        $("#btnDisplay").click(function () {
+            window.open("@Url.Action("PrintLabel", "DisplayLabel")", "_blank",
+                "menubar=no, toolbar=no, resizable=no, top=100, left=200, width=500, height=500");
+        });
+    </script>*@
+
+
+<script>
+
+</script>
