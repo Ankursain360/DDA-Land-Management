@@ -1,0 +1,188 @@
+﻿
+
+
+@*@model DDAPropertyREG.Models.Tblzonemaster*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Legal Reports</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Specify Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="RptCasesBranchLawyerSpecified">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Lawyer </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Select</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">From Date</label>
+                        <input type="date" class="form-control" />
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">To Date</label>
+                        <input type="date" class="form-control" />
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Retrieve" class="btn btn-primary myapp-hed1" />
+
+                    </div>
+                </div>
+                <div id="divsearch">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Report Lawyer Filed specified Period Wise  </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+
+                            <div id="courtwiserpt">
+                                <div class="card  table-card table-responsive">
+
+                                    <table class="table  table-bordered table-card">
+                                        
+
+                                        <thead class="thead">
+                                            <tr class="myapp-hed1">
+                                                <th>Sr.No</th>
+                                                <th>Case No. </th>
+                                                <th> Case Title</th>
+                                                <th>  Filing Date </th>
+                                                <th> Legal File no </th>
+                                                <th> Dept File no</th>
+
+                                                <th> Next Hearing Date</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="tbody">
+                                            <tr>  <td colspan="10"><strong>Lawyer Name : Ajay Verma</strong> </td> </tr>
+                                            <tr> <td colspan="10"><strong>From Date: 23-MAY-2018 </strong> </td> </tr>
+                                            <tr>  <td colspan="10"><strong>To Date :23-MAY-2019</strong> </td> </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>A-111/2004</td>
+                                                <td>TES VA TSET</td>
+                                                <td>23-MAY-2018</td>
+                                                <td>F-11/2018</td>
+                                                <td>D-102</td>
+
+
+                                                <td>30-MAY-2018</td>
+                                                <td>PENDING</td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>A-111/2004</td>
+                                                <td>TES VA TSET</td>
+                                                <td>23-MAY-2018</td>
+                                                <td>F-11/2018</td>
+                                                <td>D-102</td>
+
+
+                                                <td>30-MAY-2018</td>
+                                                <td>PENDING</td>
+
+                                            <tr>
+                                                <td>3</td>
+                                                <td>A-111/2004</td>
+                                                <td>TES VA TSET</td>
+                                                <td>23-MAY-2018</td>
+                                                <td>F-11/2018</td>
+                                                <td>D-102</td>
+
+
+                                                <td>30-MAY-2018</td>
+                                                <td>PENDING</td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                    <br />
+                    <div class="form-row">
+                        <div class=" form-group  col-md-12">
+
+                            <input type="submit" value="Export to Excel" class="btn btn-primary  myapp-hed1" style="width:150px !important;" />
+
+                        </div>
+                    </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        //alert(maxDate);
+    });
+
+
+
+</script>

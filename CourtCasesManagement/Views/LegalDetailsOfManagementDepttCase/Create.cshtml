@@ -1,0 +1,354 @@
+﻿@*@model DDAPropertyREG.Models.Tblpropertyregistration*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Legal Details of Land Management Dept. </h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div id="Divclsification">
+                    @* <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>*@
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Case No</label>
+                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                <option value="4">-Select- </option>
+
+                                <option value="0">1022/1992 WG .CDR. K.T ANANTHRAMAN VS DDA </option>
+                                <option value="1">1081/102 CHANDERMUKHI VS DDA</option>
+                                <option value="2">113/02 SATPAL VS DDA</option>
+                                <option value="3">1477/1985 MISS KRISHNA VS DDA</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Case Title</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Cause of Dispute</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Relief Claimed</label>
+                            <input type="text" class="form-control">
+
+
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Land Management</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Name of the Owner/Encroacher/Occupant</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Area in Dispute</label>
+                            <input type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Name of revenue estate/village/locality</label>
+                            <input type="text" class="form-control">
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Mode of transfer of land to dda</label>
+                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                <option value="">Select</option>
+                                <option value="1">Mode 1</option>
+                                <option value="2">Mode 2</option>
+                                <option value="3">Mode 3</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Award no.</label>
+                            <input type="text" class="form-control">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date of award</label>
+                            <input type="date" class="form-control">
+
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date of possession</label>
+                            <input type="date" class="form-control">
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date of Notification U/S-2</label>
+                            <input type="date" class="form-control">
+
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date of notification U/S-4 of LA act.</label>
+                            <input type="date" class="form-control">
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date of notification U/S-6 of LA act.</label>
+                            <input type="date" class="form-control">
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class="form-row">
+
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Purpose for which land is required</label>
+                            <input type="text" class="form-control">
+
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Plot No</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Khasara no.</label>
+                            <input type="text" class="form-control">
+                        </div>
+
+
+
+
+
+                    </div>
+
+
+
+
+
+
+             
+
+
+
+
+
+                    <div class="form-row">
+                        
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Remarks</label>
+                            <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "LegalDetailsOfManagementDepttCase", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $('#Boundary').change(function () {
+            var value = $('#Boundary').val();
+            if (value == "No") {
+                $('#txtBoundaryRemarks').val('');
+                $("#txtBoundaryRemarks").attr("disabled", "disabled");
+            }
+            else {
+                $('#txtBoundaryRemarks').val('');
+                $("#txtBoundaryRemarks").attr("disabled", "disabled");
+                $("#txtBoundaryRemarks").removeAttr("disabled", "disabled");
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    $(function () {
+        $('#Buit').change(function () {
+            var value = $('#Buit').val();
+            if (value == "No") {
+                $('#t2').val('');
+                $("#divBuilttype").hide();
+            }
+            else {
+                $('#t2').val('');
+                $("#divBuilttype").show();
+            }
+        });
+    });
+
+    $(function () {
+        $('#Layout').change(function () {
+            var value = $('#Layout').val();
+            if (value == "No") {
+                $('#fileupload').val('');
+                $("#divLayoutPlan").hide();
+            }
+            else {
+                $('#fileupload').val('');
+                $("#divLayoutPlan").show();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    //$(function () {
+    //    $('#Division').change(function () {
+    //        var value = $('#Division').val();
+    //        if (value == "No") {
+    //            $('#t3').val('');
+    //            $("#divDivision").hide();
+    //        }
+    //        else {
+    //            $('#t3').val('');
+    //            $("#divDivision").show();
+    //        }
+    //    });
+    //});
+
+    $(function () {
+        $('#Litigation').change(function () {
+            var value = $('#Litigation').val();
+            if (value == "No") {
+                $('#t4').val('');
+                $("#divLitigationStatus").hide();
+            }
+            else {
+                $('#t4').val('');
+                $("#divLitigationStatus").show();
+            }
+        });
+    });
+
+    $(function () {
+        $('#GEO').change(function () {
+            var value = $('#GEO').val();
+            if (value == "No") {
+                $('#5').val('');
+                $("#divGEOReferencing").hide();
+            }
+            else {
+                $('#t5').val('');
+                $("#divGEOReferencing").show();
+            }
+        });
+    });
+</script>
+
+
+
