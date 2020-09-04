@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Interest Master</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Property Type </label>
+                        @*<select required style="height:30px;  background-color: #dddddd;" class="form-control" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">*@
+
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Residential</option>
+                            <option value="value">Commercial</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">From Date  </label>
+
+                        <input required type="date" class="form-control" />
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">To Date   </label>
+                        <input required type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Interest Percentage </label>
+                        <input required type="text" class="form-control" />
+                    </div>
+
+                </div>
+
+
+
+
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @*@Html.ActionLink("Back", "Index", "ZoneMaster", null, new { @class = "btn btn-primary myapp-hed1" })*@
+                        <a asp-action="Index" class="btn btn-primary myapp-hed1">Back</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<script src="~/js/interestmastercreate.js"></script>
