@@ -1,0 +1,248 @@
+﻿
+@{
+    ViewData["Title"] = "ListOfCourtCasesForHearing_LastHearingDate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+@*<script src="js/bootstrap.min.js"></script>
+    <link href="Styles/bootstrap.css" rel="stylesheet" />*@
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Case Details:LAND DISPOSAL</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create" method="post" id="1">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">
+
+                                    Last Hearing Date is between Specified Period
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="container-fluid" id="DivForFileName">
+                    <div class="panel-group">
+                        <div class="panel">
+                            @*<div class="form-row ">
+                                    <div class="form-group col-md-12 bg">Status Report DateWise</div>
+
+                                </div>*@
+
+
+
+                            <div class="row" style="margin-left:1px">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Branch</label>
+                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                        <option value="4">-Select- </option>
+
+                                        <option value="0">Land Disposal-C.E(Commercial Estate) </option>
+                                        <option value="1">Land Disposal-C.E(Commercial Estate)</option>
+                                        <option value="2">Land Disposal-C.E(Commercial Estate)</option>
+                                        <option value="3">Land Disposal-C.E(Commercial Estate)</option>
+                                    </select>
+                                </div>
+
+                            </div>
+
+
+
+
+
+
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Date From</label>
+                                    <input type="Date" style="width:100%;max-width:100%;min-width:unset !important;" class="form-control" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">To</label>
+                                    <input type="Date" style="width:100%;max-width:100%;min-width:unset !important;" class="form-control" />
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Remarks</label>
+                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                                </div>
+
+                            </div>
+
+                            <br />
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group  col-md-12" style="justify-content:center">
+                            <input type="button" value="Reterive" onclick="showcollection();" class="btn btn-primary myapp-hed1" />
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid" id="showcollection" style="display:none">
+
+                    <div class="card  table-card" style="overflow:scroll;">
+
+                        <table class="table table-responsive table-bordered table-card" style="display:none" id="showtr">
+
+
+                            <thead class="thead">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>
+
+                                        CASE NO
+
+
+                                    </th>
+                                    <th> CASE TITLE</th>
+                                    <th>
+
+
+                                        LEGAL FILE NO
+
+                                    </th>
+                                    <th>DEPT FILE NO</th>
+                                    <th>
+
+                                        LAWER NAME
+
+                                    </th>
+                                    <th>
+                                        COURT NAME
+
+                                    </th>
+
+                                </tr>
+                                <tr><td colspan="7">BRANCH NAME - LAND DISPOSAL C.E.(COMMERCIAL ESTATE) </td></tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>1</td>
+                                    <td>
+                                        WP-6830/2004
+                                    </td>
+                                    <td>
+                                        CHATURBHUJ
+                                    </td>
+                                    <td>
+                                        F12(364)04
+                                    </td>
+                                    <td>HC/LEGAL</td>
+                                    <td>M.K SINGH</td>
+                                    <td>HIGH COURT OF DELHI</td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>2</td>
+                                    <td>
+                                        WP-7830/2004
+                                    </td>
+                                    <td>
+                                        CHATURBHUJ
+                                    </td>
+                                    <td>
+                                        F13(364)04
+                                    </td>
+                                    <td>TC/LEGAL</td>
+                                    <td>P.K AGGARWAL</td>
+                                    <td>HIGH COURT OF DELHI</td>
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                    <br /><br />
+
+                </div>
+
+
+
+            </form>
+        </div>
+    </div>
+</div>
+@*<script>
+        $(function () {
+            $("input[name=btnsubmit]").click(function () {
+                if ($(this).val() == "Search") {
+                    $("#DivForSubsequentPurchaser").show();
+                } else {
+                    $("#DivForSubsequentPurchaser").hide();
+                }
+            });
+        });
+
+    </script>*@
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/casedetailhousingcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/casedetailhousingcreate.min.js" asp-append-version="true"></script>
+</environment>
