@@ -1,0 +1,169 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Interims</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "Interims", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card" style="overflow:scroll;">
+
+        <table class="table table-responsive table-bordered table-card">
+            <tr class="myapp-hed1">
+
+                <th>Sr.No</th>
+                <th>Case No </th>
+                <th> Case Title </th>
+                <th> Legal File No </th>
+                <th>Court Name </th>
+                <th>Date Of Interim Direction Or Gist </th>
+                <th> Date Order To Be Complied With </th>
+                <th> Date Of Compliance </th>
+                <th>Nature Of Interim Direction </th>
+                <th>Document </th>
+                <th> Details OF Interim Direction Or Gist </th>
+                <th>Active Status</th>
+                <th>Operation</th>
+            </tr>
+
+            @*<tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td>@item.CaseNo</td>
+                    <td>@item.CaseTitle</td>
+                    <td>@item.LegalFileNo</td>
+                    <td>@item.CourtName</td>
+
+                    <td>@(Convert.ToDateTime(item.DateOfInterimDirectionOrGist).ToString("dd-MMM-yyyy"))</td>
+                    <td>@(Convert.ToDateTime(item.DateOrderToBeCompliedWith).ToString("dd-MMM-yyyy"))</td>
+                    <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
+
+                    <td>@item.NatureOfInterimDirection</td>
+                    <td>@item.Document</td>
+                    <td>@item.DetailsOinterimDirectionOrGist</td>
+                    <td>@item.ActiveStatus</td>
+
+
+
+                    <td>@(Convert.ToDateTime(item.StipulatedDate).ToString("dd-MMM-yyyy"))</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.InterimsRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@item.InterimsRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>*@
+            <tr>
+                <td>1</td>
+                <td>1111111</td>
+                <td>CaseTitle</td>
+                <td>11111</td>
+                <td>CourtName</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>NatureOfInterimDirection</td>
+                <td>Document</td>
+                <td>details</td>
+                <td>1</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <a asp-action="Edit" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                    <a asp-action="Delete" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>1111111</td>
+                <td>CaseTitle</td>
+                <td>11111</td>
+                <td>CourtName</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>NatureOfInterimDirection</td>
+                <td>Document</td>
+                <td>details</td>
+                <td>1</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <a asp-action="Edit" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                    <a asp-action="Delete" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1111111</td>
+                <td>CaseTitle</td>
+                <td>11111</td>
+                <td>CourtName</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>NatureOfInterimDirection</td>
+                <td>Document</td>
+                <td>details</td>
+                <td>1</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <a asp-action="Edit" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                    <a asp-action="Delete" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+
+
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1111111</td>
+                <td>CaseTitle</td>
+                <td>11111</td>
+                <td>CourtName</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>6/8/2020</td>
+                <td>NatureOfInterimDirection</td>
+                <td>Document</td>
+                <td>details</td>
+                <td>1</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <a asp-action="Edit" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                    <a asp-action="Delete" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+
+
+            </tr>
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+
