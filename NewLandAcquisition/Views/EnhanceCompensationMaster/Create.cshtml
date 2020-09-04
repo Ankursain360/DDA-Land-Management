@@ -1,0 +1,388 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .btn {
+        Background: linear-gradient(33deg, #8c1f47,#362c85);
+        Font-size: 1.0rem;
+        Font-Family: Open SansSemibold;
+        color: #ffffff
+    }
+</style>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Enhance Compensation Master</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div id="divname">
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Demand List No </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> ENM Sno.</label>
+                            <input required type="text" class="form-control">
+
+
+                        </div>
+
+                    </div>
+                </div>
+                <div id="divdemand">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Demand List Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">LAC File No. </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">L & B No. </label>
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">L & B Ref.Date</label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">DDA File No. </label>
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">LAC No.</label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">RFA No.</label>
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">SLP No.</label>
+                            <input required type="text" class="form-control" />
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Payable/Appealable</label>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="checkbox" id="Payable" name="Payable" value="Payable">
+                                    <label for="Payable" class="lb-sm">Payable</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="checkbox" id="Appealable" name="Appealable" value="Appealable">
+                                    <label for="Payable" class="lb-sm">Appealable</label>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date Of Judgement</label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Case Involves to which court</label>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label class="radio-inline  ">
+                                        <input type="radio" name="court" id="court" value="" checked />A.D.J
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="radio-inline ">
+                                        <input type="radio" name="court" id="court" value="" checked />H.C.
+                                    </label>
+                                </div>
+                                <div class="form-group col-md-4">
+
+                                    <label class="radio-inline ">
+                                        <input type="radio" name="court" id="court" value="" checked />S.C.
+                                    </label>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Party Name</label>
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Status</label>
+                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="Divclsification">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Khasra Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Village Name</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select--</option>
+                                <option value="1">Village Name1</option>
+                                <option value="2">Village Name2</option>
+                                <option value="3">Village Name3</option>
+                                <option value="4">Village Name4</option>
+                                <option value="5">Village Name5</option>
+                            </select>
+
+                        </div>
+
+
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Khasra No</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select--</option>
+                                <option value="1">Khasra No1</option>
+                                <option value="2">Khasra No2</option>
+                                <option value="3">Khasra No3</option>
+                                <option value="4">Khasra No4</option>
+                                <option value="5">Khasra No5</option>
+                            </select>
+
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="Divclsification">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area Used</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Bigha</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Biswa</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Biswanshi</label>
+                                <input type="text" class="form-control" placeholder="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="divdemand">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Payment Details    </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Amount paid</label>
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Cheque Date  </label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Cheque No</label>
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Bank Name </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Voucher No </label>
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Percent Paid </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Status</label>
+                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="divdemand">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Appeal Details  </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Appeal No.</label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Appeal By which Dept. </label>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <input type="checkbox" id="UOI " name="UOI " value="UOI ">
+                                    <label for="UOI " class="lb-sm">UOI </label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <input type="checkbox" id="DDA" name="DDA" value="DDA">
+                                    <label class="lb-sm" for="DDA">DDA</label>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date Of Appeal </label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Panel Lawer </label>
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Status</label>
+                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "EnhanceCompensationMaster", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*@if (ViewData["Msg"] != null)
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@
