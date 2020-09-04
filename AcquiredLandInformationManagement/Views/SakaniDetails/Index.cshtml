@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Sakani Details Form</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "SakaniDetails", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card" style="overflow:scroll;">
+
+        <table class="table table-responsive table-bordered table-card">
+
+            <thead class="thead">
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Village Name</th>
+                    <th>No. Of Khewat</th>
+                    <th>No. Of Khatauni</th>
+                    <th>Owner Details</th>
+                    <th>Lease Details</th>
+                    <th>Tenant Details</th>
+                    <th>Khasra no</th>
+                    <th>Remarks</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+                <tr>
+                    <td>1</td>
+                    <td>Nimri </td>
+                    <td>02</td>
+                    <td>02</td>
+                    <td>Dharmesh</td>
+                    <td>Lease</td>
+                    <td>Tenant</td>
+                    <td>0//10</td>
+                    <td>Land is acquired</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+                </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+
+
+
+
+
+
