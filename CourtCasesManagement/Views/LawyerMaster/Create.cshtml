@@ -1,0 +1,140 @@
+﻿@*@model DDAPropertyREG.Models.TblMasterdivisions*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Lawyer Master</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div> 
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Lawyer Type</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">---Select---</option>
+                            <option value="1">Additional Solicitor General</option>
+                            <option value="2">Panel Master</option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Lawyer Name</label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Court Name</label>
+                        <select style="height:30px; background-color: #dddddd;" class="form-control">
+                            <option value="0">---Select---</option>
+                            <option value="1"></option>
+                            <option value="2"></option>
+                        </select>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Chamber Address</label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Court Phone</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Pan No.</label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Recidential Address</label>
+                        <input type="text" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Mobile/Phone No.</label>
+                        <input type="text" class="form-control" />
+
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Valid From</label>
+                        <input type="date" class="form-control" />
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Valid To</label>
+                        <input type="date" class="form-control" />
+                    </div>
+                </div>
+
+               
+
+                <div class="form-row">
+                  
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">ActiveStatus</label>
+                        <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+                <br />
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "LawyerMaster", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
