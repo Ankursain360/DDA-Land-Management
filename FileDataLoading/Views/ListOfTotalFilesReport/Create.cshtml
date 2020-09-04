@@ -1,0 +1,206 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">List Of Total Files Report</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">List Of Total Files Report</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="container-fluid" id="DivForFileName">
+                    <div class="panel-group">
+                        <div class="panel">
+                            @*<div class="form-row ">
+                                <div class="form-group col-md-12 bg">File No</div>
+
+                            </div>*@
+                            @*<br /><br />*@
+                                  <div class="form-row">
+
+                                      <div class="form-group col-md-6">
+
+                                          <label class="control-label">Is Freehold?</label><span style="color:red">*</span>
+                                          <label class="radio-inline">
+                                              <input type="radio" name="grpfreehold" id="ryes" checked>Yes
+                                          </label>
+                                          <label class="radio-inline">
+                                              <input type="radio" name="grpfreehold" id="rno">No
+                                          </label>
+                                      </div>
+                                      <div class="form-group  col-md-6" style="justify-content:center">
+                                          <input type="submit" value="Filter" class="btn btn-primary myapp-hed1" />
+
+                                      </div>
+
+                                  </div>
+                            <div class="card  table-card" style="overflow:scroll;">
+
+                                <table class="table table-responsive table-bordered table-card">
+
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>File No.</th>
+                                            <th>File Name</th>
+                                            <th>File Particulars/Details</th>
+
+                                            @*<th>Operation</th>*@
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>F75(59)/2001-2002/LM/SEZ/CTC</td>
+                                            <td>CAPTAIN S G SHARMA VS ATTALIDEVI & ORS</td>
+                                            <td>
+                                                <table class="table table-responsive table-bordered table-card">
+
+                                                    <thead class="thead">
+                                                        <tr>
+                                                            <th>Rec.Ro.No</th>
+                                                            <th>Al.No./Compactor No.</th>
+                                                            <th>Row No</th>
+                                                            <th>Column No</th>
+                                                            <th>Bundle No</th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody">
+                                                        <tr>
+                                                            <td>C1/12</td>
+                                                            <td>1</td>
+                                                            <td>1</td>
+                                                            <td>A</td>
+                                                            <td>
+                                                                1
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </td>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>2</td>
+                                            <td>F75(59)/2001-2002/LM/SEZ/CTC</td>
+                                            <td>CAPTAIN S G SHARMA VS ATTALIDEVI & ORS</td>
+                                            <td>
+                                                <table class="table table-responsive table-bordered table-card">
+
+                                                    <thead class="thead">
+                                                        <tr>
+                                                            <th>Rec.Ro.No</th>
+                                                            <th>Al.No./Compactor No.</th>
+                                                            <th>Row No</th>
+                                                            <th>Column No</th>
+                                                            <th>Bundle No</th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="tbody">
+                                                        <tr>
+                                                            <td>C1/12</td>
+                                                            <td>1</td>
+                                                            <td>1</td>
+                                                            <td>A</td>
+                                                            <td>
+                                                                1
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </td>
+
+                                            @*<td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>*@
+
+                                        </tr>
+
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+
+
+
+                            <br />
+
+                            <div class="form-row">
+                                <div class="form-group  col-md-12" style="justify-content:center">
+                                    <input type="submit" value="Print" class="btn btn-primary myapp-hed1" />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

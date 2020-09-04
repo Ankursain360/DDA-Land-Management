@@ -1,0 +1,184 @@
+﻿
+@{
+    ViewData["Title"] = "IssueFileData";
+    Layout = null;
+}
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+
+@*<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Issue File</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />*@
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Issue File</h6>
+        </div>
+        <div class="panel-body">
+            <form method="post" asp-action="Index" id="1">
+                @*asp-action="Create"*@
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="container-fluid" id="MainContentForm">
+                    <div class="panel">
+                        <div class="panel-heading  myapp-hed1">
+                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">File Details</h6>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">File No.</label>
+                                    <label class="control-label lb-sm" text="F1"></label>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">File Name</label>
+                                    <label class="control-label lb-sm" text="Online"></label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="container-fluid" id="MainContentForm">
+                    <div class="panel">
+                        <div class="panel-heading  myapp-hed1">
+                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Location</h6>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Room No.</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Almirah No/Compactor</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Row No.</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Column No.</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Bundle No.</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="container-fluid" id="MainContentForm">
+                    <div class="panel">
+                        <div class="panel-heading  myapp-hed1">
+                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Issuing Details</h6>
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Issue to(Employee Name)</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Department</label>
+                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Har</option>
+                                        <option value="2">Someother</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Branch</label>
+                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Har</option>
+                                        <option value="2">Someother</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Designation</label>
+                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Har</option>
+                                        <option value="2">Someother</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Issuing Date</label>
+                                    <input type="date" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Issue" class="btn btn-primary myapp-hed1" id="btnFind" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Issue Receipt", "IssueReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" , target = "_blank" , style="width:auto;"})
+                        @Html.ActionLink("Return Receipt", "ReturnReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+@if (ViewData["Msg"] != null)
+{
+    FileDataLoading.Models.Message msg = ViewData["Msg"] as FileDataLoading.Models.Message;
+    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+}
+
+

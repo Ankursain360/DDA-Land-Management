@@ -1,0 +1,291 @@
+﻿@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Search By Parameters</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Create</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Main File
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Part File
+                        </label>
+                    </div>
+                </div>
+
+                <br /> <br />
+
+
+
+
+
+
+
+                <div id="Divclsification">
+                    @*<div class="panel-group">
+                        <div class="panel">*@
+
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">File No</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Category</label>
+                            <input type="text" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Header</label>
+                            <input type="text" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Seq.No</label>
+                            <input type="Number" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Year</label>
+                            <input type="Number" required class="form-control" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Scheme/Deparment</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select Scheme--</option>
+                                <option value="1">Scheme1</option>
+                                <option value="2">Scheme2</option>
+                                <option value="3">Scheme3</option>
+                                <option value="4">Scheme4</option>
+                                <option value="5">Scheme5</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label lb-sm">Locality/Title</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1; width:10px;width:100%;max-width:100%;min-width:unset !important;">
+                                <option value="0">--Select Locality--</option>
+                                <option value="1">Locality/Title1</option>
+                                <option value="2">Locality/Title2</option>
+                                <option value="3">Locality/Title3</option>
+                                <option value="4">Locality/Title4</option>
+                                <option value="5">Locality/Title5</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <br />  <br />
+                    <div class="form-row ">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm"> Name/Subject</label>
+                            <input type="text" required class="form-control" />
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Location Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Record Room No</label>
+                            <input type="Number" required class="form-control" />
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Almirah No/Compactor No</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select Almirah--</option>
+                                <option value="1">Almirah</option>
+                                <option value="2">Almirah</option>
+                                <option value="3">Almirah</option>
+                                <option value="4">Almirah</option>
+                                <option value="5">Almirah</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Row No</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select Row No--</option>
+                                <option value="1">col1</option>
+                                <option value="2">col2</option>
+                                <option value="3">col3</option>
+                                <option value="4">col4</option>
+                                <option value="5">col5</option>
+                            </select>
+                        </div>
+
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Column No</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select Column No--</option>
+                                <option value="1">col1</option>
+                                <option value="2">col2</option>
+                                <option value="3">col3</option>
+                                <option value="4">col4</option>
+                                <option value="5">col5</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Bundle No</label>
+                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">--Select Bundle No--</option>
+                                <option value="1">col1</option>
+                                <option value="2">col2</option>
+                                <option value="3">col3</option>
+                                <option value="4">col4</option>
+                                <option value="5">col5</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Remarks</label>
+                            <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                        </div>
+
+                    </div>
+
+
+
+
+                    @*</div>
+                        </div>*@
+                </div>
+
+
+
+                <br /><br />
+                <div class="form-row">
+                    <div class="form-group  col-md-12" style="justify-content:center">
+                        <input type="submit" value="Search" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @*  @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-primary myapp-hed1" })*@
+
+
+
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+
+    $(function () {
+        $("input[name='grpSearchby']").click(function () {
+            if ($("#rdbFilename").is(":checked")) {
+                $("#DivForFileName").show();
+                $("#DivForDocumentName").hide();
+                $("#DivForGenerate").hide();
+            }
+            else if ($("#rdbDocumentname").is(":checked")) {
+                $("#DivForFileName").hide();
+                $("#DivForDocumentName").show();
+                $("#DivForGenerate").hide();
+            }
+            //else {
+            //    $("#DivForFileName").hide();
+            //    $("#DivForPayeeName").hide();
+            //}
+        });
+    });
+
+</script>
+
+<script>
+    $(function () {
+        $("input[name='grpMainFile']").click(function () {
+            if ($("#rSubsequent").is(":checked")) {
+                $("#DivForSubsequentPurchaser").show();
+            } else {
+                $("#DivForSubsequentPurchaser").hide();
+            }
+        });
+    });
+</script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
+</script>
+<script>
+    $(function () {
+        $("#date").datepicker({ dateFormat: 'yy' });
+    });
+</script>

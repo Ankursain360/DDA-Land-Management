@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/js/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+<style>
+    .p {
+        color: black;
+    }
+</style>
+
+<style>
+
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;
+    }
+</style>
+
+
+<script src="js/bootstrap.min.js"></script>
+<link href="Styles/bootstrap.css" rel="stylesheet" />
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Status Report Department Wise</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+
+
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Status Report Department Wise</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="form-row">
+                    <div class="col-md-12">
+                        <table class="table table-responsive table-bordered table-card">
+
+                            <thead class="thead">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Department Name</th>
+                                    <th>Total Files</th>
+                                    <th>Total Issued Files</th>
+                                    <th>Total Unissued Files</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr>
+                                    <td>1</td>
+                                    <td>Land Management</td>
+                                    <td>4823</td>
+                                    <td>0</td>
+                                    <td>4823</td>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group  col-md-12" style="justify-content:center">
+                        <input type="submit" value="Print" class="btn btn-primary myapp-hed1" />
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
