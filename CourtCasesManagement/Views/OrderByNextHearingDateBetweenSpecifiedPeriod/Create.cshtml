@@ -1,0 +1,179 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;"> Order By Next Hearing Is Date Department/Branch Wise With Specified Period</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Order By Next Hearing Is Date Department/Branch Wise With Specified Period</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Department </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Select</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Branch </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Select</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Court </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Select</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">From </label>
+                        <input type="Date" class="form-control">
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">To </label>
+                        <input type="Date" class="form-control">
+
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Retrieve" class="btn btn-primary myapp-hed1" />
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+
+                        <div id="courtwiserpt">
+                            <div class="card  table-card table-responsive" style="overflow:scroll;">
+
+                                <table class="table  table-bordered table-card">
+                                    <thead>
+                                        <tr class="myapp-hed1">
+                                            <th colspan="12">
+                                                Details Cases whose Hearing Is Due Court-BranchWise Next Hearing Date From 10/08/2004 To 10/08/2004<br /><br />Court Name:District Court<br />Branch Name:Housing
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <thead class="thead">
+                                        <tr class="myapp-hed1">
+                                            <th>Sr.No</th>
+
+                                            <th>Case No </th>
+                                            <th>Case Title </th>
+                                            <th>Legal File No</th>
+
+                                            <th>Department File No</th>
+                                            <th> Lawyer Name </th>
+                                            <th> Last Hearing Date </th>
+                                            <th>Next Hearing Date</th>
+                                            @*<th> Branch Name </th>*@
+
+
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>A-111/2004</td>
+                                            <td>Hearing is due for housing</td>
+                                            <td> District Court Delhi(Tis Hazari)</td>
+
+                                            <td>A-111</td>
+                                            <td>AJAY VERMA</td>
+                                            <td>10/8/2003</td>
+                                            <td>10/8/2004</td>
+                                            @*<td>Housing</td>*@
+                                            @*<td>AJAY VERMA</td>*@
+                                            @*<td>30-MAY-2018</td>*@
+                                            <td>PENDING</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>A-111/2004</td>
+                                            <td>Hearing is due for housing</td>
+                                            <td> District Court Delhi(Tis Hazari)</td>
+
+                                            <td>A-111</td>
+                                            <td>AJAY VERMA</td>
+                                            <td>10/8/2003</td>
+                                            <td>10/8/2004</td>
+                                            @*<td>Housing</td>*@
+                                            @*<td>AJAY VERMA</td>*@
+                                            @*<td>30-MAY-2018</td>*@
+                                            <td>PENDING</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>A-111/2004</td>
+                                            <td>Hearing is due for housing</td>
+                                            <td> District Court Delhi(Tis Hazari)</td>
+
+                                            <td>A-111</td>
+                                            <td>AJAY VERMA</td>
+                                            <td>10/8/2003</td>
+                                            <td>10/8/2004</td>
+                                            @*<td>Housing</td>*@
+                                            @*<td>AJAY VERMA</td>*@
+                                            @*<td>30-MAY-2018</td>*@
+                                            <td>PENDING</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+
+                        <input type="submit" value="Export to Excel" class="btn btn-primary  myapp-hed1" style="width:150px !important;" />
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
