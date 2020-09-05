@@ -1,6 +1,7 @@
 using Libraries.Model.Entity;
 using Libraries.Model.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace Libraries.Model
 {
@@ -15,12 +16,16 @@ namespace Libraries.Model
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
 
-        public virtual DbSet<Designation> TblMasterDesignation { get; set; }
+        public virtual DbSet<Designation> Designation { get; set; }
+
+        public virtual DbSet<Zone> Zone { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
+            modelBuilder.ApplyConfiguration(new ZoneConfiguration());
         }
+
     }
 }
