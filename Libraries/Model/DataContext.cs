@@ -18,12 +18,16 @@ namespace Libraries.Model
         public virtual DbSet<Designation> Designation { get; set; }
 
         public virtual DbSet<Zone> Zone { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
             modelBuilder.ApplyConfiguration(new ZoneConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ModuleConfiguration());
+
         }
 
     }

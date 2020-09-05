@@ -55,7 +55,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Designation designation)
         {
-           
+
             designation.CreatedBy = 1;
             designation.CreatedDate = DateTime.Now;
             _designationRepository.Add(designation);
