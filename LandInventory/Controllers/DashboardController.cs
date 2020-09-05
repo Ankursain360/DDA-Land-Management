@@ -10,6 +10,7 @@ namespace LandInventory.Controllers
     {
         public IActionResult Index()
         {
+            //comment by nikita
             return View();
         }
     }

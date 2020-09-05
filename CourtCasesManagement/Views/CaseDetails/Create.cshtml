@@ -1,0 +1,282 @@
+﻿@*@model DDAPropertyREG.Models.Tblinterims*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .btn {
+        Background: linear-gradient(33deg, #8c1f47,#362c85);
+        Font-size: 1.0rem;
+        Font-Family: Open SansSemibold;
+        color: #ffffff
+    }
+</style>
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Case Details</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        @*<select asp-for="BillNumber" class="form-control" asp-items="@(new SelectList(ViewBag.Data,"Value","Text"))">
+                    <option value="value">text</option>
+                </select>*@
+                        <label class="control-label lb-sm">Batch  No </label>
+                        <input required type="text" class="form-control">
+
+
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Serial No  </label>
+                        <input required type="text" class="form-control">
+
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        @*<select asp-for="BillNumber" class="form-control" asp-items="@(new SelectList(ViewBag.Data,"Value","Text"))">
+                    <option value="value">text</option>
+                </select>*@
+                        <label class="control-label lb-sm">Case No </label>
+                        @*<input required type="text" class="form-control">*@
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>CS1234</option>
+                            <option>CS4569</option>
+                            <option>CS859766</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Case Title </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>Select Title</option>
+                            <option>Select Title</option>
+                        </select>
+
+                    </div>
+                </div>
+
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Legal File No </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>FN2123</option>
+                            <option>FN21230</option>
+                            <option>FN212345</option>
+                        </select>
+
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Court Name </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>High Court</option>
+                            <option>District Court</option>
+                            <option>Supreme Court</option>
+                        </select>
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Status Of DDA </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>petitioner </option>
+                            <option>respondent </option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Date Of Filing  </label>
+                        <input required type="date" class="form-control">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Department Name </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>dept1</option>
+                            <option>dept2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Branch Name</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>branch 1</option>
+                            <option>branch2</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Case Subject  </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>subject1</option>
+                            <option>subject2</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Nature </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>yes</option>
+                            <option>no</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div id="divConnectedcase">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Connected Case Details</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Connected case no.</label>
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Title of the connected case</label>
+                            <input required type="text" class="form-control">
+
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Whether Bunch Matter or Not</label>
+
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option>yes</option>
+                                <option>no</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Date of Order</label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+
+                    </div>
+                </div>
+                <div id="divPayment">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Party Details </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Party Name </label>
+
+                            <input required type="text" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Address </label>
+                            <input required type="text" class="form-control">
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+
+                        <label class="control-label lb-sm">Status</label>
+                        <select style="height:30px;    background-color: #dddddd;"
+                                required class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                    </div>
+
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+                </div>
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "CaseDetails", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*@if (ViewData["Msg"] != null)
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@

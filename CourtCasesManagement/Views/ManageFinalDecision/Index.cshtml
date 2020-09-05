@@ -1,0 +1,181 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Manage Final Decision</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "ManageFinalDecision", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card">
+        <div style="overflow-x:auto;">
+            <table class="table table-responsive table-bordered table-card">
+                <tr class="myapp-hed1">
+
+                    <th>Sr.No</th>
+
+                    <th>Case No </th>
+                    <th> Case Title </th>
+                    <th> Legal File No </th>
+                    <th>Court Name </th>
+
+
+                    <th>Date Of Final Decision </th>
+                    <th>Gist Of Final Decision </th>
+                    <th>Decision Type </th>
+
+                    <th>Nature Of Decision </th>
+                    <th>To Be Challenged </th>
+                    <th>Whether Appeal Revision To Be Filed Or Not </th>
+
+                    <th>Last Date Of Filing Appeal </th>
+                    <th>Whether Appeal Finally Filed Or Not </th>
+                    <th>Date of Filing </th>
+
+                    <th>Date By Which Order To Be Compiled </th>
+                    <th>Date Of Compliance </th>
+
+                    <th>Document </th>
+                    <th>Remarks </th>
+                    <th>Status </th>
+
+
+                    <th>Operation</th>
+                </tr>
+
+                @*<tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+
+                        <td>@item.CaseNo</td>
+                        <td>@item.CaseTitle</td>
+                        <td>@item.LegalFileNo</td>
+                        <td>@item.CourtName</td>
+
+                        <td>@(Convert.ToDateTime(item.DateOfFinalDecision).ToString("dd-MMM-yyyy"))</td>
+                        <td>@item.GistOfFinalDecision</td>
+                        <td>@item.DecisionType</td>
+                        <td>@item.NatureOfDecision</td>
+                        <td>@item.ToBeChallenged</td>
+                        <td>@item.WhetherAppealRevisionToBeFiledOrNot</td>
+
+                        <td>@(Convert.ToDateTime(item.DateOfFiling).ToString("dd-MMM-yyyy"))</td>
+
+                        <td>@(Convert.ToDateTime(item.DateByWhichOrderToBeCompiled).ToString("dd-MMM-yyyy"))</td>
+
+                        <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
+
+                        <td>@item.Document</td>
+                        <td>@item.Remarks</td>
+
+                        <td>@item.ActiveStatus</td>
+
+
+
+
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ManagefinaldecisionRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.ManagefinaldecisionRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>*@
+
+                <tr>
+                    <td>1</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>6/8/2020</td>
+                    <td>decision</td>
+                    <td>decision type</td>
+                    <td>natture</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+                    <td>remarks</td>
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>6/8/2020</td>
+                    <td>decision</td>
+                    <td>decision type</td>
+                    <td>natture</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+                    <td>remarks</td>
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>6/8/2020</td>
+                    <td>decision</td>
+                    <td>decision type</td>
+                    <td>natture</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>no</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+                    <td>remarks</td>
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+            </table>
+        </div>
+        </div>
+    </div>
+<br />
+<br />

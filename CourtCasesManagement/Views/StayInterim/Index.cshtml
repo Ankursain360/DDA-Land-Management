@@ -1,0 +1,204 @@
+﻿
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Manage Stay/Interims</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "StayInterim", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card">
+        <div style="overflow-x:auto;">
+            <table class="table table-responsive table-bordered table-card">
+
+                <tr class="myapp-hed1">
+
+                    <th>Sr.No</th>
+
+                    <th>Case No </th>
+                    <th> Case Title </th>
+                    <th> Legal File No </th>
+                    <th>Court Name </th>
+
+
+                    <th>Stay Interim </th>
+                    <th>Hearing Date </th>
+                    <th>Order Date </th>
+
+                    <th>Gist Of Order </th>
+                    <th>Vacate Modify Confirm </th>
+                    <th>Date Of Vacate Modify Confirm </th>
+
+                    <th>Compiled Or Not </th>
+                    <th>Date Of Compliance </th>
+                    <th>By Whom To Comply </th>
+
+                    <th>Reason For Non Compliance </th>
+                    <th>Appeal Revision Review If Filed </th>
+                    <th>Date Of filling appeal Revision Review </th>
+                    <th>Document </th>
+                    <th>Status </th>
+
+
+                    <th>Operation</th>
+                </tr>
+
+                @*<tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+
+                        <td>@item.CaseNo</td>
+                        <td>@item.CaseTitle</td>
+                        <td>@item.LegalFileNo</td>
+                        <td>@item.CourtName</td>
+
+                        <td>@item.StayInterim</td>
+                        <td>@(Convert.ToDateTime(item.HearingDate).ToString("dd-MMM-yyyy"))</td>
+                        <td>@(Convert.ToDateTime(item.OrderDate).ToString("dd-MMM-yyyy"))</td>
+
+                        <td>@item.GistOfOrder</td>
+                        <td>@item.VacateModifyConfirm</td>
+                        <td>@(Convert.ToDateTime(item.DateOfVacateModifyConfirm).ToString("dd-MMM-yyyy"))</td>
+                        <td>@item.CompiledOrNot</td>
+                        <td>@(Convert.ToDateTime(item.DateOfCompliance).ToString("dd-MMM-yyyy"))</td>
+
+                        <td>@item.ByWhomToComply</td>
+                        <td>@item.ReasonForNonCompliance</td>
+                        <td>@item.AppealRevisionReviewIfFiled</td>
+                        <td>@(Convert.ToDateTime(item.DateOffillingappealRevisionReview).ToString("dd-MMM-yyyy"))</td>
+                        <td>@item.Document</td>
+                        <td>@item.ActiveStatus</td>
+
+                        <td>@(Convert.ToDateTime(item.StipulatedDate).ToString("dd-MMM-yyyy"))</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.StayInterimRecNo" title="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                            <a asp-action="Delete" asp-route-id="@item.StayInterimRecNo" title="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </tbody>*@
+                <tr>
+                    <td>1</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>stay</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>order</td>
+                    <td>vacate</td>
+                    <td>6/8/2020</td>
+                    <td>yes</td>
+                    <td>6/8/2020</td>
+                    <td>A</td>
+                    <td>REASON</td>
+                    <td>Appeal</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>stay</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>order</td>
+                    <td>vacate</td>
+                    <td>6/8/2020</td>
+                    <td>yes</td>
+                    <td>6/8/2020</td>
+                    <td>B</td>
+                    <td>REASON</td>
+                    <td>Appeal</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>stay</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>order</td>
+                    <td>vacate</td>
+                    <td>6/8/2020</td>
+                    <td>yes</td>
+                    <td>6/8/2020</td>
+                    <td>C</td>
+                    <td>REASON</td>
+                    <td>Appeal</td>
+                    <td>6/8/2020</td>
+                    <td>document </td>
+
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>1111111</td>
+                    <td>CaseTitle</td>
+                    <td>11111</td>
+                    <td>CourtName</td>
+                    <td>stay</td>
+                    <td>6/8/2020</td>
+                    <td>6/8/2020</td>
+                    <td>order</td>
+                    <td>vacate</td>
+                    <td>6/8/2020</td>
+                    <td>yes</td>
+                    <td>6/8/2020</td>
+                    <td>D</td>
+                    <td>REASON</td>
+                    <td>Appeal</td>
+
+                    <td>6/8/2020</td>
+                    <td>document </td>
+                    <td>1</td>
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+

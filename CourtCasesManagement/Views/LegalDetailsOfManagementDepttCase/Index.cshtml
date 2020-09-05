@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Legal Details of Land Management Deptt. </h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Add New", "Create", "LegalDetailsOfManagementDepttCase", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card" style="overflow:scroll;">
+
+        <table class="table table-responsive table-bordered table-card">
+
+            <thead class="thead">
+                <tr>
+                    <th>Sr.No</th>
+
+                    <th>Case No.</th>
+                    <th>Case Title</th>
+                    <th>Cause of dispute</th>
+                    <th>Relief Claimed</th>
+                    <th>Name of the Owner</th>
+                    <th>Area in Dispute</th>
+                    <th>Name of Village</th>
+                    <th>Award No</th>
+                    <th>Date of award</th>
+                    <th>Date of possession</th>
+                    <th>Date of Notification U/S-2</th>
+                    <th>Plot No</th>
+                    <th>Khasara no.</th>
+                    <th>Operation</th>
+
+
+
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+                <tr>
+                    <td>1</td>
+                    <td>0001</td>
+                    <td>Title1</td>
+                    <td>dispute</td>
+                    <td>relief </td>
+                    <td>Ravinder</td>
+                    <td>Haryana</td>
+                    <td>Ullawas Village</td>
+                    <td>00098 </td>
+
+
+
+
+                    <td>28/08/2020</td>
+                    <td>28/08/2020</td>
+
+                    <td>28/08/2020</td>
+                    <td>100 </td>
+                    <td>104</td>
+
+                
+
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> |<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>0002</td>
+                    <td>title2</td>
+
+
+                    <td>dispute</td>
+                    <td>relief </td>
+                    <td>Nagender</td>
+                    <td>Haryana</td>
+                    <td>Ullawas Village</td>
+                    <td>00098 </td>
+
+
+
+
+                    <td>27/08/2020</td>
+                    <td>27/08/2020</td>
+
+                    <td>27/08/2020</td>
+                    <td>101 </td>
+                    <td>105</td>
+
+
+                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp;|<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+
+                </tr>
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+<br />
+<br />
+

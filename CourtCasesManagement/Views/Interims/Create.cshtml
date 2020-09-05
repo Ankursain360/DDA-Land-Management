@@ -1,0 +1,302 @@
+﻿@*@model DDAPropertyREG.Models.Tblinterims*@
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+        .btn {
+            Background: linear-gradient(33deg, #8c1f47,#362c85);
+            Font-size: 1.0rem;
+            Font-Family: Open SansSemibold;
+            color: #ffffff
+        }
+      
+        
+    </style>
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Interims</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div id="divsearch">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Search Cases</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Enter Case Number </label>
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input style="margin-top:15px;" type="submit" value="Search" class="btn btn-primary myapp-hed1" />
+                    </div>
+
+                </div>
+
+                <div id="divsearchresult">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Search Result</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <table id="mytable" class="table table-striped table-bordered" border="0">
+                                    <thead class="thead">
+                                        <tr>
+                                            <th>Case No </th>
+                                            <th> Case Title </th>
+                                            <th>Legal File No. </th>
+                                            <th>Department  </th>
+                                            <th>Branch </th>
+                                            <th>Last Hearing Date</th>
+                                            <th>Load Interim</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>1005/1981</td>
+                                            <td>YOGINDER KUMAR JAIN VS LG & OTHERS</td>
+                                            <td>F.1(126)1981/LSB(R) /PT/Y32</td>
+                                            <td>LANDS (DISPOSAL) (22)</td>
+                                            <td>LAND DISPOSAL-LSB(RESDL.)</td>
+                                            <td>30-11-2012</td>
+                                            <td><a href="#"> Load Interim</a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1022/1992</td>
+                                            <td>WG. CDR. K.T. ANANTHARAMAN VS DDA</td>
+                                            <td>F.1(789)1992/TC/LEGAL</td>
+                                            <td>HOUSING</td>
+                                            <td>	HOUSING-SFS </td>
+                                            <td>30-11-2012</td>
+                                            <td><a href="#"> Load Interim</a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1005/1981</td>
+                                            <td>YOGINDER KUMAR JAIN VS LG & OTHERS</td>
+                                            <td>F.1(126)1981/LSB(R) /PT/Y32</td>
+                                            <td>LANDS (DISPOSAL) (22)</td>
+                                            <td>LAND DISPOSAL-LSB(RESDL.)</td>
+                                            <td>30-11-2012</td>
+                                            <td><a href="#"> Load Interim</a> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>1022/1992</td>
+                                            <td>WG. CDR. K.T. ANANTHARAMAN VS DDA</td>
+                                            <td>F.1(789)1992/TC/LEGAL</td>
+                                            <td>HOUSING</td>
+                                            <td>	HOUSING-SFS </td>
+                                            <td>30-11-2012</td>
+                                            <td><a href="#"> Load Interim</a> </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div id="divcasedetails">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Case Details </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            @*<select asp-for="BillNumber" class="form-control" asp-items="@(new SelectList(ViewBag.Data,"Value","Text"))">
+                        <option value="value">text</option>
+                    </select>*@
+                            <label class="control-label lb-sm">Case No </label>
+                            <input required type="text" class="form-control">
+                            @*<select style="height:45px;" asp-for="Department" required class="form-control">
+                        <option value="dept1">dept1</option>
+                        <option value="dept2">dept2</option>
+                        <option value="dept3">dept3</option>
+                    </select>*@
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Case Title </label>
+                            <input required type="text" class="form-control">
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Legal File No </label>
+                            <input required type="text" class="form-control">
+
+
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Court Name </label>
+                            <input required type="text" class="form-control">
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div id="divdetails">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Add Interim Details </h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date Of Interim Direction Or Gist </label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date Order To Be Complied With</label>
+
+                            <input required type="date" class="form-control">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date Of Compliance</label>
+                            <input required type="date" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Nature Of Interim Direction </label>
+
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Document  </label>
+                            <input required type="file" class="form-control">
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Details Of Interim Direction Or Gist </label>
+
+                            <input required type="text" class="form-control">
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+
+                            <label class="control-label lb-sm">Status</label>
+                            <select style="height:30px;    background-color: #dddddd;"
+                                    required class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+
+                            <label class="control-label lb-sm">Remarks </label>
+                            <input required type="text" class="form-control">
+
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="form-group col-md-12" style="margin-bottom:40px;">
+                            <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                            @Html.ActionLink("Back", "Index", "Interims", null, new { @class = "btn btn-primary myapp-hed1" })
+                        </div>
+                    </div>
+
+                    
+                    <br />
+                </div>
+            </form>
+    </div>
+    </div>
+</div>
+
+
+
+
+
+
+@*@if (ViewData["Msg"] != null)
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@
