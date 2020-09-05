@@ -1,4 +1,5 @@
-﻿
+﻿@model Libraries.Model.Entity.Module
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -47,14 +48,14 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Module Name</label>
-                        <input required type="text" class="form-control" />
+                        <input asp-for="Name" required type="text" class="form-control" />
                     </div>
 
 
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
-                        <select required style="height:30px; background-color: #dddddd;" id="ActiveStatus"  class="form-control">
+                        <select asp-for="IsActive" required style="height:30px; background-color: #dddddd;" id="ActiveStatus" class="form-control">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
