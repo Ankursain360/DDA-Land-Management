@@ -1,0 +1,49 @@
+﻿@model SiteMaster.Models.Message
+
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<style>
+    .bg {
+        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+        Color: #ffffff;
+        /*Font-size: 0.95rem;
+        Font-Family: Open SansRegular;
+        height: 28px;*/
+    }
+
+    .modal-header {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+</style>
+
+<script type="text/javascript">
+    jQuery(function () {
+        
+        jQuery.noConflict();
+        jQuery('.modal').modal('show');
+    });
+
+</script>
+<button class="btn btn-primary" id="btnNotify" style="display:none" onclick="md.showNotification('top','right')">Top Right Notification</button>
+
+
+<div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="@(Model.Status=="S"? "modal-header btn btn-primary bg":"modal-header btn btn-danger bg")" style="display:block;max-width:100%;width:100%;">
+                    <h6 class="modal-title">Message from System</h6>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(Model.Msg)
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="@Model.BackPageAction" asp-controller="@Model.BackPageController" class="@(Model.Status=="S"? "btn btn-primary bg":"btn btn-danger bg")">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>

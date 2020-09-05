@@ -1,10 +1,13 @@
 ﻿@model Libraries.Model.Entity.Designation
-
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "View";
 }
 
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -21,26 +24,25 @@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Designation </label>
-                        <input asp-for="Name" class="form-control">
-                        <span id="lblError" style="color: red"></span>
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <input asp-for="Name" class="form-control" disabled>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                        <select asp-for="IsActive" style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control" disabled>
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        <span class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row">
@@ -50,7 +52,7 @@
                 <br />
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "Designation", null, new { @class = "btn btn-primary myapp-hed1" })
                     </div>
@@ -69,11 +71,3 @@
     @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
 }
 
-
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/designationindex.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/designationindex.min.js" asp-append-version="true"></script>
-</environment>

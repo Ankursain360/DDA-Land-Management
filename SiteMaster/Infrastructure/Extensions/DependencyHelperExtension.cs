@@ -17,12 +17,14 @@ namespace SiteMaster.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
-            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IZoneRepository, ZoneRepository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
-            services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IZoneService, ZoneService>();
+
 
         }
     }
