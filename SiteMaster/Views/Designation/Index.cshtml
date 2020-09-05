@@ -1,15 +1,10 @@
-﻿
+﻿@model IEnumerable<Libraries.Model.Entity.Designation>
+@{int rowNo = 0; }
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -46,21 +41,27 @@
 
             </thead>
             <tbody class="tbody">
-                <tr>
-                        <td></td>
-                        <td></td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@item.Name</td>
                         <td>
+                            @(item.IsActive  == 1 ? "Active" : "Inactive" )
                         </td>
-                        <td> <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> 
-                            @*<i class="glyphicon glyphicon-eye-open icon-white cl1"></i>*@ &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i> 
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+                            @*<i class="glyphicon glyphicon-eye-open icon-white cl1"></i>*@
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i> </a>
                             @*<text>
-            @Html.ActionLink(" ", "DeleteConfirmed", "Designation", new { TenderID = item.DesignationId }, new { name = "deletepopup", @class = "fa fa-trash", style = "color:#326661", data_original_title = "Delete Plot Data", data_placement = "top", data_toggle = "tooltip" })
-        </text>*@   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i>
+                                    @Html.ActionLink(" ", "DeleteConfirmed", "Designation", new { TenderID = item.DesignationId }, new { name = "deletepopup", @class = "fa fa-trash", style = "color:#326661", data_original_title = "Delete Plot Data", data_placement = "top", data_toggle = "tooltip" })
+                                </text>*@
+                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
                             @*<a asp-route-id="@item.DesignationId" title="delete" onclick="DeleteData(@item.DesignationId)">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>*@
                         </td>
 
                     </tr>
-             
+                }
 
             </tbody>
         </table>
@@ -84,7 +85,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 @*<a asp-action="DeleteConfirmed" asp-route-id="popupid" title="delete" class="btn btn-primary myapp-hed1">Delete</a>*@
-                @Html.ActionLink("Delete ", "DeleteConfirmed", "Designation",new { id = "popupid" }, new { id = "popupid", @class = "actprimary" })
+                @Html.ActionLink("Delete ", "DeleteConfirmed", "Designation", new { id = "popupid" }, new { id = "popupid", @class = "actprimary" })
             </div>
         </div>
         <!-- modal-content -->
@@ -111,3 +112,16 @@
 </div>
 
 
+@if (ViewData["Msg"] != null)
+{
+    SiteMaster.Models.Message msg = ViewData["Msg"] as SiteMaster.Models.Message;
+    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+}
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/designationindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/designationindex.min.js" asp-append-version="true"></script>
+</environment>
