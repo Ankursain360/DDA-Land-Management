@@ -13,6 +13,7 @@ namespace Libraries.Model
 
         public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<Country> Country { get; set; }
+        public virtual DbSet<Department> Department { get; set; }
 
         public virtual DbSet<Designation> TblMasterDesignation { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
