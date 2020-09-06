@@ -1,0 +1,25 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Libraries.Model.Entity;
+using Libraries.Service.Common;
+
+
+namespace Libraries.Service.IApplicationService
+{
+    public interface IZoneService : IEntityService<Zone>
+    {
+        Task<List<Zone>> GetAllZone(); // To Get all data added by renu
+        Task<List<Zone>> GetZoneUsingRepo();
+
+        Task<bool> Update(int id, Zone zone); // To Upadte Particular data added by renu
+
+        Task<bool> Create(Zone zone);
+
+        Task<Zone> FetchSingleResult(int id);  // To fetch Particular data added by renu
+
+        Task<bool> Delete(int id);    // To Delete Data  added by renu
+
+        bool CheckUniqueName(int id, Zone zone);// To check Unique Value  for zone
+        bool CheckUniqueCode(int id, Zone zone);// To check Unique Value  for zone
+    }
+}

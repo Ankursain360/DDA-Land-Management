@@ -20,41 +20,51 @@ namespace Libraries.Repository.Common
         }
 
         public T Add(T entity)
-		{
-			return _dbset.Add(entity).Entity;
-		}
+        {
+            return _dbset.Add(entity).Entity;
+        }
 
         public virtual void Edit(T entity)
-		{
-			_dbContext.Entry(entity).State = EntityState.Modified;
-		}
-		public T Delete(T entity)
-		{
-			return _dbset.Remove(entity).Entity;
-		}
+        {
+            _dbContext.Entry(entity).State = EntityState.Modified;
+        }
+        public T Delete(T entity)
+        {
+            return _dbset.Remove(entity).Entity;
+        }
 
-		public async Task<List<T>> FindBy(Expression<Func<T, bool>> predicate)
-		{
-			List<T> query = await _dbset.Where(predicate).ToListAsync();
-			return query;
-		}
+        public async Task<List<T>> FindBy(Expression<Func<T, bool>> predicate)
+        {
+            List<T> query = await _dbset.Where(predicate).ToListAsync();
+            return query;
+        }
 
-		public virtual async Task<List<T>> GetAll()
-		{
-			return await _dbset.ToListAsync();
-		}
+        public virtual async Task<List<T>> GetAll()
+        {
+            return await _dbset.ToListAsync();
+        }
 
-		public virtual async Task AddRange(List<T> entities)
-		{
-			await _dbset.AddRangeAsync(entities);
-		}
+        public virtual async Task AddRange(List<T> entities)
+        {
+            await _dbset.AddRangeAsync(entities);
+        }
 
-		public virtual async Task<int> Save()
-		{
-			return await _dbContext.SaveChangesAsync();
-		}
+        public virtual async Task<int> Save()
+        {
+            return await _dbContext.SaveChangesAsync();
+        }
 
         public Task<List<T>> ExecuteQuery(string procedureName, params object[] parameters)
+        {
+            throw new NotImplementedException();
+        }
+
+        //public object Any(Func<object, bool> p)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        Task<List<T>> IGenericRepository<T>.Any(Func<object, bool> p)
         {
             throw new NotImplementedException();
         }

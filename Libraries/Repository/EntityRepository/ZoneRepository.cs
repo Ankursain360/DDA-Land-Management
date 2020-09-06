@@ -10,19 +10,19 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class DesignationRepository : GenericRepository<Designation>, IDesignationRepository
+    public class ZoneRepository : GenericRepository<Zone>, IZoneRepository
     {
-       
-        public DesignationRepository(DataContext dbContext) : base(dbContext)
+
+        public ZoneRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
 
-        public async Task<List<Designation>> GetDesignation()
+        public async Task<List<Zone>> GetZone()
         {
-            return await _dbContext.Designation.ToListAsync();
+            return await _dbContext.Zone.ToListAsync();
         }
     }
 
-   
+
 }
