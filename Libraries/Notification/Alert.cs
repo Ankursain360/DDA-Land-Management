@@ -9,7 +9,7 @@ namespace Notification
     public static class Alert
     {
         #region HELPERS
-        private static string stringValueOf(Enum value)
+        private static string StringValueOf(Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
             DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
@@ -47,7 +47,7 @@ namespace Notification
             builder.Append(",'progressBar': ");
             builder.Append(progressBar.ToLowerString());
             builder.Append(",'positionClass': '");
-            builder.Append(stringValueOf(position));
+            builder.Append(StringValueOf(position));
             builder.Append("','preventDuplicates': false,'onclick': ");
             builder.Append((onclick ?? "null"));
             builder.Append(",'showDuration': '300','hideDuration': '1000','timeOut': '");
@@ -55,7 +55,7 @@ namespace Notification
             builder.Append("','extendedTimeOut': '1000','showEasing': 'swing','hideEasing': 'linear','showMethod': 'fadeIn','hideMethod': 'fadeOut'");
             builder.Append("};");
             builder.Append("toastr['");
-            builder.Append(stringValueOf(type));
+            builder.Append(StringValueOf(type));
             builder.Append("']('");
             builder.Append(message);
             builder.Append("', '");
