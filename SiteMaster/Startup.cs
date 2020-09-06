@@ -64,6 +64,9 @@ namespace SiteMaster
             {
                 //   options.SuppressTempDataAttributePrefix = true;
             });
+
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
+
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";
@@ -75,6 +78,9 @@ namespace SiteMaster
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
             services.RegisterDependency();
         }
 
