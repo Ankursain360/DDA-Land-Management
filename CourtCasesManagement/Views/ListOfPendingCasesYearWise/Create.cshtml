@@ -1,0 +1,175 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">List Of Pending Cases YearWise</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">List Of Pending Cases YearWise  </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Court </label>
+                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                            <option value="value">Select</option>
+                        </select>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Year </label>
+                        <input type="Date" class="form-control">
+
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Retrieve" class="btn btn-primary myapp-hed1" />
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+
+                        <div id="courtwiserpt">
+                            <div class="card  table-card table-responsive" style="overflow:scroll;">
+
+                                <table class="table  table-bordered table-card">
+                                    <thead>
+                                        <tr class="myapp-hed1">
+                                            <th colspan="10">   Court Name : A.D.J </th>
+
+                                        </tr>
+                                    </thead>
+                                    <thead class="thead">
+                                        <tr class="myapp-hed1">
+                                            <th>Sr.No</th>
+                                            <th>Court Name </th>
+                                            <th>Year </th>
+                                            <th>Case ID </th>
+                                            <th> Case Title</th>
+                                            <th>  Filing Date </th>
+                                            <th> File no </th>
+                                            <th> Dept File no</th>
+                                            <th> Branch name </th>
+                                            @*<th>Lawyer name</th>*@
+                                            <th> Next Hearing Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Delhi High Court</td>
+                                            <td>2004</td>
+                                            <td>A-111/2004</td>
+                                            <td>TES VA TSET</td>
+                                            <td>23-MAY-2018</td>
+                                            <td>F-11/2018</td>
+                                            <td>D-102</td>
+                                            <td>Land Disposal</td>
+                                            @*<td>AJAY VERMA</td>*@
+                                            <td>30-MAY-2018</td>
+                                            <td>PENDING</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Delhi High Court</td>
+                                            <td>2004</td>
+                                            <td>A-111/2004</td>
+                                            <td>TES VA TSET</td>
+                                            <td>23-MAY-2018</td>
+                                            <td>F-11/2018</td>
+                                            <td>D-102</td>
+                                            <td>ENGG</td>
+                                            @*<td>AJAY VERMA</td>*@
+                                            <td>30-MAY-2018</td>
+                                            <td>PENDING</td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Delhi High Court</td>
+                                            <td>2004</td>
+                                            <td>A-111/2004</td>
+                                            <td>TES VA TSET</td>
+                                            <td>23-MAY-2018</td>
+                                            <td>F-11/2018<</td>
+                                            <td>D-102</td>
+                                            <td>ENGG</td>
+                                            @*<td>AJAY VERMA</td>*@
+                                            <td>30-MAY-2018</td>
+                                            <td>PENDING</td>
+
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+
+                        <input type="submit" value="Export to Excel" class="btn btn-primary  myapp-hed1" style="width:150px !important;" />
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script>
+
+    $(function () {
+        var dtToday = new Date();
+
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if (month < 10)
+            month = '0' + month.toString();
+        if (day < 10)
+            day = '0' + day.toString();
+
+        var maxDate = year + '-' + month + '-' + day;
+        //alert(maxDate);
+    });
+
+
+
+</script>
+
