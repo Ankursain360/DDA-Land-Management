@@ -2,7 +2,7 @@
 
 namespace Notification.OptionEnums
 {
-    public enum ToastType
+    public enum AlertType
     {
         [Description("success")]
         Success,
