@@ -39,8 +39,6 @@ namespace SiteMaster.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Zone zone)
