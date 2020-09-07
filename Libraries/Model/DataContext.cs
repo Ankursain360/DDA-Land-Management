@@ -17,6 +17,7 @@ namespace Libraries.Model
         public virtual DbSet<Department> Department { get; set; }
 
         public virtual DbSet<Designation> Designation { get; set; }
+        public virtual DbSet<District> District { get; set; }
 
         public virtual DbSet<Zone> Zone { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -25,6 +26,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
             modelBuilder.ApplyConfiguration(new ZoneConfiguration());
+            modelBuilder.ApplyConfiguration(new DistrictConfiguration());
+
+
+
         }
 
     }
