@@ -7,7 +7,7 @@ namespace Libraries.Model.Entity
 {
     public class Designation : AuditableEntity<int>
     {
-       
+       [Required]
         public string Name { get; set; }
         public byte IsActive { get; set; }
 

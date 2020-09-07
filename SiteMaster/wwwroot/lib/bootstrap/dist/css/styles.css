@@ -1104,6 +1104,8 @@ p.back-link {
     Font-size: 0.95rem;
     Font-Family: Arial, Helvetica, sans-serif;
     margin-left: 3px;
+    color: white;
+    margin-top: -0.4%
 }
 
 .myapp-hed2 {

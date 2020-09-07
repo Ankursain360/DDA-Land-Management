@@ -1,16 +1,11 @@
 ﻿@model Libraries.Model.Entity.Designation
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Designation Master </h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <i class="fa fa-arrow-left pull-right pt-4" aria-hidden="true" ></i>
             </div>
         </div>
     </div>
@@ -31,7 +26,6 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Designation </label>
                         <input asp-for="Name" class="form-control">
-                        <span id="lblError" style="color: red"></span>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
@@ -43,11 +37,6 @@
                         <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
-
-                </div>
-
-                <br />
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
