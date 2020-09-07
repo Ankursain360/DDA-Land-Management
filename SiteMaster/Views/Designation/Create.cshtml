@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Designation Master </h6>
                 <i class="fa fa-arrow-left pull-right pt-4" aria-hidden="true" ></i>
@@ -13,9 +13,9 @@
 <br />
 
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid" >
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                        <select asp-for="IsActive"  class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
@@ -39,9 +39,8 @@
                 </div>
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "Designation", null, new { @class = "btn btn-primary myapp-hed1" })
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "Designation", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -49,15 +48,6 @@
         </div>
     </div>
 </div>
-
-
-
-@if (ViewData["Msg"] != null)
-{
-    SiteMaster.Models.Message msg = ViewData["Msg"] as SiteMaster.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
-
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

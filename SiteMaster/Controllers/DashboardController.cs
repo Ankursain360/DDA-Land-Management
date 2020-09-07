@@ -7,7 +7,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 
-namespace DDAPropertyREG.Controllers
+namespace SiteMaster.Controllers
 {
     public class DashboardController : Controller
     {
