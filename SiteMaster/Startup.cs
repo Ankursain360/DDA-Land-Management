@@ -78,9 +78,6 @@ namespace SiteMaster
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
-
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
             services.RegisterDependency();
         }
 

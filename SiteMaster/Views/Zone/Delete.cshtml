@@ -1,26 +1,9 @@
 ﻿@model Libraries.Model.Entity.Zone
 
 
-@{
-    ViewData["Title"] = "Delete";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-
-<style>
-    .bg {
-        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
-        Color: #ffffff;
-        Font-size: 0.95rem;
-        Font-Family: Open SansRegular;
-        height: 28px;
-    }
-</style>
-
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Zone Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -31,9 +14,9 @@
 <br />
 
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid" >
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Delete</h6>
         </div>
         <div class="panel-body">
@@ -49,8 +32,7 @@
                     <div class="row col-12" style="justify-content:center;">
                         <div class="col-1">
                             <input type="submit" value="Delete" class="btn btn-primary myapp-hed1" />
-                            <a asp-action="Index" class="btn btn-primary myapp-hed1">Back</a>
-                            @*@Html.ActionLink("Back", "Index", "ModuleMaster", null, new { @class = "btn btn-primary myapp-hed1" })*@
+                            <a asp-action="Index" class="btn btn-primary dda-pageheading">Back</a>
                         </div>
                     </div>
                 </div>
@@ -59,12 +41,3 @@
     </div>
 </div>
 
-
-
-
-
-@if (ViewData["Msg"] != null)
-{
-    SiteMaster.Models.Message msg = ViewData["Msg"] as SiteMaster.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}

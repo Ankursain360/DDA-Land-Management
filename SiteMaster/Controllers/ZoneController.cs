@@ -13,12 +13,12 @@ using SiteMaster.Models;
 
 namespace SiteMaster.Controllers
 {
-    public class ZoneMasterController : Controller
+    public class ZoneController : Controller
     {
 
         private readonly IZoneService _zoneService;
 
-        public ZoneMasterController(IZoneService zoneService)
+        public ZoneController(IZoneService zoneService)
         {
             _zoneService = zoneService;
         }
