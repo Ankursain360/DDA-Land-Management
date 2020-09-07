@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Libraries.Model.Entity.Department
+@{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -30,13 +31,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label">Department Name</label><span style="color:red">*</span>
-                        <input type="Text" required class="form-control" />
+                        <input asp-for="Name" required class="form-control" />
                     </div>
                     @*<input type="text" asp-for="DivisionsName" required class="form-control">*@
 
                     <div class="form-group col-md-6">
                         <label class="control-label">Status</label>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select asp-for="IsActive" class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
