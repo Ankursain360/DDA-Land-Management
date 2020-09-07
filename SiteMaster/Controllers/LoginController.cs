@@ -27,6 +27,7 @@ namespace SiteMaster.Controllers
         //}
         public IActionResult Index()
         {
+            //comment by praveen
             return View();
         }
 
