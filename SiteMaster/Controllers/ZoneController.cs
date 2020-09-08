@@ -13,7 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SiteMaster.Controllers
 {
@@ -28,14 +28,17 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _zoneService.GetAllZone();
+            var result = await _zoneService.GetAllDetails();
             return View(result);
         }
 
         void BindDropDown()
         {
-            var list = _zoneService.GetDropDownList();
-            ViewBag.DepartmentList = list;
+            Zone zone = new Zone();
+          //  var list = _zoneService.GetDropDownList();
+            zone.DepartmentList = (IEnumerable<SelectListItem>)_zoneService.GetDropDownList();
+
+            //ViewBag.DepartmentList = list;
 
         }
         public IActionResult Create()

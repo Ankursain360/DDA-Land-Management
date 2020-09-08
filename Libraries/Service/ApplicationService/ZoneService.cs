@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -30,15 +31,19 @@ namespace Libraries.Service.ApplicationService
             return await _zoneRepository.GetAll();
         }
 
+        public async Task<List<Zone>> GetAllDetails()
+        {
+            return await _zoneRepository.GetAllDetails();
+        }
         public async Task<List<Zone>> GetZoneUsingRepo()
         {
             return await _zoneRepository.GetZone();
         }
 
-        public async Task<List<Department>> GetDropDownList()
+        public async Task<IEnumerable<SelectListItem>> GetDropDownList()
         {
             var result =await _zoneRepository.GetDepartmentList();
-            return result ;
+            return (IEnumerable<SelectListItem>)result ;
                 //Designation.Select(x => new { x.Id, x.Name }).ToList();
         }
         public async Task<Zone> FetchSingleResult(int id)
