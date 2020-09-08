@@ -10,7 +10,7 @@ namespace SiteMaster.Infrastructure.Extensions
     public static class DependencyHelperExtension
     {
         public static void RegisterDependency(this IServiceCollection services)
-		{
+        {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -18,6 +18,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
+
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
 
 
@@ -26,7 +28,11 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();
+
+            services.AddScoped<IDepartmentService, DepartmentService>();
+
             services.AddScoped<IDistrictService, DistrictService>();
+
 
 
 
