@@ -16,13 +16,13 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDesignationRepository _designationRepository;
-        protected readonly DataContext _dbContext;
-        public DesignationService(IUnitOfWork unitOfWork, IDesignationRepository designationRepository, DataContext dbContext)
+     
+        public DesignationService(IUnitOfWork unitOfWork, IDesignationRepository designationRepository)
         : base(unitOfWork, designationRepository)
         {
             _unitOfWork = unitOfWork;
             _designationRepository = designationRepository;
-            _dbContext = dbContext;
+           
         }
 
         public async Task<List<Designation>> GetAllDesignation()
@@ -65,7 +65,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> CheckUniqueName(int id, string designation)
         {
-           // var name = designation;
             bool result = await _designationRepository.Any(id, designation);
           //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
             return result;

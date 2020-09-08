@@ -2031,7 +2031,9 @@ html {
 
 .mt-5,
 .my-5 {
-  margin-top: 3rem !important;
+    /*  Added By Renu for margin set 5px*/
+    /* margin-top: 3rem !important;*/
+    margin-top: 5px !important;
 }
 
 .mr-5,
@@ -2201,6 +2203,14 @@ html {
 .my-n1 {
   margin-top: -0.25rem !important;
 }
+
+
+/* Start Added By Renu To set margin -0.4%*/
+.mt-n04,
+.my-n04 {
+    margin-top: -0.4% !important;
+}
+/*End*/
 
 .mr-n1,
 .mx-n1 {
