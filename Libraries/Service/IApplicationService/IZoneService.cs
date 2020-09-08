@@ -21,7 +21,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> CheckUniqueName(int id, string zone);// To check Unique Value  for zone
         Task<bool> CheckUniqueCode(int id, string code);// To check Unique Value  for zone
-        Task<IEnumerable<SelectListItem>> GetDropDownList();
+        Task<List<Department>> GetDropDownList();
         Task<List<Zone>> GetAllDetails();
     }
 }

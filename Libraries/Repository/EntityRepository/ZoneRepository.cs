@@ -80,7 +80,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Zone.AnyAsync(t => t.Id != id && t.Code.ToLower() == code.ToLower());
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetDepartmentList()
+        public async Task<List<Department>> GetDepartmentList()
         {
             //  var resultlist = await (from Department in _dbContext.Department select Department).ToListAsync();
 
@@ -94,22 +94,25 @@ namespace Libraries.Repository.EntityRepository
             //resultlist.Insert(0, new Department { Id = 0, Name = "Select" });
 
 
-            List<SelectListItem> department = await _dbContext.Department.AsNoTracking()
-                    .OrderBy(n => n.Name)
-                        .Select(n =>
-                        new SelectListItem
-                        {
-                            Value = n.Id.ToString(),
-                            Text = n.Name
-                        }).ToListAsync();
-            var departmenttip = new SelectListItem()
-            {
-                Value = "0",
-                Text = "--- select department ---"
-            };
-            department.Insert(0, departmenttip);
+            //List<SelectListItem> department = await _dbContext.Department.AsNoTracking()
+            //        .OrderBy(n => n.Name)
+            //            .Select(n =>
+            //            new SelectListItem
+            //            {
+            //                Value = n.Id.ToString(),
+            //                Text = n.Name
+            //            }).ToListAsync();
+            //var departmenttip = new SelectListItem()
+            //{
+            //    Value = "0",
+            //    Text = "--- select department ---"
+            //};
+            //department.Insert(0, departmenttip);
 
-            return new SelectList(department, "Value", "Text");
+            //return new SelectList(department, "Value", "Text");
+
+            var departmentList = await _dbContext.Department.ToListAsync();
+            return departmentList;
         }
     }
 
