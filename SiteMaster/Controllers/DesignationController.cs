@@ -107,7 +107,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return RedirectToAction("Index","Designation");
+                        return View();
                     }
                     else
                     {
@@ -116,17 +116,9 @@ namespace SiteMaster.Controllers
 
                     }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    //if (!Exist(designation.Id, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    //    return View(designation);
-                    //}
-                    //else
-                    //{
-                    //    throw;
-                    //}
+                   
                 }
             }
             return View(designation);

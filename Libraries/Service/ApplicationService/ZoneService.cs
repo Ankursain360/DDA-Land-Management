@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -16,13 +17,13 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IZoneRepository _zoneRepository;
-        protected readonly DataContext _dbContext;
-        public ZoneService(IUnitOfWork unitOfWork, IZoneRepository zoneRepository, DataContext dbContext)
+        
+        public ZoneService(IUnitOfWork unitOfWork, IZoneRepository zoneRepository)
         : base(unitOfWork, zoneRepository)
         {
             _unitOfWork = unitOfWork;
             _zoneRepository = zoneRepository;
-            _dbContext = dbContext;
+           
         }
 
         public async Task<List<Zone>> GetAllZone()
@@ -30,15 +31,21 @@ namespace Libraries.Service.ApplicationService
             return await _zoneRepository.GetAll();
         }
 
+        public async Task<List<Zone>> GetAllDetails()
+        {
+            return await _zoneRepository.GetAllDetails();
+        }
         public async Task<List<Zone>> GetZoneUsingRepo()
         {
             return await _zoneRepository.GetZone();
         }
 
-        //public async Task<List<Zone>> GetDepartmentList()
-        //{
-        //    return _dbContext.Designation.Select(x => new { x.Id, x.Name }).ToList();
-        //}
+        public async Task<IEnumerable<SelectListItem>> GetDropDownList()
+        {
+            var result =await _zoneRepository.GetDepartmentList();
+            return (IEnumerable<SelectListItem>)result ;
+                //Designation.Select(x => new { x.Id, x.Name }).ToList();
+        }
         public async Task<Zone> FetchSingleResult(int id)
         {
             var result = await _zoneRepository.FindBy(a => a.Id == id);
@@ -66,15 +73,14 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public bool CheckUniqueName(int id, Zone zone)
+        public async Task<bool> CheckUniqueName(int id, string zone)
         {
-            var result = _dbContext.Zone.Any(t => t.Id != id && t.Name == zone.Name);
+            bool result = await _zoneRepository.Any(id, zone);
             return result;
         }
-
-        public bool CheckUniqueCode(int id, Zone zone)
+        public async Task<bool> CheckUniqueCode(int id, string code)
         {
-            var result = _dbContext.Zone.Any(t => t.Id != id && t.Code == zone.Code);
+            bool result = await _zoneRepository.anyCode(id, code);
             return result;
         }
 

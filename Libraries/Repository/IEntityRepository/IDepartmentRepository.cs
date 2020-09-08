@@ -8,5 +8,6 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDepartmentRepository : IGenericRepository<Department>
     {
         Task<List<Department>> GetDepartment();
+        Task<bool> Any(int id, string name);
     }
 }
