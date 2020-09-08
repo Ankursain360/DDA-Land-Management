@@ -1,0 +1,87 @@
+﻿using Libraries.Model;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
+using Libraries.Service.IApplicationService;
+using Microsoft.EntityFrameworkCore;
+using Repository.IEntityRepository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Libraries.Service.ApplicationService
+{
+
+    public class VillageService : EntityService<Village>, IVillageService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IVillageRepository _villageRepository;
+        protected readonly DataContext _dbContext;
+        public VillageService(IUnitOfWork unitOfWork, IVillageRepository villageRepository, DataContext dbContext)
+        : base(unitOfWork, villageRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _villageRepository = villageRepository;
+            _dbContext = dbContext;
+        }
+        public async Task<List<Village>> GetAllVillage()
+        {
+            return await _villageRepository.GetAll();
+        }
+
+        public async Task<List<Village>> GetVillageUsingRepo()
+        {
+            return await _villageRepository.GetVillage();
+        }
+
+        public async Task<bool> Update(int id, Village designation)
+        {
+            var result = await _villageRepository.FindBy(a => a.Id == id);
+            Village model = result.FirstOrDefault();
+            model.Name = designation.Name;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _villageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> Create(Village village)
+        {
+
+            village.CreatedBy = 1;
+            village.CreatedDate = DateTime.Now;
+            _villageRepository.Add(village);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public bool CheckUniqueName(int id, Village village)
+        {
+            var result = _dbContext.Village.Any(t => t.Id != id && t.Name == village.Name);
+            return result;
+        }
+
+        public async Task<Village> FetchSingleResult(int id)
+        {
+            var result = await _villageRepository.FindBy(a => a.Id == id);
+            Village model = result.FirstOrDefault();
+            return model;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _villageRepository.FindBy(a => a.Id == id);
+            Village model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _villageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<List<Zone>> GetAllZone()
+        {
+            List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
+            return zoneList;
+        }
+    }
+}
