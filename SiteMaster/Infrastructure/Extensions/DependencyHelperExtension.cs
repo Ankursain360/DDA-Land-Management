@@ -19,6 +19,10 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDesignationRepository, DesignationRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
+          
+            
+           
+            services.AddScoped<IDivisionRepository, DivisionRepository>();
 
 
 
@@ -27,6 +31,14 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();
             services.AddScoped<IDistrictService, DistrictService>();
+           
+            
+            
+            
+            
+            
+            services.AddScoped<IDivisionService,DivisionService >();
+
 
 
 

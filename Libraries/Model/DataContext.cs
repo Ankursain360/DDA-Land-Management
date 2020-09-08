@@ -20,6 +20,7 @@ namespace Libraries.Model
         public virtual DbSet<District> District { get; set; }
 
         public virtual DbSet<Zone> Zone { get; set; }
+        public virtual DbSet<Division> Division { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -27,7 +28,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
             modelBuilder.ApplyConfiguration(new ZoneConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DivisionConfiguration());
 
 
         }
