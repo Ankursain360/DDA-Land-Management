@@ -64,9 +64,10 @@ namespace Libraries.Repository.Common
         //    throw new NotImplementedException();
         //}
 
-        Task<List<T>> IGenericRepository<T>.Any(Func<object, bool> p)
-        {
-            throw new NotImplementedException();
-        }
+        //public async  Task<List<T>> Any(int id, Func<object, bool> p)
+        //{
+        //    var result =await _dbContext.Designation.Any(t => t.Id != id && t.Name ==);
+        //    return result;
+        //}
     }
 }
