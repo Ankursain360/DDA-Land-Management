@@ -39,6 +39,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Create()
         {
             Zone zone = new Zone();
+            zone.IsActive = 1;
             await BindDropDown(zone);
             return View(zone);
         }
@@ -49,7 +50,7 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                await BindDropDown(zone);
+                //await BindDropDown(zone);
 
                 if (ModelState.IsValid)
                 {
@@ -59,7 +60,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        await BindDropDown(zone);
+                        return View(zone);
                     }
                     else
                     {
@@ -108,7 +110,9 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var result1 = await _zoneService.GetAllDetails();
+
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -137,9 +141,10 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"Designation: {Name} already exist");
+                return Json($"Zone Name : {Name} already exist");
             }
         }
+
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> IsCodeExist(int Id, string Code)
@@ -169,7 +174,7 @@ namespace SiteMaster.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "ZoneMaster");
+            return RedirectToAction("Index", "Zone");
             //}
             //catch(Exception ex)
             //{

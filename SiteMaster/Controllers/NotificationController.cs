@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SiteMaster.Controllers
 {
-    public class NotificationMasterController : Controller
+    public class NotificationController : Controller
     {
         public IActionResult Index()
         {

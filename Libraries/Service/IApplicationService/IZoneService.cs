@@ -9,8 +9,7 @@ namespace Libraries.Service.IApplicationService
     public interface IZoneService : IEntityService<Zone>
     {
         Task<List<Zone>> GetAllZone(); // To Get all data added by renu
-        Task<List<Zone>> GetZoneUsingRepo();
-
+       
         Task<bool> Update(int id, Zone zone); // To Upadte Particular data added by renu
 
         Task<bool> Create(Zone zone);

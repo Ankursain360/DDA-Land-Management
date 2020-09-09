@@ -107,7 +107,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var result1 = await _designationService.GetAllDesignation();
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -166,12 +167,16 @@ namespace SiteMaster.Controllers
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _designationService.GetAllDesignation();
+                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _designationService.GetAllDesignation();
+                return View("Index", result1);
             }
-            return RedirectToAction("Index", "Designation");
+           
             //}
             //catch(Exception ex)
             //{
