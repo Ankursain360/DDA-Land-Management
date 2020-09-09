@@ -34,9 +34,6 @@ namespace SiteMaster.Controllers
         {
             return View();
         }
-
-       
-
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -59,33 +56,12 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"Notification: {Name} already exist");
+                return Json($"Notification Name : {Name} already exist");
             }
-        }
-
-
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _notificationService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-            //try
-            //{
-
             var result = await _notificationService.Delete(id);
             if (result == true)
             {
@@ -99,14 +75,6 @@ namespace SiteMaster.Controllers
                 var result1 = await _notificationService.GetAllNotification();
                 return View("Index", result1);
             }
-
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Notification" };
-            //    return View();
-            //}
-
         }
 
         public async Task<IActionResult> View(int id)

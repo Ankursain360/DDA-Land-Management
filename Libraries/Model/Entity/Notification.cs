@@ -9,7 +9,6 @@ namespace Libraries.Model.Entity
     public class Notification : AuditableEntity<int>
     {
         [Required]
-        //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Notification", AdditionalFields = "Id")]
         public string Name { get; set; }
         public byte IsActive { get; set; }
