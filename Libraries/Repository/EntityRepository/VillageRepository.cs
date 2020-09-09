@@ -1,8 +1,8 @@
 ﻿using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,5 +20,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Village.ToListAsync();
         }
+        public async Task<List<Zone>> GetAllZone()
+        {
+            List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
+            return zoneList;
+        }
+
     }
 }

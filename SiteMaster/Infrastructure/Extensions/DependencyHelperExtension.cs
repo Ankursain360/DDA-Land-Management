@@ -4,7 +4,6 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
-using Repository.IEntityRepository;
 
 namespace SiteMaster.Infrastructure.Extensions
 {
@@ -23,6 +22,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IVillageRepository, VillageRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IDivisionRepository, DivisionRepository>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
 
 
 
@@ -34,6 +34,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IVillageService, VillageService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDivisionService, DivisionService>();
+            services.AddScoped<IModuleService, ModuleService>();
 
 
 

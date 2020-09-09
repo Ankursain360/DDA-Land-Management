@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace SiteMaster.Controllers
 {
-    public class VillageMasterController : Controller
+    public class VillageController : Controller
     {
         private readonly IVillageService _villageService;
-        public VillageMasterController(IVillageService villageService)
+        public VillageController(IVillageService villageService)
         {
             _villageService = villageService;
         }
@@ -36,10 +36,6 @@ namespace SiteMaster.Controllers
                 village.ZoneList = await _villageService.GetAllZone();
                 if (ModelState.IsValid)
                 {
-                    if (!Exist(0, village))
-                    {
-                        return View(village);
-                    }
                     var result = await _villageService.Create(village);
 
                     if (result == true)
@@ -58,11 +54,6 @@ namespace SiteMaster.Controllers
             {
             }
             return View(village);
-        }
-        private bool Exist(int id, Village village)
-        {
-            var result = _villageService.CheckUniqueName(id, village);
-            return result;
         }
     }
 }

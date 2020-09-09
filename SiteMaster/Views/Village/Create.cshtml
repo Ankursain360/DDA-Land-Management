@@ -1,7 +1,7 @@
 ﻿@model Libraries.Model.Entity.Village
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Village Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -11,10 +11,10 @@
 </div>
 <br />
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="panel-heading dda-pageheading">
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Create">
@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone </label>
-                        <select class="form-control" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
-                        <select asp-for="IsActive" class="form-control">
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">InActive</option>
                         </select>
@@ -47,7 +47,7 @@
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "VillageMaster", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-primary myapp-hed1" })
                     </div>
                 </div>
 
