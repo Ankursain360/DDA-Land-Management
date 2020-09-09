@@ -4,8 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
 
 namespace SiteMaster.Controllers
 {
@@ -24,6 +28,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Create()
         {
             Village village = new Village();
+            village.IsActive = 1;
             village.ZoneList = await _villageService.GetAllZone();
             return View(village);
         }
@@ -40,9 +45,14 @@ namespace SiteMaster.Controllers
 
                     if (result == true)
                     {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _villageService.GetAllVillage();
+                        return View("Index", list);
                     }
                     else
                     {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(village);
                     }
                 }
                 else
@@ -52,8 +62,97 @@ namespace SiteMaster.Controllers
             }
             catch (Exception ex)
             {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(village);
             }
-            return View(village);
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _villageService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Village: {Name} already exist");
+            }
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _villageService.FetchSingleResult(id);
+            Data.ZoneList = await _villageService.GetAllZone();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Village village)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _villageService.Update(id, village);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _villageService.GetAllVillage();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(village);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(village);
+                }
+            }
+            else
+            {
+                return View(village);
+            }
+        }
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        {
+            try
+            {
+
+                var result = await _villageService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _villageService.GetAllVillage();
+            return View("Index", list);
+        }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _villageService.FetchSingleResult(id);
+            Data.ZoneList = await _villageService.GetAllZone();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
     }
 }

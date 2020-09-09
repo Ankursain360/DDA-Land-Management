@@ -11,5 +11,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Village>> GetVillage();
         Task<List<Zone>> GetAllZone();
+        Task<bool> Any(int id, string name);
     }
 }
