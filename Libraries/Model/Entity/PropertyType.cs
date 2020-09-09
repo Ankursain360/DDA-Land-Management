@@ -6,13 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
-    public class Notification : AuditableEntity<int>
+    public class PropertyType : AuditableEntity<int>
     {
-        [Required]
-        [Remote(action: "Exist", controller: "Notification", AdditionalFields = "Id")]
         public string Name { get; set; }
         public byte IsActive { get; set; }
 
     }
 }
-

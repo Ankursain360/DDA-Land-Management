@@ -26,7 +26,6 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<Village>> GetAllVillage()
         {
-            //return await _villageRepository.GetAll();
             return await _villageRepository.GetVillage();
         }
 
