@@ -4,7 +4,7 @@ using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using Microsoft.EntityFrameworkCore;
-using Repository.IEntityRepository;
+using Libraries.Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +18,11 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IVillageRepository _villageRepository;
-        protected readonly DataContext _dbContext;
-        public VillageService(IUnitOfWork unitOfWork, IVillageRepository villageRepository, DataContext dbContext)
+        public VillageService(IUnitOfWork unitOfWork, IVillageRepository villageRepository)
         : base(unitOfWork, villageRepository)
         {
             _unitOfWork = unitOfWork;
             _villageRepository = villageRepository;
-            _dbContext = dbContext;
         }
         public async Task<List<Village>> GetAllVillage()
         {
@@ -55,13 +53,6 @@ namespace Libraries.Service.ApplicationService
             _villageRepository.Add(village);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-        public bool CheckUniqueName(int id, Village village)
-        {
-            var result = _dbContext.Village.Any(t => t.Id != id && t.Name == village.Name);
-            return result;
-        }
-
         public async Task<Village> FetchSingleResult(int id)
         {
             var result = await _villageRepository.FindBy(a => a.Id == id);
@@ -80,7 +71,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Zone>> GetAllZone()
         {
-            List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
+            List<Zone> zoneList = await _villageRepository.GetAllZone();
             return zoneList;
         }
     }

@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.IEntityRepository
+namespace Libraries.Repository.IEntityRepository
 {
     public interface IVillageRepository : IGenericRepository<Village>
     {
         Task<List<Village>> GetVillage();
+        Task<List<Zone>> GetAllZone();
     }
 }

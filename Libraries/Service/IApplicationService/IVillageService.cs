@@ -14,7 +14,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Village>> GetVillageUsingRepo();
         Task<bool> Update(int id, Village village); // To Upadte Particular data added by Praveen
         Task<bool> Create(Village Village);
-        bool CheckUniqueName(int id, Village village);   // To check Unique Value  for designation
         Task<Village> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
     }

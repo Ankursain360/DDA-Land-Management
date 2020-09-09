@@ -4,7 +4,6 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
-using Repository.IEntityRepository;
 
 namespace SiteMaster.Infrastructure.Extensions
 {
