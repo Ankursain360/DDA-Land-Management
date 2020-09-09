@@ -44,13 +44,7 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    //if (Exist(0, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
-
-                    //}
-
+                    
                     var result = await _designationService.Create(designation);
 
                     if (result == true)
@@ -95,14 +89,6 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
-
-                    //if (Exist(id, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
-
-                    //}
-
                     var result = await _designationService.Update(id, designation);
                     if (result == true)
                     {
@@ -160,9 +146,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-            //try
-            //{
-
+           
             var result = await _designationService.Delete(id);
             if (result == true)
             {
@@ -176,13 +160,6 @@ namespace SiteMaster.Controllers
                 var result1 = await _designationService.GetAllDesignation();
                 return View("Index", result1);
             }
-           
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-            //    return View();
-            //}
 
         }
 
