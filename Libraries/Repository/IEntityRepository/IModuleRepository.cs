@@ -11,6 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IModuleRepository : IGenericRepository<Module>
     {
         Task<List<Module>> GetModule();
+        Task<bool> Any(int id, string name);
     }
 
 }

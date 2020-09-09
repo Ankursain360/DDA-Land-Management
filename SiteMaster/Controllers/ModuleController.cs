@@ -1,0 +1,194 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+namespace SiteMaster.Controllers
+{
+    public class ModuleController : Controller
+    {
+        private readonly IModuleService _moduleService;
+
+        public ModuleController(IModuleService moduleService)
+        {
+            _moduleService = moduleService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var result = await _moduleService.GetAllModule();
+            return View(result);
+
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Module module)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    //if (Exist(0, designation))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
+                    //    return View(designation);
+
+                    //}
+
+                    var result = await _moduleService.Create(module);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(module);
+
+                    }
+                }
+                else
+                {
+                    return View(module);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(module);
+            }
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _moduleService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Module module)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    //if (Exist(id, designation))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
+                    //    return View(designation);
+
+                    //}
+
+                    var result = await _moduleService.Update(id, module);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(module);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return View(module);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _moduleService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Designation: {Name} already exist");
+            }
+        }
+
+
+        public async Task<IActionResult> Delete(int id)  //Not in use
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var form = await _moduleService.Delete(id);
+            if (form == false)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            return View(form);
+        }
+
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        {
+            //try
+            //{
+
+            var result = await _moduleService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            return RedirectToAction("Index", "Module");
+            //}
+            //catch(Exception ex)
+            //{
+            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+            //    return View();
+            //}
+
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _moduleService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+    }
+}
