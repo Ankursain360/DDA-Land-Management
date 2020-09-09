@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetZone();
         Task<bool> Any(int id, string name);
         Task<bool> anyCode(int id, string name);
-        Task<IEnumerable<SelectListItem>> GetDepartmentList();
+        Task<List<Department>> GetDepartmentList();
         Task<List<Zone>> GetAllDetails();
     }
 }

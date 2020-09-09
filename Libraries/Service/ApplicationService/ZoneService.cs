@@ -40,11 +40,14 @@ namespace Libraries.Service.ApplicationService
             return await _zoneRepository.GetZone();
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetDropDownList()
+        public async Task<List<Department>> GetDropDownList()
         {
-            var result =await _zoneRepository.GetDepartmentList();
-            return (IEnumerable<SelectListItem>)result ;
-                //Designation.Select(x => new { x.Id, x.Name }).ToList();
+            //var result =await _zoneRepository.GetDepartmentList();
+            //return (IEnumerable<SelectListItem>)result ;
+            //Designation.Select(x => new { x.Id, x.Name }).ToList();
+
+            List<Department> departmentList = await _zoneRepository.GetDepartmentList();
+            return departmentList;
         }
         public async Task<Zone> FetchSingleResult(int id)
         {
