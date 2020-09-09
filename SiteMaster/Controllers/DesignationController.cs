@@ -172,13 +172,6 @@ namespace SiteMaster.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "Designation");
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-            //    return View();
-            //}
-
         }
 
         public async Task<IActionResult> View(int id)
