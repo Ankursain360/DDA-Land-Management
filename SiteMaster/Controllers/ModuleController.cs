@@ -2,42 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-
 namespace SiteMaster.Controllers
 {
-    public class DesignationController : Controller
+    public class ModuleController : Controller
     {
+        private readonly IModuleService _moduleService;
 
-        private readonly IDesignationService _designationService;
-
-        public DesignationController(IDesignationService designationService)
+        public ModuleController(IModuleService moduleService)
         {
-            _designationService = designationService;
+            _moduleService = moduleService;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _designationService.GetAllDesignation();
+            var result = await _moduleService.GetAllModule();
             return View(result);
+
         }
+
         public IActionResult Create()
         {
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Designation designation)
+        public async Task<IActionResult> Create(Module module)
         {
             try
             {
@@ -51,7 +49,7 @@ namespace SiteMaster.Controllers
 
                     //}
 
-                    var result = await _designationService.Create(designation);
+                    var result = await _moduleService.Create(module);
 
                     if (result == true)
                     {
@@ -61,25 +59,25 @@ namespace SiteMaster.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(designation);
+                        return View(module);
 
                     }
                 }
                 else
                 {
-                    return View(designation);
+                    return View(module);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(designation);
+                return View(module);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _designationService.FetchSingleResult(id);
+            var Data = await _moduleService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -89,7 +87,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Designation designation)
+        public async Task<IActionResult> Edit(int id, Module module)
         {
             if (ModelState.IsValid)
             {
@@ -103,33 +101,32 @@ namespace SiteMaster.Controllers
 
                     //}
 
-                    var result = await _designationService.Update(id, designation);
+                    var result = await _moduleService.Update(id, module);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _designationService.GetAllDesignation();
-                        return View("Index", result1);
+                        return View();
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(designation);
+                        return View(module);
 
                     }
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
             }
-            return View(designation);
+            return View(module);
         }
 
-        [AcceptVerbs ("Get","Post")]
+        [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult>  Exist(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _designationService.CheckUniqueName(Id, Name);
+            var result = await _moduleService.CheckUniqueName(Id, Name);
             if (result == false)
             {
                 return Json(true);
@@ -148,7 +145,7 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
 
-            var form = await _designationService.Delete(id);
+            var form = await _moduleService.Delete(id);
             if (form == false)
             {
                 return NotFound();
@@ -163,20 +160,16 @@ namespace SiteMaster.Controllers
             //try
             //{
 
-            var result = await _designationService.Delete(id);
+            var result = await _moduleService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _designationService.GetAllDesignation();
-                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _designationService.GetAllDesignation();
-                return View("Index", result1);
             }
-           
+            return RedirectToAction("Index", "Module");
             //}
             //catch(Exception ex)
             //{
@@ -188,13 +181,14 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _designationService.FetchSingleResult(id);
+            var Data = await _moduleService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
-    }
 
+
+    }
 }

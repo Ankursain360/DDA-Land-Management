@@ -30,11 +30,7 @@ namespace Libraries.Service.ApplicationService
             return await _designationRepository.GetAll();
         }
 
-        public async Task<List<Designation>> GetDesignationUsingRepo()
-        {
-            return await _designationRepository.GetDesignation();
-        }
-
+       
         public async Task<Designation> FetchSingleResult(int id)
         {
             var result = await _designationRepository.FindBy(a => a.Id == id);
@@ -48,6 +44,7 @@ namespace Libraries.Service.ApplicationService
             Designation model = result.FirstOrDefault();
             model.Name = designation.Name;
             model.ModifiedDate = DateTime.Now;
+            model.IsActive = designation.IsActive;
             model.ModifiedBy = 1;
             _designationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

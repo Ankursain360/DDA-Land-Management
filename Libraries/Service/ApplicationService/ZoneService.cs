@@ -35,11 +35,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _zoneRepository.GetAllDetails();
         }
-        public async Task<List<Zone>> GetZoneUsingRepo()
-        {
-            return await _zoneRepository.GetZone();
-        }
-
+      
         public async Task<List<Department>> GetDropDownList()
         {
             //var result =await _zoneRepository.GetDepartmentList();
@@ -60,6 +56,8 @@ namespace Libraries.Service.ApplicationService
             var result = await _zoneRepository.FindBy(a => a.Id == id);
             Zone model = result.FirstOrDefault();
             model.Name = zone.Name;
+            model.Code = zone.Code;
+            model.IsActive = zone.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _zoneRepository.Edit(model);
