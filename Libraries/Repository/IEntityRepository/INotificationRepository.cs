@@ -5,9 +5,9 @@ using Libraries.Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDesignationRepository : IGenericRepository<Designation>
+    public interface INotificationRepository : IGenericRepository<Notification>
     {
-        
+
         Task<bool> Any(int id, string name);
     }
 }

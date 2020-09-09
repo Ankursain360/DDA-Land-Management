@@ -10,20 +10,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class DesignationRepository : GenericRepository<Designation>, IDesignationRepository
+    public class NotificationRepository : GenericRepository<Notification>, INotificationRepository
     {
-       
-        public DesignationRepository(DataContext dbContext) : base(dbContext)
+
+        public NotificationRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
 
-       
+
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Designation.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
     }
 
-   
+
 }

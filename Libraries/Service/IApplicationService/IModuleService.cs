@@ -13,6 +13,14 @@ namespace Libraries.Service.IApplicationService
         Task<List<Module>> GetAllModule();
         Task<List<Module>> GetModuleUsingRepo();
 
-        //Task<bool> Update(int id, Designation designation);
+        Task<bool> Update(int id, Module module); // To Upadte Particular data added by renu
+
+        Task<bool> Create(Module module);
+
+        Task<Module> FetchSingleResult(int id);  // To fetch Particular data added by renu
+
+        Task<bool> Delete(int id);    // To Delete Data  added by renu
+
+        Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  for designation
     }
 }

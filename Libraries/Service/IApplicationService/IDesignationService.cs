@@ -9,8 +9,7 @@ namespace Libraries.Service.IApplicationService
     public interface IDesignationService : IEntityService<Designation>
     {
         Task<List<Designation>> GetAllDesignation(); // To Get all data added by renu
-        Task<List<Designation>> GetDesignationUsingRepo();
-
+        
         Task<bool> Update(int id, Designation designation); // To Upadte Particular data added by renu
 
         Task<bool> Create(Designation designation);

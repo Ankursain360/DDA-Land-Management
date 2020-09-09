@@ -22,7 +22,7 @@ namespace Libraries.Model
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Notification> Notification { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -32,9 +32,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new VillageConfiguration());
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
 
 
         }
