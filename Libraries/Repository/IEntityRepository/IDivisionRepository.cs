@@ -5,9 +5,9 @@ using Libraries.Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDepartmentRepository : IGenericRepository<Department>
+    public interface IDivisionRepository : IGenericRepository<Division>
     {
-        Task<List<Department>> GetDepartment();
+        Task<List<Division>> GetDivisions();
         Task<bool> Any(int id, string name);
     }
 }

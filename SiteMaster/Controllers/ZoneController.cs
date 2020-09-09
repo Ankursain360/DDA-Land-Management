@@ -13,7 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SiteMaster.Controllers
 {
@@ -28,20 +28,19 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _zoneService.GetAllZone();
+            var result = await _zoneService.GetAllDetails();
             return View(result);
         }
 
-        void BindDropDown()
+        async Task BindDropDown(Zone zone)
         {
-            var list = _zoneService.GetDropDownList();
-            ViewBag.DepartmentList = list;
-
+            zone.DepartmentList = await _zoneService.GetDropDownList();
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            BindDropDown();
-            return View();
+            Zone zone = new Zone();
+            await BindDropDown(zone);
+            return View(zone);
         }
 
         [HttpPost]
@@ -50,23 +49,11 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                BindDropDown();
+                await BindDropDown(zone);
 
                 if (ModelState.IsValid)
                 {
-                    //if (CheckUniqueName(0, zone))
-                    //{
-                    //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Zone Name", Status = "S", BackPageAction = "Create", BackPageController = "ZoneMaster" };
-                    //    return View(zone);
-
-                    //}
-                    //if (CheckUniqueCode(0, zone))
-                    //{
-                    //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Zone Code", Status = "S", BackPageAction = "Create", BackPageController = "ZoneMaster" };
-                    //    return View(zone);
-
-                    //}
-
+                  
                     var result = await _zoneService.Create(zone);
 
                     if (result == true)
@@ -95,8 +82,11 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            BindDropDown();
+            //Zone zone = new Zone();
+            //await BindDropDown(zone);
             var Data = await _zoneService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            //Data.DepartmentList
             if (Data == null)
             {
                 return NotFound();
@@ -108,24 +98,11 @@ namespace SiteMaster.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Zone zone)
         {
-            BindDropDown();
+            await BindDropDown(zone);
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    //if (CheckUniqueName(id, zone))
-                    //{
-                    //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Zone Name", Status = "S", BackPageAction = "Create", BackPageController = "ZoneMaster" };
-                    //    return View(zone);
-
-                    //}
-                    //if (CheckUniqueCode(id, zone))
-                    //{
-                    //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Zone Code", Status = "S", BackPageAction = "Create", BackPageController = "ZoneMaster" };
-                    //    return View(zone);
-
-                    //}
 
                     var result = await _zoneService.Update(id, zone);
                     if (result == true)
@@ -205,6 +182,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);
+            await BindDropDown(Data);
             if (Data == null)
             {
                 return NotFound();

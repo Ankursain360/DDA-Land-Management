@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -11,5 +12,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> Any(int id, string name);
         Task<bool> anyCode(int id, string name);
         Task<List<Department>> GetDepartmentList();
+        Task<List<Zone>> GetAllDetails();
     }
 }

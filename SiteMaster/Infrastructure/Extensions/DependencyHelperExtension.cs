@@ -20,6 +20,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IZoneRepository, ZoneRepository>();
             services.AddScoped<IDistrictRepository, DistrictRepository>();
             services.AddScoped<IVillageRepository, VillageRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IDivisionRepository, DivisionRepository>();
 
 
 
@@ -29,6 +31,12 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IZoneService, ZoneService>();
             services.AddScoped<IDistrictService, DistrictService>();
             services.AddScoped<IVillageService, VillageService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IDivisionService, DivisionService>();
+
+
+
+
         }
     }
 }
