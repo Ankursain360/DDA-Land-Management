@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Libraries.Model.Entity
 {
@@ -24,5 +25,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string DepartmentName { get; set; }
+        [NotMapped]
+        public  IEnumerable<SelectListItem> DepartmentList { get; set; }
     }
 }

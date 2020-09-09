@@ -25,12 +25,16 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label" asp-for="DepartmentName">Department </label>
-                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList( @ViewBag.DepartmentList, "Id","Name"))">
-                            <option value="value">Select</option>
+                        <select asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList,"Value","Text"))" class="form-control form-control-sm">
+                            <option value="">select</option>
                         </select>
+                        @*@Html.DropDownListFor(x => Model.DepartmentId, new SelectList(Model.DepartmentList, "Value", "Text"), htmlAttributes: new { @class = "form-control", id = "Country" })*@
+                        @*<select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList( @ViewBag.DepartmentList, "Value", "Text"))">
+            <option value="value">Select</option>
+        </select>*@
                         @*<select class="form-control dda-dropdown">
-                            <option value="0">Select</option>
-                        </select>*@
+            <option value="0">Select</option>
+        </select>*@
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
