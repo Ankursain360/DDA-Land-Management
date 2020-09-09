@@ -15,7 +15,7 @@ namespace Libraries.Model
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Module> Module { get; set; }
-
+        public virtual DbSet<Page> Page { get; set; }
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
 
@@ -35,6 +35,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
 
+            modelBuilder.ApplyConfiguration(new PageConfiguration());
 
         }
     }
