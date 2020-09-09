@@ -25,6 +25,8 @@ namespace Libraries.Model
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<PropertyType> Propertytype { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -39,6 +41,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new InterestConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
     }
 }

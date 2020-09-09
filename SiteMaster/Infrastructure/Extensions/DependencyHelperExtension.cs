@@ -26,6 +26,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IInterestRepository, InterestRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+
 
 
 
@@ -41,6 +43,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IModuleService, ModuleService>();
             //services.AddScoped<IPageService, PageService>();
             services.AddScoped<IInterestService, InterestService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
     }
 }
