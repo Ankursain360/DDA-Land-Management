@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,10 +13,9 @@ namespace Libraries.Model.Entity
         [Required]
         public int ZoneId { get; set; }
         [Required]
+        [Remote(action: "Exist", controller: "Village", AdditionalFields = "Id")]
         public string Name { get; set; }
-        public byte IsActive { get; set; }
-        [NotMapped]
-        public string ZoneName { get; set; }
+        public byte IsActive { get; set; } 
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         public virtual Zone Zone { get; set; }
