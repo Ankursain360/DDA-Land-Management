@@ -26,7 +26,7 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<Village>> GetAllVillage()
         {
-            return await _villageRepository.GetAll();
+            return await _villageRepository.GetVillage();
         }
 
         public async Task<List<Village>> GetVillageUsingRepo()
@@ -34,11 +34,13 @@ namespace Libraries.Service.ApplicationService
             return await _villageRepository.GetVillage();
         }
 
-        public async Task<bool> Update(int id, Village designation)
+        public async Task<bool> Update(int id, Village village)
         {
             var result = await _villageRepository.FindBy(a => a.Id == id);
             Village model = result.FirstOrDefault();
-            model.Name = designation.Name;
+            model.Name = village.Name;
+            model.ZoneId = village.ZoneId;
+            model.IsActive = village.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _villageRepository.Edit(model);
@@ -73,6 +75,11 @@ namespace Libraries.Service.ApplicationService
         {
             List<Zone> zoneList = await _villageRepository.GetAllZone();
             return zoneList;
+        }
+        public async Task<bool> CheckUniqueName(int id, string name)
+        {
+            bool result = await _villageRepository.Any(id, name);
+            return result;
         }
     }
 }

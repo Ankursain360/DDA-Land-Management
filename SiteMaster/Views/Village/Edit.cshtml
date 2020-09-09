@@ -14,14 +14,15 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone </label>
+                        <input asp-for="Id" type="hidden"/>
                         <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
                             <option>Select</option>
                         </select>
@@ -45,7 +46,7 @@
                 </div>
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "Village", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

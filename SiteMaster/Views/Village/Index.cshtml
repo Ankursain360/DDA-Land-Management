@@ -1,4 +1,6 @@
-﻿<div class="row">
+﻿@model IEnumerable<Libraries.Model.Entity.Village>
+@{int rowNo = 0; }
+<div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
@@ -11,7 +13,7 @@
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right myapp-hed1 " style="margin-top: -10px;">Add New</a>
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
 </div>
 <br />
 <br />
@@ -29,24 +31,25 @@
                 </tr>
             </thead>
             <tbody class="tbody">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
 
-                <tr>
-                    <td></td>
+                        <td>@item.Zone.Name</td>
 
-                    <td></td>
+                        <td>@item.Name</td>
 
-                    <td></td>
+                        <td>@(item.IsActive==1?"Active":"InActive")</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                    <td></td>
-                    <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-
-                        <i class="glyphicon glyphicon-eye-open icon-white cl1" aria-hidden="true"></i>
-                        &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i>
-                        &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-
-                </tr>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     </div>

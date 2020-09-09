@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IVillageRepository : IGenericRepository<Village>
+    public interface ILocalityRepository : IGenericRepository<Locality>
     {
-        Task<List<Village>> GetVillage();
+        Task<List<Locality>> GetLocality();
         Task<List<Zone>> GetAllZone();
+        Task<List<Department>> GetAllDepartment();
         Task<bool> Any(int id, string name);
     }
 }
