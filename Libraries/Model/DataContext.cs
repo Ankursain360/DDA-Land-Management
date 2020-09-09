@@ -14,6 +14,7 @@ namespace Libraries.Model
         public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
+        public virtual DbSet<Module> Module { get; set; }
 
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
@@ -30,6 +31,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new VillageConfiguration());
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
+
+            modelBuilder.ApplyConfiguration(new ModuleConfiguration());
+
 
         }
     }
