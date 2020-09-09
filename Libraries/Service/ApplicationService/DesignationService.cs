@@ -11,18 +11,18 @@ using Libraries.Model;
 
 namespace Libraries.Service.ApplicationService
 {
-    
+
     public class DesignationService : EntityService<Designation>, IDesignationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDesignationRepository _designationRepository;
-        protected readonly DataContext _dbContext;
-        public DesignationService(IUnitOfWork unitOfWork, IDesignationRepository designationRepository, DataContext dbContext)
+     
+        public DesignationService(IUnitOfWork unitOfWork, IDesignationRepository designationRepository)
         : base(unitOfWork, designationRepository)
         {
             _unitOfWork = unitOfWork;
             _designationRepository = designationRepository;
-            _dbContext = dbContext;
+           
         }
 
         public async Task<List<Designation>> GetAllDesignation()
@@ -44,7 +44,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Update(int id, Designation designation)
         {
-          var  result =await _designationRepository.FindBy(a => a.Id == id);
+            var result = await _designationRepository.FindBy(a => a.Id == id);
             Designation model = result.FirstOrDefault();
             model.Name = designation.Name;
             model.ModifiedDate = DateTime.Now;
@@ -63,10 +63,11 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public bool CheckUniqueName(int id, Designation designation)
+        public async Task<bool> CheckUniqueName(int id, string designation)
         {
-            var result =  _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
-            return  result;
+            bool result = await _designationRepository.Any(id, designation);
+          //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
+            return result;
         }
 
         public async Task<bool> Delete(int id)

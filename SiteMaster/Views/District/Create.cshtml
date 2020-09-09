@@ -1,17 +1,10 @@
-﻿@*@model DDAPropertyREG.Models.Tblmasterdistrict*@
-
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.District
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">District Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -20,11 +13,10 @@
     </div>
 </div>
 <br />
-
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
@@ -33,13 +25,13 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">District Code</label><span style="color:red">*</span>
-                        <input type="text" required class="form-control" />
+                        <input type="text" asp-for="Code" class="form-control" />
                     </div>
 
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">District Name</label><span style="color:red">*</span>
-                        <input type="text"  required class="form-control" />
+                        <input type="text" asp-for="Name" class="form-control" />
                     </div>
 
 
@@ -49,7 +41,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select  required class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
@@ -58,9 +50,9 @@
 
                 <div class="form-row">
                     <div class="form-group  col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
             </form>
@@ -69,27 +61,15 @@
 </div>
 
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/designationindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/designationindex.min.js" asp-append-version="true"></script>
+</environment>
 
 
 
 
-<script>
 
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-    });
-
-
-
-</script>

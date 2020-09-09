@@ -64,6 +64,9 @@ namespace SiteMaster
             {
                 //   options.SuppressTempDataAttributePrefix = true;
             });
+
+            //services.AddRazorPages().AddRazorRuntimeCompilation();
+
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";

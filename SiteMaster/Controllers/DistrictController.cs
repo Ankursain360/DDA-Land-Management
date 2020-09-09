@@ -2,74 +2,211 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-//using DDAPropertyREG.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
 namespace SiteMaster.Controllers
 {
     public class DistrictController : Controller
     {
 
+        private readonly IDistrictService _districtService;
 
-      //  private readonly lmsContext _context;
-       // public DistrictController(lmsContext context)
-       // {
-           // _context = context;
-       // }
-        public IActionResult Index()
+        public DistrictController(IDistrictService districtService)
         {
-            return View();
-
-            //(_context.Tblmasterdistrict.Where(x => x.IsActive == 1).ToList());
+            _districtService = districtService;
         }
 
-      //  public async Task<IActionResult> ViewDetails(int id)
-      //  {
-       //     var Data = await _context.Tblmasterdistrict.FindAsync(id);
-        //    if (Data == null)
-         //   {
-           //     return NotFound();
-           // }
-           // return View(Data);
-      //  }
 
-       
+        public async Task<IActionResult> Index()
+        {
+            var result = await _districtService.GetAllDistrict();
+            return View(result);
+            //return View(_context.TblMasterDesignation.Where(x => x.IsActive == 1).ToList());
+        }
+
+
+
         public IActionResult Create()
         {
+            // var result = await _districtService.Create();
             return View();
+            //return View(_context.TblMasterDesignation.Where(x => x.IsActive == 1).ToList());
         }
-       // [HttpPost]
-       // [ValidateAntiForgeryToken]
-       // public async Task<IActionResult> Create(Tblmasterdistrict tblmasterdistrict)
-       // {
-        //    tblmasterdistrict.CreatedBy = "Admin";
-          //  tblmasterdistrict.CreatedDate = DateTime.Now;
-           // _context.Add(tblmasterdistrict);
-          //  var result = await _context.SaveChangesAsync();
 
-          //  if (result == 1)
-           // {
-             //   ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Details Successfully Saved!!.", Status = "S", BackPageAction = "Index", BackPageController = "District" };
 
-           // }
-           // else
-          //  {
-             //   ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Please try again later", Status = "S", BackPageAction = "Index", BackPageController = "District" };
-              //  return View();
 
-          //  }
-          //  return View();
-      //  }
-      //  public async Task<IActionResult> Edit(int id)
-      //  {
-         //   var Data = await _context.Tblmasterdistrict.FindAsync(id);
-          //  if (Data == null)
-          //  {
-               // return NotFound();
-          //  }
-          //  return View(Data);
-      //  }
+        private bool Exist(int id, District district)
+        {
+            var result = _districtService.CheckUniqueName(id, district);
+            return result;
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(District district)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    if (Exist(0, district))
+                    {
+                        ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
+                        return View(district);
+
+                    }
+
+                    var result = await _districtService.Create(district);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(district);
+
+                    }
+                }
+                else
+                {
+                    return View(district);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(district);
+            }
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, District district)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    if (Exist(id, district))
+                    {
+                        ViewBag.Message = Alert.Show("Unique Name Required for District Name", "", AlertType.Info);
+                        return View(district);
+
+                    }
+
+                    var result = await _districtService.Update(id, district);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(district);
+
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!Exist(district.Id, district))
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(district);
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            return View(district);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _districtService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+        public async Task<IActionResult> Delete(int id)  
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var form = await _districtService.Delete(id);
+            if (form == false)
+            {
+                return NotFound();
+            }
+
+            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            return View(form);
+        }
+
+
+
+
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            //try
+            //{
+
+            var result = await _districtService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            return RedirectToAction("Index", "District");
+            //}
+            //catch(Exception ex)
+            //{
+            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+            //    return View();
+            //}
+
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _districtService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
 
     }
 }

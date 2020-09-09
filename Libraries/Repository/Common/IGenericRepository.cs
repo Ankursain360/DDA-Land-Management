@@ -17,7 +17,7 @@ namespace Libraries.Repository.Common
 		Task<int> Save();
 		Task<List<T>> ExecuteQuery(string procedureName, params object[] parameters);
 
-		Task<List<T>> Any(Func<object, bool> p);
+		
 
 	}
 }

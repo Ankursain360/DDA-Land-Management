@@ -1,16 +1,12 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Designation>
 @{int rowNo = 0; }
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Designation Master</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Designation Master </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -18,15 +14,14 @@
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "Designation", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "Designation", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="card  table-card">
 
         <table class="table table-responsive table-bordered table-card">
-            @*<tr class="myapp-hed1">*@
             <thead class="thead">
                 <tr>
                     <th>Sr.No</th>
@@ -51,13 +46,11 @@
                         </td>
                         <td>
                             <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-                            @*<i class="glyphicon glyphicon-eye-open icon-white cl1"></i>*@
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-                            @*<text>
-                                    @Html.ActionLink(" ", "DeleteConfirmed", "Designation", new { TenderID = item.DesignationId }, new { name = "deletepopup", @class = "fa fa-trash", style = "color:#326661", data_original_title = "Delete Plot Data", data_placement = "top", data_toggle = "tooltip" })
-                                </text>*@
-                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
-                            @*<a asp-route-id="@item.DesignationId" title="delete" onclick="DeleteData(@item.DesignationId)">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>*@
+                           
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil"  aria-hidden="true"></i> </a>
+                           
+                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                           
                         </td>
 
                     </tr>
@@ -68,11 +61,6 @@
 
     </div>
 </div>
-<br />
-<br />
-
-
-
 <div class="modal bounceIn animated" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -84,7 +72,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                @*<a asp-action="DeleteConfirmed" asp-route-id="popupid" title="delete" class="btn btn-primary myapp-hed1">Delete</a>*@
                 @Html.ActionLink("Delete ", "DeleteConfirmed", "Designation", new { id = "popupid" }, new { id = "popupid", @class = "actprimary" })
             </div>
         </div>
@@ -110,13 +97,6 @@
     </div>
     <!-- modal-dialog -->
 </div>
-
-
-@if (ViewData["Msg"] != null)
-{
-    SiteMaster.Models.Message msg = ViewData["Msg"] as SiteMaster.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

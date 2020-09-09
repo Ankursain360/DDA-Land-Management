@@ -9,6 +9,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using SiteMaster.Models;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SiteMaster.Controllers
 {
@@ -31,34 +35,32 @@ namespace SiteMaster.Controllers
             return View();
         }
 
-
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Designation designation)
+        public async Task<IActionResult> Create(Designation designation)
         {
             try
             {
-               
+
                 if (ModelState.IsValid)
                 {
-                    if (!Exist(0, designation))
-                    {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Designation Name", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
-                        return View(designation);
-                        
-                    }
+                    //if (Exist(0, designation))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
+                    //    return View(designation);
+
+                    //}
 
                     var result = await _designationService.Create(designation);
 
                     if (result == true)
                     {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Details Successfully Saved!!.", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         return View();
                     }
                     else
                     {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Please try again later", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(designation);
 
                     }
@@ -70,7 +72,7 @@ namespace SiteMaster.Controllers
             }
             catch (Exception ex)
             {
-                ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong!!.", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(designation);
             }
         }
@@ -84,72 +86,74 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,Designation designation)
+        public async Task<IActionResult> Edit(int id, Designation designation)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
 
-                    if (Exist(id, designation))
-                    {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Designation Name", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
-                        return View(designation);
+                    //if (Exist(id, designation))
+                    //{
+                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
+                    //    return View(designation);
 
-                    }
+                    //}
 
-                    var result = await _designationService.Update( id, designation);
+                    var result = await _designationService.Update(id, designation);
                     if (result == true)
                     {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Details Successfully Updated!!.", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         return View();
                     }
                     else
                     {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Please try again later", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(designation);
 
                     }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!Exist(designation.Id, designation))
-                    {
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Unique Name Required for Designation Name", Status = "S", BackPageAction = "Create", BackPageController = "Designation" };
-                        return View(designation);
-                    }
-                    else
-                    {
-                        throw;
-                    }
+                   
                 }
             }
             return View(designation);
         }
 
-        private bool Exist(int id, Designation designation)
+        [AcceptVerbs ("Get","Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult>  Exist(int Id, string Name)
         {
-            var result = _designationService.CheckUniqueName(id, designation);
-            return result;
+            var result = await _designationService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Designation: {Name} already exist");
+            }
         }
 
 
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            if (id == null)
+            if (id == 0)
             {
                 return NotFound();
             }
 
-            var form =  await _designationService.Delete(id);
-            if (form == null)
+            var form = await _designationService.Delete(id);
+            if (form == false)
             {
                 return NotFound();
             }
 
+            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View(form);
         }
 
@@ -158,14 +162,14 @@ namespace SiteMaster.Controllers
             //try
             //{
 
-            var result= await _designationService.Delete(id);
+            var result = await _designationService.Delete(id);
             if (result == true)
             {
-                ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Details Successfully Deleted!!.", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             }
             else
             {
-                ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Please try again later", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "Designation");
             //}

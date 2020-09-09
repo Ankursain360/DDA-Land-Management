@@ -22,6 +22,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Designation.ToListAsync();
         }
+
+        public async Task<bool> Any(int id, string name)
+        {
+            return await _dbContext.Designation.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
     }
 
    

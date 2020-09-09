@@ -18,14 +18,24 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
             services.AddScoped<IZoneRepository, ZoneRepository>();
-            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IDistrictRepository, DistrictRepository>();
+            services.AddScoped<IVillageRepository, VillageRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<IDivisionRepository, DivisionRepository>();
+
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IDesignationService, DesignationService>();
             services.AddScoped<IZoneService, ZoneService>();
+            services.AddScoped<IDistrictService, DistrictService>();
+            services.AddScoped<IVillageService, VillageService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IDivisionService, DivisionService>();
 
-            services.AddScoped<IModuleService, ModuleService>();
+
+
 
         }
     }

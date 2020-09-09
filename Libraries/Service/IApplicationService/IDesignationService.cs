@@ -19,7 +19,6 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 
-        bool CheckUniqueName(int id, Designation designation);   // To check Unique Value  for designation
-
+        Task<bool> CheckUniqueName(int id, string designation);   // To check Unique Value  for designation
     }
 }
