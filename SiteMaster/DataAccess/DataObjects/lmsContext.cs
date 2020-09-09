@@ -15,33 +15,28 @@ namespace SiteMaster.DataAccess.DataObjects
         {
         }
 
-        public virtual DbSet<Division> Division { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=root@321;database=lms");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Division>(entity =>
+            modelBuilder.Entity<Role>(entity =>
             {
-                entity.ToTable("division");
+                entity.ToTable("role");
 
                 entity.HasIndex(e => e.Name)
                     .HasName("Name_UNIQUE")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -55,6 +50,8 @@ namespace SiteMaster.DataAccess.DataObjects
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.ZoneId).HasColumnType("int(11)");
             });
 
             OnModelCreatingPartial(modelBuilder);
