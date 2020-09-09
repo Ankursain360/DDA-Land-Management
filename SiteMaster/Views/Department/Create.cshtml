@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Department Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -22,7 +22,7 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
@@ -32,15 +32,17 @@
                     <div class="form-group col-md-6">
                         <label class="control-label">Department Name</label><span style="color:red">*</span>
                         <input asp-for="Name" required class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     @*<input type="text" asp-for="DivisionsName" required class="form-control">*@
 
                     <div class="form-group col-md-6">
                         <label class="control-label">Status</label>
-                        <select asp-for="IsActive" class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
 
 
@@ -50,9 +52,9 @@
 
                 <div class="row">
                     <div class="row col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "Department", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "Department", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
             </form>
@@ -63,23 +65,10 @@
 
 
 
-<script>
-
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-    });
-
-
-
-</script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/designationindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/designationindex.min.js" asp-append-version="true"></script>
+</environment>
