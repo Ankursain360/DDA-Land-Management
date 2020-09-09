@@ -82,9 +82,11 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            Zone zone = new Zone();
-            await BindDropDown(zone);
+            //Zone zone = new Zone();
+            //await BindDropDown(zone);
             var Data = await _zoneService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            //Data.DepartmentList
             if (Data == null)
             {
                 return NotFound();
@@ -180,6 +182,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);
+            await BindDropDown(Data);
             if (Data == null)
             {
                 return NotFound();

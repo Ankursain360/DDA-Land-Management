@@ -25,12 +25,10 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label" asp-for="DepartmentName">Department </label>
-                        @*<select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList( @ViewBag.DepartmentList, "DepartmentRecNo","DepartmentName"))">
-                                <option value="value">Select</option>
-                            </select>*@
-                        <select class="form-control dda-dropdown" >
-                            <option value="0">Select</option>
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" >
+                            <option>Select</option>
                         </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Zone Name   </label>
@@ -53,7 +51,7 @@
                 </div>
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        @Html.ActionLink("Back", "Index", "Zone", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "Zone", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
