@@ -6,9 +6,9 @@ using Libraries.Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDesignationRepository : IGenericRepository<Designation>
+    public interface IInterestRepository : IGenericRepository<Interest>
     {
-        
+
         Task<bool> Any(int id, string name);
     }
 }

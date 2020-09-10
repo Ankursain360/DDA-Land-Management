@@ -13,77 +13,67 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SiteMaster.Controllers
 {
-    public class ZoneController : Controller
+    public class InterestController : Controller
     {
 
-        private readonly IZoneService _zoneService;
+        private readonly IInterestService _interestService;
 
-        public ZoneController(IZoneService zoneService)
+        public InterestController(IInterestService interestService)
         {
-            _zoneService = zoneService;
+            _interestService = interestService;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _zoneService.GetAllDetails();
+            var result = await _interestService.GetAllInterest();
             return View(result);
         }
-
-        async Task BindDropDown(Zone zone)
+        public IActionResult Create()
         {
-            zone.DepartmentList = await _zoneService.GetDropDownList();
-        }
-        public async Task<IActionResult> Create()
-        {
-            Zone zone = new Zone();
-            zone.IsActive = 1;
-            await BindDropDown(zone);
-            return View(zone);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Zone zone)
+        public async Task<IActionResult> Create(Interest interest)
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
-                  
-                    var result = await _zoneService.Create(zone);
+
+                    var result = await _interestService.Create(interest);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(zone);
-                        return View(zone);
+                        return View();
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(zone);
+                        return View(interest);
 
                     }
                 }
                 else
                 {
-                    return View(zone);
+                    return View(interest);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(zone);
+                return View(interest);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _zoneService.FetchSingleResult(id);
-            await BindDropDown(Data);
+            var Data = await _interestService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -93,90 +83,89 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Zone zone)
+        public async Task<IActionResult> Edit(int id, Interest interest)
         {
-            await BindDropDown(zone);
             if (ModelState.IsValid)
             {
                 try
                 {
-
-                    var result = await _zoneService.Update(id, zone);
+                    var result = await _interestService.Update(id, interest);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _zoneService.GetAllDetails();
-
+                        var result1 = await _interestService.GetAllInterest();
                         return View("Index", result1);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(zone);
+                        return View(interest);
 
                     }
                 }
                 catch (Exception ex)
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(zone);
+
                 }
             }
-            return View(zone);
+            return View(interest);
         }
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _zoneService.CheckUniqueName(Id, Name);
+            var result = await _interestService.CheckUniqueName(Id, Name);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"Zone Name : {Name} already exist");
+                return Json($"Interest: {Name} already exist");
             }
         }
 
-        [AcceptVerbs("Get", "Post")]
-        [AllowAnonymous]
-        public async Task<IActionResult> IsCodeExist(int Id, string Code)
+
+        public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            var result = await _zoneService.CheckUniqueCode(Id, Code);
-            if (result == false)
+            if (id == 0)
             {
-                return Json(true);
+                return NotFound();
             }
-            else
+
+            var form = await _interestService.Delete(id);
+            if (form == false)
             {
-                return Json($"Zone Code: {Code} already exist");
+                return NotFound();
             }
+
+            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-           
-            var result = await _zoneService.Delete(id);
+
+            var result = await _interestService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _zoneService.GetAllDetails();
+                var result1 = await _interestService.GetAllInterest();
                 return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _zoneService.GetAllDetails();
+                var result1 = await _interestService.GetAllInterest();
                 return View("Index", result1);
             }
+
         }
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _zoneService.FetchSingleResult(id);
-            await BindDropDown(Data);
+            var Data = await _interestService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -184,4 +173,5 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
     }
+
 }

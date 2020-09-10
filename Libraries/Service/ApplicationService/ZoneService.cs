@@ -55,6 +55,7 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _zoneRepository.FindBy(a => a.Id == id);
             Zone model = result.FirstOrDefault();
+            model.DepartmentId = zone.DepartmentId;
             model.Name = zone.Name;
             model.Code = zone.Code;
             model.IsActive = zone.IsActive;
