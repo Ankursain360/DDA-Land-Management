@@ -41,7 +41,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LocalityName)
+            builder.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);

@@ -27,11 +27,9 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
-            services.AddScoped<IUserRepository, UserRepository>();
-
-
-
-
+            services.AddScoped<ILocalityRepository, LocalityRepository>();
+            services.AddScoped<IRateRepository, RateRepository>();
+            services.AddScoped<IRebateRepository, RebateRepository>();
 
 
             /* Application Services */
@@ -44,10 +42,12 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IModuleService, ModuleService>();
-            //services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IPageService, PageService>();
             services.AddScoped<IInterestService, InterestService>();
             services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILocalityService, LocalityService>();
+            services.AddScoped<IRateService, RateService>();
+            services.AddScoped<IRebateService, RebateService>();
         }
     }
 }

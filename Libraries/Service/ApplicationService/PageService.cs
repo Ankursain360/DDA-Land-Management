@@ -1,79 +1,89 @@
-﻿using Libraries.Model.Common;
+﻿using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Linq;
+
 namespace Libraries.Service.ApplicationService
 {
-    //public class PageService : EntityService<Page>, IPageService
-    //{
-    //    private readonly IUnitOfWork _unitOfWork;
-    //    private readonly IPageRepository _pageRepository;
-    //    public PageService(IUnitOfWork unitOfWork,IPageRepository pageRepository):base(unitOfWork,pageRepository)
-    //    {
-    //        _unitOfWork = unitOfWork;
-    //        _pageRepository = pageRepository;
-    //    }
+   
+    public class PageService : EntityService<Page>, IPageService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IPageRepository _pageRepository;
 
-    //    public Task<bool> CheckUniqueName(int id, string Page)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public PageService(IUnitOfWork unitOfWork, IPageRepository pageRepository)
+        : base(unitOfWork, pageRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _pageRepository = pageRepository;
+        }
 
-    //    public Task<bool> Create(Model.Entity.Page page)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<List<Page>> GetAllPage()
+        {
+            return await _pageRepository.GetAllPage();
+        }
 
-    //    public Task<bool> Delete(int id)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<List<Page>> GetPageUsingRepo()
+        {
+            return await _pageRepository.GetPage();
+        }
 
-    //    public void Delete(Model.Entity.Page entity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<Page> FetchSingleResult(int id)
+        {
+            var result = await _pageRepository.FindBy(a => a.Id == id);
+            Page model = result.FirstOrDefault();
+            return model;
+        }
 
-    //    public Task<Model.Entity.Page> FetchSingleResult(int id)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<bool> Update(int id, Page page)
+        {
+            var result = await _pageRepository.FindBy(a => a.Id == id);
+            Page model = result.FirstOrDefault();
+            model.Name = page.Name;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _pageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
-    //    public Task<List<Model.Entity.Page>> GetAllPage()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<bool> Create(Page page)
+        {
 
-    //    public Task<List<Model.Entity.Page>> GetPAgeUsingRepo()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+            page.CreatedBy = 1;
+            page.CreatedDate = DateTime.Now;
+            _pageRepository.Add(page);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<List<Module>> GetAllModule()
+        {
+            List<Module> moduleList = await _pageRepository.GetAllModule();
+            return moduleList;
+        }
 
-    //    public Task<bool> Update(int id, Model.Entity.Page page)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<bool> CheckUniqueName(int id, string page)
+        {
+            bool result = await _pageRepository.Any(id, page);
+            //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
+            return result;
+        }
 
-    //    public void Update(Model.Entity.Page entity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _pageRepository.FindBy(a => a.Id == id);
+            Page model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _pageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
-    //    void IEntityService<Model.Entity.Page>.Create(Model.Entity.Page entity)
-    //    {
-    //        throw new NotImplementedException();
-    //    }
 
-    //    Task<List<Model.Entity.Page>> IEntityService<Model.Entity.Page>.GetAll()
-    //    {
-    //        throw new NotImplementedException();
-    //    }
-    //}
+
+       }
 }

@@ -52,13 +52,12 @@ namespace SiteMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                  
+                    await BindDropDown(zone);
                     var result = await _zoneService.Create(zone);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(zone);
                         return View(zone);
                     }
                     else
@@ -106,7 +105,6 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var result1 = await _zoneService.GetAllDetails();
-
                         return View("Index", result1);
                     }
                     else

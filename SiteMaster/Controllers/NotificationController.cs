@@ -34,6 +34,40 @@ namespace SiteMaster.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(LandNotification notification)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    var result = await _notificationService.Create(notification);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        return View();
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(notification);
+
+                    }
+                }
+                else
+                {
+                    return View(notification);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(notification);
+            }
+        }
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -44,6 +78,36 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, LandNotification notification)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _notificationService.Update(id, notification);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var result1 = await _notificationService.GetAllNotification();
+                        return View("Index", result1);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(notification);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return View(notification);
+        }
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]

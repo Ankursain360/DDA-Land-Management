@@ -1,0 +1,156 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using SiteMaster.Models;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
+
+namespace SiteMaster.Controllers
+{
+    public class RateController : Controller
+    {
+
+        private readonly IRateService _rateService;
+
+        public RateController(IRateService rateService)
+        {
+            _rateService = rateService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            var result = await _rateService.GetAllRate();
+            return View(result);
+        }
+
+        async Task BindDropDown(Rate rate)
+        {
+            rate.PropertyTypeList = await _rateService.GetDropDownList();
+        }
+        public async Task<IActionResult> Create()
+        {
+            Rate rate = new Rate();
+            rate.IsActive = 1;
+            await BindDropDown(rate);
+            return View(rate);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Rate rate)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+
+                    var result = await _rateService.Create(rate);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        await BindDropDown(rate);
+                        return View(rate);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(rate);
+
+                    }
+                }
+                else
+                {
+                    return View(rate);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(rate);
+            }
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _rateService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Rate rate)
+        {
+            await BindDropDown(rate);
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _rateService.Update(id, rate);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var result1 = await _rateService.GetAllRate();
+                        return View("Index", result1);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(rate);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return View(rate);
+        }
+
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        {
+
+            var result = await _rateService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _rateService.GetAllRate();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _rateService.GetAllRate();
+                return View("Index", result1);
+            }
+
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _rateService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+    }
+
+}

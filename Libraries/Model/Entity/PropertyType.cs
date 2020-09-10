@@ -11,5 +11,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public byte IsActive { get; set; }
 
+        //public virtual ICollection<Interest> Interest { get; set; }
+
     }
 }

@@ -133,7 +133,7 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"Designation: {Name} already exist");
+                return Json($"Module: {Name} already exist");
             }
         }
 

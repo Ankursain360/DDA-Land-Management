@@ -11,16 +11,16 @@ namespace Libraries.Service.IApplicationService
     public interface IPageService : IEntityService<Page>
     {
         Task<List<Page>> GetAllPage();
-        Task<List<Page>> GetPAgeUsingRepo();
-
-        Task<bool> Update(int id, Page page); // To Upadte Particular data added by renu
+        Task<List<Page>> GetPageUsingRepo();
+        Task<List<Module>> GetAllModule(); // To Get all data added by ishu
+        Task<bool> Update(int id, Page page); 
 
         Task<bool> Create(Page page);
 
-        Task<Page> FetchSingleResult(int id);  // To fetch Particular data added by renu
+        Task<Page> FetchSingleResult(int id);  
 
-        Task<bool> Delete(int id);    // To Delete Data  added by renu
+        Task<bool> Delete(int id);  
 
-        Task<bool> CheckUniqueName(int id, string Page);   // To check Unique Value  for designation
+        Task<bool> CheckUniqueName(int id, string Page);   
     }
 }

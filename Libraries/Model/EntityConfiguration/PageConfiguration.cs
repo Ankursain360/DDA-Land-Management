@@ -34,7 +34,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Module).HasColumnType("int(11)");
+            builder.Property(e => e.ModuleId).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
                     .IsRequired()

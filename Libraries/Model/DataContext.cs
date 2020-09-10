@@ -22,12 +22,15 @@ namespace Libraries.Model
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<LandNotification> Notification { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
-        public virtual DbSet<PropertyType> Propertytype { get; set; }
+        public virtual DbSet<PropertyType> PropertyType { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Locality> Locality { get; set; }
 
+        public virtual DbSet<Rate> Rate { get; set; }
+
+        public virtual DbSet<Rebate> Rebate { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -43,7 +46,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new InterestConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new LocalityConfiguration());
+            modelBuilder.ApplyConfiguration(new RateConfiguration());
+            modelBuilder.ApplyConfiguration(new RebateConfiguration());
         }
     }
 }

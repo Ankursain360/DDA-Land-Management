@@ -10,7 +10,9 @@ namespace Libraries.Repository.IEntityRepository
    
      public interface IPageRepository : IGenericRepository<Page>
     {
-        Task<List<Page>> GetModule();
+        Task<List<Page>> GetPage();
+        Task<List<Module>> GetAllModule();
         Task<bool> Any(int id, string name);
+        Task<List<Page>> GetAllPage();
     }
 }

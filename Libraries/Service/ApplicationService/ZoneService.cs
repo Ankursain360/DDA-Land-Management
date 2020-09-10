@@ -25,12 +25,6 @@ namespace Libraries.Service.ApplicationService
             _zoneRepository = zoneRepository;
            
         }
-
-        public async Task<List<Zone>> GetAllZone()
-        {
-            return await _zoneRepository.GetAll();
-        }
-
         public async Task<List<Zone>> GetAllDetails()
         {
             return await _zoneRepository.GetAllDetails();
@@ -38,10 +32,6 @@ namespace Libraries.Service.ApplicationService
       
         public async Task<List<Department>> GetDropDownList()
         {
-            //var result =await _zoneRepository.GetDepartmentList();
-            //return (IEnumerable<SelectListItem>)result ;
-            //Designation.Select(x => new { x.Id, x.Name }).ToList();
-
             List<Department> departmentList = await _zoneRepository.GetDepartmentList();
             return departmentList;
         }
