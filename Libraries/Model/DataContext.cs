@@ -22,7 +22,12 @@ namespace Libraries.Model
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
-        public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<LandNotification> Notification { get; set; }
+        public virtual DbSet<Interest> Interest { get; set; }
+        public virtual DbSet<PropertyType> PropertyType { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Locality> Locality { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -34,9 +39,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-
             modelBuilder.ApplyConfiguration(new PageConfiguration());
-
+            modelBuilder.ApplyConfiguration(new InterestConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new LocalityConfiguration());
         }
     }
 }

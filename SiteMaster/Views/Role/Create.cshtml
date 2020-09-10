@@ -1,146 +1,57 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-<style>
-    .alert-info {
-        color: #31708F;
-        background-color: rebeccapurple;
-        border-color: #BCE8F1;
-    }
-
-    .hedingcss {
-        background-color: rebeccapurple;
-    }
-
-    .panel-default > .panel-heading-custom {
-        background: #2c3091;
-        color: #fff;
-        height: 44px;
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    .alert-custom {
-        top: -10px;
-        color: #fff;
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-        position: relative;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .btn {
-        width: 143px !important;
-    }
-</style>
-
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+﻿@model Libraries.Model.Entity.Role
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">
-                    Role Master
-                </h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Role Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
 </div>
-
-
-
 <br />
 <br />
-
-
-
-
-
-
-
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">
-                Add Role
-            </h6>
+        <div class="panel-heading dda-pageheading">
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form class="form-horizontal" action="" method="post">
-                <fieldset>
-
-
-                    <!-- Name input-->
-                    <div class="form-group">
-
-                        <div class="col-md-6">
-                            <label class="control-label">Zone Name </label>
-                            <select style="height:30px; background-color: #dddddd;" type="text" required class="form-control">
-                                <option value="1">-Select-</option>
-                                <option value="dept1">CE (Project)</option>
-                                <option value="dept2">Dwarka</option>
-                                <option value="dept3">South</option>
-                                <option value="dept3">Rohini</option>
-                                <option value="dept3">North</option>
-                                <option value="dept3"> East </option>
-                            </select>
-                        </div>
-
-
-                        <div class="col-md-6">
-                            <label class="control-label">Role Name </label>
-                            <input id="email" name="email" type="text" class="form-control">
-
-                        </div>
-
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone </label>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
-
-
-
-                    <div class="form-group">
-
-                        <div class="col-md-6">
-                            <label class="control-label">Active Status </label>
-                            <select style="height:30px; background-color: #dddddd;" type="text" required class="form-control">
-                                <option value="1">-Select-</option>
-                                <option value="dept1">Yes</option>
-                                <option value="dept2">No</option>
-
-                            </select>
-                        </div>
-
-
-
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Role Name  </label>
+                        <input class="form-control" asp-for="Name" id="txtRole"  />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-
-
-                    <div class="form-row ">
-                        <div class="form-group col-md-12" style="margin-bottom:40px;">
-                            <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                            @Html.ActionLink("Back", "Index", "StaffQuarters", null, new { @class = "btn btn-primary myapp-hed1" })
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Status</label>
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
-                    <!-- Email input-->
-                    <br /><br /><!-- Form actions -->
+                </div>
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "Role", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
 
-                </fieldset>
             </form>
-
-
         </div>
     </div>
-
-
-
-
-
-
 </div>
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

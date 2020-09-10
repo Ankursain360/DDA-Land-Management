@@ -5,7 +5,7 @@ using Libraries.Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface INotificationRepository : IGenericRepository<Notification>
+    public interface INotificationRepository : IGenericRepository<LandNotification>
     {
 
         Task<bool> Any(int id, string name);

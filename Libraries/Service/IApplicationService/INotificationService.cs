@@ -6,15 +6,15 @@ using Libraries.Service.Common;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface INotificationService : IEntityService<Notification>
+    public interface INotificationService : IEntityService<LandNotification>
     {
-        Task<List<Notification>> GetAllNotification(); // To Get all data added by renu
+        Task<List<LandNotification>> GetAllNotification(); // To Get all data added by renu
 
-        Task<bool> Update(int id, Notification notification); // To Upadte Particular data added by renu
+        Task<bool> Update(int id, LandNotification notification); // To Upadte Particular data added by renu
 
-        Task<bool> Create(Notification notification);
+        Task<bool> Create(LandNotification notification);
 
-        Task<Notification> FetchSingleResult(int id);  // To fetch Particular data added by renu
+        Task<LandNotification> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 

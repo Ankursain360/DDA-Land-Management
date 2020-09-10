@@ -12,7 +12,7 @@ using Libraries.Model;
 namespace Libraries.Service.ApplicationService
 {
 
-    public class NotificationService : EntityService<Notification>, INotificationService
+    public class NotificationService : EntityService<LandNotification>, INotificationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly INotificationRepository _notificationRepository;
@@ -25,23 +25,23 @@ namespace Libraries.Service.ApplicationService
 
         }
 
-        public async Task<List<Notification>> GetAllNotification()
+        public async Task<List<LandNotification>> GetAllNotification()
         {
             return await _notificationRepository.GetAll();
         }
 
 
-        public async Task<Notification> FetchSingleResult(int id)
+        public async Task<LandNotification> FetchSingleResult(int id)
         {
             var result = await _notificationRepository.FindBy(a => a.Id == id);
-            Notification model = result.FirstOrDefault();
+            LandNotification model = result.FirstOrDefault();
             return model;
         }
 
-        public async Task<bool> Update(int id, Notification notification)
+        public async Task<bool> Update(int id, LandNotification notification)
         {
             var result = await _notificationRepository.FindBy(a => a.Id == id);
-            Notification model = result.FirstOrDefault();
+            LandNotification model = result.FirstOrDefault();
             model.Name = notification.Name;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = notification.IsActive;
@@ -50,7 +50,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(Notification notification)
+        public async Task<bool> Create(LandNotification notification)
         {
 
             notification.CreatedBy = 1;
@@ -70,7 +70,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _notificationRepository.FindBy(a => a.Id == id);
-            Notification model = form.FirstOrDefault();
+            LandNotification model = form.FirstOrDefault();
             model.IsActive = 0;
             _notificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

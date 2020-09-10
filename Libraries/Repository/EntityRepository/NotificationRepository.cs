@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class NotificationRepository : GenericRepository<Notification>, INotificationRepository
+    public class NotificationRepository : GenericRepository<LandNotification>, INotificationRepository
     {
 
         public NotificationRepository(DataContext dbContext) : base(dbContext)
@@ -21,7 +21,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<bool> Any(int id, string name)
         {
-            return await _dbContext.Designation.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Notification.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
     }
 

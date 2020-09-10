@@ -5,5 +5,6 @@ namespace Libraries.Model.Entity
     public class Country : AuditableEntity<int>
     {
         public string Name { get; set; }
+        public byte IsActive { get; set; }
     }
 }

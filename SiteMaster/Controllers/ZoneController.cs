@@ -50,17 +50,14 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                //await BindDropDown(zone);
-
                 if (ModelState.IsValid)
                 {
-                  
+                    await BindDropDown(zone);
                     var result = await _zoneService.Create(zone);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(zone);
                         return View(zone);
                     }
                     else
@@ -84,11 +81,8 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            //Zone zone = new Zone();
-            //await BindDropDown(zone);
             var Data = await _zoneService.FetchSingleResult(id);
             await BindDropDown(Data);
-            //Data.DepartmentList
             if (Data == null)
             {
                 return NotFound();
@@ -111,7 +105,6 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var result1 = await _zoneService.GetAllDetails();
-
                         return View("Index", result1);
                     }
                     else
@@ -162,26 +155,20 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-            //try
-            //{
-
+           
             var result = await _zoneService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _zoneService.GetAllDetails();
+                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _zoneService.GetAllDetails();
+                return View("Index", result1);
             }
-            return RedirectToAction("Index", "Zone");
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Zone" };
-            //    return View();
-            //}
-
         }
 
         public async Task<IActionResult> View(int id)

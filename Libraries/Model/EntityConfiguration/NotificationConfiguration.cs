@@ -9,10 +9,10 @@ namespace Libraries.Model.EntityConfiguration
 {
 
 
-    public class NotificationConfiguration : IEntityTypeConfiguration<Notification>
+    public class NotificationConfiguration : IEntityTypeConfiguration<LandNotification>
     {
 
-        public void Configure(EntityTypeBuilder<Notification> builder)
+        public void Configure(EntityTypeBuilder<LandNotification> builder)
         {
             builder.ToTable("notification", "lms");
 

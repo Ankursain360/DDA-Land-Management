@@ -41,10 +41,8 @@ namespace SiteMaster.Controllers
         {
             try
             {
-
                 if (ModelState.IsValid)
                 {
-                    
                     var result = await _designationService.Create(designation);
 
                     if (result == true)

@@ -1,10 +1,17 @@
-﻿using System;
+﻿using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Repository.IEntityRepository
+namespace Libraries.Repository.IEntityRepository
 {
-    class IRoleRepository
+    public interface IRoleRepository : IGenericRepository<Role>
     {
+        Task<List<Role>> GetRole();
+        Task<List<Zone>> GetAllZone();
+        Task<bool> Any(int id, string name);
     }
 }
+
