@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Ubiety.Dns.Core.Records.NotUsed;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -18,16 +19,9 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        //public async Task<List<Village>> GetLocality()
-        //{
-        //    List<Village> lst = new List<Village>();
-        //    List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
-        //    return lst;
-        //    //return await _dbContext.Village.Include(x => x.Zone).OrderByDescending(x => x.Id).ToListAsync();
-        //}
-        public async Task<List<Zone>> GetAllZone()
+        public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
+            List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId==departmentId).ToListAsync();
             return zoneList;
         }
         public async Task<List<Department>> GetAllDepartment()
@@ -40,14 +34,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Village.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
 
-        Task<List<Locality>> GetLocality()
+        public async Task<List<Locality>> GetAllLocality()
         {
-            throw new NotImplementedException();
-        }
-
-        Task<List<Locality>> ILocalityRepository.GetLocality()
-        {
-            throw new NotImplementedException();
+            var data = await _dbContext.Locality.Include(x => x.Zone).Include(x => x.Department).OrderByDescending(x => x.Id).ToListAsync();
+            return data;
         }
     }
 }

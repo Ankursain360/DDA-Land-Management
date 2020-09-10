@@ -1,4 +1,5 @@
-﻿<div class="row">
+﻿@model Libraries.Model.Entity.Locality
+<div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
@@ -21,57 +22,53 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department </label>
-                        <select required class="form-control dda-dropdown">
-                            <option value="value">Select</option>
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
+                            <option value="">Select</option>
                         </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone    </label>
-                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                        <label class="control-label lb-sm">Zone</label>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown">
                             <option value="value">Select</option>
                         </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Locality Name   </label>
-                        <input required type="text" class="form-control">
+                        <input asp-for="Name" type="text" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Locality Code</label>
-                        <input required type="text" class="form-control">
-
-
+                        <input asp-for="LocalityCode" type="text" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-
-
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Landmark    </label>
-
-                        <input required type="text" class="form-control">
-
+                        <input asp-for="Landmark" type="text" class="form-control" />
+                        <span asp-validation-for="Landmark" type="text" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address    </label>
-
-                        <input required type="text" class="form-control">
-
+                        <input asp-for="Address" type="text" class="form-control" />
+                        <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>
                 </div>
-
-
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
-                        <select style="height:30px; background-color: #dddddd;" required class="form-control">
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">InActive</option>
                         </select>
                     </div>
                 </div>
-                <div class="row">
+                <div class="form-row">
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "Locality", null, new { @class = "btn btn-primary dda-pageheading" })
@@ -82,3 +79,4 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<script src="~/js/LocalityMaster.js"></script>

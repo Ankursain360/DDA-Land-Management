@@ -9,8 +9,8 @@ namespace Libraries.Service.IApplicationService
     public interface ILocalityService
     {
         Task<List<Locality>> GetAllLocality(); // To Get all data added by Praveen
-        Task<List<Zone>> GetAllZone(); // To Get all data added by Praveen
-        Task<List<Zone>> GetAllDepartment(); // To Get all data added by Praveen
+        Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen
+        Task<List<Department>> GetAllDepartment(); // To Get all data added by Praveen
         Task<List<Locality>> GetLocalityUsingRepo();
         Task<bool> Update(int id, Locality locality); // To Upadte Particular data added by Praveen
         Task<bool> Create(Locality locality);

@@ -23,6 +23,7 @@ namespace Libraries.Model
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
+        public virtual DbSet<Locality> Locality { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -34,6 +35,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new LocalityConfiguration());
 
 
         }
