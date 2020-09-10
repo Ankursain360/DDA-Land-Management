@@ -84,9 +84,11 @@ namespace SiteMaster.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Locality locality)
         {
-            if (ModelState.IsValid)
+            locality.DepartmentList = await _localityService.GetAllDepartment();
+            locality.ZoneList = await _localityService.GetAllZone(locality.DepartmentId);
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
                     var result = await _localityService.Update(id, locality);
                     if (result == true)
@@ -101,14 +103,15 @@ namespace SiteMaster.Controllers
                         return View(locality);
                     }
                 }
-                catch (Exception ex)
+
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(locality);
                 }
             }
-            else
+            catch (Exception ex)
             {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(locality);
             }
         }
