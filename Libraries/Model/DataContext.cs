@@ -15,7 +15,7 @@ namespace Libraries.Model
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Module> Module { get; set; }
-
+        public virtual DbSet<Page> Page { get; set; }
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
 
@@ -23,8 +23,6 @@ namespace Libraries.Model
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
-        public virtual DbSet<Interest> Interest { get; set; }
-        public virtual DbSet<PropertyType> Propertytype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -36,8 +34,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new InterestConfiguration());
-            modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
+
+            modelBuilder.ApplyConfiguration(new PageConfiguration());
+
         }
     }
 }

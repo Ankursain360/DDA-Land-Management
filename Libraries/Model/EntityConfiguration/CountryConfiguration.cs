@@ -8,23 +8,25 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-             builder.ToTable("country", "appointment");
+            builder.ToTable("country", "appointment");
 
-                builder.Property(e => e.Id)
-                    .HasColumnType("int(11)")
-                    .ValueGeneratedNever();
+            builder.Property(e => e.Id)
+                .HasColumnType("int(11)")
+                .ValueGeneratedNever();
 
-                builder.Property(e => e.CreatedDate).HasColumnType("date");
+            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-                builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+            builder.Property(e => e.CreatedDate).HasColumnType("date");
 
-                builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-                builder.Property(e => e.ModifiedDate).HasColumnType("date");
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-                builder.Property(e => e.Name)
-                    .HasMaxLength(45)
-                    .IsUnicode(false);
+            builder.Property(e => e.ModifiedDate).HasColumnType("date");
+
+            builder.Property(e => e.Name)
+                .HasMaxLength(45)
+                .IsUnicode(false);
         }
     }
 }

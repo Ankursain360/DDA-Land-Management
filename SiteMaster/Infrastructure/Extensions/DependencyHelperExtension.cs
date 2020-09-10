@@ -25,6 +25,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
 
+            services.AddScoped<IPageRepository, PageRepository>();
+
 
 
             /* Application Services */
@@ -36,10 +38,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<INotificationService, NotificationService>();
-
-
-
-
+            services.AddScoped<IModuleService, ModuleService>();
+            //services.AddScoped<IPageService, PageService>();
         }
     }
 }
