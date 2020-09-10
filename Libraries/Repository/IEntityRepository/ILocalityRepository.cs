@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocality();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Department>> GetAllDepartment();
-        Task<bool> Any(int id, string name);
+        Task<bool> AnyName(int id, string name);
+        Task<bool> AnyCode(int id, string name);
     }
 }

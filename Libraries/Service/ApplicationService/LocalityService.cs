@@ -23,7 +23,12 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<bool> CheckUniqueName(int id, string name)
         {
-            bool result= await _localityRepository.Any(id, name);
+            bool result= await _localityRepository.AnyName(id, name);
+            return result;
+        }
+        public async Task<bool> CheckUniqueCode(int id, string code)
+        {
+            bool result= await _localityRepository.AnyCode(id, code);
             return result;
         }
 

@@ -29,9 +29,13 @@ namespace Libraries.Repository.EntityRepository
             List<Department> departmentList = await _dbContext.Department.ToListAsync();
             return departmentList;
         }
-        public async Task<bool> Any(int id, string name)
+        public async Task<bool> AnyName(int id, string name)
         {
-            return await _dbContext.Village.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Locality.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
+        public async Task<bool> AnyCode(int id, string code)
+        {
+            return await _dbContext.Locality.AnyAsync(t => t.Id != id && t.LocalityCode.ToLower() == code.ToLower());
         }
 
         public async Task<List<Locality>> GetAllLocality()
