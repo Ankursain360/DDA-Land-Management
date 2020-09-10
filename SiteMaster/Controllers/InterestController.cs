@@ -30,9 +30,17 @@ namespace SiteMaster.Controllers
             var result = await _interestService.GetAllInterest();
             return View(result);
         }
-        public IActionResult Create()
+
+        async Task BindDropDown(Interest interest)
         {
-            return View();
+            interest.PropertyTypeList = await _interestService.GetDropDownList();
+        }
+        public async Task<IActionResult> Create()
+        {
+            Interest interest = new Interest();
+            interest.IsActive = 1;
+            await BindDropDown(interest);
+            return View(interest);
         }
 
         [HttpPost]
@@ -74,6 +82,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _interestService.FetchSingleResult(id);
+            await BindDropDown(Data);
             if (Data == null)
             {
                 return NotFound();
@@ -85,6 +94,7 @@ namespace SiteMaster.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Interest interest)
         {
+            await BindDropDown(interest);
             if (ModelState.IsValid)
             {
                 try
@@ -109,39 +119,6 @@ namespace SiteMaster.Controllers
                 }
             }
             return View(interest);
-        }
-
-        [AcceptVerbs("Get", "Post")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string Name)
-        {
-            var result = await _interestService.CheckUniqueName(Id, Name);
-            if (result == false)
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json($"Interest: {Name} already exist");
-            }
-        }
-
-
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _interestService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu

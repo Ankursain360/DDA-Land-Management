@@ -18,6 +18,6 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 
-        Task<bool> CheckUniqueName(int id, string interest);   // To check Unique Value  for interest
+        Task<List<PropertyType>> GetDropDownList();
     }
 }

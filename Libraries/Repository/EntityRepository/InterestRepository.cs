@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Libraries.Model;
@@ -17,9 +18,16 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<bool> Any(int id, string name)
+
+        public async Task<List<Interest>> GetAllDetails()
         {
-            return await _dbContext.Designation.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            var data = await _dbContext.Interest.Include(s => s.PropertyType).ToListAsync();
+            return data;
+        }
+        public async Task<List<PropertyType>> GetPropertyTypeList()
+        {
+            var propertyTypeList = await _dbContext.Propertytype.ToListAsync();
+            return propertyTypeList;
         }
     }
 

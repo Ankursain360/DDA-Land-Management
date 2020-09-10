@@ -27,9 +27,14 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Interest>> GetAllInterest()
         {
-            return await _interestRepository.GetAll();
+            return await _interestRepository.GetAllDetails();
         }
 
+        public async Task<List<PropertyType>> GetDropDownList()
+        {
+            List<PropertyType> propertytypeList = await _interestRepository.GetPropertyTypeList();
+            return propertytypeList;
+        }
 
         public async Task<Interest> FetchSingleResult(int id)
         {
@@ -59,14 +64,6 @@ namespace Libraries.Service.ApplicationService
             interest.CreatedDate = DateTime.Now;
             _interestRepository.Add(interest);
             return await _unitOfWork.CommitAsync() > 0;
-        }
-
-
-        public async Task<bool> CheckUniqueName(int id, string interest)
-        {
-            bool result = await _interestRepository.Any(id, interest);
-            //  var result1 = _dbContext.Interest.Any(t => t.Id != id && t.Name == interest.Name);
-            return result;
         }
 
         public async Task<bool> Delete(int id)
