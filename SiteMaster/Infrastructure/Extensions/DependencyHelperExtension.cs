@@ -27,6 +27,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IPageRepository, PageRepository>();
             services.AddScoped<IInterestRepository, InterestRepository>();
             services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ILocalityRepository, LocalityRepository>();
 
 
 
@@ -44,6 +45,7 @@ namespace SiteMaster.Infrastructure.Extensions
             //services.AddScoped<IPageService, PageService>();
             services.AddScoped<IInterestService, InterestService>();
             services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<ILocalityService, LocalityService>();
         }
     }
 }

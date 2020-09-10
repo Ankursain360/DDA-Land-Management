@@ -1,7 +1,9 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Libraries.Model.Entity
@@ -12,8 +14,10 @@ namespace Libraries.Model.Entity
         [Required]
         public int ZoneId { get; set; }
         [Required]
-        public string LocalityName { get; set; }
+        [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id")]
+        public string Name { get; set; }
         [Required]
+        [Remote(action: "ExistCode", controller: "Locality", AdditionalFields = "Id")]
         public string LocalityCode { get; set; }
         [Required]
         public string Landmark { get; set; }
@@ -21,5 +25,11 @@ namespace Libraries.Model.Entity
         public string Address { get; set; }
         [Required]
         public byte IsActive { get; set; }
+        public virtual Zone Zone { get; set; }
+        public virtual Department Department { get; set; }
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+        [NotMapped] 
+        public List<Department> DepartmentList { get; set; }
     }
 }

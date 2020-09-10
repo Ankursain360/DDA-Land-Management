@@ -5,6 +5,7 @@ using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,49 +21,74 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _localityRepository = localityRepository;
         }
-        public Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> CheckUniqueName(int id, string name)
         {
-            throw new NotImplementedException();
+            bool result= await _localityRepository.AnyName(id, name);
+            return result;
+        }
+        public async Task<bool> CheckUniqueCode(int id, string code)
+        {
+            bool result= await _localityRepository.AnyCode(id, code);
+            return result;
         }
 
-        public Task<bool> Delete(int id)
+        public async Task<bool> Delete(int id)
         {
-            throw new NotImplementedException();
+            var form = await _localityRepository.FindBy(a => a.Id == id);
+            Locality model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _localityRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public Task<Locality> FetchSingleResult(int id)
+        public async Task<Locality> FetchSingleResult(int id)
         {
-            throw new NotImplementedException();
+            var result = await _localityRepository.FindBy(a => a.Id == id);
+            Locality model = result.FirstOrDefault();
+            return model;
         }
 
-        public Task<List<Zone>> GetAllDepartment()
+        public async Task<List<Department>> GetAllDepartment()
         {
-            throw new NotImplementedException();
+            List<Department> departmentList = await _localityRepository.GetAllDepartment();
+            return departmentList;
         }
 
-        public Task<List<Locality>> GetAllLocality()
+        public async Task<List<Locality>> GetAllLocality()
         {
-            throw new NotImplementedException();
+            return await _localityRepository.GetAllLocality();
         }
 
-        public Task<List<Zone>> GetAllZone()
+        public async Task<List<Zone>> GetAllZone( int departmentId)
         {
-            throw new NotImplementedException();
+            List<Zone> zoneList = await _localityRepository.GetAllZone(departmentId);
+            return zoneList;
         }
 
-        public Task<List<Locality>> GetLocalityUsingRepo()
+        public async Task<List<Locality>> GetLocalityUsingRepo()
         {
-            throw new NotImplementedException();
+            return await _localityRepository.GetAllLocality();
         }
 
-        public Task<bool> Update(int id, Locality locality)
+        public async Task<bool> Update(int id, Locality locality)
         {
-            throw new NotImplementedException();
+            var result = await _localityRepository.FindBy(a => a.Id == id);
+            Locality model = result.FirstOrDefault();
+            model.Name = locality.Name;
+            model.ZoneId = locality.ZoneId;
+            model.IsActive = locality.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _localityRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
 
-        Task<bool> ILocalityService.Create(Locality locality)
+        public async Task<bool> Create(Locality locality)
         {
-            throw new NotImplementedException();
+            locality.CreatedBy = 1;
+            locality.CreatedDate = DateTime.Now;
+            _localityRepository.Add(locality);
+            return await _unitOfWork.CommitAsync() > 0;
         }
     }
 }
