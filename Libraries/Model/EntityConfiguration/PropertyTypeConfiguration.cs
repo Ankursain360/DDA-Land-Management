@@ -7,25 +7,18 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-  public  class RoleConfiguration: IEntityTypeConfiguration<Role>
+
+
+    public class PropertyTypeConfiguration : IEntityTypeConfiguration<PropertyType>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+
+        public void Configure(EntityTypeBuilder<PropertyType> builder)
         {
-            builder.ToTable("role", "lms");
+            builder.ToTable("propertytype", "lms");
 
             builder.HasIndex(e => e.Name)
-                .HasName("Name_UNIQUE")
+                .HasName("Name")
                 .IsUnique();
-
-            builder.HasIndex(e => e.ZoneId)
-                .HasName("ZoneId_idx");
-
-            
-            builder.HasOne(d => d.Zone)
-                .WithMany(p => p.Role)
-                .HasForeignKey(d => d.ZoneId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ZoneId");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -39,13 +32,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
-
-            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
-      
-
-
         }
     }
 }

@@ -12,6 +12,8 @@ namespace Libraries.Model.Entity
         [Required]
         public int ZoneId { get; set; }
         [Required]
+        [Remote(action: "Exist", controller: "Role", AdditionalFields = "Id")]
+
         public string Name { get; set; }
         public byte IsActive { get; set; }
         [NotMapped]

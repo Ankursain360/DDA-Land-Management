@@ -16,34 +16,44 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiteMaster.Controllers
 {
-    public class DesignationController : Controller
+    public class InterestController : Controller
     {
 
-        private readonly IDesignationService _designationService;
+        private readonly IInterestService _interestService;
 
-        public DesignationController(IDesignationService designationService)
+        public InterestController(IInterestService interestService)
         {
-            _designationService = designationService;
+            _interestService = interestService;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _designationService.GetAllDesignation();
+            var result = await _interestService.GetAllInterest();
             return View(result);
         }
-        public IActionResult Create()
+
+        async Task BindDropDown(Interest interest)
         {
-            return View();
+            interest.PropertyTypeList = await _interestService.GetDropDownList();
+        }
+        public async Task<IActionResult> Create()
+        {
+            Interest interest = new Interest();
+            interest.IsActive = 1;
+            await BindDropDown(interest);
+            return View(interest);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Designation designation)
+        public async Task<IActionResult> Create(Interest interest)
         {
             try
             {
+
                 if (ModelState.IsValid)
                 {
-                    var result = await _designationService.Create(designation);
+
+                    var result = await _interestService.Create(interest);
 
                     if (result == true)
                     {
@@ -53,25 +63,26 @@ namespace SiteMaster.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(designation);
+                        return View(interest);
 
                     }
                 }
                 else
                 {
-                    return View(designation);
+                    return View(interest);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(designation);
+                return View(interest);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _designationService.FetchSingleResult(id);
+            var Data = await _interestService.FetchSingleResult(id);
+            await BindDropDown(Data);
             if (Data == null)
             {
                 return NotFound();
@@ -81,81 +92,49 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Designation designation)
+        public async Task<IActionResult> Edit(int id, Interest interest)
         {
+            await BindDropDown(interest);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _designationService.Update(id, designation);
+                    var result = await _interestService.Update(id, interest);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _designationService.GetAllDesignation();
+                        var result1 = await _interestService.GetAllInterest();
                         return View("Index", result1);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(designation);
+                        return View(interest);
 
                     }
                 }
                 catch (Exception ex)
                 {
-                   
+
                 }
             }
-            return View(designation);
-        }
-
-        [AcceptVerbs ("Get","Post")]
-        [AllowAnonymous]
-        public async Task<IActionResult>  Exist(int Id, string Name)
-        {
-            var result = await _designationService.CheckUniqueName(Id, Name);
-            if (result == false)
-            {
-                return Json(true);
-            }
-            else
-            {
-                return Json($"Designation: {Name} already exist");
-            }
-        }
-
-
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _designationService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
+            return View(interest);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-           
-            var result = await _designationService.Delete(id);
+
+            var result = await _interestService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _designationService.GetAllDesignation();
+                var result1 = await _interestService.GetAllInterest();
                 return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _designationService.GetAllDesignation();
+                var result1 = await _interestService.GetAllInterest();
                 return View("Index", result1);
             }
 
@@ -163,7 +142,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _designationService.FetchSingleResult(id);
+            var Data = await _interestService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();

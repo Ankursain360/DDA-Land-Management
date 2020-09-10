@@ -7,11 +7,10 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IRoleRepository : IGenericRepository<Role>
+   
+     public interface IPageRepository : IGenericRepository<Page>
     {
-        Task<List<Role>> GetRole();
-        Task<List<Zone>> GetAllZone();
+        Task<List<Page>> GetModule();
         Task<bool> Any(int id, string name);
     }
 }
-

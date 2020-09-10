@@ -24,7 +24,10 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDivisionRepository, DivisionRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
-            services.AddScoped<ILocalityRepository, LocalityRepository>();
+            services.AddScoped<IPageRepository, PageRepository>();
+            services.AddScoped<IInterestRepository, InterestRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+
 
 
 
@@ -37,11 +40,10 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<ILocalityService, LocalityService>();
-
-
-
-
+            services.AddScoped<IModuleService, ModuleService>();
+            //services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IInterestService, InterestService>();
+            services.AddScoped<IRoleService, RoleService>();
         }
     }
 }
