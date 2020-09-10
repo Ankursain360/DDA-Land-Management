@@ -67,7 +67,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Department>> GetDepartmentList()
         {
-            var departmentList = await _dbContext.Department.ToListAsync();
+            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
     }

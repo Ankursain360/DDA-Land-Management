@@ -40,10 +40,10 @@
                 {
                 <tr>
                     <td>@(rowNo += 1)</td>
-                    <td>@item.PropertyType.Name</td>
-                    <td>@item.FromDate</td>
+                    <td>@item.PropertyTypeName</td>
+                    <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
 
-                    <td>@item.ToDate</td>
+                    <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
                     <td>@item.Percentage</td>
 
                     <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>

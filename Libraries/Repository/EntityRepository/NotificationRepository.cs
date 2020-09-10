@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class NotificationRepository : GenericRepository<Notification>, INotificationRepository
+    public class NotificationRepository : GenericRepository<LandNotification>, INotificationRepository
     {
 
         public NotificationRepository(DataContext dbContext) : base(dbContext)

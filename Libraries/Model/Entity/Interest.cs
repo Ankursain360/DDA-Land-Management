@@ -23,10 +23,13 @@ namespace Libraries.Model.Entity
 
         public byte IsActive { get; set; }
 
-        public virtual PropertyType PropertyType { get; set; }
-
         [NotMapped]
         public List<PropertyType> PropertyTypeList { get; set; }
+
+        [NotMapped]
+        public string PropertyTypeName { get; set; }
+
+       // public virtual DDAPropertyType DDAPropertyType { get; set; }
 
     }
 }

@@ -21,12 +21,41 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Interest>> GetAllDetails()
         {
-            var data = await _dbContext.Interest.Include(s => s.PropertyType).ToListAsync();
-            return data;
+            List<Interest> olist = new List<Interest>();
+
+            var Data = await (from A in _dbContext.Interest
+                              join B in _dbContext.PropertyType on A.PropertyId equals B.Id
+                              select new
+                              {
+                                  Id = A.Id,
+                                  PropertyTypeName = B.Name,
+                                  FromDate = A.FromDate,
+                                  ToDate = A.ToDate,
+                                  Percentage = A.Percentage,
+                                  IsActive = A.IsActive
+                              }).ToListAsync();
+
+            if (Data != null)
+            {
+                for (int i = 0; i < Data.Count; i++)
+
+                {
+                    olist.Add(new Interest()
+                    {
+                        Id = Data[i].Id,
+                        PropertyTypeName = Data[i].PropertyTypeName,
+                        FromDate = Data[i].FromDate,
+                        ToDate = Data[i].ToDate,
+                        Percentage = Data[i].Percentage,
+                        IsActive = Data[i].IsActive
+                    });
+                }
+            }
+            return (olist);
         }
         public async Task<List<PropertyType>> GetPropertyTypeList()
         {
-            var propertyTypeList = await _dbContext.Propertytype.ToListAsync();
+            var propertyTypeList = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
             return propertyTypeList;
         }
     }

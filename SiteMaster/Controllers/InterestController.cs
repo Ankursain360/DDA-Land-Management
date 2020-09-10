@@ -52,13 +52,14 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-
+                    
                     var result = await _interestService.Create(interest);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        await BindDropDown(interest);
+                        return View(interest);
                     }
                     else
                     {
