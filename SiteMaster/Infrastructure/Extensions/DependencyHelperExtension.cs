@@ -39,7 +39,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IModuleService, ModuleService>();
-            //services.AddScoped<IPageService, PageService>();
+            services.AddScoped<IPageService, PageService>();
         }
     }
 }
