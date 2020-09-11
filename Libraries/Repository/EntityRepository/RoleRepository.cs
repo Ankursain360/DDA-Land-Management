@@ -29,7 +29,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<bool> Any(int id, string name)
         {
-            return await _dbContext.Village.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Role.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
     }
 }
