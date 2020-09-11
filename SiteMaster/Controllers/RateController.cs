@@ -16,73 +16,73 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiteMaster.Controllers
 {
-    public class InterestController : Controller
+    public class RateController : Controller
     {
 
-        private readonly IInterestService _interestService;
+        private readonly IRateService _rateService;
 
-        public InterestController(IInterestService interestService)
+        public RateController(IRateService rateService)
         {
-            _interestService = interestService;
+            _rateService = rateService;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _interestService.GetAllInterest();
+            var result = await _rateService.GetAllRate();
             return View(result);
         }
 
-        async Task BindDropDown(Interest interest)
+        async Task BindDropDown(Rate rate)
         {
-            interest.PropertyTypeList = await _interestService.GetDropDownList();
+            rate.PropertyTypeList = await _rateService.GetDropDownList();
         }
         public async Task<IActionResult> Create()
         {
-            Interest interest = new Interest();
-            interest.IsActive = 1;
-            await BindDropDown(interest);
-            return View(interest);
+            Rate rate = new Rate();
+            rate.IsActive = 1;
+            await BindDropDown(rate);
+            return View(rate);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Interest interest)
+        public async Task<IActionResult> Create(Rate rate)
         {
             try
             {
 
                 if (ModelState.IsValid)
                 {
-                    
-                    var result = await _interestService.Create(interest);
+
+                    var result = await _rateService.Create(rate);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(interest);
-                        return View(interest);
+                        await BindDropDown(rate);
+                        return View(rate);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(interest);
+                        return View(rate);
 
                     }
                 }
                 else
                 {
-                    return View(interest);
+                    return View(rate);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(interest);
+                return View(rate);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _interestService.FetchSingleResult(id);
+            var Data = await _rateService.FetchSingleResult(id);
             await BindDropDown(Data);
             if (Data == null)
             {
@@ -93,24 +93,24 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Interest interest)
+        public async Task<IActionResult> Edit(int id, Rate rate)
         {
-            await BindDropDown(interest);
+            await BindDropDown(rate);
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _interestService.Update(id, interest);
+                    var result = await _rateService.Update(id, rate);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _interestService.GetAllInterest();
+                        var result1 = await _rateService.GetAllRate();
                         return View("Index", result1);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(interest);
+                        return View(rate);
 
                     }
                 }
@@ -119,23 +119,23 @@ namespace SiteMaster.Controllers
 
                 }
             }
-            return View(interest);
+            return View(rate);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
-            var result = await _interestService.Delete(id);
+            var result = await _rateService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _interestService.GetAllInterest();
+                var result1 = await _rateService.GetAllRate();
                 return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _interestService.GetAllInterest();
+                var result1 = await _rateService.GetAllRate();
                 return View("Index", result1);
             }
 
@@ -143,7 +143,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _interestService.FetchSingleResult(id);
+            var Data = await _rateService.FetchSingleResult(id);
             await BindDropDown(Data);
             if (Data == null)
             {

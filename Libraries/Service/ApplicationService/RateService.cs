@@ -50,8 +50,9 @@ namespace Libraries.Service.ApplicationService
             model.FromDate = rate.FromDate;
             model.ToDate = rate.ToDate;
             model.PropertyId = rate.PropertyId;
-            model.ModifiedDate = DateTime.Now;
+            model.RatePercentage = rate.RatePercentage;
             model.IsActive = rate.IsActive;
+            model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _rateRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

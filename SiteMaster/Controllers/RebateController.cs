@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SiteMaster.Controllers
 {
-    public class RebateMasterController : Controller
+    public class RebateController : Controller
     {
         public IActionResult Index()
         {
