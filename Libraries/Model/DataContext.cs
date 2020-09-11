@@ -31,7 +31,6 @@ namespace Libraries.Model
         public virtual DbSet<Rate> Rate { get; set; }
 
         public virtual DbSet<Rebate> Rebate { get; set; }
-        public virtual DbSet<PageRole> PageRole { get; set; }
         public virtual DbSet<User> User { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -51,7 +50,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LocalityConfiguration());
             modelBuilder.ApplyConfiguration(new RateConfiguration());
             modelBuilder.ApplyConfiguration(new RebateConfiguration());
-            modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
     }

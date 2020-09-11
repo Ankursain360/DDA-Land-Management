@@ -87,7 +87,6 @@ namespace SiteMaster.Controllers
             {
                 return NotFound();
             }
-            //ViewBag.Radiobutton = Data.IsRebateOn;
             return View(Data);
         }
 
