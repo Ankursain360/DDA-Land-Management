@@ -1,9 +1,5 @@
-﻿@model Libraries.Model.Entity.User
-
-
-
-
-
+﻿
+@model Libraries.Model.Entity.User
 
 <style>
     .alert-info {
@@ -119,7 +115,7 @@
             <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create" id="create_user">
+            <form asp-action="View">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -153,21 +149,16 @@
 
 
                 <div class="row">
-
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="Password">Password </label>
-                        <input asp-for="Password" id="Password" class="form-control">
+                        <label class="control-label lb-sm">Password  </label>
+                        <input class="form-control" asp-for="Password" id="Password" name="Password" />
                         <span asp-validation-for="Password" class="text-danger"></span>
-
                     </div>
-
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="ConfirmPassword">Confirm Password</label>
-                        <input asp-for="ConfirmPassword" id="ConfirmPassword" class="form-control">
+                        <label class="control-label lb-sm">Confirm Password </label>
+                        <input class="form-control" asp-for="ConfirmPassword" id="ConfirmPassword" name="ConfirmPassword" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-
                     </div>
-
                 </div>
 
 
@@ -218,8 +209,7 @@
                         <div class="col-md-6">
                             Set Default Password<br />
                             <label class="switch">
-                                <input type="checkbox" asp-for="defaultpassword">
-
+                                <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
 
@@ -228,7 +218,7 @@
                         <div class="col-md-6">
                             user must change password at first logon <br />
                             <label class="switch">
-                                <input type="checkbox" asp-for="ChangePasswordA">
+                                <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
 
@@ -242,15 +232,22 @@
                     <div class="form-group">
 
                         <div class="col-md-6">
-                            Locked User<br />
-                            <label class="switch" asp-for="LockedA">
+                            Inactive User<br />
+                            <label class="switch">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
 
                         </div>
 
+                        <div class="col-md-4" style="margin-right:100px">
+                            Locked User<br />
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
 
+                        </div>
                         <div class="col-md-2"></div>
                     </div>
 
@@ -267,7 +264,7 @@
 
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                     
                         @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -277,13 +274,6 @@
     </div>
 </div>
 
-
-
-
-
-
-
-<script src="~/js/matchpassword.js"></script>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

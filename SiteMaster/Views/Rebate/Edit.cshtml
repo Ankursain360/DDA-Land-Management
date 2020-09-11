@@ -22,48 +22,46 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="rebate" id="rebate" value="" checked />Rebate on Principal Amount
+                            <input type="radio" asp-for="IsRebateOn" id="rbdPricipal" value="0" />Rebate on Principal Amount
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" name="rebate" id="rebate" value="" />Rebate on Interest
+                            <input type="radio" asp-for="IsRebateOn" id="rbdInterest" value="1" />Rebate on Interest
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" id="rebate" name="rebate" value="" />Both
+                            <input type="radio" asp-for="IsRebateOn" id="rbdBoth" value="2" />Both
                         </label>
                     </div>
 
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label">From Date</label>
-                            <input asp-for="FromDate" type="date" value="" class="form-control">
+                            <input asp-for="FromDate" type="date"  class="form-control">
                             <span asp-validation-for="FromDate" class="text-danger"></span>
                         </div>
-                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">To Date</label>
-                        <input asp-for="ToDate" type="date" value="" class="form-control">
+                        <input asp-for="ToDate" type="date" class="form-control">
                         <span asp-validation-for="ToDate" class="text-danger"></span>
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label"> Rebate Percentage </label>
-                        <input asp-for="RebatePercentage" type="text" value="" class="form-control">
+                        <input asp-for="RebatePercentage" type="text"  class="form-control">
                         <span asp-validation-for="RebatePercentage" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
+                        <label class="control-label">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -86,3 +84,9 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
+@*<environment include="Development">
+    <script src="~/js/rebateedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/rebateedit.js" asp-append-version="true"></script>
+</environment>*@
