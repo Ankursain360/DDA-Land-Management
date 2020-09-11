@@ -29,6 +29,8 @@ namespace Libraries.Model
         public virtual DbSet<Locality> Locality { get; set; }
 
         public virtual DbSet<Rate> Rate { get; set; }
+
+        public virtual DbSet<Rebate> Rebate { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -46,6 +48,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new LocalityConfiguration());
             modelBuilder.ApplyConfiguration(new RateConfiguration());
+            modelBuilder.ApplyConfiguration(new RebateConfiguration());
         }
     }
 }
