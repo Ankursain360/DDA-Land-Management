@@ -40,7 +40,7 @@
                 {
                     <tr>
                         <td>@(rowNo += 1)</td>
-                        <td>@item.IsRebateOn</td>
+                        <td>@(item.IsRebateOn == 0 ? "Rebate on Principal Amount" : item.IsRebateOn == 1 ? "Rebate on Interest": "Both")</td>
                         <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
 
                         <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
@@ -56,7 +56,6 @@
                         </td>
 
                     </tr>
-
 
                 }
             </tbody>

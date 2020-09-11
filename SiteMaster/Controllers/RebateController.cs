@@ -47,6 +47,12 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if (rebate.IsRebateOn == 0)
+                        rebate.IsRebateOn = 0;
+                    else if (rebate.IsRebateOn == 1)
+                        rebate.IsRebateOn = 1;
+                    else if (rebate.IsRebateOn == 2)
+                        rebate.IsRebateOn = 2;
 
                     var result = await _rebateService.Create(rebate);
 
@@ -81,6 +87,7 @@ namespace SiteMaster.Controllers
             {
                 return NotFound();
             }
+            //ViewBag.Radiobutton = Data.IsRebateOn;
             return View(Data);
         }
 

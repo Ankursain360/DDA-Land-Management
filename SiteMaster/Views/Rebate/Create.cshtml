@@ -22,32 +22,29 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
-                            <input type="radio" name="rebate" id="rebate" value="" checked />Rebate on Principal Amount
+                            <input type="radio" asp-for="IsRebateOn" id="rbdPricipal" value="0" checked />Rebate on Principal Amount
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" name="rebate" id="rebate" value="" />Rebate on Interest
+                            <input type="radio" asp-for="IsRebateOn" id="rbdInterest" value="1" />Rebate on Interest
                         </label>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="radio-inline">
-                            <input type="radio" id="rebate" name="rebate" value="" />Both
+                            <input type="radio" asp-for="IsRebateOn" id="rbdBoth" value="2" />Both
                         </label>
                     </div>
-
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">From Date</label>
-                            <input asp-for="FromDate" type="date" value="" class="form-control">
-                            <span asp-validation-for="FromDate" class="text-danger"></span>
-                        </div>
+                        <label class="control-label">From Date</label>
+                        <input asp-for="FromDate" type="date" value="" class="form-control">
+                        <span asp-validation-for="FromDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">To Date</label>
@@ -56,14 +53,14 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label"> Rebate Percentage </label>
                         <input asp-for="RebatePercentage" type="text" value="" class="form-control">
                         <span asp-validation-for="RebatePercentage" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
+                        <label class="control-label">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -71,7 +68,7 @@
                         <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="row ">
+                <div class="row">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "Rebate", null, new { @class = "btn btn-primary dda-pageheading" })
@@ -85,4 +82,10 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/rebatemastercreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/rebatemastercreate.js" asp-append-version="true"></script>
+</environment>
 
