@@ -33,6 +33,7 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         public int? LockedCount { get; set; }
         public int AadharcardNo { get; set; }
+        public virtual ICollection<PageRole> PageRole { get; set; }
         [NotMapped]
         public string ConfirmPassword { get; set; }
         [NotMapped]
