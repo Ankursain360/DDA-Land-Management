@@ -11,24 +11,15 @@ namespace SiteMaster.Controllers
 {
     public class PageRoleMasterController : Controller
     {
-        
-
         public IActionResult Index()
         {
-           
             return View();
         }
-
-
-        public IActionResult Create()
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public IActionResult IndexPost()
         {
-
             return View();
         }
-
-
-
-
-
     }
 }
