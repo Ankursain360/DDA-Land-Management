@@ -80,6 +80,17 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _localityService.FetchSingleResult(id);
+            Data.DepartmentList = await _localityService.GetAllDepartment();
+            Data.ZoneList = await _localityService.GetAllZone(Data.DepartmentId);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Locality locality)

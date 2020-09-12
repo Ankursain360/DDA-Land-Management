@@ -77,15 +77,15 @@ namespace SiteMaster.Controllers
 
                     }
 
-                    
 
-                        var result = await _userService.Create(user);
+
+                    var result = await _userService.Create(user);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _userService.GetAllUser();
-                      //  var list1 = await _userService.GetAllRole();
+                        //  var list1 = await _userService.GetAllRole();
                         return View("Index", list);
                     }
                     else
@@ -122,11 +122,11 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id)
         {
 
-             var Data = await _userService.FetchSingleResult(id);
+            var Data = await _userService.FetchSingleResult(id);
             Data.DistrictList = await _userService.GetAllDistrict();
             Data.RoleList = await _userService.GetAllRole();
 
-          
+
             Data.DistrictList = await _userService.GetAllDistrict();
             if (Data == null)
             {
@@ -166,7 +166,7 @@ namespace SiteMaster.Controllers
                 return View(user);
             }
         }
-        public async Task<IActionResult> Delete(int id)  
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
@@ -203,6 +203,3 @@ namespace SiteMaster.Controllers
         }
     }
 }
-
-
-
