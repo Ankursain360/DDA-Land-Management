@@ -14,9 +14,8 @@ $(function () {
         day = '0' + day.toString();
 
     var maxDate = year + '-' + month + '-' + day;
-    //alert(maxDate);
     $('#FromDate').attr('max', maxDate);
-    $('ToDate').attr('max', maxDate);
+    $('#ToDate').attr('max', maxDate);
 });
 
 

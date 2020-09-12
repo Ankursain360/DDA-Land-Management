@@ -21,5 +21,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         public virtual Zone Zone { get; set; }
+        public virtual ICollection<PageRole> PageRole { get; set; }
     }
 }
