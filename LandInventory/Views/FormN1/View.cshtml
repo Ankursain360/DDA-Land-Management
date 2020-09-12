@@ -1,5 +1,9 @@
-﻿@model Libraries.Model.Entity.Nazulland
+﻿
 
+@model Libraries.Model.Entity.Nazulland
+@{
+    ViewData["Title"] = "View";
+}
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
@@ -13,14 +17,16 @@
 <br />
 
 <br />
-<div class="container-fluid">
+<div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
 
 
                 <div class="form-row">
@@ -114,7 +120,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm lb-sm">Division to Which Land has been transfered</label>
-                        <select asp-for="DivisionId" 
+                        <select asp-for="DivisionId"
                                 asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" class="form-control dda-dropdown">
                             <option value="1">---Select---</option>
                             <option value="0">financial</option>
@@ -149,7 +155,6 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "FormN1", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -158,3 +163,5 @@
         </div>
     </div>
 </div>
+
+

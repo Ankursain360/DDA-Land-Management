@@ -17,8 +17,8 @@ using BotDetect.Web;
 using Newtonsoft.Json.Serialization;
 using LandInventory.Models;
 using Microsoft.Extensions.Hosting;
-
-
+using LandInventory.Infrastructure.Extensions;
+using Libraries.Model;
 namespace LandInventory
 {
     public class Startup
@@ -43,7 +43,7 @@ namespace LandInventory
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
@@ -69,6 +69,7 @@ namespace LandInventory
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+            services.RegisterDependency();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

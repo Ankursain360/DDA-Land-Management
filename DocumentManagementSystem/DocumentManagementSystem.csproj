@@ -60,4 +60,8 @@
     <Folder Include="wwwroot\Admin\img\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FileDataLoading\FileDataLoading.csproj" />
+  </ItemGroup>
+
 </Project>
