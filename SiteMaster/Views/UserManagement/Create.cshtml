@@ -2,21 +2,6 @@
 
 
 
-<script>
-    function PasswordMatch(event) {
-        var Password = $("#Password").val();
-        var ConfirmPassword = $("#ConfirmPassword").val();
-        if (Password != '') {
-            alert("Please Enter Password");
-            break;
-        }
-        if (Password != ConfirmPassword) {
-            alert("Password Not Matched Please Enter Same Password");
-            break;
-        }
-    }
-</script>
-
 
 <style>
     .alert-info {
@@ -231,7 +216,7 @@
                         <div class="col-md-6">
                             Set Default Password<br />
                             <label class="switch">
-                                <input type="checkbox" asp-for="defaultpassword">
+                                <input type="checkbox" asp-for="defaultpassword" id="defaultpass">
 
                                 <span class="slider round"></span>
                             </label>
@@ -256,8 +241,8 @@
 
                         <div class="col-md-6">
                             Locked User<br />
-                            <label class="switch" asp-for="LockedA">
-                                <input type="checkbox">
+                            <label class="switch" >
+                                <input type="checkbox" asp-for="LockedA">
                                 <span class="slider round"></span>
                             </label>
 
@@ -290,3 +275,4 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<script src="~/js/UserManagement.js"></script>

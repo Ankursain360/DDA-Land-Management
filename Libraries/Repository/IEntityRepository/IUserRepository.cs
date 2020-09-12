@@ -12,6 +12,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<User>> GetUser();
         Task<List<District>> GetAllDistrict();
         Task<List<Role>> GetAllRole();
-        Task<bool> Any(int id, string loginname);
+        Task<bool> AnyLoginName(int id, string loginname);
+
+        //Task<bool> MatchPassword(int id, string password);
     }
 }
