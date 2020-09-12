@@ -31,6 +31,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IRateRepository, RateRepository>();
             services.AddScoped<IRebateRepository, RebateRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPageRoleRepository, PageRoleRepository>();
 
 
 
@@ -51,6 +52,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IRateService, RateService>();
             services.AddScoped<IRebateService, RebateService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IPageRoleService, PageRoleService>();
         }
     }
 }

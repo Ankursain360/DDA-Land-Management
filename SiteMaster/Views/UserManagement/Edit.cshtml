@@ -207,7 +207,7 @@
 
                         <div class="col-md-6">
                             Set Default Password<br />
-                            <label class="switch">
+                            <label class="switch" asp-for="defaultpassword" id="defaultpass">
                                 <input type="checkbox">
                                 <span class="slider round"></span>
                             </label>
@@ -217,7 +217,7 @@
                         <div class="col-md-6">
                             user must change password at first logon <br />
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" asp-for="ChangePasswordA">
                                 <span class="slider round"></span>
                             </label>
 
@@ -276,3 +276,4 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<script src="~/js/UserManagement.js"></script>

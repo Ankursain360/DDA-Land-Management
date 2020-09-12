@@ -1,15 +1,13 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#FromDate").val("");
 })
 
 $(function () {
-    $("input[name='IsRebateOn']").click(function () {
-        var id = $("input[name='IsRebateOn']:checked").val();
+    $('#PropertyId').change(function () {
+        var id = $("#PropertyId").val();
         $.ajax({
             type: 'GET',
-            url: '/Rebate/GetFromDate',
+            url: '/Rate/GetFromDate',
             data: { propertyId: id },
             // dataType: 'json',
             success: function (data) {

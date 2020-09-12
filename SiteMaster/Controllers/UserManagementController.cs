@@ -107,9 +107,9 @@ namespace SiteMaster.Controllers
         }
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string loginname)
+        public async Task<IActionResult> ExistLoginName(int Id, string loginname)
         {
-            var result = await _userService.CheckUniqueName(Id, loginname);
+            var result = await _userService.CheckUniqueLoginName(Id, loginname);
             if (result == false)
             {
                 return Json(true);
@@ -119,6 +119,20 @@ namespace SiteMaster.Controllers
                 return Json($"User: {loginname} already exist");
             }
         }
+      //  [AcceptVerbs("Get", "Post")]
+      //  [AllowAnonymous]
+       /// public IActionResult PasswordMatch(string Password, string ConfirmPassword)
+       // {
+          //  bool flag = Password.Equals(ConfirmPassword);
+          //  if (flag)
+          //  {
+               // return Json(true);
+          //  }
+          //  else
+          //  {
+             //   return Json($"Password Not Matched");
+     //     //  }
+     //   }
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -128,6 +142,41 @@ namespace SiteMaster.Controllers
 
 
             Data.DistrictList = await _userService.GetAllDistrict();
+            if (Data.Password == "123")
+            {
+                //  data.defaultpassword_text = 2;
+                Data.defaultpassword = true;
+            }
+            else
+            {
+               /// Data.defaultpassword_text = 1;
+                Data.defaultpassword = false;
+            }
+
+
+            if (Data.ChangePassword == "T")
+            {
+                Data.ChangePasswordA = true;
+            }
+            else
+            {
+                Data.ChangePasswordA = false;
+            }
+
+
+            if (Data.Locked == "T")
+            {
+                Data.LockedA = true;
+            }
+            else
+            {
+                Data.LockedA = false;
+            }
+
+
+
+
+
             if (Data == null)
             {
                 return NotFound();

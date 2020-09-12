@@ -151,6 +151,16 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+        [HttpGet]
+        public string GetFromDate(int? propertyId)
+        {
+            propertyId = propertyId ?? 0;
+            var result = _rateService.GetFromDateData(Convert.ToInt32(propertyId));
+            DateTime lastFromDate = Convert.ToDateTime(result);
+            DateTime NewDate = lastFromDate.AddYears(1);
+            string newFromDate = NewDate.ToString("dd-MMM-yyyy");
+            return (string)newFromDate;
+        }
     }
 
 }

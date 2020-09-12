@@ -27,7 +27,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Rebate>> GetAllRebate()
         {
-            return await _rebateRepository.GetAll();
+            return await _rebateRepository.GetAllDetails();
         }
 
         public async Task<List<PropertyType>> GetDropDownList()
@@ -74,6 +74,11 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = 0;
             _rebateRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public object GetFromDateData(int propertyId)
+        {
+            return _rebateRepository.GetFromDateData(propertyId);
         }
     }
 }

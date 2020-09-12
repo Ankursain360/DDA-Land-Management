@@ -32,14 +32,14 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">From Date</label>
-                        <input asp-for="FromDate" type="date" value="" class="form-control">
+                        <input asp-for="FromDate" type="date" class="form-control">
                         <span asp-validation-for="FromDate" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label">To Date</label>
-                        <input asp-for="ToDate" type="date"  value="" class="form-control">
+                        <input asp-for="ToDate" type="date" value="" class="form-control">
                         <span asp-validation-for="ToDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
@@ -72,4 +72,16 @@
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/interestcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/interestcreate.js" asp-append-version="true"></script>
+</environment>
 
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.js" asp-append-version="true"></script>
+</environment>

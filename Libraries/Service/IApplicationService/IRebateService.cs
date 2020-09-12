@@ -19,5 +19,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 
         Task<List<PropertyType>> GetDropDownList();
+        object GetFromDateData(int propertyId);
     }
 }

@@ -29,16 +29,16 @@ namespace SiteMaster.Controllers
         {
             var result = await _districtService.GetAllDistrict();
             return View(result);
-            //return View(_context.TblMasterDesignation.Where(x => x.IsActive == 1).ToList());
+          
         }
 
 
 
         public IActionResult Create()
         {
-            // var result = await _districtService.Create();
+          
             return View();
-            //return View(_context.TblMasterDesignation.Where(x => x.IsActive == 1).ToList());
+          
         }
 
 
@@ -174,8 +174,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            //try
-            //{
+            
 
             var result = await _districtService.Delete(id);
             if (result == true)
@@ -187,12 +186,7 @@ namespace SiteMaster.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "District");
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-            //    return View();
-            //}
+         
 
         }
 

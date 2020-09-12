@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IUserRepository : IGenericRepository<User>
+    public interface IPageRoleRepository: IGenericRepository<PageRole>
     {
-        Task<List<User>> GetUser();
-        Task<List<District>> GetAllDistrict();
+        Task<List<PageRole>> GetAllPageRole();
+        Task<List<Module>> GetAllModule();
         Task<List<Role>> GetAllRole();
-        Task<bool> AnyLoginName(int id, string loginname);
-
-        //Task<bool> MatchPassword(int id, string password);
+        Task<List<User>> GetAllUser(int role);
     }
 }

@@ -1,17 +1,15 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     $("#FromDate").val("");
 })
 
 $(function () {
-    $("input[name='IsRebateOn']").click(function () {
-        var id = $("input[name='IsRebateOn']:checked").val();
+    $('#PropertyId').change(function () {
+        var id = $("#PropertyId").val();
         $.ajax({
             type: 'GET',
-            url: '/Rebate/GetFromDate',
+            url: '/Interest/GetFromDate',
             data: { propertyId: id },
-            // dataType: 'json',
+           // dataType: 'json',
             success: function (data) {
                 if (data != null) {
                     $("#FromDate").removeAttr("type", "date");
@@ -24,7 +22,7 @@ $(function () {
                     $("#FromDate").removeAttr("disabled", "disabled");
                     $("#FromDate").val("");
                 }
-
+                
             }
         });
     });
