@@ -1,4 +1,5 @@
-﻿$(function () {
+﻿
+$(function () {
     var dtToday = new Date();
 
     var month = dtToday.getMonth() + 1;
@@ -10,5 +11,6 @@
         day = '0' + day.toString();
 
     var maxDate = year + '-' + month + '-' + day;
-    //alert(maxDate);
+    $('#FromDate').attr('max', maxDate);
+    $('#ToDate').attr('max', maxDate);
 });

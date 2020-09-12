@@ -31,6 +31,7 @@ namespace Libraries.Model
         public virtual DbSet<Rate> Rate { get; set; }
 
         public virtual DbSet<Rebate> Rebate { get; set; }
+        public virtual DbSet<User> User { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());

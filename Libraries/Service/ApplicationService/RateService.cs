@@ -75,6 +75,11 @@ namespace Libraries.Service.ApplicationService
             _rateRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public object GetFromDateData(int propertyId)
+        {
+            return _rateRepository.GetFromDateData(propertyId);
+        }
     }
 }
 

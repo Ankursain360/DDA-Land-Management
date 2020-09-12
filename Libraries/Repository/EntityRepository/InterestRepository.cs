@@ -33,7 +33,7 @@ namespace Libraries.Repository.EntityRepository
                                   ToDate = A.ToDate,
                                   Percentage = A.Percentage,
                                   IsActive = A.IsActive
-                              }).ToListAsync();
+                              }).OrderByDescending(x=>x.Id).ToListAsync();
 
             if (Data != null)
             {
@@ -51,8 +51,18 @@ namespace Libraries.Repository.EntityRepository
                     });
                 }
             }
-            return (olist);
+            return (olist.GroupBy(x=>x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
         }
+
+        public object GetFromDateData(int propertyId)
+        {
+            var result = (from A in _dbContext.Interest
+                          where A.PropertyId == propertyId
+                          select A.FromDate).Max();
+            //var result = _dbContext.Interest.Find(propertyId).FromDate.ToString("dd-MMM-yyyy");
+            return result;
+        }
+
         public async Task<List<PropertyType>> GetPropertyTypeList()
         {
             var propertyTypeList = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();

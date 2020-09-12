@@ -11,5 +11,8 @@ namespace Libraries.Repository.IEntityRepository
 
         
         Task<List<PropertyType>> GetPropertyTypeList();
+
+        object GetFromDateData(int propertyId);
+        Task<List<Rebate>> GetAllDetails();
     }
 }
