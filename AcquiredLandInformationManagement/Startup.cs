@@ -19,7 +19,8 @@ using BotDetect.Web;
 using Newtonsoft.Json.Serialization;
 //using DDAPropertyREG.Models;
 using Microsoft.Extensions.Hosting;
-
+using AcquiredLandInformationManagement.Infrastructure.Extensions;
+using Libraries.Model;
 namespace AcquiredLandInformationManagement
 {
     public class Startup
@@ -44,6 +45,8 @@ namespace AcquiredLandInformationManagement
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+
             //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -70,6 +73,7 @@ namespace AcquiredLandInformationManagement
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+            services.RegisterDependency();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
