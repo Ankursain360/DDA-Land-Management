@@ -78,7 +78,7 @@ namespace CourtCasesManagement
 #if DEBUG
             if (HostEnvironment.IsDevelopment())
             {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+               // services.AddControllersWithViews().AddRazorRuntimeCompilation();
             }
             else
             {

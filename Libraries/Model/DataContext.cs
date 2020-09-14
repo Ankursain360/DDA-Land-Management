@@ -37,6 +37,8 @@ namespace Libraries.Model
         public virtual DbSet<Tehsil> Tehsil { get; set; }
         public virtual DbSet<Villagetype> Villagetype { get; set; }
         public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+        public virtual DbSet<Scheme> Scheme { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -60,6 +62,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
 
             modelBuilder.ApplyConfiguration(new NazullandConfiguration());
+            modelBuilder.ApplyConfiguration(new SchemeConfiguration());
+
 
         }
     }
