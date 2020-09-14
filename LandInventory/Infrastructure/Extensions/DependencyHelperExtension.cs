@@ -16,16 +16,12 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             /* Respository */
-            services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<INazullandRepository, NazullandRepository>();
-            services.AddScoped<IDivisionRepository, DivisionRepository>();
+            services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
 
             /* Application Services */
-            services.AddScoped<ICountryService, CountryService>();
-            services.AddScoped<IDivisionService, DivisionService>();
             services.AddScoped<INazullandService, NazullandService>();
-            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
         }
     }
 }
