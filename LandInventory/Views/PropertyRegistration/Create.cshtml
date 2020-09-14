@@ -1,82 +1,74 @@
-﻿@*@model DDAPropertyREG.Models.Tblpropertyregistration*@
+﻿@*@model Libraries.Model.Entity.Interest*@
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Property Registration</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Property Registration</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
 </div>
 <br />
-
 <br />
-<div class="container-fluid" id="MainContentForm">
+
+
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-               
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Classification of Land</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">DIT/Nazul-1 Land</option>
-                                <option value="1">Acquired/Nazul-2 Land</option>
-                                <option value="2">(MOR)Ministry of Rehabilitation Land</option>
-                                <option value="3">Planned Land</option>
-                                <option value="4">L&DO Land</option>
-                                <option value="5">Damage Payee Properties Land</option>
-                            </select>
-                        </div>
 
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Unique ID</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">ZOne/Division</label>
-                            <select style="height:30px; background-color: #dddddd;" id="Division" required="" class="form-control">
-                                <option value="No">Finance</option>
-                                <option value="Yes">Technical</option>
-                            </select>
-
-                        </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Classification of Land</label>
+                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                            <option value="0">DIT/Nazul-1 Land</option>
+                            <option value="1">Acquired/Nazul-2 Land</option>
+                            <option value="2">(MOR)Ministry of Rehabilitation Land</option>
+                            <option value="3">Planned Land</option>
+                            <option value="4">L&DO Land</option>
+                            <option value="5">Damage Payee Properties Land</option>
+                        </select>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Locality</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="">Select</option>
-                                <option value="1">Delhi</option>
-                                <option value="2">Mumbai</option>
-                                <option value="3">Chennai</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Khasra No</label>
-                            <input type="text" class="form-control">
-                        </div>
 
-                      
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Unique ID</label>
+                        <input type="text" class="form-control">
                     </div>
-                
-            
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">ZOne/Division</label>
+                        <select style="height:30px; background-color: #dddddd;" id="Division" required="" class="form-control">
+                            <option value="No">Finance</option>
+                            <option value="Yes">Technical</option>
+                        </select>
+
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Locality</label>
+                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="1">Delhi</option>
+                            <option value="2">Mumbai</option>
+                            <option value="3">Chennai</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Khasra No</label>
+                        <input type="text" class="form-control">
+                    </div>
+
+
+                </div>
+
+
 
                 <div id="DivArea">
                     <div class="row" style="margin-bottom:35px;">
@@ -154,7 +146,7 @@
                             </div>
                         </div>
                     </div>
-                   
+
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Built-Up</label>
@@ -310,97 +302,21 @@
     </div>
 </div>
 
-<script>
 
-    $(function () {
-        $('#Boundary').change(function () {
-            var value = $('#Boundary').val();
-            if (value == "No") {
-                $('#txtBoundaryRemarks').val('');
-                $("#txtBoundaryRemarks").attr("disabled", "disabled");
-            }
-            else {
-                $('#txtBoundaryRemarks').val('');
-                $("#txtBoundaryRemarks").attr("disabled", "disabled");
-                $("#txtBoundaryRemarks").removeAttr("disabled", "disabled");
-            }
-        });
-    });
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/propertyregisterationcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/propertyregisterationcreate.js" asp-append-version="true"></script>
+</environment>
 
-</script>
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.js" asp-append-version="true"></script>
+</environment>
 
 
-<script>
-    $(function () {
-        $('#Buit').change(function () {
-            var value = $('#Buit').val();
-            if (value == "No") {
-                $('#t2').val('');
-                $("#divBuilttype").hide();
-            }
-            else {
-                $('#t2').val('');
-                $("#divBuilttype").show();
-            }
-        });
-    });
 
-    $(function () {
-        $('#Layout').change(function () {
-            var value = $('#Layout').val();
-            if (value == "No") {
-                $('#fileupload').val('');
-                $("#divLayoutPlan").hide();
-            }
-            else {
-                $('#fileupload').val('');
-                $("#divLayoutPlan").show();
-            }
-        });
-    });
-</script>
-
-
-<script>
-    //$(function () {
-    //    $('#Division').change(function () {
-    //        var value = $('#Division').val();
-    //        if (value == "No") {
-    //            $('#t3').val('');
-    //            $("#divDivision").hide();
-    //        }
-    //        else {
-    //            $('#t3').val('');
-    //            $("#divDivision").show();
-    //        }
-    //    });
-    //});
-
-    $(function () {
-        $('#Litigation').change(function () {
-            var value = $('#Litigation').val();
-            if (value == "No") {
-                $('#t4').val('');
-                $("#divLitigationStatus").hide();
-            }
-            else {
-                $('#t4').val('');
-                $("#divLitigationStatus").show();
-            }
-        });
-    });
-
-    $(function () {
-        $('#GEO').change(function () {
-            var value = $('#GEO').val();
-            if (value == "No") {
-                $('#5').val('');
-                $("#divGEOReferencing").hide();
-            }
-            else {
-                $('#t5').val('');
-                $("#divGEOReferencing").show();
-            }
-        });
-    });
-</script>
