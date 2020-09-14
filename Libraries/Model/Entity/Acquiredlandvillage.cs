@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         public string Code { get; set; }
         public int TehsilId { get; set; }
         public int DistrictId { get; set; }
-        public DateTime YearofConsolidation { get; set; }
+        public string YearofConsolidation { get; set; }
         public string TotalNoOfSheet { get; set; }
         public string Zone { get; set; }
         public string Acquired { get; set; }

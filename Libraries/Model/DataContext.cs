@@ -41,9 +41,7 @@ namespace Libraries.Model
         public virtual DbSet<Disposaltype> Disposaltype { get; set; }
         public virtual DbSet<Landuse> Landuse { get; set; }
         public virtual DbSet<Propertyregistration> Propertyregistration { get; set; }
-
-        public virtual DbSet<Proposaldetails> Proposaldetails { get; set; }
-
+        public virtual DbSet<Scheme> Scheme { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -69,7 +67,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LanduseConfiguration());
             modelBuilder.ApplyConfiguration(new DisposaltypeConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyregistrationConfiguration());
-            modelBuilder.ApplyConfiguration(new ProposaldetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new SchemeConfiguration());
+
+
         }
     }
 }
