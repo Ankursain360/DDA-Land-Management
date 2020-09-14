@@ -75,16 +75,16 @@ namespace CourtCasesManagement
                 options.Cookie.IsEssential = true;
             });
 
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
-            {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
-            {
-                services.AddControllersWithViews();
-            }
-#endif
+//#if DEBUG
+//            if (HostEnvironment.IsDevelopment())
+//            {
+//                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+//            }
+//            else
+//            {
+//                services.AddControllersWithViews();
+//            }
+//#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
