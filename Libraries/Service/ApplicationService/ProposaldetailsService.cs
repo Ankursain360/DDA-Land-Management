@@ -46,6 +46,18 @@ namespace Libraries.Service.ApplicationService
             var result = await _proposaldetailsRepository.FindBy(a => a.Id == id);
             Proposaldetails model = result.FirstOrDefault();
             model.Name = proposaldetails.Name;
+            model.SchemeId = proposaldetails.SchemeId;
+            model.Name = proposaldetails.Name;
+            model.RequiredAgency = proposaldetails.RequiredAgency;
+
+            model.ProposalFileNo = proposaldetails.ProposalFileNo;
+            model.Bigha = proposaldetails.Bigha;
+            model.Biswa = proposaldetails.Biswa;
+            model.Biswanshi = proposaldetails.Biswanshi;
+            model.Description = proposaldetails.Description;
+            model.ProposalDate = proposaldetails.ProposalDate;
+            model.IsActive = proposaldetails.IsActive;
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _proposaldetailsRepository.Edit(model);
