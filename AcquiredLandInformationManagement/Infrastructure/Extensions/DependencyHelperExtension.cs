@@ -21,7 +21,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
 
-
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
 
 
             /* Application Services */
@@ -30,6 +30,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
 
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
 
 
         }
