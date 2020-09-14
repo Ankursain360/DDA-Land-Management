@@ -1,0 +1,118 @@
+﻿using Libraries.Model;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
+using Libraries.Service.IApplicationService;
+using Microsoft.EntityFrameworkCore;
+using Libraries.Repository.IEntityRepository;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Libraries.Service.ApplicationService
+{
+  public  class AcquiredlandvillageService : EntityService<Acquiredlandvillage>, IAcquiredlandvillageService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IAcquiredlandvillageRepository _acquiredlandvillageRepository;
+        public AcquiredlandvillageService(IUnitOfWork unitOfWork, IAcquiredlandvillageRepository acquiredlandvillageRepository)
+      : base(unitOfWork, acquiredlandvillageRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _acquiredlandvillageRepository = acquiredlandvillageRepository;
+        }
+
+
+
+
+
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _acquiredlandvillageRepository.FindBy(a => a.Id == id);
+            Acquiredlandvillage model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _acquiredlandvillageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Acquiredlandvillage> FetchSingleResult(int id)
+        {
+            var result = await _acquiredlandvillageRepository.FindBy(a => a.Id == id);
+            Acquiredlandvillage model = result.FirstOrDefault();
+            return model;
+        }
+
+        public async Task<List<District>> GetAllDistrict()
+        {
+            List<District> districtList = await _acquiredlandvillageRepository.GetAllDistrict();
+            return districtList;
+        }
+
+        public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillage()
+        {
+
+            return await _acquiredlandvillageRepository.GetAcquiredlandvillage();
+        }
+
+        public async Task<List<Tehsil>> GetAllTehsil()
+        {
+            List<Tehsil> tehsilList = await _acquiredlandvillageRepository.GetAllTehsil();
+            return tehsilList;
+        }
+
+        public async Task<List<Villagetype>> GetAllVillagetype()
+        {
+            List<Villagetype> villagetypeList = await _acquiredlandvillageRepository.GetAllVillagetype();
+            return villagetypeList;
+        }
+
+        public async Task<List<Acquiredlandvillage>> GetACquiredlandvillageUsingRepo()
+        {
+            return await _acquiredlandvillageRepository.GetAcquiredlandvillage();
+        }
+
+        public async Task<bool> Update(int id, Acquiredlandvillage acquiredlandvillage)
+        {
+            var result = await _acquiredlandvillageRepository.FindBy(a => a.Id == id);
+            Acquiredlandvillage model = result.FirstOrDefault();
+            model.DistrictId = acquiredlandvillage.DistrictId;
+            model.Name = acquiredlandvillage.Name;
+            model.Code = acquiredlandvillage.Code;
+            model.TehsilId = acquiredlandvillage.TehsilId;
+            model.DistrictId = acquiredlandvillage.DistrictId;
+            model.YearofConsolidation = acquiredlandvillage.YearofConsolidation;
+            model.TotalNoOfSheet = acquiredlandvillage.TotalNoOfSheet;
+
+            model.Zone = acquiredlandvillage.Zone;
+            model.Acquired = acquiredlandvillage.Acquired;
+            model.Circle = acquiredlandvillage.Circle;
+            model.WorkingVillage = acquiredlandvillage.WorkingVillage;
+            model.VillageTypeId = acquiredlandvillage.VillageTypeId;
+            model.IsActive = acquiredlandvillage.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _acquiredlandvillageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+
+        }
+
+        public async Task<bool> Create(Acquiredlandvillage acquiredlandvillage)
+        {
+            acquiredlandvillage.CreatedBy = 1;
+            acquiredlandvillage.CreatedDate = DateTime.Now;
+
+            _acquiredlandvillageRepository.Add(acquiredlandvillage);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+
+
+
+
+
+
+
+    }
+}

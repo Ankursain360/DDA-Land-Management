@@ -27,4 +27,9 @@
     <PackageReference Include="MySql.Data.EntityFrameworkCore.Design" Version="8.0.17" />
   </ItemGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
+		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
+	</ItemGroup>
+
 </Project>

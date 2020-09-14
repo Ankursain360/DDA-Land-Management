@@ -99,5 +99,7 @@ namespace Libraries.Service.ApplicationService
             _userRepository.Add(user);
             return await _unitOfWork.CommitAsync() > 0;
         }
+  
+    
     }
 }

@@ -34,10 +34,10 @@ namespace Libraries.Model
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<PageRole> PageRole { get; set; }
         public virtual DbSet<Nazulland> Nazulland { get; set; }
-        public virtual DbSet<Classificationofland> Classificationofland { get; set; }
-        public virtual DbSet<Disposaltype> Disposaltype { get; set; }
-        public virtual DbSet<Landuse> Landuse { get; set; }
-        public virtual DbSet<Propertyregistration> Propertyregistration { get; set; }
+        public virtual DbSet<Tehsil> Tehsil { get; set; }
+        public virtual DbSet<Villagetype> Villagetype { get; set; }
+        public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -58,11 +58,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RebateConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
+
             modelBuilder.ApplyConfiguration(new NazullandConfiguration());
-            modelBuilder.ApplyConfiguration(new ClassificationoflandConfiguration());
-            modelBuilder.ApplyConfiguration(new LanduseConfiguration());
-            modelBuilder.ApplyConfiguration(new DisposaltypeConfiguration());
-            modelBuilder.ApplyConfiguration(new PropertyregistrationConfiguration());
 
         }
     }
