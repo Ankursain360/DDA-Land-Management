@@ -34,6 +34,10 @@ namespace Libraries.Model
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<PageRole> PageRole { get; set; }
         public virtual DbSet<Nazulland> Nazulland { get; set; }
+        public virtual DbSet<Tehsil> Tehsil { get; set; }
+        public virtual DbSet<Villagetype> Villagetype { get; set; }
+        public virtual DbSet<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
