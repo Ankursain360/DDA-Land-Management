@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using Libraries.Model.Common;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Libraries.Model.Entity
 {
@@ -31,9 +32,9 @@ namespace Libraries.Model.Entity
         public DateTime? ProposalDate { get; set; }
         [Required]
         public byte? IsActive { get; set; }
-        //[NotMapped]
-        //public List<Scheme> SchemeList { get; set; }
-        //public virtual Scheme Scheme { get; set; }
+        [NotMapped]
+        public List<Scheme> SchemeList { get; set; }
+        public virtual Scheme Scheme { get; set; }
 
 
     }

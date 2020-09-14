@@ -60,11 +60,11 @@ namespace Libraries.Service.ApplicationService
             _proposaldetailsRepository.Add(proposaldetails);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        //public async Task<List<Module>> GetAllModule()
-        //{
-        //    List<Module> moduleList = await _pageRepository.GetAllModule();
-        //    return moduleList;
-        //}
+        public async Task<List<Scheme>> GetAllScheme()
+        {
+            List<Scheme> schemeList = await _proposaldetailsRepository.GetAllScheme();
+            return schemeList;
+        }
 
         public async Task<bool> CheckUniqueName(int id, string proposaldetails)
         {

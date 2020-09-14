@@ -25,15 +25,15 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Proposaldetails>> GetAllProposaldetails()
         {
-            //return await _dbContext.Page.Include(x => x.Scheme).ToListAsync();
+            return await _dbContext.Proposaldetails.Include(x => x.Scheme).ToListAsync();
 
-            return await _dbContext.Proposaldetails.ToListAsync();
+           
         }
-        //public async Task<List<Module>> GetAllModule()
-        //{
-        //    List<Module> moduleList = await _dbContext.Module.ToListAsync();
-        //    return moduleList;
-        //}
+        public async Task<List<Scheme>> GetAllScheme()
+        {
+            List<Scheme> schemeList = await _dbContext.Scheme.ToListAsync();
+            return schemeList;
+        }
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Proposaldetails.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());

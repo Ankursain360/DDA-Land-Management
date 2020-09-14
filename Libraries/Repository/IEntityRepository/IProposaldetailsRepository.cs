@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IProposaldetailsRepository : IGenericRepository<Proposaldetails>
     {
         Task<List<Proposaldetails>> GetProposaldetails();
-        //Task<List<Scheme>> GetAllScheme();
+        Task<List<Scheme>> GetAllScheme();
         Task<bool> Any(int id, string name);
         Task<List<Proposaldetails>> GetAllProposaldetails();
     }

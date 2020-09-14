@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Proposaldetails>> GetAllProposaldetails();
         Task<List<Proposaldetails>> GetProposaldetailsUsingRepo();
-        //Task<List<Module>> GetAllModule(); // To Get all data added by ishu
+        Task<List<Scheme>> GetAllScheme(); // To Get all data added by ishu
         Task<bool> Update(int id, Proposaldetails proposaldetails);
 
         Task<bool> Create(Proposaldetails proposaldetails);
@@ -21,6 +21,6 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);
 
-        Task<bool> CheckUniqueName(int id, string Proposaldetails);
+        Task<bool> CheckUniqueName(int id, string proposaldetails);
     }
 }
