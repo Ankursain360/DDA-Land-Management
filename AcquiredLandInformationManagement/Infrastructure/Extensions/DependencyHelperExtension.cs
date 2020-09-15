@@ -18,15 +18,16 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
 
 
 
 
-           
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
-
+            services.AddScoped<IKhasraService, KhasraService>();
 
 
 

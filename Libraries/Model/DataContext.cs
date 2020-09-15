@@ -41,6 +41,8 @@ namespace Libraries.Model
         public virtual DbSet<Disposaltype> Disposaltype { get; set; }
         public virtual DbSet<Landuse> Landuse { get; set; }
         public virtual DbSet<Propertyregistration> Propertyregistration { get; set; }
+        public virtual DbSet<Khasra> Khasra { get; set; }
+        public virtual DbSet<LandCategory> LandCategory { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
