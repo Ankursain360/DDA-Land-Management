@@ -18,10 +18,26 @@ namespace Libraries.Model.Entity
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
         public string Remarks { get; set; }
+        public byte IsActive { get; set; }
+
 
         [NotMapped]
         public List<Undersection4> NotificationList { get; set; }
-        public virtual Purpose Notification { get; set; }
+        public virtual Purpose NotificationNo { get; set; }
+
+
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
+        public virtual Acquiredlandvillage VillageName { get; set; }
+
+
+
+
+      //  [NotMapped]
+      //  public List<> KhasraList { get; set; }
+       // public virtual Purpose KhasraName { get; set; }
+
+
 
 
 

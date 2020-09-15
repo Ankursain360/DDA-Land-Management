@@ -11,11 +11,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Service.ApplicationService
+namespace Libraries.Service.ApplicationService
 {
-    public class  Undersection4Service: EntityService<Undersection4>, IUndersection4service
+    public class  Undersection4Service : EntityService<Undersection4>, IUndersection4service
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork; 
         private readonly IUndersection4Repository _undersection4Repository;
         public Undersection4Service(IUnitOfWork unitOfWork, IUndersection4Repository undersection4Repository)
      : base(unitOfWork, undersection4Repository)
