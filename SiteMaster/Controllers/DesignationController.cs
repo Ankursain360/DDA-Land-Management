@@ -13,6 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -29,6 +30,14 @@ namespace SiteMaster.Controllers
         {
             var result = await _designationService.GetAllDesignation();
             return View(result);
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List(DesignationSearchDto model)
+        {
+            var x = model.Name;
+            var result = await _designationService.GetAllDesignation();
+            return PartialView("_List", result);
         }
         public IActionResult Create()
         {
@@ -171,5 +180,4 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
     }
-
 }
