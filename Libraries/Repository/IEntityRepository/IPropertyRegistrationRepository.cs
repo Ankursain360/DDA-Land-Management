@@ -8,7 +8,11 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IPropertyRegistrationRepository : IGenericRepository<Propertyregistration>
     {
-
-       
+        Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
+        Task<List<Zone>> GetZoneDropDownList();
+        Task<List<Locality>> GetLocalityDropDownList();
+        Task<List<Landuse>> GetLandUseDropDownList();
+        Task<List<Disposaltype>> GetDisposalTypeDropDownList();
+        Task<List<Propertyregistration>> GetAllPropertyregistration();
     }
 }

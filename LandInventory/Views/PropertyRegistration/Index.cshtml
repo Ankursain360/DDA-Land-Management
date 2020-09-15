@@ -1,26 +1,22 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
+@{int rowNo = 0; }
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Property Registration</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Property Registration</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
 </div>
 <br />
 <br />
+
 <div>
-    @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
@@ -52,10 +48,10 @@
                     <th rowspan="2">Operation</th>
                 </tr>
                 <tr>
-                    <th >Boundary</th>
-                    <th >Total Area</th>
-                    <th >Encrochment</th>
-                    <th >Vacant</th>
+                    <th>Boundary</th>
+                    <th>Total Area</th>
+                    <th>Encrochment</th>
+                    <th>Vacant</th>
                     <th>Taken Over Name</th>
                     <th>Taken Over/Date</th>
                     <th>Taken Over/Comments</th>
@@ -69,107 +65,111 @@
                 </tr>
             </thead>
             <tbody class="tbody">
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@item.UniqueId</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@item.KhasraNo</td>
+                    <td>@item.TotalArea</td>
+                    <td>@(item.Boundary == 0 ? "No" : "Yes")</td>  
+                    <td>@item.TotalArea</td>
+                    <td>@item.Encroached</td>
+                    <td>@item.Vacant</td>
+                    <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
+                    <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
+                    <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
+                    <td>@item.LandUse.Name</td>
+                    <td>@item.TakenOverName</td>
+                    <td>@item.TakenOverDate</td>
+                    <td>@item.TakenOverComments</td>
+                    <td>@item.ZoneDivision.Name</td>
+                    <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
+                    <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>
+                    <td>@item.HandedOverName</td>
+                    <td>@item.HandedOverDate</td>
+                    <td>@item.HandedOverComments</td>
+                    <td>@item.DisposalType.Name</td>
+                    <td>@item.DisposalDate</td>
+                    <td>@item.DisposalComments</td>
+                    <td>@item.Remarks</td>
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                <tr>
-                    <td>1</td>
-                    <td>111</td>
-                    <td>dwarka</td>
-                    <td>1234</td>
-                    <td>dwarka</td>
-                    <td>yes</td>
-                    <td>1258</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>engg</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>lm</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>alloted</td>
-                    <td>7aug2020</td>
-                    <td>no comments</td>
-                    <td>good to use</td>
-                    <td>
-                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                        <i class="fa fa-trash" aria-hidden="true"></i>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                        <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>111</td>
-                    <td>dwarka</td>
-                    <td>1234</td>
-                    <td>dwarka</td>
-                    <td>yes</td>
-                    <td>1258</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>engg</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>lm</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>alloted</td>
-                    <td>7aug2020</td>
-                    <td>no comments</td>
-                    <td>good to use</td>
-                    <td>
-                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>111</td>
-                    <td>dwarka</td>
-                    <td>1234</td>
-                    <td>dwarka</td>
-                    <td>yes</td>
-                    <td>1258</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>engg</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>lm</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>dda</td>
-                    <td>7aug2020</td>
-                    <td>good</td>
-                    <td>alloted</td>
-                    <td>7aug2020</td>
-                    <td>no comments</td>
-                    <td>good to use</td>
-                    <td>
-                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                    </td>
-                </tr>
-            </tbody>
+                }
+                    @*<tr>
+                        <td>2</td>
+                        <td>111</td>
+                        <td>dwarka</td>
+                        <td>1234</td>
+                        <td>dwarka</td>
+                        <td>yes</td>
+                        <td>1258</td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>engg</td>
+                        <td>dda</td>
+                        <td>7aug2020</td>
+                        <td>good</td>
+                        <td>lm</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>dda</td>
+                        <td>7aug2020</td>
+                        <td>good</td>
+                        <td>alloted</td>
+                        <td>7aug2020</td>
+                        <td>no comments</td>
+                        <td>good to use</td>
+                        <td>
+                            <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>111</td>
+                        <td>dwarka</td>
+                        <td>1234</td>
+                        <td>dwarka</td>
+                        <td>yes</td>
+                        <td>1258</td>
+                        <td>no</td>
+                        <td>yes</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>engg</td>
+                        <td>dda</td>
+                        <td>7aug2020</td>
+                        <td>good</td>
+                        <td>lm</td>
+                        <td>no</td>
+                        <td>no</td>
+                        <td>dda</td>
+                        <td>7aug2020</td>
+                        <td>good</td>
+                        <td>alloted</td>
+                        <td>7aug2020</td>
+                        <td>no comments</td>
+                        <td>good to use</td>
+                        <td>
+                            <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                            <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                        </td>
+                    </tr>*@
+                </tbody>
 
         </table>
 

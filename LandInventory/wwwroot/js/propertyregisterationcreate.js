@@ -62,11 +62,11 @@ $(function () {
             $('#Litigation').change(function () {
                 var value = $('#Litigation').val();
                 if (value == "No") {
-                    $('#t4').val('');
+                    $('#LitigationStatusRemarks').val('');
                     $("#divLitigationStatus").hide();
                 }
                 else {
-                    $('#t4').val('');
+                    $('#LitigationStatusRemarks').val('');
                     $("#divLitigationStatus").show();
                 }
             });
@@ -76,11 +76,11 @@ $(function () {
         $('#GEO').change(function () {
             var value = $('#GEO').val();
             if (value == "No") {
-                $('#5').val('');
+                $('#GeoReferencing').val('');
                 $("#divGEOReferencing").hide();
             }
             else {
-                $('#t5').val('');
+                $('#GeoReferencing').val('');
                 $("#divGEOReferencing").show();
             }
         });
