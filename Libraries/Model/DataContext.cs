@@ -46,6 +46,7 @@ namespace Libraries.Model
         public virtual DbSet<Purpose> Purpose { get; set; }
 
         public virtual DbSet<Undersection4> Undersection4 { get; set; }
+        public virtual DbSet<Undersection4plot> Undersection4plot { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -76,6 +77,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new SchemeConfiguration());
             modelBuilder.ApplyConfiguration(new ProposaldetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection4Configuration());
+            modelBuilder.ApplyConfiguration(new Undersection4plotConfiguration());
+
 
 
         }
