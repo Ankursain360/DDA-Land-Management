@@ -26,7 +26,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Name).HasColumnType("int(11)");
+            builder.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
         }
     }
 }

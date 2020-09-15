@@ -24,7 +24,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IUndersection4Repository, Undersection4Repository>();
 
-
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
 
 
             /* Application Services */
@@ -38,6 +38,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
 
 
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
 
 
         }

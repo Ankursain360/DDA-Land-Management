@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ClassificationOfLand).HasColumnType("int(11)");
+            builder.Property(e => e.ClassificationOfLandId).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -43,7 +43,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DisposalDate).HasColumnType("date");
 
-            builder.Property(e => e.DisposalType).HasColumnType("int(11)");
+            builder.Property(e => e.DisposalTypeId).HasColumnType("int(11)");
 
             builder.Property(e => e.Encroached).HasColumnType("decimal(18,3)");
 
@@ -80,7 +80,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LandUse).HasColumnType("int(11)");
+            builder.Property(e => e.LandUseId).HasColumnType("int(11)");
 
             builder.Property(e => e.LayoutContent)
                 .HasMaxLength(200)
@@ -104,7 +104,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Locality).HasColumnType("int(11)");
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -133,7 +133,37 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Vacant).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.ZoneDivision).HasColumnType("int(11)");
+            builder.Property(e => e.ZoneDivisionId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.ClassificationOfLand)
+                    .WithMany(p => p.Propertyregistration)
+                    .HasForeignKey(d => d.ClassificationOfLandId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("ClassificationOfLandId");
+
+            builder.HasOne(d => d.DisposalType)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.DisposalTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DisposalTypeId");
+
+            builder.HasOne(d => d.LandUse)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.LandUseId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("LandUseId");
+
+            builder.HasOne(d => d.Locality)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.LocalityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("LocalityId");
+
+            builder.HasOne(d => d.ZoneDivision)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.ZoneDivisionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ZoneDivisionId");
         }
     }
 }
