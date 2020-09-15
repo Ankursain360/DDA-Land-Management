@@ -6,7 +6,6 @@ using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Service.ApplicationService;
 
-
 namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 {
     public static class DependencyHelperExtension
@@ -27,6 +26,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
             services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -37,6 +38,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection4service, Undersection4Service>();
             services.AddScoped<IProposaldetailsService, ProposaldetailsService>(); 
             services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
+            services.AddScoped<IKhasraService, KhasraService>();
+
         }
     }
 }
