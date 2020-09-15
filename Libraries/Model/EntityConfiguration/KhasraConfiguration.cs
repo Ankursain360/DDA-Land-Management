@@ -35,7 +35,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.LandId).HasColumnType("int(11)");
+            builder.Property(e => e.LandCategoryId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 

@@ -10,8 +10,10 @@ namespace Libraries.Service.IApplicationService
     {
         
         Task<List<LandCategory>> GetAllLandCategory();
-        Task<List<Villagetype>> GetAllVillagetype();
+        Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetKhasraUsingRepo();
+        Task<List<Khasra>> GetAllKhasra();
+
         Task<bool> Update(int id, Khasra khasra);
         Task<bool> Create(Khasra khasra);
         Task<Khasra> FetchSingleResult(int id);
