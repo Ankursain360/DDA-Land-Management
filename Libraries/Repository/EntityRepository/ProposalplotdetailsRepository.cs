@@ -24,7 +24,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Proposalplotdetails>> GetAllProposalplotdetails()
         {
-            return await _dbContext.Proposalplotdetails.Include(x => x.Proposaldetails).Include(x => x.Village).ToListAsync();
+            return await _dbContext.Proposalplotdetails.Include(x => x.Proposaldetails).Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
 
 
         }
@@ -39,11 +39,11 @@ namespace Libraries.Repository.EntityRepository
             return villageList;
         }
 
-        //public async Task<List<Khasra>> GetAllKhasra()
-        //{
-        //    List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
-        //    return khasraList;
-        //}
+        public async Task<List<Khasra>> GetAllKhasra()
+        {
+            List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
+            return khasraList;
+        }
 
         //public async Task<bool> Any(int id, string name)
         //{

@@ -21,6 +21,8 @@ namespace Libraries.Model.Entity
         public decimal Biswa { get; set; }
         [Required]
         public decimal Biswanshi { get; set; }
+        [Required]
+        public byte? IsActive { get; set; }
 
         [NotMapped]
         public List<Proposaldetails> ProposaldetailsList { get; set; }
@@ -32,8 +34,8 @@ namespace Libraries.Model.Entity
         public virtual Village Village { get; set; }
 
 
-        //[NotMapped]
-        //public List<Khasra> KhasraList { get; set; }
-        //public virtual Khasra Khasra { get; set; }
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
+        public virtual Khasra Khasra { get; set; }
     }
 }
