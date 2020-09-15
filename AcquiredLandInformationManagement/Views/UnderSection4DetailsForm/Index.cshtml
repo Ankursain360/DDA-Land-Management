@@ -1,12 +1,9 @@
 ﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@model IEnumerable<Libraries.Model.Entity.Undersection4>
+@{int rowNo = 0; }
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -20,12 +17,11 @@
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "UnderSection4DetailsForm", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
 </div>
 <br />
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card" style="overflow:scroll;">
+<br /><div class="container-fluid">
+    <div class="card  table-card">
 
         <table class="table table-responsive table-bordered table-card">
 
@@ -35,29 +31,32 @@
                     <th>Purpose Name</th>
                     <th>Notification No.</th>
                     <th>Notification Date</th>
+                    <th>Type</th>
+                    <th>Status</th>
                     <th>Operation</th>
                 </tr>
             </thead>
             <tbody class="tbody">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
 
-                <tr>
-                    <td>1</td>
-                    <td>SPECIAL INDUSTRIAL</td>
-                    <td>F.4(98)/64-L&H(II)</td>
-                    <td>26-11-2019</td>
-                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <td>@item.Purpose.Name</td>
+                        <td>@item.Number</td>
+                        <td>@item.Ndate</td>
+                        <td>@item.TypeDetails</td>
 
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>INSTITUTIONAL</td>
-                    <td>F.4(98)/64-L&H(II)</td>
-                    <td>26-11-2019</td>
-                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <td>@(item.IsActive==1?"Active":"InActive")</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                </tr>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
             </tbody>
 
         </table>

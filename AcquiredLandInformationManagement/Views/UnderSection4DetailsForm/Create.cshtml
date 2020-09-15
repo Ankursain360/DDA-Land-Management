@@ -2,7 +2,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Details</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -15,7 +15,7 @@
 <br />
 <div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
         </div>
         <div class="panel-body">
@@ -25,7 +25,7 @@
 
                 <div class="row" style="margin-bottom:35px;">
                     <div class="col-sm-12">
-                        <div class=" myapp-hed2">
+                        <div class=" dda-innerheading">
                             <div class="col-md-12">
                                 <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Details</h6>
                             </div>
@@ -46,7 +46,7 @@
                 <div id="Divnotification">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class=" dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Under Section-4 Details</h6>
                                 </div>
@@ -72,7 +72,7 @@
                 <div id="Divnotificationtype">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class=" dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Type Under Section-4 Details</h6>
                                 </div>
@@ -107,7 +107,7 @@
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="Submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -115,87 +115,4 @@
         </div>
     </div>
 </div>
-
-<script>
-
-    $(function () {
-        $('#Boundary').change(function () {
-            var value = $('#Boundary').val();
-            if (value == "No") {
-                $('#txtBoundaryRemarks').val('');
-                $("#txtBoundaryRemarks").attr("disabled", "disabled");
-            }
-            else {
-                $('#txtBoundaryRemarks').val('');
-                $("#txtBoundaryRemarks").attr("disabled", "disabled");
-                $("#txtBoundaryRemarks").removeAttr("disabled", "disabled");
-            }
-        });
-    });
-
-</script>
-
-
-<script>
-    $(function () {
-        $('#Buit').change(function () {
-            var value = $('#Buit').val();
-            if (value == "No") {
-                $('#t2').val('');
-                $("#divBuilttype").hide();
-            }
-            else {
-                $('#t2').val('');
-                $("#divBuilttype").show();
-            }
-        });
-    });
-
-    $(function () {
-        $('#Layout').change(function () {
-            var value = $('#Layout').val();
-            if (value == "No") {
-                $('#fileupload').val('');
-                $("#divLayoutPlan").hide();
-            }
-            else {
-                $('#fileupload').val('');
-                $("#divLayoutPlan").show();
-            }
-        });
-    });
-</script>
-
-
-<script>
-
-
-    $(function () {
-        $('#Litigation').change(function () {
-            var value = $('#Litigation').val();
-            if (value == "No") {
-                $('#t4').val('');
-                $("#divLitigationStatus").hide();
-            }
-            else {
-                $('#t4').val('');
-                $("#divLitigationStatus").show();
-            }
-        });
-    });
-
-    $(function () {
-        $('#GEO').change(function () {
-            var value = $('#GEO').val();
-            if (value == "No") {
-                $('#5').val('');
-                $("#divGEOReferencing").hide();
-            }
-            else {
-                $('#t5').val('');
-                $("#divGEOReferencing").show();
-            }
-        });
-    });
-</script>
 
