@@ -19,15 +19,18 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
 
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
 
 
-
-           
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
 
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
 
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
 
 
         }

@@ -1,12 +1,18 @@
-﻿@model IEnumerable<Libraries.Model.Entity.User>
+﻿@model IEnumerable<Libraries.Model.Entity.Acquiredlandvillage>
 @{int rowNo = 0; }
 
 
+
+
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="dda-topheading">
+        <div class="myapp-hed">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">User Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Village Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -27,18 +33,12 @@
             <thead class="thead">
                 <tr>
                     <th>Sr.No</th>
-                    <th>District</th>
-                  <th>Role</th>
-                    <th>Login Name</th>
-                    <th>Display Name</th>
-                    <th>
-                        Email ID
-                    </th>
-                    <th>Contact No.</th>
-
-                    <th> Operations</th>
+                    <th>Village Code</th>
+                    <th>Village Name</th>
+                    <th>Tehsil Name</th>
+                    <th>District Name</th>
                     <th>Status</th>
-
+                    <th>Operation</th>
                 </tr>
             </thead>
             <tbody class="tbody">
@@ -46,16 +46,12 @@
                 {
                 <tr>
                     <td>@(rowNo += 1)</td>
+
+                    <td>@item.Code</td>
+                    <td>@item.Name</td>
+                    <td>@item.Tehsil.Name</td>
                     <td>@item.District.Name</td>
-                     <td>@item.Role.Name</td>
-                    <td>@item.LoginName</td>
-
-                    <td>@item.DisplayName</td>
-                    <td>@item.Email</td>
-
-                    <td>@item.ContactNo</td>
-                    @*    <td>@item.Role.Name</td>*@
-
+                  
                     <td>@(item.IsActive==1?"Active":"InActive")</td>
                     <td>
                         <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
@@ -67,14 +63,11 @@
                 </tr>
                 }
             </tbody>
-      
-        
+
         </table>
 
     </div>
 </div>
 <br />
 <br />
-
-
 
