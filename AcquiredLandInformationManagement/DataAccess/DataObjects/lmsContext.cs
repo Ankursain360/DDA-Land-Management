@@ -15,7 +15,7 @@ namespace AcquiredLandInformationManagement.DataAccess.DataObjects
         {
         }
 
-        public virtual DbSet<Scheme> Scheme { get; set; }
+        public virtual DbSet<Undersection4> Undersection4 { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,49 +28,50 @@ namespace AcquiredLandInformationManagement.DataAccess.DataObjects
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Scheme>(entity =>
+            modelBuilder.Entity<Undersection4>(entity =>
             {
-                entity.ToTable("scheme");
+                entity.ToTable("undersection4");
 
-                entity.HasIndex(e => e.Code)
-                    .HasName("Code_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Name)
-                    .HasName("Name_UNIQUE")
+                entity.HasIndex(e => e.Number)
+                    .HasName("Number_UNIQUE")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.Code)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
 
                 entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
                 entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FileNo)
-                    .IsRequired()
-                    .HasMaxLength(100)
-                    .IsUnicode(false);
-
                 entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
                 entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.Ndate)
+                    .HasColumnName("NDate")
+                    .HasColumnType("date");
+
+                entity.Property(e => e.Npurpose)
+                    .IsRequired()
+                    .HasColumnName("NPurpose")
+                    .HasMaxLength(100)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Number)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PurposeId).HasColumnType("int(11)");
+
+                entity.Property(e => e.TypeDetails)
                     .IsRequired()
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SchemeDate).HasColumnType("date");
+                entity.Property(e => e.TypePurpose)
+                    .IsRequired()
+                    .HasMaxLength(200)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);

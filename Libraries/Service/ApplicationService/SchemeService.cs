@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibrariesService.ApplicationService
+namespace Libraries.Service.ApplicationService
 {
    public class SchemeService: EntityService<Scheme>, ISchemeService
     {

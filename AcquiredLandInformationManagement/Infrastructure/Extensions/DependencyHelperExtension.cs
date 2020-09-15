@@ -20,6 +20,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<ISchemeRepository, SchemeRepository>();
+
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
 
 
 
@@ -29,6 +32,11 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationService, NotificationService>();
 
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+            services.AddScoped<ISchemeService, SchemeService>();
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+
+
+
 
 
 
