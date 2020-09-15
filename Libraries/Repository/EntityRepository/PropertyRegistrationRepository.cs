@@ -21,7 +21,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetAllPropertyregistration()
         {
-            return await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality ).OrderByDescending(x => x.Id).ToListAsync();
+            var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality).OrderByDescending(x => x.Id).ToListAsync();
+            return data;
         }
 
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownList()
@@ -34,6 +35,24 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Disposaltype> DisposaltypeList = await _dbContext.Disposaltype.Where(x => x.IsActive == 1).ToListAsync();
             return DisposaltypeList;
+        }
+
+        public string GetFile(int id)
+        {
+          var File =   (from f in _dbContext.Propertyregistration
+             where f.Id == id
+             select f.LayoutFilePath).First();
+
+            return File;
+        }
+
+        public string GetGeoFile(int id)
+        {
+            var File = (from f in _dbContext.Propertyregistration
+                        where f.Id == id
+                        select f.GeoFilePath).First();
+
+            return File;
         }
 
         public async Task<List<Landuse>> GetLandUseDropDownList()

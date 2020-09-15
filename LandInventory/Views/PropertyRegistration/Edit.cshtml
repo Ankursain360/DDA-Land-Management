@@ -20,13 +20,13 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                <input type="hidden" asp-for="Id" />
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id", "Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ClassificationOfLandId" class="text-danger"></span>
@@ -37,8 +37,8 @@
                         <span asp-validation-for="UniqueId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label" asp-for="ZoneDivisionId">Department</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneDivisionId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                        <label class="control-label" asp-for="ZoneDivisionId">Zone/Division</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown" asp-for="ZoneDivisionId" asp-items="@(new SelectList(Model.ZoneList, "Id", "Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ZoneDivisionId" class="text-danger"></span>
@@ -46,15 +46,8 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
-                        <label class="control-label" asp-for="ZoneDivisionId">Zone/Division</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneDivisionId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
-                            <option>--Select--</option>
-                        </select>
-                        <span asp-validation-for="ZoneDivisionId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
                         <label class="control-label" asp-for="LocalityId">Locality</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id", "Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger"></span>
@@ -66,27 +59,6 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label">Plot No. & Address with Landmark</label>
-                        <textarea asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label class="control-label">Encroachment Status</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="Boundary">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <span asp-validation-for="Boundary" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label id="l1" class="control-label">Encroachment Details</label>
-                        <input asp-for="BoundaryRemarks" class="form-control" id="EncroachmentDetails" disabled>
-                        <span asp-validation-for="BoundaryRemarks" class="text-danger"></span>
-                    </div>
-                </div>
                 <div id="DivArea">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
@@ -113,7 +85,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Total Area</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" class="form-control">
+                            <input asp-for="TotalArea"  class="form-control">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
                         </div>
 
@@ -123,17 +95,13 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label">Encroched</label><span class="text-danger">*</span>
-                            <input asp-for="Encroached" value="" class="form-control" disabled>
+                            <input asp-for="Encroached"  class="form-control">
                             <span asp-validation-for="Encroached" class="text-danger"></span>
                         </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Builtup in Encroachment Area</label><span class="text-danger">*</span>
-                            <input asp-for="Encroached"  class="form-control" disabled>
-                            <span asp-validation-for="Encroached" class="text-danger"></span>
-                        </div>
+
                         <div class="form-group col-md-4">
                             <label class="control-label">Vacant</label><span class="text-danger">*</span>
-                            <input asp-for="Vacant" value="" class="form-control">
+                            <input asp-for="Vacant"  class="form-control">
                             <span asp-validation-for="Vacant" class="text-danger"></span>
                         </div>
                     </div>
@@ -153,7 +121,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label" asp-for="LandUseId">Land Use</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown" asp-for="LandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
+                            <select class="form-control dda-dropdown" asp-for="LandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id", "Name"))">
                                 <option>--Select--</option>
                             </select>
                             <span asp-validation-for="LandUseId" class="text-danger"></span>
@@ -195,7 +163,16 @@
                         </div>
                         <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
                             <label class="control-label" asp-for="FileData">Upload Layout File</label>
-                            <input type="file" class="form-control" name="Assignfile">
+                            @{
+                                @if (ViewBag.LayoutDocView != null)
+                                {
+                                    @Html.ActionLink("Download", "Download", new { id = Model.Id })
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" name="Assignfile">
+                                }
+                            }
                             <span asp-validation-for="FileData" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -226,7 +203,16 @@
                         </div>
                         <div class="form-group col-md-4" id="divGEOReferencing" style="display:none;">
                             <label class="control-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
-                            <input type="file" class="form-control" name="GeoAssignFile" />
+                            @{
+                                @if (ViewBag.GeoDocView != null)
+                                {
+                                    @Html.ActionLink("Download", "GeoDownload", new { id = Model.Id })
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" name="GeoAssignfile">
+                                }
+                            }
                             <span asp-validation-for="GeoFileData" class="text-danger"></span>
                         </div>
                     </div>
@@ -251,20 +237,13 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="TakenOverDate" type="date" value="" class="form-control">
+                            <input asp-for="TakenOverDate" type="date"  class="form-control">
                             <span asp-validation-for="TakenOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Comments</label><span class="text-danger">*</span>
                             <input asp-for="TakenOverComments" class="form-control">
                             <span asp-validation-for="TakenOverComments" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label" asp-for="GeoFileData">Document</label>
-                            <input type="file" class="form-control" name="GeoAssignFile" />
-                            <span asp-validation-for="GeoFileData" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -286,20 +265,13 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="HandedOverDate" type="date" value="" class="form-control">
+                            <input asp-for="HandedOverDate" type="date"  class="form-control">
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Comments</label><span class="text-danger">*</span>
                             <input asp-for="HandedOverComments" class="form-control">
                             <span asp-validation-for="HandedOverComments" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label" asp-for="GeoFileData">Document</label>
-                            <input type="file" class="form-control" name="GeoAssignFile" />
-                            <span asp-validation-for="GeoFileData" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -323,20 +295,13 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="DisposalDate" type="date" value="" class="form-control">
+                            <input asp-for="DisposalDate" type="date"  class="form-control">
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Comments</label><span class="text-danger">*</span>
                             <input asp-for="DisposalComments" class="form-control">
                             <span asp-validation-for="DisposalComments" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label" asp-for="GeoFileData">Document</label>
-                            <input type="file" class="form-control" name="GeoAssignFile" />
-                            <span asp-validation-for="GeoFileData" class="text-danger"></span>
                         </div>
                     </div>
                 </div>
@@ -348,22 +313,11 @@
                     </div>
                 </div>
 
-                @{
-                    @if (ViewBag.IsValidateUser == 2)
-                    {
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label">Validate</label>
-                                <input type="checkbox" asp-for="IsValidate" />
-                            </div>
-                        </div>
-                    }
-                }
 
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

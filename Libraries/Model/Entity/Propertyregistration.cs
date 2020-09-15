@@ -45,6 +45,8 @@ namespace Libraries.Model.Entity
         public DateTime DisposalDate { get; set; }
         public string DisposalComments { get; set; }
         public string Remarks { get; set; }
+        public int? DeletedStatus { get; set; }
+        public int? IsValidate { get; set; }
         public Classificationofland ClassificationOfLand { get; set; }
         public Disposaltype DisposalType { get; set; }
         public Landuse LandUse { get; set; }
@@ -68,5 +70,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile FileData { get; set; }
+
+        [NotMapped]
+        public IFormFile GeoFileData { get; set; }
+
+
     }
 }
