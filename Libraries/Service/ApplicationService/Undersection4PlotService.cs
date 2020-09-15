@@ -48,6 +48,17 @@ namespace Libraries.Service.ApplicationService
             List<Undersection4> notificationList = await _undersection4plotRepository.GetAllNotificationNo();
             return notificationList;
         }
+        public async Task<List<Khasra>> BindKhasra()
+        {
+            List<Khasra> khasraList = await _undersection4plotRepository.BindKhasra();
+            return khasraList;
+        }
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
+        {
+            List<Acquiredlandvillage>  villageList = await _undersection4plotRepository.GetAllVillage();
+            return villageList;
+        }
+
 
         public async Task<List<Undersection4plot>> GetAllUndersection4Plot()
         {
@@ -67,13 +78,12 @@ namespace Libraries.Service.ApplicationService
             var result = await _undersection4plotRepository.FindBy(a => a.Id == id);
             Undersection4plot model = result.FirstOrDefault();
             model.UnderSection4Id = undersection4plot.UnderSection4Id;
-            //model. = undersection4.Number;
-            //model.Ndate = undersection4.Ndate;
-            //model.Npurpose = undersection4.Npurpose;
-            //model.TypeDetails = undersection4.TypeDetails;
-            //model.TypePurpose = undersection4.TypePurpose;
+           model.VillageId = undersection4plot.VillageId;
+          //  model.KhasraId = undersection4plot.KhasraId;
+            model.Bigha = undersection4plot.Bigha;
+            model.Biswa = undersection4plot.Biswa;
+            model.Biswanshi = undersection4plot.Biswanshi;
 
-            //model.IsActive = undersection4.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _undersection4plotRepository.Edit(model);
@@ -86,7 +96,7 @@ namespace Libraries.Service.ApplicationService
             undersection4plot.CreatedBy = 1;
             undersection4plot.CreatedDate = DateTime.Now;
 
-          //  Undersection4plot.Add(undersection4plot);
+            _undersection4plotRepository.Add(undersection4plot);
             return await _unitOfWork.CommitAsync() > 0;
         }
 

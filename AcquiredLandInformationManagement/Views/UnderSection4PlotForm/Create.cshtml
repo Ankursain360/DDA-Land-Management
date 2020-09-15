@@ -1,15 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Undersection4plot
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Plot Form</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -20,19 +14,19 @@
 <br />
 
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
         </div>
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div id="Divclsification">
+              
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Details</h6>
                                 </div>
@@ -43,39 +37,45 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Notification No(Under Section-4)</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">F.4(98)/64-L&H(II)</option>
+                            <select class="form-control dda-dropdown" asp-for="UnderSection4Id" asp-items="@(new SelectList(Model.NotificationList, "Id","Number"))">
+                                <option>Select</option>
                             </select>
+                            <span asp-validation-for="UnderSection4Id" class="text-danger"></span>
+
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Village Name</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">Nimri</option>
+                            <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                                <option>Select</option>
                             </select>
+                            <span asp-validation-for="VillageId" class="text-danger"></span>
+
                         </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Khasra No</label>
-                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                    <option value="0">0//10</option>
-                                </select>
-                            </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Khasra No</label>
+                            <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                                <option>Select</option>
+                            </select>
+                            <span asp-validation-for="KhasraId" class="text-danger"></span>
+
                         </div>
+                    </div>
                     <div id="Divclsification">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
-                                <div class=" myapp-hed2">
+                                <div class=" dda-innerheading">
                                     <div class="col-md-12">
                                         <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Bigha</label>
 
-                                <input type="text" class="form-control" />
+                                <input type="text" asp-for="Bigha" class="form-control" />
 
                             </div>
 
@@ -83,29 +83,29 @@
 
                                 <label class="control-label lb-sm">Biswa</label>
 
-                                <input type="text" class="form-control" />
+                                <input type="text" asp-for="Biswa" class="form-control" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Biswanshi</label>
-                                <input type="text" class="form-control" placeholder="0" />
+                                <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
                             </div>
                         </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label lb-sm">Remarks</label>
-                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Remarks</label>
+                                <textarea type="text" asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
                             </div>
-                     
+                        </div>
 
-                       
+
+
 
 
                         <div class="form-row ">
                             <div class="form-group col-md-12" style="margin-bottom:40px;">
-                                <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                                <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                                 @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                @Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary myapp-hed1" })
+                                @Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary dda-pageheading" })
                             </div>
                         </div>
 
