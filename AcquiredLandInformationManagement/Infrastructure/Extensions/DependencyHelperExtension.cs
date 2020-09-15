@@ -5,7 +5,7 @@ using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Service.ApplicationService;
-using LibrariesService.ApplicationService;
+
 
 namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 {

@@ -46,7 +46,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _proposalplotdetailsRepository.FindBy(a => a.Id == id);
             Proposalplotdetails model = result.FirstOrDefault();
           
-            model.ProposalId = proposalplotdetails.ProposalId;
+            model.ProposaldetailsId = proposalplotdetails.ProposaldetailsId;
             model.VillageId = proposalplotdetails.VillageId;
             model.KhasraId = proposalplotdetails.KhasraId;
 

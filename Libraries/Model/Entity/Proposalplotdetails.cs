@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
    public partial class Proposalplotdetails : AuditableEntity<int>
     {
         [Required]
-        public int? ProposalId { get; set; }
+        public int? ProposaldetailsId { get; set; }
         [Required]
         public int? VillageId { get; set; }
         [Required]
