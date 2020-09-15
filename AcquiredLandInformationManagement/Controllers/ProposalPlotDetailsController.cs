@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
@@ -32,7 +33,7 @@ namespace DDAPropertyREG.Controllers
 
             proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
             proposalplotdetails.VillageList = await _proposalplotdetailsService.GetAllVillage();
-            //proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+            proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
 
 
             return View(proposalplotdetails);
@@ -47,7 +48,7 @@ namespace DDAPropertyREG.Controllers
             {
                 proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
                 proposalplotdetails.VillageList = await _proposalplotdetailsService.GetAllVillage();
-                //proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+                proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
                 if (ModelState.IsValid)
                 {
 
@@ -77,6 +78,99 @@ namespace DDAPropertyREG.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(proposalplotdetails);
             }
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+
+            var Data = await _proposalplotdetailsService.FetchSingleResult(id);
+            Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
+            Data.VillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+      
+        public async Task<IActionResult> Edit(int id, Proposalplotdetails proposalplotdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var result = await _proposalplotdetailsService.Update(id, proposalplotdetails);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _proposalplotdetailsService.GetAllProposalplotdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(proposalplotdetails);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            return View(proposalplotdetails);
+        }
+
+        //[AcceptVerbs("Get", "Post")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> Exist(int Id, string Name)
+        //{
+        //    var result = await _proposalplotdetailsService.CheckUniqueName(Id, Name);
+        //    if (result == false)
+        //    {
+        //        return Json(true);
+        //    }
+        //    else
+        //    {
+        //        return Json($"Page: {Name} already exist");
+        //    }
+        //}
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (id == 0)
+            {
+                return NotFound();
+            }
+
+            var form = await _proposalplotdetailsService.Delete(id);
+            if (form == false)
+            {
+                return NotFound();
+            }
+            var result = await _proposalplotdetailsService.GetAllProposalplotdetails();
+            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            return View("Index", result);
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _proposalplotdetailsService.FetchSingleResult(id);
+           
+            Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
+            Data.VillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
     }
 }

@@ -31,9 +31,18 @@ namespace Libraries.Repository.EntityRepository
             return villageList;
         }
 
+
+
+        public async Task<List<Khasra>> BindKhasra()
+       {
+           List<Khasra> KhasraList = await _dbContext.Khasra.ToListAsync();
+            return KhasraList;
+        }
+
+
         public async Task<List<Undersection4plot>> GetAllUndersection4Plot()
         {
-            return await _dbContext.Undersection4plot.Include(x => x.NotificationNo).Include(x => x.VillageName).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Undersection4plot.Include(x => x.NotificationNo).Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

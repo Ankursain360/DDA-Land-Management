@@ -66,36 +66,41 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = result.FirstOrDefault();
-            //model.ClassificationOfLandId = propertyregistration.ClassificationOfLandId;
-            //model.UniqueId = propertyregistration.UniqueId;
-            //model.ZoneDivisionId = propertyregistration.ZoneDivisionId;
-            //model.LocalityId = propertyregistration.LocalityId;
-            //model.KhasraNo = propertyregistration.KhasraNo;
-            //model.Boundary = propertyregistration.Boundary;
-            //model.BoundaryRemarks = propertyregistration.BoundaryRemarks;
-            //model.TotalArea = propertyregistration.TotalArea;
-            //model.Encroached = propertyregistration.Encroached;
-            //model.Vacant = propertyregistration.Vacant;
-            //model.LandUseId = propertyregistration.LandUseId;
-            //model.BuiltUp = propertyregistration.BuiltUp;
-            //model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
-            //model.LayoutPlan = propertyregistration.LayoutPlan;
-            //model.LitigationStatus = propertyregistration.LitigationStatus;
-            //model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
-            //model.GeoReferencing = propertyregistration.GeoReferencing;
-            //model.TakenOverName = propertyregistration.TakenOverName;
-            //model.TakenOverDate = propertyregistration.TakenOverDate;
-            //model.TakenOverComments = propertyregistration.TakenOverComments;
-            //model.HandedOverName = propertyregistration.HandedOverName;
-            //model.HandedOverDate = propertyregistration.HandedOverDate;
-            //model.HandedOverComments = propertyregistration.HandedOverComments;
-            //model.DisposalTypeId = propertyregistration.DisposalTypeId;
-            //model.DisposalDate = propertyregistration.DisposalDate;
-            //model.DisposalComments = propertyregistration.DisposalComments;
-            //model.Remarks = propertyregistration.Remarks;
-            propertyregistration.ModifiedDate = DateTime.Now;
-            propertyregistration.ModifiedBy = 1;
-            _propertyregistrationRepository.Edit(propertyregistration);
+            model.ClassificationOfLandId = propertyregistration.ClassificationOfLandId;
+            model.UniqueId = propertyregistration.UniqueId;
+            model.ZoneDivisionId = propertyregistration.ZoneDivisionId;
+            model.LocalityId = propertyregistration.LocalityId;
+            model.KhasraNo = propertyregistration.KhasraNo;
+            model.Boundary = propertyregistration.Boundary;
+            model.BoundaryRemarks = propertyregistration.BoundaryRemarks;
+            model.TotalArea = propertyregistration.TotalArea;
+            model.Encroached = propertyregistration.Encroached;
+            model.Vacant = propertyregistration.Vacant;
+            model.LandUseId = propertyregistration.LandUseId;
+            model.BuiltUp = propertyregistration.BuiltUp;
+            model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
+            model.LayoutPlan = propertyregistration.LayoutPlan;
+            model.LayoutContent = propertyregistration.LayoutContent;
+            model.LayoutExtension = propertyregistration.LayoutExtension;
+            model.LayoutFileName = propertyregistration.LayoutFileName;
+            model.LayoutFilePath = propertyregistration.LayoutFilePath;
+            model.LitigationStatus = propertyregistration.LitigationStatus;
+            model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
+            model.GeoReferencing = propertyregistration.GeoReferencing;
+            model.GeoFilePath = propertyregistration.GeoFilePath;
+            model.TakenOverName = propertyregistration.TakenOverName;
+            model.TakenOverDate = propertyregistration.TakenOverDate;
+            model.TakenOverComments = propertyregistration.TakenOverComments;
+            model.HandedOverName = propertyregistration.HandedOverName;
+            model.HandedOverDate = propertyregistration.HandedOverDate;
+            model.HandedOverComments = propertyregistration.HandedOverComments;
+            model.DisposalTypeId = propertyregistration.DisposalTypeId;
+            model.DisposalDate = propertyregistration.DisposalDate;
+            model.DisposalComments = propertyregistration.DisposalComments;
+            model.Remarks = propertyregistration.Remarks;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
@@ -112,9 +117,18 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
+            model.DeletedStatus = 0;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public string GetFile(int id)
+        {
+            return _propertyregistrationRepository.GetFile(id);
+        }
+        public string GetGeoFile(int id)
+        {
+            return _propertyregistrationRepository.GetGeoFile(id);
+        }
     }
 }

@@ -23,19 +23,19 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Undersection4> NotificationList { get; set; }
-        public virtual Purpose NotificationNo { get; set; }
+        public virtual Undersection4 NotificationNo { get; set; }
 
 
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
-        public virtual Acquiredlandvillage VillageName { get; set; }
+        public virtual Acquiredlandvillage Village { get; set; }
 
 
 
+       [NotMapped]
+       public List<Khasra> KhasraList { get; set; }
+       public virtual Khasra Khasra { get; set; }
 
-      //  [NotMapped]
-      //  public List<> KhasraList { get; set; }
-       // public virtual Purpose KhasraName { get; set; }
 
 
 

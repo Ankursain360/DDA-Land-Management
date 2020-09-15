@@ -12,6 +12,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection4plot>> GetAllUndersection4Plot();
         Task<List<Undersection4>> GetAllNotificationNo();
         Task<List<Acquiredlandvillage>> GetAllVillage();
-       // Task<List<Acquiredlandvillage>> GetAllKhasra();
+        Task<List<Khasra>> BindKhasra();
     }
 }

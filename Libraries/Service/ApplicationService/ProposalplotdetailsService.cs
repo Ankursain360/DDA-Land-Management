@@ -54,7 +54,7 @@ namespace Libraries.Service.ApplicationService
             model.Bigha = proposalplotdetails.Bigha;
             model.Biswa = proposalplotdetails.Biswa;
             model.Biswanshi = proposalplotdetails.Biswanshi;
-            
+            model.IsActive = proposalplotdetails.IsActive;
 
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -80,11 +80,11 @@ namespace Libraries.Service.ApplicationService
             List<Village> villageList = await _proposalplotdetailsRepository.GetAllVillage();
             return villageList;
         }
-        //public async Task<List<Khasra>> GetAllKhasra()
-        //{
-        //    List<Khasra> khasraList = await _proposalplotdetailsRepository.GetAllKhasra();
-        //    return khasraList;
-        //}
+        public async Task<List<Khasra>> GetAllKhasra()
+        {
+            List<Khasra> khasraList = await _proposalplotdetailsRepository.GetAllKhasra();
+            return khasraList;
+        }
 
         //public async Task<bool> CheckUniqueName(int id, string proposaldetails)
         //{
@@ -97,7 +97,7 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _proposalplotdetailsRepository.FindBy(a => a.Id == id);
             Proposalplotdetails model = form.FirstOrDefault();
-            //model.IsActive = 0;
+            model.IsActive = 0;
             _proposalplotdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

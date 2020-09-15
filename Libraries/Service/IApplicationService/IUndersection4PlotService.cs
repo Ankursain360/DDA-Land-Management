@@ -10,8 +10,9 @@ namespace Libraries.Service.IApplicationService
     {
 
         Task<List<Undersection4plot>> GetAllUndersection4Plot();
-
+       Task<List<Khasra>> BindKhasra();
         Task<List<Undersection4>> GetAllNotificationNo();
+        Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Undersection4plot>> GetUndersection4PlotUsingRepo();
         Task<bool> Update(int id, Undersection4plot undersection4plot);
         Task<bool> Create(Undersection4plot undersection4plot);
