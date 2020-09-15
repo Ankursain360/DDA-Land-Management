@@ -41,6 +41,8 @@ namespace Libraries.Model
         public virtual DbSet<Disposaltype> Disposaltype { get; set; }
         public virtual DbSet<Landuse> Landuse { get; set; }
         public virtual DbSet<Propertyregistration> Propertyregistration { get; set; }
+        public virtual DbSet<Khasra> Khasra { get; set; }
+        public virtual DbSet<LandCategory> LandCategory { get; set; }
         public virtual DbSet<Scheme> Scheme { get; set; }
         public virtual DbSet<Proposaldetails> Proposaldetails { get; set; }
         public virtual DbSet<Purpose> Purpose { get; set; }
@@ -48,7 +50,7 @@ namespace Libraries.Model
         public virtual DbSet<Undersection4> Undersection4 { get; set; }
         public virtual DbSet<Undersection4plot> Undersection4plot { get; set; }
 
-
+        public virtual DbSet<Proposalplotdetails> Proposalplotdetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -80,7 +82,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection4plotConfiguration());
 
 
-
+            modelBuilder.ApplyConfiguration(new ProposalplotdetailsConfiguration());
         }
+        
     }
 }

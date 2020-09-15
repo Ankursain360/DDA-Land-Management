@@ -25,6 +25,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection4Repository, Undersection4Repository>();
 
             services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+            services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
 
 
             /* Application Services */
@@ -34,12 +36,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<ISchemeService, SchemeService>();
             services.AddScoped<IUndersection4service, Undersection4Service>();
-
-
-
-
-            services.AddScoped<IProposaldetailsService, ProposaldetailsService>();
-
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>(); 
+            services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
+            services.AddScoped<IKhasraService, KhasraService>();
 
         }
     }
