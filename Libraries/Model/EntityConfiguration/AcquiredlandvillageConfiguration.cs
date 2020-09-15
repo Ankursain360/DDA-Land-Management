@@ -64,8 +64,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.YearofConsolidation).HasColumnType("date");
-
+            builder.Property(e => e.YearofConsolidation)
+                .IsRequired()
+                .HasMaxLength(100)
+                .IsUnicode(false);
             builder.Property(e => e.Zone)
                 .IsRequired()
                 .HasMaxLength(100)

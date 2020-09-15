@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Designation>
+
+<table class="table table-responsive table-bordered table-card">
+    <thead class="thead">
+        <tr>
+            <th>Designation Name</th>
+            <th>Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>
+                    @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+                    <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

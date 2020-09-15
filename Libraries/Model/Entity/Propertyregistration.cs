@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
-        public int ClassificationOfLand { get; set; }
+        public int ClassificationOfLandId { get; set; }
         public string UniqueId { get; set; }
-        public int ZoneDivision { get; set; }
-        public int Locality { get; set; }
+        public int ZoneDivisionId { get; set; }
+        public int LocalityId { get; set; }
         public string KhasraNo { get; set; }
         public int Boundary { get; set; }
         public string BoundaryRemarks { get; set; }
         public decimal TotalArea { get; set; }
         public decimal Encroached { get; set; }
         public decimal Vacant { get; set; }
-        public int LandUse { get; set; }
+        public int LandUseId { get; set; }
         public int BuiltUp { get; set; }
         public string BuiltUpRemarks { get; set; }
         public int LayoutPlan { get; set; }
@@ -40,10 +41,32 @@ namespace Libraries.Model.Entity
         public string HandedOverName { get; set; }
         public DateTime HandedOverDate { get; set; }
         public string HandedOverComments { get; set; }
-        public int DisposalType { get; set; }
+        public int DisposalTypeId { get; set; }
         public DateTime DisposalDate { get; set; }
         public string DisposalComments { get; set; }
         public string Remarks { get; set; }
+        public Classificationofland ClassificationOfLand { get; set; }
+        public Disposaltype DisposalType { get; set; }
+        public Landuse LandUse { get; set; }
+        public Locality Locality { get; set; }
+        public Zone ZoneDivision { get; set; }
 
+        [NotMapped]
+        public List<Classificationofland> ClassificationOfLandList { get; set; }
+
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+
+        [NotMapped]
+        public List<Landuse> LandUseList { get; set; }
+
+        [NotMapped]
+        public List<Disposaltype> DisposalTypeList { get; set; }
+
+        [NotMapped]
+        public IFormFile FileData { get; set; }
     }
 }

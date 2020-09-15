@@ -5,6 +5,7 @@ using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Service.ApplicationService;
+using LibrariesService.ApplicationService;
 
 namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 {
@@ -18,19 +19,24 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
-            services.AddScoped<IKhasraRepository, KhasraRepository>();
 
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<ISchemeRepository, SchemeRepository>();
 
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
 
-
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+            services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<IKhasraService, KhasraService>();
 
-
-
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+            services.AddScoped<ISchemeService, SchemeService>();
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>(); 
+            services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
         }
     }
 }
