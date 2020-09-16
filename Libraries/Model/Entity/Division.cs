@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
-using Libraries.Model.Common;
 
 namespace Libraries.Model.Entity
 {
@@ -10,7 +13,16 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public string Code { get; set; }
         public byte IsActive { get; set; }
+        public int ZoneId { get; set; }
+        public int DepartmentId { get; set; }
 
+        public virtual Zone Zone { get; set; }
+        public virtual Department Department { get; set; }
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+      
 
     }
 }

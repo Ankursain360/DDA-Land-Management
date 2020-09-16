@@ -31,10 +31,16 @@ namespace SiteMaster.Controllers
             var result = await _divisionService.GetAllDivision();
             return View(result);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            return View();
+            Division model = new Division();
+            model.IsActive = 1;
+            model.DepartmentList = await _divisionService.GetAllDepartment();
+            model.ZoneList = await _divisionService.GetAllZone(model.DepartmentId);
+            return View(model);
         }
+
+      
 
 
         [HttpPost]
@@ -43,6 +49,9 @@ namespace SiteMaster.Controllers
         {
             try
             {
+                division.DepartmentList = await _divisionService.GetAllDepartment();
+                division.ZoneList = await _divisionService.GetAllZone(division.DepartmentId);
+
 
                 if (ModelState.IsValid)
                 {
@@ -52,7 +61,9 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _divisionService.GetAllDivision();
+                        return View("Index", list);
+                       
                     }
                     else
                     {
@@ -77,6 +88,9 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _divisionService.FetchSingleResult(id);
+            Data.DepartmentList = await _divisionService.GetAllDepartment();
+            Data.ZoneList = await _divisionService.GetAllZone(Data.DepartmentId);
+
             if (Data == null)
             {
                 return NotFound();
@@ -171,12 +185,26 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _divisionService.FetchSingleResult(id);
+            Data.DepartmentList = await _divisionService.GetAllDepartment();
+            Data.ZoneList = await _divisionService.GetAllZone(Data.DepartmentId);
+
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+
+
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            return Json(await _divisionService.GetAllZone(Convert.ToInt32(DepartmentId)));
+        }
+
 
     }
 }
