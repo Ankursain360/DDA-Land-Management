@@ -32,6 +32,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         public async Task<IActionResult> Create()
+        
         {
             Khasra khasra = new Khasra();
             khasra.IsActive = 1;
@@ -70,7 +71,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 }
                 else
                 {
-                    return View(khasra);
+                    return View(khasra);    
                 }
             }
             catch (Exception ex)

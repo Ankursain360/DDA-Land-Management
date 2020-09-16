@@ -13,8 +13,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Proposalplotdetails>> GetProposalplotdetails();
         Task<List<Proposaldetails>> GetAllProposaldetails();
         Task<List<Village>> GetAllVillage();
-        //Task<List<Khasra>> GetAllKhasra();
-        
+        Task<List<Khasra>> GetAllKhasra();
+
 
         //Task<bool> Any(int id, string name);
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();

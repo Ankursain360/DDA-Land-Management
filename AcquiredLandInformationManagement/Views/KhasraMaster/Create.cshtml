@@ -39,7 +39,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Rect No.</label>
-                        <input type="text" class="form-control" />
+                        <input asp-for="RectNo" class="form-control" />
                     </div>
                 </div>
 
@@ -52,7 +52,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
-                        <input type="text" class="form-control" />
+                        <input asp-for="Name" class="form-control" />
                     </div>
                 </div>
                 <div id="Divclsification">
@@ -68,15 +68,15 @@
                     <div class="form-row">
                         <div class="form-group col-md-3">
                             <label class="control-label lb-sm">Bigha</label>
-                            <input type="text" class="form-control" />
+                            <input asp-for="Bigha" class="form-control" />
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label lb-sm">Biswa</label>
-                            <input type="text" class="form-control" />
+                            <input asp-for="Biswa" class="form-control" />
                         </div>
                         <div class="form-group col-md-3">
                             <label class="control-label lb-sm">Biswanshi</label>
-                            <input type="text" class="form-control" placeholder="0" />
+                            <input asp-for="Biswanshi" class="form-control" placeholder="0" />
                         </div>
                     </div>
                 </div>
@@ -84,24 +84,25 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
-                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                            <option value="0">Active</option>
-                            <option value="1">InActive</option>
+                        <label class="control-label lb-sm"> Status</label>
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
                         </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control"></textarea>
+                        <label  class="control-label lb-sm">Remarks</label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
                     </div>
                 </div>
 
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "KhasraMaster", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>

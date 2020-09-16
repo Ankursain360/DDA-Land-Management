@@ -31,6 +31,7 @@
                     <th>Bigha</th>
                     <th>Biswa</th>
                     <th>Biswanshi</th>
+                    <th>Status</th>
                     <th>Operation</th>
                 </tr>
 
@@ -43,12 +44,14 @@
                         <td>@(rowNo += 1)</td>
                         <td>@item.Proposaldetails.Name</td>
                         <td>@item.Village.Name</td>
-                        @*<td>@item.Khasra.Name</td>*@
+                        <td>@item.Khasra.Name</td>
                       
                         <td>@item.Bigha</td>
                         <td>@item.Biswa</td>
                         <td>@item.Biswanshi</td>
-                       
+                        <td>
+                            @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                        </td>
                         <td>
                             <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
