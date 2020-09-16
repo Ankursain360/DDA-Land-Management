@@ -16,9 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Undersection4 undersection4);
         Task<Undersection4> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        //  Task<bool> CheckUniqueLoginName(int id, string loginname);
-
-
+       
 
 
 

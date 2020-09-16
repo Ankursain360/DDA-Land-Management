@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
       
         public int VillageId { get; set; }
-        public int LandId { get; set; }
+        public int LandCategoryId { get; set; }
        
         public string Bigha { get; set; }
         public string Biswa { get; set; }
@@ -33,8 +33,8 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Villagetype> VillagetypeList { get; set; }
-        public virtual Villagetype Villagetype { get; set; }
+        public List<Village> VillageList { get; set; }
+        public virtual Village Village { get; set; }
 
 
 

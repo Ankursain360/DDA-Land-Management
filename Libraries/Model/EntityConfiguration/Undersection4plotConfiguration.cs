@@ -33,6 +33,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Remarks)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
 
             builder.Property(e => e.UnderSection4Id).HasColumnType("int(11)");
 

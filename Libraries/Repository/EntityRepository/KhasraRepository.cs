@@ -27,10 +27,10 @@ namespace Libraries.Repository.EntityRepository
             return landcategoryList;
         }
 
-        public async Task<List<Villagetype>> GetAllVillagetype()
+        public async Task<List<Village>> GetAllVillage()
         {
-            List<Villagetype> villagetypelist = await _dbContext.Villagetype.ToListAsync();
-            return villagetypelist;
+            List<Village> villagelist = await _dbContext.Village.ToListAsync();
+            return villagelist;
         }
 
 
@@ -38,7 +38,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Khasra>> GetAllKhasra()
         {
-            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.LandCategory).Include(x => x.Villagetype).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

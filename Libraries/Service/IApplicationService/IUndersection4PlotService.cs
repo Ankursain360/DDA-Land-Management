@@ -1,0 +1,22 @@
+﻿using Libraries.Model.Entity;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Libraries.Service.IApplicationService
+{
+    public interface IUndersection4PlotService
+    {
+
+        Task<List<Undersection4plot>> GetAllUndersection4Plot();
+
+        Task<List<Undersection4>> GetAllNotificationNo();
+        Task<List<Undersection4plot>> GetUndersection4PlotUsingRepo();
+        Task<bool> Update(int id, Undersection4plot undersection4plot);
+        Task<bool> Create(Undersection4plot undersection4plot);
+        Task<Undersection4plot> FetchSingleResult(int id);
+        Task<bool> Delete(int id);
+
+    }
+}
