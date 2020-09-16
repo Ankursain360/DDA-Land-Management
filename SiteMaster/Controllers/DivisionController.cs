@@ -17,12 +17,12 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace SiteMaster.Controllers
 {
-    public class MasterDivisionsController : Controller
+    public class DivisionController : Controller
     {
         private readonly IDivisionService _divisionService;
 
 
-        public MasterDivisionsController(IDivisionService divisionService)
+        public DivisionController(IDivisionService divisionService)
         {
             _divisionService = divisionService;
         }
