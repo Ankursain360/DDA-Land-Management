@@ -56,14 +56,14 @@ namespace SiteMaster.Controllers
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)
             {
-                if(propertyregistration.IsValidate.Value == 1)
-                {
-                    propertyregistration.IsValidate = 1;
-                }
-                else
-                {
-                    propertyregistration.IsValidate = 1;
-                }
+                //if(propertyregistration.IsValidate  == 1)
+                //{
+                //    propertyregistration.IsValidate = 1;
+                //}
+                //else
+                //{
+                //    propertyregistration.IsValidate = 1;
+                //}
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -170,6 +170,7 @@ namespace SiteMaster.Controllers
             var Data = await _propertyregistrationService.FetchSingleResult(id);
             ViewBag.LayoutDocView = Data.LayoutFilePath;
             ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.IsValidateUser = 2;
             await BindDropDown(Data);
             if (Data == null)
             {
@@ -184,6 +185,14 @@ namespace SiteMaster.Controllers
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)
             {
+                if (propertyregistration.IsValidateData == true)
+                {
+                    propertyregistration.IsValidate = 1;
+                }
+                else
+                {
+                    propertyregistration.IsValidate = 0;
+                }
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);

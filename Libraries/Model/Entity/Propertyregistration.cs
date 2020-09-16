@@ -74,6 +74,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile GeoFileData { get; set; }
 
+        [NotMapped]
+        public bool IsValidateData { get; set; }
+
 
     }
 }
