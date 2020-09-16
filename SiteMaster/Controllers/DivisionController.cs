@@ -28,8 +28,12 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _divisionService.GetAllDivision();
-            return View(result);
+            //var result = await _divisionService.GetAllDivision();
+            //return View(result);
+
+            List<Division> list = await _divisionService.GetAllDivision();
+            return View(list);
+
         }
         public async Task<IActionResult> Create()
         {

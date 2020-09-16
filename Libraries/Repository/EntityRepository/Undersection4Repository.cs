@@ -21,7 +21,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Purpose>> GetAllPurpose()
         {
-            List<Purpose> purposeList = await _dbContext.Purpose.ToListAsync();
+            List<Purpose> purposeList = await _dbContext.Purpose.Where(x => x.IsActive == 1).ToListAsync();
             return purposeList;
         }
         public async Task<List<Undersection4>> GetAllUndersection4()
