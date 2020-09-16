@@ -112,6 +112,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.Property(e => e.DeletedStatus).HasColumnType("int(11)");
+
+            builder.Property(e => e.IsValidate).HasColumnType("int(11)");
+
             builder.Property(e => e.TakenOverComments)
                 .IsRequired()
                 .HasMaxLength(5000)

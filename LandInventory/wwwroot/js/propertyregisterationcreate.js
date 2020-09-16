@@ -1,87 +1,99 @@
-﻿
+﻿$(document).ready(function () {
+    var value = $('#Boundary').val();
+    if (value == 1) {
+        $("#BoundaryRemarks").attr("disabled", "disabled");
+        $("#BoundaryRemarks").removeAttr("disabled", "disabled");
+    }
+
+    var value = $('#BuiltUp').val();
+    if (value == 1) {
+        $("#divBuilttype").show();
+    }
+
+    var value = $('#LitigationStatus').val();
+    if (value == 1) {
+        $("#divLitigationStatus").show();
+    }
+
+    var value = $('#LayoutPlan').val();
+    if (value == 1) {
+        $("#divLayoutPlan").show();
+    }
+
+    var value = $('#GeoReferencing').val();
+    if (value == 1) {
+        $("#divGEOReferencing").show();
+    }
+})
 
 $(function () {
     $('#Boundary').change(function () {
         var value = $('#Boundary').val();
-        if (value == "No") {
-            $('#txtBoundaryRemarks').val('');
-            $("#txtBoundaryRemarks").attr("disabled", "disabled");
+        if (value == 0) {
+            $('#BoundaryRemarks').val('');
+            $("#BoundaryRemarks").attr("disabled", "disabled");
         }
         else {
-            $('#txtBoundaryRemarks').val('');
-            $("#txtBoundaryRemarks").attr("disabled", "disabled");
-            $("#txtBoundaryRemarks").removeAttr("disabled", "disabled");
+            $('#BoundaryRemarks').val('');
+            $("#BoundaryRemarks").attr("disabled", "disabled");
+            $("#BoundaryRemarks").removeAttr("disabled", "disabled");
         }
     });
 });
 
 $(function () {
-    $('#Buit').change(function () {
-        var value = $('#Buit').val();
-        if (value == "No") {
-            $('#t2').val('');
+    $('#BuiltUp').change(function () {
+        var value = $('#BuiltUp').val();
+        if (value == 0) {
+            $('#BuiltUpRemarks').val('');
             $("#divBuilttype").hide();
         }
         else {
-            $('#t2').val('');
+            $('#BuiltUpRemarks').val('');
             $("#divBuilttype").show();
         }
     });
 });
 
 $(function () {
-    $('#Layout').change(function () {
-        var value = $('#Layout').val();
-        if (value == "No") {
-            $('#fileupload').val('');
+    $('#LayoutPlan').change(function () {
+        var value = $('#LayoutPlan').val();
+        if (value == 0) {
+            $('#LayoutFileName').val('');
             $("#divLayoutPlan").hide();
         }
         else {
-            $('#fileupload').val('');
+            $('#LayoutFileName').val('');
             $("#divLayoutPlan").show();
         }
     });
 });
 
 
-        //$(function () {
-        //    $('#Division').change(function () {
-        //        var value = $('#Division').val();
-        //        if (value == "No") {
-        //            $('#t3').val('');
-        //            $("#divDivision").hide();
-        //        }
-        //        else {
-        //            $('#t3').val('');
-        //            $("#divDivision").show();
-        //        }
-        //    });
-        //});
-
-        $(function () {
-            $('#Litigation').change(function () {
-                var value = $('#Litigation').val();
-                if (value == "No") {
-                    $('#LitigationStatusRemarks').val('');
-                    $("#divLitigationStatus").hide();
-                }
-                else {
-                    $('#LitigationStatusRemarks').val('');
-                    $("#divLitigationStatus").show();
-                }
-            });
-        });
-
-    $(function () {
-        $('#GEO').change(function () {
-            var value = $('#GEO').val();
-            if (value == "No") {
-                $('#GeoReferencing').val('');
-                $("#divGEOReferencing").hide();
-            }
-            else {
-                $('#GeoReferencing').val('');
-                $("#divGEOReferencing").show();
-            }
-        });
+$(function () {
+    $('#LitigationStatus').change(function () {
+        var value = $('#LitigationStatus').val();
+        if (value == 0) {
+            $('#LitigationStatusRemarks').val('');
+            $("#divLitigationStatus").hide();
+        }
+        else {
+            $('#LitigationStatusRemarks').val('');
+            $("#divLitigationStatus").show();
+        }
     });
+});
+
+$(function () {
+    $('#GeoReferencing').change(function () {
+        var value = $('#GeoReferencing').val();
+        if (value == "No") {
+            $('#GeoFileName').val('');
+            $("#divGEOReferencing").hide();
+        }
+        else {
+            $('#GeoFileName').val('');
+            $("#divGEOReferencing").show();
+        }
+    });
+});
