@@ -95,6 +95,7 @@ namespace Libraries.Service.ApplicationService
         {
             undersection4plot.CreatedBy = 1;
             undersection4plot.CreatedDate = DateTime.Now;
+            undersection4plot.IsActive = 1;
 
             _undersection4plotRepository.Add(undersection4plot);
             return await _unitOfWork.CommitAsync() > 0;
