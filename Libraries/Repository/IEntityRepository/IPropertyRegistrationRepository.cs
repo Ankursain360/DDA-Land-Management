@@ -17,5 +17,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<bool> CheckDeleteAuthority(int id);
+        Task<List<Department>> GetDepartmentDropDownList();
+        Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached);
     }
 }

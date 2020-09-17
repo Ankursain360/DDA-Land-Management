@@ -26,5 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckDeleteAuthority(int id);
         string GetFile(int id);
         string GetGeoFile(int id);
+        Task<List<Department>> GetDepartmentDropDownList();
+        Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached);
     }
 }

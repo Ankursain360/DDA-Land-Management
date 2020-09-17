@@ -134,5 +134,16 @@ namespace Libraries.Service.ApplicationService
         {
             return _propertyregistrationRepository.CheckDeleteAuthority(id);
         }
+
+        public async Task<List<Department>> GetDepartmentDropDownList()
+        {
+            List<Department> DepartmentList = await _propertyregistrationRepository.GetDepartmentDropDownList();
+            return DepartmentList;
+        }
+
+        public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached)
+        {
+            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( department,  landUse,  litigation,  encroached);
+        }
     }
 }

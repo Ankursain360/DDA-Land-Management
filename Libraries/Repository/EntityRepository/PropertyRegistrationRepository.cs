@@ -49,6 +49,12 @@ namespace Libraries.Repository.EntityRepository
             return ClassificationoflandList;
         }
 
+        public async Task<List<Department>> GetDepartmentDropDownList()
+        {
+            List<Department> DepartmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return DepartmentList;
+        }
+
         public async Task<List<Disposaltype>> GetDisposalTypeDropDownList()
         {
             List<Disposaltype> DisposaltypeList = await _dbContext.Disposaltype.Where(x => x.IsActive == 1).ToListAsync();
@@ -57,9 +63,9 @@ namespace Libraries.Repository.EntityRepository
 
         public string GetFile(int id)
         {
-          var File =   (from f in _dbContext.Propertyregistration
-             where f.Id == id
-             select f.LayoutFilePath).First();
+            var File = (from f in _dbContext.Propertyregistration
+                        where f.Id == id
+                        select f.LayoutFilePath).First();
 
             return File;
         }
@@ -83,6 +89,14 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return LocalityList;
+        }
+
+        public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached)
+        {
+          //  var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.DeletedStatus == 1 && x.DepartmentId== department && x.LandUseId == landUse && x.LitigationStatus == litigation).ToListAsync();
+            return data;
+
         }
 
         public async Task<List<Zone>> GetZoneDropDownList()

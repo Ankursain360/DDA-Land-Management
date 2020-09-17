@@ -75,6 +75,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public bool IsValidateData { get; set; }
 
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
 
     }
 }
