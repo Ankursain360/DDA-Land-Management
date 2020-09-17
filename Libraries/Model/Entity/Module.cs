@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
         public string Name { get; set; }
+        [Required]
         public byte? IsActive { get; set; }
 
     }

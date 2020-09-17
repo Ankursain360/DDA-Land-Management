@@ -1,17 +1,11 @@
 ﻿
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@model IEnumerable<Libraries.Model.Entity.Awardplotdetails>
+@{int rowNo = 0; }
 
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Award Plot Details</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -22,11 +16,11 @@
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "AwardPlotDetails", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
 </div>
 <br />
 <br />
-<div class="container-fluid" id="MainContentForm">
+<div class="container-fluid">
     <div class="card  table-card" style="overflow:scroll;">
 
         <table class="table table-responsive table-bordered table-card">
@@ -42,17 +36,26 @@
                 </tr>
             </thead>
             <tbody class="tbody">
-                <tr>
-                    <td>1</td>
-                    <td>1404</td>
-                    <td>Nimri</td>
-                    <td>0//10</td>
-                    <td>Active</td>
-                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
 
-                </tr>
+                        <td>@item.Awardmaster.AwardNumber</td>
+                        <td>@item.Village.Name</td>
+                        <td>@item.Khasra.Name</td>
+                      
 
+                        <td>@(item.IsActive==1?"Active":"InActive")</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
             </tbody>
 
         </table>

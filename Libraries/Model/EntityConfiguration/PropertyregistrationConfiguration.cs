@@ -24,6 +24,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.HasIndex(e => e.DepartmentId)
+                  .HasName("DepartmentId");
+
             builder.Property(e => e.BuiltUp).HasColumnType("int(11)");
 
             builder.Property(e => e.BuiltUpRemarks)
@@ -81,18 +84,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.LandUseId).HasColumnType("int(11)");
-
-            builder.Property(e => e.LayoutContent)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
-            builder.Property(e => e.LayoutExtension)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
-            builder.Property(e => e.LayoutFileName)
-                .HasMaxLength(200)
-                .IsUnicode(false);
 
             builder.Property(e => e.LayoutFilePath).HasColumnType("longtext");
 

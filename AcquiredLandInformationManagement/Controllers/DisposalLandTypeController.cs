@@ -2,35 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
 
-
-namespace SiteMaster.Controllers
+namespace DDAPropertyREG.Controllers
 {
-    public class MasterDivisionsController : Controller
+    
+    public class DisposalLandTypeController : Controller
     {
-        private readonly IDivisionService _divisionService;
+        private readonly IDisposallandtypeService _disposallandtypeService;
 
-
-        public MasterDivisionsController(IDivisionService divisionService)
+        public DisposalLandTypeController(IDisposallandtypeService disposallandtypeService)
         {
-            _divisionService = divisionService;
+            _disposallandtypeService = disposallandtypeService;
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _divisionService.GetAllDivision();
+            var result = await _disposallandtypeService.GetAllDisposallandtype();
             return View(result);
+
         }
+
         public IActionResult Create()
         {
             return View();
@@ -38,8 +35,8 @@ namespace SiteMaster.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Division division)
+        
+        public async Task<IActionResult> Create(Disposallandtype disposallandtype)
         {
             try
             {
@@ -47,7 +44,7 @@ namespace SiteMaster.Controllers
                 if (ModelState.IsValid)
                 {
                   
-                    var result = await _divisionService.Create(division);
+                    var result = await _disposallandtypeService.Create(disposallandtype);
 
                     if (result == true)
                     {
@@ -57,26 +54,25 @@ namespace SiteMaster.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(division);
+                        return View(disposallandtype);
 
                     }
                 }
                 else
                 {
-                    return View(division);
+                    return View(disposallandtype);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(division);
+                return View(disposallandtype);
             }
         }
 
-
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _divisionService.FetchSingleResult(id);
+            var Data = await _disposallandtypeService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -84,99 +80,81 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-
-
-
-
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Division division)
+        
+        public async Task<IActionResult> Edit(int id, Disposallandtype disposallandtype)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
 
-                    var result = await _divisionService.Update(id, division);
+
+                    var result = await _disposallandtypeService.Update(id, disposallandtype);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return RedirectToAction("Index", "MasterDivisions");
+                        return View();
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(division);
+                        return View(disposallandtype);
 
                     }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    
+
                 }
             }
-            return View(division);
+            return View(disposallandtype);
         }
-
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _divisionService.CheckUniqueName(Id, Name);
+            var result = await _disposallandtypeService.CheckUniqueName(Id, Name);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"Division: {Name} already exist");
+                return Json($"Disposallandtype: {Name} already exist");
             }
         }
 
-        public async Task<IActionResult> Delete(int id)  
+
+        public async Task<IActionResult> Delete(int id)  //Not in use
         {
             if (id == 0)
             {
                 return NotFound();
             }
 
-            var form = await _divisionService.Delete(id);
+            var form = await _disposallandtypeService.Delete(id);
             if (form == false)
             {
                 return NotFound();
             }
-
+            var result = await _disposallandtypeService.GetAllDisposallandtype();
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
+            return View("Index", result);
         }
 
-        public async Task<IActionResult> DeleteConfirmed(int id)  
-        {
-            
 
-            var result = await _divisionService.Delete(id);
-            if (result == true)
-            {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            }
-            return RedirectToAction("Index", "Division");
-         
-
-        }
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _divisionService.FetchSingleResult(id);
+            var Data = await _disposallandtypeService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+
 
     }
 }

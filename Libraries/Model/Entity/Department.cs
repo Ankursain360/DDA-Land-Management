@@ -18,5 +18,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Zone> Zone { get; set; }
         [NotMapped]
         public virtual ICollection<Locality> Locality { get; set; }
+        [NotMapped]
+        public ICollection<Propertyregistration> Propertyregistration { get; set; }
     }
 }

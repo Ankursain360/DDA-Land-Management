@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace SiteMaster.Controllers
 {
-    public class EmployeeMasterController : Controller
+    public class EmployeeController : Controller
     {
         public IActionResult Index()
         {

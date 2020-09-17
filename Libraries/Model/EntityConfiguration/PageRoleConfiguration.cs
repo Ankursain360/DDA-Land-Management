@@ -59,6 +59,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.RView)
                 .HasColumnName("R_View")
                 .HasColumnType("tinyint(4)");
+            
+            builder.Property(e => e.RView)
+                .HasColumnName("R_View")
+                .HasColumnType("tinyint(4)");
 
             builder.Property(e => e.RoleId)
                 .HasColumnName("RoleID")

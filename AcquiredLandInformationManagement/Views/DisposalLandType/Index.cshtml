@@ -1,14 +1,12 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Division>
-
+﻿@model IEnumerable<Libraries.Model.Entity.Disposallandtype>
 @{int rowNo = 0; }
-
 
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Division Master</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Disposal Land Type Master </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -16,33 +14,37 @@
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
-    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
+    @Html.ActionLink("Add New", "Create", "DisposalLandType", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
 <div class="container-fluid">
-    <div class="card  table-card" style="overflow:scroll;">
+    <div class="card  table-card table-responsive">
 
-        <table class="table table-responsive table-bordered table-card">
-
+        <table class="table  table-bordered table-card">
             <thead class="thead">
-                <tr class="myapp-hed1">
+                <tr>
                     <th>Sr.No</th>
-                    <th>Division Code</th>
-                    <th>Division Name</th>
+                   
+
+                    <th>New Land</th>
+                    <th>Remarks</th>
+
                     <th>Status</th>
                     <th>Operation</th>
                 </tr>
+
+
             </thead>
             <tbody class="tbody">
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>@(rowNo += 1)</td>
-                        <td>@item.Code</td>
+                  
                         <td>@item.Name</td>
-
+                        <td>@item.Remarks</td>
+                      
                         <td>
                             @(item.IsActive  == 1 ? "Active" : "Inactive" )
                         </td>
@@ -51,7 +53,7 @@
 
                             <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
 
                         </td>
 
@@ -63,4 +65,3 @@
 
     </div>
 </div>
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

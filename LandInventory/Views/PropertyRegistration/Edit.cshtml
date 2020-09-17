@@ -85,7 +85,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Total Area</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea"  class="form-control">
+                            <input asp-for="TotalArea" class="form-control">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
                         </div>
 
@@ -95,13 +95,13 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label">Encroched</label><span class="text-danger">*</span>
-                            <input asp-for="Encroached"  class="form-control">
+                            <input asp-for="Encroached" class="form-control">
                             <span asp-validation-for="Encroached" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-4">
                             <label class="control-label">Vacant</label><span class="text-danger">*</span>
-                            <input asp-for="Vacant"  class="form-control">
+                            <input asp-for="Vacant" class="form-control">
                             <span asp-validation-for="Vacant" class="text-danger"></span>
                         </div>
                     </div>
@@ -163,6 +163,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
                             <label class="control-label" asp-for="FileData">Upload Layout File</label>
+                            <input type="hidden" asp-for="LayoutFilePath" />
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
@@ -203,6 +204,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divGEOReferencing" style="display:none;">
                             <label class="control-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                            <input type="hidden" asp-for="GeoFilePath" />
                             @{
                                 @if (ViewBag.GeoDocView != null)
                                 {
@@ -237,7 +239,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="TakenOverDate" type="date"  class="form-control">
+                            <input asp-for="TakenOverDate" type="date" class="form-control">
                             <span asp-validation-for="TakenOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -265,7 +267,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="HandedOverDate" type="date"  class="form-control">
+                            <input asp-for="HandedOverDate" type="date" class="form-control">
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -295,7 +297,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Date</label><span class="text-danger">*</span>
-                            <input asp-for="DisposalDate" type="date"  class="form-control">
+                            <input asp-for="DisposalDate" type="date" class="form-control">
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -313,7 +315,17 @@
                     </div>
                 </div>
 
-
+                @{
+                    @if (ViewBag.IsValidateUser == 2)
+                    {
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Validate</label>
+                                <input type="checkbox" asp-for="IsValidateData" />
+                            </div>
+                        </div>
+                    }
+                }
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">

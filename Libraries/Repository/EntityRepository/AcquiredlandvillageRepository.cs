@@ -22,18 +22,18 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<District>> GetAllDistrict()
         {
-            List<District> districtList = await _dbContext.District.ToListAsync();
+            List<District> districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
         public async Task<List<Tehsil>> GetAllTehsil()
         {
-            List<Tehsil> tehsilList = await _dbContext.Tehsil.ToListAsync();
+            List<Tehsil> tehsilList = await _dbContext.Tehsil.Where(x => x.IsActive == 1).ToListAsync();
             return tehsilList;
         }
 
         public async Task<List<Villagetype>> GetAllVillagetype()
         {
-            List<Villagetype> villagetypelist = await _dbContext.Villagetype.ToListAsync();
+            List<Villagetype> villagetypelist = await _dbContext.Villagetype.Where(x => x.IsActive == 1).ToListAsync();
             return villagetypelist;
         }
 
