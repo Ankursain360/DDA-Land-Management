@@ -15,7 +15,7 @@ namespace AcquiredLandInformationManagement.DataAccess.DataObjects
         {
         }
 
-        public virtual DbSet<Undersection17> Undersection17 { get; set; }
+        public virtual DbSet<Awardplotdetails> Awardplotdetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -28,11 +28,19 @@ namespace AcquiredLandInformationManagement.DataAccess.DataObjects
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Undersection17>(entity =>
+            modelBuilder.Entity<Awardplotdetails>(entity =>
             {
-                entity.ToTable("undersection17");
+                entity.ToTable("awardplotdetails");
 
                 entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.AwardMasterId).HasColumnType("int(11)");
+
+                entity.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
+
+                entity.Property(e => e.Biswa).HasColumnType("decimal(18,3)");
+
+                entity.Property(e => e.Biswanshi).HasColumnType("decimal(18,3)");
 
                 entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -40,18 +48,15 @@ namespace AcquiredLandInformationManagement.DataAccess.DataObjects
 
                 entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
+                entity.Property(e => e.KhasraId).HasColumnType("int(11)");
+
                 entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-                entity.Property(e => e.UnderSection6Id).HasColumnType("int(11)");
-
-                entity.Property(e => e.Us17date)
-                    .HasColumnName("US17Date")
-                    .HasColumnType("date");
-
-                entity.Property(e => e.Us17number)
-                    .HasColumnName("US17Number")
+                entity.Property(e => e.Remarks)
                     .HasMaxLength(100)
                     .IsUnicode(false);
+
+                entity.Property(e => e.VillageId).HasColumnType("int(11)");
             });
 
             OnModelCreatingPartial(modelBuilder);

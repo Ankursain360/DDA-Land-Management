@@ -2,20 +2,174 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace DDAPropertyREG.Controllers
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+namespace AcquiredLandInformationManagement.Controllers
 {
     public class AwardPlotDetailsController : Controller
     {
-        public IActionResult Index()
+
+        private readonly IAwardplotDetailService _awardplotDetailService;
+        public AwardPlotDetailsController(IAwardplotDetailService awardplotDetailService)
         {
-            return View();
+            _awardplotDetailService = awardplotDetailService;
         }
 
-        public IActionResult Create()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = await _awardplotDetailService.GetAwardplotdetails();
+            return View(list);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            Awardplotdetails awardplotdetails = new Awardplotdetails();
+            awardplotdetails.IsActive = 1;
+            awardplotdetails.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra();
+            awardplotdetails.VillageList = await _awardplotDetailService.GetAllVillage();
+
+            return View(awardplotdetails);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Awardplotdetails awardplotdetails)
+        {
+            try
+            {
+                awardplotdetails.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+                awardplotdetails.KhasraList = await _awardplotDetailService.BindKhasra();
+                awardplotdetails.VillageList = await _awardplotDetailService.GetAllVillage();
+
+                if (ModelState.IsValid)
+                {
+                    var result = await _awardplotDetailService.Create(awardplotdetails);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _awardplotDetailService.GetAwardplotdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(awardplotdetails);
+                    }
+                }
+                else
+                {
+                    return View(awardplotdetails);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(awardplotdetails);
+            }
+        }
+
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _awardplotDetailService.FetchSingleResult(id);
+
+
+            Data.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            Data.KhasraList = await _awardplotDetailService.BindKhasra();
+            Data.VillageList = await _awardplotDetailService.GetAllVillage();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Awardplotdetails awardplotdetails)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _awardplotDetailService.Update(id, awardplotdetails);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _awardplotDetailService.GetAwardplotdetails();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(awardplotdetails);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(awardplotdetails);
+                }
+            }
+            else
+            {
+                return View(awardplotdetails);
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _awardplotDetailService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _awardplotDetailService.GetAwardplotdetails();
+            return View("Index", list);
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _awardplotDetailService.FetchSingleResult(id);
+            Data.AwardmasterList = await _awardplotDetailService.GetAllAWardmaster();
+            Data.KhasraList = await _awardplotDetailService.BindKhasra();
+            Data.VillageList = await _awardplotDetailService.GetAllVillage();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+
     }
 }

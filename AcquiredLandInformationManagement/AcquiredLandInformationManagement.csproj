@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="DataAccess\DataObjects\Awardplotdetails.cs" />
     <Compile Include="DataAccess\DataObjects\lmsContext.cs" />
-    <Compile Include="DataAccess\DataObjects\Undersection17.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -28,6 +28,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
             services.AddScoped<IKhasraRepository, KhasraRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
+            services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
+
 
 
 
@@ -42,6 +44,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
+            services.AddScoped<IAwardplotDetailService, AwardplotDetailsService>();
+
 
         }
     }
