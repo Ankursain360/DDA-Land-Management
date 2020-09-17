@@ -31,8 +31,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
 
+            services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
+
 
             /* Application Services */
+
+
+
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
 
@@ -44,6 +49,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IKhasraService, KhasraService>();
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
             services.AddScoped<IUndersection22Service, Undersection22Service>();
+            services.AddScoped<IDisposallandtypeService, DisposallandtypeService>();
+
         }
     }
 }
