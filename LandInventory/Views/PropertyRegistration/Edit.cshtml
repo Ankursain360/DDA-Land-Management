@@ -163,6 +163,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
                             <label class="control-label" asp-for="FileData">Upload Layout File</label>
+                            <input type="hidden" asp-for="LayoutFilePath" />
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
@@ -203,6 +204,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divGEOReferencing" style="display:none;">
                             <label class="control-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                            <input type="hidden" asp-for="GeoFilePath" />
                             @{
                                 @if (ViewBag.GeoDocView != null)
                                 {

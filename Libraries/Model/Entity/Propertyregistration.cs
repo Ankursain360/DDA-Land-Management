@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public int ClassificationOfLandId { get; set; }
         public string UniqueId { get; set; }
         public int ZoneDivisionId { get; set; }
+        public int DepartmentId { get; set; }
         public int LocalityId { get; set; }
         public string KhasraNo { get; set; }
         public int Boundary { get; set; }
@@ -25,9 +26,6 @@ namespace Libraries.Model.Entity
         public string BuiltUpRemarks { get; set; }
         public int LayoutPlan { get; set; }
         public string LayoutFilePath { get; set; }
-        public string LayoutContent { get; set; }
-        public string LayoutExtension { get; set; }
-        public string LayoutFileName { get; set; }
         public int LitigationStatus { get; set; }
         public string LitigationStatusRemarks { get; set; }
         public int GeoReferencing { get; set; }
@@ -77,6 +75,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public bool IsValidateData { get; set; }
 
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
 
     }
 }

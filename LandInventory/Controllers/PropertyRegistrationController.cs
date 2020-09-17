@@ -21,9 +21,10 @@ namespace SiteMaster.Controllers
 {
     public class PropertyRegistrationController : Controller
     {
-
+        //Let suppose user = 1 can Create, user =2 can validate , user =3 can delete , and untill validate 1,2 can only look index
         private readonly IPropertyRegistrationService _propertyregistrationService;
         private readonly IHostingEnvironment _hostingEnvironment;
+        int UserId = 2;
         public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IHostingEnvironment en)
         {
             _propertyregistrationService = propertyregistrationService;
@@ -31,7 +32,8 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _propertyregistrationService.GetAllPropertyregistration();
+            int UserId = 2;
+            var result = await _propertyregistrationService.GetAllPropertyregistration(UserId);
             return View(result);
         }
 
@@ -56,14 +58,8 @@ namespace SiteMaster.Controllers
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)
             {
-                //if(propertyregistration.IsValidate  == 1)
-                //{
-                //    propertyregistration.IsValidate = 1;
-                //}
-                //else
-                //{
-                //    propertyregistration.IsValidate = 1;
-                //}
+                propertyregistration.IsValidate = 0;
+                propertyregistration.DeletedStatus = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -80,12 +76,14 @@ namespace SiteMaster.Controllers
                     return View(propertyregistration);
                 }
 
-                /* For LayoutPlan File Upload*/
+                #region File Upload  Added by Renu 16 Sep 2020
+                /* For Layout Plan File Upload*/
                 if (propertyregistration.LayoutPlan == 1)
                 {
-                    if (Assignfile is null)
+                    if (Assignfile is null && propertyregistration.LayoutFilePath is null)
                     {
-                        throw new ArgumentNullException(nameof(Assignfile));
+                        ViewBag.Message = Alert.Show("Layout Plan Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
                     }
 
                 }
@@ -95,7 +93,7 @@ namespace SiteMaster.Controllers
                 propertyregistration.FileData = Assignfile;
                 if (propertyregistration.FileData != null)
                 {
-                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\LayoutPlanDocs";
+                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents";
                     if (!Directory.Exists(DocumentPath))
                     {
                         // Try to create the directory.
@@ -104,20 +102,17 @@ namespace SiteMaster.Controllers
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
                     filePath = Path.Combine(DocumentPath, FileName);
                     propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
-                    propertyregistration.LayoutFileName = propertyregistration.FileData.FileName;
-                    propertyregistration.LayoutContent = propertyregistration.FileData.ContentType;
                     propertyregistration.LayoutFilePath = filePath;
-                    propertyregistration.FileData = Assignfile;
-                    propertyregistration.LayoutExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
-                    propertyregistration.FileData = Assignfile;
+                    //  propertyregistration.LayoutExtension = "." + (propertyregistration.FileData.ContentType.Split('/'))[1];
                 }
 
                 /* For GeoReferncing File Upload*/
                 if (propertyregistration.GeoReferencing == 1)
                 {
-                    if (GeoAssignfile is null)
+                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
                     {
-                        throw new ArgumentNullException(nameof(GeoAssignfile));
+                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
                     }
 
                 }
@@ -136,19 +131,17 @@ namespace SiteMaster.Controllers
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
                     GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
-                    propertyregistration.GeoFileName = propertyregistration.GeoFileData.FileName;
-                    propertyregistration.GeoContent = propertyregistration.GeoFileData.ContentType;
                     propertyregistration.GeoFilePath = GeofilePath;
-                    propertyregistration.GeoFileData = Assignfile;
-                    propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
-                    propertyregistration.GeoFileData = Assignfile;
+                    //  propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
                 }
+                #endregion
+
                 var result = await _propertyregistrationService.Create(propertyregistration);
 
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration();
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
                     return View("Index", result1);
                 }
                 else
@@ -193,6 +186,7 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.IsValidate = 0;
                 }
+                propertyregistration.DeletedStatus = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -208,11 +202,15 @@ namespace SiteMaster.Controllers
                     ViewBag.Message = Alert.Show("Litigation Status Remarks Mandatory", "", AlertType.Warning);
                     return View(propertyregistration);
                 }
+
+                #region File Upload  Added by Renu 16 Sep 2020
+                /* For Layout Plan File Upload*/
                 if (propertyregistration.LayoutPlan == 1)
                 {
-                    if (Assignfile is null)
+                    if (Assignfile is null && propertyregistration.LayoutFilePath is null)
                     {
-                        throw new ArgumentNullException(nameof(Assignfile));
+                        ViewBag.Message = Alert.Show("Layout Plan Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
                     }
 
                 }
@@ -231,20 +229,17 @@ namespace SiteMaster.Controllers
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
                     filePath = Path.Combine(DocumentPath, FileName);
                     propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
-                    propertyregistration.LayoutFileName = propertyregistration.FileData.FileName;
-                    propertyregistration.LayoutContent = propertyregistration.FileData.ContentType;
                     propertyregistration.LayoutFilePath = filePath;
-                    propertyregistration.FileData = Assignfile;
-                    propertyregistration.LayoutExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
-                    propertyregistration.FileData = Assignfile;
+                    //  propertyregistration.LayoutExtension = "." + (propertyregistration.FileData.ContentType.Split('/'))[1];
                 }
 
                 /* For GeoReferncing File Upload*/
                 if (propertyregistration.GeoReferencing == 1)
                 {
-                    if (GeoAssignfile is null)
+                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
                     {
-                        throw new ArgumentNullException(nameof(GeoAssignfile));
+                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
                     }
 
                 }
@@ -263,18 +258,17 @@ namespace SiteMaster.Controllers
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
                     GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
-                    propertyregistration.GeoFileName = propertyregistration.GeoFileData.FileName;
-                    propertyregistration.GeoContent = propertyregistration.GeoFileData.ContentType;
                     propertyregistration.GeoFilePath = GeofilePath;
-                    propertyregistration.GeoFileData = Assignfile;
-                    propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
-                    propertyregistration.GeoFileData = Assignfile;
+                    //  propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
                 }
+                #endregion
+
+
                 var result = await _propertyregistrationService.Update(id, propertyregistration);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration();
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
                     return View("Index", result1);
                 }
                 else
@@ -290,20 +284,32 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
+            int UserId = 3;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(UserId);
 
-            var result = await _propertyregistrationService.Delete(id);
-            if (result == true)
+            if(UserId == 3)
             {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration();
-                return View("Index", result1);
+                var result = await _propertyregistrationService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    return View("Index", result1);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    return View("Index", result1);
+                }
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration();
+                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
                 return View("Index", result1);
             }
+            
 
         }
 
@@ -331,6 +337,7 @@ namespace SiteMaster.Controllers
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
 
+        #region Document Download added By Renu 16 Sep 2020
         public async Task<IActionResult> GeoDownload(int Id)
         {
             string filename = _propertyregistrationService.GetGeoFile(Id);
@@ -342,6 +349,7 @@ namespace SiteMaster.Controllers
             memory.Position = 0;
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
+
 
         private string GetContentType(string path)
         {
@@ -367,6 +375,7 @@ namespace SiteMaster.Controllers
                 {".csv", "text/csv"}
             };
         }
+        #endregion
     }
 
 }

@@ -87,7 +87,7 @@ $(function () {
 $(function () {
     $('#GeoReferencing').change(function () {
         var value = $('#GeoReferencing').val();
-        if (value == "No") {
+        if (value == 0) {
             $('#GeoFileName').val('');
             $("#divGEOReferencing").hide();
         }
