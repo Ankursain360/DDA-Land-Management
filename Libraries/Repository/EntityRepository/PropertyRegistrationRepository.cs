@@ -19,10 +19,28 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Propertyregistration>> GetAllPropertyregistration()
+        public async Task<bool> CheckDeleteAuthority(int id)
         {
-            var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality).OrderByDescending(x => x.Id).ToListAsync();
-            return data;
+            var result = true;
+            return result;
+        }
+
+        public async Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId)
+        {
+            var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            if (UserId == 2 || Iscreated > 0)
+            {
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.DeletedStatus == 1).ToListAsync();
+                return data;
+
+            }
+            else
+            {
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.DisposalType).Include(x => x.LandUse).Include(x => x.ZoneDivision).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.DeletedStatus == 1 && x.IsValidate == 1).ToListAsync();
+                return data;
+
+            }
+
         }
 
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownList()

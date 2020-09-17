@@ -8,9 +8,13 @@ namespace LandInventory.Controllers
 {
     public class PropertyInventoryReport : Controller
     {
-        public IActionResult Index()
+        public IActionResult Create()
         {
             return View();
+        }
+        public IActionResult Index()
+        {
+            return PartialView("Index");
         }
     }
 }

@@ -1,0 +1,229 @@
+﻿@model Libraries.Model.Entity.Propertyregistration
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left color-white" style="margin-top:5px;">Property Inventory Report</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+
+
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label" asp-for="ZoneDivisionId">Department</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown" asp-for="ZoneDivisionId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                            <option>--Select--</option>
+                        </select>
+                        <span asp-validation-for="ZoneDivisionId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Land Use</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown">
+                            <option value="">All</option>
+                            <option>Planned</option>
+                            <option>Unplanned</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Litigation Status</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown">
+                            <option value="2">All</option>
+                            <option value="0">Yes</option>
+                            <option value="1">No</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label">Encroachment</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown">
+                            <option value="2">All</option>
+                            <option value="0">Yes</option>
+                            <option value="1">No</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+
+                </div>
+                @*<div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Department</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown">
+                                <option>All</option>
+                                <option>All</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Land Use</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown">
+                                <option>All</option>
+                                <option>Planned</option>
+                                <option>Unplanned</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Litigation Status</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown">
+                                <option>All</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Encroachment</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown">
+                                <option>All</option>
+                                <option>Yes</option>
+                                <option>No</option>
+                            </select>
+                            <span class="text-danger"></span>
+                        </div>
+
+                    </div>*@
+                <div class="row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Generate" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+
+                @*<div>
+                    @{
+                        Html.RenderPartial("Index");
+                    }
+                </div>*@
+                @*<div class="card  table-card " style="overflow:scroll;">
+
+                        <table class="table table-responsive table-bordered table-card">
+
+
+                            <thead class="thead">
+                                <tr>
+                                    <th rowspan="2">Sr.No</th>
+                                    <th rowspan="2">Unique ID</th>
+                                    <th rowspan="2">Locality</th>
+                                    <th rowspan="2">Khasra No</th>
+                                    <th rowspan="2">Area</th>
+                                    <th colspan="4" style=" text-align:center">Area (in Sq. Mt.)</th>
+                                    <th rowspan="2">Buit & type</th>
+                                    <th rowspan="2">Layout Plan</th>
+                                    <th rowspan="2">Upload File</th>
+                                    <th rowspan="2">Land Use</th>
+                                    <th colspan="3" style=" text-align:center">Taken Over</th>
+                                    <th rowspan="2">Division</th>
+                                    <th rowspan="2">Litigation Status</th>
+                                    <th rowspan="2">GEO Referencing</th>
+                                    <th colspan="3" style=" text-align:center">Handed Over</th>
+                                    <th colspan="3" style=" text-align:center">Disposal</th>
+                                    <th rowspan="2">Remarks</th>
+                                    <th rowspan="2">Operation</th>
+                                </tr>
+                                <tr>
+                                    <th>Boundary</th>
+                                    <th>Total Area</th>
+                                    <th>Encrochment</th>
+                                    <th>Vacant</th>
+                                    <th>Taken Over Name</th>
+                                    <th>Taken Over/Date</th>
+                                    <th>Taken Over/Comments</th>
+                                    <th>Handed Over Name/Designation</th>
+                                    <th>Handed Over/Date</th>
+                                    <th>Handed Over/Comments</th>
+                                    <th>Disposal type</th>
+                                    <th>Disposal/Date</th>
+                                    <th>Disposal/Comments</th>
+
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+
+                                <tr>
+                                        <td>2</td>
+                                        <td>LM SWZ 34</td>
+                                        <td>Housing pocket sec-34 dwarka</td>
+                                        <td>Civil Lines</td>
+                                        <td>45</td>
+                                        <td>Yes</td>
+                                        <td>45</td>
+                                        <td>0</td>
+                                        <td>45</td>
+                                        <td>No</td>
+                                        <td>No</td>
+                                        <td>No Document</td>
+                                        <td>Engineering</td>
+                                        <td>Engineering</td>
+                                        <td>07-Aug-2020</td>
+                                        <td>good</td>
+                                        <td>Wd-8</td>
+                                        <td>no</td>
+                                        <td>no</td>
+                                        <td>MOR</td>
+                                        <td>10-Aug-2020</td>
+                                        <td>good</td>
+                                        <td>alloted</td>
+                                        <td>10-Aug-2020</td>
+                                        <td>no comments</td>
+                                        <td>good to use</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>LM SWZ 35</td>
+                                        <td>Housing pocket sec-56 dwarka</td>
+                                        <td>Civil Lines</td>
+                                        <td>50</td>
+                                        <td>Yes</td>
+                                        <td>50</td>
+                                        <td>0</td>
+                                        <td>50</td>
+                                        <td>No</td>
+                                        <td>No</td>
+                                        <td>No Document</td>
+                                        <td>Engineering</td>
+                                        <td>Engineering</td>
+                                        <td>07-Aug-2020</td>
+                                        <td>good</td>
+                                        <td>Wd-9</td>
+                                        <td>no</td>
+                                        <td>no</td>
+                                        <td>MOR</td>
+                                        <td>10-Aug-2020</td>
+                                        <td>good</td>
+                                        <td>alloted</td>
+                                        <td>10-Aug-2020</td>
+                                        <td>no comments</td>
+                                        <td>good to use</td>
+                                    </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>*@
+            </form>
+        </div>
+    </div>
+</div>
+
+<br />
+<br />
+
+

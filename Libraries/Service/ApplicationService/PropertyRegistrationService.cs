@@ -50,9 +50,9 @@ namespace Libraries.Service.ApplicationService
             return DisposaltypeList;
         }
 
-        public async Task<List<Propertyregistration>> GetAllPropertyregistration()
+        public async Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId)
         {
-            return await _propertyregistrationRepository.GetAllPropertyregistration();
+            return await _propertyregistrationRepository.GetAllPropertyregistration(UserId);
         }
 
         public async Task<Propertyregistration> FetchSingleResult(int id)
@@ -80,9 +80,6 @@ namespace Libraries.Service.ApplicationService
             model.BuiltUp = propertyregistration.BuiltUp;
             model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
             model.LayoutPlan = propertyregistration.LayoutPlan;
-            model.LayoutContent = propertyregistration.LayoutContent;
-            model.LayoutExtension = propertyregistration.LayoutExtension;
-            model.LayoutFileName = propertyregistration.LayoutFileName;
             model.LayoutFilePath = propertyregistration.LayoutFilePath;
             model.LitigationStatus = propertyregistration.LitigationStatus;
             model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
@@ -98,6 +95,8 @@ namespace Libraries.Service.ApplicationService
             model.DisposalDate = propertyregistration.DisposalDate;
             model.DisposalComments = propertyregistration.DisposalComments;
             model.Remarks = propertyregistration.Remarks;
+            model.IsValidate = propertyregistration.IsValidate;
+            model.DeletedStatus = propertyregistration.DeletedStatus;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _propertyregistrationRepository.Edit(model);
@@ -129,6 +128,11 @@ namespace Libraries.Service.ApplicationService
         public string GetGeoFile(int id)
         {
             return _propertyregistrationRepository.GetGeoFile(id);
+        }
+
+        public Task<bool> CheckDeleteAuthority(int id)
+        {
+            return _propertyregistrationRepository.CheckDeleteAuthority(id);
         }
     }
 }
