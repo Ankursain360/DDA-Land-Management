@@ -9,6 +9,10 @@ namespace Libraries.Service.IApplicationService
     public interface IDivisionService : IEntityService<Division>
     {
         Task<List<Division>> GetAllDivision();
+        Task<List<Zone>> GetAllZone(int departmentId); 
+        Task<List<Department>> GetAllDepartment(); 
+
+
         Task<List<Division>> GetDivisionUsingRepo();
 
         Task<bool> Update(int id, Division division);

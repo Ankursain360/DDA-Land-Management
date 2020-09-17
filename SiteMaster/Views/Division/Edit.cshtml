@@ -22,6 +22,26 @@
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Department </label>
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
+                            <option value="">Select</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone</label>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown">
+                            <option value="value">Select</option>
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
@@ -40,7 +60,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive"  id="ActiveStatus" required="" class="form-control dda-dropdown">
+                        <select asp-for="IsActive" id="ActiveStatus" required="" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
