@@ -52,6 +52,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual DbSet<Undersection17> Undersection17 { get; set; }
+        public virtual DbSet<Nazul> Nazul { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());

@@ -1,13 +1,11 @@
-﻿
+﻿@model Libraries.Model.Entity.Nazul
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
         <div class="myapp-hed">
@@ -23,24 +21,23 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit" id="create_user">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Village Name</label>
-                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                            <option value="0">---Select---</option>
-                            <option value="1">Namri</option>
+                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                            <option>Select</option>
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Year of Consolidation</label>
-                        <input type="date" class="form-control" />
+                        <input asp-for="YearOfConsolidation" type="date" class="form-control" />
                     </div>
 
                 </div>
@@ -50,13 +47,13 @@
                         <label class="control-label lb-sm">Jarai/Sakni</label>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input type="radio" name="grpjaraisakni" id="court" value=""  />Jarai
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="JaraiSakni" id="rdbJarai" value="1" />Jarai
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="radio-inline ">
-                                    <input type="radio" name="grpjaraisakni" id="court" value=""  />Sakni
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="JaraiSakni" id="rdbsakni" value="2" />Sakani
                                 </label>
                             </div>
                         </div>
@@ -66,13 +63,13 @@
                         <label class="control-label lb-sm">Language</label>
                         <div class="form-row">
                             <div class="form-group col-md-4">
-                                <label class="radio-inline  ">
-                                    <input type="radio" name="grplanguage" id="court" value=""/>Hindi
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="Language" id="rdbhindi" value="1" />Hindi
                                 </label>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="radio-inline ">
-                                    <input type="radio" name="grplanguage" id="court" value=""/>Urdu
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="Language" id="rdburdu" value="2" />Urdu
                                 </label>
                             </div>
                         </div>
@@ -82,27 +79,26 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Year of Jamabandi</label>
-                        <input type="date" class="form-control" />
+                        <input asp-for="YearOfJamabandi" type="date" class="form-control" />
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Last Mutation No.</label>
-                        <input type="text" class="form-control" />
+                        <input asp-for="LastMutationNo" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control"></textarea>
+                        <textarea asp-for="Remarks" class="form-control"></textarea>
                     </div>
                 </div>
 
 
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "NazulVillages", null, new { @class = "btn btn-primary myapp-hed1" })
+                <div class="form-row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
+                        @Html.ActionLink("Back", "Index", "Nazul", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
