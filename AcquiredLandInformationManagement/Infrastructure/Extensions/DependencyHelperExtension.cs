@@ -18,6 +18,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
+
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
             services.AddScoped<ISchemeRepository, SchemeRepository>();
@@ -31,13 +33,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IUndersection22Repository, Undersection22Repository>();
             services.AddScoped<IAwardplotDetailsRepository, AwardplotDetailsRepository>();
-
+           
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
-
+            services.AddScoped<IJointsurveyService, JointsurveyService>();
             services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
             services.AddScoped<ISchemeService, SchemeService>();
             services.AddScoped<IUndersection4service, Undersection4Service>();
