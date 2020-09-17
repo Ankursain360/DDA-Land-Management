@@ -23,9 +23,9 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _userRepository = userRepository;
         }
-        public async Task<bool> CheckUniqueName(int id, string loginname)
+        public async Task<bool> CheckUniqueLoginName(int id, string loginname)
         {
-            bool result = await _userRepository.Any(id, loginname);
+            bool result = await _userRepository.AnyLoginName(id, loginname);
             return result;
         }
 
@@ -70,31 +70,27 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Update(int id, User user)
         {
-               var result = await _userRepository.FindBy(a => a.Id == id);
+            var result = await _userRepository.FindBy(a => a.Id == id);
             User model = result.FirstOrDefault();
             model.DistrictId = user.DistrictId;
-                model.LoginName = user.LoginName;
-                model.DisplayName = user.DisplayName;
+            model.LoginName = user.LoginName;
+            model.DisplayName = user.DisplayName;
             model.Email = user.Email;
             model.RoleId = user.RoleId;
             model.ContactNo = user.ContactNo;
             model.AadharcardNo = user.AadharcardNo;
-                model.IsActive = user.IsActive;
-                model.ModifiedDate = DateTime.Now;
-                model.ModifiedBy = 1;
+            model.IsActive = user.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
             _userRepository.Edit(model);
-                return await _unitOfWork.CommitAsync() > 0;
-           
+            return await _unitOfWork.CommitAsync() > 0;
+
         }
 
         public async Task<bool> Create(User user)
         {
-
-           
-
             user.CreatedBy = 1;
             user.CreatedDate = DateTime.Now;
-            
             user.PrevPassword1 = "T";
             user.PrevPassword2 = "T";
             user.PrevPassword3 = "T";
@@ -103,5 +99,7 @@ namespace Libraries.Service.ApplicationService
             _userRepository.Add(user);
             return await _unitOfWork.CommitAsync() > 0;
         }
+  
+    
     }
 }

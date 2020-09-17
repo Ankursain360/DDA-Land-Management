@@ -1,0 +1,214 @@
+﻿@model Libraries.Model.Entity.Undersection4plot
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Plot Form</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class="dda-innerheading">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Under Section-4 Details</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Notification No(Under Section-4)</label>
+                        <select class="form-control dda-dropdown" asp-for="UnderSection4Id" asp-items="@(new SelectList(Model.NotificationList, "Id","Number"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="UnderSection4Id" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Village Name</label>
+                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="VillageId" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Khasra No</label>
+                        <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="KhasraId" class="text-danger"></span>
+
+                    </div>
+                </div>
+                <div id="Divclsification">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Bigha</label>
+
+                        <input type="text" asp-for="Bigha" class="form-control" />
+
+                    </div>
+
+                    <div class="form-group col-md-4">
+
+                        <label class="control-label lb-sm">Biswa</label>
+
+                        <input type="text" asp-for="Biswa" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Biswanshi</label>
+                        <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea type="text" asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+                </div>
+
+
+
+
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        $('#Boundary').change(function () {
+            var value = $('#Boundary').val();
+            if (value == "No") {
+                $('#txtBoundaryRemarks').val('');
+                $("#txtBoundaryRemarks").attr("disabled", "disabled");
+            }
+            else {
+                $('#txtBoundaryRemarks').val('');
+                $("#txtBoundaryRemarks").attr("disabled", "disabled");
+                $("#txtBoundaryRemarks").removeAttr("disabled", "disabled");
+            }
+        });
+    });
+
+</script>
+
+
+<script>
+    $(function () {
+        $('#Buit').change(function () {
+            var value = $('#Buit').val();
+            if (value == "No") {
+                $('#t2').val('');
+                $("#divBuilttype").hide();
+            }
+            else {
+                $('#t2').val('');
+                $("#divBuilttype").show();
+            }
+        });
+    });
+
+    $(function () {
+        $('#Layout').change(function () {
+            var value = $('#Layout').val();
+            if (value == "No") {
+                $('#fileupload').val('');
+                $("#divLayoutPlan").hide();
+            }
+            else {
+                $('#fileupload').val('');
+                $("#divLayoutPlan").show();
+            }
+        });
+    });
+</script>
+
+
+<script>
+    //$(function () {
+    //    $('#Division').change(function () {
+    //        var value = $('#Division').val();
+    //        if (value == "No") {
+    //            $('#t3').val('');
+    //            $("#divDivision").hide();
+    //        }
+    //        else {
+    //            $('#t3').val('');
+    //            $("#divDivision").show();
+    //        }
+    //    });
+    //});
+
+    $(function () {
+        $('#Litigation').change(function () {
+            var value = $('#Litigation').val();
+            if (value == "No") {
+                $('#t4').val('');
+                $("#divLitigationStatus").hide();
+            }
+            else {
+                $('#t4').val('');
+                $("#divLitigationStatus").show();
+            }
+        });
+    });
+
+    $(function () {
+        $('#GEO').change(function () {
+            var value = $('#GEO').val();
+            if (value == "No") {
+                $('#5').val('');
+                $("#divGEOReferencing").hide();
+            }
+            else {
+                $('#t5').val('');
+                $("#divGEOReferencing").show();
+            }
+        });
+    });
+</script>
+
+
+

@@ -51,12 +51,20 @@ namespace Libraries.Repository.EntityRepository
                     });
                 }
             }
-            return (olist);
+            return (olist.GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
         }
         public async Task<List<PropertyType>> GetPropertyTypeList()
         {
             var propertyTypeList = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
             return propertyTypeList;
+        }
+
+        public object GetFromDateData(int propertyId)
+        {
+            var result = (from A in _dbContext.Rate
+                          where A.PropertyId == propertyId
+                          select A.FromDate).Max();
+            return result;
         }
     }
 

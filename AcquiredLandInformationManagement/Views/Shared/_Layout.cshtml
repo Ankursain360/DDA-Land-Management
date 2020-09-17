@@ -4,25 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    @*<script src="~/js/jquery.min.js"></script>*@
-
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
-
-    <link rel="stylesheet" href="~/Admin/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Admin/css/datepicker3.css" />
-    <link rel="stylesheet" href="~/Admin/css/styles.css" />
-    <link rel="stylesheet" href="~/Admin/css/font-awesome.min.css" />
-
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
-
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <style>
         .canvasjs-chart-credit {
             display: none !important;
@@ -54,7 +40,12 @@
     <header class="navbar navbar-custom navbar-fixed-top" style="min-height:30px;height:30px; Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); " role="navigation">
         <div class="col-md-offset-11" style="color:#fff; padding-top:6px; font-size:13px">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <button class="btn btn-default dropdown-toggle"
+                        style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;"
+                        type="button" id="dropdownMenu1"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="true">
                     <i class="fa-user-circle fa"></i> Hi, DDA
                     <span class="caret"></span>
                 </button>
@@ -90,38 +81,73 @@
             <li class=""></li>
 
             <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-2">
-                    <em class="fa fa-object-group">&nbsp;</em>New Land Acquisition Module <span data-toggle="collapse" href="#sub-item-2" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                <a data-toggle="collapse" href="#sub-item-1">
+                    <em class="fa fa-asterisk">&nbsp;</em> Acquired Land Information Management<span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
                 </a>
-                <ul class="children collapse" id="sub-item-2">
+                <ul class="children collapse" id="sub-item-1">
                     <li>
-                        <a class="" href="/RequestFromPlanningDepartmentToCLM/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Request From Planning Department To CLM
+                        <a class="" href="/AcquiredLandVillage/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Village Master
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/RequestFromPlanningDepartmentApproval/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Request From Planning Department To CLM Approval Process
+                        <a class="" href="/KhasraMaster/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Khasra Master
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/IdentificationOfLandAnnexure1/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Identification Of Land - Annexure I
+                        <a class="" href="/Scheme/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Scheme Master
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/IdentificationOfLandAnnexure2/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Identification Of Land - Annexure II
+                        <a class="" href="/ProposalDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Proposal Details Master
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/IdentificationOfLandAnnexure2ApprovalProcess/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Identification Of Land - Annexure II Approval Process
+                        <a class="" href="/ProposalPlotDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Proposal Plot Details
                         </a>
                     </li>
                     <li>
-                        <a class="" href="/PrintRequest/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Letter Generation
+                        <a class="" href="/UnderSection4DetailsForm/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 4 Details Master
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection4PlotForm/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 4 Plot Form
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection6Master/UnderSectionMaster6Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 6 Details Master
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection6Master/UnderSectionMaster6PlotDetailsIndex">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 6  Plot Details
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection17Details/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 17 Master
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection17DetailsPlotForm/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 17 Details Plot Form
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection22Details/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section-22 Details
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/UnderSection22PlotDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Under Section 22 Plot Form
                         </a>
                     </li>
                     <li>
@@ -140,171 +166,90 @@
                         </a>
                     </li>
                     <li>
+                        <a class="" href="/JointSurvey/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Joint Survey
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DisposalLandMaster/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Disposal Land Master
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/DisposalLandTypeMaster/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Disposal Land Type Master
+                        </a>
+                    </li>
+                    <li>
                         <a class="" href="/EnhanceCompensationMaster/Index">
                             <span class="fa fa-arrow-right">&nbsp;</span>Enhance Compensation Master
                         </a>
                     </li>
-                </ul>
-            </li>
-
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-8">
-                    <em class="fa fa-tag">&nbsp;</em>Damage Payee<span data-toggle="collapse" href="#sub-item-8" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+                    @*<li>
+                <a class="" href="/AppealDetail/Index">
+                    <span class="fa fa-arrow-right">&nbsp;</span>Appeal Detail Master
                 </a>
-                <ul class="children collapse" id="sub-item-8">
-                    <li>
-                        <a class="" href="/DamagePayeeRegistration/PayeeRegistration">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Registration
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/DamagePayeeRegister/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Register
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/DamagePayeeApproval/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Payee Register Approval Process
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/NoticeToDamagePayee/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Notice to Damage Payee
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="" href="/DamageCalculationReport/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Calculation Report
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Payment/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Payment
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Door2DoorSurvey/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Door To Door Survey
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/DamagePayeeRegistration/DamageCalculator">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Damage Calculator
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/SubstitutionMutationDetails/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Apply For Mutation
-                        </a>
-                    </li>
-                </ul>
             </li>
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-9">
-                    <em class="fa fa-list-alt">&nbsp;</em>Demand Letters Maintenance Module<span data-toggle="collapse" href="#sub-item-9" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+            <li>
+                <a class="" href="/PaymentDetails/Index">
+                    <span class="fa fa-arrow-right">&nbsp;</span>Payment Details Master
                 </a>
-                <ul class="children collapse" id="sub-item-9">
-                    <li>
-                        <a class="" href="/DemandLetter/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demand Letter
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/DuplicateDemandLetter/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Duplicate Demand Letter
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/DemandReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demand Report
-                        </a>
-                    </li>
-                </ul>
             </li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-10">
-                    <em class="fa fa-globe">&nbsp;</em>Imposition of Charges <span data-toggle="collapse" href="#sub-item-10" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
+            <li>
+                <a class="" href="/PlotDetails/Index">
+                    <span class="fa fa-arrow-right">&nbsp;</span>Plot Details
                 </a>
-                <ul class="children collapse" id="sub-item-10">
+            </li>*@
+                    <li>
+                        <a class="" href="/EncroachmentDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Encrochment
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/MORlands/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>MOR lands
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/LDOlands/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>LDO lands
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/BookTtransferLand/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Book Transfer Land
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="" href="/JaraiDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Jarai Details
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/SakaniDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Sakani Details
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="" href="/MutaionDetails/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Mutation Details
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="/NazulVillages/Index">
+                            <span class="fa fa-arrow-right">&nbsp;</span>Nazul Villages
+                        </a>
+                    </li>
+
+
                 </ul>
+
+
+
+
             </li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-11">
-                    <em class="fa fa-tasks">&nbsp;</em>Demand & Collection Ledger Program<span data-toggle="collapse" href="#sub-item-11" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-11">
-                    <li>
-                        <a class="" href="/DemandCollectionLedger/Create">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demand & Collection Ledger
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-12">
-                    <em class="fa fa-briefcase">&nbsp;</em>Defaulter Listing Program <span data-toggle="collapse" href="#sub-item-12" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-12">
-
-                    <li>
-                        <a class="" href="/DefaulterListingReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Defaulter Listing Report
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-13">
-                    <em class="fa fa-film">&nbsp;</em>Penalty Imposition and Relief<span data-toggle="collapse" href="#sub-item-13" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-13">
-                    <li>
-                        <a class="" href="/ReliefReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Relief Report
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-14">
-                    <em class="fa fa-leaf">&nbsp;</em>Payment Verification and Reconciliation<span data-toggle="collapse" href="#sub-item-14" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-14">
-                    <li>
-                        <a class="" href="/DuesVsPaidAmountReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Dues Vs Paid Amount Report
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/PaymentTransactionReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Payment Transaction Report
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/PaymentVeridonebyAccSection/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Payment Verification done by Account Section
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/NoticeGenerationReport/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Notice Generation Report
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-
-
-
-
-
-
         </ul>
     </div>
 
@@ -337,25 +282,16 @@
         </div>
     </footer>
 
-    <script src="~/Admin/js/jquery-1.11.1.min.js"></script>
-    <script src="~/Admin/js/bootstrap.min.js"></script>
-    <script src="~/Admin/js/chart.min.js"></script>
-    <script src="~/Admin/js/chart-data.js"></script>
-    <script src="~/Admin/js/easypiechart.js"></script>
-    <script src="~/Admin/js/easypiechart-data.js"></script>
-    <script src="~/Admin/js/bootstrap-datepicker.js"></script>
-    <script src="~/Admin/js/custom.js"></script>
-    <script>
-        window.onload = function () {
-            var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(lineChartData, {
-                responsive: true,
-                scaleLineColor: "rgba(0,0,0,.2)",
-                scaleGridLineColor: "rgba(0,0,0,.05)",
-                scaleFontColor: "#c5c7cc"
-            });
-        };
-    </script>
-</body>
 
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    @Html.Raw(ViewBag.Message)
+</body>
 </html>

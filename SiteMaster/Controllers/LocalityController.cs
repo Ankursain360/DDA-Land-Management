@@ -92,7 +92,6 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Locality locality)
         {
             locality.DepartmentList = await _localityService.GetAllDepartment();
@@ -178,7 +177,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<JsonResult> GetZoneList(int?DepartmentId)
         {
             DepartmentId= DepartmentId ?? 0;

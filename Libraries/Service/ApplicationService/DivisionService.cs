@@ -87,6 +87,18 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<List<Department>> GetAllDepartment()
+        {
+            List<Department> departmentList = await _divisionRepository.GetAllDepartment();
+            return departmentList;
+        }
+
+
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            List<Zone> zoneList = await _divisionRepository.GetAllZone(departmentId);
+            return zoneList;
+        }
 
 
     }

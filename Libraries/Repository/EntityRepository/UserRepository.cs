@@ -32,16 +32,17 @@ namespace Libraries.Repository.EntityRepository
 
        
 
-        public async Task<bool> Any(int id, string loginname)
+        public async Task<bool> AnyLoginName(int id, string loginname)
         {
             return await _dbContext.User.AnyAsync(t => t.Id != id && t.LoginName.ToLower() == loginname.ToLower());
         }
 
-       
-
         public async Task<List<User>> GetUser()
         {
-            return await _dbContext.User.Include(x => x.District).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.User.Include(x => x.District).Include(x=>x.Role).OrderByDescending(x => x.Id).ToListAsync();
         }
+  
+    
+    
     }
 }

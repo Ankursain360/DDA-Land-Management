@@ -1,0 +1,89 @@
+﻿
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Employee Master </h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  myapp-hed1">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    @*<div class="form-group col-md-3">
+                <label class="control-label">Employee Id</label>
+                <input type="text"  class="form-control" />
+            </div>*@
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Employee Name</label>
+                        <input type="text" class="form-control">
+
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Department</label>
+                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="1">Eng.</option>
+                            <option value="2">IT</option>
+                            <option value="3">Acc</option>
+                        </select>
+                    </div>
+                 
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Designation</label>
+                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                            <option value="">Select</option>
+                            <option value="1">Engineer</option>
+                            <option value="2">Doctor</option>
+                            <option value="3">Lawyer</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Status</label>
+                        <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+                </div>
+
+                <br />
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "Employee", null, new { @class = "btn btn-primary myapp-hed1" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+

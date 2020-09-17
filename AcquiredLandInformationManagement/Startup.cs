@@ -1,14 +1,10 @@
 using System;
-using System.Collections.Generic;
+
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-//using Demolition.Common;
-//using Demolition.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
@@ -16,9 +12,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-//using DDAPropertyREG.Models;
+
+
+
 using Microsoft.Extensions.Hosting;
+using AcquiredLandInformationManagement.Infrastructure.Extensions;
+using Libraries.Model;
 
 namespace AcquiredLandInformationManagement
 {
@@ -44,6 +43,8 @@ namespace AcquiredLandInformationManagement
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+
             //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
@@ -70,6 +71,7 @@ namespace AcquiredLandInformationManagement
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+            services.RegisterDependency();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

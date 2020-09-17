@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(User user);
         Task<User> FetchSingleResult(int id); 
         Task<bool> Delete(int id);   
-        Task<bool> CheckUniqueName(int id, string loginname);
+        Task<bool> CheckUniqueLoginName(int id, string loginname);
 
 
 

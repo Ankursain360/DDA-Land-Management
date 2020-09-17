@@ -16,20 +16,24 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-//using DDAPropertyREG.Models;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace CourtCasesManagement
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            HostEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment HostEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -46,13 +50,13 @@ namespace CourtCasesManagement
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+           // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
             // services.AddMvc()
             //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddSession();
-            services.AddMvc();
+           
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddMvc().AddViewOptions(options =>
@@ -70,6 +74,17 @@ namespace CourtCasesManagement
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+
+//#if DEBUG
+//            if (HostEnvironment.IsDevelopment())
+//            {
+//                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+//            }
+//            else
+//            {
+//                services.AddControllersWithViews();
+//            }
+//#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,49 @@
+using Microsoft.Extensions.DependencyInjection;
+using Libraries.Repository.IEntityRepository;
+using Libraries.Repository.EntityRepository;
+using Libraries.Service.IApplicationService;
+using Libraries.Service.ApplicationService;
+using Libraries.Repository.Common;
+using Service.ApplicationService;
+
+namespace AcquiredLandInformationManagement.Infrastructure.Extensions
+{
+    public static class DependencyHelperExtension
+    {
+        public static void RegisterDependency(this IServiceCollection services)
+		{
+            /* Common Dependencies */
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            /* Respository */
+            services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+
+            services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
+            services.AddScoped<ISchemeRepository, SchemeRepository>();
+
+            services.AddScoped<IUndersection4Repository, Undersection4Repository>();
+
+            services.AddScoped<IProposaldetailsRepository, ProposaldetailsRepository>();
+            services.AddScoped<IProposalplotdetailsRepository, ProposalplotdetailsRepository>();
+            services.AddScoped<IKhasraRepository, KhasraRepository>();
+            services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
+
+            services.AddScoped<IUndersection22Repository, Undersection22Repository>();
+
+
+            /* Application Services */
+            services.AddScoped<ICountryService, CountryService>();
+            services.AddScoped<INotificationService, NotificationService>();
+
+            services.AddScoped<IAcquiredlandvillageService, AcquiredlandvillageService>();
+            services.AddScoped<ISchemeService, SchemeService>();
+            services.AddScoped<IUndersection4service, Undersection4Service>();
+            services.AddScoped<IProposaldetailsService, ProposaldetailsService>(); 
+            services.AddScoped<IProposalplotdetailsService, ProposalplotdetailsService>();
+            services.AddScoped<IKhasraService, KhasraService>();
+            services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
+            services.AddScoped<IUndersection22Service, Undersection22Service>();
+        }
+    }
+}

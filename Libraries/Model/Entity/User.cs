@@ -10,6 +10,9 @@ namespace Libraries.Model.Entity
     public class User : AuditableEntity<int>
     {
         public int? DistrictId { get; set; }
+        [Required]
+        [Remote(action: "ExistLoginName", controller: "UserManagement", AdditionalFields = "Id")]
+
         public string LoginName { get; set; }
         public string DisplayName { get; set; }
         public string Password { get; set; }
@@ -33,9 +36,14 @@ namespace Libraries.Model.Entity
         public string ContactNo { get; set; }
         public int? LockedCount { get; set; }
         public int AadharcardNo { get; set; }
+      //  public string Password { get; set; }
         public virtual ICollection<PageRole> PageRole { get; set; }
         [NotMapped]
+
+        [Compare("Password", ErrorMessage = "Password and confirmation password must match.")]
         public string ConfirmPassword { get; set; }
+
+       
         [NotMapped]
         public bool defaultpassword { get; set; }
 

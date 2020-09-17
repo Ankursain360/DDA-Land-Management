@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-//using Demolition.Common;
-//using Demolition.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,9 +15,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using BotDetect.Web;
 using Newtonsoft.Json.Serialization;
-//using DDAPropertyREG.Models;
-using Microsoft.Extensions.Hosting;
+//using DDAPropertyREG.Models
 
+using Microsoft.Extensions.Hosting;
+//using NewLandAcquisition.Infrastructure.Extensions;
+//using Libraries.Model;
 namespace NewLandAcquisition
 {
     public class Startup
@@ -46,6 +46,9 @@ namespace NewLandAcquisition
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+           // services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
@@ -70,6 +73,7 @@ namespace NewLandAcquisition
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+         //services.RegisterDependency();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

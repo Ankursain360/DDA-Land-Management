@@ -1,19 +1,33 @@
 ﻿
 
+$(document).ready(function () {
+    $("#FromDate").val("");
+})
 
 $(function () {
-    var dtToday = new Date();
+    $("input[name='IsRebateOn']").click(function () {
+        var id = $("input[name='IsRebateOn']:checked").val();
+        $.ajax({
+            type: 'GET',
+            url: '/Rebate/GetFromDate',
+            data: { propertyId: id },
+            // dataType: 'json',
+            success: function (data) {
+                if (data != null) {
+                    $("#FromDate").removeAttr("type", "date");
+                    $("#FromDate").attr("type", "text");
+                    $("#FromDate").val(data);
+                    $("#FromDate").removeAttr("disabled", "disabled");
+                    $("#FromDate").attr("disabled", "disabled");
+                }
+                else {
+                    $("#FromDate").removeAttr("disabled", "disabled");
+                    $("#FromDate").val("");
+                }
 
-    var month = dtToday.getMonth() + 1;
-    var day = dtToday.getDate();
-    var year = dtToday.getFullYear();
-    if (month < 10)
-        month = '0' + month.toString();
-    if (day < 10)
-        day = '0' + day.toString();
-
-    var maxDate = year + '-' + month + '-' + day;
-    //alert(maxDate);
-    $('#FromDate').attr('max', maxDate);
-    $('ToDate').attr('max', maxDate);
+            }
+        });
+    });
 });
+
+

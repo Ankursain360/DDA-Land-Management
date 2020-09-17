@@ -3,15 +3,25 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Libraries.Model.Common;
 using Libraries.Repository.Common;
+using Libraries.Service.IApplicationService;
 
 namespace Libraries.Service.Common
 {
     public class EntityService<T> : IEntityService<T> where T : BaseEntity
     {
         private readonly IGenericRepository<T> _repository;
+        private IUnitOfWork unitOfWork;
+        private IPropertyRegistrationService propertyregistrationRepository;
+
         public EntityService(IUnitOfWork unitOfWork, IGenericRepository<T> repository)
         {
             _repository=repository;
+        }
+
+        public EntityService(IUnitOfWork unitOfWork, IPropertyRegistrationService propertyregistrationRepository)
+        {
+            this.unitOfWork = unitOfWork;
+            this.propertyregistrationRepository = propertyregistrationRepository;
         }
 
         public void Create(T entity)
