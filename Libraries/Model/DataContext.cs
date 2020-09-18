@@ -61,7 +61,7 @@ namespace Libraries.Model
         public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; }
         public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
         public virtual DbSet<Disposalland> Disposalland { get; set; }
-
+        public virtual DbSet<Serialnumber> Serialnumber { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -102,7 +102,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
 
-
+            modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
         }
 
     }
