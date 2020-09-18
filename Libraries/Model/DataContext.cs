@@ -59,6 +59,8 @@ namespace Libraries.Model
         public virtual DbSet<Nazul> Nazul { get; set; }
         public virtual DbSet<Jointsurvey> Jointsurvey { get; set; }
         public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; }
+        public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
+        public virtual DbSet<Disposalland> Disposalland { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -97,6 +99,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DisposallandtypeConfiguration());
             modelBuilder.ApplyConfiguration(new JointsurveyConfiguration());
             modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
+            modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
 
 
         }

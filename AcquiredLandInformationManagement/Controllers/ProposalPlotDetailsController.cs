@@ -10,7 +10,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 
-namespace DDAPropertyREG.Controllers
+namespace AcquiredLandInformationManagement.Controllers
 {
   
         public class ProposalPlotDetailsController : Controller
