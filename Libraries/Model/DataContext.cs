@@ -53,6 +53,12 @@ namespace Libraries.Model
         public virtual DbSet<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual DbSet<Undersection17> Undersection17 { get; set; }
         public virtual DbSet<Undersection22> Undersection22 { get; set; }
+        public virtual DbSet<Awardmasterdetail> Awardmasterdetail { get; set; }
+        public virtual DbSet<Awardplotdetails> Awardplotdetails { get; set; }
+        public virtual DbSet<Disposallandtype> Disposallandtype { get; set; }
+        public virtual DbSet<Nazul> Nazul { get; set; }
+        public virtual DbSet<Jointsurvey> Jointsurvey { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -85,8 +91,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection17Configuration());
             modelBuilder.ApplyConfiguration(new ProposalplotdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection22Configuration());
-            
+            modelBuilder.ApplyConfiguration(new AwardplotDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new DisposallandtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new JointsurveyConfiguration());
+
         }
-        
+
     }
 }

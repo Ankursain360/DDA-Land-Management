@@ -1,0 +1,114 @@
+﻿@model Libraries.Model.Entity.Nazul
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="myapp-hed">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Nazul Villages</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        </div>
+        <div class="panel-body">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Village Name</label>
+                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Year of Consolidation</label>
+                        <input asp-for="YearOfConsolidation" type="date" class="form-control" />
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Jarai/Sakni</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="JaraiSakni" id="rdbJarai" value="1" />Jarai
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="JaraiSakni" id="rdbsakni" value="2" />Sakani
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Language</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="Language" id="rdbhindi" value="1" />Hindi
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline">
+                                    <input type="radio" asp-for="Language" id="rdburdu" value="2" />Urdu
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Year of Jamabandi</label>
+                        <input asp-for="YearOfJamabandi" type="date" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Last Mutation No.</label>
+                        <input asp-for="LastMutationNo" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Remarks</label>
+                        <textarea asp-for="Remarks" class="form-control"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Index", "NazulVillages", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

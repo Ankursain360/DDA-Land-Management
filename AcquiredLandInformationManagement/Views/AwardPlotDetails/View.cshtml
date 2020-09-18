@@ -1,10 +1,11 @@
-﻿@model Libraries.Model.Entity.Jointsurvey
+﻿
+@model Libraries.Model.Entity.Awardplotdetails
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Joint Survey Details</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Award Plot Details</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -13,18 +14,25 @@
 <br />
 
 <br />
-<div class="container-fluid" >
+<div class="container-fluid">
     <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">View Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="View">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-
                 <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Award No.</label>
+                        <select class="form-control dda-dropdown" asp-for="AwardMasterId" asp-items="@(new SelectList(Model.AwardmasterList, "Id","AwardNumber"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="AwardMasterId" class="text-danger"></span>
+
+                    </div>
+
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Village Name</label>
                         <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
@@ -33,8 +41,11 @@
                         <span asp-validation-for="VillageId" class="text-danger"></span>
 
                     </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Khasra No.</label>
+                        <label class="control-label lb-sm">Khasra No</label>
                         <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
                             <option>Select</option>
                         </select>
@@ -42,40 +53,10 @@
 
                     </div>
                 </div>
-
-                <div id="DivMainContentForm">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Site Possition</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition"  value="Built Up" />Built Up
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition" value="Partial Built Up" />Partial Built Up
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition"  value="Vacant" />Vacant
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition"  value="Boundary Wall" />Boundary Wall
-                            </label>
-                        </div>
-
-                    </div>
-                </div>
-
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" dda-innerheading">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
                                 </div>
@@ -101,33 +82,18 @@
                             <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
                         </div>
                     </div>
-
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Nature of Structure</label>
-                        <input type="text" asp-for="NatureOfStructure" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Joint Survey Date</label>
-                        <input type="Date" asp-for="JointSurveyDate" class="form-control" />
-                    </div>
-                </div>
-
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" asp-for="Remarks" class="form-control"></textarea>
+                        <textarea type="text" asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
                     </div>
                 </div>
 
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-primary dda-pageheading" })
+                        @Html.ActionLink("Back", "Index", "AwardPlotDetails", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 

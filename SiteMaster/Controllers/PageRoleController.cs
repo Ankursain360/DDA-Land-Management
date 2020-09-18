@@ -32,5 +32,18 @@ namespace SiteMaster.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<JsonResult> GetUserList(int? roleId)
+        {
+            roleId = roleId ?? 0;
+            var data = await _pageRoleService.GetUserList(Convert.ToInt32(roleId));
+            return Json(data);
+        }
+        [HttpPost]
+        public async Task<JsonResult> GetPageRoleDetails(int roleId)
+        {
+            //var data = await _pageRoleService.GetPageRoleDetails(Convert.ToInt32(roleId));
+            return Json(null);
+        }
     }
 }

@@ -110,6 +110,9 @@ namespace SiteMaster.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Division division)
         {
+            division.DepartmentList = await _divisionService.GetAllDepartment();
+            division.ZoneList = await _divisionService.GetAllZone(division.DepartmentId);
+
             if (ModelState.IsValid)
             {
                 try
