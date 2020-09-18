@@ -1,8 +1,22 @@
 ﻿$(document).ready(function () {
     var value = $('#Boundary').val();
     if (value == 1) {
-        $("#BoundaryRemarks").attr("disabled", "disabled");
-        $("#BoundaryRemarks").removeAttr("disabled", "disabled");
+        $('#divBoundaryRemarks').show();
+    }
+
+    var value = $('#PULand').val();
+    if (value == 1) {
+        $('#divPlannedLand').show();
+    }
+
+    var value = $('#EncroachmentStatus').val();
+    if (value == 1) {
+        $("#EncroachmentDetails").attr("disabled", "disabled");
+        $("#EncroachmentDetails").removeAttr("disabled", "disabled");
+        $("#Encroched").attr("disabled", "disabled");
+        $("#Encroched").removeAttr("disabled", "disabled");
+        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
 
     var value = $('#BuiltUp').val();
@@ -31,12 +45,11 @@ $(function () {
         var value = $('#Boundary').val();
         if (value == 0) {
             $('#BoundaryRemarks').val('');
-            $("#BoundaryRemarks").attr("disabled", "disabled");
+            $('#divBoundaryRemarks').hide();
         }
         else {
             $('#BoundaryRemarks').val('');
-            $("#BoundaryRemarks").attr("disabled", "disabled");
-            $("#BoundaryRemarks").removeAttr("disabled", "disabled");
+            $('#divBoundaryRemarks').show();
         }
     });
 });
@@ -94,6 +107,44 @@ $(function () {
         else {
             $('#GeoFileName').val('');
             $("#divGEOReferencing").show();
+        }
+    });
+});
+
+$(function () {
+    $('#EncroachmentStatus').change(function () {
+        var value = $('#EncroachmentStatus').val();
+        if (value == 0) {
+            $('#EncroachmentDetails').val('');
+            $("#EncroachmentDetails").attr("disabled", "disabled");
+            $('#Encroched').val('');
+            $("#Encroched").attr("disabled", "disabled");
+            $('#BuiltupEncroachmentArea').val('');
+            $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        }
+        else {
+            $('#EncroachmentDetails').val('');
+            $("#EncroachmentDetails").attr("disabled", "disabled");
+            $("#EncroachmentDetails").removeAttr("disabled", "disabled");
+            $('#Encroched').val('');
+            $("#Encroched").attr("disabled", "disabled");
+            $("#Encroched").removeAttr("disabled", "disabled");
+            $('#BuiltupEncroachmentArea').val('');
+            $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+            $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
+        }
+    });
+});
+
+
+$(function () {
+    $('#PULand').change(function () {
+        var value = $('#PULand').val();
+        if (value == 2) {
+            $('#divPlannedLand').hide();
+        }
+        else {
+            $('#divPlannedLand').show();
         }
     });
 });

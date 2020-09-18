@@ -56,9 +56,10 @@ namespace Libraries.Model
         public virtual DbSet<Awardmasterdetail> Awardmasterdetail { get; set; }
         public virtual DbSet<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual DbSet<Disposallandtype> Disposallandtype { get; set; }
-        public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
-        public virtual DbSet<Disposalland> Disposalland { get; set; }
         public virtual DbSet<Nazul> Nazul { get; set; }
+        public virtual DbSet<Jointsurvey> Jointsurvey { get; set; }
+        public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,8 +95,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection22Configuration());
             modelBuilder.ApplyConfiguration(new AwardplotDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandtypeConfiguration());
-            modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
-            modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
+            modelBuilder.ApplyConfiguration(new JointsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
+
 
         }
 

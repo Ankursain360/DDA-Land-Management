@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
 
-<div class="container-fluid" id="MainContentForm">
+
     <div class="card  table-card " style="overflow:scroll;">
 
         <table class="table table-responsive table-bordered table-card">
@@ -26,7 +26,6 @@
                     <th colspan="3" style=" text-align:center">Handed Over</th>
                     <th colspan="3" style=" text-align:center">Disposal</th>
                     <th rowspan="2">Remarks</th>
-                    <th rowspan="2">Operation</th>
                 </tr>
                 <tr>
                     <th>Boundary</th>
@@ -44,7 +43,7 @@
                     <th>Disposal/Comments</th>
 
                 </tr>
-            </thead>
+            </thead> 
             <tbody class="tbody">
                 @foreach (var item in Model)
                 {
@@ -147,4 +146,3 @@
         </table>
 
     </div>
-</div>
