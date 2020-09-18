@@ -1,4 +1,6 @@
 ﻿
+
+@model Libraries.Model.Entity.Morland
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,38 +9,11 @@
 
 
 
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
 
-<style>
-    .p {
-        color: black;
-    }
-</style>
-
-<style>
-
-    .bg {
-        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
-        Color: #ffffff;
-        Font-size: 0.95rem;
-        Font-Family: Open SansRegular;
-        height: 28px;
-    }
-</style>
-
-
-<script src="js/bootstrap.min.js"></script>
-<link href="Styles/bootstrap.css" rel="stylesheet" />
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">MOR lands</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -52,7 +27,7 @@
 
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
@@ -66,14 +41,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Notification No.</label>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select--</option>
-                                <option value="1">F.1(13)/62-L&H</option>
+                           
+                            <select class="form-control dda-dropdown" asp-for="NotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                                <option>Select</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm"> Notification Date</label>
-                            <input type="date" class="form-control">
+                            <input asp-for="NotificationDate" type="date" class="form-control" />
 
                         </div>
 
@@ -84,9 +59,8 @@
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Serial No</label>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select--</option>
-                                <option value="1"> Sr.01</option>
+                            <select class="form-control dda-dropdown" asp-for="SerialNoId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","Name"))">
+                                <option>Select</option>
                             </select>
 
 
@@ -95,7 +69,7 @@
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Property/Site No.</label>
-                            <input type="text" class="form-control">
+                            <input asp-for="PropertySiteNo" class="form-control" />
 
                         </div>
 
@@ -108,14 +82,14 @@
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Location Name</label>
-                            <input type="text" class="form-control">
+                            <input asp-for="Name" class="form-control" />
 
                         </div>
 
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Site Description</label>
-                            <input type="text" class="form-control">
+                            <input asp-for="SiteDescription" class="form-control" />
 
                         </div>
 
@@ -123,7 +97,7 @@
                     </div>
 
 
-                  
+
 
 
 
@@ -144,15 +118,15 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Bigha</label>
-                                <input type="text" class="form-control" />
+                                <input asp-for="Bigha" class="form-control" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Biswa</label>
-                                <input type="text" class="form-control" />
+                                <input asp-for="Biswa" class="form-control" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Biswanshi</label>
-                                <input type="text" class="form-control" placeholder="0" />
+                                <input asp-for="Biswanshi" class="form-control" />
                             </div>
                         </div>
                     </div>
@@ -160,13 +134,13 @@
 
 
 
-                   
+
 
 
                     <div id="Divclsification">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
-                                <div class=" myapp-hed2">
+                                <div class="dda-innerheading">
                                     <div class="col-md-12">
                                         <h6 class="pull-left" style="color:white;margin-top:5px;">Add Details</h6>
                                     </div>
@@ -177,14 +151,14 @@
 
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Status of Land</label>
-                                <input type="text" class="form-control">
+                                <input asp-for="StatusOfLand" class="form-control" />
 
                             </div>
 
 
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Occupied By</label>
-                                <input type="text" class="form-control">
+                                <input asp-for="OccupiedBy" class="form-control" />
 
                             </div>
 
@@ -195,53 +169,61 @@
 
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Developed</label>
-                                <input type="text" class="form-control">
+                                <input asp-for="Developed" class="form-control" />
 
                             </div>
 
 
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Land Type</label>
-                                <input type="text" class="form-control">
+                                <input asp-for="LandType" class="form-control" />
 
                             </div>
+
+
+                        </div>
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm"> Status</label>
+                                <select asp-for="IsActive" class="form-control dda-dropdown">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                            </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label class="control-label lb-sm">Remarks</label>
+                                    <textarea asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
+                                </div>
+
+                            </div>
+
+
 
 
                         </div>
 
 
 
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label lb-sm">Remarks</label>
-                                <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
-                            </div>
-
-                        </div>
 
 
 
 
-                    </div>
-
-
-
-
-
-
-
-                    @*</div>
+                        @*</div>
         </div>*@
-                </div>
+                    </div>
 
 
 
                 <br /><br />
                 <div class="form-row">
                     <div class="form-group  col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-primary dda-pageheading" })
 
 
 
@@ -254,42 +236,42 @@
 </div>
 <script>
 
-            $(function () {
-                $("input[name='grpSearchby']").click(function () {
-                    if ($("#rdbFilename").is(":checked")) {
-                        $("#DivForFileName").show();
-                        $("#DivForDocumentName").hide();
-                        $("#DivForGenerate").hide();
-                    }
-                    else if ($("#rdbDocumentname").is(":checked")) {
-                        $("#DivForFileName").hide();
-                        $("#DivForDocumentName").show();
-                        $("#DivForGenerate").hide();
-                    }
-                    //else {
-                    //    $("#DivForFileName").hide();
-                    //    $("#DivForPayeeName").hide();
-                    //}
-                });
-            });
+    $(function () {
+        $("input[name='grpSearchby']").click(function () {
+            if ($("#rdbFilename").is(":checked")) {
+                $("#DivForFileName").show();
+                $("#DivForDocumentName").hide();
+                $("#DivForGenerate").hide();
+            }
+            else if ($("#rdbDocumentname").is(":checked")) {
+                $("#DivForFileName").hide();
+                $("#DivForDocumentName").show();
+                $("#DivForGenerate").hide();
+            }
+            //else {
+            //    $("#DivForFileName").hide();
+            //    $("#DivForPayeeName").hide();
+            //}
+        });
+    });
 
 </script>
 
 <script>
-            $(function () {
-                $("input[name='grpMainFile']").click(function () {
-                    if ($("#rSubsequent").is(":checked")) {
-                        $("#DivForSubsequentPurchaser").show();
-                    } else {
-                        $("#DivForSubsequentPurchaser").hide();
-                    }
-                });
-            });
+    $(function () {
+        $("input[name='grpMainFile']").click(function () {
+            if ($("#rSubsequent").is(":checked")) {
+                $("#DivForSubsequentPurchaser").show();
+            } else {
+                $("#DivForSubsequentPurchaser").hide();
+            }
+        });
+    });
 </script>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
 </script>
 <script>
-            $(function () {
-                $("#date").datepicker({ dateFormat: 'yy' });
-            });
+    $(function () {
+        $("#date").datepicker({ dateFormat: 'yy' });
+    });
 </script>

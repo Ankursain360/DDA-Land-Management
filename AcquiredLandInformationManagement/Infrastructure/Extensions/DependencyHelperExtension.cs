@@ -37,6 +37,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();
+            services.AddScoped<IMorlandRepository, MorlandRepository>();
 
 
 
@@ -57,6 +58,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandtypeService, DisposallandtypeService>();
             services.AddScoped<INazulService, NazulService>();
             services.AddScoped<IDisposallandService, DisposallandService>();
+            services.AddScoped<IMorlandService, MorlandService>();
 
 
 

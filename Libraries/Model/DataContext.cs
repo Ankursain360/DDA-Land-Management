@@ -62,6 +62,7 @@ namespace Libraries.Model
         public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
         public virtual DbSet<Disposalland> Disposalland { get; set; }
         public virtual DbSet<Serialnumber> Serialnumber { get; set; }
+        public virtual DbSet<Morland> Morland { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
