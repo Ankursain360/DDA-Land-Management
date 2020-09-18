@@ -63,6 +63,7 @@ namespace Libraries.Model
         public virtual DbSet<Disposalland> Disposalland { get; set; }
         public virtual DbSet<Serialnumber> Serialnumber { get; set; }
         public virtual DbSet<Morland> Morland { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -102,7 +103,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
             modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
-
+          
             modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
         }
 
