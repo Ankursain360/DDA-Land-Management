@@ -41,7 +41,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CheckDate).HasColumnType("date");
+            builder.Property(e => e.ChequeDate).HasColumnType("date");
 
             builder.Property(e => e.ChequeNo)
                 .HasMaxLength(100)
