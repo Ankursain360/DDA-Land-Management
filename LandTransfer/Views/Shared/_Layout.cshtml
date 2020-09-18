@@ -4,18 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    <link rel="stylesheet" href="~/Admin/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/Admin/css/datepicker3.css" />
-    <link rel="stylesheet" href="~/Admin/css/styles.css" />
-    <link rel="stylesheet" href="~/Admin/css/font-awesome.min.css" />
-
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-
-    <script src="https://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">
-
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
     <style>
         .canvasjs-chart-credit {
             display: none !important;
@@ -56,18 +49,6 @@
                     <li><a href="#">Profile</a></li>
                 </ul>
             </div>
-            @*<a data-toggle="collapse" href="#sub-item-4" style="Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); ">
-                     Hi DDA <span data-toggle="collapse" href="#sub-item-4" ><i class="fa-angle-down fa"></i></span>
-                </a>
-                <ul class="children collapse" id="sub-item-4">
-                    <li>
-                        <a class="" href="/PropertyRegistration/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Property Registration
-                        </a>
-                    </li>
-                </ul>*@
-
-            @*<i class="fa-user-circle fa"></i> Hi, DDA <i class="fa-angle-down fa"></i>*@
         </div>
     </header>
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 col-md-2 sidebar" style="position: fixed;Font-size: 14px; color: #ffffff; Background: #2c3091;margin-top:-30px;">
@@ -146,25 +127,16 @@
         </div>
     </footer>
 
-    <script src="~/Admin/js/jquery-1.11.1.min.js"></script>
-    <script src="~/Admin/js/bootstrap.min.js"></script>
-    <script src="~/Admin/js/chart.min.js"></script>
-    <script src="~/Admin/js/chart-data.js"></script>
-    <script src="~/Admin/js/easypiechart.js"></script>
-    <script src="~/Admin/js/easypiechart-data.js"></script>
-    <script src="~/Admin/js/bootstrap-datepicker.js"></script>
-    <script src="~/Admin/js/custom.js"></script>
-    <script>
-        window.onload = function () {
-            var chart1 = document.getElementById("line-chart").getContext("2d");
-            window.myLine = new Chart(chart1).Line(lineChartData, {
-                responsive: true,
-                scaleLineColor: "rgba(0,0,0,.2)",
-                scaleGridLineColor: "rgba(0,0,0,.05)",
-                scaleFontColor: "#c5c7cc"
-            });
-        };
-    </script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/chart.js/dist/Chart.min.js"></script>
+    <script src="~/lib/toaster/toastr.min.js"></script>
+    <script src="~/js/site.js"></script>
+
+    @RenderSection("Scripts", required: false)
+    @Html.Raw(ViewBag.Message)
 </body>
 
 </html>

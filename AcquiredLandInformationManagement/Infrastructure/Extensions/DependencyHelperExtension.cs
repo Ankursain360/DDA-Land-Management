@@ -36,7 +36,11 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
            
             services.AddScoped<IDisposallandtypeRepository, DisposallandtypeRepository>();
             services.AddScoped<INazulRepository, NazulRepository>();
-            services.AddScoped<IEnhancecompensationRepository, EnhancecompensationRepository>(); //added by Nikita
+            services.AddScoped<IDisposallandRepository, DisposallandRepository>();
+            services.AddScoped<IMorlandRepository, MorlandRepository>();
+
+
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -53,7 +57,16 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IAwardplotDetailService, AwardplotDetailsService>();
             services.AddScoped<IDisposallandtypeService, DisposallandtypeService>();
             services.AddScoped<INazulService, NazulService>();
-            services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
+            services.AddScoped<IDisposallandService, DisposallandService>();
+            services.AddScoped<IMorlandService, MorlandService>();
+
+
+
+
+
+
+
+
         }
     }
 }

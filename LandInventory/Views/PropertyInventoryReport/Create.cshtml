@@ -21,17 +21,92 @@
         </div>
         <div class="panel-body">
             @*<form>*@
-                <div class="row">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="LocalityId">Locality</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
+                        <option value="0">All</option>
+                        <option value="Planned Land">Planned Land</option>
+                        <option value="Unplanned Land">Unplanned Land</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm">Main Land Use</label>
+                    <select class="form-control dda-dropdown" asp-for="MainLandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Litigation Status</label><span class="text-danger">*</span>
+                    <select asp-for="LitigationStatus" class="form-control dda-dropdown">
+                        <option value="2">All</option>
+                        <option value="0">Yes</option>
+                        <option value="1">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label">Encroachment</label><span class="text-danger">*</span>
+                    <select asp-for="Encroached" class="form-control dda-dropdown">
+                        <option value="2">All</option>
+                        <option value="0">Yes</option>
+                        <option value="1">No</option>
+                    </select>
+                </div>
+
+            </div>
+            @*<div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label" asp-for="DepartmentId">Department</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
-                            <option value="0">All</option>
+                        <label class="control-label">Department</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown">
+                            <option>All</option>
+                            <option>All</option>
                         </select>
+                        <span class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label" asp-for="LandUseId">Land Use</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
-                            <option value="0">All</option>
+                        <label class="control-label">Land Use</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown">
+                            <option>All</option>
+                            <option>Planned</option>
+                            <option>Unplanned</option>
                         </select>
                         <span class="text-danger"></span>
                     </div>
@@ -39,74 +114,34 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label">Litigation Status</label><span class="text-danger">*</span>
-                        <select asp-for="LitigationStatus" class="form-control dda-dropdown">
-                            <option value="2">All</option>
-                            <option value="0">Yes</option>
-                            <option value="1">No</option>
+                        <select class="form-control dda-dropdown">
+                            <option>All</option>
+                            <option>Yes</option>
+                            <option>No</option>
                         </select>
                         <span class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label">Encroachment</label><span class="text-danger">*</span>
-                        <select asp-for="Encroached" class="form-control dda-dropdown">
-                            <option value="2">All</option>
-                            <option value="0">Yes</option>
-                            <option value="1">No</option>
+                        <select class="form-control dda-dropdown">
+                            <option>All</option>
+                            <option>Yes</option>
+                            <option>No</option>
                         </select>
                         <span class="text-danger"></span>
                     </div>
 
+                </div>*@
+            <div class="row ">
+                <div class="form-group col-md-12" style="margin-bottom:40px;">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
+                    @Html.ActionLink("Back", "Index", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
                 </div>
-                @*<div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Department</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown">
-                                <option>All</option>
-                                <option>All</option>
-                            </select>
-                            <span class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Land Use</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown">
-                                <option>All</option>
-                                <option>Planned</option>
-                                <option>Unplanned</option>
-                            </select>
-                            <span class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Litigation Status</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown">
-                                <option>All</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                            <span class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label">Encroachment</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown">
-                                <option>All</option>
-                                <option>Yes</option>
-                                <option>No</option>
-                            </select>
-                            <span class="text-danger"></span>
-                        </div>
+            </div>
 
-                    </div>*@
-                <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-                        @Html.ActionLink("Back", "Index", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
+            <div id="LoadReportView">
 
-                <div id="LoadReportView">
-
-                </div>
+            </div>
             @*</form>*@
         </div>
     </div>

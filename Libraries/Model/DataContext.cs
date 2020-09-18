@@ -22,7 +22,7 @@ namespace Libraries.Model
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
-        public virtual DbSet<LandNotification> Notification { get; set; }
+        public virtual DbSet<LandNotification> LandNotification { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<PropertyType> PropertyType { get; set; }
         public virtual DbSet<Role> Role { get; set; }
@@ -57,9 +57,12 @@ namespace Libraries.Model
         public virtual DbSet<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual DbSet<Disposallandtype> Disposallandtype { get; set; }
         public virtual DbSet<Nazul> Nazul { get; set; }
-        public virtual DbSet<Jointsurvey> Jointsurvey { get; set; } //added by Nikita
-        public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; } //added by Nikita
-
+        public virtual DbSet<Jointsurvey> Jointsurvey { get; set; }
+        public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; }
+        public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
+        public virtual DbSet<Disposalland> Disposalland { get; set; }
+        public virtual DbSet<Serialnumber> Serialnumber { get; set; }
+        public virtual DbSet<Morland> Morland { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -95,10 +98,12 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new Undersection22Configuration());
             modelBuilder.ApplyConfiguration(new AwardplotDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandtypeConfiguration());
-            modelBuilder.ApplyConfiguration(new JointsurveyConfiguration()); //added by Nikita
-            modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration()); //added by Nikita
+            modelBuilder.ApplyConfiguration(new JointsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
+            modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
 
-
+            modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
         }
 
     }

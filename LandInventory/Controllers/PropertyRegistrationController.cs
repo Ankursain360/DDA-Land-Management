@@ -44,6 +44,8 @@ namespace SiteMaster.Controllers
             propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
         {
@@ -59,7 +61,7 @@ namespace SiteMaster.Controllers
             if (ModelState.IsValid)
             {
                 propertyregistration.IsValidate = 0;
-                propertyregistration.DeletedStatus = 1;
+                propertyregistration.IsDelated = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -103,7 +105,6 @@ namespace SiteMaster.Controllers
                     filePath = Path.Combine(DocumentPath, FileName);
                     propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
                     propertyregistration.LayoutFilePath = filePath;
-                    //  propertyregistration.LayoutExtension = "." + (propertyregistration.FileData.ContentType.Split('/'))[1];
                 }
 
                 /* For GeoReferncing File Upload*/
@@ -132,7 +133,6 @@ namespace SiteMaster.Controllers
                     GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
-                    //  propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
                 }
                 #endregion
 
@@ -186,7 +186,7 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.IsValidate = 0;
                 }
-                propertyregistration.DeletedStatus = 1;
+                propertyregistration.IsDelated = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -230,7 +230,6 @@ namespace SiteMaster.Controllers
                     filePath = Path.Combine(DocumentPath, FileName);
                     propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
                     propertyregistration.LayoutFilePath = filePath;
-                    //  propertyregistration.LayoutExtension = "." + (propertyregistration.FileData.ContentType.Split('/'))[1];
                 }
 
                 /* For GeoReferncing File Upload*/
@@ -259,7 +258,6 @@ namespace SiteMaster.Controllers
                     GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
-                    //  propertyregistration.GeoExtension = "." + (propertyregistration.LayoutContent.Split('/'))[1];
                 }
                 #endregion
 

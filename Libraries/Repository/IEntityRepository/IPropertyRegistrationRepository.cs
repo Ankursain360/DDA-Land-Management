@@ -19,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> CheckDeleteAuthority(int id);
         Task<List<Department>> GetDepartmentDropDownList();
         Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached);
+        Task<List<Division>> GetDivisionDropDownList();
     }
 }
