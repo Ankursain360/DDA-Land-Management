@@ -58,6 +58,8 @@ namespace Libraries.Model
         public virtual DbSet<Disposallandtype> Disposallandtype { get; set; }
         public virtual DbSet<Nazul> Nazul { get; set; }
         public virtual DbSet<Jointsurvey> Jointsurvey { get; set; }
+        public virtual DbSet<Enhancecompensation> Enhancecompensation { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -94,6 +96,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new AwardplotDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandtypeConfiguration());
             modelBuilder.ApplyConfiguration(new JointsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
+
 
         }
 
