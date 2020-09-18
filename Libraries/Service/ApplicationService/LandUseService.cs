@@ -25,7 +25,7 @@ namespace Libraries.Service.ApplicationService
 
         }
 
-        public async Task<List<Landuse>> GetAllLanduse()
+        public async Task<List<Landuse>> GetAllLandUse()
         {
             return await _landuseRepository.GetAll();
         }
@@ -76,9 +76,6 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public Task<List<Landuse>> GetAllLandUse()
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }
