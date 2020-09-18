@@ -43,31 +43,13 @@ namespace LandInventory.Controllers
         }
 
 
-
-        [HttpPost]
-        public async Task<IActionResult> Create(Propertyregistration propertyregistration)
-        {
-            await BindDropDown(propertyregistration);
-            if (ModelState.IsValid)
-            {
-                return (RedirectToAction("Index", "PropertyInventoryReport", propertyregistration));
-
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(propertyregistration);
-            }
-
-        }
-
-        public async Task<PartialViewResult> Index(int department, int landUse, int litigation, int encroached)
+        public async Task<PartialViewResult> GetDetails(int department, int landUse, int litigation, int encroached)
         {
             var result = await _propertyregistrationService.GetPropertyRegisterationReportData(department, landUse, litigation, encroached);
 
             if (result != null)
             {
-                return PartialView(result);
+                return PartialView("Index", result);
             }
             else
             {
