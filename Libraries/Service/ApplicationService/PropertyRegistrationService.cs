@@ -162,15 +162,30 @@ namespace Libraries.Service.ApplicationService
             return DepartmentList;
         }
 
-        public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached)
+        public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
         {
-            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( department,  landUse,  litigation,  encroached);
+            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
         public async Task<List<Division>> GetDivisionDropDownList()
         {
             List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList();
             return DivisionList;
+        }
+
+        public string GetDisposalFile(int id)
+        {
+            return _propertyregistrationRepository.GetDisposalFile(id);
+        }
+
+        public string GetHandedOverFile(int id)
+        {
+            return _propertyregistrationRepository.GetHandedOverFile(id);
+        }
+
+        public string GetTakenOverFile(int id)
+        {
+            return _propertyregistrationRepository.GetTakenOverFile(id);
         }
     }
 }

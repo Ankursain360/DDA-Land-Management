@@ -47,7 +47,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.NotificationDate).HasColumnType("date");
 
-            builder.Property(e => e.NotificationId).HasColumnType("int(11)");
+            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
 
             builder.Property(e => e.OccupiedBy)
                 .HasMaxLength(200)
@@ -61,7 +61,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.SerialNoId).HasColumnType("int(11)");
+            builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
                 .HasMaxLength(400)

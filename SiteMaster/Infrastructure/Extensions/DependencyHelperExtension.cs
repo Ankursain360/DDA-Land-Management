@@ -33,7 +33,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPageRoleRepository, PageRoleRepository>();
             services.AddScoped<ILandUseRepository, LandUseRepository>();
-           
+            services.AddScoped<IClassificationOfLandRepository, ClassificationOfLandRepository>();
+
 
 
             /* Application Services */
@@ -55,7 +56,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IPageRoleService, PageRoleService>();
             services.AddScoped<ILandUseService, LandUseService>();
-          
+            services.AddScoped<IClassificationOfLandService, ClassificationOfLandService>();
+
         }
     }
 }

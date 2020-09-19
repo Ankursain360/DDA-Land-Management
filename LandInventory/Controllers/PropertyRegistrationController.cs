@@ -32,7 +32,7 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            int UserId = 2;
+            //int UserId = 2;
             var result = await _propertyregistrationService.GetAllPropertyregistration(UserId);
             return View(result);
         }
@@ -63,6 +63,15 @@ namespace SiteMaster.Controllers
             {
                 propertyregistration.IsValidate = 0;
                 propertyregistration.IsDelated = 1;
+
+                if (propertyregistration.MainLandUseId == 0 )
+                {
+                    propertyregistration.MainLandUseId = 1;
+                }
+                if (propertyregistration.DisposalTypeId == 0)
+                {
+                    propertyregistration.DisposalTypeId = 1;
+                }
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -137,11 +146,11 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For Taken Over File Upload*/
-                if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string TakenOverFileName = "";
                 string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
@@ -161,11 +170,11 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For Handed Over File Upload*/
-                if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string HandedOverFileName = "";
                 string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
@@ -185,11 +194,11 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For Disposal Type File Upload*/
-                if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string DisposalTypeFileName = "";
                 string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
@@ -236,6 +245,9 @@ namespace SiteMaster.Controllers
             var Data = await _propertyregistrationService.FetchSingleResult(id);
             ViewBag.LayoutDocView = Data.LayoutFilePath;
             ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.IsValidateUser = 2;
             await BindDropDown(Data);
             if (Data == null)
@@ -258,6 +270,14 @@ namespace SiteMaster.Controllers
                 else
                 {
                     propertyregistration.IsValidate = 0;
+                }
+                if (propertyregistration.MainLandUseId == 0)
+                {
+                    propertyregistration.MainLandUseId = 1;
+                }
+                if (propertyregistration.DisposalTypeId == 0)
+                {
+                    propertyregistration.DisposalTypeId = 1;
                 }
                 propertyregistration.IsDelated = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
@@ -334,11 +354,11 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For Taken Over File Upload*/
-                if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string TakenOverFileName = "";
                 string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
@@ -351,18 +371,18 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(TakenOverDocumentPath);
                     }
-                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
                     TakenOverfilePath = Path.Combine(TakenOverDocumentPath, TakenOverFileName);
                     propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
                 }
 
                 /* For Handed Over File Upload*/
-                if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string HandedOverFileName = "";
                 string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
@@ -375,18 +395,18 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(HandedOverDocumentPath);
                     }
-                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
                     HandedOverfilePath = Path.Combine(HandedOverDocumentPath, HandedOverFileName);
                     propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
                 }
 
                 /* For Disposal Type File Upload*/
-                if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
-                {
-                    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
+                //{
+                //    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
                 string DisposalTypeFileName = "";
                 string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
@@ -399,7 +419,7 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(DisposalTypeDocumentPath);
                     }
-                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
                     DisposalTypefilePath = Path.Combine(DisposalTypeDocumentPath, DisposalTypeFileName);
                     propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
@@ -459,6 +479,11 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
+            ViewBag.LayoutDocView = Data.LayoutFilePath;
+            ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             await BindDropDown(Data);
             if (Data == null)
             {
@@ -471,6 +496,39 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Download(int Id)
         {
             string filename = _propertyregistrationService.GetFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> TakenOverDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetTakenOverFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> HandedOverDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetHandedOverFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DisposalTypeDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetDisposalFile(Id);
             var memory = new MemoryStream();
             using (var stream = new FileStream(filename, FileMode.Open))
             {
