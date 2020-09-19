@@ -88,12 +88,12 @@ input.form-control {
     border: 1px solid #B1B1B1;
     box-shadow: none;
     height: 30px;
-    background-color: #dddddd;
+   /* background-color: #dddddd;*/
 }
 
 textarea.form-control {
    
-    background-color: #dddddd;
+   /* background-color: #dddddd;*/
 }
 
 .bootstrap-table input.form-control {
@@ -1127,7 +1127,7 @@ p.back-link {
 
 .dda-dropdown {
     height: 30px;
-    background-color: #dddddd;
+  /*  background-color: #dddddd;*/
 }
 
 .color-white{

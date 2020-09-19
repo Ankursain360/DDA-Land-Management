@@ -72,8 +72,8 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Primary List No.</label><span class="text-danger">*</span>
-                        <input asp-for="UniqueId" class="form-control">
-                        <span asp-validation-for="UniqueId" class="text-danger"></span>
+                        <input asp-for="PrimaryListNo" class="form-control">
+                        <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
@@ -232,7 +232,7 @@
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "Download", new { id = Model.Id })
+                                    @Html.ActionLink("Download", "Download", new { id = Model.Id})
                                 }
                                 else
                                 {

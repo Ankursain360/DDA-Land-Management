@@ -38,7 +38,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INazulRepository, NazulRepository>();
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();
             services.AddScoped<IMorlandRepository, MorlandRepository>();
+            services.AddScoped<IEnhancecompensationRepository, EnhancecompensationRepository>(); //added by Nikita
 
+            services.AddScoped<ILdolandRepository, LdolandRepository>();
 
 
 
@@ -60,8 +62,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandService, DisposallandService>();
             services.AddScoped<IMorlandService, MorlandService>();
 
+            services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
 
 
+            services.AddScoped<ILdolandService, LdolandService>();
 
 
 

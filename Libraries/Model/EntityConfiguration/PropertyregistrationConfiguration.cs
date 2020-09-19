@@ -63,15 +63,19 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DeletedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.DeletedReason)
+                .HasMaxLength(5000)
+                .IsUnicode(false);
+
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DisposalComments)
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.DisposalTypeFilePath).HasColumnType("longtext");
-
             builder.Property(e => e.DisposalDate).HasColumnType("date");
+
+            builder.Property(e => e.DisposalTypeFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.DisposalTypeId).HasColumnType("int(11)");
 
@@ -81,7 +85,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Encroached).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Encroached)
+                .HasColumnType("decimal(18,3)")
+                .HasDefaultValueSql("0.000");
 
             builder.Property(e => e.EncroachmentStatusId).HasColumnType("int(11)");
 
@@ -135,7 +141,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
-            builder.Property(e => e.MainLandUseId).HasColumnType("int(11)");
+            builder.Property(e => e.MainLandUseId)
+                .HasColumnType("int(11)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -144,7 +152,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PlannedUnplannedLand).HasColumnType("int(11)");
+            builder.Property(e => e.PlannedUnplannedLand)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.PrimaryListNo)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
@@ -184,11 +200,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.UniqueId)
-                .IsRequired()
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
             builder.Property(e => e.Vacant)
                 .HasColumnType("decimal(18,3)")
                 .HasDefaultValueSql("0.000");
@@ -200,12 +211,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ClassificationOfLandId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("ClassificationOfLandId");
-
-            builder.HasOne(d => d.Department)
-                .WithMany(p => p.Propertyregistration)
-                .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DepartmentId");
 
             builder.HasOne(d => d.DisposalType)
                 .WithMany(p => p.Propertyregistration)
@@ -227,7 +232,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasOne(d => d.MainLandUse)
                 .WithMany(p => p.Propertyregistration)
                 .HasForeignKey(d => d.MainLandUseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("MainLandUseId");
 
             builder.HasOne(d => d.Zone)

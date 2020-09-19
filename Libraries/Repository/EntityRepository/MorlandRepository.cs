@@ -17,14 +17,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
-
-
-
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
-            List<LandNotification> landnotificationList = await _dbContext.LandNotification.ToListAsync();
-            return landnotificationList;
+            List<LandNotification> notificationList = await _dbContext.LandNotification.ToListAsync();
+            return notificationList;
         }
 
         public async Task<List<Serialnumber>> GetAllSerialnumber()
