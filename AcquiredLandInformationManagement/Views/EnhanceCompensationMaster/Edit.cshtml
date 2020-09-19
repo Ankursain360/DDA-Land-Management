@@ -20,19 +20,19 @@
             <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Add Details </h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div id="divname">
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm"> Demand List No </label>
-                            <input required type="text" asp-for="DemandListNo" class="form-control"/>
+                            <input required type="text" asp-for="DemandListNo" class="form-control" />
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm"> ENM Sno.</label>
-                            <input required type="text" asp-for="Enmsno" class="form-control"/>
+                            <input required type="text" asp-for="Enmsno" class="form-control" />
 
 
                         </div>
@@ -52,34 +52,34 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">LAC File No. </label>
-                            <input required type="text" asp-for="LacfileNo" class="form-control"/>
+                            <input required type="text" asp-for="LacfileNo" class="form-control" />
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">L & B No. </label>
-                            <input required type="text" asp-for="Lbno" class="form-control"/>
+                            <input required type="text" asp-for="Lbno" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">L & B Ref.Date</label>
-                            <input required type="date" asp-for="LbrefDate" class="form-control"/>
+                            <input required type="date" asp-for="LbrefDate" class="form-control" />
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">DDA File No. </label>
-                            <input required type="text" asp-for="DdafileNo" class="form-control"/>
+                            <input required type="text" asp-for="DdafileNo" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">LAC No.</label>
-                            <input required type="text" asp-for="Lacno" class="form-control"/>
+                            <input required type="text" asp-for="Lacno" class="form-control" />
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">RFA No.</label>
-                            <input required type="text" asp-for="Rfano" class="form-control"/>
+                            <input required type="text" asp-for="Rfano" class="form-control" />
                         </div>
                     </div>
                     <div class="form-row">
@@ -88,11 +88,11 @@
                             <input required type="text" asp-for="Slpno" class="form-control" />
                         </div>
 
-                        <div class="form-group col-md-6">
+                        @*<div class="form-group col-md-6">
                             <label class="control-label lb-sm">Payable/Appealable</label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <input type="checkbox"  asp-for="Payable" value="Payable" />
+                                    <input type="checkbox" asp-for="Payable" value="Payable" />
                                     <label for="Payable" class="lb-sm">Payable</label>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
 
                             </div>
 
-                        </div>
+                        </div>*@
                     </div>
 
                     <div class="form-row">
@@ -117,7 +117,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-4">
                                     <label class="radio-inline  ">
-                                        <input type="radio" asp-for="CaseCourt" value="A.D.J"  />A.D.J
+                                        <input type="radio" asp-for="CaseCourt" value="A.D.J" />A.D.J
                                     </label>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -299,26 +299,26 @@
                             <input required type="text" asp-for="AppealNo" class="form-control" />
                         </div>
 
-                        <div class="form-group col-md-6">
+                        @*<div class="form-group col-md-6">
                             <label class="control-label lb-sm">Appeal By which Dept. </label>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <input type="checkbox" asp-for="AppealDept" value="UOI ">
                                     <label for="UOI " class="lb-sm">UOI </label>
                                 </div>
-                                <div class="form-group col-DA"md-6">
+                                <div class="form-group col-DA" md-6">
                                     <input type="checkbox" asp-for="AppealDept" value="DDA">
                                     <label class="lb-sm" for="DDA">DDA</label>
                                 </div>
 
 
                             </div>
-                        </div>
+                        </div>*@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Date Of Appeal </label>
-                            <input required type="date" class="form-control"  asp-for="DateOfAppeal"/>
+                            <input required type="date" class="form-control" asp-for="DateOfAppeal" />
                         </div>
 
                         <div class="form-group col-md-6">
@@ -331,12 +331,12 @@
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm"> Status</label>
-                           
-                        <select asp-for="IsActive" class="form-control dda-dropdown">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
+
+                            <select asp-for="IsActive" class="form-control dda-dropdown">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -352,7 +352,7 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "EnhanceCompensationMaster", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>

@@ -16,6 +16,27 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("propertyregistration", "lms");
 
+            builder.HasIndex(e => e.ClassificationOfLandId)
+                .HasName("ClassificationOfLandId");
+
+            builder.HasIndex(e => e.DepartmentId)
+                .HasName("DepartmentId");
+
+            builder.HasIndex(e => e.DisposalTypeId)
+                .HasName("DisposalTypeId");
+
+            builder.HasIndex(e => e.DivisionId)
+                .HasName("DivisionId");
+
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("LocalityId");
+
+            builder.HasIndex(e => e.MainLandUseId)
+                .HasName("MainLandUseId");
+
+            builder.HasIndex(e => e.ZoneId)
+                .HasName("registerationZoneId");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Boundary).HasColumnType("int(11)");
@@ -24,10 +45,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.HasIndex(e => e.DepartmentId)
-                  .HasName("DepartmentId");
-
             builder.Property(e => e.BuiltUp).HasColumnType("int(11)");
+
+            builder.Property(e => e.BuiltUpEncraochmentArea)
+                .HasColumnType("decimal(18,3)")
+                .HasDefaultValueSql("0.000");
 
             builder.Property(e => e.BuiltUpRemarks)
                 .HasMaxLength(5000)
@@ -39,51 +61,73 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+            builder.Property(e => e.DeletedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.DeletedReason)
+                .HasMaxLength(5000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
+
             builder.Property(e => e.DisposalComments)
-                .IsRequired()
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
             builder.Property(e => e.DisposalDate).HasColumnType("date");
 
+            builder.Property(e => e.DisposalTypeFilePath).HasColumnType("longtext");
+
             builder.Property(e => e.DisposalTypeId).HasColumnType("int(11)");
 
-            builder.Property(e => e.Encroached).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
-            builder.Property(e => e.GeoContent)
-                .HasMaxLength(200)
+            builder.Property(e => e.EncraochmentDetails)
+                .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.GeoExtension)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.Encroached)
+                .HasColumnType("decimal(18,3)")
+                .HasDefaultValueSql("0.000");
 
-            builder.Property(e => e.GeoFileName)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.EncroachmentStatusId).HasColumnType("int(11)");
 
             builder.Property(e => e.GeoFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.GeoReferencing).HasColumnType("int(11)");
 
             builder.Property(e => e.HandedOverComments)
-                .IsRequired()
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
             builder.Property(e => e.HandedOverDate).HasColumnType("date");
 
-            builder.Property(e => e.HandedOverName)
-                .IsRequired()
+            builder.Property(e => e.HandedOverEmailId)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
+            builder.Property(e => e.HandedOverFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.HandedOverLandlineNo)
+                .HasMaxLength(12)
+                .IsUnicode(false);
+
+            builder.Property(e => e.HandedOverMobileNo)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
+            builder.Property(e => e.HandedOverName)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
+            builder.Property(e => e.IsDelated).HasColumnType("tinyint(4)");
+
+            builder.Property(e => e.IsValidate).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.KhasraNo)
-                .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
-
-            builder.Property(e => e.LandUseId).HasColumnType("int(11)");
 
             builder.Property(e => e.LayoutFilePath).HasColumnType("longtext");
 
@@ -97,56 +141,87 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
+            builder.Property(e => e.MainLandUseId)
+                .HasColumnType("int(11)")
+                .HasDefaultValueSql("1");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.Palandmark)
+                .HasColumnName("PALandmark")
+                .HasMaxLength(5000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.PlannedUnplannedLand)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.PrimaryListNo)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.DeletedStatus).HasColumnType("int(11)");
-
-            builder.Property(e => e.IsValidate).HasColumnType("int(11)");
+            builder.Property(e => e.SubUse)
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.TakenOverComments)
-                .IsRequired()
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
             builder.Property(e => e.TakenOverDate).HasColumnType("date");
 
+            builder.Property(e => e.TakenOverEmailId)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.TakenOverFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.TakenOverLandlineNo)
+                .HasMaxLength(12)
+                .IsUnicode(false);
+
+            builder.Property(e => e.TakenOverMobileNo)
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
             builder.Property(e => e.TakenOverName)
-                .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.UniqueId)
-                .IsRequired()
+            builder.Property(e => e.TotalAreaInBigha)
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Vacant).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Vacant)
+                .HasColumnType("decimal(18,3)")
+                .HasDefaultValueSql("0.000");
 
-            builder.Property(e => e.ZoneDivisionId).HasColumnType("int(11)");
+            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.ClassificationOfLand)
-                    .WithMany(p => p.Propertyregistration)
-                    .HasForeignKey(d => d.ClassificationOfLandId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("ClassificationOfLandId");
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.ClassificationOfLandId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("ClassificationOfLandId");
 
             builder.HasOne(d => d.DisposalType)
                 .WithMany(p => p.Propertyregistration)
                 .HasForeignKey(d => d.DisposalTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DisposalTypeId");
 
-            builder.HasOne(d => d.LandUse)
+            builder.HasOne(d => d.Division)
                 .WithMany(p => p.Propertyregistration)
-                .HasForeignKey(d => d.LandUseId)
+                .HasForeignKey(d => d.DivisionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandUseId");
+                .HasConstraintName("DivisionId");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Propertyregistration)
@@ -154,11 +229,16 @@ namespace Libraries.Model.EntityConfiguration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("LocalityId");
 
-            builder.HasOne(d => d.ZoneDivision)
+            builder.HasOne(d => d.MainLandUse)
                 .WithMany(p => p.Propertyregistration)
-                .HasForeignKey(d => d.ZoneDivisionId)
+                .HasForeignKey(d => d.MainLandUseId)
+                .HasConstraintName("MainLandUseId");
+
+            builder.HasOne(d => d.Zone)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ZoneDivisionId");
+                .HasConstraintName("registerationZoneId");
         }
     }
 }

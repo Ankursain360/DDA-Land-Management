@@ -18,6 +18,7 @@ namespace Libraries.Model
         public virtual DbSet<Page> Page { get; set; }
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
+        public virtual DbSet<Natureofencroachment> Natureofencroachment { get; set; }
 
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
@@ -27,7 +28,7 @@ namespace Libraries.Model
         public virtual DbSet<PropertyType> PropertyType { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Locality> Locality { get; set; }
-
+        public virtual DbSet<Reasons> Reasons { get; set; }
         public virtual DbSet<Rate> Rate { get; set; }
 
         public virtual DbSet<Rebate> Rebate { get; set; }
@@ -62,7 +63,10 @@ namespace Libraries.Model
         public virtual DbSet<Utilizationtype> Utilizationtype { get; set; }
         public virtual DbSet<Disposalland> Disposalland { get; set; }
         public virtual DbSet<Serialnumber> Serialnumber { get; set; }
-        public virtual DbSet<Ldoland> Ldoland { get; set; }
+        public virtual DbSet<Morland> Morland { get; set; }
+        public virtual DbSet<Enchroachment> Enchroachment { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -101,9 +105,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
             modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ReasonsConfiguration());
             modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
-            modelBuilder.ApplyConfiguration(new LdolandConfiguration());
+            modelBuilder.ApplyConfiguration(new NatureofencroachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
         }
 
     }

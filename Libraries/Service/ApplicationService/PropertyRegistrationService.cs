@@ -67,16 +67,25 @@ namespace Libraries.Service.ApplicationService
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = result.FirstOrDefault();
             model.ClassificationOfLandId = propertyregistration.ClassificationOfLandId;
-            model.UniqueId = propertyregistration.UniqueId;
-            model.ZoneDivisionId = propertyregistration.ZoneDivisionId;
+            model.DepartmentId = propertyregistration.DepartmentId;
+            model.PrimaryListNo = propertyregistration.PrimaryListNo;
+            model.ZoneId = propertyregistration.ZoneId;
+            model.DivisionId = propertyregistration.DivisionId;
             model.LocalityId = propertyregistration.LocalityId;
             model.KhasraNo = propertyregistration.KhasraNo;
+            model.Palandmark = propertyregistration.Palandmark;
+            model.EncroachmentStatusId = propertyregistration.EncroachmentStatusId;
+            model.EncraochmentDetails = propertyregistration.EncraochmentDetails;
             model.Boundary = propertyregistration.Boundary;
             model.BoundaryRemarks = propertyregistration.BoundaryRemarks;
+            model.TotalAreaInBigha = propertyregistration.TotalAreaInBigha;
             model.TotalArea = propertyregistration.TotalArea;
             model.Encroached = propertyregistration.Encroached;
+            model.BuiltUpEncraochmentArea = propertyregistration.BuiltUpEncraochmentArea;
             model.Vacant = propertyregistration.Vacant;
-            model.LandUseId = propertyregistration.LandUseId;
+            model.PlannedUnplannedLand = propertyregistration.PlannedUnplannedLand;
+            model.MainLandUseId = propertyregistration.MainLandUseId;
+            model.SubUse = propertyregistration.SubUse;
             model.BuiltUp = propertyregistration.BuiltUp;
             model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
             model.LayoutPlan = propertyregistration.LayoutPlan;
@@ -87,16 +96,26 @@ namespace Libraries.Service.ApplicationService
             model.GeoFilePath = propertyregistration.GeoFilePath;
             model.TakenOverName = propertyregistration.TakenOverName;
             model.TakenOverDate = propertyregistration.TakenOverDate;
+            model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
+            model.TakenOverMobileNo = propertyregistration.TakenOverMobileNo;
+            model.TakenOverLandlineNo = propertyregistration.TakenOverLandlineNo;
+            model.TakenOverFilePath = propertyregistration.TakenOverFilePath;
             model.TakenOverComments = propertyregistration.TakenOverComments;
             model.HandedOverName = propertyregistration.HandedOverName;
             model.HandedOverDate = propertyregistration.HandedOverDate;
+            model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
+            model.HandedOverMobileNo = propertyregistration.HandedOverMobileNo;
+            model.HandedOverLandlineNo = propertyregistration.HandedOverLandlineNo;
+            model.HandedOverFilePath = propertyregistration.HandedOverFilePath;
             model.HandedOverComments = propertyregistration.HandedOverComments;
             model.DisposalTypeId = propertyregistration.DisposalTypeId;
             model.DisposalDate = propertyregistration.DisposalDate;
+            model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
             model.DisposalComments = propertyregistration.DisposalComments;
             model.Remarks = propertyregistration.Remarks;
             model.IsValidate = propertyregistration.IsValidate;
-            model.DeletedStatus = propertyregistration.DeletedStatus;
+            model.IsActive = propertyregistration.IsDelated;
+            model.IsActive = propertyregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _propertyregistrationRepository.Edit(model);
@@ -116,7 +135,9 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
-            model.DeletedStatus = 0;
+            model.IsDelated = 0;
+            model.DeletedBy = 1;
+            model.DeletedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -144,6 +165,12 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int department, int landUse, int litigation, int encroached)
         {
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( department,  landUse,  litigation,  encroached);
+        }
+
+        public async Task<List<Division>> GetDivisionDropDownList()
+        {
+            List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList();
+            return DivisionList;
         }
     }
 }

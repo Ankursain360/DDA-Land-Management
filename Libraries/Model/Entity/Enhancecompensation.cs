@@ -29,7 +29,7 @@ namespace Libraries.Model.Entity
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
         public string AmountPaid { get; set; }
-        public DateTime? CheckDate { get; set; }
+        public DateTime? ChequeDate { get; set; }
         public string ChequeNo { get; set; }
         public string BankName { get; set; }
         public string VoucherNo { get; set; }
@@ -41,6 +41,25 @@ namespace Libraries.Model.Entity
         public string PanelLawer { get; set; }
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
-       
+
+        [NotMapped]
+        public Boolean Payable1 { get; set; }
+
+        [NotMapped]
+        public Boolean AppealDept1 { get; set; }
+
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
+        public virtual Khasra Khasra { get; set; }
+
+
+
+
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
+        public virtual Acquiredlandvillage Village { get; set; }
+
+
+
     }
 }
