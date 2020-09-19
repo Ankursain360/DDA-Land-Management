@@ -55,7 +55,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile)
+        public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)
@@ -95,7 +95,7 @@ namespace SiteMaster.Controllers
                 propertyregistration.FileData = Assignfile;
                 if (propertyregistration.FileData != null)
                 {
-                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents";
+                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\LayoutDocs";
                     if (!Directory.Exists(DocumentPath))
                     {
                         // Try to create the directory.
@@ -123,7 +123,7 @@ namespace SiteMaster.Controllers
                 propertyregistration.GeoFileData = GeoAssignfile;
                 if (propertyregistration.GeoFileData != null)
                 {
-                    GeoDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\GeoReferencingDocs";
+                    GeoDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
                     if (!Directory.Exists(GeoDocumentPath))
                     {
                         // Try to create the directory.
@@ -133,6 +133,90 @@ namespace SiteMaster.Controllers
                     GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
+                }
+
+                /* For TakenOver File Upload*/
+                if (propertyregistration.GeoReferencing == 1)
+                {
+                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
+                    {
+                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+
+                }
+                string TakenOverFileName = "";
+                string TakenOverDocumentPath = "";
+                string TakenOverfilePath = "";
+                propertyregistration.GeoFileData = GeoAssignfile;
+                if (propertyregistration.GeoFileData != null)
+                {
+                    TakenOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\TakenOverDocs";
+                    if (!Directory.Exists(TakenOverDocumentPath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(TakenOverDocumentPath);
+                    }
+                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    TakenOverfilePath = Path.Combine(TakenOverDocumentPath, TakenOverFileName);
+                    propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
+                    propertyregistration.TakenOverFilePath = TakenOverfilePath;
+                }
+
+                /* For Handed Over File Upload*/
+                if (propertyregistration.GeoReferencing == 1)
+                {
+                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
+                    {
+                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+
+                }
+                string HandedOverFileName = "";
+                string HandedOverDocumentPath = "";
+                string HandedOverfilePath = "";
+                propertyregistration.GeoFileData = GeoAssignfile;
+                if (propertyregistration.GeoFileData != null)
+                {
+                    HandedOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
+                    if (!Directory.Exists(HandedOverDocumentPath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(HandedOverDocumentPath);
+                    }
+                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    HandedOverfilePath = Path.Combine(HandedOverDocumentPath, HandedOverFileName);
+                    propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
+                    propertyregistration.HandedOverFilePath = HandedOverfilePath;
+                }
+
+                /* For Disposal Type File Upload*/
+                if (propertyregistration.GeoReferencing == 1)
+                {
+                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
+                    {
+                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+
+                }
+                string DisposalTypeFileName = "";
+                string DisposalTypeDocumentPath = "";
+                string DisposalTypefilePath = "";
+                propertyregistration.GeoFileData = GeoAssignfile;
+                if (propertyregistration.GeoFileData != null)
+                {
+                    DisposalTypeDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
+                    if (!Directory.Exists(DisposalTypeDocumentPath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(DisposalTypeDocumentPath);
+                    }
+                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    DisposalTypefilePath = Path.Combine(DisposalTypeDocumentPath, DisposalTypeFileName);
+                    propertyregistration.GeoFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
+                    propertyregistration.GeoFilePath = DisposalTypefilePath;
                 }
                 #endregion
 
@@ -173,7 +257,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile)
+        public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)

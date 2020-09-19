@@ -68,7 +68,7 @@ namespace Libraries.Service.ApplicationService
             Propertyregistration model = result.FirstOrDefault();
             model.ClassificationOfLandId = propertyregistration.ClassificationOfLandId;
             model.DepartmentId = propertyregistration.DepartmentId;
-            model.UniqueId = propertyregistration.UniqueId;
+            model.PrimaryListNo = propertyregistration.PrimaryListNo;
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;
             model.LocalityId = propertyregistration.LocalityId;

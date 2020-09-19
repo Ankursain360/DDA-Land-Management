@@ -16,7 +16,7 @@ namespace Libraries.Model.Entity
         public int DivisionId { get; set; }
         public int LocalityId { get; set; }
         public string KhasraNo { get; set; }
-        public string UniqueId { get; set; }
+        public string PrimaryListNo { get; set; }
         public string Palandmark { get; set; }
         public int EncroachmentStatusId { get; set; }
         public string EncraochmentDetails { get; set; }
@@ -25,10 +25,10 @@ namespace Libraries.Model.Entity
         public string TotalAreaInBigha { get; set; }
         public decimal TotalArea { get; set; }
         public decimal? Encroached { get; set; }
-        public decimal BuiltUpEncraochmentArea { get; set; }
-        public decimal Vacant { get; set; }
-        public int PlannedUnplannedLand { get; set; }
-        public int MainLandUseId { get; set; }
+        public decimal? BuiltUpEncraochmentArea { get; set; }
+        public decimal? Vacant { get; set; }
+        public string PlannedUnplannedLand { get; set; }
+        public int? MainLandUseId { get; set; }
         public string SubUse { get; set; }
         public int BuiltUp { get; set; }
         public string BuiltUpRemarks { get; set; }
