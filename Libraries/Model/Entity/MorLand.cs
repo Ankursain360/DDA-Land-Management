@@ -11,9 +11,9 @@ namespace Libraries.Model.Entity
     {
 
        
-        public int NotificationId { get; set; }
+        public int LandNotificationId { get; set; }
         public DateTime? NotificationDate { get; set; }
-        public int SerialNoId { get; set; }
+        public int SerialnumberId { get; set; }
         public string PropertySiteNo { get; set; }
         public string Name { get; set; }
         public string SiteDescription { get; set; }

@@ -42,7 +42,7 @@
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Notification No.</label>
                            
-                            <select class="form-control dda-dropdown" asp-for="NotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                            <select class="form-control dda-dropdown" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
                                 <option>Select</option>
                             </select>
                         </div>
@@ -59,7 +59,7 @@
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Serial No</label>
-                            <select class="form-control dda-dropdown" asp-for="SerialNoId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","Name"))">
+                            <select class="form-control dda-dropdown" asp-for="SerialnumberId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","Name"))">
                                 <option>Select</option>
                             </select>
 

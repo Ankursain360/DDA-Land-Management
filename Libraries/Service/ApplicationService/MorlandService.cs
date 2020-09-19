@@ -54,8 +54,8 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
-            List<LandNotification> notificationList = await _morlandRepository.GetAllLandNotification();
-            return notificationList;
+            List<LandNotification> landnotificationList = await _morlandRepository.GetAllLandNotification();
+            return landnotificationList;
         }
 
         public async Task<List<Serialnumber>> GetAllSerialnumber()
@@ -73,9 +73,9 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _morlandRepository.FindBy(a => a.Id == id);
             Morland model = result.FirstOrDefault();
-            model.NotificationId = morland.NotificationId;
+            model.LandNotificationId = morland.LandNotificationId;
             model.NotificationDate = morland.NotificationDate;
-            model.SerialNoId = morland.SerialNoId;
+            model.SerialnumberId = morland.SerialnumberId;
             model.PropertySiteNo = morland.PropertySiteNo;
             model.Name = morland.Name;
             model.SiteDescription = morland.SiteDescription;
