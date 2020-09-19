@@ -57,6 +57,7 @@ namespace Libraries.Model.Entity
         public string DisposalTypeFilePath { get; set; }
         public string DisposalComments { get; set; }
         public string Remarks { get; set; }
+        public string DeletedReason { get; set; }
         public byte IsActive { get; set; }
         public byte IsDelated { get; set; }
         public byte IsValidate { get; set; }
@@ -109,7 +110,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public bool IsValidateData { get; set; }
 
-      
-
+       
     }
 }

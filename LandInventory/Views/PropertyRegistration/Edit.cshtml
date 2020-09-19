@@ -20,7 +20,7 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create" method="post" enctype="multipart/form-data">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="row">
@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" class="form-control">
+                            <input asp-for="TotalArea"  class="form-control">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
                         </div>
 
@@ -141,7 +141,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Encroched(in sq. mt.)</label>
-                            <input asp-for="Encroached" value="" class="form-control" disabled>
+                            <input asp-for="Encroached"  class="form-control" disabled>
                             <span asp-validation-for="Encroached" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                            <input asp-for="Vacant" value="" class="form-control">
+                            <input asp-for="Vacant"  class="form-control">
                             <span asp-validation-for="Vacant" class="text-danger"></span>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "Download", new { id = Model.Id })
+                                    @Html.ActionLink("Download", "Download", new { id = Model.Id})
                                 }
                                 else
                                 {
@@ -303,7 +303,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="TakenOverDate" type="date" value="" class="form-control">
+                            <input asp-for="TakenOverDate" type="date"  class="form-control">
                             <span asp-validation-for="TakenOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -325,7 +325,17 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverFileData">Document</label>
-                            <input type="file" class="form-control" name="TakenOverAssignFile" />
+                            <input type="hidden" asp-for="TakenOverFilePath" />
+                            @{
+                                @if (ViewBag.TakenOverDocView != null)
+                                {
+                                    @Html.ActionLink("Download", "TakenOverDownload", new { id = Model.Id })
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" name="TakenOverAssignfile">
+                                }
+                            }
                             <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
                         </div>
 
@@ -356,7 +366,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="HandedOverDate" type="date" value="" class="form-control">
+                            <input asp-for="HandedOverDate" type="date"  class="form-control">
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -378,7 +388,17 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverFileData">Document</label>
-                            <input type="file" class="form-control" name="HandedOverAssignFile" />
+                            <input type="hidden" asp-for="HandedOverFilePath" />
+                            @{
+                                @if (ViewBag.HandedOverDocView != null)
+                                {
+                                    @Html.ActionLink("Download", "HandedOverDownload", new { id = Model.Id })
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" name="HandedOverAssignFile">
+                                }
+                            }
                             <span asp-validation-for="HandedOverFileData" class="text-danger"></span>
                         </div>
                     </div>
@@ -411,12 +431,22 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="DisposalDate" type="date" value="" class="form-control">
+                            <input asp-for="DisposalDate" type="date"  class="form-control">
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="DisposalTypeFileData">Document</label>
-                            <input type="file" class="form-control" name="DisposalTypeAssignFile" />
+                            <input type="hidden" asp-for="DisposalTypeFilePath" />
+                            @{
+                                @if (ViewBag.DisposalTypeDocView != null)
+                                {
+                                    @Html.ActionLink("Download", "DisposalTypeDownload", new { id = Model.Id })
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" name="DisposalTypeAssignFile">
+                                }
+                            }
                             <span asp-validation-for="DisposalTypeFileData" class="text-danger"></span>
                         </div>
 

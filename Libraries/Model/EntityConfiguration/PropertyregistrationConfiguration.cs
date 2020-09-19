@@ -63,6 +63,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DeletedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.DeletedReason)
+                .HasMaxLength(5000)
+                .IsUnicode(false);
+
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DisposalComments)
@@ -207,12 +211,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ClassificationOfLandId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("ClassificationOfLandId");
-
-            builder.HasOne(d => d.Department)
-                .WithMany(p => p.Propertyregistration)
-                .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("DepartmentId");
 
             builder.HasOne(d => d.DisposalType)
                 .WithMany(p => p.Propertyregistration)

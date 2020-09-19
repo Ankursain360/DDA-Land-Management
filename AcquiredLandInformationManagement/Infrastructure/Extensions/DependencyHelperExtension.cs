@@ -40,7 +40,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IMorlandRepository, MorlandRepository>();
             services.AddScoped<IEnhancecompensationRepository, EnhancecompensationRepository>(); //added by Nikita
 
-            services.AddScoped<IEnchroachmentRepository, EnchroachmentRepository>(); //added by Nikita
+            services.AddScoped<ILdolandRepository, LdolandRepository>();
 
 
 
@@ -64,9 +64,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
 
-            services.AddScoped<IEnchroachmentService, EnchroachmentService>(); //added by Nikita
 
-
+            services.AddScoped<ILdolandService, LdolandService>();
 
 
 

@@ -7,15 +7,11 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class MorlandConfiguration : IEntityTypeConfiguration<Morland>
+    class LdolandConfiguration : IEntityTypeConfiguration<Ldoland>
     {
-        public void Configure(EntityTypeBuilder<Morland> builder)
+        public void Configure(EntityTypeBuilder<Ldoland> builder)
         {
-            builder.ToTable("morland", "lms");
-
-            builder.HasIndex(e => e.Name)
-                .HasName("Name_UNIQUE")
-                .IsUnique();
+            builder.ToTable("ldoland", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -29,48 +25,44 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.Developed)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.DateofPossession).HasColumnType("date");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.LandType)
+            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
+
+            builder.Property(e => e.Location)
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Name)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
             builder.Property(e => e.NotificationDate).HasColumnType("date");
 
-            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
-
             builder.Property(e => e.OccupiedBy)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.PropertySiteNo)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(500)
+                .HasMaxLength(400)
                 .IsUnicode(false);
 
             builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
-                .HasMaxLength(400)
+                .HasMaxLength(300)
                 .IsUnicode(false);
 
             builder.Property(e => e.StatusOfLand)
-                .HasMaxLength(200)
+                .HasMaxLength(100)
                 .IsUnicode(false);
-        }
-    }
 
+        }
+
+    }
+   
 }

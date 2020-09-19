@@ -13,8 +13,8 @@
     if (value == 1) {
         $("#EncraochmentDetails").attr("disabled", "disabled");
         $("#EncraochmentDetails").removeAttr("disabled", "disabled");
-        $("#Encroched").attr("disabled", "disabled");
-        $("#Encroched").removeAttr("disabled", "disabled");
+        $("#Encroached").attr("disabled", "disabled");
+        $("#Encroached").removeAttr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
@@ -117,8 +117,8 @@ $(function () {
         if (value == 0) {
             $('#EncraochmentDetails').val('');
             $("#EncraochmentDetails").attr("disabled", "disabled");
-            $('#Encroched').val('');
-            $("#Encroched").attr("disabled", "disabled");
+            $('#Encroached').val('');
+            $("#Encroached").attr("disabled", "disabled");
             $('#BuiltupEncroachmentArea').val('');
             $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
         }
@@ -126,9 +126,9 @@ $(function () {
             $('#EncraochmentDetails').val('');
             $("#EncraochmentDetails").attr("disabled", "disabled");
             $("#EncraochmentDetails").removeAttr("disabled", "disabled");
-            $('#Encroched').val('');
-            $("#Encroched").attr("disabled", "disabled");
-            $("#Encroched").removeAttr("disabled", "disabled");
+            $('#Encroached').val('');
+            $("#Encroached").attr("disabled", "disabled");
+            $("#Encroached").removeAttr("disabled", "disabled");
             $('#BuiltupEncroachmentArea').val('');
             $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
             $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
