@@ -1,40 +1,40 @@
 ﻿$(document).ready(function () {
-    var value = $('#Boundary').val();
+    var value = $('#Boundary option:selected').val();
     if (value == 1) {
         $('#divBoundaryRemarks').show();
     }
 
-    var value = $('#PULand').val();
-    if (value == 1) {
+    var value = $('#PlannedUnplannedLand').val();
+    if (value == 'Planned Land') {
         $('#divPlannedLand').show();
     }
 
-    var value = $('#EncroachmentStatus').val();
+    var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 1) {
-        $("#EncroachmentDetails").attr("disabled", "disabled");
-        $("#EncroachmentDetails").removeAttr("disabled", "disabled");
+        $("#EncraochmentDetails").attr("disabled", "disabled");
+        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
         $("#Encroched").attr("disabled", "disabled");
         $("#Encroched").removeAttr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
 
-    var value = $('#BuiltUp').val();
+    var value = $('#BuiltUp option:selected').val();
     if (value == 1) {
         $("#divBuilttype").show();
     }
 
-    var value = $('#LitigationStatus').val();
+    var value = $('#LitigationStatus option:selected').val();
     if (value == 1) {
         $("#divLitigationStatus").show();
     }
 
-    var value = $('#LayoutPlan').val();
+    var value = $('#LayoutPlan option:selected').val();
     if (value == 1) {
         $("#divLayoutPlan").show();
     }
 
-    var value = $('#GeoReferencing').val();
+    var value = $('#GeoReferencing option:selected').val();
     if (value == 1) {
         $("#divGEOReferencing").show();
     }
@@ -42,7 +42,7 @@
 
 $(function () {
     $('#Boundary').change(function () {
-        var value = $('#Boundary').val();
+        var value = $('#Boundary option:selected').val();
         if (value == 0) {
             $('#BoundaryRemarks').val('');
             $('#divBoundaryRemarks').hide();
@@ -56,7 +56,7 @@ $(function () {
 
 $(function () {
     $('#BuiltUp').change(function () {
-        var value = $('#BuiltUp').val();
+        var value = $('#BuiltUp option:selected').val();
         if (value == 0) {
             $('#BuiltUpRemarks').val('');
             $("#divBuilttype").hide();
@@ -70,7 +70,7 @@ $(function () {
 
 $(function () {
     $('#LayoutPlan').change(function () {
-        var value = $('#LayoutPlan').val();
+        var value = $('#LayoutPlan option:selected').val();
         if (value == 0) {
             $('#LayoutFileName').val('');
             $("#divLayoutPlan").hide();
@@ -85,7 +85,7 @@ $(function () {
 
 $(function () {
     $('#LitigationStatus').change(function () {
-        var value = $('#LitigationStatus').val();
+        var value = $('#LitigationStatus option:selected').val();
         if (value == 0) {
             $('#LitigationStatusRemarks').val('');
             $("#divLitigationStatus").hide();
@@ -99,7 +99,7 @@ $(function () {
 
 $(function () {
     $('#GeoReferencing').change(function () {
-        var value = $('#GeoReferencing').val();
+        var value = $('#GeoReferencing option:selected').val();
         if (value == 0) {
             $('#GeoFileName').val('');
             $("#divGEOReferencing").hide();
@@ -112,20 +112,20 @@ $(function () {
 });
 
 $(function () {
-    $('#EncroachmentStatus').change(function () {
-        var value = $('#EncroachmentStatus').val();
+    $('#EncroachmentStatusId').change(function () {
+        var value = $('#EncroachmentStatusId option:selected').val();
         if (value == 0) {
-            $('#EncroachmentDetails').val('');
-            $("#EncroachmentDetails").attr("disabled", "disabled");
+            $('#EncraochmentDetails').val('');
+            $("#EncraochmentDetails").attr("disabled", "disabled");
             $('#Encroched').val('');
             $("#Encroched").attr("disabled", "disabled");
             $('#BuiltupEncroachmentArea').val('');
             $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
         }
         else {
-            $('#EncroachmentDetails').val('');
-            $("#EncroachmentDetails").attr("disabled", "disabled");
-            $("#EncroachmentDetails").removeAttr("disabled", "disabled");
+            $('#EncraochmentDetails').val('');
+            $("#EncraochmentDetails").attr("disabled", "disabled");
+            $("#EncraochmentDetails").removeAttr("disabled", "disabled");
             $('#Encroched').val('');
             $("#Encroched").attr("disabled", "disabled");
             $("#Encroched").removeAttr("disabled", "disabled");
@@ -138,13 +138,13 @@ $(function () {
 
 
 $(function () {
-    $('#PULand').change(function () {
-        var value = $('#PULand').val();
-        if (value == 2) {
-            $('#divPlannedLand').hide();
+    $('#PlannedUnplannedLand').change(function () {
+        var value = $('#PlannedUnplannedLand').val();
+        if (value == 'Planned Land') {
+            $('#divPlannedLand').show();
         }
         else {
-            $('#divPlannedLand').show();
+            $('#divPlannedLand').hide();
         }
     });
 });

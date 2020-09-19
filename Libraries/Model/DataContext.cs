@@ -22,7 +22,7 @@ namespace Libraries.Model
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
-        public virtual DbSet<LandNotification> Notification { get; set; }
+        public virtual DbSet<LandNotification> LandNotification { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<PropertyType> PropertyType { get; set; }
         public virtual DbSet<Role> Role { get; set; }
