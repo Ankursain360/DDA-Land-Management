@@ -16,10 +16,10 @@ namespace Libraries.Model.Entity
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
-        public int NEncroachmentId { get; set; } 
+        public int NatureofencroachmentId { get; set; } 
         public string FileNo { get; set; }
         public DateTime? ActionDate { get; set; }
-        public int ReasonId { get; set; }
+        public int ReasonsId { get; set; }
         public string DamageArea { get; set; }
         public string ActionRemarks { get; set; }
         public string Name { get; set; }
@@ -27,6 +27,18 @@ namespace Libraries.Model.Entity
         public string Payment { get; set; }
         public string PaymentAddress { get; set; }
         public byte IsActive { get; set; }
+
+        [NotMapped]
+        public List<Natureofencroachment> NencroachmentList { get; set; }
+        public virtual Natureofencroachment Natureofencroachment { get; set; }
+
+
+        [NotMapped]
+        public List<Reasons> ReasonsList { get; set; }
+        public virtual Reasons Reasons { get; set; }
+
+
+
 
 
         [NotMapped]

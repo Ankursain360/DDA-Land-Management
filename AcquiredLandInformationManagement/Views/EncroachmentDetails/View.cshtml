@@ -19,10 +19,10 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">View Details </h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="View">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div id="DivSection">
@@ -130,7 +130,7 @@
                         <div class="form-group col-md-4">
 
                             <label class="control-label lb-sm">Reference No/File No</label>
-                            <input type="Text" asp-for="FileNo" class="form-control" / >
+                            <input type="Text" asp-for="FileNo" class="form-control" />
                         </div>
                     </div>
                     <div id="DivNotificationTaken">
@@ -161,7 +161,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Damage Area</label>
                                 <label class="radio-inline">
-                                    <input type="radio" asp-for="DamageArea"  value="Yes" />Yes
+                                    <input type="radio" asp-for="DamageArea" value="Yes" />Yes
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" asp-for="DamageArea" value="No" />No
@@ -220,8 +220,7 @@
 
                     <div class="form-row ">
                         <div class="form-group col-md-12" style="margin-bottom:40px;">
-                            <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                              @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                             @Html.ActionLink("Back", "Index", "EncroachmentDetails", null, new { @class = "btn btn-primary dda-pageheading" })
                         </div>
                     </div>
@@ -230,6 +229,7 @@
         </div>
     </div>
 </div>
+
 
 
 
