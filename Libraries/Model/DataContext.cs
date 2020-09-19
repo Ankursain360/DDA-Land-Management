@@ -111,6 +111,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NatureofencroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new LdolandConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
         }
 
     }
