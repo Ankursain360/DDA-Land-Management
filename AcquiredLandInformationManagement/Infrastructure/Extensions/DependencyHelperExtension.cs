@@ -41,7 +41,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IEnhancecompensationRepository, EnhancecompensationRepository>(); //added by Nikita
 
             services.AddScoped<ILdolandRepository, LdolandRepository>();
-
+            services.AddScoped<IBooktransferlandRepository, BooktransferlandRepository>();
 
 
             /* Application Services */
@@ -67,7 +67,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<ILdolandService, LdolandService>();
 
-
+            services.AddScoped<IBooktransferlandService, BooktransferlandService>();
 
 
 

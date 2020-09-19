@@ -51,7 +51,9 @@
                     <td>@item.Name</td>
                     <td>@item.RequiredAgency</td>
                     <td>@item.ProposalFileNo</td>
-                    <td>@item.ProposalDate</td>
+                    
+                    <td>@(Convert.ToDateTime(item.ProposalDate).ToString("dd-MMM-yyyy"))</td>
+
                     <td>@item.Bigha</td>
                     <td>@item.Biswa</td>
                     <td>@item.Biswanshi</td>
