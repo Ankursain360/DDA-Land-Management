@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<LandNotification>> GetAllLandNotification()
         {
-            List<LandNotification> notificationList = await _dbContext.Notification.ToListAsync();
+            List<LandNotification> notificationList = await _dbContext.LandNotification.ToListAsync();
             return notificationList;
         }
 
