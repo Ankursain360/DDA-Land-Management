@@ -69,9 +69,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.DisposalTypeFilePath).HasColumnType("longtext");
-
             builder.Property(e => e.DisposalDate).HasColumnType("date");
+
+            builder.Property(e => e.DisposalTypeFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.DisposalTypeId).HasColumnType("int(11)");
 
@@ -81,7 +81,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Encroached).HasColumnType("decimal(18,3)");
+            builder.Property(e => e.Encroached)
+                .HasColumnType("decimal(18,3)")
+                .HasDefaultValueSql("0.000");
 
             builder.Property(e => e.EncroachmentStatusId).HasColumnType("int(11)");
 
@@ -135,7 +137,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
-            builder.Property(e => e.MainLandUseId).HasColumnType("int(11)");
+            builder.Property(e => e.MainLandUseId)
+                .HasColumnType("int(11)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -144,7 +148,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PlannedUnplannedLand).HasColumnType("int(11)");
+            builder.Property(e => e.PlannedUnplannedLand)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.PrimaryListNo)
+                .IsRequired()
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
@@ -181,11 +193,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.TotalAreaInBigha)
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
-            builder.Property(e => e.UniqueId)
-                .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
@@ -227,7 +234,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasOne(d => d.MainLandUse)
                 .WithMany(p => p.Propertyregistration)
                 .HasForeignKey(d => d.MainLandUseId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("MainLandUseId");
 
             builder.HasOne(d => d.Zone)
