@@ -182,7 +182,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Main Land Use</label>
                                 <select class="form-control dda-dropdown" asp-for="MainLandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
-                                    <option>--Select--</option>
+                                    <option value="0">--Select--</option>
                                 </select>
                                 <span asp-validation-for="MainLandUseId" class="text-danger"></span>
                             </div>

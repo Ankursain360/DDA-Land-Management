@@ -110,7 +110,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public bool IsValidateData { get; set; }
 
-      
-
+       
     }
 }
