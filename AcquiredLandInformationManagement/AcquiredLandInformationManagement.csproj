@@ -37,4 +37,8 @@
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataAccess\DataObjects\" />
+  </ItemGroup>
+
 </Project>
