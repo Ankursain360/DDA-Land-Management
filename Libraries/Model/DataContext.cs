@@ -102,7 +102,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EnhancecompensationConfiguration());
             modelBuilder.ApplyConfiguration(new UtilizationtypeConfiguration());
             modelBuilder.ApplyConfiguration(new DisposallandConfiguration());
-
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
         }
 

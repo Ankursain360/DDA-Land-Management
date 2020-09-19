@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         [Remote(action: "Exist", controller: "Notification", AdditionalFields = "Id")]
         public string Name { get; set; }
         public byte IsActive { get; set; }
-
+        
     }
 }
 

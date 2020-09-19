@@ -14,7 +14,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<LandNotification> builder)
         {
-            builder.ToTable("notification", "lms");
+            builder.ToTable("landnotification", "lms");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name")
