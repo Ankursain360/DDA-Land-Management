@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
       
         public int VillageId { get; set; }
         public int KhasraId { get; set; }
-        public int LandUseId { get; set; }
+        public string LandUse { get; set; }
         public DateTime? DateofDetection { get; set; }
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }

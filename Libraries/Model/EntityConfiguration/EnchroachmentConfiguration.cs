@@ -49,7 +49,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
-            builder.Property(e => e.LandUseId).HasColumnType("int(11)");
+            builder.Property(e => e.LandUse).HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
