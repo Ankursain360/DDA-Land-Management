@@ -1,10 +1,20 @@
-﻿using System;
+﻿using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Repository.IEntityRepository
+
+namespace Libraries.Repository.IEntityRepository
 {
-    class IEnchroachmentRepository
+    public interface IEnchroachmentRepository : IGenericRepository<Enchroachment>
     {
+        Task<List<Enchroachment>> GetAllEnchroachment();
+
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+        Task<List<Natureofencroachment>> GetAllNencroachment();
+        Task<List<Khasra>> BindKhasra();
+        Task<List<Reasons>> GetAllReasons();
     }
 }
