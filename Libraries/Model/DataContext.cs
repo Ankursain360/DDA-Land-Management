@@ -66,6 +66,7 @@ namespace Libraries.Model
         public virtual DbSet<Morland> Morland { get; set; }
         public virtual DbSet<Enchroachment> Enchroachment { get; set; }
 
+        public virtual DbSet<Ldoland> Ldoland { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -109,6 +110,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new SerialnumberConfiguration());
             modelBuilder.ApplyConfiguration(new NatureofencroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new LdolandConfiguration());
         }
 
     }
