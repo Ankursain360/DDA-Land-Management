@@ -11,8 +11,7 @@
 
     var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 1) {
-        $("#EncraochmentDetails").attr("disabled", "disabled");
-        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
+        $("#divEncroachmentDetails").show();
         $("#Encroached").attr("disabled", "disabled");
         $("#Encroached").removeAttr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
@@ -116,7 +115,7 @@ $(function () {
         var value = $('#EncroachmentStatusId option:selected').val();
         if (value == 0) {
             $('#EncraochmentDetails').val('');
-            $("#EncraochmentDetails").attr("disabled", "disabled");
+            $("#divEncroachmentDetails").hide();
             $('#Encroached').val('');
             $("#Encroached").attr("disabled", "disabled");
             $('#BuiltupEncroachmentArea').val('');
@@ -124,8 +123,7 @@ $(function () {
         }
         else {
             $('#EncraochmentDetails').val('');
-            $("#EncraochmentDetails").attr("disabled", "disabled");
-            $("#EncraochmentDetails").removeAttr("disabled", "disabled");
+            $("#divEncroachmentDetails").show();
             $('#Encroached').val('');
             $("#Encroached").attr("disabled", "disabled");
             $("#Encroached").removeAttr("disabled", "disabled");
@@ -147,4 +145,59 @@ $(function () {
             $('#divPlannedLand').hide();
         }
     });
+});
+
+//Validations For Page Added by Renu 19 Sep 2020
+
+$('.numbers').keyup(function () {
+    this.value = this.value.replace(/[^0-9\.]/g, '');
+});
+
+$('.onlynumbers').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/[^0-9]/g,''));
+});
+//$('.input').keyup(function () {
+//    var $th = $(this);
+//    $th.val($th.val().replace(/[^a-zA-Z0-9]/g, function (str) { alert('You typed " ' + str + ' ".\n\nPlease use only letters and numbers.'); return ''; }));
+//});
+$('#myForm').validate({
+    rules: {
+        TakenOverEmailId: {
+            minlength: 3,
+            maxlength: 255,
+            //required: true,
+            email: true
+        },
+
+        HandedOverEmailId: {
+            minlength: 3,
+            maxlength: 255,
+            email: true
+        }
+
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        alert('Form validated and submitted ok.');
+        return false;
+    }
+});
+
+$(function () {
+    $("#datepicker").datepicker();
 });

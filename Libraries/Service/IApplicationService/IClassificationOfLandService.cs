@@ -8,7 +8,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IClassificationOfLandService : IEntityService<Classificationofland>
     {
-        Task<List<Classificationofland>> GetAllLandUse(); // To Get all data added by renu
+        Task<List<Classificationofland>> GetAllClassificationOfLand(); // To Get all data added by renu
 
         Task<bool> Update(int id, Classificationofland classificationofland); // To Upadte Particular data added by renu
 

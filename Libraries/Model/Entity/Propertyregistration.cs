@@ -10,12 +10,23 @@ namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
+        [Required(ErrorMessage = "Classification Of Land is Madatory Field")]
         public int ClassificationOfLandId { get; set; }
+
+        [Required(ErrorMessage = "Department is Madatory Field")]
         public int DepartmentId { get; set; }
+
+        [Required(ErrorMessage = "Zone is Madatory Field")]
         public int ZoneId { get; set; }
+
+        [Required(ErrorMessage = "Division is Madatory Field")]
         public int DivisionId { get; set; }
-        public int LocalityId { get; set; }
+
+        [Required(ErrorMessage = "Locality is Madatory Field")]
+        public int LocalityId { get; set; }       
         public string KhasraNo { get; set; }
+
+        [Required(ErrorMessage = "Primary List No. is Madatory Field")]
         public string PrimaryListNo { get; set; }
         public string Palandmark { get; set; }
         public int EncroachmentStatusId { get; set; }
@@ -23,6 +34,8 @@ namespace Libraries.Model.Entity
         public int Boundary { get; set; }
         public string BoundaryRemarks { get; set; }
         public string TotalAreaInBigha { get; set; }
+
+        [Required(ErrorMessage = "Total Area is Madatory Field")]
         public decimal TotalArea { get; set; }
         public decimal? Encroached { get; set; }
         public decimal? BuiltUpEncraochmentArea { get; set; }
@@ -40,14 +53,24 @@ namespace Libraries.Model.Entity
         public string GeoFilePath { get; set; }
         public string TakenOverName { get; set; }
         public DateTime? TakenOverDate { get; set; }
+
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string TakenOverEmailId { get; set; }
+
+
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid 10 digit Mobile Number")]
         public string TakenOverMobileNo { get; set; }
         public string TakenOverLandlineNo { get; set; }
         public string TakenOverComments { get; set; }
         public string TakenOverFilePath { get; set; }
         public string HandedOverName { get; set; }
         public DateTime? HandedOverDate { get; set; }
+
+        [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
         public string HandedOverEmailId { get; set; }
+
+
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid 10 digit Mobile Number")]
         public string HandedOverMobileNo { get; set; }
         public string HandedOverLandlineNo { get; set; }
         public string HandedOverComments { get; set; }
