@@ -39,7 +39,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DateofDetection).HasColumnType("date");
 
-            builder.Property(e => e.NEncroachmentId).HasColumnType("int(11)");
+            builder.Property(e => e.NatureofencroachmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.FileNo)
                 .HasMaxLength(100)
@@ -66,7 +66,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ReasonId).HasColumnType("int(11)");
+            builder.Property(e => e.ReasonsId).HasColumnType("int(11)");
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
    

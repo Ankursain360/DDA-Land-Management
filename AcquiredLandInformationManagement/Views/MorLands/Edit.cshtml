@@ -31,8 +31,9 @@
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Edit" id="create_user">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
 
 
                 <div id="Divclsification">
@@ -41,7 +42,7 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Notification No.</label>
-                           
+
                             <select class="form-control dda-dropdown" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
                                 <option>Select</option>
                             </select>
@@ -194,87 +195,43 @@
                                 </select>
                                 <span asp-validation-for="IsActive" class="text-danger"></span>
                             </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Remarks</label>
+                                <textarea asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label lb-sm">Remarks</label>
-                                    <textarea asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
-                                </div>
-
-                            </div>
-
-
-
 
                         </div>
 
 
 
 
-
-
-
-                        @*</div>
-        </div>*@
                     </div>
+
+
+
+
+
+
+
+                    @*</div>
+                </div>*@
+                </div>
 
 
 
                 <br /><br />
                 <div class="form-row">
-                    <div class="form-group  col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
                         @Html.ActionLink("Back", "Index", "MorLands", null, new { @class = "btn btn-primary dda-pageheading" })
-
-
-
-
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
 </div>
-<script>
 
-    $(function () {
-        $("input[name='grpSearchby']").click(function () {
-            if ($("#rdbFilename").is(":checked")) {
-                $("#DivForFileName").show();
-                $("#DivForDocumentName").hide();
-                $("#DivForGenerate").hide();
-            }
-            else if ($("#rdbDocumentname").is(":checked")) {
-                $("#DivForFileName").hide();
-                $("#DivForDocumentName").show();
-                $("#DivForGenerate").hide();
-            }
-            //else {
-            //    $("#DivForFileName").hide();
-            //    $("#DivForPayeeName").hide();
-            //}
-        });
-    });
-
-</script>
-
-<script>
-    $(function () {
-        $("input[name='grpMainFile']").click(function () {
-            if ($("#rSubsequent").is(":checked")) {
-                $("#DivForSubsequentPurchaser").show();
-            } else {
-                $("#DivForSubsequentPurchaser").hide();
-            }
-        });
-    });
-</script>
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
-</script>
-<script>
-    $(function () {
-        $("#date").datepicker({ dateFormat: 'yy' });
-    });
-</script>
