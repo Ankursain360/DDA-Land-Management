@@ -32,9 +32,9 @@ namespace LandInventory.Controllers
 
             async Task BindDropDown(Propertyregistration propertyregistration)
             {
-               propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+          //     propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
                propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-               propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+          //     propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
             }
             public async Task<IActionResult> Create()
             {
@@ -48,18 +48,20 @@ namespace LandInventory.Controllers
 
             public async Task<PartialViewResult> GetDetails( int department, int zone, int division)
             {
-                var result = await _propertyregistrationService.GetRestoreLandReportData( department, zone, division);
+            //var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division);
 
-                if (result != null)
-                {
-                    return PartialView("Index", result);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return PartialView();
-                }
-            }
+            //if (result != null)
+            //{
+            //    return PartialView("Index", result);
+            //}
+            //else
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //    return PartialView();
+            //}
+
+            return PartialView();
+        }
         }
     }
 
