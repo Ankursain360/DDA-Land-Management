@@ -10,23 +10,23 @@ namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "Classification Of Land is Madatory Field")]
+        [Required(ErrorMessage = "Classification Of Land is Mandatory Field")]
         public int ClassificationOfLandId { get; set; }
 
-        [Required(ErrorMessage = "Department is Madatory Field")]
+        [Required(ErrorMessage = "Department is Mandatory Field")]
         public int DepartmentId { get; set; }
 
-        [Required(ErrorMessage = "Zone is Madatory Field")]
+        [Required(ErrorMessage = "Zone is Mandatory Field")]
         public int ZoneId { get; set; }
 
-        [Required(ErrorMessage = "Division is Madatory Field")]
+        [Required(ErrorMessage = "Division is Mandatory Field")]
         public int DivisionId { get; set; }
 
-        [Required(ErrorMessage = "Locality is Madatory Field")]
+        [Required(ErrorMessage = "Locality is Mandatory Field")]
         public int LocalityId { get; set; }       
         public string KhasraNo { get; set; }
 
-        [Required(ErrorMessage = "Primary List No. is Madatory Field")]
+        [Required(ErrorMessage = "Primary List No. is Mandatory Field")]
         public string PrimaryListNo { get; set; }
         public string Palandmark { get; set; }
         public int EncroachmentStatusId { get; set; }
@@ -35,7 +35,7 @@ namespace Libraries.Model.Entity
         public string BoundaryRemarks { get; set; }
         public string TotalAreaInBigha { get; set; }
 
-        [Required(ErrorMessage = "Total Area is Madatory Field")]
+        [Required(ErrorMessage = "Total Area is Mandatory Field")]
         public decimal TotalArea { get; set; }
         public decimal? Encroached { get; set; }
         public decimal? BuiltUpEncraochmentArea { get; set; }

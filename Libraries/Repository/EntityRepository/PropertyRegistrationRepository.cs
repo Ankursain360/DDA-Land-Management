@@ -70,9 +70,9 @@ namespace Libraries.Repository.EntityRepository
             return DisposaltypeList;
         }
 
-        public async Task<List<Division>> GetDivisionDropDownList()
+        public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
-            List<Division> DivisionList = await _dbContext.Division.Where(x => x.IsActive == 1).ToListAsync();
+            List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return DivisionList;
         }
 
@@ -109,9 +109,9 @@ namespace Libraries.Repository.EntityRepository
             return LanduseList;
         }
 
-        public async Task<List<Locality>> GetLocalityDropDownList()
+        public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
-            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return LocalityList;
         }
 
@@ -148,9 +148,9 @@ namespace Libraries.Repository.EntityRepository
             return File;
         }
 
-        public async Task<List<Zone>> GetZoneDropDownList()
+        public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
-            List<Zone> ZoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
+            List<Zone> ZoneList = await _dbContext.Zone.Where(x =>x.DepartmentId == DepartmentId && x.IsActive == 1).ToListAsync();
             return ZoneList;
         }
     }

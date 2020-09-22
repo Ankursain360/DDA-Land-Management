@@ -40,12 +40,12 @@ namespace SiteMaster.Controllers
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+           // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+        //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+          //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
         {
@@ -56,6 +56,8 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
@@ -250,6 +252,11 @@ namespace SiteMaster.Controllers
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.IsValidateUser = 2;
             await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
             if (Data == null)
             {
                 return NotFound();
@@ -261,6 +268,9 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
+            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
+            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
+            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
             if (ModelState.IsValid)
             {
                 if (propertyregistration.IsValidateData == true)
@@ -485,6 +495,12 @@ namespace SiteMaster.Controllers
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
+
             if (Data == null)
             {
                 return NotFound();
@@ -575,6 +591,30 @@ namespace SiteMaster.Controllers
                 {".gif", "image/gif"},
                 {".csv", "text/csv"}
             };
+        }
+        #endregion
+
+
+        #region Dropdown Dependency calls added  by renu 
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int?departmentId)
+        {
+            departmentId = departmentId ?? 0;
+            return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLocalityList(int?zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetLocalityDropDownList(Convert.ToInt32(zoneId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int?zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
     }
