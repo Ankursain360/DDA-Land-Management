@@ -23,6 +23,7 @@ using Libraries.Repository.IEntityRepository;
 using Libraries.Repository.EntityRepository;
 using Libraries.Model;
 using LandInventory.Infrastructure.Extensions;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace LandInventory
 {
@@ -80,6 +81,15 @@ namespace LandInventory
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
+
+            services.Configure<FormOptions>(x =>
+            {
+                x.ValueLengthLimit = int.MaxValue;
+                x.MultipartBodyLengthLimit = int.MaxValue; // if don't set default value is: 128 MB
+                x.MultipartHeadersLengthLimit = int.MaxValue;
+            });
+
+
             services.RegisterDependency();
 
 #if DEBUG

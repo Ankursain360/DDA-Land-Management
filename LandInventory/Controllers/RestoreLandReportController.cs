@@ -46,36 +46,38 @@ namespace LandInventory.Controllers
         //    ViewBag.Message = Alert.Show(Messages.RestoreSuccess, "", AlertType.Success);
         //    return View(form);
         //}
-            //async Task BindDropDown(Propertyregistration propertyregistration)
+            async Task BindDropDown(Propertyregistration propertyregistration)
+            {
+          //     propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+               propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+          //     propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+            }
+            public async Task<IActionResult> Create()
+            {
+                Propertyregistration propertyregistration = new Propertyregistration();
+                //propertyregistration.LitigationStatus = 2;
+                //propertyregistration.Encroached = 2;
+                await BindDropDown(propertyregistration);
+                return View(propertyregistration);
+            }
+
+
+            public async Task<PartialViewResult> GetDetails( int department, int zone, int division)
+            {
+            //var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division);
+
+            //if (result != null)
             //{
-            //   propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            //   propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            //   propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+            //    return PartialView("Index", result);
             //}
-            //public async Task<IActionResult> Create()
+            //else
             //{
-            //    Propertyregistration propertyregistration = new Propertyregistration();
-            //    //propertyregistration.LitigationStatus = 2;
-            //    //propertyregistration.Encroached = 2;
-            //    await BindDropDown(propertyregistration);
-            //    return View(propertyregistration);
+            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //    return PartialView();
             //}
 
-
-            //public async Task<PartialViewResult> GetDetails( int department, int zone, int division)
-            //{
-            //    var result = await _propertyregistrationService.GetRestoreLandReportData( department, zone, division);
-
-            //    if (result != null)
-            //    {
-            //        return PartialView("Index", result);
-            //    }
-            //    else
-            //    {
-            //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            //        return PartialView();
-            //    }
-           // }
+            return PartialView();
+        }
         }
     }
 

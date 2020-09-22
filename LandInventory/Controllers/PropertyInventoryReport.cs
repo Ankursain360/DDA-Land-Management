@@ -62,5 +62,28 @@ namespace LandInventory.Controllers
                 return PartialView();
             }
         }
+
+        #region Dropdown Dependency calls added  by renu 
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? departmentId)
+        {
+            departmentId = departmentId ?? 0;
+            return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLocalityList(int? zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetLocalityDropDownList(Convert.ToInt32(zoneId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int? zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
+        }
+        #endregion
     }
 }

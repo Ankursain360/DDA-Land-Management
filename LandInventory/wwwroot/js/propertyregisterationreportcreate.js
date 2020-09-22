@@ -19,8 +19,34 @@ $(document).ready(function () {
         });
     });
 });
-$(function () {
-    $(".linkdisabled").click(function () {
-        return false;
+//Bind Zone Dropdown from Department
+function GetZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ZoneId").html(html);
     });
-});
+};
+
+//Bind Divison and Locality Dropdown from Department
+function GetDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#DivisionId").html(html);
+    });
+
+    HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").html(html);
+    });
+};
