@@ -62,22 +62,22 @@ namespace LandInventory.Controllers
             }
 
 
-            public async Task<PartialViewResult> GetDetails( int department, int zone, int division)
-            {
-            //var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division);
-
-            //if (result != null)
+            //public async Task<PartialViewResult> GetDetails( int department, int zone, int division)
             //{
-            //    return PartialView("Index", result);
-            //}
-            //else
-            //{
-            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            //    return PartialView();
-            //}
+            ////var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division);
 
-            return PartialView();
-        }
+            ////if (result != null)
+            ////{
+            ////    return PartialView("Index", result);
+            ////}
+            ////else
+            ////{
+            ////    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            ////    return PartialView();
+            ////}
+
+            //return PartialView();
+        //}
         }
     }
 
