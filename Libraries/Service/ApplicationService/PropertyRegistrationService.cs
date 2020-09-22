@@ -142,6 +142,18 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        //public async Task<bool> Restore(int id)  // added by ishu
+        //{
+        //    var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+        //    Propertyregistration model = form.FirstOrDefault();
+        //    model.ModifiedBy = 1;
+        //    model.IsDelated = 1;
+        //    model.ModifiedDate = DateTime.Now;
+        //    _propertyregistrationRepository.Edit(model);
+        //    return await _unitOfWork.CommitAsync() > 0;
+        //}
+
+
         public string GetFile(int id)
         {
             return _propertyregistrationRepository.GetFile(id);

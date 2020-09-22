@@ -22,7 +22,9 @@ namespace Libraries.Service.IApplicationService
         Task<Propertyregistration> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
+        //Task<bool> Restore(int id);  // to restore data added by ishu
 
+       
         Task<bool> CheckDeleteAuthority(int id);
         string GetFile(int id);
         string GetGeoFile(int id);
