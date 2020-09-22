@@ -155,12 +155,8 @@ $('.numbers').keyup(function () {
 
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
-    $th.val($th.val().replace(/[^0-9]/g,''));
+    $th.val($th.val().replace(/[^0-9]/g, ''));
 });
-//$('.input').keyup(function () {
-//    var $th = $(this);
-//    $th.val($th.val().replace(/[^a-zA-Z0-9]/g, function (str) { alert('You typed " ' + str + ' ".\n\nPlease use only letters and numbers.'); return ''; }));
-//});
 $('#myForm').validate({
     rules: {
         TakenOverEmailId: {
@@ -174,8 +170,53 @@ $('#myForm').validate({
             minlength: 3,
             maxlength: 255,
             email: true
-        }
+        },
 
+        ClassificationOfLandId: {
+             required: true
+        },
+        DepartmentId: {
+            required: true
+        },
+        ZoneId: {
+            required: true
+        },
+        DivisionId: {
+            required: true
+        },
+        LocalityId: {
+            required: true
+        },
+        PrimaryListNo: {
+            required: true
+        },
+        TotalArea: {
+            required: true
+        }
+    },
+
+    messages: {
+        ClassificationOfLandId: {
+            required: ClassificationOfLandIdMessage //this is a function that returns custom messages
+        },
+        DepartmentId: {
+            required: DepartmentIdMessage //this is a function that returns custom messages
+        },
+        ZoneId: {
+            required: ZoneIdMessage //this is a function that returns custom messages
+        },
+        DivisionId: {
+            required: DivisionIdMessage //this is a function that returns custom messages
+        },
+        LocalityId: {
+            required: LocalityIdMessage //this is a function that returns custom messages
+        },
+        PrimaryListNo: {
+            required: PrimaryListNoMessage //this is a function that returns custom messages
+        },
+        TotalArea: {
+            required: TotalAreaMessage //this is a function that returns custom messages
+        }
     },
     highlight: function (element) {
         $(element).closest('.form-group').addClass('has-error');
@@ -193,11 +234,77 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        alert('Form validated and submitted ok.');
+     //   alert('Form validated and submitted ok.');
         return false;
     }
 });
 
+//For Drop down
+function ClassificationOfLandIdMessage() {
+    var dropdown_val = $('#ClassificationOfLandId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Classification Of Land is Required";
+    } else {
+        return "";
+    }
+} 
+
+function DepartmentIdMessage() {
+    var dropdown_val = $('#DepartmentId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Department is Required";
+    } else {
+        return "";
+    }
+} 
+
+function ZoneIdMessage() {
+    var dropdown_val = $('#ZoneId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Zone is Required";
+    } else {
+        return "";
+    }
+} 
+
+function DivisionIdMessage() {
+    var dropdown_val = $('#DivisionId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Division is Required";
+    } else {
+        return "";
+    }
+} 
+
+function LocalityIdMessage() {
+    var dropdown_val = $('#LocalityId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Locality is Required";
+    } else {
+        return "";
+    }
+} 
+
+//For Textbox
+function PrimaryListNoMessage() {
+    var dropdown_val = $('#PrimaryListNo').val();
+    if (dropdown_val == "") {
+        return "Primary List No is Required";
+    } else {
+        return "";
+    }
+}
+
+function TotalAreaMessage() {
+    var dropdown_val = $('#TotalArea').val();
+    if (dropdown_val == "") {
+        return "Total Area is Required";
+    } else {
+        return "";
+    }
+}
+
 $(function () {
-    $("#datepicker").datepicker();
+   
+    $("#HandedOverDate").datepicker();
 });
