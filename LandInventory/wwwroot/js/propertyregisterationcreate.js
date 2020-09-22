@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿//import { Dropdown } from "../lib/bootstrap/dist/js/bootstrap.bundle";
+
+$(document).ready(function () {
     var value = $('#Boundary option:selected').val();
     if (value == 1) {
         $('#divBoundaryRemarks').show();
@@ -11,8 +13,7 @@
 
     var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 1) {
-        $("#EncraochmentDetails").attr("disabled", "disabled");
-        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
+        $("#divEncroachmentDetails").show();
         $("#Encroached").attr("disabled", "disabled");
         $("#Encroached").removeAttr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
@@ -116,7 +117,7 @@ $(function () {
         var value = $('#EncroachmentStatusId option:selected').val();
         if (value == 0) {
             $('#EncraochmentDetails').val('');
-            $("#EncraochmentDetails").attr("disabled", "disabled");
+            $("#divEncroachmentDetails").hide();
             $('#Encroached').val('');
             $("#Encroached").attr("disabled", "disabled");
             $('#BuiltupEncroachmentArea').val('');
@@ -124,8 +125,7 @@ $(function () {
         }
         else {
             $('#EncraochmentDetails').val('');
-            $("#EncraochmentDetails").attr("disabled", "disabled");
-            $("#EncraochmentDetails").removeAttr("disabled", "disabled");
+            $("#divEncroachmentDetails").show();
             $('#Encroached').val('');
             $("#Encroached").attr("disabled", "disabled");
             $("#Encroached").removeAttr("disabled", "disabled");
@@ -148,3 +148,196 @@ $(function () {
         }
     });
 });
+
+//Validations For Page Added by Renu 19 Sep 2020
+
+$('.numbers').keyup(function () {
+    this.value = this.value.replace(/[^0-9\.]/g, '');
+});
+
+$('.onlynumbers').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/[^0-9]/g, ''));
+});
+$('#myForm').validate({
+    rules: {
+        TakenOverEmailId: {
+            minlength: 3,
+            maxlength: 255,
+            //required: true,
+            email: true
+        },
+
+        HandedOverEmailId: {
+            minlength: 3,
+            maxlength: 255,
+            email: true
+        },
+
+        ClassificationOfLandId: {
+             required: true
+        },
+        DepartmentId: {
+            required: true
+        },
+        ZoneId: {
+            required: true
+        },
+        DivisionId: {
+            required: true
+        },
+        LocalityId: {
+            required: true
+        },
+        PrimaryListNo: {
+            required: true
+        },
+        TotalArea: {
+            required: true
+        }
+    },
+
+    messages: {
+        ClassificationOfLandId: {
+            required: ClassificationOfLandIdMessage //this is a function that returns custom messages
+        },
+        DepartmentId: {
+            required: DepartmentIdMessage //this is a function that returns custom messages
+        },
+        ZoneId: {
+            required: ZoneIdMessage //this is a function that returns custom messages
+        },
+        DivisionId: {
+            required: DivisionIdMessage //this is a function that returns custom messages
+        },
+        LocalityId: {
+            required: LocalityIdMessage //this is a function that returns custom messages
+        },
+        PrimaryListNo: {
+            required: PrimaryListNoMessage //this is a function that returns custom messages
+        },
+        TotalArea: {
+            required: TotalAreaMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        alert('Form validated and submitted ok.');
+        return true;
+    }
+});
+
+//For Drop down
+function ClassificationOfLandIdMessage() {
+    var dropdown_val = $('#ClassificationOfLandId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Classification Of Land is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function DepartmentIdMessage() {
+    var dropdown_val = $('#DepartmentId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Department is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function ZoneIdMessage() {
+    var dropdown_val = $('#ZoneId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Zone is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function DivisionIdMessage() {
+    var dropdown_val = $('#DivisionId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Division is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function LocalityIdMessage() {
+    var dropdown_val = $('#LocalityId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Locality is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+//For Textbox
+function PrimaryListNoMessage() {
+    var dropdown_val = $('#PrimaryListNo').val();
+    if (dropdown_val == "") {
+        return "Primary List No is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+function TotalAreaMessage() {
+    var dropdown_val = $('#TotalArea').val();
+    if (dropdown_val == "") {
+        return "Total Area is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+//$(function () {
+//    $("#HandedOverDate").datepicker();
+//});
+
+//Bind Zone Dropdown from Department
+function GetZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ZoneId").html(html);
+    });
+};
+
+//Bind Divison and Locality Dropdown from Department
+function GetDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#DivisionId").html(html);
+    });
+
+    HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").html(html);
+    });
+};

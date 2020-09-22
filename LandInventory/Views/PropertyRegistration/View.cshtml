@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" disabled asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" disabled >
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -51,14 +51,14 @@
 
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled >
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="LocalityId">Locality</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled >
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger"></span>
@@ -227,7 +227,7 @@
 
                         </div>
                         <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
-                            <label class="control-label lb-sm" asp-for="FileData">Upload Layout File</label>
+                            <label class="control-label lb-sm" asp-for="FileData">Upload Layout Plan</label>
                             <input type="hidden" asp-for="LayoutFilePath" />
                             @{
                                 @if (ViewBag.LayoutDocView != null)
@@ -314,7 +314,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Mobile No.</label><span class="text-danger">*</span>
+                            <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="TakenOverMobileNo" disabled class="form-control">
                             <span asp-validation-for="TakenOverMobileNo" class="text-danger"></span>
                         </div>
@@ -377,7 +377,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Mobile No.</label><span class="text-danger">*</span>
+                            <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="HandedOverMobileNo" disabled class="form-control">
                             <span asp-validation-for="HandedOverMobileNo" class="text-danger"></span>
                         </div>

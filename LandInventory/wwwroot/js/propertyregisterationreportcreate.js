@@ -14,15 +14,13 @@ $(document).ready(function () {
             var litigationid = $('#LitigationStatus option:selected').val();
             var encroachedid = $('#Encroached option:selected').val();
             $('#LoadReportView').empty();
-            $('#LoadReportView').load(url, {classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId,plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid}).hide().fadeIn(1000);;
-           
+            $('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
+
         });
     });
-})
-
-
-$function(){
+});
+$(function () {
     $(".linkdisabled").click(function () {
         return false;
-    }
-}
+    });
+});

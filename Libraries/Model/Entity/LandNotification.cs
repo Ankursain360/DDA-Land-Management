@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Libraries.Model.Common;
@@ -13,7 +16,11 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public byte IsActive { get; set; }
 
+
+
+
         //public ICollection<Ldoland> Propertyregistration { get; set; }
+
 
     }
 }

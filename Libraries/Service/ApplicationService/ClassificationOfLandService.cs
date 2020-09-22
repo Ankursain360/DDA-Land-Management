@@ -25,7 +25,7 @@ namespace Libraries.Service.ApplicationService
 
         }
 
-        public async Task<List<Classificationofland>> GetAllLandUse()
+        public async Task<List<Classificationofland>> GetAllClassificationOfLand()
         {
             return await _classificationoflandRepository.GetAll();
         }

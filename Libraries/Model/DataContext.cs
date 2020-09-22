@@ -67,7 +67,7 @@ namespace Libraries.Model
         public virtual DbSet<Enchroachment> Enchroachment { get; set; }
 
         public virtual DbSet<Ldoland> Ldoland { get; set; }
-
+        public virtual DbSet<Booktransferland> Booktransferland { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -111,6 +111,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NatureofencroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new EnchroachmentConfiguration());
             modelBuilder.ApplyConfiguration(new LdolandConfiguration());
+            modelBuilder.ApplyConfiguration(new NotificationConfiguration());
+            modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
+
+
         }
 
     }
