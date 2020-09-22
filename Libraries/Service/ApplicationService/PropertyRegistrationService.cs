@@ -167,6 +167,12 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
+
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division)
+
+        {
+            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division);
+        }
         public async Task<List<Division>> GetDivisionDropDownList()
         {
             List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList();
