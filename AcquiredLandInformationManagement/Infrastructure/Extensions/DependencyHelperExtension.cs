@@ -42,7 +42,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IEnchroachmentRepository, EnchroachmentRepository>(); //added by Nikita
 
             services.AddScoped<ILdolandRepository, LdolandRepository>();
-
+            services.AddScoped<IBooktransferlandRepository, BooktransferlandRepository>();
 
 
             /* Application Services */
@@ -69,7 +69,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<ILdolandService, LdolandService>();
 
-
+            services.AddScoped<IBooktransferlandService, BooktransferlandService>();
 
 
 

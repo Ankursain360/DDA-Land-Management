@@ -51,7 +51,7 @@
                 <tr>
                     <td>@(rowNo += 1)</td>
                     <td>@item.LandNotification.Name</td>
-                    <td>@item.NotificationDate</td>
+                    <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
                     <td>@item.Serialnumber.SerialNo</td>
                     <td>@item.PropertySiteNo</td>
                     <td>@item.Location</td>
@@ -62,7 +62,8 @@
                     <td>@item.Biswanshi</td>
                     <td>@item.StatusOfLand</td>
                     <td>@item.OccupiedBy</td>
-                    <td>@item.DateofPossession</td>
+                    <td>@(Convert.ToDateTime(item.DateofPossession).ToString("dd-MMM-yyyy"))</td>
+                  
                     <td>@item.Remarks</td>
 
                     <td>
