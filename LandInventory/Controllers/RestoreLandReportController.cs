@@ -30,6 +30,22 @@ namespace LandInventory.Controllers
                 _propertyregistrationService = propertyregistrationService;
             }
 
+        // public async Task<IActionResult> Restore(int id)  //Added by ishu
+        //{
+        //    if (id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var form = await _propertyregistrationService.Restore(id);
+        //    if (form == false)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    ViewBag.Message = Alert.Show(Messages.RestoreSuccess, "", AlertType.Success);
+        //    return View(form);
+        //}
             async Task BindDropDown(Propertyregistration propertyregistration)
             {
           //     propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
