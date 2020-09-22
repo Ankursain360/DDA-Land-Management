@@ -23,5 +23,8 @@ namespace Libraries.Repository.IEntityRepository
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division);
+
+
     }
 }
