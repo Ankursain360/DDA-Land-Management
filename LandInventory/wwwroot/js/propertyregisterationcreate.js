@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿//import { Dropdown } from "../lib/bootstrap/dist/js/bootstrap.bundle";
+
+$(document).ready(function () {
     var value = $('#Boundary option:selected').val();
     if (value == 1) {
         $('#divBoundaryRemarks').show();
@@ -234,8 +236,8 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-     //   alert('Form validated and submitted ok.');
-        return false;
+        alert('Form validated and submitted ok.');
+        return true;
     }
 });
 
@@ -243,7 +245,7 @@ $('#myForm').validate({
 function ClassificationOfLandIdMessage() {
     var dropdown_val = $('#ClassificationOfLandId option:selected').val();
     if (dropdown_val < 1) {
-        return "Classification Of Land is Required";
+        return "Classification Of Land is Mandatory";
     } else {
         return "";
     }
@@ -252,7 +254,7 @@ function ClassificationOfLandIdMessage() {
 function DepartmentIdMessage() {
     var dropdown_val = $('#DepartmentId option:selected').val();
     if (dropdown_val < 1) {
-        return "Department is Required";
+        return "Department is Mandatory";
     } else {
         return "";
     }
@@ -261,7 +263,7 @@ function DepartmentIdMessage() {
 function ZoneIdMessage() {
     var dropdown_val = $('#ZoneId option:selected').val();
     if (dropdown_val < 1) {
-        return "Zone is Required";
+        return "Zone is Mandatory";
     } else {
         return "";
     }
@@ -270,7 +272,7 @@ function ZoneIdMessage() {
 function DivisionIdMessage() {
     var dropdown_val = $('#DivisionId option:selected').val();
     if (dropdown_val < 1) {
-        return "Division is Required";
+        return "Division is Mandatory";
     } else {
         return "";
     }
@@ -279,7 +281,7 @@ function DivisionIdMessage() {
 function LocalityIdMessage() {
     var dropdown_val = $('#LocalityId option:selected').val();
     if (dropdown_val < 1) {
-        return "Locality is Required";
+        return "Locality is Mandatory";
     } else {
         return "";
     }
@@ -289,7 +291,7 @@ function LocalityIdMessage() {
 function PrimaryListNoMessage() {
     var dropdown_val = $('#PrimaryListNo').val();
     if (dropdown_val == "") {
-        return "Primary List No is Required";
+        return "Primary List No is Mandatory";
     } else {
         return "";
     }
@@ -298,13 +300,44 @@ function PrimaryListNoMessage() {
 function TotalAreaMessage() {
     var dropdown_val = $('#TotalArea').val();
     if (dropdown_val == "") {
-        return "Total Area is Required";
+        return "Total Area is Mandatory";
     } else {
         return "";
     }
 }
 
-$(function () {
-   
-    $("#HandedOverDate").datepicker();
-});
+//$(function () {
+//    $("#HandedOverDate").datepicker();
+//});
+
+//Bind Zone Dropdown from Department
+function GetZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ZoneId").html(html);
+    });
+};
+
+//Bind Divison and Locality Dropdown from Department
+function GetDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#DivisionId").html(html);
+    });
+
+    HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").html(html);
+    });
+};

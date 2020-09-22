@@ -29,14 +29,14 @@ namespace Libraries.Service.ApplicationService
             List<Classificationofland> ClassificationoflandList = await _propertyregistrationRepository.GetClassificationOfLandDropDownList();
             return ClassificationoflandList;
         }
-        public async Task<List<Zone>> GetZoneDropDownList()
+        public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
-            List<Zone> zoneList = await _propertyregistrationRepository.GetZoneDropDownList();
+            List<Zone> zoneList = await _propertyregistrationRepository.GetZoneDropDownList(DepartmentId);
             return zoneList;
         }
-        public async Task<List<Locality>> GetLocalityDropDownList()
+        public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
-            List<Locality> LocalityList = await _propertyregistrationRepository.GetLocalityDropDownList();
+            List<Locality> LocalityList = await _propertyregistrationRepository.GetLocalityDropDownList(zoneId);
             return LocalityList;
         }
         public async Task<List<Landuse>> GetLandUseDropDownList()
@@ -167,9 +167,9 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
-        public async Task<List<Division>> GetDivisionDropDownList()
+        public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
-            List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList();
+            List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList(zoneId);
             return DivisionList;
         }
 
