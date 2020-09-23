@@ -140,16 +140,17 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        //public async Task<bool> Restore(int id)  // added by ishu
-        //{
-        //    var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
-        //    Propertyregistration model = form.FirstOrDefault();
-        //    model.ModifiedBy = 1;
-        //    model.IsDelated = 1;
-        //    model.ModifiedDate = DateTime.Now;
-        //    _propertyregistrationRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
+        public async Task<bool> Restore(int id)  // added by ishu
+        {
+            var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+            Propertyregistration model = form.FirstOrDefault();
+            model.ModifiedBy = 1;
+            model.IsActive = 1;
+            //model.IsDelated = 1;
+            model.ModifiedDate = DateTime.Now;
+            _propertyregistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
 
         public string GetFile(int id)
@@ -177,6 +178,12 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division)
+        {
+            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division);
+        }
+
+
         public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
             List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList(zoneId);
@@ -197,13 +204,13 @@ namespace Libraries.Service.ApplicationService
         {
             return _propertyregistrationRepository.GetTakenOverFile(id);
         }
-       
+
         public async Task<bool> InsertInDeletedProperty(int id, Deletedproperty model)
         {
             model.PropertyRegistrationId = id;
             model.IsDeleted = 0;
             model.DeletedBy = 1;
-            model.DeletedDate = DateTime.Now; 
+            model.DeletedDate = DateTime.Now;
             return await _propertyregistrationRepository.InsertInDeletedProperty(model);
         }
     }

@@ -157,8 +157,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<bool> InsertInDeletedProperty(Deletedproperty model)
         {
-            var result =  _dbContext.Deletedproperty.Add(model);
-            return await _dbContext.SaveChangesAsync()>0;
+            var result = _dbContext.Deletedproperty.Add(model);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 

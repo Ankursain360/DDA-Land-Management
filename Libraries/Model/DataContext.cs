@@ -69,6 +69,7 @@ namespace Libraries.Model
         public virtual DbSet<Ldoland> Ldoland { get; set; }
         public virtual DbSet<Booktransferland> Booktransferland { get; set; }
         public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
+        public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -115,6 +116,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
 
 
         }
