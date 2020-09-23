@@ -119,8 +119,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
-
-
         }
 
     }
