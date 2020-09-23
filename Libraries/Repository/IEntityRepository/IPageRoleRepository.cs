@@ -13,5 +13,11 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Module>> GetAllModule();
         Task<List<Role>> GetAllRole();
         Task<List<User>> GetAllUser(int role);
+        Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId, int? userId);
+        Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId);
+        Task<bool> Add(AssignPageRoleWise assignPageRoleWise);
+        Task<bool> DeletePageRole(PageRole pageRole);
+        Task<bool> DeleteAssignPageRoleWise(AssignPageRoleWise assignPageRoleWise);
+        Task<bool> AddPageRole(PageRole pageRole);
     }
 }

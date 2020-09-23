@@ -14,5 +14,11 @@ namespace Libraries.Service.IApplicationService
         Task<List<Role>> GetAllRoleList(); // To Get all data added by Praveen
         Task<List<User>> GetUserList(int Role); // To Get all data added by Praveen
         Task<bool> Create(PageRole pageRole);
+        Task<bool> DeletePageRole(PageRole pageRole);
+        Task<bool> DeleteAssignPageRoleWise(AssignPageRoleWise assignPageRoleWise);
+        Task<bool> Create(AssignPageRoleWise assignPageRoleWise);
+        Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId);
+        Task<List<PageRole>> GetPageRoleDetailsUserWise(int moduleId, int roleId, int? userId);
+        Task<bool> CreatePageRole(PageRole pageRole);
     }
 }
