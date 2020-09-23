@@ -33,9 +33,9 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List(DesignationSearchDto model)
+        public async Task<PartialViewResult> List([FromBody]DesignationSearchDto model)
         {
-            var x = model.Name;
+            var x = model.name;
             var result = await _designationService.GetAllDesignation();
             return PartialView("_List", result);
         }

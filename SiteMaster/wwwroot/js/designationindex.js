@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function GetDesignation(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/designation/List`, 'HTML', param, function (response) {
+    HttpPost(`/designation/List`, 'json', param, function (response) {
         $('#divDesignationTable').html(response);
     });
 }
