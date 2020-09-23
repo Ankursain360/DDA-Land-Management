@@ -71,6 +71,9 @@ namespace Libraries.Model
         public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
         public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
         public virtual DbSet<AssignPageRoleWise> AssignPageRoleWises { get; set; }
+        public virtual DbSet<Khewat> Khewat { get; set; }
+        public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -119,6 +122,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
+            modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
+
         }
 
     }
