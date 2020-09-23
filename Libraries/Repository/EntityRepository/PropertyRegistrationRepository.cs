@@ -132,7 +132,7 @@ namespace Libraries.Repository.EntityRepository
         {
             //  var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
             var data = await _dbContext.Propertyregistration.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).OrderByDescending(x => x.Id).
-                Where(x => x.IsDelated == 1 && x.DepartmentId == department && x.ZoneId == zone && x.DivisionId == division).ToListAsync();
+                Where(x =>  x.IsActive == 0 && x.DepartmentId == department && x.ZoneId == zone && x.DivisionId == division ).ToListAsync();
             return data;
 
         }

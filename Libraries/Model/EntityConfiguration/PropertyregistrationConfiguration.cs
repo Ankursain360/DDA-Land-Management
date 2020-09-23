@@ -61,11 +61,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.DeletedBy).HasColumnType("int(11)");
-
-            builder.Property(e => e.DeletedReason)
-                .HasMaxLength(5000)
-                .IsUnicode(false);
+           
 
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
