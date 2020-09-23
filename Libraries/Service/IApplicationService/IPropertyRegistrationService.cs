@@ -34,5 +34,6 @@ namespace Libraries.Service.IApplicationService
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
+        Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
     }
 }

@@ -114,7 +114,7 @@ namespace Libraries.Service.ApplicationService
             model.DisposalComments = propertyregistration.DisposalComments;
             model.Remarks = propertyregistration.Remarks;
             model.IsValidate = propertyregistration.IsValidate;
-            model.IsActive = propertyregistration.IsDelated;
+            model.IsActive = propertyregistration.IsDeleted;
             model.IsActive = propertyregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -135,9 +135,7 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
-            model.IsDelated = 0;
-            model.DeletedBy = 1;
-            model.DeletedDate = DateTime.Now;
+            model.IsDeleted = 0;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -198,6 +196,15 @@ namespace Libraries.Service.ApplicationService
         public string GetTakenOverFile(int id)
         {
             return _propertyregistrationRepository.GetTakenOverFile(id);
+        }
+       
+        public async Task<bool> InsertInDeletedProperty(int id, Deletedproperty model)
+        {
+            model.PropertyRegistrationId = id;
+            model.IsDeleted = 0;
+            model.DeletedBy = 1;
+            model.DeletedDate = DateTime.Now; 
+            return await _propertyregistrationRepository.InsertInDeletedProperty(model);
         }
     }
 }
