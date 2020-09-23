@@ -236,10 +236,12 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        alert('Form validated and submitted ok.');
+        // alert('Form validated and submitted ok.');
         return true;
     }
 });
+
+
 
 //For Drop down
 function ClassificationOfLandIdMessage() {
@@ -341,3 +343,27 @@ function GetDivisionList(id) {
         $("#LocalityId").html(html);
     });
 };
+
+//File Upload check
+$(function () {
+    $('#DisposalTypeAssignFile').change(function () {
+        var fileInput = document.getElementById('DisposalTypeAssignFile');
+
+        var filePath = fileInput.value;
+     //   var fileInput = $('#DisposalTypeAssignFile').val();
+        fileValidation(fileInput); 
+    });
+});
+function fileValidation(filePath) {
+    
+    // Allowing file type 
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    
+} 
+

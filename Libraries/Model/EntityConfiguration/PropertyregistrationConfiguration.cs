@@ -61,8 +61,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-           
-
+          
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DisposalComments)
@@ -117,7 +116,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.IsDelated).HasColumnType("tinyint(4)");
+            builder.Property(e => e.IsDeleted).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.IsValidate).HasColumnType("tinyint(4)");
 

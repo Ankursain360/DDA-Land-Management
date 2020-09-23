@@ -13,4 +13,7 @@ $(function () {
     var maxDate = year + '-' + month + '-' + day;
     $('#FromDate').attr('max', maxDate);
     $('#ToDate').attr('max', maxDate);
+    $('#TakenOverDate').attr('max', maxDate);
+    $('#HandedOverDate').attr('max', maxDate);
+    $('#DisposalDate').attr('max', maxDate);
 });

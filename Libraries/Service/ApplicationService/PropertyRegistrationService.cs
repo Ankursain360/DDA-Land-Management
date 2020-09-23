@@ -114,7 +114,7 @@ namespace Libraries.Service.ApplicationService
             model.DisposalComments = propertyregistration.DisposalComments;
             model.Remarks = propertyregistration.Remarks;
             model.IsValidate = propertyregistration.IsValidate;
-            model.IsActive = propertyregistration.IsDelated;
+            model.IsActive = propertyregistration.IsDeleted;
             model.IsActive = propertyregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -135,23 +135,21 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
-            model.IsDelated = 0;
-          //  model.DeletedBy = 1;
-           // model.DeletedDate = DateTime.Now;
+            model.IsDeleted = 0;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Restore(int id)  // added by ishu
-        {
-            var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
-            Propertyregistration model = form.FirstOrDefault();
-            model.ModifiedBy = 1;
-            model.IsDelated = 1;
-            model.ModifiedDate = DateTime.Now;
-            _propertyregistrationRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
-        }
+        //public async Task<bool> Restore(int id)  // added by ishu
+        //{
+        //    var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+        //    Propertyregistration model = form.FirstOrDefault();
+        //    model.ModifiedBy = 1;
+        //    model.IsDelated = 1;
+        //    model.ModifiedDate = DateTime.Now;
+        //    _propertyregistrationRepository.Edit(model);
+        //    return await _unitOfWork.CommitAsync() > 0;
+        //}
 
 
         public string GetFile(int id)
@@ -179,11 +177,6 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division )
-        {
-            return await _propertyregistrationRepository.GetRestoreLandReportData( department, zone, division);
-        }
-
         public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
             List<Division> DivisionList = await _propertyregistrationRepository.GetDivisionDropDownList(zoneId);
@@ -203,6 +196,15 @@ namespace Libraries.Service.ApplicationService
         public string GetTakenOverFile(int id)
         {
             return _propertyregistrationRepository.GetTakenOverFile(id);
+        }
+       
+        public async Task<bool> InsertInDeletedProperty(int id, Deletedproperty model)
+        {
+            model.PropertyRegistrationId = id;
+            model.IsDeleted = 0;
+            model.DeletedBy = 1;
+            model.DeletedDate = DateTime.Now; 
+            return await _propertyregistrationRepository.InsertInDeletedProperty(model);
         }
     }
 }
