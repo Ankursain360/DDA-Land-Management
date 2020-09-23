@@ -14,15 +14,39 @@ $(document).ready(function () {
             var litigationid = $('#LitigationStatus option:selected').val();
             var encroachedid = $('#Encroached option:selected').val();
             $('#LoadReportView').empty();
-            $('#LoadReportView').load(url, {classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId,plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid}).hide().fadeIn(1000);;
-           
+            $('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
+
         });
     });
-})
+});
+//Bind Zone Dropdown from Department
+function GetZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ZoneId").html(html);
+    });
+};
 
+//Bind Divison and Locality Dropdown from Department
+function GetDivisionList(id) {
 
-$function(){
-    $(".linkdisabled").click(function () {
-        return false;
-    }
-}
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#DivisionId").html(html);
+    });
+
+    HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">All</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").html(html);
+    });
+};

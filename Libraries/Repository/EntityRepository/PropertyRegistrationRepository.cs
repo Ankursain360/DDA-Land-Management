@@ -30,13 +30,13 @@ namespace Libraries.Repository.EntityRepository
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
             if (UserId == 2 || Iscreated > 0)
             {
-                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDelated == 1).ToListAsync();
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDeleted == 1).ToListAsync();
                 return data;
 
             }
             else
             {
-                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDelated == 1 && x.IsValidate == 1).ToListAsync();
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDeleted == 1 && x.IsValidate == 1).ToListAsync();
                 return data;
 
             }
@@ -70,9 +70,9 @@ namespace Libraries.Repository.EntityRepository
             return DisposaltypeList;
         }
 
-        public async Task<List<Division>> GetDivisionDropDownList()
+        public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
-            List<Division> DivisionList = await _dbContext.Division.Where(x => x.IsActive == 1).ToListAsync();
+            List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return DivisionList;
         }
 
@@ -109,19 +109,35 @@ namespace Libraries.Repository.EntityRepository
             return LanduseList;
         }
 
-        public async Task<List<Locality>> GetLocalityDropDownList()
+        public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
-            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return LocalityList;
         }
 
         public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
         {
           //  var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Include(x => x.DisposalType).Include(x => x.MainLandUse).OrderByDescending(x => x.Id).Where(x => x.IsDelated == 1 && x.ClassificationOfLandId== classificationofland && x.DepartmentId== department && x.ZoneId== zone && x.DivisionId == division && x.LocalityId == locality && x.PlannedUnplannedLand == plannedUnplannedLand && x.MainLandUseId == mainLandUse && x.LitigationStatus == litigation).ToListAsync();
+            var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).
+                Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).
+                Include(x => x.Locality).Include(x => x.DisposalType).Include(x => x.MainLandUse).OrderByDescending(x => x.Id).
+                Where(x => x.IsDeleted == 1 && x.ClassificationOfLandId== classificationofland && x.DepartmentId== department && x.ZoneId== zone && x.DivisionId == division && x.LocalityId == locality && x.PlannedUnplannedLand == plannedUnplannedLand && x.MainLandUseId == mainLandUse && x.LitigationStatus == litigation).ToListAsync();
             return data;
 
         }
+
+
+        
+            public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division)
+        {
+            //  var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            var data = await _dbContext.Propertyregistration.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).OrderByDescending(x => x.Id).
+                Where(x => x.IsDeleted == 1 && x.DepartmentId == department && x.ZoneId == zone && x.DivisionId == division).ToListAsync();
+            return data;
+
+        }
+
+
 
         public string GetTakenOverFile(int id)
         {
@@ -132,10 +148,17 @@ namespace Libraries.Repository.EntityRepository
             return File;
         }
 
-        public async Task<List<Zone>> GetZoneDropDownList()
+        public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
-            List<Zone> ZoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
+           
+            List<Zone> ZoneList = await _dbContext.Zone.Where(x =>x.DepartmentId == DepartmentId && x.IsActive == 1).ToListAsync();
             return ZoneList;
+        }
+
+        public async Task<bool> InsertInDeletedProperty(Deletedproperty model)
+        {
+            var result = _dbContext.Deletedproperty.Add(model);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 

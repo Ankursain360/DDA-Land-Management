@@ -20,12 +20,12 @@ namespace LandInventory.Controllers
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+          //  propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+         //   propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+        //    propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
         {
@@ -51,5 +51,28 @@ namespace LandInventory.Controllers
                 return PartialView();
             }
         }
+
+        #region Dropdown Dependency calls added  by renu 
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? departmentId)
+        {
+            departmentId = departmentId ?? 0;
+            return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLocalityList(int? zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetLocalityDropDownList(Convert.ToInt32(zoneId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int? zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
+        }
+        #endregion
     }
 }

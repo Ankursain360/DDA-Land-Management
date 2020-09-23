@@ -40,12 +40,12 @@ namespace SiteMaster.Controllers
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+           // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+        //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+          //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
         {
@@ -56,13 +56,16 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
             if (ModelState.IsValid)
             {
                 propertyregistration.IsValidate = 0;
-                propertyregistration.IsDelated = 1;
+                propertyregistration.IsDeleted = 1;
 
                 if (propertyregistration.MainLandUseId == 0 )
                 {
@@ -146,11 +149,6 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For Taken Over File Upload*/
-                //if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string TakenOverFileName = "";
                 string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
@@ -163,18 +161,13 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(TakenOverDocumentPath);
                     }
-                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
                     TakenOverfilePath = Path.Combine(TakenOverDocumentPath, TakenOverFileName);
                     propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
                 }
 
                 /* For Handed Over File Upload*/
-                //if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string HandedOverFileName = "";
                 string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
@@ -187,18 +180,13 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(HandedOverDocumentPath);
                     }
-                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
                     HandedOverfilePath = Path.Combine(HandedOverDocumentPath, HandedOverFileName);
                     propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
                 }
 
                 /* For Disposal Type File Upload*/
-                //if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string DisposalTypeFileName = "";
                 string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
@@ -211,7 +199,7 @@ namespace SiteMaster.Controllers
                         // Try to create the directory.
                         DirectoryInfo di = Directory.CreateDirectory(DisposalTypeDocumentPath);
                     }
-                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
+                    DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
                     DisposalTypefilePath = Path.Combine(DisposalTypeDocumentPath, DisposalTypeFileName);
                     propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
@@ -250,6 +238,11 @@ namespace SiteMaster.Controllers
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.IsValidateUser = 2;
             await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
             if (Data == null)
             {
                 return NotFound();
@@ -258,9 +251,15 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
+            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
+            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
+            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
             if (ModelState.IsValid)
             {
                 if (propertyregistration.IsValidateData == true)
@@ -279,7 +278,7 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.DisposalTypeId = 1;
                 }
-                propertyregistration.IsDelated = 1;
+                propertyregistration.IsDeleted = 1;
                 if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 {
                     ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
@@ -437,7 +436,9 @@ namespace SiteMaster.Controllers
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(propertyregistration);
+                    //return View(propertyregistration);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    return View("Index", result1);
 
                 }
 
@@ -449,7 +450,7 @@ namespace SiteMaster.Controllers
         {
             int UserId = 3;
             var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(UserId);
-
+            
             if (UserId == 3)
             {
                 var result = await _propertyregistrationService.Delete(id);
@@ -485,6 +486,58 @@ namespace SiteMaster.Controllers
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)  
+        {
+            Deletedproperty model = new Deletedproperty();
+            int UserId = 3;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(UserId);
+
+            if (UserId == 3)
+            {
+                model.Reason = propertyregistration.Reason;
+                var result = await _propertyregistrationService.Delete(id);
+                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+                if (result == true)
+                {
+                    UserId = 2;
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    return View("Index", result1);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    return View("Index", result1);
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                return View("Index", result1);
+            }
+
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -575,6 +628,30 @@ namespace SiteMaster.Controllers
                 {".gif", "image/gif"},
                 {".csv", "text/csv"}
             };
+        }
+        #endregion
+
+
+        #region Dropdown Dependency calls added  by renu 
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int?departmentId)
+        {
+            departmentId = departmentId ?? 0;
+            return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLocalityList(int?zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetLocalityDropDownList(Convert.ToInt32(zoneId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int?zoneId)
+        {
+            zoneId = zoneId ?? 0;
+            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
     }

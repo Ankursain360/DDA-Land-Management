@@ -1,4 +1,6 @@
-﻿$(document).ready(function () {
+﻿//import { Dropdown } from "../lib/bootstrap/dist/js/bootstrap.bundle";
+
+$(document).ready(function () {
     var value = $('#Boundary option:selected').val();
     if (value == 1) {
         $('#divBoundaryRemarks').show();
@@ -155,12 +157,8 @@ $('.numbers').keyup(function () {
 
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
-    $th.val($th.val().replace(/[^0-9]/g,''));
+    $th.val($th.val().replace(/[^0-9]/g, ''));
 });
-//$('.input').keyup(function () {
-//    var $th = $(this);
-//    $th.val($th.val().replace(/[^a-zA-Z0-9]/g, function (str) { alert('You typed " ' + str + ' ".\n\nPlease use only letters and numbers.'); return ''; }));
-//});
 $('#myForm').validate({
     rules: {
         TakenOverEmailId: {
@@ -174,8 +172,53 @@ $('#myForm').validate({
             minlength: 3,
             maxlength: 255,
             email: true
-        }
+        },
 
+        ClassificationOfLandId: {
+             required: true
+        },
+        DepartmentId: {
+            required: true
+        },
+        ZoneId: {
+            required: true
+        },
+        DivisionId: {
+            required: true
+        },
+        LocalityId: {
+            required: true
+        },
+        PrimaryListNo: {
+            required: true
+        },
+        TotalArea: {
+            required: true
+        }
+    },
+
+    messages: {
+        ClassificationOfLandId: {
+            required: ClassificationOfLandIdMessage //this is a function that returns custom messages
+        },
+        DepartmentId: {
+            required: DepartmentIdMessage //this is a function that returns custom messages
+        },
+        ZoneId: {
+            required: ZoneIdMessage //this is a function that returns custom messages
+        },
+        DivisionId: {
+            required: DivisionIdMessage //this is a function that returns custom messages
+        },
+        LocalityId: {
+            required: LocalityIdMessage //this is a function that returns custom messages
+        },
+        PrimaryListNo: {
+            required: PrimaryListNoMessage //this is a function that returns custom messages
+        },
+        TotalArea: {
+            required: TotalAreaMessage //this is a function that returns custom messages
+        }
     },
     highlight: function (element) {
         $(element).closest('.form-group').addClass('has-error');
@@ -193,11 +236,134 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        alert('Form validated and submitted ok.');
-        return false;
+        // alert('Form validated and submitted ok.');
+        return true;
     }
 });
 
+
+
+//For Drop down
+function ClassificationOfLandIdMessage() {
+    var dropdown_val = $('#ClassificationOfLandId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Classification Of Land is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function DepartmentIdMessage() {
+    var dropdown_val = $('#DepartmentId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Department is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function ZoneIdMessage() {
+    var dropdown_val = $('#ZoneId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Zone is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function DivisionIdMessage() {
+    var dropdown_val = $('#DivisionId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Division is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+function LocalityIdMessage() {
+    var dropdown_val = $('#LocalityId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Locality is Mandatory";
+    } else {
+        return "";
+    }
+} 
+
+//For Textbox
+function PrimaryListNoMessage() {
+    var dropdown_val = $('#PrimaryListNo').val();
+    if (dropdown_val == "") {
+        return "Primary List No is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+function TotalAreaMessage() {
+    var dropdown_val = $('#TotalArea').val();
+    if (dropdown_val == "") {
+        return "Total Area is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+//$(function () {
+//    $("#HandedOverDate").datepicker();
+//});
+
+//Bind Zone Dropdown from Department
+function GetZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#ZoneId").html(html);
+    });
+};
+
+//Bind Divison and Locality Dropdown from Department
+function GetDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#DivisionId").html(html);
+    });
+
+    HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").html(html);
+    });
+};
+
+//File Upload check
 $(function () {
-    $("#datepicker").datepicker();
+    $('#DisposalTypeAssignFile').change(function () {
+        var fileInput = document.getElementById('DisposalTypeAssignFile');
+
+        var filePath = fileInput.value;
+     //   var fileInput = $('#DisposalTypeAssignFile').val();
+        fileValidation(fileInput); 
+    });
 });
+function fileValidation(filePath) {
+    
+    // Allowing file type 
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
+
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    
+} 
+
