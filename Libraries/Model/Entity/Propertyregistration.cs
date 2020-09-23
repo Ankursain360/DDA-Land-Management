@@ -80,12 +80,9 @@ namespace Libraries.Model.Entity
         public string DisposalTypeFilePath { get; set; }
         public string DisposalComments { get; set; }
         public string Remarks { get; set; }
-        public string DeletedReason { get; set; }
         public byte IsActive { get; set; }
-        public byte IsDelated { get; set; }
+        public byte IsDeleted { get; set; }
         public byte IsValidate { get; set; }
-        public int? DeletedBy { get; set; }
-        public DateTime? DeletedDate { get; set; }
         public Classificationofland ClassificationOfLand { get; set; }
         public Department Department { get; set; }
         public Disposaltype DisposalType { get; set; }
@@ -132,7 +129,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public bool IsValidateData { get; set; }
+        [NotMapped]
+        public string Reason { get; set; }
 
-       
     }
 }

@@ -3,6 +3,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using MySqlX.XDevAPI.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,13 @@ namespace Libraries.Service.ApplicationService
             _pageRoleRepository.Add(pageRole);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> Create(AssignPageRoleWise assignPageRoleWise)
+        {
+            assignPageRoleWise.CreatedBy = 1;
+            assignPageRoleWise.CreatedDate = DateTime.Now;
+            var result = await _pageRoleRepository.Add(assignPageRoleWise);
+            return result;
+        }
 
         public async Task<List<Module>> GetAllModuleList()
         {
@@ -46,6 +54,34 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<User>> GetUserList(int Role)
         {
             return await _pageRoleRepository.GetAllUser(Role);
+        }
+
+        public async Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId)
+        {
+            return await _pageRoleRepository.GetPageRoleDetailsRoleWise(moduleId, roleId);
+        }
+
+        public async Task<List<PageRole>> GetPageRoleDetailsUserWise(int moduleId, int roleId, int? userId)
+        {
+            return await _pageRoleRepository.GetPageRoleDetailsRoleWise(moduleId, roleId,userId);
+        }
+
+        public async Task<bool> DeletePageRole(PageRole pageRole)
+        {
+            return await _pageRoleRepository.DeletePageRole(pageRole);
+        }
+
+        public async Task<bool> DeleteAssignPageRoleWise(AssignPageRoleWise assignPageRoleWise)
+        {
+            return await _pageRoleRepository.DeleteAssignPageRoleWise(assignPageRoleWise);
+        }
+
+        public async Task<bool> CreatePageRole(PageRole pageRole)
+        {
+            pageRole.CreatedBy = 1;
+            pageRole.CreatedDate = DateTime.Now;
+            var result = await _pageRoleRepository.AddPageRole(pageRole);
+            return result;
         }
     }
 }

@@ -68,9 +68,9 @@ namespace Libraries.Model
 
         public virtual DbSet<Ldoland> Ldoland { get; set; }
         public virtual DbSet<Booktransferland> Booktransferland { get; set; }
-        public virtual DbSet<Khewat> Khewat { get; set; }
-        public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
-
+        public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
+        public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
+        public virtual DbSet<AssignPageRoleWise> AssignPageRoleWises { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -116,9 +116,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LdolandConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
-            modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
-
-
+            modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
         }
 
     }

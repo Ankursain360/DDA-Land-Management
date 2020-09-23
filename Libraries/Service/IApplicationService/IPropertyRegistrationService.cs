@@ -22,17 +22,20 @@ namespace Libraries.Service.IApplicationService
         Task<Propertyregistration> FetchSingleResult(int id);  // To fetch Particular data added by renu
 
         Task<bool> Delete(int id);    // To Delete Data  added by renu
-        //Task<bool> Restore(int id);  // to restore data added by ishu
+        Task<bool> Restore(int id);  // to restore data added by ishu
 
-       
+
         Task<bool> CheckDeleteAuthority(int id);
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division);
+
         Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
+        Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
     }
 }

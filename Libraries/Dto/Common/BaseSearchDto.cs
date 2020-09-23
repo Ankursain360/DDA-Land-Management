@@ -3,7 +3,7 @@ namespace Dto.Common
 {
     public class BaseSearchDto
     {
-        public int PageSize { get; set; }
-        public int PageNumber { get; set; }
+        public int pageSize { get; set; }
+        public int pageNumber { get; set; }
     }
 }

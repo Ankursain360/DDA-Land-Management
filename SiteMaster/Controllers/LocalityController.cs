@@ -35,7 +35,6 @@ namespace SiteMaster.Controllers
             return View(model);
         }
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Locality locality)
         {
             try
