@@ -44,6 +44,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ILdolandRepository, LdolandRepository>();
             services.AddScoped<IBooktransferlandRepository, BooktransferlandRepository>();
             services.AddScoped<ISakanidetailRepository, SakanidetailRepository>(); //added by Nikita
+            services.AddScoped<IJaraidetailRepository, JaraidetailRepository>(); //added by Nikita
 
 
             /* Application Services */
@@ -72,6 +73,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
             services.AddScoped<IBooktransferlandService, BooktransferlandService>();
             services.AddScoped<ISakanidetailService, SakanidetailService>(); //added by Nikita
+            services.AddScoped<IJaraidetailService, JaraidetailService>(); //added by Nikita
 
 
 
