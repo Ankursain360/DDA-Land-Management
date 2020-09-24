@@ -1,5 +1,4 @@
-﻿//import { Dropdown } from "../lib/bootstrap/dist/js/bootstrap.bundle";
-
+﻿
 $(document).ready(function () {
     var value = $('#Boundary option:selected').val();
     if (value == 1) {
@@ -39,6 +38,47 @@ $(document).ready(function () {
     if (value == 1) {
         $("#divGEOReferencing").show();
     }
+
+    /*characters Calculation for Disposal comments */
+    var text_max = 4000;
+    $('#feedbackDisposalComments').html(text_max + ' characters remaining');
+    $('#DisposalComments').keyup(function () {
+        var text_length = $('#DisposalComments').val().length;
+        var text_remaining = text_max - text_length;
+        $('#feedbackDisposalComments').html(text_remaining + ' characters remaining');
+    });
+
+    /*characters Calculation for Remarks */
+    $('#feedbackRemarks').html(text_max + ' characters remaining');
+    $('#Remarks').keyup(function () {
+        var text_length = $('#Remarks').val().length;
+        var text_remaining = text_max - text_length;
+        $('#feedbackRemarks').html(text_remaining + ' characters remaining');
+    });
+
+    /*characters Calculation for Plot Not. */
+    $('#feedbackPalandmark').html(text_max + ' characters remaining');
+    $('#Palandmark').keyup(function () {
+        var text_length = $('#Palandmark').val().length;
+        var text_remaining = text_max - text_length;
+        $('#feedbackPalandmark').html(text_remaining + ' characters remaining');
+    });
+
+    /*characters Calculation for TakenOverComments */
+    $('#feedbackTakenOverComments').html(text_max + ' characters remaining');
+    $('#TakenOverComments').keyup(function () {
+        var text_length = $('#TakenOverComments').val().length;
+        var text_remaining = text_max - text_length;
+        $('#feedbackTakenOverComments').html(text_remaining + ' characters remaining');
+    });
+
+    /*characters Calculation for TakenOverComments */
+    $('#feedbackHandedOverComments').html(text_max + ' characters remaining');
+    $('#HandedOverComments').keyup(function () {
+        var text_length = $('#HandedOverComments').val().length;
+        var text_remaining = text_max - text_length;
+        $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
+    });
 })
 
 $(function () {
@@ -348,17 +388,41 @@ function GetDivisionList(id) {
 $(function () {
     $('#DisposalTypeAssignFile').change(function () {
         var fileInput = document.getElementById('DisposalTypeAssignFile');
-
         var filePath = fileInput.value;
-     //   var fileInput = $('#DisposalTypeAssignFile').val();
-        fileValidation(fileInput); 
+        fileValidation(filePath,fileInput); 
     });
 });
-function fileValidation(filePath) {
-    
-    // Allowing file type 
-    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
 
+$(function () {
+    $('#Assignfile').change(function () {
+        var fileInput = document.getElementById('Assignfile');
+        var filePath = fileInput.value;
+        fileValidation(filePath, fileInput);
+    });
+});
+$(function () {
+    $('#GeoAssignFile').change(function () {
+        var fileInput = document.getElementById('GeoAssignFile');
+        var filePath = fileInput.value;
+        fileValidation(filePath, fileInput);
+    });
+});
+$(function () {
+    $('#TakenOverAssignFile').change(function () {
+        var fileInput = document.getElementById('TakenOverAssignFile');
+        var filePath = fileInput.value;
+        fileValidation(filePath, fileInput);
+    });
+});
+$(function () {
+    $('#HandedOverAssignFile').change(function () {
+        var fileInput = document.getElementById('HandedOverAssignFile');
+        var filePath = fileInput.value;
+        fileValidation(filePath, fileInput);
+    });
+});
+function fileValidation(filePath, fileInput) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
     if (!allowedExtensions.exec(filePath)) {
         alert('Invalid file type');
         fileInput.value = '';

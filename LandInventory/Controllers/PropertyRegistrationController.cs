@@ -23,12 +23,15 @@ namespace SiteMaster.Controllers
     {
         //Let suppose user = 1 can Create, user =2 can validate , user =3 can delete , and untill validate 1,2 can only look index
         private readonly IPropertyRegistrationService _propertyregistrationService;
-        private readonly IHostingEnvironment _hostingEnvironment;
         int UserId = 2;
+        string targetPathLayout = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\LayoutDocs";
+        string targetPathGeo = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
+        string targetPathHandedOver = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\HandedOverDocs";
+        string targetPathTakenOver = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\TakenOverDocs";
+        string targetPathDisposal = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\DisposalTypeDocs";
         public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IHostingEnvironment en)
         {
             _propertyregistrationService = propertyregistrationService;
-            _hostingEnvironment = en;
         }
         public async Task<IActionResult> Index()
         {
@@ -108,16 +111,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.FileData = Assignfile;
                 if (propertyregistration.FileData != null)
                 {
-                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\LayoutDocs";
-                    if (!Directory.Exists(DocumentPath))
+                    if (!Directory.Exists(targetPathLayout))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(DocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
                     }
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
-                    filePath = Path.Combine(DocumentPath, FileName);
-                    propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
+                    filePath = Path.Combine(targetPathLayout, FileName);
+                    var stream = (new FileStream(filePath, FileMode.Create));
                     propertyregistration.LayoutFilePath = filePath;
+                    stream.Close();
                 }
 
                 /* For GeoReferncing File Upload*/
@@ -136,16 +139,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.GeoFileData = GeoAssignfile;
                 if (propertyregistration.GeoFileData != null)
                 {
-                    GeoDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
-                    if (!Directory.Exists(GeoDocumentPath))
+                    if (!Directory.Exists(targetPathGeo))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(GeoDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
                     }
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
-                    GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
-                    propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
+                    GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
+                    var stream = (new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
+                    stream.Close();
                 }
 
                 /* For Taken Over File Upload*/
@@ -155,16 +158,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.TakenOverFileData = TakenOverAssignFile;
                 if (propertyregistration.TakenOverFileData != null)
                 {
-                    TakenOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\TakenOverDocs";
-                    if (!Directory.Exists(TakenOverDocumentPath))
+                    if (!Directory.Exists(targetPathTakenOver))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(TakenOverDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
                     }
                     TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
-                    TakenOverfilePath = Path.Combine(TakenOverDocumentPath, TakenOverFileName);
-                    propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
+                    TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
+                    var stream = (new FileStream(TakenOverfilePath, FileMode.Create));
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
+                    stream.Close();
                 }
 
                 /* For Handed Over File Upload*/
@@ -174,16 +177,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.HandedOverFileData = HandedOverAssignFile;
                 if (propertyregistration.HandedOverFileData != null)
                 {
-                    HandedOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\HandedOverDocs";
-                    if (!Directory.Exists(HandedOverDocumentPath))
+                    if (!Directory.Exists(targetPathHandedOver))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(HandedOverDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
                     }
                     HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
-                    HandedOverfilePath = Path.Combine(HandedOverDocumentPath, HandedOverFileName);
-                    propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
+                    HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
+                    var stream = (new FileStream(HandedOverfilePath, FileMode.Create));
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
+                    stream.Close();
                 }
 
                 /* For Disposal Type File Upload*/
@@ -193,16 +196,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
                 if (propertyregistration.DisposalTypeFileData != null)
                 {
-                    DisposalTypeDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\DisposalTypeDocs";
-                    if (!Directory.Exists(DisposalTypeDocumentPath))
+                    if (!Directory.Exists(targetPathDisposal))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(DisposalTypeDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
                     }
                     DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
-                    DisposalTypefilePath = Path.Combine(DisposalTypeDocumentPath, DisposalTypeFileName);
-                    propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
+                    DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
+                    var stream = (new FileStream(DisposalTypefilePath, FileMode.Create)); 
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
+                    stream.Close();
                 }
                 #endregion
 
@@ -312,16 +315,16 @@ namespace SiteMaster.Controllers
                 propertyregistration.FileData = Assignfile;
                 if (propertyregistration.FileData != null)
                 {
-                    DocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\LayoutDocs";
-                    if (!Directory.Exists(DocumentPath))
+                    if (!Directory.Exists(targetPathLayout))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(DocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathLayout);
                     }
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
-                    filePath = Path.Combine(DocumentPath, FileName);
+                    filePath = Path.Combine(targetPathLayout, FileName);
                     propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
                     propertyregistration.LayoutFilePath = filePath;
+                    FileInfo doc = new FileInfo(filePath);
                 }
 
                 /* For GeoReferncing File Upload*/
@@ -340,86 +343,67 @@ namespace SiteMaster.Controllers
                 propertyregistration.GeoFileData = GeoAssignfile;
                 if (propertyregistration.GeoFileData != null)
                 {
-                    GeoDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
-                    if (!Directory.Exists(GeoDocumentPath))
+                    if (!Directory.Exists(targetPathGeo))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(GeoDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathGeo);
                     }
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
-                    GeofilePath = Path.Combine(GeoDocumentPath, GeoFileName);
+                    GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
                     propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
                 }
 
                 /* For Taken Over File Upload*/
-                //if (TakenOverAssignFile is null && propertyregistration.TakenOverFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Taken Over Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string TakenOverFileName = "";
                 string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
                 propertyregistration.TakenOverFileData = TakenOverAssignFile;
                 if (propertyregistration.TakenOverFileData != null)
                 {
-                    TakenOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\TakenOverDocs";
-                    if (!Directory.Exists(TakenOverDocumentPath))
+                    if (!Directory.Exists(targetPathTakenOver))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(TakenOverDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathTakenOver);
                     }
                     TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
-                    TakenOverfilePath = Path.Combine(TakenOverDocumentPath, TakenOverFileName);
+                    TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
                     propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
                 }
 
                 /* For Handed Over File Upload*/
-                //if (HandedOverAssignFile is null && propertyregistration.HandedOverFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Handed Over Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string HandedOverFileName = "";
                 string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
                 propertyregistration.HandedOverFileData = HandedOverAssignFile;
                 if (propertyregistration.HandedOverFileData != null)
                 {
-                    HandedOverDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\HandedOverDocs";
-                    if (!Directory.Exists(HandedOverDocumentPath))
+                    if (!Directory.Exists(targetPathHandedOver))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(HandedOverDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOver);
                     }
                     HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
-                    HandedOverfilePath = Path.Combine(HandedOverDocumentPath, HandedOverFileName);
+                    HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
                     propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
                 }
 
                 /* For Disposal Type File Upload*/
-                //if (DisposalTypeAssignFile is null && propertyregistration.DisposalTypeFilePath is null)
-                //{
-                //    ViewBag.Message = Alert.Show("Disposal Type Document is Required", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
                 string DisposalTypeFileName = "";
                 string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
                 propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
                 if (propertyregistration.DisposalTypeFileData != null)
                 {
-                    DisposalTypeDocumentPath = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\DisposalTypeDocs";
-                    if (!Directory.Exists(DisposalTypeDocumentPath))
+                    if (!Directory.Exists(targetPathDisposal))
                     {
                         // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(DisposalTypeDocumentPath);
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathDisposal);
                     }
                     DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
-                    DisposalTypefilePath = Path.Combine(DisposalTypeDocumentPath, DisposalTypeFileName);
+                    DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
                     propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
                 }

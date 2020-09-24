@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" disabled class="form-control">
+                            <input asp-for="TotalArea"  disabled class="form-control">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
                         </div>
 
@@ -141,7 +141,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Encroched(in sq. mt.)</label>
-                            <input asp-for="Encroached" value=""  class="form-control" disabled>
+                            <input asp-for="Encroached"   class="form-control" disabled>
                             <span asp-validation-for="Encroached" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -151,7 +151,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                            <input asp-for="Vacant" value="" disabled class="form-control">
+                            <input asp-for="Vacant"  disabled class="form-control">
                             <span asp-validation-for="Vacant" class="text-danger"></span>
                         </div>
                     </div>
@@ -303,7 +303,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="TakenOverDate" type="date" value="" disabled class="form-control">
+                            <input asp-for="TakenOverDate" type="date"  disabled class="form-control">
                             <span asp-validation-for="TakenOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -366,7 +366,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="HandedOverDate" type="date" value="" disabled class="form-control">
+                            <input asp-for="HandedOverDate" type="date"  disabled class="form-control">
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -431,7 +431,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="DisposalDate" type="date" value="" disabled class="form-control">
+                            <input asp-for="DisposalDate" type="date"  disabled class="form-control">
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -454,9 +454,10 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Comments</label>
-                            <textarea asp-for="DisposalComments" disabled class="form-control"></textarea>
+                            <textarea asp-for="DisposalComments" disabled class="form-control" maxlength="4000"></textarea>
                             <span asp-validation-for="DisposalComments" class="text-danger"></span>
                         </div>
+
                     </div>
                 </div>
 
