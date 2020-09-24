@@ -73,6 +73,10 @@ namespace Libraries.Model
         public virtual DbSet<AssignPageRoleWise> AssignPageRoleWises { get; set; }
         public virtual DbSet<Khewat> Khewat { get; set; }
         public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
+        public virtual DbSet<Khatauni> Khatauni { get; set; }
+        public virtual DbSet<Taraf> Taraf { get; set; }
+        public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -123,6 +127,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
 
         }
 

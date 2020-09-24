@@ -12,12 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="DataAccess\DataObjects\Khewat.cs" />
-    <Compile Include="DataAccess\DataObjects\lmsContext.cs" />
-    <Compile Include="DataAccess\DataObjects\Sakanidetail.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="Captcha" Version="4.4.2" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
@@ -41,6 +35,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataAccess\DataObjects\" />
   </ItemGroup>
 
 </Project>
