@@ -1,21 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using LandInventory.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
 
 namespace LandInventory.Controllers
 {
@@ -50,7 +39,7 @@ namespace LandInventory.Controllers
 
         public async Task<PartialViewResult> GetDetails(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
         {
-           var result = await _propertyregistrationService.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
+            var result = await _propertyregistrationService.GetPropertyRegisterationReportData(classificationofland, department, zone, division, locality, plannedUnplannedLand, mainLandUse, litigation, encroached);
 
             if (result != null)
             {

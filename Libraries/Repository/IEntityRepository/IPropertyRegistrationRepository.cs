@@ -24,6 +24,6 @@ namespace Libraries.Repository.IEntityRepository
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
         Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division);
-        Task<bool> InsertInDeletedProperty( Deletedproperty model);
+        Task<bool> InsertInDeletedProperty(Deletedproperty model);
     }
 }
