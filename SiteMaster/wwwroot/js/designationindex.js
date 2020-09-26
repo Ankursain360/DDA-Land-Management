@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 1;
 
 $(document).ready(function () {
     GetDesignation(currentPageNumber, currentPageSize);
@@ -7,7 +7,8 @@ $(document).ready(function () {
 
 function GetDesignation(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/designation/List`, 'json', param, function (response) {
+    HttpPost(`/designation/List`, 'html', param, function (response) {
+        $('#divDesignationTable').html("");
         $('#divDesignationTable').html(response);
     });
 }

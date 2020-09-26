@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
-using Dto.Search;
+using System;
+using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
@@ -26,17 +20,15 @@ namespace SiteMaster.Controllers
         {
             _designationService = designationService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _designationService.GetAllDesignation();
-            return View(result);
+            return View();
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody]DesignationSearchDto model)
         {
-            var x = model.name;
-            var result = await _designationService.GetAllDesignation();
+            var result = await _designationService.GetPagedDesignation(model);
             return PartialView("_List", result);
         }
         public IActionResult Create()

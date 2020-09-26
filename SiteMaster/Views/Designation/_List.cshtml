@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Designation>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Designation>
 
 <table class="table table-responsive table-bordered table-card">
     <thead class="thead">
@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody class="tbody">
-        @foreach (var item in Model)
+        @foreach (var item in Model.Results)
         {
             <tr>
                 <td>@item.Name</td>
@@ -24,3 +24,4 @@
         }
     </tbody>
 </table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

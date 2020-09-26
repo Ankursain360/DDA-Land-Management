@@ -17,7 +17,7 @@ namespace SiteMaster.Components
 			{
 
 			});
-			return View("paging", pageHelper);
+			return View("Pager", pageHelper);
 		}
 	}
 }
