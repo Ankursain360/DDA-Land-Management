@@ -59,7 +59,7 @@
                         <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label lb-sm" asp-for="LocalityId">Locality</label><span class="text-danger">*</span>
+                        <label class="control-label lb-sm" asp-for="LocalityId">Locality/Village</label><span class="text-danger">*</span>
                         <select class="form-control dda-dropdown" asp-for="LocalityId">
                             @*asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))"*@
                             <option value="">--Select--</option>
