@@ -2,7 +2,8 @@
 using System.Threading.Tasks;
 using Libraries.Model.Entity;
 using Libraries.Service.Common;
-
+using Dto.Search;
+using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -15,9 +16,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(District district);
         Task<District> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        bool CheckUniqueName(int id, District district);   
+        bool CheckUniqueName(int id, District district);
 
-
+        Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model);
 
         //Task<bool> Create();
 

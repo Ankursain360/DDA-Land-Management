@@ -12,6 +12,7 @@ using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 namespace SiteMaster.Controllers
 {
     public class DistrictController : Controller
@@ -32,7 +33,12 @@ namespace SiteMaster.Controllers
           
         }
 
-
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody]DistrictSearchDto model)
+        {
+            var result = await _districtService.GetPagedDistrict(model);
+            return PartialView("_List", result);
+        }
 
         public IActionResult Create()
         {
