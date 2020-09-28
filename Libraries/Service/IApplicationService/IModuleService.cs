@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -13,14 +15,15 @@ namespace Libraries.Service.IApplicationService
         Task<List<Module>> GetAllModule();
         Task<List<Module>> GetModuleUsingRepo();
 
-        Task<bool> Update(int id, Module module); // To Upadte Particular data added by renu
+        Task<bool> Update(int id, Module module); 
 
         Task<bool> Create(Module module);
 
-        Task<Module> FetchSingleResult(int id);  // To fetch Particular data added by renu
+        Task<Module> FetchSingleResult(int id);  
 
-        Task<bool> Delete(int id);    // To Delete Data  added by renu
+        Task<bool> Delete(int id);   
 
-        Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  for designation
+        Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  
+        Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model);
     }
 }

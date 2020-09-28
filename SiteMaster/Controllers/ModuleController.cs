@@ -10,6 +10,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
+
 namespace SiteMaster.Controllers
 {
     public class ModuleController : Controller
@@ -27,6 +29,12 @@ namespace SiteMaster.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] ModuleSearchDto model)
+        {
+            var result = await _moduleService.GetPagedModule(model);
+            return PartialView("_List", result);
+        }
         public IActionResult Create()
         {
             return View();
@@ -155,28 +163,25 @@ namespace SiteMaster.Controllers
             return View(form);
         }
 
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        public async Task<IActionResult> DeleteConfirmed(int id)  
         {
-            //try
-            //{
+            
 
             var result = await _moduleService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _moduleService.GetAllModule();
+                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _moduleService.GetAllModule();
+                return View("Index", result1);
             }
-            return RedirectToAction("Index", "Module");
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-            //    return View();
-            //}
-
+            //return RedirectToAction("Index", "Module");
+         
         }
 
         public async Task<IActionResult> View(int id)

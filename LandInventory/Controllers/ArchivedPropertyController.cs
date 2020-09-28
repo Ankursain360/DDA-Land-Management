@@ -14,9 +14,7 @@ namespace LandInventory.Controllers
     public class ArchivedPropertyController : Controller
     {
        
-      
-   
-            private readonly IPropertyRegistrationService _propertyregistrationService;
+        private readonly IPropertyRegistrationService _propertyregistrationService;
 
             public ArchivedPropertyController(IPropertyRegistrationService propertyregistrationService)
             {
