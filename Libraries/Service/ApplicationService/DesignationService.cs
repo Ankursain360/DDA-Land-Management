@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -22,7 +23,6 @@ namespace Libraries.Service.ApplicationService
         {
             _unitOfWork = unitOfWork;
             _designationRepository = designationRepository;
-           
         }
 
         public async Task<List<Designation>> GetAllDesignation()
@@ -30,7 +30,11 @@ namespace Libraries.Service.ApplicationService
             return await _designationRepository.GetAll();
         }
 
-       
+        public async Task<PagedResult<Designation>> GetPagedDesignation(DesignationSearchDto model)
+        {
+            return await _designationRepository.GetPagedDesignation(model);
+        }
+
         public async Task<Designation> FetchSingleResult(int id)
         {
             var result = await _designationRepository.FindBy(a => a.Id == id);

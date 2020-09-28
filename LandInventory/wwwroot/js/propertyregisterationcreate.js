@@ -387,9 +387,11 @@ function GetDivisionList(id) {
 //File Upload check
 $(function () {
     $('#DisposalTypeAssignFile').change(function () {
+        debugger;
         var fileInput = document.getElementById('DisposalTypeAssignFile');
         var filePath = fileInput.value;
-        fileValidation(filePath,fileInput); 
+        const size = (DisposalTypeAssignFile.files[0].size);
+        fileValidation(filePath, fileInput, size); 
     });
 });
 
@@ -397,37 +399,46 @@ $(function () {
     $('#Assignfile').change(function () {
         var fileInput = document.getElementById('Assignfile');
         var filePath = fileInput.value;
-        fileValidation(filePath, fileInput);
+        const size = (Assignfile.files[0].size);
+        fileValidation(filePath, fileInput, size); 
     });
 });
 $(function () {
     $('#GeoAssignFile').change(function () {
         var fileInput = document.getElementById('GeoAssignFile');
         var filePath = fileInput.value;
-        fileValidation(filePath, fileInput);
+        const size = (GeoAssignFile.files[0].size);
+        fileValidation(filePath, fileInput, size); 
     });
 });
 $(function () {
     $('#TakenOverAssignFile').change(function () {
         var fileInput = document.getElementById('TakenOverAssignFile');
         var filePath = fileInput.value;
-        fileValidation(filePath, fileInput);
+        const size = (TakenOverAssignFile.files[0].size);
+        fileValidation(filePath, fileInput, size); 
     });
 });
 $(function () {
     $('#HandedOverAssignFile').change(function () {
         var fileInput = document.getElementById('HandedOverAssignFile');
         var filePath = fileInput.value;
-        fileValidation(filePath, fileInput);
+        const size = (HandedOverAssignFile.files[0].size);
+        fileValidation(filePath, fileInput, size); 
     });
 });
-function fileValidation(filePath, fileInput) {
+function fileValidation(filePath, fileInput, size) {
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
     if (!allowedExtensions.exec(filePath)) {
         alert('Invalid file type');
         fileInput.value = '';
         return false;
     }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    } 
     
 } 
 

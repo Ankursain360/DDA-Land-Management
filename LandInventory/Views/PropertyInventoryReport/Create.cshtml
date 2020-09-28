@@ -46,13 +46,13 @@
 
                 <div class="form-group col-md-4">
                     <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
-                                                                                            <select class="form-control dda-dropdown" asp-for="DivisionId">
-                                                                                                <option value="0">All</option>
-                                                                                            </select>
+                    <select class="form-control dda-dropdown" asp-for="DivisionId">
+                        <option value="0">All</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="LocalityId">Locality</label><span class="text-danger">*</span>
-                    <select class="form-control dda-dropdown" asp-for="LocalityId"> 
+                    <label class="control-label lb-sm" asp-for="LocalityId">Locality/Village</label><span class="text-danger">*</span>
+                    <select class="form-control dda-dropdown" asp-for="LocalityId">
                         <option value="0">All</option>
                     </select>
                 </div>
@@ -135,7 +135,7 @@
             <div class="row ">
                 <div class="form-group col-md-12" style="margin-bottom:40px;">
                     <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-                    @Html.ActionLink("Back", "Index", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
+                    @Html.ActionLink("Back", "Create", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
                 </div>
             </div>
 

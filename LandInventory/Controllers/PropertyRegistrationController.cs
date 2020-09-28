@@ -78,33 +78,24 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.DisposalTypeId = 1;
                 }
-                if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
-                if (propertyregistration.BuiltUp == 1 && propertyregistration.BuiltUpRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Built-Up Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
-                if (propertyregistration.LitigationStatus == 1 && propertyregistration.LitigationStatusRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Litigation Status Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+                //if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
+                //{
+                //    ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
+                //if (propertyregistration.BuiltUp == 1 && propertyregistration.BuiltUpRemarks == null)
+                //{
+                //    ViewBag.Message = Alert.Show("Built-Up Remarks Mandatory", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
+                //if (propertyregistration.LitigationStatus == 1 && propertyregistration.LitigationStatusRemarks == null)
+                //{
+                //    ViewBag.Message = Alert.Show("Litigation Status Remarks Mandatory", "", AlertType.Warning);
+                //    return View(propertyregistration);
+                //}
 
                 #region File Upload  Added by Renu 16 Sep 2020
                 /* For Layout Plan File Upload*/
-                if (propertyregistration.LayoutPlan == 1)
-                {
-                    if (Assignfile is null && propertyregistration.LayoutFilePath is null)
-                    {
-                        ViewBag.Message = Alert.Show("Layout Plan Document is Required", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-
-                }
                 string FileName = "";
                 string DocumentPath = "";
                 string filePath = "";
@@ -124,15 +115,6 @@ namespace SiteMaster.Controllers
                 }
 
                 /* For GeoReferncing File Upload*/
-                if (propertyregistration.GeoReferencing == 1)
-                {
-                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
-                    {
-                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-
-                }
                 string GeoFileName = "";
                 string GeoDocumentPath = "";
                 string GeofilePath = "";
@@ -281,34 +263,10 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.DisposalTypeId = 1;
                 }
-                propertyregistration.IsDeleted = 1;
-                if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
-                if (propertyregistration.BuiltUp == 1 && propertyregistration.BuiltUpRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Built-Up Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
-                if (propertyregistration.LitigationStatus == 1 && propertyregistration.LitigationStatusRemarks == null)
-                {
-                    ViewBag.Message = Alert.Show("Litigation Status Remarks Mandatory", "", AlertType.Warning);
-                    return View(propertyregistration);
-                }
+
 
                 #region File Upload  Added by Renu 16 Sep 2020
                 /* For Layout Plan File Upload*/
-                if (propertyregistration.LayoutPlan == 1)
-                {
-                    if (Assignfile is null && propertyregistration.LayoutFilePath is null)
-                    {
-                        ViewBag.Message = Alert.Show("Layout Plan Document is Required", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-
-                }
                 string FileName = "";
                 string DocumentPath = "";
                 string filePath = "";
@@ -322,21 +280,12 @@ namespace SiteMaster.Controllers
                     }
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
                     filePath = Path.Combine(targetPathLayout, FileName);
-                    propertyregistration.FileData.CopyTo(new FileStream(filePath, FileMode.Create));
+                    var stream = (new FileStream(filePath, FileMode.Create));
                     propertyregistration.LayoutFilePath = filePath;
-                    FileInfo doc = new FileInfo(filePath);
+                    stream.Close();
                 }
 
                 /* For GeoReferncing File Upload*/
-                if (propertyregistration.GeoReferencing == 1)
-                {
-                    if (GeoAssignfile is null && propertyregistration.GeoFilePath is null)
-                    {
-                        ViewBag.Message = Alert.Show("Geo Referencing  Document is Required", "", AlertType.Warning);
-                        return View(propertyregistration);
-                    }
-
-                }
                 string GeoFileName = "";
                 string GeoDocumentPath = "";
                 string GeofilePath = "";
@@ -350,8 +299,9 @@ namespace SiteMaster.Controllers
                     }
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
                     GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
-                    propertyregistration.GeoFileData.CopyTo(new FileStream(GeofilePath, FileMode.Create));
+                    var stream = (new FileStream(GeofilePath, FileMode.Create));
                     propertyregistration.GeoFilePath = GeofilePath;
+                    stream.Close();
                 }
 
                 /* For Taken Over File Upload*/
@@ -368,8 +318,9 @@ namespace SiteMaster.Controllers
                     }
                     TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
                     TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
-                    propertyregistration.TakenOverFileData.CopyTo(new FileStream(TakenOverfilePath, FileMode.Create));
+                    var stream = (new FileStream(TakenOverfilePath, FileMode.Create));
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
+                    stream.Close();
                 }
 
                 /* For Handed Over File Upload*/
@@ -386,8 +337,9 @@ namespace SiteMaster.Controllers
                     }
                     HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
                     HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
-                    propertyregistration.HandedOverFileData.CopyTo(new FileStream(HandedOverfilePath, FileMode.Create));
+                    var stream = (new FileStream(HandedOverfilePath, FileMode.Create));
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
+                    stream.Close();
                 }
 
                 /* For Disposal Type File Upload*/
@@ -406,6 +358,7 @@ namespace SiteMaster.Controllers
                     DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
                     propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
+                   // stream.Close();
                 }
                 #endregion
 

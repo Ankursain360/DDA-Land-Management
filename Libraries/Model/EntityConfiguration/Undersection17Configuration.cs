@@ -21,19 +21,14 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
+            builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.NotificationDate).HasColumnType("date");
 
             builder.Property(e => e.UnderSection6Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.Us17date)
-                .HasColumnName("US17Date")
-                .HasColumnType("date");
-
-            builder.Property(e => e.Us17number)
-                .HasColumnName("US17Number")
-                .HasMaxLength(100)
-                .IsUnicode(false);
-      
 
 
 

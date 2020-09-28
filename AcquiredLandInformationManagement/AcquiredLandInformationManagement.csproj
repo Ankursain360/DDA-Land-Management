@@ -5,19 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="DataAccess\**" />
-    <Content Remove="DataAccess\**" />
-    <EmbeddedResource Remove="DataAccess\**" />
-    <None Remove="DataAccess\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="DataAccess\DataObjects\Khewat.cs" />
-    <Compile Include="DataAccess\DataObjects\lmsContext.cs" />
-    <Compile Include="DataAccess\DataObjects\Sakanidetail.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
     <PackageReference Include="Captcha" Version="4.4.2" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
