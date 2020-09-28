@@ -128,7 +128,7 @@
                     <th>Primary List No.</th>
                     <th>Plot No. & Address with Landmark</th>
                     <th>Encroachment Status</th>
-                    <th>Encroachment Details</th>
+                    @*<th>Encroachment Details</th>*@
                     <th>Total Area(in Sq. Mt.)</th>
                     <th>Operation</th>
                 </tr>
@@ -150,7 +150,7 @@
                         <td>@item.PrimaryListNo</td>
                         <td>@item.Palandmark</td>
                         <td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>
-                        <td>@item.EncraochmentDetails</td>
+                        @*<td>@item.EncraochmentDetails</td>*@
                         @*<td>@(item.Boundary == 0 ? "No" : "Yes")</td>
                         <td>@item.TotalAreaInBigha</td>*@
                         <td>@item.TotalArea</td>

@@ -79,6 +79,14 @@ $(document).ready(function () {
         var text_remaining = text_max - text_length;
         $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
     });
+
+
+    //DropDrown check at initial 
+    var departmentid = $('#DepartmentId option:selected').val();
+    if (departmentid > 0) {
+        debugger;
+        GetZoneList(departmentid);
+    }
 })
 
 $(function () {
@@ -442,3 +450,21 @@ function fileValidation(filePath, fileInput, size) {
     
 } 
 
+
+//$(function () {
+//    $('#Encroached').change(function () {
+//        debugger;
+//        var value = $('#Encroached').val();
+//        var value1 = $('#Encroached').val();
+//        if (parseFloat(value) > parseFloat(value1) || value != value1  ) {
+//            $("#EncroachedValidation").val('');
+//            $("#EncroachedValidation").hide();
+//            return true;
+//        }
+//        else {
+//            $("#EncroachedValidation").val('Total Area and Encroached Area must be ');
+//            $("#EncroachedValidation").show();
+//            return false;
+//        }
+//    });
+//});

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -69,6 +70,11 @@ namespace Libraries.Repository.EntityRepository
         {
             var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
+        }
+
+        public async Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model)
+        {
+            return await _dbContext.Zone.Include(s => s.Department).OrderBy(s => s.Id).GetPaged<Zone>(model.PageNumber, model.PageSize);
         }
     }
 

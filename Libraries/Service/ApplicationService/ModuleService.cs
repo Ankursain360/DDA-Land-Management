@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Linq;
+using Dto.Search;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -29,6 +31,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _moduleRepository.GetAll();
         }
+      
 
         public async Task<List<Module>> GetModuleUsingRepo()
         {
@@ -78,5 +81,11 @@ namespace Libraries.Service.ApplicationService
             _moduleRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
+        {
+            return await _moduleRepository.GetPagedModule(model);
+        }
+
     }
 }

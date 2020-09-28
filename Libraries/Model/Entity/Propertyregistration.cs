@@ -37,6 +37,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Total Area is Mandatory Field")]
         public decimal TotalArea { get; set; }
+       
         public decimal? Encroached { get; set; }
         public decimal? BuiltUpEncraochmentArea { get; set; }
         public decimal? Vacant { get; set; }
@@ -140,7 +141,5 @@ namespace Libraries.Model.Entity
 
 
         public Deletedproperty Deletedproperty { get; set; }
-        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
-        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
     }
 }
