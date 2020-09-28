@@ -75,6 +75,12 @@ namespace Libraries.Repository.EntityRepository
             List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return DivisionList;
         }
+      
+        public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId)
+        {
+            List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
+            return PrimaryListNoList;
+        }
 
         public string GetFile(int id)
         {
@@ -127,16 +133,14 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        
-            public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division)
+
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)
         {
-            //  var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            var data = await _dbContext.Propertyregistration.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).OrderByDescending(x => x.Id).
-                Where(x => x.IsDeleted == 1 && x.DepartmentId == department && x.ZoneId == zone && x.DivisionId == division).ToListAsync();
+            var data = await _dbContext.Propertyregistration.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x=>x.Deletedproperty).
+                OrderByDescending(x => x.Id).Where(x => (x.IsDeleted ==0)&& (x.DepartmentId == (department == 0 ? x.DepartmentId : department)) &&
+                (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) && (x.DivisionId == (division == 0 ? x.DivisionId : division)) && (x.Id == (primaryListNo == 0 ? x.Id : primaryListNo)) ).ToListAsync();
             return data;
-
         }
-
 
 
         public string GetTakenOverFile(int id)
@@ -158,6 +162,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<bool> InsertInDeletedProperty(Deletedproperty model)
         {
             var result = _dbContext.Deletedproperty.Add(model);
+            return await _dbContext.SaveChangesAsync() > 0;
+        }
+        public async Task<bool> InsertInRestoreProperty(Restoreproperty model)
+        {
+            var result = _dbContext.Restoreproperty.Add(model);
             return await _dbContext.SaveChangesAsync() > 0;
         }
     }

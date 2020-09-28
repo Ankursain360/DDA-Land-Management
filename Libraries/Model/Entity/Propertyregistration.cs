@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
+using Libraries.Model.Entity;
 namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
@@ -92,6 +92,9 @@ namespace Libraries.Model.Entity
         public Zone Zone { get; set; }
 
         [NotMapped]
+        public List<Propertyregistration> PrimaryListNoList { get; set; }
+
+        [NotMapped]
         public List<Classificationofland> ClassificationOfLandList { get; set; }
 
         [NotMapped]
@@ -132,5 +135,12 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string Reason { get; set; }
 
+        [NotMapped]
+        public string RestoreReason { get; set; }
+
+
+        public Deletedproperty Deletedproperty { get; set; }
+        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
+        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
     }
 }

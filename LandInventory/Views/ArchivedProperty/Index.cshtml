@@ -17,7 +17,7 @@
                 <th rowspan="2">Khasra No.</th>
                 <th rowspan="2">Area (In SQM) </th>
                 <th rowspan="2">Division Contact</th>
-                @*<th rowspan="2">Reason</th>*@
+                <th rowspan="2">Reason</th>
                 <th rowspan="2">Restore</th>
             </tr>
           
@@ -39,7 +39,7 @@
            
 
 
-                @*<td>@item.DeletedReason</td>*@
+                <td>@item.Deletedproperty.Reason</td>
                 @*asp-action="View" asp-route-id="@item.Id"*@
             <td>
                 <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>

@@ -1,0 +1,62 @@
+﻿@model Libraries.Model.Entity.Propertyregistration
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Restore Record</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Restore</h6>
+        </div>
+        <div class="panel-body">
+
+
+            <br />
+            <form asp-action="Restore" method="post">
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Restore Reason</label>
+                        <textarea asp-for="RestoreReason" type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <br />
+                        <h6 class="p-4">Are you sure you want to restore this?</h6>
+                        <input type="hidden" asp-for="Id" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                       
+                            <input type="submit" value="Restore" class="btn btn-primary myapp-hed1" />
+                            <a asp-action="create" class="btn btn-primary dda-pageheading " style="margin-top:3px;">Back</a>
+                        
+                       
+                    </div>
+                </div>
+                @*<div class="card-footer text-center">
+                    <div class="row col-12" style="justify-content:center;">
+                        <div class="col-1">
+                            <input type="submit" value="Restore" class="btn btn-primary myapp-hed1" />
+                            <a asp-action="create" class="btn btn-primary dda-pageheading">Back</a>
+                        </div>
+                    </div>
+                </div>*@
+            </form>
+        </div>
+    </div>
+</div>
+

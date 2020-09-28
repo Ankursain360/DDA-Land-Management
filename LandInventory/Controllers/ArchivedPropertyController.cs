@@ -23,21 +23,35 @@ namespace LandInventory.Controllers
                 _propertyregistrationService = propertyregistrationService;
             }
 
-        public async Task<IActionResult> Restore(int id)  //Added by ishu
+        public async Task<IActionResult> Restore(int id)
         {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Restore(int id, Propertyregistration propertyregistration)  //Added by ishu
+        {
+            Restoreproperty model = new Restoreproperty();
             if (id == 0)
             {
                 return NotFound();
             }
-
+            model.RestoreReason = propertyregistration.RestoreReason;
             var form = await _propertyregistrationService.Restore(id);
+            var result = await _propertyregistrationService.InsertInRestoreProperty(id, model);
             if (form == false)
             {
                 return NotFound();
             }
 
             ViewBag.Message = Alert.Show(Messages.RestoreSuccess, "", AlertType.Success);
-            return View(form);
+            return RedirectToAction("Create");
         }
         async Task BindDropDown(Propertyregistration propertyregistration)
             {
@@ -59,6 +73,17 @@ namespace LandInventory.Controllers
             zoneId = zoneId ?? 0;
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetPrimaryNoList(int? divisionId)
+        {
+            divisionId = divisionId ?? 0;
+            return Json(await _propertyregistrationService.GetPrimaryListNoList(Convert.ToInt32(divisionId)));
+        }
+
+
+
         public async Task<IActionResult> Create()
             {
                 Propertyregistration propertyregistration = new Propertyregistration();
@@ -68,9 +93,9 @@ namespace LandInventory.Controllers
             }
 
 
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division)
+        public async Task<PartialViewResult> GetDetails(int department, int zone, int division,int primaryListNo)
         {
-            var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division);
+            var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division, primaryListNo);
 
             if (result != null)
             {

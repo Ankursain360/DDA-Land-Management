@@ -11,6 +11,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
+        Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId); // added by ishu
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
@@ -29,7 +30,7 @@ namespace Libraries.Service.IApplicationService
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
-        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division);
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);
 
         Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
@@ -37,5 +38,6 @@ namespace Libraries.Service.IApplicationService
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
+        Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
     }
 }
