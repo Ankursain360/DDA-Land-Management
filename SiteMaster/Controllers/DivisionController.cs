@@ -13,7 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
-
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -34,6 +34,12 @@ namespace SiteMaster.Controllers
             List<Division> list = await _divisionService.GetAllDivision();
             return View(list);
 
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DivisionSearchDto model)
+        {
+            var result = await _divisionService.GetPagedDivision(model);
+            return PartialView("_List", result);
         }
         public async Task<IActionResult> Create()
         {

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
-
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -99,7 +99,10 @@ namespace Libraries.Service.ApplicationService
             List<Zone> zoneList = await _divisionRepository.GetAllZone(departmentId);
             return zoneList;
         }
-
+        public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
+        {
+            return await _divisionRepository.GetPagedDivision(model);
+        }
 
     }
 }

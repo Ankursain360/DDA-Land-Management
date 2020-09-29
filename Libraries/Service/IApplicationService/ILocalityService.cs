@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,5 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<bool> CheckUniqueName(int id, string name);   // To check Unique Value  for Village
         Task<bool> CheckUniqueCode(int id, string code);
+
+        Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model);
     }
 }

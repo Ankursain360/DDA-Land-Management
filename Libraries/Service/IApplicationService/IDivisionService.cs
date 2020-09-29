@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 
 
@@ -23,7 +25,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueName(int id, string division);
 
 
-        //Task<bool> Create();
+        Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model);
 
     }
 }

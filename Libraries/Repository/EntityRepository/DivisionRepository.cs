@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -16,7 +17,10 @@ namespace Libraries.Repository.EntityRepository
     {
         public DivisionRepository(DataContext dbcontext) : base(dbcontext)
         { }
-
+        public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
+        {
+            return await _dbContext.Division.GetPaged<Division>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Division>> GetDivisions()
         {
             var data = await _dbContext.Division.Include(x => x.Zone).Include(x => x.Department).OrderByDescending(x => x.Id).ToListAsync();

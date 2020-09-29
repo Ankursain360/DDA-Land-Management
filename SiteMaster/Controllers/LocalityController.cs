@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.ApplicationService;
 using Libraries.Service.IApplicationService;
@@ -25,6 +26,13 @@ namespace SiteMaster.Controllers
         {
             List<Locality> list = await _localityService.GetAllLocality();
             return View(list);
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] LocalitySearchDto model)
+        {
+            var result = await _localityService.GetPagedLocality(model);
+            return PartialView("_List", result);
         }
         public async Task<IActionResult> Create()
         {
