@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -25,7 +26,12 @@ namespace SiteMaster.Controllers
             var result = await _pageService.GetAllPage();
             return View(result);
         }
-
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] PageSearchDto model)
+        {
+            var result = await _pageService.GetPagedPage(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Create()
         {
             Page page = new Page();

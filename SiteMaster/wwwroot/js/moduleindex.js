@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 1;
+var currentPageSize = 2;
 
 $(document).ready(function () {
     GetModule(currentPageNumber, currentPageSize);

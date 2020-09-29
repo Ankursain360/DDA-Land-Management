@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.EntityRepository
 {  
@@ -16,7 +17,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
+        {
+            return await _dbContext.Page.GetPaged<Page>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Page>> GetPage()
         {
             return await _dbContext.Page.ToListAsync();
