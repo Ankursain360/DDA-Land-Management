@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -65,6 +66,11 @@ namespace Libraries.Repository.EntityRepository
                           where A.PropertyId == propertyId
                           select A.FromDate).Max();
             return result;
+        }
+
+        public Task<PagedResult<Rate>> GetPagedRate(RateSearchDto model)
+        {
+            throw new NotImplementedException();
         }
     }
 
