@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -27,6 +28,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Village>> GetAllVillage()
         {
             return await _villageRepository.GetVillage();
+        }
+        public async Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model)
+        {
+            return await _villageRepository.GetPagedVillage(model);
         }
 
         public async Task<List<Village>> GetVillageUsingRepo()

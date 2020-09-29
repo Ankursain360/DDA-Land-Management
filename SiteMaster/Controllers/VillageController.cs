@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using System;
+using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
@@ -24,6 +22,12 @@ namespace SiteMaster.Controllers
         {
             var list = await _villageService.GetAllVillage();
             return View(list);
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] VillageSearchDto model)
+        {
+            var result = await _villageService.GetPagedVillage(model);
+            return PartialView("_List", result);
         }
         public async Task<IActionResult> Create()
         {
