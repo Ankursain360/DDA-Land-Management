@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -17,6 +18,10 @@ namespace Libraries.Repository.EntityRepository
         public RoleRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+        public async Task<PagedResult<Role>> GetPagedRole(RoleSearchDto model)
+        {
+            return await _dbContext.Role.GetPaged<Role>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Role>> GetRole()
         {
