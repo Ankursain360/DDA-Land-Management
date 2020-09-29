@@ -26,19 +26,18 @@ namespace SiteMaster.Controllers
         {
             _classificationoflandService = classificationoflandService;
         }
-        public async Task<IActionResult> Index()
+        
+        public IActionResult Index()
         {
-            var result = await _classificationoflandService.GetAllClassificationOfLand();
-            return View(result);
+            return View();
         }
 
-        //[HttpPost]
-        //public async Task<PartialViewResult> List(LandUseSearchDto model)
-        //{
-        //    var x = model.Name;
-        //    var result = await _classificationoflandService.GetAllClassificationOfLand();
-        //    return PartialView("_List", result);
-        //}
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] ClassificationOfLandSearchDto model)
+        {
+            var result = await _classificationoflandService.GetPagedClassificationOfLand(model);
+            return PartialView("_List", result);
+        }
         public IActionResult Create()
         {
             return View();

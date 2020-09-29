@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 
 
@@ -19,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    // To Delete Data  added by renu
 
         Task<bool> CheckUniqueName(int id, string landuse);   // To check Unique Value  for landuse
+        Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model);
     }
 }

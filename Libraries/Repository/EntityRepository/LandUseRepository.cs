@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -22,6 +24,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Landuse.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
+
+        public async Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model)
+        {
+            return await _dbContext.Landuse.OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
         }
     }
 

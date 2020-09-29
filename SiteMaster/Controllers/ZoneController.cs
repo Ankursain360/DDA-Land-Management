@@ -27,10 +27,9 @@ namespace SiteMaster.Controllers
         {
             _zoneService = zoneService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _zoneService.GetAllDetails();
-            return View(result);
+            return View();
         }
 
         [HttpPost]

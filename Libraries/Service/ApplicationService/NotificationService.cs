@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -74,6 +75,11 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = 0;
             _notificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<LandNotification>> GetPagedNotification(NotificationSearchDto model)
+        {
+            return await _notificationRepository.GetPagedZone(model);
         }
     }
 }
