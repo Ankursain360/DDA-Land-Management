@@ -1,16 +1,13 @@
-﻿using Libraries.Model;
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
-using Microsoft.EntityFrameworkCore;
 using Libraries.Repository.IEntityRepository;
-using System;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using System;
+using Dto.Search;
 namespace Libraries.Service.ApplicationService
 {
     public class KhasraService : EntityService<Khasra>, IKhasraService
@@ -68,6 +65,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _khasraRepository.GetAllKhasra();
         }
+        public async Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model)
+        {
+            return await _khasraRepository.GetPagedKhasra(model);
+        }
 
         public async Task<bool> Update(int id, Khasra khasra)
         {
@@ -100,12 +101,6 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
-
-
-
-
-
-
+        
     }
 }

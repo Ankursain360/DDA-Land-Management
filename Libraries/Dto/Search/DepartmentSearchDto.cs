@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Dto.Search
 {
-    public class DesignationSearchDto: BaseSearchDto
+    public class DepartmentSearchDto : BaseSearchDto
     {
-        public string Name { get; set; }
+        public string name { get; set; }
     }
 }

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -28,6 +29,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _departmentRepository.GetAll();
+        }
+        public async Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model)
+        {
+            return await _departmentRepository.GetPagedDepartment(model);
         }
 
         public async Task<List<Department>> GetDepartmentUsingRepo()
