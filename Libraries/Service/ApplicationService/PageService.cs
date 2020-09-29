@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using System.Linq;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -83,7 +84,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
+        {
+            return await _pageRepository.GetPagedPage(model);
+        }
 
-
-       }
+    }
 }

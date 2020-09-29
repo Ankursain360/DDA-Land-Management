@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -21,6 +23,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);  
 
-        Task<bool> CheckUniqueName(int id, string Page);   
+        Task<bool> CheckUniqueName(int id, string Page);
+        Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
     }
 }
