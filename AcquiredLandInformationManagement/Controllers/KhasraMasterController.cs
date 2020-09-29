@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class KhasraMasterController : Controller
@@ -29,9 +29,14 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _khasraService.GetAllKhasra();
             return View(list);
         }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] KhasraMasterSearchDto model)
+        {
+            var result = await _khasraService.GetPagedKhasra(model);
+            return PartialView("_List", result);
+        }
 
-
-        public async Task<IActionResult> Create()
+    public async Task<IActionResult> Create()
         
         {
             Khasra khasra = new Khasra();

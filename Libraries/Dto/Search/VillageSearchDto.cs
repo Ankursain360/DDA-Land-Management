@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Dto.Search
 {
-    public class DesignationSearchDto: BaseSearchDto
+    public class VillageSearchDto : BaseSearchDto
     {
         public string Name { get; set; }
     }
