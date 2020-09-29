@@ -13,6 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -25,12 +26,22 @@ namespace SiteMaster.Controllers
         {
             _rebateService = rebateService;
         }
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var result = await _rebateService.GetAllRebate();
+        //    return View(result);
+        //}
+        public IActionResult Index()
         {
-            var result = await _rebateService.GetAllRebate();
-            return View(result);
+            return View();
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] RebateSearchDto model)
+        {
+            var result = await _rebateService.GetPagedRebate(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Create()
         {
             Rebate rebate = new Rebate();

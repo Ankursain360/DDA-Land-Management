@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Libraries.Repository.EntityRepository;
+using Dto.Search;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -17,6 +18,10 @@ namespace Libraries.Repository.EntityRepository
         public NazullandRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+        public async Task<PagedResult<Nazulland>> GetPagedNazulland(NazullandSearchDto model)
+        {
+            return await _dbContext.Nazulland.GetPaged<Nazulland>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Nazulland>> GetNazulland()
         {

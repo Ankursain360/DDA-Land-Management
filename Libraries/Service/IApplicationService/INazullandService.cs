@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -20,6 +22,7 @@ namespace Service.ApplicationService
         Task<Nazulland> FetchSingleResult(int id);
 
         Task<bool> Delete(int id);
+        Task<PagedResult<Nazulland>> GetPagedNazulland(NazullandSearchDto model);
 
         //Task<bool> CheckUniqueName(int id, string Page);
     }

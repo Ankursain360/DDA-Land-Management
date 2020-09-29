@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 
@@ -14,5 +15,6 @@ namespace Libraries.Repository.IEntityRepository
 
         object GetFromDateData(int propertyId);
         Task<List<Rebate>> GetAllDetails();
+        Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model);
     }
 }

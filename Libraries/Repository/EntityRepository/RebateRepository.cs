@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -39,6 +40,11 @@ namespace Libraries.Repository.EntityRepository
 
            
             return result;
+        }
+
+        public Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model)
+        {
+            throw new NotImplementedException();
         }
     }
 

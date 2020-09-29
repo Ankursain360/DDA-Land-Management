@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +29,13 @@ namespace LandInventory.Controllers
             return View(result);
         }
 
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] NazullandSearchDto model)
+        {
+            var result = await _nazullandService.GetPagedNazulland(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Create()
         {
             Nazulland nazulland = new Nazulland();
