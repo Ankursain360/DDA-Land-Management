@@ -1,14 +1,14 @@
-﻿using Libraries.Model;
-using Libraries.Model.Entity;
-using Libraries.Repository.Common;
-using Libraries.Repository.IEntityRepository;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Repository.IEntityRepository;
+using Microsoft.EntityFrameworkCore;
 namespace Libraries.Repository.EntityRepository
 {
     public class KhasraRepository : GenericRepository<Khasra>, IKhasraRepository
@@ -17,10 +17,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model)
+        {
+            return await _dbContext.Khasra.GetPaged<Khasra>(model.PageNumber, model.PageSize);
+        }
 
 
 
-        
         public async Task<List<LandCategory>> GetAllLandCategory()
         {
             List<LandCategory> landcategoryList = await _dbContext.LandCategory.ToListAsync();

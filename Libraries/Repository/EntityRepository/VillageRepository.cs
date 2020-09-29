@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -18,6 +19,11 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model)
+        {
+            return await _dbContext.Village.GetPaged<Village>(model.PageNumber, model.PageSize);
+        }
+
         public async Task<List<Village>> GetVillage()
         {
             return await _dbContext.Village.Include(x => x.Zone).OrderByDescending(x=>x.Id).ToListAsync();

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -17,6 +18,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.District.ToListAsync();
         }
 
+        public async Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model)
+        {
+            return await _dbContext.District.GetPaged<District>(model.PageNumber, model.PageSize);
+        }
 
     }
 }

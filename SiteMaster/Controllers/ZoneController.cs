@@ -14,6 +14,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -26,12 +27,17 @@ namespace SiteMaster.Controllers
         {
             _zoneService = zoneService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _zoneService.GetAllDetails();
-            return View(result);
+            return View();
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] ZoneSearchDto model)
+        {
+            var result = await _zoneService.GetPagedZone(model);
+            return PartialView("_List", result);
+        }
         async Task BindDropDown(Zone zone)
         {
             zone.DepartmentList = await _zoneService.GetDropDownList();

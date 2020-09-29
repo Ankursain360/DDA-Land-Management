@@ -13,6 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -29,6 +30,11 @@ namespace SiteMaster.Controllers
         {
             var result = await _departmentService.GetAllDepartment();
             return View(result);
+        }
+        public async Task<PartialViewResult> List([FromBody] DepartmentSearchDto model)
+        {
+            var result = await _departmentService.GetPagedDepartment(model);
+            return PartialView("_List", result);
         }
         public IActionResult Create()
         {

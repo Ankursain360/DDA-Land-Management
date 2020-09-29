@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Role>> GetRole();
         Task<List<Zone>> GetAllZone();
         Task<bool> Any(int id, string name);
+        Task<PagedResult<Role>> GetPagedRole(RoleSearchDto model);
     }
 }
 

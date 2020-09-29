@@ -13,6 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -25,12 +26,17 @@ namespace SiteMaster.Controllers
         {
             _interestService = interestService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _interestService.GetAllInterest();
-            return View(result);
+            return View();
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] InterestSearchDto model)
+        {
+            var result = await _interestService.GetPagedInterest(model);
+            return PartialView("_List", result);
+        }
         async Task BindDropDown(Interest interest)
         {
             interest.PropertyTypeList = await _interestService.GetDropDownList();

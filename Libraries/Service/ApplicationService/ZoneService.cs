@@ -9,6 +9,7 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -83,6 +84,11 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = 0;
             _zoneRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model)
+        {
+            return await _zoneRepository.GetPagedZone(model);
         }
     }
 }

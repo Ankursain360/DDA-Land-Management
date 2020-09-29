@@ -2,19 +2,175 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 
-namespace DDAPropertyREG.Controllers
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+
+namespace AcquiredLandInformationManagement.Controllers
 {
     public class UnderSection17DetailsController : Controller
     {
-        public IActionResult Index()
+        private readonly IUndersection17Service _undersection17Service;
+
+
+        public UnderSection17DetailsController(IUndersection17Service undersection17Service)
         {
-            return View();
+            _undersection17Service = undersection17Service;
         }
-        public IActionResult Create()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = await _undersection17Service.GetAllUndersection17();
+            return View(list);
         }
+
+
+        public async Task<IActionResult> Create()
+
+        {
+            Undersection17 undersection17 = new Undersection17();
+            undersection17.IsActive = 1;
+            undersection17.LandNotificationList = await _undersection17Service.GetAllLandNotification();
+
+            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6();
+            return View(undersection17);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(Undersection17 undersection17)
+        {
+            try
+            {
+                undersection17.LandNotificationList = await _undersection17Service.GetAllLandNotification();
+
+                undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6();
+
+                if (ModelState.IsValid)
+                {
+                    var result = await _undersection17Service.Create(undersection17);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _undersection17Service.GetAllUndersection17();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(undersection17);
+                    }
+                }
+                else
+                {
+                    return View(undersection17);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(undersection17);
+            }
+        }
+
+
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _undersection17Service.FetchSingleResult(id);
+            Data.LandNotificationList = await _undersection17Service.GetAllLandNotification();
+
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6();
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Undersection17 undersection17)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var result = await _undersection17Service.Update(id, undersection17);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var list = await _undersection17Service.GetAllUndersection17();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(undersection17);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(undersection17);
+                }
+            }
+            else
+            {
+                return View(undersection17);
+            }
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _undersection17Service.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _undersection17Service.GetAllUndersection17();
+            return View("Index", list);
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _undersection17Service.FetchSingleResult(id);
+
+            Data.LandNotificationList = await _undersection17Service.GetAllLandNotification();
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6();
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+
     }
 }

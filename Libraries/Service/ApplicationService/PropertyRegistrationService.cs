@@ -34,10 +34,17 @@ namespace Libraries.Service.ApplicationService
             List<Zone> zoneList = await _propertyregistrationRepository.GetZoneDropDownList(DepartmentId);
             return zoneList;
         }
+
         public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
             List<Locality> LocalityList = await _propertyregistrationRepository.GetLocalityDropDownList(zoneId);
             return LocalityList;
+        }
+     
+        public async Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId)
+        {
+            List<Propertyregistration> PrimaryListNoList = await _propertyregistrationRepository.GetPrimaryListNoList(DivisionId);
+            return PrimaryListNoList;
         }
         public async Task<List<Landuse>> GetLandUseDropDownList()
         {
@@ -145,8 +152,8 @@ namespace Libraries.Service.ApplicationService
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
             model.ModifiedBy = 1;
-            model.IsActive = 1;
-            //model.IsDelated = 1;
+            
+            model.IsDeleted = 1;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -178,9 +185,9 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division)
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)
         {
-            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division);
+            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division,primaryListNo);
         }
 
 
@@ -212,6 +219,14 @@ namespace Libraries.Service.ApplicationService
             model.DeletedBy = 1;
             model.DeletedDate = DateTime.Now;
             return await _propertyregistrationRepository.InsertInDeletedProperty(model);
+        }
+        public async Task<bool> InsertInRestoreProperty(int id, Restoreproperty model)
+        {
+            model.PropertyRegistrationId = id;
+            //model.IsDeleted = 0;
+            model.RestoreBy = 1;
+            model.RestoreDate = DateTime.Now;
+            return await _propertyregistrationRepository.InsertInRestoreProperty(model);
         }
     }
 }

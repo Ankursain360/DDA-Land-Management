@@ -1,12 +1,13 @@
-﻿using Libraries.Model;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -15,6 +16,10 @@ namespace Libraries.Repository.EntityRepository
         public ModuleRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+        public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
+        {
+            return await _dbContext.Module.GetPaged<Module>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Module>> GetModule()

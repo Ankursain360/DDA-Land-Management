@@ -20,10 +20,12 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetDepartmentDropDownList();
         Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
+        Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
-        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division);
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division,int primaryListNo);
         Task<bool> InsertInDeletedProperty(Deletedproperty model);
+        Task<bool> InsertInRestoreProperty(Restoreproperty model);
     }
 }

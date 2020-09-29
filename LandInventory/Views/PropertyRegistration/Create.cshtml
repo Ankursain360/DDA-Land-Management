@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId"  onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
                             @*asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"*@
                             <option value="">--Select--</option>
                         </select>
@@ -146,7 +146,7 @@
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Encroched(in sq. mt.)</label>
                             <input asp-for="Encroached" value="" class="form-control numbers" disabled />
-                            <span asp-validation-for="Encroached" class="text-danger lb-sm"></span>
+                            <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Builtup in Encroachment Area(in sq. mt.)</label>

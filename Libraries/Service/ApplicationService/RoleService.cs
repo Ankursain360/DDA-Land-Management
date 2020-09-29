@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -81,6 +82,10 @@ namespace Libraries.Service.ApplicationService
         {
             bool result = await _roleRepository.Any(id, name);
             return result;
+        }
+        public async Task<PagedResult<Role>> GetPagedRole(RoleSearchDto model)
+        {
+            return await _roleRepository.GetPagedRole(model);
         }
     }
 }

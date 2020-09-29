@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -76,6 +77,9 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<PagedResult<Classificationofland>> GetPagedClassificationOfLand(ClassificationOfLandSearchDto model)
+        {
+            return await _classificationoflandRepository.GetPagedClassificationOfLand(model);
+        }
     }
 }

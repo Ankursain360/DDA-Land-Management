@@ -26,19 +26,17 @@ namespace SiteMaster.Controllers
         {
             _landuseService = landuseService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            var result = await _landuseService.GetAllLandUse();
-            return View(result);
+            return View();
         }
 
-        //[HttpPost]
-        //public async Task<PartialViewResult> List(LandUseSearchDto model)
-        //{
-        //    var x = model.Name;
-        //    var result = await _landuseService.GetAllLandUse();
-        //    return PartialView("_List", result);
-        //}
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] LandUseSearchDto model)
+        {
+            var result = await _landuseService.GetPagedLandUse(model);
+            return PartialView("_List", result);
+        }
         public IActionResult Create()
         {
             return View();

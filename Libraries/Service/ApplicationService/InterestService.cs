@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -79,6 +80,11 @@ namespace Libraries.Service.ApplicationService
         public object GetFromDateData(int propertyId)
         {
             return _interestRepository.GetFromDateData(propertyId);
+        }
+
+        public async Task<PagedResult<Interest>> GetPagedInterest(InterestSearchDto model)
+        {
+            return await _interestRepository.GetPagedInterest(model);
         }
     }
 }

@@ -76,7 +76,7 @@ namespace Libraries.Model
         public virtual DbSet<Khatauni> Khatauni { get; set; }
         public virtual DbSet<Taraf> Taraf { get; set; }
         public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
-
+        public virtual DbSet<Undersection6> Undersection6 { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

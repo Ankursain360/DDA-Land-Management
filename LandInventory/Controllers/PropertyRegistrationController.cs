@@ -14,6 +14,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
@@ -23,15 +24,17 @@ namespace SiteMaster.Controllers
     {
         //Let suppose user = 1 can Create, user =2 can validate , user =3 can delete , and untill validate 1,2 can only look index
         private readonly IPropertyRegistrationService _propertyregistrationService;
+        public IConfiguration _Configuration;
         int UserId = 2;
-        string targetPathLayout = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\LayoutDocs";
-        string targetPathGeo = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\GeoReferencingDocs";
-        string targetPathHandedOver = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\HandedOverDocs";
-        string targetPathTakenOver = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\TakenOverDocs";
-        string targetPathDisposal = @"D:\VedangWorkFromHome\DDA_LandManagement_Project\GitHubFolder\Documents\PropertyRegisteration\DisposalTypeDocs";
-        public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IHostingEnvironment en)
+        string targetPathLayout = "";
+        string targetPathGeo = "";
+        string targetPathHandedOver = "";
+        string targetPathTakenOver = "";
+        string targetPathDisposal = "";
+        public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _propertyregistrationService = propertyregistrationService;
+            _Configuration = configuration;
         }
         public async Task<IActionResult> Index()
         {
@@ -65,6 +68,10 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Create(Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
+            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
+            propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
+            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
+
             if (ModelState.IsValid)
             {
                 propertyregistration.IsValidate = 0;
@@ -77,6 +84,30 @@ namespace SiteMaster.Controllers
                 if (propertyregistration.DisposalTypeId == 0)
                 {
                     propertyregistration.DisposalTypeId = 1;
+                }
+                if (propertyregistration.Encroached != null)
+                {
+                   if(propertyregistration.Encroached > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    } 
+                }
+                if (propertyregistration.BuiltUpEncraochmentArea != null)
+                {
+                    if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+                }
+                if (propertyregistration.Vacant != null)
+                {
+                    if (propertyregistration.Vacant > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
                 }
                 //if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
                 //{
@@ -97,9 +128,9 @@ namespace SiteMaster.Controllers
                 #region File Upload  Added by Renu 16 Sep 2020
                 /* For Layout Plan File Upload*/
                 string FileName = "";
-                string DocumentPath = "";
                 string filePath = "";
                 propertyregistration.FileData = Assignfile;
+                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
                 if (propertyregistration.FileData != null)
                 {
                     if (!Directory.Exists(targetPathLayout))
@@ -109,16 +140,18 @@ namespace SiteMaster.Controllers
                     }
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
                     filePath = Path.Combine(targetPathLayout, FileName);
-                    var stream = (new FileStream(filePath, FileMode.Create));
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        propertyregistration.FileData.CopyTo(stream);
+                    }
                     propertyregistration.LayoutFilePath = filePath;
-                    stream.Close();
                 }
 
                 /* For GeoReferncing File Upload*/
                 string GeoFileName = "";
-                string GeoDocumentPath = "";
                 string GeofilePath = "";
                 propertyregistration.GeoFileData = GeoAssignfile;
+                targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
                 if (propertyregistration.GeoFileData != null)
                 {
                     if (!Directory.Exists(targetPathGeo))
@@ -128,16 +161,18 @@ namespace SiteMaster.Controllers
                     }
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
                     GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
-                    var stream = (new FileStream(GeofilePath, FileMode.Create));
+                    using (var stream = new FileStream(GeofilePath, FileMode.Create))
+                    {
+                        propertyregistration.GeoFileData.CopyTo(stream);
+                    }
                     propertyregistration.GeoFilePath = GeofilePath;
-                    stream.Close();
                 }
 
                 /* For Taken Over File Upload*/
                 string TakenOverFileName = "";
-                string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
                 propertyregistration.TakenOverFileData = TakenOverAssignFile;
+                targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
                 if (propertyregistration.TakenOverFileData != null)
                 {
                     if (!Directory.Exists(targetPathTakenOver))
@@ -147,16 +182,18 @@ namespace SiteMaster.Controllers
                     }
                     TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
                     TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
-                    var stream = (new FileStream(TakenOverfilePath, FileMode.Create));
+                    using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
+                    {
+                        propertyregistration.TakenOverFileData.CopyTo(stream);
+                    }
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
-                    stream.Close();
                 }
 
                 /* For Handed Over File Upload*/
                 string HandedOverFileName = "";
-                string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
                 propertyregistration.HandedOverFileData = HandedOverAssignFile;
+                targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
                 if (propertyregistration.HandedOverFileData != null)
                 {
                     if (!Directory.Exists(targetPathHandedOver))
@@ -166,16 +203,18 @@ namespace SiteMaster.Controllers
                     }
                     HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
                     HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
-                    var stream = (new FileStream(HandedOverfilePath, FileMode.Create));
+                    using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
+                    {
+                        propertyregistration.HandedOverFileData.CopyTo(stream);
+                    }
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
-                    stream.Close();
                 }
 
                 /* For Disposal Type File Upload*/
                 string DisposalTypeFileName = "";
-                string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
                 propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
+                targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
                 if (propertyregistration.DisposalTypeFileData != null)
                 {
                     if (!Directory.Exists(targetPathDisposal))
@@ -185,9 +224,11 @@ namespace SiteMaster.Controllers
                     }
                     DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
                     DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
-                    var stream = (new FileStream(DisposalTypefilePath, FileMode.Create)); 
+                    using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                    {
+                        propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                    }
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
-                    stream.Close();
                 }
                 #endregion
 
@@ -202,6 +243,7 @@ namespace SiteMaster.Controllers
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    await BindDropDown(propertyregistration);
                     return View(propertyregistration);
 
                 }
@@ -245,6 +287,12 @@ namespace SiteMaster.Controllers
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
             propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
             propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
+            ViewBag.LayoutDocView = propertyregistration.LayoutFilePath;
+            ViewBag.GeoDocView = propertyregistration.GeoFilePath;
+            ViewBag.TakenOverDocView = propertyregistration.TakenOverFilePath;
+            ViewBag.HandedOverDocView = propertyregistration.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = propertyregistration.DisposalTypeFilePath;
+            ViewBag.IsValidateUser = 2;
             if (ModelState.IsValid)
             {
                 if (propertyregistration.IsValidateData == true)
@@ -263,14 +311,36 @@ namespace SiteMaster.Controllers
                 {
                     propertyregistration.DisposalTypeId = 1;
                 }
-
-
+                if (propertyregistration.Encroached != null)
+                {
+                    if (propertyregistration.Encroached > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Encroached Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+                }
+                if (propertyregistration.BuiltUpEncraochmentArea != null)
+                {
+                    if (propertyregistration.BuiltUpEncraochmentArea > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Built Up Encraochment Area Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+                }
+                if (propertyregistration.Vacant != null)
+                {
+                    if (propertyregistration.Vacant > propertyregistration.TotalArea)
+                    {
+                        ViewBag.Message = Alert.Show("Vacant Value Must Not be Greater than Total Area", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+                }
                 #region File Upload  Added by Renu 16 Sep 2020
                 /* For Layout Plan File Upload*/
                 string FileName = "";
-                string DocumentPath = "";
                 string filePath = "";
                 propertyregistration.FileData = Assignfile;
+                targetPathLayout = _Configuration.GetSection("FilePaths:PropertyRegistration:LayoutDocs").Value.ToString();
                 if (propertyregistration.FileData != null)
                 {
                     if (!Directory.Exists(targetPathLayout))
@@ -280,16 +350,18 @@ namespace SiteMaster.Controllers
                     }
                     FileName = Guid.NewGuid().ToString() + "_" + propertyregistration.FileData.FileName;
                     filePath = Path.Combine(targetPathLayout, FileName);
-                    var stream = (new FileStream(filePath, FileMode.Create));
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        propertyregistration.FileData.CopyTo(stream);
+                    }
                     propertyregistration.LayoutFilePath = filePath;
-                    stream.Close();
                 }
 
                 /* For GeoReferncing File Upload*/
                 string GeoFileName = "";
-                string GeoDocumentPath = "";
                 string GeofilePath = "";
                 propertyregistration.GeoFileData = GeoAssignfile;
+                targetPathGeo = _Configuration.GetSection("FilePaths:PropertyRegistration:GeoReferencingDocs").Value.ToString();
                 if (propertyregistration.GeoFileData != null)
                 {
                     if (!Directory.Exists(targetPathGeo))
@@ -299,16 +371,18 @@ namespace SiteMaster.Controllers
                     }
                     GeoFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.GeoFileData.FileName;
                     GeofilePath = Path.Combine(targetPathGeo, GeoFileName);
-                    var stream = (new FileStream(GeofilePath, FileMode.Create));
+                    using (var stream = new FileStream(GeofilePath, FileMode.Create))
+                    {
+                        propertyregistration.GeoFileData.CopyTo(stream);
+                    }
                     propertyregistration.GeoFilePath = GeofilePath;
-                    stream.Close();
                 }
 
                 /* For Taken Over File Upload*/
                 string TakenOverFileName = "";
-                string TakenOverDocumentPath = "";
                 string TakenOverfilePath = "";
                 propertyregistration.TakenOverFileData = TakenOverAssignFile;
+                targetPathTakenOver = _Configuration.GetSection("FilePaths:PropertyRegistration:TakenOverDocs").Value.ToString();
                 if (propertyregistration.TakenOverFileData != null)
                 {
                     if (!Directory.Exists(targetPathTakenOver))
@@ -318,16 +392,18 @@ namespace SiteMaster.Controllers
                     }
                     TakenOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.TakenOverFileData.FileName;
                     TakenOverfilePath = Path.Combine(targetPathTakenOver, TakenOverFileName);
-                    var stream = (new FileStream(TakenOverfilePath, FileMode.Create));
+                    using (var stream = new FileStream(TakenOverfilePath, FileMode.Create))
+                    {
+                        propertyregistration.TakenOverFileData.CopyTo(stream);
+                    }
                     propertyregistration.TakenOverFilePath = TakenOverfilePath;
-                    stream.Close();
                 }
 
                 /* For Handed Over File Upload*/
                 string HandedOverFileName = "";
-                string HandedOverDocumentPath = "";
                 string HandedOverfilePath = "";
                 propertyregistration.HandedOverFileData = HandedOverAssignFile;
+                targetPathHandedOver = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverDocs").Value.ToString();
                 if (propertyregistration.HandedOverFileData != null)
                 {
                     if (!Directory.Exists(targetPathHandedOver))
@@ -337,16 +413,18 @@ namespace SiteMaster.Controllers
                     }
                     HandedOverFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverFileData.FileName;
                     HandedOverfilePath = Path.Combine(targetPathHandedOver, HandedOverFileName);
-                    var stream = (new FileStream(HandedOverfilePath, FileMode.Create));
+                    using (var stream = new FileStream(HandedOverfilePath, FileMode.Create))
+                    {
+                        propertyregistration.HandedOverFileData.CopyTo(stream);
+                    }
                     propertyregistration.HandedOverFilePath = HandedOverfilePath;
-                    stream.Close();
                 }
 
                 /* For Disposal Type File Upload*/
                 string DisposalTypeFileName = "";
-                string DisposalTypeDocumentPath = "";
                 string DisposalTypefilePath = "";
                 propertyregistration.DisposalTypeFileData = DisposalTypeAssignFile;
+                targetPathDisposal = _Configuration.GetSection("FilePaths:PropertyRegistration:DisposalTypeDocs").Value.ToString();
                 if (propertyregistration.DisposalTypeFileData != null)
                 {
                     if (!Directory.Exists(targetPathDisposal))
@@ -356,9 +434,11 @@ namespace SiteMaster.Controllers
                     }
                     DisposalTypeFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.DisposalTypeFileData.FileName;
                     DisposalTypefilePath = Path.Combine(targetPathDisposal, DisposalTypeFileName);
-                    propertyregistration.DisposalTypeFileData.CopyTo(new FileStream(DisposalTypefilePath, FileMode.Create));
+                    using (var stream = new FileStream(DisposalTypefilePath, FileMode.Create))
+                    {
+                        propertyregistration.DisposalTypeFileData.CopyTo(stream);
+                    }
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
-                   // stream.Close();
                 }
                 #endregion
 

@@ -16,17 +16,18 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("deletedproperty", "lms");
 
+            builder.HasIndex(e => e.PropertyRegistrationId)
+                .HasName("fkPropertyRegistrationId_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DeletedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.DeletedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
-
-            builder.Property(e => e.ModifiedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
-
-            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.IsDeleted).HasColumnType("tinyint(4)");
 
