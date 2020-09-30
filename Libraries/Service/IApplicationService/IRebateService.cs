@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 
 
@@ -20,5 +22,6 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<PropertyType>> GetDropDownList();
         object GetFromDateData(int propertyId);
+        Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model);
     }
 }
