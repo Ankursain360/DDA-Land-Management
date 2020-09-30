@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown"  asp-for="ClassificationOfLandId"  disabled asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" disabled asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ClassificationOfLandId" class="text-danger"></span>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" disabled >
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" disabled>
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -51,14 +51,14 @@
 
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled >
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled>
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label lb-sm" asp-for="LocalityId">Locality/Village</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled >
+                        <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled>
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger"></span>
@@ -96,7 +96,7 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label id="l1" class="control-label lb-sm">Encroachment Details</label>
-                        <input asp-for="EncraochmentDetails"  class="form-control" disabled>
+                        <input asp-for="EncraochmentDetails" class="form-control" disabled>
                         <span asp-validation-for="EncraochmentDetails" class="text-danger"></span>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea"  disabled class="form-control">
+                            <input asp-for="TotalArea" disabled class="form-control">
                             <span asp-validation-for="TotalArea" class="text-danger"></span>
                         </div>
 
@@ -141,17 +141,17 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Encroched(in sq. mt.)</label>
-                            <input asp-for="Encroached"   class="form-control" disabled>
+                            <input asp-for="Encroached" class="form-control" disabled>
                             <span asp-validation-for="Encroached" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Builtup in Encroachment Area(in sq. mt.)</label>
-                            <input asp-for="BuiltUpEncraochmentArea"  class="form-control" id="BuiltupEncroachmentArea" disabled>
+                            <input asp-for="BuiltUpEncraochmentArea" class="form-control" id="BuiltupEncroachmentArea" disabled>
                             <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                            <input asp-for="Vacant"  disabled class="form-control">
+                            <input asp-for="Vacant" disabled class="form-control">
                             <span asp-validation-for="Vacant" class="text-danger"></span>
                         </div>
                     </div>
@@ -297,22 +297,30 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="DepartmentId" disabled asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                <option>--Select--</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
                             <input asp-for="TakenOverName" disabled class="form-control">
                             <span asp-validation-for="TakenOverName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="TakenOverDate" type="date"  disabled class="form-control">
+                            <input asp-for="TakenOverDate" type="date" disabled class="form-control">
                             <span asp-validation-for="TakenOverDate" class="text-danger"></span>
                         </div>
+
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
                             <input asp-for="TakenOverEmailId" disabled class="form-control">
                             <span asp-validation-for="TakenOverEmailId" class="text-danger"></span>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="TakenOverMobileNo" disabled class="form-control">
@@ -323,6 +331,9 @@
                             <input asp-for="TakenOverLandlineNo" disabled class="form-control">
                             <span asp-validation-for="TakenOverLandlineNo" class="text-danger"></span>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverFileData">Document</label>
                             <input type="hidden" asp-for="TakenOverFilePath" />
@@ -333,7 +344,7 @@
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" disabled  name="TakenOverAssignfile">
+                                    <input type="file" class="form-control" disabled name="TakenOverAssignfile">
                                 }
                             }
                             <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
@@ -360,22 +371,30 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="DepartmentId" disabled asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                <option>--Select--</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
                             <input asp-for="HandedOverName" disabled class="form-control">
                             <span asp-validation-for="HandedOverName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="HandedOverDate" type="date"  disabled class="form-control">
+                            <input asp-for="HandedOverDate" type="date" disabled class="form-control">
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
+
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
                             <input asp-for="HandedOverEmailId" disabled class="form-control">
                             <span asp-validation-for="HandedOverEmailId" class="text-danger"></span>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="HandedOverMobileNo" disabled class="form-control">
@@ -386,6 +405,9 @@
                             <input asp-for="HandedOverLandlineNo" disabled class="form-control">
                             <span asp-validation-for="HandedOverLandlineNo" class="text-danger"></span>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverFileData">Document</label>
                             <input type="hidden" asp-for="HandedOverFilePath" />
@@ -431,7 +453,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="DisposalDate" type="date"  disabled class="form-control">
+                            <input asp-for="DisposalDate" type="date" disabled class="form-control">
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">

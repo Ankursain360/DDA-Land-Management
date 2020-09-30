@@ -6,6 +6,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using System;
+using Dto.Search;
 
 namespace LandInventory.Controllers
 {
@@ -37,14 +38,14 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
-        public async Task<PartialViewResult> GetDetails(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] PropertyRegisterationSearchDto model,int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
         {
-            var result = await _propertyregistrationService.GetPropertyRegisterationReportData(classificationofland, department, zone, division, locality, plannedUnplannedLand, mainLandUse, litigation, encroached);
+            var result = await _propertyregistrationService.GetPropertyRegisterationReportData(model,classificationofland, department, zone, division, locality, plannedUnplannedLand, mainLandUse, litigation, encroached);
 
             if (result != null)
             {
-                return PartialView("Index", result);
+                return PartialView("_Index", result);
             }
             else
             {

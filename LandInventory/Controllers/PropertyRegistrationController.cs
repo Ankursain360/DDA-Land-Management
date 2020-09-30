@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -36,13 +37,22 @@ namespace SiteMaster.Controllers
             _propertyregistrationService = propertyregistrationService;
             _Configuration = configuration;
         }
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var result = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+        //    return View(result);
+        //}
+        public IActionResult Index()
         {
-            //int UserId = 2;
-            var result = await _propertyregistrationService.GetAllPropertyregistration(UserId);
-            return View(result);
+            return View();
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] PropertyRegisterationSearchDto model)
+        {
+            var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model,  UserId);
+            return PartialView("_List", result);
+        }
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
             propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();

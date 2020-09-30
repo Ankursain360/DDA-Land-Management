@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System;
 using Libraries.Model;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -180,9 +181,9 @@ namespace Libraries.Service.ApplicationService
             return DepartmentList;
         }
 
-        public async Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
+        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationSearchDto model, int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
         {
-            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
+            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( model, classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
         }
 
         public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)
@@ -227,6 +228,11 @@ namespace Libraries.Service.ApplicationService
             model.RestoreBy = 1;
             model.RestoreDate = DateTime.Now;
             return await _propertyregistrationRepository.InsertInRestoreProperty(model);
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
+        {
+            return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model,  UserId);
         }
     }
 }

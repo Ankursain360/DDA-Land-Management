@@ -26,10 +26,17 @@ namespace SiteMaster.Controllers
         {
             _rateService = rateService;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _rateService.GetAllRate();
+            return View(result);
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] RateSearchDto model)
