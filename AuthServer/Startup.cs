@@ -17,10 +17,11 @@ namespace AuthServer
             services.AddControllersWithViews();
 
             string connectionString = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=authserver";
+            string lmsConnection = "server=49.50.87.108;port=3306;user=root;password=Google@123;database=lms";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySQL("Data Source=AspIdUsers.db;"));
+                options.UseMySQL(lmsConnection));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
