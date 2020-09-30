@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
-
-
 
 namespace Libraries.Service.IApplicationService
 {
     public interface IDepartmentService : IEntityService<Department>
     {
+        Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model);
         Task<List<Department>> GetAllDepartment(); // To Get all data added by renu
         Task<List<Department>> GetDepartmentUsingRepo();
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -31,7 +32,12 @@ namespace SiteMaster.Controllers
             return View(list);
         }
 
-
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] RoleSearchDto model)
+        {
+            var result = await _roleService.GetPagedRole(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Create()
         {
             Role role = new Role();

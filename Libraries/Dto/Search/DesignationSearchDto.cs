@@ -7,6 +7,6 @@ namespace Dto.Search
 {
     public class DesignationSearchDto: BaseSearchDto
     {
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 }

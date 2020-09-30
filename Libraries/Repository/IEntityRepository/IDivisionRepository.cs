@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 
@@ -12,5 +13,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetAllDepartment();
 
         Task<bool> Any(int id, string name);
+        Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model);
     }
 }

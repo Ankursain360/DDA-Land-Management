@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -18,6 +19,10 @@ namespace Libraries.Repository.EntityRepository
         public LocalityRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+        public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
+        {
+            return await _dbContext.Locality.GetPaged<Locality>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {

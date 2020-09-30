@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -89,6 +90,11 @@ namespace Libraries.Service.ApplicationService
             locality.CreatedDate = DateTime.Now;
             _localityRepository.Add(locality);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
+        {
+            return await _localityRepository.GetPagedLocality(model);
         }
     }
 }

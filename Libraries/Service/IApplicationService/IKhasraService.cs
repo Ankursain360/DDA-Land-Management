@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -18,7 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Khasra khasra);
         Task<Khasra> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        
+        Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model);
 
 
 

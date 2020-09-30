@@ -1,9 +1,9 @@
-﻿using Libraries.Model.Entity;
-using Libraries.Service.Common;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -17,5 +17,6 @@ namespace Libraries.Service.IApplicationService
         Task<Village> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<bool> CheckUniqueName(int id, string name);   // To check Unique Value  for Village
+        Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model);
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//using System.Collections.Generic;
+using Dto.Search;
 using System.Threading.Tasks;
 using Libraries.Model;
 using Libraries.Model.Entity;
@@ -18,7 +18,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model)
+        {
+            return await _dbContext.Department.GetPaged<Department>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Department>> GetDepartment()
         {
             return await _dbContext.Department.ToListAsync();
