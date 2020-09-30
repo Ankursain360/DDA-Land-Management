@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -18,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
 
         //Task<bool> Any(int id, string name);
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();
+        Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model);
     }
 }
