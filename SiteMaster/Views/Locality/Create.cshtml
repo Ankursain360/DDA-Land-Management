@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Locality Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Locality (Village)</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone</label>
-                        <select asp-for="ZoneId" class="form-control dda-dropdown">
+                        <select asp-for="ZoneId" class="form-control dda-dropdown" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                             <option value="value">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -37,29 +37,36 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Division</label>
+                        <select asp-for="DivisionId" class="form-control dda-dropdown">
+                            <option value="value">Select</option>
+                        </select>
+                        <span asp-validation-for="DivisionId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Locality Name   </label>
                         <input asp-for="Name" type="text" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Locality Code</label>
                         <input asp-for="LocalityCode" type="text" class="form-control" />
                         <span asp-validation-for="LocalityCode" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Landmark    </label>
                         <input asp-for="Landmark" type="text" class="form-control" />
                         <span asp-validation-for="Landmark" type="text" class="text-danger"></span>
                     </div>
+                </div>
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address    </label>
                         <input asp-for="Address" type="text" class="form-control" />
                         <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">

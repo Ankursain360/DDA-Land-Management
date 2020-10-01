@@ -3,7 +3,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Village Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Village</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -19,14 +19,30 @@
         <div class="panel-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input asp-for="Id" type="hidden" />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone </label>
-                        <input asp-for="Id" type="hidden"/>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
-                            <option>Select</option>
+                        <label class="control-label lb-sm">Department </label>
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
+                            <option value="">Select</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone</label>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                            <option value="value">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Division</label>
+                        <select asp-for="DivisionId" class="form-control dda-dropdown">
+                            <option value="value">Select</option>
+                        </select>
+                        <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Village Name  </label>
@@ -56,3 +72,9 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/Village.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/Village.js" asp-append-version="true"></script>
+</environment>

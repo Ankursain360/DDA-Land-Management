@@ -190,5 +190,12 @@ namespace SiteMaster.Controllers
             DepartmentId= DepartmentId ?? 0;
             return Json(await _localityService.GetAllZone(Convert.ToInt32(DepartmentId)));
         }
+  
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int?ZoneId)
+        {
+            ZoneId= ZoneId ?? 0;
+            return Json(await _localityService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
+        }
     }
 }

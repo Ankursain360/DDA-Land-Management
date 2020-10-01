@@ -48,5 +48,11 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Locality.Include(x => x.Zone).Include(x => x.Department).OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
+
+        public async Task<List<Division>> GetAllDivisionList(int zone)
+        {
+            var data = await _dbContext.Division.Where(x => x.ZoneId==zone).ToListAsync();
+            return data;
+        }
     }
 }

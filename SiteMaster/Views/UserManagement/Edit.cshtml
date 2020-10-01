@@ -100,7 +100,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">User Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">User </h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -116,52 +116,65 @@
         <div class="panel-body">
             <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">District </label>
-                        <select class="form-control dda-dropdown" asp-for="DistrictId" asp-items="@(new SelectList(Model.DistrictList, "Id","Name"))">
+                        <label class="control-label lb-sm">Department </label>
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
                             <option>Select</option>
                         </select>
-                        <span asp-validation-for="DistrictId" class="text-danger"></span>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone </label>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Login Name  </label>
                         <input class="form-control" asp-for="LoginName" />
                         <span asp-validation-for="LoginName" class="text-danger"></span>
                     </div>
-                </div>
-
-
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Display Name  </label>
                         <input class="form-control" asp-for="DisplayName" />
                         <span asp-validation-for="DisplayName" class="text-danger"></span>
                     </div>
+                </div>
+
+
+
+                <div class="row">
+
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Email  </label>
                         <input class="form-control" asp-for="Email" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                </div>
-
-
-
-                <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Password  </label>
-                        <input class="form-control" asp-for="Password" id="Password" name="Password" />
+                        <label class="control-label lb-sm" asp-for="Password">Password </label>
+                        <input asp-for="Password" id="Password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
+
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Confirm Password </label>
-                        <input class="form-control" asp-for="ConfirmPassword" id="ConfirmPassword" />
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
+
+
                 </div>
 
 
                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="ConfirmPassword">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" id="ConfirmPassword" onchange="return PasswordMatch();" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Role Name </label>
                         <select class="form-control dda-dropdown" asp-for="RoleId" asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
@@ -169,24 +182,24 @@
                         </select>
                         <span asp-validation-for="RoleId" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Contact No  </label>
-                        <input class="form-control" asp-for="ContactNo" />
-                        <span asp-validation-for="ContactNo" class="text-danger"></span>
-                    </div>
                 </div>
 
 
 
                 <div class="row">
-
-
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Contact No  </label>
+                        <input class="form-control" asp-for="ContactNo" />
+                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Aadhar Card No  </label>
                         <input class="form-control" asp-for="AadharcardNo" />
                         <span asp-validation-for="AadharcardNo" class="text-danger"></span>
                     </div>
 
+                </div>
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
@@ -207,8 +220,9 @@
 
                         <div class="col-md-6">
                             Set Default Password<br />
-                            <label class="switch" asp-for="defaultpassword" id="defaultpass">
-                                <input type="checkbox">
+                            <label class="switch">
+                                <input type="checkbox" asp-for="defaultpassword" id="defaultpass">
+
                                 <span class="slider round"></span>
                             </label>
 
@@ -231,36 +245,24 @@
                     <div class="form-group">
 
                         <div class="col-md-6">
-                            Inactive User<br />
-                            <label class="switch">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-
-                        </div>
-
-                        <div class="col-md-4" style="margin-right:100px">
                             Locked User<br />
                             <label class="switch">
-                                <input type="checkbox">
+                                <input type="checkbox" asp-for="LockedA">
                                 <span class="slider round"></span>
                             </label>
 
                         </div>
+
+
                         <div class="col-md-2"></div>
                     </div>
 
                 </div>
 
                 <br />
-
-
                 <br />
-
-
-
-
-
+                <br />
+                <br />
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />

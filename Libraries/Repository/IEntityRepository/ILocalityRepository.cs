@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> AnyName(int id, string name);
         Task<bool> AnyCode(int id, string name);
         Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model);
+        Task<List<Division>> GetAllDivisionList(int zone);
     }
 }

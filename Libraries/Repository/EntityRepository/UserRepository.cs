@@ -18,31 +18,28 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-       
-        public async Task<List< District>> GetAllDistrict()
+        public async Task<List<Department>> GetAllDepartment()
         {
-            List<District> districtList = await _dbContext.District.ToListAsync();
-            return districtList;
+            List<Department> departmentList = await _dbContext.Department.ToListAsync();
+            return departmentList;
         }
         public async Task<List<Role>> GetAllRole()
         {
             List<Role> roleList = await _dbContext.Role.ToListAsync();
             return roleList;
         }
-
-       
-
         public async Task<bool> AnyLoginName(int id, string loginname)
         {
             return await _dbContext.User.AnyAsync(t => t.Id != id && t.LoginName.ToLower() == loginname.ToLower());
         }
-
         public async Task<List<User>> GetUser()
         {
             return await _dbContext.User.Include(x => x.District).Include(x=>x.Role).OrderByDescending(x => x.Id).ToListAsync();
         }
-  
-    
-    
+
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            return await _dbContext.Zone.Where(x=>x.DepartmentId==departmentId).ToListAsync();
+        }
     }
 }

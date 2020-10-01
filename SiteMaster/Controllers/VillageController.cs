@@ -33,7 +33,7 @@ namespace SiteMaster.Controllers
         {
             Village village = new Village();
             village.IsActive = 1;
-            village.ZoneList = await _villageService.GetAllZone();
+            village.DepartmentList = await _villageService.GetAllDepartment();
             return View(village);
         }
         [HttpPost]
@@ -42,7 +42,7 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                village.ZoneList = await _villageService.GetAllZone();
+                village.DepartmentList = await _villageService.GetAllDepartment();
                 if (ModelState.IsValid)
                 {
                     var result = await _villageService.Create(village);
@@ -87,7 +87,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _villageService.FetchSingleResult(id);
-            Data.ZoneList = await _villageService.GetAllZone();
+            Data.DepartmentList = await _villageService.GetAllDepartment();
             if (Data == null)
             {
                 return NotFound();
@@ -151,12 +151,26 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _villageService.FetchSingleResult(id);
-            Data.ZoneList = await _villageService.GetAllZone();
+            Data.DepartmentList = await _villageService.GetAllDepartment();
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            return Json(await _villageService.GetAllZone(Convert.ToInt32(DepartmentId)));
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int? ZoneId)
+        {
+            ZoneId = ZoneId ?? 0;
+            return Json(await _villageService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
+        }
+
     }
 }
