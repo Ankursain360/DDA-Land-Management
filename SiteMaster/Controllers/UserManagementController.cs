@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : Controller
@@ -22,9 +22,19 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _userService.GetAllUser();
-            return View(list);
+           // List<User> list = await _userService.GetAllUser();
+            return View();
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
+        {
+            var result = await _userService.GetPagedUser(model);
+            
+            return PartialView("_List", result);
+        }
+
+
         public async Task<IActionResult> Create()
         {
             User user = new User();
