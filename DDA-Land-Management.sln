@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Libraries\Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteMaster", "SiteMaster\SiteMaster.csproj", "{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PublicInterface", "LandAcquisition\PublicInterface.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIMSPublicInterface", "LIMSPublicInterface\LIMSPublicInterface.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{5996C9B1-6ED9-4A34-9EB9-E619AC1A5FD0}"
 EndProject

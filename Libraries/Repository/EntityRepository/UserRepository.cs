@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -41,5 +42,12 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Zone.Where(x=>x.DepartmentId==departmentId).ToListAsync();
         }
+
+        public async Task<PagedResult<User>> GetPagedUser(UserManagementSearchDto model)
+        {
+            return await _dbContext.User.Include(x => x.District).Include(x => x.Role).OrderByDescending(x => x.Id).GetPaged<User>(model.PageNumber, model.PageSize);
+        }
+
+
     }
 }

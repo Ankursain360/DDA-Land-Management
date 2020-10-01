@@ -181,9 +181,9 @@ namespace Libraries.Service.ApplicationService
             return DepartmentList;
         }
 
-        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationSearchDto model, int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
+        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model)
         {
-            return await _propertyregistrationRepository.GetPropertyRegisterationReportData( model, classificationofland,  department,  zone,  division,  locality,  plannedUnplannedLand,  mainLandUse,  litigation,  encroached);
+            return await _propertyregistrationRepository.GetPropertyRegisterationReportData(model);
         }
 
         public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)

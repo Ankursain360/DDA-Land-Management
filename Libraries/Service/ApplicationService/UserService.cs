@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -103,6 +104,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             return await _userRepository.GetAllZone(departmentId);
+        }
+        public async Task<PagedResult<User>> GetPagedUser(UserManagementSearchDto model)
+        {
+            return await _userRepository.GetPagedUser(model);
         }
     }
 }

@@ -2,25 +2,25 @@
 var currentPageSize = 10;
 $(document).ready(function () {
 
-   // GetDetails(currentPageNumber, currentPageSize);
+    // GetDetails(currentPageNumber, currentPageSize);
 
     $(function () {
         $("#btnGenerate").click(function () {
             debugger;
-           var param = GetSearchParam(currentPageNumber, currentPageSize);
-       //     var url = '/PropertyInventoryReport/GetDetails';
-            var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
-            var departmentid = $('#DepartmentId option:selected').val();
-            var zoneId = $('#ZoneId option:selected').val();
-            var divisionId = $('#DivisionId option:selected').val();
-            var localityId = $('#LocalityId option:selected').val();
-            var plannedUnplannedLand = $('#PlannedUnplannedLand option:selected').val();
-            var mainLandUseId = $('#MainLandUseId option:selected').val();
-            var litigationid = $('#LitigationStatus option:selected').val();
-            var encroachedid = $('#Encroached option:selected').val();
+            var param = GetSearchParam(currentPageNumber, currentPageSize);
+            //     var url = '/PropertyInventoryReport/GetDetails';
+            //var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
+            //var departmentid = $('#DepartmentId option:selected').val();
+            //var zoneId = $('#ZoneId option:selected').val();
+            //var divisionId = $('#DivisionId option:selected').val();
+            //var localityId = $('#LocalityId option:selected').val();
+            //var plannedUnplannedLand = $('#PlannedUnplannedLand option:selected').val();
+            //var mainLandUseId = $('#MainLandUseId option:selected').val();
+            //var litigationid = $('#LitigationStatus option:selected').val();
+            //var encroachedid = $('#Encroached option:selected').val();
             //$('#LoadReportView').empty();
             //$('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
-            HttpPost(`/PropertyInventoryReport/GetDetails=${classificationOfLandId, departmentid, zoneId, divisionId, localityId, plannedUnplannedLand, mainLandUseId, litigationid, encroachedid}`, 'html', param, function (response) {
+            HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
                 $('#LoadReportView').html("");
                 $('#LoadReportView').html(response);
             });
@@ -62,6 +62,13 @@ function GetDivisionList(id) {
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
+}
+
+function GetSearchParam(pageNumber, pageSize) {
     var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
     var departmentid = $('#DepartmentId option:selected').val();
     var zoneId = $('#ZoneId option:selected').val();
@@ -71,18 +78,23 @@ function GetDetails(pageNumber, pageSize) {
     var mainLandUseId = $('#MainLandUseId option:selected').val();
     var litigationid = $('#LitigationStatus option:selected').val();
     var encroachedid = $('#Encroached option:selected').val();
-    HttpPost(`/PropertyInventoryReport/GetDetails=${classificationOfLandId, departmentid, zoneId, divisionId, localityId, plannedUnplannedLand, mainLandUseId, litigationid, encroachedid}`, 'html', param, function (response) {
-        $('#LoadReportView').html("");
-        $('#LoadReportView').html(response);
-    });
-}
-
-function GetSearchParam(pageNumber, pageSize) {
+    var test = [];
+    
     var model = {
         name: "test",
         pageSize: pageSize,
-        pageNumber: pageNumber
+        pageNumber: pageNumber,
+        classificationofland: parseInt(classificationOfLandId),
+        department: parseInt(departmentid),
+        zone: parseInt(zoneId),
+        division: parseInt(divisionId),
+        locality: parseInt(localityId),
+        plannedUnplannedLand: plannedUnplannedLand,
+        mainLandUse: parseInt(mainLandUseId),
+        litigation: parseInt(litigationid),
+        encroached: parseInt(encroachedid)
     }
+    test.push(model);
     return model;
 }
 

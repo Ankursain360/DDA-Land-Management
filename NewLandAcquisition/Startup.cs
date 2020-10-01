@@ -14,12 +14,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
 //using DDAPropertyREG.Models
 
 using Microsoft.Extensions.Hosting;
-//using NewLandAcquisition.Infrastructure.Extensions;
-//using Libraries.Model;
+using System.IdentityModel.Tokens.Jwt;
+
 namespace NewLandAcquisition
 {
     public class Startup
@@ -34,6 +33,8 @@ namespace NewLandAcquisition
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -44,24 +45,20 @@ namespace NewLandAcquisition
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            //services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-           // services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            //services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
             // services.AddMvc()
             //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddSession();
-            services.AddMvc();
-            services.AddMvc().AddSessionStateTempDataProvider();
+            //services.AddMvc();
+            //services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-            services.AddMvc().AddViewOptions(options =>
-            {
+            //services.AddMvc().AddViewOptions(options =>
+            //{
                 //   options.SuppressTempDataAttributePrefix = true;
-            });
+            //});
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";
@@ -73,7 +70,28 @@ namespace NewLandAcquisition
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
                 options.Cookie.IsEssential = true;
             });
-         //services.RegisterDependency();
+            //services.RegisterDependency();
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.Authority = "https://localhost:5001";
+
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -93,7 +111,7 @@ namespace NewLandAcquisition
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
             // app.UseMvc();
@@ -101,9 +119,7 @@ namespace NewLandAcquisition
             app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Login}/{action=Create}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
         }
     }
