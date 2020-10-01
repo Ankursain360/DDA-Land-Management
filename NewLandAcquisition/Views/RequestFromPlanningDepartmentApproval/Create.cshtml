@@ -65,71 +65,80 @@
                             </div>
                         </div>
                         <div class="form-row">
-
-
                             <div class="form-group col-md-6">
-
-                                <label class="control-label lb-sm">Total Area Required</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="grpMainFile" id="rha" checked>HA
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="grpMainFile" id="racre">Acre
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="grpMainFile" id="rmt">Square mt.
-                                </label>
-                                <br /> <br />
-                                <label class="control-label lb-sm">Area</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label lb-sm">Purpose Of Acquisition</label>
-                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Commercial Use"></textarea>
+                                <label class="control-label lb-sm">Total Area Under Request</label>
+                                <div class="form-row">
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline  ">
+                                            <input type="radio" name="court" id="court" value="" />HA
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline ">
+                                            <input type="radio" name="court" id="court" value="" />Acre
+                                        </label>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label class="radio-inline ">
+                                            <input type="radio" name="court" id="court" value="" />Sq. Meters
+                                        </label>
+                                    </div>
                                 </div>
+                                <input type="text" class="form-control" />
                             </div>
 
+                        </div>
 
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="control-label lb-sm">Remarks</label>
-                                    <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Land is acquired"></textarea>
-                                </div>
+
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Purpose Of Acquisition</label>
+                                <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Commercial Use"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Remarks</label>
+                                <textarea type="text" class="form-control" style=" background-color: #dddddd;" placeholder="Land is acquired"></textarea>
                             </div>
                         </div>
                     </div>
                 </div>
-                <br />
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
-                        <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
-                            <option value="1">Forward To CLM</option>
-                            <option value="2">Approved</option>
-                            <option value="3">Reject</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control"></textarea>
-                    </div>
-                </div>
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "RequestFromPlanningDepartmentApproval", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-            </form>
+        
+        <br />
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm">Status</label>
+                <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
+                    <option value="1">Forward To CLM</option>
+                    <option value="2">Approved</option>
+                    <option value="3">Reject</option>
+                </select>
+            </div>
         </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label class="control-label lb-sm">Remarks</label>
+                <textarea type="text" class="form-control"></textarea>
+            </div>
+        </div>
+
+        <div class="form-row ">
+            <div class="form-group col-md-12" style="margin-bottom:40px;">
+                <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
+                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                @Html.ActionLink("Back", "Index", "RequestFromPlanningDepartmentApproval", null, new { @class = "btn btn-primary myapp-hed1" })
+            </div>
+        </div>
+
+        </form>
     </div>
+</div>
 </div>
 
 

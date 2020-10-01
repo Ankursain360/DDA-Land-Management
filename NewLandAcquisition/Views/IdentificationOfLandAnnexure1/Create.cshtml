@@ -27,7 +27,7 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div id="Divclsification">
+                <div id="DivProjectDetails">
                     <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
@@ -105,13 +105,17 @@
                         <label class="control-label lb-sm">Name of Village</label>
                         <input type="text" class="form-control" />
                     </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Address</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Name of Taluk/Sub-Division/Tehsil/Block(as applicable)</label>
                         <input type="text" class="form-control" />
                     </div>
-                </div>
-
-                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Name of Municipality</label>
                         <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
@@ -119,6 +123,9 @@
                             <option value="1">Nimri</option>
                         </select>
                     </div>
+
+                </div>
+                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Name of District</label>
                         <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
@@ -133,7 +140,7 @@
                         <div class="col-sm-12">
                             <div class=" myapp-hed2">
                                 <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Surelly Not to be Required</h6>
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Surely Not to be Required</h6>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +169,9 @@
                                                 <input type="text" id="txtPersonalName" class="form-control" />
                                             </td>
                                             <td>
-                                                <input type="text" id="txtPersonalName" class="form-control" />
+                                                <input type="text" id="txtPersonalName" class="form-control" placeholder="Bigha" /><br/>
+                                                <input type="text" id="txtPersonalName" class="form-control" placeholder="Biswa"  /><br />
+                                                <input type="text" id="txtPersonalName" class="form-control" placeholder="Biswanshi" />
                                             </td>
                                             <td>
                                                 <select class="form-control" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
@@ -210,7 +219,7 @@
                         </div>
                         <input type="text" class="form-control" />
                     </div>
-                    
+
                 </div>
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
