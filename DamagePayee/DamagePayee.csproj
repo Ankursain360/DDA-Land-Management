@@ -5,17 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\DemolitionReport\**" />
-    <Content Remove="Views\DemolitionReport\**" />
-    <EmbeddedResource Remove="Views\DemolitionReport\**" />
-    <None Remove="Views\DemolitionReport\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\Admin\img\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Complaint\Index.cshtml" />
+    <None Include="Views\Complaint\Report.cshtml" />
     <None Include="Views\DamageCalculationReport\Create.cshtml" />
     <None Include="Views\DamagePayeeApproval\Create.cshtml" />
     <None Include="Views\DamagePayeeApproval\Index.cshtml" />
@@ -26,6 +21,7 @@
     <None Include="Views\DamagePayeeRegistration\DemandLetter.cshtml" />
     <None Include="Views\DamagePayeeRegistration\NoticeToDamagePayee.cshtml" />
     <None Include="Views\DamagePayeeRegistration\PayeeRegistration.cshtml" />
+    <None Include="Views\Dashboard\Index.cshtml" />
     <None Include="Views\DefaulterListingReport\Index.cshtml" />
     <None Include="Views\DemandCollectionLedger\Create.cshtml" />
     <None Include="Views\DemandLetter\Create.cshtml" />
@@ -33,19 +29,30 @@
     <None Include="Views\DemandReport\Index.cshtml" />
     <None Include="Views\Demolation\Index.cshtml" />
     <None Include="Views\Demolation\Report.cshtml" />
+    <None Include="Views\DemolitionReport\Index.cshtml" />
     <None Include="Views\Door2DoorSurvey\Create.cshtml" />
     <None Include="Views\Door2DoorSurvey\Index.cshtml" />
     <None Include="Views\DuesVsPaidAmountReport\Index.cshtml" />
     <None Include="Views\DuplicateDemandLetter\DuplicateDemandLetter.cshtml" />
     <None Include="Views\DuplicateDemandLetter\Index.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Login\Create.cshtml" />
+    <None Include="Views\Login\ForgetPassword.cshtml" />
     <None Include="Views\NoticeGenerationReport\Index.cshtml" />
     <None Include="Views\NoticeToDamagePayee\Create.cshtml" />
     <None Include="Views\PaymentTransactionReport\Index.cshtml" />
     <None Include="Views\PaymentVeridonebyAccSection\Index.cshtml" />
     <None Include="Views\Payment\Index.cshtml" />
     <None Include="Views\ReliefReport\Index.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\SubstitutionMutationApplicantsDetail\Create.cshtml" />
     <None Include="Views\SubstitutionMutationDetails\Create.cshtml" />
+    <None Include="Views\_ViewImports.cshtml" />
+    <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
