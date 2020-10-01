@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -18,5 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);   
         Task<bool> CheckUniqueLoginName(int id, string loginname);
         Task<List<Zone>> GetAllZone(int departmentId);
+        Task<PagedResult<User>> GetPagedUser(UserManagementSearchDto model);
+
     }
 }
