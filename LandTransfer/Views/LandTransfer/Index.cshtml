@@ -5,16 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Land Transfer</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Land Transfer</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -22,7 +18,7 @@
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "LandTransfer", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "LandTransfer", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
@@ -34,10 +30,13 @@
                 <thead class="thead">
                     <tr class="myapp-hed1">
                         <th>Sr.No</th>
+                        <th>Department</th>
                         <th>Zone</th>
-                        <th>Locality</th>
-                        <th>Property No.</th>
-                        <th>Handed By</th>
+                        <th>Division</th>
+                        <th>Locality(Village)</th>
+                        <th>Khasra No.</th>
+                        <th>Address</th>
+                        <th>Handed Over By</th>
                         <th>Taken Over By</th>
                         <th>Date of Hand Over</th>
                         <th>Operation</th>
@@ -46,35 +45,41 @@
                 <tbody class="tbody">
                     <tr>
                         <td>1</td>
-                        <td>Narela</td>
-                        <td>Narela</td>
+                        <td>Engineering</td>
+                        <td>LM/SHAHDRA</td>
+                        <td>WD-8</td>
+                        <td>Jhansi</td>
                         <td>515</td>
+                        <td>Pocket 45 road</td>
                         <td>Land Management</td>
-                        <td>Horticulture</td>
-                        <td>20/July/2020</td>
+                        <td>MOR</td>
+                        <td>20-July-2020</td>
                         <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
 
                     </tr>
                     <tr>
                         <td>2</td>
-                        <td>Khanjhawala</td>
-                        <td>Khanjhawala</td>
+                        <td>MOR</td>
+                        <td>LM/SHAHDRA</td>
+                        <td>WD-8</td>
+                        <td>Jhansi</td>
                         <td>545</td>
+                        <td>Pocket 45 road</td>
                         <td>Land Management</td>
                         <td>Engineering</td>
-                        <td>20/July/2020</td>
+                        <td>20-July-2020</td>
                         <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
 
                     </tr>
-                    
+
 
                 </tbody>
 
             </table>
 
-</div>
         </div>
     </div>
+</div>
 <br />
 <br />
 

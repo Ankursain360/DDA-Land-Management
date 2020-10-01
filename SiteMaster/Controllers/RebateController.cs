@@ -26,15 +26,15 @@ namespace SiteMaster.Controllers
         {
             _rebateService = rebateService;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    var result = await _rebateService.GetAllRebate();
-        //    return View(result);
-        //}
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _rebateService.GetAllRebate();
+            return View(result);
         }
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] RebateSearchDto model)

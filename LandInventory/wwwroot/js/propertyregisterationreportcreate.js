@@ -1,9 +1,14 @@
-﻿
+﻿var currentPageNumber = 1;
+var currentPageSize = 10;
 $(document).ready(function () {
+
+   // GetDetails(currentPageNumber, currentPageSize);
+
     $(function () {
         $("#btnGenerate").click(function () {
             debugger;
-            var url = '/PropertyInventoryReport/GetDetails';
+           var param = GetSearchParam(currentPageNumber, currentPageSize);
+       //     var url = '/PropertyInventoryReport/GetDetails';
             var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
             var departmentid = $('#DepartmentId option:selected').val();
             var zoneId = $('#ZoneId option:selected').val();
@@ -13,9 +18,12 @@ $(document).ready(function () {
             var mainLandUseId = $('#MainLandUseId option:selected').val();
             var litigationid = $('#LitigationStatus option:selected').val();
             var encroachedid = $('#Encroached option:selected').val();
-            $('#LoadReportView').empty();
-            $('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
-
+            //$('#LoadReportView').empty();
+            //$('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
+            HttpPost(`/PropertyInventoryReport/GetDetails=${classificationOfLandId, departmentid, zoneId, divisionId, localityId, plannedUnplannedLand, mainLandUseId, litigationid, encroachedid}`, 'html', param, function (response) {
+                $('#LoadReportView').html("");
+                $('#LoadReportView').html(response);
+            });
         });
     });
 });
@@ -50,3 +58,40 @@ function GetDivisionList(id) {
         $("#LocalityId").html(html);
     });
 };
+
+
+function GetDetails(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
+    var departmentid = $('#DepartmentId option:selected').val();
+    var zoneId = $('#ZoneId option:selected').val();
+    var divisionId = $('#DivisionId option:selected').val();
+    var localityId = $('#LocalityId option:selected').val();
+    var plannedUnplannedLand = $('#PlannedUnplannedLand option:selected').val();
+    var mainLandUseId = $('#MainLandUseId option:selected').val();
+    var litigationid = $('#LitigationStatus option:selected').val();
+    var encroachedid = $('#Encroached option:selected').val();
+    HttpPost(`/PropertyInventoryReport/GetDetails=${classificationOfLandId, departmentid, zoneId, divisionId, localityId, plannedUnplannedLand, mainLandUseId, litigationid, encroachedid}`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
+}
+
+function GetSearchParam(pageNumber, pageSize) {
+    var model = {
+        name: "test",
+        pageSize: pageSize,
+        pageNumber: pageNumber
+    }
+    return model;
+}
+
+function onPaging(pageNo) {
+    GetDetails(pageNo, currentPageSize);
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetDetails(currentPageNumber, pageSize);
+    currentPageSize = pageSize;
+}

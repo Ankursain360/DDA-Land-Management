@@ -4,7 +4,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Rate Master </h6>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Rate  </h6>
                 <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -24,31 +24,36 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label" asp-for="PropertyId">Property Type </label>
+                        <label class="control-label lb-sm" asp-for="PropertyId">Property Type </label>
                         <select class="form-control dda-dropdown" asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="PropertyId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label">From Date</label>
+                        <label class="control-label lb-sm">From Date</label>
                         <input asp-for="FromDate" type="date" class="form-control">
                         <span asp-validation-for="FromDate" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">To Date</label>
+                        <label class="control-label lb-sm">To Date</label>
                         <input asp-for="ToDate" type="date" class="form-control">
                         <span asp-validation-for="ToDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label"> Interest Percentage </label>
+                        <label class="control-label lb-sm"> Interest Percentage </label>
                         <input asp-for="RatePercentage" type="text" class="form-control">
                         <span asp-validation-for="RatePercentage" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Scheme Name</label>
+                        <input asp-for="RatePercentage" type="text" value="" class="form-control">
+                        <span asp-validation-for="RatePercentage" class="text-danger"></span>
+                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
