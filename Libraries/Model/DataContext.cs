@@ -1,13 +1,14 @@
 using Libraries.Model.Entity;
 using Libraries.Model.EntityConfiguration;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Libraries.Model
 {
-    public class DataContext : DbContext
+    public class DataContext : IdentityDbContext<ApplicationUser, ApplicationRole, int>
     {
-        public DataContext(DbContextOptions options) : base(options)
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
@@ -129,7 +130,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
             modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
 
+            base.OnModelCreating(modelBuilder);
         }
-
     }
 }

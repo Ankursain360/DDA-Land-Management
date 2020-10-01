@@ -18,7 +18,7 @@
     "SiteMaster": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:1000",
+      "applicationUrl": "https://localhost:1000;http://localhost:2000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
