@@ -11,8 +11,8 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .lb-sm {
-    /*font-size: 13px;*/
-    Font-size: 0.95rem;
+    font-size: 13px;
+   /* Font-size: 0.95rem;*/
     Font-Family: Arial, Helvetica, sans-serif;
     font-weight:100;
     display:inline;

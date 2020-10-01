@@ -57,7 +57,7 @@
                         <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label lb-sm" asp-for="LocalityId">Locality/Village</label><span class="text-danger">*</span>
+                        <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label><span class="text-danger">*</span>
                         <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option value="">--Select--</option>
                         </select>
@@ -301,6 +301,13 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
                             <input asp-for="TakenOverName" class="form-control" />
                             <span asp-validation-for="TakenOverName" class="text-danger lb-sm"></span>
@@ -310,13 +317,14 @@
                             <input asp-for="TakenOverDate" type="date" class="form-control" />
                             <span asp-validation-for="TakenOverDate" class="text-danger lb-sm"></span>
                         </div>
+
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
                             <input asp-for="TakenOverEmailId" class="form-control" />
                             <span asp-validation-for="TakenOverEmailId" class="text-danger lb-sm"></span>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="TakenOverMobileNo" class="form-control onlynumbers" maxlength="10" />
@@ -327,6 +335,9 @@
                             <input asp-for="TakenOverLandlineNo" class="form-control onlynumbers" maxlength="10" />
                             <span asp-validation-for="TakenOverLandlineNo" class="text-danger lb-sm"></span>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverFileData">Document</label>
                             <input type="hidden" asp-for="TakenOverFilePath" />
@@ -366,6 +377,13 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
                             <input asp-for="HandedOverName" class="form-control" />
                             <span asp-validation-for="HandedOverName" class="text-danger lb-sm"></span>
@@ -375,13 +393,14 @@
                             <input asp-for="HandedOverDate" type="date" class="form-control" />
                             <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                         </div>
+
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
                             <input asp-for="HandedOverEmailId" class="form-control" />
                             <span asp-validation-for="HandedOverEmailId" class="text-danger lb-sm"></span>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Mobile No.</label>
                             <input asp-for="HandedOverMobileNo" class="form-control onlynumbers" maxlength="10" />
@@ -392,6 +411,9 @@
                             <input asp-for="HandedOverLandlineNo" class="form-control onlynumbers" maxlength="10" />
                             <span asp-validation-for="HandedOverLandlineNo" class="text-danger lb-sm"></span>
                         </div>
+                    </div>
+                    <div class="row">
+
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverFileData">Document</label>
                             <input type="hidden" asp-for="HandedOverFilePath" />
@@ -448,7 +470,7 @@
                             @{
                                 @if (ViewBag.DisposalTypeDocView != null)
                                 {
-                                    
+
                                     @Html.ActionLink(" (View Existing Document)", "DisposalTypeDownload", new { id = Model.Id })
                                     <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }

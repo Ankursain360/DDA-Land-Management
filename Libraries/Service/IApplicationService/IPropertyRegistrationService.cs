@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 
 
@@ -32,12 +34,13 @@ namespace Libraries.Service.IApplicationService
         Task<List<Department>> GetDepartmentDropDownList();
         Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);
 
-        Task<List<Propertyregistration>> GetPropertyRegisterationReportData(int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationSearchDto model,int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
+        Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
     }
 }

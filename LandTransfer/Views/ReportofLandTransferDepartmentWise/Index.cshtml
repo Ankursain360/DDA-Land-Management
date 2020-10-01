@@ -8,15 +8,12 @@
 @*@model DDAPropertyREG.Models.Tblzonemaster*@
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Land Transfer Reports</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Land Transfer Report(Department Wise)</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -26,26 +23,31 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Specify Details  </h6>
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="RptCasesCourtWise">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="form-row">
-
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Filter</label><span style="color:red">*</span>
+                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Handed Over By</option>
+                            <option value="2">Taken Over By</option>
+                        </select>
+                    </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
                         <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
                             <option value="0">---Select---</option>
-                            <option value="1">LM</option>
-                            <option value="2">Engg</option>
+                            <option value="1">Engineering</option>
+                            <option value="2">Land Management</option>
                         </select>
                     </div>
-
-                  
-                        <div class="form-group col-md-3">
+                    @*<div class="form-group col-md-3">
                             <br />
                             <label class="radio-inline ">
                                 <input type="radio" name="rebate" id="rebate" value="" checked />Handed Over By
@@ -56,24 +58,20 @@
                             <label class="radio-inline">
                                 <input type="radio" name="rebate" id="rebate" value="" />Taken Over By
                             </label>
-                        </div>
-                 
-
-
+                        </div>*@
                 </div>
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
-                        <input type="submit" value="Retrieve" class="btn btn-primary myapp-hed1" />
-
+                        <input type="submit" value="Generate" class="btn btn-primary dda-pageheading" />
                     </div>
                 </div>
 
-                <div id="divsearch">
+                @*<div id="divsearch">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Report of Land Transfer Department Wise</h6>
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">Land Transfer Report(Department Wise)</h6>
                                 </div>
                             </div>
                         </div>
@@ -82,16 +80,19 @@
                         <div class="form-group col-md-12">
 
                             <div id="courtwiserpt">
-                                <div class="card  table-card table-responsive">
+                                <div class="card  table-card table-responsive">*@
 
                                     <table class="table  table-bordered table-card">
 
                                         <thead class="thead">
                                             <tr class="myapp-hed1">
                                                 <th>Sr.No</th>
-                                                <th>Zone/Division  </th>
-                                                <th> Locality </th>
-                                                <th>  Property No   </th>
+                                                <th>Department</th>
+                                                <th>Zone</th>
+                                                <th>Division</th>
+                                                <th>Locality(Village)</th>
+                                                <th>Khasra No.</th>
+                                                <th>Address</th>
                                                 <th> Handed Over By  </th>
                                                 <th> Handed Over Date</th>
                                                 <th> Taken Over By  </th>
@@ -106,9 +107,12 @@
 
                                             <tr>
                                                 <td>1</td>
-                                                <td>North Zone</td>
-                                                <td>Dwarka</td>
-                                                <td>23018</td>
+                                                <td>Engineering</td>
+                                                <td>LM/SHAHDRA</td>
+                                                <td>WD-8</td>
+                                                <td>Jhansi</td>
+                                                <td>515</td>
+                                                <td>Pocket 45 road</td>
                                                 <td>LM</td>
                                                 <td>30-MAY-2018</td>
                                                 <td>ENGG</td>
@@ -119,9 +123,12 @@
                                             </tr>
                                             <tr>
                                                 <td>2</td>
-                                                <td>South Zone</td>
-                                                <td>Dwarka</td>
-                                                <td>23018</td>
+                                                <td>MOR</td>
+                                                <td>LM/SHAHDRA</td>
+                                                <td>WD-8</td>
+                                                <td>Jhansi</td>
+                                                <td>545</td>
+                                                <td>Pocket 45 road</td>
                                                 <td>LM</td>
                                                 <td>30-MAY-2018</td>
                                                 <td>ENGG</td>
@@ -134,19 +141,17 @@
 
                                     </table>
 
-                                </div>
+                                @*</div>
 
                             </div>
                         </div>
 
                     </div>
-                </div>
+                </div>*@
                 <br />
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
-
-                        <input type="submit" value="Export to Excel" class="btn btn-primary  myapp-hed1" style="width:150px !important;" />
-
+                        <input type="submit" value="Export to Excel" class="btn btn-primary  dda-pageheading" style="width:150px !important;" />
                     </div>
                 </div>
 

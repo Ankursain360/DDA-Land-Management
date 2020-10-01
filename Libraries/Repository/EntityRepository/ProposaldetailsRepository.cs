@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -18,7 +19,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<PagedResult<Proposaldetails>> GetPagedProposaldetails(ProposaldetailsSearchDto model)
+        {
+            return await _dbContext.Proposaldetails.GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Proposaldetails>> GetProposaldetails()
         {
             return await _dbContext.Proposaldetails.ToListAsync();

@@ -84,7 +84,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">SLP No.</label>
+                            <label class="control-label lb-sm">Court Case No.</label>
                             <input required type="text" asp-for="Slpno" class="form-control" />
                         </div>
 
@@ -198,7 +198,7 @@
                             <div class="col-sm-12">
                                 <div class=" dda-innerheading">
                                     <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area Used</h6>
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area </h6>
                                     </div>
                                 </div>
                             </div>
@@ -302,15 +302,18 @@
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Appeal By which Dept. </label>
                             <div class="form-row">
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-4">
                                     <input type="checkbox" asp-for="AppealDept" value="UOI ">
                                     <label for="UOI " class="lb-sm">UOI </label>
                                 </div>
-                                <div class="form-group col-DA"md-6">
+                                <div class="form-group col-md-4">
                                     <input type="checkbox" asp-for="AppealDept" value="DDA">
                                     <label class="lb-sm" for="DDA">DDA</label>
                                 </div>
-
+                                <div class="form-group col-md-4">
+                                    <input type="checkbox" asp-for="AppealDept" value="Other">
+                                    <label class="lb-sm" for="DDA">Other</label>
+                                </div>
 
                             </div>
                         </div>

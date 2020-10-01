@@ -26,12 +26,10 @@ namespace SiteMaster
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment HostEnvironment { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
@@ -39,31 +37,15 @@ namespace SiteMaster
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            //services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LocalConnectionString"]));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-            
-            // services.AddMvc()
-            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddSession();
-           // services.AddMvc();
-           // services.AddMvc().AddSessionStateTempDataProvider();
+           
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-            //services.AddMvc().AddViewOptions(options =>
-            //{
-            //    //   options.SuppressTempDataAttributePrefix = true;
-            //});
-
-            //services.AddRazorPages().AddRazorRuntimeCompilation();
-
+            
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";
             });
-            // services.AddScoped<ILogger, Logger>();
-            // Add Session services.
+                     
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
@@ -103,9 +85,7 @@ namespace SiteMaster
 
             app.UseAuthorization();
             app.UseSession();
-            // app.UseMvc();
             app.UseCookiePolicy();
-           // app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
