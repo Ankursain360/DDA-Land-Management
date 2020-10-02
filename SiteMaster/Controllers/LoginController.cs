@@ -12,7 +12,7 @@ using System.Net;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 
-namespace SiteMaster.Controllers
+namespace LIMSPublicInterface.Controllers
 {
     public class LoginController : Controller
     {

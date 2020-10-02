@@ -12,7 +12,9 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model);
         Task<List<Village>> GetVillage();
-        Task<List<Zone>> GetAllZone();
+        Task<List<Zone>> GetAllZone(int departmentId);
         Task<bool> Any(int id, string name);
+        Task<List<Division>> GetAllDivisionList(int departmentId);
+        Task<List<Department>> GetAllDepartmentList();
     }
 }

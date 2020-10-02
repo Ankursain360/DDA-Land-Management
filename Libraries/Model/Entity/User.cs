@@ -12,10 +12,11 @@ namespace Libraries.Model.Entity
         public int? DistrictId { get; set; }
         [Required]
         [Remote(action: "ExistLoginName", controller: "UserManagement", AdditionalFields = "Id")]
-
         public string LoginName { get; set; }
+        [Required] 
         public string DisplayName { get; set; }
         public string Password { get; set; }
+        [Required] 
         public string Email { get; set; }
         public int? RoleId { get; set; }
         public string ChangePassword { get; set; }
@@ -39,7 +40,6 @@ namespace Libraries.Model.Entity
       //  public string Password { get; set; }
         public virtual ICollection<PageRole> PageRole { get; set; }
         [NotMapped]
-
         [Compare("Password", ErrorMessage = "Password and confirmation password must match.")]
         public string ConfirmPassword { get; set; }
 
@@ -55,6 +55,13 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public int? DepartmentId { get; set; }
+        [NotMapped]
+        public int? ZoneId { get; set; }
+
+        [NotMapped]
         public string DistrictName { get; set; }
         [NotMapped]
         public List<District> DistrictList { get; set; }
@@ -67,7 +74,5 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Role> RoleList { get; set; }
         public virtual Role Role { get; set; }
-
-
     }
 }

@@ -22,5 +22,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueCode(int id, string code);
 
         Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model);
+        Task<List<Division>> GetAllDivisionList(int zone);
     }
 }

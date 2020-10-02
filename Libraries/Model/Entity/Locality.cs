@@ -10,9 +10,13 @@ namespace Libraries.Model.Entity
 {
     public class Locality:AuditableEntity<int>
     {
+        [Required]
         public int DepartmentId { get; set; }
         [Required]
         public int ZoneId { get; set; }
+        [NotMapped]
+        [Required]
+        public int DivisionId { get; set; }
         [Required]
         [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id")]
         public string Name { get; set; }

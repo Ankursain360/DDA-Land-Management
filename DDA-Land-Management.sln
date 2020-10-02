@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utility", "Libraries\Utilit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SiteMaster", "SiteMaster\SiteMaster.csproj", "{4CB67274-7D78-4E6B-B2E0-DCBC36EC5679}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandAcquisition", "LandAcquisition\LandAcquisition.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LIMSPublicInterface", "LIMSPublicInterface\LIMSPublicInterface.csproj", "{E3C7DEEE-CA53-4763-B413-E493621568EA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewLandAcquisition", "NewLandAcquisition\NewLandAcquisition.csproj", "{5996C9B1-6ED9-4A34-9EB9-E619AC1A5FD0}"
 EndProject
@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DamagePayee", "DamagePayee\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification", "Libraries\Notification\Notification.csproj", "{40FE5EF8-7447-461B-82AB-DD6FE715EF05}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthServer", "AuthServer\AuthServer.csproj", "{A07881E6-3A40-4CD5-A1EA-11DB1BBE3097}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\AuthServer.csproj", "{A07881E6-3A40-4CD5-A1EA-11DB1BBE3097}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

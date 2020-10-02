@@ -9,7 +9,6 @@ namespace Libraries.Model.Entity
 {
     public class Role : AuditableEntity<int>
     {
-        [Required]
         public int ZoneId { get; set; }
         [Required]
         [Remote(action: "Exist", controller: "Role", AdditionalFields = "Id")]

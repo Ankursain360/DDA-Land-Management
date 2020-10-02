@@ -56,6 +56,7 @@ namespace SiteMaster.Controllers
                 role.ZoneList = await _roleService.GetAllZone();
                 if (ModelState.IsValid)
                 {
+                    role.ZoneId = 0;
                     var result = await _roleService.Create(role);
 
                     if (result == true)
@@ -146,7 +147,6 @@ namespace SiteMaster.Controllers
         {
             try
             {
-
                 var result = await _roleService.Delete(id);
                 if (result == true)
                 {
@@ -175,6 +175,5 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
     }
 }

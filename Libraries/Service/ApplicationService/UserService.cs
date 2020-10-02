@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -45,10 +46,10 @@ namespace Libraries.Service.ApplicationService
             return model;
         }
 
-        public async Task<List<District>> GetAllDistrict()
+        public async Task<List<Department>> GetAllDepartment()
         {
-            List<District> districtList = await _userRepository.GetAllDistrict();
-            return districtList;
+            List<Department> departmentList = await _userRepository.GetAllDepartment();
+            return departmentList;
         }
 
         public async Task<List<User>> GetAllUser()
@@ -99,7 +100,14 @@ namespace Libraries.Service.ApplicationService
             _userRepository.Add(user);
             return await _unitOfWork.CommitAsync() > 0;
         }
-  
-    
+
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            return await _userRepository.GetAllZone(departmentId);
+        }
+        public async Task<PagedResult<User>> GetPagedUser(UserManagementSearchDto model)
+        {
+            return await _userRepository.GetPagedUser(model);
+        }
     }
 }

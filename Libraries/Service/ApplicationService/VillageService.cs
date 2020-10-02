@@ -76,15 +76,27 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<List<Zone>> GetAllZone()
+        public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            List<Zone> zoneList = await _villageRepository.GetAllZone();
+            List<Zone> zoneList = await _villageRepository.GetAllZone(departmentId);
             return zoneList;
         }
         public async Task<bool> CheckUniqueName(int id, string name)
         {
             bool result = await _villageRepository.Any(id, name);
             return result;
+        }
+
+        public async Task<List<Division>> GetAllDivisionList(int departmentId)
+        {
+            List<Division> divisionList = await _villageRepository.GetAllDivisionList(departmentId);
+            return divisionList;
+        }
+
+        public async Task<List<Department>> GetAllDepartment()
+        {
+            List<Department> departmentList = await _villageRepository.GetAllDepartmentList();
+            return departmentList;
         }
     }
 }

@@ -96,5 +96,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _localityRepository.GetPagedLocality(model);
         }
+
+        public async Task<List<Division>> GetAllDivisionList(int zone)
+        {
+            return await _localityRepository.GetAllDivisionList(zone);
+        }
     }
 }

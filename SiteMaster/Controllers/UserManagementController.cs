@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : Controller
@@ -22,14 +22,24 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _userService.GetAllUser();
-            return View(list);
+           // List<User> list = await _userService.GetAllUser();
+            return View();
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
+        {
+            var result = await _userService.GetPagedUser(model);
+            
+            return PartialView("_List", result);
+        }
+
+
         public async Task<IActionResult> Create()
         {
             User user = new User();
             user.IsActive = 1;
-            user.DistrictList = await _userService.GetAllDistrict();
+            user.DepartmentList = await _userService.GetAllDepartment();
             user.RoleList = await _userService.GetAllRole();
             return View(user);
         }
@@ -39,7 +49,7 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                user.DistrictList = await _userService.GetAllDistrict();
+                user.DepartmentList = await _userService.GetAllDepartment();
                 user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
@@ -137,11 +147,9 @@ namespace SiteMaster.Controllers
         {
 
             var Data = await _userService.FetchSingleResult(id);
-            Data.DistrictList = await _userService.GetAllDistrict();
             Data.RoleList = await _userService.GetAllRole();
+            Data.DepartmentList = await _userService.GetAllDepartment();
 
-
-            Data.DistrictList = await _userService.GetAllDistrict();
             if (Data.Password == "123")
             {
                 //  data.defaultpassword_text = 2;
@@ -240,15 +248,20 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _userService.FetchSingleResult(id);
-            Data.DistrictList = await _userService.GetAllDistrict();
+            Data.DepartmentList = await _userService.GetAllDepartment();
             Data.RoleList = await _userService.GetAllRole();
-
-
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
+        }
+
     }
 }
