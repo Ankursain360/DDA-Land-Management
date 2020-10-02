@@ -39,9 +39,9 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] PropertyRegisterationSearchDto model,int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached)
+        public async Task<PartialViewResult> GetDetails([FromBody] PropertyRegisterationReportSearchDto model)
         {
-            var result = await _propertyregistrationService.GetPropertyRegisterationReportData(model,classificationofland, department, zone, division, locality, plannedUnplannedLand, mainLandUse, litigation, encroached);
+            var result = await _propertyregistrationService.GetPropertyRegisterationReportData(model);
 
             if (result != null)
             {

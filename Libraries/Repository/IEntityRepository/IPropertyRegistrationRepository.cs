@@ -19,7 +19,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetGeoFile(int id);
         Task<bool> CheckDeleteAuthority(int id);
         Task<List<Department>> GetDepartmentDropDownList();
-        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationSearchDto model, int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId);
         string GetDisposalFile(int id);

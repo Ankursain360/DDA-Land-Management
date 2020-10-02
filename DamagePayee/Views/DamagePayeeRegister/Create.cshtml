@@ -78,7 +78,7 @@
                                     </tbody>
                                     <tbody class="tbody" id="add">
                                         <tr id="">
-                                            <td>1</td>
+                                            <td><span class="sn">1</span></td>
                                             <td>
                                                 <input type="text" id="txtPersonalName" class="form-control" />
                                             </td>
@@ -761,6 +761,7 @@
             alert('Please fill record before add new record ');
         }
     });
+
     $(document).delegate('a.delete-record', 'click', function (e) {
         e.preventDefault();
         var didConfirm = confirm("Are you sure You want to delete");
