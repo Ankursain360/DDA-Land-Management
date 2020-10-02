@@ -28,9 +28,9 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var result = await _districtService.GetAllDistrict();
-            return View(result);
-          
+            //var result = await _districtService.GetAllDistrict();
+            return View();
+
         }
 
         [HttpPost]
@@ -42,9 +42,9 @@ namespace SiteMaster.Controllers
 
         public IActionResult Create()
         {
-          
+
             return View();
-          
+
         }
 
 
@@ -158,7 +158,7 @@ namespace SiteMaster.Controllers
 
 
 
-        public async Task<IActionResult> Delete(int id)  
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == 0)
             {
@@ -180,7 +180,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            
+
 
             var result = await _districtService.Delete(id);
             if (result == true)
@@ -192,7 +192,7 @@ namespace SiteMaster.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "District");
-         
+
 
         }
 
