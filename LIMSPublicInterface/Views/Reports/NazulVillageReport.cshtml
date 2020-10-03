@@ -1,0 +1,72 @@
+﻿
+
+
+@{
+    ViewData["Title"] = "NazulVillageReport";
+}
+
+
+
+@*@model IEnumerable<Libraries.Model.Entity.Undersection22>*@
+@*@{int rowNo = 0; }*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left color-white" style="margin-top:5px;">List of Nazul Villages </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    @Html.ActionLink("Back", "Index", "Reports", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="card  table-card table-responsive">
+
+        <table class="table  table-bordered table-card">
+            <thead class="thead">
+                <tr>
+                    <th>Sr.No</th>
+
+                    <th> Name </th>
+                  
+                </tr>
+
+
+            </thead>
+            <tbody class="tbody">
+               
+                <tr>
+                    <td>1</td>
+                    <td>  BELA ESTATE</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td> INDER PATH </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>SOUTHERN RIDGE </td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>ALI GANJ</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td> ARAK PUR BAGH MOCHI </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
