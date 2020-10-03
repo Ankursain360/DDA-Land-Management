@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : Controller
@@ -22,9 +22,19 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _userService.GetAllUser();
-            return View(list);
+          
+            return View();
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
+        {
+            var result = await _userService.GetPagedUser(model);
+            
+            return PartialView("_List", result);
+        }
+
+
         public async Task<IActionResult> Create()
         {
             User user = new User();
@@ -85,7 +95,7 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _userService.GetAllUser();
-                        //  var list1 = await _userService.GetAllRole();
+                       
                         return View("Index", list);
                     }
                     else
@@ -119,20 +129,7 @@ namespace SiteMaster.Controllers
                 return Json($"User: {loginname} already exist");
             }
         }
-      //  [AcceptVerbs("Get", "Post")]
-      //  [AllowAnonymous]
-       /// public IActionResult PasswordMatch(string Password, string ConfirmPassword)
-       // {
-          //  bool flag = Password.Equals(ConfirmPassword);
-          //  if (flag)
-          //  {
-               // return Json(true);
-          //  }
-          //  else
-          //  {
-             //   return Json($"Password Not Matched");
-     //     //  }
-     //   }
+  
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -142,12 +139,12 @@ namespace SiteMaster.Controllers
 
             if (Data.Password == "123")
             {
-                //  data.defaultpassword_text = 2;
+               
                 Data.defaultpassword = true;
             }
             else
             {
-               /// Data.defaultpassword_text = 1;
+              
                 Data.defaultpassword = false;
             }
 

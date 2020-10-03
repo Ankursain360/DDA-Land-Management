@@ -34,7 +34,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Department>> GetDepartmentDropDownList();
         Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);
 
-        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationSearchDto model,int classificationofland, int department, int zone, int division, int locality, string plannedUnplannedLand, int mainLandUse, int litigation, int encroached);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
