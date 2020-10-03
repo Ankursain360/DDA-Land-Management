@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -28,8 +29,16 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _undersection4service.GetAllUndersection4();
-            return View(list);
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] Undersection4SearchDto model)
+        {
+            var result = await _undersection4service.GetPagedUndersection4details(model);
+
+            return PartialView("_List", result);
         }
 
 

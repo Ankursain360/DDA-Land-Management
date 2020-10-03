@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
     public class Undersection4Repository : GenericRepository<Undersection4>, IUndersection4Repository
@@ -37,5 +37,12 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Undersection4.AnyAsync(t => t.Id != id && t.Number == number);
         }
+
+
+        public async Task<PagedResult<Undersection4>> GetPagedUndersection4details(Undersection4SearchDto model)
+        {
+            return await _dbContext.Undersection4.Include(x => x.Purpose).OrderByDescending(x => x.Id).GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+        }
+
     }
 }
