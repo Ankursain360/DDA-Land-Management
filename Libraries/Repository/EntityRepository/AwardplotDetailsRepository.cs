@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
   public  class AwardplotDetailsRepository: GenericRepository<Awardplotdetails>, IAwardplotDetailsRepository
@@ -44,6 +44,13 @@ namespace Libraries.Repository.EntityRepository
             List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
             return KhasraList;
         }
+
+
+        public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
+        {
+            return await _dbContext.Awardplotdetails.Include(x => x.Awardmaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+        }
+
 
     }
 }
