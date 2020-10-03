@@ -4,9 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="dda-topheading">
+        <div class="myapp-hed">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Inspection/Encroachment Register</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -14,19 +18,18 @@
         </div>
     </div>
 </div>
-
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "EncroachmentRegister", null, new { @class = "btn btn-primary pull-right dda-pageheading ", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "EncroachmentRegister", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
 <div class="container-fluid" id="MainContentForm">
-    <div class="card  table-responsive  table-card">
+    <div class="card  table-card">
 
         <table class="table table-responsive table-bordered table-card">
-            <tr class="thead">
+            <tr class="myapp-hed1">
                 <th>Sr.No</th>
                 <th>Date</th>
                 <th>Village</th>
