@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Booktransferland>
-@{int rowNo = 0; }
+@*@{int rowNo = 0; }*@
 
 <div class="row">
     <div class="col-sm-12">
@@ -20,66 +20,74 @@
 <br />
 <div class="container-fluid">
     <div class="card  table-card table-responsive">
-
-        <table class="table  table-bordered table-card">
-            <thead class="thead">
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Notification No.</th>
-                    <th>Notification Date</th>
-                   <th>Village Name</th>
-                    <th>Khasra Number</th>
-                    <th>Part</th>
-                    <th>Bigha</th>
-                    <th>Biswa</th>
-                    <th>Biswanshi</th>
-                    <th>Status of Land</th>
-                    <th>Date of Possession</th>
-                    <th>Remarks</th>
-                    <th>Status</th>
-                    <th>Operation</th>
-                </tr>
-
-
-            </thead>
-            <tbody class="tbody">
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-                    <td>@item.LandNotification.Name</td>
-                   
-                    <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
-                    <td>@item.Village.Name</td>
-                    <td>@item.Khasra.Name</td>
-                    <td>@item.Part</td>
+        <div id="divBooktransferlandTable"></div>
+        @*<table class="table  table-bordered table-card">
+                <thead class="thead">
+                    <tr>
+                        <th>Sr.No</th>
+                        <th>Notification No.</th>
+                        <th>Notification Date</th>
+                       <th>Village Name</th>
+                        <th>Khasra Number</th>
+                        <th>Part</th>
+                        <th>Bigha</th>
+                        <th>Biswa</th>
+                        <th>Biswanshi</th>
+                        <th>Status of Land</th>
+                        <th>Date of Possession</th>
+                        <th>Remarks</th>
+                        <th>Status</th>
+                        <th>Operation</th>
+                    </tr>
 
 
-                    <td>@item.Bigha</td>
-                    <td>@item.Biswa</td>
-                    <td>@item.Biswanshi</td>
-                    <td>@item.StatusOfLand</td>
+                </thead>
+                <tbody class="tbody">
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@item.LandNotification.Name</td>
 
-                    <td>@(Convert.ToDateTime(item.DateofPossession).ToString("dd-MMM-yyyy"))</td>
-                    <td>@item.Remarks</td>
+                        <td>@(Convert.ToDateTime(item.NotificationDate).ToString("dd-MMM-yyyy"))</td>
+                        <td>@item.Village.Name</td>
+                        <td>@item.Khasra.Name</td>
+                        <td>@item.Part</td>
 
-                    <td>
-                        @(item.IsActive  == 1 ? "Active" : "Inactive" )
-                    </td>
-                    <td>
-                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+                        <td>@item.Bigha</td>
+                        <td>@item.Biswa</td>
+                        <td>@item.Biswanshi</td>
+                        <td>@item.StatusOfLand</td>
 
-                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                        <td>@(Convert.ToDateTime(item.DateofPossession).ToString("dd-MMM-yyyy"))</td>
+                        <td>@item.Remarks</td>
 
-                    </td>
+                        <td>
+                            @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                        </td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                </tr>
-                }
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-            </tbody>
-        </table>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+
+                        </td>
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>*@
 
     </div>
 </div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/booktransferlandindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/booktransferlandindex.min.js" asp-append-version="true"></script>
+</environment>

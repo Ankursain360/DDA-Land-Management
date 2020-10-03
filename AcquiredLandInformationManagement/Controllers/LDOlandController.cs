@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +26,12 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var result = await _ldolandService.GetAllLdoland();
             return View(result);
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] LdolandSearchDto model)
+        {
+            var result = await _ldolandService.GetPagedLdoland(model);
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()

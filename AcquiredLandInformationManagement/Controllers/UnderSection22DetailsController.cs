@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -25,6 +26,13 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _undersection22Service.GetAllUndersection22();
             return View(result);
 
+        }
+     
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] Undersection22SearchDto model)
+        {
+            var result = await _undersection22Service.GetPagedUndersection22(model);
+            return PartialView("_List", result);
         }
 
         public IActionResult Create()

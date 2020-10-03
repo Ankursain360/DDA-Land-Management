@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -17,6 +18,11 @@ namespace Libraries.Repository.EntityRepository
         public LdolandRepository(DataContext dbContext) : base(dbContext)
         {
 
+        }
+
+         public async Task<PagedResult<Ldoland>> GetPagedLdoland(LdolandSearchDto model)
+        {
+            return await _dbContext.Ldoland.GetPaged<Ldoland>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Ldoland>> GetLdoland()
