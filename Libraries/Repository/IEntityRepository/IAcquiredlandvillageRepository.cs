@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -15,7 +15,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<District>> GetAllDistrict();
         Task<List<Tehsil>> GetAllTehsil();
         Task<List<Villagetype>> GetAllVillagetype();
-       // Task<bool> AnyLoginName(int id, string loginname);
+        Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
+
+       
 
     }
 }
