@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -26,6 +27,13 @@ namespace AcquiredLandInformationManagement.Controllers
                 var result = await _proposalplotdetailsService.GetAllProposalplotdetails();
                 return View(result);
             }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] ProposalplotdetailSearchDto model)
+        {
+            var result = await _proposalplotdetailsService.GetPagedProposalplotdetails(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Create()
         {
             Proposalplotdetails proposalplotdetails = new Proposalplotdetails();

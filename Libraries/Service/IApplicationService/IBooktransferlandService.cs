@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -23,7 +25,7 @@ namespace Libraries.Service.IApplicationService
         Task<Booktransferland> FetchSingleResult(int id);
 
         Task<bool> Delete(int id);
-
+        Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model);
 
     }
 }

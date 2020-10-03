@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -18,10 +19,18 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public async Task<PagedResult<Undersection22>> GetPagedUndersection22(Undersection22SearchDto model)
+        {
+            return await _dbContext.Undersection22.GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+        }
+
+
         public async Task<List<Undersection22>> GetUndersection22()
         {
             return await _dbContext.Undersection22.ToListAsync();
         }
+
+
         //public async Task<bool> Any(int id, string name)
         //{
         //    return await _dbContext.Module.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
