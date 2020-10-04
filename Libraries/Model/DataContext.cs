@@ -79,6 +79,7 @@ namespace Libraries.Model
         public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
 
+        public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -129,6 +130,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
             modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
+            modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
