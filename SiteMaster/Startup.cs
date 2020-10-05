@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Libraries.Model;
 using SiteMaster.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
+using SiteMaster.Logging;
+using SiteMaster.Filters;
 
 namespace SiteMaster
 {
@@ -34,19 +36,22 @@ namespace SiteMaster
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-         
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-           
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             
+            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+
             services.Configure<CookieTempDataProviderOptions>(options =>
             {
                 options.Cookie.Name = "MyTempDataCookie";
             });
-                     
+            //services.AddMvc(option =>
+            //{
+            //    option.Filters.Add(new CustomExceptionHandlerFilter());
+            //});
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(20);
@@ -93,6 +98,7 @@ namespace SiteMaster
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
