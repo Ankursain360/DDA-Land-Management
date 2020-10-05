@@ -2,11 +2,13 @@
 var currentPageSize = 5;
 
 $(document).ready(function () {
+   // debugger;
     GetDetails(currentPageNumber, currentPageSize);
 });
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
+  //  debugger;
     HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);

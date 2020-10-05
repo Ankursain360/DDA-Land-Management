@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
+@{int rowNo = 0; }
+
+
+<div class="card  table-card table-responsive">
+
+    <table class="table table-responsive table-bordered table-card">
+
+
+        <thead class="thead">
+
+            <tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Unique Id</th>
+                <th rowspan="2">Zone</th>
+                <th>Land Descriiption</th>
+                <th rowspan="2">Khasra No.</th>
+                <th rowspan="2">Area (In SQM) </th>
+                <th rowspan="2">Division Contact</th>
+                <th>Locality(Village)</th>
+                <th rowspan="2">Restore Reason</th>
+                <th rowspan="2">Restore Date</th>
+            </tr>
+
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td></td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Palandmark</td>
+
+                    <td>@item.KhasraNo</td>
+
+                    <td>@item.TotalArea</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.Locality.Name</td>
+
+
+                    @*<td>@item.Deletedproperty.Reason</td>*@
+                    <td></td>
+                    @*asp-action="View" asp-route-id="@item.Id"*@
+                    @*<td>
+                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+                    </td>*@
+                </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+
+</div>

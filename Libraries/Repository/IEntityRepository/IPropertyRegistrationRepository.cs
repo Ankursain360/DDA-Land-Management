@@ -12,6 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Classificationofland>> GetClassificationOfLandDropDownList();
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
+        Task<List<Locality>> GetLocalityDropDownList2(int divisionId);
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
@@ -26,6 +27,8 @@ namespace Libraries.Repository.IEntityRepository
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
         Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division,int primaryListNo);
+        Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality);
+
         Task<bool> InsertInDeletedProperty(Deletedproperty model);
         Task<bool> InsertInRestoreProperty(Restoreproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
