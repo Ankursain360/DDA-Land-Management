@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -25,8 +26,16 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _jointsurveyService.GetAllJointSurvey();
-            return View(list);
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] JointSurveySearchDto model)
+        {
+            var result = await _jointsurveyService.GetPagedJointsurvey(model);
+
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()
