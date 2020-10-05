@@ -7,7 +7,6 @@ using System.IO;
 using NLog.Filters;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Builder;
-using SiteMaster.Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SiteMaster.Filters
