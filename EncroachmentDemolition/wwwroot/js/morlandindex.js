@@ -2,14 +2,14 @@
 var currentPageSize = 1;
 
 $(document).ready(function () {
-    GetKhasraMaster(currentPageNumber, currentPageSize);
+    GetMorland(currentPageNumber, currentPageSize);
 });
 
-function GetKhasraMaster(pageNumber, pageSize) {
+function GetMorland(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/khasraMaster/List`, 'html', param, function (response) {
-        $('#divKhasraTable').html("");
-        $('#divKhasraTable').html(response);
+    HttpPost(`/morLands/List`, 'html', param, function (response) {
+        $('#divMorlandTable').html("");
+        $('#divMorlandTable').html(response);
     });
 }
 
@@ -23,12 +23,12 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetKhasraMaster(pageNo, currentPageSize);
+    GetMorland(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetKhasraMaster(currentPageNumber, pageSize);
+    GetMorland(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
 

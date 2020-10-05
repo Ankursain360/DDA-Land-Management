@@ -1,17 +1,16 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Khasra>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Sakanidetail>
 
 <table class="table table-responsive table-bordered table-card">
     <thead class="thead">
         <tr>
-            <th>Village</th>
-            <th>Rect No</th>
-            <th>Land Category</th>
-            <th>Khasra No</th>
-
-
-            <th>Biswa</th>
-            <th>Bigha</th>
-            <th>Biswanshi</th>
+            <th>Sr.No</th>
+            <th>Village Name</th>
+            <th>No. Of Khewat</th>
+            <th>No. Of Khatauni</th>
+            <th>Owner Details</th>
+            <th>Lease Details</th>
+            <th>Tenant Details</th>
+            @*<th>Khasra no</th>*@
             <th>Status</th>
             <th>Operation</th>
         </tr>
@@ -20,14 +19,14 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            <td>@item.Village</td>
-            <td>@item.RectNo</td>
-            <td>@item.LandCategory</td>
+            
+            <td>@item.Village.Name</td>
+            <td>@item.Khewat.Number</td>
+            <td>@item.Khasra.Name</td>
+            <td>@item.OwnerDetails</td>
+            <td>@item.LeaseDetails</td>
+            <td>@item.Tenant</td>
 
-            <td>@item.Name</td>
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-            <td>@item.Biswanshi</td>
             <td>
                 @(item.IsActive  == 1 ? "Active" : "Inactive" )
             </td>

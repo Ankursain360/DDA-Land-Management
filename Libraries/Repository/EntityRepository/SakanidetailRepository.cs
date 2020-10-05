@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -20,7 +21,10 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-
+        public async Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
+        {
+            return await _dbContext.Sakanidetail.GetPaged<Sakanidetail>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Khewat>> GetAllKhewat()
         {
             List<Khewat> awardList = await _dbContext.Khewat.Where(x => x.IsActive == 1).ToListAsync();

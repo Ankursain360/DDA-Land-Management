@@ -2,14 +2,14 @@
 var currentPageSize = 1;
 
 $(document).ready(function () {
-    GetKhasraMaster(currentPageNumber, currentPageSize);
+    GetJaraiDetails(currentPageNumber, currentPageSize);
 });
 
-function GetKhasraMaster(pageNumber, pageSize) {
+function GetJaraiDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/khasraMaster/List`, 'html', param, function (response) {
-        $('#divKhasraTable').html("");
-        $('#divKhasraTable').html(response);
+    HttpPost(`/jaraiDetails/List`, 'html', param, function (response) {
+        $('#divJaraidetailsTable').html("");
+        $('#divJaraidetailsTable').html(response);
     });
 }
 
@@ -23,12 +23,12 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetKhasraMaster(pageNo, currentPageSize);
+    GetJaraiDetails(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetKhasraMaster(currentPageNumber, pageSize);
+    GetJaraiDetails(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
 

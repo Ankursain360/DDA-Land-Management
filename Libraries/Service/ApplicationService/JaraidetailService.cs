@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -18,7 +19,10 @@ namespace Libraries.Service.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJaraidetailRepository _jaraidetailRepository;
 
-
+        public async Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
+        {
+            return await _jaraidetailRepository.GetPagedJaraidetail(model);
+        }
         public JaraidetailService(IUnitOfWork unitOfWork, IJaraidetailRepository jaraidetailRepository)
 : base(unitOfWork, jaraidetailRepository)
         {

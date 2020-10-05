@@ -1,14 +1,14 @@
-﻿using Libraries.Model.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
 namespace Libraries.Service.IApplicationService
 {
     public interface ISakanidetailService
     {
-
+        Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
         Task<List<Sakanidetail>> GetSakanidetail();
         Task<List<Khewat>> GetAllKhewat();
         Task<List<Acquiredlandvillage>> GetAllVillage();

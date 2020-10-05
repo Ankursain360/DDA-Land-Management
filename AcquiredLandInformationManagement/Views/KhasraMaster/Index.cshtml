@@ -13,13 +13,13 @@
 <br />
 <br />
 <div>
-    @Html.ActionLink("Add New", "Create", "KhasraMaster", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "JaraiDetails", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
 <div class="container-fluid">
     <div class="card  table-card">
-        <div id="divKhasraTable"></div>
+        <div id="divJaraidetailsTable"></div>
     </div>
 </div>
 <div class="modal bounceIn animated" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -61,8 +61,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/khasramasterindex.js"></script>
+    <script src="~/js/jaraidetailsindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/khasramasterindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/jaraidetailsindex.min.js" asp-append-version="true"></script>
 </environment>
