@@ -82,7 +82,11 @@ namespace Libraries.Repository.EntityRepository
             List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
             return PrimaryListNoList;
         }
-
+        public async Task<List<Locality>> GetLocalityDropDownList2(int divisionId)
+        {
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.DivisionId == divisionId ).Where(x=> x.IsActive==1).ToListAsync();
+            return localityList;
+        }
         public string GetFile(int id)
         {
             var File = (from f in _dbContext.Propertyregistration
@@ -154,7 +158,21 @@ namespace Libraries.Repository.EntityRepository
                 (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) && (x.DivisionId == (division == 0 ? x.DivisionId : division)) && (x.Id == (primaryListNo == 0 ? x.Id : primaryListNo)) ).ToListAsync();
             return data;
         }
-
+        public async Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality)
+        {
+            var data = await _dbContext.Propertyregistration.
+                Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                . OrderByDescending(x => x.Id)
+                .Where(x => (x.IsDeleted == 1)
+                && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division)) 
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))).ToListAsync();
+            return data;
+        }
 
         public string GetTakenOverFile(int id)
         {
