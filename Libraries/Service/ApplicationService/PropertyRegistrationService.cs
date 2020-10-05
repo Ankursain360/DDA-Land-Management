@@ -47,6 +47,12 @@ namespace Libraries.Service.ApplicationService
             List<Propertyregistration> PrimaryListNoList = await _propertyregistrationRepository.GetPrimaryListNoList(DivisionId);
             return PrimaryListNoList;
         }
+
+        public async Task<List<Locality>> GetLocalityDropDownList2(int DivisionId) //added by ishu
+        {
+            List<Locality> localityList = await _propertyregistrationRepository.GetLocalityDropDownList2(DivisionId);
+            return localityList;
+        }
         public async Task<List<Landuse>> GetLandUseDropDownList()
         {
             List<Landuse> LanduseList = await _propertyregistrationRepository.GetLandUseDropDownList();
@@ -190,7 +196,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division,primaryListNo);
         }
-
+        public async Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality)
+        {
+            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division, locality);
+        }
 
         public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
