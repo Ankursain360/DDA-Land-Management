@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -13,6 +14,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Awardmasterdetail>> GetAllAWardmaster();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();
+        Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model);
+
 
     }
 }

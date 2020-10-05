@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Acquiredlandvillage>
+
 @{int rowNo = 0; }
-
-
 
 
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Village Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Village master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -17,53 +16,25 @@
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
+    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
 </div>
 <br />
 <br />
 <div class="container-fluid">
-    <div class="card  table-card">
+    <div class="card  table-card" style="overflow:scroll;">
+        <div id="divAcquiredLandVillage">
 
-        <table class="table table-responsive table-bordered table-card">
+        </div>
 
-            <thead class="thead">
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Village Code</th>
-                    <th>Village Name</th>
-                    <th>Tehsil Name</th>
-                    <th>District Name</th>
-                    <th>Status</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-
-                    <td>@item.Code</td>
-                    <td>@item.Name</td>
-                    <td>@item.Tehsil.Name</td>
-                    <td>@item.District.Name</td>
-                  
-                    <td>@(item.IsActive==1?"Active":"InActive")</td>
-                    <td>
-                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-
-                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-
-        </table>
 
     </div>
 </div>
-<br />
-<br />
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/acquiredlandvillageindex.js"></script>
+   
+</environment>
+<environment exclude="Development">
+    <script src="~/js/acquiredlandvillageindex.min.js" asp-append-version="true"></script>
+</environment>

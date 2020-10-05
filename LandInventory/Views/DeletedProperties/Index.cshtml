@@ -24,7 +24,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm"> Department </label>
-                    <select      class="form-control">
+                    <select class="form-control">
                         <option value="dept1">Engineering</option>
                         <option value="dept2">Land Management</option>
                         <option value="dept3">MOR</option>
@@ -45,7 +45,7 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm"> Division </label>
-                    <select  class="form-control">
+                    <select class="form-control">
                         <option value="dept1">WD-2 </option>
                         <option value="dept2">WD-8 </option>
                         <option value="dept3">WD-9 </option>
@@ -63,7 +63,12 @@
                 <div class="col-sm-12">
                     <div class="dda-innerheading">
                         <div class="col-md-12">
-                            <h6 class="pull-left" style="color:white;margin-top:5px;"> List of Deleted Properties is as on 05-08-2020 as under:  </h6>
+                            <h6 class="pull-left" style="color:white;margin-top:5px;">
+                                List of Deleted Properties is as on
+                                <span id="currentdate"></span>
+                             
+                                as under:
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -84,7 +89,7 @@
                                     <th>Khasra Number</th>
                                     <th>Address</th>
                                     <th>Primary List No </th>
-                                   
+
                                     <th>Reason</th>
                                     <th> Deleted On</th>
                                 </tr>
@@ -157,3 +162,12 @@
         </div>
     </div>
 </div>
+
+
+<p id="currentdate"></p>
+
+<script>
+var date = (new Date()).toISOString().split('T')[0];
+
+    document.getElementById("currentdate").innerHTML = date;
+</script>

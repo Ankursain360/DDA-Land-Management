@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Service.ApplicationService
 {
    public class AwardplotDetailsService : EntityService<Awardplotdetails>, IAwardplotDetailService
@@ -101,6 +101,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
+        {
+            return await _awardplotDetailsRepository.GetPagedAwardplotdetails(model);
+        }
 
 
 

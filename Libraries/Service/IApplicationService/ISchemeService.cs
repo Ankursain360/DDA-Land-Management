@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Repository.Common;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -17,5 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Scheme>> GetSchemeUsingRepo();
         Task<bool> Delete(int id);
         Task<bool> CheckUniqueName(int id, string name);
+        Task<PagedResult<Scheme>> GetPagedScheme(SchemeSearchDto model);
+
     }
 }

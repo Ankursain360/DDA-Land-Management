@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -18,7 +20,9 @@ namespace Libraries.Service.IApplicationService
 
         Task<Undersection22> FetchSingleResult(int id); 
 
-        Task<bool> Delete(int id);    
+        Task<bool> Delete(int id);
+        Task<PagedResult<Undersection22>> GetPagedUndersection22(Undersection22SearchDto model);
+
 
         //Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  for designation
     }

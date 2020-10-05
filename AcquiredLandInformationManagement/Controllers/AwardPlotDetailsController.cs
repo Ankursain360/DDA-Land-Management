@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class AwardPlotDetailsController : Controller
@@ -25,8 +26,16 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _awardplotDetailService.GetAwardplotdetails();
-            return View(list);
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] AwardPlotDetailSearchDto model)
+        {
+            var result = await _awardplotDetailService.GetPagedAwardplotdetails(model);
+
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()
