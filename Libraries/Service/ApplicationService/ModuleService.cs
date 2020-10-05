@@ -50,6 +50,10 @@ namespace Libraries.Service.ApplicationService
             var result = await _moduleRepository.FindBy(a => a.Id == id);
             Module model = result.FirstOrDefault();
             model.Name = module.Name;
+            model.Description = module.Description;
+            model.Url = module.Url;
+            model.Icon = module.Icon;
+            model.Target = module.Target;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _moduleRepository.Edit(model);
