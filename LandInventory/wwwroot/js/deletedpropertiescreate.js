@@ -3,7 +3,7 @@ $(document).ready(function () {
     $(function () {
         $("#btnGenerate").click(function () {
             debugger;
-            var url = '/ArchivedProperty/GetDetails';
+            var url = '/DeletedProperties/GetDetails';
 
             var departmentid = $('#DepartmentId option:selected').val();
             var zoneId = $('#ZoneId option:selected').val();
