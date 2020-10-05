@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
+using Libraries.Repository.Common;
 namespace Libraries.Service.IApplicationService
 {
     public interface IEnhancecompensationService
@@ -18,5 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Enhancecompensation enhancecompensation);
         Task<Enhancecompensation> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+         Task<PagedResult<Enhancecompensation>> GetPagedEnhancecompensation(EnhancecompensationSearchDto model);
+
     }
 }
