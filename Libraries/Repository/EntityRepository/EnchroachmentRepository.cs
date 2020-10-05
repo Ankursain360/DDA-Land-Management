@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 
 {
@@ -51,7 +51,10 @@ namespace Libraries.Repository.EntityRepository
             return NencroachmentList;
         }
 
-
+        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model)
+        {
+            return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Natureofencroachment).Include(x => x.Reasons).OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
+        }
 
     }
 }
