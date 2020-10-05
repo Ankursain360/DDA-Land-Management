@@ -47,6 +47,9 @@ namespace Libraries.Service.ApplicationService
             var result = await _workflowtemplateRepository.FindBy(a => a.Id == id);
             WorkflowTemplate model = result.FirstOrDefault();
             model.Name = workflowtemplate.Name;
+            model.Description = workflowtemplate.Description;
+            model.ModuleId = workflowtemplate.ModuleId;
+            model.Template = workflowtemplate.Template;
             model.ModifiedDate = DateTime.Now;
             model.IsActive = workflowtemplate.IsActive;
             model.ModifiedBy = 1;

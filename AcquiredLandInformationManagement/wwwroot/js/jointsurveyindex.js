@@ -1,17 +1,15 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 5;
+var currentPageSize = 10;
 
 $(document).ready(function () {
-   // debugger;
-    GetDetails(currentPageNumber, currentPageSize);
+    GetJointSurvey(currentPageNumber, currentPageSize);
 });
 
-function GetDetails(pageNumber, pageSize) {
+function GetJointSurvey(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-  //  debugger;
-    HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
+    HttpPost(`/JointSurvey/List`, 'html', param, function (response) {
+        $('#divGetJointSurvey').html("");
+        $('#divGetJointSurvey').html(response);
     });
 }
 
@@ -25,11 +23,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetDetails(pageNo, currentPageSize);
+    GetJointSurvey(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(currentPageNumber, pageSize);
+    GetJointSurvey(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

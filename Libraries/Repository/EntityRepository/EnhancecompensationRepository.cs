@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
    public class EnhancecompensationRepository: GenericRepository<Enhancecompensation>, IEnhancecompensationRepository
@@ -42,6 +42,10 @@ namespace Libraries.Repository.EntityRepository
             return KhasraList;
         }
 
+        public async Task<PagedResult<Enhancecompensation>> GetPagedEnhancecompensation(EnhancecompensationSearchDto model)
+        {
+            return await _dbContext.Enhancecompensation.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Enhancecompensation>(model.PageNumber, model.PageSize);
+        }
 
 
     }

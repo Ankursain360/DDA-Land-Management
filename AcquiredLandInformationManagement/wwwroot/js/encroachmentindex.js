@@ -1,17 +1,15 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 5;
+var currentPageSize = 10;
 
 $(document).ready(function () {
-   // debugger;
-    GetDetails(currentPageNumber, currentPageSize);
+    GetEncroachment(currentPageNumber, currentPageSize);
 });
 
-function GetDetails(pageNumber, pageSize) {
+function GetEncroachment(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-  //  debugger;
-    HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
+    HttpPost(`/EncroachmentDetails/List`, 'html', param, function (response) {
+        $('#divEncroachment').html("");
+        $('#divEncroachment').html(response);
     });
 }
 
@@ -25,11 +23,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetDetails(pageNo, currentPageSize);
+    GetEncroachment(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(currentPageNumber, pageSize);
+    GetEncroachment(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

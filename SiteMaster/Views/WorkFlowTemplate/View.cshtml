@@ -42,17 +42,17 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label class="control-label lb-sm" asp-for="Name">Name</label>
-                    <input asp-for="Name" type="text" class="form-control" />
+                    <input asp-for="Name" type="text" class="form-control" disabled />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="control-label lb-sm" asp-for="Description">Description</label>
-                    <input asp-for="Description" type="text" class="form-control" />
+                    <input asp-for="Description" type="text" class="form-control" disabled />
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-3">
                     <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
-                    <select asp-for="ModuleId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
+                    <select asp-for="ModuleId" class="form-control dda-dropdown" disabled asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
                         <option value="value">Select</option>
                     </select>
                     <span asp-validation-for="ModuleId" class="text-danger"></span>
@@ -62,10 +62,10 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     <label class="control-label lb-sm">IsActive</label>
-                    <input type="checkbox" asp-for="IsActiveData" />
+                    <input type="checkbox" asp-for="IsActiveData" disabled />
                 </div>
                 <div class="form-group col-md-3">
-                    <a class="btn btn-primary dda-pageheading add-record" data-added="0"> Add Task</a>
+                    <a class="btn btn-primary dda-pageheading add-record" data-added="0" style="display:none;" > Add Task</a>
                 </div>
             </div>
 
@@ -94,19 +94,19 @@
                                             <div class="row">
                                                 <div class="form-group col-md-3">
                                                     <label class="control-label lb-sm">Parameter Name</label>
-                                                    <input asp-for="ParameterNameList[0]" type="text" id="parameterName" class="form-control" />
+                                                    <input asp-for="ParameterNameList[0]" type="text" id="parameterName" class="form-control"  disabled/>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label class="control-label lb-sm">Parameter Value</label>
-                                                    <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control" />
+                                                    <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control" disabled />
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label class="control-label lb-sm">Level</label>
-                                                    <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" class="form-control" />
+                                                    <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" class="form-control"  disabled/>
                                                 </div>
                                                 <div class="form-group col-md-3">
                                                     <label class="control-label lb-sm">Skip</label>
-                                                    <input type="checkbox" class="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" />
+                                                    <input type="checkbox" class="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip"  disabled/>
                                                 </div>
                                             </div>
 
@@ -119,7 +119,6 @@
             </div>
             <div class="row ">
                 <div class="form-group col-md-12" style="margin-bottom:40px;">
-                    <input type="submit" value="Update" id="btnCreate" class="btn btn-primary dda-pageheading" />
                     @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-primary dda-pageheading" })
                 </div>
             </div>
