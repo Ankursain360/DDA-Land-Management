@@ -13,7 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Libraries.Model;
 using SiteMaster.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
-using SiteMaster.Logging;
+
 using SiteMaster.Filters;
 
 namespace SiteMaster
