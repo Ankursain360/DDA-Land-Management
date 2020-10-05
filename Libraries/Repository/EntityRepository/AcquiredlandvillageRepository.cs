@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+
 namespace Libraries.Repository.EntityRepository
 {
   public  class AcquiredlandvillageRepository:GenericRepository<Acquiredlandvillage>,IAcquiredlandvillageRepository
@@ -46,6 +48,10 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
+        public async Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model)
+        {
+            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x => x.Villagetype).OrderByDescending(x => x.Id).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+        }
 
 
 

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Service.ApplicationService
 {
     public class  Undersection4Service : EntityService<Undersection4>, IUndersection4service
@@ -92,7 +92,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
-
+        public async Task<PagedResult<Undersection4>> GetPagedUndersection4details(Undersection4SearchDto model)
+        {
+            return await _undersection4Repository.GetPagedUndersection4details(model);
+        }
 
 
 

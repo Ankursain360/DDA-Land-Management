@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
     public interface IMorlandRepository : IGenericRepository<Morland>
     {
-
+        Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model);
         Task<List<Morland>> GetAllMorland();
 
         Task<List<LandNotification>> GetAllLandNotification();

@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
    public class JointsurveyRepository : GenericRepository<Jointsurvey>, IJointsurveyRepository
@@ -41,6 +41,12 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Khasra> KhasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
             return KhasraList;
+        }
+
+
+        public async Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model)
+        {
+            return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
         }
 
     }

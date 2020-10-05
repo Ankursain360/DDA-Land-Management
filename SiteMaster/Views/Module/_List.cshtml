@@ -4,6 +4,10 @@
     <thead class="thead">
         <tr>
             <th>Module Name</th>
+            <th>Description</th>
+            <th>Url</th>
+            <th>Icon</th>
+            <th>Target</th>
             <th>Status</th>
             <th>Operations</th>
         </tr>
@@ -13,6 +17,10 @@
         {
             <tr>
                 <td>@item.Name</td>
+                <td>@item.Description</td>
+                <td>@item.Url</td>
+                <td>@item.Icon</td>
+                <td>@item.Target</td>
                 <td>
                     @(item.IsActive  == 1 ? "Active" : "Inactive" )
                 </td>

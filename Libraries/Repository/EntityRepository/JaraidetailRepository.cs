@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -19,7 +20,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
+        {
+            return await _dbContext.Jaraidetail.GetPaged<Jaraidetail>(model.PageNumber, model.PageSize);
+        }
 
         public async Task<List<Khewat>> GetAllKhewat()
         {

@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class EnhanceCompensationMasterController : Controller
@@ -23,9 +23,18 @@ namespace AcquiredLandInformationManagement.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _enhancecompensationService.GetAllEnhancecompensation();
-            return View(list);
+
+            return View();
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] EnhancecompensationSearchDto model)
+        {
+            var result = await _enhancecompensationService.GetPagedEnhancecompensation(model);
+
+            return PartialView("_List", result);
+        }
+
 
         public async Task<IActionResult> Create()
         {

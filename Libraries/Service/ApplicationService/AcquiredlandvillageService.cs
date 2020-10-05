@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -108,7 +109,10 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-
+        public async Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model)
+        {
+            return await _acquiredlandvillageRepository.GetPagedAcquiredlandvillage(model);
+        }
 
 
 

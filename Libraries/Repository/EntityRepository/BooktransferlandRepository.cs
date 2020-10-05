@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -18,7 +19,10 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
+        public async Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model)
+        {
+            return await _dbContext.Booktransferland.GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+        }
         public async Task<List<Booktransferland>> GetBooktransferland()
         {
             return await _dbContext.Booktransferland.ToListAsync();

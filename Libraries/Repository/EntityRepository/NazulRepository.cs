@@ -37,7 +37,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Nazul.Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-
+        
 
 
 

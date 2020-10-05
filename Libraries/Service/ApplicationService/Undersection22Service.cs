@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -80,6 +81,11 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = 0;
             _undersection22Repository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+        
+        public async Task<PagedResult<Undersection22>> GetPagedUndersection22(Undersection22SearchDto model)
+        {
+            return await _undersection22Repository.GetPagedUndersection22(model);
         }
     }
 }

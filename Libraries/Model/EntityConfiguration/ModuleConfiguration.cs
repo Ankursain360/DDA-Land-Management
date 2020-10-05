@@ -34,6 +34,21 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Description)
+               .HasMaxLength(100)
+               .IsUnicode(false);
+            builder.Property(e => e.Url)
+               .IsRequired()
+               .HasMaxLength(100)
+               .IsUnicode(false);
+
+            builder.Property(e => e.Icon)
+               .HasMaxLength(100)
+               .IsUnicode(false);
+            builder.Property(e => e.Target)
+               .HasMaxLength(100)
+               .IsUnicode(false);
+
         }
     }
 }

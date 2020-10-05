@@ -10,11 +10,14 @@ namespace Libraries.Model.Entity
     {
 
         [Required]
-        //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
         public string Name { get; set; }
         [Required]
         public byte? IsActive { get; set; }
-
+        public string Description { get; set; }
+        public string Url { get; set; }
+        public string Icon { get; set; }
+        public string Target { get; set; }
+        public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
     }
 }

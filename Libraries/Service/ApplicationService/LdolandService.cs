@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -102,8 +103,11 @@ namespace Libraries.Service.ApplicationService
             _ldolandRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-
+        
+        public async Task<PagedResult<Ldoland>> GetPagedLdoland(LdolandSearchDto model)
+        {
+            return await _ldolandRepository.GetPagedLdoland(model);
+        }
 
     }
 }

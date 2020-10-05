@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -109,6 +110,10 @@ namespace Libraries.Service.ApplicationService
         }
 
 
+        public async Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model)
+        {
+            return await _booktransferlandRepository.GetPagedBooktransferland(model);
+        }
 
     }
 }

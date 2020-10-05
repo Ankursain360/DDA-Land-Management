@@ -10,7 +10,7 @@ namespace SiteMaster.Infrastructure.Extensions
     public static class DependencyHelperExtension
     {
         public static void RegisterDependency(this IServiceCollection services)
-		{
+        {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -34,6 +34,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IPageRoleRepository, PageRoleRepository>();
             services.AddScoped<ILandUseRepository, LandUseRepository>();
             services.AddScoped<IClassificationOfLandRepository, ClassificationOfLandRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
 
 
 
@@ -57,6 +58,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IPageRoleService, PageRoleService>();
             services.AddScoped<ILandUseService, LandUseService>();
             services.AddScoped<IClassificationOfLandService, ClassificationOfLandService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
 
         }
     }

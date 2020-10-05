@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +27,13 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _jaraidetailService.GetJaraidetail();
             return View(list);
         }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] JaraiDetailsSearchDto model)
+        {
+            var result = await _jaraidetailService.GetPagedJaraidetail(model);
+            return PartialView("_List", result);
+        }
+
 
         public async Task<IActionResult> Create()
         {

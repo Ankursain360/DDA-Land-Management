@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,8 @@ namespace Libraries.Service.IApplicationService
         Task<Proposalplotdetails> FetchSingleResult(int id);
 
         Task<bool> Delete(int id);
+
+        Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model);
 
         //Task<bool> CheckUniqueName(int id, string proposaldetails);
     }

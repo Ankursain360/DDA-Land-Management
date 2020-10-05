@@ -1,18 +1,13 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Scheme>
+
 @{int rowNo = 0; }
 
 
-
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Scheme</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Scheme master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -21,56 +16,25 @@
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
+    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
 </div>
 <br />
 <br />
 <div class="container-fluid">
-    <div class="card  table-card">
+    <div class="card  table-card" style="overflow:scroll;">
+        <div id="divScheme">
 
-        <table class="table table-responsive table-bordered table-card">
+        </div>
 
-            <thead class="thead">
-                <tr>
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Name</th>
-                    <th>Code</th>
-                    <th>Date</th>
-                    <th>File No.</th>
-                    <th>Status</th>
-                    <th>Operation</th>
-              
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                @foreach (var item in Model)
-                {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-                    <td>@item.Name</td>
-                    <td>@item.Code</td>
-                    <td>@item.SchemeDate</td>
-                    <td>@item.FileNo</td>
-
-
-
-                    <td>@(item.IsActive==1?"Active":"InActive")</td>
-                    <td>
-                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-
-                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
-                }
-            </tbody>
-
-        </table>
 
     </div>
 </div>
-<br />
-<br />
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+   
+    <script src="~/js/schemeindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/schemeindex.min.js" asp-append-version="true"></script>
+</environment>

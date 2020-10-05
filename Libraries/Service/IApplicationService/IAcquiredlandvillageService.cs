@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
+using Libraries.Repository.Common;
 namespace Libraries.Service.IApplicationService
 {
     public interface IAcquiredlandvillageService
@@ -17,8 +18,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Acquiredlandvillage acquiredlandvillage);
         Task<Acquiredlandvillage> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-      //  Task<bool> CheckUniqueLoginName(int id, string loginname);
+        //  Task<bool> CheckUniqueLoginName(int id, string loginname);
 
+        Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
 
 
 

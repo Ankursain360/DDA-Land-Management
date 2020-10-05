@@ -4,6 +4,9 @@
 }
 
 @*@model Libraries.Model.Entity.Module*@
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 
 <div class="row">
     <div class="col-sm-12">
@@ -55,14 +58,24 @@
 
             </form>
             @*@{
-                @if (ViewBag.IsShowData == "Yes")
-                {*@
+        @if (ViewBag.IsShowData == "Yes")
+        {*@
+        <div id="divDataLoad">
+            <div class="row" style="margin-bottom:35px;">
+                <div class="col-sm-12">
+                    <div class="dda-innerheading">
+                        <div class="col-md-12">
+                            <h6 class="pull-left" style="color:white;margin-top:5px;">KHASRA / PLOT DETAILS  </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <div class="table-responsive">
-                        <table id="divDataLoad" class="table table-striped table-bordered" border="0">
+                        <table class="table table-striped table-bordered" border="0">
                             <thead class="thead">
-                                <tr>
+                                @*<tr>
                                     <th>Village Name</th>
                                     <th>Khasra No</th>
                                     <th>Area (Bigha - Biswa - Biswansi)(ACRE)</th>
@@ -88,24 +101,141 @@
 
                                     <th>Payble Amount</th>
                                     <th>Appealable Amount</th>
+                                    
 
+                                </tr>*@
+                               
+                            </thead>
+                           
+                            <tbody class="tbody">
+                                <tr>
+                                    <td >Village Name</td>
+
+                                    <td >aali</td>
+                                </tr>
+                                <tr>
+                                    <td>Khasra No </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Area (Bigha - Biswa - Biswansi)(ACRE) </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Notification(s) US-4 </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Notification(s) US-6 </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Notification(s) US-17 </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Award(s) </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Notification(s) US-22 </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Date of Possesion </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Date of Allotement </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Transfer Department </td>
+
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Scheme Transfer </td>
+
+                                    <td></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Party Name </td>
+
+                                    <td></td>
 
                                 </tr>
-                            </thead>
-                            <tbody class="tbody">
+                                <tr>
+                                    <td >Demand List No. </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>L&B No - Date </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>L.A.C. No </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>R.F.A.No </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>S.L.P. No </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Court Involved </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Payble Amount </td>
+
+                                    <td></td>
+
+                                </tr>
+                                <tr>
+                                    <td>Appealable Amount </td>
+
+                                    <td></td>
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
             </div>
-
+        </div>
             @*}
-                    else
-                    {
+            else
+            {
 
-                    }
-                }*@
+            }
+        }*@
         </div>
     </div>
 </div>
