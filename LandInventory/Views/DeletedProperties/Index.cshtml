@@ -12,10 +12,12 @@
 
             <tr>
                 <th rowspan="2">Sr.No</th>
+                <th>Department</th>
                 <th rowspan="2">Zone </th>
                 <th rowspan="2">Division </th>
                 <th rowspan="2">Locality(Village) </th>
                 <th rowspan="2">Khasra Number</th>
+                <th>Plot No. & Address with Landmark</th>
                 
                 <th rowspan="2">Primary List No </th>
 
@@ -30,12 +32,12 @@
             <tr>
                 <td>@(rowNo += 1)</td>
 
-                
+                <td>@item.Department.Name</td>
                 <td>@item.Zone.Name</td>
                 <td>@item.Division.Name</td>
                 <td>@item.Locality.Name</td>
                 <td>@item.KhasraNo</td>
-
+                <td>@item.Palandmark</td>
                 <td>@item.PrimaryListNo</td>
 
 
