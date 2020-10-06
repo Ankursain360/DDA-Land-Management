@@ -35,6 +35,8 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped] 
         public List<Department> DepartmentList { get; set; }
+        [NotMapped] 
+        public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
     }
 }
