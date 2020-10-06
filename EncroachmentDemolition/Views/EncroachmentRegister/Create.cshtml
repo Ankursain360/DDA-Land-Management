@@ -5,27 +5,27 @@
 }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Inspection/Encroachment Register</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Inspection/Encroachment Register </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
 </div>
+
 <br />
 
 <br />
+
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
         </div>
+
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -65,13 +65,14 @@
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Details of Encroachment</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <div class="form-row">
                         <div class="col-md-12">
                             <div class="table-responsive">
@@ -110,7 +111,7 @@
                                                 <input type="text" class="form-control" id="txtCount" />
                                             </td>
                                             <td>
-                                                <button id="addToList" class="btn btn-primary myapp-hed1">
+                                                <button id="addToList" class="btn btn-primary dda-pageheading">
                                                     <i class="fa fa-plus"></i>
                                                 </button>
                                             </td>
@@ -127,8 +128,8 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Staus of Land</label>
                         <select class="form-control" id="drpStatusofLand" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">Acquired</option>
-                            <option value="1">Non Acquired</option>
+                            <option value="0">DDA</option>
+                            <option value="1">Non DDA</option>
                         </select>
                     </div>
 
@@ -195,7 +196,7 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Photo</label>
+                        <label class="control-label lb-sm">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
                         <input type="file" class="form-control" multiple />
                     </div>
                 </div>
@@ -205,11 +206,11 @@
                         <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="row col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "EncroachmentRegister", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "EncroachmentRegister", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 

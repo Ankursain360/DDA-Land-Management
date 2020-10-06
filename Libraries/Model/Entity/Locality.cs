@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         public int DepartmentId { get; set; }
         [Required]
         public int ZoneId { get; set; }
-        [NotMapped]
+     
         [Required]
         public int DivisionId { get; set; }
         [Required]
