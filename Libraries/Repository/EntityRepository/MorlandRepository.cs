@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
     public class MorlandRepository : GenericRepository<Morland>, IMorlandRepository
@@ -37,7 +38,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Morland.Include(x => x.LandNotification).Include(x => x.Serialnumber).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-
+        public async Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model)
+        {
+            return await _dbContext.Morland.GetPaged<Morland>(model.PageNumber, model.PageSize);
+        }
 
 
 

@@ -94,12 +94,13 @@ $(function () {
         debugger;
         var param = GetListData();
         HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-
+            window.location.href = '/WorkFlowTemplate/Index';
         });
     });
 });
 
 function GetListData() {
+    var id = 0;
     var moduleId = $('#ModuleId option:selected').val();
     var name = $('#Name').val();
     var description = $('#Description').val();
@@ -120,17 +121,30 @@ function GetListData() {
         var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
         var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
-
-        model = {
-            parameterName: parameterName,
-            parameterValue: parameterValue,
-            parameterLevel: parameterLevel,
-            parameterSkip: (parameterSkip)
+        if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
+            parameterSkip = true;
         }
-        workflow.push(model);
+        else {
+            parameterSkip = false;
+        }
+        if (parameterName == "" && parameterValue == "" && parameterLevel == "" && parameterSkip == "false") {
+
+        }
+        else {
+            model = {
+                parameterName: parameterName,
+                parameterValue: parameterValue,
+                parameterLevel: parameterLevel,
+                parameterSkip: (parameterSkip)
+            }
+            workflow.push(model);
+        }
+
+        
     };
     console.log(workflow);
     data = {
+        Id: parseInt(id),
         moduleId: parseInt(moduleId),
         name: name,
         description: description,
@@ -141,3 +155,4 @@ function GetListData() {
     //workflow.push(model);
     return data;
 }
+

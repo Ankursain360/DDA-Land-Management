@@ -1,105 +1,245 @@
-﻿$(document).ready(function () {
-
+﻿
+$(document).ready(function () {
+    $("#tbl_posts #tbl_posts_body .odd").remove();
+    $("#tbl_posts #add .form-control").attr("multiple", false);
     GetTaskDetails();
-
 });
 
 function GetTaskDetails() {
-    debugger
     $("#tbl_posts #tbl_posts_body").html('');
-    var roleId = $('#Role').val();
-    var operationType = $('#ddlOperationType').val();
-    var moduleId = $('#ddlModuleId').val();
-    var userId = $('#ddlUser').val();
-    HttpGet(`/PageRole/GetTaskDetails`, 'json', function (response) {
-        debugger
+    var id = $('#Id').val();
+    HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
+        debugger;
+        response = JSON.parse(response);
+        console.log(response);
+        var count = response.length;
         for (var i = 0; i < response.length; i++) {
-            if (response[i].rDisplay == '1') {
-                $("#tbl_posts #add #ChkDisplay").prop("checked", true);
-                $("#tbl_posts #add #hdnRDisplay").val("1");
+            if (response[i].parameterSkip == true) {
+                $("#tbl_posts #add #paramenterSkip").prop("checked", true);
+                $("#tbl_posts #add #paramenterSkip").val("true");
             }
             else {
-                $("#tbl_posts #add #ChkDisplay").prop("checked", false);
-                $("#tbl_posts #add #hdnRDisplay").val("0");
+                $("#tbl_posts #add #paramenterSkip").prop("checked", false);
+                $("#tbl_posts #add #paramenterSkip").val("false");
             }
-            if (response[i].rAdd == '1') {
-                $("#tbl_posts #add #ChkAdd").prop("checked", true);
-                $("#tbl_posts #add #hdnRAdd").val("1");
-            }
-            else {
-                $("#tbl_posts #add #ChkAdd").prop("checked", false);
-                $("#tbl_posts #add #hdnRAdd").val("0");
-            }
-            if (response[i].rEdit == '1') {
-                $("#tbl_posts #add #ChkEdit").prop("checked", true);
-                $("#tbl_posts #add #hdnREdit").val("1");
-            }
-            else {
-                $("#tbl_posts #add #ChkEdit").prop("checked", false);
-                $("#tbl_posts #add #hdnREdit").val("0");
-            }
-            if (response[i].rView == '1') {
-                $("#tbl_posts #add #ChkView").prop("checked", true);
-                $("#tbl_posts #add #hdnRView").val("1");
-            }
-            else {
-                $("#tbl_posts #add #ChkView").prop("checked", false);
-                $("#tbl_posts #add #hdnRView").val("0");
-            }
-            if (response[i].rDelete == '1') {
-                $("#tbl_posts #add #ChkDelete").prop("checked", true);
-                $("#tbl_posts #add #hdnRDelete").val("1");
-            }
-            else {
-                $("#tbl_posts #add #ChkDelete").prop("checked", false);
-                $("#tbl_posts #add #hdnRDelete").val("0");
-            }
-            $("#tbl_posts #add #PageId").val(response[i].pageId);
 
-            $("#tbl_posts #add #ModuleName").text(response[i].moduleName);
-            $("#tbl_posts #add #PageName").text(response[i].pageName);
+            $("#tbl_posts #add #parameterName").val(response[i].parameterName);
+            $("#tbl_posts #add #parameterValue").val(response[i].parameterValue);
+            $("#tbl_posts #add #parameterLevel").val(response[i].parameterLevel);
 
-            $("#tbl_posts #add #PageId").removeAttr("name")
-            $("#tbl_posts #add #PageId").attr("name", "PageIdList[" + i + "]");
-            $("#tbl_posts #add #hdnRDisplay").removeAttr("name")
-            $("#tbl_posts #add #hdnRDisplay").attr("name", "RDisplayList[" + i + "]");
-            $("#tbl_posts #add #hdnRAdd").removeAttr("name")
-            $("#tbl_posts #add #hdnRAdd").attr("name", "RAddList[" + i + "]");
-            $("#tbl_posts #add #hdnREdit").removeAttr("name")
-            $("#tbl_posts #add #hdnREdit").attr("name", "REditList[" + i + "]");
-            $("#tbl_posts #add #hdnRView").removeAttr("name")
-            $("#tbl_posts #add #hdnRView").attr("name", "RViewList[" + i + "]");
-            $("#tbl_posts #add #hdnRDelete").removeAttr("name")
-            $("#tbl_posts #add #hdnRDelete").attr("name", "RDeleteList[" + i + "]");
+            $("#tbl_posts #add #parameterName").removeAttr("name")
+            $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+            $("#tbl_posts #add #parameterValue").removeAttr("name")
+            $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
+            $("#tbl_posts #add #parameterLevel").removeAttr("name")
+            $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
+            $("#tbl_posts #add #paramenterSkip").removeAttr("name")
+            $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+
             if (i < response.length - 1) {
-                var ChkDisplay = $("#tbl_posts #add #ChkDisplay").val();
-                var ChkDelete = $("#tbl_posts #add #ChkDelete").val();
-                var ChkView = $("#tbl_posts #add #ChkView").val();
-                var ChkEdit = $("#tbl_posts #add #ChkEdit").val();
-                var ChkAdd = $("#tbl_posts #add #ChkAdd").val();
-                var ValueDisplay = $("#tbl_posts #add #hdnRDisplay").val();
-                var ValueDelete = $("#tbl_posts #add #hdnRDelete").val();
-                var ValueView = $("#tbl_posts #add #hdnRView").val();
-                var ValueEdit = $("#tbl_posts #add #hdnREdit").val();
-                var ValueAdd = $("#tbl_posts #add #hdnRAdd").val();
-
                 var content = jQuery('#tbl_posts #add tr'),
                     size = jQuery('#tbl_posts >tbody >tr').length,
                     element = null,
                     element = content.clone();
                 element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts_body');
-                //$('#tbl_posts_body #rec-' + size + ' #ChkDisplay').val(ChkDisplay);
-                //$('#tbl_posts_body #rec-' + size + ' #ChkDelete').val(ChkDelete);
-                //$('#tbl_posts_body #rec-' + size + ' #ChkView').val(ChkView);
-                //$('#tbl_posts_body #rec-' + size + ' #ChkEdit').val(ChkEdit);
-                //$('#tbl_posts_body #rec-' + size + ' #ChkAdd').val(ChkAdd);
-
-                element.find('.sn').html(size);
-                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                element.find('.sn').html('Task ' +size);
+                $("#tbl_posts #add .sn").text('Task ' +$('#tbl_posts >tbody >tr').length);
                 $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                element.find(".delete-record").show();
             }
         }
+
+        //To Add one more row
+        addOneMoreRow();
+
+    });
+}
+
+
+
+$(document).delegate('a.add-record', 'click', function (e) {
+    var name = $("#tbl_posts #add #parameterName").val();
+    var value = $("#tbl_posts #add #parameterValue").val();
+    var level = $("#tbl_posts #add #parameterLevel").val();
+    var isskip = $("#tbl_posts #add #parameterLevel").val();
+    debugger
+    if ($("#tbl_posts #add #parameterName").val() != '' && $("#tbl_posts #add #parameterValue").val() != ''
+        && $("#tbl_posts #add #parameterLevel").val() != '' ) {
+        debugger
+        e.preventDefault();
+        var content = jQuery('#tbl_posts #add tr'),
+            size = jQuery('#tbl_posts >tbody>tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record').attr('data-id', size);
+        element.appendTo('#tbl_posts_body');
+        debugger;
+        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+            $("#tbl_posts #add #parameterName").removeAttr("name")
+            $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+            $("#tbl_posts #add #parameterValue").removeAttr("name")
+            $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
+            $("#tbl_posts #add #parameterLevel").removeAttr("name")
+            $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
+            $("#tbl_posts #add #paramenterSkip").removeAttr("name")
+            $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+
+        };
+        //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
+        //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
+        //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
+        element.find('.sn').html('Task ' + size);
+        $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+        $("#tbl_posts #add .add").remove();
+        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+        //element.find(".add-record").hide();
+        element.find(".delete-record").show();
+        debugger
+        $("#tbl_posts #add .form-control").val('');
+        $("#tbl_posts #add  .checkbox").prop("checked", false);
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+$(document).delegate('a.delete-record', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+
+        debugger;
+        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+            $("#tbl_posts #add #parameterName").removeAttr("name")
+            $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+            $("#tbl_posts #add #parameterValue").removeAttr("name")
+            $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
+            $("#tbl_posts #add #parameterLevel").removeAttr("name")
+            $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
+            $("#tbl_posts #add #paramenterSkip").removeAttr("name")
+            $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+
+        }
+
+        //regnerate index number on table
+        $('#tbl_posts_body tr').each(function (index) {
+            var index = index + 1;
+            $(this).find('span.sn').html('Task ' + index);
+        });
+        $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
+$(function () {
+    $("#btnCreate").click(function () {
+        debugger;
+        var param = GetListData();
+        HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
+            window.location.href = response;
+        });
     });
 });
+
+function GetListData() {
+    var id = $('#Id').val();
+    var moduleId = $('#ModuleId option:selected').val();
+    var name = $('#Name').val();
+    var description = $('#Description').val();
+    var isActive;
+    if ($("#IsActiveData").is(":checked")) {
+        isActive = 1;
+    }
+    else {
+        isActive = 0;
+    }
+    var workflow = [];
+    var model = {};
+    var data = {};
+    debugger;
+    for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+
+        var parameterName = $("input[name='ParameterNameList[" + i + "]']").val();
+        var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
+        var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
+        var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
+        if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
+            parameterSkip = true;
+        }
+        else {
+            parameterSkip = false;
+        }
+        if (parameterName == "" && parameterValue == "" && parameterLevel == "" && parameterSkip == "false") {
+
+        }
+        else {
+            model = {
+                parameterName: parameterName,
+                parameterValue: parameterValue,
+                parameterLevel: parameterLevel,
+                parameterSkip: (parameterSkip)
+            }
+        }
+        
+        workflow.push(model);
+    };
+    console.log(workflow);
+    data = {
+        Id: parseInt(id),
+        moduleId: parseInt(moduleId),
+        name: name,
+        description: description,
+        isActive: isActive,
+        template: JSON.stringify(workflow)
+    }
+    console.log(data);
+    //workflow.push(model);
+    return data;
+}
+
+function addOneMoreRow() {
+    var name = $("#tbl_posts #add #parameterName").val();
+    var value = $("#tbl_posts #add #parameterValue").val();
+    var level = $("#tbl_posts #add #parameterLevel").val();
+    var isskip = $("#tbl_posts #add #parameterLevel").val();
+    debugger
+    var content = jQuery('#tbl_posts #add tr'),
+        size = jQuery('#tbl_posts >tbody>tr').length,
+        element = null,
+        element = content.clone();
+    element.attr('id', 'rec-' + size);
+    element.find('.delete-record').attr('data-id', size);
+    element.appendTo('#tbl_posts_body');
+    debugger;
+    for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+        $("#tbl_posts #add #parameterName").removeAttr("name")
+        $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+        $("#tbl_posts #add #parameterValue").removeAttr("name")
+        $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
+        $("#tbl_posts #add #parameterLevel").removeAttr("name")
+        $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
+        $("#tbl_posts #add #paramenterSkip").removeAttr("name")
+        $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+
+    };
+    //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
+    //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
+    //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
+    element.find('.sn').html('Task ' + size);
+    $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+    $("#tbl_posts #add .add").remove();
+    $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+    //element.find(".add-record").hide();
+    element.find(".delete-record").show();
+    debugger
+    $("#tbl_posts #add .form-control").val('');
+    $("#tbl_posts #add  .checkbox").prop("checked", false);
 }

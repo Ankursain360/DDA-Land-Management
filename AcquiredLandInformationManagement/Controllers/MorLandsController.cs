@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -28,6 +28,12 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var list = await _morlandService.GetAllMorland();
             return View(list);
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] MorLandsSearchDto model)
+        {
+            var result = await _morlandService.GetPagedMorland(model);
+            return PartialView("_List", result);
         }
 
 

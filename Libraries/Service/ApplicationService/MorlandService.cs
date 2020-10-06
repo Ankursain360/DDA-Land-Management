@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -24,7 +25,10 @@ namespace Libraries.Service.ApplicationService
             _morlandRepository = morlandRepository;
         }
 
-
+        public async Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model)
+        {
+            return await _morlandRepository.GetPagedMorland(model);
+        }
 
 
 

@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IJaraidetailRepository : IGenericRepository<Jaraidetail>
     {
+        Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model);
         Task<List<Jaraidetail>> GetJaraidetail();
         Task<List<Khewat>> GetAllKhewat();
         Task<List<Acquiredlandvillage>> GetAllVillage();
