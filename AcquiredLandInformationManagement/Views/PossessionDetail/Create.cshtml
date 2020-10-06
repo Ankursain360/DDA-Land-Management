@@ -1,16 +1,208 @@
-﻿
+﻿@*@{
+        ViewData["Title"] = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="myapp-hed">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Possession Detail</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <br />
+    <div class="container-fluid" id="MainContentForm">
+        <div class="panel">
+            <div class="panel-heading  myapp-hed1">
+                <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+            </div>
+            <div class="panel-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Village Name</label>
+                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                <option value="0">---Select---</option>
+                                <option value="1">Nimri</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Khasra No.</label>
+                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                <option value="0">---Select---</option>
+                                <option value="1">0//10</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="DivPossession">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Type of Possession</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpDamageAssesseeType" id="rOriginal" checked>Physical
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpDamageAssesseeType" id="rSubsequent">Formal
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="DivPossessionReason">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Reason, if Possession not Taken</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpDamageAssesseeType" id="rOriginal" checked>Built-Up
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpDamageAssesseeType" id="rSubsequent">Litigation
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="grpDamageAssesseeType" id="rSubsequent">Others if Any
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Date</label>
+                            <input type="Date" class="form-control" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Plot No.</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+
+
+                    <div id="DivArea">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label lb-sm">Bigha</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label lb-sm">Biswa</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label lb-sm">Biswanshi</label>
+                                <input type="text" class="form-control" placeholder="0" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Remarks</label>
+                            <textarea type="text" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div id="DivNotification">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Detais</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Under Section No. 4</label>
+                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">F.1(13)/62-L&H</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Under Section No. 6</label>
+                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">F.1(13)/62-L&H</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row ">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Under Section No. 17</label>
+                                <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">F.1(13)/62-L&H</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row ">
+                        <div class="form-group col-md-12" style="margin-bottom:40px;">
+                            <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                            @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-primary myapp-hed1" })
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>*@
+
+
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Possession Detail</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -23,7 +215,7 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
@@ -51,7 +243,7 @@
                 <div id="DivPossession">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Type of Possession</h6>
                                 </div>
@@ -61,10 +253,10 @@
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label class="radio-inline">
-                                <input type="radio" name="grpDamageAssesseeType" id="rOriginal" checked>Physical
+                                <input type="checkbox" name="grpDamageAssesseeType" id="rOriginal">Vacant
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="grpDamageAssesseeType" id="rSubsequent">Formal
+                                <input type="checkbox" name="grpDamageAssesseeType" id="rSubsequent">Built Up
                             </label>
                         </div>
                     </div>
@@ -73,7 +265,7 @@
                 <div id="DivPossessionReason">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Reason, if Possession not Taken</h6>
                                 </div>
@@ -101,7 +293,7 @@
                         <input type="Date" class="form-control" />
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Plot No.</label>
+                        <label class="control-label lb-sm">Khasra No.</label>
                         <input type="text" class="form-control" />
                     </div>
                 </div>
@@ -111,7 +303,7 @@
                 <div id="DivArea">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
                                 </div>
@@ -144,7 +336,7 @@
                 <div id="DivNotification">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class=" myapp-hed2">
+                            <div class="dda-innerheading">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Detais</h6>
                                 </div>
@@ -159,7 +351,7 @@
                                 <option value="1">F.1(13)/62-L&H</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Under Section No. 6</label>
                             <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
@@ -183,9 +375,9 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "PossessionDetail", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -193,6 +385,9 @@
         </div>
     </div>
 </div>
+
+
+
 
 
 

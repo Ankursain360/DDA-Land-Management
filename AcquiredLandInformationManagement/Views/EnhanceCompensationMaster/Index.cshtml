@@ -1,13 +1,61 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Enhancecompensation>
+﻿@*@model IEnumerable<Libraries.Model.Entity.Enhancecompensation>
 
-@{int rowNo = 0; }
+    @{int rowNo = 0; }
+
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="dda-topheading">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Enhance Compensation</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div>
+        <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
+
+    </div>
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="card  table-card" style="overflow:scroll;">
+            <div id="divEnhanceCompensation">
+
+            </div>
+
+
+        </div>
+    </div>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+
+        <script src="~/js/enhancecompensationindex.js"></script>
+
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/enhancecompensationindex.min.js" asp-append-version="true"></script>
+    </environment>*@
+
+@*@model IEnumerable<DDAPropertyREG.Models.Tblzonemaster>*@
+@*@{int rowNo = 0; }*@
+
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
 
 
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Enhance Compensation</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Enhance Compensation Master</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -16,26 +64,51 @@
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
-    @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
+    @*@Html.ActionLink("Add New", "Create", "ZoneMaster", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
 </div>
 <br />
 <br />
-<div class="container-fluid">
-    <div class="card  table-card" style="overflow:scroll;">
-        <div id="divEnhanceCompensation">
+<div class="container-fluid" id="MainContentForm">
+    <div class="card  table-card table-responsive">
 
-        </div>
+        <table class="table  table-bordered table-card">
 
+            <thead class="thead">
+                <tr class="myapp-hed1">
+                    <th>Sr.No</th>
+                    <th>Demand List No </th>
+                    <th>ENM Sno.</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                <tr>
+                    <td>1</td>
+                    <td>DEP.//123-10</td>
+
+                    <td>ENM.012.2019</td>
+                    <td>
+
+                        <a asp-action="ViewDetails" title="ViewDetails">
+                            <i class="glyphicon glyphicon-eye-open icon-white cl1" aria-hidden="true"></i>
+                        </a>
+                        <a asp-action="Edit" title="edit"> &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i> </a>
+
+                        <a asp-action="Delete" title="delete">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+
+                </tr>
+
+
+
+            </tbody>
+
+        </table>
 
     </div>
 </div>
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
+<br />
+<br />
 
-    <script src="~/js/enhancecompensationindex.js"></script>
 
-</environment>
-<environment exclude="Development">
-    <script src="~/js/enhancecompensationindex.min.js" asp-append-version="true"></script>
-</environment>
