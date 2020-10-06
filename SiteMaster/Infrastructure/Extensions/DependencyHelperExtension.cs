@@ -4,6 +4,8 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity;
 
 namespace SiteMaster.Infrastructure.Extensions
 {
@@ -59,7 +61,6 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILandUseService, LandUseService>();
             services.AddScoped<IClassificationOfLandService, ClassificationOfLandService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
-
         }
     }
 }

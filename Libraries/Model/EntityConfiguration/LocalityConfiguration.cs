@@ -26,6 +26,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
+            builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.IsActive)
                 .HasColumnType("tinyint(4)")
@@ -48,6 +49,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+            builder.Property(e => e.DivisionId).HasColumnType("int(11)");
         }
     }
 }

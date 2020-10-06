@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class LandTransferRepository : GenericRepository<LandTransfer>, ILandTransferRepository
+    public class LandtransferRepository : GenericRepository<Landtransfer>, ILandTransferRepository
     {
-        public LandTransferRepository(DataContext dbContext) : base(dbContext)
+        public LandtransferRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
@@ -28,9 +28,9 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Division.Where(x => x.ZoneId == zoneId).ToListAsync();
         }
 
-        public async Task<List<LandTransfer>> GetAllLandTransfer()
+        public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
-            return await _dbContext.LandTransfer.ToListAsync();
+            return await _dbContext.Landtransfer.ToListAsync();
         }
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
@@ -38,9 +38,9 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId).ToListAsync();
         }
 
-        public async Task<PagedResult<LandTransfer>> GetPagedLandTransfer(LandTransferSearchDto model)
+        public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
-            return await _dbContext.LandTransfer.GetPaged<LandTransfer>(model.PageNumber, model.PageSize);
+            return await _dbContext.Landtransfer.GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
         }
     }
 }

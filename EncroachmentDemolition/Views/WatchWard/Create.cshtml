@@ -5,27 +5,30 @@
 }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Watch & Ward</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Watch & Ward </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
 </div>
+
+
 <br />
 
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
         </div>
+
+
+
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -38,7 +41,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Village Name</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select class="form-control">
                             <option value="0">---Select---</option>
                             <option value="1">Har</option>
                             <option value="2">Someother</option>
@@ -72,7 +75,18 @@
                             </select>
                         </div>*@
                 </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
+                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Yes</option>
+                            <option value="0">No</option>
+                        </select>
+                    </div>
 
+
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
@@ -86,6 +100,10 @@
                         <label class="control-label lb-sm">Photos</label>
                         <input type="file" class="form-control" multiple />
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Report</label>
+                        <input type="file" class="form-control" multiple />
+                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-12">
@@ -95,63 +113,21 @@
 
                 </div>
 
-                <div class="row">
-                    <div class="row col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                <div class="form-row">
+                    <div class="form-group col-md-12" style="justify-content:center">
+                        <input type="submit" value="Create" class="btn btn-primary  dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-primary  dda-pageheading" })
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-
-<script>
-    //For dropdown change event
-    $(document).ready(function () {
-        $("#drpKhasra").change(function () {
-            var courses = $("#txtArea");
-            var semesterName = $("#drpKhasra option:selected").text();
-            $.getJSON('/EncroachmentRegister/GetAreaFromKhasra', { semester: semesterName }, function (response) {
-                console.log(response);
-                var courseField = "";
-                $.each(response, function (key, value) {
-                    if (value == null) {
-                        $("#txtArea").empty();
-                    } else {
-                        courseField += "<div class=\"input-field col s12 l12\">\n" +
-                            "                        <input id=\"" + value.CourseId + "\" type=\"text\" value=\"" + value.CourseCode + "\">\n" +
-                            "                        <label class=\"active\" for=\"course\">" + value.CourseCode + "</label>\n" +
-                            "                    </div>";
-                    }
-                });
-                courses.html(courseField);
-            })
-        });
-    });
-</script>
-
-<script>
-
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-        $('#txtDate').attr('max', maxDate);
-        $('#txtDateRep').attr('max', maxDate);
-    });
-
-
-
-</script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/watchward.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/watchward.min.js" asp-append-version="true"></script>
+</environment>

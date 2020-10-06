@@ -81,7 +81,7 @@ namespace Libraries.Model
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
 
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
-        public virtual DbSet<LandTransfer> LandTransfer { get; set; }
+        public virtual DbSet<Landtransfer> Landtransfer { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -133,7 +133,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
             modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
-            modelBuilder.ApplyConfiguration(new LandTransferConfiguration());
+            modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -4,7 +4,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Role Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Role</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -22,7 +22,7 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Role Name  </label>
+                        <label class="control-label lb-sm">Role Name <span style="color:red">*</span></label>
                         <input class="form-control" asp-for="Name" id="txtRole" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>

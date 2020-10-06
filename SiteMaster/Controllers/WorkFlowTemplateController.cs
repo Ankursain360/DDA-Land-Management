@@ -157,5 +157,21 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetUserList(string value)
+        {
+            if (value == "Role")
+            {
+                var data = await _workflowtemplateService.GetRolelist();
+                return Json(data);
+            }
+            else
+            {
+                var data = await _workflowtemplateService.GetUserlist();
+                return Json(data);
+            }
+        }
+
     }
 }

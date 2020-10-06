@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface ILandTransferRepository : IGenericRepository<LandTransfer>
+    public interface ILandTransferRepository : IGenericRepository<Landtransfer>
     {
-        Task<List<LandTransfer>> GetAllLandTransfer();
+        Task<List<Landtransfer>> GetAllLandtransfer();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
-        Task<PagedResult<LandTransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
+        Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model);
     }
 }

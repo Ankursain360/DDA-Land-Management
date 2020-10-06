@@ -34,5 +34,17 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+        public async Task<List<Role>> GetRolelist()
+        {
+            var result = await _dbContext.Role.Where(x => x.IsActive == 1).ToListAsync();
+            return result;
+        }
+
+        public async Task<List<User>> GetUserlist()
+        {
+            var result = await _dbContext.User.Where(x => x.IsActive == 1).ToListAsync();
+            return result;
+        }
     }
 }

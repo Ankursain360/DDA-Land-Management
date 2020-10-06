@@ -81,6 +81,7 @@ namespace SiteMaster.Controllers
             var Data = await _localityService.FetchSingleResult(id);
             Data.DepartmentList = await _localityService.GetAllDepartment();
             Data.ZoneList = await _localityService.GetAllZone(Data.DepartmentId);
+            Data.DivisionList = await _localityService.GetAllDivisionList(Data.ZoneId);
             if (Data == null)
             {
                 return NotFound();
@@ -92,6 +93,7 @@ namespace SiteMaster.Controllers
             var Data = await _localityService.FetchSingleResult(id);
             Data.DepartmentList = await _localityService.GetAllDepartment();
             Data.ZoneList = await _localityService.GetAllZone(Data.DepartmentId);
+            Data.DivisionList = await _localityService.GetAllDivisionList(Data.ZoneId);
             if (Data == null)
             {
                 return NotFound();
@@ -103,6 +105,7 @@ namespace SiteMaster.Controllers
         {
             locality.DepartmentList = await _localityService.GetAllDepartment();
             locality.ZoneList = await _localityService.GetAllZone(locality.DepartmentId);
+            locality.DivisionList = await _localityService.GetAllDivisionList(locality.ZoneId);
             try
             {
                 if (ModelState.IsValid)
@@ -120,7 +123,6 @@ namespace SiteMaster.Controllers
                         return View(locality);
                     }
                 }
-
                 else
                 {
                     return View(locality);

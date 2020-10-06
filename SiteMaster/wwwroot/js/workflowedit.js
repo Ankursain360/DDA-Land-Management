@@ -44,9 +44,9 @@ function GetTaskDetails() {
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts_body');
-                element.find('.sn').html('Task ' +size);
-                $("#tbl_posts #add .sn").text('Task ' +$('#tbl_posts >tbody >tr').length);
-                $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                element.find('.sn').html('Level ' +size);
+                $("#tbl_posts #add .sn").text('Level ' +$('#tbl_posts >tbody >tr').length);
+              //  $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
                 element.find(".delete-record").show();
             }
         }
@@ -91,10 +91,10 @@ $(document).delegate('a.add-record', 'click', function (e) {
         //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
         //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
         //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
-        element.find('.sn').html('Task ' + size);
-        $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+        element.find('.sn').html('Level ' + size);
+        $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+      //  $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
         //element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
@@ -129,9 +129,9 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         //regnerate index number on table
         $('#tbl_posts_body tr').each(function (index) {
             var index = index + 1;
-            $(this).find('span.sn').html('Task ' + index);
+            $(this).find('span.sn').html('Level ' + index);
         });
-        $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+        $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
         return true;
     } else {
         return false;
@@ -177,7 +177,8 @@ function GetListData() {
         else {
             parameterSkip = false;
         }
-        if (parameterName == "" && parameterValue == "" && parameterLevel == "" && parameterSkip == "false") {
+
+        if ( (parameterName == "") && (parameterValue == "") && (parameterLevel == "") ) {
 
         }
         else {
@@ -187,9 +188,10 @@ function GetListData() {
                 parameterLevel: parameterLevel,
                 parameterSkip: (parameterSkip)
             }
+            workflow.push(model);
         }
         
-        workflow.push(model);
+        
     };
     console.log(workflow);
     data = {
@@ -233,10 +235,10 @@ function addOneMoreRow() {
     //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
     //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
     //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
-    element.find('.sn').html('Task ' + size);
-    $("#tbl_posts #add .sn").text('Task ' + $('#tbl_posts >tbody >tr').length);
+    element.find('.sn').html('Level ' + size);
+    $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
     $("#tbl_posts #add .add").remove();
-    $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+  //  $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
     //element.find(".add-record").hide();
     element.find(".delete-record").show();
     debugger

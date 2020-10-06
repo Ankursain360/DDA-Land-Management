@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class LandTransferService: EntityService<LandTransfer>, ILandTransferService
+    public class LandTransferService: EntityService<Landtransfer>, ILandTransferService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILandTransferRepository _landTransferRepository;
-        public LandTransferService(IUnitOfWork unitOfWork, LandTransferRepository landTransferRepository)
+        public LandTransferService(IUnitOfWork unitOfWork, LandtransferRepository landTransferRepository)
         : base(unitOfWork, landTransferRepository)
         {
             _unitOfWork = unitOfWork;
@@ -27,16 +27,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _landTransferRepository.FindBy(a => a.Id == id);
-            LandTransfer model = form.FirstOrDefault();
+            Landtransfer model = form.FirstOrDefault();
             model.IsActive = 0;
             _landTransferRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<LandTransfer> FetchSingleResult(int id)
+        public async Task<Landtransfer> FetchSingleResult(int id)
         {
             var result = await _landTransferRepository.FindBy(a => a.Id == id);
-            LandTransfer model = result.FirstOrDefault();
+            Landtransfer model = result.FirstOrDefault();
             return model;
         }
 
@@ -58,49 +58,49 @@ namespace Libraries.Service.ApplicationService
             return zoneList;
         }
 
-        public async Task<List<LandTransfer>> GetLandTransferUsingRepo()
+        public async Task<List<Landtransfer>> GetLandTransferUsingRepo()
         {
-            List<LandTransfer> landTransfer = await _landTransferRepository.GetAllLandTransfer();
-            return landTransfer;
+            List<Landtransfer> Landtransfer = await _landTransferRepository.GetAllLandtransfer();
+            return Landtransfer;
         }
-        public async Task<bool> Update(int id, LandTransfer landTransfer)
+        public async Task<bool> Update(int id, Landtransfer Landtransfer)
         {
             var result = await _landTransferRepository.FindBy(a => a.Id == id);
-            LandTransfer model = result.FirstOrDefault();
-            model.Address = landTransfer.Address;
-            model.CopyofOrderDocPath = landTransfer.CopyofOrderDocPath;
-            model.DateofTakenOver = landTransfer.DateofTakenOver;
-            model.DivisionId = landTransfer.DivisionId;
-            model.FileName = landTransfer.FileName;
-            model.HandedOverByNameDesingnation = landTransfer.HandedOverByNameDesingnation;
-            model.HandedOverDate = landTransfer.HandedOverDate;
-            model.HandedOverDepartmentId = landTransfer.HandedOverDepartmentId;
-            model.KhasraNo = landTransfer.KhasraNo;
-            model.OrderNo = landTransfer.OrderNo;
-            model.Remarks = landTransfer.Remarks;
-            model.TakenOverByNameDesingnation = landTransfer.TakenOverByNameDesingnation;
-            model.TakenOverDepartmentId = landTransfer.TakenOverDepartmentId;
-            model.TransferorderIssueAuthority = landTransfer.TransferorderIssueAuthority;
-            model.VillageId = landTransfer.VillageId;
-            model.ZoneId = landTransfer.ZoneId;
-            model.IsActive = landTransfer.IsActive;
+            Landtransfer model = result.FirstOrDefault();
+            model.Address = Landtransfer.Address;
+            model.CopyofOrderDocPath = Landtransfer.CopyofOrderDocPath;
+            model.DateofTakenOver = Landtransfer.DateofTakenOver;
+            model.DivisionId = Landtransfer.DivisionId;
+            model.FileName = Landtransfer.FileName;
+            model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
+            model.HandedOverDate = Landtransfer.HandedOverDate;
+            model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
+            model.KhasraNo = Landtransfer.KhasraNo;
+            model.OrderNo = Landtransfer.OrderNo;
+            model.Remarks = Landtransfer.Remarks;
+            model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
+            model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
+            model.TransferorderIssueAuthority = Landtransfer.TransferorderIssueAuthority;
+            model.VillageId = Landtransfer.VillageId;
+            model.ZoneId = Landtransfer.ZoneId;
+            model.IsActive = Landtransfer.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _landTransferRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(LandTransfer landTransfer)
+        public async Task<bool> Create(Landtransfer Landtransfer)
         {
-            landTransfer.CreatedBy = 1;
-            landTransfer.CreatedDate = DateTime.Now;
-            _landTransferRepository.Add(landTransfer);
+            Landtransfer.CreatedBy = 1;
+            Landtransfer.CreatedDate = DateTime.Now;
+            _landTransferRepository.Add(Landtransfer);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<LandTransfer>> GetPagedLandTransfer(LandTransferSearchDto model)
+        public async Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model)
         {
-            return await _landTransferRepository.GetPagedLandTransfer(model);
+            return await _landTransferRepository.GetPagedLandtransfer(model);
         }
     }
 }
