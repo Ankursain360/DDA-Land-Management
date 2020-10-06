@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Libraries.Model.Entity
 {
-    public class LandTransfer : AuditableEntity<int>
+    public class Landtransfer : AuditableEntity<int>
     {
         [Required]
         public int ZoneId { get; set; }

@@ -19,15 +19,14 @@ namespace SiteMaster.Controllers
     public class UserManagementController : Controller
     {
         private readonly IUserService _userService;
-        private readonly UserManager<ApplicationUser> _userManager;
-        public UserManagementController(IUserService userService, UserManager<ApplicationUser> userManager)
+        //private readonly UserManager<ApplicationUser> _userManager;
+        public UserManagementController(IUserService userService/*, UserManager<ApplicationUser> userManager*/)
         {
             _userService = userService;
-            _userManager = userManager;
+            //_userManager = userManager;
         }
         public async Task<IActionResult> Index()
-        {
-          
+        { 
             return View();
         }
 
@@ -60,14 +59,15 @@ namespace SiteMaster.Controllers
                 user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
-                    
-                    var result1 =  await _userManager.CreateAsync(new ApplicationUser()
-                    {
-                        Email = user.Email,
+                    var result1 = true;
+                    //var result1 =  await _userManager.CreateAsync(new ApplicationUser()
+                    //{
+                    //    Email = user.Email,
 
-                    }, user.Password);
+                    //}, user.Password);
 
-                    if (result1.Succeeded)
+                    //if (result1.Succeeded)
+                    if (result1)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _userService.GetAllUser();

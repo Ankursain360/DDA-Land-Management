@@ -1,6 +1,7 @@
 ﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,12 +13,12 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen
         Task<List<Department>> GetAllDepartment(); // To Get all data added by Praveen
-        Task<List<LandTransfer>> GetLandTransferUsingRepo();
-        Task<bool> Update(int id, LandTransfer landTransfer); // To Upadte Particular data added by Praveen
-        Task<bool> Create(LandTransfer landTransfer);
-        Task<LandTransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
+        Task<List<Landtransfer>> GetLandTransferUsingRepo();
+        Task<bool> Update(int id, Landtransfer Landtransfer); // To Upadte Particular data added by Praveen
+        Task<bool> Create(Landtransfer Landtransfer);
+        Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
-        Task<PagedResult<LandTransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
+        Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
     }
 }

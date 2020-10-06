@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Model.EntityConfiguration
 {
-    public class LandTransferConfiguration : IEntityTypeConfiguration<LandTransfer>
+    public class LandtransferConfiguration : IEntityTypeConfiguration<Landtransfer>
     {
-        public void Configure(EntityTypeBuilder<LandTransfer> entity)
+        public void Configure(EntityTypeBuilder<Landtransfer> entity)
         {
             entity.ToTable("landtransfer");
 
