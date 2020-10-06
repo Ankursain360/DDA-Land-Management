@@ -14,6 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId); // added by ishu
+        Task<List<Locality>> GetLocalityDropDownList2(int DivisionId);// added by ishu
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
@@ -32,8 +33,8 @@ namespace Libraries.Service.IApplicationService
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
-        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);
-
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);// added by ishu
+        Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality);// added by ishu
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
         string GetDisposalFile(int id);

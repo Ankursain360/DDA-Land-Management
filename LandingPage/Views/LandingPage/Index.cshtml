@@ -1,0 +1,252 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project Landing Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+
+        .card {
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            width: 100%;
+            max-width: 100%;
+            height: 230px;
+            max-height: 100%;
+            padding: 2px 2px 2px 2px;
+            border-radius: 4px;
+            background-color: #ffffff;
+            margin-top: 10px;
+        }
+
+            .card:hover {
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+
+        .grad {
+            background-image: linear-gradient( 33deg, #4b50a2, #7d3865);
+            background-size: cover;
+           
+            height: 100%;
+            width: 100%;
+            
+        }
+
+        .logo {
+            height: 152px;
+            /*width: 83px;*/
+        }
+       card,h5 {
+            font-family: open-sans-bold!important;
+        }
+        card, i {
+           /* background: radial-gradient(circle, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #392e8b, #2c3091);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;*/
+           color:red;
+            font-size: 70px !important;
+        }
+        .cardimg{
+            width:70px;
+            height:70px;
+            max-height:100%;
+            max-width:100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grad">
+        <div class="container">
+            <div class="row left">
+                <img src="~/images/DDALG.png" alt="logo" class="logo" style="padding-left:3%" />
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card px-4 py-4" style="height:100%;max-height:100%;background:#F0F0F0!important;">
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-5">
+                                        <i class="fa fa-sitemap " aria-hidden="true"></i>
+
+
+                                        <h5>Site Master</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/land.png" /> </i>
+
+
+                                        <h5>Acquired Land Information Management</h5>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/court.png" /></i>
+
+
+                                        <h5>Court Cases Management</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/damage.png" /></i>
+
+
+                                        <h5>Damage Payee</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/doc.png" /></i>
+
+
+                                        <h5>Document Management System</h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/demolition.png" /></i>
+
+
+                                        <h5>Encroachment And Demolition</h5>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/file.png" /></i>
+
+                                        <h5>File Data Loading </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/aquisition.png" /></i>
+
+
+                                        <h5>Land Acquisition </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/inventory.png" /></i>
+
+
+                                        <h5>Land Inventory </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true">    <img class="cardimg" src="~/images/Transfer.png" /> </i>
+
+                                        <h5>Land Transfer </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card ">
+                                    <div class="card-body text-center mt-2">
+                                        <i aria-hidden="true">
+
+                                            <img class="cardimg" src="~/images/landtransfer.png" />
+                                        </i>
+
+                                      
+                                        <h5> New Land Acquisition </h5>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                @*<div class="card ">
+                                    <div class="card-body text-center mt-2">
+
+                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/inventory.png" /></i>
+
+
+                                        <h5>Land Inventory </h5>
+                                    </div>
+
+                                </div>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br /> <br />
+            <div class="row justify-content-center">
+                <p style="color:white;font-family:open-sans-regular;">
+                    Copyright &copy 2019-All Rights Reserved-DDA
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+<script src="~/js/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+
+
+                                        @*Land Transfer
+                                        New Land Acquisition*@
