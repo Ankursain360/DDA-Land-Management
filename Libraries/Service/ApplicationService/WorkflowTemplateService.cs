@@ -87,5 +87,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _workflowtemplateRepository.GetAllModuleList();
         }
+        public async Task<List<User>> GetUserlist()
+        {
+            return await _workflowtemplateRepository.GetUserlist();
+        }
+
+        public async Task<List<Role>> GetRolelist()
+        {
+            return await _workflowtemplateRepository.GetRolelist();
+        }
     }
 }
