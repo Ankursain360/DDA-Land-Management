@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace LIMSPublicInterface.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         //private readonly lmsContext _context;
         //static string Result = string.Empty;

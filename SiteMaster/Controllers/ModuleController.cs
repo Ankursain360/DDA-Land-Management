@@ -14,7 +14,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class ModuleController : Controller
+    public class ModuleController : BaseController
     {
         private readonly IModuleService _moduleService;
 

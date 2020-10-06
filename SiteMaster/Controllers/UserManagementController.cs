@@ -16,7 +16,7 @@ using Model.Entity;
 
 namespace SiteMaster.Controllers
 {
-    public class UserManagementController : Controller
+    public class UserManagementController : BaseController
     {
         private readonly IUserService _userService;
         //private readonly UserManager<ApplicationUser> _userManager;

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
-    public class DesignationController : Controller
+    public class DesignationController : BaseController
     {
 
         private readonly IDesignationService _designationService;

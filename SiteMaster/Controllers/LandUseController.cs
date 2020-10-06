@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class LandUseController : Controller
+    public class LandUseController : BaseController
     {
 
         private readonly ILandUseService _landuseService;

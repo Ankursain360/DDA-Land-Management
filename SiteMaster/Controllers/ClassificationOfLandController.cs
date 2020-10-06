@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class ClassificationOfLandController : Controller
+    public class ClassificationOfLandController : BaseController
     {
 
         private readonly IClassificationOfLandService _classificationoflandService;
