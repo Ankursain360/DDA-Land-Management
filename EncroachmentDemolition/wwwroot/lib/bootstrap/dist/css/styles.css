@@ -12,10 +12,10 @@ body {
 }
 .lb-sm {
     font-size: 13px;
-    /* Font-size: 0.95rem;*/
+   /* Font-size: 0.95rem;*/
     Font-Family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    display: inline;
+    font-weight:100;
+    display:inline;
 }
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -88,12 +88,12 @@ input.form-control {
     border: 1px solid #B1B1B1;
     box-shadow: none;
     height: 30px;
-    background-color: #dddddd;
+   /* background-color: #dddddd;*/
 }
 
 textarea.form-control {
    
-    background-color: #dddddd;
+   /* background-color: #dddddd;*/
 }
 
 .bootstrap-table input.form-control {
@@ -1127,7 +1127,7 @@ p.back-link {
 
 .dda-dropdown {
     height: 30px;
-    background-color: #dddddd;
+  /*  background-color: #dddddd;*/
 }
 
 .color-white{
