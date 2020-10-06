@@ -14,16 +14,16 @@
 
 
 @*<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Issue File</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+        <div class="col-sm-12">
+            <div class="myapp-hed">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Issue File</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />*@
+    <br />*@
 
 <br />
 <div class="container-fluid" id="MainContentForm">
@@ -62,7 +62,7 @@
                 <div class="container-fluid" id="MainContentForm">
                     <div class="panel">
                         <div class="panel-heading  myapp-hed1">
-                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Location</h6>
+                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Location(Village)</h6>
                         </div>
                         <div class="panel-body">
 
@@ -128,7 +128,14 @@
                             </div>
 
                             <div class="form-row">
-
+                                <div class="form-group col-md-6">
+                                    <label class="control-label lb-sm">Zone</label>
+                                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1; width:10px;width:100%;max-width:100%;min-width:unset !important;">
+                                        <option value="0">--Select Zone--</option>
+                                        <option value="1">Gurgaon 61</option>
+                                        <option value="2">Dwarika</option>
+                                    </select>
+                                </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label lb-sm">Branch</label>
                                     <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
@@ -138,6 +145,9 @@
                                     </select>
                                 </div>
 
+                               
+                            </div>
+                            <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label lb-sm">Designation</label>
                                     <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
@@ -146,9 +156,6 @@
                                         <option value="2">Someother</option>
                                     </select>
                                 </div>
-                            </div>
-                            <div class="form-row">
-
                                 <div class="form-group col-md-6">
                                     <label class="control-label lb-sm">Issuing Date</label>
                                     <input type="date" class="form-control" />
@@ -162,7 +169,7 @@
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Issue" class="btn btn-primary myapp-hed1" id="btnFind" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Issue Receipt", "IssueReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" , target = "_blank" , style="width:auto;"})
+                        @Html.ActionLink("Issue Receipt", "IssueReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
                         @Html.ActionLink("Return Receipt", "ReturnReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
                     </div>
                 </div>
