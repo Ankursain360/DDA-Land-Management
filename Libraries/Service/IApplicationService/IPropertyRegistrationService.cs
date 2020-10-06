@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Zone>> GetZoneDropDownList(int DepartmentId);
         Task<List<Locality>> GetLocalityDropDownList(int zoneId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId); // added by ishu
-        Task<List<Locality>> GetLocalityDropDownList2(int DivisionId);// added by ishu
+        Task<List<Locality>> GetLocalityDropDownList2(int divisionId);// added by ishu
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
