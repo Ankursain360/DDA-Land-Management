@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using BotDetect.Web;
 //using DDAPropertyREG.Models
 
 using Microsoft.Extensions.Hosting;
@@ -116,7 +115,7 @@ namespace NewLandAcquisition
             app.UseSession();
             // app.UseMvc();
             app.UseCookiePolicy();
-            app.UseCaptcha(Configuration);
+         //   app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

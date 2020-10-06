@@ -8,7 +8,7 @@ $(document).ready(function () {
             var departmentid = $('#DepartmentId option:selected').val();
             var zoneId = $('#ZoneId option:selected').val();
             var divisionId = $('#DivisionId option:selected').val();
-            var localityid = $('#Localityid option:selected').val();
+            var localityid = $('#LocalityId option:selected').val();
 
             $('#LoadReportView').empty();
             $('#LoadReportView').load(url, {

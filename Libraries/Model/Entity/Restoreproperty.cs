@@ -11,6 +11,6 @@ namespace Libraries.Model.Entity
         public string RestoreReason { get; set; }
         public int RestoreBy { get; set; }
         public DateTime RestoreDate { get; set; }
-      
+        public Propertyregistration PropertyRegistration { get; set; }
     }
 }

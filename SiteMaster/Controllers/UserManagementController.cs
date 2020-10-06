@@ -11,24 +11,29 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using Microsoft.AspNetCore.Identity;
+using Model.Entity;
+
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : Controller
     {
         private readonly IUserService _userService;
-        public UserManagementController(IUserService userService)
+        //private readonly UserManager<ApplicationUser> _userManager;
+        public UserManagementController(IUserService userService/*, UserManager<ApplicationUser> userManager*/)
         {
             _userService = userService;
+            //_userManager = userManager;
         }
         public async Task<IActionResult> Index()
-        {
-          
+        { 
             return View();
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
         {
+            
             var result = await _userService.GetPagedUser(model);
             
             return PartialView("_List", result);
@@ -41,6 +46,7 @@ namespace SiteMaster.Controllers
             user.IsActive = 1;
             user.DepartmentList = await _userService.GetAllDepartment();
             user.RoleList = await _userService.GetAllRole();
+
             return View(user);
         }
         [HttpPost]
@@ -53,45 +59,15 @@ namespace SiteMaster.Controllers
                 user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
-                    if (user.defaultpassword == true)
-                    {
-                        user.Password = "123";
+                    var result1 = true;
+                    //var result1 =  await _userManager.CreateAsync(new ApplicationUser()
+                    //{
+                    //    Email = user.Email,
 
+                    //}, user.Password);
 
-                    }
-
-
-                    if (user.ChangePasswordA == true)
-                    {
-                        user.ChangePassword = "T";
-
-
-                    }
-
-                    else
-                    {
-                        user.ChangePassword = "F";
-
-                    }
-
-                    if (user.LockedA == true)
-                    {
-                        user.Locked = "T";
-
-
-                    }
-
-                    else
-                    {
-                        user.Locked = "F";
-
-                    }
-
-
-
-                    var result = await _userService.Create(user);
-
-                    if (result == true)
+                    //if (result1.Succeeded)
+                    if (result1)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _userService.GetAllUser();

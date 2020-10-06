@@ -141,5 +141,6 @@ namespace Libraries.Model.Entity
 
 
         public Deletedproperty Deletedproperty { get; set; }
+        public Restoreproperty Restoreproperty { get; set; }
     }
 }
