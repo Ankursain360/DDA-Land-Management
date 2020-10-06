@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
+    <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+  </ItemGroup>
+
 </Project>
