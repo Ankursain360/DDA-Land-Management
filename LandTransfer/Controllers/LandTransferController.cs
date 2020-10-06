@@ -10,11 +10,11 @@ namespace LandTransfer.Controllers
 {
     public class LandTransferController : BaseController
     {
-        public readonly ILandTransferService _landTransferService;
-        public LandTransferController(ILandTransferService landTransferService)
-        {
-            _landTransferService = landTransferService;
-        }
+        //public readonly ILandTransferService _landTransferService;
+        //public LandTransferController(ILandTransferService landTransferService)
+        //{
+        //    _landTransferService = landTransferService;
+        //}
 
         public IActionResult Index()
         {

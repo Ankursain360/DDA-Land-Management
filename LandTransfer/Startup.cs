@@ -104,7 +104,7 @@ namespace LandTransfer
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Create}/{id?}");
+                    pattern: "{controller=LandTransfer}/{action=Index}/{id?}");
             });
         }
     }
