@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 namespace Libraries.Service.ApplicationService
 {
    public class EnchroachmentService : EntityService<Enchroachment>, IEnchroachmentService
@@ -121,7 +121,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model)
+        {
+            return await _EnchroachmentRepository.GetPagedEnchroachment(model);
+        }
 
 
     }

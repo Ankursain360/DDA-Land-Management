@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -16,5 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Natureofencroachment>> GetAllNencroachment();
         Task<List<Khasra>> BindKhasra();
         Task<List<Reasons>> GetAllReasons();
+        Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
+
     }
 }
