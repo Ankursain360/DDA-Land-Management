@@ -37,263 +37,150 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-                <div id="divConnectedcase">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;"> Case Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-
-                            @*<select asp-for="BillNumber" class="form-control" asp-items="@(new SelectList(ViewBag.Data,"Value","Text"))">
-                        <option value="value">text</option>
-                    </select>*@
-                            <label class="control-label lb-sm">Case No </label>
-                            @*<input required type="text" class="form-control">*@
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>CS1234</option>
-                                <option>CS4569</option>
-                                <option>CS859766</option>
-                            </select>
-
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Case Title </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>Select Title</option>
-                                <option>Select Title</option>
-                            </select>
-
-                        </div>
-                    </div>
-
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Legal File No </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>FN2123</option>
-                                <option>FN21230</option>
-                                <option>FN212345</option>
-                            </select>
-
-
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Court Name </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>High Court</option>
-                                <option>District Court</option>
-                                <option>Supreme Court</option>
-                            </select>
-
-
-                        </div>
-
-
-                    </div>
-                </div>
-                <div id="divhearing">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;"> Hearing Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Date Of Hearing</label>
-                            <input required type="date" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Proceedings/Contemt Of Order  </label>
-                            <input required type="text" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-row">
-
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Rule/Conclude  </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>R1</option>
-                                <option>R2</option>
-                                <option>R3</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Next Date Of Hearing</label>
-                            <input required type="date" class="form-control">
-                        </div>
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Purpose For Which Case Is Fixed </label>
-                            <input required type="text" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Presence Of Panel Lawyer </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>option1</option>
-                                <option>option2</option>
-                                <option>option3</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                </div>
-
-                <div id="divAppeal">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;"> Appeal  </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Enter Hearing Date. </label>
-                            <input required type="date" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Whether Appeal Revision to be Filled </label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>yes</option>
-                                <option>no</option>
-
-                            </select>
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">   last Date Of Limitation For Filing Objection/Appeal. </label>
-                            <input required type="date" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">    Whether Appeal Is Filed or Not </label>
-
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>yes</option>
-                                <option>no</option>
-
-                            </select>
-                        </div>
-
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Appeal File No </label>
-                            <input required type="text" class="form-control">
-                        </div>
-
-                    </div>
-
-                </div>
-                <br />
-
-                <div id="divInterim">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;"> Interim Direction  </h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Date of Listing/hearing </label>
-                            <input required type="date" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Nature of Interim direction </label>
-                            <input required type="text" class="form-control">
-                        </div>
-
-
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">  Document. </label>
-                            <input required type="file" class="form-control">
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">    Date By which to be complied</label>
-
-                            <input required type="date" class="form-control">
-                        </div>
-
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">
-                                Date when Complied
-                            </label>
-                            <input required type="date" class="form-control">
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <br />
-
                 <div class="form-row">
                     <div class="form-group col-md-6">
 
-                        <label class="control-label lb-sm">Status</label>
-                        <select style="height:30px;    background-color: #dddddd;"
-                                required class="form-control">
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
+                        <label class="control-label lb-sm">Hearing Date</label>
+                        <input required type="date" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Next Date of Hearing(NDOH)   </label>
+                        <input required type="date" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Contempt of Court</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>Yes</option>
+                            <option>No</option>
                         </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Court Type </label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>High Court</option>
+                            <option>District Court</option>
+                            <option>Supreme Court</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Status</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>Writ</option>
+                            <option>SLP</option>
+                            <option>Review</option>
+                            <option>Creative</option>
+                            <option>Petition</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Last Decision</label>
+                        <textarea required type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Village</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Type</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline  ">
+                                    <input type="radio" name="court" id="court" value="" />24(2) Case
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline ">
+                                    <input type="radio" name="court" id="court" value="" />Other
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">In Favour of</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline  ">
+                                    <input type="radio" name="court" id="court" value="" />DDA
+                                </label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="radio-inline ">
+                                    <input type="radio" name="court" id="court" value="" />Against DDA
+                                </label>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
+
+                @*<div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Case No.</label>
+                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                <option>--Select--</option>
+                            </select>
+                        </div>
+                    </div>*@
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case No.</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>--Select--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Title</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                   
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Subject</label>
+                        <input type="text" class="form-control" />
+                        
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Panel Laywer</label>
+                        <textarea required type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Stay Interim Granted</label>
+                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option>--Select--</option>
+                            <option>Yes</option>
+                            <option>No</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Document(if any)</label>
+                        <input required type="file" class="form-control">
+                    </div>
+                </div>
+
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>

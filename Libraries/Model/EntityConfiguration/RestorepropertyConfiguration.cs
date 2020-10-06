@@ -16,6 +16,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("restoreproperty", "lms");
 
+            builder.HasIndex(e => e.PropertyRegistrationId)
+                .HasName("fkPropertyRegistration_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
