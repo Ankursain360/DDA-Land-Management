@@ -39,6 +39,9 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(5000)
                 .IsUnicode(false);
+
+
+
         }
     }
 }
