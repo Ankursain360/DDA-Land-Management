@@ -72,13 +72,25 @@ namespace LandInventory.Controllers
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
 
-
         [HttpGet]
-        public async Task<JsonResult> GetPrimaryNoList(int? divisionId)
+        public async Task<JsonResult> GetLocalityList(int? divisionId)
         {
-            divisionId = divisionId ?? 0;
-            return Json(await _propertyregistrationService.GetPrimaryListNoList(Convert.ToInt32(divisionId)));
+            try
+            {
+                divisionId = divisionId ?? 0;
+                return Json(await _propertyregistrationService.GetLocalityDropDownList2(Convert.ToInt32(divisionId)));
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
+        //[HttpGet]
+        //public async Task<JsonResult> GetPrimaryNoList(int? divisionId)
+        //{
+        //    divisionId = divisionId ?? 0;
+        //    return Json(await _propertyregistrationService.GetPrimaryListNoList(Convert.ToInt32(divisionId)));
+        //}
 
 
 
@@ -91,9 +103,9 @@ namespace LandInventory.Controllers
             }
 
 
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division,int primaryListNo)
+        public async Task<PartialViewResult> GetDetails(int department, int zone, int division,int locality)
         {
-            var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division, primaryListNo);
+            var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division, locality);
 
             if (result != null)
             {

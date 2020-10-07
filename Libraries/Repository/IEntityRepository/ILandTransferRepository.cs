@@ -15,6 +15,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
-        Task<List<Landtransfer>> GetAllLandTransfer();
+        Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo);
     }
 }

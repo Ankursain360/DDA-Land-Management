@@ -33,7 +33,7 @@ namespace Libraries.Service.IApplicationService
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
-        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int primaryListNo);// added by ishu
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division , int locality);// added by ishu
         Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality);// added by ishu
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
