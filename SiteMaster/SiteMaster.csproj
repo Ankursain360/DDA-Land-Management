@@ -12,7 +12,6 @@
   </ItemGroup>
 	
   <ItemGroup>
-    <None Include="Views\Actions\Index.cshtml" />
     <None Include="Views\ClassificationOfLand\Create.cshtml" />
     <None Include="Views\ClassificationOfLand\Edit.cshtml" />
     <None Include="Views\ClassificationOfLand\Index.cshtml" />
