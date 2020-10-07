@@ -31,6 +31,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
         public virtual Zone Zone { get; set; }
         public virtual Department Department { get; set; }
+        public virtual Division Division { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped] 
@@ -38,5 +39,6 @@ namespace Libraries.Model.Entity
         [NotMapped] 
         public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        public ICollection<Landtransfer> Landtransfers { get; set; }
     }
 }

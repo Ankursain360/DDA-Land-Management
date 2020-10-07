@@ -17,11 +17,11 @@ namespace LandTransfer.Infrastructure.Extensions
 
             /* Respository */
             services.AddScoped<INazullandRepository, NazullandRepository>();
-            //services.AddScoped<ILandTransferRepository, LandtransferRepository>();
+            services.AddScoped<ILandTransferRepository, LandtransferRepository>();
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
-            //services.AddScoped<ILandTransferService, LandTransferService>();
+            services.AddScoped<ILandTransferService, LandTransferService>();
         }
     }
 }

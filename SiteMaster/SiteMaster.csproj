@@ -12,6 +12,21 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Content Remove="Views\Actions\Create.cshtml" />
+    <Content Remove="Views\Actions\Delete.cshtml" />
+    <Content Remove="Views\Actions\Edit.cshtml" />
+    <Content Remove="Views\Actions\Index.cshtml" />
+    <Content Remove="Views\Actions\View.cshtml" />
+    <Content Remove="Views\Actions\_List.cshtml" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="Views\Actions\Create.cshtml" />
+    <None Include="Views\Actions\Delete.cshtml" />
+    <None Include="Views\Actions\Edit.cshtml" />
+    <None Include="Views\Actions\Index.cshtml" />
+    <None Include="Views\Actions\View.cshtml" />
+    <None Include="Views\Actions\_List.cshtml" />
     <None Include="Views\ClassificationOfLand\Create.cshtml" />
     <None Include="Views\ClassificationOfLand\Edit.cshtml" />
     <None Include="Views\ClassificationOfLand\Index.cshtml" />
