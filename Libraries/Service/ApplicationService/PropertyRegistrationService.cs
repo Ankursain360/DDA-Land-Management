@@ -192,9 +192,9 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetPropertyRegisterationReportData(model);
         }
 
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int locality)
         {
-            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division,primaryListNo);
+            return await _propertyregistrationRepository.GetRestoreLandReportData(department, zone, division, locality);
         }
         public async Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality)
         {

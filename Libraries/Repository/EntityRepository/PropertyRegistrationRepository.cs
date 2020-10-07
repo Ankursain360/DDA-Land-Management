@@ -151,20 +151,22 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int primaryListNo)
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int locality)
         {
             var data = await _dbContext.Propertyregistration
                 .Include(x=>x.Locality)
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
-                .Include(x=>x.Deletedproperty).
-                OrderByDescending(x => x.Id)
-                .Where(x => (x.IsDeleted ==0)
+                .Include(x=>x.Deletedproperty)
+               
+                .Where(x => (x.IsDeleted == 0)
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 &&(x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.Id == (primaryListNo == 0 ? x.Id : primaryListNo)) ).ToListAsync();
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)) )
+                . OrderByDescending(x => x.Id)
+                .ToListAsync();
             return data;
         }
         public async Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality)
