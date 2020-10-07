@@ -1,4 +1,4 @@
-﻿
+﻿@model Libraries.Model.Entity.Landtransfer
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -41,11 +41,11 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Engineering</option>
-                            <option value="2">Land Management</option>
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                            <option value="">Select</option>
                         </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+
                     </div>
                     @*<div class="form-group col-md-3">
                             <br />
@@ -82,72 +82,72 @@
                             <div id="courtwiserpt">
                                 <div class="card  table-card table-responsive">*@
 
-                                    <table class="table  table-bordered table-card">
+                <table class="table  table-bordered table-card">
 
-                                        <thead class="thead">
-                                            <tr class="myapp-hed1">
-                                                <th>Sr.No</th>
-                                                <th>Department</th>
-                                                <th>Zone</th>
-                                                <th>Division</th>
-                                                <th>Locality(Village)</th>
-                                                <th>Khasra No.</th>
-                                                <th>Address</th>
-                                                <th> Handed Over By  </th>
-                                                <th> Handed Over Date</th>
-                                                <th> Taken Over By  </th>
-                                                <th> Taken Over Date  </th>
-                                                <th> Transfer order Issue Authority</th>
-                                                <th>Remarks </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
+                    <thead class="thead">
+                        <tr class="myapp-hed1">
+                            <th>Sr.No</th>
+                            <th>Department</th>
+                            <th>Zone</th>
+                            <th>Division</th>
+                            <th>Locality(Village)</th>
+                            <th>Khasra No.</th>
+                            <th>Address</th>
+                            <th> Handed Over By  </th>
+                            <th> Handed Over Date</th>
+                            <th> Taken Over By  </th>
+                            <th> Taken Over Date  </th>
+                            <th> Transfer order Issue Authority</th>
+                            <th>Remarks </th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
 
-                                            @*<tr>  <td colspan="10"><strong>Court Name : High Court Delhi</strong> </td> </tr>*@
+                        @*<tr>  <td colspan="10"><strong>Court Name : High Court Delhi</strong> </td> </tr>*@
 
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Engineering</td>
-                                                <td>LM/SHAHDRA</td>
-                                                <td>WD-8</td>
-                                                <td>Jhansi</td>
-                                                <td>515</td>
-                                                <td>Pocket 45 road</td>
-                                                <td>LM</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>ENGG</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>DDA</td>
-                                                <td>Other details</td>
+                        <tr>
+                            <td>1</td>
+                            <td>Engineering</td>
+                            <td>LM/SHAHDRA</td>
+                            <td>WD-8</td>
+                            <td>Jhansi</td>
+                            <td>515</td>
+                            <td>Pocket 45 road</td>
+                            <td>LM</td>
+                            <td>30-MAY-2018</td>
+                            <td>ENGG</td>
+                            <td>30-MAY-2018</td>
+                            <td>DDA</td>
+                            <td>Other details</td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>MOR</td>
-                                                <td>LM/SHAHDRA</td>
-                                                <td>WD-8</td>
-                                                <td>Jhansi</td>
-                                                <td>545</td>
-                                                <td>Pocket 45 road</td>
-                                                <td>LM</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>ENGG</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>DDA</td>
-                                                <td>Other details</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>MOR</td>
+                            <td>LM/SHAHDRA</td>
+                            <td>WD-8</td>
+                            <td>Jhansi</td>
+                            <td>545</td>
+                            <td>Pocket 45 road</td>
+                            <td>LM</td>
+                            <td>30-MAY-2018</td>
+                            <td>ENGG</td>
+                            <td>30-MAY-2018</td>
+                            <td>DDA</td>
+                            <td>Other details</td>
 
-                                            </tr>
-                                        </tbody>
+                        </tr>
+                    </tbody>
 
-                                    </table>
+                </table>
 
-                                @*</div>
+                @*</div>
 
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                </div>*@
+                        </div>
+                    </div>*@
                 <br />
                 <div class="form-row">
                     <div class=" form-group  col-md-12">

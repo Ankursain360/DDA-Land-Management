@@ -20,16 +20,26 @@ namespace LandTransfer.Controllers
             _landTransferService = landTransferService;
         }
 
-        //async Task GetAllDepartment(Landtransfer landtransfer)
+        async Task GetAllDepartment(Landtransfer landtransfer)
+        {
+           
+            landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
+                   }
+
+        //public IActionResult Index()
         //{
-        //    //  propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-        //    landtransfer.departmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-        //    //propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+        //    return View();
         //}
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            Landtransfer model = new Landtransfer();
+            model.DepartmentList = await _landTransferService.GetAllDepartment();
+            //model.ZoneList = await _landTransferService.GetAllZone(model.DepartmentId);
+            //model.DivisionList = await _landTransferService.GetAllDivisionList(model.ZoneId);
+            //model.LocalityList = await _landTransferService.GetAllLocalityList(model.DivisionId);
+            return View(model);
         }
+
     }
 }
