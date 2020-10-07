@@ -22,5 +22,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
+        Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo);// added by shalini
     }
 }
