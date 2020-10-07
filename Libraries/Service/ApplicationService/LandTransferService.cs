@@ -13,11 +13,11 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class LandTransferService: EntityService<Landtransfer>, ILandTransferService
+    public class LandTransferService : EntityService<Landtransfer>, ILandTransferService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILandTransferRepository _landTransferRepository;
-        public LandTransferService(IUnitOfWork unitOfWork, LandtransferRepository landTransferRepository)
+        public LandTransferService(IUnitOfWork unitOfWork, ILandTransferRepository landTransferRepository)
         : base(unitOfWork, landTransferRepository)
         {
             _unitOfWork = unitOfWork;
@@ -81,7 +81,7 @@ namespace Libraries.Service.ApplicationService
             model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
             model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
             model.TransferorderIssueAuthority = Landtransfer.TransferorderIssueAuthority;
-            model.VillageId = Landtransfer.VillageId;
+            model.LocalityId = Landtransfer.LocalityId;
             model.ZoneId = Landtransfer.ZoneId;
             model.IsActive = Landtransfer.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -101,6 +101,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model)
         {
             return await _landTransferRepository.GetPagedLandtransfer(model);
+        }
+
+        public async Task<List<Locality>> GetAllLocalityList(int divisionId)
+        {
+            return await _landTransferRepository.GetAllLocalityList(divisionId);
+        }
+
+        public async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
+        {
+            return await _landTransferRepository.GetHistoryDetails(khasraNo);
         }
     }
 }

@@ -70,7 +70,7 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            entity.Property(e => e.VillageId).HasColumnType("int(11)");
+            entity.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             entity.Property(e => e.ZoneId).HasColumnType("int(11)");
         }
