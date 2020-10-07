@@ -71,7 +71,6 @@ namespace Libraries.Service.ApplicationService
             model.CopyofOrderDocPath = Landtransfer.CopyofOrderDocPath;
             model.DateofTakenOver = Landtransfer.DateofTakenOver;
             model.DivisionId = Landtransfer.DivisionId;
-            model.FileName = Landtransfer.FileName;
             model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
             model.HandedOverDate = Landtransfer.HandedOverDate;
             model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
@@ -111,6 +110,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
         {
             return await _landTransferRepository.GetHistoryDetails(khasraNo);
+        }
+
+        public async Task<List<Landtransfer>> GetAllLandTransfer()
+        {
+            return await _landTransferRepository.GetAllLandTransfer();
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Department.ToListAsync();
         }
-
         public async Task<List<Division>> GetAllDivision(int zoneId)
         {
             return await _dbContext.Division.Where(x => x.ZoneId == zoneId).ToListAsync();
@@ -33,22 +32,23 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
-            return await _dbContext.Landtransfer.ToListAsync();
+            return await _dbContext.Landtransfer.Where(x=>x.IsActive==1).ToListAsync();
         }
-
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId).ToListAsync();
         }
-
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
-            return await _dbContext.Landtransfer.GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
         }
-
         public  async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
         {
             return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim()).ToListAsync();
+        }
+        public async Task<List<Landtransfer>> GetAllLandTransfer()
+        {
+            return await _dbContext.Landtransfer.ToListAsync();
         }
     }
 }

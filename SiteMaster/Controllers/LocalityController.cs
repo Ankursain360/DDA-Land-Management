@@ -106,31 +106,23 @@ namespace SiteMaster.Controllers
             locality.DepartmentList = await _localityService.GetAllDepartment();
             locality.ZoneList = await _localityService.GetAllZone(locality.DepartmentId);
             locality.DivisionList = await _localityService.GetAllDivisionList(locality.ZoneId);
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var result = await _localityService.Update(id, locality);
+                if (result == true)
                 {
-                    var result = await _localityService.Update(id, locality);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _localityService.GetAllLocality();
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(locality);
-                    }
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _localityService.GetAllLocality();
+                    return View("Index", list);
                 }
                 else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(locality);
                 }
             }
-            catch (Exception ex)
+            else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(locality);
             }
         }

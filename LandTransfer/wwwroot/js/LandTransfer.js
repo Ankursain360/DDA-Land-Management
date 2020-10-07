@@ -22,7 +22,7 @@ function onChangeDivision(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#VillageId").html(html);
+        $("#LocalityId").html(html);
     });
 };
 function fileValidation(filePath, fileInput, size) {
@@ -49,7 +49,12 @@ $(document).ready(function () {
     $('#CopyofOrder').change(function () {
         var fileInput = document.getElementById('CopyofOrder');
         var filePath = fileInput.value;
-        const size = (HandedOverAssignFile.files[0].size);
+        const size = (CopyofOrder.files[0].size);
         fileValidation(filePath, fileInput, size);
+    });
+    var khasraNo = $("#KhasraNo").val();
+    $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
+        $('#LoadView').html("");
+        $('#LoadView').html(response);
     });
 });

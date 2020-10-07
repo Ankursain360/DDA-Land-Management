@@ -31,7 +31,6 @@ namespace Libraries.Model.Entity
         [Required]
         public string OrderNo { get; set; }
         public string CopyofOrderDocPath { get; set; }
-        public string FileName { get; set; }
         [Required]
         public string TransferorderIssueAuthority { get; set; }
         [Required]
@@ -47,6 +46,7 @@ namespace Libraries.Model.Entity
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
         [NotMapped]
+        [Required]
         public IFormFile CopyofOrder { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
