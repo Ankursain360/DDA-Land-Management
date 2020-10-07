@@ -76,7 +76,9 @@ namespace Libraries.Service.ApplicationService
             var result = await _localityRepository.FindBy(a => a.Id == id);
             Locality model = result.FirstOrDefault();
             model.Name = locality.Name;
+            model.DepartmentId = locality.DepartmentId;
             model.ZoneId = locality.ZoneId;
+            model.DivisionId = locality.DivisionId;
             model.IsActive = locality.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

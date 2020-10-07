@@ -18,7 +18,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class ZoneController : Controller
+    public class ZoneController : BaseController
     {
 
         private readonly IZoneService _zoneService;

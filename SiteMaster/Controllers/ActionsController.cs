@@ -4,20 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DDAPropertyREG.Controllers
+namespace SiteMaster.Controllers
 {
-    public class LandingPageController : Controller
+    public class ActionsController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Create()
-        {
-            return View();
-        }
     }
 }
-
-
-

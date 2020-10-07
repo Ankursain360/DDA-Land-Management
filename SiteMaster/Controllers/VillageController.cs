@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
-    public class VillageController : Controller
+    public class VillageController : BaseController
     {
         private readonly IVillageService _villageService;
         public VillageController(IVillageService villageService)

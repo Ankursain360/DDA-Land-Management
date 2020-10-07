@@ -22,15 +22,15 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Department </label>
+                        <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
                         <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone</label>
-                        <select asp-for="ZoneId" class="form-control dda-dropdown" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                        <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                             <option value="value">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -38,33 +38,33 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Division</label>
-                        <select asp-for="DivisionId" class="form-control dda-dropdown">
+                        <label class="control-label lb-sm">Division <span style="color:red">*</span></label>
+                        <select asp-for="DivisionId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))">
                             <option value="value">Select</option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Locality(Village) Name   </label>
+                        <label class="control-label lb-sm">Locality(Village) Name <span style="color:red">*</span></label>
                         <input asp-for="Name" type="text" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Locality(Village) Code</label>
+                        <label class="control-label lb-sm"> Locality(Village) Code <span style="color:red">*</span></label>
                         <input asp-for="LocalityCode" type="text" class="form-control" />
                         <span asp-validation-for="LocalityCode" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Landmark    </label>
+                        <label class="control-label lb-sm">Landmark <span style="color:red">*</span></label>
                         <input asp-for="Landmark" type="text" class="form-control" />
                         <span asp-validation-for="Landmark" type="text" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Address    </label>
+                        <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
                         <input asp-for="Address" type="text" class="form-control" />
                         <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>

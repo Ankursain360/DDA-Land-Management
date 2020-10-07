@@ -13,7 +13,7 @@ using Notification.OptionEnums;
 
 namespace SiteMaster.Controllers
 {
-    public class PageController : Controller
+    public class PageController : BaseController
     {
         private readonly IPageService _pageService;
 

@@ -15,7 +15,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 namespace SiteMaster.Controllers
 {
-    public class DistrictController : Controller
+    public class DistrictController : BaseController
     {
 
         private readonly IDistrictService _districtService;

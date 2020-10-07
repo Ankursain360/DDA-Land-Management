@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class RateController : Controller
+    public class RateController : BaseController
     {
 
         private readonly IRateService _rateService;
