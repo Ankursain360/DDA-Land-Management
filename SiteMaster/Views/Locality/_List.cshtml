@@ -20,9 +20,9 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>LM Department</td>
-                <td>South Zone</td>
-                <td>Division-1</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Zone.Name</td>
+                <td>@item.Division.Name</td>
                 <td>@item.Name</td>
                 <td>@item.LocalityCode</td>
                 <td>@item.Landmark</td>
