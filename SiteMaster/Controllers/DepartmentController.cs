@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class DepartmentController : Controller
+    public class DepartmentController : BaseController
     {
 
         private readonly IDepartmentService _departmentService;

@@ -37,6 +37,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILandUseRepository, LandUseRepository>();
             services.AddScoped<IClassificationOfLandRepository, ClassificationOfLandRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
 
 
 
@@ -61,6 +62,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ILandUseService, LandUseService>();
             services.AddScoped<IClassificationOfLandService, ClassificationOfLandService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IActionsService, ActionsService>();
         }
     }
 }

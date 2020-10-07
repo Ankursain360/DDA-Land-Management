@@ -1083,7 +1083,8 @@ p.back-link {
   text-transform: uppercase; }
 
 /*myapp-hed*/
-.dda-topheading {
+/*.dda-topheading*/
+.myapp-hed {
     background-color: #2c3091;
     /*linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);*/
     Color: #ffffff;
@@ -1098,7 +1099,8 @@ p.back-link {
     height: 25px;
 }
 /*myapp-hed1*/
-.dda-pageheading {
+/*.dda-pageheading*/
+.myapp-hed1 {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
     Color: #ffffff;
     Font-size: 0.95rem;
@@ -1109,7 +1111,8 @@ p.back-link {
 }
 
 /*myapp-hed2*/
-.dda-innerheading {
+/*.dda-innerheading*/
+.myapp-hed2 {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
     Color: #ffffff;
     Font-size: 0.95rem;

@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class NotificationController : Controller
+    public class NotificationController : BaseController
     {
 
         private readonly INotificationService _notificationService;

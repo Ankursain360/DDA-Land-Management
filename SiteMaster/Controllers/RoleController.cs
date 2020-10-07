@@ -15,7 +15,7 @@ using Notification.OptionEnums;
 namespace SiteMaster.Controllers
 {
    
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
         private readonly IRoleService _roleService;
 

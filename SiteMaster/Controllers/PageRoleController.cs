@@ -14,7 +14,7 @@ using Notification.OptionEnums;
 
 namespace SiteMaster.Controllers
 {
-    public class PageRoleController : Controller
+    public class PageRoleController : BaseController
     {
         public readonly IPageRoleService _pageRoleService;
         public PageRoleController(IPageRoleService pageRoleService)

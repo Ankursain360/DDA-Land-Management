@@ -1,41 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
-using Dto.Search;
+using System;
+using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
-    public class ClassificationOfLandController : BaseController
+    public class ActionsController : BaseController
     {
 
-        private readonly IClassificationOfLandService _classificationoflandService;
+        private readonly IActionsService _actionsService;
 
-        public ClassificationOfLandController(IClassificationOfLandService classificationoflandService)
+        public ActionsController(IActionsService actionsService)
         {
-            _classificationoflandService = classificationoflandService;
+            _actionsService = actionsService;
         }
-        
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] ClassificationOfLandSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] ActionsSearchDto model)
         {
-            var result = await _classificationoflandService.GetPagedClassificationOfLand(model);
+            var result = await _actionsService.GetPagedActions(model);
             return PartialView("_List", result);
         }
         public IActionResult Create()
@@ -45,13 +38,13 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Classificationofland classificationofland)
+        public async Task<IActionResult> Create(Actions actions)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var result = await _classificationoflandService.Create(classificationofland);
+                    var result = await _actionsService.Create(actions);
 
                     if (result == true)
                     {
@@ -61,25 +54,25 @@ namespace SiteMaster.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(classificationofland);
+                        return View(actions);
 
                     }
                 }
                 else
                 {
-                    return View(classificationofland);
+                    return View(actions);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(classificationofland);
+                return View(actions);
             }
         }
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _classificationoflandService.FetchSingleResult(id);
+            var Data = await _actionsService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -89,23 +82,23 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Classificationofland classificationofland)
+        public async Task<IActionResult> Edit(int id, Actions actions)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _classificationoflandService.Update(id, classificationofland);
+                    var result = await _actionsService.Update(id, actions);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                        var result1 = await _actionsService.GetAllActions();
                         return View("Index", result1);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(classificationofland);
+                        return View(actions);
 
                     }
                 }
@@ -114,21 +107,21 @@ namespace SiteMaster.Controllers
 
                 }
             }
-            return View(classificationofland);
+            return View(actions);
         }
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _classificationoflandService.CheckUniqueName(Id, Name);
+            var result = await _actionsService.CheckUniqueName(Id, Name);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"Classification of Land : {Name} already exist");
+                return Json($"Actions: {Name} already exist");
             }
         }
 
@@ -140,7 +133,7 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
 
-            var form = await _classificationoflandService.Delete(id);
+            var form = await _actionsService.Delete(id);
             if (form == false)
             {
                 return NotFound();
@@ -153,17 +146,17 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
-            var result = await _classificationoflandService.Delete(id);
+            var result = await _actionsService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                var result1 = await _actionsService.GetAllActions();
                 return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                var result1 = await _actionsService.GetAllActions();
                 return View("Index", result1);
             }
 
@@ -171,7 +164,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _classificationoflandService.FetchSingleResult(id);
+            var Data = await _actionsService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();

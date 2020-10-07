@@ -15,7 +15,7 @@ using Notification.OptionEnums;
 
 namespace SiteMaster.Controllers
 {
-    public class LocalityController : Controller
+    public class LocalityController : BaseController
     {
         public readonly ILocalityService _localityService;
         public LocalityController(ILocalityService localityService)

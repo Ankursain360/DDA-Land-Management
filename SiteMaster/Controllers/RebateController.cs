@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class RebateController : Controller
+    public class RebateController : BaseController
     {
 
         private readonly IRebateService _rebateService;

@@ -19,7 +19,7 @@
     <div class="col-sm-12">
         <div class="myapp-hed">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">  Case Hearing/Appeal Detail</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;"> Legal Management System</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -37,6 +37,48 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Legal File No.</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-9">
+                        <label class="control-label lb-sm">Case No.</label>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                    <option>--Select Case Type--</option>
+                                    <option>CS4569</option>
+                                    <option>CS859766</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="text" class="form-control" placeholder="Case No." />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                    <option>--Select Year--</option>
+                                    <option>2020</option>
+                                    <option>2019</option>
+                                    <option>2018</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Case Title</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Subject</label>
+                        <input type="text" class="form-control" />
+
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
 
@@ -132,49 +174,53 @@
 
                 </div>
 
-                @*<div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Case No.</label>
-                            <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                <option>--Select--</option>
-                            </select>
-                        </div>
-                    </div>*@
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Case No.</label>
-                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                            <option>--Select--</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Case Title</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                   
-                </div>
-
                 <div class="form-row">
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Subject</label>
-                        <input type="text" class="form-control" />
-                        
-                    </div>
-                    <div class="form-group col-md-6">
+
+                    <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Panel Laywer</label>
                         <textarea required type="text" class="form-control"></textarea>
                     </div>
-                </div>
-                <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Stay Interim Granted</label>
-                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                            <option>--Select--</option>
-                            <option>Yes</option>
-                            <option>No</option>
+                        <select id="ddlStayInterim" style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
                         </select>
                     </div>
+                </div>
+
+                <div class="form-row" style="display:none;" id="DivStayInterim">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Stay Interim Granted Document</label>
+                        <input required type="file" class="form-control">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Stay Interim Granted Remarks</label>
+                        <input  type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Judgement</label>
+                        <select id="ddlJudgement" style="height:30px;    background-color: #dddddd;" required class="form-control">
+                            <option value="0">No</option>
+                            <option value="1">Yes</option>
+                        </select>
+                    </div>
+
+                    <div style="display:none;" id="DivJudgement">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Judgement Document</label>
+                            <input required type="file" class="form-control">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Judgement Remarks</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Document(if any)</label>
                         <input required type="file" class="form-control">
@@ -204,7 +250,28 @@
 
 
 
+<script>
+    $('#ddlStayInterim').change(function () {
+        var value = $('#ddlStayInterim option:selected').val();
+        if (value == 0) {
+            $('#DivStayInterim').hide();
+        }
+        else {
+            $('#DivStayInterim').show();
+        }
+    });
 
+
+    $('#ddlJudgement').change(function () {
+        var value = $('#ddlJudgement option:selected').val();
+        if (value == 0) {
+            $('#DivJudgement').hide();
+        }
+        else {
+            $('#DivJudgement').show();
+        }
+    });
+</script>
 
 
 @*@if (ViewData["Msg"] != null)

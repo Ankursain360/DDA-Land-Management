@@ -17,7 +17,7 @@ using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
-    public class InterestController : Controller
+    public class InterestController : BaseController
     {
 
         private readonly IInterestService _interestService;
