@@ -27,7 +27,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Division.Where(x => x.ZoneId == zoneId).ToListAsync();
         }
-
+        public async Task<List<Locality>> GetAllLocalityList(int divisionId)
+        {
+            return await _dbContext.Locality.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
+        }
         public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
             return await _dbContext.Landtransfer.ToListAsync();
@@ -41,6 +44,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
             return await _dbContext.Landtransfer.GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+        }
+
+        public  async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
+        {
+            return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim()).ToListAsync();
         }
     }
 }

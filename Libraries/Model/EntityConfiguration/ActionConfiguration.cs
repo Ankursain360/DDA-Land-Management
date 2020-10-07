@@ -36,14 +36,14 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            builder.Property(e => e.Icon)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
-            builder.Property(e => e.Color)
-               .IsRequired()
-               .HasMaxLength(100)
-               .IsUnicode(false);
+            //    builder.Property(e => e.Icon)
+            //        .IsRequired()
+            //        .HasMaxLength(100)
+            //        .IsUnicode(false);
+            //    builder.Property(e => e.Color)
+            //       .IsRequired()
+            //       .HasMaxLength(100)
+            //       .IsUnicode(false);
         }
     }
 }
