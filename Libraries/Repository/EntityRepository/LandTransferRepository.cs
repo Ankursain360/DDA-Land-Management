@@ -50,5 +50,20 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim()).ToListAsync();
         }
+        public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
+        {
+            var data = await _dbContext.Landtransfer
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .OrderByDescending(x => x.Id)
+                .Where(x =>  (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
+                && (x.LocalityId == (locality == 0 ? x.Id : locality))).ToListAsync();
+            return data;
+        }
+
     }
 }
