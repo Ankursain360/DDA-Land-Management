@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Locality>
+@{int rowNo = 0; }
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Locality(Village)</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="card  table-responsive table-card">
+        <div id="divLocalityTable"></div>
+        @*<table class="table table-responsive table-bordered table-card">
+
+                <thead class="thead">
+                    <tr class="myapp-hed1">
+                        <th>Sr.No</th>
+                        <th>Department </th>
+                        <th>Zone </th>
+                        <th> Locality  Name</th>
+                        <th> Locality  Code</th>
+                        <th> Landmark</th>
+                        <th> Address</th>
+                        <th> Status</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+
+                            <td>@item.Department.Name</td>
+
+                            <td>@item.Zone.Name</td>
+                            <td>@item.Name</td>
+                            <td>@item.LocalityCode</td>
+                            <td>@item.Landmark</td>
+                            <td>@item.Address</td>
+
+                            <td>@(item.IsActive==1?"Active":"InActive")</td>
+                            <td>
+                                <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+
+                                <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>*@
+    </div>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/localityindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/localityindex.js" asp-append-version="true"></script>
+</environment>
