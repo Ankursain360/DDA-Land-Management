@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Dto.Common;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Dto.Search
 {
-    class ActionSearchDto
+    public class ActionsSearchDto : BaseSearchDto
     {
+        public string Name { get; set; }
     }
 }

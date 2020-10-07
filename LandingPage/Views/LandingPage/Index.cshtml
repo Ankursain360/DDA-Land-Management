@@ -1,4 +1,8 @@
-﻿
+﻿@model IEnumerable<Libraries.Model.Entity.Module>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "";
+}
 
 
 <!DOCTYPE html>
@@ -17,7 +21,7 @@
             transition: 0.3s;
             width: 100%;
             max-width: 100%;
-            height: 230px;
+            height: 250px;
             max-height: 100%;
             padding: 2px 2px 2px 2px;
             border-radius: 4px;
@@ -32,31 +36,46 @@
         .grad {
             background-image: linear-gradient( 33deg, #4b50a2, #7d3865);
             background-size: cover;
-           
             height: 100%;
             width: 100%;
-            
         }
 
         .logo {
             height: 152px;
             /*width: 83px;*/
         }
-       card,h5 {
-            font-family: open-sans-bold!important;
+
+        card, h5 {
+            font-family: open-sans-bold !important;
         }
+
         card, i {
-           /* background: radial-gradient(circle, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #392e8b, #2c3091);
+            /* background: radial-gradient(circle, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #392e8b, #2c3091);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;*/
-           color:red;
+            color: red;
             font-size: 70px !important;
         }
-        .cardimg{
-            width:70px;
-            height:70px;
-            max-height:100%;
-            max-width:100%;
+
+        .cardimg {
+            width: 70px;
+            height: 70px;
+            max-height: 100%;
+            max-width: 100%;
+        }
+    </style>
+    <style>
+        a:link, a:visited {
+            background-color: #f44336;
+            color: white;
+            padding: 7px 12px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        a:hover, a:active {
+            background-color: red;
         }
     </style>
 </head>
@@ -71,160 +90,29 @@
                 <div class="col-md-12">
                     <div class="card px-4 py-4" style="height:100%;max-height:100%;background:#F0F0F0!important;">
                         <br />
+                       
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-5">
-                                        <i class="fa fa-sitemap " aria-hidden="true"></i>
+                            @foreach (var item in Model)
+                            {
+
+                                <div class="col-md-4">
+                                    <div class="card ">
+                                        <div class="card-body text-center mt-5">
+                                            <i class="@item.Icon" aria-hidden="true"></i>
 
 
-                                        <h5>Site Master</h5>
+                                            <h5> @item.Name</h5>
+                                            <a href=@item.Url target="_blank">Click here</a>
+                                        </div>
+
                                     </div>
-
                                 </div>
+
+                            }
                             </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/land.png" /> </i>
-
-
-                                        <h5>Acquired Land Information Management</h5>
-                                    </div>
-
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/court.png" /></i>
-
-
-                                        <h5>Court Cases Management</h5>
-                                    </div>
-
-                                </div>
-                            </div>
+                            <br />
 
                         </div>
-                        <br />
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/damage.png" /></i>
-
-
-                                        <h5>Damage Payee</h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/doc.png" /></i>
-
-
-                                        <h5>Document Management System</h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/demolition.png" /></i>
-
-
-                                        <h5>Encroachment And Demolition</h5>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/file.png" /></i>
-
-                                        <h5>File Data Loading </h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true">  <img class="cardimg" src="~/images/aquisition.png" /></i>
-
-
-                                        <h5>Land Acquisition </h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/inventory.png" /></i>
-
-
-                                        <h5>Land Inventory </h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true">    <img class="cardimg" src="~/images/Transfer.png" /> </i>
-
-                                        <h5>Land Transfer </h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="card ">
-                                    <div class="card-body text-center mt-2">
-                                        <i aria-hidden="true">
-
-                                            <img class="cardimg" src="~/images/landtransfer.png" />
-                                        </i>
-
-                                      
-                                        <h5> New Land Acquisition </h5>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                @*<div class="card ">
-                                    <div class="card-body text-center mt-2">
-
-                                        <i aria-hidden="true"> <img class="cardimg" src="~/images/inventory.png" /></i>
-
-
-                                        <h5>Land Inventory </h5>
-                                    </div>
-
-                                </div>*@
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             <br /> <br />
@@ -241,8 +129,3 @@
 <script src="~/js/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
-
-
-
-                                        @*Land Transfer
-                                        New Land Acquisition*@
