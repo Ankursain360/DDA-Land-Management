@@ -237,9 +237,9 @@ $('#myForm').validate({
         LocalityId: {
             required: true
         },
-        PrimaryListNo: {
-            required: true
-        },
+        //PrimaryListNo: {
+        //    required: true
+        //},
         TotalArea: {
             required: true
         }
@@ -261,9 +261,9 @@ $('#myForm').validate({
         LocalityId: {
             required: LocalityIdMessage //this is a function that returns custom messages
         },
-        PrimaryListNo: {
-            required: PrimaryListNoMessage //this is a function that returns custom messages
-        },
+        //PrimaryListNo: {
+        //    required: PrimaryListNoMessage //this is a function that returns custom messages
+        //},
         TotalArea: {
             required: TotalAreaMessage //this is a function that returns custom messages
         }
@@ -338,14 +338,14 @@ function LocalityIdMessage() {
 } 
 
 //For Textbox
-function PrimaryListNoMessage() {
-    var dropdown_val = $('#PrimaryListNo').val();
-    if (dropdown_val == "") {
-        return "Primary List No is Mandatory";
-    } else {
-        return "";
-    }
-}
+//function PrimaryListNoMessage() {
+//    var dropdown_val = $('#PrimaryListNo').val();
+//    if (dropdown_val == "") {
+//        return "Primary List No is Mandatory";
+//    } else {
+//        return "";
+//    }
+//}
 
 function TotalAreaMessage() {
     var dropdown_val = $('#TotalArea').val();

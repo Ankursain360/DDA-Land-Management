@@ -52,6 +52,8 @@ namespace Libraries.Model.Entity
         public string LitigationStatusRemarks { get; set; }
         public int GeoReferencing { get; set; }
         public string GeoFilePath { get; set; }
+
+        public int? TakenOverDepartmentId { get; set; }
         public string TakenOverName { get; set; }
         public DateTime? TakenOverDate { get; set; }
 
@@ -64,6 +66,7 @@ namespace Libraries.Model.Entity
         public string TakenOverLandlineNo { get; set; }
         public string TakenOverComments { get; set; }
         public string TakenOverFilePath { get; set; }
+        public int? HandedOverDepartmentId { get; set; }
         public string HandedOverName { get; set; }
         public DateTime? HandedOverDate { get; set; }
 
@@ -112,6 +115,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
+
+        [NotMapped]
+        public List<Department> TakenOverDepartmentList { get; set; }
+
+        [NotMapped]
+        public List<Department> HandOverDepartmentList { get; set; }
 
         [NotMapped]
         public List<Division> DivisionList { get; set; }
