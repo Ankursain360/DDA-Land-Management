@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public string Description { get; set; }
         public int ModuleId { get; set; }
+        public string UserType { get; set; }
         public string Template { get; set; }
         public byte IsActive { get; set; }
 
@@ -28,6 +29,9 @@ namespace Libraries.Model.Entity
         public List<string> ParameterLevelList { get; set; }
         [NotMapped]
         public List<string> ParameterSkipList { get; set; }
+
+        [NotMapped]
+        public List<string> ParameterActionList { get; set; }
 
         [NotMapped]
         public bool IsActiveData { get; set; }
