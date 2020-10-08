@@ -148,5 +148,17 @@
     "inputFiles": [
       "wwwroot/js/undersection4index.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UserManagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/UserManagement.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UnderSection4PlotForm.min.js",
+    "inputFiles": [
+      "wwwroot/js/UnderSection4PlotForm.js"
+    ]
   }
 ]

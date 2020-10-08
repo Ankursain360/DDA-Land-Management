@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DDAPropertyREG.Controllers
+namespace NewLandAcquisition.Controllers
 {
-    public class NewLandAcquisition : Controller
+    public class UnderSection22PlotDetailsController : Controller
     {
         public IActionResult Index()
         {
