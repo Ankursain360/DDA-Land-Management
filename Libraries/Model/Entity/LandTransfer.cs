@@ -46,7 +46,6 @@ namespace Libraries.Model.Entity
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
         [NotMapped]
-        [Required]
         public IFormFile CopyofOrder { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }

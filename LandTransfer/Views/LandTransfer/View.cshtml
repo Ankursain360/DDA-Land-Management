@@ -111,8 +111,20 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Copy of Order</label>
-                            <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                            @{
+                                if (Model.CopyofOrderDocPath != null && Model.CopyofOrderDocPath != string.Empty)
+                                {
+                                    <a asp-action="Download" asp-route-id="@Model.Id"> (View Existing Document)</a>
+                                    @*@Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })*@
+                                    <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                                }
+                            }
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Transfer order Issue Authority</label>
