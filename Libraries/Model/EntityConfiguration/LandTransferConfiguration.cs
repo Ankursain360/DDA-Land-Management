@@ -27,11 +27,7 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.DateofTakenOver).HasColumnType("date");
 
             entity.Property(e => e.DivisionId).HasColumnType("int(11)");
-
-            entity.Property(e => e.FileName)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-
+            
             entity.Property(e => e.HandedOverByNameDesingnation)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -70,7 +66,7 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            entity.Property(e => e.VillageId).HasColumnType("int(11)");
+            entity.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             entity.Property(e => e.ZoneId).HasColumnType("int(11)");
         }

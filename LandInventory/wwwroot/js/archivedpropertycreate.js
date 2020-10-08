@@ -8,12 +8,14 @@ $(document).ready(function () {
             var departmentid = $('#DepartmentId option:selected').val();
             var zoneId = $('#ZoneId option:selected').val();
             var divisionId = $('#DivisionId option:selected').val();
-            var id = $('#Id option:selected').val();
-         
+            //var id = $('#Id option:selected').val(); // was for peimarylistno
+            var localityid = $('#LocalityId option:selected').val();
             $('#LoadReportView').empty();
             $('#LoadReportView').load(url, {
                 department: departmentid, zone: zoneId, division: divisionId,
-                primaryListNo: id
+                //primaryListNo: id
+                locality: localityid
+
             }).hide().fadeIn(1000);;
 
         });
@@ -47,15 +49,29 @@ function GetDivisionList(id) {
         $("#DivisionId").html(html);
     });
 };
+
 //Bind PrimaryNoList Dropdown from division
-function GetPrimaryNoList(id) {
-    debugger;
+//function GetPrimaryNoList(id) {
+//    debugger;
     
-    HttpGet(`/ArchivedProperty/GetPrimaryNoList/?divisionId=${id}`, 'json', function (response) {
+//    HttpGet(`/ArchivedProperty/GetPrimaryNoList/?divisionId=${id}`, 'json', function (response) {
+//        var html = '<option value="">All</option>';
+//        for (var i = 0; i < response.length; i++) {
+//            html = html + '<option value=' + response[i].id + '>' + response[i].primaryListNo + '</option>';
+//        }
+//        $("#Id").html(html);
+//    });
+//};
+
+//Bind Locality Dropdown from division
+function GetLocalityList(id) {
+    debugger;
+
+    HttpGet(`/ArchivedProperty/GetLocalityList/?divisionId=${id}`, 'json', function (response) {
         var html = '<option value="">All</option>';
         for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].primaryListNo + '</option>';
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#Id").html(html);
+        $("#LocalityId").html(html);
     });
 };
