@@ -10,10 +10,14 @@ namespace Libraries.Model.Entity
 {
     public class Division : AuditableEntity<int>
     {
+        [Required]
         public string Name { get; set; }
+        [Required]
         public string Code { get; set; }
         public byte IsActive { get; set; }
+        [Required]
         public int ZoneId { get; set; }
+        [Required]
         public int DepartmentId { get; set; }
 
         public virtual Zone Zone { get; set; }

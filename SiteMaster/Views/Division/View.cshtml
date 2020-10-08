@@ -1,5 +1,4 @@
-﻿
-@model Libraries.Model.Entity.Division
+﻿@model Libraries.Model.Entity.Division
 
 <div class="row">
     <div class="col-sm-12">
@@ -20,9 +19,33 @@
             <h6 class="pull-left color-white mt-4" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="View">
+            <form asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
+
+
+                <div class="form-row">
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Department </label>
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
+                            <option value="">Select</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Zone</label>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))">
+                            <option value="value">Select</option>
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+
+
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
@@ -41,7 +64,7 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                        <select asp-for="IsActive" id="ActiveStatus" required="" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
@@ -60,9 +83,6 @@
                 <br />
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-
-
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "Division", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -73,3 +93,4 @@
 </div>
 
 
+<script src="~/js/divisionmaster.js"></script>

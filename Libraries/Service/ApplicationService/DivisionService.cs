@@ -52,6 +52,8 @@ namespace Libraries.Service.ApplicationService
             Division model = result.FirstOrDefault();
             model.Name = division.Name;
             model.Code = division.Code;
+            model.ZoneId = division.ZoneId;
+            model.DepartmentId = division.DepartmentId;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _divisionRepository.Edit(model);

@@ -128,7 +128,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return RedirectToAction("Index", "MasterDivisions");
+                        return View("Index");
                     }
                     else
                     {
