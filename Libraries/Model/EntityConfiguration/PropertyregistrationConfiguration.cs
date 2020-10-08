@@ -96,6 +96,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.HandedOverDate).HasColumnType("date");
 
+            builder.Property(e => e.HandedOverDepartmentId).HasColumnType("int(11)");
+
             builder.Property(e => e.HandedOverEmailId)
                 .HasMaxLength(200)
                 .IsUnicode(false);
@@ -153,9 +155,8 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PrimaryListNo)
-                .IsRequired()
-                .HasMaxLength(200)
-                .IsUnicode(false);
+                   .HasMaxLength(200)
+                   .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
@@ -170,6 +171,8 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.TakenOverDate).HasColumnType("date");
+
+            builder.Property(e => e.TakenOverDepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.TakenOverEmailId)
                 .HasMaxLength(200)
