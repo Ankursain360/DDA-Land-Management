@@ -35,11 +35,30 @@ namespace LandTransfer.Controllers
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landTransferService.GetAllDepartment();
-            //model.ZoneList = await _landTransferService.GetAllZone(model.DepartmentId);
-            //model.DivisionList = await _landTransferService.GetAllDivisionList(model.ZoneId);
-            //model.LocalityList = await _landTransferService.GetAllLocalityList(model.DivisionId);
-            return View(model);
+             return View(model);
         }
 
+
+        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
+        {
+            var result = await _landTransferService.GetLandTransferReportData(department, zone, division, locality);
+
+            if (result != null)
+            {
+                return PartialView("Index", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+
+
+
+        }
+
+        }
+  
+    
+    
     }
-}
