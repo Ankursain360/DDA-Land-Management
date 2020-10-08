@@ -1,193 +1,63 @@
 ﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+@{int rowNo = 0; }
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Hand Over/Take Over Report(Zone/Division and Locality Wise)</h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
-        </div>
-    </div>
+
+<div class="card  table-card table-responsive">
+
+    <table class="table table-responsive table-bordered table-card">
+
+
+        <thead class="thead">
+
+            <tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Department</th>
+                <th rowspan="2">Zone</th>
+                <th rowspan="2">Division</th>
+                <th rowspan="2">Locality(Village)</th>
+                <th rowspan="2">Khasra No.</th>
+                <th rowspan="2">Address</th>
+                <th rowspan="2"> Handed Over By  </th>
+                <th rowspan="2"> Handed Over Date</th>
+                <th rowspan="2"> Taken Over By  </th>
+                <th rowspan="2"> Taken Over Date  </th>
+                <th rowspan="2"> Transfer order Issue Authority</th>
+                <th rowspan="2">Remarks </th>
+            </tr>
+
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@item.KhasraNo</td>
+                    <td>@item.Address</td>
+                    <td>@item.HandedOverByNameDesingnation</td>
+
+                    <td>@item.HandedOverDate</td>
+                    <td>@item.TakenOverByNameDesingnation</td>
+                    <td>@item.DateofTakenOver</td>
+
+                    <td>@item.TransferorderIssueAuthority/td>
+                    <td>@item.Remarks</td>
+                    @*asp-action="View" asp-route-id="@item.Id"*@
+                    @*<td>
+                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+                        </td>*@
+                </tr>
+            }
+
+
+        </tbody>
+
+    </table>
+
 </div>
-<br />
-<br />
-
-
-
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="RptCasesCourtWise">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Engineering</option>
-                            <option value="2">Land Management</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">LM/SHAHDRA</option>
-                            <option value="2">LM/NORTH-WEST</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Division</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">WD-8</option>
-                            <option value="2">SWD-9</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Locality(Village)</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Jhansi</option>
-                            <option value="2">Dwarka</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-                        <input type="submit" value="Generate" class="btn btn-primary dda-pageheading" />
-                    </div>
-                </div>
-
-                @*<div id="divsearch">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-pageheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left color-white" style="margin-top:5px;">Land Transfer Report(Zone/Division and Locality Wise)</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-
-                            <div id="courtwiserpt">
-                                <div class="card  table-card table-responsive">*@
-
-                                    <table class="table  table-bordered table-card">
-
-                                        <thead class="thead">
-                                            <tr class="myapp-hed1">
-                                                <th>Sr.No</th>
-                                                <th>Department</th>
-                                                <th>Zone</th>
-                                                <th>Division</th>
-                                                <th>Locality(Village)</th>
-                                                <th>Khasra No.</th>
-                                                <th>Address</th>
-                                                <th> Handed Over By  </th>
-                                                <th> Handed Over Date</th>
-                                                <th> Taken Over By  </th>
-                                                <th> Taken Over Date  </th>
-                                                <th> Transfer order Issue Authority</th>
-                                                <th>Remarks </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Engineering</td>
-                                                <td>LM/SHAHDRA</td>
-                                                <td>WD-8</td>
-                                                <td>Jhansi</td>
-                                                <td>515</td>
-                                                <td>Pocket 45 road</td>
-                                                <td>LM</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>ENGG</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>DDA</td>
-                                                <td>Other details</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>MOR</td>
-                                                <td>LM/SHAHDRA</td>
-                                                <td>WD-8</td>
-                                                <td>Jhansi</td>
-                                                <td>545</td>
-                                                <td>Pocket 45 road</td>
-                                                <td>LM</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>ENGG</td>
-                                                <td>30-MAY-2018</td>
-                                                <td>DDA</td>
-                                                <td>Other details</td>
-
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-
-                                @*</div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>*@
-                <br />
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-
-                        <input type="submit" value="Export to Excel" class="btn btn-primary dda-pageheading" style="width:150px !important;" />
-
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-
-
-
-@if (ViewData["Msg"] != null)
-{
-    LandTransfer.Models.Message msg = ViewData["Msg"] as LandTransfer.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
-
-
-<script>
-
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-    });
-
-
-
-</script>
