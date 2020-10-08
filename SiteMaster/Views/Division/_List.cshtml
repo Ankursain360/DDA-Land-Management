@@ -3,8 +3,8 @@
 <table class="table table-responsive table-bordered table-card">
     <thead class="thead">
         <tr>
-
-            @*<th>Module Name</th>*@
+            <th>Department</th>
+            <th>Zone</th>
             <th>Division Code</th>
             <th>Division Name</th>
             <th>Status</th>
@@ -15,9 +15,10 @@
         @foreach (var item in Model.Results)
         {
         <tr>
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
             <td>@item.Code</td>
             <td>@item.Name</td>
-
             <td>
                 @(item.IsActive  == 1 ? "Active" : "Inactive" )
             </td>
