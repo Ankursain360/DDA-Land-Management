@@ -12,15 +12,23 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
     <Content Remove="Views\Actions\Create.cshtml" />
     <Content Remove="Views\Actions\Delete.cshtml" />
     <Content Remove="Views\Actions\Edit.cshtml" />
     <Content Remove="Views\Actions\Index.cshtml" />
     <Content Remove="Views\Actions\View.cshtml" />
     <Content Remove="Views\Actions\_List.cshtml" />
+    <Content Remove="wwwroot\js\common.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="bundleconfig.json" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\common.min.js" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
     <None Include="Views\Actions\Create.cshtml" />
     <None Include="Views\Actions\Delete.cshtml" />
     <None Include="Views\Actions\Edit.cshtml" />
@@ -143,9 +151,11 @@
     <None Include="Views\Zone\_List.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\common.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
+	   <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
 	   <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
 	   <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />

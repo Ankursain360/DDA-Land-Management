@@ -9,7 +9,6 @@ namespace Libraries.Model.Entity
 {
     public class Role : AuditableEntity<int>
     {
-        public int ZoneId { get; set; }
         [Required]
         [Remote(action: "Exist", controller: "Role", AdditionalFields = "Id")]
 
@@ -18,8 +17,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string ZoneName { get; set; }
         [NotMapped]
-        public List<Zone> ZoneList { get; set; }
-        public virtual Zone Zone { get; set; }
         public virtual ICollection<PageRole> PageRole { get; set; }
     }
 }

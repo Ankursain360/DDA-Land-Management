@@ -1,0 +1,218 @@
+[
+  {
+    "outputFileName": "wwwroot/js/designationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/actionsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/actionsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/classificationoflandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/classificationoflandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/country.min.js",
+    "inputFiles": [
+      "wwwroot/js/country.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/departmentindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/departmentindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/designationmastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationmastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/districtindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/districtindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/divisionindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/divisionindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/divisionmaster.min.js",
+    "inputFiles": [
+      "wwwroot/js/divisionmaster.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/enabledisableuser.min.js",
+    "inputFiles": [
+      "wwwroot/js/enabledisableuser.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/interestcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/interestcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/interestedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/interestedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/interestindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/interestindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/landuseindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/landuseindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/localityindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/localityindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LocalityMaster.min.js",
+    "inputFiles": [
+      "wwwroot/js/LocalityMaster.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/moduleindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/moduleindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/notificationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/notificationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/pageindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pagerolemasterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/pagerolemasterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ratecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/ratecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/rateindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebatecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebatecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebateedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebateindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/roleindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/roleindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/UserManagement.min.js",
+    "inputFiles": [
+      "wwwroot/js/UserManagement.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/usermanagementindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/usermanagementindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Village.min.js",
+    "inputFiles": [
+      "wwwroot/js/Village.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villageindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/workflowcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/workflowcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/workflowedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/workflowedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/workflowindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/workflowindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/zoneindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/zoneindex.js"
+    ]
+  }
+]

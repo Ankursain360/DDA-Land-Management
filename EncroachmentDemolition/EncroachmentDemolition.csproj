@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\js\archivedpropertycreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\archivedpropertycreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
     <None Include="Views\AnnexureA\Create.cshtml" />
     <None Include="Views\AnnexureA\Index.cshtml" />
     <None Include="Views\Complaint\Index.cshtml" />
@@ -41,6 +51,7 @@
     <None Include="Views\ZoneWiseUserMapping\_ViewStart.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
+    <None Include="wwwroot\js\archivedpropertycreate.min.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
@@ -71,6 +82,7 @@
 
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="4.3.1" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Captcha" Version="4.4.2" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
