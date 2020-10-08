@@ -12,5 +12,6 @@ namespace Dto.Search
         public int moduleId { get; set; }
         public string template { get; set; }
         public byte isActive { get; set; }
+        public string usertype { get; set; }
     }
 }

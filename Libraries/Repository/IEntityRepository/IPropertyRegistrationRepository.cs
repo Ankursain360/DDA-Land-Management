@@ -26,7 +26,7 @@ namespace Libraries.Repository.IEntityRepository
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
-        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division,int primaryListNo);
+        Task<List<Propertyregistration>> GetRestoreLandReportData( int department, int zone, int division,int locality);
         Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality);
 
         Task<bool> InsertInDeletedProperty(Deletedproperty model);

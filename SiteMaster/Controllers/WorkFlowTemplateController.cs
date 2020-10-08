@@ -53,6 +53,7 @@ namespace SiteMaster.Controllers
             model.Name = workflowtemplatecreatedto.name;
             model.Description = workflowtemplatecreatedto.description;
             model.ModuleId = workflowtemplatecreatedto.moduleId;
+            model.UserType = workflowtemplatecreatedto.usertype;
             model.IsActive = workflowtemplatecreatedto.isActive;
             model.Template = workflowtemplatecreatedto.template;
 

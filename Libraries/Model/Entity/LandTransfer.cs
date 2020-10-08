@@ -31,7 +31,6 @@ namespace Libraries.Model.Entity
         [Required]
         public string OrderNo { get; set; }
         public string CopyofOrderDocPath { get; set; }
-        public string FileName { get; set; }
         [Required]
         public string TransferorderIssueAuthority { get; set; }
         [Required]

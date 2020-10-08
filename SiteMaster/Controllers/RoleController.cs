@@ -42,7 +42,6 @@ namespace SiteMaster.Controllers
         {
             Role role = new Role();
             role.IsActive = 1;
-            role.ZoneList = await _roleService.GetAllZone();
             return View(role);
         }
 
@@ -53,10 +52,8 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                role.ZoneList = await _roleService.GetAllZone();
                 if (ModelState.IsValid)
                 {
-                    role.ZoneId = 0;
                     var result = await _roleService.Create(role);
 
                     if (result == true)
@@ -102,7 +99,6 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _roleService.FetchSingleResult(id);
-            Data.ZoneList = await _roleService.GetAllZone();
             if (Data == null)
             {
                 return NotFound();
@@ -168,7 +164,6 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _roleService.FetchSingleResult(id);
-            Data.ZoneList = await _roleService.GetAllZone();
             if (Data == null)
             {
                 return NotFound();

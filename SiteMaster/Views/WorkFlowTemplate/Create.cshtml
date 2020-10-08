@@ -29,6 +29,9 @@
 <br />
 <br />
 
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js"></script>
+
 
 <div class="container-fluid">
     <div class="panel">
@@ -173,11 +176,11 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                
+
                                                 <div class="form-group col-md-2">
                                                     <label class="control-label lb-sm">Name</label>
-                                                    <select class="form-control dda-dropdown" id="dropdownlist">
-                                                        <option value="">--Select--</option>
+                                                    <select asp-for="ParameterNameList[0]" class="form-control dda-dropdown" id="dropdownlist">
+                                                        <option value="0">--Select--</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-2">
@@ -190,10 +193,11 @@
                                                 </div>
                                                 <div class="form-group col-md-2">
                                                     <label class="control-label lb-sm">Action Taken</label>
-                                                    <select class="form-control dda-dropdown" id="ddlActionType">
-                                                        <option value="0">Forward</option>
-                                                        <option value="1">Revert</option>
-                                                        <option value="2">Approved</option>
+                                                    <select asp-for="ParameterActionList[0]" class="select2 form-control dda-dropdown"  id="ddlActionType">
+                                                        <option value="0">--Select--</option>
+                                                        <option value="1">Forward</option>
+                                                        <option value="2">Revert</option>
+                                                        <option value="3">Approved</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-2">
@@ -282,7 +286,7 @@
     <script src="~/js/workflowcreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/workflowcreate.js" asp-append-version="true"></script>
+    <script src="~/js/workflowcreate.min.js" asp-append-version="true"></script>
 </environment>
 
 @*<environment include="Development">

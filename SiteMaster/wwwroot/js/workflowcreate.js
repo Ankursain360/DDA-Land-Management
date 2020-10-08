@@ -4,20 +4,20 @@ $(document).ready(function () {
     $("#tbl_posts #add .form-control").attr("multiple", false);
 
     BindDropdown();
-})
+});
 
 $(document).delegate('a.add-record', 'click', function (e) {
-    var name = $("#tbl_posts #add #parameterName").val();
+    var name = $("#tbl_posts #add #ddlActionType").val();
     var value = $("#tbl_posts #add #parameterValue").val();
     var level = $("#tbl_posts #add #parameterLevel").val();
     var isskip = $("#tbl_posts #add #parameterLevel").val();
     debugger
     if ($("#tbl_posts #add #parameterName").val() != '' && $("#tbl_posts #add #parameterValue").val() != '' && $("#tbl_posts #add #parameterLevel").val() != ''
-        //&& $("#tbl_posts #add #drpPersonalGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
+        && $("#tbl_posts #add #dropdownlist").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
         //&& $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
     ) {
         var actionValue = $("#tbl_posts #add #ddlActionType").children("option:selected").val();
-        //var father = $("#tbl_posts #add #txtPersonalFatherName").children("option:selected").val();
+        var dropdownValue = $("#tbl_posts #add #dropdownlist").children("option:selected").val();
         //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
         debugger
         e.preventDefault();
@@ -30,18 +30,20 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.appendTo('#tbl_posts_body');
         debugger;
         for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $("#tbl_posts #add #parameterName").removeAttr("name")
-            $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+            $("#tbl_posts #add #dropdownlist").removeAttr("name")
+            $("#tbl_posts #add #dropdownlist").attr("name", "ParameterNameList[" + i + "]");
             $("#tbl_posts #add #parameterValue").removeAttr("name")
             $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
             $("#tbl_posts #add #parameterLevel").removeAttr("name")
             $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
             $("#tbl_posts #add #paramenterSkip").removeAttr("name")
             $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+            $("#tbl_posts #add #ddlActionType").removeAttr("name")
+            $("#tbl_posts #add #ddlActionType").attr("name", "ParameterActionList[" + i + "]");
 
         };
         $('#tbl_posts_body #rec-' + size + ' #ddlActionType').val(actionValue);
-        //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
+        $('#tbl_posts_body #rec-' + size + ' #dropdownlist').val(dropdownValue);
         //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
         element.find('.sn').html('Level ' + size);
         $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
@@ -67,14 +69,16 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
         debugger;
         for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $("#tbl_posts #add #parameterName").removeAttr("name")
-            $("#tbl_posts #add #parameterName").attr("name", "ParameterNameList[" + i + "]");
+            $("#tbl_posts #add #dropdownlist").removeAttr("name")
+            $("#tbl_posts #add #dropdownlist").attr("name", "ParameterNameList[" + i + "]");
             $("#tbl_posts #add #parameterValue").removeAttr("name")
             $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
             $("#tbl_posts #add #parameterLevel").removeAttr("name")
             $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
             $("#tbl_posts #add #paramenterSkip").removeAttr("name")
             $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
+            $("#tbl_posts #add #ddlActionType").removeAttr("name")
+            $("#tbl_posts #add #ddlActionType").attr("name", "ParameterActionList[" + i + "]");
 
         }
 
@@ -106,6 +110,7 @@ function GetListData() {
     var moduleId = $('#ModuleId option:selected').val();
     var name = $('#Name').val();
     var description = $('#Description').val();
+    var usertype = $('#ddlOperationType option:selected').val();
     var isActive;
     if ($("#IsActiveData").is(":checked")) {
         isActive = 1;
@@ -118,18 +123,18 @@ function GetListData() {
     var data = {};
     debugger;
     for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-
-        var parameterName = $("input[name='ParameterNameList[" + i + "]']").val();
+        var parameterName = $("Select[name='ParameterNameList[" + i + "]']").children("option:selected").val();
         var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
         var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
+        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected").val();
         if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
             parameterSkip = true;
         }
         else {
             parameterSkip = false;
         }
-        if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "")) {
+        if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "") && (parameterName == "0") && (parameterAction == "0")) {
 
         }
         else {
@@ -137,7 +142,8 @@ function GetListData() {
                 parameterName: parameterName,
                 parameterValue: parameterValue,
                 parameterLevel: parameterLevel,
-                parameterSkip: (parameterSkip)
+                parameterSkip: (parameterSkip),
+                parameterAction: parameterAction
             }
             workflow.push(model);
         }
@@ -149,6 +155,7 @@ function GetListData() {
         moduleId: parseInt(moduleId),
         name: name,
         description: description,
+        usertype: usertype,
         isActive: isActive,
         template: JSON.stringify(workflow)
     }
@@ -157,25 +164,25 @@ function GetListData() {
 }
 
 $('#ddlOperationType').change(function () {
-    var value = $('#ddlOperationType option:selected').val();
-    debugger;
-    HttpGet(`/WorkFlowTemplate/GetUserList/value=${value}`, 'json', function (response) {
-        var html = '<option value="">---Select---</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-        $("#dropdownlist").html(html);
-    });
+    BindDropdown();
 });
 
 function BindDropdown() {
     var value = $('#ddlOperationType option:selected').val();
-    debugger;
-    HttpGet(`/WorkFlowTemplate/GetUserList/value=${value}`, 'json', function (response) {
-        var html = '<option value="">---Select---</option>';
+    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
+        var html = '<option value="0">---Select---</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#dropdownlist").html(html);
+        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+            $("#dropdownlist").html(html);
+        }
+        
     });
 }
+
+//$(function () {
+//    $('.multiselect-ui').multiselect({
+//        includeSelectAllOption: true
+//    });
+//});

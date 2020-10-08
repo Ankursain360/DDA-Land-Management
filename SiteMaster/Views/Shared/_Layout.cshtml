@@ -7,8 +7,9 @@
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-   
+
     <style>
         .canvasjs-chart-credit {
             display: none !important;
@@ -40,7 +41,7 @@
     <header class="navbar navbar-custom navbar-fixed-top" style="min-height:30px;height:30px; Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); " role="navigation">
         <div class="col-md-offset-11" style="color:#fff; padding-top:6px; font-size:13px">
             <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" 
+                <button class="btn btn-default dropdown-toggle"
                         style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;"
                         type="button" id="dropdownMenu1"
                         data-toggle="dropdown"
@@ -117,30 +118,30 @@
                         </a>
                     </li>
                     @*<li>
-                        <a class="" href="/Designation/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Designation
-                        </a>
-                    </li>*@
+                            <a class="" href="/Designation/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Designation
+                            </a>
+                        </li>*@
                     @*<li>
-                        <a class="" href="/Employee/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Employee
-                        </a>
-                    </li>*@
+                            <a class="" href="/Employee/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Employee
+                            </a>
+                        </li>*@
                     <li>
                         <a class="" href="/Role/Index">
                             <span class="fa fa-arrow-right">&nbsp;</span>Role
                         </a>
                     </li>
                     @*<li>
-                        <a class="" href="/Module/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Module
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Page/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Page
-                        </a>
-                    </li>*@
+                            <a class="" href="/Module/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Module
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Page/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Page
+                            </a>
+                        </li>*@
                     <li>
                         <a class="" href="/UserManagement/Index">
                             <span class="fa fa-arrow-right">&nbsp;</span>User Management
@@ -162,10 +163,10 @@
                         </a>
                     </li>
                     @*<li>
-                        <a class="" href="/Notification/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Notification
-                        </a>
-                    </li>*@
+                            <a class="" href="/Notification/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Notification
+                            </a>
+                        </li>*@
                     <li>
                         <a class="" href="/PageRole/Index">
                             <span class="fa fa-arrow-right">&nbsp;</span>Page Role
@@ -183,7 +184,7 @@
                     </li>
                     <li>
                         <a class="" href="/WorkFlowTemplate/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Workflow 
+                            <span class="fa fa-arrow-right">&nbsp;</span>Workflow
                         </a>
                     </li>
                 </ul>
@@ -224,12 +225,17 @@
 
     @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
     @*<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/toaster/toastr.min.js"></script>
-    <script src="~/js/site.js"></script>
 
+    <environment include="Development">
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
 </body>

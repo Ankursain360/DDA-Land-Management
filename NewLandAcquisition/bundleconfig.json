@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "wwwroot/js/printrequestindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/printrequestindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  }
+]

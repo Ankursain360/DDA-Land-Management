@@ -27,6 +27,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.Property(e => e.UserType)
+               .IsRequired()
+               .HasMaxLength(500)
+               .IsUnicode(false);
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");

@@ -19,11 +19,11 @@ namespace SiteMaster.Controllers
     public class UserManagementController : BaseController
     {
         private readonly IUserService _userService;
-        //private readonly UserManager<ApplicationUser> _userManager;
-        public UserManagementController(IUserService userService/*, UserManager<ApplicationUser> userManager*/)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public UserManagementController(IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
-            //_userManager = userManager;
+            _userManager = userManager;
         }
         public async Task<IActionResult> Index()
         { 
@@ -51,7 +51,7 @@ namespace SiteMaster.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(User user)
+        public async Task<IActionResult> Create(ApplicationUser user)
         {
             try
             {
@@ -59,26 +59,30 @@ namespace SiteMaster.Controllers
                 user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
-                    var result1 = true;
-                    //var result1 =  await _userManager.CreateAsync(new ApplicationUser()
-                    //{
-                    //    Email = user.Email,
-
-                    //}, user.Password);
-
-                    //if (result1.Succeeded)
-                    if (result1)
+                    //  var result1 = true;
+                    var result1 = await _userManager.CreateAsync(new ApplicationUser()
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _userService.GetAllUser();
-                       
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(user);
-                    }
+                        Email = user.Email,
+                        ZoneId = user.ZoneId,
+                        RoleId = user.RoleId,
+                        PasswordSetDate = DateTime.Now.AddDays(30),
+
+
+                    }, "Password"); 
+
+                   if (result1.Succeeded)
+                      // if (result1)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                            var list = await _userService.GetAllUser();
+
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(user);
+                        }
                 }
                 else
                 {

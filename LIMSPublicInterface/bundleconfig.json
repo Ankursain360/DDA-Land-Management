@@ -1,0 +1,44 @@
+[
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/country.min.js",
+    "inputFiles": [
+      "wwwroot/js/country.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ratecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/ratecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebatecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebatecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebateedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebateindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebateindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  }
+]

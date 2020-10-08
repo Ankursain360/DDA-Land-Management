@@ -17,16 +17,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("Name_UNIQUE")
                 .IsUnique();
 
-            builder.HasIndex(e => e.ZoneId)
-                .HasName("ZoneId_idx");
-
-            
-            builder.HasOne(d => d.Zone)
-                .WithMany(p => p.Role)
-                .HasForeignKey(d => d.ZoneId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ZoneId");
-
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -41,10 +31,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
-            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
-      
-
 
         }
     }

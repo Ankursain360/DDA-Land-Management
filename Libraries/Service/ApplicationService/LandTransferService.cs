@@ -15,6 +15,7 @@ namespace Libraries.Service.ApplicationService
 {
     public class LandTransferService : EntityService<Landtransfer>, ILandTransferService
     {
+
         private readonly IUnitOfWork _unitOfWork;
         private readonly ILandTransferRepository _landTransferRepository;
         public LandTransferService(IUnitOfWork unitOfWork, ILandTransferRepository landTransferRepository)
@@ -71,7 +72,6 @@ namespace Libraries.Service.ApplicationService
             model.CopyofOrderDocPath = Landtransfer.CopyofOrderDocPath;
             model.DateofTakenOver = Landtransfer.DateofTakenOver;
             model.DivisionId = Landtransfer.DivisionId;
-            model.FileName = Landtransfer.FileName;
             model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
             model.HandedOverDate = Landtransfer.HandedOverDate;
             model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
@@ -112,7 +112,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetHistoryDetails(khasraNo);
         }
-        public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo)
+
+        public async Task<List<Landtransfer>> GetAllLandTransfer()
+        {
+            return await _landTransferRepository.GetAllLandTransfer();
+        }
+       public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo)
         {
             return await _landTransferRepository.GetLandTransferReportData(department, zone, division, primaryListNo);
         }
