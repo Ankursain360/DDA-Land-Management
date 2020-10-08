@@ -1,0 +1,62 @@
+[
+  {
+    "outputFileName": "wwwroot/js/archivedpropertycreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/archivedpropertycreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/deletedpropertiescreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/deletedpropertiescreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/nazullandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/nazullandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationreportcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationreportcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/restorepropertyreportcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/restorepropertyreportcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  }
+]

@@ -1,0 +1,152 @@
+[
+  {
+    "outputFileName": "wwwroot/js/acquiredlandvillageindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/acquiredlandvillageindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardplotdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardplotdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/booktransferlandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/booktransferlandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/designationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/designationmastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationmastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/enabledisableuser.min.js",
+    "inputFiles": [
+      "wwwroot/js/enabledisableuser.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/enhancecompensationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/enhancecompensationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jaraidetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/jaraidetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/jointsurveyindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/jointsurveyindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/khasramasterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/khasramasterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ldolandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/ldolandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LocalityMaster.min.js",
+    "inputFiles": [
+      "wwwroot/js/LocalityMaster.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/morlandsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/morlandsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/pagerolemasterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/pagerolemasterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/proposaldetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/proposaldetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/proposalplotdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/proposalplotdetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ratemastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/ratemastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebatecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebatecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rebateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/rebateedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/sakanidetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/sakanidetailsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/schemeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/schemeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection22index.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection22index.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/undersection4index.min.js",
+    "inputFiles": [
+      "wwwroot/js/undersection4index.js"
+    ]
+  }
+]
