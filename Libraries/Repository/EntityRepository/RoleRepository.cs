@@ -25,7 +25,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Role>> GetRole()
         {
-            return await _dbContext.Role.Include(x => x.Zone).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Role.OrderByDescending(x => x.Id).ToListAsync();
         }
         public async Task<List<Zone>> GetAllZone()
         {

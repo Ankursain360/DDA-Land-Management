@@ -41,7 +41,6 @@ namespace Libraries.Service.ApplicationService
             var result = await _roleRepository.FindBy(a => a.Id == id);
             Role model = result.FirstOrDefault();
             model.Name = role.Name;
-            model.ZoneId = role.ZoneId;
             model.IsActive = role.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

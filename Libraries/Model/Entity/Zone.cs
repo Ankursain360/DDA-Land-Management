@@ -27,7 +27,6 @@ namespace Libraries.Model.Entity
 
         public virtual Department  Department{ get; set; }
         public virtual ICollection<Village> Village { get; set; }
-        public virtual ICollection<Role> Role { get; set; }
 
         [NotMapped]
         public virtual ICollection<Locality> Locality { get; set; }
