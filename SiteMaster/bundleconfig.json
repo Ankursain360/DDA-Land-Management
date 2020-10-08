@@ -1,0 +1,50 @@
+[
+  {
+    "outputFileName": "wwwroot/js/designationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/actionsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/actionsindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/classificationoflandindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/classificationoflandindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/country.min.js",
+    "inputFiles": [
+      "wwwroot/js/country.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/departmentindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/departmentindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/designationmastercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/designationmastercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/districtindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/districtindex.js"
+    ]
+  }
+]
