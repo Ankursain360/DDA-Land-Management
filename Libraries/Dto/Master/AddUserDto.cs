@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
+
+namespace Dto.Master
+{
+    public class AddUserDto
+    {
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "UserName is required")]
+        public string UserName { get; set; }
+
+        [Required(ErrorMessage = "Password is required")]
+        [StringLength(255, ErrorMessage = "Password between 8 to 20", MinimumLength = 8)]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "Confirm password is required")]
+        [StringLength(20, ErrorMessage = "Password between 8 to 20", MinimumLength = 8)]
+        [Compare("Password", ErrorMessage = "Password confirm password not match")]
+        public string ConfirmPassword { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        //public List<Department> DepartmentList { get; set; }
+    }
+}
