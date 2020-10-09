@@ -61,6 +61,7 @@ namespace SiteMaster.Controllers
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
           //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
