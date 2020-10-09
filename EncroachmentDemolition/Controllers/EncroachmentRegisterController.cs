@@ -17,20 +17,5 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
-
-        public IActionResult EncroachmentRegisterApproval()
-        {
-            return View();
-        }
-
-        public IActionResult EncroachmentRegisterApprovalCreate()
-        {
-            return View();
-        }
-        //public JsonResult GetCourseOfSemester(string semester)
-        //{
-        //    var courses = _context.Course.Where(cat => cat.SemesterNumber == semester).ToListAsync();
-        //    return Json(courses, JsonRequestBehavior.AllowGet);
-        //}
     }
 }
