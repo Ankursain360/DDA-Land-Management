@@ -57,25 +57,11 @@ namespace LandTransfer.Controllers
             landtransfer.LocalityList = await _landTransferService.GetAllLocalityList(landtransfer.DivisionId);
             if (ModelState.IsValid)
             {
-                //string FileName = "";
-                //string filePath = "";
-                targetPathLayout = _configuration.GetSection("FilePaths:PropertyRegistration:CopyOfOrderDoc").Value.ToString();
+                targetPathLayout = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 if (landtransfer.CopyofOrder != null)
                 {
                     FileHelper file = new FileHelper();
                     landtransfer.CopyofOrderDocPath = file.SaveFile(targetPathLayout, landtransfer.CopyofOrder);
-
-                    //if (!Directory.Exists(targetPathLayout))
-                    //{
-                    //    DirectoryInfo directoryInfo = Directory.CreateDirectory(targetPathLayout);
-                    //}
-                    //FileName = Guid.NewGuid().ToString() + "_" + landtransfer.CopyofOrder.FileName;
-                    //filePath = Path.Combine(targetPathLayout, FileName);
-                    //using (var stream = new FileStream(filePath, FileMode.Create))
-                    //{
-                    //    landtransfer.CopyofOrder.CopyTo(stream);
-                    //}
-                    //landtransfer.CopyofOrderDocPath = filePath;
                 }
                 var result = await _landTransferService.Create(landtransfer);
 
@@ -131,25 +117,11 @@ namespace LandTransfer.Controllers
             Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             if (ModelState.IsValid)
             {
-                //string FileName = "";
-                //string filePath = "";
-                targetPathLayout = _configuration.GetSection("FilePaths:PropertyRegistration:CopyOfOrderDoc").Value.ToString();
+                targetPathLayout = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 if (landtransfer.CopyofOrder != null)
                 {
                     FileHelper file = new FileHelper();
                     landtransfer.CopyofOrderDocPath = file.SaveFile(targetPathLayout, landtransfer.CopyofOrder);
-                   
-                    //if (!Directory.Exists(targetPathLayout))
-                    //{
-                    //    DirectoryInfo directoryInfo = Directory.CreateDirectory(targetPathLayout);
-                    //}
-                    //FileName = Guid.NewGuid().ToString() + "_" + landtransfer.CopyofOrder.FileName;
-                    //filePath = Path.Combine(targetPathLayout, FileName);
-                    //using (var stream = new FileStream(filePath, FileMode.Create))
-                    //{
-                    //    landtransfer.CopyofOrder.CopyTo(stream);
-                    //}
-                    //landtransfer.CopyofOrderDocPath = filePath;
                 }
                 var result = await _landTransferService.Update(id, landtransfer);
                 if (result == true)
