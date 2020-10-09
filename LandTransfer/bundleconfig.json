@@ -40,5 +40,17 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ReportofLandTransferPropertyNoWise.min.js",
+    "inputFiles": [
+      "wwwroot/js/ReportofLandTransferPropertyNoWise.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reportoflandtransferdepartmentwise.min.js",
+    "inputFiles": [
+      "wwwroot/js/reportoflandtransferdepartmentwise.js"
+    ]
   }
 ]

@@ -26,12 +26,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId==departmentId).ToListAsync();
+            List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId== departmentId && x.IsActive == 1).ToListAsync();
             return zoneList;
         }
         public async Task<List<Department>> GetAllDepartment()
         {
-            List<Department> departmentList = await _dbContext.Department.ToListAsync();
+            List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
         public async Task<bool> AnyName(int id, string name)
@@ -51,7 +51,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Division>> GetAllDivisionList(int zone)
         {
-            var data = await _dbContext.Division.Where(x => x.ZoneId==zone).ToListAsync();
+            var data = await _dbContext.Division.Where(x => x.ZoneId== zone && x.IsActive == 1).ToListAsync();
             return data;
         }
     }
