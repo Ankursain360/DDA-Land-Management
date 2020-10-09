@@ -19,13 +19,20 @@ namespace SiteMaster.Controllers
     public class UserManagementController : BaseController
     {
         private readonly IUserService _userService;
+        private readonly IDepartmentService _departmentService;
+        private readonly IZoneService _zoneService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserManagementController(IUserService userService, UserManager<ApplicationUser> userManager)
+        public UserManagementController(IUserService userService,
+            IDepartmentService departmentService,
+            IZoneService zoneService,
+            UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
+            _departmentService = departmentService;
+            _zoneService = zoneService;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         { 
             return View();
         }

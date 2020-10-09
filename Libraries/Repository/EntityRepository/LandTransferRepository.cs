@@ -65,5 +65,24 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
+        public async Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover)
+        {
+            //(handedover == 1 ? x.HandedOverDepartmentId : 1)
+            var data = await _dbContext.Landtransfer
+               .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .OrderByDescending(x => x.Id)
+
+                .Where(x => (x.HandedOverDepartmentId == handedover)
+              ).ToListAsync();
+            return data;
+        }
+
+
+
+
     }
 }
