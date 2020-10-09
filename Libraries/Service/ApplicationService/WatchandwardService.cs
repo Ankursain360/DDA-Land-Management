@@ -56,7 +56,21 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _watchandwardRepository.FindBy(a => a.Id == id);
             Watchandward model = result.FirstOrDefault();
-            //model.Name = page.Name;
+           
+            model.Date= watchandward.Date;
+            model.VillageId= watchandward.VillageId;
+            model.KhasraId= watchandward.KhasraId;
+            model.Landmark= watchandward.Landmark;
+            model.Encroachment= watchandward.Encroachment;
+            model.StatusOnGround= watchandward.StatusOnGround;
+          
+            model.PhotoPath= watchandward.Photo != null ? watchandward.PhotoPath : model.PhotoPath;
+            model.ReportFiletPath = watchandward.ReportFile != null ? watchandward.ReportFiletPath : model.ReportFiletPath;
+
+            
+            model.Remarks= watchandward.Remarks;
+            model.IsActive = watchandward.IsActive;
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _watchandwardRepository.Edit(model);
@@ -71,6 +85,7 @@ namespace Libraries.Service.ApplicationService
             _watchandwardRepository.Add(watchandward);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
         //public async Task<List<Module>> GetAllModule()
         //{
         //    List<Module> moduleList = await _pageRepository.GetAllModule();
