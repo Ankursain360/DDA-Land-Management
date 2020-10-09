@@ -15,6 +15,7 @@ using SiteMaster.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 
 using SiteMaster.Filters;
+using Service.Common;
 
 namespace SiteMaster
 {
@@ -58,6 +59,8 @@ namespace SiteMaster
                 options.Cookie.IsEssential = true;
             });
             services.RegisterDependency();
+
+            services.AddAutoMapperSetup();
 
 #if DEBUG
             if (HostEnvironment.IsDevelopment())
