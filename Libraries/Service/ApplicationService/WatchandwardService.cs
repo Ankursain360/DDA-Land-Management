@@ -23,11 +23,22 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _watchandwardRepository = watchandwardRepository;
         }
+       
+        public async Task<List<Village>> GetAllVillage()
+        {
+            List<Village> villageList = await _watchandwardRepository.GetAllVillage();
+            return villageList;
+        }
+        public async Task<List<Khasra>> GetAllKhasra()
+        {
+            List<Khasra> khasraList = await _watchandwardRepository.GetAllKhasra();
+            return khasraList;
+        }
 
-        //public async Task<List<Watchandward>> GetAllWatchandward()
-        //{
-        //    return await _watchandwardRepository.GetAllWatchandward();
-        //}
+        public async Task<List<Watchandward>> GetAllWatchandward()
+        {
+            return await _watchandwardRepository.GetAllWatchandward();
+        }
 
         public async Task<List<Watchandward>> GetWatchandwardUsingRepo()
         {

@@ -10,9 +10,10 @@ namespace Libraries.Service.IApplicationService
    
     public interface IWatchandwardService : IEntityService<Watchandward>
     {
-        //Task<List<Watchandward>> GetAllWatchandward();
+        Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Watchandward>> GetWatchandwardUsingRepo();
-        //Task<List<Module>> GetAllModule(); // To Get all data added by ishu
+        Task<List<Khasra>> GetAllKhasra();
+        Task<List<Village>> GetAllVillage();
         Task<bool> Update(int id, Watchandward watchandward);
 
         Task<bool> Create(Watchandward watchandward);

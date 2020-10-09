@@ -5,6 +5,7 @@ using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -25,15 +26,23 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Watchandward.ToListAsync();
         }
-        //public async Task<List<Page>> GetAllPage()
-        //{
-        //    return await _dbContext.Page.Include(x => x.Module).ToListAsync();
-        //}
-        //public async Task<List<Module>> GetAllModule()
-        //{
-        //    List<Module> moduleList = await _dbContext.Module.ToListAsync();
-        //    return moduleList;
-        //}
+        public async Task<List<Watchandward>> GetAllWatchandward()
+        {
+            return await _dbContext.Watchandward.Include(x => x.Village)
+                .Include(x => x.Khasra)
+                .ToListAsync();
+        }
+        public async Task<List<Khasra>> GetAllKhasra()
+        {
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
+            return khasraList;
+        }
+        public async Task<List<Village>> GetAllVillage()
+        {
+            List<Village> villagelist = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
+            return villagelist;
+        }
+
 
 
     }
