@@ -31,17 +31,27 @@ namespace LandTransfer.Controllers
         //    return View();
         //}
 
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    Landtransfer model = new Landtransfer();
+        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
+        //     return View(model);
+        //}
+
+
+        public async Task<IActionResult> Create()
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landTransferService.GetAllDepartment();
-             return View(model);
+            return View(model);
         }
 
 
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
+
+
+        public async Task<PartialViewResult> GetDetails(int handedover)
         {
-            var result = await _landTransferService.GetLandTransferReportData(department, zone, division, locality);
+            var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
 
             if (result != null)
             {
