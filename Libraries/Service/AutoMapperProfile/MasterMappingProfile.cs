@@ -12,6 +12,8 @@ namespace Service.AutoMapperProfile
         public MasterMappingProfile()
         {
             CreateMap<Country, CoutryDto>().ReverseMap();
+            CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<Zone, ZoneDto>().ReverseMap();
         }
     }
 }

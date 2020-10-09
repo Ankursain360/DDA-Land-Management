@@ -23,6 +23,9 @@ namespace Dto.Master
         public string ConfirmPassword { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        //public List<Department> DepartmentList { get; set; }
+        public int DepartmentId { get; set; }
+        public List<DepartmentDto> DepartmentList { get; set; }
+        public int ZoneId { get; set; }
+        public List<ZoneDto> ZoneList { get; set; }
     }
 }

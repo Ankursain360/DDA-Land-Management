@@ -13,6 +13,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Microsoft.AspNetCore.Identity;
 using Model.Entity;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
@@ -33,28 +34,27 @@ namespace SiteMaster.Controllers
             _userManager = userManager;
         }
         public IActionResult Index()
-        { 
+        {
             return View();
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
         {
-            
+
             var result = await _userService.GetPagedUser(model);
-            
+
             return PartialView("_List", result);
         }
 
 
         public async Task<IActionResult> Create()
         {
-            User user = new User();
-            user.IsActive = 1;
-            user.DepartmentList = await _userService.GetAllDepartment();
-            user.RoleList = await _userService.GetAllRole();
-
-            return View(user);
+            AddUserDto model = new AddUserDto() {
+                //DepartmentList = await _departmentService.GetAllDepartment(),
+                //ZoneList = await _zoneService.
+            };
+            return View(model);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,21 +75,21 @@ namespace SiteMaster.Controllers
                         PasswordSetDate = DateTime.Now.AddDays(30),
 
 
-                    }, "Password"); 
+                    }, "Password");
 
-                   if (result1.Succeeded)
-                      // if (result1)
-                        {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            var list = await _userService.GetAllUser();
+                    if (result1.Succeeded)
+                    // if (result1)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _userService.GetAllUser();
 
-                            return View("Index", list);
-                        }
-                        else
-                        {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                            return View(user);
-                        }
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(user);
+                    }
                 }
                 else
                 {
@@ -116,7 +116,7 @@ namespace SiteMaster.Controllers
                 return Json($"User: {loginname} already exist");
             }
         }
-  
+
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -126,12 +126,12 @@ namespace SiteMaster.Controllers
 
             if (Data.Password == "123")
             {
-               
+
                 Data.defaultpassword = true;
             }
             else
             {
-              
+
                 Data.defaultpassword = false;
             }
 

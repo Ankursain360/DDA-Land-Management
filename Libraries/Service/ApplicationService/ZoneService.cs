@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using System;
-using Libraries.Model;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
+using Dto.Master;
+using AutoMapper;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -18,19 +18,28 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IZoneRepository _zoneRepository;
-        
-        public ZoneService(IUnitOfWork unitOfWork, IZoneRepository zoneRepository)
+        private readonly IMapper _mapper;
+        public ZoneService(IUnitOfWork unitOfWork,
+            IZoneRepository zoneRepository,
+            IMapper mapper)
         : base(unitOfWork, zoneRepository)
         {
             _unitOfWork = unitOfWork;
             _zoneRepository = zoneRepository;
-           
+            _mapper = mapper;
         }
         public async Task<List<Zone>> GetAllDetails()
         {
             return await _zoneRepository.GetAllDetails();
         }
-      
+
+        public async Task<List<ZoneDto>> GetZone()
+        {
+            var zones = await _zoneRepository.FindBy(a => a.IsActive == 1);
+            var result = _mapper.Map<List<ZoneDto>>(zones);
+            return result;
+        }
+
         public async Task<List<Department>> GetDropDownList()
         {
             List<Department> departmentList = await _zoneRepository.GetDepartmentList();
