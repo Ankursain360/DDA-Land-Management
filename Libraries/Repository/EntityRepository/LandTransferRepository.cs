@@ -82,7 +82,11 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
-
+        public async Task<List<Landtransfer>> GetAllHandoverDepartment()
+        {
+            List<Landtransfer> handeoverdepartmentlist = await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
+            return handeoverdepartmentlist;
+        }
+     
     }
 }

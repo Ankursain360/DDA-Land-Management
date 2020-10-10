@@ -126,5 +126,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetLandTransferReportDepartmentwise(handedover);
         }
+
+        public async Task<List<Landtransfer>> GetAllHandoverDepartment()
+        {
+            List<Landtransfer> handeoverdepartmentlist = await _landTransferRepository.GetAllHandoverDepartment();
+            return handeoverdepartmentlist;
+        }
     }
 }

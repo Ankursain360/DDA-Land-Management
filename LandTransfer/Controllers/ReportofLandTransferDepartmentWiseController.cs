@@ -26,6 +26,12 @@ namespace LandTransfer.Controllers
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
                    }
 
+        async Task handedoverdepartment(Landtransfer landtransfer)
+        {
+
+            landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+        }
+
         //public IActionResult Index()
         //{
         //    return View();
@@ -43,6 +49,8 @@ namespace LandTransfer.Controllers
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landTransferService.GetAllDepartment();
+            model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+
             return View(model);
         }
 
