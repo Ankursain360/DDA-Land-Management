@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ILandTransferService
+    public interface ILandTransferService: IEntityService<Landtransfer>
     {
         Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen
         Task<List<Department>> GetAllDepartment(); // To Get all data added by Praveen

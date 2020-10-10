@@ -40,5 +40,6 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public ICollection<Landtransfer> Landtransfers { get; set; }
+        public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
     }
 }
