@@ -51,34 +51,30 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Create()
         {
             AddUserDto model = new AddUserDto() {
-                //DepartmentList = await _departmentService.GetAllDepartment(),
-                //ZoneList = await _zoneService.
+                DepartmentList = await _departmentService.GetDepartment(),
+                ZoneList = await _zoneService.GetZone()
             };
             return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ApplicationUser user)
+        public async Task<IActionResult> Create(AddUserDto model)
         {
             try
             {
-                user.DepartmentList = await _userService.GetAllDepartment();
-                user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
-                    //  var result1 = true;
                     var result1 = await _userManager.CreateAsync(new ApplicationUser()
                     {
-                        Email = user.Email,
-                        ZoneId = user.ZoneId,
-                        RoleId = user.RoleId,
+                        Email = model.Email,
+                        ZoneId = model.ZoneId,
+                        DepartmentId = model.DepartmentId,
+                        PhoneNumber = model.PhoneNumber,
                         PasswordSetDate = DateTime.Now.AddDays(30),
-
-
-                    }, "Password");
+                    }, model.Password);
 
                     if (result1.Succeeded)
-                    // if (result1)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _userService.GetAllUser();
@@ -88,20 +84,21 @@ namespace SiteMaster.Controllers
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(user);
+                        return View(model);
                     }
                 }
                 else
                 {
-                    return View(user);
+                    return View(model);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(user);
+                return View(model);
             }
         }
+
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> ExistLoginName(int Id, string loginname)

@@ -1,17 +1,13 @@
-﻿
+﻿@model IEnumerable<Libraries.Model.Entity.Watchandward>
+@{int rowNo = 0; }
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
                 <h6 class="pull-left" style="color:white;margin-top:5px;">Watch & Ward</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
@@ -21,65 +17,64 @@
 </div>
 <br />
 <br />
+
 <div>
-    @Html.ActionLink("Add New", "Create", "WatchWard", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+    @Html.ActionLink("Add New", "Create", "WatchWard", null, new { @class = "btn btn-primary pull-right dda-pageheading ", style = "margin-top: -10px;" })
 </div>
 <br />
 <br />
 <div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card">
-        <div style="overflow-x:auto;">
-            <table class="table table-responsive table-bordered table-card">
+    <div class="card  table-responsive table-card">
+        <table class="table  table-bordered table-card">
 
-                <thead class="thead">
-                    <tr class="myapp-hed1">
-                        <th>Sr.No</th>
-                        <th>Date</th>
-                        <th>Village</th>
-                        <th>Khasra No.</th>
-                        <th>Status on Ground</th>
-                        <th>Status</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    <tr>
-                        <td>1</td>
-                        <td>20-July-2020</td>
-                        <td>Narela</td>
-                        <td>515</td>
-                        <td>Status Found Correct</td>
-                        <td>Active</td>
-                        <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+            <thead class="thead">
+                <tr >
+                    <th>Sr.No</th>
+                    <th>Date</th>
+                    <th>Village</th>
+                    <th>Khasra No.</th>
+                    <th>Status on Ground</th>
+                    <th>PhotoPath</th>
+                    <th>ReportFilePath</th>
+                    <th>Remarks</th>
+                    <th>Status</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                @*@foreach (var item in Model.Results)*@
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                   
+                    <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
+                    <td>@item.Village.Name</td>
+                    <td>@item.Khasra.Name</td>
+                    <td>@item.StatusOnGround</td>
+                    <td>@item.PhotoPath</td>
+                    <td>@item.ReportFiletPath</td>
+                    <td>@item.Remarks</td>
+                    <td>
+                        @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                    </td>
+                    
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>20-July-2020</td>
-                        <td>Bajitpur</td>
-                        <td>543</td>
-                        <td>Status Found Correct</td>
-                        <td>Active</td>
-                        <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>20-July-2020</td>
-                        <td>Driyapur</td>
-                        <td>553</td>
-                        <td>Status Found Correct</td>
-                        <td>Active</td>
-                        <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+                    }
 
-                    </tr>
+            </tbody>
 
-                </tbody>
-
-            </table>
-        </div>
+        </table>
     </div>
 </div>
+
 <br />
 <br />
 
