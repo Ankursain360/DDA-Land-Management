@@ -9,6 +9,8 @@ using System.Linq;
 using System;
 using Libraries.Model;
 using Dto.Search;
+using AutoMapper;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -17,19 +19,29 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDepartmentRepository _departmentRepository;
-
-        public DepartmentService(IUnitOfWork unitOfWork, IDepartmentRepository departmentRepository)
+        private readonly IMapper _mapper;
+        public DepartmentService(IUnitOfWork unitOfWork,
+            IDepartmentRepository departmentRepository,
+            IMapper mapper)
         : base(unitOfWork, departmentRepository)
         {
             _unitOfWork = unitOfWork;
             _departmentRepository = departmentRepository;
-
+            _mapper = mapper;
         }
 
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _departmentRepository.GetAll();
         }
+
+        public async Task<List<DepartmentDto>> GetDepartment()
+        {
+            var departments = await _departmentRepository.FindBy(a => a.IsActive == 1);
+            var result = _mapper.Map<List<DepartmentDto>>(departments);
+            return result;
+        }
+
         public async Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model)
         {
             return await _departmentRepository.GetPagedDepartment(model);

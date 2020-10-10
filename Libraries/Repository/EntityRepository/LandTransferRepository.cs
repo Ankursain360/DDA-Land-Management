@@ -20,11 +20,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Department>> GetAllDepartment()
         {
-            return await _dbContext.Department.ToListAsync();
+            return await _dbContext.Department.Where(x=>x.IsActive==1).ToListAsync();
         }
         public async Task<List<Division>> GetAllDivision(int zoneId)
         {
-            return await _dbContext.Division.Where(x => x.ZoneId == zoneId).ToListAsync();
+            return await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
@@ -36,7 +36,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId).ToListAsync();
+            return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
         }
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
@@ -44,11 +44,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
         {
-            return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim()).ToListAsync();
+            return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim() && x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Landtransfer>> GetAllLandTransfer()
         {
-            return await _dbContext.Landtransfer.ToListAsync();
+            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {
@@ -65,5 +65,36 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
+        public async Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover)
+        {
+            //(handedover == 1 ? x.HandedOverDepartmentId : 1)
+            var data = await _dbContext.Landtransfer
+               .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .OrderByDescending(x => x.Id)
+
+                .Where(x => (x.HandedOverDepartmentId == handedover)
+              ).ToListAsync();
+            return data;
+        }
+
+        public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)
+        {
+            return await _dbContext.Landtransfer
+                 .Include(x => x.Locality)
+                 .Include(x => x.Department)
+                 .Include(x => x.Zone)
+                 .Include(x => x.Division)
+                 .OrderByDescending(x => x.Id)
+                 .Where(x => x.Id == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Landtransfer>> GetAllLandTransferList()
+        {
+            return await _dbContext.Landtransfer.Where(x=>x.IsActive==1).ToListAsync();
+        }
     }
 }

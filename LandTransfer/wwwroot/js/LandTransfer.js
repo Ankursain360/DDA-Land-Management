@@ -5,6 +5,8 @@
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#ZoneId").html(html);
+        $("#DivisionId").html('<option value="">Select</option>');
+        $("#LocalityId").html('<option value="">Select</option>');
     });
 };
 function onChangeZone(id) {
@@ -14,6 +16,7 @@ function onChangeZone(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#DivisionId").html(html);
+        $("#LocalityId").html('<option value="">Select</option>');
     });
 };
 function onChangeDivision(id) {

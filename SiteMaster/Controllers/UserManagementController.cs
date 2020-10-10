@@ -13,88 +13,92 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Microsoft.AspNetCore.Identity;
 using Model.Entity;
+using Dto.Master;
 
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : BaseController
     {
         private readonly IUserService _userService;
+        private readonly IDepartmentService _departmentService;
+        private readonly IZoneService _zoneService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserManagementController(IUserService userService, UserManager<ApplicationUser> userManager)
+        public UserManagementController(IUserService userService,
+            IDepartmentService departmentService,
+            IZoneService zoneService,
+            UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
+            _departmentService = departmentService;
+            _zoneService = zoneService;
             _userManager = userManager;
         }
-        public async Task<IActionResult> Index()
-        { 
+        public IActionResult Index()
+        {
             return View();
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
         {
-            
+
             var result = await _userService.GetPagedUser(model);
-            
+
             return PartialView("_List", result);
         }
 
 
         public async Task<IActionResult> Create()
         {
-            User user = new User();
-            user.IsActive = 1;
-            user.DepartmentList = await _userService.GetAllDepartment();
-            user.RoleList = await _userService.GetAllRole();
-
-            return View(user);
+            AddUserDto model = new AddUserDto() {
+                DepartmentList = await _departmentService.GetDepartment(),
+                ZoneList = await _zoneService.GetZone()
+            };
+            return View(model);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ApplicationUser user)
+        public async Task<IActionResult> Create(AddUserDto model)
         {
             try
             {
-                user.DepartmentList = await _userService.GetAllDepartment();
-                user.RoleList = await _userService.GetAllRole();
                 if (ModelState.IsValid)
                 {
-                    //  var result1 = true;
                     var result1 = await _userManager.CreateAsync(new ApplicationUser()
                     {
-                        Email = user.Email,
-                        ZoneId = user.ZoneId,
-                        RoleId = user.RoleId,
+                        Email = model.Email,
+                        ZoneId = model.ZoneId,
+                        DepartmentId = model.DepartmentId,
+                        PhoneNumber = model.PhoneNumber,
                         PasswordSetDate = DateTime.Now.AddDays(30),
+                    }, model.Password);
 
+                    if (result1.Succeeded)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _userService.GetAllUser();
 
-                    }, "Password"); 
-
-                   if (result1.Succeeded)
-                      // if (result1)
-                        {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            var list = await _userService.GetAllUser();
-
-                            return View("Index", list);
-                        }
-                        else
-                        {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                            return View(user);
-                        }
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(model);
+                    }
                 }
                 else
                 {
-                    return View(user);
+                    return View(model);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(user);
+                return View(model);
             }
         }
+
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> ExistLoginName(int Id, string loginname)
@@ -109,7 +113,7 @@ namespace SiteMaster.Controllers
                 return Json($"User: {loginname} already exist");
             }
         }
-  
+
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -119,12 +123,12 @@ namespace SiteMaster.Controllers
 
             if (Data.Password == "123")
             {
-               
+
                 Data.defaultpassword = true;
             }
             else
             {
-              
+
                 Data.defaultpassword = false;
             }
 

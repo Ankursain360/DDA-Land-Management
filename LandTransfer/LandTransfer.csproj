@@ -12,13 +12,16 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="wwwroot\js\common.min.js" />
+    <Content Remove="wwwroot\js\reportoflandtransferdivisionlocalitywisecreate.min.js" />
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\common.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\reportoflandtransferdivisionlocalitywisecreate.min.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="wwwroot\js\common.min.js" />
+    <None Include="wwwroot\js\reportoflandtransferdivisionlocalitywisecreate.min.js" />
   </ItemGroup>
 
 

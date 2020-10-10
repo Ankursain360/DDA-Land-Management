@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -10,6 +11,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IZoneService : IEntityService<Zone>
     {
+        Task<List<ZoneDto>> GetZone();
         Task<bool> Update(int id, Zone zone); // To Upadte Particular data added by renu
 
         Task<bool> Create(Zone zone);

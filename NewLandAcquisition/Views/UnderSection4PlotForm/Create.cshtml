@@ -3,12 +3,13 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">U/S-4 Plot Form</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
+        @*<div class="dda-topheading">*@
+        <div class="myapp-hed">
+        <div class="col-md-12">
+            <h6 class="pull-left" style="color:white;margin-top:5px;">U/S-4 Plot Form</h6>
+            <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
         </div>
+    </div>
     </div>
 </div>
 <br />
@@ -26,7 +27,8 @@
               
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
-                            <div class="dda-innerheading">
+                            @*<div class="dda-innerheading">*@
+                            <div class="panel-heading  myapp-hed1">
                                 <div class="col-md-12">
                                     <h6 class="pull-left" style="color:white;margin-top:5px;">U/S-4 Details</h6>
                                 </div>
@@ -64,12 +66,13 @@
                     <div id="Divclsification">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
-                                <div class=" dda-innerheading">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
+                                @*<div class=" dda-innerheading">*@
+                                    <div class="panel-heading  myapp-hed1">
+                                        <div class="col-md-12">
+                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                         </div></div>
                         <div class="form-row">
                             <div class="form-group col-md-4">
@@ -103,9 +106,13 @@
 
                         <div class="form-row ">
                             <div class="form-group col-md-12" style="margin-bottom:40px;">
-                                <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                @Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary dda-pageheading" })
+                                @*<input type="submit" value="Create" class="btn btn-primary dda-pageheading" />*@
+
+
+                                <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+                                @*@Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary dda-pageheading" })*@
+                                @Html.ActionLink("Back", "Index", "UnderSection4PlotForm", null, new { @class = "btn btn-primary myapp-hed1"})
+
                             </div>
                         </div>
 
