@@ -29,7 +29,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Zone>> GetAllZone()
         {
-            List<Zone> zoneList = await _dbContext.Zone.ToListAsync();
+            List<Zone> zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return zoneList;
         }
         public async Task<bool> Any(int id, string name)

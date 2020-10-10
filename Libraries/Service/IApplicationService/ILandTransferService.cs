@@ -18,6 +18,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Landtransfer Landtransfer);
         Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
+        Task<List<Landtransfer>> GetAllLandTransferList();
+        Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Landtransfer>> GetAllLandTransfer();

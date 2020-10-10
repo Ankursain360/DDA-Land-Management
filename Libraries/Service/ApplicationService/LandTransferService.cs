@@ -117,7 +117,7 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetAllLandTransfer();
         }
-       public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
+        public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {
             return await _landTransferRepository.GetLandTransferReportData(department, zone, division, locality);
         }
@@ -127,10 +127,14 @@ namespace Libraries.Service.ApplicationService
             return await _landTransferRepository.GetLandTransferReportDepartmentwise(handedover);
         }
 
-        public async Task<List<Landtransfer>> GetAllHandoverDepartment()
+        public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)
         {
-            List<Landtransfer> handeoverdepartmentlist = await _landTransferRepository.GetAllHandoverDepartment();
-            return handeoverdepartmentlist;
+            return await _landTransferRepository.GetLandTransferReportDataKhasraNumberWise(id);
+        }
+
+        public async Task<List<Landtransfer>> GetAllLandTransferList()
+        {
+            return await _landTransferRepository.GetAllLandTransferList();
         }
     }
 }

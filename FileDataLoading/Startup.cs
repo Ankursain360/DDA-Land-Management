@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using BotDetect.Web;
+//using BotDetect.Web;
 using Newtonsoft.Json.Serialization;
 using FileDataLoading.Models;
 using Microsoft.Extensions.Hosting;
@@ -92,7 +92,7 @@ namespace FileDataLoading
             app.UseSession();
             // app.UseMvc();
             app.UseCookiePolicy();
-            app.UseCaptcha(Configuration);
+            //app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

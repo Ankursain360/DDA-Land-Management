@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using SiteMaster.Controllers;
+using LandTransfer.Controllers;
 using Utility;
 using Utility.Helper;
 
@@ -175,8 +175,6 @@ namespace LandTransfer.Controllers
         }
         public async Task<PartialViewResult> GetHistoryDetails(string KhasraNo)
         {
-            try
-            {
                 var result = await _landTransferService.GetHistoryDetails(KhasraNo);
                 if (result != null)
                 {
@@ -187,11 +185,6 @@ namespace LandTransfer.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return PartialView();
                 }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
         public async Task<IActionResult> Download(int Id)
         {
