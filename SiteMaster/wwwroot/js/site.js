@@ -2,7 +2,13 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
+$(document).ready(function () {
+	$("#ddlActionType").attr("multiple","");
+	$("select").select2({
+		placeholder: "Select",
+		allowClear: true
+	});
+});
 function SuccessMessage(message) {
 	toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }
@@ -98,8 +104,7 @@ function HttpPut(url, dataType, payload, callback) {
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		DisplayLoader(false);
 		DisplayErrorMessages(jqXHR);
-	});
-}
+	});}
 
 function HttpDelete(url, dataType, callback) {
 	DisplayLoader(true);

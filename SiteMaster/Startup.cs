@@ -16,6 +16,10 @@ using System.IdentityModel.Tokens.Jwt;
 
 using SiteMaster.Filters;
 using Service.Common;
+using Libraries.Model.Entity;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace SiteMaster
 {
@@ -42,7 +46,10 @@ namespace SiteMaster
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
             services.Configure<CookieTempDataProviderOptions>(options =>
@@ -79,10 +86,12 @@ namespace SiteMaster
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddCookie("Cookies")
             .AddOpenIdConnect("oidc", options =>
             {
+                options.SignInScheme = "Cookies";
                 options.Authority = "https://localhost:5001";
 
                 options.ClientId = "mvc";

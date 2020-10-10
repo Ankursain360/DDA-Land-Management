@@ -2,6 +2,12 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
+$(document).ready(function () {
+	$("select").select2({
+		placeholder: "Select",
+		allowClear: true
+	});
+});
 
 function SuccessMessage(message) {
 	toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
