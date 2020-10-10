@@ -16,6 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Natureofencroachment>> GetAllNencroachment();
         Task<List<Reasons>> GetAllReasons();
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
-
+        Task<List<Khasra>> BindKhasra();
     }
 }
