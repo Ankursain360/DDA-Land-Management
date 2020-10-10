@@ -3,93 +3,15 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
- <ItemGroup>
-    <Compile Remove="bin\**" />
-    <Compile Remove="DataAccess\**" />
-    <Compile Remove="obj\**" />
-    <Content Remove="bin\**" />
-    <Content Remove="DataAccess\**" />
-    <Content Remove="obj\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <EmbeddedResource Remove="DataAccess\**" />
-    <EmbeddedResource Remove="obj\**" />
-    <None Remove="bin\**" />
-    <None Remove="DataAccess\**" />
-    <None Remove="obj\**" />
-  </ItemGroup>
+
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
-    <Content Remove="Views\Shared\Components\Pager\Pager.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
-    <None Include="Views\AnnexureA\Create.cshtml" />
-    <None Include="Views\AnnexureA\Index.cshtml" />
-    <None Include="Views\Complaint\Index.cshtml" />
-    <None Include="Views\Complaint\Report.cshtml" />
-    <None Include="Views\Dashboard\Index.cshtml" />
-    <None Include="Views\Demolation\Index.cshtml" />
-    <None Include="Views\Demolation\Report.cshtml" />
-    <None Include="Views\DemolitionReport2\Index.cshtml" />
-    <None Include="Views\DemolitionReport\Index.cshtml" />
-    <None Include="Views\EncroachmentRegister\Create.cshtml" />
-    <None Include="Views\EncroachmentRegister\EncroachmentRegisterApproval.cshtml" />
-    <None Include="Views\EncroachmentRegister\EncroachmentRegisterApprovalCreate.cshtml" />
-    <None Include="Views\EncroachmentRegister\Index.cshtml" />
-    <None Include="Views\EncroachmentReport\Index.cshtml" />
-    <None Include="Views\Home\Index.cshtml" />
-    <None Include="Views\Home\Privacy.cshtml" />
-    <None Include="Views\InspectionRegisterPeriodReport\Index.cshtml" />
-    <None Include="Views\Login\Create.cshtml" />
-    <None Include="Views\Login\ForgetPassword.cshtml" />
-    <None Include="Views\Shared\Components\Pager\Pager.cshtml" />
-    <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
-    <None Include="Views\WacthWardPeriodReport\Index.cshtml" />
-    <None Include="Views\WatchWard\Create.cshtml" />
-    <None Include="Views\WatchWard\Index.cshtml" />
-    <None Include="Views\WatchWard\WatchWardApproval.cshtml" />
-    <None Include="Views\WatchWard\WatchWardApprovalCreate.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\Create.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\Delete.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\Edit.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\Index.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\ViewDetails.cshtml" />
-    <None Include="Views\ZoneWiseUserMapping\_ViewStart.cshtml" />
-    <None Include="Views\_ViewImports.cshtml" />
-    <None Include="Views\_ViewStart.cshtml" />
-    <None Include="wwwroot\js\site.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js.map" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
-    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map" />
-    <None Include="wwwroot\lib\bootstrap\LICENSE" />
-    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
-    <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
-    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
-    <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
-    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
-    <None Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
-    <None Include="wwwroot\lib\jquery-validation\LICENSE.md" />
-    <None Include="wwwroot\lib\jquery\dist\jquery.js" />
-    <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
-    <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
   </ItemGroup>
 
-  
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
@@ -100,15 +22,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
-    <ProjectReference Include="..\Libraries\Service\Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="wwwroot\Admin\img\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Repository\Repository.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
