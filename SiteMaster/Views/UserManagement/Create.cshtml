@@ -1,103 +1,4 @@
-﻿@model Libraries.Model.Entity.ApplicationUser
-
-
-
-
-<style>
-    .alert-info {
-        color: #31708F;
-        background-color: rebeccapurple;
-        border-color: #BCE8F1;
-    }
-
-    .hedingcss {
-        background-color: rebeccapurple;
-    }
-
-    .panel-default > .panel-heading-custom {
-        background: #2c3091;
-        color: #fff;
-        height: 44px;
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    .alert-custom {
-        top: -10px;
-        color: #fff;
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-        position: relative;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .btn {
-        width: 143px !important;
-    }
-</style>
-
-
-<style>
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 40px;
-        height: 20px;
-    }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 11px;
-            left: 4px;
-            bottom: 2px;
-            background-color: white;
-            -webkit-transition: .4s;
-            transition: .4s;
-        }
-
-    input:checked + .slider {
-        background-color: #2196F3;
-    }
-
-    input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-    }
-
-    input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 20px;
-    }
-
-        .slider.round:before {
-            border-radius: 50%;
-        }
-</style>
-
-
+﻿@model Dto.Master.AddUserDto
 
 <div class="row">
     <div class="col-sm-12">
@@ -119,127 +20,58 @@
         <div class="panel-body">
             <form asp-action="Create" id="create_user">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                <div class="row">
+                    <div class="col-md-3 form-group">
+                        <label asp-for="Name" class="control-label lb-sm">Name</label>
+                        <input asp-for="Name" class="form-control form-control-sm" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="UserName" class="control-label lb-sm">User Name</label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="Email" class="control-label lb-sm">Email</label>
+                        <input asp-for="Email" class="form-control form-control-sm" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3 form-group">
+                        <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number</label>
+                        <input asp-for="PhoneNumber" class="form-control form-control-sm" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <label asp-for="Password" class="control-label lb-sm">Password<span style="color:red">*</span></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-3">
+                        <label asp-for="ConfirmPassword" class="control-label lb-sm">Confirm Password</label>
+                        <input asp-for="ConfirmPassword" class="form-control form-control-sm" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-3">
                         <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId"
+                                asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
                                 onchange="return onChange(this.options[this.selectedIndex].value);">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="RoleId ">Role   </label>
-                        <input asp-for="RoleId " class="form-control" />
-                        <span asp-validation-for="RoleId " class="text-danger"></span>
-
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">User Name  <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="UserName" />
-                        <span asp-validation-for="UserName" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Normalized User Name   <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="NormalizedUserName" />
-                        <span asp-validation-for="NormalizedUserName" class="text-danger"></span>
-                    </div>
-                </div>
-
-
-
-                <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Phone Number <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="PhoneNumber" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="PhoneNumberConfirmed">Phone Number Confirmed </label>
-                        <input asp-for="PhoneNumberConfirmed" class="form-control" />
-                        <span asp-validation-for="PhoneNumberConfirmed" class="text-danger"></span>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="Email">Email </label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="EmailConfirmed">EmailConfirmed </label>
-                        <input asp-for="EmailConfirmed" class="form-control" />
-                        <span asp-validation-for="EmailConfirmed" class="text-danger"></span>
-
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="NormalizedEmail">Normalized Email </label>
-                        <input asp-for="NormalizedEmail" class="form-control" />
-                        <span asp-validation-for="NormalizedEmail" class="text-danger"></span>
-
-                    </div>
-
-
-                </div>
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Password Set Date   <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="PasswordSetDate " type="date" />
-                        <span asp-validation-for="PasswordSetDate " class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Is Default Password    <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="IsDefaultPassword " />
-                        <span asp-validation-for="IsDefaultPassword " class="text-danger"></span>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Password    <span style="color:red">*</span></label>
-                        <input class="form-control" asp-for="PasswordHash " type="date" />
-                        <span asp-validation-for="PasswordHash " class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Confirm Password    <span style="color:red">*</span></label>
-                        <input class="form-control" />
-                        <span class="text-danger"></span>
-                    </div>
-
-                </div>
-
-                <br />
-                <br />
-
-
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label class="control-label lb-sm"> Status</label>
                         <select class="form-control dda-dropdown">
                             <option value="1">Active</option>
@@ -248,16 +80,15 @@
                         <span class="text-danger"></span>
                     </div>
                 </div>
-
-
-
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
-                        @Html.ActionLink("Back", "Index", "ApplicationUser", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                        <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
