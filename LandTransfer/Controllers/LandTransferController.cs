@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using SiteMaster.Controllers;
 
 namespace LandTransfer.Controllers
 {

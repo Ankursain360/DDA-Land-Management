@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 //using DDAPropertyREG.Models;
 //using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
 using Microsoft.AspNetCore.Mvc;
-using BotDetect.Web.Mvc;
+//using BotDetect.Web.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.EntityFrameworkCore;
