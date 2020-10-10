@@ -20,7 +20,6 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="Views\Shared\Components\Pager\Pager.cshtml" />
-    <Content Remove="Views\WatchWard\_List.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,7 +53,6 @@
     <None Include="Views\WatchWard\Index.cshtml" />
     <None Include="Views\WatchWard\WatchWardApproval.cshtml" />
     <None Include="Views\WatchWard\WatchWardApprovalCreate.cshtml" />
-    <None Include="Views\WatchWard\_List.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Create.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Delete.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Edit.cshtml" />
