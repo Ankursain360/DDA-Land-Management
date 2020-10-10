@@ -1,10 +1,4 @@
 ﻿@model Libraries.Model.Entity.Watchandward
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
 
 <div class="row">
     <div class="col-sm-12">
@@ -16,22 +10,20 @@
         </div>
     </div>
 </div>
-
-
 <br />
-
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
-
-
-
         <div class="panel-body">
-            <form asp-action="Create" enctype="multipart/form-data">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+
+
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
@@ -63,13 +55,7 @@
                         <input asp-for="Landmark" type="text" class="form-control" />
                     </div>
 
-                    @*<div class="form-group col-md-6">
-                <label class="control-label lb-sm">Status</label>
-                <select class="form-control">
-                    <option value="0">Active</option>
-                    <option value="1">Inactive</option>
-                </select>
-            </div>*@
+
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -102,7 +88,7 @@
                     </div>
                 </div>
                 <div class="form-row">
-                   
+
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
@@ -120,12 +106,10 @@
                     </div>
 
                 </div>
-
                 <div class="form-row">
-                    <div class="form-group col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary  dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-primary  dda-pageheading" })
+                    <div class="form-group col-md-12">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
             </form>
@@ -133,9 +117,11 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/watchward.js"></script>
+
+
+@*<environment include="Development">
+    <script src="~/js/LandTransfer.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/watchward.min.js" asp-append-version="true"></script>
-</environment>
+    <script src="~/js/LandTransfer.min.js" asp-append-version="true"></script>
+</environment>*@
