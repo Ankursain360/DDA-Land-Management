@@ -27,17 +27,17 @@ namespace EncroachmentDemolition.Controllers
             _watchandwardService = watchandwardService;
             _configuration = configuration;
         }
+       
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] WatchandwardSearchDto model)
         {
             var result = await _watchandwardService.GetPagedWatchandward(model);
             return PartialView("_List", result);
-        }
-
-        public async Task<IActionResult> Index()
-        {
-           // var result = await _watchandwardService.GetAllWatchandward();
-            return View();
         }
 
         public async Task<IActionResult> Create()
