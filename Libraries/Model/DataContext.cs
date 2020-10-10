@@ -87,6 +87,10 @@ namespace Libraries.Model
         // Encroachment demolition module:
 
         public virtual DbSet<Watchandward> Watchandward { get; set; }
+        public virtual DbSet<Onlinecomplaint> Onlinecomplaint { get; set; }
+        public virtual DbSet<Location> Location { get; set; }
+        public virtual DbSet<ComplaintType> ComplaintType { get; set; }
+
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -143,6 +147,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardConfiguration());
+            modelBuilder.ApplyConfiguration(new OnlinecomplaintConfiguration());
             base.OnModelCreating(modelBuilder);
 
 

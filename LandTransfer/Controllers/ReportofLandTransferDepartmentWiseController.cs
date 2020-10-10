@@ -26,11 +26,11 @@ namespace LandTransfer.Controllers
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
                    }
 
-        async Task handedoverdepartment(Landtransfer landtransfer)
-        {
+        //async Task handedoverdepartment(Landtransfer landtransfer)
+        //{
 
-            landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
-        }
+        //    landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+        //}
 
         //public IActionResult Index()
         //{
@@ -49,7 +49,7 @@ namespace LandTransfer.Controllers
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landTransferService.GetAllDepartment();
-            model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+          //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
 
             return View(model);
         }
