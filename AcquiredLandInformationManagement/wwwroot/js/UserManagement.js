@@ -3,10 +3,10 @@
     var ConfirmPassword = $("#ConfirmPassword").val();
     if (Password != '') {
         alert("Please Enter Password");
-        break;
+        return false;
     }
     if (Password != ConfirmPassword) {
         alert("Password Not Matched Please Enter Same Password");
-        break;
+        return false;
     }
 }

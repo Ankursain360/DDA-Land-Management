@@ -31,15 +31,44 @@ namespace LandTransfer.Controllers
         //    return View();
         //}
 
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    Landtransfer model = new Landtransfer();
+        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
+        //     return View(model);
+        //}
+
+
+        public async Task<IActionResult> Create()
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landTransferService.GetAllDepartment();
-            //model.ZoneList = await _landTransferService.GetAllZone(model.DepartmentId);
-            //model.DivisionList = await _landTransferService.GetAllDivisionList(model.ZoneId);
-            //model.LocalityList = await _landTransferService.GetAllLocalityList(model.DivisionId);
             return View(model);
         }
 
+
+
+
+        public async Task<PartialViewResult> GetDetails(int handedover)
+        {
+            var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
+
+            if (result != null)
+            {
+                return PartialView("Index", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+
+
+
+        }
+
+        }
+  
+    
+    
     }
-}

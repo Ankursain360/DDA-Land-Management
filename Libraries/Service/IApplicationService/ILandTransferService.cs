@@ -18,11 +18,15 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Landtransfer Landtransfer);
         Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
+        Task<List<Landtransfer>> GetAllLandTransferList();
+        Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Landtransfer>> GetAllLandTransfer();
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
-        Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo);// added by shalini
+        Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality);// added by shalini
+        Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+
     }
 }

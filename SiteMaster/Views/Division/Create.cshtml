@@ -89,6 +89,13 @@
     <script src="~/js/designationmastercreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/designationmastercreate.js" asp-append-version="true"></script>
+    <script src="~/js/designationmastercreate.min.js" asp-append-version="true"></script>
 </environment>
-<script src="~/js/divisionmaster.js"></script>
+
+<environment include="Development">
+    <script src="~/js/divisionmaster.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/divisionmaster.min.js" asp-append-version="true"></script>
+</environment>
+

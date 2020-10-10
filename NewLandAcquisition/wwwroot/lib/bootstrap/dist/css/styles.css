@@ -11,11 +11,11 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 .lb-sm {
-    font-size: 13px;
-    /* Font-size: 0.95rem;*/
+    /*font-size: 13px;*/
+    Font-size: 0.95rem;
     Font-Family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    display: inline;
+    font-weight:100;
+    display:inline;
 }
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -1083,8 +1083,7 @@ p.back-link {
   text-transform: uppercase; }
 
 /*myapp-hed*/
-/*.dda-topheading*/
-.myapp-hed {
+.dda-topheading {
     background-color: #2c3091;
     /*linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);*/
     Color: #ffffff;
@@ -1099,8 +1098,7 @@ p.back-link {
     height: 25px;
 }
 /*myapp-hed1*/
-/*.dda-pageheading*/
-.myapp-hed1 {
+.dda-pageheading {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
     Color: #ffffff;
     Font-size: 0.95rem;
@@ -1111,8 +1109,7 @@ p.back-link {
 }
 
 /*myapp-hed2*/
-/*.dda-innerheading*/
-.myapp-hed2 {
+.dda-innerheading {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
     Color: #ffffff;
     Font-size: 0.95rem;

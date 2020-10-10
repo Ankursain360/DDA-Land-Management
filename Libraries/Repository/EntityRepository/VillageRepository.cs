@@ -35,19 +35,19 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId==departmentId).ToListAsync();
+            List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId== departmentId && x.IsActive == 1).ToListAsync();
             return zoneList;
         }
 
         public async Task<List<Division>> GetAllDivisionList(int zoneId)
         {
-            List<Division> divisionList = await _dbContext.Division.Where(x => x.ZoneId == zoneId).ToListAsync();
+            List<Division> divisionList = await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
             return divisionList;
         }
 
         public async Task<List<Department>> GetAllDepartmentList()
         {
-            List<Department> departmentList = await _dbContext.Department.ToListAsync();
+            List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
     }

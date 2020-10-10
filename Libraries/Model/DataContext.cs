@@ -83,6 +83,12 @@ namespace Libraries.Model
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
         public virtual DbSet<Actions> Actions { get; set; }
+        /// <summary>
+        // Encroachment demolition module:
+
+        public virtual DbSet<Watchandward> Watchandward { get; set; }
+        /// </summary>
+        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -136,7 +142,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
+            modelBuilder.ApplyConfiguration(new WatchandwardConfiguration());
             base.OnModelCreating(modelBuilder);
+
+
+
         }
     }
 }

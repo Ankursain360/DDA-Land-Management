@@ -13,6 +13,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Controllers;
+using Utility;
+using Utility.Helper;
 
 namespace LandTransfer.Controllers
 {
@@ -55,24 +57,12 @@ namespace LandTransfer.Controllers
             landtransfer.LocalityList = await _landTransferService.GetAllLocalityList(landtransfer.DivisionId);
             if (ModelState.IsValid)
             {
-                string FileName = "";
-                string filePath = "";
-                targetPathLayout = _configuration.GetSection("FilePaths:PropertyRegistration:CopyOfOrderDoc").Value.ToString();
+                targetPathLayout = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 if (landtransfer.CopyofOrder != null)
                 {
-                    if (!Directory.Exists(targetPathLayout))
-                    {
-                        DirectoryInfo directoryInfo = Directory.CreateDirectory(targetPathLayout);
-                    }
-                    FileName = Guid.NewGuid().ToString() + "_" + landtransfer.CopyofOrder.FileName;
-                    filePath = Path.Combine(targetPathLayout, FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        landtransfer.CopyofOrder.CopyTo(stream);
-                    }
-                    landtransfer.CopyofOrderDocPath = filePath;
+                    FileHelper file = new FileHelper();
+                    landtransfer.CopyofOrderDocPath = file.SaveFile(targetPathLayout, landtransfer.CopyofOrder);
                 }
-
                 var result = await _landTransferService.Create(landtransfer);
 
                 if (result == true)
@@ -127,22 +117,11 @@ namespace LandTransfer.Controllers
             Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             if (ModelState.IsValid)
             {
-                string FileName = "";
-                string filePath = "";
-                targetPathLayout = _configuration.GetSection("FilePaths:PropertyRegistration:CopyOfOrderDoc").Value.ToString();
+                targetPathLayout = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 if (landtransfer.CopyofOrder != null)
                 {
-                    if (!Directory.Exists(targetPathLayout))
-                    {
-                        DirectoryInfo directoryInfo = Directory.CreateDirectory(targetPathLayout);
-                    }
-                    FileName = Guid.NewGuid().ToString() + "_" + landtransfer.CopyofOrder.FileName;
-                    filePath = Path.Combine(targetPathLayout, FileName);
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        landtransfer.CopyofOrder.CopyTo(stream);
-                    }
-                    landtransfer.CopyofOrderDocPath = filePath;
+                    FileHelper file = new FileHelper();
+                    landtransfer.CopyofOrderDocPath = file.SaveFile(targetPathLayout, landtransfer.CopyofOrder);
                 }
                 var result = await _landTransferService.Update(id, landtransfer);
                 if (result == true)
@@ -196,8 +175,6 @@ namespace LandTransfer.Controllers
         }
         public async Task<PartialViewResult> GetHistoryDetails(string KhasraNo)
         {
-            try
-            {
                 var result = await _landTransferService.GetHistoryDetails(KhasraNo);
                 if (result != null)
                 {
@@ -208,51 +185,13 @@ namespace LandTransfer.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return PartialView();
                 }
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
         }
         public async Task<IActionResult> Download(int Id)
         {
+            FileHelper file = new FileHelper();
             var Data =await _landTransferService.FetchSingleResult(Id);
             string filename = Data.CopyofOrderDocPath;
-            var memory = new MemoryStream();
-            using (var stream = new FileStream(filename, FileMode.Open))
-            {
-                await stream.CopyToAsync(memory);
-            }
-            memory.Position = 0;
-            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
-        #region Document Download added By Praeen 08 Oct 2020
-
-        private string GetContentType(string path)
-        {
-            var types = GetMimeTypes();
-            var ext = Path.GetExtension(path).ToLowerInvariant();
-            return types[ext];
-        }
-
-        private Dictionary<string, string> GetMimeTypes()
-        {
-            return new Dictionary<string, string>
-            {
-                {".txt", "text/plain"},
-                {".pdf", "application/pdf"},
-                {".doc", "application/vnd.ms-word"},
-                {".docx", "application/vnd.ms-word"},
-                {".xls", "application/vnd.ms-excel"},
-                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
-                {".png", "image/png"},
-                {".jpg", "image/jpeg"},
-                {".jpeg", "image/jpeg"},
-                {".gif", "image/gif"},
-                {".csv", "text/csv"}
-            };
-        }
-        #endregion
-
     }
 }
