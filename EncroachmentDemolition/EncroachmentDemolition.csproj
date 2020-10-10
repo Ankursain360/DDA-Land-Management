@@ -4,10 +4,18 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
  <ItemGroup>
+    <Compile Remove="bin\**" />
     <Compile Remove="DataAccess\**" />
+    <Compile Remove="obj\**" />
+    <Content Remove="bin\**" />
     <Content Remove="DataAccess\**" />
+    <Content Remove="obj\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="DataAccess\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="bin\**" />
     <None Remove="DataAccess\**" />
+    <None Remove="obj\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
@@ -100,6 +108,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Admin\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Libraries\Repository\Repository.csproj" />
+    <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
 
 </Project>

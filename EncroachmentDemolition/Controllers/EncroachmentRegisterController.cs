@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class EncroachmentRegisterController : Controller
+    public class EncroachmentRegisterController : BaseController
     {
         public IActionResult Index()
         {

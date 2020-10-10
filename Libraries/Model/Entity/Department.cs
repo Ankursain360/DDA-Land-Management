@@ -9,6 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class Department : AuditableEntity<int>
     {
+        public Department()
+        {
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+        }
         [Required]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
@@ -20,5 +24,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Locality> Locality { get; set; }
         [NotMapped]
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+
     }
 }
