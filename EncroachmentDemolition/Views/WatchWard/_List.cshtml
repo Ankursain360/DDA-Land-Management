@@ -1,0 +1,48 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Watchandward>
+@{int rowNo = 0; }
+<table class="table table-responsive table-bordered table-card">
+    <thead class="thead">
+        <tr>
+            <th>Sr.No</th>
+            <th>Date</th>
+            <th>Village</th>
+            <th>Khasra No.</th>
+            <th>Status on Ground</th>
+            <th>PhotoPath</th>
+            <th>ReportFilePath</th>
+            <th>Remarks</th>
+            <th>Status</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @foreach (var item in Model.Results)
+       
+        {
+            <tr>
+                <td>@(rowNo += 1)</td>
+
+                <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
+                <td>@item.Village.Name</td>
+                <td>@item.Khasra.Name</td>
+                <td>@item.StatusOnGround</td>
+                <td>@item.PhotoPath</td>
+                <td>@item.ReportFiletPath</td>
+                <td>@item.Remarks</td>
+                <td>
+                    @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                </td>
+
+                <td>
+                    <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

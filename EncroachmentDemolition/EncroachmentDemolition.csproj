@@ -11,6 +11,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="Views\Shared\Components\Pager\Pager.cshtml" />
+    <Content Remove="Views\WatchWard\_List.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,7 @@
     <None Include="Views\InspectionRegisterPeriodReport\Index.cshtml" />
     <None Include="Views\Login\Create.cshtml" />
     <None Include="Views\Login\ForgetPassword.cshtml" />
+    <None Include="Views\Shared\Components\Pager\Pager.cshtml" />
     <None Include="Views\Shared\Error.cshtml" />
     <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
     <None Include="Views\Shared\_Layout.cshtml" />
@@ -43,6 +46,7 @@
     <None Include="Views\WatchWard\Index.cshtml" />
     <None Include="Views\WatchWard\WatchWardApproval.cshtml" />
     <None Include="Views\WatchWard\WatchWardApprovalCreate.cshtml" />
+    <None Include="Views\WatchWard\_List.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Create.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Delete.cshtml" />
     <None Include="Views\ZoneWiseUserMapping\Edit.cshtml" />

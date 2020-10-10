@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -18,10 +19,18 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        //public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
-        //{
-        //    return await _dbContext.Page.GetPaged<Page>(model.PageNumber, model.PageSize);
-        //}
+      
+
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        {
+            return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
+                .Include(x => x.Village)
+                .Include(x => x.Khasra)
+                .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+        }
+
+
+
         public async Task<List<Watchandward>> GetWatchandward()
         {
             return await _dbContext.Watchandward.ToListAsync();
