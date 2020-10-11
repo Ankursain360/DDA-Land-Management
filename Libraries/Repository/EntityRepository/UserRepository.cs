@@ -35,6 +35,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<User>> GetUser()
         {
+            
             return await _dbContext.User.Include(x => x.District).Include(x=>x.Role).OrderByDescending(x => x.Id).ToListAsync();
         }
 
