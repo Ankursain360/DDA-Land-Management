@@ -40,6 +40,15 @@ namespace EncroachmentDemolition.Controllers
         //    }
         //    return View();
         //}
+
+        public async Task<IActionResult> Create()
+        {
+            //var CmplnDetails = await _context.TblOlComplaint.ToListAsync();
+
+            //return View(CmplnDetails.ToList());
+            return View();
+        }
+
         public async Task<IActionResult> Index()
         {
             //var CmplnDetails = await _context.TblOlComplaint.ToListAsync();

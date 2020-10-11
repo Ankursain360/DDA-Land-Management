@@ -5,7 +5,7 @@
            
             var url = '/ReportofLandTransferDepartmentWise/GetDetails'
           
-            var departmentid = $('#DepartmentId option:selected').val();
+            var departmentid = $('#HandedOverDepartmentId option:selected').val();
           
             var id = $('#Id option:selected').val();
             

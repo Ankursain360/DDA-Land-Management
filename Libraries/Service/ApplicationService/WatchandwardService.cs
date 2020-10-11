@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -103,10 +104,10 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        //public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
-        //{
-        //    return await _pageRepository.GetPagedPage(model);
-        //}
-
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        {
+            return await _watchandwardRepository.GetPagedWatchandward(model);
+        }
+      
     }
 }

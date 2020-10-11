@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using BotDetect.Web;
+//using BotDetect.Web;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -75,16 +75,16 @@ namespace CourtCasesManagement
                 options.Cookie.IsEssential = true;
             });
 
-//#if DEBUG
-//            if (HostEnvironment.IsDevelopment())
-//            {
-//                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-//            }
-//            else
-//            {
-//                services.AddControllersWithViews();
-//            }
-//#endif
+#if DEBUG
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            }
+            else
+            {
+                services.AddControllersWithViews();
+            }
+#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -109,7 +109,7 @@ namespace CourtCasesManagement
             app.UseSession();
             // app.UseMvc();
             app.UseCookiePolicy();
-            app.UseCaptcha(Configuration);
+            //app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

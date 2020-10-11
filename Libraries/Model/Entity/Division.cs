@@ -28,6 +28,7 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public ICollection<Landtransfer> Landtransfer { get; set; }
+        public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
 
     }
 }

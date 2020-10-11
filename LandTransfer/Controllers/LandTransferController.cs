@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using SiteMaster.Controllers;
+using LandTransfer.Controllers;
 using Utility;
 using Utility.Helper;
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Service.AutoMapperProfile;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,9 +10,9 @@ namespace Service.Common
     {
 		public static MapperConfiguration RegisterMappings()
 		{
-			return new MapperConfiguration(cfg =>
+			return new MapperConfiguration(config =>
 			{
-				
+				config.AddProfile(new MasterMappingProfile());	
 			});
 		}
 	}

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ILandTransferService
+    public interface ILandTransferService: IEntityService<Landtransfer>
     {
         Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen
         Task<List<Department>> GetAllDepartment(); // To Get all data added by Praveen
@@ -27,6 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality);// added by shalini
         Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+       /// Task<List<Landtransfer>> GetAllHandoverDepartment();
 
     }
 }

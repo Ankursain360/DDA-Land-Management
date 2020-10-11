@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                        <select asp-for="HandedOverDepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.handeoverdepartmentlist,"Id"))">
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
@@ -108,6 +108,21 @@
 
         var maxDate = year + '-' + month + '-' + day;
         //alert(maxDate);
+        $("#Handed_over").change(function () {
+            var id = $(this).val();
+            alert(id);
+            HttpGet(`/ReportofLandTransferDepartmentWise/handedoverdepartment/?id=${id}`, 'json', function (response) {
+                console.log(response);
+                var html = '<option value="">Select</option>';
+                //for (var i = 0; i < response.length; i++) {
+                //    html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+              //  }
+               // $("#ZoneId").html(html);
+               // $("#DivisionId").html('<option value="">Select</option>');
+               // $("#LocalityId").html('<option value="">Select</option>');
+            });
+        });
+
     });
 
 

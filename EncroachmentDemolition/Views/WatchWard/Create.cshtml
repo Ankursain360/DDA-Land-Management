@@ -1,4 +1,4 @@
-﻿
+﻿@model Libraries.Model.Entity.Watchandward
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -30,21 +30,19 @@
 
 
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
-                        <input type="date" id="txtDate" class="form-control" />
+                        <input asp-for="Date" type="date" id="txtDate" class="form-control" />
                     </div>
 
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Village Name</label><span style="color:red">*</span>
-                        <select class="form-control">
-                            <option value="0">---Select---</option>
-                            <option value="1">Har</option>
-                            <option value="2">Someother</option>
+                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                            <option>Select</option>
                         </select>
                     </div>
 
@@ -55,30 +53,28 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Har</option>
-                            <option value="2">Someother</option>
+                        <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                            <option>Select</option>
                         </select>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Land Mark</label><span style="color:red">*</span>
-                        <input type="text" class="form-control" />
+                        <input asp-for="Landmark" type="text" class="form-control" />
                     </div>
 
                     @*<div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Status</label>
-                            <select class="form-control">
-                                <option value="0">Active</option>
-                                <option value="1">Inactive</option>
-                            </select>
-                        </div>*@
+                <label class="control-label lb-sm">Status</label>
+                <select class="form-control">
+                    <option value="0">Active</option>
+                    <option value="1">Inactive</option>
+                </select>
+            </div>*@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select class="form-control" asp-for="Encroachment">
                             <option value="0">---Select---</option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
@@ -90,7 +86,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
-                        <textarea type="text" class="form-control"></textarea>
+                        <textarea asp-for="StatusOnGround" type="text" class="form-control"></textarea>
                     </div>
 
 
@@ -98,17 +94,29 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Photos</label>
-                        <input type="file" class="form-control" multiple />
+                        <input asp-for="Photo" type="file" class="form-control" multiple />
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Report</label>
-                        <input type="file" class="form-control" multiple />
+                        <input asp-for="ReportFile" type="file" class="form-control" multiple />
                     </div>
                 </div>
                 <div class="form-row">
+                   
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Status</label>
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
-                        <textarea type="text" class="form-control"></textarea>
+                        <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
                     </div>
 
                 </div>
