@@ -32,5 +32,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> InsertInDeletedProperty(Deletedproperty model);
         Task<bool> InsertInRestoreProperty(Restoreproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
+        Task<List<Department>> GetTakenDepartmentDropDownList();
+        Task<List<Department>> GetHandedDepartmentDropDownList();
     }
 }

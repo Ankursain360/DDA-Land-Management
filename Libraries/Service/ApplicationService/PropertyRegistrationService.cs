@@ -108,6 +108,7 @@ namespace Libraries.Service.ApplicationService
             model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
             model.GeoReferencing = propertyregistration.GeoReferencing;
             model.GeoFilePath = propertyregistration.GeoFilePath;
+            model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
             model.TakenOverName = propertyregistration.TakenOverName;
             model.TakenOverDate = propertyregistration.TakenOverDate;
             model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
@@ -115,6 +116,7 @@ namespace Libraries.Service.ApplicationService
             model.TakenOverLandlineNo = propertyregistration.TakenOverLandlineNo;
             model.TakenOverFilePath = propertyregistration.TakenOverFilePath;
             model.TakenOverComments = propertyregistration.TakenOverComments;
+            model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
             model.HandedOverName = propertyregistration.HandedOverName;
             model.HandedOverDate = propertyregistration.HandedOverDate;
             model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
@@ -242,6 +244,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
         {
             return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model,  UserId);
+        }
+
+        public async Task<List<Department>> GetTakenDepartmentDropDownList()
+        {
+            return  await _propertyregistrationRepository.GetTakenDepartmentDropDownList();
+        }
+
+        public async Task<List<Department>> GetHandedDepartmentDropDownList()
+        {
+            return await _propertyregistrationRepository.GetHandedDepartmentDropDownList();
         }
     }
 }
