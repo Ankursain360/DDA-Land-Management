@@ -21,5 +21,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<EncroachmentRegisteration>> GetPagedLandTransfer(EncroachmentRegisterationDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
+        Task<List<Khasra>> GetAllKhasraList(int localityId);
     }
 }

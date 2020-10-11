@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
+        Task<List<Khasra>> GetAllKhasraList(int localityId);
     }
 }

@@ -91,6 +91,7 @@ namespace Libraries.Model
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<ComplaintType> ComplaintType { get; set; }
         public virtual DbSet<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public virtual DbSet<DetailsOfEncroachment> DetailsOfEncroachments { get; set; }
 
         /// </summary>
         /// <param name="modelBuilder"></param>

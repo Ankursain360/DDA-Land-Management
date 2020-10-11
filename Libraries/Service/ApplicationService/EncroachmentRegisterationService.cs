@@ -103,5 +103,10 @@ namespace Libraries.Service.ApplicationService
             _encroachmentRegisterationRepository.Add(encroachmentRegisteration);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Khasra>> GetAllKhasraList(int localityId)
+        {
+            return await _encroachmentRegisterationRepository.GetAllKhasraList(localityId);
+        }
     }
 }
