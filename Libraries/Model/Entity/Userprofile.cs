@@ -1,8 +1,5 @@
 ﻿using Libraries.Model.Common;
 using Libraries.Model.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Model.Entity
 {
@@ -13,9 +10,12 @@ namespace Model.Entity
         public int? DistrictId { get; set; }
         public short? IsActive { get; set; }
         public int UserId { get; set; }
+        public int? DepartmentId { get; set; }
 
+        public virtual Department Department { get; set; }
         public virtual District District { get; set; }
         public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationRole Role { get; set; }
         public virtual Zone Zone { get; set; }
     }
 }

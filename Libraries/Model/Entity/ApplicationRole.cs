@@ -1,8 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
 
 namespace Model.Entity
 {
-    public class ApplicationRole : IdentityRole<int>
+    public partial class ApplicationRole : IdentityRole<int>
     {
+        public ApplicationRole()
+        {
+            Userprofile = new HashSet<Userprofile>();
+        }
+        public short IsActive { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int? ModifiedBy { get; set; }
+
+        public virtual ICollection<Userprofile> Userprofile { get; set; }
     }
 }

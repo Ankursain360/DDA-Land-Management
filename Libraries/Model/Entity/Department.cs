@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
 
 namespace Libraries.Model.Entity
 {
@@ -12,9 +13,11 @@ namespace Libraries.Model.Entity
         public Department()
         {
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            Propertyregistration = new HashSet<Propertyregistration>();
+            Userprofile = new HashSet<Userprofile>();
         }
+
         [Required]
-        //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
         
         public string Name { get; set; }
@@ -23,8 +26,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public virtual ICollection<Locality> Locality { get; set; }
         [NotMapped]
-        public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        public virtual ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
-
+        public virtual ICollection<Userprofile> Userprofile { get; set; }
     }
 }
