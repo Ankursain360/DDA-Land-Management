@@ -1,29 +1,25 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Model.Entity;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Libraries.Model.Common;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
-    public class ApplicationUser : IdentityUser<int> 
+    public partial class ApplicationUser : IdentityUser<int> 
     {
-        public int? DepartmentId { get; set; }
-        public int? ZoneId { get; set; }
-        public int? RoleId { get; set; }
-        public DateTime? PasswordSetDate { get; set; }
-        public string IsDefaultPassword { get; set; }
+        public ApplicationUser()
+        {
+            Userprofile = new HashSet<Userprofile>();
+        }
 
-        [NotMapped]
-        public List<Department> DepartmentList { get; set; }
-        public virtual Department Department { get; set; }
-        [NotMapped]
-        public List<Zone> ZoneList { get; set; }
-        public virtual Zone Zone { get; set; }
-        [NotMapped]
-        public List<Role> RoleList { get; set; }
-        public virtual Role Role { get; set; }
+        public DateTime? PasswordSetDate { get; set; }
+        public short? IsDefaultPassword { get; set; }
+        public string Name { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+        public int? ModifiedBy { get; set; }
+
+        public virtual ICollection<Userprofile> Userprofile { get; set; }
     }
 }
