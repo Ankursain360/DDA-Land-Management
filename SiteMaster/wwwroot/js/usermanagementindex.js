@@ -5,6 +5,18 @@ $(document).ready(function () {
     GetUser(currentPageNumber, currentPageSize);
 });
 
+$("#btnSearch").click(function () {
+    GetUser(currentPageNumber, currentPageSize);
+});
+
+$("#btnReset").click(function () {
+    $('#txtUserName').val('');
+    $('#txtName').val('');
+    $('#txtPhoneNumber').val('');
+    $('#txtEmail').val('')
+    GetUser(currentPageNumber, currentPageSize);
+});
+
 function GetUser(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/usermanagement/List`, 'html', param, function (response) {
@@ -15,7 +27,10 @@ function GetUser(pageNumber, pageSize) {
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
+        userName: $('#txtUserName').val(),
+        name: $('#txtName').val(),
+        phoneNumber: $('#txtPhoneNumber').val(),
+        email: $('#txtEmail').val(),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
