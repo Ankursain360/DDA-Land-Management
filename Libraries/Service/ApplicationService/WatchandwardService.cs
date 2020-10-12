@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -23,7 +24,7 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _watchandwardRepository = watchandwardRepository;
         }
-       
+
         public async Task<List<Village>> GetAllVillage()
         {
             List<Village> villageList = await _watchandwardRepository.GetAllVillage();
@@ -56,19 +57,19 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _watchandwardRepository.FindBy(a => a.Id == id);
             Watchandward model = result.FirstOrDefault();
-           
-            model.Date= watchandward.Date;
-            model.VillageId= watchandward.VillageId;
-            model.KhasraId= watchandward.KhasraId;
-            model.Landmark= watchandward.Landmark;
-            model.Encroachment= watchandward.Encroachment;
-            model.StatusOnGround= watchandward.StatusOnGround;
-          
-            model.PhotoPath= watchandward.Photo != null ? watchandward.PhotoPath : model.PhotoPath;
+
+            model.Date = watchandward.Date;
+            model.VillageId = watchandward.VillageId;
+            model.KhasraId = watchandward.KhasraId;
+            model.Landmark = watchandward.Landmark;
+            model.Encroachment = watchandward.Encroachment;
+            model.StatusOnGround = watchandward.StatusOnGround;
+
+            model.PhotoPath = watchandward.Photo != null ? watchandward.PhotoPath : model.PhotoPath;
             model.ReportFiletPath = watchandward.ReportFile != null ? watchandward.ReportFiletPath : model.ReportFiletPath;
 
-            
-            model.Remarks= watchandward.Remarks;
+
+            model.Remarks = watchandward.Remarks;
             model.IsActive = watchandward.IsActive;
 
             model.ModifiedDate = DateTime.Now;
@@ -92,7 +93,7 @@ namespace Libraries.Service.ApplicationService
         //    return moduleList;
         //}
 
-      
+
 
         public async Task<bool> Delete(int id)
         {
@@ -103,10 +104,21 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+
         //public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
         //{
         //    return await _pageRepository.GetPagedPage(model);
         //}
+        public async Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate)
+        {
+            return await _watchandwardRepository.GetWatchandwardReportData(village, fromdate, todate);
+        }
+
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        {
+            return await _watchandwardRepository.GetPagedWatchandward(model);
+        }
+
 
     }
 }

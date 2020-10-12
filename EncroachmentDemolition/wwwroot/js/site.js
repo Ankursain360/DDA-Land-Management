@@ -2,7 +2,12 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
+$(document).ready(function () {
+	$("select").select2({
+		placeholder: "Select",
+		allowClear: true
+	});
+});
 function SuccessMessage(message) {
 	toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }
@@ -117,3 +122,11 @@ function HttpDelete(url, dataType, callback) {
 		DisplayErrorMessages(jqXHR);
 	});
 }
+$('.numbers').keyup(function () {
+	this.value = this.value.replace(/[^0-9\.]/g, '');
+});
+
+$('.onlynumbers').keyup(function () {
+	var $th = $(this);
+	$th.val($th.val().replace(/[^0-9]/g, ''));
+});

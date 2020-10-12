@@ -52,7 +52,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         //element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        $("#tbl_posts #add .form-control").val('');
+        $("#tbl_posts #add .inputclass").val('');
+        $("#tbl_posts #add #dropdownlist")[0].selectedIndex = 0;
         $("#tbl_posts #add  .checkbox").prop("checked", false);
     }
     else {
@@ -127,7 +128,23 @@ function GetListData() {
         var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
         var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
-        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected").val();
+
+       // var parameterAction="";
+     //  var selected = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected");
+       // var selected = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected");
+       //// alert("Selected value is: " + $("select[name='ParameterActionList["+i+"]']").select2("val"));
+        //console.log(selected);
+        //selected.each(function ()  {
+        //    parameterAction += $(this).val() +  "," ;
+        //});
+        //parameterAction = parameterAction.slice(0, -1);
+        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
+        var list = $("Select[name='ParameterActionList[" + 0 + "]']").val();
+        alert(list);
+        alert(parameterAction);
+
+        //alert("You have selected the country - " + countries.join(", "));
+
         if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
             parameterSkip = true;
         }
@@ -179,4 +196,40 @@ function BindDropdown() {
         }
         
     });
+}
+
+//$("#ddlActionType").change(function () {
+//    var selections = (JSON.stringify($(test).select2('data')));
+//    console.log('Selected options: ' + selections);
+//    $('#selectedText').text(selections);
+//});
+//[{ "id": 2, "text": "duplicate" }, { "id": 3, "text": "invalid" }, { "id": 4, "text": "wontfix" }, { "id": 1, "text": "bug" }, { "id": 0, "text": "enhancement" }]
+
+//$(document).on('change', "select.drpactiontakenclass", function () {
+//    selectedItems = new Array();
+//    console.log(selectedItems);
+//    $(".ui-multiselect-menu input[name=multiselect_0]:checked").each(function () {
+//        if ($.inArray($(this).val(), selectedItems) != 0) {
+//            selectedItems.push($(this).val());
+//        }
+//    });
+//    console.log(selectedItems);
+//    var data = selectedItems.join(',');
+//    $(".live").val(data);
+//});
+
+function callDrop(element) {
+    var name = element.name;
+    selectedItems = new Array();
+    console.log(selectedItems);
+    $("Select[name='" + name + "']").each(function () {
+        if ($.inArray($(this).val(), selectedItems) != 0) {
+            selectedItems.push($(this).val());
+        }
+    });
+    console.log(selectedItems);
+    var data = selectedItems.join(',');
+    $(name).val(data);
+    var checklist = $("Select[name='ParameterActionList[" + 0 + "]']").val();
+    console.log(checklist);
 }

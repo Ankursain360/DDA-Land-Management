@@ -67,9 +67,8 @@ namespace SiteMaster.Controllers
                 {
                     var result1 = await _userManager.CreateAsync(new ApplicationUser()
                     {
+                        UserName = model.UserName,
                         Email = model.Email,
-                        ZoneId = model.ZoneId,
-                        DepartmentId = model.DepartmentId,
                         PhoneNumber = model.PhoneNumber,
                         PasswordSetDate = DateTime.Now.AddDays(30),
                     }, model.Password);

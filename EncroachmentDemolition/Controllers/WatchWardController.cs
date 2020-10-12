@@ -11,6 +11,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
+using Dto.Search;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class WatchWardController : Controller
@@ -25,10 +27,17 @@ namespace EncroachmentDemolition.Controllers
             _watchandwardService = watchandwardService;
             _configuration = configuration;
         }
-        public async Task<IActionResult> Index()
+       
+        public IActionResult Index()
         {
-            var result = await _watchandwardService.GetAllWatchandward();
-            return View(result);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] WatchandwardSearchDto model)
+        {
+            var result = await _watchandwardService.GetPagedWatchandward(model);
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()

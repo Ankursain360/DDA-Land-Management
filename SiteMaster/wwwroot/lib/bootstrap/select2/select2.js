@@ -1679,6 +1679,7 @@
 
                     this.$selection.on('mousedown', '.select2-selection__clear',
                         function (evt) {
+                            debugger;
                             self._handleClear(evt);
                         });
 
@@ -1690,6 +1691,7 @@
                 AllowClear.prototype._handleClear = function (_, evt) {
                     // Ignore the event if it is disabled
                     if (this.options.get('disabled')) {
+                        debugger;
                         return;
                     }
 

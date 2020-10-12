@@ -1,6 +1,7 @@
 ﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ILocalityService
+    public interface ILocalityService: IEntityService<Locality>
     {
         Task<List<Locality>> GetAllLocality(); // To Get all data added by Praveen
         Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen

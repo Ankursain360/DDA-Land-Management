@@ -43,5 +43,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
+        Task<List<Department>> GetTakenDepartmentDropDownList();
+        Task<List<Department>> GetHandedDepartmentDropDownList();
     }
 }

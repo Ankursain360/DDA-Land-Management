@@ -13,7 +13,6 @@ using Microsoft.Extensions.Hosting;
 using Libraries.Model;
 using SiteMaster.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
-
 using SiteMaster.Filters;
 using Service.Common;
 using Libraries.Model.Entity;

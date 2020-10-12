@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-   
+
     public interface IWatchandwardService : IEntityService<Watchandward>
     {
         Task<List<Watchandward>> GetAllWatchandward();
@@ -22,7 +24,12 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);
 
-       
+
+        Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
+
+
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+
     }
 }

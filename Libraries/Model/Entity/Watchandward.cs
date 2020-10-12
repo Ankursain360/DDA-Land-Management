@@ -30,5 +30,6 @@ namespace Libraries.Model.Entity
         public IFormFile Photo { get; set; }
         [NotMapped]
         public IFormFile ReportFile { get; set; }
+      
     }
 }
