@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-   
+
     public interface IWatchandwardService : IEntityService<Watchandward>
     {
         Task<List<Watchandward>> GetAllWatchandward();
@@ -25,6 +25,11 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
 
 
+        Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
+        //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
+
+
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+
     }
 }
