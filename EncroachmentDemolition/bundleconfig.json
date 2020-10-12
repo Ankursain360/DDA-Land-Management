@@ -124,5 +124,17 @@
     "inputFiles": [
       "wwwroot/js/EncroachmentRegisterCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/EncroachmentRegistraionIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/EncroachmentRegistraionIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/EncroachmentRegisterationView.min.js",
+    "inputFiles": [
+      "wwwroot/js/EncroachmentRegisterationView.js"
+    ]
   }
 ]

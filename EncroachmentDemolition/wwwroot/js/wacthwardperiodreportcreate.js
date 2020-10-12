@@ -6,12 +6,15 @@
 
             var villageid = $('#VillageId option:selected').val();
            
-            var id = $('#Id option:selected').val();
+            var fromDate = $('#txtFromDate').val();
+            var toDate = $('#txtToDate').val();
+           
 
             $('#LoadReportView').empty();
             $('#LoadReportView').load(url, {
-                village: villageid
-               
+                village: villageid,
+                fromdate: fromDate,
+                todate: toDate
             }).hide().fadeIn(1000);;
 
         });

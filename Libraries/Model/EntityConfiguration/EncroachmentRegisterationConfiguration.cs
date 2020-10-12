@@ -41,11 +41,6 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.EncrochmentDate).HasColumnType("date");
 
-                builder.Property(e => e.FirfilePath)
-                    .HasColumnName("FIRFilePath")
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
                 builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
                 builder.Property(e => e.IsPossession)
@@ -60,19 +55,9 @@ namespace Libraries.Model.EntityConfiguration
 
                 builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
-                builder.Property(e => e.LocationMapFilePath)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
-
                 builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
                 builder.Property(e => e.OtherDepartment).HasColumnType("int(11)");
-
-                builder.Property(e => e.PhotoFilePath)
-                    .IsRequired()
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
 
                 builder.Property(e => e.PoliceStation)
                     .HasMaxLength(100)
