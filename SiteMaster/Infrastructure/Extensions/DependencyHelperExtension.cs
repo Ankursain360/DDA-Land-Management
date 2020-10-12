@@ -6,6 +6,10 @@ using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Model.Entity;
 using Microsoft.AspNetCore.Identity;
+using Repository.IEntityRepository;
+using Repository.EntityRepository;
+using Service.IApplicationService;
+using Service.ApplicationService;
 
 namespace SiteMaster.Infrastructure.Extensions
 {
@@ -38,8 +42,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IClassificationOfLandRepository, ClassificationOfLandRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
-
-
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -63,6 +66,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IClassificationOfLandService, ClassificationOfLandService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
         }
     }
 }

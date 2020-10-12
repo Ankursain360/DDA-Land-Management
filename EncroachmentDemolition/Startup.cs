@@ -39,6 +39,7 @@ namespace EncroachmentDemolition
             // This method gets called by the runtime. Use this method to add services to the container.
             public void ConfigureServices(IServiceCollection services)
             {
+            services.AddControllersWithViews();
                 services.Configure<CookiePolicyOptions>(options =>
                 {
                     // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -50,27 +51,16 @@ namespace EncroachmentDemolition
                 services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
                 services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-
-                //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-                //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-
-                // services.AddMvc()
-                //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
                 services.AddSession();
-                services.AddMvc();
-                services.AddMvc().AddSessionStateTempDataProvider();
+            
+                
                 services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-                services.AddMvc().AddViewOptions(options =>
-                {
-                    //   options.SuppressTempDataAttributePrefix = true;
-                });
+                
                 services.Configure<CookieTempDataProviderOptions>(options =>
                 {
                     options.Cookie.Name = "MyTempDataCookie";
                 });
-                // services.AddScoped<ILogger, Logger>();
+                
                 // Add Session services.
                 services.AddSession(options =>
                 {
@@ -93,9 +83,8 @@ namespace EncroachmentDemolition
                     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                     app.UseHsts();
                 }
-                app.UseHttpsRedirection();
+                //app.UseHttpsRedirection();
                 app.UseStaticFiles();
-
                 app.UseRouting();
 
                 app.UseAuthorization();

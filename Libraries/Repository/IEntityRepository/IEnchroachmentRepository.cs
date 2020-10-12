@@ -14,9 +14,8 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Natureofencroachment>> GetAllNencroachment();
-        Task<List<Khasra>> BindKhasra();
         Task<List<Reasons>> GetAllReasons();
         Task<PagedResult<Enchroachment>> GetPagedEnchroachment(EnchroachmentSearchDto model);
-
+        Task<List<Khasra>> BindKhasra();
     }
 }

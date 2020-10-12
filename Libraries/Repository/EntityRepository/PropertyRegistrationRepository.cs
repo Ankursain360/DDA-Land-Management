@@ -251,10 +251,16 @@ namespace Libraries.Repository.EntityRepository
 
             }
         }
-    
-    
-    
-    
+
+        public async Task<List<Department>> GetTakenDepartmentDropDownList()
+        {
+            return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Department>> GetHandedDepartmentDropDownList()
+        {
+           return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+        }
     }
 
 

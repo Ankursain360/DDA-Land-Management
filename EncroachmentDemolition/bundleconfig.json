@@ -118,5 +118,11 @@
     "inputFiles": [
       "wwwroot/js/enabledisableuser.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/EncroachmentRegisterCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/EncroachmentRegisterCreate.js"
+    ]
   }
 ]

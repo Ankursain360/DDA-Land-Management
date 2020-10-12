@@ -82,11 +82,11 @@ $(document).ready(function () {
 
 
     //DropDrown check at initial 
-    var departmentid = $('#DepartmentId option:selected').val();
-    if (departmentid > 0) {
-        debugger;
-        GetZoneList(departmentid);
-    }
+    //var departmentid = $('#DepartmentId option:selected').val();
+    //if (departmentid > 0) {
+    //    debugger;
+    //    GetZoneList(departmentid);
+    //}
 })
 
 $(function () {

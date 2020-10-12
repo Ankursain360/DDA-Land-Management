@@ -13,6 +13,8 @@ namespace Libraries.Model
         {
 
         }
+
+        public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
@@ -90,6 +92,8 @@ namespace Libraries.Model
         public virtual DbSet<Onlinecomplaint> Onlinecomplaint { get; set; }
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<ComplaintType> ComplaintType { get; set; }
+        public virtual DbSet<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public virtual DbSet<DetailsOfEncroachment> DetailsOfEncroachments { get; set; }
 
         /// </summary>
         /// <param name="modelBuilder"></param>
@@ -148,6 +152,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardConfiguration());
             modelBuilder.ApplyConfiguration(new OnlinecomplaintConfiguration());
+            modelBuilder.ApplyConfiguration(new EncroachmentRegisterationConfiguration());
             base.OnModelCreating(modelBuilder);
 
 
