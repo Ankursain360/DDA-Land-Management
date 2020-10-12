@@ -19,11 +19,15 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IWatchandwardRepository, WatchandwardRepository>();
+            services.AddScoped<IOnlinecomplaintRepository, OnlinecomplaintRepository>();
+
 
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IWatchandwardService,WatchandwardService>();
+            services.AddScoped<IOnlinecomplaintService, OnlinecomplaintService>();
+
         }
     }
 }
