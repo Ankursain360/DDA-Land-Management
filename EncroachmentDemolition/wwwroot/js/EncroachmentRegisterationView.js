@@ -40,12 +40,38 @@ $(function () {
             $("#PossessionType").val("Physical Possession");
         }
     });
+    HttpGet(`/EncroachmentRegister/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
+            $("#tbl_posts #add #AreaApprox").val(data[i].area);
+            $("#tbl_posts #add #Type").val(data[i].type);
+            $("#tbl_posts #add #DateOfEncroachment").val(data[i].dateOfEncroachment);
+            $("#tbl_posts #add #ReferenceNoOnLocation").val(data[i].referenceNoOnLocation);
+            $("#tbl_posts #add #CountOfStructure").val(data[i].countOfStructure);
+            if (i < data.length - 1) {
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
+            }
+        }
+    });
 });
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
     if ($("#tbl_posts #add #NameOfStructure").val() != '' && $("#tbl_posts #add #AreaApprox").val() != '' && $("#tbl_posts #add #Type").val() != ''
         && $("#tbl_posts #add #DateOfEncroachment").val() != '' && $("#tbl_posts #add #ReferenceNoOnLocation").val() != '' && $("#tbl_posts #add #CountOfStructure").val() != ''
-      ) {
+    ) {
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
