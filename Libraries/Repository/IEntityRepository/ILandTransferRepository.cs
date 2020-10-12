@@ -20,5 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<List<Landtransfer>> GetAllLandTransferList();
+        Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id);
     }
 }

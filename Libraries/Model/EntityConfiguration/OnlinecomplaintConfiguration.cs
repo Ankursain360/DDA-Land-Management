@@ -45,6 +45,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Email)
+              .HasMaxLength(100)
+              .IsUnicode(false);
+
             builder.Property(e => e.PhotoPath)
                 .HasMaxLength(500)
                 .IsUnicode(false);

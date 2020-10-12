@@ -27,7 +27,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality);// added by shalini
         Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
-       /// Task<List<Landtransfer>> GetAllHandoverDepartment();
+        Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id);
+
+        /// Task<List<Landtransfer>> GetAllHandoverDepartment();
 
     }
 }
