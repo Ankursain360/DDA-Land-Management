@@ -107,6 +107,9 @@ namespace Libraries.Service.ApplicationService
         //{
         //    return await _pageRepository.GetPagedPage(model);
         //}
-
+        public async Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate)
+        {
+            return await _watchandwardRepository.GetWatchandwardReportData(village, fromdate, todate);
+        }
     }
 }

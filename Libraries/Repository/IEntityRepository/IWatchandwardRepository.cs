@@ -14,6 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetAllKhasra();
+        Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
     }
 }

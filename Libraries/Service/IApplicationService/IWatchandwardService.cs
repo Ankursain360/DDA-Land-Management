@@ -22,7 +22,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);
 
-       
+        Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
     }
 }
