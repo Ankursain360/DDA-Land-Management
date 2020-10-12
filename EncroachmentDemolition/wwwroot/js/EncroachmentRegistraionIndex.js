@@ -23,11 +23,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetLocality(pageNo, currentPageSize);
+    GetLandTransfer(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetLocality(currentPageNumber, pageSize);
+    GetLandTransfer(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

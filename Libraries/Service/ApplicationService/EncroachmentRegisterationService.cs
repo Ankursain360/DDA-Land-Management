@@ -113,9 +113,9 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.SaveDetailsOfEncroachment(detailsOfEncroachment);
         }
 
-        public async Task<bool> DeleteDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachments)
+        public async Task<bool> DeleteDetailsOfEncroachment(int Id)
         {
-            return await _encroachmentRegisterationRepository.DeleteDetailsOfEncroachment(detailsOfEncroachments);
+            return await _encroachmentRegisterationRepository.DeleteDetailsOfEncroachment(Id);
         }
 
         public async Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails)
@@ -126,9 +126,9 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.SaveEncroachmentFirFileDetails(encroachmentFirFileDetails);
         }
 
-        public async Task<bool> DeleteEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails)
+        public async Task<bool> DeleteEncroachmentFirFileDetails(int Id)
         {
-            return await _encroachmentRegisterationRepository.DeleteEncroachmentFirFileDetails(encroachmentFirFileDetails);
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentFirFileDetails(Id);
         }
 
         public async Task<bool> SaveEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails)
@@ -139,9 +139,9 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.SaveEncroachmentPhotoFileDetails(encroachmentPhotoFileDetails);
         }
 
-        public async Task<bool> DeleteEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails)
+        public async Task<bool> DeleteEncroachmentPhotoFileDetails(int Id)
         {
-            return await _encroachmentRegisterationRepository.DeleteEncroachmentPhotoFileDetails(encroachmentPhotoFileDetails);
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentPhotoFileDetails(Id);
         }
 
         public async Task<bool> SaveEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails)
@@ -152,9 +152,9 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.SaveEncroachmentLocationMapFileDetails(encroachmentLocationMapFileDetails);
         }
 
-        public async Task<bool> DeleteEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails)
+        public async Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id)
         {
-            return await _encroachmentRegisterationRepository.DeleteEncroachmentLocationMapFileDetails(encroachmentLocationMapFileDetails);
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentLocationMapFileDetails(Id);
         }
 
         public async Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int Id)

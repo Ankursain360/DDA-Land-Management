@@ -23,13 +23,13 @@ namespace Libraries.Service.IApplicationService
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
-        Task<bool> DeleteDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachments);
+        Task<bool> DeleteDetailsOfEncroachment(int Id);
         Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails);
-        Task<bool> DeleteEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails);
+        Task<bool> DeleteEncroachmentFirFileDetails(int Id);
         Task<bool> SaveEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails);
-        Task<bool> DeleteEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails);
+        Task<bool> DeleteEncroachmentPhotoFileDetails(int Id);
         Task<bool> SaveEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails);
-        Task<bool> DeleteEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails);
+        Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
         Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId);
         Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int encroachmentId);
         Task<EncroachmentLocationMapFileDetails> GetEncroachmentLocationMapFileDetails(int encroachmentId);

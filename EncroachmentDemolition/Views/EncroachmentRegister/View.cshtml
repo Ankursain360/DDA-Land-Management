@@ -185,15 +185,8 @@
                                     <a asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
                                     <br />
                                 }
-                                <input type="file" asp-for="Firfile" id="Firfile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="Firfile" class="text-danger"></span>
                             }
-                            else
-                            {
-                                <input type="file" asp-for="Firfile" id="Firfile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="Firfile" class="text-danger"></span>
-                            }
-                         }
+                        }
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Police Station</label>
@@ -216,16 +209,9 @@
                                 <br />
                                 foreach (var item in Model.EncroachmentLocationMapFileDetails)
                                 {
-                                     <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
+                                    <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
                                     <br />
                                 }
-                                <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="LocationMapFile" class="text-danger"></span>
-                            }
-                            else
-                            {
-                                <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="LocationMapFile" class="text-danger"></span>
                             }
                         }
                     </div>
@@ -242,13 +228,6 @@
                                     <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(PhotoFile += 1 ))</a>
                                     <br />
                                 }
-                                <input type="file" class="form-control" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="PhotoFile" class="text-danger"></span>
-                            }
-                            else
-                            {
-                                <input type="file" class="form-control" asp-for="PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="PhotoFile" class="text-danger"></span>
                             }
                         }
                     </div>
@@ -262,7 +241,6 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "EncroachmentRegister", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

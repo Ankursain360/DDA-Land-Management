@@ -17,14 +17,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<EncroachmentLocationMapFileDetails> GetEncroachmentLocationMapFileDetails(int encroachmentId);
         Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int encroachmentId);
         Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
-        Task<bool> DeleteDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachments);
+        Task<bool> DeleteDetailsOfEncroachment(int Id);
         Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails);
-        Task<bool> DeleteEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails);
+        Task<bool> DeleteEncroachmentFirFileDetails(int Id);
         Task<bool> SaveEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails);
-        Task<bool> DeleteEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails);
+        Task<bool> DeleteEncroachmentPhotoFileDetails(int Id);
         Task<bool> SaveEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails);
         Task<EncroachmentRegisteration> FetchSingleResult(int id);
-        Task<bool> DeleteEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails);
+        Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);

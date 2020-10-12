@@ -21,30 +21,30 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<bool> DeleteDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachments)
+        public async Task<bool> DeleteDetailsOfEncroachment(int Id)
         {
-            _dbContext.DetailsOfEncroachment.Remove(detailsOfEncroachments);
+            _dbContext.RemoveRange(_dbContext.DetailsOfEncroachment.Where(x => x.EncroachmentRegisterationId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-        public async Task<bool> DeleteEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails)
+        public async Task<bool> DeleteEncroachmentFirFileDetails(int Id)
         {
-            _dbContext.EncroachmentFirFileDetails.Remove(encroachmentFirFileDetails);
+            _dbContext.RemoveRange(_dbContext.EncroachmentFirFileDetails.Where(x => x.EncroachmentRegistrationId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-        public async Task<bool> DeleteEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails)
+        public async Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id)
         {
-            _dbContext.EncroachmentLocationMapFileDetails.Remove(encroachmentLocationMapFileDetails);
+            _dbContext.RemoveRange(_dbContext.EncroachmentLocationMapFileDetails.Where(x => x.EncroachmentRegistrationId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-        public async Task<bool> DeleteEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails)
+        public async Task<bool> DeleteEncroachmentPhotoFileDetails(int Id)
         {
-            _dbContext.EncroachmentPhotoFileDetails.Remove(encroachmentPhotoFileDetails);
+            _dbContext.RemoveRange(_dbContext.EncroachmentPhotoFileDetails.Where(x => x.EncroachmentRegistrationId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
