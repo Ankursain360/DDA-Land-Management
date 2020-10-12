@@ -24,12 +24,20 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Module>> GetModule()
         {
-            return await _dbContext.Module.ToListAsync();
+            return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Module.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
+
+
+
+        public async Task<List<Module>> GetAllModule()
+        {
+            return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
+        }
+
     }
 
 }

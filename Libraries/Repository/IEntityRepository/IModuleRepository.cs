@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IModuleRepository : IGenericRepository<Module>
     {
         Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model);
-        Task<List<Module>> GetModule();
+        Task<List<Module>> GetAllModule();
         Task<bool> Any(int id, string name);
     }
 
