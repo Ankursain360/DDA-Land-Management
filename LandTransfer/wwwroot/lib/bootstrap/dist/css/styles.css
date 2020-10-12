@@ -835,7 +835,9 @@ a.label:hover, a.label:focus {
 
 .sidebar ul.nav ul, .sidebar ul.nav ul li {
   list-style: none;
-  list-style-type: none; }
+  list-style-type: none; 
+  margin-bottom:10px;
+}
 
 .sidebar ul.nav li a {
     height: 50px;

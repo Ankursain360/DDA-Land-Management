@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LandingPage.Models;
+using Libraries.Service.IApplicationService;
 
 namespace LandingPage.Controllers
 {
@@ -13,15 +14,22 @@ namespace LandingPage.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IModuleService moduleService)
         {
             _logger = logger;
+            _moduleService = moduleService;
         }
 
-        public IActionResult Index()
+
+        private readonly IModuleService _moduleService;
+
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var list = await _moduleService.GetAllModule();
+            return View(list);
         }
+
 
         public IActionResult Privacy()
         {

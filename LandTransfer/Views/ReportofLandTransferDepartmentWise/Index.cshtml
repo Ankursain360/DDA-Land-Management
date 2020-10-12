@@ -25,32 +25,40 @@
 
         </thead>
         <tbody class="tbody">
-            @foreach (var item in Model)
+            @if (Model != null && Model.Count() > 0)
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+
+                        <td>@item.Department.Name</td>
+                        <td>@item.Zone.Name</td>
+                        <td>@item.Division.Name</td>
+                        <td>@item.Locality.Name</td>
+                        <td>@item.KhasraNo</td>
+                        <td>@item.Address</td>
+                        <td>@item.HandedOverByNameDesingnation</td>
+
+
+
+
+                        <td>@item.HandedOverDate</td>
+
+                        @*asp-action="View" asp-route-id="@item.Id"*@
+                        @*<td>
+                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+                    </td>*@
+                    </tr>
+                }
+            }
+            else
             {
                 <tr>
-                    <td>@(rowNo += 1)</td>
-
-                    <td>@item.Department.Name</td>
-                    <td>@item.Zone.Name</td>
-                    <td>@item.Division.Name</td>
-                    <td>@item.Locality.Name</td>
-                    <td>@item.KhasraNo</td>
-                    <td>@item.Address</td>
-                    <td>@item.HandedOverByNameDesingnation</td>
-
-
-
-
-                    <td>@item.HandedOverDate</td>
-                   
-                    @*asp-action="View" asp-route-id="@item.Id"*@
-                    @*<td>
-                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                        </td>*@
+                    <th colspan="9" style="text-align:center"> Data Not Available </th>
                 </tr>
             }
-
 
         </tbody>
 

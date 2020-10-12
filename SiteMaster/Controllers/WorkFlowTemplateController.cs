@@ -46,6 +46,13 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] WorkflowTemplateCreateDto WorkflowLevelDto)
+        {
+           
+            return  PartialView("_Levels");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Create([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();

@@ -53,7 +53,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".delete-record").show();
         debugger
         $("#tbl_posts #add .inputclass").val('');
-        $("#tbl_posts #add #dropdownlist")[0].selectedIndex = 0;
+        $("#tbl_posts #add #dropdownlist").val(null).trigger('change');
+        $("#tbl_posts #add #ddlActionType").val(null).trigger('change');
         $("#tbl_posts #add  .checkbox").prop("checked", false);
     }
     else {
@@ -230,6 +231,7 @@ function callDrop(element) {
     console.log(selectedItems);
     var data = selectedItems.join(',');
     $(name).val(data);
-    var checklist = $("Select[name='ParameterActionList[" + 0 + "]']").val();
-    console.log(checklist);
+    //var checklist = $("Select[name='ParameterActionList[" + 0 + "]']").val();
+   // console.log(checklist);
 }
+
