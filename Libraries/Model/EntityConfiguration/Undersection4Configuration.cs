@@ -15,8 +15,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("undersection4", "lms");
 
             builder.HasIndex(e => e.Number)
-                   .HasName("Number_UNIQUE")
-                   .IsUnique();
+                    .HasName("Number_UNIQUE")
+                    .IsUnique();
+
+            builder.HasIndex(e => e.PurposeId)
+                .HasName("puproseid_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -54,7 +57,13 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(200)
                 .IsUnicode(false);
-   
+
+            builder.HasOne(d => d.Purpose)
+                .WithMany(p => p.Undersection4)
+                .HasForeignKey(d => d.PurposeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("puproseid");
+
 
         }
 
