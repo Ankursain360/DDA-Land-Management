@@ -1,6 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Role>
-@*@{int rowNo = 0; }*@
-<div class="row">
+﻿<div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
@@ -11,50 +9,13 @@
     </div>
 </div>
 <br />
-<br />
 <div>
     <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
 </div>
 <br />
-<br />
 <div class="container-fluid">
     <div class="card table-responsive table-card">
-
         <div id="divRoleTable"></div>
-        @*<table class="table table-responsive table-bordered table-card">
-
-                <thead class="thead">
-                    <tr class="myapp-hed1">
-                        <th>Sr.No</th>
-                        <th> Zone Name</th>
-
-                        <th>Role Name </th>
-                        <th> Status</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody class="tbody">
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@(rowNo += 1)</td>
-
-                            <td>@item.Zone.Name</td>
-
-                            <td>@item.Name</td>
-
-                            <td>@(item.IsActive==1?"Active":"InActive")</td>
-                            <td>
-                                <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-
-                                <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-
-                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>*@
     </div>
 </div>
 

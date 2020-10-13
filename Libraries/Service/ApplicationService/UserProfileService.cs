@@ -1,4 +1,6 @@
-﻿using Dto.Search;
+﻿using AutoMapper;
+using Dto.Master;
+using Dto.Search;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Model.Entity;
@@ -14,12 +16,21 @@ namespace Service.ApplicationService
     {
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
         public UserProfileService(IUnitOfWork unitOfWork,
-            IUserProfileRepository userProfileRepository) 
+            IUserProfileRepository userProfileRepository,
+            IMapper mapper) 
             : base(unitOfWork, userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
+        }
+
+        public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
+        {
+            var role = await _userProfileRepository.GetPagedRole(model);
+            return role;
         }
 
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)

@@ -8,6 +8,7 @@ using Model.Entity;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Service.IApplicationService;
 using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
@@ -15,10 +16,13 @@ namespace SiteMaster.Controllers
     public class RoleController : BaseController
     {
         private readonly RoleManager<ApplicationRole> _roleService;
+        private readonly IUserProfileService _userProfileService;
 
-        public RoleController(RoleManager<ApplicationRole> roleService)
+        public RoleController(RoleManager<ApplicationRole> roleService,
+            IUserProfileService userProfileService)
         {
             _roleService = roleService;
+            _userProfileService = userProfileService;
         }
 
         public IActionResult Index()
@@ -29,7 +33,7 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] RoleSearchDto model)
         {
-            var result = await _roleService.Roles.ToListAsync();
+            var result = await _userProfileService.GetPagedRole(model);
             return PartialView("_List", result);
         }
 
@@ -73,7 +77,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Exist(int Id, string Name)
         {
             var result = await _roleService.FindByNameAsync(Name);
-            if (string.IsNullOrEmpty(result.Name))
+            if (result==null)
             {
                 return Json(true);
             }
