@@ -14,8 +14,11 @@ namespace Libraries.Model.Entity
         public Zone()
         {
             Userprofile = new HashSet<Userprofile>();
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            LandTransfer = new HashSet<Landtransfer>();
+            Locality = new HashSet<Locality>();
         }
-        
+
         [Required]
         public int DepartmentId { get; set; }
 
@@ -40,6 +43,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        public virtual ICollection<Landtransfer> LandTransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
     }
