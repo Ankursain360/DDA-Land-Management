@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
         public List<Purpose> PurposeList { get; set; }
         public virtual Purpose Purpose { get; set; }
 
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
 
     }
 }
