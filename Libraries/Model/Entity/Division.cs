@@ -10,6 +10,13 @@ namespace Libraries.Model.Entity
 {
     public class Division : AuditableEntity<int>
     {
+        public Division()
+        {
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            Landtransfer = new HashSet<Landtransfer>();
+            Locality = new HashSet<Locality>();
+        }
+
         [Required]
         public string Name { get; set; }
         [Required]
@@ -27,7 +34,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
-        public ICollection<Landtransfer> Landtransfer { get; set; }
+        public virtual ICollection<Landtransfer> Landtransfer { get; set; }
+        public virtual ICollection<Locality> Locality { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
 
     }

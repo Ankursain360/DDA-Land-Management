@@ -43,6 +43,8 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public virtual Zone Zone { get; set; }
         public virtual Department Department { get; set; }
+        public virtual Department HandedOverDepartment { get; set; }
+        public virtual Department TakenOverDepartment { get; set; }
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
         [NotMapped]
@@ -60,7 +62,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Landtransfer> handeoverdepartmentlist { get; set; }
-         [NotMapped]
-        public string ReportType { get; set; }
+        [NotMapped]
+        public int ReportType { get; set; }
     }
 }

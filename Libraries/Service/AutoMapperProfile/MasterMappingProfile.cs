@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Dto.Master;
 using Libraries.Model.Entity;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Service.AutoMapperProfile
 {
@@ -14,6 +14,7 @@ namespace Service.AutoMapperProfile
             CreateMap<Country, CoutryDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<Zone, ZoneDto>().ReverseMap();
+            CreateMap<ApplicationRole, RoleDto>().ReverseMap();        
         }
     }
 }

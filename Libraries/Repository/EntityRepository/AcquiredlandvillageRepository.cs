@@ -44,13 +44,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillage()
         {
-            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x=>x.Villagetype).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x=>x.VillageType).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 
         public async Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model)
         {
-            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x => x.Villagetype).OrderByDescending(x => x.Id).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x => x.VillageType).OrderByDescending(x => x.Id).GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
         }
 
 

@@ -18,6 +18,15 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("acquiredlandvillage", "lms");
 
+            builder.HasIndex(e => e.DistrictId)
+                    .HasName("districtid_idx");
+
+            builder.HasIndex(e => e.TehsilId)
+                .HasName("tehsilid_idx");
+
+            builder.HasIndex(e => e.VillageTypeId)
+                .HasName("villagetypeid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Acquired)
@@ -68,10 +77,30 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
             builder.Property(e => e.Zone)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.District)
+                .WithMany(p => p.Acquiredlandvillage)
+                .HasForeignKey(d => d.DistrictId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("districtid");
+
+            builder.HasOne(d => d.Tehsil)
+                .WithMany(p => p.Acquiredlandvillage)
+                .HasForeignKey(d => d.TehsilId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("tehsilid");
+
+            builder.HasOne(d => d.VillageType)
+                .WithMany(p => p.Acquiredlandvillage)
+                .HasForeignKey(d => d.VillageTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("villagetypeid");
+
 
 
         }

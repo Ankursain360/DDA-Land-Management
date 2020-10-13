@@ -10,5 +10,6 @@ namespace Repository.IEntityRepository
     public interface IUserProfileRepository : IGenericRepository<Userprofile>
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
+        Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
     }
 }

@@ -103,6 +103,14 @@ namespace Libraries.Service.ApplicationService
             return await _landTransferRepository.GetPagedLandtransfer(model);
         }
 
+
+        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model)//added by ishu
+
+        {
+            return await _landTransferRepository.GetPagedLandtransferReportDeptWise(model);
+        }
+
+
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
             return await _landTransferRepository.GetAllLocalityList(divisionId);
