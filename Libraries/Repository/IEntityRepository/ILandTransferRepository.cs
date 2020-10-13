@@ -17,7 +17,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
         Task<List<Landtransfer>> GetAllLandTransfer();
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo);
-        Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+        //Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+        Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<List<Landtransfer>> GetAllLandTransferList();
     }

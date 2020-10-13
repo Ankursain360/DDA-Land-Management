@@ -11,7 +11,7 @@ using Notification.OptionEnums;
 
 namespace LandTransfer.Controllers
 {
-    public class ReportofLandTransferDepartmentWiseController : Controller
+    public class ReportofLandTransferDepartmentWiseController : BaseController
     {
         private readonly ILandTransferService _landTransferService;
 
@@ -20,50 +20,29 @@ namespace LandTransfer.Controllers
             _landTransferService = landTransferService;
         }
 
-        async Task GetAllDepartment(Landtransfer landtransfer)
+        async Task BindDropDown(Landtransfer landtransfer)
         {
-           
+            
+            
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-                   }
-
-        //async Task handedoverdepartment(Landtransfer landtransfer)
-        //{
-
-        //    landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    Landtransfer model = new Landtransfer();
-        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
-        //     return View(model);
-        //}
+        }
 
 
         public async Task<IActionResult> Create()
         {
-            Landtransfer model = new Landtransfer();
-            model.DepartmentList = await _landTransferService.GetAllDepartment();
-          //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+            Landtransfer landtransfer = new Landtransfer();
 
-            return View(model);
+            await BindDropDown(landtransfer);
+            return View(landtransfer);
         }
-
-
-
-
-        public async Task<PartialViewResult> GetDetails(int handedover)
+        public async Task<PartialViewResult> GetDetails(int reportType, int DepartmentId)
         {
-            var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
+            ViewBag.ReportType = reportType;
+            var result = await _landTransferService.GetLandTransferReportDataDepartmentWise(reportType, DepartmentId);
 
             if (result != null)
             {
-                return PartialView("Index", result);
+                return PartialView("_Index", result);
             }
             else
             {
@@ -71,12 +50,10 @@ namespace LandTransfer.Controllers
                 return PartialView();
             }
 
-
-
         }
-
-        }
+    }
+}
   
     
     
-    }
+ 

@@ -66,19 +66,36 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover)
-        {
-            //(handedover == 1 ? x.HandedOverDepartmentId : 1)
-            var data = await _dbContext.Landtransfer
-               .Include(x => x.Locality)
-                .Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .OrderByDescending(x => x.Id)
+        //public async Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover)
+        //{
+        //    //(handedover == 1 ? x.HandedOverDepartmentId : 1)
+        //    var data = await _dbContext.Landtransfer
+        //       .Include(x => x.Locality)
+        //        .Include(x => x.Department)
+        //        .Include(x => x.Zone)
+        //        .Include(x => x.Division)
+        //        .OrderByDescending(x => x.Id)
 
-                .Where(x => (x.HandedOverDepartmentId == handedover)
-              ).ToListAsync();
-            return data;
+        //        .Where(x => (x.HandedOverDepartmentId == handedover)
+        //      ).ToListAsync();
+        //    return data;
+        //}
+        public async Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId)
+        {
+                var data = await _dbContext.Landtransfer
+                        .Include(x => x.Locality)
+                        .Include(x => x.Department)
+                        .Include(x => x.Zone)
+                        .Include(x => x.Division)
+
+                        .Where(x => (x.HandedOverDepartmentId == (reportType==1 ? x.HandedOverDepartmentId:
+                        (departmentId == 0 ? x.HandedOverDepartmentId : departmentId))) 
+                        && (x.TakenOverDepartmentId == (reportType == 0 ? x.TakenOverDepartmentId :
+                        (departmentId == 0 ? x.TakenOverDepartmentId : departmentId)))
+                        && (x.IsActive == 1))
+                         .OrderByDescending(x => x.Id)
+                        .ToListAsync();
+                return data;
         }
 
         public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)

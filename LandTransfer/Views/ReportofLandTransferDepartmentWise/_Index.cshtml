@@ -1,0 +1,92 @@
+﻿
+@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+@{int rowNo = 0; }
+
+
+<div class="card  table-card table-responsive">
+
+    <table class="table table-responsive table-bordered table-card">
+
+
+        <thead class="thead">
+
+            <tr>
+                @*common feilds*@
+                <th>Sr.No</th>
+                <th>Department</th>
+                <th>Zone</th>
+                <th>Division</th>
+                <th>Locality(Village)</th>
+                <th>Khasra No.</th>
+                <th>Address</th>
+                @*  Handed Over By::: feilds*@
+                @*<th> Hand Over Department</th>*@
+                @if (ViewBag.ReportType == 0)
+                {
+                    <th>  Handed Over By(Name/Designation)</th>
+                    <th> Date of Hand Over</th>
+                    <th> Order No.</th>
+                    <th> Transfer order Issue Authority</th>
+                }
+                else
+                {
+                    @* Taken Over By:::::*@
+                    @*<th> Taken Over Department</th>*@
+                    <th> Taken Over By(Name/Designation) </th>
+                    <th> Date of Taken Over</th>
+                }
+                <th> Remarks</th>
+
+            </tr>
+
+        </thead>
+        <tbody class="tbody">
+            @if (Model != null && Model.Count() > 0)
+            {
+
+                @foreach (var item in Model)
+                {
+            <tr>
+
+                <td>@(rowNo += 1)</td>
+
+                <td>@item.Department.Name</td>
+                <td>@item.Zone.Name</td>
+                <td>@item.Division.Name</td>
+                <td>@item.Locality.Name</td>
+                <td>@item.KhasraNo</td>
+                <td>@item.Address</td>
+
+                @if (ViewBag.ReportType == 0)
+                {
+                    @*<td>@item.HandedOverDepartmentId</td>*@
+                    <td>@item.HandedOverByNameDesingnation</td>
+                    <td>@item.HandedOverDate</td>
+                    <td>@item.OrderNo</td>
+                    <td>@item.TransferorderIssueAuthority</td>
+                }
+                else
+                {
+                    @*<td>@item.TakenOverDepartmentId</td>*@
+                    <td>@item.TakenOverByNameDesingnation</td>
+                    <td>@item.DateofTakenOver</td>
+                }
+
+                <td>@item.Remarks</td>
+
+
+            </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <th colspan="14" style="text-align:center"> No Record Available! </th>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+
+</div>
