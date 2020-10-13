@@ -34,8 +34,10 @@ $(function () {
     $("input[name='grpPossession']").click(function () {
         if ($("#rdbFormal").is(":checked")) {
             $("#divDepartment").show();
+            $("#PossessionType").val("Formal Possession");
         } else {
             $("#divDepartment").hide();
+            $("#PossessionType").val("Physical Possession");
         }
     });
 });

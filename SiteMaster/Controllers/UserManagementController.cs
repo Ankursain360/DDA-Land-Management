@@ -14,23 +14,27 @@ using Dto.Search;
 using Microsoft.AspNetCore.Identity;
 using Model.Entity;
 using Dto.Master;
+using Service.IApplicationService;
 
 namespace SiteMaster.Controllers
 {
     public class UserManagementController : BaseController
     {
         private readonly IUserService _userService;
+        private readonly IUserProfileService _userProfileService;
         private readonly IDepartmentService _departmentService;
         private readonly IZoneService _zoneService;
         private readonly UserManager<ApplicationUser> _userManager;
         public UserManagementController(IUserService userService,
             IDepartmentService departmentService,
             IZoneService zoneService,
+            IUserProfileService userProfileService,
             UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
             _departmentService = departmentService;
             _zoneService = zoneService;
+            _userProfileService = userProfileService;
             _userManager = userManager;
         }
         public IActionResult Index()
@@ -42,7 +46,7 @@ namespace SiteMaster.Controllers
         public async Task<PartialViewResult> List([FromBody] UserManagementSearchDto model)
         {
 
-            var result = await _userService.GetPagedUser(model);
+            var result = await _userProfileService.GetPagedUser(model);
 
             return PartialView("_List", result);
         }
