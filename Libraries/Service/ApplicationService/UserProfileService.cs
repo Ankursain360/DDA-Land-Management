@@ -13,11 +13,13 @@ namespace Service.ApplicationService
     public class UserProfileService : EntityService<Userprofile>, IUserProfileService
     {
         private readonly IUserProfileRepository _userProfileRepository;
+        private readonly IUnitOfWork _unitOfWork;
         public UserProfileService(IUnitOfWork unitOfWork,
             IUserProfileRepository userProfileRepository) 
             : base(unitOfWork, userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)

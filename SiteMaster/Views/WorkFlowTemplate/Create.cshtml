@@ -29,9 +29,89 @@
 <br />
 <br />
 
-<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
-<script src="~/lib/bootstrap/select2/select2.js"></script>
+@*<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.multipleselectbox.js"></script>*@
+@*<style>
+    .MultipleSelectBox {
+        border: 1px solid #aaa;
+        height: 200px;
+        list-style-type: none;
+        margin: 0;
+        overflow: auto;
+        padding: 1px 0;
+        width: 500px;
+        /* corner */
+        -moz-border-radius: 5px;
+        -khtml-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        -moz-box-shadow: 0 0 5px #888;
+        -webkit-box-shadow: 0 0 5px #888;
+        box-shadow: 0 0 5px #888;
+    }
 
+        .MultipleSelectBox.selecting {
+            border: 1px solid black;
+        }
+
+        .MultipleSelectBox li {
+            border: 1px solid white;
+            cursor: pointer;
+            padding: 0 3px;
+        }
+
+            .MultipleSelectBox li.disabled {
+                color: gray;
+                font-style: italic;
+            }
+
+            .MultipleSelectBox li.optgroup {
+                font-style: italic;
+                font-weight: bold;
+            }
+
+            .MultipleSelectBox li.selected {
+                border: 1px solid #F39814;
+                background-color: #F39814;
+            }
+
+            .MultipleSelectBox li.selecting {
+                border: 1px dotted black;
+            }
+
+        .MultipleSelectBox.vertical li.optgroupitem {
+            margin-left: 30px;
+        }
+        /* horizontal mode */
+        .MultipleSelectBox.horizontal {
+            height: auto;
+            white-space: nowrap;
+        }
+
+            .MultipleSelectBox.horizontal li {
+                display: inline-block;
+                /* for IE6 and IE7 */
+                *display: inline;
+                vertical-align: middle;
+            }
+
+                .MultipleSelectBox.horizontal li.optgroup {
+                    margin-bottom: 10px;
+                }
+        /* Ultimate CSS Gradient Generator (Orange <a href="https://www.jqueryscript.net/tags.php?/3D/">3D</a>) */
+        .MultipleSelectBox li.selected {
+            background: #ffa84c;
+            background: -moz-linear-gradient(top, #ffa84c 0%, #ff7b0d 100%);
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffa84c), color-stop(100%, #ff7b0d));
+            background: -webkit-linear-gradient(top, #ffa84c 0%, #ff7b0d 100%);
+            background: -o-linear-gradient(top, #ffa84c 0%, #ff7b0d 100%);
+            background: -ms-linear-gradient(top, #ffa84c 0%, #ff7b0d 100%);
+            background: linear-gradient(to bottom, #ffa84c 0%, #ff7b0d 100%);
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa84c', endColorstr='#ff7b0d', GradientType=0 );
+            /* for IE6 */
+            _background: #F39814;
+        }
+</style>*@
 
 <div class="container-fluid">
     <div class="panel">
@@ -143,13 +223,15 @@
 
         </div>*@
 
-            
 
-            <div class="form-row">
+            <div id="LoadReportView">
+                
+            </div>
+            @*<div class="form-row">
                 <div class="col-md-12">
                     <div class="table">
                         <table class="table" border="0" id="tbl_posts">
-                            @*<thead class="thead">
+                            <thead class="thead">
                             <tr>
                                 <th>Sr.No</th>
                                 <th>Name</th>
@@ -160,7 +242,7 @@
                                 <th>Email-Id</th>
                                 <th>Operation</th>
                             </tr>
-                        </thead>*@
+                        </thead>
                             <tbody id="tbl_posts_body">
                             </tbody>
                             <tbody class="tbody" id="add">
@@ -198,7 +280,7 @@
                                                     <label class="control-label lb-sm">Action Taken</label>
                                                     <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass" id="ddlActionType" onchange="callDrop(this);">
 
-                                                        @*<option value="0">--Select--</option>*@
+                                                        <option value="0">--Select--</option>
                                                         <option value="1">Forward</option>
                                                         <option value="2">Revert</option>
                                                         <option value="3">Approved</option>
@@ -214,7 +296,7 @@
                                     </td>
                                 </tr>
 
-                                @*<tr class="dda-repeatorinnerheading">
+                                <tr class="dda-repeatorinnerheading">
 
                                 <td><span class="sn">Level 1</span></td>
                                 <td colspan="2">
@@ -237,13 +319,13 @@
                                     <input asp-for="PropertyId" type="text" id="parameterLevel" class="form-control" />
                                     <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
 
-                            </tr>*@
+                            </tr>
 
 
                         </table>
                     </div>
                 </div>
-            </div>
+            </div>*@
 
             @*<table class="table" border="0" id="tbl_posts">
             <tr class="dda-repeatorinnerheading row">
@@ -287,10 +369,10 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/workflowcreate.js"></script>
+    <script src="~/js/workflowcreate1.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/workflowcreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/workflowcreate1.min.js" asp-append-version="true"></script>
 </environment>
 
 @*<environment include="Development">

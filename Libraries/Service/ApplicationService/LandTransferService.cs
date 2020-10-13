@@ -141,5 +141,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetAllLandTransferList();
         }
+
+        public async Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id)
+        {
+            return await _landTransferRepository.GetLandTransferReportdataHandover(id);
+        }
     }
 }

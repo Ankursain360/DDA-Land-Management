@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-	$("#ddlActionType").attr("multiple","");
+	$("#ddlActionType").attr("multiple", "");
 	$("select").select2({
 		placeholder: "Select",
 		allowClear: true

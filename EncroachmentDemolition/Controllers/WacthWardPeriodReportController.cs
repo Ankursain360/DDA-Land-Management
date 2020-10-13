@@ -32,7 +32,7 @@ namespace EncroachmentDemolition.Controllers
 
 
         public async Task<IActionResult> Create()
-        {
+            {
             Watchandward model = new Watchandward();
            
             model.VillageList = await _watchandwardService.GetAllVillage();

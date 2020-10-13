@@ -57,10 +57,9 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Watchandward
                 .Include(x => x.Village)
-
-                .OrderByDescending(x => x.Id)
-                . Where(x => (x.VillageId == (village == 0 ? x.Id : village))
-                && x.Date >= fromdate && x.Date<=todate).ToListAsync();
+                .Include(x=>x.Khasra)             
+                . Where(x => (x.VillageId == (village == 0 ? x.VillageId : village))
+                && x.Date >= fromdate && x.Date<=todate).OrderByDescending(x => x.Id).ToListAsync();
 
             return data;
         }

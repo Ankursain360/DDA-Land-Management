@@ -113,5 +113,20 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Landtransfer.Where(x=>x.IsActive==1).ToListAsync();
         }
+
+
+
+        public async Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id)
+        {
+            return await _dbContext.Landtransfer
+                 .Include(x => x.Locality)
+                 .Include(x => x.Department)
+                 .Include(x => x.Zone)
+                 .Include(x => x.Division)
+                 .OrderByDescending(x => x.Id)
+                 .Where(x => x.Id == id && x.IsActive == 1).ToListAsync();
+        }
+
+
     }
 }

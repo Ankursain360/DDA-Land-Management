@@ -1,5 +1,6 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Http;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,10 @@ namespace Libraries.Model.Entity
 
         public EncroachmentRegisteration()
         {
-            DetailsOfEncroachments = new HashSet<DetailsOfEncroachment>();
+            DetailsOfEncroachment = new HashSet<DetailsOfEncroachment>();
+            EncroachmentFirFileDetails = new HashSet<EncroachmentFirFileDetails>();
+            EncroachmentLocationMapFileDetails = new HashSet<EncroachmentLocationMapFileDetails>();
+            EncroachmentPhotoFileDetails = new HashSet<EncroachmentPhotoFileDetails>();
         }
         [Required]
         public int DepartmentId { get; set; }
@@ -36,13 +40,10 @@ namespace Libraries.Model.Entity
         [Required] 
         public string PossessionType { get; set; }
         public int? OtherDepartment { get; set; }
-        public string FirfilePath { get; set; }
         [Required] 
         public string PoliceStation { get; set; }
         [Required] 
         public string SecurityGuardOnDuty { get; set; }
-        public string LocationMapFilePath { get; set; }
-        public string PhotoFilePath { get; set; }
         [Required]
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
@@ -50,6 +51,10 @@ namespace Libraries.Model.Entity
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
         public virtual Zone Zone { get; set; }
+        public virtual ICollection<DetailsOfEncroachment> DetailsOfEncroachment { get; set; }
+        public virtual ICollection<EncroachmentFirFileDetails> EncroachmentFirFileDetails { get; set; }
+        public virtual ICollection<EncroachmentLocationMapFileDetails> EncroachmentLocationMapFileDetails { get; set; }
+        public virtual ICollection<EncroachmentPhotoFileDetails> EncroachmentPhotoFileDetails { get; set; }
         [NotMapped]
         public List<IFormFile> PhotoFile { get; set; }
         [NotMapped]
@@ -84,9 +89,5 @@ namespace Libraries.Model.Entity
         [NotMapped]
         [Required]
         public List<string> ReferenceNoOnLocation { get; set; }
-        [NotMapped]
-        [Required]
-        public List<string> DetailsofEncroachmentcol { get; set; }
-        public virtual ICollection<DetailsOfEncroachment> DetailsOfEncroachments { get; set; }
     }
 }

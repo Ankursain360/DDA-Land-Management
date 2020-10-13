@@ -29,13 +29,13 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Module>> GetAllModule()
         {
-            return await _moduleRepository.GetAll();
+            return await _moduleRepository.GetAllModule();
         }
       
 
         public async Task<List<Module>> GetModuleUsingRepo()
         {
-            return await _moduleRepository.GetModule();
+            return await _moduleRepository.GetAllModule();
         }
 
         public async Task<Module> FetchSingleResult(int id)

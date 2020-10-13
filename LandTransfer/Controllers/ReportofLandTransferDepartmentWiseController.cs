@@ -11,7 +11,7 @@ using Notification.OptionEnums;
 
 namespace LandTransfer.Controllers
 {
-    public class ReportofLandTransferDepartmentWiseController : BaseController
+    public class ReportofLandTransferDepartmentWiseController : Controller
     {
         private readonly ILandTransferService _landTransferService;
 
@@ -20,40 +20,77 @@ namespace LandTransfer.Controllers
             _landTransferService = landTransferService;
         }
 
-        async Task BindDropDown(Landtransfer landtransfer)
+        async Task GetAllDepartment(Landtransfer landtransfer)
         {
-            
-            
+           
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-        }
+                   }
+
+        //async Task handedoverdepartment(Landtransfer landtransfer)
+        //{
+
+        //    landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+        //}
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
+
+        //public async Task<IActionResult> Index()
+        //{
+        //    Landtransfer model = new Landtransfer();
+        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
+        //     return View(model);
+        //}
 
 
         public async Task<IActionResult> Create()
         {
-            Landtransfer landtransfer = new Landtransfer();
+            Landtransfer model = new Landtransfer();
+            model.LandTransferList = await _landTransferService.GetAllLandTransferList();
+            //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
 
-            await BindDropDown(landtransfer);
-            return View(landtransfer);
+            return View(model);
         }
-        public async Task<PartialViewResult> GetDetails(int reportType, int DepartmentId)
+
+
+
+
+        //public async Task<PartialViewResult> GetDetails(int handedover)
+        //{
+        //    var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
+
+        //    if (result != null)
+        //    {
+        //        return PartialView("Index", result);
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return PartialView();
+        //    }
+
+
+
+        //}
+
+
+
+
+         public async Task<PartialViewResult> GetDetails(int? id)
         {
-            ViewBag.ReportType = reportType;
-            var result = await _landTransferService.GetLandTransferReportDataDepartmentWise(reportType, DepartmentId);
+            id=id ?? 0;
+            var result = await _landTransferService.GetLandTransferReportdataHandover(Convert.ToInt32(id));
+            return PartialView("_List", result);
+        }
 
-            if (result != null)
-            {
-                return PartialView("_Index", result);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
-            }
+
+
+
 
         }
-    }
-}
   
     
     
- 
+    }
