@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<List<Landtransfer>> GetAllLandTransferList();
+        Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
@@ -26,10 +27,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality);// added by shalini
-        Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
-        Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id);
-
-        /// Task<List<Landtransfer>> GetAllHandoverDepartment();
+        //Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+       
+        //Task<List<Landtransfer>> GetAllHandoverDepartment();
 
     }
 }
