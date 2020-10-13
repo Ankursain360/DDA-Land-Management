@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("onlinecomplaint", "lms");
             builder.HasIndex(e => e.ComplaintTypeId)
-                    .HasName("Name_idx");
+                      .HasName("Name_idx");
 
             builder.HasIndex(e => e.LocationId)
                 .HasName("LocationId_idx");
@@ -58,6 +58,16 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PhotoPath)
                 .HasMaxLength(500)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.ComplaintType)
+                .WithMany(p => p.Onlinecomplaint)
+                .HasForeignKey(d => d.ComplaintTypeId)
+                .HasConstraintName("ComplaintTypeId");
+
+            builder.HasOne(d => d.Location)
+                .WithMany(p => p.Onlinecomplaint)
+                .HasForeignKey(d => d.LocationId)
+                .HasConstraintName("LocationId");
 
         }
         }

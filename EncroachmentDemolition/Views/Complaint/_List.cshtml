@@ -24,6 +24,8 @@
             <td>@item.Name</td>
             <td>@item.Contact</td>
             <td>@item.AddressOfComplaint</td>
+            <td>@item.ComplaintType.Name</td>
+
             <td>@item.Location.Name</td>
 
             <td>
@@ -34,7 +36,7 @@
 
                 <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
-                <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
 
             </td>
 

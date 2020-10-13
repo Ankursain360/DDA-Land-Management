@@ -15,5 +15,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+
     }
 }
