@@ -52,5 +52,11 @@
     "inputFiles": [
       "wwwroot/js/reportoflandtransferdepartmentwise.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reportoflandtransferdepartmentwisecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/reportoflandtransferdepartmentwisecreate.js"
+    ]
   }
 ]

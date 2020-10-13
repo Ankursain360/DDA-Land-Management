@@ -60,5 +60,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Landtransfer> handeoverdepartmentlist { get; set; }
+         [NotMapped]
+        public string ReportType { get; set; }
     }
 }

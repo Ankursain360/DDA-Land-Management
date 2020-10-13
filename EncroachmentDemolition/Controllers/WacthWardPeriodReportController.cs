@@ -42,17 +42,17 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<PartialViewResult> GetDetails(int village, DateTime fromdate, DateTime todate)
         {
-            var result = await _watchandwardService.GetWatchandwardReportData(village, fromdate, todate);
+                var result = await _watchandwardService.GetWatchandwardReportData(village, fromdate, todate);
 
-            if (result != null)
-            {
-                return PartialView("Index", result);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
-            }
+                if (result != null)
+                {
+                    return PartialView("Index", result);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return PartialView();
+                }
 
         }
     }

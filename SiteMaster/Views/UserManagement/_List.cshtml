@@ -26,8 +26,8 @@
             <td>@item.Role.Name</td>
             <td>@item.User.PhoneNumber</td>
             <td>@item.User.Email</td>
-            <td>@item.Zone.Name</td>
-            <td>@item.District.Name</td>
+            <td>@(item.Zone==null?"": item.Zone.Name)</td>
+            <td>@(item.District==null?"": item.District.Name)</td>
             <td>@item.Department.Name</td>
             <td>
                 @(item.IsActive == 1 ? "Active" : "Inactive")
