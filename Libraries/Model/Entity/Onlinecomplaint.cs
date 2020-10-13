@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Libraries.Model.Common;
-using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
       
         public string PhotoPath { get; set; }
+        public string Email { get; set; }
 
 
         [NotMapped]
@@ -32,6 +33,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Location> LocationList { get; set; }
         public virtual Location Location { get; set; }
+
+        [NotMapped]
+        public IFormFile Photo { get; set; }
 
     }
 }

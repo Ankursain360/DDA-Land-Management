@@ -48,8 +48,8 @@ namespace LandTransfer.Controllers
         public async Task<IActionResult> Create()
         {
             Landtransfer model = new Landtransfer();
-            model.DepartmentList = await _landTransferService.GetAllDepartment();
-          //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+            model.LandTransferList = await _landTransferService.GetAllLandTransferList();
+            //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
 
             return View(model);
         }
@@ -57,23 +57,37 @@ namespace LandTransfer.Controllers
 
 
 
-        public async Task<PartialViewResult> GetDetails(int handedover)
+        //public async Task<PartialViewResult> GetDetails(int handedover)
+        //{
+        //    var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
+
+        //    if (result != null)
+        //    {
+        //        return PartialView("Index", result);
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return PartialView();
+        //    }
+
+
+
+        //}
+
+
+
+
+         public async Task<PartialViewResult> GetDetails(int? id)
         {
-            var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
-
-            if (result != null)
-            {
-                return PartialView("Index", result);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
-            }
-
-
-
+            id=id ?? 0;
+            var result = await _landTransferService.GetLandTransferReportdataHandover(Convert.ToInt32(id));
+            return PartialView("_List", result);
         }
+
+
+
+
 
         }
   

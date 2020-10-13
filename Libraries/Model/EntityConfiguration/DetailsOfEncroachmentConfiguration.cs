@@ -26,10 +26,6 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.DateOfEncroachment).HasColumnType("date");
 
-            builder.Property(e => e.DetailsofEncroachmentcol)
-                .HasMaxLength(45)
-                .IsUnicode(false);
-
             builder.Property(e => e.EncroachmentRegisterationId).HasColumnType("int(11)");
 
             builder.Property(e => e.IsActive).HasColumnType("int(11)");
@@ -49,7 +45,7 @@ namespace Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.HasOne(d => d.EncroachmentRegisteration)
-                .WithMany(p => p.DetailsOfEncroachments)
+                .WithMany(p => p.DetailsOfEncroachment)
                 .HasForeignKey(d => d.EncroachmentRegisterationId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("EncroachmentRegisterationId");

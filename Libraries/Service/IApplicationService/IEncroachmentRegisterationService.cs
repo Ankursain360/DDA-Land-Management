@@ -18,9 +18,21 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentRegisteration> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    //To Delete Data added by Praveen
         Task<List<Locality>> GetAllLocalityList(int divisionId);
-        Task<PagedResult<EncroachmentRegisteration>> GetPagedLandTransfer(EncroachmentRegisterationDto model);
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration();
         Task<List<Khasra>> GetAllKhasraList(int localityId);
+        Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment);
+        Task<bool> DeleteDetailsOfEncroachment(int Id);
+        Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails);
+        Task<bool> DeleteEncroachmentFirFileDetails(int Id);
+        Task<bool> SaveEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails);
+        Task<bool> DeleteEncroachmentPhotoFileDetails(int Id);
+        Task<bool> SaveEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails);
+        Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
+        Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int encroachmentId);
+        Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int encroachmentId);
+        Task<EncroachmentLocationMapFileDetails> GetEncroachmentLocationMapFileDetails(int encroachmentId);
+        Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int encroachmentId);
     }
 }

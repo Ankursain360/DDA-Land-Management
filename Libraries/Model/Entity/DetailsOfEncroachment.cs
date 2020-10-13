@@ -14,7 +14,6 @@ namespace Libraries.Model.Entity
         public DateTime? DateOfEncroachment { get; set; }
         public decimal? CountOfStructure { get; set; }
         public string ReferenceNoOnLocation { get; set; }
-        public string DetailsofEncroachmentcol { get; set; }
         public int? IsActive { get; set; }
         public virtual EncroachmentRegisteration EncroachmentRegisteration { get; set; }
 

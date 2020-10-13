@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Xml;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -52,7 +53,17 @@ namespace Libraries.Repository.EntityRepository
             return villagelist;
         }
 
+        public async Task<List<Watchandward>> GetWatchandwardReportData(int village,DateTime fromdate, DateTime todate)
+        {
+            var data = await _dbContext.Watchandward
+                .Include(x => x.Village)
+                .Include(x=>x.Khasra)
+                .OrderByDescending(x => x.Id)
+                . Where(x => (x.VillageId == (village == 0 ? x.VillageId : village))
+                && x.Date >= fromdate && x.Date<=todate).ToListAsync();
 
+            return data;
+        }
 
     }
 }

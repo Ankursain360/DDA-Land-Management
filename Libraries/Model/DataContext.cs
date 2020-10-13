@@ -93,7 +93,10 @@ namespace Libraries.Model
         public virtual DbSet<Location> Location { get; set; }
         public virtual DbSet<ComplaintType> ComplaintType { get; set; }
         public virtual DbSet<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
-        public virtual DbSet<DetailsOfEncroachment> DetailsOfEncroachments { get; set; }
+        public virtual DbSet<DetailsOfEncroachment> DetailsOfEncroachment { get; set; }
+        public virtual DbSet<EncroachmentFirFileDetails> EncroachmentFirFileDetails { get; set; }
+        public virtual DbSet<EncroachmentPhotoFileDetails> EncroachmentPhotoFileDetails { get; set; }
+        public virtual DbSet<EncroachmentLocationMapFileDetails> EncroachmentLocationMapFileDetails { get; set; }
 
         /// </summary>
         /// <param name="modelBuilder"></param>
@@ -153,10 +156,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new WatchandwardConfiguration());
             modelBuilder.ApplyConfiguration(new OnlinecomplaintConfiguration());
             modelBuilder.ApplyConfiguration(new EncroachmentRegisterationConfiguration());
+            modelBuilder.ApplyConfiguration(new EncroachmentFirFileDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new EncroachmentLocationMapFileDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new EncroachmentPhotoFileDetailsConfiguration());
             base.OnModelCreating(modelBuilder);
-
-
-
         }
     }
 }

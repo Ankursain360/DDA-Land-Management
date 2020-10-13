@@ -1,134 +1,52 @@
 ﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@model IEnumerable<Libraries.Model.Entity.Watchandward>
+@{int rowNo = 0; }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Wacth & Ward Period Report</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
+<div class="card  table-card table-responsive">
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
-        </div>
-        <div class="panel-body">
-            <form method="post" asp-action="Index" id="1">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <table class="table table-responsive table-bordered table-card">
 
 
+        <thead class="thead">
 
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                            <option value="0">---All---</option>
-                            <option value="1">Nimri</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label lb-sm">From Date</label>
-                        <input type="date" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="control-label lb-sm">To Date</label>
-                        <input type="date" class="form-control" />
-                    </div>
-                </div>
+            <tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Date</th>
+                <th rowspan="2">Village Name</th>
+                <th rowspan="2">Khasra No.</th>
+                <th rowspan="2">Land Mark</th>
+                <th rowspan="2">Status on Ground</th>
+                <th rowspan="2">Remarks</th>
+            </tr>
 
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Generate" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
 
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-                        <div id="DivReportDetails">
-                            <div class="row" style="margin-bottom:35px;">
-                                <div class="col-sm-12">
-                                    <div class=" myapp-hed2">
-                                        <div class="col-md-12">
-                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div style="overflow:scroll;">
+                    <td>@item.Date</td>
+                    <td>@item.Village.Name</td>
+                    <td>@item.Khasra.Name</td>
+                    <td>@item.Landmark</td>
+                    <td>@item.StatusOnGround</td>
+                    <td>@item.Remarks</td>
+                   
+                    @*asp-action="View" asp-route-id="@item.Id"*@
+                    @*<td>
+                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
 
-                                        <table class="table table-responsive table-bordered table-card">
-
-                                            <thead class="thead">
-                                                <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Date</th>
-                                                    <th>Village Name</th>
-                                                    <th>Khasra No.</th>
-                                                    <th>Land Mark</th>
-                                                    <th>Status on Ground</th>
-                                                    <th>Remarks</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                        </td>*@
+                </tr>
+            }
 
 
-                                            </tbody>
+        </tbody>
 
-                                        </table>
+    </table>
 
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-
-            </form>
-        </div>
-    </div>
 </div>
 
 

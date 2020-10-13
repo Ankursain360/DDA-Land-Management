@@ -35,9 +35,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<EncroachmentRegisteration> FetchSingleResult(int id)
         {
-            var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
-            EncroachmentRegisteration model = result.FirstOrDefault();
-            return model;
+            return await _encroachmentRegisterationRepository.FetchSingleResult(id);
         }
 
         public async Task<List<Department>> GetAllDepartment()
@@ -65,7 +63,7 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.GetAllZone(departmentId);
         }
 
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedLandTransfer(EncroachmentRegisterationDto model)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
             return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model);
         }
@@ -88,11 +86,9 @@ namespace Libraries.Service.ApplicationService
             model.SecurityGuardOnDuty = encroachmentRegisteration.SecurityGuardOnDuty;
             model.StatusOfLand = encroachmentRegisteration.StatusOfLand;
             model.ZoneId = encroachmentRegisteration.ZoneId;
-            model.FirfilePath = encroachmentRegisteration.FirfilePath != null ? encroachmentRegisteration.FirfilePath : model.FirfilePath;
-            model.PhotoFilePath = encroachmentRegisteration.PhotoFilePath != null ? encroachmentRegisteration.PhotoFilePath : model.PhotoFilePath;
-            model.LocationMapFilePath = encroachmentRegisteration.LocationMapFilePath != null ? encroachmentRegisteration.LocationMapFilePath : model.LocationMapFilePath;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
+            model.IsActive = 1;
             _encroachmentRegisterationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -108,5 +104,78 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllKhasraList(localityId);
         }
+
+        public async Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment)
+        {
+            detailsOfEncroachment.CreatedBy = 1;
+            detailsOfEncroachment.CreatedDate = DateTime.Now;
+            detailsOfEncroachment.IsActive = 1;
+            return await _encroachmentRegisterationRepository.SaveDetailsOfEncroachment(detailsOfEncroachment);
+        }
+
+        public async Task<bool> DeleteDetailsOfEncroachment(int Id)
+        {
+            return await _encroachmentRegisterationRepository.DeleteDetailsOfEncroachment(Id);
+        }
+
+        public async Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails)
+        {
+            encroachmentFirFileDetails.CreatedBy = 1;
+            encroachmentFirFileDetails.CreatedDate = DateTime.Now;
+            encroachmentFirFileDetails.IsActive = 1;
+            return await _encroachmentRegisterationRepository.SaveEncroachmentFirFileDetails(encroachmentFirFileDetails);
+        }
+
+        public async Task<bool> DeleteEncroachmentFirFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentFirFileDetails(Id);
+        }
+
+        public async Task<bool> SaveEncroachmentPhotoFileDetails(EncroachmentPhotoFileDetails encroachmentPhotoFileDetails)
+        {
+            encroachmentPhotoFileDetails.CreatedBy = 1;
+            encroachmentPhotoFileDetails.CreatedDate = DateTime.Now;
+            encroachmentPhotoFileDetails.IsActive = 1;
+            return await _encroachmentRegisterationRepository.SaveEncroachmentPhotoFileDetails(encroachmentPhotoFileDetails);
+        }
+
+        public async Task<bool> DeleteEncroachmentPhotoFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentPhotoFileDetails(Id);
+        }
+
+        public async Task<bool> SaveEncroachmentLocationMapFileDetails(EncroachmentLocationMapFileDetails encroachmentLocationMapFileDetails)
+        {
+            encroachmentLocationMapFileDetails.CreatedBy = 1;
+            encroachmentLocationMapFileDetails.CreatedDate = DateTime.Now;
+            encroachmentLocationMapFileDetails.IsActive = 1;
+            return await _encroachmentRegisterationRepository.SaveEncroachmentLocationMapFileDetails(encroachmentLocationMapFileDetails);
+        }
+
+        public async Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.DeleteEncroachmentLocationMapFileDetails(Id);
+        }
+
+        public async Task<List<DetailsOfEncroachment>> GetDetailsOfEncroachment(int Id)
+        {
+            return await _encroachmentRegisterationRepository.GetDetailsOfEncroachment(Id);
+        }
+
+        public async Task<EncroachmentPhotoFileDetails> GetEncroachmentPhotoFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.GetEncroachmentPhotoFileDetails(Id);
+        }
+
+        public async Task<EncroachmentLocationMapFileDetails> GetEncroachmentLocationMapFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.GetEncroachmentLocationMapFileDetails(Id);
+        }
+
+        public async Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int Id)
+        {
+            return await _encroachmentRegisterationRepository.GetEncroachmentFirFileDetails(Id);
+        }
+
     }
 }
