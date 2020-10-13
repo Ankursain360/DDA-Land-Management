@@ -20,6 +20,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<List<Landtransfer>> GetAllLandTransferList();
         Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu
+
+        Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model);//added by ishu
+
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);

@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         public int? SerialNo { get; set; }
         [Required]
         public byte? IsActive { get; set; }
-       
-     }
+        public virtual ICollection<Morland> Morland { get; set; }
+
+    }
 }
