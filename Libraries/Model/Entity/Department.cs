@@ -12,9 +12,14 @@ namespace Libraries.Model.Entity
     {
         public Department()
         {
-            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            LandtransferDepartment = new HashSet<Landtransfer>();
+            LandtransferHandedOverDepartment = new HashSet<Landtransfer>();
+            LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
+            EncroachmentregisterationDepartment = new HashSet<EncroachmentRegisteration>();
+            EncroachmentregisterationOtherDepartmentNavigation = new HashSet<EncroachmentRegisteration>();
             Propertyregistration = new HashSet<Propertyregistration>();
             Userprofile = new HashSet<Userprofile>();
+            Locality = new HashSet<Locality>();
         }
 
         [Required]
@@ -23,18 +28,15 @@ namespace Libraries.Model.Entity
         public string Name { get; set; }
         public byte? IsActive { get; set; }
         public virtual ICollection<Zone> Zone { get; set; }
-        [NotMapped]
         public virtual ICollection<Locality> Locality { get; set; }
         [NotMapped]
         public virtual ICollection<Propertyregistration> Propertyregistration { get; set; }
-        public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationDepartment { get; set; }
+        public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationOtherDepartmentNavigation { get; set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
-
-
-
-        public virtual ICollection<Division> Division { get; set; }
-
-
+        public virtual ICollection<Landtransfer> LandtransferDepartment { get; set; }
+        public virtual ICollection<Landtransfer> LandtransferHandedOverDepartment { get; set; }
+        public virtual ICollection<Landtransfer> LandtransferTakenOverDepartment { get; set; }
 
     }
 }

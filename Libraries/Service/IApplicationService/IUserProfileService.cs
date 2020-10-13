@@ -11,5 +11,6 @@ namespace Service.IApplicationService
     public interface IUserProfileService : IEntityService<Userprofile>
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
+        Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
     }
 }

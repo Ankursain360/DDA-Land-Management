@@ -48,6 +48,7 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
         public virtual Department Department { get; set; }
+        public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
         public virtual Zone Zone { get; set; }
