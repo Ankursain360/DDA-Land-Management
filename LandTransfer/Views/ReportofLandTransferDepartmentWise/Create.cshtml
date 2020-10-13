@@ -34,7 +34,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Filter</label><span style="color:red">*</span>
-                        <select class="form-control" asp-for="HandedOverDepartmentId" id="Handed_over" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                        <select class="form-control"  id="Handed_over" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
                             <option value="0">---Select---</option>
                             <option value="1">Handed Over By</option>
                             <option value="2">Taken Over By</option>
@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                        <select asp-for="HandedOverDepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.handeoverdepartmentlist,"Id"))">
+                        <select asp-for="HandedOverDepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
