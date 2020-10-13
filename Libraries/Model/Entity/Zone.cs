@@ -46,5 +46,8 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Landtransfer> LandTransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual ICollection<Division> Division { get; set; }
+
+
     }
 }

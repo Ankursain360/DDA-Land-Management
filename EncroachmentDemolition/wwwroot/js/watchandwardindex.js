@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 2;
+var currentPageSize = 10;
 
 $(document).ready(function () {
     GetWatchandward(currentPageNumber, currentPageSize);
@@ -23,11 +23,13 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
+    pageNo = parseInt(pageNo);
     GetWatchandward(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
+    pageSize = parseInt(pageSize);
     GetWatchandward(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

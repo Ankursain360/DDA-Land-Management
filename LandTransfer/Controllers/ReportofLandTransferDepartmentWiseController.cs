@@ -20,73 +20,36 @@ namespace LandTransfer.Controllers
             _landTransferService = landTransferService;
         }
 
-        async Task GetAllDepartment(Landtransfer landtransfer)
+        async Task BindDropDown(Landtransfer landtransfer)
         {
-           
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-                   }
-
-        //async Task handedoverdepartment(Landtransfer landtransfer)
-        //{
-
-        //    landtransfer.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
-        //}
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    Landtransfer model = new Landtransfer();
-        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
-        //     return View(model);
-        //}
-
-
+          
+        }
         public async Task<IActionResult> Create()
         {
-            Landtransfer model = new Landtransfer();
-            model.LandTransferList = await _landTransferService.GetAllLandTransferList();
-            //  model.handeoverdepartmentlist = await _landTransferService.GetAllHandoverDepartment();
+            Landtransfer landtransfer = new Landtransfer();
 
-            return View(model);
+            await BindDropDown(landtransfer);
+            return View(landtransfer);
         }
-
-
-
-
-        //public async Task<PartialViewResult> GetDetails(int handedover)
-        //{
-        //    var result = await _landTransferService.GetLandTransferReportDepartmentwise(handedover);
-
-        //    if (result != null)
-        //    {
-        //        return PartialView("Index", result);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return PartialView();
-        //    }
-
-
-
-        //}
-
-
-
-
-         public async Task<PartialViewResult> GetDetails(int? id)
+        public async Task<PartialViewResult> GetDetails(int reportType, int departmentId)
         {
-            id=id ?? 0;
-            var result = await _landTransferService.GetLandTransferReportdataHandover(Convert.ToInt32(id));
-            return PartialView("_List", result);
+            ViewBag.ReportType = reportType;
+
+            var result = await _landTransferService.GetLandTransferReportDataDepartmentWise(reportType, departmentId);
+
+            if (result != null)
+            {
+                return PartialView("_Index", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+
         }
-
-
-
+        
 
 
         }

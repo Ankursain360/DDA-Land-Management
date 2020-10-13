@@ -8,8 +8,6 @@
             <th>Village</th>
             <th>Khasra No.</th>
             <th>Status on Ground</th>
-            <th>PhotoPath</th>
-            <th>ReportFilePath</th>
             <th>Remarks</th>
             <th>Status</th>
             <th>Operations</th>
@@ -26,11 +24,9 @@
                 <td>@item.Village.Name</td>
                 <td>@item.Khasra.Name</td>
                 <td>@item.StatusOnGround</td>
-                <td>@item.PhotoPath</td>
-                <td>@item.ReportFiletPath</td>
                 <td>@item.Remarks</td>
                 <td>
-                    @(item.IsActive  == 1 ? "Active" : "Inactive" )
+                    @(item.IsActive == 1 ? "Active" : "Inactive")
                 </td>
 
                 <td>
