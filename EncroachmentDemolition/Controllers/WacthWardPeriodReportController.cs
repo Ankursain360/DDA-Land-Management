@@ -20,17 +20,6 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-
-        // Dropdown Dependency  calls below
-      
-        //[HttpGet]
-        //public async Task<JsonResult> GetLocalityList(int? DivisionId)
-        //{
-        //    DivisionId = DivisionId ?? 0;
-        //    return Json(await _watchandwardService.GetAllVillage());
-        //}
-
-
         public async Task<IActionResult> Create()
             {
             Watchandward model = new Watchandward();
