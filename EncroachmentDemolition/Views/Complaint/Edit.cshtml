@@ -25,9 +25,9 @@
 <br />
 <br />
 @*<div>
-    @Html.ActionLink("Download ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+        @Html.ActionLink("Download ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
 
-</div>*@
+    </div>*@
 <br />
 <br />
 <div class="container-fluid" id="MainContentForm">
@@ -38,7 +38,7 @@
             @*<h6 class="pull-left" style="color:white; margin-top:-0.4%">New Complaint</h6>*@
         </div>
         <div class="panel-body">
-            <form asp-action="Create" enctype="multipart/form-data">
+            <form asp-action="Edit" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -123,19 +123,20 @@
                 </div>
 
 
-                    <br />
+                <br />
 
-                    <div class="row">
-                        <div class=" form-group  col-md-12">
-                            <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
-                            @Html.ActionLink("Back", "Index", "Complaint", null, new { @class = "btn btn-primary dda-pageheading" })
-                        </div>
+                <div class="row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
+                        @Html.ActionLink("Back", "Index", "Complaint", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
+                </div>
 
             </form>
         </div>
     </div>
 </div>
+
 
 
 

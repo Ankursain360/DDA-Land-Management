@@ -42,5 +42,8 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public virtual ICollection<Division> Division { get; set; }
+
+
     }
 }
