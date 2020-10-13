@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ namespace LandTransfer.Controllers
         async Task BindDropDown(Landtransfer landtransfer)
         {
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-          
+
         }
         public async Task<IActionResult> Create()
         {
@@ -32,28 +33,28 @@ namespace LandTransfer.Controllers
             await BindDropDown(landtransfer);
             return View(landtransfer);
         }
-        public async Task<PartialViewResult> GetDetails(int reportType, int departmentId)
+       
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
         {
-            ViewBag.ReportType = reportType;
 
-            var result = await _landTransferService.GetLandTransferReportDataDepartmentWise(reportType, departmentId);
-
-            if (result != null)
+            if (model != null)
             {
-                return PartialView("_Index", result);
+                var result = await _landTransferService.GetPagedLandtransferReportDeptWise(model);
+                ViewBag.ReportType = model.reportType;
+                return PartialView("_List", result);
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
+                ViewBag.Message = Alert.Show("No Data Found", "", AlertType.Warning);
+                return PartialView("_List", null);
             }
-
         }
-        
 
 
-        }
-  
-    
-    
     }
+
+
+
+}
