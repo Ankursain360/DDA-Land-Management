@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+﻿@model IEnumerable<Libraries.Model.Entity.Landtransfer>
 @{int rowNo = 0; }
 
 
@@ -51,40 +50,16 @@
                         <td>@item.Remarks</td>
                         @*asp-action="View" asp-route-id="@item.Id"*@
                         @*<td>
-                                <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
 
-                            </td>*@
+                    </td>*@
                     </tr>
                 }
             }
             else
             {
                 <tr>
-                   
-                    <td>@(rowNo += 1)</td>
-
-                    <td>@item.Department.Name</td>
-                    <td>@item.Zone.Name</td>
-                    <td>@item.Division.Name</td>
-                    <td>@item.Locality.Name</td>
-                    <td>@item.KhasraNo</td>
-                    <td>@item.Address</td>
-                    <td>@item.HandedOverByNameDesingnation</td>
-
-                    <td>@item.HandedOverDate</td>
-                    <td>@item.TakenOverByNameDesingnation</td>
-                    <td>@item.DateofTakenOver</td>
-
-                    <td>@item.TransferorderIssueAuthority</td>
-                    <td>@item.Remarks</td>
-                    @*asp-action="View" asp-route-id="@item.Id"*@
-                    @*<td>
-                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                        </td>*@
-                   
                     <th colspan="13" style="text-align:center"> Data Not Available </th>
-                   
                 </tr>
             }
 
