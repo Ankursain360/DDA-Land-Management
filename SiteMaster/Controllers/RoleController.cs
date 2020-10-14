@@ -9,6 +9,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Service.IApplicationService;
+using System;
 using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
@@ -89,12 +90,12 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _roleService.FindByIdAsync(id.ToString());
-            if (Data == null)
+            var result = await _userProfileService.GetRoleById(id);
+            if (result == null)
             {
                 return NotFound();
             }
-            return View(Data);
+            return View(result);
         }
 
         [HttpPost]
@@ -103,13 +104,16 @@ namespace SiteMaster.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _roleService.FindByIdAsync(id.ToString());
+                var result = await _userProfileService.GetRoleById(id);
                 if (result != null)
                 {
+                    result.Id = model.Id;
                     result.Name = model.Name;
                     result.IsActive = model.IsActive;
+                    result.ModifiedBy = 1;
+                    result.ModifiedDate = DateTime.Now;
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var list = await _roleService.UpdateAsync(result);
+                    var list = await _userProfileService.UpdateRole(result);
                     return View("Index", list);
                 }
                 else

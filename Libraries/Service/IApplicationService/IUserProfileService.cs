@@ -1,4 +1,5 @@
-﻿using Dto.Search;
+﻿using Dto.Master;
+using Dto.Search;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Model.Entity;
@@ -12,5 +13,7 @@ namespace Service.IApplicationService
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
         Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
+        Task<RoleDto> GetRoleById(int id);
+        Task<bool> UpdateRole(RoleDto model);
     }
 }

@@ -1,15 +1,11 @@
-﻿using Dto.Master;
+﻿using Dto.Search;
 using Libraries.Model;
 using Libraries.Repository.Common;
+using Microsoft.EntityFrameworkCore;
 using Model.Entity;
 using Repository.IEntityRepository;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Dto.Search;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Repository.EntityRepository
 {
