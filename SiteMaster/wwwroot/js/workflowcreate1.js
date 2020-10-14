@@ -94,6 +94,19 @@ function GetLevelDetails() {
                 i = i + 1;
             });
 
+            var i = 1;
+            $(".delete-record").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("data-id", i);
+                i = i + 1;
+            });
+
+            var i = 1;
+            $(".delete-recordDiv").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("id", "delete -recordDiv"+i);
+                i = i + 1;
+            });
 
         });
       
@@ -101,12 +114,12 @@ function GetLevelDetails() {
     else {
         alert('Please fill record before add new record ');
     }
-    debugger;
-    var x = 0;
-    $(".ParameterNameListClass").each(function () {
-        $(this).val(numbers[x]);
-        x = x + 1;
-    });
+    //debugger;
+    //var x = 0;
+    //$(".ParameterNameListClass").each(function () {
+    //    $(this).val(numbers[x]);
+    //    x = x + 1;
+    //});
 }
 
 function GetSearchParam() {
@@ -126,13 +139,121 @@ $(document).delegate('a.add-record', 'click', function (e) {
     GetLevelDetails();
 });
 
+$(document).delegate('a.delete-record', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        debugger;
+        var id = jQuery(this).attr('data-id');
+     //   var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#delete -recordDiv' + id).remove();
+      //  $('#delete -recordDiv' + id).empty();
+
+        debugger;
+        var i = 0;
+        // var collection = $(".ParameterNameListClass");
+        $(".ParameterNameListClass").each(function () {
+            // You can access `collection.length` here.
+            // var size = collection.length;            
+            // console.log(size);
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterNameList[" + i + "]");
+            i = i + 1;
+        });
+        var i = 0;
+        $(".ParameterValueListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterValueList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterLevelListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterLevelList[" + i + "]");
+            $(this).val(i + 1);
+            $(this).removeAttr("disabled", "disabled");
+            $(this).attr("disabled", "disabled");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterActionListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterActionList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterSkipListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterSkipList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".sn").each(function () {
+            $(this).html('Level ' + i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".delete-record").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".delete-recordDiv").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", "delete -recordDiv" + i);
+            i = i + 1;
+        });
+        return true;
+    } else {
+        return false;
+    }
+});
+
 $(function () {
     $("#btnCreate").click(function () {
-        debugger;
-        var param = GetListData();
-        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-            window.location.href = '/WorkFlowTemplate/Index';
-        });
+        var checkresult = false;
+        var dropdown_val = $('#ModuleId option:selected').val();
+        if (parseInt(dropdown_val) < 1) {
+            checkresult = false;
+            $("#ModuleIdMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Name_val = $('#Name').val();
+        if (Name_val == "") {
+            checkresult = false;
+            $("#NameMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Description_val = $('#Description').val();
+        if (Description_val == "") {
+            checkresult = false;
+            $("#DescriptionMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
+            checkresult = false;
+        }
+
+        if (checkresult) {
+            var param = GetListData();
+            HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+                window.location.href = '/WorkFlowTemplate/Index';
+            });
+        }
+        
     });
 });
 
@@ -196,12 +317,59 @@ function GetListData() {
     return data;
 }
 
+$('#myForm').validate({
+    rules: {       
+        ModuleId: {
+            required: true
+        },
+        Name: {
+            required: true
+        },
+        Description: {
+            required: true
+        }
+    },
 
+    messages: {
+        ModuleId: {
+            required: ModuleIdMessage //this is a function that returns custom messages
+        },
+        Name: {
+            required: NameMessage //this is a function that returns custom messages
+        },
+        Description: {
+            required: DescriptionMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        debugger;
+        var param = GetListData();
+        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+            window.location.href = '/WorkFlowTemplate/Index';
+        });
+        return true;
+    }
+});
 
 //For Drop down
-function ModuleId() {
+function ModuleIdMessage() {
     var dropdown_val = $('#ModuleId option:selected').val();
-    if (dropdown_val < 1) {
+    if (parseInt(dropdown_val) < 1) {
         return "Module is Mandatory";
     } else {
         return false;
