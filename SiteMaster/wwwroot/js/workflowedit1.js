@@ -1,15 +1,112 @@
 ﻿$(document).ready(function () {
 
-
-    var param = GetSearchParam();
-    HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
-        //   $('#LoadReportView').html("");
-        $('#LoadReportView').append(response);
-    });
-
+    GetTaskDetails();
+    
 });
 
+function GetTaskDetails() {
+   
+    var id = $('#Id').val();
+    HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
+        debugger;
+        response = JSON.parse(response);
+        console.log(response);
+        var count = response.length;
 
+        for (var i = 0; i < response.length; i++) {
+            var param = GetSearchParam();
+            HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
+                //   $('#LoadReportView').html("");
+                $('#LoadReportView').append(response);
+            });
+        }
+
+        FillLevels();
+       
+    });
+}
+
+function FillLevels() { 
+
+    var id = $('#Id').val();
+    HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
+        debugger;
+        response = JSON.parse(response);
+        console.log(response);
+        var count = response.length;
+
+        var i = 0;
+        // var collection = $(".ParameterNameListClass");
+        $(".ParameterNameListClass").each(function () {
+            // You can access `collection.length` here.
+            // var size = collection.length;            
+            // console.log(size);
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterNameList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterValueListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterValueList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterLevelListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterLevelList[" + i + "]");
+            $(this).val(i + 1);
+            $(this).removeAttr("disabled", "disabled");
+            $(this).attr("disabled", "disabled");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterActionListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterActionList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterSkipListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterSkipList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".sn").each(function () {
+            $(this).html('Level ' + i);
+            i = i + 1;
+        });
+
+
+        for (var i = 0; i < response.length; i++) {
+
+
+            if (response[i].parameterSkip == true) {
+                $("input[name='ParameterSkipList[" + i + "]']").prop("checked", true);
+                $("input[name='ParameterSkipList[" + i + "]']").val("true");
+            }
+            else {
+                $("input[name='ParameterSkipList[" + i + "]']").prop("checked", false);
+                $("input[name='ParameterSkipList[" + i + "]']").val("false");
+            }
+
+            $("Select[name='ParameterNameList[" + i + "]']").val(response[i].parameterName);
+            $("input[name='ParameterValueList[" + i + "]']").val(response[i].parameterValue);
+            $("input[name='ParameterLevelList[" + i + "]']").val(response[i].parameterLevel);
+            $("Select[name='ParameterActionList[" + i + "]']").val(response[i].parameterAction);
+
+
+        }
+
+    });
+
+}
 $('#ddlOperationType').change(function () {
     BindDropdown();
 });
@@ -30,16 +127,10 @@ function BindDropdown() {
 }
 
 function GetLevelDetails() {
-    var name = $("#tbl_posts #add #ddlActionType").val();
-    var value = $("#tbl_posts #add #parameterValue").val();
-    var level = $("#tbl_posts #add #parameterLevel").val();
-    var isskip = $("#tbl_posts #add #parameterLevel").val();
-    //var numbers = [];
-    //$(".ParameterNameListClass").each(function () {
-    //    numbers.push($(this).children('option:selected').val());
-    //});
+
+
     if ($("#tbl_posts #add #parameterName").val() != '' && $("#tbl_posts #add #parameterValue").val() != '' && $("#tbl_posts #add #parameterLevel").val() != ''
-        && $("#tbl_posts #add #dropdownlistDesrtoy").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
+        && $("#tbl_posts #add #dropdownlist").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
     ) {
 
         var param = GetSearchParam();
@@ -57,6 +148,7 @@ function GetLevelDetails() {
                 $(this).attr("name", "ParameterNameList[" + i + "]");
                 i = i + 1;
             });
+
             var i = 0;
             $(".ParameterValueListClass").each(function () {
                 $(this).removeAttr("name");
@@ -68,7 +160,7 @@ function GetLevelDetails() {
             $(".ParameterLevelListClass").each(function () {
                 $(this).removeAttr("name");
                 $(this).attr("name", "ParameterLevelList[" + i + "]");
-                $(this).val(i+1);
+                $(this).val(i + 1);
                 $(this).removeAttr("disabled", "disabled");
                 $(this).attr("disabled", "disabled");
                 i = i + 1;
@@ -96,17 +188,11 @@ function GetLevelDetails() {
 
 
         });
-      
     }
     else {
         alert('Please fill record before add new record ');
     }
-    debugger;
-    var x = 0;
-    $(".ParameterNameListClass").each(function () {
-        $(this).val(numbers[x]);
-        x = x + 1;
-    });
+
 }
 
 function GetSearchParam() {
@@ -130,14 +216,14 @@ $(function () {
     $("#btnCreate").click(function () {
         debugger;
         var param = GetListData();
-        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+        HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
             window.location.href = '/WorkFlowTemplate/Index';
         });
     });
 });
 
 function GetListData() {
-    var id = 0;
+    var id = $('#Id').val();
     var moduleId = $('#ModuleId option:selected').val();
     var name = $('#Name').val();
     var description = $('#Description').val();
@@ -194,35 +280,4 @@ function GetListData() {
     }
     console.log(data);
     return data;
-}
-
-
-
-//For Drop down
-function ModuleId() {
-    var dropdown_val = $('#ModuleId option:selected').val();
-    if (dropdown_val < 1) {
-        return "Module is Mandatory";
-    } else {
-        return false;
-    }
-} 
-
-//For Textbox
-function NameMessage() {
-    var dropdown_val = $('#Name').val();
-    if (dropdown_val == "") {
-        return "Process Name is Mandatory";
-    } else {
-        return "";
-    }
-}
-
-function DescriptionMessage() {
-    var dropdown_val = $('#Description').val();
-    if (dropdown_val == "") {
-        return "Proccess Description is Mandatory";
-    } else {
-        return "";
-    }
 }

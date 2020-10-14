@@ -46,10 +46,20 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] WorkflowTemplateCreateDto WorkflowLevelDto)
+        public async Task<PartialViewResult> GetDetails([FromBody] WorkflowLevelDto WorkflowLevelDto)
         {
-           
-            return  PartialView("_Levels");
+            WorkflowTemplate model = new WorkflowTemplate();
+            model.OperationId = WorkflowLevelDto.opertaionId;
+            if (model.OperationId == "Role")
+            {
+                ViewBag.Items = await _workflowtemplateService.GetRolelist();
+            }
+            else
+            {
+                ViewBag.Items = await _workflowtemplateService.GetUserlist();
+            }
+            
+            return  PartialView("_Levels", model);
         }
 
         [HttpPost]
