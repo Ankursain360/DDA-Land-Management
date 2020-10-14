@@ -3,7 +3,6 @@
 
     var param = GetSearchParam();
     HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
-        //   $('#LoadReportView').html("");
         $('#LoadReportView').append(response);
     });
 
@@ -34,25 +33,16 @@ function GetLevelDetails() {
     var value = $("#tbl_posts #add #parameterValue").val();
     var level = $("#tbl_posts #add #parameterLevel").val();
     var isskip = $("#tbl_posts #add #parameterLevel").val();
-    //var numbers = [];
-    //$(".ParameterNameListClass").each(function () {
-    //    numbers.push($(this).children('option:selected').val());
-    //});
     if ($("#tbl_posts #add #parameterName").val() != '' && $("#tbl_posts #add #parameterValue").val() != '' && $("#tbl_posts #add #parameterLevel").val() != ''
         && $("#tbl_posts #add #dropdownlistDesrtoy").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
     ) {
 
         var param = GetSearchParam();
         HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
-            //   $('#LoadReportView').html("");
             $('#LoadReportView').append(response);
 
             var i = 0;
-            // var collection = $(".ParameterNameListClass");
             $(".ParameterNameListClass").each(function () {
-                // You can access `collection.length` here.
-                // var size = collection.length;            
-                // console.log(size);
                 $(this).removeAttr("name");
                 $(this).attr("name", "ParameterNameList[" + i + "]");
                 i = i + 1;
@@ -114,17 +104,9 @@ function GetLevelDetails() {
     else {
         alert('Please fill record before add new record ');
     }
-    //debugger;
-    //var x = 0;
-    //$(".ParameterNameListClass").each(function () {
-    //    $(this).val(numbers[x]);
-    //    x = x + 1;
-    //});
 }
 
 function GetSearchParam() {
-    //var particularDiv = document.getElementById('particularDiv');
-    //var allTables = particularDiv.getElementsByTagName('table').length;
     var count = $('.myWebsiteTable').find('table').length;
     var value = $('#ddlOperationType option:selected').val();
     var model = {
@@ -151,11 +133,7 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
         debugger;
         var i = 0;
-        // var collection = $(".ParameterNameListClass");
         $(".ParameterNameListClass").each(function () {
-            // You can access `collection.length` here.
-            // var size = collection.length;            
-            // console.log(size);
             $(this).removeAttr("name");
             $(this).attr("name", "ParameterNameList[" + i + "]");
             i = i + 1;

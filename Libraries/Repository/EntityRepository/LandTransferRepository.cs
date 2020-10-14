@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
                 .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.LocalityId == (locality == 0 ? x.Id : locality))).ToListAsync();
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))).ToListAsync();
             return data;
         }
 

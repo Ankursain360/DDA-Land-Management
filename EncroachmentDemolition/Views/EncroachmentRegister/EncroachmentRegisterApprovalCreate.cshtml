@@ -4,16 +4,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Inspection/Encroachment Approval Process</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Inspection/Encroachment Approval Process</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -23,7 +19,7 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
@@ -34,7 +30,7 @@
                     <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
-                                <div class=" myapp-hed2">
+                                <div class="dda-innerheading">
                                     <div class="col-md-12">
 
                                         <h6 class="pull-left" style="color:white;margin-top:5px;">Watch & Ward Details</h6>
@@ -45,7 +41,7 @@
                         </div>
                     </a>
                     <div class="collapse" id="collapseExample">
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
                                 <input type="date" id="txtDate" class="form-control" />
@@ -64,7 +60,7 @@
 
                         </div>
 
-                        <div class="form-row">
+                        <div class="row">
 
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Khasra No.</label>
@@ -81,15 +77,15 @@
                             </div>
 
                             @*<div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
-                        <select class="form-control">
-                            <option value="0">Active</option>
-                            <option value="1">Inactive</option>
-                        </select>
-                    </div>*@
+                                    <label class="control-label lb-sm">Status</label>
+                                    <select class="form-control">
+                                        <option value="0">Active</option>
+                                        <option value="1">Inactive</option>
+                                    </select>
+                                </div>*@
                         </div>
 
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
                                 <textarea type="text" class="form-control"></textarea>
@@ -97,13 +93,13 @@
 
 
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Photos</label>
                                 <input type="file" class="form-control" multiple />
                             </div>
                         </div>
-                        <div class="form-row">
+                        <div class="row">
                             <div class="form-group col-md-12">
                                 <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
                                 <textarea type="text" class="form-control"></textarea>
@@ -308,7 +304,6 @@
 
                     </div>
                 </div>
-                <br />
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
@@ -329,9 +324,9 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Submit" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Submit" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "WatchWardApproval", "WatchWard", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "WatchWardApproval", "WatchWard", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 

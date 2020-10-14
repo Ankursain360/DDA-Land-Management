@@ -1,0 +1,251 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
+@{int rowNo = 0; }
+
+    <table class="table table-responsive table-bordered table-card">
+
+
+        <thead class="thead">
+
+            @*Old with few fields start*@
+            @*<tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Unique ID</th>
+                <th rowspan="2">Locality</th>
+                <th rowspan="2">Khasra No</th>
+                <th rowspan="2">Area</th>
+                <th colspan="4" style=" text-align:center">Area (in Sq. Mt.)</th>
+                <th rowspan="2">Buit & type</th>
+                <th rowspan="2">Layout Plan</th>
+                <th rowspan="2">Upload File</th>
+                <th rowspan="2">Land Use</th>
+                <th colspan="3" style=" text-align:center">Taken Over</th>
+                <th rowspan="2">Division</th>
+                <th rowspan="2">Litigation Status</th>
+                <th rowspan="2">GEO Referencing</th>
+                <th colspan="3" style=" text-align:center">Handed Over</th>
+                <th colspan="3" style=" text-align:center">Disposal</th>
+                <th rowspan="2">Remarks</th>
+                <th rowspan="2">Operation</th>
+            </tr>
+            <tr>
+                <th>Boundary</th>
+                <th>Total Area</th>
+                <th>Encrochment</th>
+                <th>Vacant</th>
+                <th>Taken Over Name</th>
+                <th>Taken Over/Date</th>
+                <th>Taken Over/Comments</th>
+                <th>Handed Over Name/Designation</th>
+                <th>Handed Over/Date</th>
+                <th>Handed Over/Comments</th>
+                <th>Disposal type</th>
+                <th>Disposal/Date</th>
+                <th>Disposal/Comments</th>
+
+            </tr>*@
+            @*Old with few fields End*@
+
+
+
+            @*New with all fields start*@
+            @*<tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Classification of Land</th>
+                <th rowspan="2">Department</th>
+                <th rowspan="2">Zone</th>
+                <th rowspan="2">Division</th>
+                <th rowspan="2">Locality</th>
+                <th rowspan="2">Khasra No.</th>
+                <th rowspan="2">Primary List No.</th>
+                <th rowspan="2">Plot No. & Address with Landmark</th>
+                <th rowspan="2">Encroachment Status</th>
+                <th rowspan="2">Encroachment Details</th>
+                <th colspan="6" style=" text-align:center">Area</th>
+                <th rowspan="2">Planned/Unplanned Land</th>
+                <th rowspan="2">Built & type</th>
+                <th rowspan="2">Layout Plan</th>
+                <th rowspan="2">Litigation Status</th>
+                <th rowspan="2">GEO Referencing</th>
+                <th colspan="4" style=" text-align:center">Taken Over</th>
+                <th colspan="4" style=" text-align:center">Handed Over</th>
+                <th colspan="3" style=" text-align:center">Disposal</th>
+                <th rowspan="2">Remarks</th>
+                <th rowspan="2">Operation</th>
+            </tr>
+            <tr>
+                <th>Boundary</th>
+                <th>Total Area(In bigha-biswa/Sq Yd./Acre)</th>
+                <th>Total Area(in Sq. Mt.)</th>
+                <th>Encrochment(in Sq. Mt.)</th>
+                <th>Builtup in Encroachment Area(in sq. mt.)</th>
+                <th>Vacant(in Sq. Mt.)</th>
+                <th>Name/Designation</th>
+                <th>Date</th>
+                <th>Mobile No.</th>
+                <th>Comments</th>
+                <th>Name/Designation</th>
+                <th>Date</th>
+                <th>Mobile No.</th>
+                <th>Comments</th>
+                <th>type</th>
+                <th>Date</th>
+                <th>Comments</th>
+
+            </tr>*@
+            @*New with all fields start*@
+
+
+            <tr>
+                <th>Sr.No</th>
+                <th>Classification of Land</th>
+                <th>Department</th>
+                <th>Zone</th>
+                <th>Division</th>
+                <th>Locality(Village)</th>
+                <th>Khasra No.</th>
+                <th>Primary List No.</th>
+                <th>Plot No. & Address with Landmark</th>
+                <th>Encroachment Status</th>
+                @*<th>Encroachment Details</th>*@
+                <th>Total Area(in Sq. Mt.)</th>
+                <th>Operation</th>
+            </tr>
+
+        </thead>
+        <tbody class="tbody">
+
+            @*New with all fields start*@
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@item.ClassificationOfLand.Name</td>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@item.KhasraNo</td>
+                    <td>@item.PrimaryListNo</td>
+                    <td>@item.Palandmark</td>
+                    <td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>
+                    @*<td>@item.EncraochmentDetails</td>*@
+                    @*<td>@(item.Boundary == 0 ? "No" : "Yes")</td>
+                    <td>@item.TotalAreaInBigha</td>*@
+                    <td>@item.TotalArea</td>
+                    @*<td>@item.Encroached</td>
+                    <td>@item.BuiltUpEncraochmentArea</td>
+                    <td>@item.Vacant</td>
+                    <td>@(item.PlannedUnplannedLand)</td>
+                    <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
+                    <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
+                    <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
+                    <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>*@
+                    @*<td>
+                        @if (item.LayoutFilePath != null)
+                        {
+                            @Html.ActionLink("Download", "Download", new { id = item.Id })
+                        }
+                        else
+                        {
+                            <p class="text-danger">No Document</p>
+                        }
+                    </td>*@
+
+                    @*<td>@item.TakenOverName</td>
+                    <td>@item.TakenOverDate</td>
+                    <td>@item.TakenOverMobileNo</td>
+                    <td>@item.TakenOverComments</td>
+                    <td>@item.HandedOverName</td>
+                    <td>@item.HandedOverDate</td>
+                    <td>@item.HandedOverMobileNo</td>
+                    <td>@item.HandedOverComments</td>
+                    <td>@item.DisposalType.Name</td>
+                    <td>@item.DisposalDate</td>
+                    <td>@item.DisposalComments</td>
+                    <td>@item.Remarks</td>*@
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            }
+            @*New with all fields start*@
+
+
+
+            @*Old with few fields start*@
+            @*<tr>
+                <td>2</td>
+                <td>111</td>
+                <td>dwarka</td>
+                <td>1234</td>
+                <td>dwarka</td>
+                <td>yes</td>
+                <td>1258</td>
+                <td>no</td>
+                <td>yes</td>
+                <td>no</td>
+                <td>no</td>
+                <td>no</td>
+                <td>engg</td>
+                <td>dda</td>
+                <td>7aug2020</td>
+                <td>good</td>
+                <td>lm</td>
+                <td>no</td>
+                <td>no</td>
+                <td>dda</td>
+                <td>7aug2020</td>
+                <td>good</td>
+                <td>alloted</td>
+                <td>7aug2020</td>
+                <td>no comments</td>
+                <td>good to use</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>111</td>
+                <td>dwarka</td>
+                <td>1234</td>
+                <td>dwarka</td>
+                <td>yes</td>
+                <td>1258</td>
+                <td>no</td>
+                <td>yes</td>
+                <td>no</td>
+                <td>no</td>
+                <td>no</td>
+                <td>engg</td>
+                <td>dda</td>
+                <td>7aug2020</td>
+                <td>good</td>
+                <td>lm</td>
+                <td>no</td>
+                <td>no</td>
+                <td>dda</td>
+                <td>7aug2020</td>
+                <td>good</td>
+                <td>alloted</td>
+                <td>7aug2020</td>
+                <td>no comments</td>
+                <td>good to use</td>
+                <td>
+                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </td>
+            </tr>*@
+            @*Old with few fields start*@
+        </tbody>
+
+    </table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

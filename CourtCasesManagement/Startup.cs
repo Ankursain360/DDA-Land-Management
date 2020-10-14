@@ -50,13 +50,13 @@ namespace CourtCasesManagement
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             //services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
             //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-           // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
             // services.AddMvc()
             //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddSession();
-           
+
             services.AddMvc().AddSessionStateTempDataProvider();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
             services.AddMvc().AddViewOptions(options =>

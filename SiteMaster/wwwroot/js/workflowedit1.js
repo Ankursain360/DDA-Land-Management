@@ -1,11 +1,11 @@
 ﻿$(document).ready(function () {
 
     GetTaskDetails();
-    
+
 });
 
 function GetTaskDetails() {
-   
+
     var id = $('#Id').val();
     HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
         debugger;
@@ -16,95 +16,82 @@ function GetTaskDetails() {
         for (var i = 0; i < response.length; i++) {
             var param = GetSearchParam();
             HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
-                //   $('#LoadReportView').html("");
                 $('#LoadReportView').append(response);
             });
         }
 
-        FillLevels();
-       
+        FillLevels(response);
+
     });
 }
 
-function FillLevels() { 
+function FillLevels(response) {
+    var count = response.length;
 
-    var id = $('#Id').val();
-    HttpGet(`/WorkFlowTemplate/GetTaskDetails/?id=${id}`, 'json', function (response) {
-        debugger;
-        response = JSON.parse(response);
-        console.log(response);
-        var count = response.length;
+    var i = 0;
+    $(".ParameterNameListClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterNameList[" + i + "]");
+        i = i + 1;
+    });
 
-        var i = 0;
-        // var collection = $(".ParameterNameListClass");
-        $(".ParameterNameListClass").each(function () {
-            // You can access `collection.length` here.
-            // var size = collection.length;            
-            // console.log(size);
-            $(this).removeAttr("name");
-            $(this).attr("name", "ParameterNameList[" + i + "]");
-            i = i + 1;
-        });
+    var a = 0;
+    $(".ParameterValueListClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterValueList[" + a + "]");
+        a = a + 1;
+    });
 
-        var i = 0;
-        $(".ParameterValueListClass").each(function () {
-            $(this).removeAttr("name");
-            $(this).attr("name", "ParameterValueList[" + i + "]");
-            i = i + 1;
-        });
+    var b = 0;
+    $(".ParameterLevelListClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterLevelList[" + b + "]");
+        $(this).val(b + 1);
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
+        b = b + 1;
+    });
 
-        var i = 0;
-        $(".ParameterLevelListClass").each(function () {
-            $(this).removeAttr("name");
-            $(this).attr("name", "ParameterLevelList[" + i + "]");
-            $(this).val(i + 1);
-            $(this).removeAttr("disabled", "disabled");
-            $(this).attr("disabled", "disabled");
-            i = i + 1;
-        });
+    var c = 0;
+    $(".ParameterActionListClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterActionList[" + c + "]");
+        c = c + 1;
+    });
+    $(".ParameterActionListClass").attr("multiple", "");
 
-        var i = 0;
-        $(".ParameterActionListClass").each(function () {
-            $(this).removeAttr("name");
-            $(this).attr("name", "ParameterActionList[" + i + "]");
-            i = i + 1;
-        });
+    var d = 0;
+    $(".ParameterSkipListClass").each(function () {
+        $(this).removeAttr("name").attr("name", "ParameterSkipList[" + d + "]");
+        d = d + 1;
+    });
 
-        var i = 0;
-        $(".ParameterSkipListClass").each(function () {
-            $(this).removeAttr("name");
-            $(this).attr("name", "ParameterSkipList[" + i + "]");
-            i = i + 1;
-        });
-
-        var i = 1;
-        $(".sn").each(function () {
-            $(this).html('Level ' + i);
-            i = i + 1;
-        });
+    var f = 1;
+    $(".sn").each(function () {
+        $(this).html('Level ' + f);
+        f = f + 1;
+    });
 
 
-        for (var i = 0; i < response.length; i++) {
+    for (var j = 0; j < response.length; j++) {
 
 
-            if (response[i].parameterSkip == true) {
-                $("input[name='ParameterSkipList[" + i + "]']").prop("checked", true);
-                $("input[name='ParameterSkipList[" + i + "]']").val("true");
-            }
-            else {
-                $("input[name='ParameterSkipList[" + i + "]']").prop("checked", false);
-                $("input[name='ParameterSkipList[" + i + "]']").val("false");
-            }
-
-            $("Select[name='ParameterNameList[" + i + "]']").val(response[i].parameterName);
-            $("input[name='ParameterValueList[" + i + "]']").val(response[i].parameterValue);
-            $("input[name='ParameterLevelList[" + i + "]']").val(response[i].parameterLevel);
-            $("Select[name='ParameterActionList[" + i + "]']").val(response[i].parameterAction);
-
-
+        if (response[j].parameterSkip == true) {
+            $("input[name='ParameterSkipList[" + j + "]']").prop("checked", true);
+            $("input[name='ParameterSkipList[" + j + "]']").val("true");
+        }
+        else {
+            $("input[name='ParameterSkipList[" + j + "]']").prop("checked", false);
+            $("input[name='ParameterSkipList[" + j + "]']").val("false");
         }
 
-    });
+        $("Select[name='ParameterNameList[" + j + "]']").val(response[j].parameterName);
+        $("input[name='ParameterValueList[" + j + "]']").val(response[j].parameterValue);
+        $("input[name='ParameterLevelList[" + j + "]']").val(response[j].parameterLevel);
+        $("Select[name='ParameterActionList[" + j + "]']").val(response[j].parameterAction);
+
+
+    }
 
 }
 $('#ddlOperationType').change(function () {
@@ -135,15 +122,10 @@ function GetLevelDetails() {
 
         var param = GetSearchParam();
         HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
-            //   $('#LoadReportView').html("");
             $('#LoadReportView').append(response);
 
             var i = 0;
-            // var collection = $(".ParameterNameListClass");
             $(".ParameterNameListClass").each(function () {
-                // You can access `collection.length` here.
-                // var size = collection.length;            
-                // console.log(size);
                 $(this).removeAttr("name");
                 $(this).attr("name", "ParameterNameList[" + i + "]");
                 i = i + 1;
@@ -196,8 +178,6 @@ function GetLevelDetails() {
 }
 
 function GetSearchParam() {
-    //var particularDiv = document.getElementById('particularDiv');
-    //var allTables = particularDiv.getElementsByTagName('table').length;
     var count = $('.myWebsiteTable').find('table').length;
     var value = $('#ddlOperationType option:selected').val();
     var model = {
@@ -241,7 +221,7 @@ $(function () {
         }
 
         if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
-        checkresult = false;
+            checkresult = false;
         }
 
 

@@ -58,5 +58,11 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/morlandinventoryindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/morlandinventoryindex.js"
+    ]
   }
 ]
