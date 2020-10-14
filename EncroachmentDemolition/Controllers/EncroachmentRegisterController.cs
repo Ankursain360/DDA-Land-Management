@@ -363,5 +363,10 @@ namespace EncroachmentDemolition.Controllers
             string filename = Data.PhotoFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+
+        public IActionResult EncroachmentRegisterApproval()
+        {
+            return View();
+        }
     }
 }
