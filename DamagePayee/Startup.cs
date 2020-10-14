@@ -43,12 +43,12 @@ namespace DamagePayee
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-          //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 
-           // services.AddMvc()
-           //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
+            // services.AddMvc()
+            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
             services.AddSession();
             services.AddMvc();
             services.AddMvc().AddSessionStateTempDataProvider();
@@ -61,7 +61,7 @@ namespace DamagePayee
             {
                 options.Cookie.Name = "MyTempDataCookie";
             });
-           // services.AddScoped<ILogger, Logger>();
+            // services.AddScoped<ILogger, Logger>();
             // Add Session services.
             services.AddSession(options =>
             {
@@ -90,7 +90,7 @@ namespace DamagePayee
 
             app.UseAuthorization();
             app.UseSession();
-           // app.UseMvc();
+            // app.UseMvc();
             app.UseCookiePolicy();
             //app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
