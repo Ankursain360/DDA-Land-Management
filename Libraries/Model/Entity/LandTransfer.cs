@@ -21,6 +21,12 @@ namespace Libraries.Model.Entity
         public int LocalityId { get; set; }
         [Required]
         public string KhasraNo { get; set; }
+        [Required]
+        public decimal? BuildupArea { get; set; }
+        [Required]
+        public decimal? VacantArea { get; set; }
+        [Required]
+        public decimal? TotalArea { get; set; }
         public string Address { get; set; }
         [Required]
         public int? HandedOverDepartmentId { get; set; }
