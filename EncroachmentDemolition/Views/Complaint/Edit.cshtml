@@ -1,0 +1,143 @@
+﻿@model Libraries.Model.Entity.Onlinecomplaint
+
+
+
+<style>
+    div.panel-heading {
+        height: 90px;
+        text-align: center;
+    }
+
+    input {
+        border: 0px;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Online Complaint</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+@*<div>
+        @Html.ActionLink("Download ", "CmplntCreate", "OlCmplnt", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
+
+    </div>*@
+<br />
+<br />
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h5 style="color:white;">Delhi Development Authority</h5>
+            <h6 style="color:white;">Online Complaint Report</h6>
+            @*<h6 class="pull-left" style="color:white; margin-top:-0.4%">New Complaint</h6>*@
+        </div>
+        <div class="panel-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Name of Complaint  </label>
+                        <input class="form-control" asp-for="Name" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Contact No. </label>
+                        <input class="form-control" asp-for="Contact" />
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Email Id  </label>
+                        <input class="form-control" asp-for="Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Type of Complaint </label>
+
+                        <select class="form-control dda-dropdown" asp-for="ComplaintTypeId" asp-items="@(new SelectList(Model.ComplaintList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="ComplaintTypeId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <label class="control-label lb-sm ">Photograph</label>
+                    <input asp-for="Photo" id="Photo" type="file" class="form-control" multiple />
+                </div>
+
+
+
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="control-label lb-sm">Area/Address of Complaint</label>
+                        <textarea type="text" asp-for="AddressOfComplaint" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Location </label>
+
+                        <select class="form-control dda-dropdown" asp-for="LocationId" asp-items="@(new SelectList(Model.LocationList, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="LocationId" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Lattitude </label>
+                        <input class="form-control" asp-for="Lattitude" />
+                        <span asp-validation-for="Lattitude" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Longitude </label>
+                        <input class="form-control" asp-for="Longitude" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Status</label>
+                        <select asp-for="IsActive" class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+
+                <br />
+
+                <div class="row">
+                    <div class=" form-group  col-md-12">
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
+                        @Html.ActionLink("Back", "Index", "Complaint", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+

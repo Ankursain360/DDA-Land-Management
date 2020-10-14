@@ -37,8 +37,9 @@ namespace Libraries.Model.Entity
      
         [NotMapped]
         public List<Villagetype> VillagetypeList { get; set; }
-        public virtual Villagetype Villagetype { get; set; }
+        public virtual Villagetype VillageType { get; set; }
 
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
 
 
     }

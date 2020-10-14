@@ -42,7 +42,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Undersection4plot>> GetAllUndersection4Plot()
         {
-            return await _dbContext.Undersection4plot.Include(x => x.NotificationNo).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Undersection4plot.Include(x => x.UnderSection4).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

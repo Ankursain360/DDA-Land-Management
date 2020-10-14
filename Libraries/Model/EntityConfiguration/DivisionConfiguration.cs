@@ -18,9 +18,15 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("division", "lms");
 
 
+            builder.HasIndex(e => e.DepartmentId)
+                     .HasName("fkDepartmentid1_idx");
+
             builder.HasIndex(e => e.Name)
-                     .HasName("Name_UNIQUE")
-                     .IsUnique();
+                .HasName("Name_UNIQUE")
+                .IsUnique();
+
+            builder.HasIndex(e => e.ZoneId)
+                .HasName("ZoneId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -33,6 +39,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+            builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
@@ -41,8 +49,14 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
+
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Zone)
+                .WithMany(p => p.Division)
+                .HasForeignKey(d => d.ZoneId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkZoneid1");
 
         }
 

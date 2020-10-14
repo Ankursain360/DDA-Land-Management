@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Dto.Search;
 using System.Linq;
+using System.Web;
 
 namespace Repository.EntityRepository
 {
@@ -33,6 +34,13 @@ namespace Repository.EntityRepository
                                         && (a.IsActive == 1)
                                     )
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+            return result;
+        }
+
+        public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
+        {
+            var result = await _dbContext.Roles.
+                            GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
             return result;
         }
     }

@@ -11,6 +11,12 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Onlinecomplaint> builder)
         {
             builder.ToTable("onlinecomplaint", "lms");
+            builder.HasIndex(e => e.ComplaintTypeId)
+                      .HasName("Name_idx");
+
+            builder.HasIndex(e => e.LocationId)
+                .HasName("LocationId_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AddressOfComplaint)
@@ -26,6 +32,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+
+            builder.Property(e => e.Email)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -45,14 +55,20 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Email)
-              .HasMaxLength(100)
-              .IsUnicode(false);
-
             builder.Property(e => e.PhotoPath)
                 .HasMaxLength(500)
                 .IsUnicode(false);
-      
+
+            builder.HasOne(d => d.ComplaintType)
+                .WithMany(p => p.Onlinecomplaint)
+                .HasForeignKey(d => d.ComplaintTypeId)
+                .HasConstraintName("ComplaintTypeId");
+
+            builder.HasOne(d => d.Location)
+                .WithMany(p => p.Onlinecomplaint)
+                .HasForeignKey(d => d.LocationId)
+                .HasConstraintName("LocationId");
+
         }
         }
     }

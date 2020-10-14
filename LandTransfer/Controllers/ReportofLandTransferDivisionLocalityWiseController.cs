@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -54,21 +55,37 @@ namespace LandInventory.Controllers
         }
 
 
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
-        {
-            var result = await _landtransferService.GetLandTransferReportData(department, zone, division, locality);
+        //public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
+        //{
+        //    var result = await _landtransferService.GetLandTransferReportData(department, zone, division, locality);
 
-            if (result != null)
+        //    if (result != null)
+        //    {
+        //        return PartialView("Index", result);
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return PartialView();
+        //    }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
+        {
+
+            if (model != null)
             {
-                return PartialView("Index", result);
+                var result = await _landtransferService.GetPagedLandtransferReportDeptWise(model);
+                ViewBag.ReportType = model.reportType;
+                return PartialView("_List", result);
             }
             else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
+                ViewBag.Message = Alert.Show("No Data Found", "", AlertType.Warning);
+                return PartialView("_List", null);
             }
-
         }
+
     }
-}
+    }
+
 
