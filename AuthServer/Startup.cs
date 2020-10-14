@@ -56,7 +56,6 @@ namespace AuthServer
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //InitializeDatabase(app);
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
