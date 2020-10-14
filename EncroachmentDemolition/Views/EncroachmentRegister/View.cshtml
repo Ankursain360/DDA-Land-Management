@@ -75,6 +75,11 @@
                         <input type="text" class="form-control numbers" asp-for="Area" />
                         <span asp-validation-for="Area" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Location/Address with land mark</label>
+                        <textarea class="form-control" asp-for="LocationAddressWithLandMark"></textarea>
+                        <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
+                    </div>
                 </div>
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
@@ -95,6 +100,7 @@
                                         <tr>
                                             <th>Sr.No</th>
                                             <th>Name of Structure</th>
+                                            <th>Construction Status</th>
                                             <th>Area[Approx.]</th>
                                             <th>Type[residential/religious/compercial]</th>
                                             <th>Date/Age of Encroachment</th>
@@ -112,13 +118,21 @@
                                                 <input type="text" asp-for="NameOfStructure" class="form-control" id="NameOfStructure" />
                                             </td>
                                             <td>
+                                                <select asp-for="ConstructionStatus" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Kachcha">Kachcha</option>
+                                                    <option value="Pakka">Pakka</option>
+                                                    <option value="Under Construction">Under Construction</option>
+                                                </select>
+                                            </td>
+                                            <td>
                                                 <input type="text" asp-for="AreaApprox" class="form-control numbers" id="AreaApprox" />
                                             </td>
                                             <td>
                                                 <input type="text" asp-for="Type" class="form-control" id="Type" />
                                             </td>
                                             <td>
-                                                <input type="date" asp-for="DateOfEncroachment" class="form-control" id="DateOfEncroachment" />
+                                                <input asp-for="DateOfEncroachment" type="date" class="form-control" id="DateOfEncroachment" />
                                             </td>
                                             <td>
                                                 <input asp-for="ReferenceNoOnLocation" type="text" class="form-control number" id="ReferenceNoOnLocation" />

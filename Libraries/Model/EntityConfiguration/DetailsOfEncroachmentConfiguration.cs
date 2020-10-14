@@ -18,7 +18,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.Area).HasColumnType("decimal(10,0)");
+            builder.Property(e => e.Area).HasColumnType("decimal(10,2)");
 
             builder.Property(e => e.CountOfStructure).HasColumnType("decimal(10,0)");
 
@@ -33,6 +33,9 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.NameOfStructure)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            builder.Property(e => e.ConstructionStatus)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 

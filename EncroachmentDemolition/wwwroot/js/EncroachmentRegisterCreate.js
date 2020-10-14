@@ -43,9 +43,11 @@ $(function () {
 });
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
-    if ($("#tbl_posts #add #NameOfStructure").val() != '' && $("#tbl_posts #add #AreaApprox").val() != '' && $("#tbl_posts #add #Type").val() != ''
+
+    if ($("#tbl_posts #add #ConstructionStatus").children("option:selected").val() != '' && $("#tbl_posts #add #ConstructionStatus").children("option:selected").val() != undefined && $("#tbl_posts #add #NameOfStructure").val() != '' && $("#tbl_posts #add #AreaApprox").val() != '' && $("#tbl_posts #add #Type").val() != ''
         && $("#tbl_posts #add #DateOfEncroachment").val() != '' && $("#tbl_posts #add #ReferenceNoOnLocation").val() != '' && $("#tbl_posts #add #CountOfStructure").val() != ''
-      ) {
+    ) {
+        var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -54,6 +56,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
+        $('#tbl_posts_body #rec-' + size + ' #ConstructionStatus').val(ConstructionStatus);
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
