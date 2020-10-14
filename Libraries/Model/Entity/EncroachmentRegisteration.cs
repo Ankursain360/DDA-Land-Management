@@ -46,6 +46,8 @@ namespace Libraries.Model.Entity
         public string SecurityGuardOnDuty { get; set; }
         [Required]
         public string Remarks { get; set; }
+        [Required]
+        public string LocationAddressWithLandMark { get; set; }
         public byte IsActive { get; set; }
         public virtual Department Department { get; set; }
         public virtual Department OtherDepartmentNavigation { get; set; }
@@ -75,6 +77,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         [Required]
         public List<string> NameOfStructure { get; set; }
+        [NotMapped]
+        [Required]
+        public List<string> ConstructionStatus { get; set; }
         [NotMapped]
         [Required]
         public List<decimal> AreaApprox { get; set; }

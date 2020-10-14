@@ -1,0 +1,86 @@
+﻿@*@model IEnumerable<Libraries.Model.Entity.Landtransfer>*@
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Current Status Of Handed Over Taken Over Land </h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
+</div>
+<br />
+<br />
+<div class="container-fluid">
+    <div class="card  table-responsive table-card">
+        <table class="table table-responsive table-bordered table-card">
+            <thead class="thead">
+                <tr class="myapp-hed1">
+                    <th>Sr.No</th>
+                    <th>Department</th>
+                    <th>Zone</th>
+                    <th>Division</th>
+                    <th>Locality(Village)</th>
+                    <th>Khasra No.</th>
+                    <th>Address</th>
+                    <th>Handed Over By</th>
+                    <th>Date of Hand Over</th>
+                    <th>Taken Over By</th>
+                    <th>Date of Taken Over</th>
+                    <th style="width:150px;">Operation</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+
+                <tr>
+
+                    <td>1</td>
+                    <td>LM</td>
+                    <td>LM-North West</td>
+                    <td>W8</td>
+                    <td>Dwarka</td>
+                    <td>KH 123</td>
+                    <td>Sec 17 Dwarka</td>
+                    <td>LM</td>
+                    <td>12 Oct 2020 </td>
+                    <td> MOR</td>
+                    <td> 12 Oct 2020 </td>
+                    <td>
+
+                        <a asp-action="Create" title="Add Status">Add Current Status </a>
+                        <a asp-action="ViewHistory" title="View History"> &nbsp; | &nbsp; View History </a>
+
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>2</td>
+                    <td>LM</td>
+                    <td>LM-North West</td>
+                    <td>W8</td>
+                    <td>Dwarka</td>
+                    <td>KH 123</td>
+                    <td>Sec 17 Dwarka</td>
+                    <td>LM</td>
+                    <td>12 Oct 2020 </td>
+                    <td> MOR</td>
+                    <td> 12 Oct 2020 </td>
+                    <td >
+                        <a asp-action="Create" title="Add Current Status">Add Current Status </a>
+                        <a asp-action="ViewHistory" title="View History"> &nbsp; | &nbsp; View History </a>
+                        @*<a asp-action="Create" title="Add Status">  &nbsp; | &nbsp;<i class="glyphicon glyphicon-plus" aria-hidden="true"></i> </a>
+        <a asp-action="Create" title="View History"> &nbsp; | &nbsp; <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>*@
+
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>

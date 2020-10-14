@@ -27,7 +27,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Awardplotdetails>> GetAwardplotdetails()
         {
-            return await _dbContext.Awardplotdetails.Include(x => x.Awardmaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Awardplotdetails.Include(x => x.AwardMaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
        
 
@@ -48,7 +48,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
         {
-            return await _dbContext.Awardplotdetails.Include(x => x.Awardmaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            return await _dbContext.Awardplotdetails.Include(x => x.AwardMaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
         }
 
 
