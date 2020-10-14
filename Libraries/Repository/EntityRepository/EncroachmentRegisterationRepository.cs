@@ -106,7 +106,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
-            return await _dbContext.EncroachmentRegisteration.Include(x=>x.Locality).Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
+                return await _dbContext.EncroachmentRegisteration.Include(x => x.Locality).Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
         }
 
         public async Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment)
