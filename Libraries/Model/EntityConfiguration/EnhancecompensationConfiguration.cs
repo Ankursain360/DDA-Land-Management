@@ -13,6 +13,13 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Enhancecompensation> builder)
         {
             builder.ToTable("enhancecompensation", "lms");
+
+            builder.HasIndex(e => e.KhasraId)
+                .HasName("fk3khasraid_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fk2Villageid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AmountPaid)
@@ -133,7 +140,19 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.VoucherNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-      
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Enhancecompensation)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk3khasraid");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Enhancecompensation)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk2Villageid");
+
 
         }
 }

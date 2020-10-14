@@ -13,6 +13,15 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("sakanidetail", "lms");
 
+            builder.HasIndex(e => e.KhasraId)
+                   .HasName("fk9khasraid_idx");
+
+            builder.HasIndex(e => e.KhewatId)
+                .HasName("khewatid_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fk9villageid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -50,9 +59,26 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
             builder.Property(e => e.YearOfJamabandi).HasColumnType("date");
-     
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Sakanidetail)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk9khasraid");
+
+            builder.HasOne(d => d.Khewat)
+                .WithMany(p => p.Sakanidetail)
+                .HasForeignKey(d => d.KhewatId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("khewatid");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Sakanidetail)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk9villageid");
 
 
         }
-        }
+    }
     }

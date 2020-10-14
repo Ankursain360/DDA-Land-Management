@@ -11,6 +11,18 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Enchroachment> builder)
         {
             builder.ToTable("enchroachment", "lms");
+            builder.HasIndex(e => e.KhasraId)
+                   .HasName("fk12khasraid_idx");
+
+            builder.HasIndex(e => e.NatureofencroachmentId)
+                .HasName("natureofencroachment_idx");
+
+            builder.HasIndex(e => e.ReasonsId)
+                .HasName("fkReasonid_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fk12villageid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.ActionDate).HasColumnType("date");
@@ -39,9 +51,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DateofDetection).HasColumnType("date");
 
-            builder.Property(e => e.NatureofencroachmentId).HasColumnType("int(11)");
-
             builder.Property(e => e.FileNo)
+                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
@@ -49,7 +60,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
-            builder.Property(e => e.LandUse).HasMaxLength(100)
+            builder.Property(e => e.LandUse)
+                .IsRequired()
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
@@ -57,6 +70,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Name)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.Property(e => e.NatureofencroachmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.Payment)
                 .HasMaxLength(100)
@@ -69,7 +84,31 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ReasonsId).HasColumnType("int(11)");
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
-   
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Enchroachment)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk12khasraid");
+
+            builder.HasOne(d => d.Natureofencroachment)
+                .WithMany(p => p.Enchroachment)
+                .HasForeignKey(d => d.NatureofencroachmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("natureofencroachment");
+
+            builder.HasOne(d => d.Reasons)
+                .WithMany(p => p.Enchroachment)
+                .HasForeignKey(d => d.ReasonsId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkReasonid");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Enchroachment)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk12villageid");
+
         }
-        }
+    }
     }
