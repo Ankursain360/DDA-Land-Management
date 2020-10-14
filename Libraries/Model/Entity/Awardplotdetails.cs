@@ -19,7 +19,7 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
 
-        public virtual Awardmasterdetail Awardmaster{ get; set; }
+        public virtual Awardmasterdetail AwardMaster{ get; set; }
         [NotMapped]
         public List<Awardmasterdetail> AwardmasterList { get; set; }
 
