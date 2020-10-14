@@ -215,10 +215,42 @@ $(document).delegate('a.add-record', 'click', function (e) {
 $(function () {
     $("#btnCreate").click(function () {
         debugger;
-        var param = GetListData();
-        HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
-            window.location.href = '/WorkFlowTemplate/Index';
-        });
+        var checkresult = false;
+        var dropdown_val = $('#ModuleId option:selected').val();
+        if (parseInt(dropdown_val) < 1) {
+            checkresult = false;
+            $("#ModuleIdMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Name_val = $('#Name').val();
+        if (Name_val == "") {
+            checkresult = false;
+            $("#NameMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Description_val = $('#Description').val();
+        if (Description_val == "") {
+            checkresult = false;
+            $("#DescriptionMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
+        checkresult = false;
+        }
+
+
+        if (checkresult) {
+            var param = GetListData();
+            HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
+                window.location.href = '/WorkFlowTemplate/Index';
+            });
+        }
     });
 });
 
@@ -280,4 +312,86 @@ function GetListData() {
     }
     console.log(data);
     return data;
+}
+
+
+
+$('#myForm').validate({
+    rules: {
+        ModuleId: {
+            required: true
+        },
+        Name: {
+            required: true
+        },
+        Description: {
+            required: true
+        }
+    },
+
+    messages: {
+        ModuleId: {
+            required: ModuleIdMessage //this is a function that returns custom messages
+        },
+        Name: {
+            required: NameMessage //this is a function that returns custom messages
+        },
+        Description: {
+            required: DescriptionMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        debugger;
+        var param = GetListData();
+        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+            window.location.href = '/WorkFlowTemplate/Index';
+        });
+        return true;
+    }
+});
+
+//For Drop down
+function ModuleIdMessage() {
+    debugger;
+    var dropdown_val = $('#ModuleId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Module is Mandatory";
+    } else {
+        return false;
+    }
+}
+
+//For Textbox
+function NameMessage() {
+    debugger;
+    var dropdown_val = $('#Name').val();
+    if (dropdown_val == "") {
+        return "Process Name is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+function DescriptionMessage() {
+    var dropdown_val = $('#Description').val();
+    if (dropdown_val == "") {
+        return "Proccess Description is Mandatory";
+    } else {
+        return "";
+    }
 }
