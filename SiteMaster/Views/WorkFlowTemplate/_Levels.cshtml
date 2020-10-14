@@ -3,8 +3,6 @@
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 
-@*<div class="form-row">
-    <div class="col-md-12">*@
 <div class="table myWebsiteTable delete-recordDiv" id="delete-recordDiv0">
     <input type="hidden" asp-for="OperationId" />
     <table class="table" border="0" id="tbl_posts">
@@ -45,7 +43,6 @@
                                 <label class="control-label lb-sm">Action Taken</label>
                                 <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
 
-                                    @*<option value="0">--Select--</option>*@
                                     <option value="1">Forward</option>
                                     <option value="3">Approved</option>
                                     <option value="2">Revert</option>
@@ -60,38 +57,8 @@
                     </div>
                 </td>
             </tr>
-
-            @*<tr class="dda-repeatorinnerheading">
-
-                    <td><span class="sn">Level 1</span></td>
-                    <td colspan="2">
-                        <a class="btn btn-danger delete-record" data-id="0" style="display:none;">Delete</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Name</label>
-                        <input asp-for="PropertyId" type="text" id="parameterName" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </td>
-                    <td>
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Value</label>
-                        <input asp-for="PropertyId" type="text" id="parameterValue" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </td>
-                    <td>
-                        <label class="control-label lb-sm" asp-for="PropertyId">Level</label>
-                        <input asp-for="PropertyId" type="text" id="parameterLevel" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-
-                </tr>*@
-
-
     </table>
 </div>
-@*</div>
-    </div>*@
-
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 <environment include="Development">
@@ -100,9 +67,3 @@
 <environment exclude="Development">
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 </environment>
-@*<environment include="Development">
-        <script src="~/js/workflowlevels.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/workflowlevels.min.js" asp-append-version="true"></script>
-    </environment>*@
