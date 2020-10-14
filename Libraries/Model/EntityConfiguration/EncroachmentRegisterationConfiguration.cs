@@ -31,7 +31,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.Area).HasColumnType("decimal(10,0)");
+            builder.Property(e => e.Area).HasColumnType("decimal(10,2)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -68,6 +68,11 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
+                .IsRequired()
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+            
+            builder.Property(e => e.LocationAddressWithLandMark)
                 .IsRequired()
                 .HasMaxLength(1000)
                 .IsUnicode(false);

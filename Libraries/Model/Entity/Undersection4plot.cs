@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Undersection4> NotificationList { get; set; }
-        public virtual Undersection4 NotificationNo { get; set; }
+        public virtual Undersection4 UnderSection4 { get; set; }
 
 
         [NotMapped]

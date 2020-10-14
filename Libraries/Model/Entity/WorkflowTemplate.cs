@@ -37,5 +37,8 @@ namespace Libraries.Model.Entity
         public bool IsActiveData { get; set; }
 
         public Module Module { get; set; }
+
+        [NotMapped]
+        public string OperationId { get; set; }
     }
 }

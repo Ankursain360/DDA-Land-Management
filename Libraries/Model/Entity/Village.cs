@@ -27,5 +27,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int DepartmentId { get; set; }
         public virtual Zone Zone { get; set; }
+        public virtual ICollection<Nazul> Nazul { get; set; }
+
     }
 }

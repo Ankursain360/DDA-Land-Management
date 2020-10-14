@@ -73,6 +73,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
             EncroachmentRegisteration model = result.FirstOrDefault();
             model.Area = encroachmentRegisteration.Area;
+            model.LocationAddressWithLandMark = encroachmentRegisteration.LocationAddressWithLandMark;
             model.DepartmentId = encroachmentRegisteration.DepartmentId;
             model.DivisionId = encroachmentRegisteration.DivisionId;
             model.EncrochmentDate = encroachmentRegisteration.EncrochmentDate;

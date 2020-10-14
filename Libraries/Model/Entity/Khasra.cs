@@ -35,6 +35,9 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Village> VillageList { get; set; }
         public virtual Village Village { get; set; }
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
+        public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
+
 
 
 

@@ -16,6 +16,9 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("nazul", "lms");
 
+            builder.HasIndex(e => e.VillageId)
+                   .HasName("VillageId");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -45,6 +48,12 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.YearOfConsolidation).HasColumnType("date");
 
             builder.Property(e => e.YearOfJamabandi).HasColumnType("date");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Nazul)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("VillageId");
         }
     }
 }

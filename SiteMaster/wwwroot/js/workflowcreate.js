@@ -55,6 +55,12 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #add .inputclass").val('');
         $("#tbl_posts #add #dropdownlist").val(null).trigger('change');
         $("#tbl_posts #add #ddlActionType").val(null).trigger('change');
+        $("#tbl_posts #add #dropdownlist").val('0');
+        $("#tbl_posts #add #dropdownlist").trigger('change');
+        $("#tbl_posts #add #ddlActionType").val('1');
+        $("#tbl_posts #add #ddlActionType").trigger('change');
+        $(".select2-disabled").prop("disabled", false);
+        $(".select2-disabled-multi").prop("disabled", false);
         $("#tbl_posts #add  .checkbox").prop("checked", false);
     }
     else {

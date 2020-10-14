@@ -62,6 +62,9 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.KhasraNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+            builder.Property(e => e.BuildupArea).HasColumnType("decimal(10,2)");
+            builder.Property(e => e.VacantArea).HasColumnType("decimal(10,2)");
+            builder.Property(e => e.TotalArea).HasColumnType("decimal(10,2)");
 
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 

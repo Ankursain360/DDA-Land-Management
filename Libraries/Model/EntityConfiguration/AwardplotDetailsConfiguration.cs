@@ -14,6 +14,15 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("awardplotdetails", "lms");
 
+            builder.HasIndex(e => e.AwardMasterId)
+                    .HasName("AwardmasterId_idx");
+
+            builder.HasIndex(e => e.KhasraId)
+                .HasName("KhasraId_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("VillageId_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AwardMasterId).HasColumnType("int(11)");
@@ -39,7 +48,24 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
-      
+
+            builder.HasOne(d => d.AwardMaster)
+                .WithMany(p => p.Awardplotdetails)
+                .HasForeignKey(d => d.AwardMasterId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("awardmasteridfk56");
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Awardplotdetails)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkkhasraid12");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Awardplotdetails)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkvillageid11");
 
 
         }

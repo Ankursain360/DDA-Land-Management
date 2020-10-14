@@ -39,7 +39,9 @@ namespace Libraries.Model.Entity
         public List<Villagetype> VillagetypeList { get; set; }
         public virtual Villagetype VillageType { get; set; }
 
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
 
+        public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
 
     }
 }

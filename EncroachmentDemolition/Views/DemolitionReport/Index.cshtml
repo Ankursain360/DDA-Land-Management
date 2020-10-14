@@ -1,19 +1,10 @@
 ﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Demolition Report</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left color-white" style="margin-top:5px;">Demolition Report</h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -23,7 +14,7 @@
 <br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
+        <div class="panel-heading  dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
@@ -52,9 +43,9 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Generate" class="btn btn-primary myapp-hed1" />
+                        <input type="submit" value="Generate" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-primary myapp-hed1" })
+                        @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -87,6 +78,7 @@
                                                     <th>Demolition Start</th>
                                                     <th>Demolition Within Time Line</th>
                                                     <th>Demolition After Time Line</th>
+                                                    <th>Reason of Demolition</th>
                                                     <th>Remarks</th>
                                                 </tr>
                                             </thead>
@@ -101,9 +93,11 @@
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>
+                                                    <td></td>
                                                 </tr>
                                                 <tr>
                                                     <td>2</td>
+                                                    <td></td>
                                                     <td></td>
                                                     <td></td>
                                                     <td></td>

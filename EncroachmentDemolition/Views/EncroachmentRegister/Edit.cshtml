@@ -75,6 +75,11 @@
                         <input type="text" class="form-control numbers" asp-for="Area" />
                         <span asp-validation-for="Area" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Location/Address with land mark</label>
+                        <textarea class="form-control" asp-for="LocationAddressWithLandMark"></textarea>
+                        <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
+                    </div>
                 </div>
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
@@ -193,7 +198,7 @@
                                 <input type="file" asp-for="Firfile" id="Firfile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                 <span asp-validation-for="Firfile" class="text-danger"></span>
                             }
-                         }
+                        }
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Police Station</label>
@@ -216,7 +221,7 @@
                                 <br />
                                 foreach (var item in Model.EncroachmentLocationMapFileDetails)
                                 {
-                                     <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
+                                    <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id"> (View Existing Document @(LocationMapFile += 1) )</a>
                                     <br />
                                 }
                                 <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
