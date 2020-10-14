@@ -3,9 +3,9 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-	$("#ddlActionType").attr("multiple", "");
+	$(".ParameterActionListClass").attr("multiple", "");
 	$("select").select2({
-		placeholder: "Select",
+		placeholder: "--Select--",
 		allowClear: true
 	});
 });

@@ -6,6 +6,7 @@ namespace Dto.Search
 {
     public class WorkflowLevelDto
     {
-        public string name { get; set; }
+        public int size { get; set; }
+        public string opertaionId { get; set; }
     }
 }

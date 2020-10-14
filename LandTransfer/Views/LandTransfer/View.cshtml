@@ -54,17 +54,35 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Khasra No.</label>
+                        <label class="control-label lb-sm">Khasra No.<span style="color:red">*</span></label>
                         <input type="text" asp-for="KhasraNo" class="form-control" />
                         <span asp-validation-for="KhasraNo" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Address</label>
+                        <label class="control-label lb-sm">Build Up Area<span style="color:red">*</span></label>
+                        <input type="text" asp-for="BuildupArea" class="form-control numbers" />
+                        <span asp-validation-for="BuildupArea" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Vacant Area<span style="color:red">*</span></label>
+                        <input type="text" asp-for="VacantArea" class="form-control numbers" />
+                        <span asp-validation-for="VacantArea" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Total Area<span style="color:red">*</span></label>
+                        <input type="text" asp-for="TotalArea" class="form-control total-area" readonly="readonly" />
+                        <span asp-validation-for="TotalArea" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
                         <textarea type="text" asp-for="Address" class="form-control"></textarea>
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                 </div>
-
                 <div id="LoadView">
                 </div>
                 <div id="DivHandedOver">
@@ -86,43 +104,31 @@
                             <span asp-validation-for="HandedOverDepartmentId" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Handed Over By(Name/Designation)</label>
+                            <label class="control-label lb-sm">Handed Over By(Name/Designation) <span style="color:red">*</span></label>
                             <input type="text" asp-for="HandedOverByNameDesingnation" class="form-control" />
                             <span asp-validation-for="HandedOverByNameDesingnation" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Date of Hand Over</label>
+                            <label class="control-label lb-sm">Date of Hand Over <span style="color:red">*</span></label>
                             <input type="date" asp-for="HandedOverDate" class="form-control" id="txtHandOverDate" pattern="\d{4}/\d{2}/\d{2}" min="15/Aug/1947" />
                             <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Order No.</label>
+                            <label class="control-label lb-sm">Order No. <span style="color:red">*</span></label>
                             <input type="text" asp-for="OrderNo" class="form-control" />
                             <span asp-validation-for="OrderNo" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Copy of Order</label>
-                            @{
-                                if (Model.CopyofOrderDocPath != null && Model.CopyofOrderDocPath != string.Empty)
-                                {
-                                    <a asp-action="Download" asp-route-id="@Model.Id"> (View Existing Document)</a>
-                                    @*@Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })*@
-                                    <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                    <span asp-validation-for="CopyofOrder" class="text-danger"></span>
-                                }
-                                else
-                                {
-                                    <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                    <span asp-validation-for="CopyofOrder" class="text-danger"></span>
-                                }
-                            }
+                            <label class="control-label lb-sm">Copy of Order <span style="color:red">*</span></label>
+                            <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <span asp-validation-for="CopyofOrder" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Transfer order Issue Authority</label>
+                            <label class="control-label lb-sm">Transfer order Issue Authority <span style="color:red">*</span></label>
                             <input asp-for="TransferorderIssueAuthority" type="text" class="form-control" />
                             <span asp-validation-for="TransferorderIssueAuthority" class="text-danger"></span>
                         </div>
@@ -147,14 +153,14 @@
                             <span asp-validation-for="TakenOverDepartmentId" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Taken Over By(Name/Designation)</label>
+                            <label class="control-label lb-sm">Taken Over By(Name/Designation) <span style="color:red">*</span></label>
                             <input asp-for="TakenOverByNameDesingnation" type="text" class="form-control" />
                             <span asp-validation-for="TakenOverByNameDesingnation" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Date of Taken Over</label>
+                            <label class="control-label lb-sm">Date of Taken Over <span style="color:red">*</span></label>
                             <input type="date" asp-for="DateofTakenOver" class="form-control" id="txtTakenOverDate" />
                             <span asp-validation-for="DateofTakenOver" class="text-danger"></span>
                         </div>
@@ -162,7 +168,7 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
+                        <label class="control-label lb-sm">Remarks <span style="color:red">*</span></label>
                         <textarea type="text" asp-for="Remarks" class="form-control" style=" background-color: #dddddd;"></textarea>
                         <span asp-validation-for="Remarks" class="text-danger"></span>
                     </div>

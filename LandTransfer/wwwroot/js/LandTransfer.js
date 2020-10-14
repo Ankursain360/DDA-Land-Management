@@ -41,13 +41,23 @@ function fileValidation(filePath, fileInput, size) {
         return false;
     }
 }
+$("#KhasraNo").change(function () {
+    var khasraNo = $("#KhasraNo").val();
+    $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
+        $('#LoadView').html("");
+        $('#LoadView').html(response);
+    });
+});
 $(document).ready(function () {
-    $("#KhasraNo").change(function () {
-        var khasraNo = $("#KhasraNo").val();
-        $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
-            $('#LoadView').html("");
-            $('#LoadView').html(response);
-        });
+    $("input").each(function () {
+        if ($(this).val() == '0') {
+            $(this).val('');
+        }
+    });
+    $(".numbers").keyup(function () {
+        var buildupArea = $("input[name='BuildupArea']").val();
+        var VacantArea = $("input[name='VacantArea']").val();
+        $("input[name='TotalArea']").val(parseFloat(buildupArea == '' ? '0' : buildupArea) + parseFloat(VacantArea == '' ? '0' : VacantArea));
     });
     $('#CopyofOrder').change(function () {
         var fileInput = document.getElementById('CopyofOrder');

@@ -76,6 +76,9 @@ namespace Libraries.Service.ApplicationService
             model.HandedOverDate = Landtransfer.HandedOverDate;
             model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
             model.KhasraNo = Landtransfer.KhasraNo;
+            model.BuildupArea = Landtransfer.BuildupArea;
+            model.VacantArea = Landtransfer.VacantArea;
+            model.TotalArea = Landtransfer.TotalArea;
             model.OrderNo = Landtransfer.OrderNo;
             model.Remarks = Landtransfer.Remarks;
             model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
@@ -105,10 +108,14 @@ namespace Libraries.Service.ApplicationService
 
 
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model)//added by ishu
-
         {
             return await _landTransferRepository.GetPagedLandtransferReportDeptWise(model);
         }
+        //public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDivisionlocalitywise(LandTransferSearchDto model)//added by shalini
+
+        //{
+        //    return await _landTransferRepository.GetPagedLandtransferReportDivisionlocalitywise(model);
+        //}
 
 
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
