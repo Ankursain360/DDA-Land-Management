@@ -1,115 +1,250 @@
-﻿// Repeator code 
-$(document).ready(function () {
-    $("#tbl_posts #tbl_posts_body .odd").remove();
-    $("#tbl_posts #add .form-control").attr("multiple", false);
+﻿$(document).ready(function () {
 
+
+    var param = GetSearchParam();
+    HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').append(response);
+    });
+
+});
+
+
+$('#ddlOperationType').change(function () {
     BindDropdown();
 });
 
-$(document).delegate('a.add-record', 'click', function (e) {
+
+function BindDropdown() {
+    debugger;
+    var value = $('#ddlOperationType option:selected').val();
+    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
+            $(".ParameterNameListClass").html(html);
+
+            $(".nameClass").each(function () {
+                var value = $('#ddlOperationType option:selected').val();
+                $(this).html(value + ' Name');
+            });
+        }
+
+    });
+}
+
+function GetLevelDetails() {
     var name = $("#tbl_posts #add #ddlActionType").val();
     var value = $("#tbl_posts #add #parameterValue").val();
     var level = $("#tbl_posts #add #parameterLevel").val();
     var isskip = $("#tbl_posts #add #parameterLevel").val();
-    debugger
     if ($("#tbl_posts #add #parameterName").val() != '' && $("#tbl_posts #add #parameterValue").val() != '' && $("#tbl_posts #add #parameterLevel").val() != ''
-        && $("#tbl_posts #add #dropdownlist").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
-        //&& $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
+        && $("#tbl_posts #add #dropdownlistDesrtoy").val() != '0' && $("#tbl_posts #add #ddlActionType").val() != '0'
     ) {
-        var actionValue = $("#tbl_posts #add #ddlActionType").children("option:selected").val();
-        var dropdownValue = $("#tbl_posts #add #dropdownlist").children("option:selected").val();
-        //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-        debugger
-        e.preventDefault();
-        var content = jQuery('#tbl_posts #add tr'),
-            size = jQuery('#tbl_posts >tbody>tr').length,
-            element = null,
-            element = content.clone();
-        element.attr('id', 'rec-' + size);
-        element.find('.delete-record').attr('data-id', size);
-        element.appendTo('#tbl_posts_body');
-        debugger;
-        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $("#tbl_posts #add #dropdownlist").removeAttr("name")
-            $("#tbl_posts #add #dropdownlist").attr("name", "ParameterNameList[" + i + "]");
-            $("#tbl_posts #add #parameterValue").removeAttr("name")
-            $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
-            $("#tbl_posts #add #parameterLevel").removeAttr("name")
-            $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
-            $("#tbl_posts #add #paramenterSkip").removeAttr("name")
-            $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
-            $("#tbl_posts #add #ddlActionType").removeAttr("name")
-            $("#tbl_posts #add #ddlActionType").attr("name", "ParameterActionList[" + i + "]");
 
-        };
-        $('#tbl_posts_body #rec-' + size + ' #ddlActionType').val(actionValue);
-        $('#tbl_posts_body #rec-' + size + ' #dropdownlist').val(dropdownValue);
-        //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
-        element.find('.sn').html('Level ' + size);
-        $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
-        $("#tbl_posts #add .add").remove();
-     //   $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-        //element.find(".add-record").hide();
-        element.find(".delete-record").show();
-        debugger
-        $("#tbl_posts #add .inputclass").val('');
-        $("#tbl_posts #add #dropdownlist").val(null).trigger('change');
-        $("#tbl_posts #add #ddlActionType").val(null).trigger('change');
-        $("#tbl_posts #add #dropdownlist").val('0');
-        $("#tbl_posts #add #dropdownlist").trigger('change');
-        $("#tbl_posts #add #ddlActionType").val('1');
-        $("#tbl_posts #add #ddlActionType").trigger('change');
-        $(".select2-disabled").prop("disabled", false);
-        $(".select2-disabled-multi").prop("disabled", false);
-        $("#tbl_posts #add  .checkbox").prop("checked", false);
+        var param = GetSearchParam();
+        HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
+            $('#LoadReportView').append(response);
+
+            var i = 0;
+            $(".ParameterNameListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterNameList[" + i + "]");
+                i = i + 1;
+            });
+            var i = 0;
+            $(".ParameterValueListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterValueList[" + i + "]");
+                i = i + 1;
+            });
+
+            var i = 0;
+            $(".ParameterLevelListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterLevelList[" + i + "]");
+                $(this).val(i+1);
+                $(this).removeAttr("disabled", "disabled");
+                $(this).attr("disabled", "disabled");
+                i = i + 1;
+            });
+
+            var i = 0;
+            $(".ParameterActionListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterActionList[" + i + "]");
+                i = i + 1;
+            });
+
+            var i = 0;
+            $(".ParameterSkipListClass").each(function () {
+                $(this).removeAttr("name");
+                $(this).attr("name", "ParameterSkipList[" + i + "]");
+                i = i + 1;
+            });
+
+            var i = 1;
+            $(".sn").each(function () {
+                $(this).html('Level ' + i);
+                i = i + 1;
+            });
+
+           
+            $(".nameClass").each(function () {
+                var value = $('#ddlOperationType option:selected').val();
+                $(this).html(value + ' Name');
+            });
+
+            var i = 1;
+            $(".delete-record").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("data-id", i);
+                i = i + 1;
+            });
+
+            var i = 1;
+            $(".recordDiv").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("id", "recordDiv"+i);
+                i = i + 1;
+            });
+
+        });
+      
     }
     else {
         alert('Please fill record before add new record ');
     }
+}
+
+function GetSearchParam() {
+    var count = $('.myWebsiteTable').find('table').length;
+    var value = $('#ddlOperationType option:selected').val();
+    var model = {
+        size: count,
+        opertaionId: value
+    }
+    return model;
+}
+
+
+$(document).delegate('a.add-record', 'click', function (e) {
+    GetLevelDetails();
 });
+
 $(document).delegate('a.delete-record', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
     if (didConfirm == true) {
+        debugger;
         var id = jQuery(this).attr('data-id');
-        var targetDiv = jQuery(this).attr('targetDiv');
-        jQuery('#rec-' + id).remove();
+     //   var targetDiv = jQuery(this).attr('targetDiv');
+        $('#recordDiv' + id).remove();
+       // jQuery("#recordDiv" + id).remove();
+      //  $('#recordDiv' + id).empty();
 
         debugger;
-        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $("#tbl_posts #add #dropdownlist").removeAttr("name")
-            $("#tbl_posts #add #dropdownlist").attr("name", "ParameterNameList[" + i + "]");
-            $("#tbl_posts #add #parameterValue").removeAttr("name")
-            $("#tbl_posts #add #parameterValue").attr("name", "ParameterValueList[" + i + "]");
-            $("#tbl_posts #add #parameterLevel").removeAttr("name")
-            $("#tbl_posts #add #parameterLevel").attr("name", "ParameterLevelList[" + i + "]");
-            $("#tbl_posts #add #paramenterSkip").removeAttr("name")
-            $("#tbl_posts #add #paramenterSkip").attr("name", "ParameterSkipList[" + i + "]");
-            $("#tbl_posts #add #ddlActionType").removeAttr("name")
-            $("#tbl_posts #add #ddlActionType").attr("name", "ParameterActionList[" + i + "]");
-
-        }
-
-        //regnerate index number on table
-        $('#tbl_posts_body tr').each(function (index) {
-            var index = index + 1;
-            $(this).find('span.sn').html('Level ' + index);
+        var i = 0;
+        $(".ParameterNameListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterNameList[" + i + "]");
+            i = i + 1;
         });
-        $("#tbl_posts #add .sn").text('Level ' + $('#tbl_posts >tbody >tr').length);
+        var i = 0;
+        $(".ParameterValueListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterValueList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterLevelListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterLevelList[" + i + "]");
+            $(this).val(i + 1);
+            $(this).removeAttr("disabled", "disabled");
+            $(this).attr("disabled", "disabled");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterActionListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterActionList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterSkipListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterSkipList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".sn").each(function () {
+            $(this).html('Level ' + i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".delete-record").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".recordDiv").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", "recordDiv" + i);
+            i = i + 1;
+        });
         return true;
     } else {
         return false;
     }
 });
 
-
 $(function () {
     $("#btnCreate").click(function () {
-        debugger;
-        var param = GetListData();
-        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-            window.location.href = '/WorkFlowTemplate/Index';
-        });
+        var checkresult = false;
+        var dropdown_val = $('#ModuleId option:selected').val();
+        if (parseInt(dropdown_val) < 1) {
+            checkresult = false;
+            $("#ModuleIdMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Name_val = $('#Name').val();
+        if (Name_val == "") {
+            checkresult = false;
+            $("#NameMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Description_val = $('#Description').val();
+        if (Description_val == "") {
+            checkresult = false;
+            $("#DescriptionMessage").show();
+        } else {
+            checkresult = true;
+        }
+
+        if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
+            checkresult = false;
+        }
+
+        if (checkresult) {
+            var param = GetListData();
+            HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+                window.location.href = '/WorkFlowTemplate/Index';
+            });
+        }
+        
     });
 });
 
@@ -130,27 +265,13 @@ function GetListData() {
     var model = {};
     var data = {};
     debugger;
-    for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-        var parameterName = $("Select[name='ParameterNameList[" + i + "]']").children("option:selected").val();
+    var count = $('.myWebsiteTable').find('table').length;
+    for (var i = 0; i < count; i++) {
+        var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
         var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
         var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
-
-       // var parameterAction="";
-     //  var selected = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected");
-       // var selected = $("Select[name='ParameterActionList[" + i + "]']").children("option:selected");
-       //// alert("Selected value is: " + $("select[name='ParameterActionList["+i+"]']").select2("val"));
-        //console.log(selected);
-        //selected.each(function ()  {
-        //    parameterAction += $(this).val() +  "," ;
-        //});
-        //parameterAction = parameterAction.slice(0, -1);
         var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
-        var list = $("Select[name='ParameterActionList[" + 0 + "]']").val();
-        alert(list);
-        alert(parameterAction);
-
-        //alert("You have selected the country - " + countries.join(", "));
 
         if ($("input[name='ParameterSkipList[" + i + "]']").is(":checked")) {
             parameterSkip = true;
@@ -171,7 +292,7 @@ function GetListData() {
             }
             workflow.push(model);
         }
-        
+
     };
     console.log(workflow);
     data = {
@@ -187,57 +308,80 @@ function GetListData() {
     return data;
 }
 
-$('#ddlOperationType').change(function () {
-    BindDropdown();
+$('#myForm').validate({
+    rules: {       
+        ModuleId: {
+            required: true
+        },
+        Name: {
+            required: true
+        },
+        Description: {
+            required: true
+        }
+    },
+
+    messages: {
+        ModuleId: {
+            required: ModuleIdMessage //this is a function that returns custom messages
+        },
+        Name: {
+            required: NameMessage //this is a function that returns custom messages
+        },
+        Description: {
+            required: DescriptionMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        debugger;
+        var param = GetListData();
+        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
+            window.location.href = '/WorkFlowTemplate/Index';
+        });
+        return true;
+    }
 });
 
-function BindDropdown() {
-    var value = $('#ddlOperationType option:selected').val();
-    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
-        var html = '<option value="0">---Select---</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-        for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
-            $("#dropdownlist").html(html);
-        }
-        
-    });
+//For Drop down
+function ModuleIdMessage() {
+    var dropdown_val = $('#ModuleId option:selected').val();
+    if (parseInt(dropdown_val) < 1) {
+        return "Module is Mandatory";
+    } else {
+        return false;
+    }
+} 
+
+//For Textbox
+function NameMessage() {
+    var dropdown_val = $('#Name').val();
+    if (dropdown_val == "") {
+        return "Process Name is Mandatory";
+    } else {
+        return "";
+    }
 }
 
-//$("#ddlActionType").change(function () {
-//    var selections = (JSON.stringify($(test).select2('data')));
-//    console.log('Selected options: ' + selections);
-//    $('#selectedText').text(selections);
-//});
-//[{ "id": 2, "text": "duplicate" }, { "id": 3, "text": "invalid" }, { "id": 4, "text": "wontfix" }, { "id": 1, "text": "bug" }, { "id": 0, "text": "enhancement" }]
-
-//$(document).on('change', "select.drpactiontakenclass", function () {
-//    selectedItems = new Array();
-//    console.log(selectedItems);
-//    $(".ui-multiselect-menu input[name=multiselect_0]:checked").each(function () {
-//        if ($.inArray($(this).val(), selectedItems) != 0) {
-//            selectedItems.push($(this).val());
-//        }
-//    });
-//    console.log(selectedItems);
-//    var data = selectedItems.join(',');
-//    $(".live").val(data);
-//});
-
-function callDrop(element) {
-    var name = element.name;
-    selectedItems = new Array();
-    console.log(selectedItems);
-    $("Select[name='" + name + "']").each(function () {
-        if ($.inArray($(this).val(), selectedItems) != 0) {
-            selectedItems.push($(this).val());
-        }
-    });
-    console.log(selectedItems);
-    var data = selectedItems.join(',');
-    $(name).val(data);
-    //var checklist = $("Select[name='ParameterActionList[" + 0 + "]']").val();
-   // console.log(checklist);
+function DescriptionMessage() {
+    var dropdown_val = $('#Description').val();
+    if (dropdown_val == "") {
+        return "Proccess Description is Mandatory";
+    } else {
+        return "";
+    }
 }
-

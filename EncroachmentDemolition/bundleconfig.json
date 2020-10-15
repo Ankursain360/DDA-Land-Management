@@ -136,5 +136,29 @@
     "inputFiles": [
       "wwwroot/js/EncroachmentRegisterationView.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/watchandwardindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/watchandwardindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/watchAndWardApprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/watchAndWardApprovalindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/wacthwardperiodreportcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/wacthwardperiodreportcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/onlinecomplaintindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/onlinecomplaintindex.js"
+    ]
   }
 ]

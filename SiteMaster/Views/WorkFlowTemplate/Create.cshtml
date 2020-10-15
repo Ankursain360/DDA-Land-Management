@@ -35,56 +35,56 @@
         </div>
         <div class="panel-body">
             @*<form id="myForm"  method="post" asp-action="Create" >*@
-                <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
 
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
-                        <select asp-for="ModuleId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
-                            <option value="0">--Select--</option>  @*value*@
-                        </select>
-                        <span asp-validation-for="ModuleId" class="text-danger lb-sm" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="control-label lb-sm">User Type</label>
-                        <select class="form-control dda-dropdown" id="ddlOperationType">
-                            <option value="Role">Role Wise</option>
-                            <option value="User">User Wise</option>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
+                    <select asp-for="ModuleId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
+                        <option value="0">--Select--</option>  @*value*@
+                    </select>
+                    <span asp-validation-for="ModuleId" class="text-danger lb-sm" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label lb-sm">User Type</label>
+                    <select class="form-control dda-dropdown" id="ddlOperationType">
+                        <option value="Role">Role Wise</option>
+                        <option value="User">User Wise</option>
 
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="Name">Proccess Name</label>
-                        <input asp-for="Name" type="text" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger lb-sm" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="Description">Proccess Description</label>
-                        <input asp-for="Description" type="text" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger lb-sm" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
-                    </div>
-
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="Name">Proccess Name</label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger lb-sm" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="Description">Proccess Description</label>
+                    <input asp-for="Description" type="text" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger lb-sm" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
                 </div>
 
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm">IsActive</label>
-                        <input type="checkbox" asp-for="IsActiveData" checked />
-                    </div>
-                    <div class="form-group col-md-3">
-                        <a class="btn btn-primary dda-pageheading add-record" data-added="0"> Add Level</a>
-                    </div>
-                </div>
-                <div id="LoadReportView">
+            </div>
 
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm">IsActive</label>
+                    <input type="checkbox" asp-for="IsActiveData" checked />
                 </div>
-              
-                <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" id="btnCreate" class="btn btn-primary dda-pageheading" />
-                        @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
+                <div class="form-group col-md-3">
+                    <a class="btn btn-primary dda-pageheading add-record" data-added="0"> Add Level</a>
                 </div>
+            </div>
+            <div id="LoadReportView">
+
+            </div>
+
+            <div class="row ">
+                <div class="form-group col-md-12" style="margin-bottom:40px;">
+                    <input type="submit" value="Create" id="btnCreate" class="btn btn-primary dda-pageheading" />
+                    @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-primary dda-pageheading" })
+                </div>
+            </div>
 
             @*</form>*@
         </div>
@@ -94,8 +94,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/workflowcreate1.js"></script>
+    <script src="~/js/workflowcreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/workflowcreate1.min.js" asp-append-version="true"></script>
+    <script src="~/js/workflowcreate.min.js" asp-append-version="true"></script>
 </environment>

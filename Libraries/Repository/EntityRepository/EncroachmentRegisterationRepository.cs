@@ -51,7 +51,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<EncroachmentRegisteration> FetchSingleResult(int id)
         {
-            return await _dbContext.EncroachmentRegisteration.Include(x => x.EncroachmentPhotoFileDetails).Include(x => x.EncroachmentFirFileDetails).Include(x => x.EncroachmentLocationMapFileDetails).Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _dbContext.EncroachmentRegisteration
+                            .Include(x => x.EncroachmentPhotoFileDetails)
+                            .Include(x => x.EncroachmentFirFileDetails)
+                            .Include(x => x.EncroachmentLocationMapFileDetails)
+                            .Where(x => x.Id == id)
+                            .FirstOrDefaultAsync();
         }
 
         public async Task<List<Department>> GetAllDepartment()
@@ -136,25 +141,18 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-
-
-        public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)
+        public async Task<List<EncroachmentRegisteration>> GetEncroachmentReportData(int department, int zone, int division, int locality)//added by shalini
         {
             var data = await _dbContext.EncroachmentRegisteration
-
                 .Include(x => x.Locality)
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
-                .Include(x => x.Division)
-               // .OrderByDescending(x => x.Id)
+                .Include(x => x.Division) 
                 .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
-                && x.EncrochmentDate >= fromdate && x.EncrochmentDate <= todate).ToListAsync();
-           // return data;
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)) && (x.IsActive==1)).OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
-
     }
 }

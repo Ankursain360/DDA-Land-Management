@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 $(document).ready(function () {
-	$("select").select2({
+	$("select[class!='form-control destroy']").select2({
 		placeholder: "Select",
 		allowClear: true
 	});

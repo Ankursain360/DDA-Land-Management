@@ -3,7 +3,7 @@
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 
-<div class="table myWebsiteTable delete-recordDiv" id="delete-recordDiv0">
+<div class="table myWebsiteTable recordDiv" id="recordDiv0">
     <input type="hidden" asp-for="OperationId" />
     <table class="table" border="0" id="tbl_posts">
         <tbody id="tbl_posts_body">
@@ -24,9 +24,12 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Name</label>
+                                <label class="control-label lb-sm">Level</label>
+                                <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="control-label lb-sm nameClass">Role Name</label>
                                 <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))" class="form-control dda-dropdown dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
                                     <option value="0">--Select--</option>
                                 </select>
@@ -35,14 +38,9 @@
                                 <label class="control-label lb-sm">Parameter Value</label>
                                 <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass ParameterValueListClass" />
                             </div>
-                            <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Level</label>
-                                <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
-                            </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Action Taken</label>
                                 <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
-
                                     <option value="1">Forward</option>
                                     <option value="3">Approved</option>
                                     <option value="2">Revert</option>

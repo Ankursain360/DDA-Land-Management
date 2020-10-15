@@ -87,7 +87,8 @@ namespace Libraries.Model
         public virtual DbSet<Actions> Actions { get; set; }
         /// <summary>
         // Encroachment demolition module:
-
+        public virtual DbSet<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
+        public virtual DbSet<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
         public virtual DbSet<Watchandward> Watchandward { get; set; }
         public virtual DbSet<Onlinecomplaint> Onlinecomplaint { get; set; }
         public virtual DbSet<Location> Location { get; set; }
@@ -159,6 +160,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EncroachmentFirFileDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new EncroachmentLocationMapFileDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new EncroachmentPhotoFileDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new WatchandwardphotofiledetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new WatchandwardreportfiledetailsConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

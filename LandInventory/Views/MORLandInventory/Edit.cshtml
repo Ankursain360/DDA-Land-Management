@@ -26,8 +26,10 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId">
                             <option value="">--Select--</option>
+                            <option value="3">(MOR)Ministry of Rehabilitation Land</option>
+                            <option value="5">L&DO Land</option>
                         </select>
                         <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
                     </div>
@@ -233,12 +235,12 @@
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
-                                    @Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })
-                                    <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })
+                                <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                             }
                             <span asp-validation-for="FileData" class="text-danger lb-sm"></span>
@@ -275,12 +277,12 @@
                             @{
                                 @if (ViewBag.GeoDocView != null)
                                 {
-                                    @Html.ActionLink(" (View Existing Document)", "GeoDownload", new { id = Model.Id })
-                                    <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View Existing Document)", "GeoDownload", new { id = Model.Id })
+                                <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                             }
                             <span asp-validation-for="GeoFileData" class="text-danger lb-sm"></span>
@@ -344,12 +346,12 @@
                             @{
                                 @if (ViewBag.TakenOverDocView != null)
                                 {
-                                    @Html.ActionLink(" (View Existing Document)", "TakenOverDownload", new { id = Model.Id })
-                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View Existing Document)", "TakenOverDownload", new { id = Model.Id })
+                                <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                             }
                             <span asp-validation-for="TakenOverFileData" class="text-danger lb-sm"></span>
@@ -420,12 +422,12 @@
                             @{
                                 @if (ViewBag.HandedOverDocView != null)
                                 {
-                                    @Html.ActionLink(" (View Existing Document)", "HandedOverDownload", new { id = Model.Id })
-                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View Existing Document)", "HandedOverDownload", new { id = Model.Id })
+                                <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                             }
                             <span asp-validation-for="HandedOverFileData" class="text-danger lb-sm"></span>
@@ -471,12 +473,12 @@
                                 @if (ViewBag.DisposalTypeDocView != null)
                                 {
 
-                                    @Html.ActionLink(" (View Existing Document)", "DisposalTypeDownload", new { id = Model.Id })
-                                    <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View Existing Document)", "DisposalTypeDownload", new { id = Model.Id })
+                                <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
                                 {
-                                    <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
+                                <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
                                 }
                             }
                             <span asp-validation-for="DisposalTypeFileData" class="text-danger lb-sm"></span>
@@ -513,12 +515,12 @@
                 @{
                     @if (ViewBag.IsValidateUser == 2)
                     {
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Validate</label>
-                                <input type="checkbox" asp-for="IsValidateData" />
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Validate</label>
+                            <input type="checkbox" asp-for="IsValidateData" />
                         </div>
+                    </div>
                     }
                 }
 
