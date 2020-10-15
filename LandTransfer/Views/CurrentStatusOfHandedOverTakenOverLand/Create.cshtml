@@ -69,16 +69,35 @@
                             @*<span asp-validation-for="LocalityId" class="text-danger"></span>*@
                         </div>
                     </div>
-                    <div class="form-row">
+                    <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Khasra No.</label>
+                            <label class="control-label lb-sm">Khasra No.<span style="color:red">*</span></label>
                             <input type="text" class="form-control" />
-                            @*<span asp-validation-for="KhasraNo" class="text-danger"></span>*@
+                            <span class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Address</label>
+                            <label class="control-label lb-sm">Build Up Area(Bigha/Biswa/Biswanshi)<span style="color:red">*</span></label>
+                            <input type="text" class="form-control numbers" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Vacant Area(Bigha/Biswa/Biswanshi)<span style="color:red">*</span></label>
+                            <input type="text" class="form-control numbers" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Total Area(Bigha/Biswa/Biswanshi)<span style="color:red">*</span></label>
+                            <input type="text" class="form-control total-area" readonly="readonly" />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
                             <textarea type="text" class="form-control"></textarea>
-                            @*<span asp-validation-for="Address" class="text-danger"></span>*@
+                            <span class="text-danger"></span>
                         </div>
                     </div>
 
@@ -225,14 +244,12 @@
                             </div>
                             @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
                             <div id="TssSurvey" class="form-group col-md-6" style="display:none;">
-                                <label class="control-label lb-sm">Upload document/report file</label>
+                                <label class="control-label lb-sm">Upload Survey Report</label>
                                 <input type="file" class="form-control" id="txtTakenOverDate" />
                             </div>
-
-
                         </div>
-
                     </div>
+
                     <div id="EncroachmentDiv">
                         <div class="row" style="margin-bottom:35px;">
                             <div class="col-sm-12">
@@ -256,7 +273,7 @@
 
                             <div id="Encroachment" style="display:none;">
                                 <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Area Of  Encroachment</label>
+                                    <label class="control-label lb-sm">Encroached Area(Bigha/Biswa/Biswanshi)</label>
                                     <input type="text" class="form-control" id="txtTakenOverDate" />
                                 </div>
                                 <div class="form-group col-md-6">
@@ -264,7 +281,7 @@
                                     <textarea type="text" class="form-control" id="txtTakenOverDate"></textarea>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Upload document/report file</label>
+                                    <label class="control-label lb-sm">Upload Action Taken Report(ATR)</label>
                                     <input type="file" class="form-control" id="txtTakenOverDate" />
                                 </div>
                             </div>
@@ -294,11 +311,11 @@
                         </div>
                         <div id="Boundary" style="display:none;">
                             <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Area Covered</label>
+                                <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
                                 <input type="text" class="form-control" id="txtTakenOverDate" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Dimension (L*B*H)</label>
+                                <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
                                 <input type="text" class="form-control" id="txtTakenOverDate" />
                             </div>
                         </div>
@@ -326,11 +343,11 @@
                         </div>
                         <div id="Utilization" style="display:none;">
                             <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Area Utilised </label>
+                                <label class="control-label lb-sm">Area Utilised(Bigha/Biswa/Biswanshi) </label>
                                 <input type="text" class="form-control" id="txtTakenOverDate" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Balance Area </label>
+                                <label class="control-label lb-sm">Balance Area(Bigha/Biswa/Biswanshi) </label>
                                 <input type="text" class="form-control" id="txtTakenOverDate" />
                             </div>
                             <div class="form-group col-md-6">
@@ -341,6 +358,46 @@
 
 
 
+                    </div>
+                </div>
+
+                <div id="DivLandUse">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">Planned/Unplanned Land</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" >Planned/Unplanned Land</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" >
+                                <option value="Planned Land">Planned Land</option>
+                                <option value="Unplanned Land">Unplanned Land</option>
+                            </select>
+                            <span  class="text-danger lb-sm"></span>
+                        </div>
+
+                        <div id="divPlannedLand">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Main Land Use</label>
+                                <select class="form-control dda-dropdown">
+                                    <option value="0">--Select--</option>
+                                    <option value="1">Main Use</option>
+                                    <option value="1">Not Known</option>
+                                    <option value="1">Sub Use</option>
+                                </select>
+                                <span  class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Sub Use</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -369,6 +426,12 @@
 
 
 <script>
+    $(document).ready(function () {
+        var value = $('#PlannedUnplannedLand').val();
+        if (value == 'Planned Land') {
+            $('#divPlannedLand').show();
+        }
+    });
     $(function () {
         $('#DD1').change(function () {
             var id = $("#DD1").val();
@@ -419,6 +482,18 @@
             }
             else {
                 $("#Utilization").hide();
+            }
+        });
+    });
+
+    $(function () {
+        $('#PlannedUnplannedLand').change(function () {
+            var value = $('#PlannedUnplannedLand').val();
+            if (value == 'Planned Land') {
+                $('#divPlannedLand').show();
+            }
+            else {
+                $('#divPlannedLand').hide();
             }
         });
     });

@@ -26,10 +26,12 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" disabled asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
-                            <option>--Select--</option>
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId">
+                            <option value="">--Select--</option>
+                            <option value="3">(MOR)Ministry of Rehabilitation Land</option>
+                            <option value="5">L&DO Land</option>
                         </select>
-                        <span asp-validation-for="ClassificationOfLandId" class="text-danger"></span>
+                        <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
                     </div>
 
                     <div class="form-group col-md-4">
@@ -232,11 +234,11 @@
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "Download", new { id = Model.Id }, new { disabled = "disabled" })
+                                @Html.ActionLink("Download", "Download", new { id = Model.Id }, new { disabled = "disabled" })
                                 }
                                 else
                                 {
-                                    <input type="file" disabled class="form-control" name="Assignfile">
+                                <input type="file" disabled class="form-control" name="Assignfile">
                                 }
                             }
                             <span asp-validation-for="FileData" class="text-danger"></span>
@@ -272,11 +274,11 @@
                             @{
                                 @if (ViewBag.GeoDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "GeoDownload", new { id = Model.Id }, new { disabled = "disabled" })
+                                @Html.ActionLink("Download", "GeoDownload", new { id = Model.Id }, new { disabled = "disabled" })
                                 }
                                 else
                                 {
-                                    <input type="file" disabled class="form-control" name="GeoAssignfile">
+                                <input type="file" disabled class="form-control" name="GeoAssignfile">
                                 }
                             }
                             <span asp-validation-for="GeoFileData" class="text-danger"></span>
@@ -340,11 +342,11 @@
                             @{
                                 @if (ViewBag.TakenOverDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "TakenOverDownload", new { id = Model.Id })
+                                @Html.ActionLink("Download", "TakenOverDownload", new { id = Model.Id })
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" disabled name="TakenOverAssignfile">
+                                <input type="file" class="form-control" disabled name="TakenOverAssignfile">
                                 }
                             }
                             <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
@@ -414,11 +416,11 @@
                             @{
                                 @if (ViewBag.HandedOverDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "HandedOverDownload", new { id = Model.Id }, new { disabled = "disabled" })
+                                @Html.ActionLink("Download", "HandedOverDownload", new { id = Model.Id }, new { disabled = "disabled" })
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" disabled name="HandedOverAssignFile">
+                                <input type="file" class="form-control" disabled name="HandedOverAssignFile">
                                 }
                             }
                             <span asp-validation-for="HandedOverFileData" class="text-danger"></span>
@@ -462,11 +464,11 @@
                             @{
                                 @if (ViewBag.DisposalTypeDocView != null)
                                 {
-                                    @Html.ActionLink("Download", "DisposalTypeDownload", new { id = Model.Id })
+                                @Html.ActionLink("Download", "DisposalTypeDownload", new { id = Model.Id })
                                 }
                                 else
                                 {
-                                    <input type="file" class="form-control" disabled name="DisposalTypeAssignFile">
+                                <input type="file" class="form-control" disabled name="DisposalTypeAssignFile">
                                 }
                             }
                             <span asp-validation-for="DisposalTypeFileData" class="text-danger"></span>
@@ -502,12 +504,12 @@
                 @{
                     @if (ViewBag.IsValidateUser == 2)
                     {
-                        <div class="row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Validate</label>
-                                <input type="checkbox" asp-for="IsValidateData" />
-                            </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Validate</label>
+                            <input type="checkbox" asp-for="IsValidateData" />
                         </div>
+                    </div>
                     }
                 }
 
