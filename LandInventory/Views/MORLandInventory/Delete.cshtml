@@ -1,0 +1,50 @@
+﻿@model Libraries.Model.Entity.Propertyregistration
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="dda-topheading">
+            <div class="col-md-12">
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Ministry of rehabilitation(MOR) Land Inventory</h6>
+                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<br />
+<div class="container-fluid">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Details</h6>
+        </div>
+        <div class="panel-body">
+
+
+            <br />
+            <form asp-action="Delete" method="post">
+                <div class="form-group">
+                    <h6 class="p-4">Are you sure you want to delete this?</h6>
+                    <input type="hidden" asp-for="Id" />
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label class="control-label lb-sm">Reason</label>
+                        <textarea asp-for="Reason" class="form-control"></textarea>
+                        <span asp-validation-for="DisposalComments" class="text-danger lb-sm"></span>
+                    </div>
+                </div>
+                <div class="form-row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Delete" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+               
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

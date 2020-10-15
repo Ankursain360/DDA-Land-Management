@@ -368,5 +368,10 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
+
+        public IActionResult EncroachmentRegisterApprovalCreate()
+        {
+            return View();
+        }
     }
 }

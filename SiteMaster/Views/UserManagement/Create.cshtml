@@ -4,8 +4,8 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Application User  </h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">User </h6>
+                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
     </div>
@@ -21,40 +21,46 @@
             <form asp-action="Create" id="create_user">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-6 form-group">
                         <label asp-for="Name" class="control-label lb-sm">Name</label>
                         <input asp-for="Name" class="form-control form-control-sm" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-6 form-group">
                         <label asp-for="UserName" class="control-label lb-sm">User Name</label>
                         <input asp-for="UserName" class="form-control" />
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3 form-group">
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
                         <label asp-for="Email" class="control-label lb-sm">Email</label>
                         <input asp-for="Email" class="form-control form-control-sm" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3 form-group">
+                    <div class="col-md-6 form-group">
                         <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number</label>
                         <input asp-for="PhoneNumber" class="form-control form-control-sm" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-md-6 form-group">
                         <label asp-for="Password" class="control-label lb-sm">Password<span style="color:red">*</span></label>
                         <input asp-for="Password" class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6 form-group">
                         <label asp-for="ConfirmPassword" class="control-label lb-sm">Confirm Password</label>
                         <input asp-for="ConfirmPassword" class="form-control form-control-sm" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label class="control-label lb-sm" asp-for="DepartmentId">Department <span style="color:red">*</span></label>
                         <select class="form-control dda-dropdown" asp-for="DepartmentId"
                                 asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
                                 onchange="return onChange(this.options[this.selectedIndex].value);">
@@ -62,8 +68,8 @@
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label lb-sm" asp-for="ZoneId">Zone <span style="color:red">*</span></label>
                         <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
                             <option>Select</option>
                         </select>
@@ -71,7 +77,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Status</label>
                         <select class="form-control dda-dropdown">
                             <option value="1">Active</option>
@@ -80,15 +86,22 @@
                         <span class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
+
+                <div class="row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
-                        <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
+                        @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
+                @*<div class="form-row">
+            <div class=" form-group  col-md-12">
+                <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
+            </div>
+        </div>*@
             </form>
         </div>
     </div>
