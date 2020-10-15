@@ -178,5 +178,10 @@ namespace Libraries.Service.ApplicationService
             return await _encroachmentRegisterationRepository.GetEncroachmentFirFileDetails(Id);
         }
 
+        public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)
+        {
+            return await _encroachmentRegisterationRepository.GetEncroachmentRegisterationReportData( department,  zone,  division,  locality, fromdate, todate);
+        }
+
     }
 }

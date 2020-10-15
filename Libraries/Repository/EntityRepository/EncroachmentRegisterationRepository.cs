@@ -136,5 +136,25 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+        public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)
+        {
+            var data = await _dbContext.EncroachmentRegisteration
+
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+               // .OrderByDescending(x => x.Id)
+                .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
+                && x.EncrochmentDate >= fromdate && x.EncrochmentDate <= todate).ToListAsync();
+           // return data;
+            return data;
+        }
+
     }
 }

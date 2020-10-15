@@ -37,6 +37,8 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Landtransfer> LandtransferDepartment { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverDepartment { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverDepartment { get; set; }
+        public virtual ICollection<Division> Division { get; set; }
+
 
     }
 }

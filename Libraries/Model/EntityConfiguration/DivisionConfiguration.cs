@@ -19,7 +19,7 @@ namespace Libraries.Model.EntityConfiguration
 
 
             builder.HasIndex(e => e.DepartmentId)
-                     .HasName("fkDepartmentid1_idx");
+                    .HasName("fkDepartmentid1_idx");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")
@@ -52,13 +52,21 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Division)
+                .HasForeignKey(d => d.DepartmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkDepartmentID");
+
             builder.HasOne(d => d.Zone)
                 .WithMany(p => p.Division)
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fkZoneid1");
+      
 
-        }
+           
+    }
 
 
     }
