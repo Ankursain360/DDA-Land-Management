@@ -46,12 +46,19 @@ namespace Libraries.Service.ApplicationService
             return await _watchandwardRepository.GetWatchandward();
         }
 
+
+        //public async Task<Watchandward> FetchSingleResult(int id)
+        //{
+        //    var result = await _watchandwardRepository.FindBy(a => a.Id == id);
+        //    Watchandward model = result.FirstOrDefault();
+        //    return model;
+        //}
+
         public async Task<Watchandward> FetchSingleResult(int id)
         {
-            var result = await _watchandwardRepository.FindBy(a => a.Id == id);
-            Watchandward model = result.FirstOrDefault();
-            return model;
+            return await _watchandwardRepository.FetchSingleResult(id);
         }
+
 
         public async Task<bool> Update(int id, Watchandward watchandward)
         {
@@ -105,10 +112,6 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        //public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
-        //{
-        //    return await _pageRepository.GetPagedPage(model);
-        //}
         public async Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate)
         {
             return await _watchandwardRepository.GetWatchandwardReportData(village, fromdate, todate);
@@ -119,6 +122,44 @@ namespace Libraries.Service.ApplicationService
             return await _watchandwardRepository.GetPagedWatchandward(model);
         }
 
+
+        //*****multiple files methods*********Added by ishu
+
+
+        public async Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails)
+        {
+            watchandwardphotofiledetails.CreatedBy = 1;
+            watchandwardphotofiledetails.CreatedDate = DateTime.Now;
+            watchandwardphotofiledetails.IsActive = 1;
+            return await _watchandwardRepository.SaveWatchandwardphotofiledetails(watchandwardphotofiledetails);
+        }
+
+        public async Task<bool> SaveWatchandwardreportfiledetails(Watchandwardreportfiledetails watchandwardreportfiledetails)
+        {
+            watchandwardreportfiledetails.CreatedBy = 1;
+            watchandwardreportfiledetails.CreatedDate = DateTime.Now;
+            watchandwardreportfiledetails.IsActive = 1;
+            return await _watchandwardRepository.SaveWatchandwardreportfiledetails(watchandwardreportfiledetails);
+        }
+        public async Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int Id)
+        {
+            return await _watchandwardRepository.GetWatchandwardphotofiledetails(Id);
+        }
+        public async Task<Watchandwardreportfiledetails> GetWatchandwardreportfiledetails(int Id)
+        {
+            return await _watchandwardRepository.GetWatchandwardreportfiledetails(Id);
+        }
+      
+       
+        public async Task<bool> DeleteWatchandwardphotofiledetails(int Id)
+        {
+            return await _watchandwardRepository.DeleteWatchandwardphotofiledetails(Id);
+        }
+
+        public async Task<bool> DeleteWatchandwardreportfiledetails(int Id)
+        {
+            return await _watchandwardRepository.DeleteWatchandwardreportfiledetails(Id);
+        }
 
     }
 }

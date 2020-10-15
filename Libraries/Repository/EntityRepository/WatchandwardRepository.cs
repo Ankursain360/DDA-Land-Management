@@ -42,6 +42,13 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Khasra)
                 .ToListAsync();
         }
+        public async Task<Watchandward> FetchSingleResult(int id)
+        {
+            return await _dbContext.Watchandward
+                .Include(x => x.Watchandwardphotofiledetails)
+                .Include(x => x.Watchandwardreportfiledetails).Where(x => x.Id == id).FirstOrDefaultAsync();
+        }
+
         public async Task<List<Khasra>> GetAllKhasra()
         {
             List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
@@ -62,6 +69,45 @@ namespace Libraries.Repository.EntityRepository
                 && x.Date >= fromdate && x.Date<=todate).OrderByDescending(x => x.Id).ToListAsync();
 
             return data;
+        }
+
+
+        //**************multiple files methods********************* added by ishu
+       
+       public async Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails)
+        {
+            _dbContext.Watchandwardphotofiledetails.Add(watchandwardphotofiledetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SaveWatchandwardreportfiledetails(Watchandwardreportfiledetails watchandwardreportfiledetails)
+        {
+            _dbContext.Watchandwardreportfiledetails.Add(watchandwardreportfiledetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        
+        public async Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int watchandwardId)
+        {
+            return await _dbContext.Watchandwardphotofiledetails.Where(x => x.Id == watchandwardId && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Watchandwardreportfiledetails> GetWatchandwardreportfiledetails(int watchandwardId)
+        {
+            return await _dbContext.Watchandwardreportfiledetails.Where(x => x.Id == watchandwardId && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> DeleteWatchandwardphotofiledetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Watchandwardphotofiledetails.Where(x => x.WatchAndWardId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<bool> DeleteWatchandwardreportfiledetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Watchandwardreportfiledetails.Where(x => x.WatchAndWardId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
 
     }

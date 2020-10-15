@@ -26,10 +26,22 @@ namespace Libraries.Service.IApplicationService
 
 
         Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
-        //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
+       
 
 
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+
+
+
+        //*****multiple files*********Added by ishu
+
+
+        Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int watchandwardId);
+        Task<Watchandwardreportfiledetails> GetWatchandwardreportfiledetails(int watchandwardId);
+        Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails);
+        Task<bool> SaveWatchandwardreportfiledetails(Watchandwardreportfiledetails watchandwardreportfiledetails);
+        Task<bool> DeleteWatchandwardphotofiledetails(int Id);
+        Task<bool> DeleteWatchandwardreportfiledetails(int Id);
 
     }
 }
