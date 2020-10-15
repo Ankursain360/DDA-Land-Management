@@ -374,8 +374,8 @@
                     <div class="row">
 
                         <div class="form-group col-md-4">
-                            <label class="control-label lb-sm" >Planned/Unplanned Land</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown" >
+                            <label class="control-label lb-sm">Planned/Unplanned Land</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" id="PlannedUnplannedLand" >
                                 <option value="Planned Land">Planned Land</option>
                                 <option value="Unplanned Land">Unplanned Land</option>
                             </select>
@@ -488,6 +488,7 @@
 
     $(function () {
         $('#PlannedUnplannedLand').change(function () {
+            debugger;
             var value = $('#PlannedUnplannedLand').val();
             if (value == 'Planned Land') {
                 $('#divPlannedLand').show();

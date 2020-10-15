@@ -15,11 +15,21 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetAllKhasra();
-
+        Task<Watchandward> FetchSingleResult(int id); //added by ishu
         Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
 
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
 
+
+        //*****multiple files*********
+
+
+        Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int watchandwardId);
+        Task<Watchandwardreportfiledetails> GetWatchandwardreportfiledetails(int watchandwardId);
+        Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails);
+        Task<bool> SaveWatchandwardreportfiledetails(Watchandwardreportfiledetails watchandwardreportfiledetails);
+        Task<bool> DeleteWatchandwardphotofiledetails(int Id);
+        Task<bool> DeleteWatchandwardreportfiledetails(int Id);
     }
 }

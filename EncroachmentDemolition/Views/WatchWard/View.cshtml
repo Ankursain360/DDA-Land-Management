@@ -1,4 +1,6 @@
 ﻿@model Libraries.Model.Entity.Watchandward
+@{int Photo = 0;}
+@{int ReportFile = 0;}
 
 <div class="row">
     <div class="col-sm-12">
@@ -80,11 +82,47 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Photos</label>
-                        <input asp-for="Photo" type="file" class="form-control" multiple />
+                        @*<input asp-for="Photo" type="file" class="form-control" multiple />*@
+
+
+
+                        @{
+                            if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Watchandwardphotofiledetails)
+                                {
+                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(Photo += 1 ))</a>
+                                    <br />
+                                }
+                            }
+                        }
+
+
+
+
+
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Report</label>
-                        <input asp-for="ReportFile" type="file" class="form-control" multiple />
+                        @*<input asp-for="ReportFile" type="file" class="form-control" multiple />*@
+
+
+                        @{
+                            if (Model.Watchandwardreportfiledetails != null && Model.Watchandwardreportfiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Watchandwardreportfiledetails)
+                                {
+                                    <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                                    <br />
+                                }
+                               
+                            }
+                        }
+
+
+
                     </div>
                 </div>
                 <div class="form-row">

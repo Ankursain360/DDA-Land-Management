@@ -32,6 +32,8 @@ function FillLevels(response) {
     $(".ParameterNameListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterNameList[" + i + "]");
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
         i = i + 1;
     });
 
@@ -39,6 +41,8 @@ function FillLevels(response) {
     $(".ParameterValueListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterValueList[" + a + "]");
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
         a = a + 1;
     });
 
@@ -56,6 +60,8 @@ function FillLevels(response) {
     $(".ParameterActionListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterActionList[" + c + "]");
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
         c = c + 1;
     });
     $(".ParameterActionListClass").attr("multiple", "");
@@ -63,6 +69,8 @@ function FillLevels(response) {
     var d = 0;
     $(".ParameterSkipListClass").each(function () {
         $(this).removeAttr("name").attr("name", "ParameterSkipList[" + d + "]");
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
         d = d + 1;
     });
 
@@ -72,6 +80,21 @@ function FillLevels(response) {
         f = f + 1;
     });
 
+    var i = 1;
+    $(".delete-record").each(function () {
+        $(this).removeAttr("data-id");
+        $(this).attr("data-id", i);
+        $(this).removeAttr("disabled", "disabled");
+        $(this).attr("disabled", "disabled");
+        i = i + 1;
+    });
+
+    var i = 1;
+    $(".recordDiv").each(function () {
+        $(this).removeAttr("data-id");
+        $(this).attr("id", "recordDiv" + i);
+        i = i + 1;
+    });
 
     for (var j = 0; j < response.length; j++) {
 
@@ -168,6 +191,19 @@ function GetLevelDetails() {
                 i = i + 1;
             });
 
+            var i = 1;
+            $(".delete-record").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("data-id", i);
+                i = i + 1;
+            });
+
+            var i = 1;
+            $(".recordDiv").each(function () {
+                $(this).removeAttr("data-id");
+                $(this).attr("id", "recordDiv" + i);
+                i = i + 1;
+            });
 
         });
     }
@@ -190,6 +226,80 @@ function GetSearchParam() {
 
 $(document).delegate('a.add-record', 'click', function (e) {
     GetLevelDetails();
+});
+
+$(document).delegate('a.delete-record', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        debugger;
+        var id = jQuery(this).attr('data-id');
+        //   var targetDiv = jQuery(this).attr('targetDiv');
+        $('#recordDiv' + id).remove();
+        // jQuery("#recordDiv" + id).remove();
+        //  $('#recordDiv' + id).empty();
+
+        debugger;
+        var i = 0;
+        $(".ParameterNameListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterNameList[" + i + "]");
+            i = i + 1;
+        });
+        var i = 0;
+        $(".ParameterValueListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterValueList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterLevelListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterLevelList[" + i + "]");
+            $(this).val(i + 1);
+            $(this).removeAttr("disabled", "disabled");
+            $(this).attr("disabled", "disabled");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterActionListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterActionList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 0;
+        $(".ParameterSkipListClass").each(function () {
+            $(this).removeAttr("name");
+            $(this).attr("name", "ParameterSkipList[" + i + "]");
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".sn").each(function () {
+            $(this).html('Level ' + i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".delete-record").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", i);
+            i = i + 1;
+        });
+
+        var i = 1;
+        $(".recordDiv").each(function () {
+            $(this).removeAttr("data-id");
+            $(this).attr("data-id", "recordDiv" + i);
+            i = i + 1;
+        });
+        return true;
+    } else {
+        return false;
+    }
 });
 
 $(function () {
