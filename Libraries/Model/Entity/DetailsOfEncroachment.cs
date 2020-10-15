@@ -9,6 +9,7 @@ namespace Libraries.Model.Entity
     {
         public int EncroachmentRegisterationId { get; set; }
         public string NameOfStructure { get; set; }
+        public string ConstructionStatus { get; set; }
         public decimal? Area { get; set; }
         public string Type { get; set; }
         public DateTime? DateOfEncroachment { get; set; }

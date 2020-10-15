@@ -21,7 +21,7 @@ namespace LandInventory.Controllers
         }
 
 
-       
+
         // Dropdown Dependency  calls below
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
@@ -55,37 +55,38 @@ namespace LandInventory.Controllers
         }
 
 
-        //public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
-        //{
-        //    var result = await _landtransferService.GetLandTransferReportData(department, zone, division, locality);
-
-        //    if (result != null)
-        //    {
-        //        return PartialView("Index", result);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return PartialView();
-        //    }
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
+        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
         {
+            var result = await _landtransferService.GetLandTransferReportData(department, zone, division, locality);
 
-            if (model != null)
+            if (result != null)
             {
-                var result = await _landtransferService.GetPagedLandtransferReportDeptWise(model);
-                ViewBag.ReportType = model.reportType;
                 return PartialView("_List", result);
             }
             else
             {
-                ViewBag.Message = Alert.Show("No Data Found", "", AlertType.Warning);
-                return PartialView("_List", null);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
             }
-        }
+            //[HttpPost]
+            //public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
+            //{
 
+            //    if (model != null)
+            //    {
+            //        var result = await _landtransferService.GetPagedLandtransferReportDeptWise(model);
+            //        ViewBag.ReportType = model.reportType;
+            //        return PartialView("_List", result);
+            //    }
+            //    else
+            //    {
+            //        ViewBag.Message = Alert.Show("No Data Found", "", AlertType.Warning);
+            //        return PartialView("_List", null);
+            //    }
+            //}
+
+        }
     }
-    }
+}
 
 

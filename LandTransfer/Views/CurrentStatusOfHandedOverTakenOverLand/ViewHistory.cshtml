@@ -1,7 +1,11 @@
 ﻿
 
 @*@model IEnumerable<Libraries.Model.Entity.Landtransfer>*@
-
+<style>
+    th{
+        text-align:center;
+    }
+</style>
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
@@ -24,7 +28,15 @@
         <table class="table table-responsive table-bordered table-card">
             <thead class="thead">
                 <tr class="myapp-hed1">
-                    <th>Sr.No</th>
+                    <th rowspan="2">Sr.No</th>
+                    <th colspan="2">TSS Survey</th>
+                    <th colspan="4">Encroachment</th>
+                    <th colspan="3">Fencing/Boundary Wall</th>
+                    <th colspan="3">Area Utilised</th>
+                    <th rowspan="2">Remarks</th>
+                    <th rowspan="2"> Submitted On </th>
+                </tr>
+                <tr>
                     <th>TSS Survey</th>
                     <th>Upload document/report file</th>
                     <th>Encroachment </th>
@@ -36,12 +48,7 @@
                     <th>Dimension (L*B*H)</th>
                     <th>Area /Plot Utilization</th>
                     <th>Area Utilised</th>
-
                     <th>Balance Area</th>
-                    @*<th>Status</th>*@
-                    <th>Remarks</th>
-                    <th> Created Date  </th>
-                    @*<th>Operation</th>*@
                 </tr>
             </thead>
             <tbody class="tbody">
@@ -61,7 +68,6 @@
                     <td>yes</td>
                     <td>356.01</td>
                     <td>213.05</td>
-                    @*<td>active</td>*@
                     <td>Area not utilised</td>
                     <td> 12 Oct 2020 </td>
 
