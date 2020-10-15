@@ -40,7 +40,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
-            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
         }
 
 

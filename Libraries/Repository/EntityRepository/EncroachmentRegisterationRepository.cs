@@ -51,7 +51,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<EncroachmentRegisteration> FetchSingleResult(int id)
         {
-            return await _dbContext.EncroachmentRegisteration.Include(x => x.EncroachmentPhotoFileDetails).Include(x => x.EncroachmentFirFileDetails).Include(x => x.EncroachmentLocationMapFileDetails).Where(x => x.Id == id).FirstOrDefaultAsync();
+            return await _dbContext.EncroachmentRegisteration
+                            .Include(x => x.EncroachmentPhotoFileDetails)
+                            .Include(x => x.EncroachmentFirFileDetails)
+                            .Include(x => x.EncroachmentLocationMapFileDetails)
+                            .Where(x => x.Id == id)
+                            .FirstOrDefaultAsync();
         }
 
         public async Task<List<Department>> GetAllDepartment()
