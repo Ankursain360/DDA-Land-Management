@@ -1097,6 +1097,21 @@ p.back-link {
     width: 97%;
     height: 25px;
 }
+
+.myapp-hed {
+    background-color: #2c3091;
+    /*linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);*/
+    Color: #ffffff;
+    Font-size: 0.95rem;
+    Font-Family: Arial, Helvetica, sans-serif;
+    margin-left: 16px;
+    position: absolute;
+    top: -10px;
+    border-radius: 5px;
+    position: absolute;
+    width: 97%;
+    height: 25px;
+}
 /*myapp-hed1*/
 .dda-pageheading {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
@@ -1108,8 +1123,34 @@ p.back-link {
     margin-top: -0.4%
 }
 
+.myapp-hed1 {
+    background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
+    Color: #ffffff;
+    Font-size: 0.95rem;
+    Font-Family: Arial, Helvetica, sans-serif;
+    margin-left: 3px;
+    color: white;
+    margin-top: -0.4%
+}
+
 /*myapp-hed2*/
 .dda-innerheading {
+    background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
+    Color: #ffffff;
+    Font-size: 0.95rem;
+    Font-Family: Arial, Helvetica, sans-serif;
+    /* margin-left: 3px;*/
+    position: absolute;
+    top: -10px;
+    border-radius: 5px;
+    position: absolute;
+    width: 97%;
+    height: 25px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+
+.myapp-hed2 {
     background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
     Color: #ffffff;
     Font-size: 0.95rem;

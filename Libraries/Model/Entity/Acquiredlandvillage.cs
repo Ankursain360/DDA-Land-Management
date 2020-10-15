@@ -42,6 +42,12 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
 
         public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
+        public virtual ICollection<Enchroachment> Enchroachment { get; set; }
+        public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
+        public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
+
+        public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+
 
     }
 }

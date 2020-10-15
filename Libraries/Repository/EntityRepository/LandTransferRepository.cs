@@ -40,7 +40,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model)
         {
-            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
         }
 
 
@@ -66,7 +71,7 @@ namespace Libraries.Repository.EntityRepository
                 .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.LocalityId == (locality == 0 ? x.Id : locality))).ToListAsync();
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))).ToListAsync();
             return data;
         }
 

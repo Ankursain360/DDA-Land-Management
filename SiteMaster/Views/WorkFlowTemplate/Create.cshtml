@@ -6,7 +6,6 @@
         Color: #ffffff;
         Font-size: 0.95rem;
         Font-Family: Arial, Helvetica, sans-serif;
-        /* margin-left: 3px;*/
         top: -10px;
         border-radius: 5px;
         position: absolute;
@@ -36,246 +35,56 @@
         </div>
         <div class="panel-body">
             @*<form id="myForm"  method="post" asp-action="Create" >*@
-                <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
 
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
-                        <select asp-for="ModuleId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
-                            <option value="0">--Select--</option>  @*value*@
-                        </select>
-                        <span asp-validation-for="ModuleId" class="text-danger lb-sm" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label class="control-label lb-sm">User Type</label>
-                        <select class="form-control dda-dropdown" id="ddlOperationType">
-                            <option value="Role">Role Wise</option>
-                            <option value="User">User Wise</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="Name">Proccess Name</label>
-                        <input asp-for="Name" type="text" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger lb-sm" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="Description">Proccess Description</label>
-                        <input asp-for="Description" type="text" class="form-control" />
-                        <span asp-validation-for="Description" class="text-danger lb-sm" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
-                    </div>
-
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
+                    <select asp-for="ModuleId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
+                        <option value="0">--Select--</option>  @*value*@
+                    </select>
+                    <span asp-validation-for="ModuleId" class="text-danger lb-sm" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
                 </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label lb-sm">User Type</label>
+                    <select class="form-control dda-dropdown" id="ddlOperationType">
+                        <option value="Role">Role Wise</option>
+                        <option value="User">User Wise</option>
 
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm">IsActive</label>
-                        <input type="checkbox" asp-for="IsActiveData" checked />
-                    </div>
-                    <div class="form-group col-md-3">
-                        <a class="btn btn-primary dda-pageheading add-record" data-added="0"> Add Level</a>
-                    </div>
+                    </select>
                 </div>
-
-                @*<div id="DivLevel">
-                <div class="row" style="margin-bottom:50px;">
-                    <div class="col-sm-12">
-                        <div class="dda-innerheading">
-                            <div class="col-md-12">
-                                <h6 class="pull-left color-white" style="align-content:center;">Level 1</h6>
-                                <input type="submit" value="Delete" class="btn btn-danger pull-right" style="width:unset; padding:unset; margin-top:5px;" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="Name">Proccess Name</label>
+                    <input asp-for="Name" type="text" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger lb-sm" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Name</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Value</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Level</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm" asp-for="Description">Proccess Description</label>
+                    <input asp-for="Description" type="text" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger lb-sm" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
                 </div>
 
             </div>
 
-            <div id="DivLevel">
-                <div class="row" style="margin-bottom:50px;">
-                    <div class="col-sm-12">
-                        <div class="dda-innerheading">
-                            <div class="col-md-12">
-                                <h6 class="pull-left color-white" style="align-content:center;">Level 2</h6>
-                                <input type="submit" value="Delete" class="btn btn-danger pull-right" style="width:unset; padding:unset; margin-top:5px;" />
-                            </div>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="form-group col-md-3">
+                    <label class="control-label lb-sm">IsActive</label>
+                    <input type="checkbox" asp-for="IsActiveData" checked />
                 </div>
-                <div class="row">
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Name</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Value</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Level</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </div>
+                <div class="form-group col-md-3">
+                    <a class="btn btn-primary dda-pageheading add-record" data-added="0"> Add Level</a>
                 </div>
+            </div>
+            <div id="LoadReportView">
 
-            </div>*@
+            </div>
 
-
-                <div id="LoadReportView">
-
+            <div class="row ">
+                <div class="form-group col-md-12" style="margin-bottom:40px;">
+                    <input type="submit" value="Create" id="btnCreate" class="btn btn-primary dda-pageheading" />
+                    @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-primary dda-pageheading" })
                 </div>
-                @*<div class="form-row">
-                <div class="col-md-12">
-                    <div class="table">
-                        <table class="table" border="0" id="tbl_posts">
-                            <thead class="thead">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Name</th>
-                                <th>Father's/Husband's Name</th>
-                                <th>Gender</th>
-                                <th>Address</th>
-                                <th>Mobile No.</th>
-                                <th>Email-Id</th>
-                                <th>Operation</th>
-                            </tr>
-                        </thead>
-                            <tbody id="tbl_posts_body">
-                            </tbody>
-                            <tbody class="tbody" id="add">
-                                <tr id="">
-                                    <td>
-                                        <div id="Div">
-                                            <div class="row" style="margin-bottom:50px;">
-                                                <div class="col-sm-12">
-                                                    <div class="dda-innerheading">
-                                                        <div class="col-md-12">
-                                                            <h6 class="pull-left color-white" style="align-content:center;"><span class="sn">Level 1</span></h6>
-                                                            <a class="btn btn-danger pull-right delete-record" data-id="0" style="width: unset; padding: unset; margin-top: 5px; display:none;">Delete</a>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-
-                                                <div class="form-group col-md-2">
-                                                    <label class="control-label lb-sm">Name</label>
-                                                    <select asp-for="ParameterNameList[0]" class="form-control dda-dropdown dropdownclass" id="dropdownlist">
-                                                        <option value="0">--Select--</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label class="control-label lb-sm">Parameter Value</label>
-                                                    <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass" />
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label class="control-label lb-sm">Level</label>
-                                                    <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" class="form-control inputclass" />
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label class="control-label lb-sm">Action Taken</label>
-                                                    <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass" id="ddlActionType" onchange="callDrop(this);">
-
-                                                        <option value="0">--Select--</option>
-                                                        <option value="1">Forward</option>
-                                                        <option value="2">Revert</option>
-                                                        <option value="3">Approved</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-2">
-                                                    <label class="control-label lb-sm">Skip</label>
-                                                    <input type="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" />
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                <tr class="dda-repeatorinnerheading">
-
-                                <td><span class="sn">Level 1</span></td>
-                                <td colspan="2">
-                                    <a class="btn btn-danger delete-record" data-id="0" style="display:none;">Delete</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="control-label lb-sm" asp-for="PropertyId">Parameter Name</label>
-                                    <input asp-for="PropertyId" type="text" id="parameterName" class="form-control" />
-                                    <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                                </td>
-                                <td>
-                                    <label class="control-label lb-sm" asp-for="PropertyId">Parameter Value</label>
-                                    <input asp-for="PropertyId" type="text" id="parameterValue" class="form-control" />
-                                    <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                                </td>
-                                <td>
-                                    <label class="control-label lb-sm" asp-for="PropertyId">Level</label>
-                                    <input asp-for="PropertyId" type="text" id="parameterLevel" class="form-control" />
-                                    <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-
-                            </tr>
-
-
-                        </table>
-                    </div>
-                </div>
-            </div>*@
-
-                @*<table class="table" border="0" id="tbl_posts">
-                <tr class="dda-repeatorinnerheading row">
-                    <td class="form-group col-md-6">Level 3</td>
-                    <td class="form-group col-md-6"><input type="submit" value="Delete" class="btn btn-danger pull-right" style="width:unset; padding:unset; margin-top:5px;" /></td>
-                </tr>
-                <tr>
-                    <td class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Name</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </td>
-                    <td class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Parameter Value</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </td>
-                    <td class="form-group col-md-3">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Level</label>
-                        <input asp-for="PropertyId" type="text" class="form-control" />
-                        <span asp-validation-for="PropertyId" class="text-danger lb-sm"></span>
-                    </td>
-
-                </tr>
-            </table>*@
-
-
-
-                <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" id="btnCreate" class="btn btn-primary dda-pageheading" />
-                        @Html.ActionLink("Back", "Index", "WorkFlowTemplate", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
+            </div>
 
             @*</form>*@
         </div>
@@ -285,15 +94,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/workflowcreate1.js"></script>
+    <script src="~/js/workflowcreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/workflowcreate1.min.js" asp-append-version="true"></script>
+    <script src="~/js/workflowcreate.min.js" asp-append-version="true"></script>
 </environment>
-
-@*<environment include="Development">
-        <script src="~/js/common.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/common.js" asp-append-version="true"></script>
-    </environment>*@

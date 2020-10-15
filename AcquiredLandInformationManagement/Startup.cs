@@ -11,10 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-using BotDetect.Web;
-
-
-
+//using BotDetect.Web;
 using Microsoft.Extensions.Hosting;
 using AcquiredLandInformationManagement.Infrastructure.Extensions;
 using Libraries.Model;
@@ -96,7 +93,7 @@ namespace AcquiredLandInformationManagement
             app.UseSession();
             // app.UseMvc();
             app.UseCookiePolicy();
-            app.UseCaptcha(Configuration);
+           // app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

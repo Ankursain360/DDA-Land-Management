@@ -49,7 +49,10 @@ $(function () {
             $("#tbl_posts #add #DateOfEncroachment").val(data[i].dateOfEncroachment);
             $("#tbl_posts #add #ReferenceNoOnLocation").val(data[i].referenceNoOnLocation);
             $("#tbl_posts #add #CountOfStructure").val(data[i].countOfStructure);
+            $("#tbl_posts #add #ConstructionStatus").val(data[i].constructionStatus);
+            $('#tbl_posts #add #ConstructionStatus').trigger('change');
             if (i < data.length - 1) {
+                var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
                 var content = jQuery('#tbl_posts #add tr'),
                     size = jQuery('#tbl_posts >tbody >tr').length,
                     element = null,
@@ -57,6 +60,7 @@ $(function () {
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts_body');
+                $('#tbl_posts_body #rec-' + size + ' #ConstructionStatus').val(ConstructionStatus);
                 element.find('.sn').html(size);
                 $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
                 $("#tbl_posts #add .add").remove();

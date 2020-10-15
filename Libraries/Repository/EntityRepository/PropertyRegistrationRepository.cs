@@ -46,7 +46,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownList()
         {
-            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland.Where(x => x.IsActive == 1).ToListAsync();
+            var badCodes = new[] { 3,5 };
+            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland.Where(x => x.IsActive == 1 && !badCodes.Contains(x.Id)).ToListAsync();
             return ClassificationoflandList;
         }
 

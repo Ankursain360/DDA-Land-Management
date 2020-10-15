@@ -12,6 +12,12 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Jointsurvey> builder)
         {
             builder.ToTable("jointsurvey", "lms");
+            builder.HasIndex(e => e.KhasraId)
+                   .HasName("fk6khasraid_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fk4villageid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
@@ -45,7 +51,19 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
-    
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Jointsurvey)
+                .HasForeignKey(d => d.KhasraId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk6khasraid");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Jointsurvey)
+                .HasForeignKey(d => d.VillageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk4villageid");
+
         }
-        }
+    }
 }

@@ -214,5 +214,17 @@
     "inputFiles": [
       "wwwroot/js/zoneindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/workflowlevels.min.js",
+    "inputFiles": [
+      "wwwroot/js/workflowlevels.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/workflowview.min.js",
+    "inputFiles": [
+      "wwwroot/js/workflowview.js"
+    ]
   }
 ]
