@@ -31,5 +31,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<List<EncroachmentRegisteration>> GetEncroachmentReportData(int department, int zone, int division, int locality);
+        Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);
+
     }
 }
