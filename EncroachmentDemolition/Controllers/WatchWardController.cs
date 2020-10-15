@@ -15,7 +15,7 @@ using Dto.Search;
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class WatchWardController : Controller
+    public class WatchWardController : BaseController
     {
         private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
