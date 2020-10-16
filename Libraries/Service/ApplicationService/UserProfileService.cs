@@ -55,5 +55,18 @@ namespace Service.ApplicationService
             IdentityResult result = await _roleManager.UpdateAsync(role);
             return result.Succeeded ? true : false;
         }
+
+        public async Task<List<UserProfileDto>> GetUser()
+        {
+            var user = await _userProfileRepository.GetUser();
+            var result = _mapper.Map<List<UserProfileDto>>(user);
+            return result;
+        }
+
+        public async Task<List<RoleDto>> GetRole()
+        {
+            var role = await _userProfileRepository.GetRole();
+            return _mapper.Map<List<RoleDto>>(role);
+        }
     }
 }

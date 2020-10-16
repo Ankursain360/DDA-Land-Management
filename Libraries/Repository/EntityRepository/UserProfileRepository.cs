@@ -42,9 +42,16 @@ namespace Repository.EntityRepository
             return result;
         }
 
-        public async Task<List<ApplicationUser>> GetUser()
+        public async Task<List<Userprofile>> GetUser()
         {
-            return await _dbContext.Users.ToListAsync();
+            return await _dbContext.Userprofile
+                                    .Include(a => a.User)
+                                    .Include(a => a.Role)
+                                    .Include(a => a.Department)
+                                    .Include(a => a.Zone)
+                                    .Include(a => a.District)
+                                    .Where(a => a.IsActive == 1)
+                                    .ToListAsync();
         }
 
         public async Task<List<ApplicationRole>> GetRole()
