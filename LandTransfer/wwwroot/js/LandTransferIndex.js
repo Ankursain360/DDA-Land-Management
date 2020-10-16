@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 2;
+var currentPageSize = 10;
 
 $(document).ready(function () {
     GetLandTransfer(currentPageNumber, currentPageSize);
@@ -23,11 +23,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetLandTransfer(pageNo, currentPageSize);
+    GetLandTransfer(parseInt(pageNo), currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetLandTransfer(currentPageNumber, pageSize);
+    GetLandTransfer(currentPageNumber, parseInt(pageSize));
     currentPageSize = pageSize;
 }
