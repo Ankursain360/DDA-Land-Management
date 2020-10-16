@@ -3,7 +3,7 @@
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 
-<div class="table myWebsiteTable delete-recordDiv" id="delete-recordDiv0">
+<div class="table myWebsiteTable recordDiv" id="recordDiv0">
     <input type="hidden" asp-for="OperationId" />
     <table class="table" border="0" id="tbl_posts">
         <tbody id="tbl_posts_body">
@@ -39,10 +39,9 @@
                                 <label class="control-label lb-sm">Level</label>
                                 <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
                             </div>
-                            <div class="form-group col-md-2">
+                            <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Action Taken</label>
                                 <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
-
                                     <option value="1">Forward</option>
                                     <option value="3">Approved</option>
                                     <option value="2">Revert</option>
