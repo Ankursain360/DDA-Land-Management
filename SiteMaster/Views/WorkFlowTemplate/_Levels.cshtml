@@ -24,9 +24,12 @@
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Name</label>
+                                <label class="control-label lb-sm">Level</label>
+                                <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="control-label lb-sm nameClass">Role Name</label>
                                 <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))" class="form-control dda-dropdown dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
                                     <option value="0">--Select--</option>
                                 </select>
@@ -34,10 +37,6 @@
                             <div class="form-group col-md-2">
                                 <label class="control-label lb-sm">Parameter Value</label>
                                 <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass ParameterValueListClass" />
-                            </div>
-                            <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Level</label>
-                                <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Action Taken</label>

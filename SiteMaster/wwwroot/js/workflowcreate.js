@@ -15,6 +15,7 @@ $('#ddlOperationType').change(function () {
 
 
 function BindDropdown() {
+    debugger;
     var value = $('#ddlOperationType option:selected').val();
     HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
         var html = '<option value="0">---Select---</option>';
@@ -23,6 +24,11 @@ function BindDropdown() {
         }
         for (var i = 0; i < jQuery('#tbl_posts >tbody>tr').length; i++) {
             $(".ParameterNameListClass").html(html);
+
+            $(".nameClass").each(function () {
+                var value = $('#ddlOperationType option:selected').val();
+                $(this).html(value + ' Name');
+            });
         }
 
     });
@@ -82,6 +88,12 @@ function GetLevelDetails() {
             $(".sn").each(function () {
                 $(this).html('Level ' + i);
                 i = i + 1;
+            });
+
+           
+            $(".nameClass").each(function () {
+                var value = $('#ddlOperationType option:selected').val();
+                $(this).html(value + ' Name');
             });
 
             var i = 1;
