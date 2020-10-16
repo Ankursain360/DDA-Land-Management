@@ -141,5 +141,18 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<List<EncroachmentRegisteration>> GetEncroachmentReportData(int department, int zone, int division, int locality)//added by shalini
+        {
+            var data = await _dbContext.EncroachmentRegisteration
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division) 
+                .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)) && (x.IsActive==1)).OrderByDescending(x => x.Id).ToListAsync();
+            return data;
+        }
     }
 }

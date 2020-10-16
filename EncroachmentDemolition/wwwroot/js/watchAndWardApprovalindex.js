@@ -2,14 +2,14 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-    GetLandTransfer(currentPageNumber, currentPageSize);
+    GetWatchandward(currentPageNumber, currentPageSize);
 });
 
-function GetLandTransfer(pageNumber, pageSize) {
+function GetWatchandward(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/EncroachmentRegister/List`, 'html', param, function (response) {
-        $('#divEncroachmentRegisterationTable').html("");
-        $('#divEncroachmentRegisterationTable').html(response);
+    HttpPost(`/WatchWardApproval/List`, 'html', param, function (response) {
+        $('#divWatchandwardTable').html("");
+        $('#divWatchandwardTable').html(response);
     });
 }
 
@@ -24,12 +24,12 @@ function GetSearchParam(pageNumber, pageSize) {
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);
-    GetLandTransfer(pageNo, currentPageSize);
+    GetWatchandward(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetLandTransfer(currentPageNumber, pageSize);
+    GetWatchandward(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

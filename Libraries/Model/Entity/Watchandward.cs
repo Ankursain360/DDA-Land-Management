@@ -8,6 +8,11 @@ namespace Libraries.Model.Entity
 {
     public partial class Watchandward : AuditableEntity<int>
     {
+        public Watchandward()
+        {
+            Watchandwardphotofiledetails = new HashSet<Watchandwardphotofiledetails>();
+            Watchandwardreportfiledetails = new HashSet<Watchandwardreportfiledetails>();
+        }
        
         public DateTime? Date { get; set; }
         public int? VillageId { get; set; }
@@ -19,6 +24,9 @@ namespace Libraries.Model.Entity
         public string ReportFiletPath { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
+
+
+
         [NotMapped]
         public List<Village> VillageList { get; set; }
         public virtual Village Village { get; set; }
@@ -27,9 +35,11 @@ namespace Libraries.Model.Entity
         public virtual Khasra Khasra { get; set; }
 
         [NotMapped]
-        public IFormFile Photo { get; set; }
+        public List<IFormFile> Photo { get; set; }
         [NotMapped]
-        public IFormFile ReportFile { get; set; }
-      
+        public List<IFormFile> ReportFile { get; set; }
+        public virtual ICollection<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
+        public virtual ICollection<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
+        
     }
 }

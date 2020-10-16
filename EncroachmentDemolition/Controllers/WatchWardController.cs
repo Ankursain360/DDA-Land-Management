@@ -12,15 +12,16 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Dto.Search;
+using System.IO;
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class WatchWardController : Controller
+    public class WatchWardController : BaseController
     {
         private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
-        string targetPhotoPathLayout = string.Empty;
-        string targetReportfilePathLayout = string.Empty;
+        //string targetPhotoPathLayout = string.Empty;
+        //string targetReportfilePathLayout = string.Empty;
 
         public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration)
         {
@@ -53,26 +54,79 @@ namespace EncroachmentDemolition.Controllers
         {
             watchandward.VillageList = await _watchandwardService.GetAllVillage();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
-            if (ModelState.IsValid)
-            {
-                targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-                targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
-                FileHelper file = new FileHelper();
 
-                if (watchandward.Photo != null)
-                {
-                    watchandward.PhotoPath = file.SaveFile(targetPhotoPathLayout, watchandward.Photo);
-                }
-                if (watchandward.ReportFile !=null)
-                {
-                    watchandward.ReportFiletPath = file.SaveFile(targetReportfilePathLayout, watchandward.ReportFile);
-                }
+            
+            string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+            string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+               if (ModelState.IsValid)
+            {
+               
                 var result = await _watchandwardService.Create(watchandward);
-                if (result == true)
+                
+                if (result)
                 {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var result1 = await _watchandwardService.GetAllWatchandward();
-                    return View("Index", result1);
+
+                    FileHelper fileHelper = new FileHelper();
+
+
+                    ///for photo file:
+                    
+
+                    if (watchandward.Photo != null && watchandward.Photo.Count > 0)
+                    {
+                        List<Watchandwardphotofiledetails> watchandwardphotofiledetails = new List<Watchandwardphotofiledetails>();
+                        for (int i = 0; i < watchandward.Photo.Count; i++)
+                        {
+                            string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
+                            watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
+                            {
+                                WatchAndWardId = watchandward.Id,
+                                PhotoFilePath = FilePath
+                            });
+                        }
+                        foreach (var item in watchandwardphotofiledetails)
+                        {
+                            result = await _watchandwardService.SaveWatchandwardphotofiledetails(item);
+                        }
+                    }
+
+                    //for report file:
+                    
+                    if (watchandward.ReportFile != null && watchandward.ReportFile.Count > 0)
+                    {
+                        List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
+                        for (int i = 0; i < watchandward.Photo.Count; i++)
+                        {
+                            string FilePath = fileHelper.SaveFile(targetReportfilePathLayout, watchandward.Photo[i]);
+                            watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
+                            {
+                                WatchAndWardId = watchandward.Id,
+                                ReportFilePath= FilePath
+                            });
+                        }
+                        foreach (var item in watchandwardreportfiledetails)
+                        {
+                            result = await _watchandwardService.SaveWatchandwardreportfiledetails(item);
+                        }
+                    }
+
+                    if (result)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var result1 = await _watchandwardService.GetAllWatchandward();
+                        return View("Index", result1);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(watchandward);
+                    }
+                }
+                else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(watchandward);
+                    }
                 }
                 else
                 {
@@ -80,9 +134,7 @@ namespace EncroachmentDemolition.Controllers
                     return View(watchandward);
                 }
             }
-
-            return View(watchandward);
-        }
+           
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
@@ -97,34 +149,80 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, Watchandward watchandward)
         {
-            var Data = await _watchandwardService.FetchSingleResult(watchandward.Id);
+            var Data = await _watchandwardService.FetchSingleResult(id);
             Data.VillageList = await _watchandwardService.GetAllVillage();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+            string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+
             if (ModelState.IsValid)
             {
-                targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-                targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                //targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+                //targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
 
-                if (watchandward.Photo != null)
-                {
-                    FileHelper file = new FileHelper();
-                    watchandward.PhotoPath = file.SaveFile(targetPhotoPathLayout, watchandward.Photo);
-                }
-                if (watchandward.ReportFile != null)
-                {
-                    FileHelper file = new FileHelper();
-                    watchandward.ReportFiletPath = file.SaveFile(targetReportfilePathLayout, watchandward.ReportFile);
-                }
                 var result = await _watchandwardService.Update(id, watchandward);
-                if (result == true)
+                if (result)
                 {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var result1 = await _watchandwardService.GetAllWatchandward();
-                    return View("Index", result1);
+                    FileHelper fileHelper = new FileHelper();
+
+
+                    //for photo file:
+
+                    if (watchandward.Photo != null && watchandward.Photo.Count > 0)
+                    {
+                        List<Watchandwardphotofiledetails> watchandwardphotofiledetails = new List<Watchandwardphotofiledetails>();
+                        result = await _watchandwardService.DeleteWatchandwardphotofiledetails(id);
+                        for (int i = 0; i < watchandward.Photo.Count; i++)
+                        {
+                            string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
+                            watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
+                            {
+                                WatchAndWardId = watchandward.Id,
+                                PhotoFilePath = FilePath
+                            });
+                        }
+                        foreach (var item in watchandwardphotofiledetails)
+                        {
+                            result = await _watchandwardService.SaveWatchandwardphotofiledetails(item);
+                        }
+                    }
+
+                    //for report file:
+
+                    if (watchandward.ReportFile != null && watchandward.ReportFile.Count > 0)
+                    {
+                        List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
+                        result = await _watchandwardService.DeleteWatchandwardreportfiledetails(id);
+                        for (int i = 0; i < watchandward.Photo.Count; i++)
+                        {
+                            string FilePath = fileHelper.SaveFile(targetReportfilePathLayout, watchandward.Photo[i]);
+                            watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
+                            {
+                                WatchAndWardId = watchandward.Id,
+                                ReportFilePath = FilePath
+                            });
+                        }
+                        foreach (var item in watchandwardreportfiledetails)
+                        {
+                            result = await _watchandwardService.SaveWatchandwardreportfiledetails(item);
+                        }
+                    }
+
+                    if (result)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        var result1 = await _watchandwardService.GetAllWatchandward();
+                        return View("Index", result1);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(watchandward);
+                    }
+
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(watchandward);
                 }
             }
@@ -133,6 +231,7 @@ namespace EncroachmentDemolition.Controllers
                 return View(watchandward);
             }
         }
+
 
         public async Task<IActionResult> View(int id)
         {
@@ -159,6 +258,24 @@ namespace EncroachmentDemolition.Controllers
             }
             var result1 = await _watchandwardService.GetAllWatchandward();
             return View("Index", result1);
+        }
+
+
+        //***to download photo file ***
+        public async Task<IActionResult> DownloadPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string filename = Data.PhotoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        //***to download report file ***
+        public async Task<IActionResult> DownloadReportFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardreportfiledetails Data = await _watchandwardService.GetWatchandwardreportfiledetails(Id);
+            string filename = Data.ReportFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public IActionResult WatchWardApproval()
         {

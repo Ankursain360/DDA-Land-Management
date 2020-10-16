@@ -95,7 +95,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model)
+        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model)//added by ishu
         {
             return await _dbContext.Landtransfer
                                    .Include(x => x.Department)
