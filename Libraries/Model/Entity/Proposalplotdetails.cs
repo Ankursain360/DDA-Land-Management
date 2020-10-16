@@ -37,5 +37,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         public virtual Khasra Khasra { get; set; }
+
+       
     }
 }

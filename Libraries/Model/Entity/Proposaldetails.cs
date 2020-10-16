@@ -9,6 +9,12 @@ namespace Libraries.Model.Entity
 {
     public partial class Proposaldetails: AuditableEntity<int>
     {
+
+        public Proposaldetails()
+        {
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
+        }
+
         [Required]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "ProposalDetails", AdditionalFields = "Id")]
@@ -35,7 +41,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Scheme> SchemeList { get; set; }
         public virtual Scheme Scheme { get; set; }
-
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
 
     }
 }

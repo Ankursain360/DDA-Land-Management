@@ -9,7 +9,10 @@ namespace Libraries.Model.Entity
 {
     public partial class Scheme : AuditableEntity<int>
     {
-     
+        public Scheme()
+        {
+            Proposaldetails = new HashSet<Proposaldetails>();
+        }
         public string Name { get; set; }
         public string Code { get; set; }
         public DateTime? SchemeDate { get; set; }
@@ -17,7 +20,7 @@ namespace Libraries.Model.Entity
         public string Description { get; set; }
         public byte IsActive { get; set; }
 
+        public ICollection<Proposaldetails> Proposaldetails { get; set; }
 
-       
     }
 }

@@ -52,5 +52,6 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
         public virtual Division Division { get; set; }
 
+      
     }
 }
