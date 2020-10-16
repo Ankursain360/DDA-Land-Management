@@ -1,6 +1,6 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Landtransfer>*@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Landtransfer>
 
-@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+@*@model IEnumerable<Libraries.Model.Entity.Landtransfer>*@
 
 @{int rowNo = 0; }
 
@@ -30,10 +30,10 @@
 
         </thead>
         <tbody class="tbody">
-            @if (Model != null && Model.Count() > 0)
-            @*@if (Model != null && Model.Results.Count() > 0)*@
+            @if (Model != null && Model.Results.Count() > 0)
             {
-                @foreach (var item in Model)
+
+                @foreach (var item in Model.Results)
                 {
                     <tr>
                         <td>@(rowNo += 1)</td>
@@ -72,4 +72,4 @@
     </table>
 
 </div>
-@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
