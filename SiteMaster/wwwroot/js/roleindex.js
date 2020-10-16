@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 2;
+var currentPageSize = 10;
 
 $(document).ready(function () {
     GetRole(currentPageNumber, currentPageSize);
@@ -23,11 +23,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetRole(pageNo, currentPageSize);
+    GetRole(parseInt(pageNo), parseInt(currentPageSize));
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetRole(currentPageNumber, pageSize);
+    GetRole(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }

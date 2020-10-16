@@ -18,7 +18,7 @@ $("#btnReset").click(function () {
 });
 
 function GetUser(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+    var param = GetSearchParam(parseInt(pageNumber), parseInt(pageSize));
     HttpPost(`/usermanagement/List`, 'html', param, function (response) {
         $('#divUser').html("");
         $('#divUser').html(response);

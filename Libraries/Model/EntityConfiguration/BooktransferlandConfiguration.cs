@@ -14,8 +14,16 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Booktransferland> builder)
         {
-
             builder.ToTable("booktransferland", "lms");
+
+            builder.HasIndex(e => e.KhasraId)
+                .HasName("fkBookTransferLandKhasra_idx");
+
+            builder.HasIndex(e => e.LandNotificationId)
+                .HasName("fkBookTransferLandNotification_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fkBookTransferLandVillage_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -55,6 +63,20 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Booktransferland)
+                .HasForeignKey(d => d.KhasraId)
+                .HasConstraintName("fkBookTransferLandKhasra");
+
+            builder.HasOne(d => d.LandNotification)
+                .WithMany(p => p.Booktransferland)
+                .HasForeignKey(d => d.LandNotificationId)
+                .HasConstraintName("fkBookTransferLandNotification");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Booktransferland)
+                .HasForeignKey(d => d.VillageId)
+                .HasConstraintName("fkBookTransferLandVillage");
         }
     }
 }

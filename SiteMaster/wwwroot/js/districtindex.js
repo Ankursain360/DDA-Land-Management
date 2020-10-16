@@ -23,12 +23,12 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetDistrict(pageNo, currentPageSize);
+    GetDistrict(parseInt(pageNo), parseInt(currentPageSize));
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDistrict(currentPageNumber, pageSize);
+    GetDistrict(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }
  

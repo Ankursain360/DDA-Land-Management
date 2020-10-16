@@ -21,6 +21,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("Code_UNIQUE")
                 .IsUnique();
 
+            builder.HasIndex(e => e.DepartmentId)
+                .HasName("fkzonedepartment_idx");
+
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")
                 .IsUnique();
@@ -46,6 +49,12 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Zone)
+                .HasForeignKey(d => d.DepartmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkzonedepartment");
         }
     }
 }

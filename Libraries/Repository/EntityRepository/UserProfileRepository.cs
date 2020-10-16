@@ -1,9 +1,11 @@
 ﻿using Dto.Search;
 using Libraries.Model;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
 using Repository.IEntityRepository;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,6 +40,35 @@ namespace Repository.EntityRepository
             var result = await _dbContext.Roles.
                             GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
             return result;
+        }
+
+        public async Task<List<Userprofile>> GetUser()
+        {
+            return await _dbContext.Userprofile
+                                    .Include(a => a.User)
+                                    .Include(a => a.Role)
+                                    .Include(a => a.Department)
+                                    .Include(a => a.Zone)
+                                    .Include(a => a.District)
+                                    .Where(a => a.IsActive == 1)
+                                    .ToListAsync();
+        }
+
+        public async Task<Userprofile> GetUserById(int userId)
+        {
+            return await _dbContext.Userprofile
+                                    .Include(a => a.User)
+                                    .Include(a => a.Role)
+                                    .Include(a => a.Department)
+                                    .Include(a => a.Zone)
+                                    .Include(a => a.District)
+                                    .Where(a => a.IsActive == 1 && a.User.Id==userId)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<ApplicationRole>> GetRole()
+        {
+            return await _dbContext.Roles.ToListAsync();
         }
     }
 }

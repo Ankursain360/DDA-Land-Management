@@ -15,6 +15,15 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("proposalplotdetails", "lms");
 
+            builder.HasIndex(e => e.KhasraId)
+                .HasName("fkProposalKhasra_idx");
+
+            builder.HasIndex(e => e.ProposaldetailsId)
+                .HasName("fkProposalDetails_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fkProposalVillage_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
@@ -27,6 +36,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+            builder.Property(e => e.IsActive)
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
+
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
@@ -34,7 +47,21 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ProposaldetailsId).HasColumnType("int(11)");
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Proposalplotdetails)
+                .HasForeignKey(d => d.KhasraId)
+                .HasConstraintName("fkProposalKhasra");
+
+            builder.HasOne(d => d.Proposaldetails)
+                .WithMany(p => p.Proposalplotdetails)
+                .HasForeignKey(d => d.ProposaldetailsId)
+                .HasConstraintName("fkProposalDetails");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Proposalplotdetails)
+                .HasForeignKey(d => d.VillageId)
+                .HasConstraintName("fkProposalVillage");
 
         }
      
