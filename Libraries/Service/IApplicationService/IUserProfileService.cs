@@ -16,6 +16,7 @@ namespace Service.IApplicationService
         Task<RoleDto> GetRoleById(int id);
         Task<bool> UpdateRole(RoleDto model);
         Task<List<UserProfileDto>> GetUser();
+        Task<UserProfileDto> GetUserById(int userId);
         Task<List<RoleDto>> GetRole();
     }
 }
