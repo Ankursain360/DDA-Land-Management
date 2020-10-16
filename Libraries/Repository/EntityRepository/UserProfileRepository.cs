@@ -1,9 +1,11 @@
 ﻿using Dto.Search;
 using Libraries.Model;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
 using Repository.IEntityRepository;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -38,6 +40,16 @@ namespace Repository.EntityRepository
             var result = await _dbContext.Roles.
                             GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
             return result;
+        }
+
+        public async Task<List<ApplicationUser>> GetUser()
+        {
+            return await _dbContext.Users.ToListAsync();
+        }
+
+        public async Task<List<ApplicationRole>> GetRole()
+        {
+            return await _dbContext.Roles.ToListAsync();
         }
     }
 }
