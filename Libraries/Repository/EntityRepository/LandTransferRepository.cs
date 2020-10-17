@@ -75,8 +75,22 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model)
+        {
+            return await _dbContext.Landtransfer
+                                   .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                
+                .Where(x => (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)))
+                                   .OrderByDescending(x => x.Id)
+                                   .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+        }
 
-       
         public async Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId) //added by ishu
         {
             var data = await _dbContext.Landtransfer

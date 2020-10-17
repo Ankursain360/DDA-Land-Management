@@ -102,7 +102,7 @@
                     </div>
 
                     @*<div id="LoadView">
-            </div>*@
+                        </div>*@
                     <div id="DivHandedOver">
 
                         <div class="row" style="margin-bottom:35px;">
@@ -375,11 +375,12 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Planned/Unplanned Land</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown" id="PlannedUnplannedLand" >
+                            <select class="form-control dda-dropdown" id="PlannedUnplannedLand">
                                 <option value="Planned Land">Planned Land</option>
                                 <option value="Unplanned Land">Unplanned Land</option>
+                                <option value="Under Process">Under Process</option>
                             </select>
-                            <span  class="text-danger lb-sm"></span>
+                            <span class="text-danger lb-sm"></span>
                         </div>
 
                         <div id="divPlannedLand">
@@ -387,11 +388,15 @@
                                 <label class="control-label lb-sm">Main Land Use</label>
                                 <select class="form-control dda-dropdown">
                                     <option value="0">--Select--</option>
-                                    <option value="1">Main Use</option>
-                                    <option value="1">Not Known</option>
-                                    <option value="1">Sub Use</option>
+                                    <option value="1">Residential</option>
+                                    <option value="2">Commercial</option>
+                                    <option value="3">Industrial</option>
+                                    <option value="4">Institutional</option>
+                                    <option value="5">Public Utility</option>
+                                    <option value="6">Mix Land Use</option>
+                                    <option value="7">Others</option>
                                 </select>
-                                <span  class="text-danger lb-sm"></span>
+                                <span class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Sub Use</label>
@@ -419,7 +424,7 @@
                     </div>
                 </div>
             </form>
-    </div>
+        </div>
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

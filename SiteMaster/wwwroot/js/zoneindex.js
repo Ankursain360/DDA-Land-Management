@@ -22,13 +22,14 @@ function GetSearchParam(pageNumber, pageSize) {
     return model;
 }
 
-
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
+    pageNo = parseInt(pageNo);
+    GetDetails(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
+    pageSize = parseInt(pageSize);
+    GetDetails(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }

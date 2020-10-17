@@ -15,6 +15,8 @@ namespace Libraries.Model.Entity
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Landtransfer = new HashSet<Landtransfer>();
             Locality = new HashSet<Locality>();
+            Nazulland = new HashSet<Nazulland>();
+            Propertyregistration = new HashSet<Propertyregistration>();
         }
 
         [Required]
@@ -37,6 +39,6 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Landtransfer> Landtransfer { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
-
+        public ICollection<Nazulland> Nazulland { get; set; }
     }
 }

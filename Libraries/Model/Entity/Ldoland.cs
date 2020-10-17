@@ -43,6 +43,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Serialnumber> SerialnumberList { get; set; }
         public virtual Serialnumber Serialnumber { get; set; }
-
+        
     }
 }

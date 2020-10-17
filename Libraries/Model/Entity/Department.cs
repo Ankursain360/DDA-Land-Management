@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             Propertyregistration = new HashSet<Propertyregistration>();
             Userprofile = new HashSet<Userprofile>();
             Locality = new HashSet<Locality>();
+            Zone = new HashSet<Zone>();
         }
 
         [Required]
@@ -38,7 +39,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Landtransfer> LandtransferHandedOverDepartment { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverDepartment { get; set; }
         public virtual ICollection<Division> Division { get; set; }
-
+       
 
     }
 }

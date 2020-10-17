@@ -1,5 +1,4 @@
 ﻿using Dto.Search;
-using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Model.Entity;
 using System.Collections.Generic;
@@ -11,7 +10,8 @@ namespace Repository.IEntityRepository
     {
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
         Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
-        Task<List<ApplicationUser>> GetUser();
+        Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
+        Task<Userprofile> GetUserById(int userId);
     }
 }

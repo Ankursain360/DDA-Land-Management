@@ -111,11 +111,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetPagedLandtransferReportDeptWise(model);
         }
-        //public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDivisionlocalitywise(LandTransferSearchDto model)//added by shalini
+        public async Task<PagedResult<Landtransfer>> GetPagedLandTransferReportData(LandTransferSearchDto model)//added by shalini
 
-        //{
-        //    return await _landTransferRepository.GetPagedLandtransferReportDivisionlocalitywise(model);
-        //}
+        {
+            return await _landTransferRepository.GetPagedLandtransferReportData(model);
+        }
 
 
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)

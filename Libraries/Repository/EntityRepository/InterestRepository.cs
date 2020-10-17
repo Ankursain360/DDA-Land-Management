@@ -9,6 +9,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -34,7 +35,7 @@ namespace Libraries.Repository.EntityRepository
                                   ToDate = A.ToDate,
                                   Percentage = A.Percentage,
                                   IsActive = A.IsActive
-                              }).OrderByDescending(x=>x.Id).ToListAsync();
+                              }).OrderByDescending(x => x.Id).ToListAsync();
 
             if (Data != null)
             {
@@ -52,7 +53,9 @@ namespace Libraries.Repository.EntityRepository
                     });
                 }
             }
-            return (olist.GroupBy(x=>x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
+            return (olist.GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
+
+
         }
 
         public object GetFromDateData(int propertyId)
@@ -66,7 +69,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Interest>> GetPagedInterest(InterestSearchDto model)
         {
-           return await _dbContext.Interest.Include(x=> x.PropertyType).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+            //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
+            var data = await _dbContext.LoadStoredProcedure("GetInterestIndexDetails").WithSqlParams(("para", "values")).
+                                ExecuteStoredProcedureAsync<Interest>();
+          //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
+             return await _dbContext.Interest.Include(x=> x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+            //return data;
         }
 
         public async Task<List<PropertyType>> GetPropertyTypeList()

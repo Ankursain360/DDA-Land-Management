@@ -29,7 +29,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string PropertyTypeName { get; set; }
 
-        public PropertyType PropertyType { get; set; }
+        public PropertyType Property { get; set; }
 
     }
 }

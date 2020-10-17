@@ -11,18 +11,20 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Page> builder)
         {
-
             builder.ToTable("page", "lms");
 
+            builder.HasIndex(e => e.ModuleId)
+                .HasName("fkpagemodule_idx");
+
             builder.HasIndex(e => e.Name)
-                    .HasName("Name_UNIQUE")
-                    .IsUnique();
+                .HasName("Name_UNIQUE")
+                .IsUnique();
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Address)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -37,13 +39,16 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ModuleId).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
-                    .IsRequired()
-                    .HasMaxLength(300)
-                    .IsUnicode(false);
+                .IsRequired()
+                .HasMaxLength(300)
+                .IsUnicode(false);
 
             builder.Property(e => e.Priority).HasColumnType("int(11)");
 
-
+            builder.HasOne(d => d.Module)
+                .WithMany(p => p.Page)
+                .HasForeignKey(d => d.ModuleId)
+                .HasConstraintName("fkpagemodule");
         }
     }
 }

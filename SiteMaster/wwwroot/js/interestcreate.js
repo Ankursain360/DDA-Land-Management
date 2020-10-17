@@ -11,6 +11,7 @@ $(function () {
             data: { propertyId: id },
            // dataType: 'json',
             success: function (data) {
+                debugger;
                 if (data != null) {
                     $("#FromDate").removeAttr("type", "date");
                     $("#FromDate").attr("type", "text");
