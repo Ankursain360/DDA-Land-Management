@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Libraries.Model.Entity.EncroachmentRegisteration>
-@{int rowNo = 0; }
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
+@{int rowNo = 0;}
 
 
 <div class="card  table-card table-responsive">
@@ -22,9 +22,9 @@
         </thead>
         <tbody class="tbody">
 
-            @if (Model != null && Model.Count() > 0)
+            @if (Model != null && Model.Results.Count() > 0)
             {
-                @foreach (var item in Model)
+                @foreach (var item in Model.Results)
                 {
                     <tr>
                         <td>@(rowNo += 1)</td>
@@ -34,7 +34,7 @@
                         <td>@item.Division.Name</td>
                         <td>@item.Locality.Name</td>
                         <td>@item.KhasraNo</td>
-                       
+
                         <td>@item.EncrochmentDate</td>
                     </tr>
                 }
@@ -51,3 +51,4 @@
     </table>
 
 </div>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

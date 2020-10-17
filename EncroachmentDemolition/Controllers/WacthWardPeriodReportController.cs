@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -18,32 +19,27 @@ namespace EncroachmentDemolition.Controllers
         {
             _watchandwardService = watchandwardService;
         }
-
-
         public async Task<IActionResult> Create()
-            {
+        {
             Watchandward model = new Watchandward();
-           
+
             model.VillageList = await _watchandwardService.GetAllVillage();
             return View(model);
         }
 
-
-        public async Task<PartialViewResult> GetDetails(int village, DateTime fromdate, DateTime todate)
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] WatchandwardSearchDto watchandwardSearchDto)
         {
-                var result = await _watchandwardService.GetWatchandwardReportData(village, fromdate, todate);
-
-                if (result != null)
-                {
-                    return PartialView("Index", result);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return PartialView();
-                }
-
+            var result = await _watchandwardService.GetWatchandwardReportData(watchandwardSearchDto);
+            if (result != null)
+            {
+                return PartialView("Index", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
         }
     }
 }
-

@@ -19,9 +19,6 @@ namespace EncroachmentDemolition.Controllers
         {
             _encroachmentregistrationService = encroachmentregistrationService;
         }
-
-
-
         // Dropdown Dependency  calls below
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
@@ -42,8 +39,6 @@ namespace EncroachmentDemolition.Controllers
             DivisionId = DivisionId ?? 0;
             return Json(await _encroachmentregistrationService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
-
-
         public async Task<IActionResult> Create()
         {
             EncroachmentRegisteration model = new EncroachmentRegisteration();
@@ -53,12 +48,10 @@ namespace EncroachmentDemolition.Controllers
             model.LocalityList = await _encroachmentregistrationService.GetAllLocalityList(model.DivisionId);
             return View(model);
         }
-
-
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody]EnchroachmentSearchDto dto)
         {
-            var result = await _encroachmentregistrationService.GetEncroachmentReportData(department, zone, division, locality);
-
+            var result = await _encroachmentregistrationService.GetEncroachmentReportData(dto);
             if (result != null)
             {
                 return PartialView("_List", result);
@@ -68,8 +61,6 @@ namespace EncroachmentDemolition.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
-
-
         }
     }
 }
