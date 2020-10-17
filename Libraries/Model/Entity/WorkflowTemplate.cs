@@ -23,6 +23,9 @@ namespace Libraries.Model.Entity
         public List<int?> WorkflowIdList { get; set; }
         [NotMapped]
         public List<string> ParameterNameList { get; set; }
+
+        [NotMapped]
+        public List<string> ParameterLabelNameList { get; set; }
         [NotMapped]
         public List<string> ParameterValueList { get; set; }
         [NotMapped]

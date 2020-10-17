@@ -364,7 +364,7 @@ function GetListData() {
     var count = $('.myWebsiteTable').find('table').length;
     for (var i = 0; i < count; i++) {
         var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
-        var parameterValue = $("input[name='ParameterValueList[" + i + "]']").val();
+        var parameterValue = $("select[name='ParameterValueList[" + i + "]']").val();
         var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
         var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
         var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();

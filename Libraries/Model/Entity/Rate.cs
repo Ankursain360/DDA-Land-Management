@@ -29,7 +29,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string PropertyTypeName { get; set; }
 
-        // public virtual DDAPropertyType DDAPropertyType { get; set; }
-
+        public string Scheme { get; set; }
+        public PropertyType Property { get; set; }
     }
 }

@@ -93,7 +93,7 @@ namespace AcquiredLandInformationManagement
             app.UseSession();
             // app.UseMvc();
             app.UseCookiePolicy();
-           // app.UseCaptcha(Configuration);
+            // app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

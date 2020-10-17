@@ -8,9 +8,14 @@ namespace Libraries.Model.Entity
 {
     public class PropertyType : AuditableEntity<int>
     {
+        public PropertyType()
+        {
+            Interest = new HashSet<Interest>();
+            Rate = new HashSet<Rate>();
+        }
         public string Name { get; set; }
         public byte IsActive { get; set; }
         public ICollection<Interest> Interest { get; set; }
-
+        public ICollection<Rate> Rate { get; set; }
     }
 }

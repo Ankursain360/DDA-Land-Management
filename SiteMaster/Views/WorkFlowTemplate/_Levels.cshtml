@@ -3,6 +3,80 @@
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 
+<style>
+    .checkbox.checbox-switch {
+        padding-left: 0;
+    }
+
+        .checkbox.checbox-switch label,
+        .checkbox-inline.checbox-switch {
+            display: inline-block;
+            position: relative;
+            padding-left: 0;
+        }
+
+            .checkbox.checbox-switch label input,
+            .checkbox-inline.checbox-switch input {
+                display: none;
+            }
+
+            .checkbox.checbox-switch label span,
+            .checkbox-inline.checbox-switch span {
+                width: 35px;
+                border-radius: 20px;
+                height: 18px;
+                border: 1px solid #dbdbdb;
+                background-color: red;
+                border-color: red;
+                box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset;
+                transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s;
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+
+                .checkbox.checbox-switch label span:before,
+                .checkbox-inline.checbox-switch span:before {
+                    display: inline-block;
+                    width: 16px;
+                    height: 16px;
+                    border-radius: 50%;
+                    background: rgb(255,255,255);
+                    content: " ";
+                    top: 0;
+                    position: relative;
+                    left: 0px;
+                    transition: all 0.3s ease;
+                    box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+                    top: -2px;
+                }
+
+            .checkbox.checbox-switch label > input:checked + span:before,
+            .checkbox-inline.checbox-switch > input:checked + span:before {
+                left: 16px;
+                top: -2px;
+            }
+
+            /* Switch Primary */
+            .checkbox.checbox-switch.switch-primary label > input:checked + span,
+            .checkbox-inline.checbox-switch.switch-primary > input:checked + span {
+                /* background-color: rgb(0, 105, 217);
+                border-color: rgb(0, 105, 217);*/
+                background-color: #25b928;
+                border-color: #25b928;
+                /*box-shadow: rgb(0, 105, 217) 0px 0px 0px 8px inset;*/
+                transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s, background-color 1.2s ease 0s;
+            }
+
+            .checkbox.checbox-switch.switch-primary label > input:checked:disabled + span,
+            .checkbox-inline.checbox-switch.switch-primary > input:checked:disabled + span {
+                background-color: red;
+                border-color: red;
+                /* box-shadow: rgb(109, 163, 221) 0px 0px 0px 8px inset;*/
+                transition: border 0.4s ease 0s, box-shadow 0.4s ease 0s, background-color 1.2s ease 0s;
+            }
+</style>
+
 <div class="table myWebsiteTable recordDiv" id="recordDiv0">
     <input type="hidden" asp-for="OperationId" />
     <table class="table" border="0" id="tbl_posts">
@@ -29,15 +103,22 @@
                                 <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />
                             </div>
                             <div class="form-group col-md-2">
-                                <label class="control-label lb-sm nameClass">Role Name</label>
+                                <label class="control-label lb-sm">User Type</label>
+                                <select asp-for="ParameterValueList[0]" class="form-control dda-dropdown ParameterValueListClass" id="ddlOperationType" onchange="callTypeDropdown(this);">
+                                    <option value="Role">Role Wise</option>
+                                    <option value="User">User Wise</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="control-label lb-sm nameClass" name="ParameterLabelNameList[0]">Role Name</label>
                                 <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))" class="form-control dda-dropdown dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
                                     <option value="0">--Select--</option>
                                 </select>
                             </div>
-                            <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Parameter Value</label>
-                                <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass ParameterValueListClass" />
-                            </div>
+                            @*<div class="form-group col-md-2">
+                                    <label class="control-label lb-sm">Parameter Value</label>
+                                    <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass ParameterValueListClass" />
+                                </div>*@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Action Taken</label>
                                 <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
@@ -47,8 +128,18 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-2">
-                                <label class="control-label lb-sm">Skip</label>
-                                <input type="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" class="ParameterSkipListClass" />
+                                <div class="form-group">
+                                    <label class="control-label lb-sm">Skip</label>
+                                    <div class="checkbox checbox-switch switch-primary">
+                                        <label>
+                                             <input type="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" class="ParameterSkipListClass"  />
+                                            <span></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+
                             </div>
                         </div>
 

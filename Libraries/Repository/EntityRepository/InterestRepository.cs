@@ -53,6 +53,8 @@ namespace Libraries.Repository.EntityRepository
                 }
             }
             return (olist.GroupBy(x=>x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
+
+          
         }
 
         public object GetFromDateData(int propertyId)
@@ -66,7 +68,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Interest>> GetPagedInterest(InterestSearchDto model)
         {
-           return await _dbContext.Interest.Include(x=> x.PropertyType).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+            //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
+            return await _dbContext.Interest.Include(x=> x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<PropertyType>> GetPropertyTypeList()
