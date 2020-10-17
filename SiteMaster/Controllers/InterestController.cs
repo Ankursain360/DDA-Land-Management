@@ -65,7 +65,7 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         await BindDropDown(interest);
-                        return View(interest);
+                        return View("Index");
                     }
                     else
                     {

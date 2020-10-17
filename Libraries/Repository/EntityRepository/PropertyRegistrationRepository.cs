@@ -165,7 +165,8 @@ namespace Libraries.Repository.EntityRepository
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 &&(x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)) )
+               // && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
+                )
                 . OrderByDescending(x => x.Id)
                 .ToListAsync();
             return data;
