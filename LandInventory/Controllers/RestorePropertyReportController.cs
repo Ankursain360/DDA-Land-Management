@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,6 @@ namespace LandInventory.Controllers
 {
     public class RestorePropertyReportController : Controller
     {
-       
-
             private readonly IPropertyRegistrationService _propertyregistrationService;
 
             public RestorePropertyReportController(IPropertyRegistrationService propertyregistrationService)
@@ -34,9 +33,10 @@ namespace LandInventory.Controllers
             await BindDropDown(propertyregistration);
             return View(propertyregistration);
         }
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int locality)
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestorePropertyReportData(department, zone, division, locality);
+            var result = await _propertyregistrationService.GetRestorePropertyReportData(model);
 
             if (result != null)
             {
