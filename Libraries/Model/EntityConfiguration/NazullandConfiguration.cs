@@ -12,32 +12,32 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Nazulland> builder)
         {
-
             builder.ToTable("nazulland", "lms");
 
-            builder.Property(e => e.Id)
-                    .HasColumnType("int(11)");
-                   
+            builder.HasIndex(e => e.DivisionId)
+                .HasName("FKnazullandDivision_idx");
+
+            builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AdiCourt)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.AmountOfAward).HasColumnType("int(11)");
 
             builder.Property(e => e.AreaOfWhichPossessionTakenOver)
-                    .HasMaxLength(300)
-                    .IsUnicode(false);
+                .HasMaxLength(300)
+                .IsUnicode(false);
 
             builder.Property(e => e.AwardDate).HasColumnType("date");
 
             builder.Property(e => e.AwardNo)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.CertificateToCorrectnessOfEntry)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -52,33 +52,40 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.HighCourt)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.KhasraNo)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.LandAreaAcquired)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Remarks)
-                    .HasMaxLength(500)
-                    .IsUnicode(false);
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.SchemeForWhichAcquired)
-                    .HasMaxLength(300)
-                    .IsUnicode(false);
+                .HasMaxLength(300)
+                .IsUnicode(false);
 
             builder.Property(e => e.SupremeCourt)
-                    .HasMaxLength(200)
-                    .IsUnicode(false);
-           
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.HasOne(d => d.Division)
+                .WithMany(p => p.Nazulland)
+                .HasForeignKey(d => d.DivisionId)
+                .HasConstraintName("fkdivisionnazulland");
+
+            
+
         }
     }
 }

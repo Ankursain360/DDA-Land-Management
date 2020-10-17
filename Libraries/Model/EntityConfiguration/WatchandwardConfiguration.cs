@@ -14,7 +14,14 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Watchandward> builder)
         {
 
+
             builder.ToTable("watchandward", "lms");
+
+            builder.HasIndex(e => e.KhasraId)
+                .HasName("fkWatchWardKhasra_idx");
+
+            builder.HasIndex(e => e.VillageId)
+                .HasName("fkWatchWardVillage_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -55,6 +62,16 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Khasra)
+                .WithMany(p => p.Watchandward)
+                .HasForeignKey(d => d.KhasraId)
+                .HasConstraintName("fkWatchWardKhasra");
+
+            builder.HasOne(d => d.Village)
+                .WithMany(p => p.Watchandward)
+                .HasForeignKey(d => d.VillageId)
+                .HasConstraintName("fkWatchWardVillage");
 
         }
     }

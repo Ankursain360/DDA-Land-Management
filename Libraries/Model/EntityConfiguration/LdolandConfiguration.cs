@@ -13,6 +13,12 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("ldoland", "lms");
 
+            builder.HasIndex(e => e.LandNotificationId)
+                .HasName("fkLdoNotification_idx");
+
+            builder.HasIndex(e => e.SerialnumberId)
+                .HasName("fkLdoSerialNo_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
@@ -61,6 +67,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.HasOne(d => d.LandNotification)
+                .WithMany(p => p.Ldoland)
+                .HasForeignKey(d => d.LandNotificationId)
+                .HasConstraintName("fkLdoNotification");
+
+            builder.HasOne(d => d.Serialnumber)
+                .WithMany(p => p.Ldoland)
+                .HasForeignKey(d => d.SerialnumberId)
+                .HasConstraintName("fkLdoSerialNo");
         }
 
     }

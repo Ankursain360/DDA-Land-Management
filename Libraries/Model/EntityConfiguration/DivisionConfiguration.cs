@@ -13,13 +13,10 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Division> builder)
         {
-
-
             builder.ToTable("division", "lms");
 
-
             builder.HasIndex(e => e.DepartmentId)
-                    .HasName("fkDepartmentid1_idx");
+                .HasName("fkDepartmentid1_idx");
 
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")
@@ -63,10 +60,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fkZoneid1");
-      
 
-           
-    }
+        }
 
 
     }

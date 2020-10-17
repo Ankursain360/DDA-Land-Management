@@ -9,7 +9,18 @@ namespace Libraries.Model.Entity
 {
     public class Khasra : AuditableEntity<int>
     {
-
+        public Khasra()
+        {
+            Awardplotdetails = new HashSet<Awardplotdetails>();
+            Booktransferland = new HashSet<Booktransferland>();
+            Enchroachment = new HashSet<Enchroachment>();
+            Enhancecompensation = new HashSet<Enhancecompensation>();
+            Jointsurvey = new HashSet<Jointsurvey>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Sakanidetail = new HashSet<Sakanidetail>();
+            Undersection4plot = new HashSet<Undersection4plot>();
+            Watchandward = new HashSet<Watchandward>();
+        }
         public string Name { get; set; }
       
         public int VillageId { get; set; }
@@ -43,8 +54,8 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 
-
-
-
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+        public ICollection<Watchandward> Watchandward { get; set; }
+        public ICollection<Booktransferland> Booktransferland { get; set; }
     }
 }

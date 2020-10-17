@@ -10,6 +10,14 @@ namespace Libraries.Model.Entity
 {
     public class Village : AuditableEntity<int>
     {
+        public Village()
+        {
+            Booktransferland = new HashSet<Booktransferland>();
+            Nazul = new HashSet<Nazul>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Watchandward = new HashSet<Watchandward>();
+        }
+
         [Required]
         public int ZoneId { get; set; }
         [Required]
@@ -28,6 +36,9 @@ namespace Libraries.Model.Entity
         public int DepartmentId { get; set; }
         public virtual Zone Zone { get; set; }
         public virtual ICollection<Nazul> Nazul { get; set; }
-
+        public ICollection<Booktransferland> Booktransferland { get; set; }
+       
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+        public ICollection<Watchandward> Watchandward { get; set; }
     }
 }

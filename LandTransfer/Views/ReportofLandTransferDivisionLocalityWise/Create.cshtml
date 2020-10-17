@@ -25,14 +25,14 @@
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
                     <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
-                        <option value="">Select</option>
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
                     <select asp-for="ZoneId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
-                        <option value="value">Select</option>
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                 </div>
@@ -41,14 +41,14 @@
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Division <span style="color:red">*</span></label>
                     <select asp-for="DivisionId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
-                        <option value="value">Select</option>
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="DivisionId" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Locality(Village) Name <span style="color:red">*</span></label>
                     <select asp-for="LocalityId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                        <option value="value">Select</option>
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="LocalityId" class="text-danger"></span>
                 </div>

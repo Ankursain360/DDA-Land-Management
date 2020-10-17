@@ -30,9 +30,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality);// added by shalini
-                                                                                                                 //Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
+        Task<PagedResult<Landtransfer>> GetPagedLandTransferReportData(LandTransferSearchDto model);// added by shalini                                                                                                     //Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
 
         //Task<List<Landtransfer>> GetAllHandoverDepartment();
-        //Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDivisionlocalitywise(LandTransferSearchDto model);//added by shalini
+       
     }
 }
