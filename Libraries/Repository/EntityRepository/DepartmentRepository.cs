@@ -8,6 +8,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -20,11 +21,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model)
         {
-            return await _dbContext.Department.GetPaged<Department>(model.PageNumber, model.PageSize);
+            return await _dbContext.Department.Where(x => x.IsActive == 1).GetPaged<Department>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Department>> GetDepartment()
         {
-            return await _dbContext.Department.ToListAsync();
+            return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
 
         public async Task<bool> Any(int id, string name)

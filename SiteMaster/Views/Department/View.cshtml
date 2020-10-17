@@ -6,9 +6,9 @@
 
 <div class="row">
     <div class="col-sm-12">
-        <div class="myapp-hed">
+        <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Department Master </h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Department  </h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -20,7 +20,7 @@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%">View Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Edit">
@@ -31,6 +31,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department </label>
                         <input asp-for="Name" class="form-control" disabled>
+                        <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
@@ -38,6 +39,7 @@
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
                         <span class="text-danger"></span>
                     </div>
                 </div>

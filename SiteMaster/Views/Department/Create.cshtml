@@ -4,14 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Department Master</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Department </h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -30,14 +29,13 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label class="control-label">Department Name</label><span style="color:red">*</span>
+                        <label class="control-label lb-sm">Department Name</label><span style="color:red">*</span>
                         <input asp-for="Name" required class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
-                    @*<input type="text" asp-for="DivisionsName" required class="form-control">*@
 
                     <div class="form-group col-md-6">
-                        <label class="control-label">Status</label>
+                        <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -50,8 +48,8 @@
 
 
 
-                <div class="row">
-                    <div class="row col-md-12" style="justify-content:center">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
                         <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "Department", null, new { @class = "btn btn-primary dda-pageheading" })

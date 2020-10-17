@@ -64,6 +64,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _departmentRepository.FindBy(a => a.Id == id);
             Department model = result.FirstOrDefault();
             model.Name = department.Name;
+            model.IsActive = department.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _departmentRepository.Edit(model);
