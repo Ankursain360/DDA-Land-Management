@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -19,41 +20,9 @@ namespace LandInventory.Controllers
             _propertyregistrationService = propertyregistrationService;
         }
 
-        //public async Task<IActionResult> Restore(int id)
-        //{
-        //    var Data = await _propertyregistrationService.FetchSingleResult(id);
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> Restore(int id, Propertyregistration propertyregistration)  //Added by ishu
-        //{
-        //    Restoreproperty model = new Restoreproperty();
-        //    if (id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    model.RestoreReason = propertyregistration.RestoreReason;
-        //    var form = await _propertyregistrationService.Restore(id);
-        //    var result = await _propertyregistrationService.InsertInRestoreProperty(id, model);
-        //    if (form == false)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    ViewBag.Message = Alert.Show(Messages.RestoreSuccess, "", AlertType.Success);
-        //    return RedirectToAction("Create");
-        //}
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
-            //  propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            //propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
 
         // Dropdown Dependency  calls below
@@ -88,11 +57,10 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
-        public async Task<PartialViewResult> GetDetails(int department, int zone, int division, int primaryListNo)
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestoreLandReportData(department, zone, division, primaryListNo);
-
+            var result = await _propertyregistrationService.GetRestoreLandReportData(model);
             if (result != null)
             {
                 return PartialView("Index", result);
@@ -102,7 +70,6 @@ namespace LandInventory.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return PartialView();
             }
-
         }
     }
 }
