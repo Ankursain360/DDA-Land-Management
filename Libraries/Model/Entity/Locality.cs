@@ -15,17 +15,17 @@ namespace Libraries.Model.Entity
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Landtransfer = new HashSet<Landtransfer>();
         }
-        [Required]
+        [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Zone field is required")]
         public int ZoneId { get; set; }
-     
-        [Required]
+
+        [Required(ErrorMessage = "The Division field is required")]
         public int DivisionId { get; set; }
         [Required]
         [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Locality Code field is required")]
         [Remote(action: "ExistCode", controller: "Locality", AdditionalFields = "Id")]
         public string LocalityCode { get; set; }
         [Required]
