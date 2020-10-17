@@ -70,7 +70,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View(rebate);
+                        return View("Index");
                     }
                     else
                     {

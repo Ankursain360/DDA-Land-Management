@@ -72,7 +72,7 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         await BindDropDown(rate);
-                        return View(rate);
+                        return View("Index");
                     }
                     else
                     {

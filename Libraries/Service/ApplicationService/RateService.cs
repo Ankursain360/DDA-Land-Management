@@ -52,6 +52,7 @@ namespace Libraries.Service.ApplicationService
             model.ToDate = rate.ToDate;
             model.PropertyId = rate.PropertyId;
             model.RatePercentage = rate.RatePercentage;
+            model.Scheme = rate.Scheme;
             model.IsActive = rate.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
