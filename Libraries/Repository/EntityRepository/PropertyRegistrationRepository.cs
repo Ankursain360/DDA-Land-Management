@@ -149,47 +149,6 @@ namespace Libraries.Repository.EntityRepository
                             .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
 
         }
-
-
-
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int locality)
-        {
-            var data = await _dbContext.Propertyregistration
-                .Include(x=>x.Locality)
-                .Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .Include(x=>x.Deletedproperty)
-               
-                .Where(x => (x.IsDeleted == 0)
-                && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-                &&(x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
-                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-               // && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
-                )
-                . OrderByDescending(x => x.Id)
-                .ToListAsync();
-            return data;
-        }
-        public async Task<List<Propertyregistration>> GetRestorePropertyReportData(int department, int zone, int division, int locality)
-        {
-            var data = await _dbContext.Propertyregistration.
-                Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .Include(x => x.Locality)
-                .Include(x => x.Restoreproperty)
-              
-                .Where(x => (x.IsDeleted == 1)
-                && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
-                && (x.DivisionId == (division == 0 ? x.DivisionId : division)) 
-                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)))
-                  .OrderByDescending(x => x.Id)
-                .ToListAsync();
-            return data;
-        }
-
         public string GetTakenOverFile(int id)
         {
             var File = (from f in _dbContext.Propertyregistration
@@ -263,7 +222,42 @@ namespace Libraries.Repository.EntityRepository
         {
            return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+        public async Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model)
+        {
+            var data = await _dbContext.Propertyregistration
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Deletedproperty)
+
+                .Where(x => (x.IsDeleted == 0)
+                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
+                .OrderByDescending(x => x.Id)
+                .GetPaged(model.PageNumber, model.PageSize);
+            return data;
+        }
+        public async Task<PagedResult<Propertyregistration>> GetRestorePropertyReportData(PropertyRegisterationSearchDto model)
+        {
+            var data = await _dbContext.Propertyregistration.
+                Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                .Include(x => x.Restoreproperty)
+
+                .Where(x => (x.IsDeleted == 1)
+                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
+                  .OrderByDescending(x => x.Id)
+                .GetPaged(model.PageNumber, model.PageSize);
+            return data;
+        }
     }
-
-
 }
