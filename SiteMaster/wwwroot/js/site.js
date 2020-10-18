@@ -9,6 +9,15 @@ $(document).ready(function () {
         allowClear: true
     });
 });
+
+$('.numbers').keyup(function () {
+    this.value = this.value.replace(/[^0-9\.]/g, '');
+});
+$('.onlynumbers').keyup(function () {
+    var $th = $(this);
+    $th.val($th.val().replace(/[^0-9]/g, ''));
+});
+
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }

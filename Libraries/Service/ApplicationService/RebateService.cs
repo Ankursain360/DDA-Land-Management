@@ -52,6 +52,7 @@ namespace Libraries.Service.ApplicationService
             model.ToDate = rebate.ToDate;
             model.IsRebateOn = rebate.IsRebateOn;
             model.RebatePercentage = rebate.RebatePercentage;
+            model.Scheme = rebate.Scheme;
             model.IsActive = rebate.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

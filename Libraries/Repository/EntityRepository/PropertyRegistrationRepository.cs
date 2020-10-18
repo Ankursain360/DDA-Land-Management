@@ -31,13 +31,30 @@ namespace Libraries.Repository.EntityRepository
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
             if (UserId == 2 || Iscreated > 0)
             {
-                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDeleted == 1).ToListAsync();
+                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                    .Include(x => x.Department)
+                    .Include(x => x.Division)
+                    .Include(x => x.DisposalType)
+                    .Include(x => x.MainLandUse)
+                    .Include(x => x.Zone)
+                    .Include(x => x.Locality)
+                        .Where(x => x.IsDeleted == 1)
+                        .OrderByDescending(x => x.Id).ToListAsync();
                 return data;
 
             }
             else
             {
-                var data = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand).Include(x => x.Department).Include(x => x.Division).Include(x => x.DisposalType).Include(x => x.MainLandUse).Include(x => x.Zone).Include(x => x.Locality).OrderByDescending(x => x.Id).Where(x => x.IsDeleted == 1 && x.IsValidate == 1).ToListAsync();
+                var data = await _dbContext.Propertyregistration
+                                .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Division)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Locality)
+                                    .Where(x => x.IsDeleted == 1 && x.IsValidate == 1)
+                                    .OrderByDescending(x => x.Id).ToListAsync();
                 return data;
 
             }
@@ -47,7 +64,9 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownList()
         {
             var badCodes = new[] { 3,5 };
-            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland.Where(x => x.IsActive == 1 && !badCodes.Contains(x.Id)).ToListAsync();
+            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
+                                                                        .Where(x => x.IsActive == 1 && !badCodes.Contains(x.Id))
+                                                                        .ToListAsync();
             return ClassificationoflandList;
         }
 
@@ -74,18 +93,22 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
-            List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
+            List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1)
+                                                .ToListAsync();
             return DivisionList;
         }
       
         public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId)
         {
-            List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
+            List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration
+                                                                .Where(x => x.DivisionId == divisionId && x.IsActive == 1)
+                                                                .ToListAsync();
             return PrimaryListNoList;
         }
         public async Task<List<Locality>> GetLocalityDropDownList2(int divisionId)
         {
-            List<Locality> localityList = await _dbContext.Locality.Where(x => x.DivisionId == divisionId ).Where(x=> x.IsActive==1).ToListAsync();
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.DivisionId == divisionId )
+                                                .Where(x=> x.IsActive==1).ToListAsync();
             return localityList;
         }
         public string GetFile(int id)
@@ -123,7 +146,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Locality>> GetLocalityDropDownList(int zoneId)
         {
-            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
+            List<Locality> LocalityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1)
+                                                .ToListAsync();
             return LocalityList;
         }
 
@@ -165,7 +189,7 @@ namespace Libraries.Repository.EntityRepository
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 &&(x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-               // && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
                 )
                 . OrderByDescending(x => x.Id)
                 .ToListAsync();
@@ -202,7 +226,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
            
-            List<Zone> ZoneList = await _dbContext.Zone.Where(x =>x.DepartmentId == DepartmentId && x.IsActive == 1).ToListAsync();
+            List<Zone> ZoneList = await _dbContext.Zone.Where(x =>x.DepartmentId == DepartmentId && x.IsActive == 1)
+                                        .ToListAsync();
             return ZoneList;
         }
 

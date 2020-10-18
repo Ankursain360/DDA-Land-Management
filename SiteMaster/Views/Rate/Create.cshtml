@@ -19,14 +19,14 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Create" id="myForm"  method="post" >
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="PropertyId">Property Type </label>
                         <select class="form-control dda-dropdown" asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
-                            <option>Select</option>
+                            <option value="">Select</option>
                         </select>
                         <span asp-validation-for="PropertyId" class="text-danger"></span>
                     </div>
@@ -44,15 +44,15 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Rate Amount per Sqr Yrd </label>
-                        <input asp-for="RatePercentage" type="text" value="" class="form-control">
+                        <input asp-for="RatePercentage" type="text" value="" class="form-control numbers">
                         <span asp-validation-for="RatePercentage" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm ">Scheme Name</label>
-                        <input asp-for="RatePercentage" type="text" value="" class="form-control">
-                        <span asp-validation-for="RatePercentage" class="text-danger"></span>
+                        <input asp-for="Scheme" type="text" value="" class="form-control">
+                        <span asp-validation-for="Scheme" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>

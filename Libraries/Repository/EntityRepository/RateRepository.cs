@@ -62,9 +62,14 @@ namespace Libraries.Repository.EntityRepository
 
         public object GetFromDateData(int propertyId)
         {
-            var result = (from A in _dbContext.Rate
-                          where A.PropertyId == propertyId
-                          select A.FromDate).Max();
+            DateTime result = _dbContext.Rate
+                        .Where(A => A.PropertyId == propertyId)
+                        .Select(A => (DateTime?)A.FromDate)
+                        .Max() ?? DateTime.Now;
+
+            //(from A in _dbContext.Rate
+            //          where A.PropertyId == propertyId
+            //          select A.FromDate).Max();
             return result;
         }
 
