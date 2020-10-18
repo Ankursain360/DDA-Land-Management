@@ -1,14 +1,8 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
-
-
-<div class="card  table-card table-responsive" >
-
+<div class="card  table-card table-responsive">
     <table class="table table-responsive table-bordered table-card">
-
-
         <thead class="thead">
-       
             <tr>
                 <th rowspan="2">Sr.No</th>
                 <th>Department</th>
@@ -22,38 +16,37 @@
                 <th rowspan="2">delete Reason</th>
                 <th rowspan="2"> Deleted On</th>
                 <th rowspan="2">Restore</th>
-
-              
             </tr>
-          
         </thead>
         <tbody class="tbody">
-            @foreach (var item in Model)
+            @foreach (var item in Model.Results)
             {
-            <tr>
-                <td>@(rowNo += 1)</td>
-                <td>@item.Department.Name</td>
-                <td>@item.Zone.Name</td>
-                <td>@item.Division.Name</td>
-                <td>@item.Locality.Name</td>
-                <td>@item.KhasraNo</td>
-                <td>@item.Palandmark</td>
-                <td>@item.PrimaryListNo</td>
-                <td>@item.TotalArea</td>
-                <td>@item.Deletedproperty.Reason</td>
-                <td>@item.Deletedproperty.DeletedDate</td>
-
-
-                <td>
-                    <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                </td>
-            </tr>
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@item.KhasraNo</td>
+                    <td>@item.Palandmark</td>
+                    <td>@item.PrimaryListNo</td>
+                    <td>@item.TotalArea</td>
+                    <td>@item.Deletedproperty.Reason</td>
+                    <td>@item.Deletedproperty.DeletedDate</td>
+                    <td>
+                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+                    </td>
+                </tr>
             }
-          
-                  
+            @if (Model.Results.Count <= 0)
+            {
+                <tr>
+                    <th style="text-align:center" colspan="999">
+                        Data Not Available
+                    </th>
+                </tr>
+            }
         </tbody>
-
     </table>
-
 </div>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -1,63 +1,48 @@
-﻿
-@model IEnumerable<Libraries.Model.Entity.Watchandward>
-@{int rowNo = 0; }
-
-
-<div class="card  table-card table-responsive">
-
-    <table class="table table-responsive table-bordered table-card">
-
-
-        <thead class="thead">
-
-            <tr>
-                <th rowspan="2">Sr.No</th>
-                <th rowspan="2">Date</th>
-                <th rowspan="2">Village Name</th>
-                <th rowspan="2">Khasra No.</th>
-                <th rowspan="2">Land Mark</th>
-                <th rowspan="2">Status on Ground</th>
-                <th rowspan="2">Remarks</th>
-            </tr>
-
-        </thead>
-        <tbody class="tbody">
-            @if (Model != null && Model.Count() > 0)
-            {
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-
-                        <td>@item.Date</td>
-                        <td>@item.Village.Name</td>
-                        <td>@item.Khasra.Name</td>
-                        <td>@item.Landmark</td>
-                        <td>@item.StatusOnGround</td>
-                        <td>@item.Remarks</td>
-
-                        @*asp-action="View" asp-route-id="@item.Id"*@
-                        @*<td>
-                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                    </td>*@
-                    </tr>
-                }
-            }
-            else
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Watchandward>
+@{int rowNo = 0;}
+<table class="table table-responsive table-bordered table-card">
+    <thead class="thead">
+        <tr>
+            <th rowspan="2">Sr.No</th>
+            <th rowspan="2">Date</th>
+            <th rowspan="2">Village Name</th>
+            <th rowspan="2">Khasra No.</th>
+            <th rowspan="2">Land Mark</th>
+            <th rowspan="2">Status on Ground</th>
+            <th rowspan="2">Remarks</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
             {
                 <tr>
-                    <th colspan="13" style="text-align:center"> Data Not Available </th>
+                    <td>@(rowNo += 1)</td>
+
+                    <td>@item.Date</td>
+                    <td>@item.Village.Name</td>
+                    <td>@item.Khasra.Name</td>
+                    <td>@item.Landmark</td>
+                    <td>@item.StatusOnGround</td>
+                    <td>@item.Remarks</td>
+
+                    @*asp-action="View" asp-route-id="@item.Id"*@
+                    @*<td>
+                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+                        </td>*@
                 </tr>
             }
+        }
+        else
+        {
+            <tr>
+                <th colspan="13" style="text-align:center"> Data Not Available </th>
+            </tr>
+        }
 
-        </tbody>
+    </tbody>
 
-    </table>
-
-</div>
-
-
-
-
-
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

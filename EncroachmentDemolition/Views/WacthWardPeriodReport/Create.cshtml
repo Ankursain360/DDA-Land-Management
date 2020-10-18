@@ -25,7 +25,7 @@
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Village Name</label><span style="color:red">*</span>
                     <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                        <option>All</option>
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
                 </div>

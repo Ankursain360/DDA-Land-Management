@@ -160,5 +160,17 @@
     "inputFiles": [
       "wwwroot/js/onlinecomplaintindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/watchAndWardApproval.min.js",
+    "inputFiles": [
+      "wwwroot/js/watchAndWardApproval.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentreportcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentreportcreate.js"
+    ]
   }
 ]

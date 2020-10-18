@@ -50,14 +50,16 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                   
+
 
                     var result = await _departmentService.Create(department);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        //return View();
+                        var list = await _departmentService.GetAllDepartment();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -97,18 +99,15 @@ namespace SiteMaster.Controllers
                 try
                 {
 
-                    //if (Exist(id, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
 
-                    //}
 
                     var result = await _departmentService.Update(id, department);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+
+                        var list = await _departmentService.GetAllDepartment();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -119,6 +118,8 @@ namespace SiteMaster.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(department);
 
                 }
             }

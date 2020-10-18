@@ -8,18 +8,6 @@ $(document).ready(function () {
         $("#btnGenerate").click(function () {
             debugger;
             var param = GetSearchParam(currentPageNumber, currentPageSize);
-            //     var url = '/PropertyInventoryReport/GetDetails';
-            //var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
-            //var departmentid = $('#DepartmentId option:selected').val();
-            //var zoneId = $('#ZoneId option:selected').val();
-            //var divisionId = $('#DivisionId option:selected').val();
-            //var localityId = $('#LocalityId option:selected').val();
-            //var plannedUnplannedLand = $('#PlannedUnplannedLand option:selected').val();
-            //var mainLandUseId = $('#MainLandUseId option:selected').val();
-            //var litigationid = $('#LitigationStatus option:selected').val();
-            //var encroachedid = $('#Encroached option:selected').val();
-            //$('#LoadReportView').empty();
-            //$('#LoadReportView').load(url, { classificationofland: classificationOfLandId, department: departmentid, zone: zoneId, division: divisionId, locality: localityId, plannedUnplannedLand: plannedUnplannedLand, mainLandUse: mainLandUseId, litigation: litigationid, encroached: encroachedid }).hide().fadeIn(1000);;
             HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
                 $('#LoadReportView').html("");
                 $('#LoadReportView').html(response);
@@ -31,7 +19,7 @@ $(document).ready(function () {
 function GetZoneList(id) {
     debugger;
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
-        var html = '<option value="">All</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
@@ -43,7 +31,7 @@ function GetZoneList(id) {
 function GetDivisionList(id) {
 
     HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
-        var html = '<option value="">All</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
@@ -51,7 +39,7 @@ function GetDivisionList(id) {
     });
 
     HttpGet(`/PropertyRegistration/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
-        var html = '<option value="">All</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
@@ -82,8 +70,8 @@ function GetSearchParam(pageNumber, pageSize) {
     
     var model = {
         name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber,
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber),
         classificationofland: parseInt(classificationOfLandId),
         department: parseInt(departmentid),
         zone: parseInt(zoneId),
@@ -98,14 +86,13 @@ function GetSearchParam(pageNumber, pageSize) {
     return model;
 }
 
+
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDetails(pageNo, currentPageSize);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetDetails(currentPageNumber, pageSize);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }

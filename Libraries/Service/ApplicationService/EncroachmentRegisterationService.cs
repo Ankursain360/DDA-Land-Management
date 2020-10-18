@@ -37,17 +37,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.FetchSingleResult(id);
         }
-
         public async Task<List<Department>> GetAllDepartment()
         {
             return await _encroachmentRegisterationRepository.GetAllDepartment();
         }
-
         public async Task<List<Division>> GetAllDivisionList(int zone)
         {
             return await _encroachmentRegisterationRepository.GetAllDivision(zone);
         }
-
         public async Task<List<EncroachmentRegisteration>> GetAllEncroachmentRegisteration()
         {
             return await _encroachmentRegisterationRepository.GetAllEncroachmentRegisteration();
@@ -62,12 +59,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllZone(departmentId);
         }
-
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
             return await _encroachmentRegisterationRepository.GetPagedEncroachmentRegisteration(model);
         }
-
         public async Task<bool> Update(int id, EncroachmentRegisteration encroachmentRegisteration)
         {
             var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
@@ -100,12 +95,10 @@ namespace Libraries.Service.ApplicationService
             _encroachmentRegisterationRepository.Add(encroachmentRegisteration);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
         public async Task<List<Khasra>> GetAllKhasraList(int localityId)
         {
             return await _encroachmentRegisterationRepository.GetAllKhasraList(localityId);
         }
-
         public async Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment)
         {
             detailsOfEncroachment.CreatedBy = 1;
@@ -113,12 +106,10 @@ namespace Libraries.Service.ApplicationService
             detailsOfEncroachment.IsActive = 1;
             return await _encroachmentRegisterationRepository.SaveDetailsOfEncroachment(detailsOfEncroachment);
         }
-
         public async Task<bool> DeleteDetailsOfEncroachment(int Id)
         {
             return await _encroachmentRegisterationRepository.DeleteDetailsOfEncroachment(Id);
         }
-
         public async Task<bool> SaveEncroachmentFirFileDetails(EncroachmentFirFileDetails encroachmentFirFileDetails)
         {
             encroachmentFirFileDetails.CreatedBy = 1;
@@ -177,15 +168,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetEncroachmentFirFileDetails(Id);
         }
-        public async Task<List<EncroachmentRegisteration>> GetEncroachmentReportData(int department, int zone, int division, int locality)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto)
         {
-            return await _encroachmentRegisterationRepository.GetEncroachmentReportData(department, zone, division, locality);
+            return await _encroachmentRegisterationRepository.GetEncroachmentReportData(enchroachmentSearchDto);
         }
-
         public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)
         {
             return await _encroachmentRegisterationRepository.GetEncroachmentRegisterationReportData( department,  zone,  division,  locality, fromdate, todate);
         }
-
     }
 }

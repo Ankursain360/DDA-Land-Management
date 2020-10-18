@@ -121,7 +121,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+                        return View("Index");
 
                     }
                     else

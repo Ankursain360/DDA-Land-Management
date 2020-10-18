@@ -60,13 +60,13 @@ namespace Libraries.Repository.EntityRepository
             return villagelist;
         }
 
-        public async Task<List<Watchandward>> GetWatchandwardReportData(int village,DateTime fromdate, DateTime todate)
+        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
         {
             var data = await _dbContext.Watchandward
                 .Include(x => x.Village)
                 .Include(x=>x.Khasra)             
-                . Where(x => (x.VillageId == (village == 0 ? x.VillageId : village))
-                && x.Date >= fromdate && x.Date<=todate).OrderByDescending(x => x.Id).ToListAsync();
+                . Where(x => (x.VillageId == (watchandwardSearchDto.villageId == 0 ? x.VillageId : watchandwardSearchDto.villageId))
+                && x.Date >= watchandwardSearchDto.fromDate && x.Date<= watchandwardSearchDto.toDate).OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
 
             return data;
         }

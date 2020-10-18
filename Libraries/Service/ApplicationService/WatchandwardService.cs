@@ -112,9 +112,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate)
+        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
         {
-            return await _watchandwardRepository.GetWatchandwardReportData(village, fromdate, todate);
+            return await _watchandwardRepository.GetWatchandwardReportData(watchandwardSearchDto);
         }
 
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
