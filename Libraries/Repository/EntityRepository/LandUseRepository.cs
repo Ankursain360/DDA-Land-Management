@@ -28,7 +28,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model)
         {
-            return await _dbContext.Landuse.OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+            return await _dbContext.Landuse.Where(s => s.IsActive == 1).OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
         }
     }
 

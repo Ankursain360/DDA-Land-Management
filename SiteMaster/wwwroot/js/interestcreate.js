@@ -13,10 +13,12 @@ $(function () {
             success: function (data) {
                 debugger;
                 if (data != null) {
-                    $("#FromDate").removeAttr("type", "date");
-                    $("#FromDate").attr("type", "text");
-                    $("#FromDate").val(data);
-                    $("#FromDate").attr("readonly", "readonly");
+                    if (data != "") {
+                        $("#FromDate").removeAttr("type", "date");
+                        $("#FromDate").attr("type", "text");
+                        $("#FromDate").val(data);
+                        $("#FromDate").attr("readonly", "readonly");
+                    }
                 }
                 else {
                     $("#FromDate").attr("readonly", "readonly");

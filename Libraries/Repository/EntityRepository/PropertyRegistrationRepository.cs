@@ -288,6 +288,16 @@ namespace Libraries.Repository.EntityRepository
         {
            return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+        public Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<PagedResult<Propertyregistration>> GetRestorePropertyReportData(PropertyRegisterationSearchDto model)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 

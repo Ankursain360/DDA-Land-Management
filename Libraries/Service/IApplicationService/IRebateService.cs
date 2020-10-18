@@ -23,5 +23,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<PropertyType>> GetDropDownList();
         object GetFromDateData(int propertyId);
         Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model);
+        int IsRecordExist(int propertyId);
     }
 }

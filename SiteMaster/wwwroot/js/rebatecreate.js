@@ -10,14 +10,15 @@ $(document).ready(function () {
         // dataType: 'json',
         success: function (data) {
             if (data != null) {
-                $("#FromDate").removeAttr("type", "date");
-                $("#FromDate").attr("type", "text");
-                $("#FromDate").val(data);
-                $("#FromDate").removeAttr("disabled", "disabled");
-                $("#FromDate").attr("disabled", "disabled");
+                if (data != "") {
+                    $("#FromDate").removeAttr("type", "date");
+                    $("#FromDate").attr("type", "text");
+                    $("#FromDate").val(data);
+                    $("#FromDate").attr("readonly", "readonly");
+                }
             }
             else {
-                $("#FromDate").removeAttr("disabled", "disabled");
+                $("#FromDate").attr("readonly", "readonly");
                 $("#FromDate").val("");
             }
 
@@ -35,10 +36,18 @@ $(function () {
             // dataType: 'json',
             success: function (data) {
                 if (data != null) {
-                    $("#FromDate").removeAttr("type", "date");
-                    $("#FromDate").attr("type", "text");
-                    $("#FromDate").val(data);
-                    $("#FromDate").attr("readonly", "readonly");
+                    if (data == "") {
+                        $("#FromDate").removeAttr("readonly", "readonly");
+                        $("#FromDate").removeAttr("type", "text");
+                        $("#FromDate").attr("type", "date");
+                        $("#FromDate").val("");
+                    }
+                    else {
+                        $("#FromDate").removeAttr("type", "date");
+                        $("#FromDate").attr("type", "text");
+                        $("#FromDate").val(data);
+                        $("#FromDate").attr("readonly", "readonly");
+                    }
                 }
                 else {
                     $("#FromDate").attr("readonly", "readonly");

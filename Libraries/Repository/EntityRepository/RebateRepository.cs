@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Rebate>> GetAllDetails()
         {
             List<Rebate> olist = new List<Rebate>();
-            olist =await _dbContext.Rebate.ToListAsync();
+            olist =await _dbContext.Rebate.Where(x => x.IsActive == 1).ToListAsync();
             return (olist.GroupBy(x => x.IsRebateOn).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList());
         }
         public async Task<List<PropertyType>> GetPropertyTypeList()
@@ -34,9 +34,16 @@ namespace Libraries.Repository.EntityRepository
 
         public object GetFromDateData(int propertyId)
         {
-            var result = (from A in _dbContext.Rebate
-                          where A.IsRebateOn == propertyId
-                          select A.FromDate).Max();
+            Rebate rebate = new Rebate();
+            int count = _dbContext.Rebate.Where(A => A.IsRebateOn == propertyId).Count();
+            rebate.IsRecordExist = count;
+            DateTime result = _dbContext.Rebate
+                       .Where(A => A.IsRebateOn == propertyId)
+                       .Select(A => (DateTime?)A.FromDate)
+                       .Max() ?? DateTime.Now;
+            //var result = (from A in _dbContext.Rebate
+            //              where A.IsRebateOn == propertyId
+            //              select A.FromDate).Max();
 
            
             return result;
@@ -45,6 +52,11 @@ namespace Libraries.Repository.EntityRepository
         public Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model)
         {
             throw new NotImplementedException();
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _dbContext.Rebate.Where(A => A.IsRebateOn == propertyId).Count();
         }
     }
 

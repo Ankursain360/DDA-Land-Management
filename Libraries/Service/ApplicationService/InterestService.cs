@@ -86,5 +86,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _interestRepository.GetPagedInterest(model);
         }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _interestRepository.IsRecordExist(propertyId);
+        }
     }
 }

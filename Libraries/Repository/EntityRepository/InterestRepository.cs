@@ -60,9 +60,20 @@ namespace Libraries.Repository.EntityRepository
 
         public object GetFromDateData(int propertyId)
         {
-            var result = (from A in _dbContext.Interest
-                          where A.PropertyId == propertyId
-                          select A.FromDate).Max();
+            Interest interest = new Interest();
+            int count = _dbContext.Interest.Where(A => A.PropertyId == propertyId).Count();
+            interest.IsRecordExist = count;
+
+            DateTime result = _dbContext.Interest
+                        .Where(A => A.PropertyId == propertyId)
+                        .Select(A => (DateTime?)A.FromDate)
+                        .Max() ?? DateTime.Now;
+
+            //(from A in _dbContext.Interest
+            //          where A.PropertyId == propertyId
+            //          select A.FromDate).Max();
+
+
             //var result = _dbContext.Interest.Find(propertyId).FromDate.ToString("dd-MMM-yyyy");
             return result;
         }
@@ -90,6 +101,11 @@ namespace Libraries.Repository.EntityRepository
         {
             var propertyTypeList = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
             return propertyTypeList;
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _dbContext.Interest.Where(A => A.PropertyId == propertyId).Count();
         }
     }
 

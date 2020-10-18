@@ -87,5 +87,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _rebateRepository.GetPagedRebate(model);
         }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _rebateRepository.IsRecordExist(propertyId);
+        }
     }
 }

@@ -80,12 +80,17 @@ namespace Libraries.Service.ApplicationService
 
         public object GetFromDateData(int propertyId)
         {
-            return _rateRepository.GetFromDateData(propertyId);
+            return  _rateRepository.GetFromDateData(propertyId);
         }
 
         public async Task<PagedResult<Rate>> GetPagedRate(RateSearchDto model)
         {
             return await _rateRepository.GetPagedRate(model);
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _rateRepository.IsRecordExist(propertyId);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Classificationofland>> GetPagedClassificationOfLand(ClassificationOfLandSearchDto model)
         {
-            return await _dbContext.Classificationofland.OrderBy(s => s.Id).GetPaged<Classificationofland>(model.PageNumber, model.PageSize);
+            return await _dbContext.Classificationofland.Where(s => s.IsActive == 1).OrderBy(s => s.Id).GetPaged<Classificationofland>(model.PageNumber, model.PageSize);
         }
     }
 
