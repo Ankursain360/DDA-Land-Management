@@ -78,6 +78,9 @@ namespace Libraries.Service.ApplicationService
             model.Name = locality.Name;
             model.DepartmentId = locality.DepartmentId;
             model.ZoneId = locality.ZoneId;
+            model.Landmark = locality.Landmark;
+            model.Address = locality.Address;
+            model.LocalityCode = locality.LocalityCode;
             model.DivisionId = locality.DivisionId;
             model.IsActive = locality.IsActive;
             model.ModifiedDate = DateTime.Now;

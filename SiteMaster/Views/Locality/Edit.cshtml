@@ -14,7 +14,7 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Locality (Village)</h6>
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Edit">
@@ -31,7 +31,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
                         <select asp-for="ZoneId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
-                            <option value="value">Select</option>
+                            <option value="">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
@@ -40,32 +40,32 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Division <span style="color:red">*</span></label>
                         <select asp-for="DivisionId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))">
-                            <option value="value">Select</option>
+                            <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Locality(Village) Name <span style="color:red">*</span></label>
-                        <input asp-for="Name" type="text" class="form-control" />
+                        <input asp-for="Name" type="text" class="form-control max-length" size="200"/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Locality(Village) Code <span style="color:red">*</span></label>
-                        <input asp-for="LocalityCode" type="text" class="form-control" />
+                        <input asp-for="LocalityCode" type="text" class="form-control max-length" size="200" />
                         <span asp-validation-for="LocalityCode" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Landmark <span style="color:red">*</span></label>
-                        <input asp-for="Landmark" type="text" class="form-control" />
+                        <input asp-for="Landmark" type="text" class="form-control max-length" size="200"/>
                         <span asp-validation-for="Landmark" type="text" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
-                        <input asp-for="Address" type="text" class="form-control" />
+                        <input asp-for="Address" type="text" class="form-control max-length" size="600" />
                         <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
