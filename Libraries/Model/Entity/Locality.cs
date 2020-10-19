@@ -12,6 +12,9 @@ namespace Libraries.Model.Entity
     {
         public Locality()
         {
+            Booktransferland = new HashSet<Booktransferland>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Watchandward = new HashSet<Watchandward>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Landtransfer = new HashSet<Landtransfer>();
         }
@@ -47,5 +50,9 @@ namespace Libraries.Model.Entity
         public ICollection<Landtransfer> Landtransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Khasra> Khasra { get; set; }
+        public ICollection<Booktransferland> Booktransferland { get; set; }
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+        public ICollection<Watchandward> Watchandward { get; set; }
+
     }
 }
