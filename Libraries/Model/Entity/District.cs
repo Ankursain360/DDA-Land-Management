@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
 using Model.Entity;
 
 namespace Libraries.Model.Entity
@@ -11,10 +14,12 @@ namespace Libraries.Model.Entity
         {
             Userprofile = new HashSet<Userprofile>();
         }
-        [Required(ErrorMessage = "Department Name is Mandatory Field")]
+        [Required(ErrorMessage = "District Name is Mandatory Field")]
+        [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
 
         public string Name { get; set; }
-       
+        [Required(ErrorMessage = "District Name is Mandatory Field")]
+
         public string Code { get; set; }
         [Required]
         public byte IsActive { get; set; }
