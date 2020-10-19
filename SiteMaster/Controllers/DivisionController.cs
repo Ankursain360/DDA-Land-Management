@@ -161,39 +161,28 @@ namespace SiteMaster.Controllers
             }
         }
 
-        public async Task<IActionResult> Delete(int id)  
+
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
-            if (id == 0)
+            try
             {
-                return NotFound();
+
+                var result = await _divisionService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
             }
-
-            var form = await _divisionService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
-        }
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  
-        {
-            
-
-            var result = await _divisionService.Delete(id);
-            if (result == true)
-            {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            }
-            else
+            catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            return RedirectToAction("Index", "Division");
-         
-
+            var list = await _divisionService.GetAllDivision();
+            return View("Index", list);
         }
         public async Task<IActionResult> View(int id)
         {
