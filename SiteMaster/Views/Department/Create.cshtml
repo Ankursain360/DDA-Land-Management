@@ -30,7 +30,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department Name</label><span style="color:red">*</span>
-                        <input asp-for="Name" required class="form-control max-length" size="100"/>
+                        <input asp-for="Name" required class="form-control" limit="100"/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
 

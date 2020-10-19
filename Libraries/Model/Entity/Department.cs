@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
             Zone = new HashSet<Zone>();
         }
 
-        [Required]
+        [Required(ErrorMessage = "Department name is required")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
         
         public string Name { get; set; }
