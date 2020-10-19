@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
     {
         
         Task<List<LandCategory>> GetAllLandCategory();
-        Task<List<Village>> GetAllVillage();
+        Task<List<Locality>> GetAllLocalityList();
         Task<List<Khasra>> GetKhasraUsingRepo();
         Task<List<Khasra>> GetAllKhasra();
 

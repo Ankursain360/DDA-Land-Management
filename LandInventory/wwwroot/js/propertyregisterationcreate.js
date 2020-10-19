@@ -202,7 +202,6 @@ $(function () {
 $('.numbers').keyup(function () {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
-
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
     $th.val($th.val().replace(/[^0-9]/g, ''));
