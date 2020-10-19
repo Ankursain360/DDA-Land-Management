@@ -24,6 +24,9 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
         public string Scheme { get; set; }
+
+        [NotMapped]
+        public int IsRecordExist { get; set; }
     }
 }
 

@@ -31,5 +31,8 @@ namespace Libraries.Model.Entity
 
         public string Scheme { get; set; }
         public PropertyType Property { get; set; }
+
+        [NotMapped]
+        public int IsRecordExist { get; set; }
     }
 }

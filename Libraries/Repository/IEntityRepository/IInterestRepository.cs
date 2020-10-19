@@ -14,5 +14,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<PropertyType>> GetPropertyTypeList();
         object GetFromDateData(int propertyId);
         Task<PagedResult<Interest>> GetPagedInterest(InterestSearchDto model);
+        int IsRecordExist(int propertyId);
     }
 }

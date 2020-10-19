@@ -72,7 +72,8 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         await BindDropDown(rate);
-                        return View(rate);
+                        var result1 = await _rateService.GetAllRate();
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -167,12 +168,22 @@ namespace SiteMaster.Controllers
         [HttpGet]
         public string GetFromDate(int? propertyId)
         {
+            Rate rate = new Rate();
             propertyId = propertyId ?? 0;
+            int IsRecordExist = _rateService.IsRecordExist(Convert.ToInt32(propertyId));
             var result = _rateService.GetFromDateData(Convert.ToInt32(propertyId));
-            DateTime lastFromDate = Convert.ToDateTime(result);
-            DateTime NewDate = lastFromDate.AddYears(1);
-            string newFromDate = NewDate.ToString("dd-MMM-yyyy");
-            return (string)newFromDate;
+            if (IsRecordExist ==0)
+            {
+                return "";
+            }
+            else
+            {
+                DateTime lastFromDate = Convert.ToDateTime(result);
+                DateTime NewDate = lastFromDate.AddYears(1);
+                string newFromDate = NewDate.ToString("dd-MMM-yyyy");
+                return newFromDate;
+            }
+
         }
     }
 

@@ -52,6 +52,7 @@ namespace Libraries.Service.ApplicationService
             model.ToDate = rebate.ToDate;
             model.IsRebateOn = rebate.IsRebateOn;
             model.RebatePercentage = rebate.RebatePercentage;
+            model.Scheme = rebate.Scheme;
             model.IsActive = rebate.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -85,6 +86,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model)
         {
             return await _rebateRepository.GetPagedRebate(model);
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _rebateRepository.IsRecordExist(propertyId);
         }
     }
 }

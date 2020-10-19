@@ -50,14 +50,16 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                   
+
 
                     var result = await _departmentService.Create(department);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        //return View();
+                        var list = await _departmentService.GetAllDepartment();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -97,18 +99,15 @@ namespace SiteMaster.Controllers
                 try
                 {
 
-                    //if (Exist(id, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
 
-                    //}
 
                     var result = await _departmentService.Update(id, department);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+
+                        var list = await _departmentService.GetAllDepartment();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -119,6 +118,8 @@ namespace SiteMaster.Controllers
                 }
                 catch (Exception ex)
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(department);
 
                 }
             }
@@ -141,23 +142,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _departmentService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
-        }
-
+       
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             //try
@@ -190,6 +175,29 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        {
+            try
+            {
+
+                var result = await _departmentService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _departmentService.GetAllDepartment();
+            return View("Index", list);
         }
     }
 

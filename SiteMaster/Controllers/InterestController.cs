@@ -64,8 +64,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(interest);
-                        return View("Index");
+                        var result1 = await _interestService.GetAllInterest();
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -161,12 +161,21 @@ namespace SiteMaster.Controllers
         [HttpGet]
         public string GetFromDate(int? propertyId)
         {
+            Interest interest = new Interest();
             propertyId = propertyId ?? 0;
+            int IsRecordExist = _interestService.IsRecordExist(Convert.ToInt32(propertyId));
             var result = _interestService.GetFromDateData(Convert.ToInt32(propertyId));
-            DateTime lastFromDate = Convert.ToDateTime(result);
-            DateTime NewDate = lastFromDate.AddYears(1);
-            string newFromDate = NewDate.ToString("dd-MMM-yyyy");
-            return (string)newFromDate;
+            if (IsRecordExist ==0)
+            {
+                return "";
+            }
+            else
+            {
+                DateTime lastFromDate = Convert.ToDateTime(result);
+                DateTime NewDate = lastFromDate.AddYears(1);
+                string newFromDate = NewDate.ToString("dd-MMM-yyyy");
+                return newFromDate;
+            }
         }
     }
 

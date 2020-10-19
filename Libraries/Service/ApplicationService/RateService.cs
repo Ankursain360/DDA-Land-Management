@@ -52,6 +52,7 @@ namespace Libraries.Service.ApplicationService
             model.ToDate = rate.ToDate;
             model.PropertyId = rate.PropertyId;
             model.RatePercentage = rate.RatePercentage;
+            model.Scheme = rate.Scheme;
             model.IsActive = rate.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -79,12 +80,17 @@ namespace Libraries.Service.ApplicationService
 
         public object GetFromDateData(int propertyId)
         {
-            return _rateRepository.GetFromDateData(propertyId);
+            return  _rateRepository.GetFromDateData(propertyId);
         }
 
         public async Task<PagedResult<Rate>> GetPagedRate(RateSearchDto model)
         {
             return await _rateRepository.GetPagedRate(model);
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _rateRepository.IsRecordExist(propertyId);
         }
     }
 }

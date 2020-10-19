@@ -226,5 +226,23 @@
     "inputFiles": [
       "wwwroot/js/workflowview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/classificationoflandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/classificationoflandcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/landusecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/landusecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/zonecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/zonecreate.js"
+    ]
   }
 ]

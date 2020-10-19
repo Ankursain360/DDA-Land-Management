@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         object GetFromDateData(int propertyId);
         Task<List<Rebate>> GetAllDetails();
         Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model);
+        int IsRecordExist(int propertyId);
     }
 }

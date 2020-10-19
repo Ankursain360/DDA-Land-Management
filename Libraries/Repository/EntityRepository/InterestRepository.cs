@@ -60,27 +60,52 @@ namespace Libraries.Repository.EntityRepository
 
         public object GetFromDateData(int propertyId)
         {
-            var result = (from A in _dbContext.Interest
-                          where A.PropertyId == propertyId
-                          select A.FromDate).Max();
+            Interest interest = new Interest();
+            int count = _dbContext.Interest.Where(A => A.PropertyId == propertyId).Count();
+            interest.IsRecordExist = count;
+
+            DateTime result = _dbContext.Interest
+                        .Where(A => A.PropertyId == propertyId)
+                        .Select(A => (DateTime?)A.FromDate)
+                        .Max() ?? DateTime.Now;
+
+            //(from A in _dbContext.Interest
+            //          where A.PropertyId == propertyId
+            //          select A.FromDate).Max();
+
+
             //var result = _dbContext.Interest.Find(propertyId).FromDate.ToString("dd-MMM-yyyy");
             return result;
         }
 
         public async Task<PagedResult<Interest>> GetPagedInterest(InterestSearchDto model)
         {
-            //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
-            var data = await _dbContext.LoadStoredProcedure("GetInterestIndexDetails").WithSqlParams(("para", "values")).
-                                ExecuteStoredProcedureAsync<Interest>();
-          //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
-             return await _dbContext.Interest.Include(x=> x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
-            //return data;
+            try
+            {
+                //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
+                var data = await _dbContext.LoadStoredProcedure("GetInterestIndexDetails")
+                                .WithOutParams().ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
+                //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
+                
+                //return data;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return await _dbContext.Interest.Include(x => x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+
         }
 
         public async Task<List<PropertyType>> GetPropertyTypeList()
         {
             var propertyTypeList = await _dbContext.PropertyType.Where(x => x.IsActive == 1).ToListAsync();
             return propertyTypeList;
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _dbContext.Interest.Where(A => A.PropertyId == propertyId).Count();
         }
     }
 

@@ -14,10 +14,10 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Edit">
+            <form asp-action="Edit" id="myForm" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-row">
@@ -48,3 +48,9 @@
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/landusecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/landusecreate.js" asp-append-version="true"></script>
+</environment>

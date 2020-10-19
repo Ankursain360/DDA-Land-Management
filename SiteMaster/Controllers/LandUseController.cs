@@ -55,7 +55,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var result1 = await _landuseService.GetAllLandUse();
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -127,7 +128,7 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"LandUse: {Name} already exist");
+                return Json($"Land Use: {Name} already exist");
             }
         }
 

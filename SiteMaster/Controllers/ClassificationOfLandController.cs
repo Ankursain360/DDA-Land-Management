@@ -56,7 +56,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                        return View("Index", result1);
                     }
                     else
                     {

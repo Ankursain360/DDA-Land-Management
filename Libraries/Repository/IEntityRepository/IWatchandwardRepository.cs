@@ -16,7 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetAllKhasra();
         Task<Watchandward> FetchSingleResult(int id); //added by ishu
-        Task<List<Watchandward>> GetWatchandwardReportData(int village, DateTime fromdate, DateTime todate);
+        Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
 
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);

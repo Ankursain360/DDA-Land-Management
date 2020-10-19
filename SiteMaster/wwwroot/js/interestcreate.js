@@ -9,21 +9,22 @@ $(function () {
             type: 'GET',
             url: '/Interest/GetFromDate',
             data: { propertyId: id },
-           // dataType: 'json',
+            // dataType: 'json',
             success: function (data) {
                 debugger;
                 if (data != null) {
-                    $("#FromDate").removeAttr("type", "date");
-                    $("#FromDate").attr("type", "text");
-                    $("#FromDate").val(data);
-                    $("#FromDate").removeAttr("disabled", "disabled");
-                    $("#FromDate").attr("disabled", "disabled");
+                    if (data != "") {
+                        $("#FromDate").removeAttr("type", "date");
+                        $("#FromDate").attr("type", "text");
+                        $("#FromDate").val(data);
+                        $("#FromDate").attr("readonly", "readonly");
+                    }
                 }
                 else {
-                    $("#FromDate").removeAttr("disabled", "disabled");
+                    $("#FromDate").attr("readonly", "readonly");
                     $("#FromDate").val("");
                 }
-                
+
             }
         });
     });

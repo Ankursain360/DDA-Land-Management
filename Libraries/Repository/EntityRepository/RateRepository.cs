@@ -26,6 +26,7 @@ namespace Libraries.Repository.EntityRepository
 
             var Data = await (from A in _dbContext.Rate
                               join B in _dbContext.PropertyType on A.PropertyId equals B.Id
+                              where A.IsActive ==1
                               select new
                               {
                                   Id = A.Id,
@@ -62,15 +63,25 @@ namespace Libraries.Repository.EntityRepository
 
         public object GetFromDateData(int propertyId)
         {
-            var result = (from A in _dbContext.Rate
-                          where A.PropertyId == propertyId
-                          select A.FromDate).Max();
+            Rate rate = new Rate();
+            int count = _dbContext.Rate.Where(A => A.PropertyId == propertyId).Count();
+            rate.IsRecordExist = count;
+
+            DateTime result = _dbContext.Rate
+                        .Where(A => A.PropertyId == propertyId)
+                        .Select(A => (DateTime?)A.FromDate)
+                        .Max() ?? DateTime.Now;
             return result;
         }
 
         public Task<PagedResult<Rate>> GetPagedRate(RateSearchDto model)
         {
             throw new NotImplementedException();
+        }
+
+        public int IsRecordExist(int propertyId)
+        {
+            return _dbContext.Rate.Where(A => A.PropertyId == propertyId).Count();
         }
     }
 

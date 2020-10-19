@@ -70,7 +70,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View(rebate);
+                        var result1 = await _rebateService.GetAllRebate();
+                        return View("Index", result1);
                     }
                     else
                     {
@@ -163,12 +164,21 @@ namespace SiteMaster.Controllers
         [HttpGet]
         public string GetFromDate(int? propertyId)
         {
+            Rebate rebate = new Rebate();
             propertyId = propertyId ?? 0;
+            int IsRecordExist = _rebateService.IsRecordExist(Convert.ToInt32(propertyId));
             var result = _rebateService.GetFromDateData(Convert.ToInt32(propertyId));
-            DateTime lastFromDate = Convert.ToDateTime(result);
-            DateTime NewDate = lastFromDate.AddYears(1);
-            string newFromDate = NewDate.ToString("dd-MMM-yyyy");
-            return (string)newFromDate;
+            if (IsRecordExist == 0)
+            {
+                return "";
+            }
+            else
+            {
+                DateTime lastFromDate = Convert.ToDateTime(result);
+                DateTime NewDate = lastFromDate.AddYears(1);
+                string newFromDate = NewDate.ToString("dd-MMM-yyyy");
+                return newFromDate;
+            }
         }
     }
 

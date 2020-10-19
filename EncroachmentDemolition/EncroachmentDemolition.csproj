@@ -7,15 +7,18 @@
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
+    <Content Remove="wwwroot\js\encroachmentreportcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\encroachmentreportcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="bundleconfig.json" />
     <None Include="wwwroot\js\EncroachmentRegisterationView.min.js" />
+    <None Include="wwwroot\js\encroachmentreportcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>

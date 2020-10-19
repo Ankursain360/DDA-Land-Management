@@ -27,6 +27,7 @@ namespace Libraries.Model.Entity
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
         
         public string Name { get; set; }
+        [Required(ErrorMessage = "Status feild is required")]
         public byte? IsActive { get; set; }
         public virtual ICollection<Zone> Zone { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }
