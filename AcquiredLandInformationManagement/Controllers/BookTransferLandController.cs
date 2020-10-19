@@ -39,7 +39,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Booktransferland booktransferland = new Booktransferland();
             //proposalplotdetails.IsActive = 1;
             booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
-            booktransferland.VillageList = await _booktransferlandService.GetAllVillage();
+            booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
             booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
 
             return View(booktransferland);
@@ -53,7 +53,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 booktransferland.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
-                booktransferland.VillageList = await _booktransferlandService.GetAllVillage();
+                booktransferland.LocalityList = await _booktransferlandService.GetAllLocality();
                 booktransferland.KhasraList = await _booktransferlandService.GetAllKhasra();
 
                 if (ModelState.IsValid)
@@ -93,7 +93,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             
             Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
-            Data.VillageList = await _booktransferlandService.GetAllVillage();
+            Data.LocalityList = await _booktransferlandService.GetAllLocality();
             Data.KhasraList = await _booktransferlandService.GetAllKhasra();
 
 
@@ -159,7 +159,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _booktransferlandService.FetchSingleResult(id);
 
             Data.LandNotificationList = await _booktransferlandService.GetAllLandNotification();
-            Data.VillageList = await _booktransferlandService.GetAllVillage();
+            Data.LocalityList = await _booktransferlandService.GetAllLocality();
             Data.KhasraList = await _booktransferlandService.GetAllKhasra();
             if (Data == null)
             {

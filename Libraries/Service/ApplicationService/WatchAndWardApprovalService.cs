@@ -40,7 +40,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _watchAndWardApprovalRepository.GetAllVillage();
         }
-
+        public async Task<List<Locality>> GetAllLocality()
+        {
+            return await _watchAndWardApprovalRepository.GetAllLocality();
+        }
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
             return await _watchAndWardApprovalRepository.GetAllWatchandward();

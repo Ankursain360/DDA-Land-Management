@@ -47,7 +47,14 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _pageRepository.FindBy(a => a.Id == id);
             Page model = result.FirstOrDefault();
-            model.Name = page.Name;
+            model.ModuleId = page.ModuleId;
+            model.Address = page.Address;
+            model.DisplayPageOnMenu = page.DisplayPageOnMenu;
+            model.Priority = page.Priority;
+         
+            model.IsActive = page.IsActive;
+
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _pageRepository.Edit(model);

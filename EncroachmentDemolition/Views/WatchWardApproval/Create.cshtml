@@ -40,8 +40,8 @@
                                 <input type="date" asp-for="Date" class="form-control" />
                             </div>
                             <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Village Name</label>
-                                <select class="form-control destroy" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList,"Id","Name"))">
+                                <label class="control-label lb-sm">Locality (Village) Name</label>
+                                <select class="form-control destroy" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                                     <option value="">Select</option>
                                 </select>
                             </div>

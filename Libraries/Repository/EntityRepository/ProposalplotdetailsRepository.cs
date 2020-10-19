@@ -6,6 +6,7 @@ using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,7 +21,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model)
         {
-            return await _dbContext.Proposalplotdetails.GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+            return await _dbContext.Proposalplotdetails
+                .Include(x => x.Proposaldetails)
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Where(x => x.IsActive==1)
+                .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Proposalplotdetails>> GetProposalplotdetails()
         {
@@ -28,24 +34,28 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Proposalplotdetails>> GetAllProposalplotdetails()
         {
-            return await _dbContext.Proposalplotdetails.Include(x => x.Proposaldetails).Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
+            return await _dbContext.Proposalplotdetails
+                .Include(x => x.Proposaldetails)
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Where(x => x.IsActive == 1).ToListAsync();
 
 
         }
         public async Task<List<Proposaldetails>> GetAllProposaldetails()
         {
-            List<Proposaldetails> proposaldetailsList = await _dbContext.Proposaldetails.ToListAsync();
+            List<Proposaldetails> proposaldetailsList = await _dbContext.Proposaldetails.Where(x => x.IsActive == 1).ToListAsync();
             return proposaldetailsList;
         }
-        public async Task<List<Village>> GetAllVillage()
+        public async Task<List<Locality>> GetAllLocality()
         {
-            List<Village> villageList = await _dbContext.Village.ToListAsync();
-            return villageList;
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive==1).ToListAsync();
+            return localityList;
         }
 
         public async Task<List<Khasra>> GetAllKhasra()
         {
-            List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
             return khasraList;
         }
 

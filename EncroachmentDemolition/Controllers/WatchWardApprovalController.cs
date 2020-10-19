@@ -29,7 +29,8 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
-            Data.VillageList = await _watchAndWardApprovalService.GetAllVillage();
+            //Data.VillageList = await _watchAndWardApprovalService.GetAllVillage();
+            Data.LocalityList = await _watchAndWardApprovalService.GetAllLocality();
             Data.KhasraList = await _watchAndWardApprovalService.GetAllKhasra();
             if (Data == null)
             {

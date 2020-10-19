@@ -23,7 +23,7 @@ namespace EncroachmentDemolition.Controllers
         {
             Watchandward model = new Watchandward();
 
-            model.VillageList = await _watchandwardService.GetAllVillage();
+            model.LocalityList = await _watchandwardService.GetAllLocality();
             return View(model);
         }
 

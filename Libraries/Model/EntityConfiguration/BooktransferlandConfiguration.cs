@@ -22,8 +22,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.LandNotificationId)
                 .HasName("fkBookTransferLandNotification_idx");
 
-            builder.HasIndex(e => e.VillageId)
-                .HasName("fkBookTransferLandVillage_idx");
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("fkBookTransferLandLocality_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -45,6 +45,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LandNotificationId).HasColumnType("int(11)");
 
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.NotificationDate).HasColumnType("date");
@@ -61,8 +63,6 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
-
             builder.HasOne(d => d.Khasra)
                 .WithMany(p => p.Booktransferland)
                 .HasForeignKey(d => d.KhasraId)
@@ -73,10 +73,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.LandNotificationId)
                 .HasConstraintName("fkBookTransferLandNotification");
 
-            builder.HasOne(d => d.Village)
+            builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Booktransferland)
-                .HasForeignKey(d => d.VillageId)
-                .HasConstraintName("fkBookTransferLandVillage");
+                .HasForeignKey(d => d.LocalityId)
+                .HasConstraintName("fkBookTransferLandLocality");
         }
     }
 }

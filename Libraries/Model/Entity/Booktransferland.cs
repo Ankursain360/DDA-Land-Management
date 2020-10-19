@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
        
         public int? LandNotificationId { get; set; }
         public DateTime? NotificationDate { get; set; }
-        public int? VillageId { get; set; }
+        public int? LocalityId { get; set; }
         public int? KhasraId { get; set; }
         public string Part { get; set; }
         public decimal? Bigha { get; set; }
@@ -31,10 +31,9 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Village> VillageList { get; set; }
-        public virtual Village Village { get; set; }
-
-    
+        public List<Locality> LocalityList { get; set; }
+        public virtual Locality Locality { get; set; }
+       
 
 
         [NotMapped]

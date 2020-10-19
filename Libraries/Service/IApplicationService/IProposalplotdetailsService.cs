@@ -15,7 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();
         Task<List<Proposalplotdetails>> GetProposalplotdetailsUsingRepo();
         Task<List<Proposaldetails>> GetAllProposaldetails();
-        Task<List<Village>> GetAllVillage();
+        Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<bool> Update(int id, Proposalplotdetails proposalplotdetails);
 

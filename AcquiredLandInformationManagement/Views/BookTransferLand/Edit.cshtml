@@ -43,8 +43,8 @@
                 <div class="form-row">
 
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))"
+                        <label class="control-label lb-sm">Locality Name (Village)</label>
+                        <select asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))"
                                 class="form-control dda-dropdown">
                             <option value="0">---Select---</option>
 

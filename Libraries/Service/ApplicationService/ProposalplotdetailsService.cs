@@ -48,7 +48,7 @@ namespace Libraries.Service.ApplicationService
             Proposalplotdetails model = result.FirstOrDefault();
           
             model.ProposaldetailsId = proposalplotdetails.ProposaldetailsId;
-            model.VillageId = proposalplotdetails.VillageId;
+            model.LocalityId = proposalplotdetails.LocalityId;
             model.KhasraId = proposalplotdetails.KhasraId;
 
           
@@ -76,10 +76,10 @@ namespace Libraries.Service.ApplicationService
             List<Proposaldetails> proposaldetailsList = await _proposalplotdetailsRepository.GetAllProposaldetails();
             return proposaldetailsList;
         }
-        public async Task<List<Village>> GetAllVillage()
+        public async Task<List<Locality>> GetAllLocality()
         {
-            List<Village> villageList = await _proposalplotdetailsRepository.GetAllVillage();
-            return villageList;
+            List<Locality> localityList = await _proposalplotdetailsRepository.GetAllLocality();
+            return localityList;
         }
         public async Task<List<Khasra>> GetAllKhasra()
         {

@@ -5,7 +5,7 @@
         <tr>
             <th>Sr.No</th>
             <th>Date</th>
-            <th>Village</th>
+            <th>Locality(Village)</th>
             <th>Khasra No.</th>
             <th>Status on Ground</th>
             <th>Remarks</th>
@@ -21,7 +21,7 @@
                 <td>@(rowNo += 1)</td>
 
                 <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
-                <td>@item.Village.Name</td>
+                <td>@item.Locality.Name</td>
                 <td>@item.Khasra.Name</td>
                 <td>@item.StatusOnGround</td>
                 <td>@item.Remarks</td>

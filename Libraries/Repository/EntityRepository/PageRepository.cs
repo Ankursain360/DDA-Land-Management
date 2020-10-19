@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using System.Linq;
 
 namespace Libraries.Repository.EntityRepository
 {  
@@ -19,7 +20,10 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
         {
-            return await _dbContext.Page.GetPaged<Page>(model.PageNumber, model.PageSize);
+            return await _dbContext.Page
+                .Include(x => x.Module)
+                .Where(x => x.IsActive==1)
+                .GetPaged<Page>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Page>> GetPage()
         {
@@ -31,7 +35,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Module>> GetAllModule()
         {
-            List<Module> moduleList = await _dbContext.Module.ToListAsync();
+            List<Module> moduleList = await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
             return moduleList;
         }
         public async Task<bool> Any(int id, string name)

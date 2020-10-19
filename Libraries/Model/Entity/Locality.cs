@@ -12,8 +12,11 @@ namespace Libraries.Model.Entity
     {
         public Locality()
         {
+            Booktransferland = new HashSet<Booktransferland>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Landtransfer = new HashSet<Landtransfer>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Watchandward = new HashSet<Watchandward>();
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -43,8 +46,11 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentList { get; set; }
         [NotMapped] 
         public List<Division> DivisionList { get; set; }
+        public ICollection<Booktransferland> Booktransferland { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public ICollection<Landtransfer> Landtransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+        public ICollection<Watchandward> Watchandward { get; set; }
     }
 }

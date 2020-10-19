@@ -13,15 +13,13 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Watchandward> builder)
         {
-
-
             builder.ToTable("watchandward", "lms");
 
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkWatchWardKhasra_idx");
 
-            builder.HasIndex(e => e.VillageId)
-                .HasName("fkWatchWardVillage_idx");
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("fkWatchWardLocality_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -43,6 +41,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(300)
                 .IsUnicode(false);
 
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.PhotoPath)
@@ -61,17 +61,15 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
-
             builder.HasOne(d => d.Khasra)
                 .WithMany(p => p.Watchandward)
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fkWatchWardKhasra");
 
-            builder.HasOne(d => d.Village)
+            builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Watchandward)
-                .HasForeignKey(d => d.VillageId)
-                .HasConstraintName("fkWatchWardVillage");
+                .HasForeignKey(d => d.LocalityId)
+                .HasConstraintName("fkWatchWardLocality");
 
         }
     }
