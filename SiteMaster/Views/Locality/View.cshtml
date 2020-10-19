@@ -64,7 +64,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
-                        <input asp-for="Address" type="text" class="form-control" />
+                        <textarea asp-for="Address" type="text" class="form-control" limit="600"></textarea>
                         <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">

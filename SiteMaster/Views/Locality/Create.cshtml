@@ -45,26 +45,26 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Locality(Village) Name <span style="color:red">*</span></label>
-                        <input asp-for="Name" type="text" class="form-control max-length" size="200" />
+                        <input asp-for="Name" type="text" class="form-control" limit="200" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Locality(Village) Code <span style="color:red">*</span></label>
-                        <input asp-for="LocalityCode" type="text" class="form-control max-length" size="200" />
+                        <input asp-for="LocalityCode" type="text" class="form-control" limit="200" />
                         <span asp-validation-for="LocalityCode" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Landmark <span style="color:red">*</span></label>
-                        <input asp-for="Landmark" type="text" class="form-control max-length" size="200" />
+                        <input asp-for="Landmark" type="text" class="form-control" limit="200" />
                         <span asp-validation-for="Landmark" type="text" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
-                        <input asp-for="Address" type="text" class="form-control max-length" size="600" />
+                        <textarea asp-for="Address" type="text" class="form-control" limit="600" ></textarea>
                         <span asp-validation-for="Address" type="text" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
