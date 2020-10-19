@@ -22,8 +22,8 @@ namespace Libraries.Model.Entity
             Watchandward = new HashSet<Watchandward>();
         }
         public string Name { get; set; }
-      
-        public int VillageId { get; set; }
+
+        public int LocalityId { get; set; }
         public int LandCategoryId { get; set; }
        
         public string Bigha { get; set; }
@@ -44,8 +44,8 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Village> VillageList { get; set; }
-        public virtual Village Village { get; set; }
+        public List<Locality> LocalityList { get; set; }
+        public virtual Locality Locality { get; set; }
         public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
         public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }

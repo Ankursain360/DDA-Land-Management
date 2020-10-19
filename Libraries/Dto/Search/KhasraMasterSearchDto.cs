@@ -10,7 +10,7 @@ namespace Dto.Search
        
         public string Name { get; set; }
 
-        public int VillageId { get; set; }
+        public int LocalityId { get; set; }
         public int LandCategoryId { get; set; }
 
         public string Bigha { get; set; }

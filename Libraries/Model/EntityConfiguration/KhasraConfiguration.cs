@@ -13,6 +13,12 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("khasra", "lms");
 
+            builder.HasIndex(e => e.LandCategoryId)
+                .HasName("fkKhasraLandCategory_idx");
+
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("fkKhasraLocality_idx");
+
             builder.HasIndex(e => e.Name)
                 .HasName("Name_UNIQUE")
                 .IsUnique();
@@ -37,6 +43,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LandCategoryId).HasColumnType("int(11)");
 
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
@@ -49,7 +57,17 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
+            builder.HasOne(d => d.LandCategory)
+                .WithMany(p => p.Khasra)
+                .HasForeignKey(d => d.LandCategoryId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkKhasraLandCategory");
+
+            builder.HasOne(d => d.Locality)
+                .WithMany(p => p.Khasra)
+                .HasForeignKey(d => d.LocalityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fkKhasraLocality");
         }
     }
 

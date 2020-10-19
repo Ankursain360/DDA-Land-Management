@@ -46,5 +46,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public ICollection<Landtransfer> Landtransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
+        public ICollection<Khasra> Khasra { get; set; }
     }
 }

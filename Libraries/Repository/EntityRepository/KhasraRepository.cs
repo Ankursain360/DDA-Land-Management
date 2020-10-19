@@ -19,7 +19,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model)
         {
-            return await _dbContext.Khasra.GetPaged<Khasra>(model.PageNumber, model.PageSize);
+            return await _dbContext.Khasra.Where(x => x.IsActive == 1).Include(x => x.Locality).Include(x => x.LandCategory).GetPaged<Khasra>(model.PageNumber, model.PageSize);
         }
 
 
@@ -30,10 +30,10 @@ namespace Libraries.Repository.EntityRepository
             return landcategoryList;
         }
 
-        public async Task<List<Village>> GetAllVillage()
+        public async Task<List<Locality>> GetAllLocalityList()
         {
-            List<Village> villagelist = await _dbContext.Village.ToListAsync();
-            return villagelist;
+            List<Locality> localityList = await _dbContext.Locality.ToListAsync();
+            return localityList;
         }
 
 
@@ -41,7 +41,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Khasra>> GetAllKhasra()
         {
-            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Village).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Locality).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

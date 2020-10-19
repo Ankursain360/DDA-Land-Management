@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">View Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="View">
@@ -27,8 +27,8 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                        <label class="control-label lb-sm">Locality</label>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option>Select</option>
                         </select>
                     </div>
