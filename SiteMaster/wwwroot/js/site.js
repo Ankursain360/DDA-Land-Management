@@ -37,19 +37,39 @@ $(document).ready(function () {
         else {
             e.preventDefault();
             $(this).unbind("click").delay(10000);
-            alert("Unbind");
+          //  alert("Unbind");
             $(this).bind("click").delay(10000);
-            alert("bind");
+           // alert("bind");
         }
     });
 });
-$('.numbers').keyup(function () {
+$('.numbers').keyup(function (e) {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
+
+
+function numericDecimal(elementRef) {
+    var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+    if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57)) {
+        return true;
+    }
+    // '.' decimal point... 
+    else if (keyCodeEntered == 46) {
+        // Allow only 1 decimal point ('.')...  
+        if ((elementRef.value) && (elementRef.value.indexOf('.') >= 0))
+            return false;
+        else
+            return true;
+    }
+    return false;
+
+}  
+
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
     $th.val($th.val().replace(/[^0-9]/g, ''));
 });
+
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }

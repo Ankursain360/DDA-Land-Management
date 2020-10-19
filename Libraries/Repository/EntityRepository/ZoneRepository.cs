@@ -74,7 +74,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model)
         {
-            return await _dbContext.Zone.Include(s => s.Department).OrderBy(s => s.Id).GetPaged<Zone>(model.PageNumber, model.PageSize);
+            return await _dbContext.Zone.Include(s => s.Department).Where(s => s.IsActive ==1).OrderBy(s => s.Id).GetPaged<Zone>(model.PageNumber, model.PageSize);
         }
     }
 

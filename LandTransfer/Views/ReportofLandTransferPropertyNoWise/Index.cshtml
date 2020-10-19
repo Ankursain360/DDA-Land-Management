@@ -11,20 +11,18 @@
 </div>
 <br />
 <br />
-
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="RptCasesCourtWise">
+            <form novalidate="novalidate">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No <span style="color:red">*</span></label>
-                        <select asp-for="KhasraNo" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.LandTransferList,"Id","KhasraNo"))">
+                        <select asp-for="KhasraNo" class="form-control dda-dropdown" required="required" requiredMsg="Please Select Khasra Number" asp-items="@(new SelectList(Model.LandTransferList,"Id","KhasraNo"))">
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
@@ -36,7 +34,6 @@
                     </div>
                 </div>
                 <div id="LoadView">
-
                 </div>
             </form>
         </div>
