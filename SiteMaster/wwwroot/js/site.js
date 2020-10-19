@@ -29,19 +29,27 @@ $(document).ready(function () {
             return false;
         };
     });
-    var isSubmit = false;
-    $('input[type="submit"]').click(function (e) {
-        if (isSubmit == false) {
-            isSubmit = true;
-        }
-        else {
-            e.preventDefault();
-            $(this).unbind("click").delay(10000);
-            alert("Unbind");
-            $(this).bind("click").delay(10000);
-            alert("bind");
-        }
+    $("input[type!='hidden'],textarea").each(function () {
+        $(this).rules("add", {
+            required: true,
+            messages: {
+                required: "Specify the reference name"
+            }
+        });
     });
+    //var isSubmit = false;
+    //$('input[type="submit"]').click(function (e) {
+    //    if (isSubmit == false) {
+    //        isSubmit = true;
+    //    }
+    //    else {
+    //        e.preventDefault();
+    //        $(this).unbind("click").delay(10000);
+    //        alert("Unbind");
+    //        $(this).bind("click").delay(10000);
+    //        alert("bind");
+    //    }
+    //});
 });
 $('.numbers').keyup(function () {
     this.value = this.value.replace(/[^0-9\.]/g, '');
