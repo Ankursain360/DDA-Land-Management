@@ -11,10 +11,10 @@ namespace Libraries.Model.Entity
         {
             Userprofile = new HashSet<Userprofile>();
         }
-        [Required]
+        [Required(ErrorMessage = "Department Name is Mandatory Field")]
 
         public string Name { get; set; }
-        [Required]
+       
         public string Code { get; set; }
         [Required]
         public byte IsActive { get; set; }
