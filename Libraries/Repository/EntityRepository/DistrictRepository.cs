@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Dto.Search;
 using Libraries.Model;
@@ -15,12 +16,16 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<District>> GetDistricts()
         {
-            return await _dbContext.District.ToListAsync();
+            return await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
         }
 
         public async Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model)
         {
-            return await _dbContext.District.GetPaged<District>(model.PageNumber, model.PageSize);
+            return await _dbContext.District.Where(x => x.IsActive == 1).GetPaged<District>(model.PageNumber, model.PageSize);
+        }
+        public async Task<bool> Any(int id, string name)
+        {
+            return await _dbContext.District.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
 
     }

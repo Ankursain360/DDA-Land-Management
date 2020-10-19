@@ -19,7 +19,7 @@ namespace Libraries.Repository.EntityRepository
         { }
         public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
         {
-            return await _dbContext.Division.Include(x => x.Zone).Include(x => x.Department).GetPaged<Division>(model.PageNumber, model.PageSize);
+            return await _dbContext.Division.Include(x => x.Zone).Include(x => x.Department).Where(x => x.IsActive == 1).GetPaged<Division>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Division>> GetDivisions()
         {

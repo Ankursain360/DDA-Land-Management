@@ -19,14 +19,18 @@ namespace Libraries.Model.Entity
             Propertyregistration = new HashSet<Propertyregistration>();
         }
 
-        [Required]
+        [Required(ErrorMessage = "Division name is required")]
+        [Remote(action: "Exist", controller: "Division", AdditionalFields = "Id")]
+
         public string Name { get; set; }
         [Required]
         public string Code { get; set; }
         public byte IsActive { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Zone field is required")]
+
         public int ZoneId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Department field is required")]
+
         public int DepartmentId { get; set; }
 
         public virtual Zone Zone { get; set; }

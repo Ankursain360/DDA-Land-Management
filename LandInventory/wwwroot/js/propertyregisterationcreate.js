@@ -89,7 +89,7 @@ $(document).ready(function () {
     //}
 })
 
-$(function () {
+
     $('#Boundary').change(function () {
         var value = $('#Boundary option:selected').val();
         if (value == 0) {
@@ -101,7 +101,7 @@ $(function () {
             $('#divBoundaryRemarks').show();
         }
     });
-});
+
 
 $(function () {
     $('#BuiltUp').change(function () {

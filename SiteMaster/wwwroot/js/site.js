@@ -29,35 +29,47 @@ $(document).ready(function () {
             return false;
         };
     });
-    $("input[type!='hidden'],textarea").each(function () {
-        $(this).rules("add", {
-            required: true,
-            messages: {
-                required: "Specify the reference name"
-            }
-        });
+    var isSubmit = false;
+    $('input[type="submit"]').click(function (e) {
+        if (isSubmit == false) {
+            isSubmit = true;
+        }
+        else {
+            e.preventDefault();
+            $(this).unbind("click").delay(10000);
+          //  alert("Unbind");
+            $(this).bind("click").delay(10000);
+           // alert("bind");
+        }
     });
-    //var isSubmit = false;
-    //$('input[type="submit"]').click(function (e) {
-    //    if (isSubmit == false) {
-    //        isSubmit = true;
-    //    }
-    //    else {
-    //        e.preventDefault();
-    //        $(this).unbind("click").delay(10000);
-    //        alert("Unbind");
-    //        $(this).bind("click").delay(10000);
-    //        alert("bind");
-    //    }
-    //});
 });
-$('.numbers').keyup(function () {
+$('.numbers').keyup(function (e) {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
+
+
+function numericDecimal(elementRef) {
+    var keyCodeEntered = (event.which) ? event.which : (window.event.keyCode) ? window.event.keyCode : -1;
+    if ((keyCodeEntered >= 48) && (keyCodeEntered <= 57)) {
+        return true;
+    }
+    // '.' decimal point... 
+    else if (keyCodeEntered == 46) {
+        // Allow only 1 decimal point ('.')...  
+        if ((elementRef.value) && (elementRef.value.indexOf('.') >= 0))
+            return false;
+        else
+            return true;
+    }
+    return false;
+
+}  
+
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
     $th.val($th.val().replace(/[^0-9]/g, ''));
 });
+
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
 }

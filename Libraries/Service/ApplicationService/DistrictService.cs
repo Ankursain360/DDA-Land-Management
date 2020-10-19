@@ -47,6 +47,7 @@ namespace Libraries.Service.ApplicationService
             model.Name = district.Name;
             model.Code = district.Code;
             model.ModifiedDate = DateTime.Now;
+            model.IsActive = district.IsActive;
             model.ModifiedBy = 1;
             _districtRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -76,6 +77,12 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<bool> CheckUniqueName(int id, string district)
+        {
+            bool result = await _districtRepository.Any(id, district);
+            //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
+            return result;
+        }
 
 
         public async Task<bool> Delete(int id)

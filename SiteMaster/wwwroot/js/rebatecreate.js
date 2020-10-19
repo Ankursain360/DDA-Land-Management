@@ -84,6 +84,7 @@ $('#myForm').validate({
             required: ToDateMessage //this is a function that returns custom messages
         },
         RebatePercentage: {
+            maxlength: 18,
             required: RebatePercentageMessage
         }
     },
