@@ -3,16 +3,19 @@ var currentPageSize = 10;
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
+        var result = ValidateForm();
         var localityid = $('#LocalityId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
+        //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
+        if (result) {
             GetDetails(currentPageNumber, currentPageSize);
         }
-        else {
-            alert('Please Fill All Fields');
-        }
+        //}
+        //else {
+        //    alert('Please Fill All Fields');
+        //}
     });
 
     $(".linkdisabled").click(function () {
