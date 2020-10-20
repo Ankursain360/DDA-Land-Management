@@ -2,8 +2,10 @@
 var currentPageSize = 10;
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
-        debugger
-        GetDetails(currentPageNumber, currentPageSize);
+        var result = ValidateForm();
+        if (result) {
+            GetDetails(currentPageNumber, currentPageSize);
+        }
     });
     $(".linkdisabled").click(function () {
         return false;

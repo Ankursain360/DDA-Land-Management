@@ -4,23 +4,18 @@ var currentPageSize = 10;
 $(function () {
     $("#btnGenerate").click(function () {
         debugger;
-        //var url = '/ReportofLandTransferDivisionLocalityWise/List';
+        var result = ValidateForm();
+        if (result) {
 
-        var departmentid = $('#DepartmentId option:selected').val();
-        var zoneId = $('#ZoneId option:selected').val();
-        var divisionId = $('#DivisionId option:selected').val();
-        ////var id = $('#Id option:selected').val(); // was for peimarylistno
-        var localityid = $('#LocalityId option:selected').val();
-        //$('#LoadReportView').empty();
-        //$('#LoadReportView').load(url, {
-        //    department: departmentid, zone: zoneId, division: divisionId,
-        //    //primaryListNo: id
-        //    locality: localityid
+            var departmentid = $('#DepartmentId option:selected').val();
+            var zoneId = $('#ZoneId option:selected').val();
+            var divisionId = $('#DivisionId option:selected').val();
 
-        //}).hide().fadeIn(1000);;
+            var localityid = $('#LocalityId option:selected').val();
 
-        GetReport(currentPageNumber, currentPageSize, departmentid, zoneId, divisionId, localityid)
 
+            GetReport(currentPageNumber, currentPageSize, departmentid, zoneId, divisionId, localityid)
+        }
 
     });
 

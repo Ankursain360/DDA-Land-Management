@@ -162,7 +162,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        public async Task<IActionResult> Delete(int id)  
         {
             try
             {

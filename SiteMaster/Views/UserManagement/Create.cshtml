@@ -22,12 +22,12 @@
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label asp-for="Name" class="control-label lb-sm">Name</label>
+                        <label asp-for="Name" class="control-label lb-sm">Name<span style="color:red">*</span></label>
                         <input asp-for="Name" class="form-control form-control-sm" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label asp-for="UserName" class="control-label lb-sm">User Name</label>
+                        <label asp-for="UserName" class="control-label lb-sm">User Name<span style="color:red">*</span></label>
                         <input asp-for="UserName" class="form-control" />
                         <span asp-validation-for="UserName" class="text-danger"></span>
                     </div>
@@ -35,12 +35,12 @@
 
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        <label asp-for="Email" class="control-label lb-sm">Email</label>
+                        <label asp-for="Email" class="control-label lb-sm">Email<span style="color:red">*</span></label>
                         <input asp-for="Email" class="form-control form-control-sm" />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number</label>
+                        <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number<span style="color:red">*</span></label>
                         <input asp-for="PhoneNumber" class="form-control form-control-sm" />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
@@ -48,11 +48,11 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label asp-for="Password" class="control-label lb-sm">Password<span style="color:red">*</span></label>
-                        <input asp-for="Password" class="form-control" />
+                        <input asp-for="Password"  class="form-control" />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label asp-for="ConfirmPassword" class="control-label lb-sm">Confirm Password</label>
+                        <label asp-for="ConfirmPassword" class="control-label lb-sm">Confirm Password<span style="color:red">*</span></label>
                         <input asp-for="ConfirmPassword" class="form-control form-control-sm" />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
