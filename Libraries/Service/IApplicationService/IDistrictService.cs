@@ -16,7 +16,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(District district);
         Task<District> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-        bool CheckUniqueName(int id, District district);
+        Task<bool> CheckUniqueName(int id, string district);
 
         Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model);
 

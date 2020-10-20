@@ -12,7 +12,9 @@ using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+
 namespace SiteMaster.Controllers
 {
     public class DistrictController : BaseController
@@ -24,39 +26,20 @@ namespace SiteMaster.Controllers
         {
             _districtService = districtService;
         }
-
-
         public async Task<IActionResult> Index()
         {
-            //var result = await _districtService.GetAllDistrict();
-            return View();
-
+            var result = await _districtService.GetAllDistrict();
+            return View(result);
         }
-
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody]DistrictSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] DistrictSearchDto model)
         {
             var result = await _districtService.GetPagedDistrict(model);
             return PartialView("_List", result);
         }
-
         public IActionResult Create()
         {
-
             return View();
-
         }
-
-
-
-        private bool Exist(int id, District district)
-        {
-            var result = _districtService.CheckUniqueName(id, district);
-            return result;
-        }
-
-
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -67,19 +50,16 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    if (Exist(0, district))
-                    {
-                        ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                        return View(district);
 
-                    }
 
                     var result = await _districtService.Create(district);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View("Index");
+                        //return View();
+                        var list = await _districtService.GetAllDistrict();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -100,53 +80,6 @@ namespace SiteMaster.Controllers
             }
         }
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, District district)
-        {
-            if (ModelState.IsValid)
-            {
-                try
-                {
-
-                    if (Exist(id, district))
-                    {
-                        ViewBag.Message = Alert.Show("Unique Name Required for District Name", "", AlertType.Info);
-                        return View(district);
-
-                    }
-
-                    var result = await _districtService.Update(id, district);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View("Index");
-
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(district);
-
-                    }
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!Exist(district.Id, district))
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(district);
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-            }
-            return View(district);
-        }
-
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _districtService.FetchSingleResult(id);
@@ -157,31 +90,63 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-
-
-        public async Task<IActionResult> Delete(int id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, District district)
         {
-            if (id == 0)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
+                try
+                {
 
-            var form = await _districtService.Delete(id);
-            if (form == false)
+
+
+                    var result = await _districtService.Update(id, district);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                        var list = await _districtService.GetAllDistrict();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(district);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(district);
+
+                }
+            }
+            return View(district);
+        }
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _districtService.CheckUniqueName(Id, Name);
+            if (result == false)
             {
-                return NotFound();
+                return Json(true);
             }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
+            else
+            {
+                return Json($"Department: {Name} already exist");
+            }
         }
 
 
 
-
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-
+            //try
+            //{
 
             var result = await _districtService.Delete(id);
             if (result == true)
@@ -193,7 +158,12 @@ namespace SiteMaster.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
             return RedirectToAction("Index", "District");
-
+            //}
+            //catch(Exception ex)
+            //{
+            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
+            //    return View();
+            //}
 
         }
 
@@ -207,7 +177,28 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        {
+            try
+            {
 
-
+                var result = await _districtService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _districtService.GetAllDistrict();
+            return View("Index", list);
+        }
     }
+
 }

@@ -9,6 +9,7 @@ namespace Libraries.Repository.IEntityRepository
    public interface IDistrictRepository:IGenericRepository<District>
     {
         Task<List<District>> GetDistricts();
+        Task<bool> Any(int id, string name);
         Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model);
     }
 }
