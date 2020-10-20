@@ -12,13 +12,13 @@ namespace Libraries.Model.Entity
         [Required]
         public int IsRebateOn { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The From Date field is required")]
         public DateTime FromDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The To Date field is required")]
         public DateTime ToDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Rebate Percentage field is required")]
         public decimal RebatePercentage { get; set; }
 
         public byte IsActive { get; set; }

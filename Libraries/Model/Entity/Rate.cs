@@ -9,16 +9,18 @@ namespace Libraries.Model.Entity
 {
     public class Rate : AuditableEntity<int>
     {
-        [Required]
+        [Required(ErrorMessage = "The Property Type field is required")]
         public int PropertyId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The From Date field is required")]
         public DateTime FromDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The To Date field is required")]
         public DateTime ToDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Rate Percentage field is required")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$",ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Rate Percentage; Max 18 digits")]
         public decimal RatePercentage { get; set; }
 
         public byte IsActive { get; set; }
@@ -29,6 +31,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string PropertyTypeName { get; set; }
 
+        [StringLength(1000)]
         public string Scheme { get; set; }
         public PropertyType Property { get; set; }
 

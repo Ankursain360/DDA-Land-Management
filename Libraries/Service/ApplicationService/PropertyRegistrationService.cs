@@ -255,5 +255,15 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetHandedDepartmentDropDownList();
         }
+
+        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR()
+        {
+            return await _propertyregistrationRepository.GetClassificationOfLandDropDownListMOR();
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId)
+        {
+            return await _propertyregistrationRepository.GetPagedPropertyRegisterationMOR(model, userId);
+        }
     }
 }

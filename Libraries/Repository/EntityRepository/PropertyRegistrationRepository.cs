@@ -70,6 +70,15 @@ namespace Libraries.Repository.EntityRepository
             return ClassificationoflandList;
         }
 
+        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR()
+        {
+            var badCodes = new[] { 3, 5 };
+            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
+                                                                        .Where(x => x.IsActive == 1 && badCodes.Contains(x.Id))
+                                                                        .ToListAsync();
+            return ClassificationoflandList;
+        }
+
         public async Task<List<Department>> GetDepartmentDropDownList()
         {
             List<Department> DepartmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
@@ -279,6 +288,43 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int UserId)
+        {
+            var badCodes = new[] { 3, 5 };
+            var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            if (UserId == 2 || Iscreated > 0)
+            {
+                var data = await _dbContext.Propertyregistration
+                                .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Division)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Locality)
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                return data;
+
+            }
+            else
+            {
+                var data = await _dbContext.Propertyregistration
+                                .Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Division)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Locality)
+                                    .Where(x => x.IsDeleted == 1 && x.IsValidate == 1)
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                return data;
+
+            }
+        }
         public async Task<List<Department>> GetTakenDepartmentDropDownList()
         {
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();

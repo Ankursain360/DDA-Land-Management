@@ -37,11 +37,13 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Propertyregistration>> GetRestorePropertyReportData(PropertyRegisterationSearchDto model);// added by ishu
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
+        Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId);
         string GetDisposalFile(int id);
         string GetHandedOverFile(int id);
         string GetTakenOverFile(int id);
         Task<bool> InsertInDeletedProperty(int id, Deletedproperty model);
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
+        Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
         Task<List<Department>> GetHandedDepartmentDropDownList();

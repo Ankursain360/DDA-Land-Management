@@ -1,8 +1,9 @@
 ﻿$(document).ready(function () {
   //  $("#FromDate").val("");
+
 })
 
-$(function () {
+//$(function () {
     $('#PropertyId').change(function () {
         var id = $("#PropertyId").val();
         $.ajax({
@@ -27,63 +28,65 @@ $(function () {
             }
         });
     });
-});
+//});
 
 
-$('#myForm').validate({
-    rules: {
+//$('#myForm').validate({
+//    rules: {
 
-        PropertyId: {
-            required: true
-        },
-        FromDate: {
-            required: true
-        },
-        ToDate: {
-            required: true
-        },
-        RatePercentage: {
-            maxlength: 18,
-            required: true
-        }
-    },
+//        PropertyId: {
+//            required: true
+//        },
+//        FromDate: {
+//            required: true
+//        },
+//        ToDate: {
+//            required: true
+//        },
+//        RatePercentage: {
+//            maxlength: 18,
+//            required: true
+//        }
+//    },
 
-    messages: {
-        PropertyId: {
-            required: PropertyIdMessage //this is a function that returns custom messages
-        },
-        FromDate: {
-            required: FromDateMessage //this is a function that returns custom messages
-        },
-        ToDate: {
-            required: ToDateMessage //this is a function that returns custom messages
-        },
-        RatePercentage: {
-            required: RatePercentageMessage
-        }
-    },
-    highlight: function (element) {
-        $(element).closest('.form-group').addClass('has-error');
-    },
-    unhighlight: function (element) {
-        $(element).closest('.form-group').removeClass('has-error');
-    },
-    errorElement: 'span',
-    errorClass: 'help-block',
-    errorPlacement: function (error, element) {
-        if (element.parent('.input-group').length) {
-            error.insertAfter(element.parent());
-        } else {
-            error.insertAfter(element);
-        }
-    },
-    submitHandler: function (form) {
-        // alert('Form validated and submitted ok.');
-        return true;
-    }
-});
+//    messages: {
+//        PropertyId: {
+//            required: PropertyIdMessage //this is a function that returns custom messages
+//        },
+//        FromDate: {
+//            required: FromDateMessage //this is a function that returns custom messages
+//        },
+//        ToDate: {
+//            required: ToDateMessage //this is a function that returns custom messages
+//        },
+//        RatePercentage: {
+//            required: RatePercentageMessage
+//        }
+//    },
+//    highlight: function (element) {
+//        $(element).closest('.form-group').addClass('has-error');
+//    },
+//    unhighlight: function (element) {
+//        $(element).closest('.form-group').removeClass('has-error');
+//    },
+//    errorElement: 'span',
+//    errorClass: 'help-block',
+//    errorPlacement: function (error, element) {
+//        if (element.parent('.input-group').length) {
+//            error.insertAfter(element.parent());
+//        } else {
+//            error.insertAfter(element);
+//        }
+//    },
+//    submitHandler: function (form) {
+//       // alert('Form validated and submitted ok.');
+//        $('input[type="submit"]').attr("disabled", "disabled");
+//        return true;
+//    }
+//});
 
 //For Drop down
+
 function PropertyIdMessage() {
     var dropdown_val = $('#PropertyId option:selected').val();
     if (dropdown_val < 1) {

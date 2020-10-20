@@ -34,5 +34,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId);
         Task<List<Department>> GetTakenDepartmentDropDownList();
         Task<List<Department>> GetHandedDepartmentDropDownList();
+        Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
+        Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId);
     }
 }

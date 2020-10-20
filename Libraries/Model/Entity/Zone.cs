@@ -20,14 +20,13 @@ namespace Libraries.Model.Entity
         }
 
         [Required(ErrorMessage = "The Department field is required")]
-
         public int DepartmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Department Name field is required")]
         [Remote(action: "Exist", controller: "Zone", AdditionalFields = "Id")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Code field is required")]
         [Remote(action: "IsCodeExist", controller: "Zone", AdditionalFields = "Id")]
         public string Code { get; set; }
         public byte IsActive { get; set; }
