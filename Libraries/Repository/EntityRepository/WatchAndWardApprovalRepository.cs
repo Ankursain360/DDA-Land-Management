@@ -18,20 +18,36 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        //public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        //{
+        //    return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
+        //        .Include(x => x.Village)
+        //        .Include(x => x.Khasra)
+        //        .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+        //}
+
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
         {
             return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
-                .Include(x => x.Village)
+                .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
         }
+
+
         public async Task<List<Watchandward>> GetWatchandward()
         {
             return await _dbContext.Watchandward.ToListAsync();
         }
+        //public async Task<List<Watchandward>> GetAllWatchandward()
+        //{
+        //    return await _dbContext.Watchandward.Include(x => x.Village)
+        //        .Include(x => x.Khasra)
+        //        .ToListAsync();
+        //}
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
-            return await _dbContext.Watchandward.Include(x => x.Village)
+            return await _dbContext.Watchandward.Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .ToListAsync();
         }
@@ -44,6 +60,11 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Village> villagelist = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
             return villagelist;
+        }
+        public async Task<List<Locality>> GetAllLocality()
+        {
+            List<Locality> localitylist = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localitylist;
         }
     }
 }

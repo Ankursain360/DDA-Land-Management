@@ -21,7 +21,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Booktransferland>> GetPagedBooktransferland(BooktransferlandSearchDto model)
         {
-            return await _dbContext.Booktransferland.GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+            return await _dbContext.Booktransferland
+                  .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Include(x => x.LandNotification)
+                .Where(x => x.IsActive == 1)
+                .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Booktransferland>> GetBooktransferland()
         {
@@ -29,7 +34,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Booktransferland>> GetAllBooktransferland()
         {
-            return await _dbContext.Booktransferland.Include(x => x.LandNotification).Include(x => x.Village).Include(x => x.Khasra).ToListAsync();
+            return await _dbContext.Booktransferland
+                .Include(x => x.LandNotification)
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Where(x => x.IsActive == 1)
+                .ToListAsync();
 
 
         }
@@ -39,12 +49,12 @@ namespace Libraries.Repository.EntityRepository
             return landNotificationList;
         }
       
-        public async Task<List<Village>> GetAllVillage()
+       
+        public async Task<List<Locality>> GetAllLocality()
         {
-            List<Village> villageList = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
-            return villageList;
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localityList;
         }
-
         public async Task<List<Khasra>> GetAllKhasra()
         {
             List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();

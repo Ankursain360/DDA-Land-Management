@@ -3,11 +3,11 @@ var currentPageSize = 10;
 $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
-        var villageid = $('#VillageId option:selected').val();
+        var localityid = $('#LocalityId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
-        if (villageid != '' && villageid != undefined && fromDate != '' && toDate != '' && villageid != null && fromDate != null && toDate != null) {
+        if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
             GetDetails(currentPageNumber, currentPageSize);
         }
         else {
@@ -31,14 +31,14 @@ function GetDetails(pageNumber, pageSize) {
 
 function GetSearchParam(pageNumber, pageSize) {
     debugger;
-    var villageid = $('#VillageId option:selected').val();
+    var localityid = $('#LocalityId option:selected').val();
     var FromDate = $('#txtFromDate').val();
     var ToDate = $('#txtToDate').val();
     var model = {
         name: "test",
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
-        villageId: parseInt(villageid),
+        localityId: parseInt(localityid),
         fromDate: FromDate,
         toDate: ToDate
     }

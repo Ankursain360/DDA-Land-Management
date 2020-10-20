@@ -9,19 +9,19 @@ namespace Libraries.Model.Entity
 {
     public class Page : AuditableEntity<int>
     {
-        [Required]
+        [Required(ErrorMessage = "Module name is required")]
         public int? ModuleId { get; set; }
-        [Required]
+        [Required (ErrorMessage ="Page name is required")]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Page", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please fill Address ")]
         public string Address { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please fill Display Page On Menu feild ")]
         public byte? DisplayPageOnMenu { get; set; }
         [Required]
         public int? Priority { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please fill Status feild")]
         public byte? IsActive { get; set; }
 
         [NotMapped]

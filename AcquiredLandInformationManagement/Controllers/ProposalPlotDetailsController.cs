@@ -40,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
             //proposalplotdetails.IsActive = 1;
 
             proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            proposalplotdetails.VillageList = await _proposalplotdetailsService.GetAllVillage();
+            proposalplotdetails.LocalityList = await _proposalplotdetailsService.GetAllLocality();
             proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
 
 
@@ -55,7 +55,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-                proposalplotdetails.VillageList = await _proposalplotdetailsService.GetAllVillage();
+                proposalplotdetails.LocalityList = await _proposalplotdetailsService.GetAllLocality();
                 proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
                 if (ModelState.IsValid)
                 {
@@ -92,7 +92,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
             var Data = await _proposalplotdetailsService.FetchSingleResult(id);
             Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            Data.VillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.LocalityList = await _proposalplotdetailsService.GetAllLocality();
+            
             Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
 
 
@@ -134,20 +135,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(proposalplotdetails);
         }
 
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _proposalplotdetailsService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Page: {Name} already exist");
-        //    }
-        //}
+      
 
 
         public async Task<IActionResult> Delete(int id)
@@ -172,7 +160,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _proposalplotdetailsService.FetchSingleResult(id);
            
             Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            Data.VillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.LocalityList = await _proposalplotdetailsService.GetAllLocality();
             Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
             if (Data == null)
             {

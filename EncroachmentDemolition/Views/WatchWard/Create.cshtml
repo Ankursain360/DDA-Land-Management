@@ -40,8 +40,8 @@
 
 
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label><span style="color:red">*</span>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                        <label class="control-label lb-sm">Locality Name (Village)</label><span style="color:red">*</span>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option>Select</option>
                         </select>
                     </div>

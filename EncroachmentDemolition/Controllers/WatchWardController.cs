@@ -45,14 +45,14 @@ namespace EncroachmentDemolition.Controllers
         {
             Watchandward watchandward = new Watchandward();
             watchandward.IsActive = 1;
-            watchandward.VillageList = await _watchandwardService.GetAllVillage();
+            watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
             return View(watchandward);
         }
         [HttpPost]
         public async Task<IActionResult> Create(Watchandward watchandward)
         {
-            watchandward.VillageList = await _watchandwardService.GetAllVillage();
+            watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
 
             
@@ -138,7 +138,8 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
-            Data.VillageList = await _watchandwardService.GetAllVillage();
+        
+            Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             if (Data == null)
             {
@@ -150,7 +151,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Edit(int id, Watchandward watchandward)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
-            Data.VillageList = await _watchandwardService.GetAllVillage();
+            Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
@@ -236,7 +237,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
-            Data.VillageList = await _watchandwardService.GetAllVillage();
+            Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             if (Data == null)
             {

@@ -24,8 +24,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
         {
-            return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
-                .Include(x => x.Village)
+            return await _dbContext.Watchandward
+                .Where(x => x.IsActive == 1)
+                .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
         }
@@ -38,7 +39,8 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
-            return await _dbContext.Watchandward.Include(x => x.Village)
+            return await _dbContext.Watchandward
+                .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .ToListAsync();
         }
@@ -59,22 +61,26 @@ namespace Libraries.Repository.EntityRepository
             List<Village> villagelist = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
             return villagelist;
         }
-
+        public async Task<List<Locality>> GetAllLocality()
+        {
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localityList;
+        }
         public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
         {
             var data = await _dbContext.Watchandward
-                .Include(x => x.Village)
-                .Include(x=>x.Khasra)             
-                . Where(x => (x.VillageId == (watchandwardSearchDto.villageId == 0 ? x.VillageId : watchandwardSearchDto.villageId))
-                && x.Date >= watchandwardSearchDto.fromDate && x.Date<= watchandwardSearchDto.toDate).OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Where(x => (x.LocalityId == (watchandwardSearchDto.localityId == 0 ? x.LocalityId : watchandwardSearchDto.localityId))
+               && x.Date >= watchandwardSearchDto.fromDate && x.Date <= watchandwardSearchDto.toDate).OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
 
             return data;
         }
 
 
         //**************multiple files methods********************* added by ishu
-       
-       public async Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails)
+
+        public async Task<bool> SaveWatchandwardphotofiledetails(Watchandwardphotofiledetails watchandwardphotofiledetails)
         {
             _dbContext.Watchandwardphotofiledetails.Add(watchandwardphotofiledetails);
             var Result = await _dbContext.SaveChangesAsync();

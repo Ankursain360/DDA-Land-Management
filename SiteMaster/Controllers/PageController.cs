@@ -35,7 +35,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Create()
         {
             Page page = new Page();
-            page.IsActive = 1;
+            
             page.ModuleList = await _pageService.GetAllModule();
             return View(page);
         }
@@ -138,22 +138,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _pageService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-            var result = await _pageService.GetAllPage();
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View("Index",result);
-        }
+       
 
         public async Task<IActionResult> View(int id)
         {
@@ -166,6 +151,27 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality 
+        {
+            try
+            {
 
+                var result = await _pageService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _pageService.GetAllPage();
+            return View("Index", list);
+        }
     }
 }

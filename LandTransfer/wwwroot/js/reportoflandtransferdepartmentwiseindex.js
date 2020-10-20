@@ -3,17 +3,13 @@ var currentPageSize = 10;
 
 $(function () {
     $("#btnGenerate").click(function () {
-        debugger; 
-
+        debugger;
+        var result = ValidateForm();
         var departmentid = $('#DepartmentId option:selected').val();
         var reportType = $('#ReportType option:selected').val();
-        if (departmentid != null && departmentid != undefined && reportType != null && departmentid != "" && reportType != "" && reportType != undefined) {
+        if (result) {
             GetReport(currentPageNumber, currentPageSize, departmentid, reportType);
-        }
-        else {
-            alert("Please select department");
-        }
-
+        }          
     });
 });
 

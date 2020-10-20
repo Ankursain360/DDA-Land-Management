@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         [Required]
         public int? ProposaldetailsId { get; set; }
         [Required]
-        public int? VillageId { get; set; }
+        public int? LocalityId { get; set; }
         [Required]
         public int? KhasraId { get; set; }
         [Required]
@@ -30,9 +30,9 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Village> VillageList { get; set; }
-        public virtual Village Village { get; set; }
-
+        public List<Locality> LocalityList { get; set; }
+        public virtual Locality Locality { get; set; }
+   
 
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }

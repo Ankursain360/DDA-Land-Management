@@ -25,10 +25,11 @@ namespace Libraries.Service.ApplicationService
             _watchandwardRepository = watchandwardRepository;
         }
 
-        public async Task<List<Village>> GetAllVillage()
+       
+        public async Task<List<Locality>> GetAllLocality()
         {
-            List<Village> villageList = await _watchandwardRepository.GetAllVillage();
-            return villageList;
+            List<Locality> localityList = await _watchandwardRepository.GetAllLocality();
+            return localityList;
         }
         public async Task<List<Khasra>> GetAllKhasra()
         {
@@ -66,7 +67,7 @@ namespace Libraries.Service.ApplicationService
             Watchandward model = result.FirstOrDefault();
 
             model.Date = watchandward.Date;
-            model.VillageId = watchandward.VillageId;
+            model.LocalityId = watchandward.LocalityId;
             model.KhasraId = watchandward.KhasraId;
             model.Landmark = watchandward.Landmark;
             model.Encroachment = watchandward.Encroachment;

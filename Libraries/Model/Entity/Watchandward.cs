@@ -15,7 +15,7 @@ namespace Libraries.Model.Entity
         }
        
         public DateTime? Date { get; set; }
-        public int? VillageId { get; set; }
+        public int? LocalityId { get; set; }
         public int? KhasraId { get; set; }
         public string Landmark { get; set; }
         public int? Encroachment { get; set; }
@@ -28,8 +28,8 @@ namespace Libraries.Model.Entity
 
 
         [NotMapped]
-        public List<Village> VillageList { get; set; }
-        public virtual Village Village { get; set; }
+        public List<Locality> LocalityList { get; set; }
+        public virtual Locality Locality { get; set; }
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         public virtual Khasra Khasra { get; set; }

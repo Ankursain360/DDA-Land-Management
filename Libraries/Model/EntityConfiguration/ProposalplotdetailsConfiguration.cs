@@ -18,11 +18,11 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkProposalKhasra_idx");
 
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("fkProposalLocality_idx");
+
             builder.HasIndex(e => e.ProposaldetailsId)
                 .HasName("fkProposalDetails_idx");
-
-            builder.HasIndex(e => e.VillageId)
-                .HasName("fkProposalVillage_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -42,27 +42,26 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ProposaldetailsId).HasColumnType("int(11)");
-
-            builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Khasra)
                 .WithMany(p => p.Proposalplotdetails)
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fkProposalKhasra");
 
+            builder.HasOne(d => d.Locality)
+                .WithMany(p => p.Proposalplotdetails)
+                .HasForeignKey(d => d.LocalityId)
+                .HasConstraintName("fkProposalLocality");
+
             builder.HasOne(d => d.Proposaldetails)
                 .WithMany(p => p.Proposalplotdetails)
                 .HasForeignKey(d => d.ProposaldetailsId)
                 .HasConstraintName("fkProposalDetails");
-
-            builder.HasOne(d => d.Village)
-                .WithMany(p => p.Proposalplotdetails)
-                .HasForeignKey(d => d.VillageId)
-                .HasConstraintName("fkProposalVillage");
-
         }
      
      }

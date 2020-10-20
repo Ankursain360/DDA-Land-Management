@@ -50,7 +50,7 @@ namespace Libraries.Service.ApplicationService
             model.LandNotificationId= booktransferland.LandNotificationId;
 
             model.NotificationDate = booktransferland.NotificationDate;
-            model.VillageId = booktransferland.VillageId;
+            model.LocalityId = booktransferland.LocalityId;
             model.KhasraId = booktransferland.KhasraId;
 
 
@@ -87,10 +87,11 @@ namespace Libraries.Service.ApplicationService
             List<LandNotification> landNotificationList = await _booktransferlandRepository.GetAllLandNotification();
             return landNotificationList;
         }
-        public async Task<List<Village>> GetAllVillage()
+       
+        public async Task<List<Locality>> GetAllLocality()
         {
-            List<Village> villageList = await _booktransferlandRepository.GetAllVillage();
-            return villageList;
+            List<Locality> localityList = await _booktransferlandRepository.GetAllLocality();
+            return localityList;
         }
         public async Task<List<Khasra>> GetAllKhasra()
         {

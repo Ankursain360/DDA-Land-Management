@@ -13,6 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Watchandward>> GetWatchandward();
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Village>> GetAllVillage();
+        Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
     }
