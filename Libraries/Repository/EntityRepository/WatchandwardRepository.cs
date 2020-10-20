@@ -56,11 +56,11 @@ namespace Libraries.Repository.EntityRepository
             List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
             return khasraList;
         }
-        public async Task<List<Village>> GetAllVillage()
-        {
-            List<Village> villagelist = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
-            return villagelist;
-        }
+        //public async Task<List<Village>> GetAllVillage()
+        //{
+        //    List<Village> villagelist = await _dbContext.Village.Where(x => x.IsActive == 1).ToListAsync();
+        //    return villagelist;
+        //}
         public async Task<List<Locality>> GetAllLocality()
         {
             List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();

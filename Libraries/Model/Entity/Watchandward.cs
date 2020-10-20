@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
             Watchandwardphotofiledetails = new HashSet<Watchandwardphotofiledetails>();
             Watchandwardreportfiledetails = new HashSet<Watchandwardreportfiledetails>();
         }
-       
+        [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
         public int? LocalityId { get; set; }
         public int? KhasraId { get; set; }
