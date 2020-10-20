@@ -26,15 +26,15 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department<span style="color:red">*</span> </label>
-                        <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <select asp-for="DepartmentId" class="form-control dda-dropdown" required="required" requiredMsg="The Department field is required" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);">
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone<span style="color:red">*</span></label>
-                        <select asp-for="ZoneId" class="form-control dda-dropdown">
-                            <option value="value">Select</option>
+                        <select asp-for="ZoneId" class="form-control dda-dropdown" required="required" requiredMsg="The Zone Name is required">
+                            <option value="">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
@@ -47,12 +47,12 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Division Name <span style="color:red">*</span></label>
-                        <input asp-for="Name" required class="form-control" limit="100">
+                        <input asp-for="Name" required="required" requiredMsg="The Division Name is required" class="form-control" limit="100">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Code<span style="color:red">*</span></label>
-                        <input asp-for="Code" required class="form-control" limit="100">
+                        <input asp-for="Code" required="required" requiredMsg="The Code is required" class="form-control" limit="100">
                         <span asp-validation-for="Code" class="text-danger"></span>
                     </div>
                 </div>
@@ -74,7 +74,7 @@
 
                 <div class="row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
                         @Html.ActionLink("Back", "Index", "Division", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
@@ -85,14 +85,10 @@
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/designationmastercreate.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/designationmastercreate.min.js" asp-append-version="true"></script>
-</environment>
+
 
 <environment include="Development">
+    <script src="~/js/divisioncreate.js"></script>
     <script src="~/js/divisionmaster.js"></script>
 </environment>
 <environment exclude="Development">
