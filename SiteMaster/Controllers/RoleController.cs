@@ -127,5 +127,33 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
+
+
+
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    try
+        //    {
+
+        //        var result = await _roleService.Delete(id);
+        //        if (result == true)
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //    }
+        //    var list = await _roleService.GetRole();
+        //    return View("Index", list);
+        //}
+
+
+
     }
 }

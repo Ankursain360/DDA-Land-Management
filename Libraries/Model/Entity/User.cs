@@ -15,10 +15,13 @@ namespace Libraries.Model.Entity
         public string LoginName { get; set; }
         [Required] 
         public string DisplayName { get; set; }
+        [Required]
         public string Password { get; set; }
         [Required] 
         public string Email { get; set; }
+        [Required]
         public int? RoleId { get; set; }
+        [Required]
         public string ChangePassword { get; set; }
         public string PrevPassword1 { get; set; }
         public string PrevPassword2 { get; set; }
@@ -35,6 +38,7 @@ namespace Libraries.Model.Entity
         public DateTime? LastLogoutDateTime { get; set; }
         public string LastActivity { get; set; }
         public string ContactNo { get; set; }
+        [Required]
         public int? LockedCount { get; set; }
         public int AadharcardNo { get; set; }
       //  public string Password { get; set; }

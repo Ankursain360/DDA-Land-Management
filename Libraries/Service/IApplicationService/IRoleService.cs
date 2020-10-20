@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Role role); 
         Task<bool> Create(Role Role);
         Task<Role> FetchSingleResult(int id);  
+
         Task<bool> Delete(int id);
         Task<bool> CheckUniqueName(int id, string name);
         Task<PagedResult<Role>> GetPagedRole(RoleSearchDto model);

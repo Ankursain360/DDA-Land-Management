@@ -19,7 +19,8 @@ namespace Libraries.Model.Entity
             Locality = new HashSet<Locality>();
         }
 
-        [Required]
+        [Required(ErrorMessage = "The Department field is required")]
+
         public int DepartmentId { get; set; }
 
         [Required]
