@@ -43,6 +43,53 @@ $(document).ready(function () {
         }
     });
 });
+function ValidateForm() {
+    var isFormValid = true;
+    $("form input,select,textarea").each(function () {
+        var FieldId = "span_" + $(this).attr("id");
+        debugger
+        //if ($.trim($(this).val()).length == 0 || $.trim($(this).val()) == 0) {
+        if ($.trim($(this).val()).length == 0) {
+            if ($(this).is("[required]")) {
+                if ($("#" + FieldId).length == 0) {
+                    var ValidationMsg = $(this).attr('requiredMsg') == undefined && $(this).attr('requiredMsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredMsg');
+                    $("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+                    //$("<span class='help-block' id='" + FieldId + "'>" + $(this).attr('requiredMsg') + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+                    $(this).parent().closest('div').addClass('has-error');
+                }
+                if ($("#" + FieldId).css('display') == 'none') {
+                    $("#" + FieldId).fadeIn(250);
+                }
+                isFormValid = false;
+            }
+        }
+        else if ($(this).attr('type') == 'email' && $(this).val() != '' && $(this).val() != null) {
+            debugger
+            isFormValid = (/^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/).test($(this).val());
+            if (!isFormValid) {
+                $(this).parent().closest('div').removeClass("has-error");
+                $('#' + FieldId).remove();
+                $("#" + FieldId).fadeIn(250);
+                $("<span class='help-block' id='" + FieldId + "'>Please Enter Valid Email-Id</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+                $(this).parent().closest('div').addClass('has-error');
+                isFormValid = false;
+            }
+            else {
+                $(this).parent().closest('div').removeClass("has-error");
+                if ($("#" + FieldId).length > 0) {
+                    $("#" + FieldId).fadeOut(250);
+                }
+            }
+        }
+        else {
+            $(this).parent().closest('div').removeClass("has-error");
+            if ($("#" + FieldId).length > 0) {
+                $("#" + FieldId).fadeOut(250);
+            }
+        }
+    });
+    return isFormValid;
+};
 $('.numbers').keyup(function (e) {
     this.value = this.value.replace(/[^0-9\.]/g, '');
 });
