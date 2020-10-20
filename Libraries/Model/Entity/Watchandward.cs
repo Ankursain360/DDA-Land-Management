@@ -15,14 +15,25 @@ namespace Libraries.Model.Entity
         }
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
+        [Required(ErrorMessage = "Please select locality")]
         public int? LocalityId { get; set; }
+
+        [Required(ErrorMessage = "Please select khasra")]
         public int? KhasraId { get; set; }
+        [Required(ErrorMessage = "Please fill Landmark")]
         public string Landmark { get; set; }
+        [Required(ErrorMessage = "Please select")]
         public int? Encroachment { get; set; }
+
+        [Required(ErrorMessage = "Status On Ground is required")]
         public string StatusOnGround { get; set; }
+
         public string PhotoPath { get; set; }
         public string ReportFiletPath { get; set; }
+
+        [Required(ErrorMessage = "Remarks feild is required")]
         public string Remarks { get; set; }
+        [Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
 
 
