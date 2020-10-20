@@ -50,12 +50,12 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model, UserId);
+            var result = await _propertyregistrationService.GetPagedPropertyRegisterationMOR(model, UserId);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
-            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
             // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
             //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
