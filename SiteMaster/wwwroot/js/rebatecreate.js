@@ -1,7 +1,7 @@
 ﻿
 
 $(document).ready(function () {
-   // $("#FromDate").val("");
+    // $("#FromDate").val("");
     var id = $("input[name='IsRebateOn']:checked").val();
     $.ajax({
         type: 'GET',
@@ -26,38 +26,38 @@ $(document).ready(function () {
     });
 })
 
-$(function () {
-    $("input[name='IsRebateOn']").click(function () {
-        var id = $("input[name='IsRebateOn']:checked").val();
-        $.ajax({
-            type: 'GET',
-            url: '/Rebate/GetFromDate',
-            data: { propertyId: id },
-            // dataType: 'json',
-            success: function (data) {
-                if (data != null) {
-                    if (data == "") {
-                        $("#FromDate").removeAttr("readonly", "readonly");
-                        $("#FromDate").removeAttr("type", "text");
-                        $("#FromDate").attr("type", "date");
-                        $("#FromDate").val("");
-                    }
-                    else {
-                        $("#FromDate").removeAttr("type", "date");
-                        $("#FromDate").attr("type", "text");
-                        $("#FromDate").val(data);
-                        $("#FromDate").attr("readonly", "readonly");
-                    }
-                }
-                else {
-                    $("#FromDate").attr("readonly", "readonly");
+
+$("input[name='IsRebateOn']").click(function () {
+    var id = $("input[name='IsRebateOn']:checked").val();
+    $.ajax({
+        type: 'GET',
+        url: '/Rebate/GetFromDate',
+        data: { propertyId: id },
+        // dataType: 'json',
+        success: function (data) {
+            if (data != null) {
+                if (data == "") {
+                    $("#FromDate").removeAttr("readonly", "readonly");
+                    $("#FromDate").removeAttr("type", "text");
+                    $("#FromDate").attr("type", "date");
                     $("#FromDate").val("");
                 }
-
+                else {
+                    $("#FromDate").removeAttr("type", "date");
+                    $("#FromDate").attr("type", "text");
+                    $("#FromDate").val(data);
+                    $("#FromDate").attr("readonly", "readonly");
+                }
             }
-        });
+            else {
+                $("#FromDate").attr("readonly", "readonly");
+                $("#FromDate").val("");
+            }
+
+        }
     });
 });
+
 
 
 
@@ -76,7 +76,7 @@ $('#myForm').validate({
     },
 
     messages: {
-       
+
         FromDate: {
             required: FromDateMessage //this is a function that returns custom messages
         },

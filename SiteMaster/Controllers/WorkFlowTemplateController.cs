@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Service.IApplicationService;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,10 +18,12 @@ namespace SiteMaster.Controllers
     {
 
         private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IUserProfileService _userProfileService;
 
-        public WorkFlowTemplateController(IWorkflowTemplateService workflowtemplateService)
+        public WorkFlowTemplateController(IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService)
         {
             _workflowtemplateService = workflowtemplateService;
+            _userProfileService = userProfileService;
         }
         public IActionResult Index()
         {
@@ -181,12 +184,12 @@ namespace SiteMaster.Controllers
         {
             if (value == "Role")
             {
-                var data = await _workflowtemplateService.GetRolelist();
+                var data = await _userProfileService.GetRole();
                 return Json(data);
             }
             else
             {
-                var data = await _workflowtemplateService.GetUserlist();
+                var data = await _userProfileService.GetUser();
                 return Json(data);
             }
         }

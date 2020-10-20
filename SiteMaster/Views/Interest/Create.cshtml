@@ -24,33 +24,33 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="PropertyId">Property Type </label>
-                        <select class="form-control dda-dropdown" asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
+                        <label class="control-label lb-sm" asp-for="PropertyId">Property Type </label><span class="text-danger">*</span>
+                        <select class="form-control dda-dropdown" asp-for="PropertyId" required="required" requiredMsg="Property Type is Mandatory" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
                             <option value="">--Select--</option>
                         </select>
                         <span asp-validation-for="PropertyId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">From Date</label>
-                        <input asp-for="FromDate" type="date" class="form-control" value="">
+                        <label class="control-label lb-sm">From Date</label><span class="text-danger">*</span>
+                        <input asp-for="FromDate" type="date" class="form-control" value="" required="required" requiredMsg="Rate Amount is Mandatory">
                         <span asp-validation-for="FromDate" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">To Date</label>
-                        <input asp-for="ToDate" type="date" value="" class="form-control">
+                        <label class="control-label lb-sm">To Date</label><span class="text-danger">*</span>
+                        <input asp-for="ToDate" type="date" value="" class="form-control" required="required" requiredMsg="To Date is Mandatory">
                         <span asp-validation-for="ToDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Interest Percentage </label>
-                        <input asp-for="Percentage" type="text" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste = "return false;">
+                        <label class="control-label lb-sm"> Interest Percentage </label><span class="text-danger">*</span>
+                        <input asp-for="Percentage" type="text" value="" class="form-control numbers" required="required" requiredMsg="Interest Percentage is Mandatory"  onkeypress="return numericDecimal(this);" onpaste = "return false;">
                         <span asp-validation-for="Percentage" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
+                        <label class="control-label lb-sm">Status</label><span class="text-danger">*</span>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();"/>
                         @Html.ActionLink("Back", "Index", "Interest", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

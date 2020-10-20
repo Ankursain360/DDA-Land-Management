@@ -22,7 +22,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Division is Mandatory Field")]
         public int DivisionId { get; set; }
 
-        [Required(ErrorMessage = "Locality is Mandatory Field")]
+        
         public int LocalityId { get; set; }       
         public string KhasraNo { get; set; }
 

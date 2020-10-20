@@ -19,7 +19,7 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Edit" id="myForm" method="post">
+            <form asp-action="Edit"  method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="row">
@@ -43,32 +43,32 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">From Date</label>
-                        <input asp-for="FromDate" type="date" class="form-control">
+                        <label class="control-label lb-sm">From Date</label><span class="text-danger">*</span>
+                        <input asp-for="FromDate" type="date" class="form-control" required="required" requiredMsg="From Date is Mandatory">
                         <span asp-validation-for="FromDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">To Date</label>
-                        <input asp-for="ToDate" type="date" class="form-control">
+                        <label class="control-label lb-sm">To Date</label><span class="text-danger">*</span>
+                        <input asp-for="ToDate" type="date" class="form-control" required="required" requiredMsg="To Date is Mandatory">
                         <span asp-validation-for="ToDate" class="text-danger"></span>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Rebate Percentage </label>
-                        <input asp-for="RebatePercentage" type="text" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste = "return false;">
+                        <label class="control-label lb-sm"> Rebate Percentage </label><span class="text-danger">*</span>
+                        <input asp-for="RebatePercentage" type="text" class="form-control numbers" required="required" requiredMsg="Rebate Percentage is Mandatory" onkeypress="return numericDecimal(this);" onpaste = "return false;">
                         <span asp-validation-for="RebatePercentage" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Scheme Name</label>
-                        <input asp-for="Scheme" type="text" class="form-control">
+                        <input asp-for="Scheme" type="text" class="form-control" limit="1000">
                         <span asp-validation-for="Scheme" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
+                        <label class="control-label lb-sm">Status</label><span class="text-danger">*</span>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();"/>
                         @Html.ActionLink("Back", "Index", "Rebate", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
