@@ -62,7 +62,7 @@ namespace SiteMaster.Controllers
         {
             try
             {
-
+                await BindDropDown(rate);
                 if (ModelState.IsValid)
                 {
 
@@ -71,7 +71,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        await BindDropDown(rate);
+                        
                         var result1 = await _rateService.GetAllRate();
                         return View("Index", result1);
                     }

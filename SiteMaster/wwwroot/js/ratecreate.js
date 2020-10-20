@@ -43,6 +43,7 @@ $('#myForm').validate({
             required: true
         },
         RatePercentage: {
+            maxlength: 18,
             required: true
         }
     },
@@ -111,7 +112,7 @@ function ToDateMessage() {
 }
 
 function RatePercentageMessage() {
-    var value = $("RatePercentage").val();
+    var value = $("#RatePercentage").val();
     if (value == "") {
         return "Rate Percentage is Mandatory";
     }
