@@ -31,8 +31,8 @@ function GetSearchParam(pageNumber, pageSize) {
         name: $('#txtName').val(),
         phoneNumber: $('#txtPhoneNumber').val(),
         email: $('#txtEmail').val(),
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

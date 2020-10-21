@@ -297,7 +297,7 @@ function GetListData() {
         else {
             parameterSkip = false;
         }
-        if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "") && (parameterName == "0") && (parameterAction == "0")) {
+        if ((parameterName == "")) {
 
         }
         else {

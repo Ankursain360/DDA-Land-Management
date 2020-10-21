@@ -22,12 +22,12 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Classification of Land</label>
-                        <input asp-for="Name" class="form-control" limit="200">
+                        <label class="control-label lb-sm">Classification of Land</label><span class="text-danger">*</span>
+                        <input asp-for="Name" class="form-control" limit="200" required="required" requiredMsg="Classification of Land is Mandatory">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
+                        <label class="control-label lb-sm">Status</label><span class="text-danger">*</span>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();"/>
                         @Html.ActionLink("Back", "Index", "ClassificationofLand", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

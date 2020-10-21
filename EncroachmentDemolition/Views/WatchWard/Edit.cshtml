@@ -17,7 +17,7 @@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Edit" enctype="multipart/form-data">
@@ -30,6 +30,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
                         <input asp-for="Date" type="date" id="txtDate" class="form-control" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
                     </div>
 
 
@@ -38,6 +39,7 @@
                         <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option>Select</option>
                         </select>
+                        <span asp-validation-for="LocalityId" class="text-danger"></span>
                     </div>
 
 
@@ -50,11 +52,13 @@
                         <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
                             <option>Select</option>
                         </select>
+                        <span asp-validation-for="KhasraId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Land Mark</label><span style="color:red">*</span>
                         <input asp-for="Landmark" type="text" class="form-control" />
+                        <span asp-validation-for="Landmark" class="text-danger"></span>
                     </div>
 
 
@@ -67,6 +71,7 @@
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
+                        <span asp-validation-for="Encroachment" class="text-danger"></span>
                     </div>
 
 
@@ -75,6 +80,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
                         <textarea asp-for="StatusOnGround" type="text" class="form-control"></textarea>
+                        <span asp-validation-for="StatusOnGround" class="text-danger"></span>
                     </div>
 
 
@@ -147,6 +153,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
                         <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
                     </div>
 
                 </div>

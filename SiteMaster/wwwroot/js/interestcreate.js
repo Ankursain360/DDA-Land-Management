@@ -2,7 +2,7 @@
     $("#FromDate").val("");
 })
 
-$(function () {
+//$(function () {
     $('#PropertyId').change(function () {
         var id = $("#PropertyId").val();
         $.ajax({
@@ -28,7 +28,7 @@ $(function () {
             }
         });
     });
-});
+//});
 
 
 $('#myForm').validate({

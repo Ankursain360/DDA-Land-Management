@@ -27,10 +27,12 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
                         <input asp-for="KhasraNo" type="text" class="form-control" />
+                        <span asp-validation-for="KhasraNo" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Land Area Acquired</label>
                         <input asp-for="LandAreaAcquired" type="text" class="form-control" />
+                        <span asp-validation-for="LandAreaAcquired" class="text-danger"></span>
                     </div>
 
 
@@ -40,10 +42,12 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Award No.</label>
                         <input asp-for="AwardNo" type="text" class="form-control" />
+                        <span asp-validation-for="AwardNo" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Award Date</label>
                         <input asp-for="AwardDate" type="date" class="form-control" />
+                        <span asp-validation-for="AwardDate" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -51,10 +55,12 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date of Possession</label>
                         <input asp-for="DateOfPossession" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfPossession" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Area of which possession taken over</label>
                         <input asp-for="AreaOfWhichPossessionTakenOver" type="text" class="form-control" />
+                        <span asp-validation-for="AreaOfWhichPossessionTakenOver" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -62,10 +68,12 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date on which possession taken over</label>
                         <input asp-for="DateOnWhichPossessionTakenOver" type="date" class="form-control" />
+                        <span asp-validation-for="DateOnWhichPossessionTakenOver" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Scheme for which Acquired</label>
                         <input asp-for="SchemeForWhichAcquired" type="text" class="form-control" />
+                        <span asp-validation-for="SchemeForWhichAcquired" class="text-danger"></span>
                     </div>
                 </div>
 
@@ -73,6 +81,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Amount of Award</label>
                         <input asp-for="AmountOfAward" type="text" class="form-control" />
+                        <span asp-validation-for="AmountOfAward" class="text-danger"></span>
                     </div>
 
                 </div>
@@ -92,16 +101,19 @@
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">ADI Court</label>
                             <input asp-for="AdiCourt" type="text" class="form-control" />
+                            <span asp-validation-for="AdiCourt" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">High Court</label>
                             <input asp-for="HighCourt" type="text" class="form-control" />
+                            <span asp-validation-for="HighCourt" class="text-danger"></span>
                         </div>
 
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Supreme Court</label>
                             <input asp-for="SupremeCourt" type="text" class="form-control" />
+                            <span asp-validation-for="SupremeCourt" class="text-danger"></span>
                         </div>
 
                     </div>
@@ -111,21 +123,23 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Certificate by Land Record Officer to the correctness of entry</label>
                         <input asp-for="CertificateToCorrectnessOfEntry" type="text" class="form-control" />
+                        <span asp-validation-for="CertificateToCorrectnessOfEntry" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm lb-sm">Division to Which Land has been transfered</label>
-                        <select asp-for="DivisionId" 
+                        <select asp-for="DivisionId"
                                 asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" class="form-control dda-dropdown">
                             <option value="1">---Select---</option>
                             <option value="0">financial</option>
                         </select>
-                        <span class="text-danger"></span>
+                        <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date of Transfer</label>
                         <input asp-for="DateOfTransfer" type="date" class="form-control" />
+                        <span asp-validation-for="DateOfTransfer" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-row">
@@ -143,6 +157,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
                         <textarea asp-for="Remarks" type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
                     </div>
                 </div>
 
