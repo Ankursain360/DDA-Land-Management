@@ -24,21 +24,21 @@
 
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm" asp-for="DepartmentName">Department </label>
+                        <label class="control-label lb-sm" asp-for="DepartmentName">Department <span style="color:red">*</span></label>
                         <select class="form-control dda-dropdown"  required="required" requiredMsg="The Department field is required" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
                             <option value="">--Select--</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone Name   </label>
+                        <label class="control-label lb-sm">Zone Name <span style="color:red">*</span>  </label>
                         <input asp-for="Name" type="text" class="form-control" limit="100"  required="required" requiredMsg="The Zone field is required">
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Zone Code</label>
+                        <label class="control-label lb-sm">Zone Code<span style="color:red">*</span></label>
                         <input asp-for="Code" type="text" class="form-control" limit="100"  required="required" requiredMsg="The Zone Code field is required">
                         <span asp-validation-for="Code" class="text-danger"></span>
                     </div>
