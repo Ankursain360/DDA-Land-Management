@@ -32,7 +32,7 @@ $(document).ready(function () {
 });
 function ValidateForm() {
     var isFormValid = true;
-    $("form input,select,textarea").each(function () {
+    $("input,select,textarea").each(function () {
         var FieldId = "span_" + $(this).attr("id");
         if ($.trim($(this).val()).length == 0) {
             if ($(this).is("[required]")) {
@@ -42,7 +42,7 @@ function ValidateForm() {
                         $("#" + $(this).attr("id") + "-error")
                         var ValidationMsg = $(this).attr('requiredmsg') == undefined && $(this).attr('requiredmsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredmsg');
                     }
-                    $("<span class='text-danger' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
+                    $("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
                     $(this).parent().closest('div').addClass('has-error');
                 }
                 if ($("#" + FieldId).css('display') == 'none') {
@@ -91,7 +91,7 @@ function ValidateForm() {
                     $(this).parent().closest('div').removeClass("has-error");
                     $('#' + FieldId).remove();
                     $("#" + FieldId).fadeIn(250);
-                    $("<span class='text-danger' id='" + FieldId + "'>Please Enter Minimum " + parseInt($(this).attr("min-limit")) + " Characters</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"));
+                    $("<span class='help-block' id='" + FieldId + "'>Please Enter Minimum " + parseInt($(this).attr("min-limit")) + " Characters</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"));
                     $(this).parent().closest('div').addClass('has-error');
                     isFormValid = false;
                 }
@@ -131,8 +131,7 @@ function numericDecimal(elementRef) {
             return true;
     }
     return false;
-
-}  
+}
 
 $('.onlynumbers').keyup(function () {
     var $th = $(this);
