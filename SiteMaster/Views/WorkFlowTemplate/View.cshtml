@@ -39,28 +39,20 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="row">
-                <div class="form-group col-md-3">
-                    <label class="control-label lb-sm" asp-for="ModuleId">Module</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="ModuleId">Module</label><span class="text-danger">*</span>
                     <select asp-for="ModuleId" disabled class="form-control dda-dropdown" asp-items="@(new SelectList(Model.ModuleList,"Id","Name"))">
                         <option value="0">Select</option>
                     </select>
                     <span asp-validation-for="ModuleId" class="text-danger lb-sm" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
                 </div>
-                <div class="form-group col-md-2">
-                    <label class="control-label lb-sm">User Type</label>
-                    <select class="form-control dda-dropdown" id="ddlOperationType" disabled>
-                        <option value="Role">Role Wise</option>
-                        <option value="User">User Wise</option>
-
-                    </select>
-                </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label lb-sm" asp-for="Name">Proccess Name</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="Name">Proccess Name</label><span class="text-danger">*</span>
                     <input asp-for="Name" type="text" class="form-control" disabled/>
                     <span asp-validation-for="Name"  class="text-danger lb-sm" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
                 </div>
-                <div class="form-group col-md-3">
-                    <label class="control-label lb-sm" asp-for="Description">Proccess Description</label>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="Description">Proccess Description</label><span class="text-danger">*</span>
                     <input asp-for="Description" type="text" class="form-control" disabled />
                     <span asp-validation-for="Description"  class="text-danger lb-sm" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
                 </div>
