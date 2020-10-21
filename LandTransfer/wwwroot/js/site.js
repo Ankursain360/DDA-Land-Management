@@ -22,6 +22,27 @@ $(document).ready(function () {
 			}
 		}
 	});
+	$('input,textarea').keypress(function () {
+		var FieldId = "span_Min" + $(this).attr("id");
+		if ($(this).is("[minLimit]")) {
+			if ($(this).attr("minLimit") != undefined && $(this).attr("minLimit") != null && $(this).attr("minLimit") != '') {
+				if (parseInt($(this).attr("minLimit")) > 0) {
+					$("#" + FieldId).remove();
+					$("<span class='help-block' id='" + FieldId + "'>Please Enter Minimum " + parseInt($(this).attr("minLimit"))+" Characters</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"));
+				}
+                else {
+					
+                }
+			}
+		}
+	});
+	$('input,textarea').each(function () {
+		if ($(this).is("[limit]")) {
+			if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
+				$(this).MaxLength({ MaxLength: parseInt($(this).attr("limit")) });
+			}
+		}
+	});
 	var forbiddenWords = ['iframe', 'Script', 'Video', 'Audio', 'Alert', '<', '>', '/>'];
 	var Bool = "False";
 	$('input,textarea').on('keyup', function (e) {
@@ -46,9 +67,11 @@ function ValidateForm() {
 		if ($.trim($(this).val()).length == 0 ) {
 			if ($(this).is("[required]")) {
 				if ($("#" + FieldId).length == 0) {
-					var ValidationMsg = $(this).attr('requiredMsg') == undefined && $(this).attr('requiredMsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredMsg');
+					var ValidationMsg = 'This Field is Mandatory';
+					if ($(this).is('requiredMsg')) {
+						var ValidationMsg = $(this).attr('requiredMsg') == undefined && $(this).attr('requiredMsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredMsg');
+					}
 					$("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg+ "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
-					//$("<span class='help-block' id='" + FieldId + "'>" + $(this).attr('requiredMsg') + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
 					$(this).parent().closest('div').addClass('has-error');
 				}
 				if ($("#" + FieldId).css('display') == 'none') {
