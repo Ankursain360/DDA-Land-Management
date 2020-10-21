@@ -33,6 +33,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Landtransfer>> GetPagedLandTransferReportData(LandTransferSearchDto model);// added by shalini                                                                                                     //Task<List<Landtransfer>> GetLandTransferReportDepartmentwise(int handedover);
 
         //Task<List<Landtransfer>> GetAllHandoverDepartment();
-       
+
+        //Current status of land history :
+        Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
+
     }
 }

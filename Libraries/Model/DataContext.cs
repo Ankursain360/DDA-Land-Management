@@ -85,6 +85,7 @@ namespace Libraries.Model
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
         public virtual DbSet<Actions> Actions { get; set; }
+        public virtual DbSet<Currentstatusoflandhistory> Currentstatusoflandhistory { get; set; }
         /// <summary>
         // Encroachment demolition module:
         public virtual DbSet<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
@@ -162,6 +163,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EncroachmentPhotoFileDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardphotofiledetailsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardreportfiledetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new CurrentstatusoflandhistoryConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
