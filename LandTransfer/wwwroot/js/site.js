@@ -68,8 +68,8 @@ function ValidateForm() {
 			if ($(this).is("[required]")) {
 				if ($("#" + FieldId).length == 0) {
 					var ValidationMsg = 'This Field is Mandatory';
-					if ($(this).is('requiredMsg')) {
-						var ValidationMsg = $(this).attr('requiredMsg') == undefined && $(this).attr('requiredMsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredMsg');
+					if ($(this).is('requiredmsg')) {
+						var ValidationMsg = $(this).attr('requiredmsg') == undefined && $(this).attr('requiredmsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredmsg');
 					}
 					$("<span class='help-block' id='" + FieldId + "'>" + ValidationMsg+ "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger field-validation-valid']"))
 					$(this).parent().closest('div').addClass('has-error');

@@ -23,20 +23,20 @@
             @*<form>*@
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label>
                     <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
                         <option value="0">All</option>
                     </select>
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
                     <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
                         <option value="0">All</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
                     <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
                         <option value="0">All</option>
                     </select>
@@ -45,19 +45,19 @@
             <div class="row">
 
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
                     <select class="form-control dda-dropdown" asp-for="DivisionId">
                         <option value="0">All</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label>
                     <select class="form-control dda-dropdown" asp-for="LocalityId">
                         <option value="0">All</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
                     <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
                         <option value="0">All</option>
                         <option value="Planned Land">Planned Land</option>
@@ -75,19 +75,19 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm">Litigation Status</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm">Litigation Status</label>
                     <select asp-for="LitigationStatus" class="form-control dda-dropdown">
                         <option value="2">All</option>
-                        <option value="0">Yes</option>
-                        <option value="1">No</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm">Encroachment</label><span class="text-danger">*</span>
+                    <label class="control-label lb-sm">Encroachment</label>
                     <select asp-for="Encroached" class="form-control dda-dropdown">
                         <option value="2">All</option>
-                        <option value="0">Yes</option>
-                        <option value="1">No</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
                     </select>
                 </div>
 

@@ -17,7 +17,7 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">View Details</h6>
         </div>
         <div class="panel-body">
             <form asp-action="Edit" method="post" enctype="multipart/form-data">
@@ -26,7 +26,7 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" disabled asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" disabled asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))" required="required" requiredmsg="Classification of Land is Mandatory">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ClassificationOfLandId" class="text-danger"></span>
@@ -34,14 +34,14 @@
 
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="DepartmentId">Department</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DepartmentId" disabled asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId" disabled asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" required="required" requiredmsg="Department is Mandatory">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" disabled>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" disabled required="required" requiredmsg="Zone is Mandatory">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
@@ -51,35 +51,35 @@
 
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled>
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" disabled  asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId" disabled asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option>--Select--</option>
                         </select>
                         <span asp-validation-for="LocalityId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Khasra No</label>
-                        <input asp-for="KhasraNo" disabled class="form-control">
+                        <input asp-for="KhasraNo" disabled class="form-control" limit="200">
                         <span asp-validation-for="KhasraNo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Primary List No.</label>
-                        <input asp-for="PrimaryListNo" disabled class="form-control">
+                        <input asp-for="PrimaryListNo" disabled class="form-control" limit="200">
                         <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Plot No. & Address with Landmark</label>
-                        <textarea asp-for="Palandmark" disabled class="form-control"></textarea>
+                        <textarea asp-for="Palandmark" disabled class="form-control" limit="4000"></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -97,7 +97,7 @@
                     <div class="form-group col-md-12">
                         <label id="l1" class="control-label lb-sm">Encroachment Details</label>
                         <input asp-for="EncraochmentDetails" class="form-control" disabled>
-                        <span asp-validation-for="EncraochmentDetails" class="text-danger"></span>
+                        <span asp-validation-for="EncraochmentDetails" class="text-danger" limit="4000"></span>
                     </div>
                 </div>
 
@@ -122,12 +122,12 @@
                         </div>
                         <div class="form-group col-md-4" id="divBoundaryRemarks" style="display:none;">
                             <label id="l1" class="control-label lb-sm">Boundary Remarks</label>
-                            <input asp-for="BoundaryRemarks" disabled class="form-control">
+                            <input asp-for="BoundaryRemarks" disabled class="form-control" limit="4000">
                             <span asp-validation-for="BoundaryRemarks" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm lb-sm">Total Area(In bigha-biswa/Sq Yd./Acre)</label>
-                            <input asp-for="TotalAreaInBigha" type="text" disabled class="form-control">
+                            <input asp-for="TotalAreaInBigha" type="text" disabled class="form-control" limit="200">
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
@@ -189,7 +189,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Sub Use</label>
-                                <input type="text" disabled class="form-control">
+                                <input type="text" disabled class="form-control" limit="500">
                             </div>
                         </div>
                     </div>
@@ -215,7 +215,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divBuilttype" style="display:none;">
                             <label class="control-label lb-sm">Built-Up Remarks</label>
-                            <input asp-for="BuiltUpRemarks" disabled class="form-control">
+                            <input asp-for="BuiltUpRemarks" disabled class="form-control" limit="4000">
                             <span asp-validation-for="BuiltUpRemarks" class="text-danger"></span>
                         </div>
 
@@ -251,7 +251,7 @@
                         </div>
                         <div class="form-group col-md-4" id="divLitigationStatus" style="display:none;">
                             <label class="control-label lb-sm">Remarks</label>
-                            <input asp-for="LitigationStatusRemarks" disabled class="form-control">
+                            <input asp-for="LitigationStatusRemarks" disabled class="form-control" limit="4000">
                             <span asp-validation-for="LitigationStatusRemarks" class="text-danger"></span>
                         </div>
                     </div>
@@ -299,14 +299,14 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverDepartmentId">Department</label>
-                            <select class="form-control dda-dropdown" asp-for="TakenOverDepartmentId" asp-items="@(new SelectList(Model.TakenOverDepartmentList, "Id","Name"))">
+                            <select class="form-control dda-dropdown" disabled asp-for="TakenOverDepartmentId" asp-items="@(new SelectList(Model.TakenOverDepartmentList, "Id","Name"))">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="TakenOverDepartmentId" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
-                            <input asp-for="TakenOverName" disabled class="form-control">
+                            <input asp-for="TakenOverName" disabled class="form-control" limit="200">
                             <span asp-validation-for="TakenOverName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -319,7 +319,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
-                            <input asp-for="TakenOverEmailId" disabled class="form-control">
+                            <input asp-for="TakenOverEmailId" disabled class="form-control" limit="200">
                             <span asp-validation-for="TakenOverEmailId" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -329,7 +329,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Land Line No.</label>
-                            <input asp-for="TakenOverLandlineNo" disabled class="form-control">
+                            <input asp-for="TakenOverLandlineNo" disabled class="form-control" >
                             <span asp-validation-for="TakenOverLandlineNo" class="text-danger"></span>
                         </div>
                     </div>
@@ -355,7 +355,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Comments</label>
-                            <textarea asp-for="TakenOverComments" disabled class="form-control"></textarea>
+                            <textarea asp-for="TakenOverComments" disabled class="form-control" limit="4000"></textarea>
                             <span asp-validation-for="TakenOverComments" class="text-danger"></span>
                         </div>
                     </div>
@@ -373,14 +373,14 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverDepartmentId">Department</label>
-                            <select class="form-control dda-dropdown" asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.HandOverDepartmentList, "Id","Name"))">
+                            <select class="form-control dda-dropdown" disabled asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.HandOverDepartmentList, "Id","Name"))">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="HandedOverDepartmentId" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Name/Designation</label>
-                            <input asp-for="HandedOverName" disabled class="form-control">
+                            <input asp-for="HandedOverName" disabled class="form-control" limit="200">
                             <span asp-validation-for="HandedOverName" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -393,7 +393,7 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Email Id</label>
-                            <input asp-for="HandedOverEmailId" disabled class="form-control">
+                            <input asp-for="HandedOverEmailId" disabled class="form-control" limit="200">
                             <span asp-validation-for="HandedOverEmailId" class="text-danger"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -403,7 +403,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Land Line No.</label>
-                            <input asp-for="HandedOverLandlineNo" disabled class="form-control">
+                            <input asp-for="HandedOverLandlineNo" disabled class="form-control" >
                             <span asp-validation-for="HandedOverLandlineNo" class="text-danger"></span>
                         </div>
                     </div>
@@ -428,7 +428,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Comments</label>
-                            <textarea asp-for="HandedOverComments" disabled class="form-control"></textarea>
+                            <textarea asp-for="HandedOverComments" disabled class="form-control" limit="4000"></textarea>
                             <span asp-validation-for="HandedOverComments" class="text-danger"></span>
                         </div>
 
@@ -477,7 +477,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Comments</label>
-                            <textarea asp-for="DisposalComments" disabled class="form-control" maxlength="4000"></textarea>
+                            <textarea asp-for="DisposalComments" disabled class="form-control" maxlength="4000" limit="4000"></textarea>
                             <span asp-validation-for="DisposalComments" class="text-danger"></span>
                         </div>
 
@@ -487,7 +487,8 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
-                        <textarea asp-for="Remarks" disabled class="form-control"></textarea>
+                        <textarea asp-for="Remarks" disabled class="form-control" limit="4000"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">

@@ -41,6 +41,8 @@ function FillLevels(response) {
     $(".ParameterValueListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterValueList[" + a + "]");
+        $(this).removeAttr("onchange");
+        $(this).attr("onchange", "callTypeDropdown(" + i + ")");
         $(this).removeAttr("disabled", "disabled");
         $(this).attr("disabled", "disabled");
         a = a + 1;
@@ -158,6 +160,8 @@ function GetLevelDetails() {
             $(".ParameterValueListClass").each(function () {
                 $(this).removeAttr("name");
                 $(this).attr("name", "ParameterValueList[" + i + "]");
+                $(this).removeAttr("onchange");
+                $(this).attr("onchange", "callTypeDropdown(" + i + ")");
                 i = i + 1;
             });
 
@@ -250,6 +254,8 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         $(".ParameterValueListClass").each(function () {
             $(this).removeAttr("name");
             $(this).attr("name", "ParameterValueList[" + i + "]");
+            $(this).removeAttr("onchange");
+            $(this).attr("onchange", "callTypeDropdown(" + i + ")");
             i = i + 1;
         });
 
@@ -375,8 +381,7 @@ function GetListData() {
         else {
             parameterSkip = false;
         }
-        if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "") && (parameterName == "0") && (parameterAction == "0")) {
-
+        if ((parameterName == "0")) {
         }
         else {
             model = {
@@ -391,14 +396,19 @@ function GetListData() {
 
     };
     console.log(workflow);
-    data = {
-        Id: parseInt(id),
-        moduleId: parseInt(moduleId),
-        name: name,
-        description: description,
-        usertype: usertype,
-        isActive: isActive,
-        template: JSON.stringify(workflow)
+    if ($.isEmptyObject(workflow)) {
+
+    }
+    else {
+        data = {
+            Id: parseInt(id),
+            moduleId: parseInt(moduleId),
+            name: name,
+            description: description,
+            usertype: usertype,
+            isActive: isActive,
+            template: JSON.stringify(workflow)
+        }
     }
     console.log(data);
     return data;

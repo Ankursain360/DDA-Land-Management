@@ -253,6 +253,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
         {
+            var badCodes = new[] { 3, 5 };
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
             if (UserId == 2 || Iscreated > 0)
             {
@@ -264,7 +265,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1)
+                                    .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
                 return data;
@@ -280,7 +281,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsValidate == 1)
+                                    .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1)
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
                 return data;
@@ -318,7 +319,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsValidate == 1)
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 )
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
@@ -371,7 +372,14 @@ namespace Libraries.Repository.EntityRepository
                 .GetPaged(model.PageNumber, model.PageSize);
             return data;
         }
-        
+
+        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport()
+        {
+            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
+                                                                        .Where(x => x.IsActive == 1 )
+                                                                        .ToListAsync();
+            return ClassificationoflandList;
+        }
     }
 
 

@@ -19,6 +19,8 @@ namespace Libraries.Model.Entity
         public DateTime ToDate { get; set; }
 
         [Required(ErrorMessage = "The Rebate Percentage field is required")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Rebate Percentage; Max 18 digits")]
         public decimal RebatePercentage { get; set; }
 
         public byte IsActive { get; set; }

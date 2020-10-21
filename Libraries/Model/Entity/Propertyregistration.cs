@@ -23,66 +23,109 @@ namespace Libraries.Model.Entity
         public int DivisionId { get; set; }
 
         [Required(ErrorMessage = "Locality is Mandatory Field")]
-        public int LocalityId { get; set; }       
+        public int LocalityId { get; set; }
+
+        [StringLength(200)]
         public string KhasraNo { get; set; }
 
-        [Required(ErrorMessage = "Primary List No. is Mandatory Field")]
+        [StringLength(200)]
         public string PrimaryListNo { get; set; }
+
+        [StringLength(4000)]
         public string Palandmark { get; set; }
         public int EncroachmentStatusId { get; set; }
+
+        [StringLength(4000)]
         public string EncraochmentDetails { get; set; }
         public int Boundary { get; set; }
+
+        [StringLength(4000)]
         public string BoundaryRemarks { get; set; }
+
+        [StringLength(200)]
         public string TotalAreaInBigha { get; set; }
 
         [Required(ErrorMessage = "Total Area is Mandatory Field")]
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal TotalArea { get; set; }
-       
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Encroached; Max 18 digits")]
         public decimal? Encroached { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Built Up Encraochment Area; Max 18 digits")]
         public decimal? BuiltUpEncraochmentArea { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Vacant; Max 18 digits")]
         public decimal? Vacant { get; set; }
         public string PlannedUnplannedLand { get; set; }
         public int? MainLandUseId { get; set; }
+
+        [StringLength(500)]
         public string SubUse { get; set; }
         public int BuiltUp { get; set; }
+
+        [StringLength(4000)]
         public string BuiltUpRemarks { get; set; }
         public int LayoutPlan { get; set; }
         public string LayoutFilePath { get; set; }
         public int LitigationStatus { get; set; }
+
+        [StringLength(4000)]
         public string LitigationStatusRemarks { get; set; }
         public int GeoReferencing { get; set; }
         public string GeoFilePath { get; set; }
-
         public int? TakenOverDepartmentId { get; set; }
+
+        [StringLength(200)]
         public string TakenOverName { get; set; }
         public DateTime? TakenOverDate { get; set; }
 
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
+        [StringLength(200)]
         public string TakenOverEmailId { get; set; }
 
 
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid 10 digit Mobile Number")]
         public string TakenOverMobileNo { get; set; }
+
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid Max 10 digit Land Line Number")]
         public string TakenOverLandlineNo { get; set; }
+
+        [StringLength(4000)]
         public string TakenOverComments { get; set; }
         public string TakenOverFilePath { get; set; }
         public int? HandedOverDepartmentId { get; set; }
+
+        [StringLength(200)]
         public string HandedOverName { get; set; }
         public DateTime? HandedOverDate { get; set; }
 
         [RegularExpression(@"^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$", ErrorMessage = "Email is not valid.")]
+        [StringLength(200)]
         public string HandedOverEmailId { get; set; }
 
 
         [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid 10 digit Mobile Number")]
         public string HandedOverMobileNo { get; set; }
+
+        [RegularExpression(@"^([0-9]{10})$", ErrorMessage = "Please Enter a Valid Max 10 digit Land Line Number")]
         public string HandedOverLandlineNo { get; set; }
+
+        [StringLength(4000)]
         public string HandedOverComments { get; set; }
         public string HandedOverFilePath { get; set; }
         public int? DisposalTypeId { get; set; }
         public DateTime? DisposalDate { get; set; }
         public string DisposalTypeFilePath { get; set; }
+
+        [StringLength(4000)]
         public string DisposalComments { get; set; }
+
+        [StringLength(4000)]
         public string Remarks { get; set; }
         public byte IsActive { get; set; }
         public byte IsDeleted { get; set; }

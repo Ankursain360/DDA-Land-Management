@@ -1,10 +1,21 @@
 ﻿// Write your JavaScript code.
 $(document).ready(function () {
+
+    $('.numbers').keyup(function (e) {
+        this.value = this.value.replace(/[^0-9\.]/g, '');
+    });
+
+    $('.onlynumbers').keyup(function () {
+        var $th = $(this);
+        $th.val($th.val().replace(/[^0-9]/g, ''));
+    });
+
     $(".ParameterActionListClass").attr("multiple", "");
     $("select").select2({
         placeholder: "--Select--",
         allowClear: true
     });
+
     $('input,textarea').each(function () {
         if ($(this).is("[limit]")) {
             if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
@@ -112,9 +123,7 @@ function ValidateForm() {
     $(".field-validation-valid").hide();
     return isFormValid;
 };
-$('.numbers').keyup(function (e) {
-    this.value = this.value.replace(/[^0-9\.]/g, '');
-});
+
 
 
 function numericDecimal(elementRef) {
@@ -133,10 +142,7 @@ function numericDecimal(elementRef) {
     return false;
 }
 
-$('.onlynumbers').keyup(function () {
-    var $th = $(this);
-    $th.val($th.val().replace(/[^0-9]/g, ''));
-});
+
 
 function SuccessMessage(message) {
     toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
