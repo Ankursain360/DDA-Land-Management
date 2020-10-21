@@ -44,5 +44,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Locality> Locality { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Nazulland> Nazulland { get; set; }
+        public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+        
     }
 }
