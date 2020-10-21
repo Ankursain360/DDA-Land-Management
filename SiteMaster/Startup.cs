@@ -71,11 +71,15 @@ namespace SiteMaster
 #if DEBUG
             if (HostEnvironment.IsDevelopment())
             {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+); 
             }
             else
             {
-                services.AddControllersWithViews();
+                services.AddControllersWithViews().AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+); 
             }
 #endif
 

@@ -68,7 +68,22 @@ namespace Repository.EntityRepository
 
         public async Task<List<ApplicationRole>> GetRole()
         {
-            return await _dbContext.Roles.ToListAsync();
+            return await _dbContext.Roles.AsNoTracking().ToListAsync();
         }
+
+      
+
+
+      
+
+
+
+
+
+
+
+
+
+
     }
 }

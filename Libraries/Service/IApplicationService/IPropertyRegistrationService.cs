@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetLocalityDropDownList2(int divisionId);// added by ishu
         Task<List<Landuse>> GetLandUseDropDownList();
         Task<List<Disposaltype>> GetDisposalTypeDropDownList();
+        Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport();
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
 
         Task<bool> Update(int id, Propertyregistration propertyregistration); // To Upadte Particular data added by renu

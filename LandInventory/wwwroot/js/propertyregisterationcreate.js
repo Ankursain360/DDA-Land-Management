@@ -9,19 +9,31 @@ $(document).ready(function () {
     if (value == 'Planned Land') {
         $('#divPlannedLand').show();
     }
+    else {
+        $('#divPlannedLand').hide();
+    }
 
     var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 1) {
-        $("#divEncroachmentDetails").show();
+        $("#EncraochmentDetails").attr("disabled", "disabled");
+        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
         $("#Encroached").attr("disabled", "disabled");
         $("#Encroached").removeAttr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
         $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
+    else {
+        $("#EncraochmentDetails").attr("disabled", "disabled");
+        $("#Encroached").attr("disabled", "disabled");
+        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+    }
 
     var value = $('#BuiltUp option:selected').val();
     if (value == 1) {
         $("#divBuilttype").show();
+    }
+    else {
+        $("#divBuilttype").hide();
     }
 
     var value = $('#LitigationStatus option:selected').val();
@@ -39,46 +51,46 @@ $(document).ready(function () {
         $("#divGEOReferencing").show();
     }
 
-    /*characters Calculation for Disposal comments */
-    var text_max = 4000;
-    $('#feedbackDisposalComments').html(text_max + ' characters remaining');
-    $('#DisposalComments').keyup(function () {
-        var text_length = $('#DisposalComments').val().length;
-        var text_remaining = text_max - text_length;
-        $('#feedbackDisposalComments').html(text_remaining + ' characters remaining');
-    });
+    ///*characters Calculation for Disposal comments */
+    //var text_max = 4000;
+    //$('#feedbackDisposalComments').html(text_max + ' characters remaining');
+    //$('#DisposalComments').keyup(function () {
+    //    var text_length = $('#DisposalComments').val().length;
+    //    var text_remaining = text_max - text_length;
+    //    $('#feedbackDisposalComments').html(text_remaining + ' characters remaining');
+    //});
 
-    /*characters Calculation for Remarks */
-    $('#feedbackRemarks').html(text_max + ' characters remaining');
-    $('#Remarks').keyup(function () {
-        var text_length = $('#Remarks').val().length;
-        var text_remaining = text_max - text_length;
-        $('#feedbackRemarks').html(text_remaining + ' characters remaining');
-    });
+    ///*characters Calculation for Remarks */
+    //$('#feedbackRemarks').html(text_max + ' characters remaining');
+    //$('#Remarks').keyup(function () {
+    //    var text_length = $('#Remarks').val().length;
+    //    var text_remaining = text_max - text_length;
+    //    $('#feedbackRemarks').html(text_remaining + ' characters remaining');
+    //});
 
-    /*characters Calculation for Plot Not. */
-    $('#feedbackPalandmark').html(text_max + ' characters remaining');
-    $('#Palandmark').keyup(function () {
-        var text_length = $('#Palandmark').val().length;
-        var text_remaining = text_max - text_length;
-        $('#feedbackPalandmark').html(text_remaining + ' characters remaining');
-    });
+    ///*characters Calculation for Plot Not. */
+    //$('#feedbackPalandmark').html(text_max + ' characters remaining');
+    //$('#Palandmark').keyup(function () {
+    //    var text_length = $('#Palandmark').val().length;
+    //    var text_remaining = text_max - text_length;
+    //    $('#feedbackPalandmark').html(text_remaining + ' characters remaining');
+    //});
 
-    /*characters Calculation for TakenOverComments */
-    $('#feedbackTakenOverComments').html(text_max + ' characters remaining');
-    $('#TakenOverComments').keyup(function () {
-        var text_length = $('#TakenOverComments').val().length;
-        var text_remaining = text_max - text_length;
-        $('#feedbackTakenOverComments').html(text_remaining + ' characters remaining');
-    });
+    ///*characters Calculation for TakenOverComments */
+    //$('#feedbackTakenOverComments').html(text_max + ' characters remaining');
+    //$('#TakenOverComments').keyup(function () {
+    //    var text_length = $('#TakenOverComments').val().length;
+    //    var text_remaining = text_max - text_length;
+    //    $('#feedbackTakenOverComments').html(text_remaining + ' characters remaining');
+    //});
 
-    /*characters Calculation for TakenOverComments */
-    $('#feedbackHandedOverComments').html(text_max + ' characters remaining');
-    $('#HandedOverComments').keyup(function () {
-        var text_length = $('#HandedOverComments').val().length;
-        var text_remaining = text_max - text_length;
-        $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
-    });
+    ///*characters Calculation for TakenOverComments */
+    //$('#feedbackHandedOverComments').html(text_max + ' characters remaining');
+    //$('#HandedOverComments').keyup(function () {
+    //    var text_length = $('#HandedOverComments').val().length;
+    //    var text_remaining = text_max - text_length;
+    //    $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
+    //});
 
 
     //DropDrown check at initial 
@@ -90,122 +102,116 @@ $(document).ready(function () {
 })
 
 
-    $('#Boundary').change(function () {
-        var value = $('#Boundary option:selected').val();
-        if (value == 0) {
-            $('#BoundaryRemarks').val('');
-            $('#divBoundaryRemarks').hide();
-        }
-        else {
-            $('#BoundaryRemarks').val('');
-            $('#divBoundaryRemarks').show();
-        }
-    });
-
-
-$(function () {
-    $('#BuiltUp').change(function () {
-        var value = $('#BuiltUp option:selected').val();
-        if (value == 0) {
-            $('#BuiltUpRemarks').val('');
-            $("#divBuilttype").hide();
-        }
-        else {
-            $('#BuiltUpRemarks').val('');
-            $("#divBuilttype").show();
-        }
-    });
-});
-
-$(function () {
-    $('#LayoutPlan').change(function () {
-        var value = $('#LayoutPlan option:selected').val();
-        if (value == 0) {
-            $('#LayoutFileName').val('');
-            $("#divLayoutPlan").hide();
-        }
-        else {
-            $('#LayoutFileName').val('');
-            $("#divLayoutPlan").show();
-        }
-    });
+$('#Boundary').change(function () {
+    var value = $('#Boundary option:selected').val();
+    if (value == 0) {
+        $('#BoundaryRemarks').val('');
+        $('#divBoundaryRemarks').hide();
+    }
+    else {
+        $('#BoundaryRemarks').val('');
+        $('#divBoundaryRemarks').show();
+    }
 });
 
 
-$(function () {
-    $('#LitigationStatus').change(function () {
-        var value = $('#LitigationStatus option:selected').val();
-        if (value == 0) {
-            $('#LitigationStatusRemarks').val('');
-            $("#divLitigationStatus").hide();
-        }
-        else {
-            $('#LitigationStatusRemarks').val('');
-            $("#divLitigationStatus").show();
-        }
-    });
-});
 
-$(function () {
-    $('#GeoReferencing').change(function () {
-        var value = $('#GeoReferencing option:selected').val();
-        if (value == 0) {
-            $('#GeoFileName').val('');
-            $("#divGEOReferencing").hide();
-        }
-        else {
-            $('#GeoFileName').val('');
-            $("#divGEOReferencing").show();
-        }
-    });
-});
-
-$(function () {
-    $('#EncroachmentStatusId').change(function () {
-        var value = $('#EncroachmentStatusId option:selected').val();
-        if (value == 0) {
-            $('#EncraochmentDetails').val('');
-            $("#divEncroachmentDetails").hide();
-            $('#Encroached').val('');
-            $("#Encroached").attr("disabled", "disabled");
-            $('#BuiltupEncroachmentArea').val('');
-            $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
-        }
-        else {
-            $('#EncraochmentDetails').val('');
-            $("#divEncroachmentDetails").show();
-            $('#Encroached').val('');
-            $("#Encroached").attr("disabled", "disabled");
-            $("#Encroached").removeAttr("disabled", "disabled");
-            $('#BuiltupEncroachmentArea').val('');
-            $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
-            $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
-        }
-    });
+$('#BuiltUp').change(function () {
+    var value = $('#BuiltUp option:selected').val();
+    if (value == 0) {
+        $('#BuiltUpRemarks').val('');
+        $("#divBuilttype").hide();
+    }
+    else {
+        $('#BuiltUpRemarks').val('');
+        $("#divBuilttype").show();
+    }
 });
 
 
-$(function () {
-    $('#PlannedUnplannedLand').change(function () {
-        var value = $('#PlannedUnplannedLand').val();
-        if (value == 'Planned Land') {
-            $('#divPlannedLand').show();
-        }
-        else {
-            $('#divPlannedLand').hide();
-        }
-    });
+
+$('#LayoutPlan').change(function () {
+    var value = $('#LayoutPlan option:selected').val();
+    if (value == 0) {
+        $('#LayoutFileName').val('');
+        $("#divLayoutPlan").hide();
+    }
+    else {
+        $('#LayoutFileName').val('');
+        $("#divLayoutPlan").show();
+    }
 });
+
+
+
+
+$('#LitigationStatus').change(function () {
+    var value = $('#LitigationStatus option:selected').val();
+    if (value == 0) {
+        $('#LitigationStatusRemarks').val('');
+        $("#divLitigationStatus").hide();
+    }
+    else {
+        $('#LitigationStatusRemarks').val('');
+        $("#divLitigationStatus").show();
+    }
+});
+
+
+
+$('#GeoReferencing').change(function () {
+    var value = $('#GeoReferencing option:selected').val();
+    if (value == 0) {
+        $('#GeoFileName').val('');
+        $("#divGEOReferencing").hide();
+    }
+    else {
+        $('#GeoFileName').val('');
+        $("#divGEOReferencing").show();
+    }
+});
+
+
+
+$('#EncroachmentStatusId').change(function () {
+    var value = $('#EncroachmentStatusId option:selected').val();
+    if (value == 0) {
+        $('#EncraochmentDetails').val('');
+        $("#EncraochmentDetails").attr("disabled", "disabled");
+        $('#Encroached').val('');
+        $("#Encroached").attr("disabled", "disabled");
+        $('#BuiltupEncroachmentArea').val('');
+        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+    }
+    else {
+        $('#EncraochmentDetails').val('');
+        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
+        $('#Encroached').val('');
+        $("#Encroached").attr("disabled", "disabled");
+        $("#Encroached").removeAttr("disabled", "disabled");
+        $('#BuiltupEncroachmentArea').val('');
+        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
+    }
+});
+
+
+
+
+$('#PlannedUnplannedLand').change(function () {
+    var value = $('#PlannedUnplannedLand').val();
+    if (value == 'Planned Land') {
+        $('#divPlannedLand').show();
+    }
+    else {
+        $('#divPlannedLand').hide();
+    }
+});
+
 
 //Validations For Page Added by Renu 19 Sep 2020
 
-$('.numbers').keyup(function () {
-    this.value = this.value.replace(/[^0-9\.]/g, '');
-});
-$('.onlynumbers').keyup(function () {
-    var $th = $(this);
-    $th.val($th.val().replace(/[^0-9]/g, ''));
-});
+
 $('#myForm').validate({
     rules: {
         TakenOverEmailId: {
@@ -222,7 +228,7 @@ $('#myForm').validate({
         },
 
         ClassificationOfLandId: {
-             required: true
+            required: true
         },
         DepartmentId: {
             required: true
@@ -298,7 +304,7 @@ function ClassificationOfLandIdMessage() {
     } else {
         return "";
     }
-} 
+}
 
 function DepartmentIdMessage() {
     var dropdown_val = $('#DepartmentId option:selected').val();
@@ -307,7 +313,7 @@ function DepartmentIdMessage() {
     } else {
         return "";
     }
-} 
+}
 
 function ZoneIdMessage() {
     var dropdown_val = $('#ZoneId option:selected').val();
@@ -316,7 +322,7 @@ function ZoneIdMessage() {
     } else {
         return "";
     }
-} 
+}
 
 function DivisionIdMessage() {
     var dropdown_val = $('#DivisionId option:selected').val();
@@ -325,7 +331,7 @@ function DivisionIdMessage() {
     } else {
         return "";
     }
-} 
+}
 
 function LocalityIdMessage() {
     var dropdown_val = $('#LocalityId option:selected').val();
@@ -334,7 +340,7 @@ function LocalityIdMessage() {
     } else {
         return "";
     }
-} 
+}
 
 //For Textbox
 //function PrimaryListNoMessage() {
@@ -391,49 +397,48 @@ function GetDivisionList(id) {
     });
 };
 
-//File Upload check
-$(function () {
-    $('#DisposalTypeAssignFile').change(function () {
-        debugger;
-        var fileInput = document.getElementById('DisposalTypeAssignFile');
-        var filePath = fileInput.value;
-        const size = (DisposalTypeAssignFile.files[0].size);
-        fileValidation(filePath, fileInput, size); 
-    });
+
+$('#DisposalTypeAssignFile').change(function () {
+    debugger;
+    var fileInput = document.getElementById('DisposalTypeAssignFile');
+    var filePath = fileInput.value;
+    const size = (DisposalTypeAssignFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
 
-$(function () {
-    $('#Assignfile').change(function () {
-        var fileInput = document.getElementById('Assignfile');
-        var filePath = fileInput.value;
-        const size = (Assignfile.files[0].size);
-        fileValidation(filePath, fileInput, size); 
-    });
+
+
+$('#Assignfile').change(function () {
+    var fileInput = document.getElementById('Assignfile');
+    var filePath = fileInput.value;
+    const size = (Assignfile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
-$(function () {
-    $('#GeoAssignFile').change(function () {
-        var fileInput = document.getElementById('GeoAssignFile');
-        var filePath = fileInput.value;
-        const size = (GeoAssignFile.files[0].size);
-        fileValidation(filePath, fileInput, size); 
-    });
+
+
+$('#GeoAssignFile').change(function () {
+    var fileInput = document.getElementById('GeoAssignFile');
+    var filePath = fileInput.value;
+    const size = (GeoAssignFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
-$(function () {
-    $('#TakenOverAssignFile').change(function () {
-        var fileInput = document.getElementById('TakenOverAssignFile');
-        var filePath = fileInput.value;
-        const size = (TakenOverAssignFile.files[0].size);
-        fileValidation(filePath, fileInput, size); 
-    });
+
+
+$('#TakenOverAssignFile').change(function () {
+    var fileInput = document.getElementById('TakenOverAssignFile');
+    var filePath = fileInput.value;
+    const size = (TakenOverAssignFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
-$(function () {
-    $('#HandedOverAssignFile').change(function () {
-        var fileInput = document.getElementById('HandedOverAssignFile');
-        var filePath = fileInput.value;
-        const size = (HandedOverAssignFile.files[0].size);
-        fileValidation(filePath, fileInput, size); 
-    });
+
+
+$('#HandedOverAssignFile').change(function () {
+    var fileInput = document.getElementById('HandedOverAssignFile');
+    var filePath = fileInput.value;
+    const size = (HandedOverAssignFile.files[0].size);
+    fileValidation(filePath, fileInput, size);
 });
+
 function fileValidation(filePath, fileInput, size) {
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -445,9 +450,9 @@ function fileValidation(filePath, fileInput, size) {
         alert("File must be of 10 MB or Lesser Than 10 MB");
         fileInput.value = '';
         return false;
-    } 
-    
-} 
+    }
+
+}
 
 
 //$(function () {

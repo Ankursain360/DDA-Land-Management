@@ -265,5 +265,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetPagedPropertyRegisterationMOR(model, userId);
         }
+
+        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport()
+        {
+            return await _propertyregistrationRepository.GetClassificationOfLandDropDownListReport();
+        }
     }
 }
