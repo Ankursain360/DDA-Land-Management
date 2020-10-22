@@ -88,14 +88,14 @@ namespace Libraries.Repository.EntityRepository
                                 .ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
                 //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
                 
-                //return data;
+                return (PagedResult<Interest>)data;
             }
             catch (Exception ex)
             {
                 throw;
             }
-            return await _dbContext.Interest.Include(x => x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
-
+            //return await _dbContext.Interest.Include(x => x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+            
         }
 
         public async Task<List<PropertyType>> GetPropertyTypeList()
