@@ -152,7 +152,13 @@ namespace Libraries.Repository.EntityRepository
                  .OrderByDescending(x => x.Id)
                  .Where(x => x.Id == id && x.IsActive == 1).ToListAsync();
         }
-
-
+        //*****************current status of land *********
+        public async Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model)
+        {
+           _dbContext.Currentstatusoflandhistory.Add(model);
+         
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

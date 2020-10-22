@@ -161,5 +161,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetLandTransferReportdataHandover(id);
         }
+
+        // current status of land history :
+        public async Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model)
+        {
+            model.CreatedBy = 1;
+            model.CreatedDate = DateTime.Now;
+            model.IsActive = 1;
+            return await _landTransferRepository.SaveCurrentstatusoflandhistory(model);
+        }
     }
 }

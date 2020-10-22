@@ -85,7 +85,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
                 var data = await _dbContext.LoadStoredProcedure("GetInterestIndexDetails")
-                                .WithOutParams().ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
+                                .ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
                 //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
                 
                 //return data;

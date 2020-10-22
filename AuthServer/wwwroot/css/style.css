@@ -1,0 +1,319 @@
+/*
+DDA
+Typography & Color Theme
+
+Primary typeface
+Open Sans Light
+Open Sans Regular
+Open Sans Semibold
+Open Sans Bold
+
+LOGIN PAGE
+
+Logo
+Width: 83px
+Height 362px
+
+Heading
+Font-size: 1.9rem
+Color: #2c3091
+Font-Family: Open Sans Regular
+
+Field
+Font-size: 0.85rem
+Color: #000000
+Font-Family: Open Sans Regular
+
+Background
+Color: #4b50a2 (Left)
+Color: #7d3865(right)
+
+Button
+Background: linear-gradient(33deg, #8c1f47, #362c85)
+Font-size:1.0rem
+Font-Family: Open Sans Semibold
+color: #ffffff
+
+Footer
+Font-size:0.80rem
+Font-Family: Open Sans Regular
+color: #ffffff
+
+Dashboard
+
+Top header
+Font-size:0.85rem
+Font-Family: Open Sans Semibold
+color: #ffffff
+Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091)
+
+Logo
+Width: 224px
+Height 73px
+
+Left Sidebar
+Font-size:0.85rem
+Font-Family: Open Sans Semibold
+color: #ffffff
+Background: #2c3091
+
+Heading
+Font-size: 0.83rem
+Color: #ffffff
+Font-Family: Open Sans Regular
+background: linear-gradient(to right, #585cd6, #5256c7, #4d50b9, #474baa, #42459c)
+Table
+Thead
+background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091)
+Color: #ffffff
+Font-Family: Open Sans Semibold
+Font-size: 0.85rem
+Tbody
+background: #f2f2f2(odd), #ffffff(even)
+Color: #000
+
+Font-Family: Open Sans Regular
+Font-size: 0.83rem
+Action Button
+background: linear-gradient(33deg, #8c1f47, #362c85)
+Color: #ffffff
+
+Form Header
+background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091)
+Color: #ffffff
+Font-size: 0.95rem
+Font-Family: Open Sans Regular
+
+Form Tab Header
+background: #5358cb
+Color: #ffffff
+Font-size: 0.81rem
+Font-Family: Open Sans Regular
+
+Form Label
+Color: #ffffff
+Font-size: 0.94rem
+Font-Family: Open Sans Semibold
+Form Field
+Color: #888888
+Font-size: 0.85rem
+Font-Family: Open Sans Semibold
+border: 1px solid #888888
+Button
+background: linear-gradient(33deg, #8c1f47, #362c85)
+Font-size: 0.75rem
+Font-Family: Open Sans Regular
+
+Footer
+background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091)
+Color: #ffffff
+Font-size: 0.80rem
+Font-Family: Open Sans Regular*/
+
+
+
+body,
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.slow {
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out
+}
+
+.fixed-bg {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+
+
+.theme-bg {
+    background: rgb(75, 80, 162);
+    background: -moz-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
+}
+
+
+.btn-theme {
+    font-size: .9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1rem;
+    background: rgb(140, 31, 71);
+    background: -moz-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: -webkit-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8c1f47", endColorstr="#362c85", GradientType=1);
+    border-color: transparent;
+}
+
+
+
+/*login page css*/
+
+#LoginPage {
+    min-height: 100vh;
+    width: 100%;
+    background-image: url(../img/login/login-bg.jpg);
+    position: relative;
+}
+
+#LoginPage::before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgb(75, 80, 162);
+    background: -moz-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
+    opacity: .95;
+    z-index: 0z;
+}
+
+.login {
+    position: relative;
+    z-index: 1;
+}
+
+.login-container {
+    padding: 30px;
+}
+
+figcaption h6 {
+    color: #000;
+    font-weight: 700;
+}
+
+.input-form .form-group {
+    position: relative;
+}
+
+.input-form .form-group small {
+    position: absolute;
+    color: #f00;
+    font-size: .7rem;
+    bottom: -14px;
+    font-weight: 600;
+}
+
+.input-form .form-control {
+    font-size: .9rem;
+}
+
+.input-form .form-group {
+    margin-bottom: 1.2rem;
+}
+
+.input-form {
+    font-size: .9rem;
+}
+
+.icon .form-control {
+    padding-left: 33px;
+}
+
+.icon {
+    position: relative;
+}
+
+.icon i {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 1rem;
+    color: #707070;
+    height: 30px;
+    line-height: 30px;
+    left: 10px;
+}
+
+.is-invalid i,
+.is-invalid .form-control,
+.input-form .is-invalid small {
+    color: #de0000;
+}
+
+.is-valid i,
+.is-valid .form-control,
+.input-form .is-valid small {
+    color: #05a00b;
+}
+
+.code .form-control {
+    padding-right: 100px;
+}
+
+.code span {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 1rem;
+    color: #707070;
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    right: 0px;
+    text-align: center;
+}
+
+.code .codeImg {
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 1rem;
+    color: #707070;
+    height: 20px;
+    width: 50px;
+    line-height: 30px;
+    right: 35px;
+}
+
+.code .codeImg img {
+    height: 20px;
+    width: 50px;
+    display: block;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+
+@media (min-width:992px) {
+    .login-container {
+        padding: 45px;
+    }
+}
