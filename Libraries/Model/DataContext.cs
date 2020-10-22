@@ -99,6 +99,11 @@ namespace Libraries.Model
         public virtual DbSet<EncroachmentPhotoFileDetails> EncroachmentPhotoFileDetails { get; set; }
         public virtual DbSet<EncroachmentLocationMapFileDetails> EncroachmentLocationMapFileDetails { get; set; }
 
+        public virtual DbSet<Demolitionchecklist> Demolitionchecklist { get; set; }
+
+        public virtual DbSet<Demolitiondocument> Demolitiondocument { get; set; }
+
+
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -162,6 +167,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new EncroachmentPhotoFileDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardphotofiledetailsConfiguration());
             modelBuilder.ApplyConfiguration(new WatchandwardreportfiledetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new DemolitionchecklistConfiguration());
+            modelBuilder.ApplyConfiguration(new DemolitiondocumentConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
