@@ -24,14 +24,14 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Locality Name(Village)</label><span style="color:red">*</span>
-                    <select class="form-control dda-dropdown" asp-for="LocalityId" required="required" requiredMsg="Please Select Locality" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                    <select class="form-control dda-dropdown" asp-for="LocalityId" required="required" requiredmsg="Please Select Locality" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                         <option value="0">All</option>
                     </select>
                     <span asp-validation-for="LocalityId" class="text-danger"></span>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">From Date</label><span style="color:red">*</span>
-                    <input asp-for="Date" type="date" id="txtFromDate" required="required" requiredMsg="Please Select Date" class="form-control" />
+                    <input asp-for="Date" type="date" id="txtFromDate" required="required" requiredmsg="Please Select Date" class="form-control" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="form-group col-md-6">
                    
                     <label class="control-label lb-sm">To Date</label><span style="color:red">*</span>
-                    <input asp-for="Date" type="date" id="txtToDate" required="required" requiredMsg="Please Select Date" class="form-control" />
+                    <input asp-for="Date" type="date" id="txtToDate" required="required" requiredmsg="Please Select Date" class="form-control" />
                     <span asp-validation-for="Date" class="text-danger"></span>
                 </div>
                

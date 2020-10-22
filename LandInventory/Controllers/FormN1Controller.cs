@@ -144,22 +144,7 @@ namespace LandInventory.Controllers
         //}
 
 
-        public async Task<IActionResult> Delete(int id)  //Not in use
-        {
-            if (id == 0)
-            {
-                return NotFound();
-            }
-
-            var form = await _nazullandService.Delete(id);
-            if (form == false)
-            {
-                return NotFound();
-            }
-            var result = await _nazullandService.GetAllNazulland();
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View("Index", result);
-        }
+       
 
         public async Task<IActionResult> View(int id)
         {
@@ -171,7 +156,28 @@ namespace LandInventory.Controllers
             }
             return View(Data);
         }
+        public async Task<IActionResult> Delete(int id) 
+        {
+            try
+            {
 
+                var result = await _nazullandService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _nazullandService.GetAllNazulland();
+            return View("Index", list);
+        }
 
     }
 }

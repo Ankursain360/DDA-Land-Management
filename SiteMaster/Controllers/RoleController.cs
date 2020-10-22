@@ -78,7 +78,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Exist(int Id, string Name)
         {
             var result = await _roleService.FindByNameAsync(Name);
-            if (result==null)
+            if (result == null)
             {
                 return Json(true);
             }
@@ -130,28 +130,48 @@ namespace SiteMaster.Controllers
 
 
 
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    try
-        //    {
 
-        //        var result = await _roleService.Delete(id);
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    var list = await _roleService.GetRole();
-        //    return View("Index", list);
-        //}
+
+
+
+
+
+
+
+
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                // var data = await _userProfileService.UpdateRole( );
+
+                RoleDto role = new RoleDto()
+                {
+                    Id = id,
+                    IsActive = 0,
+                    ModifiedBy = 1,
+                    ModifiedDate = DateTime.Now
+                };
+
+                var result = await _userProfileService.UpdateRole(role);
+                if (result)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+
+            return View("Index");
+        }
 
 
 
