@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    $("#FromDate").val("");
+   // $("#FromDate").val("");
 })
 
 //$(function () {

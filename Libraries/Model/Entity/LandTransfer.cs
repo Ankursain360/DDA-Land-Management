@@ -10,6 +10,11 @@ namespace Libraries.Model.Entity
 {
     public class Landtransfer : AuditableEntity<int>
     {
+
+        public Landtransfer()
+        {
+            Currentstatusoflandhistory = new HashSet<Currentstatusoflandhistory>();
+        }
         [Required]
         public int DepartmentId { get; set; }
 
@@ -70,5 +75,56 @@ namespace Libraries.Model.Entity
         public List<Landtransfer> handeoverdepartmentlist { get; set; }
         [NotMapped]
         public int ReportType { get; set; }
+
+        public ICollection<Currentstatusoflandhistory> Currentstatusoflandhistory { get; set; }
+
+        //Current status of land history table entry feilds:
+
+        [NotMapped]
+        public string TSSSurvey { get; set; }
+
+        [NotMapped]
+        public IFormFile  SurveyReportFile { get; set; }
+        
+      
+        [NotMapped]
+        public string SurveyReportFilePath { get; set; }
+        [NotMapped]
+        public string Encroachment { get; set; }
+        [NotMapped]
+        public decimal? EncroachedArea { get; set; }
+        [NotMapped]
+        public string ActionOnEncroachment { get; set; }
+        [NotMapped]
+        public IFormFile ActionReportFile{ get; set; }
+
+        [NotMapped]
+        public string ActionReportFilePath { get; set; }
+
+        [NotMapped]
+        public string FencingBoundaryWall { get; set; }
+
+        [NotMapped]
+        public decimal? AreaCovered { get; set; }
+        [NotMapped]
+        public string Dimension { get; set; }
+        [NotMapped]
+        public string PlotUtilization { get; set; }
+        [NotMapped]
+        public decimal? AreaUtilised { get; set; }
+        [NotMapped]
+        public decimal? BalanceArea { get; set; }
+        [NotMapped]
+        public string Status { get; set; }
+        [NotMapped]
+        public string PlannedUnplannedLand { get; set; }
+        [NotMapped]
+        public string MainLandUse { get; set; }
+        [NotMapped]
+        public string SubUse { get; set; }
+        [NotMapped]
+        public string currentLandRemarks { get; set; }
+
+        
     }
 }

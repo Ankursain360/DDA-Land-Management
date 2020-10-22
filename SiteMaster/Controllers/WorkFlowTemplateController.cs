@@ -55,13 +55,13 @@ namespace SiteMaster.Controllers
           //  model.OperationId = WorkflowLevelDto.opertaionId;
             //if (model.OperationId == "Role")
             //{
-                ViewBag.Items = await _workflowtemplateService.GetRolelist();
+                ViewBag.Items = await _userProfileService.GetRole();
             //}
             //else
             //{
             //    ViewBag.Items = await _workflowtemplateService.GetUserlist();
             //}
-            
+
             return  PartialView("_Levels", model);
         }
 
@@ -79,23 +79,31 @@ namespace SiteMaster.Controllers
 
             if (ModelState.IsValid)
             {
-                var result = await _workflowtemplateService.Create(model);
-
-                if (result == true)
+                if(model.Template != null)
                 {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    return Json(Url.Action("Index", "WorkFlowTemplate"));
+                    var result = await _workflowtemplateService.Create(model);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        return Json(Url.Action("Index", "WorkFlowTemplate"));
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return Json(Url.Action("Create", "WorkFlowTemplate"));
+
+                    }
                 }
                 else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(model);
-
+                    return Json(Url.Action("Create", "WorkFlowTemplate"));
                 }
+               
             }
             else
             {
-                return View(model);
+                return Json(Url.Action("Create", "WorkFlowTemplate"));
             }
         }
 
@@ -190,6 +198,7 @@ namespace SiteMaster.Controllers
             else
             {
                 var data = await _userProfileService.GetUser();
+                
                 return Json(data);
             }
         }

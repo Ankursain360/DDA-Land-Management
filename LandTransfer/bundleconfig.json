@@ -64,5 +64,17 @@
     "inputFiles": [
       "wwwroot/js/reportoflandtransferdepartmentwiseindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentStatusOfLandIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentStatusOfLandIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentstatusoflandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentstatusoflandcreate.js"
+    ]
   }
 ]

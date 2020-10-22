@@ -39,6 +39,8 @@ function FillLevels(response) {
     $(".ParameterValueListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterValueList[" + a + "]");
+        $(this).removeAttr("onchange");
+        $(this).attr("onchange", "callTypeDropdown(" + a + ")");
         a = a + 1;
     });
 
@@ -155,6 +157,8 @@ function GetLevelDetails() {
             $(".ParameterValueListClass").each(function () {
                 $(this).removeAttr("name");
                 $(this).attr("name", "ParameterValueList[" + i + "]");
+                $(this).removeAttr("onchange");
+                $(this).attr("onchange", "callTypeDropdown(" + i + ")");
                 i = i + 1;
             });
 
@@ -254,6 +258,8 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         $(".ParameterValueListClass").each(function () {
             $(this).removeAttr("name");
             $(this).attr("name", "ParameterValueList[" + i + "]");
+            $(this).removeAttr("onchange");
+            $(this).attr("onchange", "callTypeDropdown(" + i + ")");
             i = i + 1;
         });
 
@@ -349,7 +355,7 @@ $(function () {
         if (checkresult) {
             var param = GetListData();
             HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
-                window.location.href = '/WorkFlowTemplate/Index';
+                window.location.href = response; 
             });
         }
     });
@@ -386,8 +392,8 @@ function GetListData() {
         else {
             parameterSkip = false;
         }
-        if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "") && (parameterName == "0") && (parameterAction == "0")) {
-
+        //if ((parameterName == "") && (parameterValue == "") && (parameterLevel == "") && (parameterName == "0") && (parameterAction == "0")) {
+        if ((parameterName == "0")) {
         }
         else {
             model = {
@@ -402,14 +408,19 @@ function GetListData() {
 
     };
     console.log(workflow);
-    data = {
-        Id: parseInt(id),
-        moduleId: parseInt(moduleId),
-        name: name,
-        description: description,
-        usertype: usertype,
-        isActive: isActive,
-        template: JSON.stringify(workflow)
+    if ($.isEmptyObject(workflow)) {
+
+    }
+    else {
+        data = {
+            Id: parseInt(id),
+            moduleId: parseInt(moduleId),
+            name: name,
+            description: description,
+            usertype: usertype,
+            isActive: isActive,
+            template: JSON.stringify(workflow)
+        }
     }
     console.log(data);
     return data;
@@ -498,20 +509,24 @@ function DescriptionMessage() {
 }
 
 function callTypeDropdown(element) {
-    var name = element.name;
+    var name = element;   
     console.log(name);
-    var fragment_arr = name.split("[").slice(-2)[1];
-    console.log(fragment_arr);
-    var fragment_arr = fragment_arr.split("]").slice(-2)[0];
+    var fragment_arr = name;
     console.log(fragment_arr)
-    var value = $("select[name='" + name + "']").val();
+    var value = $("select[name='ParameterValueList[" + name + "]']").val();
     console.log(value);
 
     HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
         var html = '<option value="0">---Select---</option>';
         for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            if (value == "Role") {
+                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            }
+            else {
+                html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
+            }
         }
+        $("select[name='ParameterNameList[" + fragment_arr + "]']").val(null).trigger('change');
         $("select[name='ParameterNameList[" + fragment_arr + "]']").html(html);
         $("label[name='ParameterLabelNameList[" + fragment_arr + "]']").html(value + ' Name');
     });

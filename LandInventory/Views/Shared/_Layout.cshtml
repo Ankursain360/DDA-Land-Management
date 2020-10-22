@@ -8,6 +8,8 @@
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
 
     <style>
         .canvasjs-chart-credit {
@@ -81,10 +83,10 @@
                     </li>
 
                     @*<li>
-            <a class="" href="/FormN1/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Nazul Land Information
-            </a>
-        </li>*@
+                            <a class="" href="/FormN1/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Nazul Land Information
+                            </a>
+                        </li>*@
 
                     <li>
                         <a class="" href="/DeletedProperties/Create">
@@ -97,10 +99,10 @@
                         </a>
                     </li>
                     @*<li>
-            <a class="" href="/ListOfDataUploaded/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>List Of Data Uploaded
-            </a>
-        </li>*@
+                            <a class="" href="/ListOfDataUploaded/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>List Of Data Uploaded
+                            </a>
+                        </li>*@
                     <li>
                         <a class="" href="/PropertyInventoryReport/Create">
                             <span class="fa fa-arrow-right">&nbsp;</span>Property Inventory Report
@@ -137,56 +139,56 @@
                     </li>
 
                     @*<li>
-            <a class="" href="/DemolitionStatusReport/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Status Report
-            </a>
-        </li>*@
+                            <a class="" href="/DemolitionStatusReport/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Status Report
+                            </a>
+                        </li>*@
                     @*<li>
-            <a class="" href="/Discripency/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Discripency
-            </a>
-        </li>
-        <li>
-            <a class="" href="/DemolitionUploadedPhotos/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Uploaded Photos
-            </a>
-        </li>*@
+                            <a class="" href="/Discripency/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Discripency
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/DemolitionUploadedPhotos/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Uploaded Photos
+                            </a>
+                        </li>*@
 
                     @*<li>
-            <a class="" href="/ListOfLocalitiesImagesNotUploaded/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Images Not Uploaded)
-            </a>
-        </li>
-        <li>
-            <a class="" href="/ListOfLocalitiesNotUploadedImage/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Not Uploaded Image)
-            </a>
-        </li>
-        <li>
-            <a class="" href="/IntervalReportsOfPictureUploaded/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Interval Reports Of Photos Uploaded
-            </a>
-        </li>
-        <li>
-            <a class="" href="/StatusOfAllotedProperties/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Status Of Alloted Properties
-            </a>
-        </li>
-        <li>
-            <a class="" href="/StatusReportEngineering_Land/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Status Report Engineering LandManagement Horticulture
-            </a>
-        </li>
-        <li>
-            <a class="" href="/LandUserWisePhotoNotUploadedWithinTime/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded WithinTime
-            </a>
-        </li>
-        <li>
-            <a class="" href="/ListOfPropertiesImagesNotUploadedDuringSelectedDates/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded During Dates
-            </a>
-        </li>*@
+                            <a class="" href="/ListOfLocalitiesImagesNotUploaded/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Images Not Uploaded)
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/ListOfLocalitiesNotUploadedImage/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>List Of Localities(Not Uploaded Image)
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/IntervalReportsOfPictureUploaded/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Interval Reports Of Photos Uploaded
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/StatusOfAllotedProperties/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Status Of Alloted Properties
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/StatusReportEngineering_Land/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Status Report Engineering LandManagement Horticulture
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/LandUserWisePhotoNotUploadedWithinTime/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded WithinTime
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/ListOfPropertiesImagesNotUploadedDuringSelectedDates/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Photo Not Uploaded During Dates
+                            </a>
+                        </li>*@
 
 
                 </ul>
@@ -230,14 +232,13 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/toaster/toastr.min.js"></script>
+
     <environment include="Development">
         <script src="~/js/site.js"></script>
     </environment>
     <environment exclude="Development">
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
-    <script src="https://code.jquery.com/jquery-git.js"></script>
-
     @RenderSection("Scripts", required: false)
     @Html.Raw(ViewBag.Message)
 </body>

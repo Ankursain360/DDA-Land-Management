@@ -21,7 +21,7 @@ namespace LandInventory.Controllers
 
         async Task BindDropDown(Propertyregistration propertyregistration)
         {
-            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
           //  propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
          //   propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();

@@ -36,5 +36,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetHandedDepartmentDropDownList();
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId);
+        Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport();
     }
 }

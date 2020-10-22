@@ -27,6 +27,7 @@ namespace Libraries.Repository.EntityRepository
 
             var Data = await (from A in _dbContext.Interest
                               join B in _dbContext.PropertyType on A.PropertyId equals B.Id
+                              where A.IsActive == 1
                               select new
                               {
                                   Id = A.Id,
@@ -84,17 +85,17 @@ namespace Libraries.Repository.EntityRepository
             {
                 //  await _dbContext.LoadStoredProcedure("").WithSqlParams(("para", "values"), ("5456", "")).ExecuteStoredProcedureAsync<Designation>();
                 var data = await _dbContext.LoadStoredProcedure("GetInterestIndexDetails")
-                                .WithOutParams().ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
+                                .ExecuteStoredProcedureAsync<InterestIndexDataDetails>();
                 //  var data1 =data.GetPaged<Interest>(model.PageNumber, model.PageSize);
                 
-                //return data;
+                return (PagedResult<Interest>)data;
             }
             catch (Exception ex)
             {
                 throw;
             }
-            return await _dbContext.Interest.Include(x => x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
-
+            //return await _dbContext.Interest.Include(x => x.Property).GroupBy(x => x.PropertyTypeName).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).GetPaged<Interest>(model.PageNumber, model.PageSize);
+            
         }
 
         public async Task<List<PropertyType>> GetPropertyTypeList()

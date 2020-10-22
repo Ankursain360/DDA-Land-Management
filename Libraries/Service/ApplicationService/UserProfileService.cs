@@ -22,7 +22,7 @@ namespace Service.ApplicationService
         public UserProfileService(IUnitOfWork unitOfWork,
             IUserProfileRepository userProfileRepository,
             RoleManager<ApplicationRole> roleManager,
-            IMapper mapper) 
+            IMapper mapper)
             : base(unitOfWork, userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
