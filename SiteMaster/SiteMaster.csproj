@@ -20,11 +20,13 @@
     <Content Remove="Views\Actions\View.cshtml" />
     <Content Remove="Views\Actions\_List.cshtml" />
     <Content Remove="wwwroot\js\common.min.js" />
+    <Content Remove="wwwroot\js\interestedit.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
     <_ContentIncludedByDefault Remove="bundleconfig.json" />
     <_ContentIncludedByDefault Remove="wwwroot\js\common.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\interestedit.min.js" />
   </ItemGroup>
 	
   <ItemGroup>
@@ -152,6 +154,7 @@
     <None Include="Views\_ViewImports.cshtml" />
     <None Include="Views\_ViewStart.cshtml" />
     <None Include="wwwroot\js\common.min.js" />
+    <None Include="wwwroot\js\interestedit.min.js" />
   </ItemGroup>
 	
   <ItemGroup>

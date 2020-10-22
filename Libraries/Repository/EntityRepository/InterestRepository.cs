@@ -27,6 +27,7 @@ namespace Libraries.Repository.EntityRepository
 
             var Data = await (from A in _dbContext.Interest
                               join B in _dbContext.PropertyType on A.PropertyId equals B.Id
+                              where A.IsActive == 1
                               select new
                               {
                                   Id = A.Id,

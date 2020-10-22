@@ -26,10 +26,16 @@ namespace SiteMaster.Controllers
         {
             _interestService = interestService;
         }
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var result = await _interestService.GetAllInterest();
+            return View(result);
         }
+        //public IActionResult Index()
+        //{            
+        //    return View();
+        //}
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] InterestSearchDto model)

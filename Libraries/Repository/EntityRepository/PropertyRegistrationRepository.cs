@@ -372,7 +372,14 @@ namespace Libraries.Repository.EntityRepository
                 .GetPaged(model.PageNumber, model.PageSize);
             return data;
         }
-        
+
+        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport()
+        {
+            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
+                                                                        .Where(x => x.IsActive == 1 )
+                                                                        .ToListAsync();
+            return ClassificationoflandList;
+        }
     }
 
 
