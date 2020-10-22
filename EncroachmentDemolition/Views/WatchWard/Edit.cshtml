@@ -26,7 +26,7 @@
 
 
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
                         <input asp-for="Date" type="date" id="txtDate" class="form-control" />
@@ -45,7 +45,7 @@
 
                 </div>
 
-                <div class="form-row">
+                <div class="row">
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
@@ -63,7 +63,7 @@
 
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
                         <select class="form-control" asp-for="Encroachment">
@@ -76,7 +76,7 @@
 
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
                         <textarea asp-for="StatusOnGround" type="text" class="form-control"></textarea>
@@ -85,10 +85,10 @@
 
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         @*<label class="control-label lb-sm">Photos</label>
-                <input asp-for="Photo" type="file" class="form-control" multiple />*@
+            <input asp-for="Photo" type="file" class="form-control" multiple />*@
 
                         <label class="control-label lb-sm">Photo (<span style="color:red;"> max size: 5 mb</span>)</label>
                         @{
@@ -137,7 +137,7 @@
 
                     </div>
                 </div>
-                <div class="form-row">
+                <div class="row">
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
                         <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
@@ -157,7 +157,7 @@
                     </div>
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-primary dda-pageheading" })

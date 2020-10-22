@@ -34,6 +34,8 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+       
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
@@ -160,5 +162,11 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId)
+        {
+            return await _dbContext.Currentstatusoflandhistory.Where(x => x.Id == landtransferId && x.IsActive == 1).ToListAsync();
+        }
+       
+
     }
 }
