@@ -4,16 +4,16 @@ $(document).ready(function () {
 
     // GetDetails(currentPageNumber, currentPageSize);
 
-    $(function () {
-        $("#btnGenerate").click(function () {
-            debugger;
-            var param = GetSearchParam(currentPageNumber, currentPageSize);
-            HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
-                $('#LoadReportView').html("");
-                $('#LoadReportView').html(response);
-            });
+
+    $("#btnGenerate").click(function () {
+        debugger;
+        var param = GetSearchParam(currentPageNumber, currentPageSize);
+        HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
+            $('#LoadReportView').html("");
+            $('#LoadReportView').html(response);
         });
     });
+
 });
 //Bind Zone Dropdown from Department
 function GetZoneList(id) {
@@ -67,7 +67,7 @@ function GetSearchParam(pageNumber, pageSize) {
     var litigationid = $('#LitigationStatus option:selected').val();
     var encroachedid = $('#Encroached option:selected').val();
     var test = [];
-    
+
     var model = {
         name: "test",
         pageSize: parseInt(pageSize),
