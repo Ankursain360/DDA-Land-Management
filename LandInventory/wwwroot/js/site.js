@@ -21,6 +21,8 @@ $(document).ready(function () {
 		if ($(this).is("[limit]")) {
 			if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
 				$(this).MaxLength({ MaxLength: parseInt($(this).attr("limit")) });
+				$(this).siblings('div').removeAttr('style');
+				$(this).siblings('div').attr('style', 'text-align:right;');
 			}
 		}
 	});
