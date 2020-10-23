@@ -56,7 +56,8 @@ namespace SiteMaster.Controllers
         {
             AddUserDto model = new AddUserDto() {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone()
+                ZoneList = await _zoneService.GetZone(),
+                RoleList = await _userProfileService.GetRole()
             };
             return View(model);
         }
@@ -64,42 +65,16 @@ namespace SiteMaster.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddUserDto model)
-        {
-            try
+        {    
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
-                {
-                    var result1 = await _userManager.CreateAsync(new ApplicationUser()
-                    {
-                        UserName = model.UserName,
-                        Email = model.Email,
-                        PhoneNumber = model.PhoneNumber,
-                        PasswordSetDate = DateTime.Now.AddDays(30),
-                    }, model.Password);
-
-                    if (result1.Succeeded)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _userService.GetAllUser();
-
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(model);
-                    }
-                }
-                else
-                {
-                    return View(model);
-                }
+                await _userProfileService.CreateUser(model);
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
+            else
             {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(model);
-            }
+            }   
         }
 
         [AcceptVerbs("Get", "Post")]
@@ -119,82 +94,27 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-
-            var Data = await _userService.FetchSingleResult(id);
-            Data.RoleList = await _userService.GetAllRole();
-            Data.DepartmentList = await _userService.GetAllDepartment();
-
-            if (Data.Password == "123")
+            var user = await _userProfileService.GetUserById(id);
+            EditUserDto model = new EditUserDto()
             {
-
-                Data.defaultpassword = true;
-            }
-            else
-            {
-
-                Data.defaultpassword = false;
-            }
-
-
-            if (Data.ChangePassword == "T")
-            {
-                Data.ChangePasswordA = true;
-            }
-            else
-            {
-                Data.ChangePasswordA = false;
-            }
-
-
-            if (Data.Locked == "T")
-            {
-                Data.LockedA = true;
-            }
-            else
-            {
-                Data.LockedA = false;
-            }
-
-
-
-
-
-            if (Data == null)
-            {
-                return NotFound();
-            }
-            return View(Data);
+                Email = user.User.Email,
+                Name = user.User.Name,
+                PhoneNumber = user.User.PhoneNumber
+            };
+            return View(model);
         }
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, User user)
+        public async Task<IActionResult> Edit(EditUserDto model)
         {
             if (ModelState.IsValid)
             {
-                try
-                {
-                    var result = await _userService.Update(id, user);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _userService.GetAllUser();
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(user);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(user);
-                }
+                await _userProfileService.UpdateUser(model);
+                return RedirectToAction(nameof(Index));
             }
             else
             {
-                return View(user);
+                return View(model);
             }
         }
         public async Task<IActionResult> Delete(int id)

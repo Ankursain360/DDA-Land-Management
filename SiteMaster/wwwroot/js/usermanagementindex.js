@@ -23,6 +23,10 @@ function GetUser(pageNumber, pageSize) {
         $('#divUser').html("");
         $('#divUser').html(response);
     });
+
+    if ($('table >tbody >tr').length <= 1) {
+        GetUser(1, $("#ddlPageSize option:selected").val());
+    }
 }
 
 function GetSearchParam(pageNumber, pageSize) {

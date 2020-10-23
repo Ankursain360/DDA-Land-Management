@@ -1,6 +1,5 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
-
 $(document).ready(function () {
     GetLocality(currentPageNumber, currentPageSize);
 });
@@ -11,17 +10,20 @@ function GetLocality(pageNumber, pageSize) {
         $('#divLocalityTable').html("");
         $('#divLocalityTable').html(response);
     });
+    if ($('table >tbody >tr').length <= 1) {
+        GetLocality(1, $("#ddlPageSize option:selected").val());
+    }
 }
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
         name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
+    debugger
     return model;
 }
-
 
 function onPaging(pageNo) {
     GetLocality(parseInt(pageNo), parseInt(currentPageSize));

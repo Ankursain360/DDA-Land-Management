@@ -11,6 +11,12 @@ function GetDivision(pageNumber, pageSize) {
         $('#divDivisionTable').html("");
         $('#divDivisionTable').html(response);
     });
+    var widthPercentage = 100 / $('table').children('thead').children('tr').children('th').length;
+    $('table').children('thead').children('tr').children('th').css("width", widthPercentage.toString() + "%");
+    $('table').children('tbody').children('tr').children('th').css("width", widthPercentage.toString() + "%");
+    if ($('table >tbody >tr').length <= 1) {
+        GetDivision(1, $("#ddlPageSize option:selected").val());
+    }
 }
 
 function GetSearchParam(pageNumber, pageSize) {

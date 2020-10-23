@@ -1,6 +1,7 @@
 ﻿function onChange(id) {
 
     HttpGet(`/UserManagement/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
+        $("#ZoneId").val('').trigger('change');
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
