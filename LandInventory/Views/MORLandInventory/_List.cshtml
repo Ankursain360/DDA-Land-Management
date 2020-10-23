@@ -1,13 +1,13 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
 
-    <table class="table table-responsive table-bordered table-card">
+<table class="table table-responsive table-bordered table-card">
 
 
-        <thead class="thead">
+    <thead class="thead">
 
-            @*Old with few fields start*@
-            @*<tr>
+        @*Old with few fields start*@
+        @*<tr>
                 <th rowspan="2">Sr.No</th>
                 <th rowspan="2">Unique ID</th>
                 <th rowspan="2">Locality</th>
@@ -43,12 +43,12 @@
                 <th>Disposal/Comments</th>
 
             </tr>*@
-            @*Old with few fields End*@
+        @*Old with few fields End*@
 
 
 
-            @*New with all fields start*@
-            @*<tr>
+        @*New with all fields start*@
+        @*<tr>
                 <th rowspan="2">Sr.No</th>
                 <th rowspan="2">Classification of Land</th>
                 <th rowspan="2">Department</th>
@@ -92,29 +92,31 @@
                 <th>Comments</th>
 
             </tr>*@
-            @*New with all fields start*@
+        @*New with all fields start*@
 
 
-            <tr>
-                <th>Sr.No</th>
-                <th>Classification of Land</th>
-                <th>Department</th>
-                <th>Zone</th>
-                <th>Division</th>
-                <th>Locality(Village)</th>
-                <th>Khasra No.</th>
-                <th>Primary List No.</th>
-                <th>Plot No. & Address with Landmark</th>
-                <th>Encroachment Status</th>
-                @*<th>Encroachment Details</th>*@
-                <th>Total Area(in Sq. Mt.)</th>
-                <th>Operation</th>
-            </tr>
+        <tr>
+            <th>Sr.No</th>
+            <th>Classification of Land</th>
+            <th>Department</th>
+            <th>Zone</th>
+            <th>Division</th>
+            <th>Locality(Village)</th>
+            <th>Khasra No.</th>
+            <th>Primary List No.</th>
+            <th>Plot No. & Address with Landmark</th>
+            <th>Encroachment Status</th>
+            @*<th>Encroachment Details</th>*@
+            <th>Total Area(in Sq. Mt.)</th>
+            <th>Operation</th>
+        </tr>
 
-        </thead>
-        <tbody class="tbody">
+    </thead>
+    <tbody class="tbody">
 
-            @*New with all fields start*@
+        @*New with all fields start*@
+        @if (Model != null && Model.Results.Count() > 0)
+        {
             @foreach (var item in Model.Results)
             {
                 <tr>
@@ -130,39 +132,39 @@
                     <td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>
                     @*<td>@item.EncraochmentDetails</td>*@
                     @*<td>@(item.Boundary == 0 ? "No" : "Yes")</td>
-                    <td>@item.TotalAreaInBigha</td>*@
+                        <td>@item.TotalAreaInBigha</td>*@
                     <td>@item.TotalArea</td>
                     @*<td>@item.Encroached</td>
-                    <td>@item.BuiltUpEncraochmentArea</td>
-                    <td>@item.Vacant</td>
-                    <td>@(item.PlannedUnplannedLand)</td>
-                    <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
-                    <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
-                    <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
-                    <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>*@
+                        <td>@item.BuiltUpEncraochmentArea</td>
+                        <td>@item.Vacant</td>
+                        <td>@(item.PlannedUnplannedLand)</td>
+                        <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
+                        <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
+                        <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
+                        <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>*@
                     @*<td>
-                        @if (item.LayoutFilePath != null)
-                        {
-                            @Html.ActionLink("Download", "Download", new { id = item.Id })
-                        }
-                        else
-                        {
-                            <p class="text-danger">No Document</p>
-                        }
-                    </td>*@
+                            @if (item.LayoutFilePath != null)
+                            {
+                                @Html.ActionLink("Download", "Download", new { id = item.Id })
+                            }
+                            else
+                            {
+                                <p class="text-danger">No Document</p>
+                            }
+                        </td>*@
 
                     @*<td>@item.TakenOverName</td>
-                    <td>@item.TakenOverDate</td>
-                    <td>@item.TakenOverMobileNo</td>
-                    <td>@item.TakenOverComments</td>
-                    <td>@item.HandedOverName</td>
-                    <td>@item.HandedOverDate</td>
-                    <td>@item.HandedOverMobileNo</td>
-                    <td>@item.HandedOverComments</td>
-                    <td>@item.DisposalType.Name</td>
-                    <td>@item.DisposalDate</td>
-                    <td>@item.DisposalComments</td>
-                    <td>@item.Remarks</td>*@
+                        <td>@item.TakenOverDate</td>
+                        <td>@item.TakenOverMobileNo</td>
+                        <td>@item.TakenOverComments</td>
+                        <td>@item.HandedOverName</td>
+                        <td>@item.HandedOverDate</td>
+                        <td>@item.HandedOverMobileNo</td>
+                        <td>@item.HandedOverComments</td>
+                        <td>@item.DisposalType.Name</td>
+                        <td>@item.DisposalDate</td>
+                        <td>@item.DisposalComments</td>
+                        <td>@item.Remarks</td>*@
                     <td>
                         <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
@@ -178,74 +180,81 @@
 
             @*Old with few fields start*@
             @*<tr>
-                <td>2</td>
-                <td>111</td>
-                <td>dwarka</td>
-                <td>1234</td>
-                <td>dwarka</td>
-                <td>yes</td>
-                <td>1258</td>
-                <td>no</td>
-                <td>yes</td>
-                <td>no</td>
-                <td>no</td>
-                <td>no</td>
-                <td>engg</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>lm</td>
-                <td>no</td>
-                <td>no</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>alloted</td>
-                <td>7aug2020</td>
-                <td>no comments</td>
-                <td>good to use</td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>111</td>
-                <td>dwarka</td>
-                <td>1234</td>
-                <td>dwarka</td>
-                <td>yes</td>
-                <td>1258</td>
-                <td>no</td>
-                <td>yes</td>
-                <td>no</td>
-                <td>no</td>
-                <td>no</td>
-                <td>engg</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>lm</td>
-                <td>no</td>
-                <td>no</td>
-                <td>dda</td>
-                <td>7aug2020</td>
-                <td>good</td>
-                <td>alloted</td>
-                <td>7aug2020</td>
-                <td>no comments</td>
-                <td>good to use</td>
-                <td>
-                    <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
-                    <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </td>
-            </tr>*@
+                    <td>2</td>
+                    <td>111</td>
+                    <td>dwarka</td>
+                    <td>1234</td>
+                    <td>dwarka</td>
+                    <td>yes</td>
+                    <td>1258</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>engg</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>lm</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>alloted</td>
+                    <td>7aug2020</td>
+                    <td>no comments</td>
+                    <td>good to use</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>111</td>
+                    <td>dwarka</td>
+                    <td>1234</td>
+                    <td>dwarka</td>
+                    <td>yes</td>
+                    <td>1258</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>engg</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>lm</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>dda</td>
+                    <td>7aug2020</td>
+                    <td>good</td>
+                    <td>alloted</td>
+                    <td>7aug2020</td>
+                    <td>no comments</td>
+                    <td>good to use</td>
+                    <td>
+                        <i class="glyphicon glyphicon-eye-open icon-white cl1"></i>&nbsp;|&nbsp;
+                        <i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                    </td>
+                </tr>*@
             @*Old with few fields start*@
-        </tbody>
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
 
-    </table>
+</table>
 
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -105,6 +105,10 @@ namespace Libraries.Model
         public virtual DbSet<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public virtual DbSet<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
         public virtual DbSet<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+        public virtual DbSet<Demolitionchecklist> Demolitionchecklist { get; set; }
+
+        public virtual DbSet<Demolitiondocument> Demolitiondocument { get; set; }
+
         /// </summary>
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -173,6 +177,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemolitionstructureConfiguration());
             modelBuilder.ApplyConfiguration(new DemolitionstructuredetailsConfiguration());
             modelBuilder.ApplyConfiguration(new CurrentstatusoflandhistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DemolitionchecklistConfiguration());
+            modelBuilder.ApplyConfiguration(new DemolitiondocumentConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

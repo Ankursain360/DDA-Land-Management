@@ -39,8 +39,8 @@
                     <td>@item.PrimaryListNo</td>
                     <td>@item.TotalArea</td>
 
-                    <td>@item.Restoreproperty.RestoreReason</td>
-                    <td>@item.Restoreproperty.RestoreDate</td>
+                    <td>@(item.Restoreproperty==null?"Not Available":item.Restoreproperty.RestoreReason)</td>
+                    <td>@(item.Restoreproperty==null?"Not Available":Convert.ToDateTime(item.Restoreproperty.RestoreDate).ToString("dd-MMM-yyyy"))</td>
                     @*asp-action="View" asp-route-id="@item.Id"*@
                     @*<td>
                             <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
