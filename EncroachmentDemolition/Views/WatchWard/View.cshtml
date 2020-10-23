@@ -28,17 +28,17 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
-                        <input asp-for="Date" type="date" id="txtDate" class="form-control" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
+                        <input disabled asp-for="Date" type="date" id="txtDate" class="form-control" />
+                        @*<span asp-validation-for="Date" class="text-danger"></span>*@
                     </div>
 
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Locality Name (Village)</label><span style="color:red">*</span>
-                        <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                        <select disabled class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                             <option>Select</option>
                         </select>
-                        <span asp-validation-for="LocalityId" class="text-danger"></span>
+                        @*<span asp-validation-for="LocalityId" class="text-danger"></span>*@
                     </div>
 
 
@@ -48,16 +48,16 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
-                        <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
+                        <select disabled class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
                             <option>Select</option>
                         </select>
-                        <span asp-validation-for="KhasraId" class="text-danger"></span>
+                        @*<span asp-validation-for="KhasraId" class="text-danger"></span>*@
                     </div>
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Land Mark</label><span style="color:red">*</span>
-                        <input asp-for="Landmark" type="text" class="form-control" />
-                        <span asp-validation-for="Landmark" class="text-danger"></span>
+                        <input disabled asp-for="Landmark" type="text" class="form-control" />
+                        @*<span asp-validation-for="Landmark" class="text-danger"></span>*@
                     </div>
 
 
@@ -65,12 +65,12 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
-                        <select class="form-control" asp-for="Encroachment">
+                        <select disabled class="form-control" asp-for="Encroachment">
                             <option value="0">---Select---</option>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
-                        <span asp-validation-for="Encroachment" class="text-danger"></span>
+                        @*<span asp-validation-for="Encroachment" class="text-danger"></span>*@
                     </div>
 
 
@@ -78,8 +78,8 @@
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
-                        <textarea asp-for="StatusOnGround" type="text" class="form-control"></textarea>
-                        <span asp-validation-for="StatusOnGround" class="text-danger"></span>
+                        <textarea disabled asp-for="StatusOnGround" type="text" class="form-control"></textarea>
+                        @*<span asp-validation-for="StatusOnGround" class="text-danger"></span>*@
                     </div>
 
 
@@ -134,19 +134,19 @@
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" class="form-control dda-dropdown">
+                        <select disabled asp-for="IsActive" class="form-control dda-dropdown">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>
                         </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                        @*<span asp-validation-for="IsActive" class="text-danger"></span>*@
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
-                        <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
-                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                        <textarea disabled asp-for="Remarks" type="text" class="form-control"></textarea>
+                        @*<span asp-validation-for="Remarks" class="text-danger"></span>*@
                     </div>
 
                 </div>

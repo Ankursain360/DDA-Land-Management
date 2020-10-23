@@ -8,8 +8,8 @@
     });
     $(function () {
         $('#DD1').change(function () {
-            var id = $("#DD1").val();
-            if (id == 1) {
+            var value = $("#DD1").val();
+            if (value == 'Yes') {
                 $("#TssSurvey").show();
 
             }
@@ -21,8 +21,8 @@
 
     $(function () {
         $('#DD2').change(function () {
-            var id = $("#DD2").val();
-            if (id == 1) {
+            var value = $("#DD2").val();
+            if (value == 'Yes') {
                 $("#Encroachment").show();
 
             }
@@ -35,8 +35,8 @@
 
     $(function () {
         $('#DD3').change(function () {
-            var id = $("#DD3").val();
-            if (id == 1) {
+            var value = $("#DD3").val();
+            if (value == 'Yes') {
                 $("#Boundary").show();
 
             }
@@ -49,8 +49,8 @@
 
     $(function () {
         $('#DD4').change(function () {
-            var id = $("#DD4").val();
-            if (id == 1) {
+            var value = $("#DD4").val();
+            if (value == 'Yes') {
                 $("#Utilization").show();
 
             }

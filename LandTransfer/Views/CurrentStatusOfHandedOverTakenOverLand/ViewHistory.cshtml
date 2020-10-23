@@ -1,11 +1,5 @@
-﻿
-
-@*@model IEnumerable<Libraries.Model.Entity.Landtransfer>*@
-<style>
-    th{
-        text-align:center;
-    }
-</style>
+﻿@model IEnumerable<Libraries.Model.Entity.Currentstatusoflandhistory>
+@{int rowNo = 0;}
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
@@ -34,7 +28,7 @@
                     <th colspan="3">Fencing/Boundary Wall</th>
                     <th colspan="3">Area Utilised</th>
                     <th rowspan="2">Remarks</th>
-                    <th rowspan="2"> Submitted On </th>
+                    <th rowspan="2">Submitted On </th>
                 </tr>
                 <tr>
                     <th>TSS Survey</th>
@@ -53,45 +47,54 @@
             </thead>
             <tbody class="tbody">
 
-                <tr>
+                @*<tr>
 
-                    <td>1</td>
-                    <td>yes</td>
-                    <td>file.pdf</td>
-                    <td>yes</td>
-                    <td>456.01</td>
-                    <td>taken</td>
-                    <td>file.pdf</td>
-                    <td>yes</td>
-                    <td>456.01</td>
-                    <td> 45*52*31</td>
-                    <td>yes</td>
-                    <td>356.01</td>
-                    <td>213.05</td>
-                    <td>Area not utilised</td>
-                    <td> 12 Oct 2020 </td>
+            <td>1</td>
+            <td>yes</td>
+            <td>file.pdf</td>
+            <td>yes</td>
+            <td>456.01</td>
+            <td>taken</td>
+            <td>file.pdf</td>
+            <td>yes</td>
+            <td>456.01</td>
+            <td> 45*52*31</td>
+            <td>yes</td>
+            <td>356.01</td>
+            <td>213.05</td>
+            <td>Area not utilised</td>
+            <td> 12 Oct 2020 </td>
 
-                </tr>
-                <tr>
+        </tr>*@
 
-                    <td>2</td>
-                    <td>yes</td>
-                    <td>file.pdf</td>
-                    <td>yes</td>
-                    <td>456.01</td>
-                    <td>taken</td>
-                    <td>file.pdf</td>
-                    <td>yes</td>
-                    <td>456.01</td>
-                    <td> 45*52*31</td>
-                    <td>yes</td>
-                    <td>356.01</td>
-                    <td>213.05</td>
-                    @*<td>active</td>*@
-                    <td>Area not utilised</td>
-                    <td> 12 Oct 2020 </td>
+                @if (Model != null && Model.Count() > 0)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+                            <td>@item.Tsssurvey</td>
+                            <td>@item.Encroachment</td>
+                            <td>@item.EncroachedArea</td>
+                            <td>@item.ActionOnEncroachment</td>
+                            <td>@item.FencingBoundaryWall</td>
+                            <td>@item.AreaCovered</td>
+                            <td>@item.Dimension</td>
+                            <td> @item.PlotUtilization</td>
+                            <td>@item.AreaUtilised</td>
+                            <td>@item.BalanceArea</td>
+                            <td>@item.Remarks</td>
+                            <td>@(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy") )</td>
 
-                </tr>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <th colspan="14" style="text-align:center"> No Record Available! </th>
+                    </tr>
+                }
             </tbody>
 
         </table>
