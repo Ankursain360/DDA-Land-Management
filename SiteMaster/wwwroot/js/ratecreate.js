@@ -29,6 +29,54 @@ $('#PropertyId').change(function () {
     });
 });
 
+$('#myForm').validate({
+    rules: {
+
+        FromDate: {
+            required: true
+        },
+        ToDate: {
+            required: true
+        },
+        RatePercentage: {
+            required: true
+        }
+    },
+
+    messages: {
+
+        FromDate: {
+            required: FromDateMessage //this is a function that returns custom messages
+        },
+        ToDate: {
+            required: ToDateMessage //this is a function that returns custom messages
+        },
+        RatePercentage: {
+            maxlength: 18,
+            required: RatePercentageMessage
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        // alert('Form validated and submitted ok.');
+        return true;
+    }
+});
+
 function PropertyIdMessage() {
     var dropdown_val = $('#PropertyId option:selected').val();
     if (dropdown_val < 1) {

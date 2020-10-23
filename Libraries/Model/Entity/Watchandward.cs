@@ -51,6 +51,7 @@ namespace Libraries.Model.Entity
         public List<IFormFile> ReportFile { get; set; }
         public virtual ICollection<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
         public virtual ICollection<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
-        
+        public int? Status { get; set; }
+
     }
 }

@@ -41,6 +41,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(300)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Status).HasColumnType("int(11)");
+
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
