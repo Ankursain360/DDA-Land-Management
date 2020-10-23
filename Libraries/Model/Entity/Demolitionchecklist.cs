@@ -12,6 +12,9 @@ namespace Libraries.Model.Entity
    public class Demolitionchecklist : AuditableEntity<int>
     {
 
+        
+
+
 
         [Required(ErrorMessage = "The Checklist Description field is required")]
 
