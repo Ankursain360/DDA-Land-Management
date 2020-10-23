@@ -67,6 +67,12 @@ namespace Service.ApplicationService
             return _mapper.Map<List<RoleDto>>(role);
         }
 
+        public async Task<List<RoleDto>> GetActiveRole()
+        {
+            var role = await _userProfileRepository.GetActiveRole();
+            return _mapper.Map<List<RoleDto>>(role);
+        }
+
         public async Task<UserProfileDto> GetUserById(int userId)
         {
             var user = await _userProfileRepository.GetUserById(userId);

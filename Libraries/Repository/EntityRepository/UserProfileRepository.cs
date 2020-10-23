@@ -71,19 +71,9 @@ namespace Repository.EntityRepository
             return await _dbContext.Roles.AsNoTracking().ToListAsync();
         }
 
-      
-
-
-      
-
-
-
-
-
-
-
-
-
-
+        public async Task<List<ApplicationRole>> GetActiveRole()
+        {
+            return await _dbContext.Roles.Where(a=>a.IsActive == 1).AsNoTracking().ToListAsync();
+        }
     }
 }

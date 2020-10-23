@@ -13,5 +13,6 @@ namespace Repository.IEntityRepository
         Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
+        Task<List<ApplicationRole>> GetActiveRole();
     }
 }

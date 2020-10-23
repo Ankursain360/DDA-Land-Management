@@ -56,7 +56,8 @@ namespace SiteMaster.Controllers
         {
             AddUserDto model = new AddUserDto() {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone()
+                ZoneList = await _zoneService.GetZone(),
+                RoleList = await _userProfileService.GetRole()
             };
             return View(model);
         }
@@ -69,26 +70,8 @@ namespace SiteMaster.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var result1 = await _userManager.CreateAsync(new ApplicationUser()
-                    {
-                        UserName = model.UserName,
-                        Email = model.Email,
-                        PhoneNumber = model.PhoneNumber,
-                        PasswordSetDate = DateTime.Now.AddDays(30),
-                    }, model.Password);
-
-                    if (result1.Succeeded)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _userService.GetAllUser();
-
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(model);
-                    }
+                    await _userProfileService.CreateUser(model);
+                    return RedirectToAction("Index");
                 }
                 else
                 {
