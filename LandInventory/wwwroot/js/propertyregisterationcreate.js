@@ -369,11 +369,14 @@ function TotalAreaMessage() {
 function GetZoneList(id) {
     debugger;
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        $("#ZoneId").val('').trigger('change');
         var html = '<option value="">---Select---</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
+        }        
         $("#ZoneId").html(html);
+        $("#DivisionId").val('').trigger('change');
+        $("#LocalityId").val('').trigger('change');
     });
 };
 
@@ -385,6 +388,7 @@ function GetDivisionList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        $("#DivisionId").val('').trigger('change');
         $("#DivisionId").html(html);
     });
 
@@ -393,6 +397,7 @@ function GetDivisionList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        $("#LocalityId").val('').trigger('change');
         $("#LocalityId").html(html);
     });
 };
