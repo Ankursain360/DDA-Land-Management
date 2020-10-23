@@ -22,6 +22,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IEncroachmentRegisterationRepository, EncroachmentRegisterationRepository>();
             services.AddScoped<IOnlinecomplaintRepository, OnlinecomplaintRepository>();
             services.AddScoped<IWatchAndWardApprovalRepository, WatchAndWardApprovalRepository>();
+            services.AddScoped<IAnnexureARepository, AnnexureARepository>();
 
 
             /* Application Services */
@@ -30,6 +31,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IEncroachmentRegisterationService, EncroachmentRegisterationService>();
             services.AddScoped<IOnlinecomplaintService, OnlinecomplaintService>();
             services.AddScoped<IWatchAndWardApprovalService, WatchAndWardApprovalService>();
+            services.AddScoped<IAnnexureAService, AnnexureAService>();
 
         }
     }
