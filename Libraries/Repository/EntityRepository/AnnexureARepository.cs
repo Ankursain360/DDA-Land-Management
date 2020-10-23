@@ -13,7 +13,17 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   /// public class AnnexureARepository : GenericRepository<>, IWatchandwardRepository
-   // {
-   // }
+   public class AnnexureARepository : GenericRepository<Demolitionchecklist>, IAnnexureARepository
+    {
+        public AnnexureARepository(DataContext dbContext) : base(dbContext)
+        {
+
+        }
+
+        public async Task<List<Demolitionchecklist>> GetDemolitionchecklist()
+        {
+            return await _dbContext.Demolitionchecklist.ToListAsync();
+        }
+
+    }
 }

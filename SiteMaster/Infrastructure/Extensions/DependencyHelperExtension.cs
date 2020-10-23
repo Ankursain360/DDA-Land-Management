@@ -43,6 +43,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IDemolitionchecklistRepository, DemolitionchecklistRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -67,6 +68,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IDemolitionchecklistService, DemolitionchecklistService>();
         }
     }
 }

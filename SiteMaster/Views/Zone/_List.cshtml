@@ -1,11 +1,9 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Zone>
-@{int rowNo = 0; }
 
 <table class="table table-responsive table-bordered table-card">
 
     <thead class="thead">
         <tr class="myapp-hed1">
-            <th>Sr.No</th>
             <th>Department </th>
             <th> Zone Name</th>
             <th> Zone Code</th>
@@ -17,7 +15,6 @@
         @foreach (var item in Model.Results)
         {
             <tr>
-                <td>@(rowNo += 1)</td>
                 <td>@item.Department.Name</td>
                 <td>@item.Name</td>
 

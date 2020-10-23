@@ -11,7 +11,8 @@ function GetDetails(pageNumber, pageSize) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
-
+    var widthPercentage = 100 / $('table').children('thead').children('tr').children('th').length;
+    $('table').children('thead').children('tr').children('th').css("width", widthPercentage.toString() + "%");
     if ($('table >tbody >tr').length <= 1) {
         GetDetails(1, $("#ddlPageSize option:selected").val());
     }
