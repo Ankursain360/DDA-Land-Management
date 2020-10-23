@@ -1,6 +1,5 @@
 ﻿// Write your JavaScript code.
 $(document).ready(function () {
-
     $('.numbers').keyup(function (e) {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });
@@ -11,11 +10,18 @@ $(document).ready(function () {
     });
 
     $(".ParameterActionListClass").attr("multiple", "");
-    $("select").select2({
+    $("select[id!='ddlPageSize']").select2({
         placeholder: "--Select--",
         allowClear: true
     });
-
+    if ($("form").is("[disabled]")) {
+        if ($("form").attr('disabled') == 'disabled') {
+            $('input').attr('disabled', 'disabled');
+            $('select').attr('disabled', 'disabled');
+            $('button').attr('disabled', 'disabled');
+            $('textarea').attr('disabled', 'disabled');
+        }
+    }
     $('input,textarea').each(function () {
         if ($(this).is("[limit]")) {
             if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {
@@ -120,7 +126,7 @@ function ValidateForm() {
             }
         }
     });
-    $(".field-validation-valid").hide();
+    //$(".field-validation-valid").hide();
     return isFormValid;
 };
 
