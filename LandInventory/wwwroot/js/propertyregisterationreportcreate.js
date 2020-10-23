@@ -19,11 +19,15 @@ $(document).ready(function () {
 function GetZoneList(id) {
     debugger;
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+       
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        $("#ZoneId").val('0').trigger('change');
         $("#ZoneId").html(html);
+        $("#DivisionId").val('0').trigger('change');
+        $("#LocalityId").val('0').trigger('change');
     });
 };
 
@@ -35,6 +39,7 @@ function GetDivisionList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        $("#DivisionId").val('0').trigger('change');
         $("#DivisionId").html(html);
     });
 
@@ -43,6 +48,7 @@ function GetDivisionList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        $("#LocalityId").val('0').trigger('change');
         $("#LocalityId").html(html);
     });
 };
