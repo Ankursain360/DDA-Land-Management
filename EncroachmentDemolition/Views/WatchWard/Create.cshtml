@@ -33,7 +33,7 @@
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
                         <input asp-for="Date" type="date" id="txtDate" class="form-control" />
@@ -52,7 +52,7 @@
 
                 </div>
 
-                <div class="form-row">
+                <div class="row">
 
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Khasra No.</label>
@@ -68,9 +68,9 @@
                         <span asp-validation-for="Landmark" class="text-danger"></span>
                     </div>
 
-                  
+
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
                         <select class="form-control" asp-for="Encroachment">
@@ -83,7 +83,7 @@
 
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
                         <textarea asp-for="StatusOnGround" type="text" class="form-control"></textarea>
@@ -92,7 +92,7 @@
 
 
                 </div>
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Photos</label>
                         <input asp-for="Photo" type="file" class="form-control" multiple />
@@ -104,8 +104,8 @@
                         <span asp-validation-for="ReportFile" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-row">
-                   
+                <div class="row">
+
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
@@ -116,7 +116,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
                         <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
@@ -125,7 +125,7 @@
 
                 </div>
 
-                <div class="form-row">
+                <div class="row">
                     <div class="form-group col-md-12" style="justify-content:center">
                         <input type="submit" value="Create" class="btn btn-primary  dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
