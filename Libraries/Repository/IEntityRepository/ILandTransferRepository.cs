@@ -25,7 +25,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<List<Landtransfer>> GetAllLandTransferList();
-        Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id);
+        Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id); 
         Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model);//added by shalini
 
         //Current status of land history methods:

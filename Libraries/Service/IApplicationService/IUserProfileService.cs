@@ -20,5 +20,11 @@ namespace Service.IApplicationService
         Task<List<RoleDto>> GetActiveRole();
         Task<bool> CreateUser(AddUserDto userDto);
         Task<bool> UpdateUser(EditUserDto userDto);
+        Task<bool> UpdateRole(ApplicationRole role, RoleDto model);
+        Task<ApplicationRole> GetApplicationRoleById(int id);
+        Task<bool> CheckUniqueName(int id, string name);
+        Task<bool> CheckUniqueUserName(int id, string UserName);
+        object GetUserIdIdByProfile(int id);
+        Task<AddUserDto> GetUserByDTOId(int finalUserId);
     }
 }

@@ -14,5 +14,9 @@ namespace Repository.IEntityRepository
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
         Task<List<ApplicationRole>> GetActiveRole();
+
+        Task<bool> CheckUniqueName(int id, string name);
+        Task<bool> CheckUniqueUserName(int id, string userName);
+        object GetUserIdIdByProfile(int id);
     }
 }

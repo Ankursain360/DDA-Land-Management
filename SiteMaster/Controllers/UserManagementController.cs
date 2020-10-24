@@ -79,16 +79,16 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExistLoginName(int Id, string loginname)
+        public async Task<IActionResult> ExistLoginName(int Id, string UserName)
         {
-            var result = await _userService.CheckUniqueLoginName(Id, loginname);
+            var result = await _userProfileService.CheckUniqueUserName(Id, UserName);
             if (result == false)
             {
                 return Json(true);
             }
             else
             {
-                return Json($"User: {loginname} already exist");
+                return Json($"User: {UserName} already exist");
             }
         }
 
