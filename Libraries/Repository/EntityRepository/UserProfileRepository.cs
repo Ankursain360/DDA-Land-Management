@@ -71,19 +71,9 @@ namespace Repository.EntityRepository
             return await _dbContext.Roles.AsNoTracking().ToListAsync();
         }
 
-      
-
-
-      
-
-
-
-
-
-
-
-
-
-
+        public async Task<bool> CheckUniqueName(int id, string name)
+        {
+            return await _dbContext.Roles.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
     }
 }

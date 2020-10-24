@@ -77,8 +77,9 @@ namespace SiteMaster.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
-            var result = await _roleService.FindByNameAsync(Name);
-            if (result == null)
+            //var result = await _roleService.FindByNameAsync(Name);
+            var result = await _userProfileService.CheckUniqueName(Id, Name);
+            if (result == false)
             {
                 return Json(true);
             }
@@ -104,16 +105,17 @@ namespace SiteMaster.Controllers
         {
             if (ModelState.IsValid)
             {
+                ApplicationRole role = await _userProfileService.GetApplicationRoleById(id);
                 var result = await _userProfileService.GetRoleById(id);
                 if (result != null)
                 {
-                    result.Id = model.Id;
-                    result.Name = model.Name;
-                    result.IsActive = model.IsActive;
-                    result.ModifiedBy = 1;
-                    result.ModifiedDate = DateTime.Now;
+                    role.Id = model.Id;
+                    role.Name = model.Name;
+                    role.IsActive = model.IsActive;
+                    role.ModifiedBy = 1;
+                    role.ModifiedDate = DateTime.Now;
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var list = await _userProfileService.UpdateRole(result);
+                    var list = await _userProfileService.UpdateRole(role, model);
                     return View("Index", list);
                 }
                 else
@@ -127,42 +129,26 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id, RoleDto model)
         {
             try
             {
-                // var data = await _userProfileService.UpdateRole( );
-
-                RoleDto role = new RoleDto()
+                ApplicationRole role = await _userProfileService.GetApplicationRoleById(id);
+                if (role != null)
                 {
-                    Id = id,
-                    IsActive = 0,
-                    ModifiedBy = 1,
-                    ModifiedDate = DateTime.Now
-                };
-
-                var result = await _userProfileService.UpdateRole(role);
-                if (result)
-                {
+                    role.Id = model.Id;
+                    model.Name = role.Name;
+                    role.IsActive = 0;
+                    role.ModifiedBy = 1;
+                    role.ModifiedDate = DateTime.Now;
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    var list = await _userProfileService.UpdateRole(role, model);
+                    return View("Index", list);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(model);
                 }
             }
             catch (Exception ex)

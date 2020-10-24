@@ -49,10 +49,10 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async Task<bool> UpdateRole(RoleDto model)
+        public async Task<bool> UpdateRole(ApplicationRole role,RoleDto model)
         {
-            var role = _mapper.Map<ApplicationRole>(model);
-            IdentityResult result = await _roleManager.UpdateAsync(role);
+            var roleres = _mapper.Map(model, role);
+            IdentityResult result = await _roleManager.UpdateAsync(roleres);
             return result.Succeeded ? true : false;
         }
 
@@ -74,6 +74,18 @@ namespace Service.ApplicationService
             var user = await _userProfileRepository.GetUserById(userId);
             var result = _mapper.Map<UserProfileDto>(user);
             return result;
+        }
+
+        public async Task<ApplicationRole> GetApplicationRoleById(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+           // var result = _mapper.Map<RoleDto>(role);
+            return role;
+        }
+
+        public async Task<bool> CheckUniqueName(int id, string name)
+        {
+            return await _userProfileRepository.CheckUniqueName(id, name);
         }
     }
 }
