@@ -4,12 +4,11 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
-using Model.Entity;
-using Microsoft.AspNetCore.Identity;
 using Repository.IEntityRepository;
 using Repository.EntityRepository;
 using Service.IApplicationService;
 using Service.ApplicationService;
+using SiteMaster.Helper;
 
 namespace SiteMaster.Infrastructure.Extensions
 {
@@ -19,7 +18,7 @@ namespace SiteMaster.Infrastructure.Extensions
         {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<ISiteContext, SiteContext>();
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
@@ -45,6 +44,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IDemolitionchecklistRepository, DemolitionchecklistRepository>();
             services.AddScoped<IDemolitiondocumentRepository, DemolitiondocumentRepository>();
+            services.AddScoped<IDemolitionprogrammasterRepository, DemolitionprogrammasterRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -71,6 +71,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IDemolitionchecklistService, DemolitionchecklistService>();
             services.AddScoped<IDemolitiondocumentService, DemolitiondocumentService>();
+            services.AddScoped<IDemolitionprogrammasterService, DemolitionprogrammasterService>();
+
 
         }
     }

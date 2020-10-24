@@ -59,11 +59,6 @@ namespace SiteMaster
             //{
             //    option.Filters.Add(new CustomExceptionHandlerFilter());
             //});
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
             services.RegisterDependency();
 
             services.AddAutoMapperSetup();
@@ -127,7 +122,6 @@ namespace SiteMaster
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSession();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
