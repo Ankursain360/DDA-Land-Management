@@ -159,6 +159,15 @@ namespace SiteMaster.Controllers
             return View("Index");
         }
 
+        public async Task<IActionResult> View(int id)
+        {
+            var result = await _userProfileService.GetRoleById(id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return View(result);
+        }
 
 
     }

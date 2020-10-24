@@ -69,22 +69,14 @@
                         <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     </div>
                     <div class="col-md-6 form-group">
-                        <label class="control-label lb-sm" asp-for="ZoneId">Zone <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId"  asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" required="required" requiredMsg="Zone is Mandatory">
+                        <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId"   >
                             <option value="">Select</option>
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Status</label>
-                        <select class="form-control dda-dropdown">
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
-                        </select>
-                        <span class="text-danger"></span>
-                    </div>
                     <div class="col-md-6 form-group">
                         <label class="control-label lb-sm" asp-for="RoleId">Role <span style="color:red">*</span></label>
                         <select class="form-control dda-dropdown" asp-for="RoleId" required="required" requiredMsg="Department is Mandatory"
@@ -93,6 +85,15 @@
                         </select>
                         <span asp-validation-for="RoleId" class="text-danger"></span>
                     </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Status</label>
+                        <select class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span class="text-danger"></span>
+                    </div>
+
                 </div>
 
                 <div class="row ">
