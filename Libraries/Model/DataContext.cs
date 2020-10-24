@@ -98,7 +98,7 @@ namespace Libraries.Model
         public virtual DbSet<Demolitionchecklist> Demolitionchecklist { get; set; }
         public virtual DbSet<Demolitiondocument> Demolitiondocument { get; set; }
         public virtual DbSet<Demolitionprogrammaster> Demolitionprogrammaster { get; set; }
-
+        public virtual DbSet<Structure> Structure { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
