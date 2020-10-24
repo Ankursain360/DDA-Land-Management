@@ -23,9 +23,13 @@ namespace Dto.Master
         public string ConfirmPassword { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public int DepartmentId { get; set; }
+        public int? DepartmentId { get; set; }
         public List<DepartmentDto> DepartmentList { get; set; }
-        public int ZoneId { get; set; }
+        public int? ZoneId { get; set; }
         public List<ZoneDto> ZoneList { get; set; }
+        public int? DistrictId { get; set; }
+        public List<DistrictDto> DistrictList { get; set; }
+        public int RoleId { get; set; }
+        public List<RoleDto> RoleList { get; set; }
     }
 }

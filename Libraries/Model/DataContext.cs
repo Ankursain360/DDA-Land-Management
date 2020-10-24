@@ -23,7 +23,6 @@ namespace Libraries.Model
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
         public virtual DbSet<Natureofencroachment> Natureofencroachment { get; set; }
-
         public virtual DbSet<Zone> Zone { get; set; }
         public virtual DbSet<Village> Village { get; set; }
         public virtual DbSet<Division> Division { get; set; }
@@ -34,7 +33,6 @@ namespace Libraries.Model
         public virtual DbSet<Locality> Locality { get; set; }
         public virtual DbSet<Reasons> Reasons { get; set; }
         public virtual DbSet<Rate> Rate { get; set; }
-
         public virtual DbSet<Rebate> Rebate { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<PageRole> PageRole { get; set; }
@@ -51,10 +49,8 @@ namespace Libraries.Model
         public virtual DbSet<Scheme> Scheme { get; set; }
         public virtual DbSet<Proposaldetails> Proposaldetails { get; set; }
         public virtual DbSet<Purpose> Purpose { get; set; }
-
         public virtual DbSet<Undersection4> Undersection4 { get; set; }
         public virtual DbSet<Undersection4plot> Undersection4plot { get; set; }
-
         public virtual DbSet<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual DbSet<Undersection17> Undersection17 { get; set; }
         public virtual DbSet<Undersection22> Undersection22 { get; set; }
@@ -69,7 +65,6 @@ namespace Libraries.Model
         public virtual DbSet<Serialnumber> Serialnumber { get; set; }
         public virtual DbSet<Morland> Morland { get; set; }
         public virtual DbSet<Enchroachment> Enchroachment { get; set; }
-
         public virtual DbSet<Ldoland> Ldoland { get; set; }
         public virtual DbSet<Booktransferland> Booktransferland { get; set; }
         public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
@@ -81,15 +76,10 @@ namespace Libraries.Model
         public virtual DbSet<Taraf> Taraf { get; set; }
         public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
-
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
         public virtual DbSet<Actions> Actions { get; set; }
-
-
         public virtual DbSet<Currentstatusoflandhistory> Currentstatusoflandhistory { get; set; }
-        /// <summary>
-        // Encroachment demolition module:
         public virtual DbSet<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
         public virtual DbSet<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
         public virtual DbSet<Watchandward> Watchandward { get; set; }
@@ -101,16 +91,13 @@ namespace Libraries.Model
         public virtual DbSet<EncroachmentFirFileDetails> EncroachmentFirFileDetails { get; set; }
         public virtual DbSet<EncroachmentPhotoFileDetails> EncroachmentPhotoFileDetails { get; set; }
         public virtual DbSet<EncroachmentLocationMapFileDetails> EncroachmentLocationMapFileDetails { get; set; }
-         public virtual DbSet<Demolitionstructure> Demolitionstructure { get; set; }
+        public virtual DbSet<Demolitionstructure> Demolitionstructure { get; set; }
         public virtual DbSet<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public virtual DbSet<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
         public virtual DbSet<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
         public virtual DbSet<Demolitionchecklist> Demolitionchecklist { get; set; }
-
         public virtual DbSet<Demolitiondocument> Demolitiondocument { get; set; }
 
-        /// </summary>
-        /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -179,7 +166,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CurrentstatusoflandhistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DemolitionchecklistConfiguration());
             modelBuilder.ApplyConfiguration(new DemolitiondocumentConfiguration());
-
+            modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

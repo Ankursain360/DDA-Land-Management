@@ -3,7 +3,6 @@ using Dto.Search;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Model.Entity;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -14,11 +13,11 @@ namespace Service.IApplicationService
         Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model);
         Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model);
         Task<RoleDto> GetRoleById(int id);
-        Task<bool> UpdateRole(ApplicationRole role, RoleDto model);
+        Task<bool> UpdateRole(RoleDto model);
         Task<List<UserProfileDto>> GetUser();
         Task<UserProfileDto> GetUserById(int userId);
         Task<List<RoleDto>> GetRole();
-        Task<ApplicationRole> GetApplicationRoleById(int id);
-        Task<bool> CheckUniqueName(int id, string name);
+        Task<List<RoleDto>> GetActiveRole();
+        Task<bool> CreateUser(AddUserDto userDto);
     }
 }

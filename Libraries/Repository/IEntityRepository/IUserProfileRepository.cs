@@ -13,6 +13,6 @@ namespace Repository.IEntityRepository
         Task<List<Userprofile>> GetUser();
         Task<List<ApplicationRole>> GetRole();
         Task<Userprofile> GetUserById(int userId);
-        Task<bool> CheckUniqueName(int id, string name);
+        Task<List<ApplicationRole>> GetActiveRole();
     }
 }

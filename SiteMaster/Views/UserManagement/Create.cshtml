@@ -85,6 +85,14 @@
                         </select>
                         <span class="text-danger"></span>
                     </div>
+                    <div class="col-md-6 form-group">
+                        <label class="control-label lb-sm" asp-for="RoleId">Role <span style="color:red">*</span></label>
+                        <select class="form-control dda-dropdown" asp-for="RoleId" required="required" requiredMsg="Department is Mandatory"
+                                asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
+                            <option value="">Select</option>
+                        </select>
+                        <span asp-validation-for="RoleId" class="text-danger"></span>
+                    </div>
                 </div>
 
                 <div class="row ">

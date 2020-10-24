@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using Dto.Master;
 using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore.Update.Internal;
 using Model.Entity;
 using Repository.IEntityRepository;
 using Service.IApplicationService;
@@ -17,16 +19,19 @@ namespace Service.ApplicationService
     {
         private readonly IUserProfileRepository _userProfileRepository;
         private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
         public UserProfileService(IUnitOfWork unitOfWork,
             IUserProfileRepository userProfileRepository,
             RoleManager<ApplicationRole> roleManager,
+            UserManager<ApplicationUser> userManager,
             IMapper mapper)
             : base(unitOfWork, userProfileRepository)
         {
             _userProfileRepository = userProfileRepository;
             _roleManager = roleManager;
+            _userManager = userManager;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -49,13 +54,6 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async Task<bool> UpdateRole(ApplicationRole role,RoleDto model)
-        {
-            var roleres = _mapper.Map(model, role);
-            IdentityResult result = await _roleManager.UpdateAsync(roleres);
-            return result.Succeeded ? true : false;
-        }
-
         public async Task<List<UserProfileDto>> GetUser()
         {
             var user = await _userProfileRepository.GetUser();
@@ -69,6 +67,12 @@ namespace Service.ApplicationService
             return _mapper.Map<List<RoleDto>>(role);
         }
 
+        public async Task<List<RoleDto>> GetActiveRole()
+        {
+            var role = await _userProfileRepository.GetActiveRole();
+            return _mapper.Map<List<RoleDto>>(role);
+        }
+
         public async Task<UserProfileDto> GetUserById(int userId)
         {
             var user = await _userProfileRepository.GetUserById(userId);
@@ -76,16 +80,50 @@ namespace Service.ApplicationService
             return result;
         }
 
-        public async Task<ApplicationRole> GetApplicationRoleById(int id)
+        public async Task<bool> UpdateRole(RoleDto roleDto)
         {
-            var role = await _roleManager.FindByIdAsync(id.ToString());
-           // var result = _mapper.Map<RoleDto>(role);
-            return role;
+            var role = await _roleManager.FindByIdAsync(roleDto.Id.ToString());
+            role.Name = roleDto.Name;
+            role.IsActive = roleDto.IsActive;
+            role.ModifiedBy = 1;
+            role.ModifiedDate = DateTime.Now;
+            var result = await _roleManager.UpdateAsync(role);
+            return result.Succeeded ? true : false;
         }
 
-        public async Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> CreateUser(AddUserDto userDto)
         {
-            return await _userProfileRepository.CheckUniqueName(id, name);
+            int profileSaveResult = 0;     
+            ApplicationUser user = new ApplicationUser() {
+                Name = userDto.Name,
+                UserName = userDto.UserName,
+                Email = userDto.Email,
+                PhoneNumber = userDto.PhoneNumber,
+                PasswordSetDate = DateTime.Now.AddDays(30),
+                CreatedBy = 1, 
+                CreatedDate = DateTime.Now,
+                IsDefaultPassword = 1
+            };
+
+            var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
+            if (userSavedResult.Succeeded) {
+                var savedUser = await _userManager.FindByNameAsync(user.UserName);
+                Userprofile userprofile = new Userprofile()
+                {
+                    ZoneId = userDto.ZoneId,
+                    DepartmentId = userDto.DepartmentId,
+                    DistrictId = userDto.DistrictId,
+                    RoleId = userDto.RoleId,
+                    IsActive = 1,
+                    UserId = savedUser.Id,
+                    CreatedBy = 1,
+                    CreatedDate = DateTime.Now
+                };
+                _userProfileRepository.Add(userprofile);
+                profileSaveResult = await _unitOfWork.CommitAsync();
+            }
+
+            return profileSaveResult > 0;
         }
     }
 }
