@@ -20,6 +20,28 @@
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" id="rbdWatchWard" value="1" />Watch & Ward
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" id="rbdOnlineComplaint" value="2" />Online Complaint
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline">
+                            <input type="radio" id="rbdOther" value="3" />Other
+                        </label>
+                    </div>
+                </div>
+
+                <div id="LoadOtherDataView">
+
+                </div>
+
+                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
                         <select asp-for="DepartmentId" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
@@ -73,7 +95,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Location/Address with land mark</label>
-                        <textarea class="form-control" asp-for="LocationAddressWithLandMark" ></textarea>
+                        <textarea class="form-control" asp-for="LocationAddressWithLandMark"></textarea>
                         <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
                     </div>
                 </div>
@@ -111,7 +133,7 @@
                                         <tr id="">
                                             <td style="text-align:center;"><span class="sn">1</span></td>
                                             <td>
-                                                <input type="text" asp-for="NameOfStructure" class="form-control" id="NameOfStructure"/>
+                                                <input type="text" asp-for="NameOfStructure" class="form-control" id="NameOfStructure" />
                                             </td>
                                             <td>
                                                 <select asp-for="ConstructionStatus" class="form-control">
@@ -122,10 +144,10 @@
                                                 </select>
                                             </td>
                                             <td>
-                                                <input type="text" asp-for="AreaApprox" class="form-control numbers" id="AreaApprox"/>
+                                                <input type="text" asp-for="AreaApprox" class="form-control numbers" id="AreaApprox" />
                                             </td>
                                             <td>
-                                                <input type="text" asp-for="Type" class="form-control" id="Type"/>
+                                                <input type="text" asp-for="Type" class="form-control" id="Type" />
                                             </td>
                                             <td>
                                                 <input asp-for="DateOfEncroachment" type="date" class="form-control" id="DateOfEncroachment" />
@@ -134,7 +156,7 @@
                                                 <input asp-for="ReferenceNoOnLocation" type="text" class="form-control number" id="ReferenceNoOnLocation" />
                                             </td>
                                             <td>
-                                                <input asp-for="CountOfStructure" type="text" class="form-control onlynumbers" id="CountOfStructure"/>
+                                                <input asp-for="CountOfStructure" type="text" class="form-control onlynumbers" id="CountOfStructure" />
                                             </td>
                                             <td>
                                                 <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;"><i class="fa fa-trash"></i></a>
@@ -165,9 +187,9 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6" id="divRdaioPossessionGroup" style="display:block;">
-                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession"/>
-                        <input type="hidden" asp-for="Id" id="hdnId"/>
-                        <input type="hidden" asp-for="IsActive" value="1"/>
+                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
+                        <input type="hidden" asp-for="Id" id="hdnId" />
+                        <input type="hidden" asp-for="IsActive" value="1" />
                         <label class="radio-inline">
                             <input type="radio" name="grpPossession" id="rdbFormal" checked>Formal Possession
                         </label>

@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Role Name <span style="color:red">*</span> </label>
-                        <input class="form-control" asp-for="Name" id="txtRole" limit="100"/>
+                        <input class="form-control" asp-for="Name" id="txtRole" limit="100" required="required" requiredMsg="Role Name is Mandatory"/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
@@ -36,7 +36,7 @@
                 </div>
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
                         @Html.ActionLink("Back", "Index", "Role", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>

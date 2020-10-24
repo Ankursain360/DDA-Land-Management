@@ -7,6 +7,9 @@
         $("#ZoneId").html(html);
         $("#DivisionId").html('<option value="">Select</option>');
         $("#LocalityId").html('<option value="">Select</option>');
+        $("#LocalityId").select2('val', '')
+        $("#DivisionId").select2('val', '');
+        $("#ZoneId").select2('val', '');
     });
 };
 function onChangeZone(id) {
@@ -17,6 +20,8 @@ function onChangeZone(id) {
         }
         $("#DivisionId").html(html);
         $("#LocalityId").html('<option value="">Select</option>');
+        $("#LocalityId").select2('val', '');
+        $("#DivisionId").select2('val', '')
     });
 };
 function onChangeDivision(id) {
@@ -26,6 +31,7 @@ function onChangeDivision(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#LocalityId").html(html);
+        $("#LocalityId").select2('val', '')
     });
 };
 $(function () {

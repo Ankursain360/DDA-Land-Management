@@ -1,5 +1,5 @@
-﻿
-
+﻿@model IEnumerable<Libraries.Model.Entity.Demolitionchecklist>
+@{int rowNo = 0; }
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -164,71 +164,75 @@
                                             </tr>
                                         </thead>
                                         <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached
-                                                </td>
-                                                <td>
-                                                    <select style="height:30px;    background-color: #dddddd;"  required class="form-control">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                        <option>Not Required</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    Whether any structure proposed for demolition is protected under any Act including special provisions Act2011
-                                                </td>
-                                                <td>
-                                                    <select style="height:30px;    background-color: #dddddd;"  required class="form-control">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                        <option>Not Required</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>
-                                                    If re-encroachment after demolition in past, whether responsibility for the lapse in protecting the land has been fixed
-                                                </td>
-                                                <td>
-                                                    <select style="height:30px;    background-color: #dddddd;"  required class="form-control">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                        <option>Not Required</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>
-                                                    Whether area is sensitive and demolition may lead to law & Order problems.
-                                                </td>
-                                                <td>
-                                                    <select style="height:30px;    background-color: #dddddd;"  required class="form-control">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                        <option>Not Required</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>
-                                                    In case of major/sensitive area demolition, whether approval from Hon'ble LG obtained and attached
-                                                </td>
-                                                <td>
-                                                    <select style="height:30px;    background-color: #dddddd;"  required class="form-control">
-                                                        <option>Yes</option>
-                                                        <option>No</option>
-                                                        <option>Not Required</option>
-                                                    </select>
-                                                </td>
-                                            </tr>
+                                            @foreach (var item in Model)
+                                            {
+
+
+                                                <tr>
+                                                    <td>@(rowNo += 1)</td>
+                                                    <td>
+                                                       @item.ChecklistDescription     </td>
+                                                    <td>
+                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            <option>Not Required</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                            }
+                                            @*<tr>
+                                                    <td>2</td>
+                                                    <td>
+                                                        Whether any structure proposed for demolition is protected under any Act including special provisions Act2011
+                                                    </td>
+                                                    <td>
+                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            <option>Not Required</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>
+                                                        If re-encroachment after demolition in past, whether responsibility for the lapse in protecting the land has been fixed
+                                                    </td>
+                                                    <td>
+                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            <option>Not Required</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>4</td>
+                                                    <td>
+                                                        Whether area is sensitive and demolition may lead to law & Order problems.
+                                                    </td>
+                                                    <td>
+                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            <option>Not Required</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>5</td>
+                                                    <td>
+                                                        In case of major/sensitive area demolition, whether approval from Hon'ble LG obtained and attached
+                                                    </td>
+                                                    <td>
+                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                            <option>Yes</option>
+                                                            <option>No</option>
+                                                            <option>Not Required</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>*@
                                         </tbody>
                                     </table>
                                 </div>
@@ -236,7 +240,7 @@
                         </div>
                     </div>
                 </div>
-            
+
                 <div class="container-fluid" id="MainContentForm">
                     <div class="panel">
                         <div class="panel-heading  dda-pageheading">
@@ -246,18 +250,18 @@
 
                             @*<div class="form-row">
 
-            <div class="form-group col-md-12">
-                <br />
-                <a asp-action="Index" style="margin-top: -35px;">List of structure for demolition</a>
-            </div>
+                                    <div class="form-group col-md-12">
+                                        <br />
+                                        <a asp-action="Index" style="margin-top: -35px;">List of structure for demolition</a>
+                                    </div>
 
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-3">
-                <a asp-action="Index" style="margin-top: -35px;">Location map</a>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-3">
+                                        <a asp-action="Index" style="margin-top: -35px;">Location map</a>
 
-            </div>
-        </div>*@
+                                    </div>
+                                </div>*@
 
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered" border="0">
@@ -310,5 +314,5 @@
 
 
 
-<br/>
+<br />
 <br />

@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Service.IApplicationService;
 using Utility.Helper;
 
 namespace LandTransfer.Controllers
@@ -18,13 +19,15 @@ namespace LandTransfer.Controllers
     {
         public IConfiguration _configuration;
         public readonly ILandTransferService _landTransferService;
+        public readonly ICurrentstatusoflandhistoryService _currentstatusoflandhistoryService;
         //string targetPathLayout = string.Empty;
         string surveyReportFilePath = string.Empty;
         string actionReportFilePath = string.Empty;
-        public CurrentStatusOfHandedOverTakenOverLandController(ILandTransferService landTransferService, IConfiguration configuration)
+        public CurrentStatusOfHandedOverTakenOverLandController(ILandTransferService landTransferService, IConfiguration configuration, ICurrentstatusoflandhistoryService currentstatusoflandhistoryService)
         {
             _landTransferService = landTransferService;
             _configuration = configuration;
+            _currentstatusoflandhistoryService = currentstatusoflandhistoryService;
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
@@ -37,7 +40,24 @@ namespace LandTransfer.Controllers
             List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
             return View(list);
         }
-        public async Task<IActionResult> Create(int id, Landtransfer landTransfer)
+        public async Task<IActionResult> Create(int id)
+        {
+            Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
+            var Data = await _landTransferService.FetchSingleResult(id);
+
+            Data.DepartmentList = await _landTransferService.GetAllDepartment();
+            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
+            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
+            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
+            Model.LandTransfer = Data;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(int id, Currentstatusoflandhistory currentstatusoflandhistory)
         {
             var Data = await _landTransferService.FetchSingleResult(id);
 
@@ -45,62 +65,30 @@ namespace LandTransfer.Controllers
             Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
-            //if (Data == null)
-            //{
-            //    return NotFound();
-            //}
-            //return View(Data);
+            currentstatusoflandhistory.LandTransfer = Data;
 
-          
-
-            if (ModelState.IsValid)
-
+            if (id == 0)
             {
-                //var result = await _landTransferService.Create(landTransfer);
-                //if (result)
-                //{
+                return NotFound();
+            }
 
+            //if (ModelState.IsValid)
+            //{
                 surveyReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandSurveyReport").Value.ToString();
                 actionReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandActionReport").Value.ToString();
                 FileHelper file = new FileHelper();
 
-                if (landTransfer.SurveyReportFile != null)
+                if (currentstatusoflandhistory.SurveyReportFile != null)
                 {
-                    landTransfer.SurveyReportFilePath = file.SaveFile(surveyReportFilePath, landTransfer.SurveyReportFile);
+                    currentstatusoflandhistory.SurveyReportFilePath = file.SaveFile(surveyReportFilePath, currentstatusoflandhistory.SurveyReportFile);
                 }
-                if (landTransfer.ActionReportFile != null)
+                if (currentstatusoflandhistory.ActionReportFile != null)
                 {
-                    landTransfer.ActionReportFilePath = file.SaveFile(actionReportFilePath, landTransfer.ActionReportFile);
+                    currentstatusoflandhistory.ActionReportFilePath = file.SaveFile(actionReportFilePath, currentstatusoflandhistory.ActionReportFile);
                 }
-
-                Currentstatusoflandhistory model = new Currentstatusoflandhistory();
-
-                model.LandTransferId = landTransfer.Id;
-                model.Tsssurvey = landTransfer.TSSSurvey;
-                model.SurveyReportFilePath = landTransfer.SurveyReportFilePath;
-                model.Encroachment = landTransfer.Encroachment;
-                model.EncroachedArea = landTransfer.EncroachedArea;
-                model.ActionOnEncroachment = landTransfer.ActionOnEncroachment;
-                model.ActionReportFilePath = landTransfer.ActionReportFilePath;
-                model.FencingBoundaryWall = landTransfer.FencingBoundaryWall;
-                model.AreaCovered = landTransfer.AreaCovered;
-                model.Dimension = landTransfer.Dimension;
-                model.PlotUtilization = landTransfer.PlotUtilization;
-                model.AreaUtilised = landTransfer.AreaUtilised;
-                model.BalanceArea = landTransfer.BalanceArea;
-
-                model.Status = landTransfer.Status;
-                model.PlannedUnplannedLand = landTransfer.PlannedUnplannedLand;
-                model.MainLandUse = landTransfer.MainLandUse;
-                model.SubUse = landTransfer.SubUse;
-                model.Remarks = landTransfer.currentLandRemarks;
-
-
-                var result2 = await _landTransferService.SaveCurrentstatusoflandhistory(model);
-
-
-                
-                if (result2 == true)
+                currentstatusoflandhistory.LandTransferId = currentstatusoflandhistory.LandTransfer.Id;
+                var result = await _currentstatusoflandhistoryService.Create(currentstatusoflandhistory);
+                if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     var result1 = await _landTransferService.GetAllLandTransfer();
@@ -109,26 +97,20 @@ namespace LandTransfer.Controllers
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(Data);
+                    return View(currentstatusoflandhistory);
                 }
-            }
-            //    else
-            //    {
-            //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            //        return View(Data);
-            //    }
             //}
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(Data);
-            }
-            //return View(Data);
-
-        }
-        public IActionResult ViewHistory()
+            //else
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //    return View(currentstatusoflandhistory);
+            //}
+        } 
+        public async Task<IActionResult> ViewHistory(int landtransferId)
         {
-            return View();
+            List<Currentstatusoflandhistory> list = await _landTransferService.GetCurrentstatusoflandhistory( landtransferId);
+            return View(list);
+            //return View();
         }
 
         //*************dropdown methods *****
