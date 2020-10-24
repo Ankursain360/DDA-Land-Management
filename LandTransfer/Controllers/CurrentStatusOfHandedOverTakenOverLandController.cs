@@ -50,10 +50,8 @@ namespace LandTransfer.Controllers
             Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             Model.LandTransfer = Data;
-            if (Data == null)
-            {
-                return NotFound();
-            }
+
+          
             return View(Model);
         }
         [HttpPost]
@@ -66,14 +64,15 @@ namespace LandTransfer.Controllers
             Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             currentstatusoflandhistory.LandTransfer = Data;
-
-            if (id == 0)
+            currentstatusoflandhistory.Id = 0;
+            if (currentstatusoflandhistory.LandTransferId == 0)
             {
                 return NotFound();
             }
-
+            //var errors = ModelState.Values.SelectMany(x => x.Errors);
+            //ModelState.Remove(null);
             //if (ModelState.IsValid)
-            //{
+            {
                 surveyReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandSurveyReport").Value.ToString();
                 actionReportFilePath = _configuration.GetSection("FilePaths:CurrentStatusOfLand:CurrentLandActionReport").Value.ToString();
                 FileHelper file = new FileHelper();
@@ -99,16 +98,16 @@ namespace LandTransfer.Controllers
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(currentstatusoflandhistory);
                 }
-            //}
+            }
             //else
             //{
             //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             //    return View(currentstatusoflandhistory);
             //}
-        } 
-        public async Task<IActionResult> ViewHistory(int landtransferId)
+        }
+        public async Task<IActionResult> ViewHistory(int id)
         {
-            List<Currentstatusoflandhistory> list = await _landTransferService.GetCurrentstatusoflandhistory( landtransferId);
+            List<Currentstatusoflandhistory> list = await _currentstatusoflandhistoryService.GetCurrentstatusoflandhistory(id);
             return View(list);
             //return View();
         }

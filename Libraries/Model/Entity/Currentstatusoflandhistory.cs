@@ -34,8 +34,6 @@ namespace Libraries.Model.Entity
         public IFormFile SurveyReportFile { get; set; }
         [NotMapped]
         public IFormFile ActionReportFile { get; set; }
-
-
         public Landtransfer LandTransfer { get; set; }
     }
 }

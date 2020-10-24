@@ -10,6 +10,6 @@ namespace Libraries.Repository.IEntityRepository
     public interface ICurrentstatusoflandhistoryRepository : IGenericRepository<Currentstatusoflandhistory>
     {
      
-         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id);
     }
 }
