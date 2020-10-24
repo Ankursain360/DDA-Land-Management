@@ -244,5 +244,11 @@
     "inputFiles": [
       "wwwroot/js/zonecreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/usermanagementedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/usermanagementedit.js"
+    ]
   }
 ]

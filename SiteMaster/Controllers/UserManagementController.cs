@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Model.Entity;
 using Dto.Master;
 using Service.IApplicationService;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -117,6 +118,20 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> EditUserPersonal(EditUserDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userProfileService.UpdateUser(model);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return View(model);
+            }
+        }
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -155,6 +170,53 @@ namespace SiteMaster.Controllers
         {
             DepartmentId = DepartmentId ?? 0;
             return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] UsermanagementEditPartialLoad dtodata)
+        {
+            if(dtodata.value == "Personal")
+            {
+                var user = await _userProfileService.GetUserById(dtodata.id);
+                //EditUserDto model = new EditUserDto()
+                //{
+                //    Email = user.User.Email,
+                //    Name = user.User.Name,
+
+                //    PhoneNumber = user.User.PhoneNumber
+                //};
+                UserPersonalInfoDto model = new UserPersonalInfoDto()
+                {
+                    Id = user.User.Id,
+                    Email = user.User.Email,
+                    Name = user.User.Name,
+                    UserName = user.User.UserName,
+                    PhoneNumber = user.User.PhoneNumber
+                };
+                return PartialView("_UserPersonalInfo", model);
+            }
+            else
+            {
+                //AddUserDto model1 = new AddUserDto()
+                //{
+                //    DepartmentList = await _departmentService.GetDepartment(),
+                //    ZoneList = await _zoneService.GetZone(),
+                //    RoleList = await _userProfileService.GetRole()
+                //};
+                var user = await _userProfileService.GetUserById(dtodata.id);
+                UserProfileInfoDto model = new UserProfileInfoDto()
+                {
+                    DepartmentList = await _departmentService.GetDepartment(),
+                    ZoneList = await _zoneService.GetZone(),
+                    RoleList = await _userProfileService.GetRole(),
+                    DepartmentId = user.DepartmentId,
+                    RoleId = user.RoleId,
+                    DistrictId = user.DistrictId,
+                    ZoneId = user.ZoneId
+                };
+                return PartialView("_UserProfileInfo", model);
+            }
+           
         }
 
     }

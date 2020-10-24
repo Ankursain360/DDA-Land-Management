@@ -145,17 +145,17 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Encroched(in sq. mt.)</label>
-                            <input asp-for="Encroached" value="" class="form-control numbers" disabled  onkeypress="return numericDecimal(this);" onpaste = "return false;"/>
+                            <input asp-for="Encroached" value="" class="form-control numbers" onchange="return ComapareTotalArea(this);" disabled  onkeypress="return numericDecimal(this);" onpaste = "return false;"/>
                             <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Builtup in Encroachment Area(in sq. mt.)</label>
-                            <input asp-for="BuiltUpEncraochmentArea" class="form-control numbers" id="BuiltupEncroachmentArea" disabled  onkeypress="return numericDecimal(this);" onpaste = "return false;"/>
+                            <input asp-for="BuiltUpEncraochmentArea" class="form-control numbers" id="BuiltupEncroachmentArea" onchange="return ComapareTotalArea(this);" disabled  onkeypress="return numericDecimal(this);" onpaste = "return false;"/>
                             <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                            <input asp-for="Vacant" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste = "return false;"/>
+                            <input asp-for="Vacant" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste = "return false;" onchange="return ComapareTotalArea(this);"/>
                             <span asp-validation-for="Vacant" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Sub Use</label>
-                                <input type="text" class="form-control" limit="500" />
+                                <input type="text" asp-for="SubUse" class="form-control" limit="500" />
                             </div>
                         </div>
                     </div>
