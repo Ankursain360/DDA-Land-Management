@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label class="control-label lb-sm" asp-for="RoleId">Role <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="RoleId" required="required" requiredMsg="Department is Mandatory"
+                        <select class="form-control dda-dropdown" asp-for="RoleId" required="required" requiredMsg="Role is Mandatory"
                                 asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
                             <option value="">Select</option>
                         </select>

@@ -134,5 +134,42 @@ namespace Service.ApplicationService
             IdentityResult result = await _userManager.UpdateAsync(user);
             return result.Succeeded ? true : false;
         }
+
+        public async Task<AddUserDto> GetUserByDTOId(int userId)
+        {
+            var user = await _userProfileRepository.GetUserById(userId);
+            var result = _mapper.Map<UserProfileDto>(user);
+            var result1 = _mapper.Map<AddUserDto>(result);
+            return result1;
+        }
+
+        public async Task<bool> CheckUniqueName(int id, string name)
+        {
+            return await _userProfileRepository.CheckUniqueName(id, name);
+        }
+
+        public async Task<bool> UpdateRole(ApplicationRole role, RoleDto model)
+        {
+            var roleres = _mapper.Map(model, role);
+            IdentityResult result = await _roleManager.UpdateAsync(roleres);
+            return result.Succeeded ? true : false;
+        }
+
+        public async Task<ApplicationRole> GetApplicationRoleById(int id)
+        {
+            var role = await _roleManager.FindByIdAsync(id.ToString());
+            return role;
+        }
+
+        public async Task<bool> CheckUniqueUserName(int id, string UserName)
+        {
+            return await _userProfileRepository.CheckUniqueUserName(id, UserName);
+        }
+
+        public object GetUserIdIdByProfile(int id)
+        {
+            return _userProfileRepository.GetUserIdIdByProfile(id);
+        }
+
     }
 }
