@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
         public int? DivisionId { get; set; }
         public int? LocalityId { get; set; }
         public string FileNo { get; set; }
+        public string Name { get; set; }
         public DateTime? Date { get; set; }
         public string Area { get; set; }
         public string PoliceStation { get; set; }
@@ -35,11 +36,6 @@ namespace Libraries.Model.Entity
         public decimal? AreaReclaimed { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public int? ModifiedBy { get; set; }
-        public DateTime? ModifiedDate { get; set; }
-
         public Department Department { get; set; }
         public Division Division { get; set; }
         public Locality Locality { get; set; }
@@ -53,7 +49,16 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
         public List<Division> DivisionList { get; set; }
-
+        [NotMapped]
+        public List<Structure> Structure { get; set; }
+        [NotMapped]
+        public List<decimal> NoOfStructrure { get; set; }
+        [NotMapped]
+        public List<decimal> StructrureId { get; set; }
+        [NotMapped]
+        public List<IFormFile> AfterPhotoFile { get; set; }
+        [NotMapped]
+        public List<IFormFile> BeforePhotoFile { get; set; }
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
         public ICollection<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public ICollection<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
