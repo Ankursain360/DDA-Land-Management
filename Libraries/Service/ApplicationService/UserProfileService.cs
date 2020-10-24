@@ -5,7 +5,6 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore.Update.Internal;
 using Model.Entity;
 using Repository.IEntityRepository;
 using Service.IApplicationService;
@@ -124,6 +123,16 @@ namespace Service.ApplicationService
             }
 
             return profileSaveResult > 0;
+        }
+
+        public async Task<bool> UpdateUser(EditUserDto userDto) {
+
+            ApplicationUser user = await _userManager.FindByIdAsync(userDto.Id.ToString());
+            user.Email = userDto.Email;
+            user.PhoneNumber = userDto.PhoneNumber;
+            user.Name = userDto.Name;
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            return result.Succeeded ? true : false;
         }
     }
 }

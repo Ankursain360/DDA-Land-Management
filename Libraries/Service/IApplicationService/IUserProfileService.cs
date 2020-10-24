@@ -19,5 +19,6 @@ namespace Service.IApplicationService
         Task<List<RoleDto>> GetRole();
         Task<List<RoleDto>> GetActiveRole();
         Task<bool> CreateUser(AddUserDto userDto);
+        Task<bool> UpdateUser(EditUserDto userDto);
     }
 }
