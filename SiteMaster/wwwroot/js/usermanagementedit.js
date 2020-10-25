@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    debugger;
     var value = "Personal"
     var param = GetSearchParam(value);
     HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
@@ -7,6 +6,33 @@
         $('#divLoadData').html(response);
     });
 
+    $("#btnSavePersonalInfo").click(function (event) {
+        event.preventDefault();
+        var value = "Profile"
+        var param = GetSearchParam(value);
+        var validateForm = $("#frmUserProfileInfo").valid();
+        if (validateForm) {
+            HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+                SuccessMessage('Profile updated successfully.');
+                $('#divLoadData').html("");
+                $('#divLoadData').html(response);
+            });
+        }
+    });
+
+    $("#btnSaveProfileInfo").click(function (event) {
+        event.preventDefault();
+        var value = "Personal"
+        var param = GetSearchParam(value);
+        var validateForm = $("#frmUserPersonalInfo").valid();
+        if (validateForm) {
+            HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+                SuccessMessage('Profile updated successfully.');
+                $('#divLoadData').html("");
+                $('#divLoadData').html(response);
+            });
+        }
+    });
 });
 
 function GetSearchParam(value) {
@@ -18,27 +44,6 @@ function GetSearchParam(value) {
     return model;
 }
 
-$("#ProfileBtn").click(function () {
-    debugger;
-    var value = "Profile"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
-        $('#divLoadData').html("");
-        $('#divLoadData').html(response);
-    });
-
-});
-
-$("#PersonalBtn").click(function () {
-    debugger;
-    var value = "Personal"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
-        $('#divLoadData').html("");
-        $('#divLoadData').html(response);
-    });
-
-});
 function onChange(id) {
 
     HttpGet(`/UserManagement/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {

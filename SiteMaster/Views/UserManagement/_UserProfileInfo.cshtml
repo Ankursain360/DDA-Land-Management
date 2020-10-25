@@ -1,5 +1,5 @@
 ﻿@model Dto.Master.UserProfileInfoDto
-@*<form asp-action="Create" id="create_user">*@
+<form asp-action="Create" id="frmUserProfileInfo">
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <input type="hidden" asp-for="Id" />
 <div class="row">
@@ -32,11 +32,11 @@
 </div>
 <div class="row ">
     <div class="form-group col-md-12" style="margin-bottom:40px;">
-        <input type="submit" value="Update" id="updateProfileBtn" class="btn btn-primary dda-pageheading" />
+        <input type="submit" value="Update" id="btnSaveProfileInfo" class="btn btn-primary dda-pageheading" />
         @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
     </div>
 </div>
-@*</form>*@
+</form>
 
 <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
 <script src="~/lib/bootstrap/select2/select2.js" defer></script>

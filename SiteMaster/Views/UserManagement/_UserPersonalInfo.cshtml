@@ -1,5 +1,5 @@
 ﻿@model Dto.Master.UserPersonalInfoDto
-@*<form asp-action="EditUserPersonal" >*@
+<form asp-action="EditUserPersonal" id="frmUserPersonalInfo">
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 <input type="hidden" asp-for="Id" />
 <div class="row">
@@ -28,11 +28,11 @@
 </div>
 <div class="row ">
     <div class="form-group col-md-12" style="margin-bottom:40px;">
-        <input type="submit" value="Update" id="updatePersonalBtn" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
+        <input type="submit" value="Update" id="btnSavePersonalInfo" class="btn btn-primary dda-pageheading" />
         @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
     </div>
 </div>
-@*</form>*@
+</form>
 
 <environment include="Development">
     <script src="~/js/userpersonaledit.js"></script>
