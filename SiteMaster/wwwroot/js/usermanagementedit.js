@@ -7,18 +7,6 @@
         $('#divLoadData').html(response);
     });
 
-
-
-    HttpGet(`/UserManagement/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
-        debugger;
-        $("#ZoneId").val('').trigger('change');
-        var html = '<option value="">Select</option>';
-        for (var i = 0; i < response.length; i++) {
-            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }
-        $("#ZoneId").html(html);
-    });
-
 });
 
 function GetSearchParam(value) {

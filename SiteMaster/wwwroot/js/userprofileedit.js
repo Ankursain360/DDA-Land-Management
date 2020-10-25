@@ -13,7 +13,6 @@ function GetListData() {
     var id = $('#Id').val();
     var departmentid = $('#DepartmentId').val();
     var zoneid = $('#ZoneId').val();
-
     var roleid = $('#RoleId').val();
     var model = {
         Id: parseInt(id),

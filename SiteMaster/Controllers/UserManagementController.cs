@@ -121,25 +121,8 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-
-                var result = await _userService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            }
-            var list = await _userService.GetAllUser();
-            return View("Index", list);
+            await _userProfileService.DeleteUser(id);
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> View(int id)
         {

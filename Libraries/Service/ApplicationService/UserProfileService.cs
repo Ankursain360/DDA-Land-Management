@@ -140,7 +140,6 @@ namespace Service.ApplicationService
 
         public async Task<bool> UpdateUser(EditUserDto userDto)
         {
-
             ApplicationUser user = await _userManager.FindByIdAsync(userDto.Id.ToString());
             user.Email = userDto.Email;
             user.PhoneNumber = userDto.PhoneNumber;
@@ -171,31 +170,39 @@ namespace Service.ApplicationService
 
         public async Task<bool> UpdateUserProfileDetails(UserProfileEditDto model)
         {
-                int profileSaveResult = 1;
-                Userprofile user = await _userProfileRepository.GetUserById(model.Id);
-                if (user.DepartmentId != model.DepartmentId || user.RoleId != model.RoleId || user.ZoneId != model.ZoneId)
-                {
-                    user.IsActive = 0;
-                    _userProfileRepository.Edit(user);
-                    profileSaveResult = await _unitOfWork.CommitAsync();
+            int profileSaveResult = 1;
+            Userprofile user = await _userProfileRepository.GetUserById(model.Id);
+            if (user.DepartmentId != model.DepartmentId || user.RoleId != model.RoleId || user.ZoneId != model.ZoneId)
+            {
+                user.IsActive = 0;
+                _userProfileRepository.Edit(user);
+                profileSaveResult = await _unitOfWork.CommitAsync();
 
-                    user.Id = 0;
-                    user.DepartmentId = model.DepartmentId;
-                    user.RoleId = model.RoleId;
-                    user.ZoneId = model.ZoneId;
-                    user.IsActive = 1;
-                    user.UserId = model.Id;
-                    user.CreatedBy = 1;
-                    user.CreatedDate = DateTime.Now;
-                    _userProfileRepository.Add(user);
-                    profileSaveResult = await _unitOfWork.CommitAsync();
-                }
+                user.Id = 0;
+                user.DepartmentId = model.DepartmentId;
+                user.RoleId = model.RoleId;
+                user.ZoneId = model.ZoneId;
+                user.IsActive = 1;
+                user.UserId = model.Id;
+                user.CreatedBy = 1;
+                user.CreatedDate = DateTime.Now;
+                _userProfileRepository.Add(user);
+                profileSaveResult = await _unitOfWork.CommitAsync();
+            }
 
-                //user.DepartmentId = model.DepartmentId;
-                //user.RoleId = model.RoleId;
-                //user.ZoneId = model.ZoneId;
-                //  user.DistrictId = model.DistrictId;
-                return profileSaveResult > 0;
+            //user.DepartmentId = model.DepartmentId;
+            //user.RoleId = model.RoleId;
+            //user.ZoneId = model.ZoneId;
+            //  user.DistrictId = model.DistrictId;
+            return profileSaveResult > 0;
+        }
+
+        public async Task<bool> DeleteUser(int id)
+        {
+            Userprofile user = await _userProfileRepository.GetUserById(id);
+            user.IsActive = 0;
+            _userProfileRepository.Edit(user);
+            return await _unitOfWork.CommitAsync() > 0;
         }
     }
 }

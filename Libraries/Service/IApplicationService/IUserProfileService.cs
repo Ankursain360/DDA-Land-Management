@@ -26,5 +26,6 @@ namespace Service.IApplicationService
         Task<bool> UpdateUserPersonalDetails(UserPersonalInfoDto model);
         Task<bool> UpdateUserProfileDetails(UserProfileEditDto model);
         Task<bool> DeleteRole(RoleDto model);
+        Task<bool> DeleteUser(int id);
     }
 }

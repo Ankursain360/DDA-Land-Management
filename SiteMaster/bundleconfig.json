@@ -250,5 +250,23 @@
     "inputFiles": [
       "wwwroot/js/usermanagementedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/usermanagementview.min.js",
+    "inputFiles": [
+      "wwwroot/js/usermanagementview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/userpersonaledit.min.js",
+    "inputFiles": [
+      "wwwroot/js/userpersonaledit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/userprofileedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/userprofileedit.js"
+    ]
   }
 ]
