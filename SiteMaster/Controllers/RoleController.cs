@@ -73,21 +73,21 @@ namespace SiteMaster.Controllers
             }
         }
 
-        //[AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    //var result = await _roleService.FindByNameAsync(Name);
-        //    var result = await _userProfileService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Role: {Name} already exist");
-        //    }
-        //}
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            //var result = await _roleService.FindByNameAsync(Name);
+            var result = await _userProfileService.ValidateUniqueRoleName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Role: {Name} already exist");
+            }
+        }
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -99,69 +99,49 @@ namespace SiteMaster.Controllers
             return View(result);
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Edit(int id, RoleDto model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationRole role = await _userProfileService.GetApplicationRoleById(id);
-        //        var result = await _userProfileService.GetRoleById(id);
-        //        if (result != null)
-        //        {
-        //            role.Id = model.Id;
-        //            role.Name = model.Name;
-        //            role.IsActive = model.IsActive;
-        //            role.ModifiedBy = 1;
-        //            role.ModifiedDate = DateTime.Now;
-        //            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-        //            var list = await _userProfileService.UpdateRole(role, model);
-        //            return View("Index", list);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(model);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        return View(model);
-        //    }
-        //}
-    
-        
-        
-        
-        //public async Task<IActionResult> Delete(int id, RoleDto model)
-        //{
-        //    try
-        //    {
-        //        ApplicationRole role = await _userProfileService.GetApplicationRoleById(id);
-        //        if (role != null)
-        //        {
-        //            role.Id = model.Id;
-        //            model.Name = role.Name;
-        //            role.IsActive = 0;
-        //            role.ModifiedBy = 1;
-        //            role.ModifiedDate = DateTime.Now;
-        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //            var list = await _userProfileService.UpdateRole(role, model);
-        //            return View("Index", list);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(model);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, RoleDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                var list = await _userProfileService.UpdateRole( model);
+                return View("Index", list);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(model);
+            }
+        }
 
-        //    return View("Index");
-        //}
+
+
+
+        public async Task<IActionResult> Delete(int id, RoleDto model)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _userProfileService.DeleteRole(model);
+                    return View("Index", list);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+
+            return View("Index");
+        }
 
         public async Task<IActionResult> View(int id)
         {

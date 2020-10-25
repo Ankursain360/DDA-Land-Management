@@ -52,3 +52,14 @@ $("#PersonalBtn").click(function () {
 
 });
 
+$("#updatePersonalBtn").click(function () {
+        var param = GetListData();
+    HttpPost(`/UserManagement/UpdatePersonalDetails`, 'json', param, function (response) {
+        debugger;
+        });
+
+});
+
+function GetListData() {
+
+}

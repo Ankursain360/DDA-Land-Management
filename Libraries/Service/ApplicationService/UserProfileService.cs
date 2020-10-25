@@ -90,22 +90,35 @@ namespace Service.ApplicationService
             return result.Succeeded ? true : false;
         }
 
+        public async Task<bool> DeleteRole(RoleDto roleDto)
+        {
+            var role = await _roleManager.FindByIdAsync(roleDto.Id.ToString());
+          // role.Name = roleDto.Name;
+            role.IsActive = 0;
+            role.ModifiedBy = 1;
+            role.ModifiedDate = DateTime.Now;
+            var result = await _roleManager.UpdateAsync(role);
+            return result.Succeeded ? true : false;
+        }
+
         public async Task<bool> CreateUser(AddUserDto userDto)
         {
-            int profileSaveResult = 0;     
-            ApplicationUser user = new ApplicationUser() {
+            int profileSaveResult = 0;
+            ApplicationUser user = new ApplicationUser()
+            {
                 Name = userDto.Name,
                 UserName = userDto.UserName,
                 Email = userDto.Email,
                 PhoneNumber = userDto.PhoneNumber,
                 PasswordSetDate = DateTime.Now.AddDays(30),
-                CreatedBy = 1, 
+                CreatedBy = 1,
                 CreatedDate = DateTime.Now,
                 IsDefaultPassword = 1
             };
 
             var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
-            if (userSavedResult.Succeeded) {
+            if (userSavedResult.Succeeded)
+            {
                 var savedUser = await _userManager.FindByNameAsync(user.UserName);
                 Userprofile userprofile = new Userprofile()
                 {
@@ -125,7 +138,8 @@ namespace Service.ApplicationService
             return profileSaveResult > 0;
         }
 
-        public async Task<bool> UpdateUser(EditUserDto userDto) {
+        public async Task<bool> UpdateUser(EditUserDto userDto)
+        {
 
             ApplicationUser user = await _userManager.FindByIdAsync(userDto.Id.ToString());
             user.Email = userDto.Email;
@@ -135,41 +149,35 @@ namespace Service.ApplicationService
             return result.Succeeded ? true : false;
         }
 
-        public async Task<AddUserDto> GetUserByDTOId(int userId)
+        public async Task<bool> ValidateUniqueRoleName(int id, string name)
         {
-            var user = await _userProfileRepository.GetUserById(userId);
-            var result = _mapper.Map<UserProfileDto>(user);
-            var result1 = _mapper.Map<AddUserDto>(result);
-            return result1;
+            return await _userProfileRepository.ValidateUniqueRoleName(id, name);
+        }
+        public async Task<bool> ValidateUniqueUserName(int id, string UserName)
+        {
+            return await _userProfileRepository.ValidateUniqueUserName(id, UserName);
         }
 
-        public async Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> UpdateUserPersonalDetails(UserPersonalInfoDto model)
         {
-            return await _userProfileRepository.CheckUniqueName(id, name);
-        }
-
-        public async Task<bool> UpdateRole(ApplicationRole role, RoleDto model)
-        {
-            var roleres = _mapper.Map(model, role);
-            IdentityResult result = await _roleManager.UpdateAsync(roleres);
+            ApplicationUser user = await _userManager.FindByIdAsync(model.Id.ToString());
+            user.Email = model.Email;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Name = model.Name;
+            user.UserName = model.UserName;
+            IdentityResult result = await _userManager.UpdateAsync(user);
             return result.Succeeded ? true : false;
         }
 
-        public async Task<ApplicationRole> GetApplicationRoleById(int id)
-        {
-            var role = await _roleManager.FindByIdAsync(id.ToString());
-            return role;
-        }
-
-        public async Task<bool> CheckUniqueUserName(int id, string UserName)
-        {
-            return await _userProfileRepository.CheckUniqueUserName(id, UserName);
-        }
-
-        public object GetUserIdIdByProfile(int id)
-        {
-            return _userProfileRepository.GetUserIdIdByProfile(id);
-        }
-
+        //public async Task<bool> UpdateUserProfileDetails(UserProfileInfoDto model)
+        //{
+        //    ApplicationUser user = await _userProfileRepository.FindByIdAsync(model.Id.ToString());
+        //    user.DepartmentId = model.DepartmentId;
+        //    user.RoleId = model.RoleId;
+        //    user.ZoneId = model.ZoneId;
+        //    user.DistrictId = model.DistrictId;
+        //    IdentityResult result = await _userManager.UpdateAsync(user);
+        //    return result.Succeeded ? true : false;
+        //}
     }
 }

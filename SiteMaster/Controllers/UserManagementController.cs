@@ -82,7 +82,7 @@ namespace SiteMaster.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExistLoginName(int Id, string UserName)
         {
-            var result = await _userProfileService.CheckUniqueUserName(Id, UserName);
+            var result = await _userProfileService.ValidateUniqueUserName(Id, UserName);
             if (result == false)
             {
                 return Json(true);
@@ -107,20 +107,6 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         public async Task<IActionResult> Edit(EditUserDto model)
-        {
-            if (ModelState.IsValid)
-            {
-                await _userProfileService.UpdateUser(model);
-                return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                return View(model);
-            }
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EditUserPersonal(EditUserDto model)
         {
             if (ModelState.IsValid)
             {
@@ -218,6 +204,21 @@ namespace SiteMaster.Controllers
             }
            
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] UserPersonalInfoDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userProfileService.UpdateUserPersonalDetails(model);
+                return Json(Url.Action("Index", "UserManagement"));
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
 
     }
 }

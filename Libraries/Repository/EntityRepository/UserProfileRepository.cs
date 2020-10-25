@@ -76,28 +76,14 @@ namespace Repository.EntityRepository
             return await _dbContext.Roles.Where(a=>a.IsActive == 1).AsNoTracking().ToListAsync();
         }
 
-        public async Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> ValidateUniqueRoleName(int id, string name)
         {
             return await _dbContext.Roles.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
 
-        public async Task<bool> CheckUniqueUserName(int id, string userName)
+        public async Task<bool> ValidateUniqueUserName(int id, string userName)
         {
             return await _dbContext.Users.AnyAsync(t => t.Id != id && t.Name.ToLower() == userName.ToLower());
-        }
-
-        public object GetUserIdIdByProfile(int id)
-        {
-            var firstObj = _dbContext.Userprofile.FirstOrDefault(x => x.Id == id);
-            int userId = 0;
-            if (firstObj != null)
-            {
-                userId = firstObj.UserId;
-            }
-            //var userId = _dbContext.Userprofile
-            //            .Where(A => A.Id == id)
-            //            .Select(A => A.UserId);
-            return userId;
         }
     }
 }
