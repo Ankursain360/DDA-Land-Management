@@ -24,7 +24,7 @@ namespace Service.IApplicationService
         Task<bool> ValidateUniqueRoleName(int id, string name);
         Task<bool> ValidateUniqueUserName(int id, string UserName);
         Task<bool> UpdateUserPersonalDetails(UserPersonalInfoDto model);
-        //Task<bool> UpdateUserProfileDetails(UserProfileInfoDto model);
+        Task<bool> UpdateUserProfileDetails(UserProfileEditDto model);
         Task<bool> DeleteRole(RoleDto model);
     }
 }

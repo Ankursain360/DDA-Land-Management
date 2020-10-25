@@ -55,7 +55,8 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Create()
         {
-            AddUserDto model = new AddUserDto() {
+            AddUserDto model = new AddUserDto()
+            {
                 DepartmentList = await _departmentService.GetDepartment(),
                 ZoneList = await _zoneService.GetZone(),
                 RoleList = await _userProfileService.GetRole()
@@ -66,7 +67,7 @@ namespace SiteMaster.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddUserDto model)
-        {    
+        {
             if (ModelState.IsValid)
             {
                 await _userProfileService.CreateUser(model);
@@ -75,7 +76,7 @@ namespace SiteMaster.Controllers
             else
             {
                 return View(model);
-            }   
+            }
         }
 
         [AcceptVerbs("Get", "Post")]
@@ -98,9 +99,9 @@ namespace SiteMaster.Controllers
             var user = await _userProfileService.GetUserById(id);
             EditUserDto model = new EditUserDto()
             {
-                Email = user.User.Email,
-                Name = user.User.Name,
-                PhoneNumber = user.User.PhoneNumber
+                //Email = user.User.Email,
+                //Name = user.User.Name,
+                //PhoneNumber = user.User.PhoneNumber
             };
             return View(model);
         }
@@ -142,14 +143,11 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _userService.FetchSingleResult(id);
-            Data.DepartmentList = await _userService.GetAllDepartment();
-            Data.RoleList = await _userService.GetAllRole();
-            if (Data == null)
+            var user = await _userProfileService.GetUserById(id);
+            EditUserDto model = new EditUserDto()
             {
-                return NotFound();
-            }
-            return View(Data);
+            };
+            return View(model);
         }
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
@@ -161,7 +159,7 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] UsermanagementEditPartialLoad dtodata)
         {
-            if(dtodata.value == "Personal")
+            if (dtodata.value == "Personal")
             {
                 var user = await _userProfileService.GetUserById(dtodata.id);
                 //EditUserDto model = new EditUserDto()
@@ -202,11 +200,11 @@ namespace SiteMaster.Controllers
                 };
                 return PartialView("_UserProfileInfo", model);
             }
-           
+
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] UserPersonalInfoDto model)
+        public async Task<IActionResult> UpdatePersonalDetails([FromBody] UserPersonalInfoDto model)
         {
             if (ModelState.IsValid)
             {
@@ -219,6 +217,19 @@ namespace SiteMaster.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfileDetails([FromBody] UserProfileEditDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userProfileService.UpdateUserProfileDetails(model);
+                return Json(Url.Action("Index", "UserManagement"));
+            }
+            else
+            {
+                return View(model);
+            }
+        }
 
     }
 }

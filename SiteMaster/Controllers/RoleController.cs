@@ -123,17 +123,17 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
+                //if (ModelState.IsValid)
+                //{
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     var list = await _userProfileService.DeleteRole(model);
                     return View("Index", list);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(model);
-                }
+                //}
+                //else
+                //{
+                //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                //    return View(model);
+                //}
             }
             catch (Exception ex)
             {
