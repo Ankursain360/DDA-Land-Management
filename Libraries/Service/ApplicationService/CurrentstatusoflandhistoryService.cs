@@ -30,9 +30,9 @@ namespace Service.ApplicationService
             _currentstatusoflandhistoryRepository.Add(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId)
+        public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id)
         {
-            return await _currentstatusoflandhistoryRepository.GetCurrentstatusoflandhistory(landtransferId);
+            return await _currentstatusoflandhistoryRepository.GetCurrentstatusoflandhistory(id);
         }
 
     }
