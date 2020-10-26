@@ -21,9 +21,9 @@ namespace Libraries.Repository.EntityRepository
 
         }
        
-        public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId)
+        public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id)
         {
-            return await _dbContext.Currentstatusoflandhistory.Where(x => x.Id == landtransferId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Currentstatusoflandhistory.Where(x => x.LandTransferId == id).Include(x=>x.LandTransfer).ToListAsync();
         }
 
     }

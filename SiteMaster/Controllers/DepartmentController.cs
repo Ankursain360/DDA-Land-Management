@@ -28,8 +28,8 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _departmentService.GetAllDepartment();
-            return View(result);
+           // var result = await _departmentService.GetAllDepartment();
+            return View();
         }
         public async Task<PartialViewResult> List([FromBody] DepartmentSearchDto model)
         {

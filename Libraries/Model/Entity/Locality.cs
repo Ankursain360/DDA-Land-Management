@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "The Division field is required")]
         public int DivisionId { get; set; }
         [Required]
-        [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id")]
+        [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id,DepartmentId,DivisionId,ZoneId")]
         public string Name { get; set; }
         [Required(ErrorMessage = "The Locality Code field is required")]
         [Remote(action: "ExistCode", controller: "Locality", AdditionalFields = "Id")]

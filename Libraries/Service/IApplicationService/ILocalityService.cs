@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Locality locality);
         Task<Locality> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
-        Task<bool> CheckUniqueName(int id, string name);   // To check Unique Value  for Village
+        Task<bool> CheckUniqueName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId);   // To check Unique Value  for Village
         Task<bool> CheckUniqueCode(int id, string code);
 
         Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model);

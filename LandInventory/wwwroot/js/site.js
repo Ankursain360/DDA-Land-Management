@@ -46,20 +46,26 @@ $(document).ready(function () {
 });
 function ValidateForm() {
 	var isFormValid = true;
-	$("form input,select,textarea").each(function () {
+	$("form input,select,textarea").each(function ()
+	{
 		var FieldId = "span_" + $(this).attr("id");
-		if ($.trim($(this).val()).length == 0) {
-			if ($(this).is("[required]")) {
-				if ($("#" + FieldId).length == 0) {
+		if ($.trim($(this).val()).length == 0)
+		{
+			if ($(this).is("[required]"))
+			{
+				if ($("#" + FieldId).length == 0)
+				{
 					var ValidationMsg = 'This Field is Mandatory';
-					if ($(this).is('[requiredmsg]')) {
+					if ($(this).is('[requiredmsg]'))
+					{
 						$("#" + $(this).attr("id") + "-error")
 						var ValidationMsg = $(this).attr('requiredmsg') == undefined && $(this).attr('requiredmsg') == '' ? 'This Field is Mandatory' : $(this).attr('requiredmsg');
 					}
 					$("<span class='text-danger lb-sm' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger lb-sm field-validation-valid']"))
 					$(this).parent().closest('div').addClass('has-error');
 				}
-				if ($("#" + FieldId).css('display') == 'none') {
+				if ($("#" + FieldId).css('display') == 'none')
+				{
 					$("#" + FieldId).fadeIn(250);
 				}
 				isFormValid = false;

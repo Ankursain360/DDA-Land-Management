@@ -7,6 +7,9 @@
         $("#ZoneId").html(html);
         $("#DivisionId").html('<option value="">Select</option>');
         $("#LocalityId").html('<option value="">Select</option>');
+        $("#ZoneId").select2('val','');
+        $("#DivisionId").select2('val','');
+        $("#LocalityId").select2('val','');
     });
 };
 function onChangeZone(id) {
@@ -17,6 +20,9 @@ function onChangeZone(id) {
         }
         $("#DivisionId").html(html);
         $("#LocalityId").html('<option value="">Select</option>');
+        $("#DivisionId").select2('val', '');
+        $("#LocalityId").select2('val', '');
+
     });
 };
 function onChangeDivision(id) {
@@ -26,6 +32,7 @@ function onChangeDivision(id) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#LocalityId").html(html);
+        $("#LocalityId").select2('val', '');
     });
 };
 function fileValidation(filePath, fileInput, size) {
@@ -66,8 +73,10 @@ $(document).ready(function () {
         fileValidation(filePath, fileInput, size);
     });
     var khasraNo = $("#KhasraNo").val();
-    $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
-        $('#LoadView').html("");
-        $('#LoadView').html(response);
-    });
+    if (khasraNo!='') {
+        $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
+            $('#LoadView').html("");
+            $('#LoadView').html(response);
+        });
+    }
 });

@@ -15,37 +15,24 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white " style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create" id="create_user">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label asp-for="Name" class="control-label lb-sm">Name<span style="color:red">*</span></label>
-                        <input asp-for="Name" class="form-control form-control-sm" limit="150" required="required" requiredMsg="Name is Mandatory" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label asp-for="Email" class="control-label lb-sm">Email<span style="color:red">*</span></label>
-                        <input asp-for="Email" class="form-control form-control-sm" type="email" limit="256" required="required" requiredMsg="Email is Mandatory" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number<span style="color:red">*</span></label>
-                        <input asp-for="PhoneNumber" class="form-control form-control-sm onlynumbers" maxlength="10" required="required" requiredMsg="Phone Number is Mandatory" onpaste="return false;" />
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
-                        @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-            </form>
+            <input type="hidden" asp-for="Id" />
+            <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="btnPersonalInfo" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
+                       aria-selected="true">Personal Information</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="btnProfileInfo" data-toggle="tab" href="#profile-md" role="tab" aria-controls="profile-md"
+                       aria-selected="false">Profile Information</a>
+                </li>
+            </ul>
+            <br/>
+            <div id="divLoadData">
+
+            </div>
         </div>
     </div>
 </div>
@@ -53,8 +40,8 @@
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
 <environment include="Development">
-    <script src="~/js/UserManagement.js"></script>
+    <script src="~/js/usermanagementedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/UserManagement.min.js" asp-append-version="true"></script>
+    <script src="~/js/usermanagementedit.min.js" asp-append-version="true"></script>
 </environment>

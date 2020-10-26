@@ -15,9 +15,10 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
         [NotMapped]
         public List<string> NameOfStructure { get; set; }
-       
+        public virtual Structure Structure { get; set; }
 
         public virtual Demolitionstructuredetails DemolitionStructureDetails { get; set; }
-        public virtual Structure Structure { get; set; }
+        
+
     }
 }

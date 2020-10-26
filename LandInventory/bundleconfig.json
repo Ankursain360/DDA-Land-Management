@@ -64,5 +64,11 @@
     "inputFiles": [
       "wwwroot/js/morlandinventoryindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationedit.js"
+    ]
   }
 ]

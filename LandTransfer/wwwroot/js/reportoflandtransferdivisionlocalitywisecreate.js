@@ -33,6 +33,9 @@ function onChangeDepartment(id) {
         $("#ZoneId").html(html);
         $("#DivisionId").html('<option value="">Select</option>');
         $("#LocalityId").html('<option value="">Select</option>');
+        $("#ZoneId").select2('val', '');
+        $("#DivisionId").select2('val', '');
+        $("#LocalityId").select2('val', '');
     });
 };
 function onChangeZone(id) {

@@ -47,7 +47,7 @@ namespace Dto.Master
         [NotMapped]
         public List<DistrictDto> DistrictList { get; set; }
 
-        [Required(ErrorMessage = "RoleId is required")]
+        [Required(ErrorMessage = "Role is required")]
         public int RoleId { get; set; }
 
         [NotMapped]

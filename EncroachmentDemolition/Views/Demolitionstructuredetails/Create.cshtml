@@ -22,8 +22,8 @@
         </div>
        
         <div class="panel-body">
-            <form asp-action="Create">
-                  <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
@@ -138,33 +138,33 @@
 
 
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table id="tbl_posts" class="table table-striped table-bordered">
-                                <thead class="thead">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table id="tbl_posts" class="table table-striped table-bordered">
+                            <thead class="thead">
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Name of Structure</th>
+                                    <th>No of Structure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Structure)
+                                {
                                     <tr>
-                                        <th>Sr.No</th>
-                                        <th>Name of Structure</th>
-                                        <th>No of Structure</th>
+                                        <td>@(recNo += 1)</td>
+                                        <td>@(item.Name)</td>
+                                        <td>
+                                        <input class="form-control" asp-for="NoOfStructrure"/>
+                                        <input type="hidden" asp-for="StructrureId" value="@(item.Id)"/>
+                                        </td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Structure)
-                                    {
-                                        <tr>
-                                            <td>@(recNo += 1)</td>
-                                            <td>@(item.Name)</td>
-                                            <td>
-                                            <input class="form-control" asp-for="NoOfStructrure"/>
-                                            <input type="hidden" asp-for="StructrureId"/>
-                                            </td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
+                                }
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+            </div>
                 <br />
                 <div class="form-row">
                     <div class="form-group col-md-6">

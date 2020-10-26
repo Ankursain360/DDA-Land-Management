@@ -16,8 +16,8 @@ function GetLandTransfer(pageNumber, pageSize) {
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
         name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

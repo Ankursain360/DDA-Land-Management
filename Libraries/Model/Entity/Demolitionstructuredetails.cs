@@ -54,6 +54,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<decimal> NoOfStructrure { get; set; }
         [NotMapped]
+        public List<string> NameOfStructure { get; set; }
+        [NotMapped]
         public List<decimal> StructrureId { get; set; }
         [NotMapped]
         public List<IFormFile> AfterPhotoFile { get; set; }
