@@ -160,5 +160,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetStructure();
         }
+        //public async Task<List<Demolitionstructure>> GetDemolitionstructure()
+        //{
+        //    return await _demolitionstructuredetailsRepository.GetDemolitionstructure();
+        //}
     }
 }

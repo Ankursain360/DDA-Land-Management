@@ -79,10 +79,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
         }
 
-        public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
-        {
-            return await _dbContext.Demolitionstructure.Where(x => x.DemolitionStructureDetailsId == demostructuredId && x.IsActive == 1).ToListAsync();
-        }
+        //public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
+        //{
+        //    return await _dbContext.Demolitionstructure.Where(x => x.DemolitionStructureDetailsId == demostructuredId && x.IsActive == 1).ToListAsync();
+        //}
 
 
 
@@ -135,7 +135,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Structure>> GetStructure()
         {
-            return await _dbContext.Structure.Where(x=>x.Id==0).ToListAsync();
+            return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
+        {
+            return await _dbContext.Demolitionstructure.Where(x => x.DemolitionStructureDetailsId == demostructuredId && x.IsActive == 1).ToListAsync();
         }
     }
 }

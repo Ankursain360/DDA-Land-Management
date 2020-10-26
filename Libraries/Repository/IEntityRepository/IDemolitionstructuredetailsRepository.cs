@@ -33,5 +33,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model);
         Task<List<Locality>> GetAllLocalityList(int localityId);
         Task<List<Structure>> GetStructure();
+        //Task<List<Demolitionstructure>> GetDemolitionstructure();
+        
     }
 }
