@@ -35,6 +35,19 @@ namespace SiteMaster
 
         public void ConfigureServices(IServiceCollection services)
         {
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+            else
+            {
+                services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -49,34 +62,12 @@ namespace SiteMaster
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
 
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
             //services.AddMvc(option =>
             //{
             //    option.Filters.Add(new CustomExceptionHandlerFilter());
             //});
             services.RegisterDependency();
-
             services.AddAutoMapperSetup();
-
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
-            {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
-            }
-            else
-            {
-                services.AddControllersWithViews().AddNewtonsoftJson(options =>
-    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
-            }
-#endif
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
