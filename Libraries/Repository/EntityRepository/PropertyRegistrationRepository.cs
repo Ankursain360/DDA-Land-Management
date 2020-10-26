@@ -265,7 +265,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id))
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && !badCodes.Contains(x.ClassificationOfLand.Id))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
                 return data;
@@ -303,7 +303,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;

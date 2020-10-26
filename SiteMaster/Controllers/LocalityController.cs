@@ -24,8 +24,8 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            List<Locality> list = await _localityService.GetAllLocality();
-            return View(list);
+           // List<Locality> list = await _localityService.GetAllLocality();
+            return View();
         }
 
         [HttpPost]

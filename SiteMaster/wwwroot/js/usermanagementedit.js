@@ -8,30 +8,22 @@
 
     $("#btnSavePersonalInfo").click(function (event) {
         event.preventDefault();
-        var value = "Profile"
+        var value = "Personal"
         var param = GetSearchParam(value);
-        var validateForm = $("#frmUserProfileInfo").valid();
-        if (validateForm) {
-            HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
-                SuccessMessage('Profile updated successfully.');
-                $('#divLoadData').html("");
-                $('#divLoadData').html(response);
-            });
-        }
+        HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+            $('#divLoadData').html("");
+            $('#divLoadData').html(response);
+        });
     });
 
     $("#btnSaveProfileInfo").click(function (event) {
         event.preventDefault();
-        var value = "Personal"
+        var value = "Profile"
         var param = GetSearchParam(value);
-        var validateForm = $("#frmUserPersonalInfo").valid();
-        if (validateForm) {
-            HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
-                SuccessMessage('Profile updated successfully.');
-                $('#divLoadData').html("");
-                $('#divLoadData').html(response);
-            });
-        }
+        HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+            $('#divLoadData').html("");
+            $('#divLoadData').html(response);
+        });
     });
 });
 

@@ -22,7 +22,16 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
         {
-            return await _dbContext.Locality.Where(x=>x.IsActive==1).Include(x=>x.Zone).Include(x=>x.Department).Include(x=>x.Division).GetPaged<Locality>(model.PageNumber, model.PageSize);
+            return await _dbContext.Locality
+                        .Include(x=>x.Zone)
+                        .Include(x=>x.Department)
+                        .Include(x=>x.Division)
+                            .Where(x => x.IsActive == 1)
+                            .OrderBy(s => s.Department.Name)
+                            .ThenBy(s => s.Zone.Name)
+                            .ThenBy(s => s.Division.Name)
+                            .ThenBy(s => s.Name)
+                        .GetPaged<Locality>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {

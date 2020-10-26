@@ -2,9 +2,12 @@
 $("#updateProfileBtn").click(function () {
     debugger;
     var param = GetListData();
-    HttpPost(`/UserManagement/UpdateProfileDetails`, 'json', param, function (response) {
-        debugger;
-    });
+    var validateForm = $("#frmUserProfileInfo").valid();
+    if (validateForm) {
+        HttpPost(`/UserManagement/UpdateProfileDetails`, 'json', param, function (response) {
+            SuccessMessage('Profile Data updated successfully.');
+        });
+    }
 
 });
 
