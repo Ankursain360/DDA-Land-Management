@@ -17,7 +17,7 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Edit" enctype="multipart/form-data">
+            <form asp-action="Edit" enctype="multipart/form-data"  disabled="disabled">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="row">
@@ -124,8 +124,11 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Copy of Order <span style="color:red">*</span></label>
-                            <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                            @if (Model.CopyofOrderDocPath != null && Model.CopyofOrderDocPath != "")
+                            {   
+                                <br />
+                                <a asp-action="Download" asp-route-Id="@(Model.Id)"> View Existing Document</a>
+                            }
                         </div>
                         <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Transfer order Issue Authority <span style="color:red">*</span></label>
