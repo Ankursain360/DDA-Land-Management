@@ -21,7 +21,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model)
         {
-            return await _dbContext.Village.Include(x=>x.Zone).GetPaged<Village>(model.PageNumber, model.PageSize);
+            return await _dbContext.Village
+                        .Include(x=>x.Zone)
+                            .Where(x => x.IsActive == 1)
+                            .OrderBy(s => s.Zone.Name).ThenBy(s => s.Name)
+                        .GetPaged<Village>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Village>> GetVillage()

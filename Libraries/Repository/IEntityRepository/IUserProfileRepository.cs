@@ -1,4 +1,5 @@
 ﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Model.Entity;
 using System.Collections.Generic;
@@ -15,8 +16,7 @@ namespace Repository.IEntityRepository
         Task<Userprofile> GetUserById(int userId);
         Task<List<ApplicationRole>> GetActiveRole();
 
-        Task<bool> CheckUniqueName(int id, string name);
-        Task<bool> CheckUniqueUserName(int id, string userName);
-        object GetUserIdIdByProfile(int id);
+        Task<bool> ValidateUniqueRoleName(int id, string name);
+        Task<bool> ValidateUniqueUserName(int id, string userName);
     }
 }

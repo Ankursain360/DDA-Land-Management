@@ -9,7 +9,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface ICurrentstatusoflandhistoryService : IEntityService<Currentstatusoflandhistory>
     {
-        Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+        Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id);
         Task<bool> Create(Currentstatusoflandhistory model);
     }
 }

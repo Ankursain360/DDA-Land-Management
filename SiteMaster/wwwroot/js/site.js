@@ -1,5 +1,11 @@
 ﻿// Write your JavaScript code.
 $(document).ready(function () {
+
+    $('#mobileMenu').on('click', function () {
+        $('#leftMenu').toggleClass('small');
+        $('#mobileMenu').toggleClass('open');
+    });
+
     $('.numbers').keyup(function (e) {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });

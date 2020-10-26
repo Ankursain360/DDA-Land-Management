@@ -93,12 +93,14 @@ $(document).ready(function () {
     //});
 
 
-    //DropDrown check at initial 
-    //var departmentid = $('#DepartmentId option:selected').val();
-    //if (departmentid > 0) {
-    //    debugger;
-    //    GetZoneList(departmentid);
-    //}
+   // DropDrown check at initial 
+    var departmentid = $('#DepartmentId option:selected').val();
+    if (departmentid > 0) {
+        debugger;
+        GetZoneList(departmentid);
+    }
+
+   
 })
 
 
@@ -477,3 +479,24 @@ function fileValidation(filePath, fileInput, size) {
 //        }
 //    });
 //});
+
+
+function ComapareTotalArea(element) {
+    debugger;
+    var isFormValid = true;
+    var name = element.name;
+    var FieldId = "span_" + name;
+    var ValidationMsg = 'Value must be lesser than or equal to Total Area';
+    var totalArea = $("input[name='TotalArea']").val();
+    var value = $("input[name='" + name+"']").val();
+    if ((parseFloat(value == '' ? '0' : value)) > (parseFloat(totalArea == '' ? '0' : totalArea))) {
+        $("<span class='text-danger lb-sm' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger lb-sm field-validation-valid']"))
+        $(this).parent().closest('div').addClass('has-error');
+        isFormValid = false;
+    }
+    if ($("#" + FieldId).css('display') == 'none') {
+        $("#" + FieldId).fadeIn(250);
+    }
+
+    return isFormValid;
+}

@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Model.Entity;
 using Dto.Master;
 using Service.IApplicationService;
+using Dto.Search;
 
 namespace SiteMaster.Controllers
 {
@@ -54,7 +55,8 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Create()
         {
-            AddUserDto model = new AddUserDto() {
+            AddUserDto model = new AddUserDto()
+            {
                 DepartmentList = await _departmentService.GetDepartment(),
                 ZoneList = await _zoneService.GetZone(),
                 RoleList = await _userProfileService.GetRole()
@@ -65,7 +67,7 @@ namespace SiteMaster.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddUserDto model)
-        {    
+        {
             if (ModelState.IsValid)
             {
                 await _userProfileService.CreateUser(model);
@@ -74,14 +76,14 @@ namespace SiteMaster.Controllers
             else
             {
                 return View(model);
-            }   
+            }
         }
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
         public async Task<IActionResult> ExistLoginName(int Id, string UserName)
         {
-            var result = await _userProfileService.CheckUniqueUserName(Id, UserName);
+            var result = await _userProfileService.ValidateUniqueUserName(Id, UserName);
             if (result == false)
             {
                 return Json(true);
@@ -97,9 +99,9 @@ namespace SiteMaster.Controllers
             var user = await _userProfileService.GetUserById(id);
             EditUserDto model = new EditUserDto()
             {
-                Email = user.User.Email,
-                Name = user.User.Name,
-                PhoneNumber = user.User.PhoneNumber
+                //Email = user.User.Email,
+                //Name = user.User.Name,
+                //PhoneNumber = user.User.PhoneNumber
             };
             return View(model);
         }
@@ -119,42 +121,97 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            try
-            {
-
-                var result = await _userService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            }
-            var list = await _userService.GetAllUser();
-            return View("Index", list);
+            await _userProfileService.DeleteUser(id);
+            return RedirectToAction(nameof(Index));
         }
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _userService.FetchSingleResult(id);
-            Data.DepartmentList = await _userService.GetAllDepartment();
-            Data.RoleList = await _userService.GetAllRole();
-            if (Data == null)
+            var user = await _userProfileService.GetUserById(id);
+            EditUserDto model = new EditUserDto()
             {
-                return NotFound();
-            }
-            return View(Data);
+            };
+            return View(model);
         }
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
             return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> LoadPersonalDetails([FromBody] UsermanagementEditPartialLoad dtodata)
+        {
+            var user = await _userProfileService.GetUserById(dtodata.id);
+            //EditUserDto model = new EditUserDto()
+            //{
+            //    Email = user.User.Email,
+            //    Name = user.User.Name,
+
+            //    PhoneNumber = user.User.PhoneNumber
+            //};
+            UserPersonalInfoDto model = new UserPersonalInfoDto()
+            {
+                Id = user.User.Id,
+                Email = user.User.Email,
+                Name = user.User.Name,
+                UserName = user.User.UserName,
+                PhoneNumber = user.User.PhoneNumber
+            };
+            return PartialView("_UserPersonalInfo", model);
+
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> LoadProfileDetails([FromBody] UsermanagementEditPartialLoad dtodata)
+        {
+            //AddUserDto model1 = new AddUserDto()
+            //{
+            //    DepartmentList = await _departmentService.GetDepartment(),
+            //    ZoneList = await _zoneService.GetZone(),
+            //    RoleList = await _userProfileService.GetRole()
+            //};
+            var user = await _userProfileService.GetUserById(dtodata.id);
+            UserProfileInfoDto model = new UserProfileInfoDto()
+            {
+                DepartmentList = await _departmentService.GetDepartment(),
+                ZoneList = await _zoneService.GetZone(),
+                RoleList = await _userProfileService.GetRole(),
+                DepartmentId = user.DepartmentId,
+                RoleId = user.RoleId,
+                DistrictId = user.DistrictId,
+                ZoneId = user.ZoneId
+            };
+            return PartialView("_UserProfileInfo", model);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePersonalDetails([FromBody] UserPersonalInfoDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userProfileService.UpdateUserPersonalDetails(model);
+                return Json(Url.Action("Index", "UserManagement"));
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfileDetails([FromBody] UserProfileEditDto model)
+        {
+            if (ModelState.IsValid)
+            {
+                await _userProfileService.UpdateUserProfileDetails(model);
+                return Json(Url.Action("Index", "UserManagement"));
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
     }

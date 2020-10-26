@@ -23,6 +23,7 @@
             <thead class="thead">
                 <tr class="myapp-hed1">
                     <th rowspan="2">Sr.No</th>
+                    <th rowspan="2">Khasra No</th>
                     <th colspan="2">TSS Survey</th>
                     <th colspan="4">Encroachment</th>
                     <th colspan="3">Fencing/Boundary Wall</th>
@@ -47,36 +48,19 @@
             </thead>
             <tbody class="tbody">
 
-                @*<tr>
-
-            <td>1</td>
-            <td>yes</td>
-            <td>file.pdf</td>
-            <td>yes</td>
-            <td>456.01</td>
-            <td>taken</td>
-            <td>file.pdf</td>
-            <td>yes</td>
-            <td>456.01</td>
-            <td> 45*52*31</td>
-            <td>yes</td>
-            <td>356.01</td>
-            <td>213.05</td>
-            <td>Area not utilised</td>
-            <td> 12 Oct 2020 </td>
-
-        </tr>*@
-
                 @if (Model != null && Model.Count() > 0)
                 {
                     @foreach (var item in Model)
                     {
                         <tr>
                             <td>@(rowNo += 1)</td>
+                            <td>@item.LandTransfer.KhasraNo</td>
                             <td>@item.Tsssurvey</td>
+                            <td>@item.SurveyReportFilePath</td>
                             <td>@item.Encroachment</td>
                             <td>@item.EncroachedArea</td>
                             <td>@item.ActionOnEncroachment</td>
+                            <td>@item.ActionReportFilePath</td>
                             <td>@item.FencingBoundaryWall</td>
                             <td>@item.AreaCovered</td>
                             <td>@item.Dimension</td>

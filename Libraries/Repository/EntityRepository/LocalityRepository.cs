@@ -22,7 +22,16 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
         {
-            return await _dbContext.Locality.Where(x=>x.IsActive==1).Include(x=>x.Zone).Include(x=>x.Department).Include(x=>x.Division).GetPaged<Locality>(model.PageNumber, model.PageSize);
+            return await _dbContext.Locality
+                        .Include(x=>x.Zone)
+                        .Include(x=>x.Department)
+                        .Include(x=>x.Division)
+                            .Where(x => x.IsActive == 1)
+                            .OrderBy(s => s.Department.Name)
+                            .ThenBy(s => s.Zone.Name)
+                            .ThenBy(s => s.Division.Name)
+                            .ThenBy(s => s.Name)
+                        .GetPaged<Locality>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
@@ -34,9 +43,9 @@ namespace Libraries.Repository.EntityRepository
             List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
-        public async Task<bool> AnyName(int id, string name)
+        public async Task<bool> AnyName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId)
         {
-            return await _dbContext.Locality.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Locality.AnyAsync(t => t.Id != Id && t.DepartmentId == DepartmentId&& t.IsActive == 1 && t.DivisionId == DivisionId && t.ZoneId == ZoneId && t.Name.ToLower() == Name.ToLower());
         }
         public async Task<bool> AnyCode(int id, string code)
         {
