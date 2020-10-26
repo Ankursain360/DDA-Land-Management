@@ -25,7 +25,7 @@
                         <select asp-for="KhasraNo" class="form-control dda-dropdown" required="required" requiredMsg="Please Select Khasra Number" asp-items="@(new SelectList(Model.LandTransferList,"Id","KhasraNo"))">
                             <option value="">Select</option>
                         </select>
-                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        <span asp-validation-for="KhasraNo" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="row">
