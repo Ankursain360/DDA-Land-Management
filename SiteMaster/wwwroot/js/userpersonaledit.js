@@ -1,9 +1,11 @@
 ﻿$("#updatePersonalBtn").click(function () {
     var param = GetListData();
-    HttpPost(`/UserManagement/UpdatePersonalDetails`, 'json', param, function (response) {
-        debugger;
-    });
-
+    var validateForm = $("#frmUserPersonalInfo").valid();
+    if (validateForm) {
+        HttpPost(`/UserManagement/UpdatePersonalDetails`, 'json', param, function (response) {
+            SuccessMessage('Personal Data updated successfully.');
+        });
+    }
 });
 
 function GetListData() {

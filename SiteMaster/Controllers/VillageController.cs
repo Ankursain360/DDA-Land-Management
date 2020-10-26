@@ -20,8 +20,8 @@ namespace SiteMaster.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var list = await _villageService.GetAllVillage();
-            return View(list);
+           // var list = await _villageService.GetAllVillage();
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] VillageSearchDto model)
