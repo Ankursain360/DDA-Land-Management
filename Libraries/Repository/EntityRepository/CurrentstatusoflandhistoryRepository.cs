@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
        
         public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id)
         {
-            return await _dbContext.Currentstatusoflandhistory.Where(x => x.LandTransferId == id).ToListAsync();
+            return await _dbContext.Currentstatusoflandhistory.Where(x => x.LandTransferId == id).Include(x=>x.LandTransfer).ToListAsync();
         }
 
     }

@@ -14,7 +14,6 @@ namespace SiteMaster.Controllers
         }
         public IActionResult Index()
         {
-            SiteContext.
             return View();
         }
     }

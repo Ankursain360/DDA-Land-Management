@@ -23,6 +23,7 @@
             <thead class="thead">
                 <tr class="myapp-hed1">
                     <th rowspan="2">Sr.No</th>
+                    <th rowspan="2">Khasra No</th>
                     <th colspan="2">TSS Survey</th>
                     <th colspan="4">Encroachment</th>
                     <th colspan="3">Fencing/Boundary Wall</th>
@@ -53,6 +54,7 @@
                     {
                         <tr>
                             <td>@(rowNo += 1)</td>
+                            <td>@item.LandTransfer.KhasraNo</td>
                             <td>@item.Tsssurvey</td>
                             <td>@item.SurveyReportFilePath</td>
                             <td>@item.Encroachment</td>
