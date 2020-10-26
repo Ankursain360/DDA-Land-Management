@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-  public  class DemolitionprogrammasterConfiguration : IEntityTypeConfiguration<Demolitionprogrammaster>
+  public  class DemolitionprogrammasterConfiguration : IEntityTypeConfiguration<Demolitionprogram>
     {
-        public void Configure(EntityTypeBuilder<Demolitionprogrammaster> builder)
+        public void Configure(EntityTypeBuilder<Demolitionprogram> builder)
         {
             builder.ToTable("demolitionprogrammaster", "lms");
 

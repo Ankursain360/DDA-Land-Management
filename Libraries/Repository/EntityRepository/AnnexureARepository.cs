@@ -25,5 +25,24 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Demolitionchecklist.ToListAsync();
         }
 
+        public async Task<List<Demolitiondocument>> GetDemolitiondocument()
+        {
+            return await _dbContext.Demolitiondocument.ToListAsync();
+        }
+
+        public async Task<List<Fixingdemolition>> GetFixingdemolition(int encroachmentId)
+        {
+            return await _dbContext.Fixingdemolition.Where(x => x.EncroachmentId == encroachmentId && x.IsActive == 1).ToListAsync();
+        }
+
+
+        public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+        {
+            _dbContext.Fixingdemolition.Add(fixingdemolition);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+
     }
 }

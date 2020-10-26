@@ -171,9 +171,10 @@
                                                 <tr>
                                                     <td>@(rowNo += 1)</td>
                                                     <td>
-                                                       @item.ChecklistDescription     </td>
+                                                       @item.ChecklistDescription  
+                                                    </td>
                                                     <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                                                        <select style="height:30px; background-color: #dddddd;" required class="form-control">
                                                             <option>Yes</option>
                                                             <option>No</option>
                                                             <option>Not Required</option>
@@ -273,6 +274,21 @@
                                         </tr>
                                     </thead>
                                     <tbody class="tbody">
+                                        @*@foreach (var item in Model)
+        {
+        <tr>
+            @(rowNo += 1)
+            <td>
+                @item.Demolitiondocumentdetails
+            </td>
+            <td>
+            <td>
+                <input type="file" class="form-control" />
+            </td>
+        </tr>}*@
+
+
+
                                         <tr>
                                             <td>1</td>
                                             <td>
@@ -282,6 +298,7 @@
                                                 <input type="file" class="form-control" />
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td>2</td>
                                             <td>

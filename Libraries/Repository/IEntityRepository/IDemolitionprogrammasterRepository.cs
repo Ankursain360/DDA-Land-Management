@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDemolitionprogrammasterRepository : IGenericRepository<Demolitionprogrammaster>
+    public interface IDemolitionprogrammasterRepository : IGenericRepository<Demolitionprogram>
     {
 
 
-        Task<PagedResult<Demolitionprogrammaster>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model);
+        Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model);
 
-        Task<List<Demolitionprogrammaster>> GetDemolitionprogrammaster();
+        Task<List<Demolitionprogram>> GetDemolitionprogrammaster();
 
     }
 }

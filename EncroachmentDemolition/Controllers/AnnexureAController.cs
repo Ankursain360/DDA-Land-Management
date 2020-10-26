@@ -28,8 +28,17 @@ namespace EncroachmentDemolition.Controllers
         }
         public async Task<IActionResult> Create()
         {
-            var list = await _annexureAService.GetDemolitionchecklist();
+
+           
+
+           
+
+           var list = await _annexureAService.GetDemolitionchecklist();
+            
+           // var list1 = await _annexureAService.GetDemolitiondocument();
             return View(list);
+           // return View(list1);
         }
+
     }
 }
