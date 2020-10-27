@@ -169,7 +169,7 @@ namespace Libraries.Repository.EntityRepository
                             .Include(x => x.Locality)
                             .Include(x => x.DisposalType)
                             .Include(x => x.MainLandUse)
-                                .Where(x => (x.IsDeleted == 1) && 
+                                .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1) && 
                                 (x.ClassificationOfLandId == (model.classificationofland== 0 ? x.ClassificationOfLandId : model.classificationofland))
                                 && (x.DepartmentId==(model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId== (model.zone == 0 ? x.ZoneId : model.zone))
                                 && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
