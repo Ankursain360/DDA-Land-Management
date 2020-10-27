@@ -212,8 +212,8 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Division)
                 .Include(x => x.Locality)
                 .Include(x => x.Restoreproperty)
-              
-                .Where(x => (x.IsDeleted == 1)
+              .Where(x => (x.RestoreReason != null)
+                //.Where(x => (x.IsDeleted == 1)
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
                 && (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division)) 
@@ -362,8 +362,8 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Division)
                 .Include(x => x.Locality)
                 .Include(x => x.Restoreproperty)
-
-                .Where(x => (x.IsDeleted == 1)
+                .Where(x => (x.Restoreproperty.RestoreReason != null)
+                //.Where(x => (x.IsDeleted == 1)
                 && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
