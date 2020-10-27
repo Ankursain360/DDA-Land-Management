@@ -13,21 +13,21 @@ using System.Threading.Tasks;
 
 namespace Repository.EntityRepository
 {
-    public class DemolitionprogrammasterRepository : GenericRepository<Demolitionprogrammaster>, IDemolitionprogrammasterRepository
+    public class DemolitionprogrammasterRepository : GenericRepository<Demolitionprogram>, IDemolitionprogrammasterRepository
     {
         public DemolitionprogrammasterRepository(DataContext dbcontext) : base(dbcontext)
         { }
 
 
 
-        public async Task<List<Demolitionprogrammaster>> GetDemolitionprogrammaster()
+        public async Task<List<Demolitionprogram>> GetDemolitionprogrammaster()
         {
             return await _dbContext.Demolitionprogrammaster.Where(x => x.IsActive == 1).ToListAsync();
         }
 
-        public async Task<PagedResult<Demolitionprogrammaster>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
+        public async Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
         {
-            return await _dbContext.Demolitionprogrammaster.Where(x => x.IsActive == 1).GetPaged<Demolitionprogrammaster>(model.PageNumber, model.PageSize);
+            return await _dbContext.Demolitionprogrammaster.Where(x => x.IsActive == 1).GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
         }
 
 

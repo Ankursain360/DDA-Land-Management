@@ -164,75 +164,93 @@
                                             </tr>
                                         </thead>
                                         <tbody class="tbody">
-                                            @foreach (var item in Model)
-                                            {
+                                            @*@foreach (var item in Model)*@
+                                            @*{*@
 
 
-                                                <tr>
-                                                    <td>@(rowNo += 1)</td>
-                                                    <td>
-                                                       @item.ChecklistDescription     </td>
-                                                    <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                            <option>Not Required</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                            }
+                                            <tr>
+                                                <td>1</td>
+                                                <td>Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached</td>
+
+                                                <td>
+                                                    <select style="height:30px; background-color: #dddddd;" required class="form-control">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                        <option>Not Required</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+
+
+
+
+                                            <tr>
+                                                <td>2</td>
+                                                <td>Whether any structure proposed for demolition is protected under any Act including special provisio
+<td>
+                                                    <select style="height:30px; background-color: #dddddd;" required class="form-control">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                        <option>Not Required</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+
+
+                                            @*}*@
                                             @*<tr>
-                                                    <td>2</td>
-                                                    <td>
-                                                        Whether any structure proposed for demolition is protected under any Act including special provisions Act2011
-                                                    </td>
-                                                    <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                            <option>Not Required</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>
-                                                        If re-encroachment after demolition in past, whether responsibility for the lapse in protecting the land has been fixed
-                                                    </td>
-                                                    <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                            <option>Not Required</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>4</td>
-                                                    <td>
-                                                        Whether area is sensitive and demolition may lead to law & Order problems.
-                                                    </td>
-                                                    <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                            <option>Not Required</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>5</td>
-                                                    <td>
-                                                        In case of major/sensitive area demolition, whether approval from Hon'ble LG obtained and attached
-                                                    </td>
-                                                    <td>
-                                                        <select style="height:30px;    background-color: #dddddd;" required class="form-control">
-                                                            <option>Yes</option>
-                                                            <option>No</option>
-                                                            <option>Not Required</option>
-                                                        </select>
-                                                    </td>
-                                                </tr>*@
+            <td>2</td>
+            <td>
+                Whether any structure proposed for demolition is protected under any Act including special provisions Act2011
+            </td>
+            <td>
+                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Not Required</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>
+                If re-encroachment after demolition in past, whether responsibility for the lapse in protecting the land has been fixed
+            </td>
+            <td>
+                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Not Required</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>
+                Whether area is sensitive and demolition may lead to law & Order problems.
+            </td>
+            <td>
+                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Not Required</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>
+                In case of major/sensitive area demolition, whether approval from Hon'ble LG obtained and attached
+            </td>
+            <td>
+                <select style="height:30px;    background-color: #dddddd;" required class="form-control">
+                    <option>Yes</option>
+                    <option>No</option>
+                    <option>Not Required</option>
+                </select>
+            </td>
+        </tr>*@
                                         </tbody>
                                     </table>
                                 </div>
@@ -273,6 +291,21 @@
                                         </tr>
                                     </thead>
                                     <tbody class="tbody">
+                                        @*@foreach (var item in Model)
+        {
+        <tr>
+            @(rowNo += 1)
+            <td>
+                @item.Demolitiondocumentdetails
+            </td>
+            <td>
+            <td>
+                <input type="file" class="form-control" />
+            </td>
+        </tr>}*@
+
+
+
                                         <tr>
                                             <td>1</td>
                                             <td>
@@ -282,6 +315,7 @@
                                                 <input type="file" class="form-control" />
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td>2</td>
                                             <td>

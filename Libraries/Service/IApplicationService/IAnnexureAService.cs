@@ -11,5 +11,10 @@ namespace Libraries.Service.IApplicationService
     public interface IAnnexureAService
     {
         Task<List<Demolitionchecklist>> GetDemolitionchecklist();
+        Task<List<Demolitiondocument>> GetDemolitiondocument();
+        Task<List<Fixingdemolition>> GetFixingdemolition(int encroachmentId);
+        Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition);
+
+
     }
 }

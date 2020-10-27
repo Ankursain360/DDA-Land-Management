@@ -9,10 +9,14 @@ using Model.Entity;
 
 namespace Libraries.Model.Entity
 {
-   public class Demolitionchecklist : AuditableEntity<int>
+   public partial class Demolitionchecklist : AuditableEntity<int>
     {
 
-        
+        public Demolitionchecklist()
+        {
+            Demolitionprogrammasterdetails = new HashSet<Demolitionprogram>();
+            Demolitiondocumentdetails = new HashSet<Demolitiondocument>();
+        }
 
 
 
@@ -22,7 +26,16 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "The Is Active field is required")]
 
         public byte IsActive { get; set; }
-      
+
+        //[NotMapped]
+        //public List<Demolitiondocument> Demolitiondocument { get; set; }
+
+
+
+        public virtual ICollection<Demolitionprogram> Demolitionprogrammasterdetails { get; set; }
+        public virtual ICollection<Demolitiondocument> Demolitiondocumentdetails { get; set; }
+
+
 
     }
 }

@@ -1,0 +1,40 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
+@{int rowNo = 0;}
+<table class="table table-responsive table-bordered table-card">
+    <thead class="thead">
+        <tr class="myapp-hed1">
+            <th>Sr.No</th>
+            <th>Date</th>
+            <th>Locality(Village)</th>
+            <th>Khasra No</th>
+            <th>Police Station</th>
+            <th>Security Guard on duty</th>
+            <th>Status</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @foreach (var item in Model.Results)
+        {
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
+                <td>@item.Locality.Name</td>
+                <td>@item.KhasraNo</td>
+                <td>@item.PoliceStation</td>
+                <td>@item.SecurityGuardOnDuty</td>
+                <td>@item.StatusOfLand</td>
+                <td>
+                    <a asp-action="Create" asp-controller="AnnexureA">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+                  
+                    
+                    
+                    
+                    <a asp-action="Create"  asp-controller="AnnexureA"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+                     </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
-  public  class Demolitionprogrammaster : AuditableEntity<int>
+  public  class Demolitionprogram : AuditableEntity<int>
     {
 
         [Required(ErrorMessage = "The Items field is required")]

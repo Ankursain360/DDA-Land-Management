@@ -12,7 +12,7 @@ using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class DemolitionprogrammasterService : EntityService<Demolitionprogrammaster>, IDemolitionprogrammasterService
+    public class DemolitionprogrammasterService : EntityService<Demolitionprogram>, IDemolitionprogrammasterService
     {
 
         private readonly IUnitOfWork _unitOfWork;
@@ -27,22 +27,22 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Demolitionprogrammaster>> GetDemolitionprogrammasterUsingRepo()
+        public async Task<List<Demolitionprogram>> GetDemolitionprogrammasterUsingRepo()
         {
             return await _demolitionprogrammasterRepository.GetDemolitionprogrammaster();
         }
 
-        public async Task<Demolitionprogrammaster> FetchSingleResult(int id)
+        public async Task<Demolitionprogram> FetchSingleResult(int id)
         {
             var result = await _demolitionprogrammasterRepository.FindBy(a => a.Id == id);
-            Demolitionprogrammaster model = result.FirstOrDefault();
+            Demolitionprogram model = result.FirstOrDefault();
             return model;
         }
 
-        public async Task<bool> Update(int id, Demolitionprogrammaster demolitionprogrammaster)
+        public async Task<bool> Update(int id, Demolitionprogram demolitionprogrammaster)
         {
             var result = await _demolitionprogrammasterRepository.FindBy(a => a.Id == id);
-            Demolitionprogrammaster model = result.FirstOrDefault();
+            Demolitionprogram model = result.FirstOrDefault();
             model.Items = demolitionprogrammaster.Items;
             model.ItemsType = demolitionprogrammaster.ItemsType;
             model.ModifiedDate = DateTime.Now;
@@ -51,7 +51,7 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(Demolitionprogrammaster demolitionprogrammaster)
+        public async Task<bool> Create(Demolitionprogram demolitionprogrammaster)
         {
 
             demolitionprogrammaster.CreatedBy = 1;
@@ -66,7 +66,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _demolitionprogrammasterRepository.FindBy(a => a.Id == id);
-            Demolitionprogrammaster model = form.FirstOrDefault();
+            Demolitionprogram model = form.FirstOrDefault();
             model.IsActive = 0;
             _demolitionprogrammasterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -74,14 +74,14 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Demolitionprogrammaster>> GetDemolitionprogrammaster()
+        public async Task<List<Demolitionprogram>> GetDemolitionprogrammaster()
         {
             return await _demolitionprogrammasterRepository.GetDemolitionprogrammaster();
         }
 
 
 
-        public async Task<PagedResult<Demolitionprogrammaster>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
+        public async Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
         {
             return await _demolitionprogrammasterRepository.GetPagedDemolitionprogrammaster(model);
         }

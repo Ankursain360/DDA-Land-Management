@@ -14,18 +14,18 @@ namespace Libraries.Service.IApplicationService
 
 
 
-        Task<List<Demolitionprogrammaster>> GetDemolitionprogrammaster();
+        Task<List<Demolitionprogram>> GetDemolitionprogrammaster();
 
-        Task<List<Demolitionprogrammaster>> GetDemolitionprogrammasterUsingRepo();
+        Task<List<Demolitionprogram>> GetDemolitionprogrammasterUsingRepo();
 
-        Task<bool> Update(int id, Demolitionprogrammaster demolitionprogrammaster);
-        Task<bool> Create(Demolitionprogrammaster demolitionprogrammaster);
-        Task<Demolitionprogrammaster> FetchSingleResult(int id);
+        Task<bool> Update(int id, Demolitionprogram demolitionprogrammaster);
+        Task<bool> Create(Demolitionprogram demolitionprogrammaster);
+        Task<Demolitionprogram> FetchSingleResult(int id);
         Task<bool> Delete(int id);
 
 
 
-        Task<PagedResult<Demolitionprogrammaster>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model);
+        Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model);
 
 
 

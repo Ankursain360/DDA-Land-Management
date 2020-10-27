@@ -31,6 +31,23 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.GetDemolitionchecklist();
         }
 
+        public async Task<List<Demolitiondocument>> GetDemolitiondocument()
+        {
+            return await _annexureARepository.GetDemolitiondocument();
+        }
+        public async Task<List<Fixingdemolition>> GetFixingdemolition(int Id)
+        {
+            return await _annexureARepository.GetFixingdemolition(Id);
+        }
+
+        public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+        {
+            fixingdemolition.CreatedBy = 1;
+            fixingdemolition.CreatedDate = DateTime.Now;
+            fixingdemolition.IsActive = 1;
+            return await _annexureARepository.SaveFixingdemolition(fixingdemolition);
+        }
+
 
     }
 }

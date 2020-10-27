@@ -11,5 +11,10 @@ namespace Libraries.Repository.IEntityRepository
     public interface IAnnexureARepository : IGenericRepository<Demolitionchecklist>
     {
         Task<List<Demolitionchecklist>> GetDemolitionchecklist();
+        Task<List<Demolitiondocument>> GetDemolitiondocument();
+        Task<List<Fixingdemolition>> GetFixingdemolition(int encroachmentId);
+        Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition);
+
+
     }
 }

@@ -51,7 +51,7 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Create()
         {
-            Demolitionprogrammaster demolitionprogrammaster = new Demolitionprogrammaster();
+            Demolitionprogram demolitionprogrammaster = new Demolitionprogram();
             demolitionprogrammaster.IsActive = 1;
             return View(demolitionprogrammaster);
         }
@@ -59,7 +59,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Demolitionprogrammaster demolitionprogrammaster)
+        public async Task<IActionResult> Create(Demolitionprogram demolitionprogrammaster)
         {
             try
             {
@@ -108,7 +108,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Demolitionprogrammaster demolitionprogrammaster)
+        public async Task<IActionResult> Edit(int id, Demolitionprogram demolitionprogrammaster)
         {
             if (ModelState.IsValid)
             {

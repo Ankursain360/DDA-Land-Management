@@ -17,19 +17,57 @@ namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAController : Controller
     {
-        private readonly  IAnnexureAService _annexureAService;
-        public AnnexureAController(IAnnexureAService annexureAService)
+        //  private readonly  IAnnexureAService _annexureAService;
+
+       // public IConfiguration _configuration;
+        public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
+
+        //public AnnexureAController(IAnnexureAService annexureAService)
+        //{
+        //    _encroachmentRegisterationService = encroachmentRegisterationService;
+
+        //    _annexureAService = annexureAService;
+        //}
+
+        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService)
         {
-            _annexureAService = annexureAService;
+            _encroachmentRegisterationService = encroachmentRegisterationService;
+         //   _configuration = configuration;
         }
+
+
+
+
         public IActionResult Index()
         {
             return View();
         }
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] EncroachmentRegisterationDto model)
+        //{
+        //    var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model);
+        //    return PartialView("_List", result);
+        //}
+
+
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
         public async Task<IActionResult> Create()
         {
-            var list = await _annexureAService.GetDemolitionchecklist();
-            return View(list);
+
+           
+
+           
+
+      //     var list = await _annexureAService.GetDemolitionchecklist();
+            
+           // var list1 = await _annexureAService.GetDemolitiondocument();
+            return View();
+           // return View(list1);
         }
+
     }
 }
