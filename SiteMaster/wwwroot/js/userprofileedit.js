@@ -1,5 +1,5 @@
 ﻿
-$("#updateProfileBtn").click(function () {
+$("#btnSaveProfileInfo").click(function () {
     debugger;
     var param = GetListData();
     var validateForm = $("#frmUserProfileInfo").valid();

@@ -1,4 +1,5 @@
-﻿$("#updatePersonalBtn").click(function () {
+﻿$("#btnSavePersonalInfo").click(function () {
+    debugger;
     var param = GetListData();
     var validateForm = $("#frmUserPersonalInfo").valid();
     if (validateForm) {

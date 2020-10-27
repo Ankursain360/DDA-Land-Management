@@ -82,7 +82,7 @@ namespace SiteMaster
             {
                 options.SignInScheme = "Cookies";
                 options.Authority = "https://localhost:5001";
-                // options.Authority = "http://49.50.87.108:8493/";
+               //  options.Authority = "http://49.50.87.108:8493/";
                 options.RequireHttpsMetadata = false;
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";

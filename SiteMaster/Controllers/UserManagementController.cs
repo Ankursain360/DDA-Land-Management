@@ -140,49 +140,49 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] UsermanagementEditPartialLoad dtodata)
+        public async Task<PartialViewResult> LoadPersonalDetails([FromBody] UsermanagementEditPartialLoad dtodata)
         {
-            if (dtodata.value == "Personal")
-            {
-                var user = await _userProfileService.GetUserById(dtodata.id);
-                //EditUserDto model = new EditUserDto()
-                //{
-                //    Email = user.User.Email,
-                //    Name = user.User.Name,
+            var user = await _userProfileService.GetUserById(dtodata.id);
+            //EditUserDto model = new EditUserDto()
+            //{
+            //    Email = user.User.Email,
+            //    Name = user.User.Name,
 
-                //    PhoneNumber = user.User.PhoneNumber
-                //};
-                UserPersonalInfoDto model = new UserPersonalInfoDto()
-                {
-                    Id = user.User.Id,
-                    Email = user.User.Email,
-                    Name = user.User.Name,
-                    UserName = user.User.UserName,
-                    PhoneNumber = user.User.PhoneNumber
-                };
-                return PartialView("_UserPersonalInfo", model);
-            }
-            else
+            //    PhoneNumber = user.User.PhoneNumber
+            //};
+            UserPersonalInfoDto model = new UserPersonalInfoDto()
             {
-                //AddUserDto model1 = new AddUserDto()
-                //{
-                //    DepartmentList = await _departmentService.GetDepartment(),
-                //    ZoneList = await _zoneService.GetZone(),
-                //    RoleList = await _userProfileService.GetRole()
-                //};
-                var user = await _userProfileService.GetUserById(dtodata.id);
-                UserProfileInfoDto model = new UserProfileInfoDto()
-                {
-                    DepartmentList = await _departmentService.GetDepartment(),
-                    ZoneList = await _zoneService.GetZone(),
-                    RoleList = await _userProfileService.GetRole(),
-                    DepartmentId = user.DepartmentId,
-                    RoleId = user.RoleId,
-                    DistrictId = user.DistrictId,
-                    ZoneId = user.ZoneId
-                };
-                return PartialView("_UserProfileInfo", model);
-            }
+                Id = user.User.Id,
+                Email = user.User.Email,
+                Name = user.User.Name,
+                UserName = user.User.UserName,
+                PhoneNumber = user.User.PhoneNumber
+            };
+            return PartialView("_UserPersonalInfo", model);
+
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> LoadProfileDetails([FromBody] UsermanagementEditPartialLoad dtodata)
+        {
+            //AddUserDto model1 = new AddUserDto()
+            //{
+            //    DepartmentList = await _departmentService.GetDepartment(),
+            //    ZoneList = await _zoneService.GetZone(),
+            //    RoleList = await _userProfileService.GetRole()
+            //};
+            var user = await _userProfileService.GetUserById(dtodata.id);
+            UserProfileInfoDto model = new UserProfileInfoDto()
+            {
+                DepartmentList = await _departmentService.GetDepartment(),
+                ZoneList = await _zoneService.GetZone(),
+                RoleList = await _userProfileService.GetRole(),
+                DepartmentId = user.DepartmentId,
+                RoleId = user.RoleId,
+                DistrictId = user.DistrictId,
+                ZoneId = user.ZoneId
+            };
+            return PartialView("_UserProfileInfo", model);
 
         }
 

@@ -7,6 +7,5 @@ namespace Dto.Search
     public class UsermanagementEditPartialLoad
     {
         public int id { get; set; }
-        public string value { get; set; }
     }
 }

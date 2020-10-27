@@ -21,30 +21,18 @@
             <input type="hidden" asp-for="Id" />
             <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="btnSavePersonalInfo" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
+                    <a class="nav-link active" id="btnPersonalInfo" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
                        aria-selected="true">Personal Information</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="btnSaveProfileInfo" data-toggle="tab" href="#profile-md" role="tab" aria-controls="profile-md"
+                    <a class="nav-link" id="btnProfileInfo" data-toggle="tab" href="#profile-md" role="tab" aria-controls="profile-md"
                        aria-selected="false">Profile Information</a>
                 </li>
             </ul>
-            
-            <div class="row ">
-                <div class="form-group col-md-12" align="center">
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        @*<button type="button" id="PersonalBtn" class="btn btn-secondary">Personal Information</button>
-                    <button type="button" id="ProfileBtn" class="btn btn-secondary">Profile Information</button>*@
+            <br/>
+            <div id="divLoadData">
 
-                        @*<input type="submit" value="Personal Information" id="PersonalBtn" class="btn btn-primary dda-pageheading" style = "width:auto;" />
-                        <input type="submit" value="Profile Information" id="ProfileBtn" class="btn btn-primary dda-pageheading" style = "width:auto;"/>*@
-
-                    </div>
-                </div>
             </div>
-
-            <br />
-            <div id="divLoadData"></div>
         </div>
     </div>
 </div>
