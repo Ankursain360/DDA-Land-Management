@@ -151,9 +151,9 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> ExistName(int Id, string Name)
+        public async Task<IActionResult> ExistName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId)
         {
-            var result = await _localityService.CheckUniqueName(Id, Name);
+            var result = await _localityService.CheckUniqueName(Id, Name,DepartmentId,DivisionId,ZoneId);
             if (result == false)
             {
                 return Json(true);

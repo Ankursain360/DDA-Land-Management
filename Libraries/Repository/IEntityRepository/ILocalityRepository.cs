@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocality();
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Department>> GetAllDepartment();
-        Task<bool> AnyName(int id, string name);
+        Task<bool> AnyName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId);
         Task<bool> AnyCode(int id, string name);
         Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);

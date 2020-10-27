@@ -22,9 +22,9 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _localityRepository = localityRepository;
         }
-        public async Task<bool> CheckUniqueName(int id, string name)
+        public async Task<bool> CheckUniqueName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId)
         {
-            bool result= await _localityRepository.AnyName(id, name);
+            bool result= await _localityRepository.AnyName(Id, Name,DepartmentId,DivisionId,ZoneId);
             return result;
         }
         public async Task<bool> CheckUniqueCode(int id, string code)

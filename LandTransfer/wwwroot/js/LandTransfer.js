@@ -73,8 +73,10 @@ $(document).ready(function () {
         fileValidation(filePath, fileInput, size);
     });
     var khasraNo = $("#KhasraNo").val();
-    $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
-        $('#LoadView').html("");
-        $('#LoadView').html(response);
-    });
+    if (khasraNo!='') {
+        $.get(`/LandTransfer/GetHistoryDetails/?KhasraNo=${khasraNo}`, function (response) {
+            $('#LoadView').html("");
+            $('#LoadView').html(response);
+        });
+    }
 });

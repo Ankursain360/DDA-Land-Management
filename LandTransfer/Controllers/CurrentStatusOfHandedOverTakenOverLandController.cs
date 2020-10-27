@@ -44,7 +44,6 @@ namespace LandTransfer.Controllers
         {
             Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
             var Data = await _landTransferService.FetchSingleResult(id);
-
             Data.DepartmentList = await _landTransferService.GetAllDepartment();
             Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);

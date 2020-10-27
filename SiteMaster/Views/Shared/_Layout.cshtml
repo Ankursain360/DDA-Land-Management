@@ -1,255 +1,275 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <link href="img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
+    <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Dashboard</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <!--font css-->
+    <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
+
+    <!--icon css-->
+    <link rel="stylesheet" href="~/font/icon/remixicon.css" />
+
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
     <link href="~/lib/toaster/toastr.min.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap/dist/css/styles.css" rel="stylesheet" />
+    <link href="~/lib/select2/select2.css" rel="stylesheet" />
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
-    <script src="~/lib/bootstrap/select2/select2.js" defer></script>
-
-    <style>
-        .canvasjs-chart-credit {
-            display: none !important;
-        }
-
-        .btn {
-            width: 100px;
-        }
-
-        .nav li {
-            background: #3e4a9a;
-        }
-    </style>
-
-    <style>
-
-        footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            height: 50px;
-            margin-top: 50px;
-            margin-bottom: -10px;
-        }
-    </style>
 </head>
+<body class="bg-gray">
+    <div class="top-header">
+        <header>
+            <div class="container-fluid">
+                <div class="d-flex align-items-center">
+                    <div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu">
+                        <i class="ri-menu-fold-line"></i>
+                        <i class="ri-menu-unfold-line"></i>
+                    </div>
+                    <div class="logo py-1 mr-auto mr-md-4 order-md-1">
+                        <a href="/" class="d-block">
+                            <figure class="m-0">
+                                <img src="~/images/header-logo.png" alt="" class="img-fluid">
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="dropdown noti text-white my-2  mr-3 order-md-3">
+                        <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+                            <i class="ri-notification-2-line"></i>
+                            <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
+                            Comming Soon!
+                        </div>
+                    </div>
+                    <div class="dropdown user text-white order-md-4">
+                        <a href="#" role="button" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
+                            <div class="d-flex align-items-center profile">
+                                <figure class="m-0 d-none">
+                                    <img src="~/images/favicon.png" alt="" class="rounded-circle" width="34" height="34">
+                                </figure>
+                                <strong class="text-img rounded-circle d-block">
+                                    S
+                                </strong>
+                                <span class="ml-2 d-none d-md-block">Hi Sachin</span>
+                            </div>
+                        </a>
 
-<body style="font-family:sans-serif">
-    <header class="navbar navbar-custom navbar-fixed-top" style="min-height:30px;height:30px; Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); " role="navigation">
-        <div class="col-md-offset-11" style="color:#fff; padding-top:6px; font-size:13px">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle"
-                        style="background-color:#991141; border:#991141; margin-top:-25px; margin-left:-20px; color:white;"
-                        type="button" id="dropdownMenu1"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="true">
-                    <i class="fa-user-circle fa"></i> Hi, DDA
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="/Login/Create">Logout</a></li>
-                    <li><a href="#">Profile</a></li>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile">
+                            Comming Soon!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    @*<div>
+            <ul class="nav menu" style="font-family:sans-serif; font-size:13px!important;">
+                <li class="parent divider">
+                        Masters
+                    <ul class="children collapse" id="sub-item-1">
+
+                        <li>
+                            <a class="" href="/District/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>District
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Department/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Department
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Zone/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Zone
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Locality/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Locality(Village)
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Division/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Division
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Village/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Village
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/Role/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Role
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/UserManagement/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>User
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Interest/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Interest(Damage Payee)
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Rate/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Rate (Damage Payee)
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/Rebate/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Rebate (Damage Payee)
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/PageRole/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Page Role
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/LandUse/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Land Use
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/ClassificationOfLand/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Classification of Land
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="/WorkFlowTemplate/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Workflow
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a class="" href="/Demolitionchecklist/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Checklist
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/Demolitiondocument/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Document
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="" href="/Demolitionprogrammaster/Index">
+                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Program master
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+            </ul>
+        </div>*@
+    <!--        left menu section-->
+    <aside class="left-menu small slow" id="leftMenu">
+        <div class="accordion" id="leftMenu">
+            <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button" aria-expanded="false" aria-controls="m0">
+                <i class="main-icon ri-dashboard-line"></i>
+                <span class="text mr-auto">Dashboard</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m1" role="button" aria-expanded="false" aria-controls="m1">
+                <i class="main-icon ri-group-line"></i>
+                <span class="text mr-auto">Master</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="collapse sub-menu" id="m1" data-parent="#leftMenu">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
+                        <a href="/district" class="d-block">District</a>
+                    </li>
+                    <li>
+                        <a href="/" class="d-block">1 Sub-menu</a>
+                    </li>
+                    <li>
+                        <a href="/" class="d-block">1 Sub-menu</a>
+                    </li>
                 </ul>
             </div>
-            @*<a data-toggle="collapse" href="#sub-item-4" style="Background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091); ">
-                     Hi DDA <span data-toggle="collapse" href="#sub-item-4" ><i class="fa-angle-down fa"></i></span>
-                </a>
-                <ul class="children collapse" id="sub-item-4">
-                    <li>
-                        <a class="" href="/PropertyRegistration/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Property Registration
-                        </a>
-                    </li>
-                </ul>*@
-
-            @*<i class="fa-user-circle fa"></i> Hi, DDA <i class="fa-angle-down fa"></i>*@
-        </div>
-    </header>
-    <div id="sidebar-collapse" class="col-sm-3 col-lg-2 col-md-2 sidebar" style="position: fixed;Font-size: 14px; color: #ffffff; Background: #2c3091;margin-top:-30px;">
-        <div role="separator" class="divider">
-            <img src="~/images/DDAL.JPG" height="70" class="img-responsive" alt="">
-        </div>
-        <hr style="color:darkblue; border-top: 1px solid #534e9a ;" />
-        <div style="padding-left:10px; padding-right:10px;">
-            <a href="/Dashboard/Index"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-0" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a>
-        </div>
-        <ul class="nav menu" style="font-family:sans-serif; font-size:13px!important;">
-            @*<li class=""><a href="#"><h4 style="color:#fff;">Dashboard <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-dashboard fa"></em></span></h4>  </a></li>*@
-            <li class=""></li>
-
-            <li class="parent divider">
-                <a data-toggle="collapse" href="#sub-item-1">
-                    <em class="fa fa-asterisk">&nbsp;</em> Masters<span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa-angle-right fa"></em></span>
-                </a>
-                <ul class="children collapse" id="sub-item-1">
-
-                    <li>
-                        <a class="" href="/District/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>District
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Department/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Department
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Zone/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Zone
-                        </a>
-                    </li>>
-                    <li>
-                        <a class="" href="/Division/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Division
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Locality/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Locality(Village)
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/Village/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Village
-                        </a>
-                    </li>
-                    @*<li>
-            <a class="" href="/Designation/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Designation
+            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m2" role="button" aria-expanded="false" aria-controls="m2">
+                <i class="main-icon ri-landscape-line"></i>
+                <span class="text mr-auto">New Land Acquisition</span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
             </a>
-        </li>*@
-                    @*<li>
-            <a class="" href="/Employee/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Employee
-            </a>
-        </li>*@
+            <div class="collapse sub-menu" id="m2" data-parent="#leftMenu">
+                <ul class="list-unstyled m-0 p-0">
                     <li>
-                        <a class="" href="/Role/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Role
-                        </a>
-                    </li>
-                    @*<li>
-            <a class="" href="/Module/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Module
-            </a>
-        </li>
-        <li>
-            <a class="" href="/Page/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Page
-            </a>
-        </li>*@
-                    <li>
-                        <a class="" href="/UserManagement/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>User
-                        </a>
+                        <a href="/" class="d-block">2 Sub-menu</a>
                     </li>
                     <li>
-                        <a class="" href="/Interest/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Interest(Damage Payee)
-                        </a>
+                        <a href="/" class="d-block">2 Sub-menu</a>
                     </li>
                     <li>
-                        <a class="" href="/Rate/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Rate (Damage Payee)
-                        </a>
+                        <a href="/" class="d-block">2 Sub-menu</a>
                     </li>
-                    <li>
-                        <a class="" href="/Rebate/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Rebate (Damage Payee)
-                        </a>
-                    </li>
-                    @*<li>
-            <a class="" href="/Notification/Index">
-                <span class="fa fa-arrow-right">&nbsp;</span>Notification
-            </a>
-        </li>*@
-                    <li>
-                        <a class="" href="/PageRole/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Page Role
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/LandUse/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Land Use
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/ClassificationOfLand/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Classification of Land
-                        </a>
-                    </li>
-                    <li>
-                        <a class="" href="/WorkFlowTemplate/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Workflow
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a class="" href="/Demolitionchecklist/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Checklist
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="" href="/Demolitiondocument/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Document
-                        </a>
-                    </li>
-
-                    <li>
-                        <a class="" href="/Demolitionprogrammaster/Index">
-                            <span class="fa fa-arrow-right">&nbsp;</span>Demolition Program master
-                        </a>
-                    </li>
-
                 </ul>
-            </li>
+            </div>
+            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m3" role="button" aria-expanded="false" aria-controls="m3">
+                <i class="main-icon ri-sound-module-line"></i>
+                <span class="text mr-auto">Acquired Land Information Management Module </span>
+                <i class="arrow ri-arrow-drop-down-line slow"></i>
+            </a>
+            <div class="collapse sub-menu" id="m3" data-parent="#leftMenu">
+                <ul class="list-unstyled m-0 p-0">
+                    <li>
+                        <a href="/" class="d-block">3 Sub-menu</a>
+                    </li>
+                    <li>
+                        <a href="/" class="d-block">3 Sub-menu</a>
+                    </li>
+                    <li>
+                        <a href="/" class="d-block">3 Sub-menu</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </aside>
 
-        </ul>
-    </div>
 
     <partial name="_CookieConsentPartial" />
-    <div class="col-lg-10 col-md-10 col-md-offset-2" style="padding-left:0; margin-top:-2%;">
-        <div class="row">
-            <img src="http://res.cloudinary.com/deb9cwxor/image/upload/v1595791041/oy34mzpbprqa1fwnbxgd.jpg" height="75" style="position: relative; z-index: 0; width:100%;" />
-        </div>
+    <section id="rightSection" class="slow bg-gray">
         @RenderBody()
-    </div>
+    </section>
+    @*<footer style="background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); Color: #ffffff; Font-size: 0.80rem; Font-Family: Open SansRegular;">
+            <div class="col-sm-12" style="color: #f8f8f8; float: none; font-family:sans-serif; font-size:11px; line-height: 150%; padding: 5px 25px 0px 10px; text-align: left; width: auto; ">
+                <div class="pull-left">
+                    Terms & Conditions | Privacy Policy | Copyright Policy | Hyperlink policy |  Accessibility Statement | Help <br />
+                    © Content Owned by DDA, Government of India.
+                </div>
 
-    <footer style="background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); Color: #ffffff; Font-size: 0.80rem; Font-Family: Open SansRegular;">
-        <div class="col-sm-12" style="color: #f8f8f8; float: none; font-family:sans-serif; font-size:11px; line-height: 150%; padding: 5px 25px 0px 10px; text-align: left; width: auto; ">
-            <div class="pull-left">
-                Terms & Conditions | Privacy Policy | Copyright Policy | Hyperlink policy |  Accessibility Statement | Help <br />
-                © Content Owned by DDA, Government of India.
+                <div class="pull-right" style="padding-left:40%; text-align: right; width: auto; ">
+                    <table>
+                        <tr>
+                            <td>
+                                <a href="#" style="color:#fff;">
+                                    Contact with us: &nbsp; <i class="fa fa-facebook" style="color:#ffffff;"></i> &nbsp; <i class="fa fa-twitter" style="color:#ffffff;"></i>&nbsp; <i class="fa fa-youtube" style="color:#ffffff;"></i><br /><span>Visitors: 137713714, last Updated On: 31/07/2020</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
             </div>
+        </footer>*@
 
-            <div class="pull-right" style="padding-left:40%; text-align: right; width: auto; ">
-                <table>
-                    <tr>
-                        <td>
-                            <a href="#" style="color:#fff;">
-                                Contact with us: &nbsp; <i class="fa fa-facebook" style="color:#ffffff;"></i> &nbsp; <i class="fa fa-twitter" style="color:#ffffff;"></i>&nbsp; <i class="fa fa-youtube" style="color:#ffffff;"></i><br /><span>Visitors: 137713714, last Updated On: 31/07/2020</span>
-                            </a>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    </footer>
-
-
-    @*<script src="~/lib/jquery/dist/jquery.js"></script>*@
-    @*<script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>*@
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
     <script src="~/lib/toaster/toastr.min.js"></script>
+    <script src="~/lib/select2/select2.js"></script>
 
     <environment include="Development">
         <script src="~/js/site.js"></script>

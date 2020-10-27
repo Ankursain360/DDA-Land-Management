@@ -15,40 +15,40 @@ namespace Libraries.Model.Entity
         {
             Currentstatusoflandhistory = new HashSet<Currentstatusoflandhistory>();
         }
-        [Required]
+        [Required(ErrorMessage = "The Department field is required.")]
         public int DepartmentId { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "The Zone field is required.")]
         public int ZoneId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Division field is required.")]
         public int DivisionId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Locality field is required.")]
         public int LocalityId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Khasra Number is required.")]
         public string KhasraNo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Buildup Area is required.")]
         public decimal? BuildupArea { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Vacant Area is required.")]
         public decimal? VacantArea { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Total Area is required.")]
         public decimal? TotalArea { get; set; }
         public string Address { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Handed Over Department is required.")]
         public int? HandedOverDepartmentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Handed Over By Name Desingnation is required.")]
         public string HandedOverByNameDesingnation { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Handed Over By Date is required.")]
         public DateTime? HandedOverDate { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Order No is required.")]
         public string OrderNo { get; set; }
         public string CopyofOrderDocPath { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Transfer order Issue Authority is required.")]
         public string TransferorderIssueAuthority { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Taken Over Department is required.")]
         public int? TakenOverDepartmentId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Taken Over By Name Desingnation is required.")]
         public string TakenOverByNameDesingnation { get; set; }
-        [Required]
+        [Required(ErrorMessage = "The Taken Over is required.")]
         public DateTime? DateofTakenOver { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
