@@ -243,28 +243,25 @@
 
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray">
-        @RenderBody()
-    </section>
-    @*<footer style="background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091); Color: #ffffff; Font-size: 0.80rem; Font-Family: Open SansRegular;">
-            <div class="col-sm-12" style="color: #f8f8f8; float: none; font-family:sans-serif; font-size:11px; line-height: 150%; padding: 5px 25px 0px 10px; text-align: left; width: auto; ">
-                <div class="pull-left">
-                    Terms & Conditions | Privacy Policy | Copyright Policy | Hyperlink policy |  Accessibility Statement | Help <br />
-                    © Content Owned by DDA, Government of India.
-                </div>
-
-                <div class="pull-right" style="padding-left:40%; text-align: right; width: auto; ">
-                    <table>
-                        <tr>
-                            <td>
-                                <a href="#" style="color:#fff;">
-                                    Contact with us: &nbsp; <i class="fa fa-facebook" style="color:#ffffff;"></i> &nbsp; <i class="fa fa-twitter" style="color:#ffffff;"></i>&nbsp; <i class="fa fa-youtube" style="color:#ffffff;"></i><br /><span>Visitors: 137713714, last Updated On: 31/07/2020</span>
-                                </a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+        <div class="container-fluid">
+            <div class="section-wraper p-3 pb-md-0">
+                @RenderBody()
             </div>
-        </footer>*@
+        </div>
+</section>
+    <footer class="footer slow">
+        <div class="container-fluid">
+            <p class="my-0 py-2">
+                <a href="#">Terms & Conditions</a> 
+                | <a href="#">Privacy Policy</a> 
+                | <a href="#">Copyright Policy</a> 
+                | <a href="#">Hyperlink policy</a> 
+                | <a href="#">Accessibility Statement</a> 
+                | <a href="#">Help</a><br>
+                &copy; Content Owned by DDA, Government of India.
+            </p>
+        </div>
+    </footer>
 
     <script src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/chart.js/dist/Chart.min.js"></script>
