@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    //To Delete Data 
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model);
+        Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetails();
 

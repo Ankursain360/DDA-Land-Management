@@ -32,7 +32,8 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitionstructuredetailsDto model)
         {
-            var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetails(model);
+            //var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetails(model);
+            var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetailsList(model);
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Create()
@@ -161,6 +162,8 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
+            demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetStructure();
+
             if (demolitionstructuredetails == null)
             {
                 return NotFound();
@@ -175,6 +178,7 @@ namespace EncroachmentDemolition.Controllers
             Data.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(Data.DepartmentId ?? 0));
             Data.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(Data.ZoneId ?? 0));
             Data.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(Data.DivisionId ?? 0));
+            demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetStructure();
 
 
             if (ModelState.IsValid)
@@ -263,6 +267,7 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId??0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId??0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId??0));
+            demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetStructure();
             if (demolitionstructuredetails == null)
             {
                 return NotFound();
