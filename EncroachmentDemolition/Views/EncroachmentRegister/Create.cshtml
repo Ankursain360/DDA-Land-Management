@@ -19,7 +19,7 @@
         <div class="panel-body">
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
+                @*<div class="row">
                     <div class="form-group col-md-4">
                         <label class="radio-inline ">
                             <input type="radio" id="rbdWatchWard" value="1" />Watch & Ward
@@ -35,7 +35,7 @@
                             <input type="radio" id="rbdOther" value="3" />Other
                         </label>
                     </div>
-                </div>
+                </div>*@
 
                 <div id="LoadOtherDataView">
 
@@ -172,40 +172,38 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Staus of Land</label>
-                        <select asp-for="StatusOfLand" class="form-control dda-dropdown">
+                        <select asp-for="StatusOfLand" class="form-control dda-dropdown" onchange="onChangeLandStatus(this.value)">
                             <option value="DDA Land">DDA Land</option>
                             <option value="Non DDA Land">Non DDA Land</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Possession </label>
-                        <select class="form-control dda-dropdown" asp-for="IsPossession">
-                            <option value="Yes">Yes</option>
-                            <option value="Yes">No</option>
-                        </select>
+                    <div id="divForLandStatus">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Possession </label>
+                            <select class="form-control dda-dropdown" asp-for="IsPossession" onchange="onChangePossationStatus(this.value)">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6" id="divPossessionGroup" style="display:block;">
+                            <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
+                            <input type="hidden" asp-for="Id" id="hdnId" />
+                            <input type="hidden" asp-for="IsActive" value="1" />
+                            <label class="radio-inline">
+                                <input type="radio" name="grpPossession" id="rdbFormal" checked>Formal Possession
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="grpPossession" id="rdbFlexible">Physical Possession
+                            </label>
+                        </div>
+                        <div class="form-group col-md-6" id="divDepartment" style="display:block;">
+                            <label class="control-label lb-sm">Other Department </label>
+                            <select asp-for="OtherDepartment" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
+                                <option value="0">Select</option>
+                            </select>
+                            <span asp-validation-for="OtherDepartment" class="text-danger"></span>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6" id="divRdaioPossessionGroup" style="display:block;">
-                        <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
-                        <input type="hidden" asp-for="Id" id="hdnId" />
-                        <input type="hidden" asp-for="IsActive" value="1" />
-                        <label class="radio-inline">
-                            <input type="radio" name="grpPossession" id="rdbFormal" checked>Formal Possession
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="grpPossession" id="rdbFlexible">Physical Possession
-                        </label>
-                    </div>
-                    <div class="form-group col-md-6" id="divDepartment" style="display:block;">
-                        <label class="control-label lb-sm">Other Department </label>
-                        <select asp-for="OtherDepartment" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
-                            <option value="0">Select</option>
-                        </select>
-                        <span asp-validation-for="OtherDepartment" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">FIR Details</label>
                         <input type="file" asp-for="Firfile" id="Firfile" class="form-control" multiple />
@@ -216,8 +214,6 @@
                         <input type="text" asp-for="PoliceStation" class="form-control" />
                         <span asp-validation-for="PoliceStation" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Security Guard on Duty</label>
                         <input type="text" asp-for="SecurityGuardOnDuty" class="form-control" />
@@ -229,8 +225,6 @@
                         <input type="file" asp-for="LocationMapFile" id="LocationMapFile" class="form-control" multiple />
                         <span asp-validation-for="LocationMapFile" class="text-danger"></span>
                     </div>
-                </div>
-                <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
                         <input type="file" class="form-control" asp-for="PhotoFile" id="PhotoFile" multiple />

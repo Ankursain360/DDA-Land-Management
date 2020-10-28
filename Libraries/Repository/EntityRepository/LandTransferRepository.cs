@@ -60,7 +60,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Landtransfer>> GetAllLandTransfer()
         {
-            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Landtransfer.Include(x=>x.Department).Include(x=>x.Zone).Include(x=>x.Division).Include(x=>x.Locality).Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {

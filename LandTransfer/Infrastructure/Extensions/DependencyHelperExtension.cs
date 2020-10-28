@@ -20,10 +20,12 @@ namespace LandTransfer.Infrastructure.Extensions
             services.AddScoped<INazullandRepository, NazullandRepository>();
             services.AddScoped<ILandTransferRepository, LandtransferRepository>();
             services.AddScoped<ICurrentstatusoflandhistoryRepository, CurrentstatusoflandhistoryRepository>();
+            services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
             services.AddScoped<ILandTransferService, LandTransferService>();
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
+            services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
         }
 
     }
