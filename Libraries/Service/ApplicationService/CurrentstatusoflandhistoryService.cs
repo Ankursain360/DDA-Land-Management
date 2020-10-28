@@ -34,6 +34,11 @@ namespace Service.ApplicationService
         {
             return await _currentstatusoflandhistoryRepository.GetCurrentstatusoflandhistory(id);
         }
-
+       
+        public async Task<Currentstatusoflandhistory> FetchSingleResult(int id)
+        {
+            return await _currentstatusoflandhistoryRepository.FetchSingleResult(id);
+        }
     }
+
 }
