@@ -517,9 +517,9 @@ function ComapareTotalArea(element) {
     return isFormValid;
 }
 
-//function callSelect2() {
-//    $("select").select2({
-//        placeholder: "Select",
-//        allowClear: true
-//    });
-//}
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
