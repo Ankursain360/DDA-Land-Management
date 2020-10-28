@@ -55,6 +55,16 @@ $("#KhasraNo").change(function () {
         $('#LoadView').html(response);
     });
 });
+$("#collapse").click(function () {
+    debugger
+    $('#collapseExample').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    })
+});
+
 $(document).ready(function () {
     $("input").each(function () {
         if ($(this).val() == '0') {
