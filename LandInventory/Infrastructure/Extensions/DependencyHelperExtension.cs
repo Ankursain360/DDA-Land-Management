@@ -5,6 +5,7 @@ using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Service.ApplicationService;
+using LandInventory.Helper;
 
 namespace LandInventory.Infrastructure.Extensions
 {
@@ -14,6 +15,7 @@ namespace LandInventory.Infrastructure.Extensions
 		{
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ISiteContext, SiteContext>();
 
             /* Respository */
             services.AddScoped<INazullandRepository, NazullandRepository>();
