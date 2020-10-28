@@ -332,6 +332,10 @@ figcaption h6 {
     display: block;
 }
 
+.noti-time {
+    width: 42px;
+}
+
 
 @media (min-width:992px) {
     .login-container {
@@ -367,6 +371,100 @@ figcaption h6 {
 
 .noti small.nofi-active {
     display: block;
+}
+
+.noti .dropdown-menu {
+    top: 7px !important;
+}
+
+.noti .dropdown-menu::before,
+.user .dropdown-menu::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    display: block;
+    background: #fff;
+    position: absolute;
+    top: -8px;
+    right: 10px;
+    transform: rotate(45deg);
+    border-top: 1px solid rgba(0, 0, 0, .15);
+    border-left: 1px solid rgba(0, 0, 0, .15);
+
+}
+
+.noti .dropdown-menu a {
+    text-decoration: none !important;
+}
+
+.noti .dropdown-menu a .noti-time i {
+    color: #ffb608;
+    display: block;
+    margin-bottom: -4px;
+}
+
+.noti .dropdown-menu a.read .noti-time i {
+    color: #00f30a;
+}
+
+.noti .dropdown-menu a .noti-time small {
+    color: #888888;
+}
+
+.noti .dropdown-menu a p {
+    color: #000;
+    font-size: .8rem;
+    font-weight: 600;
+    width: 200px;
+    margin-right: 5px !important;
+}
+
+.noti .dropdown-menu a.read p {
+    color: #888;
+}
+
+.noti .dropdown-menu a p small {
+    color: #888888;
+    font-size: 0.7rem;
+    font-weight: 400;
+    width: 200px;
+}
+
+.drop-detail {
+    padding: 20px;
+}
+
+.drop-detail img {
+    height: 50px;
+    width: 50px;
+}
+
+.drop-detail h3 {
+    font-size: .95rem;
+    font-weight: 700;
+    margin: 15px 0 6px 0;
+}
+
+.drop-detail p {
+    font-size: .7rem;
+    font-weight: 400;
+    margin: 0;
+    padding-bottom: 13px;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.drop-detail a {
+    color: #888;
+    font-size: .85rem;
+    padding: 10px 0;
+    text-decoration: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, .15);
+}
+
+.drop-detail li:last-child a {
+    padding: 10px 0 0 0;
+    color: #bd0000;
+    border-bottom: 0px solid rgba(0, 0, 0, .15);
 }
 
 .text-img {
@@ -531,6 +629,7 @@ figcaption h6 {
 
     .user .profile span {
         font-size: .85rem;
+        max-width: 85px;
     }
 }
 
