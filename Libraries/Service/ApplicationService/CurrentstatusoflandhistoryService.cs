@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -38,6 +39,11 @@ namespace Service.ApplicationService
         public async Task<Currentstatusoflandhistory> FetchSingleResult(int id)
         {
             return await _currentstatusoflandhistoryRepository.FetchSingleResult(id);
+        }
+
+        public async Task<PagedResult<Currentstatusoflandhistory>> GetPagedCurrentstatusoflandhistory(CurrentstatusoflandhistorySearchDto model)
+        {
+            return await _currentstatusoflandhistoryRepository.GetPagedCurrentstatusoflandhistory(model);
         }
     }
 
