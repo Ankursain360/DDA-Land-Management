@@ -45,13 +45,26 @@
             </select>
         </div>
         <div class="col-md-3">
-            <label class="control-label lb-sm" for="DepartmentId">Department</label><span class="text-danger">*</span>
+            <label class="control-label lb-sm" for="DepartmentId">Department</label>
             <select class="form-control dda-dropdown" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Department is Mandatory">
                 <option value="0">All</option>
             </select>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col-md-3">
+            <label class="control-label lb-sm" for="ZoneId">Zone</label>
+            <select class="form-control dda-dropdown" id="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                <option value="0">All</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <label class="control-label lb-sm" for="DivisionId">Division</label>
+            <select class="form-control dda-dropdown" id="DivisionId">
+                <option value="0">All</option>
+            </select>
+        </div>
+    </div>
     <div class="row ">
         <div class="form-group col-md-12" style="margin-top:20px;">
             <button id="btnSearch" class="btn btn-primary dda-pageheading">Search</button>
