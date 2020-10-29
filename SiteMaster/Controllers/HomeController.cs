@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Service.IApplicationService;
 using SiteMaster.Filters;
 using SiteMaster.Models;
 using System.Diagnostics;
@@ -7,12 +8,7 @@ namespace SiteMaster.Controllers
 {
     [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
-    {        
-        public HomeController()
-        {
-
-        }
-
+    {
         public IActionResult Index()
         {
             return View();
@@ -21,6 +17,11 @@ namespace SiteMaster.Controllers
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            return SignOut("Cookies", "oidc");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
