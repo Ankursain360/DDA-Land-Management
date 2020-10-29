@@ -17,7 +17,10 @@ namespace Libraries.Model.Entity
 
         public string ItemsType { get; set; }
         public byte IsActive { get; set; }
-      
+       // public virtual ICollection<Fixingdemolition> Fixingdemolition { get; set; }
+        public virtual ICollection<Fixingprogram> Fixingprogram { get; set; }
+
+
 
     }
 }

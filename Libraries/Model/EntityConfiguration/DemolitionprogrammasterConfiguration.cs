@@ -11,7 +11,7 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Demolitionprogram> builder)
         {
-            builder.ToTable("demolitionprogrammaster", "lms");
+            builder.ToTable("demolitionprogram", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 

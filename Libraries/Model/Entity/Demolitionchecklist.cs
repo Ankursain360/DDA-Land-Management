@@ -12,11 +12,11 @@ namespace Libraries.Model.Entity
    public partial class Demolitionchecklist : AuditableEntity<int>
     {
 
-        public Demolitionchecklist()
-        {
-            Demolitionprogrammasterdetails = new HashSet<Demolitionprogram>();
-            Demolitiondocumentdetails = new HashSet<Demolitiondocument>();
-        }
+
+        //public Demolitionchecklist()
+        //{
+        //    Fixingchecklist = new HashSet<Fixingchecklist>();
+        //}
 
 
 
@@ -32,9 +32,11 @@ namespace Libraries.Model.Entity
 
 
 
-        public virtual ICollection<Demolitionprogram> Demolitionprogrammasterdetails { get; set; }
-        public virtual ICollection<Demolitiondocument> Demolitiondocumentdetails { get; set; }
+        // public virtual ICollection<Demolitionprogram> Demolitionprogrammasterdetails { get; set; }
+        // public virtual ICollection<Demolitiondocument> Demolitiondocumentdetails { get; set; }
+        //public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
 
+        public ICollection<Fixingchecklist> Fixingchecklist { get; set; }
 
 
     }

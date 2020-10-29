@@ -172,5 +172,11 @@
     "inputFiles": [
       "wwwroot/js/encroachmentreportcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fixingdemolitionindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/fixingdemolitionindex.js"
+    ]
   }
 ]

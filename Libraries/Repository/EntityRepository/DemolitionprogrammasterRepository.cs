@@ -22,12 +22,12 @@ namespace Repository.EntityRepository
 
         public async Task<List<Demolitionprogram>> GetDemolitionprogrammaster()
         {
-            return await _dbContext.Demolitionprogrammaster.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demolitionprogram.Where(x => x.IsActive == 1).ToListAsync();
         }
 
         public async Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
         {
-            return await _dbContext.Demolitionprogrammaster.Where(x => x.IsActive == 1).GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
+            return await _dbContext.Demolitionprogram.Where(x => x.IsActive == 1).GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
         }
 
 

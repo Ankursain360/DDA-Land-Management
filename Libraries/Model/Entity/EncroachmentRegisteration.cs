@@ -14,6 +14,8 @@ namespace Libraries.Model.Entity
 
         public EncroachmentRegisteration()
         {
+            Fixingdemolition = new HashSet<Fixingdemolition>();
+
             DetailsOfEncroachment = new HashSet<DetailsOfEncroachment>();
             EncroachmentFirFileDetails = new HashSet<EncroachmentFirFileDetails>();
             EncroachmentLocationMapFileDetails = new HashSet<EncroachmentLocationMapFileDetails>();
@@ -95,5 +97,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         [Required]
         public List<string> ReferenceNoOnLocation { get; set; }
+        public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
+       
+
     }
 }

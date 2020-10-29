@@ -8,12 +8,22 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IAnnexureARepository : IGenericRepository<Demolitionchecklist>
+    public interface IAnnexureARepository : IGenericRepository<Fixingdemolition>
     {
         Task<List<Demolitionchecklist>> GetDemolitionchecklist();
+       Task<List<Demolitionprogram>> GetDemolitionprogram();
+        Task<List<Fixingdemolition>> GetFixingdemolition(int id);
         Task<List<Demolitiondocument>> GetDemolitiondocument();
-        Task<List<Fixingdemolition>> GetFixingdemolition(int encroachmentId);
-        Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition);
+
+         Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
+
+        Task<bool> Savefixingchecklist(Fixingchecklist fixingchecklist);
+
+
+        Task<List<Fixingchecklist>> Getfixingchecklist(int fixingdemolitionId);
+
+        Task<List<Fixingprogram>> Getfixingprogram(int fixingdemolitionId);
+        Task<List<Fixingdocument>> Getfixingdocument(int fixingdemolitionId);
 
 
     }
