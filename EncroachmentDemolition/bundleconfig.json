@@ -174,9 +174,27 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/fixingdemolitionindex.min.js",
+    "outputFileName": "wwwroot/js/DemolitionstructuredetailsCreate.min.js",
     "inputFiles": [
-      "wwwroot/js/fixingdemolitionindex.js"
+      "wwwroot/js/DemolitionstructuredetailsCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemolitionstructuredetailsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemolitionstructuredetailsIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/DemolitionstructuredetailsView.min.js",
+    "inputFiles": [
+      "wwwroot/js/DemolitionstructuredetailsView.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/inspectionencroachmentregisterperiodreport.min.js",
+    "inputFiles": [
+      "wwwroot/js/inspectionencroachmentregisterperiodreport.js"
     ]
   }
 ]

@@ -8,6 +8,12 @@ $(document).ready(function () {
 		placeholder: "Select",
 		allowClear: true
 	});
+	function callSelect2() {
+		$("select").select2({
+			placeholder: "Select",
+			allowClear: true
+		});
+	}
 	if ($("form").is("[disabled]")) {
 		if ($("form").attr('disabled') == 'disabled') {
 			$('input').attr('disabled', 'disabled');
@@ -65,6 +71,8 @@ $(document).ready(function () {
 		};
 	});
 });
+
+
 function ValidateForm() {
 	var isFormValid = true;
 	$("form input,select,textarea").each(function () {

@@ -1,31 +1,50 @@
 ﻿
 $(document).ready(function () {
     var value = $('#Boundary option:selected').val();
-    if (value == 1) {
-        $('#divBoundaryRemarks').show();
+    if (value == 2) {
+        $('#divBoundarySelection').hide();
     }
+    else {
+        $('#divBoundarySelection').show();
+    }
+
 
     var value = $('#PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
-        $('#divPlannedLand').show();
+        $('#DivLandUse').show();
+        $('#divPlannedSelection').show();
+        $('#divUnplannedSelection').hide();
+        $("#divLayoutPlan").show();
+        callSelect2();
     }
     else {
-        $('#divPlannedLand').hide();
+        $('#DivLandUse').hide();
+        $('#divPlannedSelection').hide();
+        $('#divUnplannedSelection').show();
+        $("#divLayoutPlan").hide();
     }
 
     var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 1) {
-        $("#EncraochmentDetails").attr("disabled", "disabled");
-        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
-        $("#Encroached").attr("disabled", "disabled");
-        $("#Encroached").removeAttr("disabled", "disabled");
-        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
-        $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
+        $('#divEncroachmentYesSelection').show();
+        $('#divEncroachmentDetails').show();
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+        //$("#EncraochmentDetails").attr("disabled", "disabled");
+        //$("#EncraochmentDetails").removeAttr("disabled", "disabled");
+        //$("#Encroached").attr("disabled", "disabled");
+        //$("#Encroached").removeAttr("disabled", "disabled");
+        //$("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        //$("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
     else {
-        $("#EncraochmentDetails").attr("disabled", "disabled");
-        $("#Encroached").attr("disabled", "disabled");
-        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        $('#divEncroachmentYesSelection').hide();
+        $('#divEncroachmentDetails').hide();
+        //$("#EncraochmentDetails").attr("disabled", "disabled");
+        //$("#Encroached").attr("disabled", "disabled");
+        //$("#BuiltupEncroachmentArea").attr("disabled", "disabled");
     }
 
     var value = $('#BuiltUp option:selected').val();
@@ -38,17 +57,19 @@ $(document).ready(function () {
 
     var value = $('#LitigationStatus option:selected').val();
     if (value == 1) {
-        $("#divLitigationStatus").show();
+        $("#divLitigationStatusSelection").show();
+    }
+    else {
+        $('#divLitigationStatusSelection').hide();
     }
 
-    var value = $('#LayoutPlan option:selected').val();
-    if (value == 1) {
-        $("#divLayoutPlan").show();
-    }
-
+    
     var value = $('#GeoReferencing option:selected').val();
     if (value == 1) {
-        $("#divGEOReferencing").show();
+        $("#divGEOReferencingSelection").show();
+    }
+    else {
+        $('#divGEOReferencingSelection').hide();
     }
 
     ///*characters Calculation for Disposal comments */
@@ -105,14 +126,15 @@ $(document).ready(function () {
 
 
 $('#Boundary').change(function () {
+    debugger;
     var value = $('#Boundary option:selected').val();
-    if (value == 0) {
+    if (value == 2) {
         $('#BoundaryRemarks').val('');
-        $('#divBoundaryRemarks').hide();
+        $('#divBoundarySelection').hide();
     }
     else {
         $('#BoundaryRemarks').val('');
-        $('#divBoundaryRemarks').show();
+        $('#divBoundarySelection').show();
     }
 });
 
@@ -130,32 +152,15 @@ $('#BuiltUp').change(function () {
     }
 });
 
-
-
-$('#LayoutPlan').change(function () {
-    var value = $('#LayoutPlan option:selected').val();
-    if (value == 0) {
-        $('#LayoutFileName').val('');
-        $("#divLayoutPlan").hide();
-    }
-    else {
-        $('#LayoutFileName').val('');
-        $("#divLayoutPlan").show();
-    }
-});
-
-
-
-
 $('#LitigationStatus').change(function () {
     var value = $('#LitigationStatus option:selected').val();
     if (value == 0) {
         $('#LitigationStatusRemarks').val('');
-        $("#divLitigationStatus").hide();
+        $("#divLitigationStatusSelection").hide();
     }
     else {
         $('#LitigationStatusRemarks').val('');
-        $("#divLitigationStatus").show();
+        $("#divLitigationStatusSelection").show();
     }
 });
 
@@ -165,11 +170,11 @@ $('#GeoReferencing').change(function () {
     var value = $('#GeoReferencing option:selected').val();
     if (value == 0) {
         $('#GeoFileName').val('');
-        $("#divGEOReferencing").hide();
+        $("#divGEOReferencingSelection").hide();
     }
     else {
         $('#GeoFileName').val('');
-        $("#divGEOReferencing").show();
+        $("#divGEOReferencingSelection").show();
     }
 });
 
@@ -178,22 +183,27 @@ $('#GeoReferencing').change(function () {
 $('#EncroachmentStatusId').change(function () {
     var value = $('#EncroachmentStatusId option:selected').val();
     if (value == 0) {
-        $('#EncraochmentDetails').val('');
-        $("#EncraochmentDetails").attr("disabled", "disabled");
-        $('#Encroached').val('');
-        $("#Encroached").attr("disabled", "disabled");
-        $('#BuiltupEncroachmentArea').val('');
-        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        $('#divEncroachmentYesSelection').hide();
+        $('#divEncroachmentDetails').hide();
+        //$('#EncraochmentDetails').val('');
+        //$("#EncraochmentDetails").attr("disabled", "disabled");
+        //$('#Encroached').val('');
+        //$("#Encroached").attr("disabled", "disabled");
+        //$('#BuiltupEncroachmentArea').val('');
+        //$("#BuiltupEncroachmentArea").attr("disabled", "disabled");
     }
     else {
-        $('#EncraochmentDetails').val('');
-        $("#EncraochmentDetails").removeAttr("disabled", "disabled");
-        $('#Encroached').val('');
-        $("#Encroached").attr("disabled", "disabled");
-        $("#Encroached").removeAttr("disabled", "disabled");
-        $('#BuiltupEncroachmentArea').val('');
-        $("#BuiltupEncroachmentArea").attr("disabled", "disabled");
-        $("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
+        $('#divEncroachmentYesSelection').show();
+        $('#divEncroachmentDetails').show();
+        callSelect2();
+        //$('#EncraochmentDetails').val('');
+        //$("#EncraochmentDetails").removeAttr("disabled", "disabled");
+        //$('#Encroached').val('');
+        //$("#Encroached").attr("disabled", "disabled");
+        //$("#Encroached").removeAttr("disabled", "disabled");
+        //$('#BuiltupEncroachmentArea').val('');
+        //$("#BuiltupEncroachmentArea").attr("disabled", "disabled");
+        //$("#BuiltupEncroachmentArea").removeAttr("disabled", "disabled");
     }
 });
 
@@ -203,10 +213,18 @@ $('#EncroachmentStatusId').change(function () {
 $('#PlannedUnplannedLand').change(function () {
     var value = $('#PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
-        $('#divPlannedLand').show();
+        $('#DivLandUse').show();
+        $('#divPlannedSelection').show();
+        $("#divLayoutPlan").show();
+        $('#divUnplannedSelection').hide();
+        callSelect2();
     }
     else {
-        $('#divPlannedLand').hide();
+        $('#DivLandUse').hide();
+        $('#divPlannedSelection').hide();
+        $("#divLayoutPlan").hide();
+        $('#divUnplannedSelection').show();
+        callSelect2();
     }
 });
 
@@ -499,4 +517,11 @@ function ComapareTotalArea(element) {
     }
 
     return isFormValid;
+}
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
 }

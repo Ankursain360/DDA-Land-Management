@@ -2,7 +2,7 @@ using System;
 
 namespace Libraries.Model.Common
 {
-    public class AuditableEntity<T> : Entity<T>, IAuditableEntity
+    public class AuditableEntity<T> : Entity<T>
     {
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }

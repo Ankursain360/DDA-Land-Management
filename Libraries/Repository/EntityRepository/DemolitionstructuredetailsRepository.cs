@@ -27,7 +27,7 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-
+        
 
         public async Task<bool> DeleteDemolitionstructureafterdemolitionphotofiledetails(int Id)
         {
@@ -99,7 +99,19 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model)
         {
-            return await _dbContext.Demolitionstructuredetails.Include(x => x.Locality).Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
+            return await _dbContext.Demolitionstructuredetails.Include(x => new { x.Locality, x.Zone, x.Department, x.Division }).Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
+        }
+        public async Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model)
+        {
+            try
+            {
+                return await _dbContext.Demolitionstructuredetails.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Where(x => x.IsActive == 1).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         public async Task<bool> SaveDemolitionstructure(Demolitionstructure demolitionstructure)
@@ -133,13 +145,17 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
 
-        public async Task<List<Structure>> GetStructure()
+        public async Task<List<Demolitionstructure>> GetStructure()
         {
-            return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demolitionstructure.Include(x=>x.Structure).Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
         {
             return await _dbContext.Demolitionstructure.Where(x => x.DemolitionStructureDetailsId == demostructuredId && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Structure>> GetMasterStructure()
+        {
+            return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
         }
     }
 }

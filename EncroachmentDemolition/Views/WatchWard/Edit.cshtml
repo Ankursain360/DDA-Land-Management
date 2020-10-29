@@ -125,12 +125,12 @@
                                     <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
                                     <br />
                                 }
-                                <input type="file" class="form-control" asp-for="ReportFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <input type="file" class="form-control" asp-for="ReportFile"  accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                 <span asp-validation-for="ReportFile" class="text-danger"></span>
                             }
                             else
                             {
-                                <input type="file" class="form-control" asp-for="ReportFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <input type="file" class="form-control" asp-for="ReportFile"  accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                                 <span asp-validation-for="ReportFile" class="text-danger"></span>
                             }
                         }

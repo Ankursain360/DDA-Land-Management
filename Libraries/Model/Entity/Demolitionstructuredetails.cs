@@ -52,6 +52,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Structure> Structure { get; set; }
         [NotMapped]
+        public List<Demolitionstructure> DemolitionStructure { get; set; }
+        [NotMapped]
         public List<decimal> NoOfStructrure { get; set; }
         [NotMapped]
         public List<string> NameOfStructure { get; set; }

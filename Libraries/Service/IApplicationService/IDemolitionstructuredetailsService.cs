@@ -19,6 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);    //To Delete Data 
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model);
+        Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Demolitionstructuredetails>> GetAllDemolitionstructuredetails();
 
@@ -33,8 +34,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId);
         Task<Demolitionstructureafterdemolitionphotofiledetails> GetDemolitionstructureafterdemolitionphotofiledetails(int Id);
         Task<Demolitionstructurebeforedemolitionphotofiledetails> GetDemolitionstructurebeforedemolitionphotofiledetails(int Id);
-        Task<List<Structure>> GetStructure();
-        //Task<List<Demolitionstructure>> GetDemolitionstructure();
+        Task<List<Demolitionstructure>> GetStructure();
+        Task<List<Structure>> GetMasterStructure();
 
         //Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
         //Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);

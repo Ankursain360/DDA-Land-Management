@@ -11,5 +11,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int id);
         Task<bool> Create(Currentstatusoflandhistory model);
-    }
+
+        Task<Currentstatusoflandhistory> FetchSingleResult(int id);
+    }  
 }

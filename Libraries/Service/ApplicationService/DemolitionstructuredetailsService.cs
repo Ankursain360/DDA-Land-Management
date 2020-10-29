@@ -63,6 +63,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetPagedDemolitionstructuredetails(model);
         }
+        public async Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model)
+        {
+            return await _demolitionstructuredetailsRepository.GetPagedDemolitionstructuredetailsList(model);
+        }
         public async Task<bool> Update(int id, Demolitionstructuredetails demolitionstructuredetails)
         {
             var result = await _demolitionstructuredetailsRepository.FindBy(a => a.Id == id);
@@ -93,6 +97,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Demolitionstructuredetails demolitionstructuredetails)
         {
             demolitionstructuredetails.CreatedBy = 1;
+            demolitionstructuredetails.IsActive = 1;
             demolitionstructuredetails.CreatedDate = DateTime.Now;
             _demolitionstructuredetailsRepository.Add(demolitionstructuredetails);
             return await _unitOfWork.CommitAsync() > 0;
@@ -156,13 +161,13 @@ namespace Libraries.Service.ApplicationService
             return await _demolitionstructuredetailsRepository.GetDemolitionstructurebeforedemolitionphotofiledetails(Id);
         }
 
-        public async Task<List<Structure>> GetStructure()
+        public async Task<List<Demolitionstructure>> GetStructure()
         {
             return await _demolitionstructuredetailsRepository.GetStructure();
         }
-        //public async Task<List<Demolitionstructure>> GetDemolitionstructure()
-        //{
-        //    return await _demolitionstructuredetailsRepository.GetDemolitionstructure();
-        //}
+        public async Task<List<Structure>> GetMasterStructure()
+        {
+            return await _demolitionstructuredetailsRepository.GetMasterStructure();
+        }
     }
 }

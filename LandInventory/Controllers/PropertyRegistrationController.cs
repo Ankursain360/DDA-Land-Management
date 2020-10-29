@@ -19,14 +19,14 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
 
-namespace SiteMaster.Controllers
+namespace LandInventory.Controllers
 {
-    public class PropertyRegistrationController : Controller
+    public class PropertyRegistrationController : BaseController
     {
         //Let suppose user = 1 can Create, user =2 can validate , user =3 can delete , and untill validate 1,2 can only look index
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
-        int UserId = 2;
+       // int userId =  SiteContext.UserId;
         string targetPathLayout = "";
         string targetPathGeo = "";
         string targetPathHandedOver = "";
@@ -39,18 +39,21 @@ namespace SiteMaster.Controllers
         }
         //public async Task<IActionResult> Index()
         //{
-        //    var result = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+        //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
         //    return View(result);
         //}
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             return View();
         }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model,  UserId);
+            int userId = SiteContext.UserId;
+            var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model,  userId);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Propertyregistration propertyregistration)
@@ -249,7 +252,7 @@ namespace SiteMaster.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     return View("Index", result1);
                 }
                 else
@@ -459,14 +462,14 @@ namespace SiteMaster.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     return View("Index", result1);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     //return View(propertyregistration);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     return View("Index", result1);
 
                 }
@@ -477,29 +480,29 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-            int UserId = 3;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(UserId);
+            int userId = SiteContext.UserId;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
             
-            if (UserId == 3)
+            if (userId == 3)
             {
                 var result = await _propertyregistrationService.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                     return View("Index", result1);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                     return View("Index", result1);
                 }
             }
             else
             {
                 ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                 return View("Index", result1);
             }
 
@@ -532,32 +535,32 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)  
         {
             Deletedproperty model = new Deletedproperty();
-            int UserId = 3;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(UserId);
+            int userId = 3;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
 
-            if (UserId == 3)
+            if (userId == 3)
             {
                 model.Reason = propertyregistration.Reason;
                 var result = await _propertyregistrationService.Delete(id);
                 var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
                 if (result == true)
                 {
-                    UserId = 2;
+                    userId = 2;
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                     return View("Index", result1);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                     return View("Index", result1);
                 }
             }
             else
             {
                 ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration(UserId);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
                 return View("Index", result1);
             }
 
@@ -683,6 +686,55 @@ namespace SiteMaster.Controllers
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
+
+        public async Task<IActionResult> Dispose(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            Data.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
+        {
+            Deletedproperty model = new Deletedproperty();
+            int userId = SiteContext.UserId;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
+
+            if (userId == 3)
+            {
+                model.Reason = propertyregistration.Reason;
+                var result = await _propertyregistrationService.Delete(id);
+                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+                if (result == true)
+                {
+                    userId = 2;
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                    return View("Index", result1);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                    return View("Index", result1);
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                return View("Index", result1);
+            }
+
+
+        }
+
+        
     }
 
 }

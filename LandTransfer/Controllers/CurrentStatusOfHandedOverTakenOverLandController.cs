@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Dto.Search;
@@ -130,6 +131,31 @@ namespace LandTransfer.Controllers
         {
             DivisionId = DivisionId ?? 0;
             return Json(await _landTransferService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
+        }
+
+        // **************** download file **********************
+
+        public async Task<IActionResult> DownloadSurveyReportFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _currentstatusoflandhistoryService.FetchSingleResult(Id);
+
+               string filename = Data.SurveyReportFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadActionReportFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _currentstatusoflandhistoryService.FetchSingleResult(Id);
+            string filename = Data.ActionReportFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> Download(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _landTransferService.FetchSingleResult(Id);
+            string filename = Data.CopyofOrderDocPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }

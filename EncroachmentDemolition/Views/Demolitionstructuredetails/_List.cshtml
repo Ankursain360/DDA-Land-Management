@@ -1,4 +1,5 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demolitionstructuredetails>
+﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demolitionstructuredetails>*@
+@model IEnumerable<Libraries.Model.Entity.Demolitionstructuredetails>
 @{int rowNo = 0;}
 <table class="table table-responsive table-bordered table-card">
     <thead class="thead">
@@ -21,7 +22,8 @@
         </tr>
     </thead>
     <tbody class="tbody">
-        @foreach (var item in Model.Results)
+        @*@foreach (var item in Model.Results)*@
+        @foreach (var item in Model)
         {
         <tr>
             <td>@(rowNo += 1)</td>
@@ -48,4 +50,4 @@
     </tbody>
 
 </table>
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

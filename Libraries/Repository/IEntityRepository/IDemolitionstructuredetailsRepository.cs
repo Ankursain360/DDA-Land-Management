@@ -31,9 +31,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionstructuredetails(DemolitionstructuredetailsDto model);
+        Task<List<Demolitionstructuredetails>> GetPagedDemolitionstructuredetailsList(DemolitionstructuredetailsDto model);
         Task<List<Locality>> GetAllLocalityList(int localityId);
-        Task<List<Structure>> GetStructure();
-        //Task<List<Demolitionstructure>> GetDemolitionstructure();
-        
+        Task<List<Demolitionstructure>> GetStructure();
+        Task<List<Structure>> GetMasterStructure();
+
     }
 }
