@@ -684,6 +684,55 @@ namespace LandInventory.Controllers
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
+
+        public async Task<IActionResult> Dispose(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            Data.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
+        {
+            Deletedproperty model = new Deletedproperty();
+            int userId = SiteContext.UserId;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
+
+            if (userId == 3)
+            {
+                model.Reason = propertyregistration.Reason;
+                var result = await _propertyregistrationService.Delete(id);
+                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+                if (result == true)
+                {
+                    userId = 2;
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                    return View("Index", result1);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                    return View("Index", result1);
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+                return View("Index", result1);
+            }
+
+
+        }
+
+        
     }
 
 }
