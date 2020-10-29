@@ -23,38 +23,13 @@
             @*<form>*@
             <div class="row">
                 <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label>
-                    <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                    <label class="control-label lb-sm">Inventoried In</label>
+                    <select class="form-control dda-dropdown">
                         <option value="0">All</option>
+                        <option value="1">VLMS</option>
+                        <option value="2">Used</option>
                     </select>
-                </div>
-
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
-                    <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
-                        <option value="0">All</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
-                    <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
-                        <option value="0">All</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
-                    <select class="form-control dda-dropdown" asp-for="DivisionId">
-                        <option value="0">All</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label>
-                    <select class="form-control dda-dropdown" asp-for="LocalityId">
-                        <option value="0">All</option>
-                    </select>
+                    <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
@@ -63,9 +38,125 @@
                         <option value="Planned Land">Planned Land</option>
                         <option value="Unplanned Land">Unplanned Land</option>
                     </select>
+                    <span asp-validation-for="PlannedUnplannedLand" class="text-danger lb-sm"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label>
+                    <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
+                </div>
 
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                    <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);" >
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
+                    <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" >
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
+                    <select class="form-control dda-dropdown" asp-for="DivisionId" >
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
+                </div>
+                <div id="divUnplannedSelection" style="display:none;">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId">
+                            <option value="0">All</option>
+                        </select>
+                        <span asp-validation-for="LocalityId" class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Khasra No</label>
+                        <input asp-for="KhasraNo" class="form-control" />
+                        <span asp-validation-for="KhasraNo" class="text-danger lb-sm"></span>
+                    </div>
+                </div>
+                <div id="divPlannedSelection">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Colony</label>
+                        <input type="text" class="form-control" />
+                        <span class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Sector</label>
+                        <input  class="form-control" />
+                        <span  class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Block</label>
+                        <input type="text" class="form-control" />
+                        <span class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Pocket</label>
+                        <input  class="form-control" />
+                        <span  class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm">Plot No.</label>
+                        <input  class="form-control" />
+                        <span class="text-danger lb-sm"></span>
+                    </div>
                 </div>
             </div>
+            @*<div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label>
+                        <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
+                        <select class="form-control dda-dropdown" asp-for="DivisionId">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label>
+                        <select class="form-control dda-dropdown" asp-for="LocalityId">
+                            <option value="0">All</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
+                        <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
+                            <option value="0">All</option>
+                            <option value="Planned Land">Planned Land</option>
+                            <option value="Unplanned Land">Unplanned Land</option>
+                        </select>
+
+                    </div>
+                </div>*@
 
             <div class="row">
                 <div class="form-group col-md-4">

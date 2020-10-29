@@ -42,8 +42,10 @@ namespace LandInventory.Controllers
         //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
         //    return View(result);
         //}
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             return View();
         }
 
