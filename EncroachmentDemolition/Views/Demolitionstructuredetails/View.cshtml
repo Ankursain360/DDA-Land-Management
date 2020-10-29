@@ -1,7 +1,7 @@
 ﻿@model Libraries.Model.Entity.Demolitionstructuredetails
-@*@{int FirFile = 0;}
-@{int LocationMapFile = 0;}
-@{int PhotoFile = 0;}*@
+@{ int recNo = 0;}
+@{int AfterPhotoFile = 0;}
+@{int BeforePhotoFile = 0;}
 
 <div class="row">
     <div class="col-sm-12">
@@ -116,9 +116,26 @@
                         <span asp-validation-for="StartOfDemolitionActionDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Photographs Before Demolition</label>
-                        <input type="file" class="form-control" asp-for="BeforePhotoFile" id="PhotoFile" multiple />
-                        <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+
+                        <label class="control-label lb-sm">Photographs Before Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
+                        @{
+                            if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
+                                {
+                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
+                                    <br />
+                                }
+                                <input type="file" class="form-control" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input type="file" class="form-control" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+                            }
+                        }
                     </div>
                 </div>
 
@@ -129,9 +146,25 @@
                         <span asp-validation-for="EndOfDemolitionActionDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Photographs After Demolition</label>
-                        <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" multiple />
-                        <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                        <label class="control-label lb-sm">Photographs After Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
+                        @{
+                            if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
+                                {
+                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+                                    <br />
+                                }
+                                <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                            }
+                        }
                     </div>
                 </div>
 
@@ -145,49 +178,21 @@
                                         <th>Sr.No</th>
                                         <th>Name of Structure</th>
                                         <th>No of Structure</th>
-
-                                        <th>Operation</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tbl_posts_body">
+                                <tbody>
+                                    @foreach (var item in Model.DemolitionStructure)
+                                    {
+                                        <tr>
+                                            <td>@(recNo += 1)</td>
+                                            <td>@(item.Structure.Name)</td>
+                                            <td>
+                                                <input class="form-control" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" />
+                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                                            </td>
+                                        </tr>
+                                    }
                                 </tbody>
-                                <!--<tbody id="add">
-                                    <tr id="">
-                                        <td style="text-align:center;"><span class="sn">1</span></td>
-
-                                        <td>
-                                            <select asp-for="NoOfStructrure" class="form-control">
-                                                <option value="Select">Select</option>
-                                                <option value="Kachcha">Kachcha</option>
-                                                <option value="Pakka">Pakka</option>
-                                                <option value="Under Construction">Under Construction</option>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <input type="text" asp-for="NameOfStructure" class="form-control" id="NameOfStructure" />
-                                        </td>-->
-
-                                        @*<td>
-                                    <input type="text" asp-for="AreaApprox" class="form-control numbers" id="AreaApprox" />
-                                </td>
-                                <td>
-                                    <input type="text" asp-for="Type" class="form-control" id="Type" />
-                                </td>
-                                <td>
-                                    <input asp-for="DateOfEncroachment" type="date" class="form-control" id="DateOfEncroachment" />
-                                </td>
-                                <td>
-                                    <input asp-for="ReferenceNoOnLocation" type="text" class="form-control number" id="ReferenceNoOnLocation" />
-                                </td>
-                                <td>
-                                    <input asp-for="CountOfStructure" type="text" class="form-control onlynumbers" id="CountOfStructure" />
-                                </td>*@
-                                        <!--<td>
-                                            <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;"><i class="fa fa-trash"></i></a>
-                                            <a class="btn dda-pageheading add-record" data-added="0"><i class="fa fa-plus"></i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>-->
                             </table>
                         </div>
                     </div>
@@ -218,8 +223,8 @@
     </div>
 </div>
 <environment include="Development">
-    <script src="~/js/EncroachmentRegisterationView.js"></script>
+    <script src="~/js/DemolitionstructuredetailsView.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/EncroachmentRegisterationView.min.js" asp-append-version="true"></script>
+    <script src="~/js/DemolitionstructuredetailsView.min.js" asp-append-version="true"></script>
 </environment>

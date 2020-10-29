@@ -161,13 +161,13 @@ namespace Libraries.Service.ApplicationService
             return await _demolitionstructuredetailsRepository.GetDemolitionstructurebeforedemolitionphotofiledetails(Id);
         }
 
-        public async Task<List<Structure>> GetStructure()
+        public async Task<List<Demolitionstructure>> GetStructure()
         {
             return await _demolitionstructuredetailsRepository.GetStructure();
         }
-        //public async Task<List<Demolitionstructure>> GetDemolitionstructure()
-        //{
-        //    return await _demolitionstructuredetailsRepository.GetDemolitionstructure();
-        //}
+        public async Task<List<Structure>> GetMasterStructure()
+        {
+            return await _demolitionstructuredetailsRepository.GetMasterStructure();
+        }
     }
 }

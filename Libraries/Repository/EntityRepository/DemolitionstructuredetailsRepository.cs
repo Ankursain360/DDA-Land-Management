@@ -145,13 +145,17 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
 
-        public async Task<List<Structure>> GetStructure()
+        public async Task<List<Demolitionstructure>> GetStructure()
         {
-            return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demolitionstructure.Include(x=>x.Structure).Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Demolitionstructure>> GetDemolitionstructure(int demostructuredId)
         {
             return await _dbContext.Demolitionstructure.Where(x => x.DemolitionStructureDetailsId == demostructuredId && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Structure>> GetMasterStructure()
+        {
+            return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
         }
     }
 }
