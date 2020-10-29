@@ -1,4 +1,20 @@
-﻿function onChangeDepartment(id) {
+﻿function onChangeLandStatus(status) {
+    if (status == 'DDA Land') {
+        $("#divForLandStatus").show();
+    }
+    else {
+        $("#divForLandStatus").hide();
+    }
+};
+function onChangePossationStatus(status) {
+    if (status == 'Yes') {
+        $("#divPossessionGroup").show();
+    }
+    else {
+        $("#divPossessionGroup").hide();
+    }
+};
+function onChangeDepartment(id) {
     HttpGet(`/EncroachmentRegister/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {

@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,9 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Model;
 using LandInventory.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Http.Features;
+using Service.Common;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace LandInventory
 {
@@ -41,6 +45,19 @@ namespace LandInventory
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+            else
+            {
+                services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -51,57 +68,35 @@ namespace LandInventory
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            //services.AddDbContext<DataContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:LocalConnectionString"]));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            // services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-
-            // services.AddMvc()
-            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddSession();
-            // services.AddMvc();
-            // services.AddMvc().AddSessionStateTempDataProvider();
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-            //services.AddMvc().AddViewOptions(options =>
-            //{
-            //    //   options.SuppressTempDataAttributePrefix = true;
-            //});
-
-            //services.AddRazorPages().AddRazorRuntimeCompilation();
-
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
-            // services.AddScoped<ILogger, Logger>();
-            // Add Session services.
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
-
-            services.Configure<FormOptions>(x =>
-            {
-                x.ValueLengthLimit = int.MaxValue;
-                x.MultipartBodyLengthLimit = int.MaxValue; // if don't set default value is: 128 MB
-                x.MultipartHeadersLengthLimit = int.MaxValue;
-            });
 
 
             services.RegisterDependency();
+            services.AddAutoMapperSetup();
 
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
             {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
             {
-                services.AddControllersWithViews();
-            }
-#endif
+                options.SignInScheme = "Cookies";
+                options.Authority = "https://localhost:5001";
+                //  options.Authority = "http://49.50.87.108:8493/";
+                options.RequireHttpsMetadata = false;
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -110,6 +105,7 @@ namespace LandInventory
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -119,19 +115,13 @@ namespace LandInventory
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSession();
-            // app.UseMvc();
             app.UseCookiePolicy();
-            // app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Login}/{action=Create}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
         }
     }

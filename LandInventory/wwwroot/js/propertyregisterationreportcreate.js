@@ -3,6 +3,28 @@ var currentPageSize = 10;
 $(document).ready(function () {
 
     // GetDetails(currentPageNumber, currentPageSize);
+    var value = $('#PlannedUnplannedLand').val();
+    if (value == 'Planned Land') {
+        $('#DivLandUse').show();
+        $('#divPlannedSelection').show();
+        $("#divLayoutPlan").show();
+        $('#divUnplannedSelection').hide();
+        callSelect2();
+    }
+    else if (value == 'Unplanned Land') {
+        $('#DivLandUse').hide();
+        $('#divPlannedSelection').hide();
+        $("#divLayoutPlan").hide();
+        $('#divUnplannedSelection').show();
+        callSelect2();
+    }
+    else {
+        $('#DivLandUse').show();
+        $('#divPlannedSelection').show();
+        $("#divLayoutPlan").show();
+        $('#divUnplannedSelection').show();
+        callSelect2();
+    }
 
 
     $("#btnGenerate").click(function () {
@@ -12,6 +34,32 @@ $(document).ready(function () {
             $('#LoadReportView').html("");
             $('#LoadReportView').html(response);
         });
+    });
+
+
+    $('#PlannedUnplannedLand').change(function () {
+        var value = $('#PlannedUnplannedLand').val();
+        if (value == 'Planned Land') {
+            $('#DivLandUse').show();
+            $('#divPlannedSelection').show();
+            $("#divLayoutPlan").show();
+            $('#divUnplannedSelection').hide();
+            callSelect2();
+        }
+        else if (value == 'Unplanned Land') {
+            $('#DivLandUse').hide();
+            $('#divPlannedSelection').hide();
+            $("#divLayoutPlan").hide();
+            $('#divUnplannedSelection').show();
+            callSelect2();
+        }
+        else {
+            $('#DivLandUse').show();
+            $('#divPlannedSelection').show();
+            $("#divLayoutPlan").show();
+            $('#divUnplannedSelection').show();
+            callSelect2();
+        }
     });
 
 });
@@ -63,6 +111,7 @@ function GetDetails(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
+    debugger;
     var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
     var departmentid = $('#DepartmentId option:selected').val();
     var zoneId = $('#ZoneId option:selected').val();
@@ -101,4 +150,12 @@ function onPaging(pageNo) {
 function onChangePageSize(pageSize) {
     GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
+}
+
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
 }

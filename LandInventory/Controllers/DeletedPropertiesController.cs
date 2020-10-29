@@ -71,6 +71,41 @@ namespace LandInventory.Controllers
                 return PartialView();
             }
         }
+
+        async Task BindDropDownInvnetory(Propertyregistration propertyregistration)
+        {
+            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
+            //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+            propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+            propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
+            propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
+            //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+        }
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            ViewBag.LayoutDocView = Data.LayoutFilePath;
+            ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            await BindDropDownInvnetory(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
     }
 }
 

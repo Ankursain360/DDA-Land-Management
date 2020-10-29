@@ -15,28 +15,33 @@
                 <th rowspan="2">Area (In SQM) </th>
                 <th rowspan="2">delete Reason</th>
                 <th rowspan="2"> Deleted On</th>
+                <th rowspan="2">View Details</th>
                 <th rowspan="2">Restore</th>
             </tr>
         </thead>
         <tbody class="tbody">
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-                    <td>@item.Department.Name</td>
-                    <td>@item.Zone.Name</td>
-                    <td>@item.Division.Name</td>
-                    <td>@item.Locality.Name</td>
-                    <td>@item.KhasraNo</td>
-                    <td>@item.Palandmark</td>
-                    <td>@item.PrimaryListNo</td>
-                    <td>@item.TotalArea</td>
-                    <td>@item.Deletedproperty.Reason</td>
-                    <td>@item.Deletedproperty.DeletedDate</td>
-                    <td>
-                        <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-                    </td>
-                </tr>
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Zone.Name</td>
+                <td>@item.Division.Name</td>
+                <td>@item.Locality.Name</td>
+                <td>@item.KhasraNo</td>
+                <td>@item.Palandmark</td>
+                <td>@item.PrimaryListNo</td>
+                <td>@item.TotalArea</td>
+                <td>@item.Deletedproperty.Reason</td>
+                <td>@item.Deletedproperty.DeletedDate</td>
+                <td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>
+
+                <td>
+                    <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+                </td>
+
+
+            </tr>
             }
             @if (Model.Results.Count <= 0)
             {

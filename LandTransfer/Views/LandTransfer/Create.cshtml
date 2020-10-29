@@ -1,4 +1,5 @@
 ﻿@model Libraries.Model.Entity.Landtransfer
+@{int rowNo = 0;}
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
@@ -19,6 +20,685 @@
         <div class="panel-body">
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <a data-toggle="collapse" href="#collapseExample" id="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">Property Registration Details </h6>
+                                    <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;color:white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="collapse" id="collapseExample">
+
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Inventoried In</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown">
+                                <option value="">--Select--</option>
+                                <option value="1">VLMS</option>
+                                <option value="2">Used</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.ClassificationOfLandId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="Propertyregistration.PlannedUnplannedLand">Planned/Unplanned Land</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" asp-for="Propertyregistration.PlannedUnplannedLand">
+                                <option value="Planned Land">Planned Land</option>
+                                <option value="Unplanned Land">Unplanned Land</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.PlannedUnplannedLand" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="Propertyregistration.ClassificationOfLandId">Classification of Land</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" asp-for="Propertyregistration.ClassificationOfLandId" asp-items="@(new SelectList(Model.Propertyregistration.ClassificationOfLandList, "Id","Name"))" required="required" requiredmsg="Classification of Land is Mandatory">
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.ClassificationOfLandId" class="text-danger lb-sm"></span>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="Propertyregistration.DepartmentId">Department</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" asp-for="Propertyregistration.DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Department is Mandatory">
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.DepartmentId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
+                                @*asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"*@
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
+                            <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" required="required" requiredmsg="Division is Mandatory">
+                                @*asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))"*@
+                                <option value="">--Select--</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div id="divUnplannedSelection" style="display:none;">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.LocalityId">Locality(Village)</label>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.LocalityId">
+                                    @*asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))"*@
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.LocalityId" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Khasra No</label>
+                                <input asp-for="Propertyregistration.KhasraNo" class="form-control" limit="200" />
+                                <span asp-validation-for="Propertyregistration.KhasraNo" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div id="divPlannedSelection">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Colony</label>
+                                <input type="text" class="form-control" />
+                                <span class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Sector</label>
+                                <input asp-for="Propertyregistration.KhasraNo" class="form-control" />
+                                <span asp-validation-for="Propertyregistration.KhasraNo" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Block</label>
+                                <input type="text" class="form-control" />
+                                <span class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Pocket</label>
+                                <input asp-for="Propertyregistration.KhasraNo" class="form-control" />
+                                <span asp-validation-for="Propertyregistration.KhasraNo" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Plot No.</label>
+                                <input asp-for="Propertyregistration.KhasraNo" class="form-control" />
+                                <span asp-validation-for="Propertyregistration.KhasraNo" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Primary List No.</label>
+                            <input asp-for="Propertyregistration.PrimaryListNo" class="form-control" limit="200" />
+                            <span asp-validation-for="Propertyregistration.PrimaryListNo" class="text-danger lb-sm"></span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Address with Landmark</label>
+                            <textarea asp-for="Propertyregistration.Palandmark" class="form-control" maxlength="4000" limit="4000"></textarea>
+                            <div id="feedbackPalandmark"></div>
+                        </div>
+                    </div>
+
+
+                    <div id="DivArea">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Area</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm lb-sm">Area Unit</label>
+                                <select class="form-control dda-dropdown">
+                                    <option value="0">bigha-biswa-bishwani</option>
+                                    <option value="1">Sq Yd.</option>
+                                    <option value="2">Acre</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm lb-sm">Total Area(In bigha-biswa-bishwani/Sq Yd./Acre)</label>
+                                <input asp-for="Propertyregistration.TotalAreaInBigha" type="text" class="form-control" limit="200" />
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
+                                <input asp-for="Propertyregistration.TotalArea" value="" class="form-control numbers" required="required" requiredmsg="Total Area is Mandatory" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <span asp-validation-for="Propertyregistration.TotalArea" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+
+                        </div>
+                    </div>
+
+                    <div id="divEncroachment">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Encroached Details</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Encroachment Status</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.EncroachmentStatusId">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.EncroachmentStatusId" class="text-danger lb-sm"></span>
+                            </div>
+                            <div id="divEncroachmentYesSelection" style="display:none;">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Land</label>
+                                    <select class="form-control dda-dropdown" asp-for="Propertyregistration.EncroachmentStatusId">
+                                        <option value="0">Vacant</option>
+                                        <option value="1">Partially Vacant</option>
+                                    </select>
+                                    <span asp-validation-for="Propertyregistration.EncroachmentStatusId" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Encroched Area(in sq. mt.)</label>
+                                    <input asp-for="Propertyregistration.Encroached" value="" class="form-control numbers" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                    <span id="EncroachedValidation" asp-validation-for="Propertyregistration.Encroached" class="text-danger lb-sm"></span>
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Builtup in Encroachment Area(in sq. mt.)</label>
+                                    <input asp-for="Propertyregistration.BuiltUpEncraochmentArea" class="form-control numbers" id="BuiltupEncroachmentArea" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                    <span asp-validation-for="Propertyregistration.BuiltUpEncraochmentArea" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
+                                    <input asp-for="Propertyregistration.Vacant" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" onchange="return ComapareTotalArea(this);" />
+                                    <span asp-validation-for="Propertyregistration.Vacant" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Action On Encroachment</label>
+                                    <textarea type="text" class="form-control" id="txtTakenOverDate"></textarea>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Upload Action Taken Report(ATR)</label>
+                                    <input type="file" class="form-control" id="txtTakenOverDate" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12" id="divEncroachmentDetails" style="display:none;">
+                                <label id="l1" class="control-label lb-sm">Encroachment Details</label>
+                                <input asp-for="Propertyregistration.EncraochmentDetails" class="form-control" maxlength="4000" limit="4000" />
+                                <span asp-validation-for="Propertyregistration.EncraochmentDetails" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="divFencingBoundaryWall">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Fencing/Boundary Wall </h6>
+                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;color:white"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Boundary Wall/Fencing</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.Boundary">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.Boundary" class="text-danger lb-sm"></span>
+                            </div>
+                            <div id="divBoundarySelection" style="display:none;">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
+                                    <input type="text" class="form-control" id="txtTakenOverDate" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
+                                    <input type="text" class="form-control" id="txtTakenOverDate" />
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label id="l1" class="control-label lb-sm">Boundary Remarks</label>
+                                    <input asp-for="Propertyregistration.BoundaryRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.BoundaryRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="DivLandUse">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Land Use</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div id="divPlannedLand">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Main Land Use</label>
+                                    <select class="form-control dda-dropdown" asp-for="Propertyregistration.MainLandUseId" asp-items="@(new SelectList(Model.Propertyregistration.LandUseList, "Id","Name"))">
+                                        <option value="0">--Select--</option>
+                                    </select>
+                                    <span asp-validation-for="Propertyregistration.MainLandUseId" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Sub Use</label>
+                                    <input type="text" asp-for="Propertyregistration.SubUse" class="form-control" limit="500" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="divLitigation">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Litigation</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Litigation Status</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.LitigationStatus">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div id="divLitigationStatusSelection" style="display:none;">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Court Name</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Case No.</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Opposite Party</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Remarks</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" limit="4000" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="DivOtherDetails">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Other Details</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Built-Up</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.BuiltUp">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4" id="divBuilttype" style="display:none;">
+                                <label class="control-label lb-sm">Built-Up Remarks</label>
+                                <input asp-for="Propertyregistration.BuiltUpRemarks" class="form-control" />
+                                <span asp-validation-for="Propertyregistration.BuiltUpRemarks" class="text-danger lb-sm"></span>
+                            </div>
+
+                            <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.FileData">Upload Layout Plan</label>
+                                <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <span asp-validation-for="Propertyregistration.FileData" class="text-danger lb-sm"></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">GEO Referencing Done</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.GeoReferencing">
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
+                                </select>
+
+                            </div>
+                            <div id="divGEOReferencingSelection" style="display:none;">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm" asp-for="Propertyregistration.GeoFileData">Upload Geo Referencing</label>
+                                    <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    <span asp-validation-for="Propertyregistration.GeoFileData" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Lattitude</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Longitude</label>
+                                    <input asp-for="Propertyregistration.LitigationStatusRemarks" class="form-control" />
+                                    <span asp-validation-for="Propertyregistration.LitigationStatusRemarks" class="text-danger lb-sm"></span>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <a class="btn btn-primary dda-pageheading" style="width:auto;margin-top:15px;">Get Lat Long</a>
+                                    @*@Html.ActionLink("Get Latt Longitude", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading", style = "width:auto;" })*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="DivHandedOver">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.HandedOverDepartmentId">Department</label>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.HandedOverDepartmentId" asp-items="@(new SelectList(Model.Propertyregistration.HandOverDepartmentList, "Id","Name"))">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.HandedOverDepartmentId" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" required="required" requiredmsg="Division is Mandatory">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Name/Designation</label>
+                                <input asp-for="Propertyregistration.HandedOverName" class="form-control" limit="200" />
+                                <span asp-validation-for="Propertyregistration.HandedOverName" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Date</label>
+                                <input asp-for="Propertyregistration.HandedOverDate" class="form-control" type="date" value="" />
+                                <span asp-validation-for="Propertyregistration.HandedOverDate" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Email Id</label>
+                                <input asp-for="Propertyregistration.HandedOverEmailId" class="form-control" type="email" limit="200" />
+                                <span asp-validation-for="Propertyregistration.HandedOverEmailId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Mobile No.</label>
+                                <input asp-for="Propertyregistration.HandedOverMobileNo" class="form-control onlynumbers" maxlength="10" />
+                                <span asp-validation-for="Propertyregistration.HandedOverMobileNo" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Land Line No.</label>
+                                <input asp-for="Propertyregistration.HandedOverLandlineNo" class="form-control onlynumbers" maxlength="10" />
+                                <span asp-validation-for="Propertyregistration.HandedOverLandlineNo" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Order No. <span style="color:red">*</span></label>
+                                <input type="text" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Copy of Order <span style="color:red">*</span></label>
+                                <input type="file" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Transfer order Issue Authority <span style="color:red">*</span></label>
+                                <input type="text" class="form-control" />
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.HandedOverFileData">Document</label>
+                                <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <span asp-validation-for="Propertyregistration.HandedOverFileData" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Comments</label>
+                                <textarea asp-for="Propertyregistration.HandedOverComments" class="form-control" maxlength="4000" limit="4000"></textarea>
+                                <span asp-validation-for="Propertyregistration.HandedOverComments" class="text-danger lb-sm"></span>
+                                <div id="feedbackHandedOverComments"></div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div id="DivTakenOver">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Taken Over</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.TakenOverDepartmentId">Department</label>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.TakenOverDepartmentId" asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDepartmentList, "Id","Name"))">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.TakenOverDepartmentId" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" required="required" requiredmsg="Division is Mandatory">
+                                    <option value="">--Select--</option>
+                                </select>
+                                <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Name/Designation</label>
+                                <input asp-for="Propertyregistration.TakenOverName" class="form-control" limit="200" />
+                                <span asp-validation-for="Propertyregistration.TakenOverName" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Date</label>
+                                <input asp-for="Propertyregistration.TakenOverDate" type="date" value="" class="form-control" />
+                                <span asp-validation-for="Propertyregistration.TakenOverDate" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Email Id</label>
+                                <input asp-for="Propertyregistration.TakenOverEmailId" class="form-control" type="email" limit="200" />
+                                <span asp-validation-for="Propertyregistration.TakenOverEmailId" class="text-danger lb-sm"></span>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Mobile No.</label>
+                                <input asp-for="Propertyregistration.TakenOverMobileNo" class="form-control onlynumbers" maxlength="10" />
+                                <span asp-validation-for="Propertyregistration.TakenOverMobileNo" class="text-danger lb-sm"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm">Land Line No.</label>
+                                <input asp-for="Propertyregistration.TakenOverLandlineNo" class="form-control onlynumbers" maxlength="10" />
+                                <span asp-validation-for="Propertyregistration.TakenOverLandlineNo" class="text-danger lb-sm"></span>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.TakenOverFileData">Document</label>
+                                <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <span asp-validation-for="Propertyregistration.TakenOverFileData" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label lb-sm">Comments</label>
+                                <textarea asp-for="Propertyregistration.TakenOverComments" class="form-control" maxlength="4000" limit="4000"></textarea>
+                                <span asp-validation-for="Propertyregistration.TakenOverComments" class="text-danger lb-sm"></span>
+                                <div id="feedbackTakenOverComments"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Remarks</label>
+                            <textarea asp-for="Propertyregistration.Remarks" class="form-control" maxlength="4000" limit="4000"></textarea>
+                            <div id="feedbackRemarks"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Status</label>
+                            <select asp-for="Propertyregistration.IsActive" class="form-control dda-dropdown">
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            <span asp-validation-for="Propertyregistration.IsActive" class="text-danger lb-sm"></span>
+                        </div>
+                    </div>
+                    @{
+                        @if (ViewBag.IsValidateUser == 2)
+                        {
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label class="control-label lb-sm">Validate</label>
+                                    <input type="checkbox" asp-for="Propertyregistration.IsValidate" />
+                                </div>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+                <a data-toggle="collapse" href="#collapseExample2" id="collapse" role="button" aria-expanded="false" aria-controls="collapseExample2">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">History </h6>
+                                    <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;color:white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <div class="collapse" id="collapseExample2">
+                    <table class="table table-responsive table-bordered table-card">
+                        <thead class="thead">
+                            <tr class="dda-pageheading">
+                                <th>Sr.No</th>
+                                <th>Department</th>
+                                <th>Zone</th>
+                                <th>Division</th>
+                                <th>Locality(Village)</th>
+                                <th>Khasra No.</th>
+                                <th>Address</th>
+                                <th>Handed Over By</th>
+                                <th>Date of Hand Over</th>
+                                <th>Taken Over By</th>
+                                <th>Date of Taken Over</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            @foreach (var item in Model.LandTransferList)
+                            {
+                                <tr>
+                                    <td>@(rowNo += 1)</td>
+                                    <td>@item.Department.Name</td>
+                                    <td>@item.Zone.Name</td>
+                                    <td>@item.Division.Name</td>
+                                    <td>@item.Locality.Name</td>
+                                    <td>@item.KhasraNo</td>
+                                    <td>@item.Address</td>
+                                    <td>
+                                        @item.HandedOverByNameDesingnation
+                                    </td>
+                                    <td>
+                                        @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+                                    </td>
+                                    <td>
+                                        @item.TakenOverByNameDesingnation
+                                    </td>
+                                    <td>
+                                        @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+                </div>
+                <div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class="dda-innerheading">
+                            <div class="col-md-12">
+                                <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over /Taken Over Details </h6>
+                                <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;color:white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
@@ -30,7 +710,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
-                        <select asp-for="ZoneId" class="form-control dda-dropdown" 
+                        <select asp-for="ZoneId" class="form-control dda-dropdown"
                                 asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                             <option value="">Select</option>
                         </select>
@@ -40,7 +720,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Division <span style="color:red">*</span></label>
-                        <select asp-for="DivisionId" class="form-control dda-dropdown" 
+                        <select asp-for="DivisionId" class="form-control dda-dropdown"
                                 asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
                             <option value="">Select</option>
                         </select>
@@ -65,7 +745,7 @@
                         <input type="text" asp-for="BuildupArea" class="form-control numbers" />
                         <span asp-validation-for="BuildupArea" class="text-danger"></span>
                     </div>
-                </div>                
+                </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Vacant Area(Bigha/Biswa/Biswanshi)<span style="color:red">*</span></label>
@@ -74,10 +754,10 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Total Area(Bigha/Biswa/Biswanshi)<span style="color:red">*</span></label>
-                        <input type="text" asp-for="TotalArea" class="form-control total-area" readonly="readonly"/>
+                        <input type="text" asp-for="TotalArea" class="form-control total-area" readonly="readonly" />
                         <span asp-validation-for="TotalArea" class="text-danger"></span>
                     </div>
-                </div>                
+                </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Address <span style="color:red">*</span></label>
@@ -92,51 +772,128 @@
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
                                 <div class="col-md-12">
-                                    <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over By</h6>
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over</h6>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                            <select asp-for="HandedOverDepartmentId" class="form-control dda-dropdown"
-                                    asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
-                                <option value="">Select</option>
+                            <label class="control-label lb-sm" asp-for="HandedOverDepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                <option value="">--Select--</option>
                             </select>
-                            <span asp-validation-for="HandedOverDepartmentId" class="text-danger"></span>
+                            <span asp-validation-for="HandedOverDepartmentId" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Handed Over By(Name/Designation) <span style="color:red">*</span></label>
-                            <input type="text" asp-for="HandedOverByNameDesingnation" class="form-control" />
-                            <span asp-validation-for="HandedOverByNameDesingnation" class="text-danger"></span>
+                            <label class="control-label lb-sm">Name/Designation</label>
+                            <input class="form-control" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Date of Hand Over <span style="color:red">*</span></label>
-                            <input type="date" asp-for="HandedOverDate" class="form-control" id="txtHandOverDate" pattern="\d{4}/\d{2}/\d{2}" min="15/Aug/1947" />
-                            <span asp-validation-for="HandedOverDate" class="text-danger"></span>
+                            <label class="control-label lb-sm">Date</label>
+                            <input asp-for="HandedOverDate" type="date" class="form-control" />
+                            <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Order No. <span style="color:red">*</span></label>
-                            <input type="text" asp-for="OrderNo" class="form-control" />
-                            <span asp-validation-for="OrderNo" class="text-danger"></span>
+                            <label class="control-label lb-sm">Email Id</label>
+                            <input class="form-control" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Copy of Order <span style="color:red">*</span></label>
-                            <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                            <label class="control-label lb-sm">Mobile No.</label>
+                            <input class="form-control onlynumbers" maxlength="10" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Transfer order Issue Authority <span style="color:red">*</span></label>
-                            <input asp-for="TransferorderIssueAuthority" type="text" class="form-control" />
-                            <span asp-validation-for="TransferorderIssueAuthority" class="text-danger"></span>
+                            <label class="control-label lb-sm">Land Line No.</label>
+                            <input class="form-control onlynumbers" maxlength="10" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Document</label>
+                            <input type="hidden" />
+                            @{
+                                @if (ViewBag.HandedOverDocView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "HandedOverDownload", new { id = Model.Id })
+                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
+                            <span class="text-danger lb-sm"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Comments</label>
+                            <textarea class="form-control"></textarea>
+                            <span class="text-danger lb-sm"></span>
+                            <div id="feedbackHandedOverComments"></div>
+                        </div>
+
                     </div>
                 </div>
+                @*<div id="DivHandedOver">
+                        <div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class="dda-innerheading">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over By</h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
+                                <select asp-for="HandedOverDepartmentId" class="form-control dda-dropdown"
+                                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
+                                    <option value="">Select</option>
+                                </select>
+                                <span asp-validation-for="HandedOverDepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Handed Over By(Name/Designation) <span style="color:red">*</span></label>
+                                <input type="text" asp-for="HandedOverByNameDesingnation" class="form-control" />
+                                <span asp-validation-for="HandedOverByNameDesingnation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Date of Hand Over <span style="color:red">*</span></label>
+                                <input type="date" asp-for="HandedOverDate" class="form-control" id="txtHandOverDate" pattern="\d{4}/\d{2}/\d{2}" min="15/Aug/1947" />
+                                <span asp-validation-for="HandedOverDate" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Order No. <span style="color:red">*</span></label>
+                                <input type="text" asp-for="OrderNo" class="form-control" />
+                                <span asp-validation-for="OrderNo" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Copy of Order <span style="color:red">*</span></label>
+                                <input type="file" class="form-control" asp-for="CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <span asp-validation-for="CopyofOrder" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Transfer order Issue Authority <span style="color:red">*</span></label>
+                                <input asp-for="TransferorderIssueAuthority" type="text" class="form-control" />
+                                <span asp-validation-for="TransferorderIssueAuthority" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>*@
                 <div id="DivTakenOver">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
@@ -149,26 +906,93 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                            <select asp-for="TakenOverDepartmentId" class="form-control dda-dropdown"
-                                    asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
-                                <option value="">Select</option>
+                            <label class="control-label lb-sm" asp-for="TakenOverDepartmentId">Department</label>
+                            <select class="form-control dda-dropdown" asp-for="TakenOverDepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                <option value="">--Select--</option>
                             </select>
-                            <span asp-validation-for="TakenOverDepartmentId" class="text-danger"></span>
+                            <span asp-validation-for="TakenOverDepartmentId" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Taken Over By(Name/Designation) <span style="color:red">*</span></label>
-                            <input asp-for="TakenOverByNameDesingnation" type="text" class="form-control" />
-                            <span asp-validation-for="TakenOverByNameDesingnation" class="text-danger"></span>
+                            <label class="control-label lb-sm">Name/Designation</label>
+                            <input type="text" class="form-control" id="1" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Date of Taken Over <span style="color:red">*</span></label>
-                            <input type="date" asp-for="DateofTakenOver" class="form-control" id="txtTakenOverDate" />
-                            <span asp-validation-for="DateofTakenOver" class="text-danger"></span>
+                            <label class="control-label lb-sm">Date</label>
+                            <input type="date" class="form-control" />
+                            <span class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Email Id</label>
+                            <input class="form-control" id="2" />
+                            <span class="text-danger lb-sm"></span>
                         </div>
                     </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Mobile No.</label>
+                            <input class="form-control onlynumbers" maxlength="10" />
+                            <span class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Land Line No.</label>
+                            <input class="form-control onlynumbers" maxlength="10" />
+                            <span class="text-danger lb-sm"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Document</label>
+                            <input type="hidden" />
+                            @{
+                                @if (ViewBag.TakenOverDocView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "TakenOverDownload", new { id = Model.Id })
+                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
+                            <span class="text-danger lb-sm"></span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Comments</label>
+                            <textarea class="form-control" id="4"></textarea>
+                            <span class="text-danger lb-sm"></span>
+                            <div id="feedbackTakenOverComments"></div>
+                        </div>
+                    </div>
+                    @*<div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
+                                <select asp-for="TakenOverDepartmentId" class="form-control dda-dropdown"
+                                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
+                                    <option value="">Select</option>
+                                </select>
+                                <span asp-validation-for="TakenOverDepartmentId" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Taken Over By(Name/Designation) <span style="color:red">*</span></label>
+                                <input asp-for="TakenOverByNameDesingnation" type="text" class="form-control" />
+                                <span asp-validation-for="TakenOverByNameDesingnation" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Date of Taken Over <span style="color:red">*</span></label>
+                                <input type="date" asp-for="DateofTakenOver" class="form-control" id="txtTakenOverDate" />
+                                <span asp-validation-for="DateofTakenOver" class="text-danger"></span>
+                            </div>
+                        </div>*@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">

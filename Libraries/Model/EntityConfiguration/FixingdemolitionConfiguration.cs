@@ -12,8 +12,10 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Fixingdemolition> builder)
         {
             builder.ToTable("fixingdemolition", "lms");
+
+
             builder.HasIndex(e => e.EncroachmentId)
-                    .HasName("fk1enchroachmentid_idx");
+                .HasName("fk1EncroachmentId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -26,6 +28,12 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Encroachment)
+                .WithMany(p => p.Fixingdemolition)
+                .HasForeignKey(d => d.EncroachmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk1EncroachmentId");
 
 
         }

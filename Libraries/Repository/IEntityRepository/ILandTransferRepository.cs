@@ -34,5 +34,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
 
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model);
     }
 }

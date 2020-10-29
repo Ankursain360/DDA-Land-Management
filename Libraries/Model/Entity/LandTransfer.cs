@@ -77,8 +77,8 @@ namespace Libraries.Model.Entity
         public int ReportType { get; set; }
 
         public ICollection<Currentstatusoflandhistory> Currentstatusoflandhistory { get; set; }
+        [NotMapped]
+        public Propertyregistration Propertyregistration { get; set; }
 
-       
-        
     }
 }

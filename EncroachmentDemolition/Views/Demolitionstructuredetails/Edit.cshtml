@@ -123,9 +123,28 @@
                         <span asp-validation-for="StartOfDemolitionActionDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Photographs Before Demolition</label>
-                        <input type="file" class="form-control" asp-for="BeforePhotoFile" id="PhotoFile" multiple />
-                        <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+                        @*<label class="control-label lb-sm">Photographs Before Demolition</label>
+        <input type="file" class="form-control" asp-for="BeforePhotoFile" id="PhotoFile" multiple />
+        <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>*@
+                        <label class="control-label lb-sm">Photographs Before Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
+                        @{
+                            if (Model.Demolitionstructurebeforedemolitionphotofiledetails != null && Model.Demolitionstructurebeforedemolitionphotofiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Demolitionstructurebeforedemolitionphotofiledetails)
+                                {
+                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(BeforePhotoFile += 1 ))</a>
+                                    <br />
+                                }
+                                <input type="file" class="form-control" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input type="file" class="form-control" asp-for="BeforePhotoFile" id="BPhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="BeforePhotoFile" class="text-danger"></span>
+                            }
+                        }
                     </div>
                 </div>
 
@@ -136,13 +155,30 @@
                         <span asp-validation-for="EndOfDemolitionActionDate" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Photographs After Demolition</label>
-                        <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" multiple />
-                        <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                        @*<label class="control-label lb-sm">Photographs After Demolition</label>
+        <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" multiple />
+        <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>*@
+                        <label class="control-label lb-sm">Photographs After Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
+                        @{
+                            if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
+                            {
+                                <br />
+                                foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
+                                {
+                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+                                    <br />
+                                }
+                                <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                            }
+                            else
+                            {
+                                <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                            }
+                        }
                     </div>
                 </div>
-
-
                 <div class="row">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -155,14 +191,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var item in Model.Structure)
+                                    @foreach (var item in Model.DemolitionStructure)
                                     {
                                         <tr>
                                             <td>@(recNo += 1)</td>
-                                            <td>@(item.Name)</td>
+                                            <td>@(item.Structure.Name)</td>
                                             <td>
-                                                <input class="form-control" asp-for="NoOfStructrure" />
-                                                <input type="hidden" asp-for="StructrureId" />
+                                                <input class="form-control" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)"/>
+                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
                                             </td>
                                         </tr>
                                     }

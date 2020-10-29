@@ -1,11 +1,11 @@
 ﻿
 $(document).ready(function () {
     var value = $('#Boundary option:selected').val();
-    if (value == 1) {
-        $('#divBoundarySelection').show();
+    if (value == 2) {
+        $('#divBoundarySelection').hide();
     }
     else {
-        $('#divBoundarySelection').hide();
+        $('#divBoundarySelection').show();
     }
 
 
@@ -15,6 +15,7 @@ $(document).ready(function () {
         $('#divPlannedSelection').show();
         $('#divUnplannedSelection').hide();
         $("#divLayoutPlan").show();
+        callSelect2();
     }
     else {
         $('#DivLandUse').hide();
@@ -127,7 +128,7 @@ $(document).ready(function () {
 $('#Boundary').change(function () {
     debugger;
     var value = $('#Boundary option:selected').val();
-    if (value == 0) {
+    if (value == 2) {
         $('#BoundaryRemarks').val('');
         $('#divBoundarySelection').hide();
     }
@@ -216,6 +217,7 @@ $('#PlannedUnplannedLand').change(function () {
         $('#divPlannedSelection').show();
         $("#divLayoutPlan").show();
         $('#divUnplannedSelection').hide();
+        callSelect2();
     }
     else {
         $('#DivLandUse').hide();

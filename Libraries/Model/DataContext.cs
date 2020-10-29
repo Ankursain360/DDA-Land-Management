@@ -97,9 +97,13 @@ namespace Libraries.Model
         public virtual DbSet<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
         public virtual DbSet<Demolitionchecklist> Demolitionchecklist { get; set; }
         public virtual DbSet<Demolitiondocument> Demolitiondocument { get; set; }
-        public virtual DbSet<Demolitionprogram> Demolitionprogrammaster { get; set; }
+        public virtual DbSet<Demolitionprogram> Demolitionprogram { get; set; }
         public virtual DbSet<Structure> Structure { get; set; }
         public virtual DbSet<Fixingdemolition> Fixingdemolition { get; set; }
+        public virtual DbSet<Fixingchecklist> Fixingchecklist { get; set; }
+        public virtual DbSet<Fixingprogram> Fixingprogram { get; set; }
+        public virtual DbSet<Fixingdocument> Fixingdocument { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -172,6 +176,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DemolitionprogrammasterConfiguration());
             modelBuilder.ApplyConfiguration(new FixingdemolitionConfiguration());
+            modelBuilder.ApplyConfiguration(new FixingchecklistConfiguration());
+            modelBuilder.ApplyConfiguration(new FixingprogramConfiguration());
+            modelBuilder.ApplyConfiguration(new FixingdocumentConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }
