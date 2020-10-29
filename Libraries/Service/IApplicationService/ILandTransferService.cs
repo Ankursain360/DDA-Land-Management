@@ -38,5 +38,8 @@ namespace Libraries.Service.IApplicationService
         //Current status of land history :
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+
+        Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model); //added by ishu
+
     }
 }
