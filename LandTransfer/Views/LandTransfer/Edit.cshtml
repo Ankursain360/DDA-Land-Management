@@ -443,37 +443,38 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm" asp-for="HandedOverDepartmentId">Department</label>
                             <select class="form-control dda-dropdown" asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="HandedOverDepartmentId" class="text-danger lb-sm"></span>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Name/Designation</label>
-                            <input class="form-control" limit="200" />
+                            <input class="form-control" />
                             <span class="text-danger lb-sm"></span>
                         </div>
-                        <div class="form-group col-md-4">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Date</label>
                             <input asp-for="HandedOverDate" type="date" class="form-control" />
                             <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                         </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Email Id</label>
                             <input class="form-control" />
                             <span class="text-danger lb-sm"></span>
                         </div>
-                        <div class="form-group col-md-4">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Mobile No.</label>
                             <input class="form-control onlynumbers" maxlength="10" />
                             <span class="text-danger lb-sm"></span>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Land Line No.</label>
                             <input class="form-control onlynumbers" maxlength="10" />
                             <span class="text-danger lb-sm"></span>
@@ -481,7 +482,7 @@
                     </div>
                     <div class="row">
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-6">
                             <label class="control-label lb-sm">Document</label>
                             <input type="hidden" />
                             @{
@@ -501,7 +502,7 @@
                     <div class="row">
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Comments</label>
-                            <textarea class="form-control" ></textarea>
+                            <textarea class="form-control"></textarea>
                             <span class="text-danger lb-sm"></span>
                             <div id="feedbackHandedOverComments"></div>
                         </div>
