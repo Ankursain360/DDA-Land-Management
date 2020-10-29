@@ -1,4 +1,20 @@
-﻿function onChangeDepartment(id) {
+﻿function onChangeLandStatus(status) {
+    if (status == 'DDA Land') {
+        $("#divForLandStatus").show();
+    }
+    else {
+        $("#divForLandStatus").hide();
+    }
+};
+function onChangePossationStatus(status) {
+    if (status == 'Yes') {
+        $("#divPossessionGroup").show();
+    }
+    else {
+        $("#divPossessionGroup").hide();
+    }
+};
+function onChangeDepartment(id) {
     HttpGet(`/EncroachmentRegister/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
@@ -31,6 +47,18 @@ function onChangeDivision(id) {
 $(function () {
     $("#tbl_posts #tbl_posts_body .odd").remove();
     $("#tbl_posts #add .form-control").attr("multiple", false);
+    if ($('#StatusOfLand option:selected').val() == 'DDA Land') {
+        $("#divForLandStatus").show();
+    }
+    else {
+        $("#divForLandStatus").hide();
+    }
+    if ($('#IsPossession option:selected').val() == 'Yes') {
+        $("#divPossessionGroup").show();
+    }
+    else {
+        $("#divPossessionGroup").hide();
+    }
     $("input[name='grpPossession']").click(function () {
         if ($("#rdbFormal").is(":checked")) {
             $("#divDepartment").show();

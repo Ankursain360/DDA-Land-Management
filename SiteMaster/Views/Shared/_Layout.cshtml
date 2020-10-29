@@ -41,141 +41,39 @@
                             <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notification">
-                            Comming Soon!
+                            <ul class="list-unstyled m-0 p-0">
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">12:00</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                                <li class="px-3">
+                                    <a href="#" class="d-flex align-items-center py-2 border-bottom read">
+                                        <div class="noti-time text-center pr-2">
+                                            <i class="ri-discuss-line"></i>
+                                            <small class="d-block w-100">2 Days</small>
+                                        </div>
+                                        <p class="m-0 text-truncate text-left">
+                                            Some notification message new message
+                                            <small class="d-block text-truncate text-left">Lorem Ipsum is simply dummy text dummy text</small>
+                                        </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
-                    <div class="dropdown user text-white order-md-4">
-                        <a href="#" role="button" id="profile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
-                            <div class="d-flex align-items-center profile">
-                                <figure class="m-0 d-none">
-                                    <img src="~/images/favicon.png" alt="" class="rounded-circle" width="34" height="34">
-                                </figure>
-                                <strong class="text-img rounded-circle d-block">
-                                    S
-                                </strong>
-                                <span class="ml-2 d-none d-md-block">Hi Sachin</span>
-                            </div>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profile">
-                            Comming Soon!
-                        </div>
-                    </div>
+                    @await Component.InvokeAsync("SignInProfile")
                 </div>
             </div>
         </header>
     </div>
-
-    @*<div>
-            <ul class="nav menu" style="font-family:sans-serif; font-size:13px!important;">
-                <li class="parent divider">
-                        Masters
-                    <ul class="children collapse" id="sub-item-1">
-
-                        <li>
-                            <a class="" href="/District/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>District
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Department/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Department
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Zone/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Zone
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Locality/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Locality(Village)
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Division/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Division
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Village/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Village
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="" href="/Role/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Role
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="" href="/UserManagement/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>User
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Interest/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Interest(Damage Payee)
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Rate/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Rate (Damage Payee)
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/Rebate/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Rebate (Damage Payee)
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="" href="/PageRole/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Page Role
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/LandUse/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Land Use
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/ClassificationOfLand/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Classification of Land
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="/WorkFlowTemplate/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Workflow
-                            </a>
-                        </li>
-
-
-                        <li>
-                            <a class="" href="/Demolitionchecklist/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Checklist
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="" href="/Demolitiondocument/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Document
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="" href="/Demolitionprogrammaster/Index">
-                                <span class="fa fa-arrow-right">&nbsp;</span>Demolition Program master
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-            </ul>
-        </div>*@
-    <!--        left menu section-->
     <aside class="left-menu small slow" id="leftMenu">
         <div class="accordion" id="leftMenu">
             <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button" aria-expanded="false" aria-controls="m0">
@@ -248,15 +146,15 @@
                 @RenderBody()
             </div>
         </div>
-</section>
+    </section>
     <footer class="footer slow">
         <div class="container-fluid">
             <p class="my-0 py-2">
-                <a href="#">Terms & Conditions</a> 
-                | <a href="#">Privacy Policy</a> 
-                | <a href="#">Copyright Policy</a> 
-                | <a href="#">Hyperlink policy</a> 
-                | <a href="#">Accessibility Statement</a> 
+                <a href="#">Terms & Conditions</a>
+                | <a href="#">Privacy Policy</a>
+                | <a href="#">Copyright Policy</a>
+                | <a href="#">Hyperlink policy</a>
+                | <a href="#">Accessibility Statement</a>
                 | <a href="#">Help</a><br>
                 &copy; Content Owned by DDA, Government of India.
             </p>

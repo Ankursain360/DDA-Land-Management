@@ -144,7 +144,13 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Copy of Order</label>
-                                <input readonly="readonly" type="file" class="form-control" asp-for="LandTransfer.CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @*<input readonly="readonly" type="file" class="form-control" asp-for="LandTransfer.CopyofOrder" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />*@
+
+                                @if (Model.LandTransfer.CopyofOrderDocPath != null && Model.LandTransfer.CopyofOrderDocPath != "")
+                                {
+                                    <br />
+                                    <a asp-action="Download" asp-route-Id="@(Model.LandTransfer.Id)"> View Existing Document</a>
+                                }
                                 @*<span asp-validation-for="CopyofOrder" class="text-danger"></span>*@
                             </div>
                             <div class="form-group col-md-6">

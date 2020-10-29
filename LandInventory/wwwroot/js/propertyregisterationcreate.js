@@ -15,6 +15,7 @@ $(document).ready(function () {
         $('#divPlannedSelection').show();
         $('#divUnplannedSelection').hide();
         $("#divLayoutPlan").show();
+        callSelect2();
     }
     else {
         $('#DivLandUse').hide();
@@ -216,6 +217,7 @@ $('#PlannedUnplannedLand').change(function () {
         $('#divPlannedSelection').show();
         $("#divLayoutPlan").show();
         $('#divUnplannedSelection').hide();
+        callSelect2();
     }
     else {
         $('#DivLandUse').hide();
@@ -517,9 +519,9 @@ function ComapareTotalArea(element) {
     return isFormValid;
 }
 
-//function callSelect2() {
-//    $("select").select2({
-//        placeholder: "Select",
-//        allowClear: true
-//    });
-//}
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
