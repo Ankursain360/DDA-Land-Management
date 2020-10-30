@@ -226,14 +226,14 @@
                                 <span asp-validation-for="Propertyregistration.BuiltUpRemarks" class="text-danger lb-sm"></span>
                             </div>
 
-                            <div class="form-group col-md-4">
+                            @*<div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Layout Plan</label><span class="text-danger">*</span>
                                 <select class="form-control dda-dropdown" asp-for="Propertyregistration.LayoutPlan">
                                     <option value="0">No</option>
                                     <option value="1">Yes</option>
                                 </select>
 
-                            </div>
+                            </div>*@
                             <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
                                 <label class="control-label lb-sm" asp-for="Propertyregistration.FileData">Upload Layout Plan</label>
                                 <input type="hidden" asp-for="Propertyregistration.LayoutFilePath" />

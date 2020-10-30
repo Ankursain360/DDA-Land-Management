@@ -102,7 +102,7 @@ namespace Libraries.Service.ApplicationService
             model.SubUse = propertyregistration.SubUse;
             model.BuiltUp = propertyregistration.BuiltUp;
             model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
-            model.LayoutPlan = propertyregistration.LayoutPlan;
+           // model.LayoutPlan = propertyregistration.LayoutPlan;
             model.LayoutFilePath = propertyregistration.LayoutFilePath;
             model.LitigationStatus = propertyregistration.LitigationStatus;
             model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
