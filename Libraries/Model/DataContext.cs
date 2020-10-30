@@ -100,7 +100,7 @@ namespace Libraries.Model
         public virtual DbSet<Demolitionprogram> Demolitionprogrammaster { get; set; }
         public virtual DbSet<Structure> Structure { get; set; }
         public virtual DbSet<Fixingdemolition> Fixingdemolition { get; set; }
-
+        public virtual DbSet<Menu> Menu { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -172,7 +172,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new UserProfileConfiguration());
             modelBuilder.ApplyConfiguration(new DemolitionprogrammasterConfiguration());
             modelBuilder.ApplyConfiguration(new FixingdemolitionConfiguration());
-
+            modelBuilder.ApplyConfiguration(new MenuConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

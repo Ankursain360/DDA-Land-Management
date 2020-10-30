@@ -1,0 +1,151 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.ApplicationService;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+
+namespace SiteMaster.Controllers
+{
+    public class MenuController : BaseController
+    {
+        public readonly IMenuService _menuService;
+        public MenuController(IMenuService menuService)
+        {
+            _menuService = menuService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] MenuSearchDto model)
+        {
+            var result = await _menuService.GetPagedMenu(model);
+            return PartialView("_List", result);
+        }
+        public async Task<IActionResult> Create()
+        {
+            Menu model = new Menu();
+            model.IsActive = 1;
+            model.modulelist = await _menuService.GetAllModule();
+           
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(Menu menu)
+        {
+            try
+            {
+                menu.modulelist = await _menuService.GetAllModule();
+                
+                if (ModelState.IsValid)
+                {
+                    var result = await _menuService.Create(menu);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        var list = await _menuService.GetAllMenu();
+                        return View("Index", list);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(menu);
+                    }
+                }
+                else
+                {
+                    return View(menu);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(menu);
+            }
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _menuService.FetchSingleResult(id);
+            Data.modulelist = await _menuService.GetAllModule();
+           
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _menuService.FetchSingleResult(id);
+            Data.modulelist = await _menuService.GetAllModule();
+           
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, Menu menu)
+        {
+            menu.modulelist = await _menuService.GetAllModule();
+           
+            if (ModelState.IsValid)
+            {
+                var result = await _menuService.Update(id, menu);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _menuService.GetAllMenu();
+                    return View("Index", list);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(menu);
+                }
+            }
+            else
+            {
+                return View(menu);
+            }
+        }
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _menuService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _menuService.GetAllMenu();
+            return View("Index", list);
+        }
+
+
+    }
+}
