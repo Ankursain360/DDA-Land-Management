@@ -33,7 +33,9 @@ namespace LandTransfer.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
         {
-            var result = await _landTransferService.GetPagedLandTransfer(model);
+            var result = await _landTransferService.GetPropertyRegisterationDataForLandTransfer(model);
+            //var result1 = await _propertyregistrationService.GetPropertyRegisterationReportData(null);
+            //var result = await _landTransferService.GetPagedLandTransfer(model);
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Index()
@@ -110,8 +112,9 @@ namespace LandTransfer.Controllers
         }
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _landTransferService.FetchSingleResult(id);
-            Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(32);
+            //var Data = await _landTransferService.FetchSingleResult(id);
+            var Data = new Landtransfer();
+            Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(id);
             Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
             Data.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             Data.Propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
