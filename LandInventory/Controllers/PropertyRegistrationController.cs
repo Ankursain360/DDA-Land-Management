@@ -535,7 +535,7 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)  
         {
             Deletedproperty model = new Deletedproperty();
-            int userId = SiteContext.UserId;
+            int userId = 3;
             var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
 
             if (userId == 3)
