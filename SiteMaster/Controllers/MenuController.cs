@@ -76,53 +76,97 @@ namespace SiteMaster.Controllers
                 return View(menu);
             }
         }
+        //public async Task<IActionResult> Edit(int id)
+        //{
+        //    var Data = await _menuService.FetchSingleResult(id);
+        //    Data.modulelist = await _menuService.GetAllModule();
+           
+        //    if (Data == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(Data);
+        //}
+        
+        //public async Task<IActionResult> View(int id)
+        //{
+        //    var Data = await _menuService.FetchSingleResult(id);
+        //    Data.modulelist = await _menuService.GetAllModule();
+           
+        //    if (Data == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(Data);
+        //}
+
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _menuService.FetchSingleResult(id);
             Data.modulelist = await _menuService.GetAllModule();
            
+
             if (Data == null)
             {
                 return NotFound();
             }
             return View(Data);
         }
-        public async Task<IActionResult> View(int id)
-        {
-            var Data = await _menuService.FetchSingleResult(id);
-            Data.modulelist = await _menuService.GetAllModule();
-           
-            if (Data == null)
-            {
-                return NotFound();
-            }
-            return View(Data);
-        }
+
+
+
+
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Menu menu)
         {
             menu.modulelist = await _menuService.GetAllModule();
            
+
             if (ModelState.IsValid)
             {
-                var result = await _menuService.Update(id, menu);
-                if (result == true)
+                try
                 {
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    var list = await _menuService.GetAllMenu();
-                    return View("Index", list);
+
+                    var result = await _menuService.Update(id, menu);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View("Index");
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(menu);
+
+                    }
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(menu);
+
                 }
+            }
+            return View(menu);
+        }
+
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name, int ModuleId)
+        {
+            var result = await _menuService.CheckUniqueName(Id, Name,ModuleId);
+            if (result == false)
+            {
+                return Json(true);
             }
             else
             {
-                return View(menu);
+                return Json($"Division: {Name} already exist");
             }
         }
+
+
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -145,7 +189,27 @@ namespace SiteMaster.Controllers
             var list = await _menuService.GetAllMenu();
             return View("Index", list);
         }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _menuService.FetchSingleResult(id);
+            Data.modulelist = await _menuService.GetAllModule();
+           
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+
 
 
     }
 }
+
+
+
+ 

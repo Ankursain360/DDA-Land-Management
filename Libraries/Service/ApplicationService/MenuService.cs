@@ -66,6 +66,7 @@ namespace Libraries.Service.ApplicationService
             return await _menuRepository.GetAllMenu();
         }
 
+
         public async Task<bool> Update(int id, Menu menu)
         {
             var result = await _menuRepository.FindBy(a => a.Id == id);

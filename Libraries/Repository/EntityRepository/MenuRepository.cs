@@ -33,7 +33,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Module>> GetAllModule()
         {
-            List<Module> modulelist = await _dbContext.Module.ToListAsync();
+            List<Module> modulelist = await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
             return modulelist;
         }
 
@@ -45,7 +45,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Menu>> GetAllMenu()
         {
-            return await _dbContext.Menu.Include(x => x.Module).OrderByDescending(x => x.Id).ToListAsync();
+            var data = await _dbContext.Menu.Include(x => x.Module).OrderByDescending(x => x.Id).ToListAsync();
+            return data;
         }
 
 
