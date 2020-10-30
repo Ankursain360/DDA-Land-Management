@@ -18,6 +18,10 @@ namespace Libraries.Model.Entity
 
         public string IsMandatory { get; set; }
         public byte IsActive { get; set; }
-      
+       // public virtual ICollection<Fixingdemolition> Fixingdemolition { get; set; }
+        public virtual ICollection<Fixingdocument> Fixingdocument { get; set; }
+
+
+
     }
 }

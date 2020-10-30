@@ -72,7 +72,9 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .Where(x => (x.LocalityId == (watchandwardSearchDto.localityId == 0 ? x.LocalityId : watchandwardSearchDto.localityId))
-               && x.Date >= watchandwardSearchDto.fromDate && x.Date <= watchandwardSearchDto.toDate).OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
+               && x.Date >= watchandwardSearchDto.fromDate
+               && x.Date <= watchandwardSearchDto.toDate)
+                .OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
 
             return data;
         }

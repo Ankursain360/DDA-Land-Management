@@ -14,7 +14,7 @@ using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
-  public  class AnnexureAService : EntityService<Demolitionchecklist>, IAnnexureAService
+  public  class AnnexureAService : EntityService<Fixingdemolition>, IAnnexureAService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IAnnexureARepository _annexureARepository;
@@ -31,22 +31,76 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.GetDemolitionchecklist();
         }
 
+        public async Task<List<Demolitionprogram>> GetDemolitionprogram()
+        {
+            return await _annexureARepository.GetDemolitionprogram();
+        }
+
+
         public async Task<List<Demolitiondocument>> GetDemolitiondocument()
         {
             return await _annexureARepository.GetDemolitiondocument();
         }
-        public async Task<List<Fixingdemolition>> GetFixingdemolition(int Id)
+        public async Task<List<Fixingdemolition>> GetFixingdemolition(int id)
         {
-            return await _annexureARepository.GetFixingdemolition(Id);
+            return await _annexureARepository.GetFixingdemolition(id);
         }
 
-        public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+
+
+        public async Task<bool> Create(Fixingdemolition model)
         {
-            fixingdemolition.CreatedBy = 1;
-            fixingdemolition.CreatedDate = DateTime.Now;
-            fixingdemolition.IsActive = 1;
-            return await _annexureARepository.SaveFixingdemolition(fixingdemolition);
+            model.CreatedBy = 1;
+            model.CreatedDate = DateTime.Now;
+           
+            _annexureARepository.Add(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
+
+
+
+        //public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+        //{
+        //    fixingdemolition.CreatedBy = 1;
+        //    fixingdemolition.CreatedDate = DateTime.Now;
+        //    fixingdemolition.IsActive = 1;
+        //    return await _annexureARepository.SaveFixingdemolition(fixingdemolition);
+        //}
+
+
+        public async Task<bool> Savefixingchecklist(Fixingchecklist fixingchecklist)
+        {
+            fixingchecklist.CreatedBy = 1;
+            fixingchecklist.CreatedDate = DateTime.Now;
+            fixingchecklist.IsActive = 1;
+            return await _annexureARepository.Savefixingchecklist(fixingchecklist);
+        }
+
+        public async Task<List<Fixingchecklist>> Getfixingchecklist(int Id)
+        {
+            return await _annexureARepository.Getfixingchecklist(Id);
+        }
+
+        public async Task<List<Fixingprogram>> Getfixingprogram(int Id)
+        {
+            return await _annexureARepository.Getfixingprogram(Id);
+        }
+
+        public async Task<List<Fixingdocument>> Getfixingdocument(int Id)
+        {
+            return await _annexureARepository.Getfixingdocument(Id);
+        }
+
+
+
+        public async Task<bool> SaveFixingprogram(Fixingprogram fixingprogram)
+        {
+            fixingprogram.CreatedBy = 1;
+            fixingprogram.CreatedDate = DateTime.Now;
+            fixingprogram.IsActive = 1;
+            return await _annexureARepository.SaveFixingprogram(fixingprogram);
+        }
+
 
 
     }

@@ -31,7 +31,7 @@
                 <td>
                     @item.HandedOverByNameDesingnation
                 </td>
-                <td>
+                  <td>
                     @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
                 </td>
                 <td>
@@ -40,12 +40,13 @@
                 <td>
                     @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
                 </td>
-                 <td>
+                <td>
 
-                        <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Add Current Status </a>
-                        <a asp-action="ViewHistory" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>
+                    <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Add Current Status </a>
+                    @*<a asp-action="ViewHistory" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>*@
+                    <a asp-action="History" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>
 
-                    </td>
+                </td>
             </tr>
             }
             </tbody>

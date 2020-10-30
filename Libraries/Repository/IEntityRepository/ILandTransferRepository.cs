@@ -13,6 +13,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model);
+        Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model);
+
         Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
@@ -32,5 +34,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
 
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model);
     }
 }

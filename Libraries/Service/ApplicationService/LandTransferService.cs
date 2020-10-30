@@ -175,7 +175,15 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetCurrentstatusoflandhistory(landtransferId);
         }
-       
+        public async Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model) //added by ishu
+        {
+            return await _landTransferRepository.GetPagedCurrentStatusLandtransfer(model);
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model)
+        {
+            return await _landTransferRepository.GetPropertyRegisterationDataForLandTransfer(model);
+        }
     }
 
 }

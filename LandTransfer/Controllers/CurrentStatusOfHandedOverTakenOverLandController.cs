@@ -36,10 +36,11 @@ namespace LandTransfer.Controllers
             var result = await _landTransferService.GetPagedLandTransfer(model);
             return PartialView("_List", result);
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
-            return View(list);
+            //List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
+            //return View(list);
+            return View();
         }
         public async Task<IActionResult> Create(int id)
         {
@@ -109,11 +110,27 @@ namespace LandTransfer.Controllers
         {
             List<Currentstatusoflandhistory> list = await _currentstatusoflandhistoryService.GetCurrentstatusoflandhistory(id);
             return View(list);
-            //return View();
+            //return View();  
         }
 
+        public IActionResult History(int id)
+        {
+            var Id = id;
+           // var Id = Request.Path.ToString().Split('/').LastOrDefault();
+            //var Id = Context.Request.Query["id"];
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> HistoryDetails([FromBody] CurrentstatusoflandhistorySearchDto model)
+        {
+           // var Id = Request.Path.ToString().Split('/').LastOrDefault();
+            var result = await _currentstatusoflandhistoryService.GetPagedCurrentstatusoflandhistory(model);
+            return PartialView("_HistoryDetails", result);
+        }
+       
         //*************dropdown methods *****
-             [HttpGet]
+        [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
