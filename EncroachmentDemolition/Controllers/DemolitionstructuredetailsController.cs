@@ -61,13 +61,13 @@ namespace EncroachmentDemolition.Controllers
             string AfterPhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:AfterPhotoFilePath").Value.ToString();
             string BeforePhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:BeforePhotoFilePath").Value.ToString();
 
-            if (ModelState.IsValid)
+if (ModelState.IsValid)
             {
 
                 var result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
 
                 if (result)
-                {
+                {            
 
                     FileHelper fileHelper = new FileHelper();
 

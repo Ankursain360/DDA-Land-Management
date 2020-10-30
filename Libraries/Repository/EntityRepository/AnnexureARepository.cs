@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   public class AnnexureARepository : GenericRepository<Demolitionchecklist>, IAnnexureARepository
+   public class AnnexureARepository : GenericRepository<Fixingdemolition>, IAnnexureARepository
     {
         public AnnexureARepository(DataContext dbContext) : base(dbContext)
         {
@@ -25,23 +25,78 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Demolitionchecklist.ToListAsync();
         }
 
+
+        public async Task<List<Demolitionprogram>> GetDemolitionprogram()
+        {
+            return await _dbContext.Demolitionprogram.ToListAsync();
+        }
+
+
         public async Task<List<Demolitiondocument>> GetDemolitiondocument()
         {
             return await _dbContext.Demolitiondocument.ToListAsync();
         }
 
-        public async Task<List<Fixingdemolition>> GetFixingdemolition(int encroachmentId)
+        public async Task<List<Fixingdemolition>> GetFixingdemolition(int id)
         {
-            return await _dbContext.Fixingdemolition.Where(x => x.EncroachmentId == encroachmentId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Fixingdemolition.Where(x => x.EncroachmentId == id).Include(x => x.Encroachment).ToListAsync();
         }
 
 
-        public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+
+
+
+
+        //public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
+        //{
+        //    _dbContext.Fixingdemolition.Add(fixingdemolition);
+        //    var Result = await _dbContext.SaveChangesAsync();
+        //    return Result > 0 ? true : false;
+        //}
+
+
+
+        public async Task<bool> Savefixingchecklist(Fixingchecklist fixingchecklist)
         {
-            _dbContext.Fixingdemolition.Add(fixingdemolition);
+            _dbContext.Fixingchecklist.Add(fixingchecklist);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+
+
+        public async Task<bool> SaveFixingprogram(Fixingprogram fixingprogram)
+        {
+            _dbContext.Fixingprogram.Add(fixingprogram);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+
+
+
+
+
+
+
+        public async Task<List<Fixingchecklist>> Getfixingchecklist(int fixingdemolitionId)
+        {
+            return await _dbContext.Fixingchecklist.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Fixingprogram>> Getfixingprogram(int fixingdemolitionId)
+        {
+            return await _dbContext.Fixingprogram.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Fixingdocument>> Getfixingdocument(int fixingdemolitionId)
+        {
+            return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
+        }
+
+
+
+
 
 
     }

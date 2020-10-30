@@ -50,6 +50,23 @@ namespace Libraries.Repository.EntityRepository
                 .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
         }
 
+        public async Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model) //added by ishu
+        {
+            return await _dbContext.Landtransfer
+                
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.Locality)
+                .Where(x =>(x.IsActive == 1)
+                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)))
+               .OrderByDescending(x => x.Id)
+                .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+
+        }
 
 
 
