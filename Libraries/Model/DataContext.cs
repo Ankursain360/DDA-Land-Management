@@ -103,7 +103,7 @@ namespace Libraries.Model
         public virtual DbSet<Fixingchecklist> Fixingchecklist { get; set; }
         public virtual DbSet<Fixingprogram> Fixingprogram { get; set; }
         public virtual DbSet<Fixingdocument> Fixingdocument { get; set; }
-
+        public virtual DbSet<Menu> Menu { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -179,7 +179,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new FixingchecklistConfiguration());
             modelBuilder.ApplyConfiguration(new FixingprogramConfiguration());
             modelBuilder.ApplyConfiguration(new FixingdocumentConfiguration());
-
+            modelBuilder.ApplyConfiguration(new MenuConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
