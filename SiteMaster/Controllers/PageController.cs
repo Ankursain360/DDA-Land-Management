@@ -125,9 +125,9 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, string Name,int MenuId)
         {
-            var result = await _pageService.CheckUniqueName(Id, Name);
+            var result = await _pageService.CheckUniqueName(Id, Name,MenuId);
             if (result == false)
             {
                 return Json(true);
@@ -139,7 +139,6 @@ namespace SiteMaster.Controllers
         }
 
 
-       
 
         public async Task<IActionResult> View(int id)
         {

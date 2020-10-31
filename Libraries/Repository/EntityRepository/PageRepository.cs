@@ -38,9 +38,9 @@ namespace Libraries.Repository.EntityRepository
             List<Menu> menuList = await _dbContext.Menu.Where(x => x.IsActive == 1).ToListAsync();
             return menuList;
         }
-        public async Task<bool> Any(int id, string name)
+        public async Task<bool> Any(int id, string name,int MenuId)
         {
-            return await _dbContext.Page.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Page.AnyAsync(t => t.Id != id && t.MenuId == MenuId && t.Name.ToLower() == name.ToLower());
         }
 
        

@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Page>> GetPage();
         Task<List<Menu>> GetAllMenu();
-        Task<bool> Any(int id, string name);
+        Task<bool> Any(int id, string name,int MenuId);
         Task<List<Page>> GetAllPage();
         Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
     }

@@ -48,6 +48,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _pageRepository.FindBy(a => a.Id == id);
             Page model = result.FirstOrDefault();
             model.MenuId = page.MenuId;
+            model.Name = page.Name;
             model.Url = page.Url;
            
             model.IsActive = page.IsActive;
@@ -73,9 +74,9 @@ namespace Libraries.Service.ApplicationService
             return menuList;
         }
 
-        public async Task<bool> CheckUniqueName(int id, string page)
+        public async Task<bool> CheckUniqueName(int id, string page,int MenuId)
         {
-            bool result = await _pageRepository.Any(id, page);
+            bool result = await _pageRepository.Any(id, page, MenuId);
             //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
             return result;
         }

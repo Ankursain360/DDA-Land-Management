@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Delete(int id);  
 
-        Task<bool> CheckUniqueName(int id, string Page);
+        Task<bool> CheckUniqueName(int id, string Page,int MenuId);
         Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
     }
 }
