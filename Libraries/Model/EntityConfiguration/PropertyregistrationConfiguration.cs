@@ -147,7 +147,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.HandedOverDepartmentId).HasColumnType("int(11)");
 
-            builder.Property(e => e.HandedOverDivision).HasColumnType("int(11)");
+            builder.Property(e => e.HandedOverDivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.HandedOverEmailId)
                 .HasMaxLength(200)
@@ -171,13 +171,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.HandedOverZone).HasColumnType("int(11)");
+            builder.Property(e => e.HandedOverZoneId).HasColumnType("int(11)");
 
             builder.Property(e => e.HandedTransferOrder)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.InventoriedIn).HasColumnType("int(11)");
+            builder.Property(e => e.InventoriedInId).HasColumnType("int(11)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
@@ -253,7 +253,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.TakenOverDepartmentId).HasColumnType("int(11)");
 
-            builder.Property(e => e.TakenOverDivision).HasColumnType("int(11)");
+            builder.Property(e => e.TakenOverDivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.TakenOverEmailId)
                 .HasMaxLength(200)
@@ -273,7 +273,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
-            builder.Property(e => e.TakenOverZone).HasColumnType("int(11)");
+            builder.Property(e => e.TakenOverZoneId).HasColumnType("int(11)");
 
             builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 

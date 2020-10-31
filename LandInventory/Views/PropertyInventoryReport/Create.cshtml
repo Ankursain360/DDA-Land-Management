@@ -24,12 +24,12 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <label class="control-label lb-sm">Inventoried In</label>
-                    <select class="form-control dda-dropdown">
+                    <select class="form-control dda-dropdown" asp-for="InventoriedInId">
                         <option value="0">All</option>
                         <option value="1">VLMS</option>
                         <option value="2">Used</option>
                     </select>
-                    <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
+                    <span asp-validation-for="InventoriedInId" class="text-danger lb-sm"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>

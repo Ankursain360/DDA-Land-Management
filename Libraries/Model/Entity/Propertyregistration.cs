@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
-        public int? InventoriedIn { get; set; }
+        public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
 
         [Required(ErrorMessage = "Classification Of Land is Mandatory Field")]
@@ -101,8 +101,8 @@ namespace Libraries.Model.Entity
         public string GeoLongitude { get; set; }
         public string GeoPhotoFilePath { get; set; }
         public int? TakenOverDepartmentId { get; set; }
-        public int? TakenOverZone { get; set; }
-        public int? TakenOverDivision { get; set; }
+        public int? TakenOverZoneId { get; set; }
+        public int? TakenOverDivisionId { get; set; }
 
         [StringLength(200)]
         public string TakenOverName { get; set; }
@@ -123,8 +123,8 @@ namespace Libraries.Model.Entity
         public string TakenOverComments { get; set; }
         public string TakenOverFilePath { get; set; }
         public int? HandedOverDepartmentId { get; set; }
-        public int? HandedOverZone { get; set; }
-        public int? HandedOverDivision { get; set; }
+        public int? HandedOverZoneId { get; set; }
+        public int? HandedOverDivisionId { get; set; }
 
         [StringLength(200)]
         public string HandedOverName { get; set; }
@@ -199,6 +199,18 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
 
         [NotMapped]
+        public List<Zone> TakenOverZoneList { get; set; }
+
+        [NotMapped]
+        public List<Division> TakenOverDivisionList { get; set; }
+
+        [NotMapped]
+        public List<Zone> HandedOverZoneList { get; set; }
+
+        [NotMapped]
+        public List<Division> HandedOverDivisionList { get; set; }
+
+        [NotMapped]
         public IFormFile FileData { get; set; }
 
         [NotMapped]
@@ -212,6 +224,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile DisposalTypeFileData { get; set; }
+
+        [NotMapped]
+        public IFormFile EncroachAtrDoc { get; set; }
+
+        [NotMapped]
+        public IFormFile HandedOverCopyofOrderDoc { get; set; }
 
         [NotMapped]
         public bool IsValidateData { get; set; }

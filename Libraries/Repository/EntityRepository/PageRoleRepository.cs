@@ -77,92 +77,94 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId, int? userId)
         {
             List<PageRole> olist = new List<PageRole>();
-            var Data = await (from A in _dbContext.Module
-                              join B in _dbContext.Page on A.Id equals B.ModuleId
-                              join C in _dbContext.PageRole on B.Id equals C.PageId into Details
-                              from D in Details.DefaultIfEmpty()
-                              where A.Id == moduleId && (D.RoleId == roleId || D.RoleId == D.RoleId) && (D.UserId == userId || D.UserId == D.UserId)
-                              select new
-                              {
-                                  RoleId=D.RoleId,
-                                  ModuleId = A.Id,
-                                  ModuleName = A.Name,
-                                  PageName = B.Name,
-                                  PageId = B.Id,
-                                  RAdd = D.RAdd,
-                                  RDelete = D.RDelete,
-                                  REdit = D.REdit,
-                                  RView = D.RView,
-                                  RDisplay = D.RDisplay,
-                                  UserId = D.UserId
-                              }).ToListAsync();
+            //var Data = await (from A in _dbContext.Module
+            //                  //join B in _dbContext.Page on A.Id equals B.ModuleId
+                              
+            //                //  join C in _dbContext.PageRole on B.Id equals C.PageId into Details
+            //                 // from D in Details.DefaultIfEmpty()
+            //                  where A.Id == moduleId && (D.RoleId == roleId || D.RoleId == D.RoleId) && (D.UserId == userId || D.UserId == D.UserId)
+            //                  select new
+            //                  {
+            //                      RoleId=D.RoleId,
+            //                      ModuleId = A.Id,
+            //                      ModuleName = A.Name,
+            //                      //PageName = B.Name,
 
-            if (Data != null)
-            {
-                for (int i = 0; i < Data.Count; i++)
-                {
-                    olist.Add(new PageRole()
-                    {
-                        RoleId=Data[i].RoleId,
-                        ModuleId = Data[i].ModuleId,
-                        ModuleName = Data[i].ModuleName,
-                        PageId = Data[i].PageId,
-                        PageName = Data[i].PageName,
-                        RDisplay = Data[i].RDisplay,
-                        RAdd = Data[i].RAdd,
-                        RDelete = Data[i].RDelete,
-                        REdit = Data[i].REdit,
-                        RView = Data[i].RView,
-                        UserId = Data[i].UserId
-                    });
-                }
-            }
+            //                      //PageId = B.Id,
+            //                      RAdd = D.RAdd,
+            //                      RDelete = D.RDelete,
+            //                      REdit = D.REdit,
+            //                      RView = D.RView,
+            //                      RDisplay = D.RDisplay,
+            //                      UserId = D.UserId
+            //                  }).ToListAsync();
+
+            //if (Data != null)
+            //{
+            //    //for (int i = 0; i < Data.Count; i++)
+            //    //{
+            //    //    olist.Add(new PageRole()
+            //    //    {
+            //    //        RoleId=Data[i].RoleId,
+            //    //        ModuleId = Data[i].ModuleId,
+            //    //        ModuleName = Data[i].ModuleName,
+            //    //        PageId = Data[i].PageId,
+            //    //        PageName = Data[i].PageName,
+            //    //        RDisplay = Data[i].RDisplay,
+            //    //        RAdd = Data[i].RAdd,
+            //    //        RDelete = Data[i].RDelete,
+            //    //        REdit = Data[i].REdit,
+            //    //        RView = Data[i].RView,
+            //    //        UserId = Data[i].UserId
+            //    //    });
+            //    //}
+            //}
             return olist;
         }
 
         public async Task<List<PageRole>> GetPageRoleDetailsRoleWise(int moduleId, int roleId)
         {
             List<PageRole> olist = new List<PageRole>();
-            var Data = await (from A in _dbContext.Module
-                              join B in _dbContext.Page on A.Id equals B.ModuleId
-                              join C in _dbContext.AssignPageRoleWises on B.Id equals C.PageId into Details
-                              from D in Details.DefaultIfEmpty()
-                              where A.Id == moduleId && (D.RoleId == roleId || D.RoleId == null)
-                              select new
-                              {
-                                  RoleId = D.RoleId,
-                                  ModuleId = A.Id,
-                                  ModuleName = A.Name,
-                                  PageName = B.Name,
-                                  PageId = B.Id,
-                                  RAdd = D.RAdd,
-                                  RDelete = D.RDelete,
-                                  REdit = D.REdit,
-                                  RView = D.RView,
-                                  RDisplay = D.RDisplay,
-                                  UserId = 0
-                              }).ToListAsync();
+            //var Data = await (from A in _dbContext.Module
+            //                  join B in _dbContext.Page on A.Id equals B.ModuleId
+            //                  join C in _dbContext.AssignPageRoleWises on B.Id equals C.PageId into Details
+            //                  from D in Details.DefaultIfEmpty()
+            //                  where A.Id == moduleId && (D.RoleId == roleId || D.RoleId == null)
+            //                  select new
+            //                  {
+            //                      RoleId = D.RoleId,
+            //                      ModuleId = A.Id,
+            //                      ModuleName = A.Name,
+            //                      PageName = B.Name,
+            //                      PageId = B.Id,
+            //                      RAdd = D.RAdd,
+            //                      RDelete = D.RDelete,
+            //                      REdit = D.REdit,
+            //                      RView = D.RView,
+            //                      RDisplay = D.RDisplay,
+            //                      UserId = 0
+            //                  }).ToListAsync();
 
-            if (Data != null)
-            {
-                for (int i = 0; i < Data.Count; i++)
-                {
-                    olist.Add(new PageRole()
-                    {
-                        RoleId = Data[i].RoleId,
-                        ModuleId = Data[i].ModuleId,
-                        ModuleName = Data[i].ModuleName,
-                        PageId = Data[i].PageId,
-                        PageName = Data[i].PageName,
-                        RDisplay =(byte)(Data[i].RDisplay??0),
-                        RAdd = (byte)(Data[i].RAdd??0),
-                        REdit = (byte)(Data[i].REdit??0),
-                        RDelete = (byte)(Data[i].RDelete??0),
-                        RView = (byte)(Data[i].RView??0),
-                        UserId = Data[i].UserId
-                    });
-                }
-            }
+            //if (Data != null)
+            //{
+            //    for (int i = 0; i < Data.Count; i++)
+            //    {
+            //        olist.Add(new PageRole()
+            //        {
+            //            RoleId = Data[i].RoleId,
+            //            ModuleId = Data[i].ModuleId,
+            //            ModuleName = Data[i].ModuleName,
+            //            PageId = Data[i].PageId,
+            //            PageName = Data[i].PageName,
+            //            RDisplay =(byte)(Data[i].RDisplay??0),
+            //            RAdd = (byte)(Data[i].RAdd??0),
+            //            REdit = (byte)(Data[i].REdit??0),
+            //            RDelete = (byte)(Data[i].RDelete??0),
+            //            RView = (byte)(Data[i].RView??0),
+            //            UserId = Data[i].UserId
+            //        });
+            //    }
+            //}
             return olist;
         }
     }

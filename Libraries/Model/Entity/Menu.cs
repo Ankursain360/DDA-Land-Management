@@ -9,21 +9,21 @@ namespace Libraries.Model.Entity
 {
     public class Menu : AuditableEntity<int>
     {
+        public Menu()
+        {
+            Page = new HashSet<Page>();
+        }
 
-        [Required(ErrorMessage = "The Module Name field is required")]
         public int? ModuleId { get; set; }
-        [Required]
-        [Remote(action: "ExistName", controller: "Menu", AdditionalFields = "Id,ModuleId")]
         public string Name { get; set; }
-        [Required]
         public int? SortBy { get; set; }
-        [Required]
         public int? ParentMenuId { get; set; }
-        
         public byte? IsActive { get; set; }
         [NotMapped]
         public List<Module> modulelist { get; set; }
 
         public virtual Module Module { get; set; }
+
+        public ICollection<Page> Page { get; set; }
     }
 }
