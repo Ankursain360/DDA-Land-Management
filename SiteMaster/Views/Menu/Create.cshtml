@@ -22,7 +22,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Module Name <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="ModuleId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
+                        <select class="form-control dda-dropdown" required="required" requiredmsg="The  Module Name field is required" asp-for="ModuleId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="ModuleId" class="text-danger"></span>
@@ -36,7 +36,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Sort By <span style="color:red">*</span></label>
-                        <input asp-for="SortBy" type="number" class="form-control" limit="11" required="required" requiredmsg="The field is required" />
+                        <input asp-for="SortBy" type="number" class="form-control" limit="11" required="required" requiredmsg="The  Sort By field is required" />
                         <span asp-validation-for="SortBy" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
