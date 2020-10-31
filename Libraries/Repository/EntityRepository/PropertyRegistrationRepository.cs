@@ -169,8 +169,8 @@ namespace Libraries.Repository.EntityRepository
                             .Include(x => x.Locality)
                             .Include(x => x.DisposalType)
                             .Include(x => x.MainLandUse)
-                                .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1) && 
-                                (x.ClassificationOfLandId == (model.classificationofland== 0 ? x.ClassificationOfLandId : model.classificationofland))
+                                .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                                && (x.ClassificationOfLandId == (model.classificationofland== 0 ? x.ClassificationOfLandId : model.classificationofland))
                                 && (x.DepartmentId==(model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId== (model.zone == 0 ? x.ZoneId : model.zone))
                                 && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
                                 && ( x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
@@ -265,7 +265,13 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && !badCodes.Contains(x.ClassificationOfLand.Id))
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && !badCodes.Contains(x.ClassificationOfLand.Id)
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)) 
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
                 return data;
@@ -379,6 +385,24 @@ namespace Libraries.Repository.EntityRepository
                                                                         .Where(x => x.IsActive == 1 )
                                                                         .ToListAsync();
             return ClassificationoflandList;
+        }
+
+        public string GetEncroachAtr(int id)
+        {
+            var File = (from f in _dbContext.Propertyregistration
+                        where f.Id == id
+                        select f.EncroachAtrfilepath).First();
+
+            return File;
+        }
+
+        public string GetHandedOverCopyofOrderFile(int id)
+        {
+            var File = (from f in _dbContext.Propertyregistration
+                        where f.Id == id
+                        select f.HandedOverCopyofOrderFilepath).First();
+
+            return File;
         }
     }
 

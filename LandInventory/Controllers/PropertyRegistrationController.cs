@@ -32,6 +32,8 @@ namespace LandInventory.Controllers
         string targetPathHandedOver = "";
         string targetPathTakenOver = "";
         string targetPathDisposal = "";
+        string targetPathHandedOverCopyOfOrder = "";
+        string targetPathATR = "";
         public PropertyRegistrationController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _propertyregistrationService = propertyregistrationService;
@@ -100,6 +102,14 @@ namespace LandInventory.Controllers
                 {
                     propertyregistration.DisposalTypeId = 1;
                 }
+                if (propertyregistration.PlannedUnplannedLand == "Unplanned Land")
+                {
+                    if(propertyregistration.LocalityId.ToString() == "")
+                    {
+                        ViewBag.Message = Alert.Show("Locality is Mandatory in case of Unplanned Land", "", AlertType.Warning);
+                        return View(propertyregistration);
+                    }
+                }
                 if (propertyregistration.Encroached != null)
                 {
                    if(propertyregistration.Encroached > propertyregistration.TotalArea)
@@ -124,22 +134,6 @@ namespace LandInventory.Controllers
                         return View(propertyregistration);
                     }
                 }
-                //if (propertyregistration.Boundary == 1 && propertyregistration.BoundaryRemarks == null)
-                //{
-                //    ViewBag.Message = Alert.Show("Boundary Remarks Mandatory", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
-                //if (propertyregistration.BuiltUp == 1 && propertyregistration.BuiltUpRemarks == null)
-                //{
-                //    ViewBag.Message = Alert.Show("Built-Up Remarks Mandatory", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
-                //if (propertyregistration.LitigationStatus == 1 && propertyregistration.LitigationStatusRemarks == null)
-                //{
-                //    ViewBag.Message = Alert.Show("Litigation Status Remarks Mandatory", "", AlertType.Warning);
-                //    return View(propertyregistration);
-                //}
-
                 #region File Upload  Added by Renu 16 Sep 2020
                 /* For Layout Plan File Upload*/
                 string FileName = "";
@@ -245,6 +239,45 @@ namespace LandInventory.Controllers
                     }
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
                 }
+
+                /* For Handed Over Copy of Order*/
+                string HandedOverCopyOrderFileName = "";
+                string HandedOverCopyOrderfilePath = "";
+                targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
+                if (propertyregistration.HandedOverCopyofOrderDoc != null)
+                {
+                    if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
+                    }
+                    HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
+                    HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
+                    using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
+                    {
+                        propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
+                    }
+                    propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
+                }
+
+                string ATRFileName = "";
+                string ATRfilePath = "";
+                targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
+                if (propertyregistration.EncroachAtrDoc != null)
+                {
+                    if (!Directory.Exists(targetPathATR))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
+                    }
+                    ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
+                    ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
+                    using (var stream = new FileStream(ATRfilePath, FileMode.Create))
+                    {
+                        propertyregistration.EncroachAtrDoc.CopyTo(stream);
+                    }
+                    propertyregistration.EncroachAtrfilepath = ATRfilePath;
+                }
                 #endregion
 
                 var result = await _propertyregistrationService.Create(propertyregistration);
@@ -278,12 +311,18 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = Data.TakenOverFilePath;
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
+            ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
             ViewBag.IsValidateUser = 2;
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
             Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
             Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
 
             if (Data == null)
             {
@@ -302,6 +341,10 @@ namespace LandInventory.Controllers
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
             propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
             propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
+            propertyregistration.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
+            propertyregistration.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
+            propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
+            propertyregistration.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
             ViewBag.LayoutDocView = propertyregistration.LayoutFilePath;
             ViewBag.GeoDocView = propertyregistration.GeoFilePath;
             ViewBag.TakenOverDocView = propertyregistration.TakenOverFilePath;
@@ -455,6 +498,44 @@ namespace LandInventory.Controllers
                     }
                     propertyregistration.DisposalTypeFilePath = DisposalTypefilePath;
                 }
+                /* For Handed Over Copy of Order*/
+                string HandedOverCopyOrderFileName = "";
+                string HandedOverCopyOrderfilePath = "";
+                targetPathHandedOverCopyOfOrder = _Configuration.GetSection("FilePaths:PropertyRegistration:HandedOverCopyofOrderDocs").Value.ToString();
+                if (propertyregistration.HandedOverCopyofOrderDoc != null)
+                {
+                    if (!Directory.Exists(targetPathHandedOverCopyOfOrder))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathHandedOverCopyOfOrder);
+                    }
+                    HandedOverCopyOrderFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.HandedOverCopyofOrderDoc.FileName;
+                    HandedOverCopyOrderfilePath = Path.Combine(targetPathHandedOverCopyOfOrder, HandedOverCopyOrderFileName);
+                    using (var stream = new FileStream(HandedOverCopyOrderfilePath, FileMode.Create))
+                    {
+                        propertyregistration.HandedOverCopyofOrderDoc.CopyTo(stream);
+                    }
+                    propertyregistration.HandedOverCopyofOrderFilepath = HandedOverCopyOrderfilePath;
+                }
+
+                string ATRFileName = "";
+                string ATRfilePath = "";
+                targetPathATR = _Configuration.GetSection("FilePaths:PropertyRegistration:EcroachedATRDocs").Value.ToString();
+                if (propertyregistration.EncroachAtrDoc != null)
+                {
+                    if (!Directory.Exists(targetPathATR))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(targetPathATR);
+                    }
+                    ATRFileName = Guid.NewGuid().ToString() + "_" + propertyregistration.EncroachAtrDoc.FileName;
+                    ATRfilePath = Path.Combine(targetPathATR, ATRFileName);
+                    using (var stream = new FileStream(ATRfilePath, FileMode.Create))
+                    {
+                        propertyregistration.EncroachAtrDoc.CopyTo(stream);
+                    }
+                    propertyregistration.EncroachAtrfilepath = ATRfilePath;
+                }
                 #endregion
 
 
@@ -463,6 +544,8 @@ namespace LandInventory.Controllers
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                     return View("Index", result1);
                 }
                 else
@@ -522,6 +605,10 @@ namespace LandInventory.Controllers
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
             Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
             Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
 
 
             if (Data == null)
@@ -614,6 +701,29 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> DisposalTypeDownload(int Id)
         {
             string filename = _propertyregistrationService.GetDisposalFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> EncroachAtrDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetEncroachAtr(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        public async Task<IActionResult> HandedOverCopyofOrderDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetHandedOverCopyofOrderFile(Id);
             var memory = new MemoryStream();
             using (var stream = new FileStream(filename, FileMode.Open))
             {

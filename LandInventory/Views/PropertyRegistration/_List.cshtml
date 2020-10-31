@@ -103,7 +103,7 @@
             <th>Zone</th>
             <th>Division</th>
             <th>Locality(Village)</th>
-            <th>Khasra No.</th>
+            @*<th>Khasra No.</th>*@
             <th>Primary List No.</th>
             <th>Planned/Unplanned Land </th>
             @*<th>Encroachment Status</th>*@
@@ -122,13 +122,13 @@
             {
         <tr>
             <td>@(rowNo += 1)</td>
-            <td></td>
+            <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
             <td>@item.ClassificationOfLand.Name</td>
             <td>@item.Department.Name</td>
             <td>@item.Zone.Name</td>
             <td>@item.Division.Name</td>
-            <td>@item.Locality.Name</td>
-            <td>@item.KhasraNo</td>
+            <td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>
+            @*<td>@item.KhasraNo</td>*@
             <td>@item.PrimaryListNo</td>
             <td>@(item.PlannedUnplannedLand)</td>
             @*<td>@item.Palandmark</td>*@
@@ -168,13 +168,19 @@
         <td>@item.DisposalDate</td>
         <td>@item.DisposalComments</td>
         <td>@item.Remarks</td>*@
-            <td>
-                <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+        <td>
+            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
 
+            @if (item.IsValidate == 0)
+            {
                 <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+            }
+            @if (item.IsValidate == 1)
+            {
                 <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" onclick="return confirm('Are You Sure, You want to Dispose this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-erase" aria-hidden="true"></i></a>
+            }
             </td>
         </tr>
             }

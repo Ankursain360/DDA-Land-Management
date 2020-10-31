@@ -48,5 +48,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
         Task<List<Department>> GetHandedDepartmentDropDownList();
+        string GetEncroachAtr(int id);
+        string GetHandedOverCopyofOrderFile(int id);
     }
 }
