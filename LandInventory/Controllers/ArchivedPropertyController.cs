@@ -84,7 +84,7 @@ namespace LandInventory.Controllers
         {
             Propertyregistration propertyregistration = new Propertyregistration();
 
-            await BindDropDown(propertyregistration);
+            await BindDropDownView(propertyregistration);
             return View(propertyregistration);
         }
         [HttpPost]
@@ -103,17 +103,13 @@ namespace LandInventory.Controllers
         }
 
 
-        async Task BindDropDownInvnetory(Propertyregistration propertyregistration)
+        async Task BindDropDownView(Propertyregistration propertyregistration)
         {
-            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-            // propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList();
-            //    propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList();
+            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
-            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
+            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList(); propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
 
         public async Task<IActionResult> View(int id)
@@ -124,11 +120,15 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = Data.TakenOverFilePath;
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
-            await BindDropDownInvnetory(Data);
+            await BindDropDownView(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
             Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
             Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
 
 
             if (Data == null)

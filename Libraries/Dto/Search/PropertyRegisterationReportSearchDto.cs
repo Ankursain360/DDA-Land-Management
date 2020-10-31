@@ -8,6 +8,7 @@ namespace Dto.Search
     public class PropertyRegisterationReportSearchDto : BaseSearchDto
     {
         public string name { get; set; }
+        public int inventoriedIn{ get; set; }
         public int classificationofland { get; set; }
         public int department { get; set; }
         public int zone { get; set; }

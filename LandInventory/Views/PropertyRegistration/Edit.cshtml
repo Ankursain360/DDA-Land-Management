@@ -92,27 +92,27 @@
                     <div id="divPlannedSelection">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Colony</label>
-                            <input asp-for="Colony" type="text" class="form-control" />
+                            <input asp-for="Colony" type="text" class="form-control" maxlength="50"/>
                             <span class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Sector</label>
-                            <input asp-for="Sector" class="form-control" />
+                            <input asp-for="Sector" class="form-control" maxlength="50" />
                             <span asp-validation-for="Sector" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Block</label>
-                            <input type="text" class="form-control" />
-                            <span class="text-danger lb-sm"></span>
+                            <input type="text" class="form-control" maxlength="50" asp-for="Block" />
+                            <span class="text-danger lb-sm" asp-validation-for="Block"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Pocket</label>
-                            <input asp-for="Pocket" class="form-control" />
+                            <input asp-for="Pocket" class="form-control" maxlength="50" />
                             <span asp-validation-for="Pocket" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Plot No.</label>
-                            <input asp-for="PlotNo" class="form-control" />
+                            <input asp-for="PlotNo" class="form-control" maxlength="50" />
                             <span asp-validation-for="PlotNo" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -228,13 +228,13 @@
                                 <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
+                                <label class="control-label lb-sm">Vacant Area(in sq. mt.)</label>
                                 <input asp-for="Vacant"  class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                 <span asp-validation-for="Vacant" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Action On Encroachment</label>
-                                <input asp-for="ActionOnEncroachment" class="form-control" />
+                                <input asp-for="ActionOnEncroachment" class="form-control" maxlength="200"/>
                                 <span asp-validation-for="ActionOnEncroachment" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -355,17 +355,17 @@
                         <div id="divLitigationStatusSelection" style="display:none;">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Court Name</label>
-                                <input asp-for="CourtName" class="form-control" />
+                                <input asp-for="CourtName" class="form-control" maxlength="50" />
                                 <span asp-validation-for="CourtName" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Case No.</label>
-                                <input asp-for="CaseNo" class="form-control" />
+                                <input asp-for="CaseNo" class="form-control" maxlength="50" />
                                 <span asp-validation-for="CaseNo" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Opposite Party</label>
-                                <input asp-for="OppositeParty" class="form-control" />
+                                <input asp-for="OppositeParty" class="form-control" maxlength="100" />
                                 <span asp-validation-for="OppositeParty" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -529,7 +529,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Order No.</label>
-                            <input type="text" class="form-control" asp-for="HandedOverOrderNo" />
+                            <input type="text" class="form-control" asp-for="HandedOverOrderNo" maxlength="100"/>
                             <span asp-validation-for="HandedOverOrderNo" class="text-danger"></span>
                         </div>
                     </div>
@@ -538,7 +538,7 @@
                             <label class="control-label lb-sm">Copy of Order </label>
                             <input type="hidden" asp-for="HandedOverCopyofOrderFilepath" />
                             @{
-                                @if (ViewBag.HandedOverCopyofOrderDocView != null)
+                                @if (ViewBag.HandedOverCopyofOrderView != null)
                                 {
                                     @Html.ActionLink(" (View Existing Document)", "HandedOverCopyofOrderDownload", new { id = Model.Id })
                                     <input type="file" class="form-control" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
@@ -553,8 +553,8 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Transfer order Issue Authority </label>
-                            <input type="text" class="form-control" asp-for="HandedTransferOrder"/>
-                            <span class="text-danger"></span>
+                            <input type="text" class="form-control" asp-for="HandedTransferOrder" maxlength="100"/>
+                            <span class="text-danger lb-sm" asp-validation-for="HandedTransferOrder"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverFileData">Document</label>

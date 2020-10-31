@@ -286,6 +286,8 @@ namespace LandInventory.Controllers
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                     return View("Index", result1);
                 }
                 else

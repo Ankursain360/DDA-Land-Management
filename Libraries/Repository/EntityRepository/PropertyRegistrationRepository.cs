@@ -287,7 +287,13 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1)
+                                    .Where(x => x.IsDeleted == 1 && !badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
                 return data;
@@ -309,7 +315,13 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id))
+                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && badCodes.Contains(x.ClassificationOfLand.Id)
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
@@ -325,7 +337,13 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 )
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 
+                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
