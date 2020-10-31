@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Page>> GetAllPage();
         Task<List<Page>> GetPageUsingRepo();
-        Task<List<Module>> GetAllModule(); // To Get all data added by ishu
+        Task<List<Menu>> GetAllMenu(); // To Get all data added by ishu
         Task<bool> Update(int id, Page page); 
 
         Task<bool> Create(Page page);

@@ -9,8 +9,11 @@ namespace Libraries.Model.Entity
 {
     public class Menu : AuditableEntity<int>
     {
-    
-       
+        public Menu()
+        {
+            Page = new HashSet<Page>();
+        }
+
         public int? ModuleId { get; set; }
         public string Name { get; set; }
         public int? SortBy { get; set; }
@@ -20,5 +23,7 @@ namespace Libraries.Model.Entity
         public List<Module> modulelist { get; set; }
 
         public virtual Module Module { get; set; }
+
+        public ICollection<Page> Page { get; set; }
     }
 }

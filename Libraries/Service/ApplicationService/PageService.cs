@@ -47,11 +47,9 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _pageRepository.FindBy(a => a.Id == id);
             Page model = result.FirstOrDefault();
-            model.ModuleId = page.ModuleId;
-            model.Address = page.Address;
-            model.DisplayPageOnMenu = page.DisplayPageOnMenu;
-            model.Priority = page.Priority;
-         
+            model.MenuId = page.MenuId;
+            model.Url = page.Url;
+           
             model.IsActive = page.IsActive;
 
 
@@ -69,10 +67,10 @@ namespace Libraries.Service.ApplicationService
             _pageRepository.Add(page);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        public async Task<List<Module>> GetAllModule()
+        public async Task<List<Menu>> GetAllMenu()
         {
-            List<Module> moduleList = await _pageRepository.GetAllModule();
-            return moduleList;
+            List<Menu> menuList = await _pageRepository.GetAllMenu();
+            return menuList;
         }
 
         public async Task<bool> CheckUniqueName(int id, string page)
