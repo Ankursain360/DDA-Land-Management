@@ -205,5 +205,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Landtransfer.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Where(x => (x.IsActive == 1) && (x.PropertyRegistrationId == propertyRegistrationId)).ToListAsync();
         }
+
+        public async Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id)
+        {
+            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => (x.IsActive == 1) && (x.Id == id)).FirstOrDefaultAsync();
+        }
     }
 }

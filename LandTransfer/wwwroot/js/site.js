@@ -4,7 +4,7 @@
 // Write your JavaScript code.
 var AllRules = '';
 $(document).ready(function () {
-	$("select").select2({
+	$("select[class!='form-control dda-dropdown select2destroy']").select2({
 		placeholder: "Select",
 		allowClear: true
 	});

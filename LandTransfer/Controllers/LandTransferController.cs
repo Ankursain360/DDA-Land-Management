@@ -125,11 +125,11 @@ namespace LandTransfer.Controllers
             Data.Propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.DepartmentId);
             Data.Propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.Propertyregistration.DivisionId);
             Data.Propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.ZoneId);
-            
+
             Data.Propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
-            Data.Propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.TakenOverDepartmentId??0);
+            Data.Propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.TakenOverDepartmentId ?? 0);
             Data.Propertyregistration.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.TakenOverZoneId ?? 0);
-            
+
             Data.Propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
             Data.Propertyregistration.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.HandedOverDepartmentId ?? 0);
             Data.Propertyregistration.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.HandedOverZoneId ?? 0);
@@ -255,21 +255,21 @@ namespace LandTransfer.Controllers
         }
         public async Task<PartialViewResult> GetHistoryDetails(string KhasraNo)
         {
-                var result = await _landTransferService.GetHistoryDetails(KhasraNo);
-                if (result != null)
-                {
-                    return PartialView("_HistoryDetails", result);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return PartialView();
-                }
+            var result = await _landTransferService.GetHistoryDetails(KhasraNo);
+            if (result != null)
+            {
+                return PartialView("_HistoryDetails", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
         }
         public async Task<IActionResult> Download(int Id)
         {
             FileHelper file = new FileHelper();
-            var Data =await _landTransferService.FetchSingleResult(Id);
+            var Data = await _landTransferService.FetchSingleResult(Id);
             string filename = Data.CopyofOrderDocPath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }

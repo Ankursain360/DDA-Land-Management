@@ -141,6 +141,11 @@ $(document).ready(function () {
     if (value == 1 || value == 0) {
         $('#divBoundarySelection').show();
     }
+    $("a").each(function () {
+        if ($(this).attr("href") == '/LandTransfer/ViewDocument?path=') {
+            $(this).removeAttr("href");
+        }
+    });
 
     var value = $('#Propertyregistration_PlannedUnplannedLand').val();
     if (value == 'Planned Land') {

@@ -40,6 +40,11 @@ namespace Libraries.Service.ApplicationService
             Landtransfer model = result.FirstOrDefault();
             return model;
         }
+        public async Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id)
+        {
+            Landtransfer model =await _landTransferRepository.FetchSingleResultWithPropertyRegistration(id);
+            return model;
+        }
 
         public async Task<List<Department>> GetAllDepartment()
         {

@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Landtransfer Landtransfer); // To Upadte Particular data added by Praveen
         Task<bool> Create(Landtransfer Landtransfer);
         Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
+        Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<List<Landtransfer>> GetAllLandTransferList();
         Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu

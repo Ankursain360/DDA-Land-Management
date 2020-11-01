@@ -29,6 +29,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landtransfer>> GetAllLandTransferList();
         Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id); 
         Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model);//added by shalini
+        Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id);
 
         //Current status of land history methods:
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
