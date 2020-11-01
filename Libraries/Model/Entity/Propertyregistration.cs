@@ -15,6 +15,10 @@ namespace Libraries.Model.Entity
         //    Deletedproperty = new HashSet<Deletedproperty>();
         //    Disposedproperty = new HashSet<Disposedproperty>();
         //}
+        public Propertyregistration()
+        {
+            Landtransfer = new HashSet<Landtransfer>();
+        }
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
 
@@ -246,6 +250,7 @@ namespace Libraries.Model.Entity
         public Restoreproperty Restoreproperty { get; set; }
         //public ICollection<Deletedproperty> Deletedproperty { get; set; }
         //public ICollection<Disposedproperty> Disposedproperty { get; set; }
+        public ICollection<Landtransfer> Landtransfer { get; set; }
 
         public Deletedproperty Deletedproperty { get; set; }
         public Disposedproperty Disposedproperty { get; set; }
