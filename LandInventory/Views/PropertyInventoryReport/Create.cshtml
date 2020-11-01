@@ -34,7 +34,7 @@
                 <div class="form-group col-md-4">
                     <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
                     <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
-                        <option value="0">All</option>
+                        @*<option value="0">All</option>*@
                         <option value="Planned Land">Planned Land</option>
                         <option value="Unplanned Land">Unplanned Land</option>
                     </select>
@@ -80,10 +80,10 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Khasra No</label>
-                        <select class="form-control dda-dropdown" asp-for="KhasraNo" asp-items="@(new SelectList(Model.KhasraNoList, "KhasraNo","KhasraNo"))">
+                        @*<select class="form-control dda-dropdown" asp-for="KhasraNo" asp-items="@(new SelectList(Model.KhasraNoList, "KhasraNo","KhasraNo"))">
                             <option value="0">All</option>
-                        </select>
-                        @*<input asp-for="KhasraNo" class="form-control" />*@
+                        </select>*@
+                        <input asp-for="KhasraNo" class="form-control" />
                         <span asp-validation-for="KhasraNo" class="text-danger lb-sm"></span>
                     </div>
                 </div>
