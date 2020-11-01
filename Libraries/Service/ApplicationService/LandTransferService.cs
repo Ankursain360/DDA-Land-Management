@@ -128,9 +128,13 @@ namespace Libraries.Service.ApplicationService
             return await _landTransferRepository.GetHistoryDetails(khasraNo);
         }
 
+        public async Task<List<Landtransfer>> GetAllLandTransfer(int propertyRegistrationId)
+        {
+            return await _landTransferRepository.GetAllLandTransfer(propertyRegistrationId);
+        }
         public async Task<List<Landtransfer>> GetAllLandTransfer()
         {
-            return await _landTransferRepository.GetAllLandTransfer();
+            return await _landTransferRepository.GetAllLandtransfer();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {

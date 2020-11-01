@@ -30,12 +30,7 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Locality.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
         }
-        public async Task<List<Landtransfer>> GetAllLandtransfer()
-        {
-            return await _dbContext.Landtransfer.Where(x => x.IsActive == 1).ToListAsync();
-        }
 
-       
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             return await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
@@ -53,12 +48,12 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model) //added by ishu
         {
             return await _dbContext.Landtransfer
-                
+
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
                 .Include(x => x.Locality)
-                .Where(x =>(x.IsActive == 1)
+                .Where(x => (x.IsActive == 1)
                 && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
@@ -74,10 +69,6 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
         {
             return await _dbContext.Landtransfer.Where(x => x.KhasraNo == (khasraNo).Trim() && x.IsActive == 1).ToListAsync();
-        }
-        public async Task<List<Landtransfer>> GetAllLandTransfer()
-        {
-            return await _dbContext.Landtransfer.Include(x=>x.Department).Include(x=>x.Zone).Include(x=>x.Division).Include(x=>x.Locality).Where(x => x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {
@@ -101,7 +92,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
-                
+
                 .Where(x => (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
@@ -174,8 +165,8 @@ namespace Libraries.Repository.EntityRepository
         //*****************current status of land *********
         public async Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model)
         {
-           _dbContext.Currentstatusoflandhistory.Add(model);
-         
+            _dbContext.Currentstatusoflandhistory.Add(model);
+
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
@@ -186,16 +177,33 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model)
         {
-            return await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
-                            .Include(x => x.Department)
-                            .Include(x => x.Zone)
-                            .Include(x => x.Division)
-                            .Include(x => x.Locality)
-                            .Include(x => x.DisposalType)
-                            .Include(x => x.MainLandUse)
-                                .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)) 
-                                .OrderByDescending(x => x.Id)
-                            .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+            try
+            {
+                return await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Division)
+                                .Include(x => x.Locality)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1))
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public async Task<List<Landtransfer>> GetAllLandtransfer()
+        {
+            return await _dbContext.Landtransfer.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Where(x => x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Landtransfer>> GetAllLandTransfer(int propertyRegistrationId)
+        {
+            return await _dbContext.Landtransfer.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Where(x => (x.IsActive == 1) && (x.PropertyRegistrationId == propertyRegistrationId)).ToListAsync();
         }
     }
 }
