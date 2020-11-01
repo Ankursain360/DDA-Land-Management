@@ -21,7 +21,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Page>> GetPagedPage(PageSearchDto model)
         {
             return await _dbContext.Page
-                .Include(x => x.Module)
+                .Include(x => x.Menu)
                 .Where(x => x.IsActive==1)
                 .GetPaged<Page>(model.PageNumber, model.PageSize);
         }
@@ -31,16 +31,16 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Page>> GetAllPage()
         {
-            return await _dbContext.Page.Include(x=>x.Module).ToListAsync();
+            return await _dbContext.Page.Include(x=>x.Menu).ToListAsync();
         }
-        public async Task<List<Module>> GetAllModule()
+        public async Task<List<Menu>> GetAllMenu()
         {
-            List<Module> moduleList = await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
-            return moduleList;
+            List<Menu> menuList = await _dbContext.Menu.Where(x => x.IsActive == 1).ToListAsync();
+            return menuList;
         }
-        public async Task<bool> Any(int id, string name)
+        public async Task<bool> Any(int id, string name,int MenuId)
         {
-            return await _dbContext.Page.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+            return await _dbContext.Page.AnyAsync(t => t.Id != id && t.MenuId == MenuId && t.Name.ToLower() == name.ToLower());
         }
 
        

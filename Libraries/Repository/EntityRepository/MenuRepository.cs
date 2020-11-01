@@ -41,7 +41,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.IsActive == 1 && t.Name.ToLower() == Name.ToLower());
         }
-
+        //public async Task<bool> AnyCode(int id, string code)
+        //{
+        //    return await _dbContext.Locality.AnyAsync(t => t.Id != id && t.LocalityCode.ToLower() == code.ToLower());
+        //}
 
         public async Task<List<Menu>> GetAllMenu()
         {

@@ -162,7 +162,7 @@ namespace SiteMaster.Controllers
             }
             else
             {
-                return Json($"Division: {Name} already exist");
+                return Json($"Menu: {Name} already exist");
             }
         }
 

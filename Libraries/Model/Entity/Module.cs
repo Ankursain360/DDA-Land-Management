@@ -8,10 +8,7 @@ namespace Libraries.Model.Entity
 {
     public class Module : AuditableEntity<int>
     {
-        public Module()
-        {
-            Page = new HashSet<Page>();
-        }
+       
 
         [Required]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
@@ -22,7 +19,7 @@ namespace Libraries.Model.Entity
         public string Url { get; set; }
         public string Icon { get; set; }
         public string Target { get; set; }
-        public ICollection<Page> Page { get; set; }
+      
         public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
           public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Menu> Menu { get; set; }
