@@ -40,9 +40,9 @@ $(document).ready(function () {
 			return false;
 		};
 	});
-	$('input,textarea,select').on('keyup keypress change', function () {
-		ValidateForm();
-	});
+	//$('input,textarea,select').on('keyup keypress change', function () {
+	//	ValidateForm();
+	//});
 });
 function ValidateForm() {
 	var isFormValid = true;

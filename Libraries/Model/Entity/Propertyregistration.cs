@@ -10,10 +10,11 @@ namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
-        public Propertyregistration()
-        {
-            Landtransfer = new HashSet<Landtransfer>();
-        }
+        //public Propertyregistration()
+        //{
+        //    Deletedproperty = new HashSet<Deletedproperty>();
+        //    Disposedproperty = new HashSet<Disposedproperty>();
+        //}
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
 
@@ -50,9 +51,9 @@ namespace Libraries.Model.Entity
         public decimal? TotalAreaInBiswa { get; set; }
         public decimal? TotalAreaInBiswani { get; set; }
         public decimal? TotalAreaInSqAcreHt { get; set; }
-        public virtual ICollection<Landtransfer> Landtransfer { get; set; }
 
-        //  [Required(ErrorMessage = "Total Area is Mandatory Field")]
+
+      //  [Required(ErrorMessage = "Total Area is Mandatory Field")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? TotalArea { get; set; }
@@ -242,7 +243,14 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string RestoreReason { get; set; }
-        public Deletedproperty Deletedproperty { get; set; }
         public Restoreproperty Restoreproperty { get; set; }
+        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
+        //public ICollection<Disposedproperty> Disposedproperty { get; set; }
+
+        public Deletedproperty Deletedproperty { get; set; }
+        public Disposedproperty Disposedproperty { get; set; }
+
+        [NotMapped]
+        public List<Propertyregistration> KhasraNoList { get; set; }
     }
 }

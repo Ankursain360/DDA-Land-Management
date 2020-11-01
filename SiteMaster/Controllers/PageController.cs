@@ -36,7 +36,7 @@ namespace SiteMaster.Controllers
         {
             Page page = new Page();
             
-            page.ModuleList = await _pageService.GetAllModule();
+            page.MenuList = await _pageService.GetAllMenu();
             return View(page);
         }
 
@@ -47,7 +47,7 @@ namespace SiteMaster.Controllers
         {
             try
             {
-                page.ModuleList = await _pageService.GetAllModule();
+                page.MenuList = await _pageService.GetAllMenu();
                 if (ModelState.IsValid)
                 {
                    
@@ -83,7 +83,8 @@ namespace SiteMaster.Controllers
         {
 
             var Data = await _pageService.FetchSingleResult(id);
-            Data.ModuleList = await _pageService.GetAllModule();
+           
+            Data.MenuList = await _pageService.GetAllMenu();
             if (Data == null)
             {
                 return NotFound();
@@ -124,9 +125,9 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, string Name,int MenuId)
         {
-            var result = await _pageService.CheckUniqueName(Id, Name);
+            var result = await _pageService.CheckUniqueName(Id, Name,MenuId);
             if (result == false)
             {
                 return Json(true);
@@ -138,12 +139,11 @@ namespace SiteMaster.Controllers
         }
 
 
-       
 
         public async Task<IActionResult> View(int id)
         {
             var Data = await _pageService.FetchSingleResult(id);
-            Data.ModuleList = await _pageService.GetAllModule();
+            Data.MenuList = await _pageService.GetAllMenu();
             if (Data == null)
             {
                 return NotFound();

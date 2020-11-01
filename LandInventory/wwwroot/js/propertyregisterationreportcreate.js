@@ -44,6 +44,13 @@ $(document).ready(function () {
             $('#divPlannedSelection').show();
             $("#divLayoutPlan").show();
             $('#divUnplannedSelection').hide();
+            $('#KhasraNo').val('');
+            $('#Colony').val('');
+            $('#Sector').val('');
+            $('#Block').val('');
+            $('#Pocket').val('');
+            $('#PlotNo').val('');
+            $("#LocalityId").val('0').trigger('change');
             callSelect2();
         }
         else if (value == 'Unplanned Land') {
@@ -51,6 +58,13 @@ $(document).ready(function () {
             $('#divPlannedSelection').hide();
             $("#divLayoutPlan").hide();
             $('#divUnplannedSelection').show();
+            $('#KhasraNo').val('');
+            $('#Colony').val('');
+            $('#Sector').val('');
+            $('#Block').val('');
+            $('#Pocket').val('');
+            $('#PlotNo').val('');
+            $("#LocalityId").val('0').trigger('change');
             callSelect2();
         }
         else {
@@ -58,6 +72,13 @@ $(document).ready(function () {
             $('#divPlannedSelection').show();
             $("#divLayoutPlan").show();
             $('#divUnplannedSelection').show();
+            $('#KhasraNo').val('');
+            $('#Colony').val('');
+            $('#Sector').val('');
+            $('#Block').val('');
+            $('#Pocket').val('');
+            $('#PlotNo').val('');
+            $("#LocalityId").val('0').trigger('change');
             callSelect2();
         }
     });
@@ -67,7 +88,7 @@ $(document).ready(function () {
 function GetZoneList(id) {
     debugger;
     HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
-       
+
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
@@ -135,7 +156,14 @@ function GetSearchParam(pageNumber, pageSize) {
         plannedUnplannedLand: plannedUnplannedLand,
         mainLandUse: parseInt(mainLandUseId),
         litigation: parseInt(litigationid),
-        encroached: parseInt(encroachedid)
+        encroached: parseInt(encroachedid),
+        inventoriedIn: parseInt($('#InventoriedInId').val()),
+        khasraNo: $('#KhasraNo').val(),
+        colony: $('#Colony').val(),
+        sector: $('#Sector').val(),
+        block: $('#Block').val(),
+        pocket: $('#Pocket').val(),
+        plotNo: $('#PlotNo').val(),
     }
     test.push(model);
     return model;

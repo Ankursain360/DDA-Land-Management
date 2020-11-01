@@ -9,24 +9,24 @@ namespace Libraries.Model.Entity
 {
     public class Page : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "Module name is required")]
-        public int? ModuleId { get; set; }
+        [Required(ErrorMessage = "Menu name is required")]
+        public int? MenuId { get; set; }
         [Required (ErrorMessage ="Page name is required")]
-        //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
+       
         [Remote(action: "Exist", controller: "Page", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please fill Address ")]
-        public string Address { get; set; }
-        [Required(ErrorMessage = "Please fill Display Page On Menu feild ")]
-        public byte? DisplayPageOnMenu { get; set; }
-        [Required]
-        public int? Priority { get; set; }
-        [Required(ErrorMessage = "Please fill Status feild")]
+        [Required(ErrorMessage = "Please fill Url feild ")]
+        public string Url { get; set; }
+       
         public byte? IsActive { get; set; }
 
         [NotMapped]
-        public List<Module> ModuleList { get; set; }
-        public virtual Module Module { get; set; }
+        //public List<Module> ModuleList { get; set; }
 
+        //public virtual Module Module { get; set; }
+
+        public List<Menu> MenuList { get; set; }
+
+        public Menu Menu { get; set; }
     }
 }
