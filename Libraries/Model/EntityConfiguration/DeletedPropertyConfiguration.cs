@@ -40,6 +40,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            //builder.HasOne(d => d.PropertyRegistration)
+            //    .WithMany(p => p.Deletedproperty)
+            //    .HasForeignKey(d => d.PropertyRegistrationId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("fkPropertyRegistrationId");
+
 
 
         }

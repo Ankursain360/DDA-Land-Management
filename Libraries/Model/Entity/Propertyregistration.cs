@@ -10,6 +10,11 @@ namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
     {
+        //public Propertyregistration()
+        //{
+        //    Deletedproperty = new HashSet<Deletedproperty>();
+        //    Disposedproperty = new HashSet<Disposedproperty>();
+        //}
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
 
@@ -238,7 +243,14 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string RestoreReason { get; set; }
-        public Deletedproperty Deletedproperty { get; set; }
         public Restoreproperty Restoreproperty { get; set; }
+        //public ICollection<Deletedproperty> Deletedproperty { get; set; }
+        //public ICollection<Disposedproperty> Disposedproperty { get; set; }
+
+        public Deletedproperty Deletedproperty { get; set; }
+        public Disposedproperty Disposedproperty { get; set; }
+
+        [NotMapped]
+        public List<Propertyregistration> KhasraNoList { get; set; }
     }
 }

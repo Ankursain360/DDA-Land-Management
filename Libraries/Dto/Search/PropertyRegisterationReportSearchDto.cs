@@ -18,6 +18,14 @@ namespace Dto.Search
         public int mainLandUse { get; set; }
         public int litigation { get; set; }
         public int encroached { get; set; }
+        public string khasraNo { get; set; }
+        public string colony { get; set; }
+        public string sector { get; set; }
+        public string block { get; set; }
+        public string pocket { get; set; }
+        public string plotNo { get; set; }
+
+
 
     }
 }

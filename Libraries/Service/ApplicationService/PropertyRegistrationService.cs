@@ -308,5 +308,28 @@ namespace Libraries.Service.ApplicationService
         {
             return _propertyregistrationRepository.GetHandedOverCopyofOrderFile(id);
         }
+
+        public async Task<bool> DisposeDetails(int id)
+        {
+            var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+            Propertyregistration model = form.FirstOrDefault();
+            model.IsDisposed = 0;
+            _propertyregistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> InsertInDisposedProperty(int id, Disposedproperty model)
+        {
+            model.PropertyRegistrationId = id;
+            model.IsDisposed = 0;
+            model.DisposedBy = 1;
+            model.DisposedDate = DateTime.Now;
+            return await _propertyregistrationRepository.InsertInDisposedProperty(model);
+        }
+
+        public async Task<List<Propertyregistration>> GetKhasraReportList()
+        {
+            return await _propertyregistrationRepository.GetKhasraReportList();
+        }
     }
 }
