@@ -4,11 +4,10 @@
     <thead class="thead">
         <tr>
             <th>Sr.No</th>
-            <th>Module Name</th>
+            <th>Menu Name</th>
             <th>Page Name</th>
-            <th>Page Address</th>
-            <th> Diaplay Page On Menu</th>
-            <th>Priority</th>
+            <th>Page Url</th>
+           
             <th> Status</th>
             <th>Operation</th>
         </tr>
@@ -18,11 +17,11 @@
         {
         <tr>
             <td>@(rowNo += 1)</td>
-            <td>@item.Module.Name</td>
+            <td>@item.Menu.Name</td>
             <td>@item.Name</td>
-            <td>@item.Address</td>
-            <td>@item.DisplayPageOnMenu</td>
-            <td>@item.Priority</td>
+            <td>@item.Url</td>
+           
+            @*<td>@item.IsActive</td>*@
 
             <td>
                 @(item.IsActive  == 1 ? "Active" : "Inactive" )

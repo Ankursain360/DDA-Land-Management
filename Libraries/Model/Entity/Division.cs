@@ -13,7 +13,8 @@ namespace Libraries.Model.Entity
         public Division()
         {
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
-            Landtransfer = new HashSet<Landtransfer>();
+            LandtransferHandedOverDivision = new HashSet<Landtransfer>();
+            LandtransferTakenOverDivision = new HashSet<Landtransfer>();
             Locality = new HashSet<Locality>();
             Nazulland = new HashSet<Nazulland>();
             Propertyregistration = new HashSet<Propertyregistration>();
@@ -40,7 +41,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
-        public virtual ICollection<Landtransfer> Landtransfer { get; set; }
+        public virtual ICollection<Landtransfer> LandtransferHandedOverDivision { get; set; }
+        public virtual ICollection<Landtransfer> LandtransferTakenOverDivision { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Nazulland> Nazulland { get; set; }

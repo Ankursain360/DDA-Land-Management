@@ -1,74 +1,69 @@
-﻿
-
-    $(document).ready(function () {
-        var value = $('#PlannedUnplannedLand').val();
-        if (value == 'Planned Land') {
-        $('#divPlannedLand').show();
+﻿$(document).ready(function () {
+    debugger
+    if ($('#LandTransfer_Encroachment option:selected').val() == '1') {
+        $("#divEncroachmentYesSelectionForLandTransfer").show();
+    } else {
+        $("#divEncroachmentYesSelectionForLandTransfer").hide();
+    }
+    $("a").each(function () {
+        if ($(this).attr("href") =='/CurrentStatusOfHandedOverTakenOverLand/ViewDocument?path=') {
+            $(this).removeAttr("href");
         }
     });
-    $(function () {
-        $('#DD1').change(function () {
-            var value = $("#DD1").val();
-            if (value == 'Yes') {
-                $("#TssSurvey").show();
+    $("#collapseExample3 input,select,textarea").attr("disabled", "disabled");
+    var value = $('#PlannedUnplannedLand').val();
+    if (value == 'Planned Land') {
+        $('#divPlannedLand').show();
+    }
+    $('#DD1').change(function () {
+        var value = $("#DD1").val();
+        if (value == 'Yes') {
+            $("#TssSurvey").show();
 
-            }
-            else {
-                $("#TssSurvey").hide();
-            }
-        });
+        }
+        else {
+            $("#TssSurvey").hide();
+        }
+    });
+    $('#DD2').change(function () {
+        var value = $("#DD2").val();
+        if (value == 'Yes') {
+            $("#Encroachment").show();
+
+        }
+        else {
+            $("#Encroachment").hide();
+        }
+    });
+    $('#DD3').change(function () {
+        var value = $("#DD3").val();
+        if (value == 'Yes') {
+            $("#Boundary").show();
+
+        }
+        else {
+            $("#Boundary").hide();
+        }
+    });
+    $('#DD4').change(function () {
+        var value = $("#DD4").val();
+        if (value == 'Yes') {
+            $("#Utilization").show();
+
+        }
+        else {
+            $("#Utilization").hide();
+        }
     });
 
-    $(function () {
-        $('#DD2').change(function () {
-            var value = $("#DD2").val();
-            if (value == 'Yes') {
-                $("#Encroachment").show();
-
-            }
-            else {
-                $("#Encroachment").hide();
-            }
-        });
+    $('#PlannedUnplannedLand').change(function () {
+        debugger;
+        var value = $('#PlannedUnplannedLand').val();
+        if (value == 'Planned Land') {
+            $('#divPlannedLand').show();
+        }
+        else {
+            $('#divPlannedLand').hide();
+        }
     });
-
-
-    $(function () {
-        $('#DD3').change(function () {
-            var value = $("#DD3").val();
-            if (value == 'Yes') {
-                $("#Boundary").show();
-
-            }
-            else {
-                $("#Boundary").hide();
-            }
-        });
-    });
-
-
-    $(function () {
-        $('#DD4').change(function () {
-            var value = $("#DD4").val();
-            if (value == 'Yes') {
-                $("#Utilization").show();
-
-            }
-            else {
-                $("#Utilization").hide();
-            }
-        });
-    });
-
-    $(function () {
-        $('#PlannedUnplannedLand').change(function () {
-            debugger;
-            var value = $('#PlannedUnplannedLand').val();
-            if (value == 'Planned Land') {
-                $('#divPlannedLand').show();
-            }
-            else {
-                $('#divPlannedLand').hide();
-            }
-        });
-    });
+});

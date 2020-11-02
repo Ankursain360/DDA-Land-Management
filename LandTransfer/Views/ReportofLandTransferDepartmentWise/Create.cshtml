@@ -26,49 +26,48 @@
         </div>
         <div class="panel-body">
             <form>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Report Type<span style="color:red">*</span></label>
-                    <select asp-for="ReportType" id="ReportType" class="form-control dda-dropdown" >
-                        <option value="0">Handed Over</option>
-                        <option value="1">Taken Over</option>
-                    </select>
-                    <span asp-validation-for="ReportType" class="text-danger"></span>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Report Type<span style="color:red">*</span></label>
+                        <select asp-for="ReportType" id="ReportType" class="form-control dda-dropdown">
+                            <option value="0">Handed Over</option>
+                            <option value="1">Taken Over</option>
+                        </select>
+                        <span asp-validation-for="ReportType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm"> Department <span style="color:red">*</span></label>
+                        <select id="DepartmentId" required="required" requiredMsg="Please Select Department" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm"> Department <span style="color:red">*</span></label>
-                    <select asp-for="DepartmentId" id="DepartmentId" required="required" requiredMsg="Please Select Department" class="form-control dda-dropdown" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" >
-                        <option value="">Select</option>
-                    </select>
-                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                </div>
-            </div>
 
-                    <div class="row ">
-                        <div class="form-group col-md-12" style="margin-bottom:40px;">
-                            <input type="button" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-                            <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-primary dda-pageheading" />
+                <div class="row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="button" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
+                        <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-primary dda-pageheading" />
+                    </div>
+                </div>
+
+                <div id="LoadReportView">
+
+                </div>
+
+
+                @*<br />
+                    <div class="form-row">
+                        <div class=" form-group  col-md-12">
+                            <input type="submit" value="Export to Excel" class="btn btn-primary  dda-pageheading" style="width:150px !important;" />
                         </div>
-                    </div>
+                    </div>*@
 
-                    <div id="LoadReportView">
-
-                    </div>
-
-
-                    @*<br />
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-                        <input type="submit" value="Export to Excel" class="btn btn-primary  dda-pageheading" style="width:150px !important;" />
-                    </div>
-                </div>*@
-
-                    </form>
-                </div>
-            </div>
+            </form>
         </div>
+    </div>
+</div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

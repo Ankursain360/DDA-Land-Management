@@ -31,6 +31,7 @@ namespace Libraries.Service.IApplicationService
 
 
         Task<bool> CheckDeleteAuthority(int id);
+        Task<List<Propertyregistration>> GetKhasraReportList();
         string GetFile(int id);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
@@ -48,5 +49,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> InsertInRestoreProperty(int id, Restoreproperty model);
         Task<List<Department>> GetTakenDepartmentDropDownList();
         Task<List<Department>> GetHandedDepartmentDropDownList();
+        string GetEncroachAtr(int id);
+        string GetHandedOverCopyofOrderFile(int id);
+        Task<bool> DisposeDetails(int id);
+        Task<bool> InsertInDisposedProperty(int id, Disposedproperty model);
     }
 }

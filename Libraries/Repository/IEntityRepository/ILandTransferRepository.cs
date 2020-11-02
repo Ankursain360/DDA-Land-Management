@@ -13,10 +13,12 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<Landtransfer>> GetPagedLandtransfer(LandTransferSearchDto model);
+        Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model);
+
         Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
-        Task<List<Landtransfer>> GetAllLandTransfer();
+        Task<List<Landtransfer>> GetAllLandTransfer(int propertyRegistrationId);
         Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int primaryListNo);
 
 
@@ -27,6 +29,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Landtransfer>> GetAllLandTransferList();
         Task<List<Landtransfer>> GetLandTransferReportdataHandover(int id); 
         Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model);//added by shalini
+        Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id);
 
         //Current status of land history methods:
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);

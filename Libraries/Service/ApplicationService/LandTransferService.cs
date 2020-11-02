@@ -40,6 +40,11 @@ namespace Libraries.Service.ApplicationService
             Landtransfer model = result.FirstOrDefault();
             return model;
         }
+        public async Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id)
+        {
+            Landtransfer model =await _landTransferRepository.FetchSingleResultWithPropertyRegistration(id);
+            return model;
+        }
 
         public async Task<List<Department>> GetAllDepartment()
         {
@@ -68,24 +73,16 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _landTransferRepository.FindBy(a => a.Id == id);
             Landtransfer model = result.FirstOrDefault();
-            model.Address = Landtransfer.Address;
             model.CopyofOrderDocPath = Landtransfer.CopyofOrder != null ? Landtransfer.CopyofOrderDocPath : model.CopyofOrderDocPath;
             model.DateofTakenOver = Landtransfer.DateofTakenOver;
-            model.DivisionId = Landtransfer.DivisionId;
             model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
             model.HandedOverDate = Landtransfer.HandedOverDate;
             model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
-            model.KhasraNo = Landtransfer.KhasraNo;
-            model.BuildupArea = Landtransfer.BuildupArea;
-            model.VacantArea = Landtransfer.VacantArea;
-            model.TotalArea = Landtransfer.TotalArea;
             model.OrderNo = Landtransfer.OrderNo;
             model.Remarks = Landtransfer.Remarks;
             model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
             model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
             model.TransferorderIssueAuthority = Landtransfer.TransferorderIssueAuthority;
-            model.LocalityId = Landtransfer.LocalityId;
-            model.ZoneId = Landtransfer.ZoneId;
             model.IsActive = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -128,9 +125,13 @@ namespace Libraries.Service.ApplicationService
             return await _landTransferRepository.GetHistoryDetails(khasraNo);
         }
 
+        public async Task<List<Landtransfer>> GetAllLandTransfer(int propertyRegistrationId)
+        {
+            return await _landTransferRepository.GetAllLandTransfer(propertyRegistrationId);
+        }
         public async Task<List<Landtransfer>> GetAllLandTransfer()
         {
-            return await _landTransferRepository.GetAllLandTransfer();
+            return await _landTransferRepository.GetAllLandtransfer();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {
@@ -174,6 +175,10 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId)
         {
             return await _landTransferRepository.GetCurrentstatusoflandhistory(landtransferId);
+        }
+        public async Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model) //added by ishu
+        {
+            return await _landTransferRepository.GetPagedCurrentStatusLandtransfer(model);
         }
 
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model)

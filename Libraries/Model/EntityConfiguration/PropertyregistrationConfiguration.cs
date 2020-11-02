@@ -29,7 +29,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasName("DivisionId");
 
             builder.HasIndex(e => e.LocalityId)
-                .HasName("LocalityId");
+                .HasName("LocalityId_idx");
 
             builder.HasIndex(e => e.MainLandUseId)
                 .HasName("MainLandUseId");
@@ -39,7 +39,23 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.ActionOnEncroachment)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+
+            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
+
+            builder.Property(e => e.Block)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
             builder.Property(e => e.Boundary).HasColumnType("int(11)");
+
+            builder.Property(e => e.BoundaryAreaCovered).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.BoundaryDimension)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.BoundaryRemarks)
                 .HasMaxLength(5000)
@@ -55,13 +71,24 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.Property(e => e.CaseNo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
             builder.Property(e => e.ClassificationOfLandId).HasColumnType("int(11)");
+
+            builder.Property(e => e.Colony)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            builder.Property(e => e.CourtName)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-          
             builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DisposalComments)
@@ -80,13 +107,33 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.Property(e => e.EncroachAtrfilepath)
+                .HasColumnName("EncroachATRFilepath")
+                .HasColumnType("longtext");
+
             builder.Property(e => e.Encroached)
                 .HasColumnType("decimal(18,3)")
                 .HasDefaultValueSql("0.000");
 
+            builder.Property(e => e.EncroachedPartiallyFully)
+                .HasMaxLength(20)
+                .IsUnicode(false);
+
             builder.Property(e => e.EncroachmentStatusId).HasColumnType("int(11)");
 
+            builder.Property(e => e.EncrochedArea).HasColumnType("decimal(18,3)");
+
             builder.Property(e => e.GeoFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.GeoLattitude)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.GeoLongitude)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.GeoPhotoFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.GeoReferencing).HasColumnType("int(11)");
 
@@ -94,9 +141,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(5000)
                 .IsUnicode(false);
 
+            builder.Property(e => e.HandedOverCopyofOrderFilepath).HasColumnType("longtext");
+
             builder.Property(e => e.HandedOverDate).HasColumnType("date");
 
             builder.Property(e => e.HandedOverDepartmentId).HasColumnType("int(11)");
+
+            builder.Property(e => e.HandedOverDivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.HandedOverEmailId)
                 .HasMaxLength(200)
@@ -116,9 +167,23 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
+            builder.Property(e => e.HandedOverOrderNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.HandedOverZoneId).HasColumnType("int(11)");
+
+            builder.Property(e => e.HandedTransferOrder)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.InventoriedInId).HasColumnType("int(11)");
+
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.IsDeleted).HasColumnType("tinyint(4)");
+
+            builder.Property(e => e.IsDisposed).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.IsValidate).HasColumnType("tinyint(4)");
 
@@ -127,8 +192,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.LayoutFilePath).HasColumnType("longtext");
-
-            builder.Property(e => e.LayoutPlan).HasColumnType("int(11)");
 
             builder.Property(e => e.LitigationStatus).HasColumnType("int(11)");
 
@@ -144,6 +207,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.OppositeParty)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
             builder.Property(e => e.Palandmark)
                 .HasColumnName("PALandmark")
                 .HasMaxLength(5000)
@@ -154,12 +221,24 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PlotNo)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Pocket)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
             builder.Property(e => e.PrimaryListNo)
-                   .HasMaxLength(200)
-                   .IsUnicode(false);
+                .HasMaxLength(200)
+                .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Sector)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.SubUse)
@@ -173,6 +252,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.TakenOverDate).HasColumnType("date");
 
             builder.Property(e => e.TakenOverDepartmentId).HasColumnType("int(11)");
+
+            builder.Property(e => e.TakenOverDivisionId).HasColumnType("int(11)");
 
             builder.Property(e => e.TakenOverEmailId)
                 .HasMaxLength(200)
@@ -192,11 +273,17 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(200)
                 .IsUnicode(false);
 
+            builder.Property(e => e.TakenOverZoneId).HasColumnType("int(11)");
+
             builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
-            builder.Property(e => e.TotalAreaInBigha)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.TotalAreaInBigha).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInBiswa).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInBiswani).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.Vacant)
                 .HasColumnType("decimal(18,3)")
@@ -209,6 +296,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.ClassificationOfLandId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("ClassificationOfLandId");
+
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Propertyregistration)
+                .HasForeignKey(d => d.DepartmentId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("DepartmentId");
 
             builder.HasOne(d => d.DisposalType)
                 .WithMany(p => p.Propertyregistration)
@@ -224,7 +317,6 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Propertyregistration)
                 .HasForeignKey(d => d.LocalityId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("LocalityId");
 
             builder.HasOne(d => d.MainLandUse)

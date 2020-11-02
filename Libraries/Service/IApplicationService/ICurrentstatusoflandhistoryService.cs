@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -13,5 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Currentstatusoflandhistory model);
 
         Task<Currentstatusoflandhistory> FetchSingleResult(int id);
-    }  
+        Task<PagedResult<Currentstatusoflandhistory>> GetPagedCurrentstatusoflandhistory(CurrentstatusoflandhistorySearchDto model);
+
+    }
 }

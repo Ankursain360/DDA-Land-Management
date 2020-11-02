@@ -20,15 +20,17 @@ namespace LandTransfer.Controllers
     {
         public IConfiguration _configuration;
         public readonly ILandTransferService _landTransferService;
+        public readonly IPropertyRegistrationService _propertyregistrationService;
         public readonly ICurrentstatusoflandhistoryService _currentstatusoflandhistoryService;
         //string targetPathLayout = string.Empty;
         string surveyReportFilePath = string.Empty;
         string actionReportFilePath = string.Empty;
-        public CurrentStatusOfHandedOverTakenOverLandController(ILandTransferService landTransferService, IConfiguration configuration, ICurrentstatusoflandhistoryService currentstatusoflandhistoryService)
+        public CurrentStatusOfHandedOverTakenOverLandController(ILandTransferService landTransferService, IConfiguration configuration, ICurrentstatusoflandhistoryService currentstatusoflandhistoryService, IPropertyRegistrationService propertyregistrationService)
         {
             _landTransferService = landTransferService;
             _configuration = configuration;
             _currentstatusoflandhistoryService = currentstatusoflandhistoryService;
+            _propertyregistrationService = propertyregistrationService;
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
@@ -36,22 +38,43 @@ namespace LandTransfer.Controllers
             var result = await _landTransferService.GetPagedLandTransfer(model);
             return PartialView("_List", result);
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
-            return View(list);
+            //List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
+            //return View(list);
+            return View();
         }
         public async Task<IActionResult> Create(int id)
         {
             Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
-            var Data = await _landTransferService.FetchSingleResult(id);
-            Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
-            Model.LandTransfer = Data;
+            //var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
+            //Data.DepartmentList = await _landTransferService.GetAllDepartment();
+            //Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
+            //Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
+            //Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
+            Landtransfer Data = new Landtransfer();
+            Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
+            Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(Data.PropertyRegistrationId);
+            Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            Data.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+            Data.Propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            Data.Propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            Data.Propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.DepartmentId);
+            Data.Propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.Propertyregistration.DivisionId);
+            Data.Propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.ZoneId);
 
-          
+            Data.Propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
+            Data.Propertyregistration.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.TakenOverDepartmentId ?? 0);
+            Data.Propertyregistration.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.TakenOverZoneId ?? 0);
+
+            Data.Propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
+            Data.Propertyregistration.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.Propertyregistration.HandedOverDepartmentId ?? 0);
+            Data.Propertyregistration.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.Propertyregistration.HandedOverZoneId ?? 0);
+
+
+            Data.LandTransferList = await _landTransferService.GetAllLandTransfer(Data.Propertyregistration.Id);
+            Data.DepartmentList = await _landTransferService.GetAllDepartment();
+            Model.LandTransfer = Data;
             return View(Model);
         }
         [HttpPost]
@@ -60,9 +83,7 @@ namespace LandTransfer.Controllers
             var Data = await _landTransferService.FetchSingleResult(id);
 
             Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
+
             currentstatusoflandhistory.LandTransfer = Data;
             currentstatusoflandhistory.Id = 0;
             if (currentstatusoflandhistory.LandTransferId == 0)
@@ -109,11 +130,27 @@ namespace LandTransfer.Controllers
         {
             List<Currentstatusoflandhistory> list = await _currentstatusoflandhistoryService.GetCurrentstatusoflandhistory(id);
             return View(list);
-            //return View();
+            //return View();  
+        }
+
+        public IActionResult History(int id)
+        {
+            var Id = id;
+            // var Id = Request.Path.ToString().Split('/').LastOrDefault();
+            //var Id = Context.Request.Query["id"];
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> HistoryDetails([FromBody] CurrentstatusoflandhistorySearchDto model)
+        {
+            // var Id = Request.Path.ToString().Split('/').LastOrDefault();
+            var result = await _currentstatusoflandhistoryService.GetPagedCurrentstatusoflandhistory(model);
+            return PartialView("_HistoryDetails", result);
         }
 
         //*************dropdown methods *****
-             [HttpGet]
+        [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
@@ -140,7 +177,7 @@ namespace LandTransfer.Controllers
             FileHelper file = new FileHelper();
             var Data = await _currentstatusoflandhistoryService.FetchSingleResult(Id);
 
-               string filename = Data.SurveyReportFilePath;
+            string filename = Data.SurveyReportFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
         public async Task<IActionResult> DownloadActionReportFile(int Id)
@@ -156,6 +193,12 @@ namespace LandTransfer.Controllers
             var Data = await _landTransferService.FetchSingleResult(Id);
             string filename = Data.CopyofOrderDocPath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public FileResult ViewDocument(string path)
+        {
+            FileHelper file = new FileHelper();
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
         }
     }
 }

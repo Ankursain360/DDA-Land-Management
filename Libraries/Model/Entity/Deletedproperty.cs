@@ -8,7 +8,6 @@ namespace Libraries.Model.Entity
 {
     public class Deletedproperty : AuditableEntity<int>
     {
-       
         public int PropertyRegistrationId { get; set; }
         public string Reason { get; set; }
         public byte IsDeleted { get; set; }

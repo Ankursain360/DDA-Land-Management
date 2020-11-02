@@ -20,6 +20,7 @@
                 <th rowspan="2">Area (In SQM) </th>
                 <th rowspan="2">Restore Reason</th>
                 <th rowspan="2">Restore Date</th>
+                <th rowspan="2"> View Details</th>
             </tr>
 
         </thead>
@@ -41,6 +42,7 @@
 
                 <td>@item.Restoreproperty.RestoreReason </td>
                 <td>@item.Restoreproperty.RestoreDate </td>
+                <td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>
                 @*<td>@(item.Restoreproperty==null?"Not Available":item.Restoreproperty.RestoreReason)</td>
         <td>@(item.Restoreproperty==null?"Not Available":Convert.ToDateTime(item.Restoreproperty.RestoreDate).ToString("dd-MMM-yyyy"))</td>*@
 

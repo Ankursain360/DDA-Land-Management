@@ -16,7 +16,6 @@ namespace Libraries.Model.Entity
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Watchandward = new HashSet<Watchandward>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
-            Landtransfer = new HashSet<Landtransfer>();
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -47,7 +46,6 @@ namespace Libraries.Model.Entity
         [NotMapped] 
         public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
-        public ICollection<Landtransfer> Landtransfer { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Khasra> Khasra { get; set; }
         public ICollection<Booktransferland> Booktransferland { get; set; }

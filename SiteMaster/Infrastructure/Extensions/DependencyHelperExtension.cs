@@ -45,6 +45,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDemolitionchecklistRepository, DemolitionchecklistRepository>();
             services.AddScoped<IDemolitiondocumentRepository, DemolitiondocumentRepository>();
             services.AddScoped<IDemolitionprogrammasterRepository, DemolitionprogrammasterRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -72,6 +73,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDemolitionchecklistService, DemolitionchecklistService>();
             services.AddScoped<IDemolitiondocumentService, DemolitiondocumentService>();
             services.AddScoped<IDemolitionprogrammasterService, DemolitionprogrammasterService>();
+            services.AddScoped<IMenuService, MenuService>();
 
 
         }

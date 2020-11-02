@@ -15,7 +15,6 @@
                 <th>Division</th>
                 <th>Locality(Village)</th>
                 <th>Khasra No.</th>
-                <th>Address</th>
                 @*  Handed Over By::: feilds*@
                 @*<th> Hand Over Department</th>*@
                 @if (ViewBag.ReportType == 0)
@@ -47,13 +46,11 @@
 
                         <td>@(rowNo += 1)</td>
 
-                        <td>@item.Department.Name</td>
-                        <td>@item.Zone.Name</td>
-                        <td>@item.Division.Name</td>
-                        <td>@item.Locality.Name</td>
-                        <td>@item.KhasraNo</td>
-                        <td>@item.Address</td>
-
+                        <td>@item.PropertyRegistration.Department.Name</td>
+                        <td>@item.PropertyRegistration.Zone.Name</td>
+                        <td>@item.PropertyRegistration.Division.Name</td>
+                        <td>@item.PropertyRegistration.Locality.Name</td>
+                        <td>@item.PropertyRegistration.KhasraNo</td>
                         @if (ViewBag.ReportType == 0)
                         {
                             @*<td>@item.HandedOverDepartmentId</td>*@

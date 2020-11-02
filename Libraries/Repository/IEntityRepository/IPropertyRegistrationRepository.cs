@@ -37,5 +37,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR();
         Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int userId);
         Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport();
+        string GetEncroachAtr(int id);
+        string GetHandedOverCopyofOrderFile(int id);
+        Task<bool> InsertInDisposedProperty(Disposedproperty model);
+        Task<List<Propertyregistration>> GetKhasraReportList();
     }
 }

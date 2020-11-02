@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Landtransfer Landtransfer); // To Upadte Particular data added by Praveen
         Task<bool> Create(Landtransfer Landtransfer);
         Task<Landtransfer> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
+        Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id);  // To fetch Particular data added by Praveen
         Task<bool> Delete(int id);    // To Delete Data  added by Praveen
         Task<List<Landtransfer>> GetAllLandTransferList();
         Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId);//added by ishu
@@ -27,6 +28,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<PagedResult<Propertyregistration>>GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
+        Task<List<Landtransfer>> GetAllLandTransfer(int PropertyRegistrationId);
         Task<List<Landtransfer>> GetAllLandTransfer();
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Landtransfer>> GetHistoryDetails(string khasraNo);
@@ -38,5 +40,8 @@ namespace Libraries.Service.IApplicationService
         //Current status of land history :
         Task<bool> SaveCurrentstatusoflandhistory(Currentstatusoflandhistory model);
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
+
+        Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model); //added by ishu
+
     }
 }

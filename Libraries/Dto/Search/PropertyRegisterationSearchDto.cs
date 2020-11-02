@@ -11,6 +11,9 @@ namespace Dto.Search
         public int departmentId { get; set; }
         public int zoneId { get; set; }
         public int divisionId { get; set; }
+        public int inventoriedId { get; set; }
+        public int classificationOfLandId { get; set; }
+        public string plannedUnplannedLand { get; set; }
         public int Id { get; set; }
     }
 }

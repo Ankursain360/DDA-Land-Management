@@ -80,35 +80,58 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = result.FirstOrDefault();
+            model.InventoriedInId = propertyregistration.InventoriedInId;
+            model.PlannedUnplannedLand = propertyregistration.PlannedUnplannedLand;
             model.ClassificationOfLandId = propertyregistration.ClassificationOfLandId;
             model.DepartmentId = propertyregistration.DepartmentId;
             model.PrimaryListNo = propertyregistration.PrimaryListNo;
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;
             model.LocalityId = propertyregistration.LocalityId;
+            model.Colony = propertyregistration.Colony;
+            model.Sector = propertyregistration.Sector;
+            model.Block = propertyregistration.Block;
+            model.Pocket = propertyregistration.Pocket;
+            model.PlotNo = propertyregistration.PlotNo;
             model.KhasraNo = propertyregistration.KhasraNo;
             model.Palandmark = propertyregistration.Palandmark;
-            model.EncroachmentStatusId = propertyregistration.EncroachmentStatusId;
-            model.EncraochmentDetails = propertyregistration.EncraochmentDetails;
-            model.Boundary = propertyregistration.Boundary;
-            model.BoundaryRemarks = propertyregistration.BoundaryRemarks;
+            model.AreaUnit = propertyregistration.AreaUnit;
             model.TotalAreaInBigha = propertyregistration.TotalAreaInBigha;
+            model.TotalAreaInBiswa = propertyregistration.TotalAreaInBiswa;
+            model.TotalAreaInBiswani = propertyregistration.TotalAreaInBiswani;
+            model.TotalAreaInSqAcreHt = propertyregistration.TotalAreaInSqAcreHt;
             model.TotalArea = propertyregistration.TotalArea;
-            model.Encroached = propertyregistration.Encroached;
+            model.EncroachmentStatusId = propertyregistration.EncroachmentStatusId;
+            model.EncroachedPartiallyFully = propertyregistration.EncroachedPartiallyFully;
+            model.EncrochedArea = propertyregistration.EncrochedArea;
             model.BuiltUpEncraochmentArea = propertyregistration.BuiltUpEncraochmentArea;
             model.Vacant = propertyregistration.Vacant;
-            model.PlannedUnplannedLand = propertyregistration.PlannedUnplannedLand;
+            model.ActionOnEncroachment = propertyregistration.ActionOnEncroachment;
+            model.EncroachAtrfilepath = propertyregistration.EncroachAtrfilepath;
+            model.EncraochmentDetails = propertyregistration.EncraochmentDetails;
+            model.Boundary = propertyregistration.Boundary;
+            model.BoundaryAreaCovered = propertyregistration.BoundaryAreaCovered;
+            model.BoundaryDimension = propertyregistration.BoundaryDimension;
+            model.BoundaryRemarks = propertyregistration.BoundaryRemarks;
+            model.Encroached = propertyregistration.Encroached;
             model.MainLandUseId = propertyregistration.MainLandUseId;
             model.SubUse = propertyregistration.SubUse;
             model.BuiltUp = propertyregistration.BuiltUp;
             model.BuiltUpRemarks = propertyregistration.BuiltUpRemarks;
-            model.LayoutPlan = propertyregistration.LayoutPlan;
             model.LayoutFilePath = propertyregistration.LayoutFilePath;
             model.LitigationStatus = propertyregistration.LitigationStatus;
+            model.CourtName = propertyregistration.CourtName;
+            model.CaseNo = propertyregistration.CaseNo;
+            model.OppositeParty = propertyregistration.OppositeParty;
             model.LitigationStatusRemarks = propertyregistration.LitigationStatusRemarks;
             model.GeoReferencing = propertyregistration.GeoReferencing;
             model.GeoFilePath = propertyregistration.GeoFilePath;
+            model.GeoLattitude = propertyregistration.GeoLattitude;
+            model.GeoLongitude = propertyregistration.GeoLongitude;
+
             model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
+            model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
+            model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
             model.TakenOverName = propertyregistration.TakenOverName;
             model.TakenOverDate = propertyregistration.TakenOverDate;
             model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
@@ -117,12 +140,17 @@ namespace Libraries.Service.ApplicationService
             model.TakenOverFilePath = propertyregistration.TakenOverFilePath;
             model.TakenOverComments = propertyregistration.TakenOverComments;
             model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
+            model.HandedOverZoneId = propertyregistration.HandedOverZoneId;
+            model.HandedOverDivisionId = propertyregistration.HandedOverDivisionId;
             model.HandedOverName = propertyregistration.HandedOverName;
             model.HandedOverDate = propertyregistration.HandedOverDate;
             model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
             model.HandedOverMobileNo = propertyregistration.HandedOverMobileNo;
             model.HandedOverLandlineNo = propertyregistration.HandedOverLandlineNo;
             model.HandedOverFilePath = propertyregistration.HandedOverFilePath;
+            model.HandedOverOrderNo = propertyregistration.HandedOverOrderNo;
+            model.HandedOverCopyofOrderFilepath = propertyregistration.HandedOverCopyofOrderFilepath;
+            model.HandedTransferOrder = propertyregistration.HandedTransferOrder;
             model.HandedOverComments = propertyregistration.HandedOverComments;
             model.DisposalTypeId = propertyregistration.DisposalTypeId;
             model.DisposalDate = propertyregistration.DisposalDate;
@@ -269,6 +297,39 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport()
         {
             return await _propertyregistrationRepository.GetClassificationOfLandDropDownListReport();
+        }
+
+        public string GetEncroachAtr(int id)
+        {
+            return _propertyregistrationRepository.GetEncroachAtr(id);
+        }
+
+        public string GetHandedOverCopyofOrderFile(int id)
+        {
+            return _propertyregistrationRepository.GetHandedOverCopyofOrderFile(id);
+        }
+
+        public async Task<bool> DisposeDetails(int id)
+        {
+            var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+            Propertyregistration model = form.FirstOrDefault();
+            model.IsDisposed = 0;
+            _propertyregistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> InsertInDisposedProperty(int id, Disposedproperty model)
+        {
+            model.PropertyRegistrationId = id;
+            model.IsDisposed = 0;
+            model.DisposedBy = 1;
+            model.DisposedDate = DateTime.Now;
+            return await _propertyregistrationRepository.InsertInDisposedProperty(model);
+        }
+
+        public async Task<List<Propertyregistration>> GetKhasraReportList()
+        {
+            return await _propertyregistrationRepository.GetKhasraReportList();
         }
     }
 }

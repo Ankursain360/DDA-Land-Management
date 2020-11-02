@@ -27,7 +27,8 @@ namespace LandInventory.Controllers
             propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
             propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-        //    propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
+            propertyregistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
+            //    propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
         public async Task<IActionResult> Create()
         {

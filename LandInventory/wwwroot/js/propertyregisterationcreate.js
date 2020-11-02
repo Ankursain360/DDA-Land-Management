@@ -262,9 +262,9 @@ $('#myForm').validate({
         LocalityId: {
             required: true
         },
-        //PrimaryListNo: {
-        //    required: true
-        //},
+        InventoriedInId: {
+            required: true
+        },
         TotalArea: {
             required: true
         }
@@ -286,9 +286,9 @@ $('#myForm').validate({
         LocalityId: {
             required: LocalityIdMessage //this is a function that returns custom messages
         },
-        //PrimaryListNo: {
-        //    required: PrimaryListNoMessage //this is a function that returns custom messages
-        //},
+        InventoriedInId: {
+            required: InventoriedInIdMessage //this is a function that returns custom messages
+        },
         TotalArea: {
             required: TotalAreaMessage //this is a function that returns custom messages
         }
@@ -362,16 +362,17 @@ function LocalityIdMessage() {
     }
 }
 
-//For Textbox
-//function PrimaryListNoMessage() {
-//    var dropdown_val = $('#PrimaryListNo').val();
-//    if (dropdown_val == "") {
-//        return "Primary List No is Mandatory";
-//    } else {
-//        return "";
-//    }
-//}
+function InventoriedInIdMessage() {
+    var dropdown_val = $('#InventoriedInId').val();
+    if (dropdown_val == "") {
+        return "Inventoried In is Mandatory";
+    } else {
+        return "";
+    }
+}
 
+
+//For Textbox
 function TotalAreaMessage() {
     var dropdown_val = $('#TotalArea').val();
     if (dropdown_val == "") {
@@ -464,6 +465,22 @@ $('#HandedOverAssignFile').change(function () {
     fileValidation(filePath, fileInput, size);
 });
 
+$('#HandedOverCopyofOrderDoc').change(function () {
+    var fileInput = document.getElementById('HandedOverCopyofOrderDoc');
+    var filePath = fileInput.value;
+    const size = (HandedOverCopyofOrderDoc.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#EncroachAtrDoc').change(function () {
+    var fileInput = document.getElementById('EncroachAtrDoc');
+    var filePath = fileInput.value;
+    const size = (EncroachAtrDoc.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
 function fileValidation(filePath, fileInput, size) {
     var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.xls|\.xlsx|\.docx|\.doc)$/i;
     if (!allowedExtensions.exec(filePath)) {
@@ -525,3 +542,85 @@ function callSelect2() {
         allowClear: true
     });
 }
+
+
+$('#AreaUnit').change(function () {
+    debugger;
+    var value = $('#AreaUnit option:selected').val();
+    if (value == 0) {
+        $('#TotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBigha').val('');
+        $('#TotalAreaInBiswa').val('');
+        $('#TotalAreaInBiswani').val('');
+        $("#AreainSqAcreHec").hide();
+        $("#bighabis").show();
+    }
+    else {
+        $('#TotalAreaInSqAcreHt').val('');
+        $('#TotalAreaInBigha').val('');
+        $('#TotalAreaInBiswa').val('');
+        $('#TotalAreaInBiswani').val('');
+        $("#AreainSqAcreHec").show();
+        $("#bighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+    }
+});
+
+//Bind Divison  Dropdown from Department for Taken Over
+function GetTakenOverZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        $("#TakenOverZone").val('').trigger('change');
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#TakenOverZone").html(html);
+        $("#TakenOverDivision").val('').trigger('change'); GetTakenOverDivisionList
+    });
+};
+
+//Bind Divison  Dropdown from Zone for Taken Over
+function GetTakenOverDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#TakenOverDivision").val('').trigger('change');
+        $("#TakenOverDivision").html(html);
+    });
+};
+
+//Bind Divison  Dropdown from Department for Handed Over
+function GetHandedOverZoneList(id) {
+    debugger;
+    HttpGet(`/PropertyRegistration/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+        $("#HandedOverZone").val('').trigger('change');
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#HandedOverZone").html(html);
+        $("#HandedOverDivision").val('').trigger('change'); GetTakenOverDivisionList
+    });
+};
+
+//Bind Divison  Dropdown from Zone for Handed Over
+function GetHandedOverDivisionList(id) {
+
+    HttpGet(`/PropertyRegistration/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#HandedOverDivision").val('').trigger('change');
+        $("#HandedOverDivision").html(html);
+    });
+};
