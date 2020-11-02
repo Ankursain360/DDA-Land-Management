@@ -1,28 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using LandTransfer.Infrastructure.Extensions;
+using Libraries.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-//using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-using LandTransfer.Models;
 using Microsoft.Extensions.Hosting;
-using Libraries.Model.Entity;
-using Libraries.Service.IApplicationService;
-using Libraries.Repository.IEntityRepository;
-using Libraries.Repository.EntityRepository;
-using Libraries.Model;
-using LandTransfer.Infrastructure.Extensions;
+using System.IO;
 
 namespace LandTransfer
 {
@@ -65,31 +51,7 @@ namespace LandTransfer
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
 
-
-            services.AddSession();
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
             services.RegisterDependency();
-
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
-            {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
-            {
-                services.AddControllersWithViews();
-            }
-#endif
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,11 +69,8 @@ namespace LandTransfer
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-            app.UseSession();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
