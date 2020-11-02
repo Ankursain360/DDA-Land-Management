@@ -14,23 +14,6 @@ namespace Libraries.Model.Entity
         {
             Currentstatusoflandhistory = new HashSet<Currentstatusoflandhistory>();
         }
-        [Required(ErrorMessage = "The Department field is required.")]
-        public int DepartmentId { get; set; }
-        [Required(ErrorMessage = "The Zone field is required.")]
-        public int ZoneId { get; set; }
-        [Required(ErrorMessage = "The Division field is required.")]
-        public int DivisionId { get; set; }
-        [Required(ErrorMessage = "The Locality field is required.")]
-        public int LocalityId { get; set; }
-        [Required(ErrorMessage = "The Khasra Number is required.")]
-        public string KhasraNo { get; set; }
-        [Required(ErrorMessage = "The Buildup Area is required.")]
-        public decimal? BuildupArea { get; set; }
-        [Required(ErrorMessage = "The Vacant Area is required.")]
-        public decimal? VacantArea { get; set; }
-        [Required(ErrorMessage = "The Total Area is required.")]
-        public decimal? TotalArea { get; set; }
-        public string Address { get; set; }
         [Required(ErrorMessage = "The Handed Over Department is required.")]
         public int? HandedOverDepartmentId { get; set; }
         [Required(ErrorMessage = "The Handed Over By Name Desingnation is required.")]
@@ -77,17 +60,13 @@ namespace Libraries.Model.Entity
         public string ActionOnEncroachment { get; set; }
         public string ActionTakenReportPath { get; set; }
         public string EncroachmentDetails { get; set; }
-        public virtual Department Department { get; set; }
-        public virtual Division Division { get; set; }
         public virtual Department HandedOverDepartment { get; set; }
         public virtual Division HandedOverDivision { get; set; }
         public virtual Zone HandedOverZone { get; set; }
-        public virtual Locality Locality { get; set; }
         public virtual Propertyregistration PropertyRegistration { get; set; }
         public virtual Department TakenOverDepartment { get; set; }
         public virtual Division TakenOverDivision { get; set; }
         public virtual Zone TakenOverZone { get; set; }
-        public virtual Zone Zone { get; set; }
         [NotMapped]
         public IFormFile CopyofOrder { get; set; }
         [NotMapped]

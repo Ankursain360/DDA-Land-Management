@@ -136,13 +136,9 @@ namespace LandTransfer.Controllers
 
 
             Data.LandTransferList = await _landTransferService.GetAllLandTransfer(Data.Propertyregistration.Id);
-            Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             if (Data == null)
             {
-                return NotFound();
+                return NotFound();  
             }
             return View(Data);
         }
@@ -169,10 +165,6 @@ namespace LandTransfer.Controllers
 
 
             landtransfer.LandTransferList = await _landTransferService.GetAllLandTransfer(landtransfer.PropertyRegistrationId);
-            landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-            landtransfer.ZoneList = await _landTransferService.GetAllZone(landtransfer.DepartmentId);
-            landtransfer.DivisionList = await _landTransferService.GetAllDivisionList(landtransfer.ZoneId);
-            landtransfer.LocalityList = await _landTransferService.GetAllLocalityList(landtransfer.DivisionId);
             if (ModelState.IsValid)
             {
                 copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
@@ -223,10 +215,6 @@ namespace LandTransfer.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _landTransferService.FetchSingleResult(id);
-            Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
             if (Data == null)
             {
                 return NotFound();

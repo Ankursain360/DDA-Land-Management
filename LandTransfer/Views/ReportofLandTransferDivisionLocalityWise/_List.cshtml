@@ -19,7 +19,6 @@
                 <th rowspan="2">Division</th>
                 <th rowspan="2">Locality(Village)</th>
                 <th rowspan="2">Khasra No.</th>
-                <th rowspan="2">Address</th>
                 <th rowspan="2"> Handed Over By  </th>
                 <th rowspan="2"> Handed Over Date</th>
                 <th rowspan="2"> Taken Over By  </th>
@@ -38,13 +37,12 @@
                     <tr>
                         <td>@(rowNo += 1)</td>
 
-                        <td>@item.Department.Name</td>
-                        <td>@item.Zone.Name</td>
-                        <td>@item.Division.Name</td>
-                        <td>@item.Locality.Name</td>
-                        <td>@item.KhasraNo</td>
-                        <td>@item.Address</td>
-                        <td>@item.HandedOverByNameDesingnation</td>
+                        <td>@item.PropertyRegistration.Department.Name</td>
+                        <td>@item.PropertyRegistration.Zone.Name</td>
+                        <td>@item.PropertyRegistration.Division.Name</td>
+                        <td>@item.PropertyRegistration.Locality.Name</td>
+                        <td>@item.PropertyRegistration.KhasraNo</td>
+                       <td>@item.HandedOverByNameDesingnation</td>
 
                         <td>@item.HandedOverDate</td>
                         <td>@item.TakenOverByNameDesingnation</td>

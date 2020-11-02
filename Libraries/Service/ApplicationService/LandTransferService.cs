@@ -73,24 +73,16 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _landTransferRepository.FindBy(a => a.Id == id);
             Landtransfer model = result.FirstOrDefault();
-            model.Address = Landtransfer.Address;
             model.CopyofOrderDocPath = Landtransfer.CopyofOrder != null ? Landtransfer.CopyofOrderDocPath : model.CopyofOrderDocPath;
             model.DateofTakenOver = Landtransfer.DateofTakenOver;
-            model.DivisionId = Landtransfer.DivisionId;
             model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
             model.HandedOverDate = Landtransfer.HandedOverDate;
             model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
-            model.KhasraNo = Landtransfer.KhasraNo;
-            model.BuildupArea = Landtransfer.BuildupArea;
-            model.VacantArea = Landtransfer.VacantArea;
-            model.TotalArea = Landtransfer.TotalArea;
             model.OrderNo = Landtransfer.OrderNo;
             model.Remarks = Landtransfer.Remarks;
             model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
             model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
             model.TransferorderIssueAuthority = Landtransfer.TransferorderIssueAuthority;
-            model.LocalityId = Landtransfer.LocalityId;
-            model.ZoneId = Landtransfer.ZoneId;
             model.IsActive = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

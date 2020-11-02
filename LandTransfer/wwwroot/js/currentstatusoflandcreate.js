@@ -1,17 +1,9 @@
 ﻿$(document).ready(function () {
-    if ($('#Propertyregistration_EncroachmentStatusId2 option:selected').val() == '1') {
+    debugger
+    if ($('#LandTransfer_Encroachment option:selected').val() == '1') {
         $("#divEncroachmentYesSelectionForLandTransfer").show();
-        $("#divEncroachmentYesSelectionForLandTransfer select").removeAttr("disabled");
-        $("#divEncroachmentYesSelectionForLandTransfer input").removeAttr("disabled");
-        $("#divEncroachmentYesSelectionForLandTransfer textarea").removeAttr("disabled");
-        $("#divEncroachmentYesSelectionForLandTransfer select").val('');
-        $("#divEncroachmentYesSelectionForLandTransfer input").val('');
-        $("#divEncroachmentYesSelectionForLandTransfer textarea").val('');
     } else {
         $("#divEncroachmentYesSelectionForLandTransfer").hide();
-        $("#divEncroachmentYesSelectionForLandTransfer select").attr("disabled", "disabled");
-        $("#divEncroachmentYesSelectionForLandTransfer input").attr("disabled", "disabled");
-        $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
     $("a").each(function () {
         if ($(this).attr("href") =='/CurrentStatusOfHandedOverTakenOverLand/ViewDocument?path=') {

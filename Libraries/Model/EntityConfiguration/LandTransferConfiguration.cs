@@ -10,12 +10,6 @@ namespace Model.EntityConfiguration
         {
             entity.ToTable("landtransfer");
 
-            entity.HasIndex(e => e.DepartmentId)
-                .HasName("DepartmentId_idx");
-
-            entity.HasIndex(e => e.DivisionId)
-                .HasName("LandTransferDivisionId_idx");
-
             entity.HasIndex(e => e.HandedOverDepartmentId)
                 .HasName("LandTransferHandedOverDepartmentId_idx");
 
@@ -24,9 +18,6 @@ namespace Model.EntityConfiguration
 
             entity.HasIndex(e => e.HandedOverZoneId)
                 .HasName("LandTransferHandedOverZoneId_idx");
-
-            entity.HasIndex(e => e.LocalityId)
-                .HasName("LandTransferLocalityId_idx");
 
             entity.HasIndex(e => e.PropertyRegistrationId)
                 .HasName("LandTransferPropertyRegistrationId_idx");
@@ -40,9 +31,6 @@ namespace Model.EntityConfiguration
             entity.HasIndex(e => e.TakenOverZoneId)
                 .HasName("LandTransferTakenOverZoneId_idx");
 
-            entity.HasIndex(e => e.ZoneId)
-                .HasName("LandTransferZoneId_idx");
-
             entity.Property(e => e.Id).HasColumnType("int(11)");
 
             entity.Property(e => e.ActionOnEncroachment)
@@ -53,13 +41,7 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            entity.Property(e => e.Address)
-                .HasMaxLength(500)
-                .IsUnicode(false);
-
             entity.Property(e => e.BuildUpInEncroachementArea).HasColumnType("decimal(18,2)");
-
-            entity.Property(e => e.BuildupArea).HasColumnType("decimal(10,2)");
 
             entity.Property(e => e.CopyofOrderDocPath)
                 .HasMaxLength(500)
@@ -70,10 +52,6 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.CreatedDate).HasColumnType("date");
 
             entity.Property(e => e.DateofTakenOver).HasColumnType("date");
-
-            entity.Property(e => e.DepartmentId).HasColumnType("int(11)");
-
-            entity.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             entity.Property(e => e.EncroachementArea).HasColumnType("decimal(18,2)");
 
@@ -112,12 +90,6 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.IsActive)
                 .HasColumnType("tinyint(4)")
                 .HasDefaultValueSql("'1'");
-
-            entity.Property(e => e.KhasraNo)
-                .HasMaxLength(100)
-                .IsUnicode(false);
-
-            entity.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -159,27 +131,9 @@ namespace Model.EntityConfiguration
 
             entity.Property(e => e.TakenOverZoneId).HasColumnType("int(11)");
 
-            entity.Property(e => e.TotalArea).HasColumnType("decimal(10,2)");
-
             entity.Property(e => e.TransferorderIssueAuthority)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
-            entity.Property(e => e.VacantArea).HasColumnType("decimal(10,2)");
-
-            entity.Property(e => e.ZoneId).HasColumnType("int(11)");
-
-            entity.HasOne(d => d.Department)
-                .WithMany(p => p.LandtransferDepartment)
-                .HasForeignKey(d => d.DepartmentId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandTransferDepartmentId");
-
-            entity.HasOne(d => d.Division)
-                .WithMany(p => p.LandtransferDivision)
-                .HasForeignKey(d => d.DivisionId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandTransferDivisionId");
 
             entity.HasOne(d => d.HandedOverDepartment)
                 .WithMany(p => p.LandtransferHandedOverDepartment)
@@ -197,12 +151,6 @@ namespace Model.EntityConfiguration
                 .HasForeignKey(d => d.HandedOverZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("LandTransferHandedOverZoneId");
-
-            entity.HasOne(d => d.Locality)
-                .WithMany(p => p.Landtransfer)
-                .HasForeignKey(d => d.LocalityId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandTransferLocalityId");
 
             entity.HasOne(d => d.PropertyRegistration)
                 .WithMany(p => p.Landtransfer)
@@ -226,12 +174,6 @@ namespace Model.EntityConfiguration
                 .HasForeignKey(d => d.TakenOverZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("LandTransferTakenOverZoneId");
-
-            entity.HasOne(d => d.Zone)
-                .WithMany(p => p.LandtransferZone)
-                .HasForeignKey(d => d.ZoneId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("LandTransferZoneId");
         }
     }
 }

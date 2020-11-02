@@ -74,10 +74,6 @@ namespace LandTransfer.Controllers
 
             Data.LandTransferList = await _landTransferService.GetAllLandTransfer(Data.Propertyregistration.Id);
             Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
-
             Model.LandTransfer = Data;
             return View(Model);
         }
@@ -87,9 +83,7 @@ namespace LandTransfer.Controllers
             var Data = await _landTransferService.FetchSingleResult(id);
 
             Data.DepartmentList = await _landTransferService.GetAllDepartment();
-            Data.ZoneList = await _landTransferService.GetAllZone(Data.DepartmentId);
-            Data.DivisionList = await _landTransferService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _landTransferService.GetAllLocalityList(Data.DivisionId);
+
             currentstatusoflandhistory.LandTransfer = Data;
             currentstatusoflandhistory.Id = 0;
             if (currentstatusoflandhistory.LandTransferId == 0)

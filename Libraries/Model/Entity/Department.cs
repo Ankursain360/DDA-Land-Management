@@ -12,7 +12,6 @@ namespace Libraries.Model.Entity
     {
         public Department()
         {
-            LandtransferDepartment = new HashSet<Landtransfer>();
             LandtransferHandedOverDepartment = new HashSet<Landtransfer>();
             LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
             EncroachmentregisterationDepartment = new HashSet<EncroachmentRegisteration>();
@@ -36,7 +35,6 @@ namespace Libraries.Model.Entity
         public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationDepartment { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationOtherDepartmentNavigation { get; set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
-        public virtual ICollection<Landtransfer> LandtransferDepartment { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverDepartment { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverDepartment { get; set; }
         public virtual ICollection<Division> Division { get; set; }

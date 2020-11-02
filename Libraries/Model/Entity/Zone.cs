@@ -15,7 +15,6 @@ namespace Libraries.Model.Entity
         {
             LandtransferHandedOverZone = new HashSet<Landtransfer>();
             LandtransferTakenOverZone = new HashSet<Landtransfer>();
-            LandtransferZone = new HashSet<Landtransfer>();
             Userprofile = new HashSet<Userprofile>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Locality = new HashSet<Locality>();
@@ -47,15 +46,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
-        public virtual ICollection<Landtransfer> LandtransferZone { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverZone { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverZone { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public virtual ICollection<Division> Division { get; set; }
         public virtual ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
-        
-
-
     }
 }
