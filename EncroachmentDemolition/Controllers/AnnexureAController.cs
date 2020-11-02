@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.Extensions.Configuration;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -12,7 +12,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
-
+using Utility.Helper;
 namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAController : BaseController
@@ -22,23 +22,17 @@ namespace EncroachmentDemolition.Controllers
 
         // public IConfiguration _configuration;
         public readonly IAnnexureAService _annexureAService;
+        public IConfiguration _configuration;
+        string targetPhotoPathLayout = string.Empty;
+        string targetReportfilePathLayout = string.Empty;
 
-     //   public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
-
-        //public AnnexureAController(IAnnexureAService annexureAService)
-        //{
-        //    _encroachmentRegisterationService = encroachmentRegisterationService;
-
-        //    _annexureAService = annexureAService;
-        //}
-
-        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService ,IAnnexureAService annexureAService)
+        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService ,IAnnexureAService annexureAService, IConfiguration configuration)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
 
 
             _annexureAService = annexureAService;
-         //   _configuration = configuration;
+            _configuration = configuration;
         }
 
 
@@ -74,6 +68,14 @@ namespace EncroachmentDemolition.Controllers
         {
             Fixingdemolition Model = new Fixingdemolition();
             var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
+            Data.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
+            Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
+            Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
+            Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
+            Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
+
+
+
             Model.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
             Model.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
 
@@ -183,6 +185,59 @@ namespace EncroachmentDemolition.Controllers
                 }
             }
 
+
+
+
+
+
+
+
+            //if (fixingdemolition.DemolitionDocumentId != null)
+            //{
+            //    List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
+            //    for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count(); i++)
+            //    {
+            //        fixingdocument.Add(new Fixingdocument
+            //        {
+
+            //            DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
+            //            DocumentDetails = fixingdemolition.DocumentDetails[i],
+            //            FixingdemolitionId = fixingdemolition.Id
+            //        });
+            //    }
+            //    foreach (var item in fixingdocument)
+            //    {
+            //        result = await _annexureAService.SaveFixingdocument(item);
+            //    }
+            //}
+
+            string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
+
+
+            // targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+
+
+             FileHelper fileHelper = new FileHelper();
+
+
+            if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
+            {
+                List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
+                for (int i = 0; i < fixingdemolition.DocumentDetails.Count; i++)
+                {
+                    string FilePath = fileHelper.SaveFile(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
+                    fixingdocument.Add(new Fixingdocument
+                    {
+                        DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
+                        DocumentDetails = FilePath,
+                        FixingdemolitionId = fixingdemolition.Id
+                    });
+                }
+                foreach (var item in fixingdocument)
+                {
+                    result = await _annexureAService.SaveFixingdocument(item);
+                }
+            }
 
 
 

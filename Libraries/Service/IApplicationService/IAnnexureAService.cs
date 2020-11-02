@@ -27,6 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Fixingdemolition model);
 
         Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
+        Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
 
 
     }
