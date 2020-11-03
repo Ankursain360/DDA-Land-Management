@@ -2,14 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>0d8e5e5d-9582-4ad4-8f44-d20a57617291</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="DataAccess\**" />
-    <Content Remove="DataAccess\**" />
-    <EmbeddedResource Remove="DataAccess\**" />
-    <None Remove="DataAccess\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
