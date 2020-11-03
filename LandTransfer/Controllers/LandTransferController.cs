@@ -115,8 +115,16 @@ namespace LandTransfer.Controllers
         //}
         public async Task<IActionResult> Edit(int id)
         {
-            //var Data = await _landTransferService.FetchSingleResult(id);
-            var Data = new Landtransfer();
+            var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
+            if (Data==null)
+            {
+                Data = new Landtransfer();
+            }
+            Data.HandedOverZoneList= await _landTransferService.GetAllZone(Data.HandedOverDepartmentId??0);
+            Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
+            Data.TakenOverZoneList= await _landTransferService.GetAllZone(Data.TakenOverDepartmentId??0);
+            Data.TakenOverDivisionList= await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
+
             Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(id);
             Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
             Data.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
