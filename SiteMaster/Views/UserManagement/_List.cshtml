@@ -1,48 +1,54 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>
 
-<table class="table table-responsive table-bordered table-card">
-
-    <thead class="thead">
-        <tr>
-            <th>User Name</th>
-            <th>Name</th>
-            <th>Role</th>
-            <th>Contact No.</th>
-            <th>Email Id</th>
-            <th>Zone</th>
-            <th>District</th>
-            <th>Department</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody class="tbody">
-        @foreach (var item in Model.Results)
-        {
-        <tr>
-            <td>@item.User.UserName</td>
-            <td>@item.User.Name</td>
-            <td>@item.Role.Name</td>
-            <td>@item.User.PhoneNumber</td>
-            <td>@item.User.Email</td>
-            <td>@(item.Zone==null?"": item.Zone.Name)</td>
-            <td>@(item.District==null?"": item.District.Name)</td>
-            <td>@item.Department.Name</td>
-            <td>
-                @(item.IsActive == 1 ? "Active" : "Inactive")
-            </td>
-            <td>
-                <a asp-action="View" asp-route-id="@item.User.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-                <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-                <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">
-                    &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-                </a>
-                @*<i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i>
-                    &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i>
-                        &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>*@
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+    <table class="table table-sm table-bordered mb-0 table-striped">
+        <thead>
+            <tr>
+                <th scope="col">User Name</th>
+                <th scope="col">Name</th>
+                <th scope="col">Role</th>
+                <th scope="col">Contact No.</th>
+                <th scope="col">Email Id</th>
+                <th scope="col">Zone</th>
+                <th scope="col">District</th>
+                <th scope="col">Department</th>
+                <th scope="col">Status</th>
+                <th scope="col" style="min-width: 105px;">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.User.UserName</td>
+                    <td>@item.User.Name</td>
+                    <td>@item.Role.Name</td>
+                    <td>@item.User.PhoneNumber</td>
+                    <td>@item.User.Email</td>
+                    <td>@(item.Zone==null?"": item.Zone.Name)</td>
+                    <td>@(item.District==null?"": item.District.Name)</td>
+                    <td>@item.Department.Name</td>
+                    <td>
+                        @if (item.IsActive == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">Active</span>
+                        }
+                        else 
+                        { 
+                            <span class="badge badge-danger px-2 py-1">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.User.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" class="remove"
+                               onclick="return confirm('Are You Sure, You want to Delete this Record?')">
+                                <i class="ri-delete-bin-5-fill"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
