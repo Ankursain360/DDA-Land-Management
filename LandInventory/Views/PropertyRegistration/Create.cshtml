@@ -176,7 +176,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" class="form-control numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                            <input asp-for="TotalArea" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                             <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -614,7 +614,7 @@
                         <div id="feedbackRemarks"></div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
@@ -624,7 +624,7 @@
                         <span asp-validation-for="IsActive" class="text-danger lb-sm"></span>
                     </div>
                 </div>
-                @{
+                @*@{
                     @if (ViewBag.IsValidateUser == 2)
                     {
                         <div class="row">
@@ -634,7 +634,7 @@
                             </div>
                         </div>
                     }
-                }
+                }*@
 
 
                 <div class="form-row ">

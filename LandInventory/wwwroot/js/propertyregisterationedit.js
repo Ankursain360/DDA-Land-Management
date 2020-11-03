@@ -1,5 +1,7 @@
 ﻿
 $(document).ready(function () {
+    $("#TotalArea").attr("readonly", "readonly");
+
     var value = $('#Boundary option:selected').val();
     if (value == 2) {
         $('#divBoundarySelection').hide();
@@ -124,7 +126,7 @@ $(document).ready(function () {
 
         var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
 
-        $("input[name='TotalArea']").val(totalarea);
+        $("input[name='TotalArea']").val(totalarea.toFixed(3));
     });
 
     $(".TotalCalculation").keyup(function () {

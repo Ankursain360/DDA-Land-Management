@@ -16,9 +16,14 @@
 <br />
 
 
-<div>
-    @Html.ActionLink("Add New", "Create", "MORLandInventory", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
-</div>
+@{
+    @if (ViewBag.IsUserCreation == 13)
+    {
+    <div>
+        @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
+    </div>
+    }
+}
 <br />
 <br />
 <div class="container-fluid" id="MainContentForm">
