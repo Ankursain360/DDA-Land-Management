@@ -63,7 +63,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownList()
         {
-            var badCodes = new[] { 3,5 };
+            var badCodes = new[] { 3, 5 };
             List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
                                                                         .Where(x => x.IsActive == 1 && !badCodes.Contains(x.Id))
                                                                         .ToListAsync();
@@ -102,11 +102,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Division>> GetDivisionDropDownList(int zoneId)
         {
-            List<Division> DivisionList = await _dbContext.Division.Where(x =>x.ZoneId == zoneId && x.IsActive == 1)
+            List<Division> DivisionList = await _dbContext.Division.Where(x => x.ZoneId == zoneId && x.IsActive == 1)
                                                 .ToListAsync();
             return DivisionList;
         }
-      
+
         public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId)
         {
             List<Propertyregistration> PrimaryListNoList = await _dbContext.Propertyregistration
@@ -116,8 +116,8 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Locality>> GetLocalityDropDownList2(int divisionId)
         {
-            List<Locality> localityList = await _dbContext.Locality.Where(x => x.DivisionId == divisionId )
-                                                .Where(x=> x.IsActive==1).ToListAsync();
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.DivisionId == divisionId)
+                                                .Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
         public string GetFile(int id)
@@ -164,7 +164,7 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-                if(model.plannedUnplannedLand == "Planned Land")
+                if (model.plannedUnplannedLand == "Planned Land")
                 {
                     return await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
                                .Include(x => x.Department)
@@ -173,7 +173,13 @@ namespace Libraries.Repository.EntityRepository
                                .Include(x => x.Locality)
                                .Include(x => x.DisposalType)
                                .Include(x => x.MainLandUse)
-                                   .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                               .Include(x => x.HandedOverDepartment)
+                               .Include(x => x.HandedOverZone)
+                               .Include(x => x.HandedOverDivision)
+                               .Include(x => x.TakenOverDepartment)
+                               .Include(x => x.TakenOverZone)
+                               .Include(x => x.TakenOverDivision)
+                                   .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && x.IsValidate == 1 )
                                    && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
                                    && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
                                    && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
@@ -184,11 +190,11 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
                                    //&& (x.KhasraNo == (model.khasraNo == "0" ? x.KhasraNo : model.khasraNo))
                                    // && (x.KhasraNo.Contains(model.khasraNo == "" ? x.KhasraNo : model.khasraNo))
-                                   && (x.Colony.Contains(model.colony == "" ? x.Colony : model.colony))
-                                   && (x.Sector.Contains(model.sector == "" ? x.Sector : model.sector))
-                                   && (x.Block.Contains(model.block == "" ? x.Block : model.block))
-                                   && (x.Pocket.Contains(model.pocket == "" ? x.Pocket : model.pocket))
-                                   && (x.PlotNo.Contains(model.plotNo == "" ? x.PlotNo : model.plotNo))
+                                   && (x.Colony != null ? x.Colony.Contains(model.colony == "" ? x.Colony : model.colony) : true)
+                                   && (x.Sector != null ? x.Sector.Contains(model.sector == "" ? x.Sector : model.sector) : true)
+                                   && (x.Block != null ? x.Block.Contains(model.block == "" ? x.Block : model.block) : true)
+                                   && (x.Pocket != null ? x.Pocket.Contains(model.pocket == "" ? x.Pocket : model.pocket) : true)
+                                   && (x.PlotNo != null ? x.PlotNo.Contains(model.plotNo == "" ? x.PlotNo : model.plotNo) : true)
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
@@ -222,7 +228,7 @@ namespace Libraries.Repository.EntityRepository
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 }
-               
+
 
             }
             catch (Exception ex)
@@ -233,22 +239,22 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division,int locality)
+        public async Task<List<Propertyregistration>> GetRestoreLandReportData(int department, int zone, int division, int locality)
         {
             var data = await _dbContext.Propertyregistration
-                .Include(x=>x.Locality)
+                .Include(x => x.Locality)
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
-                .Include(x=>x.Deletedproperty)
-               
+                .Include(x => x.Deletedproperty)
+
                 .Where(x => (x.IsDeleted == 0)
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-                &&(x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
                 && (x.DivisionId == (division == 0 ? x.DivisionId : division))
                 && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
                 )
-                . OrderByDescending(x => x.Id)
+                .OrderByDescending(x => x.Id)
                 .ToListAsync();
             return data;
         }
@@ -263,8 +269,8 @@ namespace Libraries.Repository.EntityRepository
               .Where(x => (x.RestoreReason != null)
                 //.Where(x => (x.IsDeleted == 1)
                 && (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone)) 
-                && (x.DivisionId == (division == 0 ? x.DivisionId : division)) 
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
                 && (x.LocalityId == (locality == 0 ? x.LocalityId : locality)))
                   .OrderByDescending(x => x.Id)
                 .ToListAsync();
@@ -282,8 +288,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Zone>> GetZoneDropDownList(int DepartmentId)
         {
-           
-            List<Zone> ZoneList = await _dbContext.Zone.Where(x =>x.DepartmentId == DepartmentId && x.IsActive == 1)
+
+            List<Zone> ZoneList = await _dbContext.Zone.Where(x => x.DepartmentId == DepartmentId && x.IsActive == 1)
                                         .ToListAsync();
             return ZoneList;
         }
@@ -315,13 +321,13 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Locality)
                                     .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && !badCodes.Contains(x.ClassificationOfLand.Id)
                                     && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
-                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)) 
+                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                                     && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                                     && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
                                     && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
                                     && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
-                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
 
             }
@@ -343,7 +349,7 @@ namespace Libraries.Repository.EntityRepository
                                     && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
                                     && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
                                     .OrderByDescending(x => x.Id)
-                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize); 
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
 
             }
@@ -385,7 +391,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1  && x.IsDisposed != 0 
                                     && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
                                     && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                                     && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
@@ -405,7 +411,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Department>> GetHandedDepartmentDropDownList()
         {
-           return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
 
         public async Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model)
@@ -416,8 +422,11 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
                 .Include(x => x.Deletedproperty)
-
+                .Include(x => x.ClassificationOfLand)
                 .Where(x => (x.IsDeleted == 0)
+                 && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                 && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
                 && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
@@ -434,8 +443,13 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Division)
                 .Include(x => x.Locality)
                 .Include(x => x.Restoreproperty)
+                .Include(x => x.ClassificationOfLand)
                 .Where(x => (x.Restoreproperty.RestoreReason != null)
                 //.Where(x => (x.IsDeleted == 1)
+                 && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                 && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+
                 && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                 && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
                 && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
@@ -448,7 +462,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListReport()
         {
             List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
-                                                                        .Where(x => x.IsActive == 1 )
+                                                                        .Where(x => x.IsActive == 1)
                                                                         .ToListAsync();
             return ClassificationoflandList;
         }
@@ -479,7 +493,29 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetKhasraReportList()
         {
-            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.KhasraNo !=null).Distinct().ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.KhasraNo != null).Distinct().ToListAsync();
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model)
+        {
+            var data = await _dbContext.Propertyregistration
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Include(x => x.ClassificationOfLand)
+                .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 &&  x.IsDisposed != 0)
+                &&(x.IsValidate == (model.unverifiedverfied == 0 ? 0 : 1))
+                && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
+                .OrderByDescending(x => x.Id)
+                .GetPaged(model.PageNumber, model.PageSize);
+            return data;
         }
     }
 

@@ -103,5 +103,16 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<bool> SaveFixingdocument(Fixingdocument fixingdocument)
+        {
+            fixingdocument.CreatedBy = 1;
+            fixingdocument.CreatedDate = DateTime.Now;
+            fixingdocument.IsActive = 1;
+            return await _annexureARepository.SaveFixingdocument(fixingdocument);
+        }
+
+
+
+
     }
 }

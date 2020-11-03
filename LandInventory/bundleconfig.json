@@ -70,5 +70,17 @@
     "inputFiles": [
       "wwwroot/js/propertyregisterationedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/inventoryunverifiedapproved.min.js",
+    "inputFiles": [
+      "wwwroot/js/inventoryunverifiedapproved.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/propertyregisterationview.min.js",
+    "inputFiles": [
+      "wwwroot/js/propertyregisterationview.js"
+    ]
   }
 ]

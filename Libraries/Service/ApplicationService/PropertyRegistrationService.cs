@@ -331,5 +331,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _propertyregistrationRepository.GetKhasraReportList();
         }
+
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model);
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
+@{int rowNo = 0; }
+
+<table class="table table-responsive table-bordered table-card">
+
+
+    <thead class="thead">
+        <tr>
+            <th>Sr.No</th>
+            <th>Inventoried In</th>
+            <th>Planned/Unplanned Land </th>
+            <th>Classification of Land</th>
+            <th>Department</th>
+            <th>Zone</th>
+            <th>Division</th>
+            <th>Primary List No.</th>
+            <th>Total Area(in Sq. Mt.)</th>
+            <th>Operation</th>
+        </tr>
+
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
+                    <td>@(item.PlannedUnplannedLand)</td>
+                    <td>@item.ClassificationOfLand.Name</td>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    <td>@item.PrimaryListNo</td>
+                    <td>@item.TotalArea</td>
+                    <td>
+                        @if (item.IsValidate == 0)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> Unverified</a>
+                        }
+                        @if (item.IsValidate == 1)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> Approved</a>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

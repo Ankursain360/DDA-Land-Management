@@ -18,6 +18,7 @@ namespace Libraries.Repository.IEntityRepository
          Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
 
         Task<bool> Savefixingchecklist(Fixingchecklist fixingchecklist);
+        Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
 
 
         Task<List<Fixingchecklist>> Getfixingchecklist(int fixingdemolitionId);

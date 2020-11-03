@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 using Model.Entity;
-
+using Microsoft.AspNetCore.Http;
 namespace Libraries.Model.Entity
 {
     public partial class Fixingdemolition : AuditableEntity<int>
@@ -44,8 +44,15 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<decimal> DemolitionChecklistId { get; set; }  //add from fixing checklist table
 
+        [NotMapped]
+        public List<IFormFile> DocumentDetails { get; set; }    //add from fixing document table
 
+        [NotMapped]
+        public List<decimal> DemolitionDocumentId { get; set; }  //add from fixing document table
 
+       
+        //[NotMapped]
+        //public List<IFormFile> Document { get; set; }
 
         public EncroachmentRegisteration Encroachment { get; set; }
         //public virtual EncroachmentRegisteration Encroachment { get; set; }

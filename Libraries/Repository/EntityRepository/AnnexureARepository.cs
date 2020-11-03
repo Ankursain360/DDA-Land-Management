@@ -47,12 +47,12 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-        //public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
-        //{
-        //    _dbContext.Fixingdemolition.Add(fixingdemolition);
-        //    var Result = await _dbContext.SaveChangesAsync();
-        //    return Result > 0 ? true : false;
-        //}
+        public async Task<bool> SaveFixingdocument(Fixingdocument fixingdocument)
+        {
+            _dbContext.Fixingdocument.Add(fixingdocument);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
 
 

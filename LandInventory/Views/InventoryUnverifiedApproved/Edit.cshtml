@@ -17,11 +17,12 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create" id="myForm" method="post" enctype="multipart/form-data" autocomplete="off">
+            <form asp-action="Edit" id="myForm" method="post" enctype="multipart/form-data" autocomplete="off">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
 
                 <div class="row">
                     <div class="form-group col-md-4">
@@ -35,7 +36,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
+                        <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand" >
                             <option value="Planned Land">Planned Land</option>
                             <option value="Unplanned Land">Unplanned Land</option>
                         </select>
@@ -58,7 +59,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="return GetDivisionList(this.options[this.selectedIndex].value);" required="required" requiredmsg="Zone is Mandatory">
                             @*asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"*@
                             <option value="">--Select--</option>
                         </select>
@@ -67,7 +68,7 @@
 
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label><span class="text-danger">*</span>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" required="required" requiredmsg="Division is Mandatory">
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" required="required" requiredmsg="Division is Mandatory">
                             @*asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))"*@
                             <option value="">--Select--</option>
                         </select>
@@ -76,7 +77,7 @@
                     <div id="divUnplannedSelection" style="display:none;">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label><span class="text-danger">*</span>
-                            <select class="form-control dda-dropdown" asp-for="LocalityId">
+                            <select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                                 @*asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))"*@
                                 <option value="">--Select--</option>
                             </select>
@@ -96,7 +97,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Sector</label>
-                            <input asp-for="Sector" class="form-control" maxlength="50"/>
+                            <input asp-for="Sector" class="form-control" maxlength="50" />
                             <span asp-validation-for="Sector" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -106,7 +107,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Pocket</label>
-                            <input asp-for="Pocket" class="form-control" maxlength="50"/>
+                            <input asp-for="Pocket" class="form-control" maxlength="50" />
                             <span asp-validation-for="Pocket" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -155,17 +156,17 @@
                         <div id="bighabis">
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Bigha</label>
-                                <input asp-for="TotalAreaInBigha" value="" class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBigha"  class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBigha" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Biswa</label>
-                                <input asp-for="TotalAreaInBiswa" value="" class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswa"  class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswa" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Biswani</label>
-                                <input asp-for="TotalAreaInBiswani" value="" class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswani"  class="form-control numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswani" class="text-danger lb-sm"></span>
                             </div>
                         </div>
@@ -176,7 +177,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                            <input asp-for="TotalArea" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                             <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -217,18 +218,18 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Encroched Area(in sq. mt.)</label>
-                                <input asp-for="EncrochedArea" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                                <span id="EncroachedValidation" asp-validation-for="EncrochedArea" class="text-danger lb-sm"></span>
+                                <input asp-for="EncrochedArea"  class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger lb-sm"></span>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Builtup in Encroachment Area(in sq. mt.)</label>
-                                <input asp-for="BuiltUpEncraochmentArea" class="form-control numbers" id="BuiltupEncroachmentArea"  onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                <input asp-for="BuiltUpEncraochmentArea" class="form-control numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                 <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Vacant Area(in sq. mt.)</label>
-                                <input asp-for="Vacant" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                <input asp-for="Vacant"  class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                 <span asp-validation-for="Vacant" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -238,7 +239,19 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Upload Action Taken Report(ATR)</label>
-                                <input type="file" class="form-control" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif"/>
+                                <input type="hidden" asp-for="EncroachAtrfilepath" />
+                                @{
+                                    @if (ViewBag.EncroachAtrDocView != null)
+                                    {
+                                        @Html.ActionLink(" (View Existing Document)", "EncroachAtrDownload", new { id = Model.Id })
+                                        <input type="file" class="form-control" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    }
+                                    else
+                                    {
+                                        <input type="file" class="form-control" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+
+                                    }
+                                }
                                 <span asp-validation-for="EncroachAtrDoc" class="text-danger lb-sm"></span>
                             </div>
 
@@ -279,7 +292,7 @@
                         <div id="divBoundarySelection" style="display:none;">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Area Covered(Sq. mtr)</label>
-                                <input type="text" class="form-control numbers" asp-for="BoundaryAreaCovered"  />
+                                <input type="text" class="form-control numbers" asp-for="BoundaryAreaCovered" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Dimension (L*B*H)(mtr)</label>
@@ -390,7 +403,18 @@
 
                         <div class="form-group col-md-4" id="divLayoutPlan" style="display:none;">
                             <label class="control-label lb-sm" asp-for="FileData">Upload Layout Plan</label>
-                            <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input type="hidden" asp-for="LayoutFilePath" />
+                            @{
+                                @if (ViewBag.LayoutDocView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })
+                                    <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
                             <span asp-validation-for="FileData" class="text-danger lb-sm"></span>
                         </div>
 
@@ -405,9 +429,20 @@
 
                         </div>
                         <div id="divGEOReferencingSelection" style="display:none;">
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm" asp-for="GeoFileData">Upload Geo Referencing</label>
-                                <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <div class="form-group col-md-4" id="divGEOReferencing">
+                                <label class="control-label lb-sm" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                                <input type="hidden" asp-for="GeoFilePath" />
+                                @{
+                                    @if (ViewBag.GeoDocView != null)
+                                    {
+                                        @Html.ActionLink(" (View Existing Document)", "GeoDownload", new { id = Model.Id })
+                                        <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    }
+                                    else
+                                    {
+                                        <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                    }
+                                }
                                 <span asp-validation-for="GeoFileData" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -448,7 +483,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverZoneId">Zone</label>
-                            <select class="form-control dda-dropdown" asp-for="HandedOverZoneId" onchange="return GetHandedOverDivisionList(this.options[this.selectedIndex].value);">
+                            <select class="form-control dda-dropdown" asp-for="HandedOverZoneId" asp-items="@(new SelectList(Model.HandedOverZoneList, "Id","Name"))" onchange="return GetHandedOverDivisionList(this.options[this.selectedIndex].value);">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="HandedOverZoneId" class="text-danger lb-sm"></span>
@@ -456,7 +491,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverDivisionId">Division</label>
-                            <select class="form-control dda-dropdown" asp-for="HandedOverDivisionId" >
+                            <select class="form-control dda-dropdown" asp-for="HandedOverDivisionId" asp-items="@(new SelectList(Model.HandedOverDivisionList, "Id","Name"))">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="HandedOverDivisionId" class="text-danger lb-sm"></span>
@@ -472,7 +507,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="HandedOverDate" class="form-control" type="date" value="" />
+                            <input asp-for="HandedOverDate" class="form-control" type="date"  />
                             <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -494,24 +529,47 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Order No.</label>
-                            <input type="text" class="form-control" asp-for="HandedOverOrderNo" />
+                            <input type="text" class="form-control" asp-for="HandedOverOrderNo" maxlength="100"/>
                             <span asp-validation-for="HandedOverOrderNo" class="text-danger"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Copy of Order</label>
-                            <input type="file" class="form-control" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <label class="control-label lb-sm">Copy of Order </label>
+                            <input type="hidden" asp-for="HandedOverCopyofOrderFilepath" />
+                            @{
+                                @if (ViewBag.HandedOverCopyofOrderView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "HandedOverCopyofOrderDownload", new { id = Model.Id })
+                                    <input type="file" class="form-control" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
+
                             <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Transfer order Issue Authority</label>
-                            <input type="text" class="form-control" asp-for="HandedTransferOrder" />
-                            <span class="text-danger" asp-validation-for="HandedTransferOrder"></span>
+                            <label class="control-label lb-sm">Transfer order Issue Authority </label>
+                            <input type="text" class="form-control" asp-for="HandedTransferOrder" maxlength="100"/>
+                            <span class="text-danger lb-sm" asp-validation-for="HandedTransferOrder"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="HandedOverFileData">Document</label>
-                            <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input type="hidden" asp-for="HandedOverFilePath" />
+                            @{
+                                @if (ViewBag.HandedOverDocView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "HandedOverDownload", new { id = Model.Id })
+                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
                             <span asp-validation-for="HandedOverFileData" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -545,7 +603,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverZoneId">Zone</label>
-                            <select class="form-control dda-dropdown" asp-for="TakenOverZoneId" onchange="return GetTakenOverDivisionList(this.options[this.selectedIndex].value);" >
+                            <select class="form-control dda-dropdown" asp-for="TakenOverZoneId" asp-items="@(new SelectList(Model.TakenOverZoneList, "Id","Name"))" onchange="return GetTakenOverDivisionList(this.options[this.selectedIndex].value);">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="TakenOverZoneId" class="text-danger lb-sm"></span>
@@ -553,7 +611,7 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverDivisionId">Division</label>
-                            <select class="form-control dda-dropdown" asp-for="TakenOverDivisionId" >
+                            <select class="form-control dda-dropdown" asp-for="TakenOverDivisionId" asp-items="@(new SelectList(Model.TakenOverDivisionList, "Id","Name"))">
                                 <option value="">--Select--</option>
                             </select>
                             <span asp-validation-for="TakenOverDivisionId" class="text-danger lb-sm"></span>
@@ -568,7 +626,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="TakenOverDate" type="date" value="" class="form-control" />
+                            <input asp-for="TakenOverDate" type="date"  class="form-control" />
                             <span asp-validation-for="TakenOverDate" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -592,11 +650,23 @@
 
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="TakenOverFileData">Document</label>
-                            <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input type="hidden" asp-for="TakenOverFilePath" />
+                            @{
+                                @if (ViewBag.TakenOverDocView != null)
+                                {
+                                    @Html.ActionLink(" (View Existing Document)", "TakenOverDownload", new { id = Model.Id })
+                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                                else
+                                {
+                                    <input type="file" class="form-control" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                }
+                            }
                             <span asp-validation-for="TakenOverFileData" class="text-danger lb-sm"></span>
                         </div>
                     </div>
                     <div class="row">
+
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -607,6 +677,9 @@
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
@@ -630,7 +703,7 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Validate</label>
-                                <input type="checkbox" asp-for="IsValidate" />
+                                <input type="checkbox" asp-for="IsValidateData" />
                             </div>
                         </div>
                     }
@@ -639,8 +712,8 @@
 
                 <div class="form-row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();"/>
-                        @Html.ActionLink("Back", "Index", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading" })
+                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading"  onclick="return ValidateForm();"/>
+                        @Html.ActionLink("Back", "Index", "InventoryUnverifiedApproved", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -652,10 +725,10 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/propertyregisterationcreate.js"></script>
+    <script src="~/js/propertyregisterationedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/propertyregisterationcreate.js" asp-append-version="true"></script>
+    <script src="~/js/propertyregisterationedit.js" asp-append-version="true"></script>
 </environment>
 
 <environment include="Development">

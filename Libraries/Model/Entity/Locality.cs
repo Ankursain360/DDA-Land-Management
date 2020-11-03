@@ -16,6 +16,7 @@ namespace Libraries.Model.Entity
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Watchandward = new HashSet<Watchandward>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
+            Propertyregistration = new HashSet<Propertyregistration>();
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -52,7 +53,6 @@ namespace Libraries.Model.Entity
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
-        
 
     }
 }
