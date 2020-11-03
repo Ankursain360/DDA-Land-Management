@@ -49,6 +49,8 @@ namespace LandInventory.Controllers
         {
             ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
             ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            ViewBag.IsUserCreation = SiteContext.UserId;
+            ViewBag.IsDisposedRightsUser = SiteContext.UserId;
             return View();
         }
 
@@ -316,7 +318,7 @@ namespace LandInventory.Controllers
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
             ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
-            ViewBag.IsValidateUser = 2;
+            ViewBag.IsValidateUser = SiteContext.UserId;
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
@@ -353,7 +355,7 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = propertyregistration.TakenOverFilePath;
             ViewBag.HandedOverDocView = propertyregistration.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = propertyregistration.DisposalTypeFilePath;
-            ViewBag.IsValidateUser = 2;
+            ViewBag.IsValidateUser = SiteContext.UserId;
             if (ModelState.IsValid)
             {
                 if (propertyregistration.IsValidateData == true)
@@ -629,10 +631,10 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)  
         {
             Deletedproperty model = new Deletedproperty();
-            int userId = 3;
+            int userId = SiteContext.UserId;
             var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
 
-            if (userId == 3)
+            if (userId == 13)
             {
                 model.Reason = propertyregistration.Reason;
                 var result = await _propertyregistrationService.Delete(id);
@@ -822,10 +824,10 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
         {
             Disposedproperty model = new Disposedproperty();
-            int userId = 3;
+            int userId =  SiteContext.UserId;
             var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
 
-            if (userId == 3)
+            if (userId == 15)
             {
                 model.DisposalTypeId = propertyregistration.DisposalTypeId;
                 model.DisposalDate = propertyregistration.DisposalDate;
@@ -835,7 +837,6 @@ namespace LandInventory.Controllers
                 var result2 = await _propertyregistrationService.InsertInDisposedProperty(id, model);
                 if (result == true)
                 {
-                    userId = 2;
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();

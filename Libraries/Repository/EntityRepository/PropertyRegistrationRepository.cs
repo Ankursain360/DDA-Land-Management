@@ -309,7 +309,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var badCodes = new[] { 3, 5 };
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            if (UserId == 2 || Iscreated > 0)
+            if (UserId == 14 || Iscreated > 0)
             {
                 var data = await _dbContext.Propertyregistration
                                 .Include(x => x.ClassificationOfLand)
@@ -359,7 +359,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var badCodes = new[] { 3, 5 };
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            if (UserId == 2 || Iscreated > 0)
+            if (UserId == 14 || Iscreated > 0)
             {
                 var data = await _dbContext.Propertyregistration
                                 .Include(x => x.ClassificationOfLand)

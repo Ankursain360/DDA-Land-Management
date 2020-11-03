@@ -48,6 +48,7 @@ namespace LandInventory.Controllers
         {
             ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
             ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            ViewBag.IsUserCreation = SiteContext.UserId;
             return View();
         }
 
@@ -314,7 +315,7 @@ namespace LandInventory.Controllers
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
             ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
-            ViewBag.IsValidateUser = 2;
+            ViewBag.IsValidateUser = SiteContext.UserId; 
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
