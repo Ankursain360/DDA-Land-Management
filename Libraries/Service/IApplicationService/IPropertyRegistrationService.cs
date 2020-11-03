@@ -54,5 +54,6 @@ namespace Libraries.Service.IApplicationService
         string GetHandedOverCopyofOrderFile(int id);
         Task<bool> DisposeDetails(int id);
         Task<bool> InsertInDisposedProperty(int id, Disposedproperty model);
+        Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration);
     }
 }

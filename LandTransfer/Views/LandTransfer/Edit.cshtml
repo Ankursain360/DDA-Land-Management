@@ -19,6 +19,11 @@
         </div>
         <div class="panel-body">
             <form asp-action="Edit" enctype="multipart/form-data">
+                @if (@Model.Id > 0)
+                {
+                    <input type="hidden" asp-for="Id" value="@Model.Id" />
+                }
+                    <input type="hidden" asp-for="PropertyRegistrationId" value="@Model.Propertyregistration.Id" />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <a data-toggle="collapse" href="#collapseExample" id="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
                     <div class="row" style="margin-bottom:35px;">
@@ -152,16 +157,16 @@
                                 </div>
                                 <div class="form-group col-md-1">
                                     <label class="control-label lb-sm">Biswani</label>
-                                    <input asp-for="PropertyRegistration.TotalAreaInBiswani" class="form-control numbers" disabled>
+                                    <input asp-for="Propertyregistration.TotalAreaInBiswani" class="form-control numbers" disabled>
                                 </div>
                             </div>
                             <div id="AreainSqAcreHec" class="form-group col-md-4" style="display:none;">
                                 <label class="control-label lb-sm lb-sm" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
-                                <input asp-for="PropertyRegistration.TotalAreaInSqAcreHt" type="text" disabled class="form-control numbers" />
+                                <input asp-for="Propertyregistration.TotalAreaInSqAcreHt" type="text" disabled class="form-control numbers" />
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                                <input asp-for="PropertyRegistration.TotalArea" class="form-control numbers" disabled />
+                                <input asp-for="Propertyregistration.TotalArea" class="form-control numbers" disabled />
                             </div>
                         </div>
                     </div>
@@ -401,20 +406,19 @@
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
-                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" asp-items="@(new SelectList(Model.Propertyregistration.HandedOverZoneList, "Id","Name"))" disabled>
+                                <label class="control-label lb-sm" asp-for="PropertyRegistration.HandedOverZoneId">Zone</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="PropertyRegistration.HandedOverZoneId" asp-items="@(new SelectList(Model.Propertyregistration.HandedOverZoneList, "Id","Name"))" disabled>
                                     <option value="">--Select--</option>
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
-                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" disabled asp-items="@(new SelectList(Model.Propertyregistration.HandedOverDivisionList, "Id","Name"))">
+                                <label class="control-label lb-sm" asp-for="Propertyregistration.HandedOverDivisionId">Division</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.HandedOverDivisionId" disabled asp-items="@(new SelectList(Model.Propertyregistration.HandedOverDivisionList, "Id","Name"))">
                                     <option value="">--Select--</option>
                                 </select>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Name/Designation</label>
@@ -477,20 +481,20 @@
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Department</label>
-                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.TakenOverDepartmentId" asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDepartmentList, "Id","Name"))" disabled>
+                                <select class="form-control dda-dropdown" asp-for="PropertyRegistration.TakenOverDepartmentId" asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDepartmentList, "Id","Name"))" disabled>
                                     <option value="">--Select--</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label><span class="text-danger">*</span>
-                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" disabled asp-items="@(new SelectList(Model.Propertyregistration.TakenOverZoneList, "Id","Name"))">
+                                <label class="control-label lb-sm" asp-for="PropertyRegistration.TakenOverZoneId">Zone</label><span class="text-danger">*</span>
+                                <select class="form-control dda-dropdown" asp-for="PropertyRegistration.TakenOverZoneId" disabled asp-items="@(new SelectList(Model.Propertyregistration.TakenOverZoneList, "Id","Name"))">
                                     <option value="">--Select--</option>
                                 </select>
                             </div>
 
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Division</label><span class="text-danger">*</span>
-                                <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId" disabled asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDivisionList, "Id","Name"))">
+                                <select class="form-control dda-dropdown" asp-for="PropertyRegistration.TakenOverDivisionId" disabled asp-items="@(new SelectList(Model.Propertyregistration.TakenOverDivisionList, "Id","Name"))">
                                     <option value="">--Select--</option>
                                 </select>
                             </div>
@@ -598,41 +602,48 @@
                             </tr>
                         </thead>
                         <tbody class="tbody">
-                      
-                            @foreach (var item in Model.LandTransferList)
+                            @if (Model.LandTransferList.Count > 0)
                             {
-                                <tr>
-                                    <td>@(rowNo += 1)</td>
-                                    <td>@item.PropertyRegistration.Locality.Name</td>
-                                    <td>@item.PropertyRegistration.KhasraNo</td>
-                                    <td>
-                                        @item.HandedOverDepartment.Name
-                                    </td>
-                                    <td>
-                                        @item.HandedOverZone.Name
-                                    </td>
-                                    <td>
-                                        @item.HandedOverDivision.Name
-                                    </td>
-                                    <td>
-                                        @item.HandedOverByNameDesingnation
-                                    </td>
-                                    <td>
-                                        @item.TakenOverDepartment.Name
-                                    </td>
-                                    <td>
-                                        @item.TakenOverZone.Name
-                                    </td>
-                                    <td>
-                                        @item.TakenOverDivision.Name
-                                    </td>
-                                    <td>
-                                        @item.TakenOverByNameDesingnation
-                                    </td>
-                                    <td>
-                                        @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
-                                    </td>
-                                </tr>
+                                @foreach (var item in Model.LandTransferList)
+                                {
+                                    <tr>
+                                        <td>@(rowNo += 1)</td>
+                                        <td>@item.PropertyRegistration.Locality.Name</td>
+                                        <td>@item.PropertyRegistration.KhasraNo</td>
+                                        <td>
+                                            @item.HandedOverDepartment.Name
+                                        </td>
+                                        <td>
+                                            @item.HandedOverZone.Name
+                                        </td>
+                                        <td>
+                                            @item.HandedOverDivision.Name
+                                        </td>
+                                        <td>
+                                            @item.HandedOverByNameDesingnation
+                                        </td>
+                                        <td>
+                                            @item.TakenOverDepartment.Name
+                                        </td>
+                                        <td>
+                                            @item.TakenOverZone.Name
+                                        </td>
+                                        <td>
+                                            @item.TakenOverDivision.Name
+                                        </td>
+                                        <td>
+                                            @item.TakenOverByNameDesingnation
+                                        </td>
+                                        <td>
+                                            @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr><td colspan="99" style="text-align:center;">Data Not Available !!!</td></tr>
+
                             }
                         </tbody>
 
@@ -690,7 +701,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="HandedOverDate" class="form-control" type="date" value="" />
+                            <input asp-for="HandedOverDate" class="form-control" type="date"/>
                             <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -786,7 +797,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Date</label>
-                            <input asp-for="DateofTakenOver" type="date" value="" class="form-control" />
+                            <input asp-for="DateofTakenOver" type="date" class="form-control" />
                             <span asp-validation-for="DateofTakenOver" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
@@ -852,7 +863,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Encroched Area(in sq. mt.)</label>
-                                <input asp-for="EncroachementArea" value="" class="form-control numbers" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                                <input asp-for="EncroachementArea" class="form-control numbers" onchange="return ComapareTotalArea(this);" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                                 <span id="EncroachedValidation" asp-validation-for="EncroachementArea" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -862,7 +873,7 @@
                             </div>
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Vacant(in sq. mt.)</label>
-                                <input asp-for="EncroachementArea" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" onchange="return ComapareTotalArea(this);" />
+                                <input asp-for="EncroachementArea" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" onchange="return ComapareTotalArea(this);" />
                                 <span asp-validation-for="EncroachementArea" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-4">
@@ -885,12 +896,19 @@
                     </div>
                 </div>
                 @{
-                    @if (Model.Id >0)
+                    @if (ViewBag.IsValidateUser == 2 && Model.Id > 0)
                     {
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Validate</label>
-                                <input type="checkbox"/>
+                                @if (@Model.IsValidateData)
+                                {
+                                    <input type="checkbox" asp-for="IsValidateData" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" asp-for="IsValidateData" />
+                                }
                             </div>
                         </div>
                     }

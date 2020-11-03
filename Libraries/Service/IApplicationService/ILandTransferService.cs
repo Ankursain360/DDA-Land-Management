@@ -42,6 +42,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Currentstatusoflandhistory>> GetCurrentstatusoflandhistory(int landtransferId);
 
         Task<PagedResult<Landtransfer>> GetPagedCurrentStatusLandtransfer(LandTransferSearchDto model); //added by ishu
-
+        Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory);
     }
 }

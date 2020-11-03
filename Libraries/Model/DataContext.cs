@@ -105,6 +105,7 @@ namespace Libraries.Model
         public virtual DbSet<Fixingdocument> Fixingdocument { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Disposedproperty> Disposedproperty { get; set; }
+        public virtual DbSet<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -182,6 +183,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new FixingdocumentConfiguration());
             modelBuilder.ApplyConfiguration(new MenuConfiguration());
             modelBuilder.ApplyConfiguration(new DisposedPropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyRegistrationHistoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
