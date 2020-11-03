@@ -82,9 +82,17 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
+        public List<Zone> HandedOverZoneList { get; set; }
+        [NotMapped]
+        public List<Zone> TakenOverZoneList { get; set; }
+        [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
         public List<Division> DivisionList { get; set; }
+         [NotMapped]
+        public List<Division> TakenOverDivisionList { get; set; }
+         [NotMapped]
+        public List<Division> HandedOverDivisionList { get; set; }
         [NotMapped]
         public List<Landtransfer> handeoverdepartmentlist { get; set; }
         [NotMapped]
