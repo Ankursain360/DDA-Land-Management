@@ -133,7 +133,7 @@ $(document).ready(function () {
 
         var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
 
-        $("input[name='TotalArea']").val(totalarea).toFixed(3);
+        $("input[name='TotalArea']").val(totalarea.toFixed(3));
     });
 
     $(".TotalCalculation").keyup(function () {
@@ -141,13 +141,13 @@ $(document).ready(function () {
         var value = $('#AreaUnit option:selected').val();
         var totalOther = $('#TotalAreaInSqAcreHt').val();
         if (value == 1) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836)).toFixed(3);;
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
         }
         else if (value == 2) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09)).toFixed(3);;
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
         }
         else if (value == 3) {
-            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156)).toFixed(3);;
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
         }
     });
 })
