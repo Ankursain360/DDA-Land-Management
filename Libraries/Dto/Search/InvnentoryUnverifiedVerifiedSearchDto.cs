@@ -15,6 +15,5 @@ namespace Dto.Search
         public int classificationOfLandId { get; set; }
         public string plannedUnplannedLand { get; set; }
         public int Id { get; set; }
-        public int unverifiedverfied { get; set; }
     }
 }

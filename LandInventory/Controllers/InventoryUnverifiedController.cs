@@ -21,7 +21,7 @@ using Dto.Search;
 
 namespace LandInventory.Controllers
 {
-    public class InventoryUnverifiedApprovedController : Controller
+    public class InventoryUnverifiedController : Controller
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
@@ -32,7 +32,7 @@ namespace LandInventory.Controllers
         string targetPathDisposal = "";
         string targetPathHandedOverCopyOfOrder = "";
         string targetPathATR = "";
-        public InventoryUnverifiedApprovedController(IPropertyRegistrationService propertyregistrationService)
+        public InventoryUnverifiedController(IPropertyRegistrationService propertyregistrationService)
         {
             _propertyregistrationService = propertyregistrationService;
         }

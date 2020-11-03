@@ -1,11 +1,11 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
 $(document).ready(function () {
-
+    GetDetails(pageNumber, pageSize);
     $("#btnGenerate").click(function () {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
-        HttpPost(`/InventoryUnverifiedApproved/GetDetails`, 'html', param, function (response) {
+        HttpPost(`/InventoryUnverified/GetDetails`, 'html', param, function (response) {
             $('#LoadReportView').html("");
             $('#LoadReportView').html(response);
         });
@@ -14,7 +14,7 @@ $(document).ready(function () {
 //Bind Zone Dropdown from Department
 function GetZoneList(id) {
     debugger;
-    HttpGet(`/InventoryUnverifiedApproved/GetZoneList/?departmentId=${id}`, 'json', function (response) {
+    HttpGet(`/InventoryUnverified/GetZoneList/?departmentId=${id}`, 'json', function (response) {
 
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
@@ -30,7 +30,7 @@ function GetZoneList(id) {
 //Bind Divison and Locality Dropdown from Department
 function GetDivisionList(id) {
 
-    HttpGet(`/InventoryUnverifiedApproved/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
+    HttpGet(`/InventoryUnverified/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
@@ -39,7 +39,7 @@ function GetDivisionList(id) {
         $("#DivisionId").html(html);
     });
 
-    HttpGet(`/InventoryUnverifiedApproved/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
+    HttpGet(`/InventoryUnverified/GetLocalityList/?zoneId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
@@ -52,7 +52,7 @@ function GetDivisionList(id) {
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/InventoryUnverifiedApproved/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/InventoryUnverified/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
@@ -76,7 +76,7 @@ function GetSearchParam(pageNumber, pageSize) {
         inventoriedId: parseInt($('#InventoriedInId').val()),
         classificationOfLandId: parseInt($('#ClassificationOfLandId').val()),
         plannedUnplannedLand: $('#PlannedUnplannedLand').val(),
-        unverifiedverfied: parseInt($('#unverifiedverfied').val()),
+      //  unverifiedverfied: 0,
         Id: parseInt(Id)
     }
     test.push(model);
