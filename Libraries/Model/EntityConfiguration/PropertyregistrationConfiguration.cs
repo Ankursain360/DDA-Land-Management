@@ -28,11 +28,29 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.DivisionId)
                 .HasName("DivisionId");
 
+            builder.HasIndex(e => e.HandedOverDepartmentId)
+                .HasName("registerationHandedDepartment_idx");
+
+            builder.HasIndex(e => e.HandedOverDivisionId)
+                .HasName("registerationHandedDivision_idx");
+
+            builder.HasIndex(e => e.HandedOverZoneId)
+                .HasName("registerationHandedZone_idx");
+
             builder.HasIndex(e => e.LocalityId)
                 .HasName("LocalityId_idx");
 
             builder.HasIndex(e => e.MainLandUseId)
                 .HasName("MainLandUseId");
+
+            builder.HasIndex(e => e.TakenOverDepartmentId)
+                .HasName("registerationTakenDepartment_idx");
+
+            builder.HasIndex(e => e.TakenOverDivisionId)
+                .HasName("registerationTakenDivision_idx");
+
+            builder.HasIndex(e => e.TakenOverZoneId)
+                .HasName("registerationTakenZone_idx");
 
             builder.HasIndex(e => e.ZoneId)
                 .HasName("registerationZoneId");
@@ -298,7 +316,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasConstraintName("ClassificationOfLandId");
 
             builder.HasOne(d => d.Department)
-                .WithMany(p => p.Propertyregistration)
+                .WithMany(p => p.PropertyregistrationDepartment)
                 .HasForeignKey(d => d.DepartmentId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DepartmentId");
@@ -309,10 +327,25 @@ namespace Libraries.Model.EntityConfiguration
                 .HasConstraintName("DisposalTypeId");
 
             builder.HasOne(d => d.Division)
-                .WithMany(p => p.Propertyregistration)
+                .WithMany(p => p.PropertyregistrationDivision)
                 .HasForeignKey(d => d.DivisionId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("DivisionId");
+
+            builder.HasOne(d => d.HandedOverDepartment)
+                .WithMany(p => p.PropertyregistrationHandedOverDepartment)
+                .HasForeignKey(d => d.HandedOverDepartmentId)
+                .HasConstraintName("registerationHandedDepartment");
+
+            builder.HasOne(d => d.HandedOverDivision)
+                .WithMany(p => p.PropertyregistrationHandedOverDivision)
+                .HasForeignKey(d => d.HandedOverDivisionId)
+                .HasConstraintName("registerationHandedDivision");
+
+            builder.HasOne(d => d.HandedOverZone)
+                .WithMany(p => p.PropertyregistrationHandedOverZone)
+                .HasForeignKey(d => d.HandedOverZoneId)
+                .HasConstraintName("registerationHandedZone");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Propertyregistration)
@@ -324,8 +357,23 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.MainLandUseId)
                 .HasConstraintName("MainLandUseId");
 
+            builder.HasOne(d => d.TakenOverDepartment)
+                .WithMany(p => p.PropertyregistrationTakenOverDepartment)
+                .HasForeignKey(d => d.TakenOverDepartmentId)
+                .HasConstraintName("registerationTakenDepartment");
+
+            builder.HasOne(d => d.TakenOverDivision)
+                .WithMany(p => p.PropertyregistrationTakenOverDivision)
+                .HasForeignKey(d => d.TakenOverDivisionId)
+                .HasConstraintName("registerationTakenDivision");
+
+            builder.HasOne(d => d.TakenOverZone)
+                .WithMany(p => p.PropertyregistrationTakenOverZone)
+                .HasForeignKey(d => d.TakenOverZoneId)
+                .HasConstraintName("registerationTakenZone");
+
             builder.HasOne(d => d.Zone)
-                .WithMany(p => p.Propertyregistration)
+                .WithMany(p => p.PropertyregistrationZone)
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("registerationZoneId");

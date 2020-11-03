@@ -33,6 +33,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckDeleteAuthority(int id);
         Task<List<Propertyregistration>> GetKhasraReportList();
         string GetFile(int id);
+        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model);
         string GetGeoFile(int id);
         Task<List<Department>> GetDepartmentDropDownList();
         Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model);// added by ishu

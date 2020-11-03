@@ -1,5 +1,6 @@
 ﻿
 $(document).ready(function () {
+
     var value = $('#Boundary option:selected').val();
     if (value == 2) {
         $('#divBoundarySelection').hide();
@@ -570,6 +571,43 @@ $('#AreaUnit').change(function () {
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
     }
 });
+
+//$('#TotalAreaInBigha').change(function () {
+//    debugger;
+//    var inbigha = $('#TotalAreaInBigha').val();
+//    var inbiswa = $('#TotalAreaInBiswa').val();
+//    var inbiswani = $('#TotalAreaInBiswani').val();
+
+//    var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha);
+//    var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa);
+//    var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani); 
+
+//    var totalarea = inbighavalue;
+
+//    $("input[name='TotalArea']").val(parseFloat(inbigha == '' ? '0' : inbigha) + parseFloat(inbiswa == '' ? '0' : inbiswa) + parseFloat(inbiswani == '' ? '0' : inbiswani));
+//    if (value == 0) {
+//        $('#TotalAreaInSqAcreHt').val('');
+//        $('#TotalAreaInBigha').val('');
+//        $('#TotalAreaInBiswa').val('');
+//        $('#TotalAreaInBiswani').val('');
+//        $("#AreainSqAcreHec").hide();
+//        $("#bighabis").show();
+//    }
+//    else {
+//        $('#TotalAreaInSqAcreHt').val('');
+//        $('#TotalAreaInBigha').val('');
+//        $('#TotalAreaInBiswa').val('');
+//        $('#TotalAreaInBiswani').val('');
+//        $("#AreainSqAcreHec").show();
+//        $("#bighabis").hide();
+//        if (value == 1)
+//            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+//        else if (value == 2)
+//            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+//        else if (value == 3)
+//            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+//    }
+//});
 
 //Bind Divison  Dropdown from Department for Taken Over
 function GetTakenOverZoneList(id) {

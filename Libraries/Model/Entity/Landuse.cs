@@ -9,6 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class Landuse : AuditableEntity<int>
     {
+        public Landuse()
+        {
+            Propertyregistration = new HashSet<Propertyregistration>();
+        }
         [Required(ErrorMessage = "The Land Use Name field is required")]
         public string Name { get; set; }
         public byte IsActive { get; set; }

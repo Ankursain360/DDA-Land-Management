@@ -9,6 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class Disposaltype : AuditableEntity<int>
     {
+        public Disposaltype()
+        {
+            Propertyregistration = new HashSet<Propertyregistration>();
+        }
         public string Name { get; set; }
         public byte IsActive { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
