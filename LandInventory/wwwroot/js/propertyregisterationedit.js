@@ -113,6 +113,34 @@ $(document).ready(function () {
     //    $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
     //});
 
+    $(".bbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBigha').val();
+        var inbiswa = $('#TotalAreaInBiswa').val();
+        var inbiswani = $('#TotalAreaInBiswani').val();
+
+        var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha) * 1621.344;
+        var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
+        var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323;
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[name='TotalArea']").val(totalarea);
+    });
+
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836));
+        }
+        else if (value == 2) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09));
+        }
+        else if (value == 3) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156));
+        }
+    });
 
     // DropDrown check at initial 
     //var departmentid = $('#DepartmentId option:selected').val();

@@ -64,7 +64,7 @@ $(document).ready(function () {
         $('#divLitigationStatusSelection').hide();
     }
 
-    
+
     var value = $('#GeoReferencing option:selected').val();
     if (value == 1) {
         $("#divGEOReferencingSelection").show();
@@ -115,7 +115,7 @@ $(document).ready(function () {
     //});
 
 
-   // DropDrown check at initial 
+    // DropDrown check at initial 
     var departmentid = $('#DepartmentId option:selected').val();
     if (departmentid > 0) {
         debugger;
@@ -137,16 +137,17 @@ $(document).ready(function () {
     });
 
     $(".TotalCalculation").keyup(function () {
-    var value = $('#AreaUnit option:selected').val();
-    var totalOther = $('#TotalAreaInBigha').val();
-    if (value == 1) {
-        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836));
-    }
-    else if (value == 2) {
-        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09));
-    }
-    else if (value == 3) {
-        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156));
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836));
+        }
+        else if (value == 2) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09));
+        }
+        else if (value == 3) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156));
         }
     });
 })
@@ -421,7 +422,7 @@ function GetZoneList(id) {
         var html = '<option value="">---Select---</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }        
+        }
         $("#ZoneId").html(html);
         $("#DivisionId").val('').trigger('change');
         $("#LocalityId").val('').trigger('change');
@@ -550,7 +551,7 @@ function ComapareTotalArea(element) {
     var FieldId = "span_" + name;
     var ValidationMsg = 'Value must be lesser than or equal to Total Area';
     var totalArea = $("input[name='TotalArea']").val();
-    var value = $("input[name='" + name+"']").val();
+    var value = $("input[name='" + name + "']").val();
     if ((parseFloat(value == '' ? '0' : value)) > (parseFloat(totalArea == '' ? '0' : totalArea))) {
         $("<span class='text-danger lb-sm' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger lb-sm field-validation-valid']"))
         $(this).parent().closest('div').addClass('has-error');
