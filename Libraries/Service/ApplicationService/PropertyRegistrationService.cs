@@ -169,7 +169,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Propertyregistration propertyregistration)
         {
 
-            propertyregistration.CreatedBy = 1;
+            propertyregistration.CreatedBy = 13;
             propertyregistration.CreatedDate = DateTime.Now;
             _propertyregistrationRepository.Add(propertyregistration);
             return await _unitOfWork.CommitAsync() > 0;
@@ -332,9 +332,9 @@ namespace Libraries.Service.ApplicationService
             return await _propertyregistrationRepository.GetKhasraReportList();
         }
 
-        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model)
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
         {
-            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model);
+            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model, userId);
         }
     }
 }

@@ -179,7 +179,7 @@ namespace Libraries.Repository.EntityRepository
                                .Include(x => x.TakenOverDepartment)
                                .Include(x => x.TakenOverZone)
                                .Include(x => x.TakenOverDivision)
-                                   .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && x.IsValidate == 1 )
+                                   .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && x.IsValidate == 1)
                                    && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
                                    && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
                                    && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
@@ -308,31 +308,25 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
         {
             var badCodes = new[] { 3, 5 };
-            var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
-            if (UserId == 14 || Iscreated > 0)
-            {
-                var data = await _dbContext.Propertyregistration
-                                .Include(x => x.ClassificationOfLand)
-                                .Include(x => x.Department)
-                                .Include(x => x.Division)
-                                .Include(x => x.DisposalType)
-                                .Include(x => x.MainLandUse)
-                                .Include(x => x.Zone)
-                                .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && !badCodes.Contains(x.ClassificationOfLand.Id)
-                                    && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
-                                    && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
-                                    && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
-                                    && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
-                                    && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
-                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)))
-                                    .OrderByDescending(x => x.Id)
-                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
-                return data;
+            //var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            //if (UserId == 14 )
+            //{
+            //    var data = await _dbContext.Propertyregistration
+            //                    .Include(x => x.ClassificationOfLand)
+            //                    .Include(x => x.Department)
+            //                    .Include(x => x.Division)
+            //                    .Include(x => x.DisposalType)
+            //                    .Include(x => x.MainLandUse)
+            //                    .Include(x => x.Zone)
+            //                    .Include(x => x.Locality)
+            //                        .Where(x => x.IsDeleted == null)
+            //                        .OrderByDescending(x => x.Id)
+            //                    .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+            //    return data;
 
-            }
-            else
-            {
+            //}
+            //else
+            //{
                 var data = await _dbContext.Propertyregistration
                                 .Include(x => x.ClassificationOfLand)
                                 .Include(x => x.Department)
@@ -352,7 +346,7 @@ namespace Libraries.Repository.EntityRepository
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
                 return data;
 
-            }
+            //}
         }
 
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisterationMOR(PropertyRegisterationSearchDto model, int UserId)
@@ -391,7 +385,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.MainLandUse)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Locality)
-                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1  && x.IsDisposed != 0 
+                                    .Where(x => x.IsDeleted == 1 && badCodes.Contains(x.ClassificationOfLand.Id) && x.IsValidate == 1 && x.IsDisposed != 0
                                     && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
                                     && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
                                     && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
@@ -496,25 +490,44 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.KhasraNo != null).Distinct().ToListAsync();
         }
 
-        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model)
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
         {
-            var data = await _dbContext.Propertyregistration
-                .Include(x => x.Locality)
-                .Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .Include(x => x.ClassificationOfLand)
-                .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 &&  x.IsDisposed != 0 && x.IsValidate ==0)
-                && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
-                && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
-                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
-                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
-                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
-                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
-                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
-                .OrderByDescending(x => x.Id)
-                .GetPaged(model.PageNumber, model.PageSize);
-            return data;
+            int UserId = userId;
+            var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();
+            if (UserId == 14 || Iscreated > 0)
+            {
+                var data = await _dbContext.Propertyregistration
+               .Include(x => x.Locality)
+               .Include(x => x.Department)
+               .Include(x => x.Zone)
+               .Include(x => x.Division)
+               .Include(x => x.ClassificationOfLand)
+               .Where(x => (x.IsDeleted == 1 && x.IsActive == 1 && x.IsDisposed != 0 && x.IsValidate == 0)
+               && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+               && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+               && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+               && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+               && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+               && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+               && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
+               .OrderByDescending(x => x.Id)
+               .GetPaged(model.PageNumber, model.PageSize);
+                return data;
+            }
+            else
+            {
+                var data = await _dbContext.Propertyregistration
+               .Include(x => x.Locality)
+              .Include(x => x.Department)
+              .Include(x => x.Zone)
+              .Include(x => x.Division)
+              .Include(x => x.ClassificationOfLand)
+              .Where(x => (x.IsDeleted == null))
+              .OrderByDescending(x => x.Id)
+              .GetPaged(model.PageNumber, model.PageSize);
+                return data;
+            }
+
         }
     }
 

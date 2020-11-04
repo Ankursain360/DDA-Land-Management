@@ -845,7 +845,7 @@ namespace LandInventory.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show("You are not Authorized to Dispose Record", "", AlertType.Warning);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 return View("Index");

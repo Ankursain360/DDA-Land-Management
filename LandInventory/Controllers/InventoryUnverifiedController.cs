@@ -21,7 +21,7 @@ using Dto.Search;
 
 namespace LandInventory.Controllers
 {
-    public class InventoryUnverifiedController : Controller
+    public class InventoryUnverifiedController :  BaseController
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
@@ -32,9 +32,10 @@ namespace LandInventory.Controllers
         string targetPathDisposal = "";
         string targetPathHandedOverCopyOfOrder = "";
         string targetPathATR = "";
-        public InventoryUnverifiedController(IPropertyRegistrationService propertyregistrationService)
+        public InventoryUnverifiedController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _propertyregistrationService = propertyregistrationService;
+            _Configuration = configuration;
         }
 
         async Task BindDropDown(Propertyregistration propertyregistration)
@@ -57,7 +58,7 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] InvnentoryUnverifiedVerifiedSearchDto model)
         {
-            var result = await _propertyregistrationService.GetInventoryUnverifiedVerified(model);
+            var result = await _propertyregistrationService.GetInventoryUnverifiedVerified(model, SiteContext.UserId);
 
             if (result != null)
             {
@@ -93,6 +94,7 @@ namespace LandInventory.Controllers
         }
         #endregion
 
+        #region Property Inventory changes
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -336,7 +338,9 @@ namespace LandInventory.Controllers
                     //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
+                    Propertyregistration propertyregistration1 = new Propertyregistration();
+                    await BindDropDown(propertyregistration1);
+                    return RedirectToAction("Create", propertyregistration1);
                 }
                 else
                 {
@@ -345,7 +349,8 @@ namespace LandInventory.Controllers
                     //  var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
+                    await BindDropDown(propertyregistration);
+                    return View("Create");
 
                 }
 
@@ -353,5 +358,192 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            ViewBag.LayoutDocView = Data.LayoutFilePath;
+            ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
+        {
+            Deletedproperty model = new Deletedproperty();
+            int userId = SiteContext.UserId;
+            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
+
+            if (userId == 13)
+            {
+                model.Reason = propertyregistration.Reason;
+                var result = await _propertyregistrationService.Delete(id);
+                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+                if (result == true)
+                {
+                    userId = 2;
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                    return View("Index");
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                return View("Index");
+            }
+
+
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+        public async Task<IActionResult> Download(int Id)
+        {
+            string filename = _propertyregistrationService.GetFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> TakenOverDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetTakenOverFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> HandedOverDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetHandedOverFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DisposalTypeDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetDisposalFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> EncroachAtrDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetEncroachAtr(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        public async Task<IActionResult> HandedOverCopyofOrderDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetHandedOverCopyofOrderFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        #region Document Download added By Renu 16 Sep 2020
+        public async Task<IActionResult> GeoDownload(int Id)
+        {
+            string filename = _propertyregistrationService.GetGeoFile(Id);
+            var memory = new MemoryStream();
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, GetContentType(filename), Path.GetFileName(filename));
+        }
+
+
+        private string GetContentType(string path)
+        {
+            var types = GetMimeTypes();
+            var ext = Path.GetExtension(path).ToLowerInvariant();
+            return types[ext];
+        }
+
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".txt", "text/plain"},
+                {".pdf", "application/pdf"},
+                {".doc", "application/vnd.ms-word"},
+                {".docx", "application/vnd.ms-word"},
+                {".xls", "application/vnd.ms-excel"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+                {".csv", "text/csv"}
+            };
+        }
+        #endregion
+
+
+        #endregion
     }
 }
