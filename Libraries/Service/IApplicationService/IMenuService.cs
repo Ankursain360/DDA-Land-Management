@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Menu menu);
         Task<Menu> FetchSingleResult(int id); 
         Task<bool> Delete(int id);   
-        Task<bool> CheckUniqueName(int Id, string Name, int ModuleId);   
+        Task<bool> CheckUniqueName(int Id, string Name);   
         //Task<bool> CheckUniqueCode(int id, string code);
 
         Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model);
