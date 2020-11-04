@@ -96,7 +96,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.PropertyRegistration.Department)
                 .Include(x => x.PropertyRegistration.Zone)
                 .Include(x => x.PropertyRegistration.Division)
-                .Where(x => (x.PropertyRegistration.DepartmentId == (model.departmentId == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
+                .Where(x => (x.PropertyRegistration.DepartmentId == ((model.departmentId??0) == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
                 && (x.PropertyRegistration.ZoneId == (model.zoneId == 0 ? x.PropertyRegistration.ZoneId : model.zoneId))
                 && (x.PropertyRegistration.DivisionId == (model.divisionId == 0 ? x.PropertyRegistration.DivisionId : model.divisionId))
                 && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId)))
@@ -149,7 +149,6 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Division)
                  .OrderByDescending(x => x.Id)
                  .Where(x => x.Id == id && x.IsActive == 1&& x.Propertyregistration.Id==(id==0? x.Propertyregistration.Id:id)).ToListAsync();
-        
         }
 
         public async Task<List<Landtransfer>> GetAllLandTransferList()

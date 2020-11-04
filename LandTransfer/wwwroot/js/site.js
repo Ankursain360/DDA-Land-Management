@@ -4,14 +4,22 @@
 // Write your JavaScript code.
 var AllRules = '';
 $(document).ready(function () {
-	$("select[class!='form-control dda-dropdown select2destroy']").select2({
-		placeholder: "Select",
-		allowClear: true
+	$("select").each(function () {
+		if ($(this).hasClass("select2destroy") == false) {
+			$(this).select2({
+				placeholder: "Select",
+				allowClear: true
+			});
+		}
 	});
 	function callSelect2() {
-		$("select").select2({
-			placeholder: "Select",
-			allowClear: true
+		$("select").each(function () {
+			if ($(this).hasClass("select2destroy") == false) {
+				$(this).select2({
+					placeholder: "Select",
+					allowClear: true
+				});
+			}
 		});
 	}
 	if ($("form").is("[disabled]")) {

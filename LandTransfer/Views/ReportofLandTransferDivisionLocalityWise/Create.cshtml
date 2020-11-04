@@ -20,17 +20,16 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Report Of Land Transfer Division Locality Wise Details</h6>
         </div>
         <div class="panel-body">
-            @*<form>*@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Department <span style="color:red">*</span></label>
-                    <select class="form-control dda-dropdown" required="required" requiredMsg="Please Select Department" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                    <select class="form-control dda-dropdown" id="DepartmentId" required="required" requiredMsg="Please Select Department" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
                         <option value="0">All</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Zone <span style="color:red">*</span></label>
-                    <select class="form-control dda-dropdown" required="required" requiredMsg="Please Select Zone" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                    <select class="form-control dda-dropdown" required="required" requiredMsg="Please Select Zone" id="ZoneId" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                         <option value="0">All</option>
                     </select>
                 </div>
@@ -38,13 +37,13 @@
             <div class="row">
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Division <span style="color:red">*</span></label>
-                    <select class="form-control dda-dropdown" required="required" requiredMsg="Please Select Division" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
+                    <select class="form-control dda-dropdown" id="DivisionId" required="required" requiredMsg="Please Select Division" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
                         <option value="0">All</option>
                     </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label class="control-label lb-sm">Locality(Village) Name <span style="color:red">*</span></label>
-                    <select class="form-control dda-dropdown" required="required" requiredMsg="Please Select Locality" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                    <select class="form-control dda-dropdown" id="LocalityId" required="required" requiredMsg="Please Select Locality" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                         <option value="0">All</option>
                     </select>
                 </div>
@@ -55,14 +54,11 @@
             <div class="row ">
                 <div class="form-group col-md-12" style="margin-bottom:40px;">
                     <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-                    @*@Html.ActionLink("Back", "Index", "RestoreLandReport", null, new { @class = "btn btn-primary dda-pageheading" })*@
                 </div>
             </div>
-
             <div id="LoadReportView">
 
             </div>
-            @*</form>*@
         </div>
     </div>
 </div>

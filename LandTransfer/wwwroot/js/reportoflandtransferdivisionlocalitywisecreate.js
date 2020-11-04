@@ -26,31 +26,31 @@ $(function () {
 
 function onChangeDepartment(id) {
     HttpGet(`/ReportofLandTransferDivisionLocalityWise/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
-        var html = '<option value="">Select</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#ZoneId").html(html);
-        $("#DivisionId").html('<option value="">Select</option>');
-        $("#LocalityId").html('<option value="">Select</option>');
-        $("#ZoneId").select2('val', '');
-        $("#DivisionId").select2('val', '');
-        $("#LocalityId").select2('val', '');
+        $("#DivisionId").html('<option value="0">All</option>');
+        $("#LocalityId").html('<option value="0">All</option>');
+        $("#ZoneId").select2('val', '0');
+        $("#DivisionId").select2('val', '0');
+        $("#LocalityId").select2('val', '0');
     });
 };
 function onChangeZone(id) {
     HttpGet(`/ReportofLandTransferDivisionLocalityWise/GetDivisionList/?ZoneId=${id}`, 'json', function (response) {
-        var html = '<option value="">Select</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
         $("#DivisionId").html(html);
-        $("#LocalityId").html('<option value="">Select</option>');
+        $("#LocalityId").html('<option value="0">All</option>');
     });
 };
 function onChangeDivision(id) {
     HttpGet(`/ReportofLandTransferDivisionLocalityWise/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
-        var html = '<option value="">Select</option>';
+        var html = '<option value="0">All</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
