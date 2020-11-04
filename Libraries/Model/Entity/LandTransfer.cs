@@ -33,6 +33,7 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "The Taken Over is required.")]
         public DateTime? DateofTakenOver { get; set; }
         public string Remarks { get; set; }
+        public byte? IsValidate { get; set; }
         public byte? IsActive { get; set; }
         [Required]
         public int PropertyRegistrationId { get; set; }
@@ -67,6 +68,8 @@ namespace Libraries.Model.Entity
         public virtual Department TakenOverDepartment { get; set; }
         public virtual Division TakenOverDivision { get; set; }
         public virtual Zone TakenOverZone { get; set; }
+        [NotMapped]
+        public bool IsValidateData { get; set; }
         [NotMapped]
         public IFormFile CopyofOrder { get; set; }
         [NotMapped]

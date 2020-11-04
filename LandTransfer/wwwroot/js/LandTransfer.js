@@ -126,6 +126,16 @@ $(document).ready(function () {
             $(this).val('');
         }
     });
+
+    var TakenOverLandLineNo = $("#TakenOverLandLineNo").val();
+    $("#TakenOverLandLineNo").val(Math.trunc(TakenOverLandLineNo));
+    var TakenOverMobileNo = $("#TakenOverMobileNo").val();
+    $("#TakenOverMobileNo").val(Math.trunc(TakenOverMobileNo));
+    var HandedOverMobileNo = $("#HandedOverMobileNo").val();
+    $("#HandedOverMobileNo").val(Math.trunc(HandedOverMobileNo));
+    var HandedOverLandLineNo = $("#HandedOverLandLineNo").val();
+    $("#HandedOverLandLineNo").val(Math.trunc(HandedOverLandLineNo));
+
     $(".numbers").keyup(function () {
         var buildupArea = $("input[name='BuildupArea']").val();
         var VacantArea = $("input[name='VacantArea']").val();

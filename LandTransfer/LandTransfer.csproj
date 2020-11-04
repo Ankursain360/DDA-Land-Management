@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+    <ProjectReference Include="..\SiteMaster\SiteMaster.csproj" />
   </ItemGroup>
 
 </Project>

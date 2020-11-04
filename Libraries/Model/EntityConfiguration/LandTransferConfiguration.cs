@@ -91,6 +91,10 @@ namespace Model.EntityConfiguration
                 .HasColumnType("tinyint(4)")
                 .HasDefaultValueSql("'1'");
 
+            entity.Property(e => e.IsValidate)
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("'0'");
+
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.ModifiedDate).HasColumnType("date");

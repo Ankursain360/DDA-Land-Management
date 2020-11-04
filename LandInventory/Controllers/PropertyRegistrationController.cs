@@ -59,6 +59,7 @@ namespace LandInventory.Controllers
         {
             int userId = SiteContext.UserId;
             var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model,  userId);
+            ViewBag.IsDisposedRightsUser = SiteContext.UserId;
             return PartialView("_List", result);
         }
         async Task BindDropDown(Propertyregistration propertyregistration)
@@ -288,9 +289,11 @@ namespace LandInventory.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                 //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                    //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                    ViewBag.IsUserCreation = SiteContext.UserId;
+                    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
                     return View("Index");
                 }
                 else
@@ -358,14 +361,22 @@ namespace LandInventory.Controllers
             ViewBag.IsValidateUser = SiteContext.UserId;
             if (ModelState.IsValid)
             {
-                if (propertyregistration.IsValidateData == true)
+                if (propertyregistration.IsValidate == 1)
                 {
-                    propertyregistration.IsValidate = 1;
+                        propertyregistration.IsValidate = 1;
                 }
                 else
                 {
-                    propertyregistration.IsValidate = 0;
+                    if (propertyregistration.IsValidateData == true)
+                    {
+                        propertyregistration.IsValidate = 1;
+                    }
+                    else
+                    {
+                        propertyregistration.IsValidate = 0;
+                    }
                 }
+               
                 if (propertyregistration.MainLandUseId == 0)
                 {
                     propertyregistration.MainLandUseId = 1;
@@ -548,7 +559,10 @@ namespace LandInventory.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                 //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+                    //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+
+                    ViewBag.IsUserCreation = SiteContext.UserId;
+                    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                     return View("Index");
@@ -852,7 +866,7 @@ namespace LandInventory.Controllers
             }
             else
             {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show("You are not Authorized to Dispose Record", "", AlertType.Warning);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 return View("Index");

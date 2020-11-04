@@ -149,6 +149,9 @@ $(document).ready(function () {
         else if (value == 3) {
             $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
         }
+        else if (value == 4) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+        }
     });
 })
 

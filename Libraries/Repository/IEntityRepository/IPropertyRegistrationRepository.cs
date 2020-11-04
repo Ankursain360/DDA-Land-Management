@@ -41,6 +41,6 @@ namespace Libraries.Repository.IEntityRepository
         string GetHandedOverCopyofOrderFile(int id);
         Task<bool> InsertInDisposedProperty(Disposedproperty model);
         Task<List<Propertyregistration>> GetKhasraReportList();
-        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model);
+        Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId);
     }
 }

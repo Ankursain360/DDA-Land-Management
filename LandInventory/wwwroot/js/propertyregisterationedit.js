@@ -115,6 +115,24 @@ $(document).ready(function () {
     //    $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
     //});
 
+    var value = $('#AreaUnit option:selected').val();
+    if (value == 0) {
+        $("#AreainSqAcreHec").hide();
+        $("#bighabis").show();
+    }
+    else {
+        $("#AreainSqAcreHec").show();
+        $("#bighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+        else if (value == 4)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq. Mt." + ')');
+    }
+
     $(".bbbcalculation").keyup(function () {
         var inbigha = $('#TotalAreaInBigha').val();
         var inbiswa = $('#TotalAreaInBiswa').val();
@@ -141,6 +159,9 @@ $(document).ready(function () {
         }
         else if (value == 3) {
             $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+        }
+        else if (value == 4) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
         }
     });
 
