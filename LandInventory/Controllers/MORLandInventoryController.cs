@@ -848,7 +848,7 @@ namespace LandInventory.Controllers
                 model.DisposalDate = propertyregistration.DisposalDate;
                 model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
                 model.DisposalComments = propertyregistration.DisposalComments;
-                var result = await _propertyregistrationService.DisposeDetails(id);
+                var result = await _propertyregistrationService.DisposeDetails(id, model);
                 var result2 = await _propertyregistrationService.InsertInDisposedProperty(id, model);
                 if (result == true)
                 {

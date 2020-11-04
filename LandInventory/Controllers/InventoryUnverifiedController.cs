@@ -50,6 +50,9 @@ namespace LandInventory.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            var Msg = TempData["Message"] as string;
+            if(Msg !=null)
+            ViewBag.Message = Msg;
             Propertyregistration propertyregistration = new Propertyregistration();
             await BindDropDown(propertyregistration);
             return View(propertyregistration);
@@ -336,12 +339,9 @@ namespace LandInventory.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     //   var result1 = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    Propertyregistration propertyregistration1 = new Propertyregistration();
-                    await BindDropDown(propertyregistration1);
-                    return RedirectToAction("Create", propertyregistration1);
+                    return RedirectToAction("Create");
                 }
                 else
                 {
