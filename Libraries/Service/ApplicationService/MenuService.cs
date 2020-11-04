@@ -22,9 +22,9 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _menuRepository = menuRepository;
         }
-        public async Task<bool> CheckUniqueName(int Id, string Name, int ModuleId)
+        public async Task<bool> CheckUniqueName(int Id, string Name)
         {
-            bool result = await _menuRepository.AnyName(Id, Name, ModuleId);
+            bool result = await _menuRepository.AnyName(Id, Name);
             return result;
         }
         //public async Task<bool> CheckUniqueCode(int id, string code)
@@ -75,7 +75,7 @@ namespace Libraries.Service.ApplicationService
             model.ModuleId = menu.ModuleId;
             model.Name = menu.Name;
             model.SortBy = menu.SortBy;
-            model.ParentMenuId = menu.ParentMenuId;
+          //  model.ParentMenuId = menu.ParentMenuId;
            
             model.IsActive = menu.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -88,6 +88,7 @@ namespace Libraries.Service.ApplicationService
         {
             menu.CreatedBy = 1;
             menu.CreatedDate = DateTime.Now;
+            menu.ParentMenuId = 1;
             _menuRepository.Add(menu);
             return await _unitOfWork.CommitAsync() > 0;
         }

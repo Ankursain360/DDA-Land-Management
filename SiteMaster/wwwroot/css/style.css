@@ -956,7 +956,7 @@ footer.footer a {
     background-color: transparent;
 }
 
-.floating-label-field--s1 + .floating-label {
+.floating-label-field--s1 ~ .floating-label {
     transition: transform .25s, opacity .25s ease-in-out;
     transform-origin: 0 0;
     opacity: .5;
@@ -967,8 +967,8 @@ footer.footer a {
     border-color: rgba(255, 255, 255, .1);
 }
 
-.floating-label-field--s1:focus + .floating-label,
-.floating-label-field--s1:not(:placeholder-shown) + .floating-label {
+.floating-label-field--s1:focus ~ .floating-label,
+.floating-label-field--s1:not(:placeholder-shown) ~ .floating-label {
     transform: translate(.25em, -30%) scale(.8);
     opacity: .25;
 }
@@ -989,14 +989,14 @@ footer.footer a {
     background-color: #ccc;
 }
 
-.floating-label-field--s2 + .floating-label {
+.floating-label-field--s2 ~ .floating-label {
     visibility: hidden;
     transition: transform .25s, visibility .5s, opacity .5s ease-in-out;
     opacity: 0;
 }
 
-.floating-label-field--s2:focus + .floating-label,
-.floating-label-field--s2:not(:placeholder-shown) + .floating-label {
+.floating-label-field--s2:focus ~ .floating-label,
+.floating-label-field--s2:not(:placeholder-shown) ~ .floating-label {
     visibility: visible;
     transform: translateY(-80%);
     opacity: .5;
@@ -1022,7 +1022,7 @@ footer.footer a {
     font-size: .75rem;
 }
 
-.floating-label-field--s3 + .floating-label {
+.floating-label-field--s3 ~ .floating-label {
     position: absolute;
     left: .4rem;
     display: inline-block;
@@ -1040,8 +1040,8 @@ footer.footer a {
     border-color: #008eff;
 }
 
-.floating-label-field--s3:focus + .floating-label,
-.floating-label-field--s3:not(:placeholder-shown) + .floating-label {
+.floating-label-field--s3:focus ~ .floating-label,
+.floating-label-field--s3:not(:placeholder-shown) ~ .floating-label {
     z-index: 2500;
     padding: .35rem;
     transform: translate(0, -.75rem) scale(.9);

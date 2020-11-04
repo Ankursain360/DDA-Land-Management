@@ -1,13 +1,20 @@
 using LandTransfer.Infrastructure.Extensions;
 using Libraries.Model;
+using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Model.Entity;
+using Service.Common;
+using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 
 namespace LandTransfer
@@ -50,8 +57,36 @@ namespace LandTransfer
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+           .AddEntityFrameworkStores<DataContext>()
+           .AddDefaultTokenProviders();
 
             services.RegisterDependency();
+            services.AddAutoMapperSetup();
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,12 +106,11 @@ namespace LandTransfer
             app.UseStaticFiles();
             app.UseRouting();
             app.UseAuthorization();
+            app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=LandTransfer}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
         }
     }
