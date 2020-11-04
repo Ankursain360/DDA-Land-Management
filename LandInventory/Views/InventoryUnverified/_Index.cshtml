@@ -38,10 +38,13 @@
                 <a asp-action="View" asp-route-id="@item.Id" title="View"> View </a>
                 @if (item.IsValidate == 0)
                 {
-                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp; Delete</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp; Delete</a>
                 }
-                <a asp-action="Edit" asp-route-id="@item.Id" title="Verify"> &nbsp; | &nbsp; Verify</a>
-            </td>
+                @if (ViewBag.IsUserCanEdit == 14)
+                {
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="Verify"> &nbsp; | &nbsp; Verify</a>
+                }
+                </td>
         </tr>
             }
         }

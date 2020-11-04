@@ -60,6 +60,7 @@ namespace LandInventory.Controllers
             int userId = SiteContext.UserId;
             var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model,  userId);
             ViewBag.IsDisposedRightsUser = SiteContext.UserId;
+            ViewBag.IsUserCanEdit = SiteContext.UserId;
             return PartialView("_List", result);
         }
         async Task BindDropDown(Propertyregistration propertyregistration)

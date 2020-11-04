@@ -171,7 +171,11 @@
                     <td>
                         <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
 
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+                        @if (ViewBag.IsUserCanEdit == 14)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+                        }
+
 
                         @if (item.IsValidate == 0)
                         {
@@ -179,7 +183,10 @@
                         }
                         @if (item.IsValidate == 1)
                         {
-                            <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" onclick="return confirm('Are You Sure, You want to Dispose this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-erase" aria-hidden="true"></i></a>
+                            @if (ViewBag.IsDisposedRightsUser == 15)
+                            {
+                                <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" onclick="return confirm('Are You Sure, You want to Dispose this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-erase" aria-hidden="true"></i></a>
+                            }
                         }
                     </td>
                 </tr>

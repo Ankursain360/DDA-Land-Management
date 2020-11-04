@@ -60,6 +60,7 @@ namespace LandInventory.Controllers
         {
             var result = await _propertyregistrationService.GetInventoryUnverifiedVerified(model, SiteContext.UserId);
 
+            ViewBag.IsUserCanEdit = SiteContext.UserId;
             if (result != null)
             {
                 return PartialView("_Index", result);
@@ -105,7 +106,7 @@ namespace LandInventory.Controllers
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
             ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
             ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
-            ViewBag.IsValidateUser = 2;
+            ViewBag.IsValidateUser = SiteContext.UserId;
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
@@ -403,14 +404,18 @@ namespace LandInventory.Controllers
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
+                    Propertyregistration propertyregistration1 = new Propertyregistration();
+                    await BindDropDown(propertyregistration1);
+                    return RedirectToAction("Create", propertyregistration1);
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                     ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
+                    Propertyregistration propertyregistration1 = new Propertyregistration();
+                    await BindDropDown(propertyregistration1);
+                    return RedirectToAction("Create", propertyregistration1);
                 }
             }
             else
@@ -418,7 +423,9 @@ namespace LandInventory.Controllers
                 ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                return View("Index");
+                Propertyregistration propertyregistration1 = new Propertyregistration();
+                await BindDropDown(propertyregistration1);
+                return RedirectToAction("Create", propertyregistration1);
             }
 
 

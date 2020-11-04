@@ -4,7 +4,7 @@
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Land Inventory</h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Ministry of rehabilitation(MOR) Land Inventory</h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -16,7 +16,7 @@
 <div class="container-fluid">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Details</h6>
+            <h6 class="pull-left" style="color:white; margin-top:-0.4%"> Delete Property</h6>
         </div>
         <div class="panel-body">
 
@@ -31,7 +31,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Reason</label>
                         <textarea asp-for="Reason" class="form-control"></textarea>
-                        <span asp-validation-for="DisposalComments" class="text-danger lb-sm"></span>
+                        <span asp-validation-for="Reason" class="text-danger lb-sm"></span>
                     </div>
                 </div>
                 <div class="form-row ">
@@ -40,7 +40,7 @@
                         @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
-               
+
             </form>
         </div>
     </div>

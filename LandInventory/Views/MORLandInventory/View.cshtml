@@ -150,6 +150,7 @@
                                 <option value="1">Sq Yd.</option>
                                 <option value="2">Acre</option>
                                 <option value="3">Hectare</option>
+                                <option value="4">Sq. Mt.</option>
                             </select>
                             <span asp-validation-for="AreaUnit" class="text-danger lb-sm"></span>
                         </div>
@@ -463,7 +464,7 @@
                     </div>
                 </div>
 
-                <div id="DivHandedOver">
+                <div id="DivHandedOver" style="display:none;">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -583,7 +584,8 @@
 
                     </div>
                 </div>
-                <div id="DivTakenOver">
+                <div id="DivTakenOver" style="display:none;">
+                    >
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -678,7 +680,45 @@
                     </div>
                 </div>
 
+                <div id="DivDisposal" style="display: none;">
+                    <div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class="dda-innerheading">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left color-white" style="margin-top:5px;">Disposal</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DisposalTypeId">Type</label>
+                            <select class="form-control dda-dropdown" asp-for="DisposalTypeId" asp-items="@(new SelectList(Model.DisposalTypeList, "Id","Name"))">
+                                <option value="0">--Select--</option>
+                            </select>
+                            <span asp-validation-for="DisposalTypeId" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm">Date</label>
+                            <input asp-for="DisposalDate" type="date" value="" class="form-control" />
+                            <span asp-validation-for="DisposalDate" class="text-danger lb-sm"></span>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label lb-sm" asp-for="DisposalTypeFileData">Document</label>
+                            <input type="file" id="DisposalTypeAssignFile" class="form-control" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
+                            <span asp-validation-for="DisposalTypeFileData" class="text-danger lb-sm"></span>
+                        </div>
 
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label lb-sm">Comments</label>
+                            <textarea asp-for="DisposalComments" class="form-control" maxlength="4000" limit="4000"></textarea>
+                            <span asp-validation-for="DisposalComments" class="text-danger lb-sm"></span>
+                            <div id="feedbackDisposalComments"></div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="form-group col-md-12">
