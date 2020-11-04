@@ -196,6 +196,7 @@ function HttpPost(url, dataType, payload, callback) {
 		DisplayLoader(false);
 		callback(response);
 	}).fail(function (jqXHR, textStatus, errorThrown) {
+		debugger;
 		DisplayLoader(false);
 		DisplayErrorMessages(jqXHR);
 	});

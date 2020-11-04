@@ -8,6 +8,7 @@ $(document).ready(function () {
 function GetLandTransfer(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/LandTransfer/List`, 'html', param, function (response) {
+        debugger;
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
     });
@@ -53,13 +54,13 @@ function onChangePlanned(value) {
         $('#divPlannedSelection').show();
         $("#divLayoutPlan").show();
         $('#divUnplannedSelection').show();
-        $('#KhasraNo').val('');
-        $('#Colony').val('');
-        $('#Sector').val('');
-        $('#Block').val('');
-        $('#Pocket').val('');
-        $('#PlotNo').val('');
-        $("#LocalityId").val('0').trigger('change');
+        $('#Propertyregistration_KhasraNo').val('');
+        $('#Propertyregistration_Colony').val('');
+        $('#Propertyregistration_Sector').val('');
+        $('#Propertyregistration_Block').val('');
+        $('#Propertyregistration_Pocket').val('');
+        $('#Propertyregistration_PlotNo').val('');
+        $("#Propertyregistration_LocalityId").val('0').trigger('change');
         callSelect2();
     }
 };
@@ -105,11 +106,7 @@ function GetSearchParam(pageNumber, pageSize) {
     var departmentid = $('#Propertyregistration_DepartmentId option:selected').val();
     var zoneId = $('#Propertyregistration_ZoneId option:selected').val();
     var divisionId = $('#Propertyregistration_DivisionId option:selected').val();
-    var localityId = $('#Propertyregistration_LocalityId option:selected').val();
     var plannedUnplannedLand = $('#Propertyregistration_PlannedUnplannedLand option:selected').val();
-    var mainLandUseId = $('#Propertyregistration_MainLandUseId option:selected').val();
-    var litigationid = $('#Propertyregistration_LitigationStatus option:selected').val();
-    var encroachedid = $('#Propertyregistration_Encroached option:selected').val();
     var test = [];
 
     var model = {
@@ -120,18 +117,8 @@ function GetSearchParam(pageNumber, pageSize) {
         department: parseInt(departmentid),
         zone: parseInt(zoneId),
         division: parseInt(divisionId),
-        locality: parseInt(localityId),
         plannedUnplannedLand: plannedUnplannedLand,
-        mainLandUse: parseInt(mainLandUseId),
-        litigation: parseInt(litigationid),
-        encroached: parseInt(encroachedid),
         inventoriedIn: parseInt($('#Propertyregistration_InventoriedInId').val()),
-        khasraNo: $('#Propertyregistration_KhasraNo').val(),
-        colony: $('#Propertyregistration_Colony').val(),
-        sector: $('#Propertyregistration_Sector').val(),
-        block: $('#Propertyregistration_Block').val(),
-        pocket: $('#Propertyregistration_Pocket').val(),
-        plotNo: $('#Propertyregistration_PlotNo').val()
     }
     test.push(model);
     return model;

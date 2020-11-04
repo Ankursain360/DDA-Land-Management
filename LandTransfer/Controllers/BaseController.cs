@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
-using SiteMaster.Helper;
+using LandTransfer.Helper;
 
 namespace LandTransfer.Controllers
 {

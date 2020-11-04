@@ -16,7 +16,6 @@ using LandTransfer.Controllers;
 using Utility;
 using Utility.Helper;
 using System.Net;
-using SiteMaster.Helper;
 
 namespace LandTransfer.Controllers
 {
@@ -38,10 +37,8 @@ namespace LandTransfer.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
         {
-            var result = await _landTransferService.GetPropertyRegisterationDataForLandTransfer(model);
-            //var result1 = await _propertyregistrationService.GetPropertyRegisterationReportData(null);
-            //var result = await _landTransferService.GetPagedLandTransfer(model);
-            return PartialView("_List", result);
+                var result = await _landTransferService.GetPropertyRegisterationDataForLandTransfer(model);
+                return PartialView("_List", result);
         }
         public async Task<IActionResult> Index()
         {
