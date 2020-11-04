@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Menu>> GetAllMenu();
        
         Task<List<Module>> GetAllModule();
-        Task<bool> AnyName(int Id, string Name, int ModuleId);
+        Task<bool> AnyName(int Id, string Name);
         //Task<bool> AnyCode(int id, string name);
         Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model);
         

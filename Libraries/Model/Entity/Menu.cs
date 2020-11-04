@@ -15,15 +15,18 @@ namespace Libraries.Model.Entity
 
 
         public int? ModuleId { get; set; }
-        [Required]
-        [Remote(action: "ExistName", controller: "Menu", AdditionalFields = "Id,ModuleId")]
+        [Required(ErrorMessage = "The Module field is required")]
+        [Remote(action: "ExistName", controller: "Menu", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Name field in required")]
         public int? SortBy { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Sort field in required")]
+      
         public int? ParentMenuId { get; set; }
+        [Required]
 
         public byte? IsActive { get; set; }
+        [Required]
         [NotMapped]
         public List<Module> modulelist { get; set; }
 
