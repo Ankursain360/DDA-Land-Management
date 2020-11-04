@@ -46,6 +46,7 @@ namespace LandInventory.Controllers
             }
 
             ViewBag.Message = Alert.Show(Messages.RestoreSuccess, "", AlertType.Success);
+            TempData["Message"] = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return RedirectToAction("Create");
         }
         async Task BindDropDown(Propertyregistration propertyregistration)
@@ -82,13 +83,16 @@ namespace LandInventory.Controllers
         }
         public async Task<IActionResult> Create()
         {
+            var Msg = TempData["Message"] as string;
+            if (Msg != null)
+                ViewBag.Message = Msg;
             Propertyregistration propertyregistration = new Propertyregistration();
 
             await BindDropDownView(propertyregistration);
             return View(propertyregistration);
         }
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody]PropertyRegisterationSearchDto model)
+        public async Task<PartialViewResult> GetDetails([FromBody] PropertyRegisterationSearchDto model)
         {
             var result = await _propertyregistrationService.GetRestoreLandReportData(model);
             if (result != null)
@@ -120,7 +124,7 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = Data.TakenOverFilePath;
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
-            ViewBag.Isdispodedtrue  = Data.IsDisposed;
+            ViewBag.Isdispodedtrue = Data.IsDisposed;
             await BindDropDownView(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
