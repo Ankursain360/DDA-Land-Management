@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Libraries.Model.Entity;
+using Libraries.Service.ApplicationService;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
@@ -14,14 +15,17 @@ namespace LandTransfer.Controllers
     public class ReportofLandTransferPropertyNoWiseController : Controller
     {
         private readonly ILandTransferService _landtransferService;
-        public ReportofLandTransferPropertyNoWiseController(ILandTransferService landtransferService)
+        private readonly IPropertyRegistrationService _propertyRegistrationService;
+        public ReportofLandTransferPropertyNoWiseController(ILandTransferService landtransferService, IPropertyRegistrationService propertyRegistrationService)
         {
+            _propertyRegistrationService = propertyRegistrationService;
             _landtransferService = landtransferService;
         }
         public async Task<IActionResult> Index()
         {
             Landtransfer model = new Landtransfer();
-            model.LandTransferList =await _landtransferService.GetAllLandTransferList();
+            List<Propertyregistration> registration = await _propertyRegistrationService.GetKhasraReportList();
+            model.PropertyRegistrationList= await _propertyRegistrationService.GetKhasraReportList(); 
             return View(model);
         }
         public async Task<PartialViewResult> GetDetails(int? id)

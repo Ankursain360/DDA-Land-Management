@@ -417,7 +417,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Division)
                 .Include(x => x.Deletedproperty)
                 .Include(x => x.ClassificationOfLand)
-                .Where(x => (x.IsDeleted == 0)
+                .Where(x => (x.IsDeleted == 0 || x.IsDisposed ==0)
                  && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
                  && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
                 && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))

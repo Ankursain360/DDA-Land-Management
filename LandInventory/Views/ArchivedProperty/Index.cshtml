@@ -33,7 +33,7 @@
                 <td>@item.Department.Name</td>
                 <td>@item.Zone.Name</td>
                 <td>@item.Division.Name</td>
-                <td>@item.Locality.Name</td>
+                <td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>
                 <td>@item.KhasraNo</td>
                 <td>@item.Palandmark</td>
                 <td>@item.PrimaryListNo</td>
