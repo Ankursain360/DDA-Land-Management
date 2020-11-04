@@ -81,6 +81,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
+        public List<Propertyregistration> PropertyRegistrationList { get; set; }
+        [NotMapped]
         public List<Landtransfer> LandTransferList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
