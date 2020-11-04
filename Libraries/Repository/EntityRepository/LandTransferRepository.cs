@@ -149,6 +149,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Division)
                  .OrderByDescending(x => x.Id)
                  .Where(x => x.Id == id && x.IsActive == 1&& x.Propertyregistration.Id==(id==0? x.Propertyregistration.Id:id)).ToListAsync();
+        
         }
 
         public async Task<List<Landtransfer>> GetAllLandTransferList()
