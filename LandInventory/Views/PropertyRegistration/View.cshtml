@@ -150,6 +150,7 @@
                                 <option value="1">Sq Yd.</option>
                                 <option value="2">Acre</option>
                                 <option value="3">Hectare</option>
+                                <option value="4">Sq. Mt.</option>
                             </select>
                             <span asp-validation-for="AreaUnit" class="text-danger lb-sm"></span>
                         </div>
@@ -463,7 +464,7 @@
                     </div>
                 </div>
 
-                <div id="DivHandedOver">
+                <div id="DivHandedOver" style="display:none;">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -583,7 +584,7 @@
 
                     </div>
                 </div>
-                <div id="DivTakenOver">
+                <div id="DivTakenOver" style="display:none;">>
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -687,7 +688,7 @@
                         <div id="feedbackRemarks"></div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Status</label>
                         <select disabled asp-for="IsActive" class="form-control dda-dropdown">

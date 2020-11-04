@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+﻿@model Libraries.Model.Entity.Landtransfer
 
 <div class="row">
     <div class="col-sm-12">
@@ -12,12 +12,63 @@
 </div>
 <br />
 <br />
-@*<div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading" style="margin-top: -10px;">Add New</a>
-</div>
-<br />
-<br />*@
 <div class="container-fluid">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm">Inventoried In</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.InventoriedInId">
+                <option value="0">All</option>
+                <option value="1">VLMS</option>
+                <option value="2">Used</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.InventoriedInId" class="text-danger lb-sm"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="Propertyregistration.PlannedUnplannedLand">Planned/Unplanned Land</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.PlannedUnplannedLand" onchange="onChangePlanned(this.value)">
+                @*<option value="0">All</option>*@
+                <option value="Planned Land">Planned Land</option>
+                <option value="Unplanned Land">Unplanned Land</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.PlannedUnplannedLand" class="text-danger lb-sm"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="Propertyregistration.ClassificationOfLandId">Classification of Land</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.ClassificationOfLandId" asp-items="@(new SelectList(Model.Propertyregistration.ClassificationOfLandList, "Id","Name"))">
+                <option value="0">All</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.ClassificationOfLandId" class="text-danger lb-sm"></span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="Propertyregistration.DepartmentId">Department</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.DepartmentId" asp-items="@(new SelectList(Model.Propertyregistration.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                <option value="0">All</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.DepartmentId" class="text-danger lb-sm"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="Propertyregistration.ZoneId">Zone</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                <option value="0">All</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.ZoneId" class="text-danger lb-sm"></span>
+        </div>
+
+        <div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label>
+            <select class="form-control dda-dropdown" asp-for="Propertyregistration.DivisionId">
+                <option value="0">All</option>
+            </select>
+            <span asp-validation-for="Propertyregistration.DivisionId" class="text-danger lb-sm"></span>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="form-group col-md-12" style="margin-bottom:40px;">
+            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
+            @Html.ActionLink("Back", "Create", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
+        </div>
+    </div>
     <div class="card  table-responsive table-card">
         <div id="divLandTransferTable"></div>
     </div>

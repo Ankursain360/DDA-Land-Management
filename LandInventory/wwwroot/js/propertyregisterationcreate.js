@@ -1,5 +1,6 @@
 ﻿
 $(document).ready(function () {
+    $("#TotalArea").attr("readonly", "readonly");
     var value = $('#Boundary option:selected').val();
     if (value == 2) {
         $('#divBoundarySelection').hide();
@@ -63,7 +64,7 @@ $(document).ready(function () {
         $('#divLitigationStatusSelection').hide();
     }
 
-    
+
     var value = $('#GeoReferencing option:selected').val();
     if (value == 1) {
         $("#divGEOReferencingSelection").show();
@@ -114,14 +115,44 @@ $(document).ready(function () {
     //});
 
 
-   // DropDrown check at initial 
+    // DropDrown check at initial 
     var departmentid = $('#DepartmentId option:selected').val();
     if (departmentid > 0) {
         debugger;
         GetZoneList(departmentid);
     }
 
-   
+    $(".bbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBigha').val();
+        var inbiswa = $('#TotalAreaInBiswa').val();
+        var inbiswani = $('#TotalAreaInBiswani').val();
+
+        var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha) * 1621.344;
+        var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
+        var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323;
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[name='TotalArea']").val(totalarea.toFixed(3));
+    });
+
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+        }
+        else if (value == 2) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+        }
+        else if (value == 3) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+        }
+        else if (value == 4) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+        }
+    });
 })
 
 
@@ -394,7 +425,7 @@ function GetZoneList(id) {
         var html = '<option value="">---Select---</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-        }        
+        }
         $("#ZoneId").html(html);
         $("#DivisionId").val('').trigger('change');
         $("#LocalityId").val('').trigger('change');
@@ -523,7 +554,7 @@ function ComapareTotalArea(element) {
     var FieldId = "span_" + name;
     var ValidationMsg = 'Value must be lesser than or equal to Total Area';
     var totalArea = $("input[name='TotalArea']").val();
-    var value = $("input[name='" + name+"']").val();
+    var value = $("input[name='" + name + "']").val();
     if ((parseFloat(value == '' ? '0' : value)) > (parseFloat(totalArea == '' ? '0' : totalArea))) {
         $("<span class='text-danger lb-sm' id='" + FieldId + "'>" + ValidationMsg + "</span>").insertAfter($(this).parent().closest('div').find("span[class='text-danger lb-sm field-validation-valid']"))
         $(this).parent().closest('div').addClass('has-error');
@@ -552,6 +583,7 @@ $('#AreaUnit').change(function () {
         $('#TotalAreaInBigha').val('');
         $('#TotalAreaInBiswa').val('');
         $('#TotalAreaInBiswani').val('');
+        $('#TotalArea').val('');
         $("#AreainSqAcreHec").hide();
         $("#bighabis").show();
     }
@@ -560,6 +592,7 @@ $('#AreaUnit').change(function () {
         $('#TotalAreaInBigha').val('');
         $('#TotalAreaInBiswa').val('');
         $('#TotalAreaInBiswani').val('');
+        $('#TotalArea').val('');
         $("#AreainSqAcreHec").show();
         $("#bighabis").hide();
         if (value == 1)
@@ -570,6 +603,32 @@ $('#AreaUnit').change(function () {
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
     }
 });
+
+//$('#TotalAreaInSqAcreHt').change(function () {
+//    debugger;
+//    var value = $('#AreaUnit option:selected').val();
+//    var totalOther = $('#TotalAreaInBigha').val();
+//    if (value == 1) {
+//        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836));
+//    }
+//    else if (value == 2) {
+//        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09));
+//    }
+//    else if (value == 3) {
+//        $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156));
+//    }
+//    //var inbigha = $('#TotalAreaInBigha').val();
+//    //var inbiswa = $('#TotalAreaInBiswa').val();
+//    //var inbiswani = $('#TotalAreaInBiswani').val();
+
+//    //var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha)* 1621.344;
+//    //var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
+//    //var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323; 
+
+//    //var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+//    //$("input[name='TotalArea']").val(totalarea);
+//});
 
 //Bind Divison  Dropdown from Department for Taken Over
 function GetTakenOverZoneList(id) {

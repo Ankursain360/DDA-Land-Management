@@ -177,6 +177,13 @@ namespace Libraries.Model.Entity
         public Landuse MainLandUse { get; set; }
         public Zone Zone { get; set; }
 
+        public Department HandedOverDepartment { get; set; }
+        public Division HandedOverDivision { get; set; }
+        public Zone HandedOverZone { get; set; }
+        public Department TakenOverDepartment { get; set; }
+        public Division TakenOverDivision { get; set; }
+        public Zone TakenOverZone { get; set; }
+
         [NotMapped]
         public List<Propertyregistration> PrimaryListNoList { get; set; }
 
@@ -257,5 +264,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Propertyregistration> KhasraNoList { get; set; }
+
+        [NotMapped]
+        public int unverifiedverfied { get; set; }
     }
 }

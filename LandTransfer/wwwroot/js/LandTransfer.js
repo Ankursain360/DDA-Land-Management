@@ -126,6 +126,16 @@ $(document).ready(function () {
             $(this).val('');
         }
     });
+
+    var TakenOverLandLineNo = $("#TakenOverLandLineNo").val();
+    $("#TakenOverLandLineNo").val(Math.trunc(TakenOverLandLineNo));
+    var TakenOverMobileNo = $("#TakenOverMobileNo").val();
+    $("#TakenOverMobileNo").val(Math.trunc(TakenOverMobileNo));
+    var HandedOverMobileNo = $("#HandedOverMobileNo").val();
+    $("#HandedOverMobileNo").val(Math.trunc(HandedOverMobileNo));
+    var HandedOverLandLineNo = $("#HandedOverLandLineNo").val();
+    $("#HandedOverLandLineNo").val(Math.trunc(HandedOverLandLineNo));
+
     $(".numbers").keyup(function () {
         var buildupArea = $("input[name='BuildupArea']").val();
         var VacantArea = $("input[name='VacantArea']").val();
@@ -146,7 +156,22 @@ $(document).ready(function () {
             $(this).removeAttr("href");
         }
     });
-
+    var value = $('#Propertyregistration_AreaUnit option:selected').val();
+    if (value == 0) {
+        $("#AreainSqAcreHec").hide();
+        $("#bighabis").show();
+    }
+    else {
+        $("#AreainSqAcreHec").show();
+        $("#bighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+    }
+    
     var value = $('#Propertyregistration_PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
         $('#divUnplannedSelection').hide();
@@ -192,6 +217,20 @@ $(document).ready(function () {
     if (value == 1) {
         $("#divGEOReferencingSelection").show();
     }
+    var status = $("#Encroachment option:selected").val();
+    debugger
+    if (status == '1') {
+        $("#divEncroachmentYesSelectionForLandTransfer").show();
+        $("#divEncroachmentYesSelectionForLandTransfer select").removeAttr("disabled");
+        $("#divEncroachmentYesSelectionForLandTransfer input").removeAttr("disabled");
+        $("#divEncroachmentYesSelectionForLandTransfer textarea").removeAttr("disabled");
+    } else {
+        $("#divEncroachmentYesSelectionForLandTransfer").hide();
+        $("#divEncroachmentYesSelectionForLandTransfer select").attr("disabled", "disabled");
+        $("#divEncroachmentYesSelectionForLandTransfer input").attr("disabled", "disabled");
+        $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
+    }
+    callSelect2();
 });
 function ChangeEncroachmentStatus(status) {
     if (status == '1') {

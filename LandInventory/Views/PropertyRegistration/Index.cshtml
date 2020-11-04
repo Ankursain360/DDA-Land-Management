@@ -15,9 +15,15 @@
 <br />
 <br />
 
-<div>
-    @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
-</div>
+@{
+    @if (ViewBag.IsUserCreation == 13)
+    {
+        <div>
+            @Html.ActionLink("Add New", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary pull-right dda-pageheading", style = "margin-top: -10px;" })
+        </div>
+    }
+}
+
 <br />
 <br />
 <div class="container-fluid" id="MainContentForm">
@@ -46,7 +52,7 @@
         </div>
         <div class="col-md-3">
             <label class="control-label lb-sm" for="DepartmentId">Department</label>
-            <select class="form-control dda-dropdown" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);" >
+            <select class="form-control dda-dropdown" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
                 <option value="0">All</option>
             </select>
         </div>

@@ -59,7 +59,7 @@ namespace Libraries.Repository.EntityRepository
                 && (x.PropertyRegistration.ZoneId == (model.zoneId == 0 ? x.PropertyRegistration.ZoneId : model.zoneId))
                 && (x.PropertyRegistration.DivisionId == (model.divisionId == 0 ? x.PropertyRegistration.DivisionId : model.divisionId))
                 && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId)))
-               
+
                .OrderByDescending(x => x.Id)
                 .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
 
@@ -70,7 +70,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Landtransfer>> GetHistoryDetails(string khasraNo)
         {
-            return await _dbContext.Landtransfer.Include(x=>x.PropertyRegistration).Where(x => x.PropertyRegistration.KhasraNo == (khasraNo).Trim() && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => x.PropertyRegistration.KhasraNo == (khasraNo).Trim() && x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Landtransfer>> GetLandTransferReportData(int department, int zone, int division, int locality)
         {
@@ -96,7 +96,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.PropertyRegistration.Department)
                 .Include(x => x.PropertyRegistration.Zone)
                 .Include(x => x.PropertyRegistration.Division)
-                .Where(x=>(x.PropertyRegistration.DepartmentId == (model.departmentId == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
+                .Where(x => (x.PropertyRegistration.DepartmentId == (model.departmentId == 0 ? x.PropertyRegistration.DepartmentId : model.departmentId))
                 && (x.PropertyRegistration.ZoneId == (model.zoneId == 0 ? x.PropertyRegistration.ZoneId : model.zoneId))
                 && (x.PropertyRegistration.DivisionId == (model.divisionId == 0 ? x.PropertyRegistration.DivisionId : model.divisionId))
                 && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId)))
@@ -193,7 +193,12 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Locality)
                                 .Include(x => x.DisposalType)
                                 .Include(x => x.MainLandUse)
-                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1))
+                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                                                                       && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
+                                   && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
+                                   && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
+                                   && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+)
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
             }
@@ -202,7 +207,6 @@ namespace Libraries.Repository.EntityRepository
                 throw;
             }
         }
-
         public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
             return await _dbContext.Landtransfer.
@@ -232,7 +236,14 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id)
         {
-            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => (x.IsActive == 1) && (x.Id == id)).FirstOrDefaultAsync();
+            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => (x.IsActive == 1) && (x.PropertyRegistrationId == id)).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory)
+        {
+            await _dbContext.Propertyregistrationhistory.AddAsync(propertyRegistrationHistory);
+            await _dbContext.SaveChangesAsync();
+            return propertyRegistrationHistory.Id > 0 ? true : false;
         }
     }
 }

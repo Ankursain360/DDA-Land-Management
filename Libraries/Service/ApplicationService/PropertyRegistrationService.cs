@@ -41,7 +41,7 @@ namespace Libraries.Service.ApplicationService
             List<Locality> LocalityList = await _propertyregistrationRepository.GetLocalityDropDownList(zoneId);
             return LocalityList;
         }
-     
+
         public async Task<List<Propertyregistration>> GetPrimaryListNoList(int DivisionId)
         {
             List<Propertyregistration> PrimaryListNoList = await _propertyregistrationRepository.GetPrimaryListNoList(DivisionId);
@@ -169,7 +169,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Propertyregistration propertyregistration)
         {
 
-            propertyregistration.CreatedBy = 1;
+            propertyregistration.CreatedBy = 13;
             propertyregistration.CreatedDate = DateTime.Now;
             _propertyregistrationRepository.Add(propertyregistration);
             return await _unitOfWork.CommitAsync() > 0;
@@ -189,7 +189,7 @@ namespace Libraries.Service.ApplicationService
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
             model.ModifiedBy = 1;
-            
+
             model.IsDeleted = 1;
             model.ModifiedDate = DateTime.Now;
             _propertyregistrationRepository.Edit(model);
@@ -271,12 +271,12 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<PagedResult<Propertyregistration>> GetPagedPropertyRegisteration(PropertyRegisterationSearchDto model, int UserId)
         {
-            return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model,  UserId);
+            return await _propertyregistrationRepository.GetPagedPropertyRegisteration(model, UserId);
         }
 
         public async Task<List<Department>> GetTakenDepartmentDropDownList()
         {
-            return  await _propertyregistrationRepository.GetTakenDepartmentDropDownList();
+            return await _propertyregistrationRepository.GetTakenDepartmentDropDownList();
         }
 
         public async Task<List<Department>> GetHandedDepartmentDropDownList()
@@ -330,6 +330,44 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Propertyregistration>> GetKhasraReportList()
         {
             return await _propertyregistrationRepository.GetKhasraReportList();
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId)
+        {
+            return await _propertyregistrationRepository.GetInventoryUnverifiedVerified(model, userId);
+        }
+
+        public async Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration)
+        {
+            var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
+            Propertyregistration model = result.FirstOrDefault();
+            model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
+            model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
+            model.TakenOverDivisionId = propertyregistration.TakenOverDivisionId;
+            model.TakenOverName = propertyregistration.TakenOverName;
+            model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
+            model.TakenOverDate = propertyregistration.TakenOverDate;
+            model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
+            model.TakenOverMobileNo = propertyregistration.TakenOverMobileNo;
+            model.TakenOverLandlineNo = propertyregistration.TakenOverLandlineNo;
+            model.TakenOverComments = propertyregistration.TakenOverComments;
+            model.TakenOverName = propertyregistration.TakenOverName;
+
+            model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
+            model.HandedOverZoneId = propertyregistration.HandedOverZoneId;
+            model.HandedOverDivisionId = propertyregistration.HandedOverDivisionId;
+            model.HandedOverName = propertyregistration.HandedOverName;
+            model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
+            model.HandedOverDate = propertyregistration.HandedOverDate;
+            model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
+            model.HandedOverMobileNo = propertyregistration.HandedOverMobileNo;
+            model.HandedOverLandlineNo = propertyregistration.HandedOverLandlineNo;
+            model.HandedOverComments = propertyregistration.HandedOverComments;
+            model.HandedOverName = propertyregistration.HandedOverName;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _propertyregistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
     }
 }

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +27,8 @@ using Microsoft.AspNetCore.Http.Features;
 using Service.Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity;
 
 namespace LandInventory
 {
@@ -68,8 +69,12 @@ namespace LandInventory
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
 
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+               .AddEntityFrameworkStores<DataContext>()
+               .AddDefaultTokenProviders();
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();
@@ -86,9 +91,8 @@ namespace LandInventory
             .AddOpenIdConnect("oidc", options =>
             {
                 options.SignInScheme = "Cookies";
-                options.Authority = "https://localhost:5001";
-                //  options.Authority = "http://49.50.87.108:8493/";
-                options.RequireHttpsMetadata = false;
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";

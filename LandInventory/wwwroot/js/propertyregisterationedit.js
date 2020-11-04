@@ -1,5 +1,7 @@
 ﻿
 $(document).ready(function () {
+    $("#TotalArea").attr("readonly", "readonly");
+
     var value = $('#Boundary option:selected').val();
     if (value == 2) {
         $('#divBoundarySelection').hide();
@@ -113,6 +115,55 @@ $(document).ready(function () {
     //    $('#feedbackHandedOverComments').html(text_remaining + ' characters remaining');
     //});
 
+    var value = $('#AreaUnit option:selected').val();
+    if (value == 0) {
+        $("#AreainSqAcreHec").hide();
+        $("#bighabis").show();
+    }
+    else {
+        $("#AreainSqAcreHec").show();
+        $("#bighabis").hide();
+        if (value == 1)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq Yd." + ')');
+        else if (value == 2)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Acre" + ')');
+        else if (value == 3)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
+        else if (value == 4)
+            $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Sq. Mt." + ')');
+    }
+
+    $(".bbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBigha').val();
+        var inbiswa = $('#TotalAreaInBiswa').val();
+        var inbiswani = $('#TotalAreaInBiswani').val();
+
+        var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha) * 1621.344;
+        var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
+        var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323;
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[name='TotalArea']").val(totalarea.toFixed(3));
+    });
+
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+        }
+        else if (value == 2) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+        }
+        else if (value == 3) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+        }
+        else if (value == 4) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+        }
+    });
 
     // DropDrown check at initial 
     //var departmentid = $('#DepartmentId option:selected').val();

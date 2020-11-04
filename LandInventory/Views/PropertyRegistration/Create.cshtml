@@ -116,8 +116,8 @@
                         </div>
                     </div>
                     <div class="form-group col-md-4">
-                        <label class="control-label lb-sm">Primary List No.</label>
-                        <input asp-for="PrimaryListNo" class="form-control" limit="200" />
+                        <label class="control-label lb-sm">Primary List No.</label><span class="text-danger">*</span>
+                        <input asp-for="PrimaryListNo" class="form-control" limit="200" required="required" requiredmsg="Primary List No. is Mandatory"/>
                         <span asp-validation-for="PrimaryListNo" class="text-danger lb-sm"></span>
                     </div>
                 </div>
@@ -149,34 +149,35 @@
                                 <option value="1">Sq Yd.</option>
                                 <option value="2">Acre</option>
                                 <option value="3">Hectare</option>
+                                <option value="4">Sq. Mt.</option>
                             </select>
                             <span asp-validation-for="AreaUnit" class="text-danger lb-sm"></span>
                         </div>
                         <div id="bighabis">
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Bigha</label>
-                                <input asp-for="TotalAreaInBigha" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBigha" value="" class="form-control onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBigha" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Biswa</label>
-                                <input asp-for="TotalAreaInBiswa" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswa" value="" class="form-control onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswa" class="text-danger lb-sm"></span>
                             </div>
                             <div class="form-group col-md-1">
                                 <label class="control-label lb-sm">Biswani</label>
-                                <input asp-for="TotalAreaInBiswani" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswani" value="" class="form-control onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswani" class="text-danger lb-sm"></span>
                             </div>
                         </div>
                         <div id="AreainSqAcreHec" class="form-group col-md-4" style="display:none;">
                             <label class="control-label lb-sm lb-sm" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
-                            <input asp-for="TotalAreaInSqAcreHt" type="text" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                            <input asp-for="TotalAreaInSqAcreHt" type="text" class="form-control numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                             <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger lb-sm"></span>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                            <input asp-for="TotalArea" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                            <input asp-for="TotalArea" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                             <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
                         </div>
                     </div>
@@ -218,7 +219,7 @@
                             <div class="form-group col-md-4">
                                 <label class="control-label lb-sm">Encroched Area(in sq. mt.)</label>
                                 <input asp-for="EncrochedArea" value="" class="form-control numbers"  onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                                <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger lb-sm"></span>
+                                <span id="EncroachedValidation" asp-validation-for="EncrochedArea" class="text-danger lb-sm"></span>
                             </div>
 
                             <div class="form-group col-md-4">
@@ -428,7 +429,7 @@
                     </div>
                 </div>
 
-                <div id="DivHandedOver">
+                <div id="DivHandedOver" style="display:none;">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -525,7 +526,7 @@
 
                     </div>
                 </div>
-                <div id="DivTakenOver">
+                <div id="DivTakenOver" style="display:none;">>
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
                             <div class="dda-innerheading">
@@ -597,7 +598,6 @@
                         </div>
                     </div>
                     <div class="row">
-
                     </div>
                     <div class="row">
                         <div class="form-group col-md-12">
@@ -609,8 +609,6 @@
                     </div>
                 </div>
 
-
-
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
@@ -618,7 +616,7 @@
                         <div id="feedbackRemarks"></div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="display:none;">
                     <div class="form-group col-md-4">
                         <label class="control-label lb-sm">Status</label>
                         <select asp-for="IsActive" class="form-control dda-dropdown">
@@ -628,7 +626,7 @@
                         <span asp-validation-for="IsActive" class="text-danger lb-sm"></span>
                     </div>
                 </div>
-                @{
+                @*@{
                     @if (ViewBag.IsValidateUser == 2)
                     {
                         <div class="row">
@@ -638,7 +636,7 @@
                             </div>
                         </div>
                     }
-                }
+                }*@
 
 
                 <div class="form-row ">

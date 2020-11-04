@@ -32,6 +32,9 @@ function GetSearchParam(pageNumber, pageSize, departmentId, zoneId, divisionId, 
         departmentId: parseInt(departmentId),
         zoneId: parseInt(zoneId),
         divisionId: parseInt(divisionId),
+        inventoriedId: parseInt($('#InventoriedInId').val()),
+        classificationOfLandId: parseInt($('#ClassificationOfLandId').val()),
+        plannedUnplannedLand: $('#PlannedUnplannedLand').val(),
         Id: parseInt(Id)
     }
     return model;

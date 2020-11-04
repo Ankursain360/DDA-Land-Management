@@ -16,10 +16,13 @@ namespace Libraries.Model.Entity
             LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
             EncroachmentregisterationDepartment = new HashSet<EncroachmentRegisteration>();
             EncroachmentregisterationOtherDepartmentNavigation = new HashSet<EncroachmentRegisteration>();
-            Propertyregistration = new HashSet<Propertyregistration>();
+         //   Propertyregistration = new HashSet<Propertyregistration>();
             Userprofile = new HashSet<Userprofile>();
             Locality = new HashSet<Locality>();
             Zone = new HashSet<Zone>();
+            PropertyregistrationDepartment = new HashSet<Propertyregistration>();
+            PropertyregistrationHandedOverDepartment = new HashSet<Propertyregistration>();
+            PropertyregistrationTakenOverDepartment = new HashSet<Propertyregistration>();
         }
 
         [Required(ErrorMessage = "Department name is required")]
@@ -30,8 +33,8 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public virtual ICollection<Zone> Zone { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }
-        [NotMapped]
-        public virtual ICollection<Propertyregistration> Propertyregistration { get; set; }
+      //  [NotMapped]
+      //  public virtual ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationDepartment { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentregisterationOtherDepartmentNavigation { get; set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
@@ -39,7 +42,9 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Landtransfer> LandtransferTakenOverDepartment { get; set; }
         public virtual ICollection<Division> Division { get; set; }
         public virtual ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+        public ICollection<Propertyregistration> PropertyregistrationDepartment { get; set; }
+        public ICollection<Propertyregistration> PropertyregistrationHandedOverDepartment { get; set; }
+        public ICollection<Propertyregistration> PropertyregistrationTakenOverDepartment { get; set; }
 
-        
     }
 }

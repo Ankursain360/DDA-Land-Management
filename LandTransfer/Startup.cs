@@ -1,28 +1,21 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using LandTransfer.Infrastructure.Extensions;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-//using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-using LandTransfer.Models;
 using Microsoft.Extensions.Hosting;
-using Libraries.Model.Entity;
-using Libraries.Service.IApplicationService;
-using Libraries.Repository.IEntityRepository;
-using Libraries.Repository.EntityRepository;
-using Libraries.Model;
-using LandTransfer.Infrastructure.Extensions;
+using Model.Entity;
+using Service.Common;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 
 namespace LandTransfer
 {
@@ -64,32 +57,36 @@ namespace LandTransfer
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+           .AddEntityFrameworkStores<DataContext>()
+           .AddDefaultTokenProviders();
 
-
-            services.AddSession();
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
             services.RegisterDependency();
+            services.AddAutoMapperSetup();
 
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
             {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
             {
-                services.AddControllersWithViews();
-            }
-#endif
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -107,17 +104,13 @@ namespace LandTransfer
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
-            app.UseSession();
+            app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=LandTransfer}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
         }
     }
