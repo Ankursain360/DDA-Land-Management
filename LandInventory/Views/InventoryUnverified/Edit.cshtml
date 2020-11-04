@@ -432,7 +432,7 @@
                                 @{
                                     @if (ViewBag.GeoDocView != null)
                                     {
-                                    @Html.ActionLink(" (View Existing Document)", "GeoDownload", new { id = Model.Id })
+                                    @Html.ActionLink(" (Document)", "GeoDownload", new { id = Model.Id })
                                     <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     }
                                     else
