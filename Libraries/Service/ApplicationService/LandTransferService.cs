@@ -74,15 +74,37 @@ namespace Libraries.Service.ApplicationService
             var result = await _landTransferRepository.FindBy(a => a.Id == id);
             Landtransfer model = result.FirstOrDefault();
             model.CopyofOrderDocPath = Landtransfer.CopyofOrder != null ? Landtransfer.CopyofOrderDocPath : model.CopyofOrderDocPath;
-            model.DateofTakenOver = Landtransfer.DateofTakenOver;
+            model.ActionTakenReportPath = Landtransfer.ActionTakenReportPath != null ? Landtransfer.ActionTakenReportPath : model.ActionTakenReportPath;
+            model.HandedOverFile = Landtransfer.HandedOverFile != null ? Landtransfer.HandedOverFile : model.HandedOverFile;
+            model.TakenOverDocument = Landtransfer.TakenOverDocument != null ? Landtransfer.TakenOverDocument : model.TakenOverDocument;
+            model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
+            model.HandedOverZoneId = Landtransfer.HandedOverZoneId;
+            model.HandedOverDivisionId = Landtransfer.HandedOverDivisionId;
             model.HandedOverByNameDesingnation = Landtransfer.HandedOverByNameDesingnation;
             model.HandedOverDate = Landtransfer.HandedOverDate;
-            model.HandedOverDepartmentId = Landtransfer.HandedOverDepartmentId;
+            model.HandedOverEmailId = Landtransfer.HandedOverEmailId;
+            model.HandedOverMobileNo = Landtransfer.HandedOverMobileNo;
+            model.HandedOverLandLineNo = Landtransfer.HandedOverLandLineNo;
+            model.HandedOverCommments = Landtransfer.HandedOverCommments;
             model.OrderNo = Landtransfer.OrderNo;
-            model.Remarks = Landtransfer.Remarks;
-            model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
-            model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
             model.TransferorderIssueAuthority = Landtransfer.TransferorderIssueAuthority;
+            model.TakenOverDepartmentId = Landtransfer.TakenOverDepartmentId;
+            model.TakenOverZoneId = Landtransfer.TakenOverZoneId;
+            model.TakenOverDivisionId = Landtransfer.TakenOverDivisionId;
+            model.TakenOverByNameDesingnation = Landtransfer.TakenOverByNameDesingnation;
+            model.TakenOverEmailId = Landtransfer.TakenOverEmailId;
+            model.TakenOverMobileNo = Landtransfer.TakenOverMobileNo;
+            model.TakenOverLandLineNo = Landtransfer.TakenOverLandLineNo;
+            model.TakenOverCommments = Landtransfer.TakenOverCommments;
+            model.DateofTakenOver = Landtransfer.DateofTakenOver;
+            model.Encroachment = Landtransfer.Encroachment;
+            model.EncroachmentStatus = Landtransfer.EncroachmentStatus;
+            model.EncroachementArea = Landtransfer.EncroachementArea;
+            model.BuildUpInEncroachementArea = Landtransfer.BuildUpInEncroachementArea;
+            model.ActionOnEncroachment = Landtransfer.ActionOnEncroachment;
+            model.EncroachmentDetails = Landtransfer.EncroachmentDetails;
+            model.Remarks = Landtransfer.Remarks;
+            model.IsValidate = Landtransfer.IsValidate;
             model.IsActive = 1;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -184,6 +206,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model)
         {
             return await _landTransferRepository.GetPropertyRegisterationDataForLandTransfer(model);
+        }
+
+        public async Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory)
+        {
+            return await _landTransferRepository.CreateHistory(propertyRegistrationHistory);
         }
     }
 
