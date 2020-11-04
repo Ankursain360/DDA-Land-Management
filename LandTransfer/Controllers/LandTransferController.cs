@@ -16,6 +16,7 @@ using LandTransfer.Controllers;
 using Utility;
 using Utility.Helper;
 using System.Net;
+using SiteMaster.Helper;
 
 namespace LandTransfer.Controllers
 {
@@ -44,7 +45,15 @@ namespace LandTransfer.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            return View();
+            Landtransfer landtransfer = new Landtransfer();
+            Propertyregistration propertyRegistration = new Propertyregistration();
+            propertyRegistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownListReport();
+            propertyRegistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+            propertyRegistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            propertyRegistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
+            landtransfer.Propertyregistration = propertyRegistration;
+            return View(landtransfer);
         }
         //public async Task<IActionResult> Create()
         //{
@@ -120,7 +129,14 @@ namespace LandTransfer.Controllers
             {
                 Data = new Landtransfer();
             }
-            ViewBag.IsValidateUser = 2;
+            if (SiteContext.UserId == 14)
+            {
+                ViewBag.IsValidateUser = 2;
+            }
+            else
+            {
+                ViewBag.IsValidateUser = 0;
+            }
             Data.HandedOverZoneList= await _landTransferService.GetAllZone(Data.HandedOverDepartmentId??0);
             Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
             Data.TakenOverZoneList= await _landTransferService.GetAllZone(Data.TakenOverDepartmentId??0);

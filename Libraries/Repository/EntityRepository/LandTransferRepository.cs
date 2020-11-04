@@ -193,7 +193,24 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Locality)
                                 .Include(x => x.DisposalType)
                                 .Include(x => x.MainLandUse)
-                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1))
+                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                                                                       && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
+                                   && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
+                                   && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
+                                   && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
+                                   && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                                   && (x.MainLandUseId == (model.mainLandUse == 0 ? x.MainLandUseId : model.mainLandUse))
+                                   && (x.LitigationStatus == (model.litigation == 2 ? x.LitigationStatus : model.litigation))
+                                   && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
+                                   //&& (x.KhasraNo == (model.khasraNo == "0" ? x.KhasraNo : model.khasraNo))
+                                   // && (x.KhasraNo.Contains(model.khasraNo == "" ? x.KhasraNo : model.khasraNo))
+                                   && (x.Colony != null ? x.Colony.Contains(model.colony == "" ? x.Colony : model.colony) : true)
+                                   && (x.Sector != null ? x.Sector.Contains(model.sector == "" ? x.Sector : model.sector) : true)
+                                   && (x.Block != null ? x.Block.Contains(model.block == "" ? x.Block : model.block) : true)
+                                   && (x.Pocket != null ? x.Pocket.Contains(model.pocket == "" ? x.Pocket : model.pocket) : true)
+                                   && (x.PlotNo != null ? x.PlotNo.Contains(model.plotNo == "" ? x.PlotNo : model.plotNo) : true)
+                                   )
+
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
             }
@@ -202,7 +219,6 @@ namespace Libraries.Repository.EntityRepository
                 throw;
             }
         }
-
         public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
             return await _dbContext.Landtransfer.
