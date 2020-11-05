@@ -96,6 +96,118 @@
         $("#divEncroachmentYesSelectionForLandTransfer input").attr("disabled", "disabled");
         $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
+    $('#Tsssurvey').change(function () {
+        var value = $("#Tsssurvey option:selected").val();
+        if (value == 'Yes') {
+            $("#TssSurvey").show();
+
+        }
+        else {
+            $("#TssSurvey").hide();
+        }
+    });
+    $('#Encroachment').change(function () {
+        var value = $("#Encroachment option:selected").val();
+        debugger
+        if (value == 'Yes') {
+            $("#DivEncroachment").show();
+
+        }
+        else {
+            $("#DivEncroachment").hide();
+        }
+    });
+    $('#FencingBoundaryWall').change(function () {
+        var value = $("#FencingBoundaryWall option:selected").val();
+        if (value == 'Yes') {
+            $("#Boundary").show();
+
+        }
+        else {
+            $("#Boundary").hide();
+        }
+    });
+    $('#PlotUtilization').change(function () {
+        var value = $("#PlotUtilization option:selected").val();
+        if (value == 'Yes') {
+            $("#Utilization").show();
+
+        }
+        else {
+            $("#Utilization").hide();
+        }
+        callSelect2();
+    });
+
+    $('#PlannedUnplannedLand').change(function () {
+        debugger;
+        var value = $('#PlannedUnplannedLand option:selected').val();
+        if (value == 'Planned Land') {
+            $('#divPlannedLand').show();
+        }
+        else {
+            $('#divPlannedLand').hide();
+        }
+    });
+    $(".bbbcalculation").keyup(function () {
+        var inbigha = $('#TotalAreaInBigha').val();
+        var inbiswa = $('#TotalAreaInBiswa').val();
+        var inbiswani = $('#TotalAreaInBiswani').val();
+
+        var inbighavalue = parseFloat(inbigha == '' ? 0 : inbigha) * 1621.344;
+        var inbiswavalue = parseFloat(inbiswa == '' ? 0 : inbiswa) * 32408.640;
+        var inbiswanivalue = parseFloat(inbiswani == '' ? 0 : inbiswani) * 6.323;
+
+        var totalarea = inbighavalue + inbiswavalue + inbiswanivalue;
+
+        $("input[name='TotalArea']").val(totalarea.toFixed(3));
+    });
+
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        var totalOther = $('#TotalAreaInSqAcreHt').val();
+        if (value == 1) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.836).toFixed(3));
+        }
+        else if (value == 2) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 0.09).toFixed(3));
+        }
+        else if (value == 3) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther) * 10098.156).toFixed(3));
+        }
+        else if (value == 4) {
+            $("input[name='TotalArea']").val((parseFloat(totalOther == '' ? 0 : totalOther)).toFixed(3));
+        }
+    });
+    $('#AreaUnit').change(function () {
+        debugger;
+        var value = $('#AreaUnit option:selected').val();
+        if (value == 0) {
+            $('#TotalAreaInSqAcreHt').val('');
+            $('#TotalAreaInBigha').val('');
+            $('#TotalAreaInBiswa').val('');
+            $('#TotalAreaInBiswani').val('');
+            $('#TotalArea').val('');
+            $("#AreainSqAcreHecForCurrentStatus").hide();
+            $("#bighabisForCurrentStatus").show();
+        }
+        else {
+            $('#TotalAreaInSqAcreHt').val('');
+            $('#TotalAreaInBigha').val('');
+            $('#TotalAreaInBiswa').val('');
+            $('#TotalAreaInBiswani').val('');
+            $('#TotalArea').val('');
+            $("#AreainSqAcreHecForCurrentStatus").show();
+            $("#bighabis").hide();
+            if (value == 1)
+                $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Sq Yd." + ')');
+            else if (value == 2)
+                $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Acre" + ')');
+            else if (value == 3)
+                $('#LabelTotalAreaSqAcreHecForCurrentStatus').html('Total Area(' + "Hectare" + ')');
+        }
+    });
     callSelect2();
 });
 function callSelect2() {
@@ -108,54 +220,3 @@ function callSelect2() {
         }
     });
 }
-$('#DD1').change(function () {
-    var value = $("#DD1").val();
-    if (value == 'Yes') {
-        $("#TssSurvey").show();
-
-    }
-    else {
-        $("#TssSurvey").hide();
-    }
-});
-$('#DD2').change(function () {
-    var value = $("#DD2").val();
-    if (value == 'Yes') {
-        $("#Encroachment").show();
-
-    }
-    else {
-        $("#Encroachment").hide();
-    }
-});
-$('#DD3').change(function () {
-    var value = $("#DD3").val();
-    if (value == 'Yes') {
-        $("#Boundary").show();
-
-    }
-    else {
-        $("#Boundary").hide();
-    }
-});
-$('#DD4').change(function () {
-    var value = $("#DD4").val();
-    if (value == 'Yes') {
-        $("#Utilization").show();
-
-    }
-    else {
-        $("#Utilization").hide();
-    }
-});
-
-$('#PlannedUnplannedLand').change(function () {
-    debugger;
-    var value = $('#PlannedUnplannedLand').val();
-    if (value == 'Planned Land') {
-        $('#divPlannedLand').show();
-    }
-    else {
-        $('#divPlannedLand').hide();
-    }
-});

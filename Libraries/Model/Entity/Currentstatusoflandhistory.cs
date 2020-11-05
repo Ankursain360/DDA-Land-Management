@@ -22,6 +22,15 @@ namespace Libraries.Model.Entity
         public decimal? AreaCovered { get; set; }
         public string Dimension { get; set; }
         public string PlotUtilization { get; set; }
+        public int? AreaUnit { get; set; }
+        public decimal? TotalAreaInBigha { get; set; }
+        public decimal? TotalAreaInBiswa { get; set; }
+        public decimal? TotalAreaInBiswani { get; set; }
+        public decimal? TotalAreaInSqAcreHt { get; set; }
+
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
+        public decimal? TotalArea { get; set; }
         public decimal? AreaUtilised { get; set; }
         public decimal? BalanceArea { get; set; }
         public string Status { get; set; }

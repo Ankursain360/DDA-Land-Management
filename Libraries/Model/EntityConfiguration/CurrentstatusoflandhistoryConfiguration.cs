@@ -37,7 +37,17 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
+            builder.Property(e => e.TotalAreaInBigha).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInBiswa).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInBiswani).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
+
+            builder.Property(e => e.AreaUnit).HasColumnType("int(11)");
             builder.Property(e => e.Dimension)
                 .HasMaxLength(200)
                 .IsUnicode(false);
