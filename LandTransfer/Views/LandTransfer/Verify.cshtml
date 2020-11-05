@@ -18,7 +18,7 @@
             <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">
-            <form disabled="disabled">
+            <form asp-action="Verify" enctype="multipart/form-data">
                 @if (@Model.Id > 0)
                 {
                     <input type="hidden" asp-for="Id" value="@Model.Id" />
@@ -915,6 +915,7 @@
                 }
                 <div class="row">
                     <div class="row col-md-12" style="justify-content:center">
+                        <input type="submit" value="Verify" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "IndexUnverified", "LandTransfer", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
