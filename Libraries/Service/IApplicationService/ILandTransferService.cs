@@ -27,6 +27,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id);
         Task<PagedResult<Landtransfer>> GetPagedLandTransfer(LandTransferSearchDto model);
         Task<PagedResult<Propertyregistration>>GetPropertyRegisterationDataForLandTransfer(LandTransferSearchDto model);
+        Task<PagedResult<Propertyregistration>> GetPropertyRegisterationUnverifiedDataForLandTransfer(LandTransferSearchDto model);
         Task<List<Division>> GetAllDivisionList(int zone);
         Task<List<Landtransfer>> GetAllLandTransfer(int PropertyRegistrationId);
         Task<List<Landtransfer>> GetAllLandTransfer();
