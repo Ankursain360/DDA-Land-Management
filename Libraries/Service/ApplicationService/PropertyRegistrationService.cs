@@ -309,10 +309,14 @@ namespace Libraries.Service.ApplicationService
             return _propertyregistrationRepository.GetHandedOverCopyofOrderFile(id);
         }
 
-        public async Task<bool> DisposeDetails(int id)
+        public async Task<bool> DisposeDetails(int id, Disposedproperty disposedproperty)
         {
             var form = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = form.FirstOrDefault();
+            model.DisposalTypeId = disposedproperty.DisposalTypeId;
+            model.DisposalDate = disposedproperty.DisposalDate;
+            model.DisposalTypeFilePath = disposedproperty.DisposalTypeFilePath;
+            model.DisposalComments = disposedproperty.DisposalComments;
             model.IsDisposed = 0;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

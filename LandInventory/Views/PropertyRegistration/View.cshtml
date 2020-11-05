@@ -244,7 +244,7 @@
                                 @{
                                     @if (ViewBag.EncroachAtrDocView != null)
                                     {
-                                        <a>(View Existing Document)</a>
+                                        <a>(View File)</a>
                                         <input type="file" class="form-control" disabled asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     }
                                     else
@@ -408,7 +408,7 @@
                             @{
                                 @if (ViewBag.LayoutDocView != null)
                                 {
-                                    @Html.ActionLink(" (View Existing Document)", "Download", new { id = Model.Id })
+                                    @Html.ActionLink(" (View File)", "Download", new { id = Model.Id })
                                     <input type="file" disabled class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
@@ -436,7 +436,7 @@
                                 @{
                                     @if (ViewBag.GeoDocView != null)
                                     {
-                                        <a>(View Existing Document)</a>
+                                        <a>(View File)</a>
                                         <input type="file" disabled class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     }
                                     else
@@ -541,7 +541,7 @@
                             @{
                                 @if (ViewBag.HandedOverCopyofOrderView != null)
                                 {
-                                    <a>(View Existing Document)</a>
+                                    <a>(View File)</a>
                                     <input type="file" class="form-control" disabled asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
@@ -563,7 +563,7 @@
                             @{
                                 @if (ViewBag.HandedOverDocView != null)
                                 {
-                                    <a>(View Existing Document)</a>
+                                    <a>(View File)</a>
                                     <input type="file" class="form-control" disabled id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else
@@ -656,7 +656,7 @@
                             @{
                                 @if (ViewBag.TakenOverDocView != null)
                                 {
-                                    <a>(View Existing Document)</a>
+                                    <a>(View File)</a>
                                     <input type="file" class="form-control" disabled id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 }
                                 else

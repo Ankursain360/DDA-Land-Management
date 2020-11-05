@@ -52,7 +52,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Department>> GetHandedDepartmentDropDownList();
         string GetEncroachAtr(int id);
         string GetHandedOverCopyofOrderFile(int id);
-        Task<bool> DisposeDetails(int id);
+        Task<bool> DisposeDetails(int id, Disposedproperty model);
         Task<bool> InsertInDisposedProperty(int id, Disposedproperty model);
         Task<bool> UpdatePropertyRegistrationForLandTransfer(int id, Propertyregistration propertyregistration);
     }
