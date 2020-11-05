@@ -4,6 +4,8 @@ $(document).ready(function () {
     $('#mobileMenu').on('click', function () {
         $('#leftMenu').toggleClass('small');
         $('#mobileMenu').toggleClass('open');
+        $('#rightSection').toggleClass('menu-close');
+        $('footer').toggleClass('menu-close');
     });
 
     $('.numbers').keyup(function (e) {
@@ -174,7 +176,7 @@ function InfoMessage(message) {
 
 function DisplayLoader(show) {
     var styleValue = show === true ? "block" : "none";
-    $(".spinner").css("display", styleValue);
+    $(".body-loading").css("display", styleValue);
 }
 
 function DisplayErrorMessages(response) {
