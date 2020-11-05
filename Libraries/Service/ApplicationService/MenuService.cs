@@ -22,9 +22,9 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _menuRepository = menuRepository;
         }
-        public async Task<bool> CheckUniqueName(int Id, string Name)
+        public async Task<bool> CheckUniqueName(int Id,int ModuleId,string Name)
         {
-            bool result = await _menuRepository.AnyName(Id, Name);
+            bool result = await _menuRepository.AnyName(Id,ModuleId, Name);
             return result;
         }
         //public async Task<bool> CheckUniqueCode(int id, string code)
@@ -54,6 +54,11 @@ namespace Libraries.Service.ApplicationService
             List<Module> modulelist = await _menuRepository.GetAllModule();
             return modulelist;
         }
+        public async Task<List<Menu>> GetAllParentmenu()
+        {
+            List<Menu> parentmenulist = await _menuRepository.GetAllParentmenu();
+            return parentmenulist;
+        }
 
         public async Task<List<Menu>> GetAllMenu()
         {
@@ -75,8 +80,8 @@ namespace Libraries.Service.ApplicationService
             model.ModuleId = menu.ModuleId;
             model.Name = menu.Name;
             model.SortBy = menu.SortBy;
-          //  model.ParentMenuId = menu.ParentMenuId;
-           
+            model.ParentMenuId = menu.ParentMenuId;
+
             model.IsActive = menu.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

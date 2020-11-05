@@ -13,13 +13,14 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Menu>> GetAllMenu(); 
         
-        Task<List<Module>> GetAllModule(); 
+        Task<List<Module>> GetAllModule();
+        Task<List<Menu>> GetAllParentmenu();
         Task<List<Menu>> GetMenuUsingRepo();
         Task<bool> Update(int id, Menu menu); 
         Task<bool> Create(Menu menu);
         Task<Menu> FetchSingleResult(int id); 
         Task<bool> Delete(int id);   
-        Task<bool> CheckUniqueName(int Id, string Name);   
+        Task<bool> CheckUniqueName(int Id, int ModuleId ,string Name);   
         //Task<bool> CheckUniqueCode(int id, string code);
 
         Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model);

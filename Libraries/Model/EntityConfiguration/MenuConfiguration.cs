@@ -17,6 +17,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.ModuleId)
                 .HasName("fk_module_id_idx");
 
+            builder.HasIndex(e => e.ParentMenuId)
+                .HasName("fk_parentmenuid_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -44,7 +47,12 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Menu)
                 .HasForeignKey(d => d.ModuleId)
                 .HasConstraintName("fk_ModuleId");
-        
+
+            builder.HasOne(d => d.ParentMenu)
+                .WithMany(p => p.InverseParentMenu)
+                .HasForeignKey(d => d.ParentMenuId)
+                .HasConstraintName("fk_parentmenuid");
+
         }
     }
 }
