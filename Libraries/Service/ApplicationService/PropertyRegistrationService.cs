@@ -345,9 +345,9 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _propertyregistrationRepository.FindBy(a => a.Id == id);
             Propertyregistration model = result.FirstOrDefault();
-            model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
-            model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
-            model.TakenOverDivisionId = propertyregistration.TakenOverDivisionId;
+            //model.TakenOverDepartmentId = propertyregistration.TakenOverDepartmentId;
+            //model.TakenOverZoneId = propertyregistration.TakenOverZoneId;
+            //model.TakenOverDivisionId = propertyregistration.TakenOverDivisionId;
             //model.TakenOverName = propertyregistration.TakenOverName;
             //model.TakenOverDate = propertyregistration.TakenOverDate;
             //model.TakenOverEmailId = propertyregistration.TakenOverEmailId;
@@ -355,15 +355,20 @@ namespace Libraries.Service.ApplicationService
             //model.TakenOverLandlineNo = propertyregistration.TakenOverLandlineNo;
             //model.TakenOverComments = propertyregistration.TakenOverComments;
 
-            model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
-            model.HandedOverZoneId = propertyregistration.HandedOverZoneId;
-            model.HandedOverDivisionId = propertyregistration.HandedOverDivisionId;
+            //model.HandedOverDepartmentId = propertyregistration.HandedOverDepartmentId;
+            //model.HandedOverZoneId = propertyregistration.HandedOverZoneId;
+            //model.HandedOverDivisionId = propertyregistration.HandedOverDivisionId;
             //model.HandedOverName = propertyregistration.HandedOverName;
             //model.HandedOverDate = propertyregistration.HandedOverDate;
             //model.HandedOverEmailId = propertyregistration.HandedOverEmailId;
             //model.HandedOverMobileNo = propertyregistration.HandedOverMobileNo;
             //model.HandedOverLandlineNo = propertyregistration.HandedOverLandlineNo;
             //model.HandedOverComments = propertyregistration.HandedOverComments;
+
+
+            model.DepartmentId = propertyregistration.DepartmentId;
+            model.ZoneId = propertyregistration.ZoneId;
+            model.DivisionId = propertyregistration.DivisionId;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _propertyregistrationRepository.Edit(model);

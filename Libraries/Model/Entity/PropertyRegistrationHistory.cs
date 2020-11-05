@@ -8,8 +8,11 @@ namespace Libraries.Model.Entity
     public class PropertyRegistrationHistory : AuditableEntity<int>
     {
         public int PropertyRegistrationId { get; set; }
-        public int LandTransferId { get; set; }
+        public int DepartmentId { get; set; }
+        public int ZoneId { get; set; }
+        public int DivisionId { get; set; }
         public int? HandedOverDepartmentId { get; set; }
+        public int LandTransferId { get; set; }
         public int HandedOverZoneId { get; set; }
         public int HandedOverDivisionId { get; set; }
         public string HandedOverByNameDesingnation { get; set; }

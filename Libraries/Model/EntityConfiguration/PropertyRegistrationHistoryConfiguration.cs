@@ -19,6 +19,9 @@ namespace Libraries.Model.EntityConfiguration
                         .HasMaxLength(500)
                         .IsUnicode(false);
 
+            entity.Property(e => e.ZoneId).HasColumnType("int(11)");
+            entity.Property(e => e.DivisionId).HasColumnType("int(11)");
+            entity.Property(e => e.DepartmentId).HasColumnType("int(11)");
             entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.CreatedDate).HasColumnType("date");
