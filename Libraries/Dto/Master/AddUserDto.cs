@@ -15,7 +15,7 @@ namespace Dto.Master
         public string Name { get; set; }
 
         [Required(ErrorMessage = "User Name is required")]
-        [Remote(action: "Exist", controller: "UserManagement", AdditionalFields = "Id")]
+        [Remote(action: "ExistLoginName", controller: "UserManagement", AdditionalFields = "Id")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
