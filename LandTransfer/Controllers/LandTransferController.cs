@@ -393,27 +393,23 @@ namespace LandTransfer.Controllers
                         propertyregistration.TakenOverDepartmentId = landtransfer.TakenOverDepartmentId;
                         propertyregistration.TakenOverZoneId = landtransfer.TakenOverZoneId;
                         propertyregistration.TakenOverDivisionId = landtransfer.TakenOverDivisionId;
-                        propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
-                        propertyregistration.TakenOverDepartmentId = landtransfer.TakenOverDepartmentId;
-                        propertyregistration.TakenOverDate = landtransfer.DateofTakenOver;
-                        propertyregistration.TakenOverEmailId = landtransfer.TakenOverEmailId;
-                        propertyregistration.TakenOverMobileNo = Convert.ToString(landtransfer.TakenOverMobileNo);
-                        propertyregistration.TakenOverLandlineNo = Convert.ToString(landtransfer.TakenOverLandLineNo);
-                        propertyregistration.TakenOverComments = landtransfer.TakenOverCommments;
-                        propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
+                        //propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
+                        //propertyregistration.TakenOverDate = landtransfer.DateofTakenOver;
+                        //propertyregistration.TakenOverEmailId = landtransfer.TakenOverEmailId;
+                        //propertyregistration.TakenOverMobileNo = Convert.ToString(landtransfer.TakenOverMobileNo);
+                        //propertyregistration.TakenOverLandlineNo = Convert.ToString(landtransfer.TakenOverLandLineNo);
+                        //propertyregistration.TakenOverComments = landtransfer.TakenOverCommments;
 
 
                         propertyregistration.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
                         propertyregistration.HandedOverZoneId = landtransfer.HandedOverZoneId;
                         propertyregistration.HandedOverDivisionId = landtransfer.HandedOverDivisionId;
-                        propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
-                        propertyregistration.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                        propertyregistration.HandedOverDate = landtransfer.HandedOverDate;
-                        propertyregistration.HandedOverEmailId = landtransfer.HandedOverEmailId;
-                        propertyregistration.HandedOverMobileNo = Convert.ToString(landtransfer.HandedOverMobileNo);
-                        propertyregistration.HandedOverLandlineNo = Convert.ToString(landtransfer.HandedOverLandLineNo);
-                        propertyregistration.HandedOverComments = landtransfer.HandedOverCommments;
-                        propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
+                        //propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
+                        //propertyregistration.HandedOverDate = landtransfer.HandedOverDate;
+                        //propertyregistration.HandedOverEmailId = landtransfer.HandedOverEmailId;
+                        //propertyregistration.HandedOverMobileNo = Convert.ToString(landtransfer.HandedOverMobileNo);
+                        //propertyregistration.HandedOverLandlineNo = Convert.ToString(landtransfer.HandedOverLandLineNo);
+                        //propertyregistration.HandedOverComments = landtransfer.HandedOverCommments;
 
                         result = await _propertyregistrationService.UpdatePropertyRegistrationForLandTransfer(landtransfer.PropertyRegistrationId, propertyregistration);
                     }
@@ -518,66 +514,6 @@ namespace LandTransfer.Controllers
                 landtransfer.Id = 0;
                     result = await _landTransferService.Create(landtransfer);
                 //}
-                if (landtransfer.IsValidateData)
-                {
-                    PropertyRegistrationHistory propertyRegistrationHistory = new PropertyRegistrationHistory();
-                    propertyRegistrationHistory.LandTransferId=     landtransfer.Id;
-                    propertyRegistrationHistory.PropertyRegistrationId=     landtransfer.PropertyRegistrationId;
-                    propertyRegistrationHistory.TakenOverDepartmentId=     landtransfer.TakenOverDepartmentId;
-                    propertyRegistrationHistory.TakenOverDepartmentId=     landtransfer.TakenOverDepartmentId;
-                    propertyRegistrationHistory.TakenOverZoneId=     landtransfer.TakenOverZoneId;
-                    propertyRegistrationHistory.TakenOverDivisionId=       landtransfer.TakenOverDivisionId;
-                    propertyRegistrationHistory.TakenOverByNameDesingnation=landtransfer.TakenOverByNameDesingnation;
-                    propertyRegistrationHistory.DateofTakenOver=          landtransfer.DateofTakenOver;
-                    propertyRegistrationHistory.TakenOverEmailId=          landtransfer.TakenOverEmailId;
-                    propertyRegistrationHistory.TakenOverMobileNo=         landtransfer.TakenOverMobileNo;
-                    propertyRegistrationHistory.TakenOverLandLineNo=       landtransfer.TakenOverLandLineNo;
-                    propertyRegistrationHistory.TakenOverCommments=        landtransfer.TakenOverCommments;
-
-
-                    propertyRegistrationHistory.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                    propertyRegistrationHistory.HandedOverZoneId = landtransfer.HandedOverZoneId;
-                    propertyRegistrationHistory.HandedOverDivisionId = landtransfer.HandedOverDivisionId;
-                    propertyRegistrationHistory.HandedOverByNameDesingnation = landtransfer.HandedOverByNameDesingnation;
-                    propertyRegistrationHistory.HandedOverDate = landtransfer.HandedOverDate;
-                    propertyRegistrationHistory.HandedOverEmailId = landtransfer.HandedOverEmailId;
-                    propertyRegistrationHistory.HandedOverMobileNo =landtransfer.HandedOverMobileNo;
-                    propertyRegistrationHistory.HandedOverLandLineNo = landtransfer.HandedOverLandLineNo;
-                    propertyRegistrationHistory.HandedOverCommments = landtransfer.HandedOverCommments;
-
-                    result = await _landTransferService.CreateHistory(propertyRegistrationHistory);
-                    if (result)
-                    {
-                        Propertyregistration propertyregistration = new Propertyregistration();
-
-                        propertyregistration.TakenOverDepartmentId = landtransfer.TakenOverDepartmentId;
-                        propertyregistration.TakenOverZoneId = landtransfer.TakenOverZoneId;
-                        propertyregistration.TakenOverDivisionId = landtransfer.TakenOverDivisionId;
-                        propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
-                        propertyregistration.TakenOverDepartmentId = landtransfer.TakenOverDepartmentId;
-                        propertyregistration.TakenOverDate = landtransfer.DateofTakenOver;
-                        propertyregistration.TakenOverEmailId = landtransfer.TakenOverEmailId;
-                        propertyregistration.TakenOverMobileNo = Convert.ToString(landtransfer.TakenOverMobileNo);
-                        propertyregistration.TakenOverLandlineNo = Convert.ToString(landtransfer.TakenOverLandLineNo);
-                        propertyregistration.TakenOverComments = landtransfer.TakenOverCommments;
-                        propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
-
-
-                        propertyregistration.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                        propertyregistration.HandedOverZoneId = landtransfer.HandedOverZoneId;
-                        propertyregistration.HandedOverDivisionId = landtransfer.HandedOverDivisionId;
-                        propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
-                        propertyregistration.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                        propertyregistration.HandedOverDate = landtransfer.HandedOverDate;
-                        propertyregistration.HandedOverEmailId = landtransfer.HandedOverEmailId;
-                        propertyregistration.HandedOverMobileNo = Convert.ToString(landtransfer.HandedOverMobileNo);
-                        propertyregistration.HandedOverLandlineNo = Convert.ToString(landtransfer.HandedOverLandLineNo);
-                        propertyregistration.HandedOverComments = landtransfer.HandedOverCommments;
-                        propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
-
-                        result = await _propertyregistrationService.UpdatePropertyRegistrationForLandTransfer(landtransfer.PropertyRegistrationId, propertyregistration);
-                    }
-                }
                 if (result)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
