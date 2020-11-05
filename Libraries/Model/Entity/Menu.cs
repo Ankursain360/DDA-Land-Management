@@ -10,23 +10,20 @@ namespace Libraries.Model.Entity
     public class Menu : AuditableEntity<int>
     {
 
-
-       
-
-
-        public int? ModuleId { get; set; }
         [Required(ErrorMessage = "The Module field is required")]
-        [Remote(action: "ExistName", controller: "Menu", AdditionalFields = "Id")]
+        public int? ModuleId { get; set; }
+
+        [Required(ErrorMessage = "Name field in required")]
+        [Remote(action: "Exist", controller: "Menu", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required(ErrorMessage ="Name field in required")]
-        public int? SortBy { get; set; }
+
         [Required(ErrorMessage = "Sort field in required")]
+        public int? SortBy { get; set; }
       
         public int? ParentMenuId { get; set; }
-        [Required]
 
         public byte? IsActive { get; set; }
-        [Required]
+
         [NotMapped]
         public List<Module> modulelist { get; set; }
 
