@@ -111,8 +111,8 @@ namespace LandTransfer.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var result1 = await _landTransferService.GetAllLandTransfer();
-                    return View("Index", result1);
+                    //var result1 = await _landTransferService.GetAllLandTransfer();
+                    return View("Index");
                 }
                 else
                 {
@@ -120,11 +120,6 @@ namespace LandTransfer.Controllers
                     return View(currentstatusoflandhistory);
                 }
             }
-            //else
-            //{
-            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            //    return View(currentstatusoflandhistory);
-            //}
         }
         public async Task<IActionResult> ViewHistory(int id)
         {
