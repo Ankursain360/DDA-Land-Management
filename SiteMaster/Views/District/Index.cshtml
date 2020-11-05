@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.District>
+@await Component.InvokeAsync("PageHeader", new { pageName = "District" })
+
 
 @{int rowNo = 0; }
 
@@ -26,7 +28,7 @@
         <div id="divDistrict">
 
         </div>
-         
+
 
     </div>
 </div>
