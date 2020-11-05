@@ -106,6 +106,8 @@ namespace Libraries.Model
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Disposedproperty> Disposedproperty { get; set; }
         public virtual DbSet<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
+        public virtual DbSet<Rolemodulemap> Rolemodulemap { get; set; }
+        public virtual DbSet<Submenuactionrolemap> Submenuactionrolemap { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -184,6 +186,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MenuConfiguration());
             modelBuilder.ApplyConfiguration(new DisposedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyRegistrationHistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new RolemodulemapConfiguration());
+            modelBuilder.ApplyConfiguration(new SubmenuactionrolemapConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

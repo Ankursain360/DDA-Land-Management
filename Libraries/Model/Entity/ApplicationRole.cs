@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 
@@ -9,6 +10,8 @@ namespace Model.Entity
         public ApplicationRole()
         {
             Userprofile = new HashSet<Userprofile>();
+            Rolemodulemap = new HashSet<Rolemodulemap>();
+            Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
         }
         public short IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -17,5 +20,7 @@ namespace Model.Entity
         public int? ModifiedBy { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+        public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
+        public ICollection<Submenuactionrolemap> Submenuactionrolemap { get; set; }
     }
 }

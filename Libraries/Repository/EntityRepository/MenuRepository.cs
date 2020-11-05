@@ -22,14 +22,15 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model)
         {
-            return await _dbContext.Menu
+            var data= await _dbContext.Menu
                         .Include(x => x.Module)
-                       
+                        .Include(x => x.ParentMenu)
+
                             .Where(x => x.IsActive == 1)
                             .OrderBy(s => s.Module.Name)
-                           
                             .ThenBy(s => s.Name)
                         .GetPaged<Menu>(model.PageNumber, model.PageSize);
+            return data;
         }
 
 

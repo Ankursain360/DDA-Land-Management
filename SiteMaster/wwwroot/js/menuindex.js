@@ -10,9 +10,9 @@ function GetMenu(pageNumber, pageSize) {
         $('#divMenuTable').html("");
         $('#divMenuTable').html(response);
     });
-    if ($('table >tbody >tr').length <= 1) {
-        GetMenu(1, $("#ddlPageSize option:selected").val());
-    }
+    //if ($('table >tbody >tr').length <= 1) {
+    //   // GetMenu(1, $("#ddlPageSize option:selected").val());
+    //}
 }
 
 function GetSearchParam(pageNumber, pageSize) {

@@ -51,7 +51,7 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Parent Menu <span style="color:red">*</span></label>
                         <select class="form-control dda-dropdown" asp-for="ParentMenuId" asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
-                            <option>Select</option>
+                            <option value="0">Select</option>
                         </select>
                         <span asp-validation-for="ParentMenuId" class="text-danger"></span>
                     </div>
