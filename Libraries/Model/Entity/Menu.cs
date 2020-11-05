@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         public int? ModuleId { get; set; }
 
         [Required(ErrorMessage = "Name field in required")]
-        [Remote(action: "Exist", controller: "Menu", AdditionalFields = "Id")]
+        [Remote(action: "Exist", controller: "Menu", AdditionalFields = "Id,ModuleId")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Sort field in required")]
@@ -23,6 +23,10 @@ namespace Libraries.Model.Entity
         public int? ParentMenuId { get; set; }
 
         public byte? IsActive { get; set; }
+        [NotMapped]
+        public List<Menu> parentmenulist { get; set; }
+
+        //public virtual Menu menu { get; set; }
 
         [NotMapped]
         public List<Module> modulelist { get; set; }

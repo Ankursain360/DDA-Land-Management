@@ -48,6 +48,15 @@
                         </select>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Parent Menu <span style="color:red">*</span></label>
+                        <select class="form-control dda-dropdown" asp-for="ParentMenuId" asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="ParentMenuId" class="text-danger"></span>
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class=" form-group  col-md-12">
                         <input type="submit" value="Update" class="btn btn-primary dda-pageheading" />

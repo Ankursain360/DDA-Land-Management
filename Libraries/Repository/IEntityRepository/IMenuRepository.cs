@@ -11,9 +11,9 @@ namespace Libraries.Repository.IEntityRepository
     public interface IMenuRepository : IGenericRepository<Menu>
     {
         Task<List<Menu>> GetAllMenu();
-       
+        Task<List<Menu>> GetAllParentmenu();
         Task<List<Module>> GetAllModule();
-        Task<bool> AnyName(int Id, string Name);
+        Task<bool> AnyName(int Id,int ModuleId, string Name);
         //Task<bool> AnyCode(int id, string name);
         Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model);
         
