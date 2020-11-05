@@ -1,27 +1,20 @@
-﻿using Dto.Master;
+﻿using Dto.Component;
 using Microsoft.AspNetCore.Mvc;
-using Service.IApplicationService;
-using SiteMaster.Helper;
 using System.Threading.Tasks;
 
 namespace SiteMaster.Components
 {
     public class PageHeaderViewComponent : ViewComponent
     {
-        private readonly ISiteContext _siteContext;
-        private readonly IUserProfileService _userProfileService;
-
-        public PageHeaderViewComponent(ISiteContext siteContext,
-           IUserProfileService userProfileService)
+        public async Task<IViewComponentResult> InvokeAsync(string pageName)
         {
-            _siteContext = siteContext;
-            _userProfileService = userProfileService;
-        }
+            await Task.Run(() =>
+            {
 
-        public async Task<IViewComponentResult> InvokeAsync()
-        {
-            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
-            return View("PageHeader", user);
+            });
+            return View("PageHeader", new PageHeaderDto() {
+                PageName = pageName
+            });
         }
 
     }

@@ -1,9 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.User>
-
-
-@await Component.InvokeAsync("PageHeader")
-
-
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "User" })
 
 <div class="pt-3">
     <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -70,7 +65,7 @@
             </div>
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-primary mr-2">
+                <a href="/usermanagement/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
@@ -88,7 +83,6 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-
     <script src="~/js/usermanagementindex.js"></script>
 </environment>
 <environment exclude="Development">
