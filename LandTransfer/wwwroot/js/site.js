@@ -29,6 +29,14 @@ $(document).ready(function () {
 			$('textarea').attr('disabled', 'disabled');
 		}
 	}
+	if ($("form").is("[disabled]")) {
+		if ($("form").attr('disabled') == 'disabled') {
+			$('input').attr('disabled', 'disabled');
+			$('select').attr('disabled', 'disabled');
+			$('button').attr('disabled', 'disabled');
+			$('textarea').attr('disabled', 'disabled');
+		}
+	}
 	$('.numbers').keyup(function () {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
 	});

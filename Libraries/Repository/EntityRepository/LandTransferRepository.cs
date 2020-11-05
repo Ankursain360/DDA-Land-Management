@@ -186,7 +186,8 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-                return await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                var data =await _dbContext.Landtransfer.Where(y => y.IsValidate == 0).Select(y => y.PropertyRegistrationId).ToListAsync();
+                var data1= await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
                                 .Include(x => x.Department)
                                 .Include(x => x.Zone)
                                 .Include(x => x.Division)
@@ -197,16 +198,47 @@ namespace Libraries.Repository.EntityRepository
                                                                        && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
                                    && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
                                    && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
-                                   && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
-)
+                                   && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)) && (!data.Contains(x.Id))
+
+                                   ) 
                                     .OrderByDescending(x => x.Id)
                                 .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                return data1;
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
+        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationUnverifiedDataForLandTransfer(LandTransferSearchDto model)
+        {
+            try
+            {
+                var data = await _dbContext.Landtransfer.Where(y => y.IsValidate == 0).Select(y => y.PropertyRegistrationId).ToListAsync();
+                var data1 = await _dbContext.Propertyregistration.Include(x => x.ClassificationOfLand)
+                                .Include(x => x.Department)
+                                .Include(x => x.Zone)
+                                .Include(x => x.Division)
+                                .Include(x => x.Locality)
+                                .Include(x => x.DisposalType)
+                                .Include(x => x.MainLandUse)
+                                    .Where(x => (x.IsDeleted == 1 && x.IsValidate == 1)
+                                                                       && (x.ClassificationOfLandId == (model.classificationofland == 0 ? x.ClassificationOfLandId : model.classificationofland))
+                                   && (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)) && (x.ZoneId == (model.zone == 0 ? x.ZoneId : model.zone))
+                                   && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
+                                   && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)) && (data.Contains(x.Id))
+
+                                   )
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                return data1;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
         public async Task<List<Landtransfer>> GetAllLandtransfer()
         {
             return await _dbContext.Landtransfer.

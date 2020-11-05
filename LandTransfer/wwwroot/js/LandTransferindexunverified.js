@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function GetLandTransfer(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/LandTransfer/List`, 'html', param, function (response) {
+    HttpPost(`/LandTransfer/UnverifiedList`, 'html', param, function (response) {
         debugger;
         $('#divLandTransferTable').html("");
         $('#divLandTransferTable').html(response);
@@ -19,9 +19,7 @@ $("#btnGenerate").click(function () {
     GetLandTransfer(currentPageNumber, currentPageSize);
 });
 
-
 function onChangePlanned(value) {
-
     if (value == 'Planned Land') {
         $('#DivLandUse').show();
         $('#divPlannedSelection').show();
@@ -65,6 +63,7 @@ function onChangePlanned(value) {
         callSelect2();
     }
 };
+
 function GetZoneList(id) {
     debugger;
     HttpGet(`/LandTransfer/GetZoneList/?departmentId=${id}`, 'json', function (response) {
@@ -80,7 +79,6 @@ function GetZoneList(id) {
     });
 };
 
-//Bind Divison and Locality Dropdown from Department
 function GetDivisionList(id) {
 
     HttpGet(`/LandTransfer/GetDivisionList/?zoneId=${id}`, 'json', function (response) {
@@ -101,6 +99,7 @@ function GetDivisionList(id) {
         $("#Propertyregistration_LocalityId").html(html);
     });
 };
+
 function GetSearchParam(pageNumber, pageSize) {
     debugger;
     var classificationOfLandId = $('#Propertyregistration_ClassificationOfLandId option:selected').val();
@@ -131,6 +130,7 @@ function callSelect2() {
         allowClear: true
     });
 }
+
 function onPaging(pageNo) {
     GetLandTransfer(parseInt(pageNo), currentPageSize);
     currentPageNumber = pageNo;
