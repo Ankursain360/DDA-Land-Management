@@ -48,6 +48,9 @@ namespace LandInventory.Controllers
         {
             Landtransfer model = new Landtransfer();
             model.DepartmentList = await _landtransferService.GetAllDepartment();
+            model.ZoneList = await _landtransferService.GetAllZone(0);
+            model.DivisionList = await _landtransferService.GetAllDivisionList(0);   
+            model.LocalityList = await _landtransferService.GetAllLocalityList(0);   
             return View(model);
         }
 
