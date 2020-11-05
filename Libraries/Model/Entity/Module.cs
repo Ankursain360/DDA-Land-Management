@@ -8,7 +8,11 @@ namespace Libraries.Model.Entity
 {
     public class Module : AuditableEntity<int>
     {
-       
+        public Module()
+        {
+          //  Menu = new HashSet<Menu>();
+            Rolemodulemap = new HashSet<Rolemodulemap>();
+        }
 
         [Required]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
@@ -23,6 +27,7 @@ namespace Libraries.Model.Entity
         public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
           public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Menu> Menu { get; set; }
+        public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
     }
    
 }

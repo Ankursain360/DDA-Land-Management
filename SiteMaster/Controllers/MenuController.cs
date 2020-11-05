@@ -40,7 +40,10 @@ namespace SiteMaster.Controllers
             model.IsActive = 1;
             model.ParentMenuId = 1;
             model.modulelist = await _menuService.GetAllModule();
-           
+            model.parentmenulist = await _menuService.GetAllParentmenu();
+            
+
+
             return View(model);
         }
         [HttpPost]
@@ -49,7 +52,7 @@ namespace SiteMaster.Controllers
             try
             {
                 menu.modulelist = await _menuService.GetAllModule();
-
+                menu.parentmenulist = await _menuService.GetAllParentmenu();
                 if (ModelState.IsValid)
                 {
                     var result = await _menuService.Create(menu);
@@ -77,35 +80,13 @@ namespace SiteMaster.Controllers
                 return View(menu);
             }
         }
-        //public async Task<IActionResult> Edit(int id)
-        //{
-        //    var Data = await _menuService.FetchSingleResult(id);
-        //    Data.modulelist = await _menuService.GetAllModule();
-           
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-        
-        //public async Task<IActionResult> View(int id)
-        //{
-        //    var Data = await _menuService.FetchSingleResult(id);
-        //    Data.modulelist = await _menuService.GetAllModule();
-           
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
+       
 
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _menuService.FetchSingleResult(id);
             Data.modulelist = await _menuService.GetAllModule();
-           
+            Data.parentmenulist = await _menuService.GetAllParentmenu();
 
             if (Data == null)
             {
@@ -123,7 +104,7 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Edit(int id, Menu menu)
         {
             menu.modulelist = await _menuService.GetAllModule();
-           
+            menu.parentmenulist = await _menuService.GetAllParentmenu();
 
             if (ModelState.IsValid)
             {
@@ -154,9 +135,9 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, string Name)
+        public async Task<IActionResult> Exist(int Id, int ModuleId, string Name)
         {
-            var result = await _menuService.CheckUniqueName(Id, Name);
+            var result = await _menuService.CheckUniqueName(Id, ModuleId, Name);
             if (result == false)
             {
                 return Json(true);

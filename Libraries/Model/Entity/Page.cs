@@ -9,6 +9,11 @@ namespace Libraries.Model.Entity
 {
     public class Page : AuditableEntity<int>
     {
+        public Page()
+        {
+            Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
+        }
+
         [Required(ErrorMessage = "Menu name is required")]
         public int? MenuId { get; set; }
         [Required (ErrorMessage ="Page name is required")]
@@ -28,5 +33,6 @@ namespace Libraries.Model.Entity
         public List<Menu> MenuList { get; set; }
 
         public Menu Menu { get; set; }
+        public ICollection<Submenuactionrolemap> Submenuactionrolemap { get; set; }
     }
 }
