@@ -598,38 +598,38 @@
                             {
                                 @foreach (var item in Model.LandTransfer.LandTransferList)
                                 {
-                                    <tr>
-                                        <td>@(rowNo += 1)</td>
-                                        <td>@item.PropertyRegistration.Locality.Name</td>
-                                        <td>@item.PropertyRegistration.KhasraNo</td>
-                                        <td>
-                                            @item.HandedOverDepartment.Name
-                                        </td>
-                                        <td>
-                                            @item.HandedOverZone.Name
-                                        </td>
-                                        <td>
-                                            @item.HandedOverDivision.Name
-                                        </td>
-                                        <td>
-                                            @item.HandedOverByNameDesingnation
-                                        </td>
-                                        <td>
-                                            @item.TakenOverDepartment.Name
-                                        </td>
-                                        <td>
-                                            @item.TakenOverZone.Name
-                                        </td>
-                                        <td>
-                                            @item.TakenOverDivision.Name
-                                        </td>
-                                        <td>
-                                            @item.TakenOverByNameDesingnation
-                                        </td>
-                                        <td>
-                                            @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
-                                        </td>
-                                    </tr>
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>@(item.PropertyRegistration.Locality==null?"": item.PropertyRegistration.Locality.Name)</td>
+                                <td>@item.PropertyRegistration.KhasraNo</td>
+                                <td>
+                                    @item.HandedOverDepartment.Name
+                                </td>
+                                <td>
+                                    @item.HandedOverZone.Name
+                                </td>
+                                <td>
+                                    @item.HandedOverDivision.Name
+                                </td>
+                                <td>
+                                    @item.HandedOverByNameDesingnation
+                                </td>
+                                <td>
+                                    @item.TakenOverDepartment.Name
+                                </td>
+                                <td>
+                                    @item.TakenOverZone.Name
+                                </td>
+                                <td>
+                                    @item.TakenOverDivision.Name
+                                </td>
+                                <td>
+                                    @item.TakenOverByNameDesingnation
+                                </td>
+                                <td>
+                                    @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+                                </td>
+                            </tr>
                                 }
                             }
                             else

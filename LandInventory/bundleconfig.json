@@ -82,5 +82,65 @@
     "inputFiles": [
       "wwwroot/js/propertyregisterationview.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LandTransfer.min.js",
+    "inputFiles": [
+      "wwwroot/js/LandTransfer.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LandTransferIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/LandTransferIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentstatusoflandcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentstatusoflandcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentStatusOfLandHistory.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentStatusOfLandHistory.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentStatusOfLandIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentStatusOfLandIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LandTransferindexunverified.min.js",
+    "inputFiles": [
+      "wwwroot/js/LandTransferindexunverified.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/ReportofLandTransferPropertyNoWise.min.js",
+    "inputFiles": [
+      "wwwroot/js/ReportofLandTransferPropertyNoWise.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reportoflandtransferdivisionlocalitywisecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/reportoflandtransferdivisionlocalitywisecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reportoflandtransferdepartmentwiseindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/reportoflandtransferdepartmentwiseindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reportoflandtransferdepartmentwise.min.js",
+    "inputFiles": [
+      "wwwroot/js/reportoflandtransferdepartmentwise.js"
+    ]
   }
 ]
