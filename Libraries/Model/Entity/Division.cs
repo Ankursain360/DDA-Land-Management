@@ -17,10 +17,10 @@ namespace Libraries.Model.Entity
             LandtransferTakenOverDivision = new HashSet<Landtransfer>();
             Locality = new HashSet<Locality>();
             Nazulland = new HashSet<Nazulland>();
-            //   Propertyregistration = new HashSet<Propertyregistration>();
             PropertyregistrationDivision = new HashSet<Propertyregistration>();
             PropertyregistrationHandedOverDivision = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverDivision = new HashSet<Propertyregistration>();
+            Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
         }
 
         [Required(ErrorMessage = "Division name is required")]
@@ -54,5 +54,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationDivision { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationHandedOverDivision { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverDivision { get; set; }
+        public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
     }
 }

@@ -82,5 +82,11 @@
     "inputFiles": [
       "wwwroot/js/currentStatusOfLandHistory.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/LandTransferindexunverified.min.js",
+    "inputFiles": [
+      "wwwroot/js/LandTransferindexunverified.js"
+    ]
   }
 ]

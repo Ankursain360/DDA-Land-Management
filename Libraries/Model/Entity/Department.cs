@@ -16,13 +16,13 @@ namespace Libraries.Model.Entity
             LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
             EncroachmentregisterationDepartment = new HashSet<EncroachmentRegisteration>();
             EncroachmentregisterationOtherDepartmentNavigation = new HashSet<EncroachmentRegisteration>();
-         //   Propertyregistration = new HashSet<Propertyregistration>();
             Userprofile = new HashSet<Userprofile>();
             Locality = new HashSet<Locality>();
             Zone = new HashSet<Zone>();
             PropertyregistrationDepartment = new HashSet<Propertyregistration>();
             PropertyregistrationHandedOverDepartment = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverDepartment = new HashSet<Propertyregistration>();
+            Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
         }
 
         [Required(ErrorMessage = "Department name is required")]
@@ -45,6 +45,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationDepartment { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationHandedOverDepartment { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverDepartment { get; set; }
-
+        public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
     }
 }

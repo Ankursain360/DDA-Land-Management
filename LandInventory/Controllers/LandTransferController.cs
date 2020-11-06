@@ -12,12 +12,12 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LandTransfer.Controllers;
+//using LandTransfer.Controllers;
 using Utility;
 using Utility.Helper;
 using System.Net;
 
-namespace LandTransfer.Controllers
+namespace LandInventory.Controllers
 {
     public class LandTransferController : BaseController
     {

@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 1;
+var currentPageSize = 10;
 
 $(document).ready(function () {
     GetDesignation(currentPageNumber, currentPageSize);
