@@ -231,7 +231,8 @@ function ChangeEncroachmentStatus(status) {
         $("#divEncroachmentYesSelectionForLandChangeStatus select").select2('val', '');
         $("#divEncroachmentYesSelectionForLandChangeStatus input").val('');
         $("#divEncroachmentYesSelectionForLandChangeStatus textarea").val('');
-    } else {
+    }
+    else {
         $("#divEncroachmentYesSelectionForLandChangeStatus").hide();
         $("#divEncroachmentYesSelectionForLandChangeStatus select").attr("disabled", "disabled");
         $("#divEncroachmentYesSelectionForLandChangeStatus input").attr("disabled", "disabled");
