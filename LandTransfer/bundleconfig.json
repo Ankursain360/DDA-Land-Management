@@ -88,11 +88,5 @@
     "inputFiles": [
       "wwwroot/js/LandTransferindexunverified.js"
     ]
-  },
-  {
-    "outputFileName": "wwwroot/js/PlanningCreate.min.js",
-    "inputFiles": [
-      "wwwroot/js/PlanningCreate.js"
-    ]
   }
 ]
