@@ -8,14 +8,14 @@ $(document).ready(function () {
         $('footer').toggleClass('menu-close');
     });
 
-    $('.numbers').keyup(function (e) {
+    $('.numbers').keyup(function () {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });
-
     $('.onlynumbers').keyup(function () {
         var $th = $(this);
         $th.val($th.val().replace(/[^0-9]/g, ''));
     });
+
 
     $(".ParameterActionListClass").attr("multiple", "");
     $("select[id!='ddlPageSize']").select2({
