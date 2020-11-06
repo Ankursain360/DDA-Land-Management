@@ -24,7 +24,7 @@
                 <td>@item.PropertyRegistration.Department.Name</td>
                 <td>@item.PropertyRegistration.Zone.Name</td>
                 <td>@item.PropertyRegistration.Division.Name</td>
-                <td>@item.PropertyRegistration.Locality.Name</td>
+                <td>@(item.PropertyRegistration.LocalityId == null ? "" : item.PropertyRegistration.Locality.Name)</td>
                 <td>@item.PropertyRegistration.KhasraNo</td>
                 <td>
                     @item.HandedOverByNameDesingnation
