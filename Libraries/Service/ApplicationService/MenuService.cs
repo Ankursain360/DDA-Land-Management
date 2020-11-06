@@ -80,7 +80,7 @@ namespace Libraries.Service.ApplicationService
             model.ModuleId = menu.ModuleId;
             model.Name = menu.Name;
             model.SortBy = menu.SortBy;
-            model.ParentMenuId = menu.ParentMenuId;
+            model.ParentMenuId = menu.ParentMenuId == 0 ? null : menu.ParentMenuId;
 
             model.IsActive = menu.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -93,7 +93,7 @@ namespace Libraries.Service.ApplicationService
         {
             menu.CreatedBy = 1;
             menu.CreatedDate = DateTime.Now;
-            menu.ParentMenuId = 1;
+            menu.ParentMenuId = menu.ParentMenuId == 0 ? null : menu.ParentMenuId;
             _menuRepository.Add(menu);
             return await _unitOfWork.CommitAsync() > 0;
         }
