@@ -10,7 +10,7 @@ using Dto.Search;
 
 namespace LandInventory.Controllers
 {
-    public class PropertyInventoryReport : Controller
+    public class PropertyInventoryReport : BaseController
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
 
