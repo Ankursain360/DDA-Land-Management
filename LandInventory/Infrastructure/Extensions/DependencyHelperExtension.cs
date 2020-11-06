@@ -25,6 +25,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<ILandTransferRepository, LandtransferRepository>();
             services.AddScoped<ICurrentstatusoflandhistoryRepository, CurrentstatusoflandhistoryRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
+            services.AddScoped<IPlanningRepositry, PlanningRepositry>();
             //services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             /* Application Services */
@@ -35,6 +36,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<ILandTransferService, LandTransferService>();
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
+            services.AddScoped<IPlanningService, PlanningService>();
            // services.AddScoped<IUserProfileService, UserProfileService>();
         }
     }
