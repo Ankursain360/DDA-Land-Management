@@ -61,7 +61,6 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Interest interest)
         {
-
             interest.CreatedBy = 1;
             interest.CreatedDate = DateTime.Now;
             _interestRepository.Add(interest);

@@ -920,16 +920,15 @@
                             <div class="form-group col-md-6">
                                 <label class="control-label lb-sm">Encroachment  <span style="color:red">*</span></label>
                                 <select class="form-control  dda-dropdown" asp-for="Encroachment">
-                                    <option value="No">No</option>
-                                    <option value="Yes">Yes</option>
+                                    <option value="0">No</option>
+                                    <option value="1">Yes</option>
 
                                 </select>
                             </div>
-
                             <div id="DivEncroachment" style="display:none;">
                                 <div class="form-group col-md-6">
                                     <label class="control-label lb-sm">Encroached Area(Bigha/Biswa/Biswanshi)</label>
-                                    <input type="text" asp-for="EncroachedArea" class="form-control" id="txtTakenOverDate" />
+                                    <input type="text" asp-for="EncroachementArea" class="form-control" id="txtTakenOverDate" />
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="control-label lb-sm">Action On Encroachment</label>

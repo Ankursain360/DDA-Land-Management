@@ -15,14 +15,14 @@ namespace Libraries.Model.Entity
             Page = new HashSet<Page>();
         }
 
-        [Required(ErrorMessage = "The Module field is required")]
+        [Required(ErrorMessage = "Module Name field field is Mandatory")]
         public int? ModuleId { get; set; }
 
-        [Required(ErrorMessage = "Name field in required")]
+        [Required(ErrorMessage = "Menu Name field field is Mandatory")]
         [Remote(action: "Exist", controller: "Menu", AdditionalFields = "Id,ModuleId")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Sort field in required")]
+        [Required(ErrorMessage = "Sort By field is Mandatory")]
         public int? SortBy { get; set; }
       
         public int? ParentMenuId { get; set; }
