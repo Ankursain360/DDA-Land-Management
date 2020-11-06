@@ -4,16 +4,18 @@ $(document).ready(function () {
     $('#mobileMenu').on('click', function () {
         $('#leftMenu').toggleClass('small');
         $('#mobileMenu').toggleClass('open');
+        $('#rightSection').toggleClass('menu-close');
+        $('footer').toggleClass('menu-close');
     });
 
-    $('.numbers').keyup(function (e) {
+    $('.numbers').keyup(function () {
         this.value = this.value.replace(/[^0-9\.]/g, '');
     });
-
     $('.onlynumbers').keyup(function () {
         var $th = $(this);
         $th.val($th.val().replace(/[^0-9]/g, ''));
     });
+
 
     $(".ParameterActionListClass").attr("multiple", "");
     $("select[id!='ddlPageSize']").select2({
@@ -174,7 +176,7 @@ function InfoMessage(message) {
 
 function DisplayLoader(show) {
     var styleValue = show === true ? "block" : "none";
-    $(".spinner").css("display", styleValue);
+    $(".body-loading").css("display", styleValue);
 }
 
 function DisplayErrorMessages(response) {

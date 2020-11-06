@@ -361,7 +361,7 @@ figcaption h6 {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 9999
+    z-index: 99
 }
 
 
@@ -795,7 +795,7 @@ footer.footer {
     right: 0;
     color: #fff;
     font-size: .6rem;
-    z-index: 9999;
+    z-index: 99;
 }
 
 footer.footer a {
@@ -916,14 +916,14 @@ footer.footer a {
     top: 0;
     left: 0;
     user-select: none;
-    z-index: 1500;
+    z-index: 1;
 }
 
 /* Hide the browser-specific focus styles */
 .floating-label-field {
     color: rgba(44, 62, 80, .75);
     border-width: 0;
-    z-index: 2000;
+    z-index: 2;
 }
 
 .floating-label-field:focus {
@@ -1191,7 +1191,59 @@ footer.footer a {
     }
 }
 
+.body-loading {
+    position: fixed;
+    overflow: hidden;
+    background-color: rgba(0, 0, 0, .9);
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    display: none;
+}
 
+.body-loading.loader-active {
+    display: block;
+}
+
+
+.body-loading::after {
+    content: "";
+    position: fixed;
+    width: 48px;
+    height: 48px;
+    border: 8px solid #fff;
+    border-left-color: transparent;
+    border-radius: 50%;
+    top: calc(50% + 18px);
+    left: calc(50% - 24px);
+    animation: rotation 1.2s linear infinite;
+}
+
+
+.body-loading::before {
+    content: 'Loading...';
+    position: fixed;
+    top: calc(50% - 18px);
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(359deg)
+    }
+}
 
 
 

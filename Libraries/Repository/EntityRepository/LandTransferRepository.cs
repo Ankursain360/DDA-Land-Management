@@ -268,7 +268,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<Landtransfer> FetchSingleResultWithPropertyRegistration(int id)
         {
-            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => (x.IsActive == 1) && (x.PropertyRegistrationId == id)).FirstOrDefaultAsync();
+            return await _dbContext.Landtransfer.Include(x => x.PropertyRegistration).Where(x => (x.IsActive == 1) && (x.PropertyRegistrationId == id) &&(x.IsValidate==0)).FirstOrDefaultAsync();
         }
 
         public async Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory)

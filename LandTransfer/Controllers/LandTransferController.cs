@@ -70,73 +70,6 @@ namespace LandTransfer.Controllers
             landtransfer.Propertyregistration = propertyRegistration;
             return View(landtransfer);
         }
-        //public async Task<IActionResult> Create()
-        //{
-        //    Landtransfer model = new Landtransfer();
-        //    model.Propertyregistration = await _propertyregistrationService.FetchSingleResult(32);
-        //    model.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-        //    model.Propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
-        //    model.Propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
-        //    model.Propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-        //    model.Propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
-        //    model.Propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-        //    model.Propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(model.Propertyregistration.DepartmentId);
-        //    model.Propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(model.Propertyregistration.DivisionId);
-        //    model.Propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(model.Propertyregistration.ZoneId);
-
-        //    model.LandTransferList = await _landTransferService.GetAllLandTransfer();
-        //    model.DepartmentList = await _landTransferService.GetAllDepartment();
-        //    model.ZoneList = await _landTransferService.GetAllZone(model.DepartmentId);
-        //    model.DivisionList = await _landTransferService.GetAllDivisionList(model.ZoneId);
-        //    model.LocalityList = await _landTransferService.GetAllLocalityList(model.DivisionId);
-        //    return View(model);
-        //}
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Landtransfer landtransfer)
-        //{
-        //    landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
-        //    landtransfer.ZoneList = await _landTransferService.GetAllZone(landtransfer.DepartmentId);
-        //    landtransfer.DivisionList = await _landTransferService.GetAllDivisionList(landtransfer.ZoneId);
-        //    landtransfer.LocalityList = await _landTransferService.GetAllLocalityList(landtransfer.DivisionId);
-        //    if (ModelState.IsValid)
-        //    {
-        //        targetPathLayout = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
-        //        if (landtransfer.CopyofOrder != null)
-        //        {
-        //            FileHelper file = new FileHelper();
-        //            landtransfer.CopyofOrderDocPath = file.SaveFile(targetPathLayout, landtransfer.CopyofOrder);
-        //        }
-        //        var result = await _landTransferService.Create(landtransfer);
-
-        //        if (result == true)
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-        //            var result1 = await _landTransferService.GetAllLandTransfer();
-        //            return View("Index", result1);
-        //        }
-        //        else
-        //        {
-        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //            return View(landtransfer);
-        //        }
-        //    }
-
-        //    return View(landtransfer);
-        //}
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var result = await _landTransferService.Delete(id);
-        //    if (result == true)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    var result1 = await _landTransferService.GetAllLandTransfer();
-        //    return View("Index", result1);
-        //}
         public async Task<IActionResult> Edit(int id)
         {
             var Data = new Landtransfer();//await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
@@ -361,55 +294,18 @@ namespace LandTransfer.Controllers
                 if (landtransfer.IsValidateData)
                 {
                     PropertyRegistrationHistory propertyRegistrationHistory = new PropertyRegistrationHistory();
-                    propertyRegistrationHistory.LandTransferId=     landtransfer.Id;
-                    propertyRegistrationHistory.PropertyRegistrationId=     landtransfer.PropertyRegistrationId;
-                    propertyRegistrationHistory.TakenOverDepartmentId=     landtransfer.TakenOverDepartmentId;
-                    propertyRegistrationHistory.TakenOverDepartmentId=     landtransfer.TakenOverDepartmentId;
-                    propertyRegistrationHistory.TakenOverZoneId=     landtransfer.TakenOverZoneId;
-                    propertyRegistrationHistory.TakenOverDivisionId=       landtransfer.TakenOverDivisionId;
-                    propertyRegistrationHistory.TakenOverByNameDesingnation=landtransfer.TakenOverByNameDesingnation;
-                    propertyRegistrationHistory.DateofTakenOver=          landtransfer.DateofTakenOver;
-                    propertyRegistrationHistory.TakenOverEmailId=          landtransfer.TakenOverEmailId;
-                    propertyRegistrationHistory.TakenOverMobileNo=         landtransfer.TakenOverMobileNo;
-                    propertyRegistrationHistory.TakenOverLandLineNo=       landtransfer.TakenOverLandLineNo;
-                    propertyRegistrationHistory.TakenOverCommments=        landtransfer.TakenOverCommments;
-
-
-                    propertyRegistrationHistory.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                    propertyRegistrationHistory.HandedOverZoneId = landtransfer.HandedOverZoneId;
-                    propertyRegistrationHistory.HandedOverDivisionId = landtransfer.HandedOverDivisionId;
-                    propertyRegistrationHistory.HandedOverByNameDesingnation = landtransfer.HandedOverByNameDesingnation;
-                    propertyRegistrationHistory.HandedOverDate = landtransfer.HandedOverDate;
-                    propertyRegistrationHistory.HandedOverEmailId = landtransfer.HandedOverEmailId;
-                    propertyRegistrationHistory.HandedOverMobileNo =landtransfer.HandedOverMobileNo;
-                    propertyRegistrationHistory.HandedOverLandLineNo = landtransfer.HandedOverLandLineNo;
-                    propertyRegistrationHistory.HandedOverCommments = landtransfer.HandedOverCommments;
-
+                    propertyRegistrationHistory.LandTransferId = landtransfer.Id;
+                    propertyRegistrationHistory.PropertyRegistrationId = landtransfer.PropertyRegistrationId;
+                    propertyRegistrationHistory.DepartmentId = landtransfer.HandedOverDepartmentId??0;
+                    propertyRegistrationHistory.ZoneId = landtransfer.HandedOverZoneId;
+                    propertyRegistrationHistory.DivisionId = landtransfer.HandedOverDivisionId;
                     result = await _landTransferService.CreateHistory(propertyRegistrationHistory);
                     if (result)
                     {
                         Propertyregistration propertyregistration = new Propertyregistration();
-
-                        propertyregistration.TakenOverDepartmentId = landtransfer.TakenOverDepartmentId;
-                        propertyregistration.TakenOverZoneId = landtransfer.TakenOverZoneId;
-                        propertyregistration.TakenOverDivisionId = landtransfer.TakenOverDivisionId;
-                        //propertyregistration.TakenOverName = landtransfer.TakenOverByNameDesingnation;
-                        //propertyregistration.TakenOverDate = landtransfer.DateofTakenOver;
-                        //propertyregistration.TakenOverEmailId = landtransfer.TakenOverEmailId;
-                        //propertyregistration.TakenOverMobileNo = Convert.ToString(landtransfer.TakenOverMobileNo);
-                        //propertyregistration.TakenOverLandlineNo = Convert.ToString(landtransfer.TakenOverLandLineNo);
-                        //propertyregistration.TakenOverComments = landtransfer.TakenOverCommments;
-
-
-                        propertyregistration.HandedOverDepartmentId = landtransfer.HandedOverDepartmentId;
-                        propertyregistration.HandedOverZoneId = landtransfer.HandedOverZoneId;
-                        propertyregistration.HandedOverDivisionId = landtransfer.HandedOverDivisionId;
-                        //propertyregistration.HandedOverName = landtransfer.HandedOverByNameDesingnation;
-                        //propertyregistration.HandedOverDate = landtransfer.HandedOverDate;
-                        //propertyregistration.HandedOverEmailId = landtransfer.HandedOverEmailId;
-                        //propertyregistration.HandedOverMobileNo = Convert.ToString(landtransfer.HandedOverMobileNo);
-                        //propertyregistration.HandedOverLandlineNo = Convert.ToString(landtransfer.HandedOverLandLineNo);
-                        //propertyregistration.HandedOverComments = landtransfer.HandedOverCommments;
+                        propertyregistration.DepartmentId = landtransfer.HandedOverDepartmentId??0;
+                        propertyregistration.ZoneId = landtransfer.HandedOverZoneId;
+                        propertyregistration.DivisionId = landtransfer.HandedOverDivisionId;
 
                         result = await _propertyregistrationService.UpdatePropertyRegistrationForLandTransfer(landtransfer.PropertyRegistrationId, propertyregistration);
                     }
@@ -504,16 +400,8 @@ namespace LandTransfer.Controllers
                     FileHelper file = new FileHelper();
                     landtransfer.HandedOverFile = file.SaveFile(handedOverFile, landtransfer.HandedOverFiles);
                 }
-                var result = false;
-                //if (landtransfer.Id > 0)
-                //{
-                //    result = await _landTransferService.Update(landtransfer.Id, landtransfer);
-                //}
-                //else
-                //{
                 landtransfer.Id = 0;
-                    result = await _landTransferService.Create(landtransfer);
-                //}
+                var result = await _landTransferService.Create(landtransfer);
                 if (result)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);

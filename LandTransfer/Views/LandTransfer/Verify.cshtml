@@ -37,7 +37,6 @@
                     </div>
                 </a>
                 <div class="collapse" id="collapseExample">
-
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm">Inventoried In</label><span class="text-danger">*</span>
@@ -73,7 +72,6 @@
                                 <option value="">--Select--</option>
                             </select>
                         </div>
-
                         <div class="form-group col-md-4">
                             <label class="control-label lb-sm" asp-for="Propertyregistration.DivisionId">Division</label><span class="text-danger">*</span>
                             <select class="form-control dda-dropdown" disabled asp-for="Propertyregistration.DivisionId" asp-items="@(new SelectList(Model.Propertyregistration.DivisionList, "Id","Name"))">
