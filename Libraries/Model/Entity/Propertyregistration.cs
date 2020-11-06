@@ -19,6 +19,7 @@ namespace Libraries.Model.Entity
         {
             Landtransfer = new HashSet<Landtransfer>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
+            PlanningProperties = new HashSet<PlanningProperties>();
         }
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
@@ -184,6 +185,7 @@ namespace Libraries.Model.Entity
         public Department TakenOverDepartment { get; set; }
         public Division TakenOverDivision { get; set; }
         public Zone TakenOverZone { get; set; }
+        public virtual ICollection<PlanningProperties> PlanningProperties { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
 
         [NotMapped]

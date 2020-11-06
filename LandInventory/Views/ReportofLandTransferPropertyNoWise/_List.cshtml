@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Landtransfer>
+@{int rowNo = 0; }
+    <div class="row">
+        <div class="card table-card table-responsive">
+            <table class="table  table-bordered table-card">
+                <thead class="thead">
+                    <tr class="myapp-hed1">
+                        <th>Sr.No</th>
+                        <th>Department</th>
+                        <th>Zone</th>
+                        <th>Division</th>
+                        <th>Locality(Village)</th>
+                        <th>Khasra No.</th>
+                        <th>Handed Over By  </th>
+                        <th>Handed Over Date</th>
+                        <th>Taken Over By  </th>
+                        <th>Taken Over Date  </th>
+                        <th>Transfer order Issue Authority</th>
+                        <th>Remarks </th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        @foreach (var item in Model)
+                        {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@item.PropertyRegistration.Department.Name</td>
+                        <td>@item.PropertyRegistration.Zone.Name</td>
+                        <td>@item.PropertyRegistration.Division.Name</td>
+                        <td>@(item.PropertyRegistration.LocalityId == null ? "" : item.PropertyRegistration.Locality.Name)</td>
+                        <td>@(item.PropertyRegistration.KhasraNo == null ? "" :item.PropertyRegistration.KhasraNo)</td>
+                        <td>
+                            @item.HandedOverByNameDesingnation
+                        </td>
+                        <td>
+                            @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+                        </td>
+                        <td>
+                            @item.TakenOverByNameDesingnation
+                        </td>
+                        <td>
+                            @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
+                        </td>
+                        <td>
+                            @item.TransferorderIssueAuthority
+                        </td>
+                        <td>
+                            @item.Remarks
+                        </td>
+                    </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <th colspan="13" style="text-align:center"> Data Not Available </th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
