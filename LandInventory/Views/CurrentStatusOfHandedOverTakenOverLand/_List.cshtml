@@ -1,0 +1,53 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Landtransfer>
+@{int rowNo = 0;}
+    <table class="table table-responsive table-bordered table-card">
+        <thead class="thead">
+            <tr class="dda-pageheading">
+                <th>Sr.No</th>
+                <th>Department</th>
+                <th>Zone</th>
+                <th>Division</th>
+                <th>Locality(Village)</th>
+                <th>Khasra No.</th>
+                <th>Handed Over By</th>
+                <th>Date of Hand Over</th>
+                <th>Taken Over By</th>
+                <th>Date of Taken Over</th>
+                <th style="width:150px;">Operation</th>
+            </tr>
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model.Results)
+            {
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@item.PropertyRegistration.Department.Name</td>
+                <td>@item.PropertyRegistration.Zone.Name</td>
+                <td>@item.PropertyRegistration.Division.Name</td>
+                <td>@item.PropertyRegistration.Locality.Name</td>
+                <td>@item.PropertyRegistration.KhasraNo</td>
+                <td>
+                    @item.HandedOverByNameDesingnation
+                </td>
+                  <td>
+                    @(item.HandedOverDate != null ? Convert.ToDateTime(item.HandedOverDate).ToString("dd MMM yyyy") : "Not Available")
+                </td>
+                <td>
+                    @item.TakenOverByNameDesingnation
+                </td>
+                <td>
+                    @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
+                </td>
+                <td>
+
+                    <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Add Current Status </a>
+                    @*<a asp-action="ViewHistory" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>*@
+                    <a asp-action="History" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>
+
+                </td>
+            </tr>
+            }
+            </tbody>
+
+    </table>
+    @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
