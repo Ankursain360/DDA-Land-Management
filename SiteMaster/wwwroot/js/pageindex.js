@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 2;
+var currentPageSize = 10;
 
 $(document).ready(function () {
     GetPage(currentPageNumber, currentPageSize);

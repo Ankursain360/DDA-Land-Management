@@ -38,7 +38,6 @@ namespace SiteMaster.Controllers
         {
             Menu model = new Menu();
             model.IsActive = 1;
-            model.ParentMenuId = 1;
             model.modulelist = await _menuService.GetAllModule();
             model.parentmenulist = await _menuService.GetAllParentmenu();
             
@@ -135,7 +134,7 @@ namespace SiteMaster.Controllers
 
         [AcceptVerbs("Get", "Post")]
         [AllowAnonymous]
-        public async Task<IActionResult> Exist(int Id, int ModuleId, string Name)
+        public async Task<IActionResult> Exist(int Id,  string Name,int ModuleId)
         {
             var result = await _menuService.CheckUniqueName(Id, ModuleId, Name);
             if (result == false)
@@ -175,7 +174,7 @@ namespace SiteMaster.Controllers
         {
             var Data = await _menuService.FetchSingleResult(id);
             Data.modulelist = await _menuService.GetAllModule();
-           
+            Data.parentmenulist = await _menuService.GetAllParentmenu();
 
             if (Data == null)
             {

@@ -1,7 +1,7 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.LandNotification>
 @{int rowNo = 0; }
 
-    <table class="table table-responsive table-bordered table-card">
+    <table class="table table-bordered table-card">
 
         <thead class="thead">
             <tr class="myapp-hed1">
@@ -14,19 +14,19 @@
         <tbody class="tbody">
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-                    <td>@item.Name</td>
-                    <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>
-                    <td>
-                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+            <tr>
+                <td>@(rowNo += 1)</td>
+                <td>@item.Name</td>
+                <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>
+                <td>
+                    <div class="action-btns">
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                    </div>
+                </td>
 
-                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-
-                        <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-                    </td>
-
-                </tr>
+            </tr>
 
 
             }
