@@ -42,10 +42,14 @@ namespace Libraries.Repository.EntityRepository
             List<Module> modulelist = await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
             return modulelist;
         }
-
-        public async Task<bool> AnyName(int Id, string Name)
+        public async Task<List<Menu>> GetAllParentmenu()
         {
-            return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.Name.ToLower() == Name.ToLower());
+            List<Menu> parentmenulist = await _dbContext.Menu.Where(x => x.IsActive == 1).ToListAsync();
+            return parentmenulist;
+        }
+        public async Task<bool> AnyName(int Id,int ModuleId, string Name)
+        {
+            return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.Name.ToLower() == Name.ToLower());
         }
 
 

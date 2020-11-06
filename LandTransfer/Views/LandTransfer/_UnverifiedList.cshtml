@@ -31,7 +31,7 @@
                         <td>@item.Division.Name</td>
                         <td>@item.PrimaryListNo</td>
                         <td>@item.Palandmark</td>
-                        <td><a asp-action="Edit" asp-route-Id="@item.Id">Hand Over/Take Over</a></td>
+                        <td><a asp-action="Verify" asp-route-Id="@item.Id">Verify  </a>&nbsp;|&nbsp;  <a asp-action="View" asp-route-Id="@item.Id">View</a></td>
                     </tr>
                 }
             }

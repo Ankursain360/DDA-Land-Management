@@ -207,6 +207,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _landTransferRepository.GetPropertyRegisterationDataForLandTransfer(model);
         }
+        public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationUnverifiedDataForLandTransfer(LandTransferSearchDto model)
+        {
+            return await _landTransferRepository.GetPropertyRegisterationUnverifiedDataForLandTransfer(model);
+        }
 
         public async Task<bool> CreateHistory(PropertyRegistrationHistory propertyRegistrationHistory)
         {

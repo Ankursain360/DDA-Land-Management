@@ -76,5 +76,11 @@
     "inputFiles": [
       "wwwroot/js/currentstatusoflandcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/currentStatusOfLandHistory.min.js",
+    "inputFiles": [
+      "wwwroot/js/currentStatusOfLandHistory.js"
+    ]
   }
 ]

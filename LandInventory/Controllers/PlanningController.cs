@@ -14,47 +14,41 @@ using Notification.OptionEnums;
 using Service.IApplicationService;
 using Utility.Helper;
 
-namespace LandTransfer.Controllers
+namespace LandInventory.Controllers
 {
     public class PlanningController : Controller
     {
 
         public IConfiguration _configuration;
         public readonly IPropertyRegistrationService _propertyregistrationService;
-
-
-
-
         public PlanningController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
         {
             _propertyregistrationService = propertyregistrationService;
-
             _configuration = configuration;
-              }
-
-
-
-
-
-
+        }
         public IActionResult Index()
         {
             return View();
         }
-
-
-
-        public async Task<IActionResult> ListPage(Propertyregistration propertyregistration)
+        public async Task<IActionResult> Create(Propertyregistration propertyregistration)
         {
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-
             propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
-           // propertyregistration.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(propertyregistration.ZoneId);
             propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
-
             return View(propertyregistration);
         }
-
-
+        [HttpGet]
+        public async Task<JsonResult> GetZoneList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            var zoneList = await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(DepartmentId));
+            return Json(zoneList);
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetDivisionList(int? ZoneId)
+        {
+            ZoneId = ZoneId ?? 0;
+            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(ZoneId)));
+        }
     }
 }
