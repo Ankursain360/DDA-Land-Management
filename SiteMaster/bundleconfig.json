@@ -268,5 +268,41 @@
     "inputFiles": [
       "wwwroot/js/userprofileedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/menuindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/menuindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/divisioncreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/divisioncreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionchecklistindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionchecklistindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitiondocumentindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitiondocumentindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionprogrammasterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionprogrammasterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/MaxLength.min.js",
+    "inputFiles": [
+      "wwwroot/js/MaxLength.js"
+    ]
   }
 ]
