@@ -15,12 +15,12 @@ namespace Libraries.Model.Entity
         {
             PropertyregistrationHandedOverZone = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverZone = new HashSet<Propertyregistration>();
-           // PropertyregistrationZone = new HashSet<Propertyregistration>();
             LandtransferHandedOverZone = new HashSet<Landtransfer>();
             LandtransferTakenOverZone = new HashSet<Landtransfer>();
             Userprofile = new HashSet<Userprofile>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Locality = new HashSet<Locality>();
+            Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
         }
 
         [Required(ErrorMessage = "The Department field is required")]
@@ -58,5 +58,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationHandedOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationZone { get; set; }
+        public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
     }
 }

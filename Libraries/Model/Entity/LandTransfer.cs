@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public Landtransfer()
         {
             Currentstatusoflandhistory = new HashSet<Currentstatusoflandhistory>();
+            Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
         }
         [Required(ErrorMessage = "The Handed Over Department is required.")]
         public int? HandedOverDepartmentId { get; set; }
@@ -102,6 +103,7 @@ namespace Libraries.Model.Entity
         public List<Landtransfer> handeoverdepartmentlist { get; set; }
         [NotMapped]
         public int ReportType { get; set; }
+        public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
         public ICollection<Currentstatusoflandhistory> Currentstatusoflandhistory { get; set; }
         [NotMapped]
         public Propertyregistration Propertyregistration { get; set; }
