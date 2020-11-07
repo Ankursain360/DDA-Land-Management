@@ -24,7 +24,7 @@
             <td>@item.Name</td>
             <td>@item.SortBy</td>
 
-            <td>@item.ParentMenu.Name</td>
+            <td>@(item.ParentMenuId == null ? "" : item.ParentMenu.Name)</td>
             <td>
                 @if (item.IsActive == 1)
                 {

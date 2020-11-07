@@ -50,7 +50,8 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<bool> AnyName(int Id,int ModuleId, string Name)
         {
-            return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.Name.ToLower() == Name.ToLower());
+            return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.Name.ToLower() == Name.ToLower() && t.IsActive == 1);
+            
         }
 
 
