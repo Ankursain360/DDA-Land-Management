@@ -14,13 +14,14 @@ namespace Libraries.Model.Entity
             Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
         }
 
-        [Required(ErrorMessage = "Menu name is required")]
+        [Required(ErrorMessage = "Menu name field is mandatory")]
         public int? MenuId { get; set; }
-        [Required (ErrorMessage ="Page name is required")]
-       
-        [Remote(action: "Exist", controller: "Page", AdditionalFields = "Id")]
+
+        [Required (ErrorMessage = "Name field is mandatory")]       
+        [Remote(action: "Exist", controller: "Page", AdditionalFields = "Id,MenuId")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please fill Url feild ")]
+
+        [Required(ErrorMessage = "Url field is mandatory")]
         public string Url { get; set; }
        
         public byte? IsActive { get; set; }

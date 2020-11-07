@@ -22,13 +22,13 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Module Name <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" required="required" requiredmsg="The  Module Name field is required" asp-for="ModuleId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
-                            <option>Select</option>
+                        <select class="form-control dda-dropdown"  asp-for="ModuleId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
+                            <option value="">Select</option>
                         </select>
                         <span asp-validation-for="ModuleId" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Parent Menu <span style="color:red">*</span></label>
+                        <label class="control-label lb-sm">Parent Menu </label>
                         <select class="form-control dda-dropdown" asp-for="ParentMenuId" asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
                             <option value="0">--Select--</option>
                         </select>
@@ -39,12 +39,12 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Menu Name <span style="color:red">*</span></label>
-                        <input asp-for="Name" type="text" class="form-control" limit="200" required="required" requiredmsg="The Menu Name field is required" />
+                        <input asp-for="Name" type="text" class="form-control" limit="200"/>
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Sort By <span style="color:red">*</span></label>
-                        <input asp-for="SortBy" type="number" class="form-control onlynumbers" limit="11" required="required" requiredmsg="The  Sort By field is required" />
+                        <input asp-for="SortBy" type="number" class="form-control onlynumbers" limit="11" />
                         <span asp-validation-for="SortBy" class="text-danger"></span>
                     </div>
 
@@ -69,10 +69,4 @@
         </div>
     </div>
 </div>
-@*<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-    <environment include="Development">
-        <script src="~/js/menumaster.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/menumaster.min.js" asp-append-version="true"></script>
-    </environment>*@
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
