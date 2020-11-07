@@ -14,9 +14,16 @@ namespace Libraries.Model.Entity
         public int? LandTransferId { get; set; }
         public string Tsssurvey { get; set; }
         public string SurveyReportFilePath { get; set; }
-        public string Encroachment { get; set; }
-        public decimal? EncroachedArea { get; set; }
+        public int Encroachment { get; set; }
+        public decimal? VacantArea { get; set; }
+        public int? EncroachmentStatus { get; set; }
+        public DateTime VacationDate { get; set; }
+        public int? NatureOfUtilization { get; set; }
+        public decimal? EncroachementArea { get; set; }
+        public decimal? BuildUpInEncroachementArea { get; set; }
         public string ActionOnEncroachment { get; set; }
+        public string EncroachmentDetails { get; set; }
+
         public string ActionReportFilePath { get; set; }
         public string FencingBoundaryWall { get; set; }
         public decimal? AreaCovered { get; set; }

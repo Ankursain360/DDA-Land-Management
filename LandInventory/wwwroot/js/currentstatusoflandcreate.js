@@ -131,6 +131,7 @@
         var value = $("#PlotUtilization option:selected").val();
         if (value == 'Yes') {
             $("#Utilization").show();
+            $("#VacationDate").val('');
 
         }
         else {
@@ -220,3 +221,35 @@ function callSelect2() {
         }
     });
 }
+function ChangeEncroachmentStatus(status) {
+    if (status == '1') {
+        $("#divEncroachmentYesSelectionForLandChangeStatus").show();
+        $("#divEncroachmentYesSelectionForLandChangeStatus select").removeAttr("disabled");
+        $("#divEncroachmentYesSelectionForLandChangeStatus input").removeAttr("disabled");
+        $("#divEncroachmentYesSelectionForLandChangeStatus textarea").removeAttr("disabled");
+        $("#divEncroachmentYesSelectionForLandChangeStatus select").val('');
+        $("#divEncroachmentYesSelectionForLandChangeStatus select").select2('val', '');
+        $("#divEncroachmentYesSelectionForLandChangeStatus input").val('');
+        $("#divEncroachmentYesSelectionForLandChangeStatus textarea").val('');
+    }
+    else {
+        $("#divEncroachmentYesSelectionForLandChangeStatus").hide();
+        $("#divEncroachmentYesSelectionForLandChangeStatus select").attr("disabled", "disabled");
+        $("#divEncroachmentYesSelectionForLandChangeStatus input").attr("disabled", "disabled");
+        $("#divEncroachmentYesSelectionForLandChangeStatus textarea").attr("disabled", "disabled");
+    }
+    callSelect2();
+};
+function ChangeNatureOfUtilizationStatus(status) {
+    if (status == '0') {
+        $("#divNatureOfUtilization").show();
+        $("#VacationDate").removeAttr("disabled");
+        $("#VacationDate").val('');
+    }
+    else {
+        $("#divNatureOfUtilization").hide();
+        $("#VacationDate").attr("disabled", "disabled");
+        $("#VacationDate").val("");
+    }
+    callSelect2();
+};
