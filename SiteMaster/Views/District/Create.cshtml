@@ -22,40 +22,57 @@
         <div class="panel-body">
             <form id="myForm" asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                       
-                        <label class="control-label lb-sm">District Name</label><span style="color:red">*</span>
-                        <input type="text" asp-for="Name" class="form-control" limit="200" required="required" requiredmsg="The District Name field is required" />
-                        <span asp-validation-for="Name" class="text-danger" ></span>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            <input asp-for="Name" placeholder="Name" type="text"
+                                   class="floating-label-field floating-label-field--s3" limit="100">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label class="floating-label">District Name   </label>
+                        </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
 
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">District Code</label><span style="color:red">*</span>
-                        <input type="text" asp-for="Code" class="form-control"  limit="200" required="required" requiredmsg="The District Name field is required" />
-                        <span asp-validation-for="Code" class="text-danger"></span>
-                    </div>
-
-
-                </div>
-
-                <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label>
-                        <select asp-for="IsActive" class="form-control dda-dropdown">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
+                            <input asp-for="Code" placeholder="Code" type="text"
+                                   class="floating-label-field floating-label-field--s3" limit="100">
+                            <span asp-validation-for="Code" class="text-danger"></span>
+                            <label class="floating-label">District Code   </label>
+                        </div>
                     </div>
                 </div>
+                <div class="row">
 
-                <div class="form-row">
-                    <div class="form-group  col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-primary dda-pageheading" })
+                    <div class="col-md-6    ">
+                        <div class="floating-label-wrap">
+                            @*<label class="floating-label">Status</label>*@
+
+                            <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                                @*<option selected="selected" disabled="disabled">Select One</option>*@
+                                <option value="1">Active</option>
+                                <option value="0">InActive</option>
+
+                                @*<option value="1">Active</option>
+            <option value="0">Inactive</option>*@
+                            </select>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                            <label asp-for="IsActive" class="floating-label">Status </label>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="form-row">
+        <div class="form-group  col-md-12" style="justify-content:center">
+            <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />-->
+                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                <!--@Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-primary dda-pageheading" })
+        </div>
+    </div>-->
+                <div class="row ">
+                    <div class=" col-md-12">
+                        <button class="btn btn-theme " type="submit">Create</button>
+                        @Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-theme " })
+
                     </div>
                 </div>
             </form>

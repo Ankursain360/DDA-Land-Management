@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
-using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Notification;
-using Notification.Constants;
-using Notification.OptionEnums;
-using Service.IApplicationService;
-using Utility.Helper;
 
 namespace LandInventory.Controllers
 {
@@ -20,35 +11,35 @@ namespace LandInventory.Controllers
     {
 
         public IConfiguration _configuration;
-        public readonly IPropertyRegistrationService _propertyregistrationService;
-        public PlanningController(IPropertyRegistrationService propertyregistrationService, IConfiguration configuration)
+        public readonly IPlanningService _planningService;
+        public PlanningController(IPlanningService planningService, IConfiguration configuration)
         {
-            _propertyregistrationService = propertyregistrationService;
+            _planningService = planningService;
             _configuration = configuration;
         }
         public IActionResult Index()
         {
             return View();
         }
-        public async Task<IActionResult> Create(Propertyregistration propertyregistration)
+        public async Task<IActionResult> Create(Planning planning)
         {
-            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-            propertyregistration.ZoneList = await _propertyregistrationService.GetZoneDropDownList(propertyregistration.DepartmentId);
-            propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(propertyregistration.ZoneId);
-            return View(propertyregistration);
+            planning.DepartmentList = await _planningService.GetAllDepartment();
+            planning.ZoneList = await _planningService.GetAllZone(planning.DepartmentId);
+            planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
+            return View(planning);
         }
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
-            var zoneList = await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(DepartmentId));
+            var zoneList = await _planningService.GetAllZone(Convert.ToInt32(DepartmentId));
             return Json(zoneList);
         }
         [HttpGet]
         public async Task<JsonResult> GetDivisionList(int? ZoneId)
         {
             ZoneId = ZoneId ?? 0;
-            return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(ZoneId)));
+            return Json(await _planningService.GetAllDivision(Convert.ToInt32(ZoneId)));
         }
     }
 }

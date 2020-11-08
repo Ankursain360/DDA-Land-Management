@@ -10,9 +10,9 @@ function GetLocality(pageNumber, pageSize) {
         $('#divLocalityTable').html("");
         $('#divLocalityTable').html(response);
     });
-    if ($('table >tbody >tr').length <= 1) {
-        GetLocality(1, $("#ddlPageSize option:selected").val());
-    }
+    //if ($('table >tbody >tr').length <= 1) {
+    //    GetLocality(1, $("#ddlPageSize option:selected").val());
+    //}
 }
 
 function GetSearchParam(pageNumber, pageSize) {
