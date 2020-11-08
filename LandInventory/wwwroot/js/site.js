@@ -4,11 +4,25 @@
 // Write your JavaScript code.
 var AllRules = '';
 $(document).ready(function () {
-	$("select").select2({
-		placeholder: "Select",
-		allowClear: true
+	$("select").each(function () {
+		if ($(this).hasClass("select2destroy") == false) {
+			$(this).select2({
+				placeholder: "Select",
+				allowClear: true
+			});
+		}
 	});
-	$('.numbers').keyup(function () {
+	function callSelect2() {
+		$("select").each(function () {
+			if ($(this).hasClass("select2destroy") == false) {
+				$(this).select2({
+					placeholder: "Select",
+					allowClear: true
+				});
+			}
+		});
+	}
+$('.numbers').keyup(function () {
 		this.value = this.value.replace(/[^0-9\.]/g, '');
 	});
 	$('.onlynumbers').keyup(function () {

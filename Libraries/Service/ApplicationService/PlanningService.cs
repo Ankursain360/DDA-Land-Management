@@ -25,8 +25,14 @@ namespace Service.ApplicationService
         {
             planning.CreatedDate = DateTime.Now;
             planning.CreatedBy = 1;
+            planning.IsActive = 1;
             _planningRepositry.Add(planning);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> CreateProperties(List<PlanningProperties> planningProperties)
+        {
+            return await _planningRepositry.CreateProperties(planningProperties);
         }
 
         public async Task<bool> Delete(int id)
@@ -35,13 +41,24 @@ namespace Service.ApplicationService
             Planning model = result.FirstOrDefault();
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 0;
+            model.IsActive = 0;
             _planningRepositry.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<List<int>> FetchPlannedProperties(int id)
+        {
+            return await _planningRepositry.FetchPlannedProperties(id);
+        }
+
         public async Task<Planning> FetchSingleResult(int id)
         {
-           return (await _planningRepositry.FindBy(x=>x.Id==id)).FirstOrDefault();
+            return (await _planningRepositry.FindBy(x => x.Id == id)).FirstOrDefault();
+        }
+
+        public async Task<List<int>> FetchUnplannedProperties(int id)
+        {
+            return await _planningRepositry.FetchUnplannedProperties(id);
         }
 
         public async Task<List<Department>> GetAllDepartment()
@@ -64,10 +81,23 @@ namespace Service.ApplicationService
             return await _planningRepositry.GetPagedPlanning();
         }
 
+        public async Task<List<Propertyregistration>> GetPlannedProperties(int departmentId, int zoneId, int divisionId)
+        {
+            return await _planningRepositry.GetPlannedProperties(departmentId, zoneId, divisionId);
+        }
+
+        public async Task<List<Propertyregistration>> GetUnplannedProperties(int departmentId, int zoneId, int divisionId)
+        {
+            return await _planningRepositry.GetUnplannedProperties(departmentId, zoneId, divisionId);
+        }
+
         public async Task<bool> Update(int id, Planning planning)
         {
             var result = await _planningRepositry.FindBy(a => a.Id == id);
             Planning model = result.FirstOrDefault();
+            model.DepartmentId = planning.DepartmentId;
+            model.ZoneId = planning.ZoneId;
+            model.DivisionId = planning.DivisionId;
             model.Remarks = planning.Remarks;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

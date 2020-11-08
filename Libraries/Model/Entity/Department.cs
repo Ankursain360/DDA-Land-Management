@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
             PropertyregistrationHandedOverDepartment = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverDepartment = new HashSet<Propertyregistration>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
+            Planning = new HashSet<Planning>();
         }
 
         [Required(ErrorMessage = "Department name is required")]
@@ -46,5 +47,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationHandedOverDepartment { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverDepartment { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
+        public virtual ICollection<Planning> Planning { get; set; }
     }
 }

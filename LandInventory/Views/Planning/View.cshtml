@@ -1,5 +1,4 @@
 ﻿@model Libraries.Model.Entity.Planning
-
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
@@ -15,10 +14,11 @@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Edit Details</h6>
         </div>
         <div class="panel-body">
-            <form action="Create" method="post">
+            <form id="formDisabled">
+                <input type="hidden" asp-for="Id"/>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="GetDivisionList(this.value);">
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="GetDivisionList(this.value);">
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
                     </div>
@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" onchange="GetProperties()">
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" onchange="GetProperties()">
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
                     </div>
@@ -50,18 +50,17 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="UnplannedProperties">Unplanned Properties</label>
-                        <select multiple="multiple" asp-for="UnplannedProperties" class="form-control select2destroy list-group">
+                        <select multiple="multiple" asp-for="UnplannedProperties" class="form-control select2destroy list-group" asp-items="@(new SelectList(Model.UnplannedList, "Id","PrimaryListNo"))">
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="PlannedProperties">Planned Properties</label>
-                        <select multiple="multiple" asp-for="PlannedProperties" class="form-control sel-task select2destroy">
+                        <select multiple="multiple" asp-for="PlannedProperties" class="form-control sel-task select2destroy" asp-items="@(new SelectList(Model.PlannedList, "Id","PrimaryListNo"))">
                         </select>
                     </div>
                 </div>
                 <div class="row ">
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" id="btnGenerate" class="btn btn-primary dda-pageheading" />
                         @Html.ActionLink("Back", "Index", "Planning", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
