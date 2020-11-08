@@ -4,6 +4,9 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
+using Repository.IEntityRepository;
+using Repository.EntityRepository;
+using Service.IApplicationService;
 using Service.ApplicationService;
 using LandInventory.Helper;
 
@@ -25,7 +28,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<ILandTransferRepository, LandtransferRepository>();
             services.AddScoped<ICurrentstatusoflandhistoryRepository, CurrentstatusoflandhistoryRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
-            //services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
@@ -35,7 +38,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<ILandTransferService, LandTransferService>();
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
-           // services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
         }
     }
 }
