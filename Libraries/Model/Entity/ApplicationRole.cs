@@ -11,7 +11,7 @@ namespace Model.Entity
         {
             Userprofile = new HashSet<Userprofile>();
             Rolemodulemap = new HashSet<Rolemodulemap>();
-            Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
+            Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
         public short IsActive { get; set; }
         public DateTime CreatedDate { get; set; }
@@ -21,6 +21,6 @@ namespace Model.Entity
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
-        public ICollection<Submenuactionrolemap> Submenuactionrolemap { get; set; }
+        public ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
     }
 }
