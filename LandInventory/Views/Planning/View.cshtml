@@ -22,14 +22,14 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
-                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="GetZoneList(this.value);">
+                        <select class="form-control dda-dropdown" disabled asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="GetZoneList(this.value);">
                             <option>Select</option>
                         </select>
                         <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="GetDivisionList(this.value);">
+                        <select class="form-control dda-dropdown" disabled asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="GetDivisionList(this.value);">
                         </select>
                         <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
                     </div>
@@ -37,25 +37,25 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
-                        <select class="form-control dda-dropdown" asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" onchange="GetProperties()">
+                        <select class="form-control dda-dropdown" disabled asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" onchange="GetProperties()">
                         </select>
                         <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="Remarks">Remarks</label>
-                        <textarea asp-for="Remarks" class="form-control"></textarea>
+                        <textarea asp-for="Remarks" class="form-control" disabled></textarea>
                         <span asp-validation-for="Remarks" class="text-danger lb-sm"></span>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="UnplannedProperties">Unplanned Properties</label>
-                        <select multiple="multiple" asp-for="UnplannedProperties" class="form-control select2destroy list-group" asp-items="@(new SelectList(Model.UnplannedList, "Id","PrimaryListNo"))">
+                        <select multiple="multiple" disabled asp-for="UnplannedProperties" class="form-control select2destroy list-group" asp-items="@(new SelectList(Model.UnplannedList, "Id","PrimaryListNo"))">
                         </select>
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm" asp-for="PlannedProperties">Planned Properties</label>
-                        <select multiple="multiple" asp-for="PlannedProperties" class="form-control sel-task select2destroy" asp-items="@(new SelectList(Model.PlannedList, "Id","PrimaryListNo"))">
+                        <select multiple="multiple" disabled asp-for="PlannedProperties" class="form-control sel-task select2destroy" asp-items="@(new SelectList(Model.PlannedList, "Id","PrimaryListNo"))">
                         </select>
                     </div>
                 </div>

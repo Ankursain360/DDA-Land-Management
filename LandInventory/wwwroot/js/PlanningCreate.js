@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    $("#formDisabled input,textarea,select").attr("disabled", "disabled");
 });
 function GetZoneList(id) {
     HttpGet(`/Planning/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {

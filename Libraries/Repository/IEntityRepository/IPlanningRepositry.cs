@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IPlanningRepositry: IGenericRepository<Planning>
     {
-        Task<PagedResult<Planning>> GetPagedPlanning();
+        Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto);
         Task<List<Division>> GetAllDivision(int ZoneId);
         Task<List<Zone>> GetAllZone(int DepartmentId);
         Task<List<Department>> GetAllDepartment();

@@ -288,5 +288,12 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
+
+        //[HttpGet]
+        //public async Task<JsonResult> GetZoneList(string path)
+        //{
+        //    departmentId = departmentId ?? 0;
+        //    return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
+        //}
     }
 }
