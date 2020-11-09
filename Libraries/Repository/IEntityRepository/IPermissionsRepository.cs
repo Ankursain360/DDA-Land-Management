@@ -10,6 +10,6 @@ namespace Libraries.Repository.IEntityRepository
     public interface IPermissionsRepository : IGenericRepository<Menuactionrolemap>
     {
 
-        Task<List<Department>> GetDepartmentList();
+        Task<List<Module>> GetModuleList();
     }
 }

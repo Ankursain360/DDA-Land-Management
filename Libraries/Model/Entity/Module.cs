@@ -25,7 +25,7 @@ namespace Libraries.Model.Entity
         public string Target { get; set; }
       
         public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
-          public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
+        public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Menu> Menu { get; set; }
         public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
     }

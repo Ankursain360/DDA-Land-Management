@@ -29,10 +29,9 @@ namespace Libraries.Service.ApplicationService
             _mapper = mapper;
         }
        
-        public async Task<List<Department>> GetDropDownList()
+        public async Task<List<Module>> GetModuleList()
         {
-            List<Department> departmentList = await _permissionsRepository.GetDepartmentList();
-            return departmentList;
+            return await _permissionsRepository.GetModuleList();
         }
        
     }

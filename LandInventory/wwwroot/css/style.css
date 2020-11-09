@@ -1042,7 +1042,7 @@ footer.footer a {
 
 .floating-label-field--s3:focus ~ .floating-label,
 .floating-label-field--s3:not(:placeholder-shown) ~ .floating-label {
-    /*z-index: 2500;*/
+   /* z-index: 2500;*/
     padding: .35rem;
     transform: translate(0, -.75rem) scale(.9);
     color: #2196F3;

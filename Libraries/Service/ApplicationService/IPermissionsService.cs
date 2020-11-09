@@ -12,6 +12,6 @@ namespace Libraries.Service.IApplicationService
     public interface IPermissionsService : IEntityService<Menuactionrolemap>
     {
        
-        Task<List<Department>> GetDropDownList();
+        Task<List<Module>> GetModuleList();
     }
 }
