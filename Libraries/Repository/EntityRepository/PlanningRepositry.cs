@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -23,9 +24,9 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Division.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId).ToListAsync();
         }
-        public async Task<PagedResult<Planning>> GetPagedPlanning()
+        public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
         {
-                return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1).GetPaged(1, 10);
+                return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1).GetPaged(dto.PageNumber, dto.PageSize);
         }
         public async Task<List<Zone>> GetAllZone(int DepartmentId)
         {

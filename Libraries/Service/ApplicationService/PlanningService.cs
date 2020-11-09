@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -76,9 +77,9 @@ namespace Service.ApplicationService
             return await _planningRepositry.GetAllZone(DepartmentId);
         }
 
-        public async Task<PagedResult<Planning>> GetPagedPlanning()
+        public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
         {
-            return await _planningRepositry.GetPagedPlanning();
+            return await _planningRepositry.GetPagedPlanning(dto);
         }
 
         public async Task<List<Propertyregistration>> GetPlannedProperties(int departmentId, int zoneId, int divisionId)

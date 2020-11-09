@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +26,9 @@ namespace LandInventory.Controllers
         {
             return View();
         }
-        public async Task<PartialViewResult> List()
+        public async Task<PartialViewResult> List([FromBody] PlanningSearchDto dto)
         {
-            var list = await _planningService.GetPagedPlanning();
+            var list = await _planningService.GetPagedPlanning(dto);
             return PartialView("_List", list);
         }
         public async Task<IActionResult> Create()
