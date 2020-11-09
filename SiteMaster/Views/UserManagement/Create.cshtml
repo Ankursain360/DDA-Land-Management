@@ -1,119 +1,139 @@
 ﻿@model Dto.Master.AddUserDto
+@await Component.InvokeAsync("PageHeader", new { pageName = "User" })
+<div class="pt-3">
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">User </h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+    <div class="container-fluid">
+        <div class="panel">
+
+            <div class="panel-body">
+                <form asp-action="Create" id="create_user" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                    <h3 class="mb-3 d-flex">Add Details</h3>
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input asp-for="Name" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="150" />
+
+                                <span asp-validation-for="Name" class="text-danger"></span>
+
+                                <label class="floating-label">Name   </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="UserName" placeholder="UserName" type="text" class="floating-label-field floating-label-field--s3" limit="256" />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                                <label class="floating-label"> UserName   </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="Email" placeholder="Email" class="floating-label-field floating-label-field--s3" type="email" limit="256" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <label class="floating-label"> Email   </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="PhoneNumber" placeholder="Phone Number" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" onpaste="return false;" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                <label class="floating-label">Phone Number</label>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="Password" placeholder="Password" class="floating-label-field floating-label-field--s3" type="password" onpaste="return false;" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                                <label class="floating-label">Password</label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input asp-for="ConfirmPassword" placeholder="Confirm Password" class="floating-label-field floating-label-field--s3" type="password" onpaste="return false;" />
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                <label class="floating-label">Confirm Password</label>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
+                                        asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
+                                        onchange="return onChange(this.options[this.selectedIndex].value);">
+                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                                </select>
+                                <label asp-validation-for="DepartmentId" class="error"></label>
+
+                                <label class="floating-label">Department </label>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))">
+                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                </select>
+                                <label asp-validation-for="ZoneId" class="error"></label>
+                                <label asp-for="ZoneId" class="floating-label">Zone </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="RoleId"
+                                        asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
+                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                                </select>
+                                <label asp-validation-for="RoleId" class="error"></label>
+                                <label asp-for="RoleId" class="floating-label">Role </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class=" col-md-12">
+                            <button class="btn btn-theme " type="submit">Create</button>
+                            @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
+
+                        </div>
+                    </div>  @*<div class="form-row">
+                            <div class=" form-group  col-md-12">
+                                <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                                <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
+                            </div>
+                        </div>*@
+                </form>
             </div>
         </div>
     </div>
-</div>
-<br />
-<br />
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="Create" id="create_user">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label asp-for="Name" class="control-label lb-sm">Name<span style="color:red">*</span></label>
-                        <input asp-for="Name" class="form-control form-control-sm" limit="150" required="required" requiredMsg="Name is Mandatory"/>
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label asp-for="UserName" class="control-label lb-sm">User Name<span style="color:red">*</span></label>
-                        <input asp-for="UserName" class="form-control" limit="256" required="required" requiredMsg="User Name is Mandatory"/>
-                        <span asp-validation-for="UserName" class="text-danger"></span>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label asp-for="Email" class="control-label lb-sm">Email<span style="color:red">*</span></label>
-                        <input asp-for="Email" class="form-control form-control-sm" type="email" limit="256" required="required" requiredMsg="Email is Mandatory"/>
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label asp-for="PhoneNumber" class="control-label lb-sm">Phone Number<span style="color:red">*</span></label>
-                        <input asp-for="PhoneNumber" class="form-control form-control-sm onlynumbers" maxlength="10" required="required" requiredMsg="Phone Number is Mandatory" onpaste="return false;"/>
-                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label asp-for="Password" class="control-label lb-sm">Password<span style="color:red">*</span></label>
-                        <input asp-for="Password"  class="form-control"  type="password" required="required" requiredMsg="Password is Mandatory" onpaste="return false;"/>
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label asp-for="ConfirmPassword" class="control-label lb-sm">Confirm Password<span style="color:red">*</span></label>
-                        <input asp-for="ConfirmPassword" class="form-control form-control-sm" type="password"  required="required" requiredMsg="Confirm Password is Mandatory" onpaste="return false;"/>
-                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label class="control-label lb-sm" asp-for="DepartmentId">Department <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="DepartmentId"  required="required" requiredMsg="Department is Mandatory"
-                                asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
-                                onchange="return onChange(this.options[this.selectedIndex].value);">
-                            <option value="">Select</option>
-                        </select>
-                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
-                        <select class="form-control dda-dropdown" asp-for="ZoneId"   >
-                            <option value="">Select</option>
-                        </select>
-                        <span asp-validation-for="ZoneId" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 form-group">
-                        <label class="control-label lb-sm" asp-for="RoleId">Role <span style="color:red">*</span></label>
-                        <select class="form-control dda-dropdown" asp-for="RoleId" required="required" requiredMsg="Role is Mandatory"
-                                asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
-                            <option value="">Select</option>
-                        </select>
-                        <span asp-validation-for="RoleId" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Status</label>
-                        <select class="form-control dda-dropdown">
-                            <option value="1">Active</option>
-                            <option value="0">InActive</option>
-                        </select>
-                        <span class="text-danger"></span>
-                    </div>
-
-                </div>
-
-                <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
-                        @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-                @*<div class="form-row">
-                        <div class=" form-group  col-md-12">
-                            <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        </div>
-                        <div class="form-group">
-                            <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
-                            <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
-                        </div>
-                    </div>*@
-            </form>
-        </div>
-    </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
