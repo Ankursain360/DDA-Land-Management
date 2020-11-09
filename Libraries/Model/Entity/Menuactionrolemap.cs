@@ -8,7 +8,7 @@ using Model.Entity;
 
 namespace Libraries.Model.Entity
 {
-    public class Submenuactionrolemap : AuditableEntity<int>
+    public class Menuactionrolemap : AuditableEntity<int>
     {
         public int SubMenuId { get; set; }
         public int ActionId { get; set; }
