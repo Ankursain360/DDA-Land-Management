@@ -48,7 +48,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="FromDate" value="" placeholder="From Date" type="date"
+                    <input asp-for="FromDate" placeholder="From Date" type="date"
                            class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="FromDate" class="text-danger"></span>
@@ -59,7 +59,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="ToDate" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                    <input asp-for="ToDate" type="date"  class="floating-label-field floating-label-field--s3" placeholder="To Date">
 
                     <span asp-validation-for="ToDate" class="text-danger "></span>
                     <label class="floating-label">To Date</label>
@@ -71,7 +71,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="RebatePercentage" value="" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Rebate Percentage"
+                    <input asp-for="RebatePercentage"  type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Rebate Percentage"
                            limit="18">
                     <span asp-validation-for="RebatePercentage" class="text-danger "></span>
                     <label class="floating-label">Rebate Percentage</label>
@@ -80,7 +80,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="Scheme" value="" type="text" class="floating-label-field floating-label-field--s3" placeholder="Scheme"
+                    <input asp-for="Scheme"  type="text" class="floating-label-field floating-label-field--s3" placeholder="Scheme"
                            limit="1000">
                     <span asp-validation-for="Scheme" class="text-danger "></span>
                     <label class="floating-label">Scheme Name</label>
