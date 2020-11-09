@@ -3,15 +3,28 @@ using Service.IApplicationService;
 using LandInventory.Filters;
 using LandInventory.Models;
 using System.Diagnostics;
+using LandInventory.Helper;
+using System.Threading.Tasks;
+using Dto.Master;
 
 namespace LandInventory.Controllers
 {
     [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
+
+        public HomeController(ISiteContext siteContext,
+           IUserProfileService userProfileService)
         {
-            return View();
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            return View(user);
         }
 
         public IActionResult Privacy()

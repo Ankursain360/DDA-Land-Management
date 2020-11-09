@@ -18,6 +18,7 @@ namespace Libraries.Model.Entity
             LandtransferHandedOverZone = new HashSet<Landtransfer>();
             LandtransferTakenOverZone = new HashSet<Landtransfer>();
             Userprofile = new HashSet<Userprofile>();
+            Planning = new HashSet<Planning>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Locality = new HashSet<Locality>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
@@ -58,6 +59,7 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationHandedOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationZone { get; set; }
+        public ICollection<Planning> Planning { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
     }
 }
