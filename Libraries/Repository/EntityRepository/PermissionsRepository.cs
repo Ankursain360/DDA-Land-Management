@@ -21,10 +21,9 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Department>> GetDepartmentList()
+        public async Task<List<Module>> GetModuleList()
         {
-            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
-            return departmentList;
+            return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
         }
     }
 

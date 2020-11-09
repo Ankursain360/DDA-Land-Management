@@ -16,5 +16,15 @@ namespace Libraries.Model.Entity
         public Actions Action { get; set; }
         public ApplicationRole Role { get; set; }
         public Page SubMenu { get; set; }
+
+        [NotMapped]
+        public int ModuleId { get; set; }
+
+        [NotMapped]
+        public List<Module> ModuleList { get; set; }
+
+        [NotMapped]
+        public List<ApplicationRole> RoleList { get; set; }
+        
     }
 }
