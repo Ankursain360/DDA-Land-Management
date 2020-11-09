@@ -78,6 +78,7 @@ namespace EncroachmentDemolition.Controllers
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
                             string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
+                            
                             watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                             {
                                 WatchAndWardId = watchandward.Id,

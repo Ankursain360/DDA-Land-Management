@@ -142,5 +142,17 @@
     "inputFiles": [
       "wwwroot/js/reportoflandtransferdepartmentwise.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PlanningCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/PlanningCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PlanningIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/PlanningIndex.js"
+    ]
   }
 ]

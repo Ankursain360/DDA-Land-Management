@@ -4,13 +4,14 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!--<ItemGroup>
     <Content Remove="bundleconfig.json" />
     <Content Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
     <Content Remove="wwwroot\js\encroachmentreportcreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Shared\Components\PageHeader\PageHeader.cshtml" />
     <_ContentIncludedByDefault Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\encroachmentreportcreate.min.js" />
   </ItemGroup>
@@ -19,15 +20,17 @@
     <None Include="bundleconfig.json" />
     <None Include="wwwroot\js\EncroachmentRegisterationView.min.js" />
     <None Include="wwwroot\js\encroachmentreportcreate.min.js" />
-  </ItemGroup>
+  </ItemGroup>-->
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="NLog" Version="4.7.5" />
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.9.3" />
+    <PackageReference Include="System.Drawing.Common" Version="4.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,8 +39,22 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
-    <ProjectReference Include="..\Libraries\Repository\Repository.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Shared\Components\Pager\Pager.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\Components\SignInProfile\SignInProfile.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Shared\Components\PageHeader\PageHeader.cshtml" />
   </ItemGroup>
 
 </Project>

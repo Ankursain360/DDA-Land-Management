@@ -1,10 +1,12 @@
-﻿<h1 class="border-bottom">Welcome to DDA</h1>
+﻿@model Dto.Master.UserProfileDto
+
+<h1 class="border-bottom">Welcome to DDA</h1>
 <div class="profile-box bg-white rounded border p-3 my-4 shadow d-md-flex align-items-center py-lg-4 px-xl-5">
     <figure class="mx-auto my-0">
         <img class="d-block rounded-circle mx-auto shadow-sm" src="~/images/noimage.jpg" alt="">
     </figure>
     <div class="text-center detail py-3 text-md-left px-md-4 mx-lg-auto px-xl-5 ml-xl-0">
-        <h2 class="mb-2">Mr.Johan Smith</h2>
+        <h2 class="mb-2">@Model.User.Name</h2>
         <p class="text-muted mb-2 mb-md-1">Last Login : <strong>22 Oct 2020 02:33 PM</strong></p>
         <p class="text-muted">Full time designer <strong>(DDA)</strong></p>
     </div>
@@ -13,16 +15,16 @@
             <tbody>
                 <tr>
                     <th scope="row">Designation</th>
-                    <td>Designer</td>
+                    <td>@Model.Role.Name</td>
                 </tr>
-               
+
                 <tr>
                     <th scope="row">Name</th>
-                    <td colspan="2">Vedang</td>
+                    <td colspan="2">@Model.User.Name</td>
                 </tr>
                 <tr>
-                    <th scope="row">Username</th>
-                    <td colspan="2">vedang@email.com</td>
+                    <th scope="row">Email Id</th>
+                    <td colspan="2">@Model.User.Email</td>
                 </tr>
             </tbody>
         </table>

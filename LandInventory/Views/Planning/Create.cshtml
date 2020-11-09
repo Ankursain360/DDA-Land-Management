@@ -1,10 +1,10 @@
-﻿@model Libraries.Model.Entity.Propertyregistration
+﻿@model Libraries.Model.Entity.Planning
 
 <div class="row">
     <div class="col-sm-12">
         <div class="dda-topheading">
             <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Hand Over/Take Over </h6>
+                <h6 class="pull-left" style="color:white;margin-top:5px;">Planning </h6>
                 <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
             </div>
         </div>
@@ -12,79 +12,74 @@
 </div>
 <br />
 <br />
-<div class="container-fluid">
-    <div class="row">  
-        <div class="form-group col-md-4">
-            <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
-            <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
-                <option value="0">All</option>
-            </select>
-            <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+<div class="container-fluid" id="MainContentForm">
+    <div class="panel">
+        <div class="panel-heading  dda-pageheading">
+            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
         </div>
-        <div class="form-group col-md-4">
-            <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
-            <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
-                <option value="0">All</option>
-            </select>
-            <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
-        </div>
-
-        <div class="form-group col-md-4">
-            <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
-            <select class="form-control dda-dropdown" asp-for="DivisionId">
-                <option value="0">All</option>
-            </select>
-            <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
-        </div>
-    </div>
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label lb-sm" asp-for="DivisionId">Unplanned Properties</label>
-            <select id="SelectedTags" multiple="multiple" name="SelectedTags" class="form-control select2destroy" style="height:500px;">
-                <option value="1">Tech</option>
-                <option value="2">Books</option>
-                <option value="3">Business</option>
-                <option value="4">Home</option>
-                <option value="5">Living</option>
-                <option value="6">Social</option>
-                <option value="7">Work</option>
-                <option value="8">Pets</option>
-                <option value="9">Family</option>
-            </select>
-        </div>
-        <div class="form-group col-md-6">
-            <label class="control-label lb-sm" asp-for="DivisionId">Planned Properties</label>
-            <select id="SelectedTags1" multiple="multiple" name="SelectedTags" class="form-control sel-task select2destroy" style="height:500px;">
-                <option value="1">Tech</option>
-                <option value="2">Books</option>
-                <option value="3">Business</option>
-                <option value="4">Home</option>
-                <option value="5">Living</option>
-                <option value="6">Social</option>
-                <option value="7">Work</option>
-                <option value="8">Pets</option>
-                <option value="9">Family</option>
-            </select>
-        </div>
-    </div>
-    <div class="row ">
-        <div class="form-group col-md-12" style="margin-bottom:40px;">
-            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-            @Html.ActionLink("Back", "Create", "PropertyInventoryReport", null, new { @class = "btn btn-primary dda-pageheading" })
+        <div class="panel-body">
+            <form action="Create" method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                        <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="GetZoneList(this.value);">
+                            <option>Select</option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
+                        <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="GetDivisionList(this.value);">
+                        </select>
+                        <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
+                        <select class="form-control dda-dropdown" asp-for="DivisionId" onchange="GetProperties()">
+                        </select>
+                        <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="Remarks">Remarks</label>
+                        <textarea asp-for="Remarks" class="form-control"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger lb-sm"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="UnplannedProperties">Unplanned Properties</label>
+                        <select multiple="multiple" asp-for="UnplannedProperties" class="form-control select2destroy list-group">
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm" asp-for="PlannedProperties">Planned Properties</label>
+                        <select multiple="multiple" asp-for="PlannedProperties" class="form-control sel-task select2destroy">
+                        </select>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Create" id="btnGenerate" class="btn btn-primary dda-pageheading" />
+                        @Html.ActionLink("Back", "Index", "Planning", null, new { @class = "btn btn-primary dda-pageheading" })
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function () {
-        var list = $("#SelectedTags1").select2({
-            closeOnSelect: false
-        }).on("select2:closing", function (e) {
-            e.preventDefault();
-        }).on("select2:closed", function (e) {
-            list.select2("open");
-            e.preventDefault();
-        });
-        list.select2("open");
-    })
-</script>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/PlanningCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/PlanningCreate.min.js" asp-append-version="true"></script>
+</environment>
+
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.min.js" asp-append-version="true"></script>
+</environment>

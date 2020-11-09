@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
@@ -12,11 +13,16 @@ namespace Libraries.Service.IApplicationService
     {
         Task<bool> Update(int id, Planning planning);
         Task<bool> Create(Planning planning);
-        Task<PagedResult<Planning>> GetPagedPlanning();
+        Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto);
         Task<List<Division>> GetAllDivision(int ZoneId);
         Task<List<Zone>> GetAllZone(int DepartmentId);
         Task<List<Department>> GetAllDepartment();
         Task<Planning> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<List<Propertyregistration>> GetPlannedProperties(int departmentId, int zoneId, int divisionId);
+        Task<List<Propertyregistration>> GetUnplannedProperties(int departmentId, int zoneId, int divisionId);
+        Task<bool> CreateProperties(List<PlanningProperties> planningProperties);
+        Task<List<int>> FetchUnplannedProperties(int id);
+        Task<List<int>> FetchPlannedProperties(int id);
     }
 }

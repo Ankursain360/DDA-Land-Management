@@ -9,10 +9,12 @@ namespace Libraries.Model.Entity
 {
     public class Role : AuditableEntity<int>
     {
-        [Required]
+        [Required(ErrorMessage = "The Role Name field is required")]
         //[Remote(action: "Exist", controller: "Role", AdditionalFields = "Id")]
 
         public string Name { get; set; }
+        [Required(ErrorMessage = "The Active Status field is required")]
+
         public byte IsActive { get; set; }
         [NotMapped]
         public string ZoneName { get; set; }

@@ -22,6 +22,7 @@ namespace Libraries.Model.Entity
         public int? KhasraId { get; set; }
         [Required(ErrorMessage = "Please fill Landmark")]
         public string Landmark { get; set; }
+
         [Required(ErrorMessage = "Please select")]
         public int? Encroachment { get; set; }
 
@@ -53,5 +54,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
         public int? Status { get; set; }
 
+        [NotMapped]
+        public int EncroachmentStatus { get; set; }
     }
 }
