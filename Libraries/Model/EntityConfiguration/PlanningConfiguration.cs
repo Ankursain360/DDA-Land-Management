@@ -1,9 +1,6 @@
 ﻿using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Model.EntityConfiguration
 {
@@ -12,7 +9,7 @@ namespace Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Planning> entity)
         {
             entity.ToTable("planning");
-            
+
             entity.Property(e => e.Id).HasColumnType("int(11)");
 
             entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -24,6 +21,8 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
+            entity.Property(e => e.IsVerify).HasColumnType("tinyint(4)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
