@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Libraries.Service.IApplicationService;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
-//using AutoMapper.Configuration;
-using Utility.Helper;
+using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.Extensions.Configuration;
-using Dto.Search;
+using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -20,15 +17,13 @@ namespace EncroachmentDemolition.Controllers
     {
         private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
-        //string targetPhotoPathLayout = string.Empty;
-        //string targetReportfilePathLayout = string.Empty;
 
         public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration)
         {
             _watchandwardService = watchandwardService;
             _configuration = configuration;
         }
-       
+
         public IActionResult Index()
         {
             return View();
@@ -55,14 +50,14 @@ namespace EncroachmentDemolition.Controllers
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
 
-            
+
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
-               if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-               
+
                 var result = await _watchandwardService.Create(watchandward);
-                
+
                 if (result)
                 {
 
@@ -70,7 +65,7 @@ namespace EncroachmentDemolition.Controllers
 
 
                     ///for photo file:
-                    
+
 
                     if (watchandward.Photo != null && watchandward.Photo.Count > 0)
                     {
@@ -78,7 +73,7 @@ namespace EncroachmentDemolition.Controllers
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
                             string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
-                            
+
                             watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
@@ -92,7 +87,7 @@ namespace EncroachmentDemolition.Controllers
                     }
 
                     //for report file:
-                    
+
                     if (watchandward.ReportFile != null && watchandward.ReportFile.Count > 0)
                     {
                         List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
@@ -102,7 +97,7 @@ namespace EncroachmentDemolition.Controllers
                             watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
-                                ReportFilePath= FilePath
+                                ReportFilePath = FilePath
                             });
                         }
                         foreach (var item in watchandwardreportfiledetails)
@@ -124,22 +119,22 @@ namespace EncroachmentDemolition.Controllers
                     }
                 }
                 else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(watchandward);
-                    }
-                }
-                else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(watchandward);
                 }
             }
-           
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(watchandward);
+            }
+        }
+
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
-        
+
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             if (Data == null)
