@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
     {
         public Page()
         {
-            Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
+            Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
 
         [Required(ErrorMessage = "Menu name field is mandatory")]
@@ -34,6 +34,6 @@ namespace Libraries.Model.Entity
         public List<Menu> MenuList { get; set; }
 
         public Menu Menu { get; set; }
-        public ICollection<Submenuactionrolemap> Submenuactionrolemap { get; set; }
+        public ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
     }
 }

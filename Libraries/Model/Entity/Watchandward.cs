@@ -56,5 +56,11 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int EncroachmentStatus { get; set; }
+
+        [NotMapped]
+        public int Latitude { get; set; }
+
+        [NotMapped]
+        public int Longitude { get; set; }
     }
 }

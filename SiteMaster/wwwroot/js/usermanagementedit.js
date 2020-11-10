@@ -1,8 +1,7 @@
 ﻿$(document).ready(function () {
-
-    var value = "Personal"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+    debugger
+    var param = GetSearchParam();
+    HttpPost(`/UserManagement/LoadPersonalDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
     });
@@ -12,7 +11,7 @@
 
 $("#btnPersonalInfo").click(function (event) {
     event.preventDefault();
-    var param = GetSearchParam(value);
+    var param = GetSearchParam();
     HttpPost(`/UserManagement/LoadPersonalDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
@@ -21,14 +20,14 @@ $("#btnPersonalInfo").click(function (event) {
 
 $("#btnProfileInfo").click(function (event) {
     event.preventDefault();
-    var param = GetSearchParam(value);
+    var param = GetSearchParam();
     HttpPost(`/UserManagement/LoadProfileDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
     });
 });
 
-function GetSearchParam(value) {
+function GetSearchParam() {
     var id = $('#Id').val();
     var model = {
         id: parseInt(id)

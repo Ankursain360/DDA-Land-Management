@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
     {
         public Actions()
         {
-            Submenuactionrolemap = new HashSet<Submenuactionrolemap>();
+            Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
         [Required]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
@@ -19,7 +19,7 @@ namespace Libraries.Model.Entity
         public string Icon { get; set; }
         public string Color { get; set; }
         public byte IsActive { get; set; }
-        public ICollection<Submenuactionrolemap> Submenuactionrolemap { get; set; }
+        public ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
 
     }
 }

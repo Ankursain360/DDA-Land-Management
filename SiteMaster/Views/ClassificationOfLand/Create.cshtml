@@ -1,50 +1,114 @@
 ﻿@model Libraries.Model.Entity.Classificationofland
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Classification of Land Master</h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+@*<div class="row">
+        <div class="col-sm-12">
+            <div class="dda-topheading">
+                <div class="col-md-12">
+                    <h6 class="pull-left color-white" style="margin-top:5px;">Classification of Land Master</h6>
+                    <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <br />
+    <br />
+    <div class="container-fluid">
+        <div class="panel">
+            <div class="panel-heading  dda-pageheading">
+                <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
+            </div>
+            <div class="panel-body">
+                <form asp-action="Create" id="myForm" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Classification of Land</label><span class="text-danger">*</span>
+                            <input asp-for="Name" class="form-control" limit="200" required="required" requiredMsg="Classification of Land is Mandatory">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="control-label lb-sm">Status</label><span class="text-danger">*</span>
+                            <select asp-for="IsActive" class="form-control dda-dropdown" >
+                                <option value="1">Active</option>
+                                <option value="0">Inactive</option>
+                            </select>
+                            <span asp-validation-for="IsActive" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-row ">
+                        <div class="form-group col-md-12" style="margin-bottom:40px;">
+                            <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
+                            @Html.ActionLink("Back", "Index", "ClassificationofLand", null, new { @class = "btn btn-primary dda-pageheading" })
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "ClassificationOfLand" })
+@*<style>
+       form .error
+        {
+            position: absolute;
+            color: #f00;
+            font-size: .7rem;
+            bottom: -14px;
+            font-weight: 600;
+        }
+
+        .success {
+            color: #28a745;
+        }
+    </style>*@
+
 <br />
+
 <br />
 <div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white " style="margin-top:-0.4%">Add Details</h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="Create" id="myForm" method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Classification of Land</label><span class="text-danger">*</span>
-                        <input asp-for="Name" class="form-control" limit="200" required="required" requiredMsg="Classification of Land is Mandatory">
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Status</label><span class="text-danger">*</span>
-                        <select asp-for="IsActive" class="form-control dda-dropdown" >
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                        <span asp-validation-for="IsActive" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" onclick="return ValidateForm();" />
-                        @Html.ActionLink("Back", "Index", "ClassificationofLand", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
 
-            </form>
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @*<span class="text-danger">*</span>*@
+                    <input asp-for="Name" placeholder="Classification of Land" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="200" />
+
+                    <span asp-validation-for="Name" class="text-danger"></span>
+
+                    <label class="floating-label">Classification of Land   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
         </div>
-    </div>
+
+       
+        <div class="row ">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "ClassificationOfLand", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
 </div>
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

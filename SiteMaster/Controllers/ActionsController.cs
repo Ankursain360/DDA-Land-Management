@@ -49,7 +49,9 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        //return View();
+                        var list = await _actionsService.GetAllActions();
+                        return View("Index", list);
                     }
                     else
                     {
