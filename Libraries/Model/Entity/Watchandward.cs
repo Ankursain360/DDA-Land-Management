@@ -23,8 +23,8 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Please fill Landmark")]
         public string Landmark { get; set; }
 
-        [Required(ErrorMessage = "Please select")]
-        public int? Encroachment { get; set; }
+        //[Required(ErrorMessage = "Please select")]
+        public int Encroachment { get; set; }
 
         [Required(ErrorMessage = "Status On Ground is required")]
         public string StatusOnGround { get; set; }
@@ -32,9 +32,9 @@ namespace Libraries.Model.Entity
         public string PhotoPath { get; set; }
         public string ReportFiletPath { get; set; }
 
-        [Required(ErrorMessage = "Remarks feild is required")]
+        //[Required(ErrorMessage = "Remarks feild is required")]
         public string Remarks { get; set; }
-        [Required(ErrorMessage = "Please select  status")]
+        //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
 
 
@@ -58,9 +58,13 @@ namespace Libraries.Model.Entity
         public int EncroachmentStatus { get; set; }
 
         [NotMapped]
-        public int Latitude { get; set; }
+        public string Latitude { get; set; }
 
         [NotMapped]
-        public int Longitude { get; set; }
+        public string Longitude { get; set; }
+
+        public string PrimaryListNo { get; set; }
+
+       
     }
 }

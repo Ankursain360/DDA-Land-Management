@@ -98,7 +98,7 @@ namespace SiteMaster.Controllers
         {
             var user = await _userProfileService.GetUserById(id);
             EditUserDto model = new EditUserDto()
-            {
+            { 
                 //Email = user.User.Email,
                 //Name = user.User.Name,
                 //PhoneNumber = user.User.PhoneNumber

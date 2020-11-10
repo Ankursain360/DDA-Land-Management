@@ -72,7 +72,7 @@ namespace Libraries.Service.ApplicationService
             model.Landmark = watchandward.Landmark;
             model.Encroachment = watchandward.Encroachment;
             model.StatusOnGround = watchandward.StatusOnGround;
-
+            model.PrimaryListNo = watchandward.PrimaryListNo;
             model.PhotoPath = watchandward.Photo != null ? watchandward.PhotoPath : model.PhotoPath;
             model.ReportFiletPath = watchandward.ReportFile != null ? watchandward.ReportFiletPath : model.ReportFiletPath;
 
