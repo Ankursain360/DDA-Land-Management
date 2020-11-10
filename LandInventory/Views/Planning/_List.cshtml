@@ -1,91 +1,95 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Planning>
 @{int rowNo = 0; }
-    <table class="table table-responsive table-bordered table-card">
-        <thead class="thead">
-            <tr>
-                <th rowspan="2">Sr.No</th>
-                <th rowspan="2">Department</th>
-                <th rowspan="2">Division</th>
-                <th rowspan="2">Zone</th>
-                <th rowspan="2">Unplanned Property</th>
-                <th rowspan="2">Planned Property</th>
-                <th rowspan="2">Operation</th>
-            </tr>
-        </thead>
-        <tbody class="tbody">
-            @if (Model != null && Model.Results.Count() > 0)
-            {
-                @foreach (var item in Model.Results)
-                {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-                        <td>@item.Department.Name</td>
-                        <td>@item.Zone.Name</td>
-                        <td>@item.Division.Name</td>
-                        <td>
-                        @{ 
-                            bool isValidUnplanned = true;
-                            int isCommaUnplanned = 0;
-                            string UnplannedProperty = string.Empty;
-                            foreach (var data in item.PlanningProperties)
-                            {
-                                if (data.PropertyType == 0)
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th rowspan="2">Sr.No</th>
+            <th rowspan="2">Department</th>
+            <th rowspan="2">Division</th>
+            <th rowspan="2">Zone</th>
+            <th rowspan="2">Unplanned Property</th>
+            <th rowspan="2">Planned Property</th>
+            <th rowspan="2">Operation</th>
+        </tr>
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+@foreach (var item in Model.Results)
+{
+<tr>
+    <td>@(rowNo += 1)</td>
+    <td>@item.Department.Name</td>
+    <td>@item.Zone.Name</td>
+    <td>@item.Division.Name</td>
+    <td>
+        @{ bool isValidUnplanned = true;
+                                int isCommaUnplanned = 0;
+                                string UnplannedProperty = string.Empty;
+                                foreach (var data in item.PlanningProperties)
                                 {
-                                    if (isCommaUnplanned > 0)
+                                    if (data.PropertyType == 0)
                                     {
-                                        UnplannedProperty += ", ";
+                                        if (isCommaUnplanned > 0)
+                                        {
+                                            UnplannedProperty += ", ";
+                                        }
+                                        UnplannedProperty += data.PropertyRegistration.PrimaryListNo;
+                                        isValidUnplanned = false;
+                                        isCommaUnplanned++;
                                     }
-                                    UnplannedProperty += data.PropertyRegistration.PrimaryListNo;
-                                    isValidUnplanned = false;
-                                    isCommaUnplanned++;
                                 }
-                            }
-                            if (isValidUnplanned)
-                            {
-                                UnplannedProperty = "Not Available";
-                            }
-                        }
-                        @UnplannedProperty
-                        </td>
-                        <td>
-                        @{ 
-                            bool isValid = true;
-                            int isComma = 0;
-                            string PlannedProperty = string.Empty;
-                            foreach (var data in item.PlanningProperties)
-                            {
-                                if (data.PropertyType == 1)
+                                if (isValidUnplanned)
                                 {
-                                    if (isComma > 0)
+                                    UnplannedProperty = "Not Available";
+                                } }
+        @UnplannedProperty
+    </td>
+    <td>
+        @{ bool isValid = true;
+                                int isComma = 0;
+                                string PlannedProperty = string.Empty;
+                                foreach (var data in item.PlanningProperties)
+                                {
+                                    if (data.PropertyType == 1)
                                     {
-                                        PlannedProperty += ", ";
+                                        if (isComma > 0)
+                                        {
+                                            PlannedProperty += ", ";
+                                        }
+                                        PlannedProperty += data.PropertyRegistration.PrimaryListNo;
+                                        isValid = false;
+                                        isComma++;
                                     }
-                                    PlannedProperty += data.PropertyRegistration.PrimaryListNo;
-                                    isValid = false;
-                                    isComma++;
                                 }
-                            }
-                            if (isValid)
-                            {
-                                PlannedProperty = "Not Available";
-                            }
-                        }
-                        @PlannedProperty
-                        </td>
-                        <td>
-                            <a title="Edit" asp-action="Edit" asp-route-id="@item.Id">  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-                            |<a title="View" asp-action="View" asp-route-id="@item.Id">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-                            |<a title="Delete" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are You Sure, You want to Delete this Record?');">  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> </a>
-                        </td>
-                    </tr>
-                }
-            }
+                                if (isValid)
+                                {
+                                    PlannedProperty = "Not Available";
+                                } }
+        @PlannedProperty
+    </td>
+    @*<td>
+            <a title="Edit" asp-action="Edit" asp-route-id="@item.Id">  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+            |<a title="View" asp-action="View" asp-route-id="@item.Id">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+            |<a title="Delete" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('Are You Sure, You want to Delete this Record?');">  <i class="glyphicon glyphicon-trash" aria-hidden="true"></i> </a>
+        </td>*@
+
+    <td>
+        <div class="action-btns">
+            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+        </div>
+    </td>
+
+
+
+</tr>} }
             else
             {
-                <tr>
-                    <th colspan="14" style="text-align:center"> No Record Available! </th>
-                </tr>
-            }
-        </tbody>
-    </table>
+<tr>
+    <th colspan="14" style="text-align:center"> No Record Available! </th>
+</tr>}
+    </tbody>
+</table>
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
