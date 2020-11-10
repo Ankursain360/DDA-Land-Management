@@ -989,10 +989,11 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Fencing/Boundary Wall   <span style="color:red">*</span></label>
-                                <select asp-for="FencingBoundaryWall" class="form-control  dda-dropdown">
-                                    <option value="No">No</option>
-                                    <option value="Yes">Yes</option>
+                                <label class="control-label lb-sm">Protection of Land   <span style="color:red">*</span></label>
+                                <select asp-for="FencingBoundaryWall" class="form-control dda-dropdown">
+                                    <option value="0" selected="selected">Boundary Wall</option>
+                                    <option value="1">Fencing</option>
+                                    <option value="2">None</option>
                                 </select>
                                 @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
                             </div>

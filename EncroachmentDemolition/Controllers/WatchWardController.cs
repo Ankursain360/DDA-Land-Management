@@ -13,6 +13,8 @@ using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Dto.Search;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -289,11 +291,50 @@ namespace EncroachmentDemolition.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //public async Task<JsonResult> GetZoneList(string path)
-        //{
-        //    departmentId = departmentId ?? 0;
-        //    return Json(await _propertyregistrationService.GetZoneDropDownList(Convert.ToInt32(departmentId)));
-        //}
+        [HttpGet]
+        public string GetLattLongDetails(string path)
+        {
+            string path23 = "D:\\VedangWorkFromHome\\DDA_LandManagement_Project\\ExtraData\\ddaImage.jpg";
+            var longi = "";
+            using (Bitmap bitmap = new Bitmap(path23, true))
+            {
+                var longitude = GetCoordinateDouble(bitmap.PropertyItems.Single(p => p.Id == 4));
+                var latitude = GetCoordinateDouble(bitmap.PropertyItems.Single(p => p.Id == 2));
+
+                Console.WriteLine($"Longitude: {longitude}");
+                Console.WriteLine($"Latitude: {latitude}");
+
+                Console.WriteLine($"https://www.google.com/maps/place/{latitude},{longitude}");
+
+                
+               
+            }
+            return longi;
+        }
+
+        private static double GetCoordinateDouble(PropertyItem propItem)
+        {
+            uint degreesNumerator = BitConverter.ToUInt32(propItem.Value, 0);
+            uint degreesDenominator = BitConverter.ToUInt32(propItem.Value, 4);
+            double degrees = degreesNumerator / (double)degreesDenominator;
+
+
+            uint minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
+            uint minutesDenominator = BitConverter.ToUInt32(propItem.Value, 12);
+            double minutes = minutesNumerator / (double)minutesDenominator;
+
+            uint secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
+            uint secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
+            double seconds = secondsNumerator / (double)secondsDenominator;
+
+            double coorditate = degrees + (minutes / 60d) + (seconds / 3600d);
+            string gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] { propItem.Value[0] }); //N, S, E, or W  
+
+            if (gpsRef == "S" || gpsRef == "W")
+            {
+                coorditate = coorditate * -1;
+            }
+            return coorditate;
+        }
     }
 }
