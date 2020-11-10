@@ -33,6 +33,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _permissionsRepository.GetModuleList();
         }
+
+        public async Task GetMappedMenu(int moduleId, int roleId) {
+            await _permissionsRepository.GetPermission(moduleId, roleId);
+        }
        
     }
 }
