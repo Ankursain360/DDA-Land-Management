@@ -24,13 +24,13 @@ namespace EncroachmentDemolition.Controllers
         public IConfiguration _configuration;
         //string targetPhotoPathLayout = string.Empty;
         //string targetReportfilePathLayout = string.Empty;
-
+        string targetPathLayout = "";
         public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration)
         {
             _watchandwardService = watchandwardService;
             _configuration = configuration;
         }
-       
+
         public IActionResult Index()
         {
             return View();
@@ -57,14 +57,17 @@ namespace EncroachmentDemolition.Controllers
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
 
-            
+
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
-               if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-               
+                if (watchandward.Encroachment == 0)
+                    watchandward.Encroachment = 0;
+                else if (watchandward.Encroachment == 1)
+                    watchandward.Encroachment = 1;
                 var result = await _watchandwardService.Create(watchandward);
-                
+
                 if (result)
                 {
 
@@ -72,7 +75,7 @@ namespace EncroachmentDemolition.Controllers
 
 
                     ///for photo file:
-                    
+
 
                     if (watchandward.Photo != null && watchandward.Photo.Count > 0)
                     {
@@ -80,11 +83,20 @@ namespace EncroachmentDemolition.Controllers
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
                             string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
-                            
+                            GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
+                            var LattitudeValue = TempData["LattitudeValue"] as string;
+                            watchandward.Latitude = LattitudeValue;
+                            var LongitudeValue = TempData["LongitudeValue"] as string;
+                            watchandward.Longitude = LongitudeValue;
+                            var lattlongurlvalue = TempData["url"] as string;
                             watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
-                                PhotoFilePath = FilePath
+                                PhotoFilePath = FilePath,
+                                Lattitude = watchandward.Latitude,
+                                Longitude = watchandward.Longitude,
+                                LattLongUrl = lattlongurlvalue
+
                             });
                         }
                         foreach (var item in watchandwardphotofiledetails)
@@ -94,7 +106,7 @@ namespace EncroachmentDemolition.Controllers
                     }
 
                     //for report file:
-                    
+
                     if (watchandward.ReportFile != null && watchandward.ReportFile.Count > 0)
                     {
                         List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
@@ -104,7 +116,7 @@ namespace EncroachmentDemolition.Controllers
                             watchandwardreportfiledetails.Add(new Watchandwardreportfiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
-                                ReportFilePath= FilePath
+                                ReportFilePath = FilePath
                             });
                         }
                         foreach (var item in watchandwardreportfiledetails)
@@ -126,24 +138,41 @@ namespace EncroachmentDemolition.Controllers
                     }
                 }
                 else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(watchandward);
-                    }
-                }
-                else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(watchandward);
                 }
             }
-           
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(watchandward);
+            }
+        }
+
         public async Task<IActionResult> Edit(int id)
         {
+          //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
             var Data = await _watchandwardService.FetchSingleResult(id);
-        
+            //if (Data.Encroachment == 0)
+            //    Data.EncroachmentStatus = 0;
+            //else
+            //    Data.EncroachmentStatus = 1;
+
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+           
+            //for (int i= 0 ; i< Data.Watchandwardphotofiledetails.Count; i++)
+            //{
+            //    if (!string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Lattitude) && !string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Longitude))
+            //    {
+            //        string latitdue = Data.Watchandwardphotofiledetails.First().Lattitude;
+            //        string longitude = Data.Watchandwardphotofiledetails.First().Longitude;
+            //        ViewBag.LattLongUrlList = $"https://www.google.com/maps/place/{latitdue},{longitude}";
+            //        watchandwardphotofiledetails.urlList = "https://www.google.com/maps/place/{latitdue},{longitude}";
+            //    }
+            //}
+            
             if (Data == null)
             {
                 return NotFound();
@@ -163,7 +192,10 @@ namespace EncroachmentDemolition.Controllers
             {
                 //targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
                 //targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
-
+                if (watchandward.Encroachment == 0)
+                    watchandward.Encroachment = 0;
+                else if (watchandward.Encroachment == 1)
+                    watchandward.Encroachment = 1;
                 var result = await _watchandwardService.Update(id, watchandward);
                 if (result)
                 {
@@ -179,10 +211,20 @@ namespace EncroachmentDemolition.Controllers
                         for (int i = 0; i < watchandward.Photo.Count; i++)
                         {
                             string FilePath = fileHelper.SaveFile(targetPhotoPathLayout, watchandward.Photo[i]);
+                            GetLattLongDetails(FilePath, watchandward.Latitude, watchandward.Longitude);
+                            var LattitudeValue = TempData["LattitudeValue"] as string;
+                            watchandward.Latitude = LattitudeValue;
+                            var LongitudeValue = TempData["LongitudeValue"] as string;
+                            watchandward.Longitude = LongitudeValue;
+                            var lattlongurlvalue = TempData["url"] as string;
                             watchandwardphotofiledetails.Add(new Watchandwardphotofiledetails
                             {
                                 WatchAndWardId = watchandward.Id,
-                                PhotoFilePath = FilePath
+                                PhotoFilePath = FilePath,
+                                Lattitude = watchandward.Latitude,
+                                Longitude = watchandward.Longitude,
+                                LattLongUrl = lattlongurlvalue
+
                             });
                         }
                         foreach (var item in watchandwardphotofiledetails)
@@ -292,49 +334,75 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpGet]
-        public string GetLattLongDetails(string path)
+        public void GetLattLongDetails(string path, string Latt, string Long)
         {
-            string path23 = "D:\\VedangWorkFromHome\\DDA_LandManagement_Project\\ExtraData\\ddaImage.jpg";
+            string path23 = "D:\\VedangWorkFromHome\\DDA_LandManagement_Project\\ExtraData\\40BAC009-7963-4F73-AD7A-3F0E52DEC3F3.jpeg";
             var longi = "";
-            using (Bitmap bitmap = new Bitmap(path23, true))
+            double? latitdue = null;
+            double? longitude = null;
+            string url = null;
+            if (path != null)
             {
-                var longitude = GetCoordinateDouble(bitmap.PropertyItems.Single(p => p.Id == 4));
-                var latitude = GetCoordinateDouble(bitmap.PropertyItems.Single(p => p.Id == 2));
-
-                Console.WriteLine($"Longitude: {longitude}");
-                Console.WriteLine($"Latitude: {latitude}");
-
-                Console.WriteLine($"https://www.google.com/maps/place/{latitude},{longitude}");
-
+                Bitmap bmp = new Bitmap(path);
+                // set Variable Values
                 
-               
+
+                foreach (PropertyItem propItem in bmp.PropertyItems)
+                {
+                    switch (propItem.Type)
+                    {
+                        case 5:
+                            if (propItem.Id == 2) // Latitude Array
+                            {
+                                latitdue = GetLatitudeAndLongitude(propItem);
+                            }
+
+                            if (propItem.Id == 4) //Longitude Array
+                            {
+                                longitude = GetLatitudeAndLongitude(propItem);
+                            }
+
+                            break;
+
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(latitdue.ToString()) && !string.IsNullOrEmpty(longitude.ToString()))
+                {
+                    url = $"https://www.google.com/maps/place/{latitdue},{longitude}";
+                    Console.WriteLine($"https://www.google.com/maps/place/{latitdue},{longitude}");
+                    //ViewState["ImagePath"]
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Uploaded Image does not contain any geo location.please enter your request location in below textbox", "", AlertType.Error);
+
+                }
+                bmp.Dispose();
             }
-            return longi;
+            TempData["LattitudeValue"] = latitdue.ToString();
+            TempData["LongitudeValue"] = longitude.ToString();
+            TempData["url"] = url;
         }
 
-        private static double GetCoordinateDouble(PropertyItem propItem)
+        private static double? GetLatitudeAndLongitude(PropertyItem propItem)
         {
-            uint degreesNumerator = BitConverter.ToUInt32(propItem.Value, 0);
-            uint degreesDenominator = BitConverter.ToUInt32(propItem.Value, 4);
-            double degrees = degreesNumerator / (double)degreesDenominator;
-
-
-            uint minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
-            uint minutesDenominator = BitConverter.ToUInt32(propItem.Value, 12);
-            double minutes = minutesNumerator / (double)minutesDenominator;
-
-            uint secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
-            uint secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
-            double seconds = secondsNumerator / (double)secondsDenominator;
-
-            double coorditate = degrees + (minutes / 60d) + (seconds / 3600d);
-            string gpsRef = System.Text.Encoding.ASCII.GetString(new byte[1] { propItem.Value[0] }); //N, S, E, or W  
-
-            if (gpsRef == "S" || gpsRef == "W")
+            try
             {
-                coorditate = coorditate * -1;
+                uint degreesNumerator = BitConverter.ToUInt32(propItem.Value, 0);
+                uint degreesDenominator = BitConverter.ToUInt32(propItem.Value, 4);
+                uint minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
+                uint minutesDenominator = BitConverter.ToUInt32(propItem.Value, 12);
+                uint secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
+                uint secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
+                return (Convert.ToDouble(degreesNumerator) / Convert.ToDouble(degreesDenominator)) + (Convert.ToDouble(Convert.ToDouble(minutesNumerator) / Convert.ToDouble(minutesDenominator)) / 60) +
+                       (Convert.ToDouble((Convert.ToDouble(secondsNumerator) / Convert.ToDouble(secondsDenominator)) / 3600));
             }
-            return coorditate;
+            catch (Exception)
+            {
+
+                return null;
+            }
         }
     }
 }

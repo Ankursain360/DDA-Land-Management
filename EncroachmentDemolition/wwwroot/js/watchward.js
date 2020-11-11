@@ -64,11 +64,11 @@ function fileValidation(filePath, fileInput, size) {
         fileInput.value = '';
         return false;
     }
-    else {
-        HttpGet(`/WatchWard/GetLattLongDetails/?path=${filePath}`, 'string', function (response) {
-            $("#Longitude").val(response);
-            $("#Longitude").val();
-        });
-    }
+    //else {
+    //    HttpGet(`/WatchWard/GetLattLongDetails/?path=${filePath}`, 'string', function (response) {
+    //        $("#Longitude").val(response);
+    //        $("#Longitude").val();
+    //    });
+    //}
 
 }

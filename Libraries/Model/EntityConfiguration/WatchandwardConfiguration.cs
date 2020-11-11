@@ -55,6 +55,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PrimaryListNo)
+                    .HasMaxLength(45)
+                    .IsUnicode(false);
+
             builder.Property(e => e.ReportFiletPath)
                 .HasMaxLength(500)
                 .IsUnicode(false);
