@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Dto.Search;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -9,6 +6,9 @@ using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LandInventory.Controllers
 {
@@ -26,10 +26,19 @@ namespace LandInventory.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> VerificationPage()
+        {
+            return View();
+        }
         public async Task<PartialViewResult> List([FromBody] PlanningSearchDto dto)
         {
             var list = await _planningService.GetPagedPlanning(dto);
             return PartialView("_List", list);
+        }
+        public async Task<PartialViewResult> VerificationPageList([FromBody] PlanningSearchDto dto)
+        {
+            var list = await _planningService.GetUnverifiedPagedPlanning(dto);
+            return PartialView("_PlanningVerification", list);
         }
         public async Task<IActionResult> Create()
         {
@@ -47,7 +56,7 @@ namespace LandInventory.Controllers
             planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
             if (ModelState.IsValid)
             {
-                var result=await _planningService.Create(planning);
+                var result = await _planningService.Create(planning);
                 if (result)
                 {
                     List<PlanningProperties> planningProperties = new List<PlanningProperties>();
@@ -66,7 +75,7 @@ namespace LandInventory.Controllers
                             });
                         }
                     }
-                    if (planning.UnplannedProperties!=null)
+                    if (planning.UnplannedProperties != null)
                     {
                         for (int i = 0; i < planning.UnplannedProperties.Count; i++)
                         {
@@ -81,7 +90,7 @@ namespace LandInventory.Controllers
                             });
                         }
                     }
-                    result =await _planningService.CreateProperties(planningProperties);
+                    result = await _planningService.CreateProperties(planningProperties);
                     if (result)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
@@ -101,6 +110,18 @@ namespace LandInventory.Controllers
             return View(planning);
         }
         public async Task<IActionResult> Edit(int id)
+        {
+            Planning planning = await _planningService.FetchSingleResult(id);
+            planning.DepartmentList = await _planningService.GetAllDepartment();
+            planning.ZoneList = await _planningService.GetAllZone(planning.DepartmentId);
+            planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
+            planning.PlannedList = await _planningService.GetPlannedProperties(planning.DepartmentId, planning.ZoneId, planning.DivisionId);
+            planning.UnplannedList = await _planningService.GetUnplannedProperties(planning.DepartmentId, planning.ZoneId, planning.DivisionId);
+            planning.PlannedProperties = await _planningService.FetchPlannedProperties(id);
+            planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
+            return View(planning);
+        }
+        public async Task<IActionResult> VerifyPropertyView(int id)
         {
             Planning planning = await _planningService.FetchSingleResult(id);
             planning.DepartmentList = await _planningService.GetAllDepartment();
@@ -191,6 +212,35 @@ namespace LandInventory.Controllers
                 return View(planning);
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> VerifyPropertyView(Planning planning)
+        {
+            planning.DepartmentList = await _planningService.GetAllDepartment();
+            planning.ZoneList = await _planningService.GetAllZone(planning.DepartmentId);
+            planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
+            planning.PlannedList = await _planningService.GetPlannedProperties(planning.DepartmentId, planning.ZoneId, planning.DivisionId);
+            planning.UnplannedList = await _planningService.GetUnplannedProperties(planning.DepartmentId, planning.ZoneId, planning.DivisionId);
+            var result = await _planningService.VerifyProperty(planning.Id, planning);
+            if (result)
+            {
+                result = await _planningService.VerifyProperties(planning.Id);
+                if (result)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    return View("VerificationPage");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(planning);
+                }
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(planning);
+            }
+        }
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _planningService.Delete(id);
@@ -220,7 +270,7 @@ namespace LandInventory.Controllers
             return Json(await _planningService.GetAllDivision(Convert.ToInt32(ZoneId)));
         }
         [HttpGet]
-        public async Task<JsonResult> GetPlannedProperties(int? DepartmentId,int? ZoneId,int? DivisionId)
+        public async Task<JsonResult> GetPlannedProperties(int? DepartmentId, int? ZoneId, int? DivisionId)
         {
             DepartmentId = DepartmentId ?? 0;
             ZoneId = ZoneId ?? 0;

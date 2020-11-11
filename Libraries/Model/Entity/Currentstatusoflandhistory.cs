@@ -1,16 +1,14 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Runtime.CompilerServices;
 
 namespace Libraries.Model.Entity
 {
-    public  class Currentstatusoflandhistory : AuditableEntity<int>
+    public class Currentstatusoflandhistory : AuditableEntity<int>
     {
-       [Required]
+        [Required]
         public int? LandTransferId { get; set; }
         public string Tsssurvey { get; set; }
         public string SurveyReportFilePath { get; set; }
@@ -51,6 +49,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile ActionReportFile { get; set; }
         public Landtransfer LandTransfer { get; set; }
-       
+
     }
 }

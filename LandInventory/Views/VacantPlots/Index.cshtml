@@ -1,11 +1,7 @@
 ﻿
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Index"; }
 
-
-
-
+@await Component.InvokeAsync("PageHeader", new { pageName = "Vacant Plots" })
 
 <style>
     .bg {
@@ -43,7 +39,6 @@
     }
 </style>
 
-
 <style>
     .btn {
         Background: linear-gradient(33deg, #8c1f47,#362c85);
@@ -53,30 +48,20 @@
     }
 </style>
 
-
-
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Vacant Plots</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-
-<br />
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading   dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">
-                Status of Uploading Photographs of the Vacant Plots
-            </h6>
-        </div>
-        <div class="panel-body"> 
+
+        <div class="panel-body">
+
+            <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+
+                <h3 class="mb-3 d-flex"> Status of Uploading Photographs of the Vacant Plots</h3>
+
+
+
+
+            </form>
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel-heading   dda-pageheading">
@@ -181,8 +166,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-

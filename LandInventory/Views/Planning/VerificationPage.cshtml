@@ -1,4 +1,4 @@
-﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Planning" })
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Planning Verification" })
 
 <div class="pt-3">
 
@@ -46,8 +46,6 @@
                         <option selected="selected" disabled="disabled">Select One</option>
                         <option>Unplanned Property</option>
                         <option>Planned Property</option>
-
-                        @*<option>Department</option>*@
                     </select>
                     <label for="field-1" class="floating-label">Short by</label>
                 </div>
@@ -58,10 +56,10 @@
             </div>
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/planning/create" class="d-flex align-items-center btn btn-primary mr-2">
-                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                    <small>Add More</small>
-                </a>
+                @*<a href="/planning/create" class="d-flex align-items-center btn btn-primary mr-2">
+                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                        <small>Add More</small>
+                    </a>*@
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
@@ -79,8 +77,8 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/PlanningIndex.js"></script>
+    <script src="~/js/PlanningVerification.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/PlanningIndex.min.js" asp-append-version="true"></script>
+    <script src="~/js/PlanningVerification.min.js" asp-append-version="true"></script>
 </environment>

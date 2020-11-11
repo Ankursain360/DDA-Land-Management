@@ -20,7 +20,7 @@ namespace Model.Entity
         public int? ModifiedBy { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
-        public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
-        public ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
+        public virtual ICollection<Rolemodulemap> Rolemodulemap { get; set; }
+        public virtual ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
     }
 }

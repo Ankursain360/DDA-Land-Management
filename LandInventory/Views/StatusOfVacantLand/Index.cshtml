@@ -1,147 +1,115 @@
 ﻿@*@model Libraries.Model.Entity.Propertyregistration*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Status of Vacant Land" })
+<div class="pt-3">
+    <div class="container-fluid">
+        <div class="panel">
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Status of Vacant Land  </h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-            </div>
-        </div>
-    </div>
-</div>
-<br />
-<br />
+            <div class="panel-body">
+                <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+
+                    <h3 class="mb-3 d-flex">Status of Vacant Land (Enggering / Land Management / Horticulture)</h3>
 
 
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">   Status of Vacant Land (Enggering / Land Management / Horticulture)</h6>
-        </div>
-        <div class="panel-body">
 
-            @*<div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm"> From Date </label>
-                    <input type="date" class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm"> To Date </label>
-                    <input type="date" class="form-control" />
-                </div>
-            </div>
 
-            <div class="form-row">
-                <div class=" form-group col-md-12">
-                    <input type="submit" value="Retrieve Report" style="margin-bottom:30px;max-width:100%;width:150px !important;" class="btn btn-primary dda-pageheading" />
-                </div>
+                </form>
+                <div class="row mt-md-3">
+                    <div class="table-section bg-white border shadow rounded">
 
-            </div>*@
-
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left" style="color:white;margin-top:5px;">
-                                Status of Vacant Land (Enggering / Land Management / Horticulture) is as on
+                        <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                            <h3 class="mb-3 d-flex">
+                                Status of Vacant Land (Enggering/Land Management/Horticulture) is as on
                                 <span id="currentdate"></span>
                                 as under:
-                            </h6>
+                            </h3>
+
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+
+                                <thead class="text-nowrap">
+
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Department</th>
+                                        <th>Total No of Plots</th>
+                                        <th>
+                                            No of Plots against which photos uploaded as on
+                                            01-10-2020
+                                        </th>
+                                        <th>No of Plots against which photos uploaded as on date  </th>
+                                        <th>No of plots against which photos are not being uploaded</th>
+                                        <th>No of photographs uploaded</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Engineering</td>
+                                        <td>2398</td>
+                                        <td>2384</td>
+                                        <td>2385</td>
+                                        <td>13</td>
+                                        <td>363544</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Land Management</td>
+                                        <td>218</td>
+                                        <td>217</td>
+                                        <td>217</td>
+                                        <td>1</td>
+                                        <td>25519</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Horticulture</td>
+                                        <td>773</td>
+                                        <td>771</td>
+                                        <td>772</td>
+                                        <td>1</td>
+                                        <td>50970</td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td>Total</td>
+                                        <td>165</td>
+                                        <td>110</td>
+                                        <td>110</td>
+                                        <td>55</td>
+                                        <td>2108</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </form>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-12">
+                            <input type="submit" value="Export to Excel" class="btn btn-theme" />
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class=" form-group col-md-12">
-
-                    <div class="card  table-card table-responsive">
-                        <table class="table  table-bordered table-card">
-                            <thead class="thead">
-
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Department</th>
-                                    <th>Total No of Plots</th>
-                                    <th>
-                                        No of Plots against which photos uploaded as on
-                                        01-10-2020
-                                    </th>
-                                    <th>No of Plots against which photos uploaded as on date  </th>
-                                    <th>No of plots against which photos are not being uploaded</th>
-                                    <th>No of photographs uploaded</th>
-
-                                </tr>
-                            </thead>
-                            <tbody class="tbody">
-                                <tr>
-                                    <td>1</td>
-                                    <td>Engineering</td>
-                                    <td>2398</td>
-                                    <td>2384</td>
-                                    <td>2385</td>
-                                    <td>13</td>
-                                    <td>363544</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Land Management</td>
-                                    <td>218</td>
-                                    <td>217</td>
-                                    <td>217</td>
-                                    <td>1</td>
-                                    <td>25519</td>
-                                </tr>
 
 
-                                <tr>
-                                    <td>4</td>
-                                    <td>Horticulture</td>
-                                    <td>773</td>
-                                    <td>771</td>
-                                    <td>772</td>
-                                    <td>1</td>
-                                    <td>50970</td>
-                                </tr>
 
-
-                                <tr>
-                                    <td>
-                                    </td>
-                                    <td>Total</td>
-                                    <td>165</td>
-                                    <td>110</td>
-                                    <td>110</td>
-                                    <td>55</td>
-                                    <td>2108</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
 
                     </div>
                 </div>
-                <div class="form-row mt-4">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Export to Excel" class="btn btn-primary dda-pageheading" style="width:200px;" />
-                    </div>
-                </div>
-
-
-
             </div>
         </div>
     </div>
+
+
 </div>
-
-
-
 
 <p id="currentdate"></p>
 
 <script>
-var date = (new Date()).toISOString().split('T')[0];
+    var date = (new Date()).toISOString().split('T')[0];
 
     document.getElementById("currentdate").innerHTML = date;
 </script>

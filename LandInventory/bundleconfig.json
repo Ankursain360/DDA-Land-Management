@@ -154,5 +154,11 @@
     "inputFiles": [
       "wwwroot/js/PlanningIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/PlanningVerification.min.js",
+    "inputFiles": [
+      "wwwroot/js/PlanningVerification.js"
+    ]
   }
 ]

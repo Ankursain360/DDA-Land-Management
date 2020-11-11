@@ -48,7 +48,7 @@ $(function () {
 $('#Photo').change(function () {
     var fileInput = document.getElementById('Photo');
     var filePath = fileInput.value;
-    const size = (EncroachAtrDoc.files[0].size);
+    const size = (Photo.files[0].size);
     fileValidation(filePath, fileInput, size);
 });
 
@@ -64,18 +64,11 @@ function fileValidation(filePath, fileInput, size) {
         fileInput.value = '';
         return false;
     }
-    else {
-        debugger;
-        HttpGet(`/WatchWard/GetLattLongDetails/?path=${filePath}`, 'json', function (response) {
-            $("#ZoneId").val('').trigger('change');
-            var html = '<option value="">---Select---</option>';
-            for (var i = 0; i < response.length; i++) {
-                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-            }
-            $("#ZoneId").html(html);
-            $("#DivisionId").val('').trigger('change');
-            $("#LocalityId").val('').trigger('change');
-        });
-    }
+    //else {
+    //    HttpGet(`/WatchWard/GetLattLongDetails/?path=${filePath}`, 'string', function (response) {
+    //        $("#Longitude").val(response);
+    //        $("#Longitude").val();
+    //    });
+    //}
 
 }

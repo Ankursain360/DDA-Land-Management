@@ -1,8 +1,7 @@
 ﻿$(document).ready(function () {
     debugger;
-    var value = "Personal"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+    var param = GetSearchParam();
+    HttpPost(`/UserManagement/LoadPersonalDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
 
@@ -10,41 +9,39 @@
         $('#UserName').attr("disabled", "disabled");
         $('#Email').attr("disabled", "disabled");
         $('#PhoneNumber').attr("disabled", "disabled");
-        $('#updatePersonalBtn').hide();
+        $('#btnSavePersonalInfo').hide();
     });
 
 });
 
-function GetSearchParam(value) {
+function GetSearchParam() {
     var id = $('#Id').val();
     var model = {
-        id: parseInt(id),
-        value: value
+        id: parseInt(id)
     }
     return model;
 }
 
-$("#ProfileBtn").click(function () {
-    debugger;
-    var value = "Profile"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+$("#btnProfileInfo").click(function () {
+    event.preventDefault();
+    var param = GetSearchParam();
+    HttpPost(`/UserManagement/LoadProfileDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
+
 
         $('#DepartmentId').attr("disabled", "disabled");
         $('#ZoneId').attr("disabled", "disabled");
         $('#RoleId').attr("disabled", "disabled");
-        $('#updateProfileBtn').hide();
+        $('#btnSaveProfileInfo').hide();
     });
 
 });
 
-$("#PersonalBtn").click(function () {
-    debugger;
-    var value = "Personal"
-    var param = GetSearchParam(value);
-    HttpPost(`/UserManagement/GetDetails`, 'html', param, function (response) {
+$("#btnPersonalInfo").click(function () {
+    event.preventDefault();
+    var param = GetSearchParam();
+    HttpPost(`/UserManagement/LoadPersonalDetails`, 'html', param, function (response) {
         $('#divLoadData').html("");
         $('#divLoadData').html(response);
 
@@ -52,7 +49,7 @@ $("#PersonalBtn").click(function () {
         $('#UserName').attr("disabled", "disabled");
         $('#Email').attr("disabled", "disabled");
         $('#PhoneNumber').attr("disabled", "disabled");
-        $('#updatePersonalBtn').hide();
+        $('#btnSavePersonalInfo').hide();
     });
 
 });
