@@ -7,7 +7,6 @@ using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Service.ApplicationService
@@ -92,6 +91,11 @@ namespace Service.ApplicationService
             return await _planningRepositry.GetUnplannedProperties(departmentId, zoneId, divisionId);
         }
 
+        public async Task<PagedResult<Planning>> GetUnverifiedPagedPlanning(PlanningSearchDto dto)
+        {
+            return await _planningRepositry.GetUnverifiedPagedPlanning(dto);
+        }
+
         public async Task<bool> Update(int id, Planning planning)
         {
             var result = await _planningRepositry.FindBy(a => a.Id == id);
@@ -100,6 +104,22 @@ namespace Service.ApplicationService
             model.ZoneId = planning.ZoneId;
             model.DivisionId = planning.DivisionId;
             model.Remarks = planning.Remarks;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _planningRepositry.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> VerifyProperties(int PlanningId)
+        {
+            return await _planningRepositry.DeleteProperties(PlanningId);
+        }
+
+        public async Task<bool> VerifyProperty(int id, Planning planning)
+        {
+            var result = await _planningRepositry.FindBy(a => a.Id == id);
+            Planning model = result.FirstOrDefault();
+            model.IsVerify = planning.IsVerify;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _planningRepositry.Edit(model);

@@ -989,10 +989,11 @@
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Fencing/Boundary Wall   <span style="color:red">*</span></label>
-                                <select asp-for="FencingBoundaryWall" class="form-control  dda-dropdown">
-                                    <option value="No">No</option>
-                                    <option value="Yes">Yes</option>
+                                <label class="control-label lb-sm">Protection of Land   <span style="color:red">*</span></label>
+                                <select asp-for="FencingBoundaryWall" class="form-control dda-dropdown">
+                                    <option value="0" selected="selected">Boundary Wall</option>
+                                    <option value="1">Fencing</option>
+                                    <option value="2">None</option>
                                 </select>
                                 @*<span asp-validation-for="DepartmentId" class="text-danger"></span>*@
                             </div>
@@ -1025,7 +1026,6 @@
                                 <select asp-for="PlotUtilization" class="form-control  dda-dropdown">
                                     <option value="No">No</option>
                                     <option value="Yes">Yes</option>
-
                                 </select>
                             </div>
                             <div id="Utilization" style="display:none;">
@@ -1083,7 +1083,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label class="control-label lb-sm">Total Area(in sq. mt.)</label><span class="text-danger">*</span>
-                                    <input asp-for="TotalArea" value="" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                                    <input asp-for="TotalArea" class="form-control numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                                     <span asp-validation-for="TotalArea" class="text-danger lb-sm"></span>
                                 </div>
                                 <div class="form-group col-md-4">

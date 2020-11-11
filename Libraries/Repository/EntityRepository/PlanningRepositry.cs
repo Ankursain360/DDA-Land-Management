@@ -4,10 +4,8 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
@@ -20,13 +18,25 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
+        public async Task<bool> DeleteProperties(int planningId)
+        {
+            var UnplannedProperties = await _dbContext.PlanningProperties.Include(x => x.PropertyRegistration).Where(x => x.PlanningId == planningId && x.PropertyType == 0).Select(x => x.PropertyRegistration).ToListAsync();
+            UnplannedProperties.ForEach(x => x.IsDeleted = 1);
+            _dbContext.Propertyregistration.UpdateRange(UnplannedProperties);
+            var result = await _dbContext.SaveChangesAsync();
+            return result > 0;
+        }
         public async Task<List<Division>> GetAllDivision(int ZoneId)
         {
             return await _dbContext.Division.Where(x => x.IsActive == 1 && x.ZoneId == ZoneId).ToListAsync();
         }
         public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
         {
-                return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1).GetPaged(dto.PageNumber, dto.PageSize);
+            return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1 && x.IsVerify == 1).GetPaged(dto.PageNumber, dto.PageSize);
+        }
+        public async Task<PagedResult<Planning>> GetUnverifiedPagedPlanning(PlanningSearchDto dto)
+        {
+            return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1 && x.IsVerify == 0).GetPaged(dto.PageNumber, dto.PageSize);
         }
         public async Task<List<Zone>> GetAllZone(int DepartmentId)
         {
@@ -34,11 +44,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Propertyregistration>> GetPlannedProperties(int departmentId, int zoneId, int divisionId)
         {
-            return await _dbContext.Propertyregistration.Where(x => (x.IsActive == 1) && (x.DepartmentId == departmentId) && (x.ZoneId == zoneId) && (x.DivisionId == divisionId) && (x.IsValidate==1) && (x.PlannedUnplannedLand== "Planned Land")).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => (x.IsActive == 1) && (x.DepartmentId == departmentId) && (x.ZoneId == zoneId) && (x.DivisionId == divisionId) && (x.IsValidate == 1) && (x.PlannedUnplannedLand == "Planned Land")).ToListAsync();
         }
         public async Task<List<Propertyregistration>> GetUnplannedProperties(int departmentId, int zoneId, int divisionId)
         {
-            return await _dbContext.Propertyregistration.Where(x => (x.IsActive == 1) && (x.DepartmentId == departmentId) && (x.ZoneId == zoneId) && (x.DivisionId == divisionId)&& (x.IsValidate == 1) && (x.PlannedUnplannedLand == "Unplanned Land")).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => (x.IsActive == 1) && (x.DepartmentId == departmentId) && (x.ZoneId == zoneId) && (x.DivisionId == divisionId) && (x.IsValidate == 1) && (x.PlannedUnplannedLand == "Unplanned Land")).ToListAsync();
         }
         public async Task<bool> CreateProperties(List<PlanningProperties> planningProperties)
         {
@@ -52,7 +62,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<int>> FetchUnplannedProperties(int id)
         {
-            return await _dbContext.PlanningProperties.Where(x=>x.PlanningId==id && x.PropertyType==0&& x.IsActive==1).Select(x => x.PropertyRegistrationId).ToListAsync();
+            return await _dbContext.PlanningProperties.Where(x => x.PlanningId == id && x.PropertyType == 0 && x.IsActive == 1).Select(x => x.PropertyRegistrationId).ToListAsync();
         }
 
         public async Task<List<int>> FetchPlannedProperties(int id)
