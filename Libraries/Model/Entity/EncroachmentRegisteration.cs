@@ -35,6 +35,8 @@ namespace Libraries.Model.Entity
         public string KhasraNo { get; set; }
         [Required] 
         public decimal Area { get; set; }
+
+        public string EncroacherName { get; set; }
         [Required] 
         public string StatusOfLand { get; set; }
         [Required] 
@@ -90,7 +92,11 @@ namespace Libraries.Model.Entity
         public List<string> Type { get; set; }
         [NotMapped]
         [Required]
-        public List<DateTime> DateOfEncroachment { get; set; }
+        public List<int> DateOfEncroachment { get; set; }
+
+        [NotMapped]
+        public List<string> ReligiousStructure { get; set; }
+
         [NotMapped]
         [Required]
         public List<decimal> CountOfStructure { get; set; }

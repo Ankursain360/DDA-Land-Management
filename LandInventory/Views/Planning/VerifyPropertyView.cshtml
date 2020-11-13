@@ -1,0 +1,107 @@
+﻿@model Libraries.Model.Entity.Planning
+@await Component.InvokeAsync("PageHeader", new { pageName = "Planning" })
+
+<div class="pt-3">
+
+    <div class="container-fluid" id="MainContentForm">
+        <div class="panel">
+
+            <div class="panel-body">
+                <form id="formDisabled" asp-action="VerifyPropertyView" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                    <h3 class="mb-3 d-flex">View Details</h3>
+
+
+                    <input type="hidden" asp-for="Id" />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="GetZoneList(this.value);">
+                                    <option>Select</option>
+                                </select>
+                                <label asp-for="DepartmentId" class="floating-label">Department</label>
+
+                                <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))" onchange="GetDivisionList(this.value);">
+                                </select>
+                                <label asp-for="ZoneId" class="floating-label">Zone</label>
+
+                                <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <select class="floating-label-field floating-label-field--s3" disabled asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))" onchange="GetProperties()">
+                                </select>
+                                <label asp-for="DivisionId" class="floating-label">Division</label>
+
+                                <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <textarea asp-for="Remarks" class="floating-label-field floating-label-field--s3" disabled placeholder="Remarks"></textarea>
+                                <label asp-for="Remarks" class="floating-label">Remarks</label>
+
+                                <span asp-validation-for="Remarks" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-2">
+                        <div class="col-md-6">
+                            <label class="control-label lb-sm" asp-for="UnplannedProperties">Unplanned Properties</label>
+                            <select multiple="multiple" disabled asp-for="UnplannedProperties" class="form-control select2destroy list-group" asp-items="@(new SelectList(Model.UnplannedList, "Id","PrimaryListNo"))">
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label lb-sm" asp-for="PlannedProperties">Planned Properties</label>
+                            <select multiple="multiple" disabled asp-for="PlannedProperties" class="form-control sel-task select2destroy" asp-items="@(new SelectList(Model.PlannedList, "Id","PrimaryListNo"))">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="IsVerify">
+                                    <option value="0">Unverify</option>
+                                    <option value="1">Verify</option>
+                                </select>
+                                <label asp-for="IsVerify" class="floating-label">Verify Status</label>
+                                <span asp-validation-for="IsVerify" class="text-danger lb-sm"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-4">
+                        <div class=" col-md-12">
+                            <input type="submit" value="Submit" class="btn btn-theme" />
+                            @Html.ActionLink("Back", "VerificationPage", "Planning", null, new { @class = "btn btn-theme" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/PlanningCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/PlanningCreate.min.js" asp-append-version="true"></script>
+</environment>
+
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.min.js" asp-append-version="true"></script>
+</environment>

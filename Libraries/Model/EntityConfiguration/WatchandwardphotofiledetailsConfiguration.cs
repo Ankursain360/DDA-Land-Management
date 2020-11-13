@@ -21,6 +21,12 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.Lattitude).HasColumnType("longtext");
+
+            builder.Property(e => e.LattLongUrl).HasColumnType("longtext");
+
+            builder.Property(e => e.Longitude).HasColumnType("longtext");
+
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");

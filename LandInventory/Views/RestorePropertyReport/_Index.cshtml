@@ -43,7 +43,7 @@
                 <td>@item.Locality.Name</td>
                 <td>@item.KhasraNo</td>
                 <td>@item.Palandmark</td>
-                <td>@item.PrimaryListNo</td>
+                <td>@(item.PrimaryListNo == null ? "" : item.PrimaryListNo)</td>
                 <td>@item.TotalArea</td>
                 <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreReason)</td>
                 <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreDate.ToString("dd-MMM-yyyy"))</td>

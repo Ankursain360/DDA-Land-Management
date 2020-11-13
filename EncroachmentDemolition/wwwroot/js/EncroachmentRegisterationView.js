@@ -74,13 +74,16 @@ $(function () {
             $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
             $("#tbl_posts #add #AreaApprox").val(data[i].area);
             $("#tbl_posts #add #Type").val(data[i].type);
+            $("#tbl_posts #add #ReligiousStructure").val(data[i].religiousStructure);
             $("#tbl_posts #add #DateOfEncroachment").val(data[i].dateOfEncroachment);
             $("#tbl_posts #add #ReferenceNoOnLocation").val(data[i].referenceNoOnLocation);
             $("#tbl_posts #add #CountOfStructure").val(data[i].countOfStructure);
             $("#tbl_posts #add #ConstructionStatus").val(data[i].constructionStatus);
             $('#tbl_posts #add #ConstructionStatus').trigger('change');
+            $('#tbl_posts #add #ReligiousStructure').trigger('change');
             if (i < data.length - 1) {
                 var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
+                var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
                 var content = jQuery('#tbl_posts #add tr'),
                     size = jQuery('#tbl_posts >tbody >tr').length,
                     element = null,
@@ -89,6 +92,7 @@ $(function () {
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts_body');
                 $('#tbl_posts_body #rec-' + size + ' #ConstructionStatus').val(ConstructionStatus);
+                $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
                 element.find('.sn').html(size);
                 $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
                 $("#tbl_posts #add .add").remove();
@@ -98,12 +102,16 @@ $(function () {
             }
         }
     });
+
+    //callSelect2();
 });
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
     if ($("#tbl_posts #add #NameOfStructure").val() != '' && $("#tbl_posts #add #AreaApprox").val() != '' && $("#tbl_posts #add #Type").val() != ''
-        && $("#tbl_posts #add #DateOfEncroachment").val() != '' && $("#tbl_posts #add #ReferenceNoOnLocation").val() != '' && $("#tbl_posts #add #CountOfStructure").val() != ''
+        && $("#tbl_posts #add #DateOfEncroachment").val() != '' && $("#tbl_posts #add #ReligiousStructure").val() != '' && $("#tbl_posts #add #ReferenceNoOnLocation").val() != '' && $("#tbl_posts #add #CountOfStructure").val() != ''
     ) {
+        var ConstructionStatus = $("#tbl_posts #add #ConstructionStatus").children("option:selected").val();
+        var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -112,6 +120,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
+        $('#tbl_posts_body #rec-' + size + ' #ConstructionStatus').val(ConstructionStatus);
+        $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
@@ -120,6 +130,15 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".delete-record").show();
         debugger
         $("#tbl_posts #add .form-control").val('');
+        $("#tbl_posts #add #ReligiousStructure").val(null).trigger('change');
+        $("#tbl_posts #add #ConstructionStatus").val(null).trigger('change');
+        $("#tbl_posts #add #ReligiousStructure").val('No');
+        $("#tbl_posts #add #ReligiousStructure").trigger('change');
+        $("#tbl_posts #add #ConstructionStatus").val('Select');
+        $("#tbl_posts #add #ConstructionStatus").trigger('change');
+        $(".select2-disabled").prop("disabled", false);
+        $(".select2-disabled-multi").prop("disabled", false);
+        
     }
     else {
         alert('Please fill record before add new record ');
@@ -143,3 +162,10 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         return false;
     }
 });
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}

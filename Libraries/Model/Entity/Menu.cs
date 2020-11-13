@@ -1,6 +1,5 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,6 +11,7 @@ namespace Libraries.Model.Entity
         public Menu()
         {
             InverseParentMenu = new HashSet<Menu>();
+            Menuactionrolemap = new HashSet<Menuactionrolemap>();
             Page = new HashSet<Page>();
         }
 
@@ -36,7 +36,8 @@ namespace Libraries.Model.Entity
 
         public virtual Module Module { get; set; }
         public Menu ParentMenu { get; set; }
-        public ICollection<Menu> InverseParentMenu { get; set; }
-        public ICollection<Page> Page { get; set; }
+        public virtual ICollection<Menu> InverseParentMenu { get; set; }
+        public virtual ICollection<Page> Page { get; set; }
+        public virtual ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
     }
 }

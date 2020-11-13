@@ -24,7 +24,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.DateOfEncroachment).HasColumnType("date");
+            builder.Property(e => e.DateOfEncroachment).HasColumnType("int");
 
             builder.Property(e => e.EncroachmentRegisterationId).HasColumnType("int(11)");
 
@@ -35,6 +35,12 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.NameOfStructure)
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.Property(e => e.ReligiousStructure)
+                .IsRequired()
+                .HasMaxLength(10)
+                .IsUnicode(false);
+
             builder.Property(e => e.ConstructionStatus)
                 .HasMaxLength(100)
                 .IsUnicode(false);
