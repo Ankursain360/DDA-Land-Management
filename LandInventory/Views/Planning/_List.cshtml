@@ -12,7 +12,7 @@
             <th rowspan="2">Operation</th>
         </tr>
     </thead>
-    <tbody class="tbody">
+    <tbody>
         @if (Model != null && Model.Results.Count() > 0)
         {
 @foreach (var item in Model.Results)
@@ -24,48 +24,48 @@
     <td>@item.Division.Name</td>
     <td>
         @{ bool isValidUnplanned = true;
-                                int isCommaUnplanned = 0;
-                                string UnplannedProperty = string.Empty;
-                                foreach (var data in item.PlanningProperties)
-                                {
-                                    if (data.PropertyType == 0)
-                                    {
-                                        if (isCommaUnplanned > 0)
-                                        {
-                                            UnplannedProperty += ", ";
-                                        }
-                                        UnplannedProperty += data.PropertyRegistration.PrimaryListNo;
-                                        isValidUnplanned = false;
-                                        isCommaUnplanned++;
-                                    }
-                                }
-                                if (isValidUnplanned)
-                                {
-                                    UnplannedProperty = "Not Available";
-                                } }
+            int isCommaUnplanned = 0;
+            string UnplannedProperty = string.Empty;
+            foreach (var data in item.PlanningProperties)
+            {
+                if (data.PropertyType == 0)
+                {
+                    if (isCommaUnplanned > 0)
+                    {
+                        UnplannedProperty += ", ";
+                    }
+                    UnplannedProperty += data.PropertyRegistration.PrimaryListNo;
+                    isValidUnplanned = false;
+                    isCommaUnplanned++;
+                }
+            }
+            if (isValidUnplanned)
+            {
+                UnplannedProperty = "Not Available";
+            } }
         @UnplannedProperty
     </td>
     <td>
         @{ bool isValid = true;
-                                int isComma = 0;
-                                string PlannedProperty = string.Empty;
-                                foreach (var data in item.PlanningProperties)
-                                {
-                                    if (data.PropertyType == 1)
-                                    {
-                                        if (isComma > 0)
-                                        {
-                                            PlannedProperty += ", ";
-                                        }
-                                        PlannedProperty += data.PropertyRegistration.PrimaryListNo;
-                                        isValid = false;
-                                        isComma++;
-                                    }
-                                }
-                                if (isValid)
-                                {
-                                    PlannedProperty = "Not Available";
-                                } }
+            int isComma = 0;
+            string PlannedProperty = string.Empty;
+            foreach (var data in item.PlanningProperties)
+            {
+                if (data.PropertyType == 1)
+                {
+                    if (isComma > 0)
+                    {
+                        PlannedProperty += ", ";
+                    }
+                    PlannedProperty += data.PropertyRegistration.PrimaryListNo;
+                    isValid = false;
+                    isComma++;
+                }
+            }
+            if (isValid)
+            {
+                PlannedProperty = "Not Available";
+            } }
         @PlannedProperty
     </td>
     @*<td>
@@ -85,8 +85,8 @@
 
 
 </tr>} }
-            else
-            {
+else
+{
 <tr>
     <th colspan="14" style="text-align:center"> No Record Available! </th>
 </tr>}
