@@ -12,7 +12,9 @@ namespace Libraries.Model.Entity
         public string ConstructionStatus { get; set; }
         public decimal? Area { get; set; }
         public string Type { get; set; }
-        public DateTime? DateOfEncroachment { get; set; }
+        public int? DateOfEncroachment { get; set; }
+
+        public string ReligiousStructure { get; set; }
         public decimal? CountOfStructure { get; set; }
         public string ReferenceNoOnLocation { get; set; }
         public int? IsActive { get; set; }

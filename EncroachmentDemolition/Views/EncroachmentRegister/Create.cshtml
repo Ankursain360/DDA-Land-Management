@@ -20,22 +20,22 @@
             <form asp-action="Create" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @*<div class="row">
-                    <div class="form-group col-md-4">
-                        <label class="radio-inline ">
-                            <input type="radio" id="rbdWatchWard" value="1" />Watch & Ward
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="radio-inline">
-                            <input type="radio" id="rbdOnlineComplaint" value="2" />Online Complaint
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="radio-inline">
-                            <input type="radio" id="rbdOther" value="3" />Other
-                        </label>
-                    </div>
-                </div>*@
+            <div class="form-group col-md-4">
+                <label class="radio-inline ">
+                    <input type="radio" id="rbdWatchWard" value="1" />Watch & Ward
+                </label>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="radio-inline">
+                    <input type="radio" id="rbdOnlineComplaint" value="2" />Online Complaint
+                </label>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="radio-inline">
+                    <input type="radio" id="rbdOther" value="3" />Other
+                </label>
+            </div>
+        </div>*@
 
                 <div id="LoadOtherDataView">
 
@@ -99,6 +99,13 @@
                         <span asp-validation-for="LocationAddressWithLandMark" class="text-danger"></span>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">Name of Encroacher</label>
+                        <input type="text" class="form-control" asp-for="EncroacherName" />
+                        <span asp-validation-for="EncroacherName" class="text-danger"></span>
+                    </div>
+                </div>
                 <div id="Divclsification">
                     <div class="row" style="margin-bottom:35px;">
                         <div class="col-sm-12">
@@ -121,7 +128,8 @@
                                             <th>Construction Status</th>
                                             <th>Area[Approx.]</th>
                                             <th>Type[residential/religious/compercial]</th>
-                                            <th>Date/Age of Encroachment</th>
+                                            <th>Religious Structure</th>
+                                            <th>Age of Encroachment</th>
                                             <th>Reference No. on  Location</th>
                                             <th>Count of Structure</th>
                                             <th>Operation</th>
@@ -150,7 +158,13 @@
                                                 <input type="text" asp-for="Type" class="form-control" id="Type" />
                                             </td>
                                             <td>
-                                                <input asp-for="DateOfEncroachment" type="date" class="form-control" id="DateOfEncroachment" />
+                                                <select asp-for="ReligiousStructure" class="form-control">
+                                                    <option value="No">No</option>
+                                                    <option value="Yes">Yes</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input asp-for="DateOfEncroachment" class="form-control onlynumbers" id="DateOfEncroachment" />
                                             </td>
                                             <td>
                                                 <input asp-for="ReferenceNoOnLocation" type="text" class="form-control number" id="ReferenceNoOnLocation" />
@@ -171,15 +185,16 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Staus of Land</label>
+                        <label class="control-label lb-sm">Land Ownership</label>
                         <select asp-for="StatusOfLand" class="form-control dda-dropdown" onchange="onChangeLandStatus(this.value)">
                             <option value="DDA Land">DDA Land</option>
-                            <option value="Non DDA Land">Non DDA Land</option>
+                            <option value="Other Govt. Land">Other Govt. Land</option>
+                            <option vlaue="Private Land">Private Land</option>
                         </select>
                     </div>
                     <div id="divForLandStatus">
                         <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Possession </label>
+                            <label class="control-label lb-sm">Possession with DDA</label>
                             <select class="form-control dda-dropdown" asp-for="IsPossession" onchange="onChangePossationStatus(this.value)">
                                 <option value="Yes">Yes</option>
                                 <option value="No">No</option>

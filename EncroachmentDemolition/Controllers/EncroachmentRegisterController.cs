@@ -72,6 +72,7 @@ namespace EncroachmentDemolition.Controllers
                                 Area = encroachmentRegisterations.AreaApprox[i],
                                 CountOfStructure = encroachmentRegisterations.CountOfStructure[i],
                                 DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment[i],
+                                ReligiousStructure = encroachmentRegisterations.ReligiousStructure[i],
                                 ConstructionStatus = encroachmentRegisterations.ConstructionStatus[i],
                                 NameOfStructure = encroachmentRegisterations.NameOfStructure[i],
                                 ReferenceNoOnLocation = encroachmentRegisterations.ReferenceNoOnLocation[i],
@@ -191,7 +192,8 @@ namespace EncroachmentDemolition.Controllers
         {
             Id = Id ?? 0;
             var data = await _encroachmentRegisterationService.GetDetailsOfEncroachment(Convert.ToInt32(Id));
-            return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
+            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
+            return Json(data.Select(x => new { x.CountOfStructure,  x.DateOfEncroachment, x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus , x.ReligiousStructure}));
         }
         [HttpPost]
         public async Task<IActionResult> Edit(int id, EncroachmentRegisteration encroachmentRegisterations)
@@ -221,6 +223,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 Area = encroachmentRegisterations.AreaApprox[i],
                                 CountOfStructure = encroachmentRegisterations.CountOfStructure[i],
+                                ReligiousStructure = encroachmentRegisterations.ReligiousStructure[i],
                                 DateOfEncroachment = encroachmentRegisterations.DateOfEncroachment[i],
                                 ConstructionStatus = encroachmentRegisterations.ConstructionStatus[i],
                                 NameOfStructure = encroachmentRegisterations.NameOfStructure[i],
