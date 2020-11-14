@@ -15,11 +15,15 @@ namespace Libraries.Model.Entity
         }
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
-        [Required(ErrorMessage = "Please select locality")]
+        //[Required(ErrorMessage = "Please select locality")]
         public int? LocalityId { get; set; }
 
-        [Required(ErrorMessage = "Please select khasra")]
+        //[Required(ErrorMessage = "Please select khasra")]
         public int? KhasraId { get; set; }
+
+        [Required(ErrorMessage = "Please select Primary List No.")]
+        public int PrimaryListNo { get; set; }
+
         [Required(ErrorMessage = "Please fill Landmark")]
         public string Landmark { get; set; }
 
@@ -37,7 +41,8 @@ namespace Libraries.Model.Entity
         //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
 
-
+        [NotMapped]
+        public List<Propertyregistration> PrimaryListNoList { get; set; }
 
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
@@ -63,8 +68,27 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string Longitude { get; set; }
 
-        public string PrimaryListNo { get; set; }
+        public Propertyregistration PrimaryListNoNavigation { get; set; }
 
-       
+        [NotMapped]
+        public string PlannedUnplannedLand { get; set; }
+
+        [NotMapped]
+        public string Colony { get; set; }
+
+        [NotMapped]
+        public string Sector { get; set; }
+
+        [NotMapped]
+        public string Block { get; set; }
+
+        [NotMapped]
+        public string Pocket { get; set; }
+
+        [NotMapped]
+        public string PlotNo { get; set; }
+
+        [NotMapped]
+        public string KhasraNo { get; set; }
     }
 }

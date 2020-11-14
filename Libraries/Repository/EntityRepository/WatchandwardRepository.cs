@@ -118,5 +118,14 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
+        public async Task<List<Propertyregistration>> GetAllPrimaryList()
+        {
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 &&  x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
+        }
+
+        public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)
+        {
+            return await _dbContext.Propertyregistration.Where(x => x.Id == propertyId).FirstOrDefaultAsync();
+        }
     }
 }

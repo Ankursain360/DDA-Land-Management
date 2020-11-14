@@ -49,6 +49,7 @@ namespace EncroachmentDemolition.Controllers
             watchandward.IsActive = 1;
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
+            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             return View(watchandward);
         }
         [HttpPost]
@@ -56,7 +57,7 @@ namespace EncroachmentDemolition.Controllers
         {
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
-
+            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
@@ -161,7 +162,7 @@ namespace EncroachmentDemolition.Controllers
 
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
-           
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             //for (int i= 0 ; i< Data.Watchandwardphotofiledetails.Count; i++)
             //{
             //    if (!string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Lattitude) && !string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Longitude))
@@ -172,7 +173,7 @@ namespace EncroachmentDemolition.Controllers
             //        watchandwardphotofiledetails.urlList = "https://www.google.com/maps/place/{latitdue},{longitude}";
             //    }
             //}
-            
+
             if (Data == null)
             {
                 return NotFound();
@@ -185,6 +186,7 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
 
@@ -284,6 +286,7 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             if (Data == null)
             {
                 return NotFound();
@@ -403,6 +406,12 @@ namespace EncroachmentDemolition.Controllers
 
                 return null;
             }
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetOtherDetails(int? propertyId)
+        {
+            propertyId = propertyId ?? 0;
+            return Json(await _watchandwardService.FetchSingleResultOnPrimaryList(Convert.ToInt32(propertyId)));
         }
     }
 }

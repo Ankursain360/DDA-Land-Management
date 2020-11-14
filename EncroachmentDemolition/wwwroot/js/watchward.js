@@ -25,7 +25,28 @@ $(document).ready(function () {
 
 
 
-
+function GetOtherDetails(id) {
+    
+    HttpGet(`/WatchWard/GetOtherDetails/?propertyId=${id}`, 'json', function (response) {
+        debugger;
+        console.log(response);
+        var value = plannedUnplannedLand.val();
+        if (value == 'Planned Land') {
+          //  $('#DivLandUse').show();
+            $('#divPlannedSelection').show();
+          //  $("#divLayoutPlan").show();
+            $('#divUnplannedSelection').hide();
+            callSelect2();
+        }
+        else {
+         //   $('#DivLandUse').hide();
+            $('#divPlannedSelection').hide();
+         //   $("#divLayoutPlan").hide();
+            $('#divUnplannedSelection').show();
+            callSelect2();
+        }
+    });
+};
 $(function () {
     var dtToday = new Date();
 
@@ -71,4 +92,11 @@ function fileValidation(filePath, fileInput, size) {
     //    });
     //}
 
+}
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
 }
