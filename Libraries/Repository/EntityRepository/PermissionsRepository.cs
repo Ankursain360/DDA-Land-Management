@@ -23,12 +23,22 @@ namespace Libraries.Repository.EntityRepository
                 .ToListAsync();
         }
 
-        public async Task GetPermission(int moduleId, int roleId) {
-           var x = await _dbContext.Menuactionrolemap
-                    .Include(a=>a.Menu)
-                    .Where(a=>a.Menu.ModuleId==moduleId
-                            && a.RoleId== roleId)
+        public async Task<List<Menuactionrolemap>> GetPermission(int moduleId, int roleId) {
+            try
+            {
+                var x = await _dbContext.Menuactionrolemap
+                    .Include(a => a.Menu)
+                    .Where(a => a.Menu.ModuleId == moduleId
+                            && a.RoleId == roleId)
                     .ToListAsync();
+                return x;
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+           
         }
     }
 }

@@ -35,7 +35,6 @@ namespace Libraries.Model
         public virtual DbSet<Rate> Rate { get; set; }
         public virtual DbSet<Rebate> Rebate { get; set; }
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<PageRole> PageRole { get; set; }
         public virtual DbSet<Nazulland> Nazulland { get; set; }
         public virtual DbSet<Tehsil> Tehsil { get; set; }
         public virtual DbSet<Villagetype> Villagetype { get; set; }
@@ -130,7 +129,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new RateConfiguration());
             modelBuilder.ApplyConfiguration(new RebateConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfiguration());
-            modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
+            //modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
             modelBuilder.ApplyConfiguration(new NazullandConfiguration());
             modelBuilder.ApplyConfiguration(new ClassificationoflandConfiguration());
             modelBuilder.ApplyConfiguration(new LanduseConfiguration());

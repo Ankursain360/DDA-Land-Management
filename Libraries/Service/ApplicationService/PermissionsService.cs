@@ -6,10 +6,8 @@ using Libraries.Repository.IEntityRepository;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using System;
-using Dto.Search;
-using Dto.Master;
 using AutoMapper;
+using Dto.Component;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -34,8 +32,20 @@ namespace Libraries.Service.ApplicationService
             return await _permissionsRepository.GetModuleList();
         }
 
-        public async Task GetMappedMenu(int moduleId, int roleId) {
-            await _permissionsRepository.GetPermission(moduleId, roleId);
+        public async Task<List<MenuDetailDto>> GetMappedMenu(int moduleId, int roleId) {
+
+            var result1 = await _permissionsRepository.GetPermission(moduleId, roleId);
+            var result = result1.GroupBy(a => a.MenuId)
+                .Select(a=>a.FirstOrDefault())
+                    .Select(b=> new MenuDetailDto() {
+                        Id = b.MenuId,
+                        ParentId = b.Menu.ParentMenuId ?? 0,
+                        Name = b.Menu.Name,
+                        Url = b.Menu.Url,
+                        SortOrder = b.Menu.SortBy
+                    }).ToList();
+
+            return result;
         }
        
     }
