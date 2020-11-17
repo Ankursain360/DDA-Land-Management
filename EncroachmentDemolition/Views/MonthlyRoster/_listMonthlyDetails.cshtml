@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Libraries.Model.MonthlyRoster>
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="thead">
+        <tr>
+            <th>Date</th>
+            <th>Day</th>
+            <th>Primary No</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>@item.Date</td>
+    <td>@item.Day</td>
+    <td>
+        <select multiple>
+            <option value="Codeigniter">Bahapur</option>
+            <option value="CakePHP">Raipur Khurd</option>
+            <option value="Laravel">Tehkhand</option>
+            <option value="YII">Kilokari</option>
+            <option value="Zend">Jaitpur</option>
+            <option value="Symfony">Jasola</option>
+            <option value="Phalcon">Aali</option>
+            <option value="Slim">Tajpul</option>
+        </select>
+    </td>
+</tr>}
+    </tbody>
+</table>
+<script>
+    $(document).ready(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+</script>

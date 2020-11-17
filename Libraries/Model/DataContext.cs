@@ -1,8 +1,8 @@
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
 using Libraries.Model.EntityConfiguration;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Model.EntityConfiguration;
 
 namespace Libraries.Model
@@ -109,7 +109,9 @@ namespace Libraries.Model
         public virtual DbSet<Menuactionrolemap> Menuactionrolemap { get; set; }
         public virtual DbSet<PlanningProperties> PlanningProperties { get; set; }
         public virtual DbSet<Planning> Planning { get; set; }
-
+        public virtual DbSet<AssignedPropertyDailyRoaster> Assignedpropertydailyroaster { get; set; }
+        public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
+        public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -191,6 +193,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MenuactionrolemapConfiguration());
             modelBuilder.ApplyConfiguration(new PlanningConfiguration());
             modelBuilder.ApplyConfiguration(new PlanningPropertiesConfiguration());
+            modelBuilder.ApplyConfiguration(new AssignedPropertyDailyRoasterConfiguration());
+            modelBuilder.ApplyConfiguration(new MonthlyRosterConfiguration());
+            modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

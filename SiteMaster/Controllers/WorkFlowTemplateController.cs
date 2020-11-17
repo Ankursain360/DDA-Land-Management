@@ -1,15 +1,11 @@
 ﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Service.IApplicationService;
-using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
@@ -52,17 +48,17 @@ namespace SiteMaster.Controllers
         public async Task<PartialViewResult> GetDetails([FromBody] WorkflowLevelDto WorkflowLevelDto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
-          //  model.OperationId = WorkflowLevelDto.opertaionId;
+            //  model.OperationId = WorkflowLevelDto.opertaionId;
             //if (model.OperationId == "Role")
             //{
-                ViewBag.Items = await _userProfileService.GetRole();
+            ViewBag.Items = await _userProfileService.GetRole();
             //}
             //else
             //{
             //    ViewBag.Items = await _workflowtemplateService.GetUserlist();
             //}
 
-            return  PartialView("_Levels", model);
+            return PartialView("_Levels", model);
         }
 
         [HttpPost]
@@ -79,7 +75,7 @@ namespace SiteMaster.Controllers
 
             if (ModelState.IsValid)
             {
-                if(model.Template != null)
+                if (model.Template != null)
                 {
                     var result = await _workflowtemplateService.Create(model);
 
@@ -99,7 +95,7 @@ namespace SiteMaster.Controllers
                 {
                     return Json(Url.Action("Create", "WorkFlowTemplate"));
                 }
-               
+
             }
             else
             {
@@ -186,7 +182,6 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
         [HttpGet]
         public async Task<JsonResult> GetUserList(string value)
         {
@@ -198,10 +193,9 @@ namespace SiteMaster.Controllers
             else
             {
                 var data = await _userProfileService.GetUser();
-                
+
                 return Json(data);
             }
         }
-
     }
 }
