@@ -202,5 +202,11 @@
     "inputFiles": [
       "wwwroot/js/fixingdemolitioncreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/watchwardedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/watchwardedit.js"
+    ]
   }
 ]

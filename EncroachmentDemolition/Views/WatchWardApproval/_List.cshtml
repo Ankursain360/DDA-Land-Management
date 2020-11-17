@@ -4,10 +4,11 @@
     <thead class="thead">
         <tr>
             <th>Sr.No</th>
-            <th>Locality Name(Village)</th>
-            <th>Khasra No.</th>
-            <th>Status on Ground</th>
             <th>Date</th>
+            <th>Locality(Village)</th>
+            <th>Khasra No.</th>
+            <th>Primary List No.</th>
+            <th>Status on Ground</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
@@ -17,12 +18,14 @@
         {
         <tr>
             <td>@(rowNo += 1)</td>
-            <td>@item.Locality.Name</td>
-            <td>@item.Khasra.Name</td>
-            <td>@item.StatusOnGround</td>
+
             <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@item.PrimaryListNoNavigation.KhasraNo</td>
+            <td>@item.PrimaryListNo</td>
+            <td>@item.StatusOnGround</td>
             <td>
-                @(item.IsActive == 1 ? "Active" : "Inactive")
+                Pending
             </td>
             <td>
                 <a asp-action="Create" asp-route-id="@item.Id" title="edit"> &nbsp; <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
