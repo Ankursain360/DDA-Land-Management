@@ -14,26 +14,22 @@ namespace SiteMaster.Controllers
     {
         private readonly IPermissionsService _permissionsService;
         private readonly IUserProfileService _userProfileService;
+        private readonly IModuleService _moduleService;
 
-        public PermissionsController(IPermissionsService permissionsService, IUserProfileService userProfileService)
+        public PermissionsController(IPermissionsService permissionsService,
+            IUserProfileService userProfileService,
+            IModuleService moduleService)
         {
             _permissionsService = permissionsService;
             _userProfileService = userProfileService;
+            _moduleService = moduleService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            List<Module> lstModule = await _moduleService.GetActiveModule();
+            ViewBag.Modules = lstModule;
             return View();
-        }
-        async Task BindDropDown(Menuactionrolemap menuactionrolemap)
-        {
-            //menuactionrolemap.ModuleList = await _permissionsService.GetModuleList();
-        }
-        public async Task<IActionResult> Create()
-        {
-            Menuactionrolemap menuactionrolemap = new Menuactionrolemap();
-           await BindDropDown(menuactionrolemap);
-            return View(menuactionrolemap);
         }
 
         [HttpGet]

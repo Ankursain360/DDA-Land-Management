@@ -31,7 +31,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _moduleRepository.GetAllModule();
         }
-      
+
+        public async Task<List<Module>> GetActiveModule()
+        {
+            return await _moduleRepository.FindBy(a => a.IsActive == 1);
+        }
+
 
         public async Task<List<Module>> GetModuleUsingRepo()
         {

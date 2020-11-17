@@ -1,2 +1,70 @@
 ﻿@model System.Collections.Generic.IList<Dto.Master.PermissionDto>
 
+<ul class="treeview">
+    @foreach (var menu in Model)
+    {
+        if (menu.Children.Any())
+        {
+            <li>
+                @if (menu.ParentId == 0)
+                {
+                    <span class="tree-caret">@menu.Name</span>
+                }
+                else
+                {
+                    <span class="tree-caret">@menu.Name</span>
+                }
+                @if (menu.ParentId == 0)
+                {
+                    <ul class="nested">
+                        <partial name="Components/Permission/Permission" model="menu.Children" />
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nested">
+                        <partial name="Components/Permission/Permission" model="menu.Children" />
+                    </ul>
+                }
+            </li>
+        }
+        else
+        {
+            <li>
+                @{
+                    if (menu.Children.Count == 0)
+                    {
+                        <span>@menu.Name</span>
+                        <ul class="treeviewActions">
+                            @foreach (var item in menu.Actions)
+                            {
+                                <li>
+                                    <div class="custom-control custom-checkbox">
+                                        @if (item.IsAvailable == false)
+                                        {
+                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction" disabled="disabled">
+                                        }
+                                        else if (item.IsActive == 1)
+                                        {
+                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction" checked="checked">
+                                        }
+                                        else
+                                        {
+                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction">
+                                        }
+
+                                        <label class="custom-control-label" for="@item.ActionId,@item.MenuId">@item.ActionName</label>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    }
+                    else
+                    {
+                        <span class="tree-caret">@menu.Name</span>
+                    }
+                }
+            </li>
+        }
+    }
+</ul>
