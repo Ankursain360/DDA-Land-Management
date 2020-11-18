@@ -1,5 +1,9 @@
 ﻿$(document).ready(function () {
 
+    $("#ddlModuleId").change(function () {
+
+    });
+
     HttpGet(`/Permissions/GetRoleList/`, 'json', function (response) {
         var html = '<option value="0">---Select---</option>';
         for (var i = 0; i < response.length; i++) {

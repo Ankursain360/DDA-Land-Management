@@ -43,6 +43,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveWatchandwardreportfiledetails(Watchandwardreportfiledetails watchandwardreportfiledetails);
         Task<bool> DeleteWatchandwardphotofiledetails(int Id);
         Task<bool> DeleteWatchandwardreportfiledetails(int Id);
-
+        Task<List<Propertyregistration>> GetAllPrimaryList();
+        Task<Propertyregistration> FetchSingleResultOnPrimaryList(int v);
     }
 }

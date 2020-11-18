@@ -21,12 +21,14 @@ namespace EncroachmentDemolition.Controllers
     public class WatchWardController : BaseController
     {
         private readonly IWatchandwardService _watchandwardService;
+        private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _configuration;
         //string targetPhotoPathLayout = string.Empty;
         //string targetReportfilePathLayout = string.Empty;
         string targetPathLayout = "";
-        public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration)
+        public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
         {
+            _propertyregistrationService = propertyregistrationService;
             _watchandwardService = watchandwardService;
             _configuration = configuration;
         }
@@ -49,6 +51,7 @@ namespace EncroachmentDemolition.Controllers
             watchandward.IsActive = 1;
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
+            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             return View(watchandward);
         }
         [HttpPost]
@@ -56,7 +59,7 @@ namespace EncroachmentDemolition.Controllers
         {
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
             watchandward.KhasraList = await _watchandwardService.GetAllKhasra();
-
+            watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
@@ -161,7 +164,7 @@ namespace EncroachmentDemolition.Controllers
 
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
-           
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             //for (int i= 0 ; i< Data.Watchandwardphotofiledetails.Count; i++)
             //{
             //    if (!string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Lattitude) && !string.IsNullOrEmpty(Data.Watchandwardphotofiledetails.First().Longitude))
@@ -172,7 +175,7 @@ namespace EncroachmentDemolition.Controllers
             //        watchandwardphotofiledetails.urlList = "https://www.google.com/maps/place/{latitdue},{longitude}";
             //    }
             //}
-            
+
             if (Data == null)
             {
                 return NotFound();
@@ -185,6 +188,7 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             string targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             string targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
 
@@ -284,6 +288,7 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             if (Data == null)
             {
                 return NotFound();
@@ -404,5 +409,54 @@ namespace EncroachmentDemolition.Controllers
                 return null;
             }
         }
+        [HttpGet]
+        public async Task<JsonResult> GetOtherDetails(int? propertyId)
+        {
+            propertyId = propertyId ?? 0;
+            var data = await _watchandwardService.FetchSingleResultOnPrimaryList(Convert.ToInt32(propertyId));
+            return Json(data);
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetLocalityList()
+        {
+            return Json(await _watchandwardService.GetAllLocality());
+        }
+
+
+        #region View Details of Property Inventory
+
+        async Task BindDropDown(Propertyregistration propertyregistration)
+        {
+            propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+            propertyregistration.LandUseList = await _propertyregistrationService.GetLandUseDropDownList();
+            propertyregistration.DisposalTypeList = await _propertyregistrationService.GetDisposalTypeDropDownList();
+            propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+            propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
+            propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
+            
+        }
+        public async Task<PartialViewResult> InventoryView(int id)
+        {
+            var Data = await _propertyregistrationService.FetchSingleResult(id);
+            ViewBag.LayoutDocView = Data.LayoutFilePath;
+            ViewBag.GeoDocView = Data.GeoFilePath;
+            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            await BindDropDown(Data);
+
+            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+
+            return PartialView("_InventoryView", Data);
+        }
+
+        #endregion
     }
 }

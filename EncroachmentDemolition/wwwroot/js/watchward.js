@@ -2,6 +2,8 @@
 
 //For dropdown change event
 $(document).ready(function () {
+    GetLocalityList();
+
     $("#drpKhasra").change(function () {
         var courses = $("#txtArea");
         var semesterName = $("#drpKhasra option:selected").text();
@@ -23,9 +25,59 @@ $(document).ready(function () {
     });
 });
 
+function GetLocalityList() {
+    HttpGet(`/WatchWard/GetLocalityList/`, 'json', function (response) {
+        var html = '<option value="">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#LocalityId").val('').trigger('change');
+        $("#LocalityId").html(html);
+    });
+}
 
+function GetOtherDetails(id) {
+    
+    //HttpGet(`/WatchWard/GetOtherDetails/?propertyId=${id}`, 'json', function (response) {
+        debugger;
+        //$('#PlannedUnplanedDiv').show();
+        //var value = response.plannedUnplannedLand;
+        //if (value == 'Planned Land') {
+        //  //  $('#DivLandUse').show();
+        //    $('#divPlannedSelection').show();
+        //  //  $("#divLayoutPlan").show();
+        //    $('#divUnplannedSelection').hide();
+        //    callSelect2();
 
+        //    $("#PlannedUnplannedLand").val(response.plannedUnplannedLand);
+        //    $("#PlannedUnplannedLand").trigger('change');
+        //    $('#Colony').val(response.colony);
+        //    $('#Sector').val(response.sector);
+        //    $('#Block').val(response.block);
+        //    $('#Pocket').val(response.pocket);
+        //    $('#PlotNo').val(response.plotNo);
+        //}
+        //else {
+        // //   $('#DivLandUse').hide();
+        //    $('#divPlannedSelection').hide();
+        // //   $("#divLayoutPlan").hide();
+        //    $('#divUnplannedSelection').show();
+        //    callSelect2();
 
+        //  //  $(".link").attr('href', '/WatchWard/View/' + response.id);
+        //    $("#PlannedUnplannedLand").val(response.plannedUnplannedLand);
+        //    $("#PlannedUnplannedLand").trigger('change');
+        //    $("#LocalityId").val(response.localityId);
+        //    $("#LocalityId").trigger('change');
+        //    $('#KhasraNo').val(response.khasraNo);
+        //}
+
+        HttpGet(`/WatchWard/InventoryView/?Id=${id}`, 'html', function (response) {
+            $('#InventoryOtherDiv').html("");
+            $('#InventoryOtherDiv').html(response);
+        });
+    //});
+};
 $(function () {
     var dtToday = new Date();
 
@@ -72,3 +124,19 @@ function fileValidation(filePath, fileInput, size) {
     //}
 
 }
+
+function callSelect2() {
+    $("select").select2({
+        placeholder: "Select",
+        allowClear: true
+    });
+}
+
+$("#collapse").click(function () {
+    $('#collapseExample').collapse("toggle").promise().done(function () {
+        $("select").select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    })
+});

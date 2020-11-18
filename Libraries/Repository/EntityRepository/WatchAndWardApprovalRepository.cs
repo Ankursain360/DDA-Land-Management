@@ -29,6 +29,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
         {
             return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
+                .Include(x => x.PrimaryListNoNavigation)
+                .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);

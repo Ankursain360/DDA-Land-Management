@@ -35,6 +35,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(150)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Url)
+                   .HasMaxLength(150)
+                   .IsUnicode(false);
+
             builder.Property(e => e.ParentMenuId).HasColumnType("int(11)");
 
             builder.Property(e => e.SortBy).HasColumnType("int(11)");

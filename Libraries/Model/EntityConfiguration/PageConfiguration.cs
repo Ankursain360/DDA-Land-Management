@@ -41,10 +41,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.HasOne(d => d.Menu)
-                .WithMany(p => p.Page)
-                .HasForeignKey(d => d.MenuId)
-                .HasConstraintName("FkPageMenuId");
+            //builder.HasOne(d => d.Menu)
+            //    .WithMany(p => p.Page)
+            //    .HasForeignKey(d => d.MenuId)
+            //    .HasConstraintName("FkPageMenuId");
         }
     }
 }
