@@ -1,52 +1,53 @@
 ﻿@model System.Collections.Generic.IList<Dto.Component.SideNavDto>
 
-<aside class="left-menu small slow" id="leftMenu">
-    <div class="accordion" id="leftMenu">
-        @foreach (var menu in Model)
-        {
-            if (menu.Children.Any())
+@foreach (var menu in Model)
+{
+    if (menu.Children.Any())
+    {
+        <li>
+            @if (menu.ParentId == 0)
             {
-
-                <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button" aria-expanded="false" aria-controls="m0">
+                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
                     <i class="main-icon ri-dashboard-line"></i>
-                    <span class="text mr-auto">Dashboard</span>
+                    <span class="text mr-auto">@menu.Name</span>
                     <i class="arrow ri-arrow-drop-down-line slow"></i>
                 </a>
-                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m1" role="button" aria-expanded="false" aria-controls="m1">
-                    <i class="main-icon ri-group-line"></i>
-                    <span class="text mr-auto">Master</span>
-                    <i class="arrow ri-arrow-drop-down-line slow"></i>
-                </a>
-                <div class="collapse sub-menu" id="m1" data-parent="#leftMenu">
-                    <ul class="list-unstyled m-0 p-0">
-                        <li>
-                            <a href="/district" class="d-block">District</a>
-                        </li>
-                        <li>
-                            <a href="/notification" class="d-block">Notification</a>
-                        </li>
-                        <li>
-                            <a href="/classificationofland" class="d-block">Classification of land</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m3" role="button" aria-expanded="false" aria-controls="m3">
-                    <i class="main-icon ri-sound-module-line"></i>
-                    <span class="text mr-auto">System Configuration</span>
-                    <i class="arrow ri-arrow-drop-down-line slow"></i>
-                </a>
-                <div class="collapse sub-menu" id="m3" data-parent="#leftMenu">
-                    <ul class="list-unstyled m-0 p-0">
-                        <li>
-                            <a href="/module" class="d-block">Module</a>
-                        </li>
-                        <li>
-                            <a href="/page" class="d-block">Page</a>
-                        </li>
-                    </ul>
-                </div>
             }
-        }
-    </div>
-</aside>
+            else
+            {
+                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
+                    <i class="main-icon ri-dashboard-line"></i>
+                    <span class="text mr-auto">@menu.Name</span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+            }
+            @if (menu.ParentId == 0)
+            {
+                <ul class="collapse sub-menu list-unstyled m-0 p-0" id="m_@menu.Id">
+                    <partial name="Components/SideNav/SideNav" model="menu.Children" />
+                </ul>
+            }
+            else
+            {
+                <ul class="collapse sub-menu list-unstyled m-0 p-0" id="m_@menu.Id">
+                    <partial name="Components/SideNav/SideNav" model="menu.Children" />
+                </ul>
+            }
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @{
+                if (string.IsNullOrEmpty(menu.Url))
+                {
+                    <a href="javascript:void(0)" class="d-block">@menu.Name</a>
+                }
+                else
+                {
+                    <a href="@menu.Url" class="d-block">@menu.Name</a>
+                }
+            }
+        </li>
+    }
+}

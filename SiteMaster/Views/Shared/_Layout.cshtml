@@ -78,7 +78,12 @@
             </div>
         </header>
     </div>
-    @await Component.InvokeAsync("SideNav")
+    <aside class="left-menu small slow" id="leftMenu">
+        <ul class="accordion list-unstyled mb-0">
+            @await Component.InvokeAsync("SideNav")
+        </ul>
+    </aside>
+   
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray">
         <div class="container-fluid">
