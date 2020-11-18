@@ -34,8 +34,10 @@ namespace Libraries.Repository.EntityRepository
             
         }
 
-        public async Task<List<Menuactionrolemap>> GetMappedMenuWithAction(int moduleId, int roleId)
+        public async Task<List<Menu>> GetMappedMenuWithAction(int moduleId, int roleId)
         {
+            var result = await _dbContext.Menu.Include(a => a.Menuactionrolemap).ThenInclude(a=>a.Action)
+                .Where(a => a.ModuleId == moduleId).ToListAsync();
 
             var x = await _dbContext.Menuactionrolemap
                 .Include(a => a.Menu)
@@ -43,7 +45,7 @@ namespace Libraries.Repository.EntityRepository
                 .Where(a => a.Menu.ModuleId == moduleId
                         && a.RoleId == roleId)
                 .ToListAsync();
-            return x;
+            return result;
 
         }
     }

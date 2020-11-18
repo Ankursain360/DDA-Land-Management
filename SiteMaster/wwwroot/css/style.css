@@ -361,7 +361,7 @@ figcaption h6 {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 99
+    z-index: 999;
 }
 
 
@@ -434,6 +434,19 @@ figcaption h6 {
     font-size: 0.7rem;
     font-weight: 400;
     width: 200px;
+}
+
+.noti::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 1px;
+    height: 60%;
+    right: -.7rem;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .drop-detail {
@@ -1012,6 +1025,10 @@ footer.footer a {
     background-color: #ffe0e3;
 }
 
+textarea.floating-label-field--s3 {
+    min-height: 55px;
+}
+
 .floating-label-field--s3 {
     padding: .35rem .5rem;
     transition: border-color .25s ease-in-out;
@@ -1042,7 +1059,7 @@ footer.footer a {
 
 .floating-label-field--s3:focus ~ .floating-label,
 .floating-label-field--s3:not(:placeholder-shown) ~ .floating-label {
-    z-index: 2500;
+    z-index: 10;
     padding: .35rem;
     transform: translate(0, -.75rem) scale(.9);
     color: #2196F3;
@@ -1089,6 +1106,20 @@ footer.footer a {
     margin-left: -1rem;
     margin-right: -1rem;
     padding: .7rem 1.1rem;
+}
+
+.sub-heading {
+    font-weight: 800;
+    font-size: 14px;
+    padding: .4rem .1rem;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.search-filer h3.sub-heading {
+    background: rgb(255, 255, 255, 0);
+    border-bottom: 1px solid #dee2e6;
+    padding: .5rem 0.1rem;
+    margin: 0;
 }
 
 .search-filer .btn {
@@ -1245,6 +1276,39 @@ footer.footer a {
     }
 }
 
+
+.permission {
+    font-size: .8rem;
+}
+
+.permission .card {
+    border-radius: .3rem !important;
+    margin-bottom: .5rem !important;
+    border: 1px solid rgba(0, 0, 0, .125) !important;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.permission a {
+    color: #555;
+}
+
+.permission li.form-check {
+    margin-left: 1rem;
+    -ms-flex-align: center !important;
+    align-items: center !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+}
+
+.permission li.form-check .form-check-input {
+    margin-top: 0rem;
+    margin-left: -1.1rem;
+}
+
+
+.border-bottom:last-child {
+    border-bottom: 0px solid #dee2e6 !important;
+}
 
 
 

@@ -1,70 +1,90 @@
 ﻿@model System.Collections.Generic.IList<Dto.Master.PermissionDto>
 
-<ul class="treeview">
-    @foreach (var menu in Model)
+@foreach (var menu in Model)
+{
+    @if (menu.Children.Any())
     {
-        if (menu.Children.Any())
-        {
-            <li>
+        <ul class="accordion list-unstyled m-0" id="permission_@menu.Id">
+            <li class="card" id="sub-permission_@menu.Id">
                 @if (menu.ParentId == 0)
                 {
-                    <span class="tree-caret">@menu.Name</span>
+                    <a class="p-2 no-dec d-flex align-items-center" 
+                       data-toggle="collapse" 
+                       href="#p_@menu.Id" 
+                       role="button" 
+                       aria-expanded="true" 
+                       aria-controls="p_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
                 }
                 else
                 {
-                    <span class="tree-caret">@menu.Name</span>
+                    <a class="p-2 no-dec d-flex align-items-center" 
+                       data-toggle="collapse" 
+                       href="#p_@menu.Id" 
+                       role="button" 
+                       aria-expanded="true" 
+                       aria-controls="p_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
                 }
                 @if (menu.ParentId == 0)
                 {
-                    <ul class="nested">
+                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
                 else
                 {
-                    <ul class="nested">
+                    <ul class="list-unstyled m-0 pl-2 pr-1 pl-md-4 pr-md-3 collapse show">
                         <partial name="Components/Permission/Permission" model="menu.Children" />
                     </ul>
                 }
             </li>
-        }
-        else
-        {
-            <li>
-                @{
-                    if (menu.Children.Count == 0)
-                    {
-                        <span>@menu.Name</span>
-                        <ul class="treeviewActions">
-                            @foreach (var item in menu.Actions)
-                            {
-                                <li>
-                                    <div class="custom-control custom-checkbox">
-                                        @if (item.IsAvailable == false)
-                                        {
-                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction" disabled="disabled">
-                                        }
-                                        else if (item.IsActive == 1)
-                                        {
-                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction" checked="checked">
-                                        }
-                                        else
-                                        {
-                                            <input type="checkbox" id="@item.ActionId,@item.MenuId" class="custom-control-input chkAction">
-                                        }
-
-                                        <label class="custom-control-label" for="@item.ActionId,@item.MenuId">@item.ActionName</label>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                    }
-                    else
-                    {
-                        <span class="tree-caret">@menu.Name</span>
-                    }
-                }
-            </li>
-        }
+        </ul>
     }
-</ul>
+    else
+    {
+        <li class="border-bottom d-md-flex align-items-center">
+            @{
+                if (menu.Children.Count == 0)
+                {
+                    <a href="/" class="d-block no-dec p-2 mr-auto">@menu.Name</a>
+                    <ul class="list-unstyled m-0 p-0 d-lg-flex align-items-center">
+                        @foreach (var item in menu.Actions)
+                        {
+                            <li class="form-check">
+                                @if (item.IsAvailable == true)
+                                {
+                                    <input type="checkbox" class="form-check-input chkAction" id="@item.ActionId,@menu.Id" checked="checked" />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="@item.ActionId,@menu.Id" class="form-check-input chkAction" />
+                                }
+
+                                <label class="form-check-label" for="@item.ActionId,@menu.Id">@item.ActionName</label>
+                            </li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <a class="p-2 no-dec d-flex align-items-center"
+                       data-toggle="collapse" href="#p_@menu.Id"
+                       role="button"
+                       aria-expanded="true"
+                       aria-controls="p_@menu.Id">
+                        <i class="ri-arrow-right-s-fill"></i>
+                        <span class="text ml-1 mr-auto">@menu.Name</span>
+                        <i class="arrow ri-arrow-drop-down-line slow"></i>
+                    </a>
+                }
+            }
+        </li>
+    }
+}
