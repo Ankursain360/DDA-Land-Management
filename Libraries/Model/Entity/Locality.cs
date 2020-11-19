@@ -1,14 +1,12 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Libraries.Model.Entity
 {
-    public class Locality:AuditableEntity<int>
+    public class Locality : AuditableEntity<int>
     {
         public Locality()
         {
@@ -17,6 +15,7 @@ namespace Libraries.Model.Entity
             Watchandward = new HashSet<Watchandward>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Propertyregistration = new HashSet<Propertyregistration>();
+            MonthlyRoaster = new HashSet<MonthlyRoaster>();
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -42,9 +41,9 @@ namespace Libraries.Model.Entity
         public virtual Zone Zone { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
-        [NotMapped] 
+        [NotMapped]
         public List<Department> DepartmentList { get; set; }
-        [NotMapped] 
+        [NotMapped]
         public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
@@ -53,6 +52,7 @@ namespace Libraries.Model.Entity
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+        public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
 
     }
 }

@@ -6,5 +6,7 @@ namespace Libraries.Model.Entity
     {
         public int DailyRoasterId { get; set; }
         public int PropertyRegistrationId { get; set; }
+        public DailyRoaster DailyRoaster { get; set; }
+        public Propertyregistration PropertyRegistration { get; set; }
     }
 }

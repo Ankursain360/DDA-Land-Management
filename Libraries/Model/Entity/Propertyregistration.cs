@@ -1,11 +1,9 @@
-﻿using System;
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Libraries.Model.Common;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Libraries.Model.Entity;
 namespace Libraries.Model.Entity
 {
     public class Propertyregistration : AuditableEntity<int>
@@ -21,7 +19,7 @@ namespace Libraries.Model.Entity
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             PlanningProperties = new HashSet<PlanningProperties>();
             Watchandward = new HashSet<Watchandward>();
-
+            AssignedPropertyDailyRoaster = new HashSet<AssignedPropertyDailyRoaster>();
         }
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
@@ -37,7 +35,7 @@ namespace Libraries.Model.Entity
 
         [Required(ErrorMessage = "Division is Mandatory Field")]
         public int DivisionId { get; set; }
-        
+
         public int? LocalityId { get; set; }
 
         [StringLength(200)]
@@ -61,7 +59,7 @@ namespace Libraries.Model.Entity
         public decimal? TotalAreaInSqAcreHt { get; set; }
 
 
-      //  [Required(ErrorMessage = "Total Area is Mandatory Field")]
+        //  [Required(ErrorMessage = "Total Area is Mandatory Field")]
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? TotalArea { get; set; }
@@ -91,7 +89,7 @@ namespace Libraries.Model.Entity
         [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
         [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Encroached; Max 18 digits")]
         public decimal? Encroached { get; set; }
-       
+
         public int? MainLandUseId { get; set; }
 
         [StringLength(500)]
@@ -187,6 +185,7 @@ namespace Libraries.Model.Entity
         public Department TakenOverDepartment { get; set; }
         public Division TakenOverDivision { get; set; }
         public Zone TakenOverZone { get; set; }
+        public virtual ICollection<AssignedPropertyDailyRoaster> AssignedPropertyDailyRoaster { get; set; }
         public virtual ICollection<PlanningProperties> PlanningProperties { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
 

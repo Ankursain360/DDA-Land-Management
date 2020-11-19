@@ -1,10 +1,8 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Libraries.Model.Entity
 {
@@ -17,6 +15,7 @@ namespace Libraries.Model.Entity
             LandtransferTakenOverDivision = new HashSet<Landtransfer>();
             Locality = new HashSet<Locality>();
             Nazulland = new HashSet<Nazulland>();
+            MonthlyRoaster = new HashSet<MonthlyRoaster>();
             PropertyregistrationDivision = new HashSet<Propertyregistration>();
             PropertyregistrationHandedOverDivision = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverDivision = new HashSet<Propertyregistration>();
@@ -44,14 +43,14 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
-      //  public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        //  public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverDivision { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverDivision { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
         public ICollection<Nazulland> Nazulland { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
-
+        public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationDivision { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationHandedOverDivision { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverDivision { get; set; }

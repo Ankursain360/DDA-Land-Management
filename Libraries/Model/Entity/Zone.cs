@@ -1,14 +1,13 @@
-﻿using System;
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Libraries.Model.Common;
-using Microsoft.AspNetCore.Mvc;
-using Model.Entity;
 
 namespace Libraries.Model.Entity
 {
-    
+
     public class Zone : AuditableEntity<int>
     {
         public Zone()
@@ -21,6 +20,7 @@ namespace Libraries.Model.Entity
             Planning = new HashSet<Planning>();
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Locality = new HashSet<Locality>();
+            MonthlyRoaster = new HashSet<MonthlyRoaster>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
         }
 
@@ -41,7 +41,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string DepartmentName { get; set; }
 
-        public virtual Department  Department{ get; set; }
+        public virtual Department Department { get; set; }
         public virtual ICollection<Village> Village { get; set; }
 
         [NotMapped]
@@ -49,13 +49,14 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
-      //  public ICollection<Propertyregistration> Propertyregistration { get; set; }
+        //  public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<Landtransfer> LandtransferTakenOverZone { get; set; }
         public virtual ICollection<Landtransfer> LandtransferHandedOverZone { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; internal set; }
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public virtual ICollection<Division> Division { get; set; }
         public virtual ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
+        public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationHandedOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationTakenOverZone { get; set; }
         public ICollection<Propertyregistration> PropertyregistrationZone { get; set; }

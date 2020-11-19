@@ -1,9 +1,16 @@
 ﻿using Libraries.Model.Common;
+using Model.Entity;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
     public class MonthlyRoaster : AuditableEntity<int>
     {
+        public MonthlyRoaster()
+        {
+            Dailyroaster = new HashSet<DailyRoaster>();
+        }
         public int DepartmentId { get; set; }
         public int ZoneId { get; set; }
         public int DivisionId { get; set; }
@@ -11,5 +18,25 @@ namespace Libraries.Model.Entity
         public int SecurityGuard { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
+
+        public Department Department { get; set; }
+        public Division Division { get; set; }
+        public Locality LocalityNavigation { get; set; }
+        public Userprofile SecurityGuardNavigation { get; set; }
+        public Zone Zone { get; set; }
+        public ICollection<DailyRoaster> Dailyroaster { get; set; }
+
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+        [NotMapped]
+        public List<Division> DivisionList { get; set; }
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Userprofile> UserprofileList { get; set; }
+        [NotMapped]
+        public List<Propertyregistration> PropertyregistrationList { get; set; }
     }
 }
