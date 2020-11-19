@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace EncroachmentDemolition.Components
+namespace SiteMaster.Components
 {
     public class PageHeaderViewComponent : ViewComponent
     {

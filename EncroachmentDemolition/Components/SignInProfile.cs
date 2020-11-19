@@ -1,10 +1,10 @@
 ﻿using Dto.Master;
+using EncroachmentDemolition.Helper;
 using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
-using EncroachmentDemolition.Helper;
 using System.Threading.Tasks;
 
-namespace EncroachmentDemolition.Components
+namespace SiteMaster.Components
 {
     public class SignInProfileViewComponent : ViewComponent
     {
