@@ -1,4 +1,165 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model Libraries.Model.Entity.Watchandward
+@{int Photo = 0;}
+@{int ReportFile = 0;}
+
+
+<a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
+    <div class="row" style="margin-bottom:35px;">
+        <div class="col-sm-12">
+            <div class="dda-innerheading">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Watch & Ward Details</h6>
+                    <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+<div class="collapse" id="collapseApprroval">
+    <form asp-action="Edit" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
+                <input asp-for="Date" type="date" id="txtDate" class="form-control" disabled />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+        </div>
+        <div id="DivPrimaryList">
+            <div class="row" style="margin-bottom:35px;">
+                <div class="col-sm-12">
+                    <div class="dda-innerheading">
+                        <div class="col-md-12">
+                            <h6 class="pull-left color-white" style="margin-top:5px;">Primary List No. and other details</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label class="control-label lb-sm">Primary List No.</label><span style="color:red">*</span>
+                    <select class="form-control dda-dropdown" asp-for="PrimaryListNo" disabled asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
+                        <option value="">--Select--</option>
+                    </select>
+                    <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
+                </div>
+
+            </div>
+
+
+            <div id="InventoryOtherDiv">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm">Land Mark</label><span style="color:red">*</span>
+                <input asp-for="Landmark" type="text" class="form-control" disabled />
+                <span asp-validation-for="Landmark" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm"> Encroachment</label><span style="color:red">*</span>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline  ">
+                            <input type="radio" asp-for="Encroachment" disabled name="grpDamageAssesseeType" value="1" checked>Yes
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" asp-for="Encroachment" disabled name="grpDamageAssesseeType" value="0">No
+                        </label>
+                    </div>
+                </div>
+                <span asp-validation-for="Encroachment" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
+                <textarea asp-for="StatusOnGround" type="text" disabled class="form-control"></textarea>
+                <span asp-validation-for="StatusOnGround" class="text-danger"></span>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm">Photo (<span style="color:red;"> max size: 5 mb</span>)</label>
+                @{
+                    if (Model.Watchandwardphotofiledetails != null && Model.Watchandwardphotofiledetails.Count > 0)
+                    {
+                        <br />
+                        foreach (var item in Model.Watchandwardphotofiledetails)
+                        {
+                            <a asp-action="ViewDocument"  asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+
+                            if (item.LattLongUrl != null)
+                            {
+                                <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
+                            }
+                            <br />
+                        }
+                    }
+                    else
+                    {
+
+                    }
+                }
+
+
+
+
+            </div>
+            <div class="form-group col-md-6" style="display:none;">
+                <label class="control-label lb-sm">Report</label>
+                @{
+                    if (Model.Watchandwardreportfiledetails != null && Model.Watchandwardreportfiledetails.Count > 0)
+                    {
+                        <br />
+                        foreach (var item in Model.Watchandwardreportfiledetails)
+                        {
+                            <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                            <br />
+                        }
+                    }
+                    else
+                    {
+                    }
+                }
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="form-group col-md-6" style="display:none;">
+                <label class="control-label lb-sm">Status</label>
+                <select asp-for="IsActive" class="form-control dda-dropdown">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-12" style="display:none;">
+                <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
+                <textarea asp-for="Remarks" type="text" class="form-control"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+            </div>
+
+        </div>
+    </form>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
+<environment include="Development">
+    <script src="~/js/watchwardedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/watchwardedit.min.js" asp-append-version="true"></script>
+</environment>

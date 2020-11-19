@@ -423,6 +423,14 @@ namespace EncroachmentDemolition.Controllers
             return Json(await _watchandwardService.GetAllLocality());
         }
 
+        public async Task<FileResult> ViewDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.PhotoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
 
         #region View Details of Property Inventory
 

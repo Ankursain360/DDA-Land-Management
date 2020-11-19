@@ -4,8 +4,11 @@ using Libraries.Repository.EntityRepository;
 using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
-using Model.Entity;
-using Microsoft.AspNetCore.Identity;
+using Repository.IEntityRepository;
+using Repository.EntityRepository;
+using Service.IApplicationService;
+using Service.ApplicationService;
+using EncroachmentDemolition.Helper;
 
 namespace EncroachmentDemolition.Infrastructure.Extensions
 {
@@ -15,6 +18,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
         {
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<ISiteContext, SiteContext>();
 
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
@@ -25,6 +29,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IAnnexureARepository, AnnexureARepository>();
             services.AddScoped<IDemolitionstructuredetailsRepository, DemolitionStructureDetailsRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -35,6 +40,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IAnnexureAService, AnnexureAService>();
             services.AddScoped<IDemolitionstructuredetailsService, DemolitionstructuredetailsService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
         }
     }
 }

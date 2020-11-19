@@ -19,74 +19,10 @@
         <div class="panel-body">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
 
-                <div id="DivLandTransferDetails">
-                    <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                        <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class="dda-innerheading">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Watch & Ward Details</h6>
-                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <div class="collapse" id="collapseExample">
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Date</label><span style="color:red">*</span>
-                                <input type="date" asp-for="Date" class="form-control" />
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Locality (Village) Name</label>
-                                <select class="form-control destroy" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                                    <option value="">Select</option>
-                                </select>
-                            </div>
+                <div id="WatchWardDetailsDiv">
 
-
-                        </div>
-
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Khasra No.</label>
-                                <select class="form-control destroy" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
-                                    <option value="">Select</option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Land Mark</label><span style="color:red">*</span>
-                                <input type="text" asp-for="Landmark" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Status on Ground</label><span style="color:red">*</span>
-                                <textarea type="text" class="form-control" asp-for="StatusOnGround"></textarea>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Photos</label><br />
-                                @{
-                                    if (Model.PhotoPath != null && Model.PhotoPath != string.Empty)
-                                    {
-                                        <img src="@Model.PhotoPath" class="mx-auto d-block">
-                                    }
-                                    else
-                                    {
-                                        <img src="@Model.PhotoPath" class="mx-auto d-block">
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
-                                <label class="control-label lb-sm">Remarks</label><span style="color:red"></span>
-                                <textarea type="text" class="form-control"></textarea>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <br />
                 <div class="row">
@@ -109,7 +45,7 @@
                     <div class="form-group col-md-12" style="margin-bottom:40px;">
                         <input type="submit" value="Submit" class="btn btn-primary dda-pageheading" />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "WatchWardApproval", "WatchWard", null, new { @class = "btn btn-primary dda-pageheading" })
+                        @Html.ActionLink("Back", "Index", "WatchWardApproval", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
 
@@ -118,8 +54,8 @@
     </div>
 </div>
 <environment include="Development">
-    <script src="~/js/watchAndWardApproval.js"></script>
+    <script src="~/js/watchandwardapproval.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/watchAndWardApproval.min.js" asp-append-version="true"></script>
+    <script src="~/js/watchandwardapproval.min.js" asp-append-version="true"></script>
 </environment>

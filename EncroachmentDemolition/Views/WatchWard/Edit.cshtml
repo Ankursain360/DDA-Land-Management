@@ -102,10 +102,10 @@
                             </div>
                         </div>
                         @*<select class="form-control" asp-for="Encroachment">
-            <option value="">---Select---</option>
-            <option value="1">Yes</option>
-            <option value="0">No</option>
-        </select>*@
+                                <option value="">---Select---</option>
+                                <option value="1">Yes</option>
+                                <option value="0">No</option>
+                            </select>*@
                         <span asp-validation-for="Encroachment" class="text-danger"></span>
                     </div>
 
@@ -131,7 +131,7 @@
                                 <br />
                                 foreach (var item in Model.Watchandwardphotofiledetails)
                                 {
-                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(Photo += 1 ))</a>
+                                    <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
 
                                     if (item.LattLongUrl != null)
                                     {

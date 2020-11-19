@@ -8,16 +8,6 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Name" type="text"
-                           class="floating-label-field floating-label-field--s3"
-                           placeholder="Menu Name"
-                           limit="200">
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                    <label class="floating-label">Menu Name</label>
-                </div>
-            </div>
-            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ModuleId"
@@ -32,15 +22,13 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3"
                             asp-for="ParentMenuId"
-                            asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
+                            asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select--</option>
                     </select>
                     <label asp-validation-for="ModuleId" class="error"></label>
                     <label asp-for="ParentMenuId" class="floating-label">Parent Menu</label>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" type="text"
@@ -51,6 +39,9 @@
                     <label class="floating-label">Menu Name</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
+            
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="SortBy" type="number"

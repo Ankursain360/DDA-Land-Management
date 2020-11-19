@@ -9,7 +9,6 @@ $(document).ready(function () {
 
 
 function GetOtherDetails(id) {
-    debugger;
     HttpGet(`/WatchWard/InventoryView/?Id=${id}`, 'html', function (response) {
         $('#InventoryOtherDiv').html("");
         $('#InventoryOtherDiv').html(response);
@@ -63,6 +62,7 @@ function callSelect2() {
 }
 
 $("#collapse").click(function () {
+    debugger;
     $('#collapseExample').collapse("toggle").promise().done(function () {
         $("select").select2({
             placeholder: "Select",
