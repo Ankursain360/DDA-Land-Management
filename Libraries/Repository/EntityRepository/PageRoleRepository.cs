@@ -27,8 +27,8 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<bool> AddPageRole(PageRole pageRole)
         {
-            _dbContext.PageRole.Add(pageRole);
-            var result=await _dbContext.SaveChangesAsync();
+           // _dbContext.PageRole.Add(pageRole);
+            var result = 1;
             return result > 0 ? true : false;
         }
 
@@ -45,12 +45,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<bool> DeletePageRole(PageRole pageRole)
         {
-            var data =await _dbContext.PageRole.Where(x => x.RoleId == pageRole.RoleId && x.ModuleId == pageRole.ModuleId && x.UserId==pageRole.UserId).ToListAsync();
-            foreach (var userWise in data)
-            {
-                _dbContext.Remove(userWise);
-            }
-            var result = await _dbContext.SaveChangesAsync();
+            
+            var result = 1;
             return result > 0 ? true : false;
         }
 
@@ -61,7 +57,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<PageRole>> GetAllPageRole()
         {
-            return await _dbContext.PageRole.Include(x=>x.Role).Include(x=>x.User).ToListAsync();
+            return new List<PageRole>();
         }
 
         public async Task<List<Role>> GetAllRole()

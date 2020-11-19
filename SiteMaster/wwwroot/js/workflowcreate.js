@@ -49,7 +49,7 @@ function GetLevelDetails() {
         var param = GetSearchParam();
         HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
             $('#LoadReportView').append(response);
-
+            debugger;
             var i = 0;
             $(".ParameterNameListClass").each(function () {
                 $(this).removeAttr("name");
@@ -265,6 +265,7 @@ $("#btnCreate").click(function () {
         var param = GetListData();
         HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
             debugger;
+            SuccessMessage('Data updated successfully.');
             window.location.href = response;  //'/WorkFlowTemplate/Index';
         });
     }

@@ -1,6 +1,5 @@
 ﻿using Dto.Search;
 using Libraries.Model;
-using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
@@ -17,7 +16,8 @@ namespace Repository.EntityRepository
         {
         }
 
-        public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model) {
+        public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)
+        {
 
             var result = await _dbContext.Userprofile
                                     .Include(a => a.User)
@@ -25,7 +25,7 @@ namespace Repository.EntityRepository
                                     .Include(a => a.Department)
                                     .Include(a => a.Zone)
                                     .Include(a => a.District)
-                                    .Where(a=> (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
+                                    .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
                                         && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
@@ -62,7 +62,7 @@ namespace Repository.EntityRepository
                                     .Include(a => a.Department)
                                     .Include(a => a.Zone)
                                     .Include(a => a.District)
-                                    .Where(a => a.IsActive == 1 && a.User.Id==userId)
+                                    .Where(a => a.IsActive == 1 && a.User.Id == userId)
                                     .FirstOrDefaultAsync();
         }
 
@@ -73,7 +73,7 @@ namespace Repository.EntityRepository
 
         public async Task<List<ApplicationRole>> GetActiveRole()
         {
-            return await _dbContext.Roles.Where(a=>a.IsActive == 1).AsNoTracking().ToListAsync();
+            return await _dbContext.Roles.Where(a => a.IsActive == 1).AsNoTracking().ToListAsync();
         }
 
         public async Task<bool> ValidateUniqueRoleName(int id, string name)

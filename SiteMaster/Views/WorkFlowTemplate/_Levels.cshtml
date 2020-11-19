@@ -93,35 +93,35 @@
                                         <div class="col-md-10">
                                             <h6 class="pull-left color-white py-2 px-3" style="align-content:center;"><span class="sn">Level 1</span></h6>
                                         </div>
-                                            <div class="col-md-2">
-                                                <a class="btn btn-danger pull-right delete-record py-2" data-id="0">Delete</a>
+                                        <div class="col-md-2">
+                                            <a class="btn btn-danger pull-right delete-record py-2" data-id="0">Delete</a>
 
-
-                                            </div>
 
                                         </div>
+
                                     </div>
                                 </div>
+                            </div>
                         </div>
                         <div class="row">
-                         
+
                             <div class=" col-md-2">
                                 <br />
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled
-                                           class="floating-label-field floating-label-field--s3" />
+                                           class="floating-label-field floating-label-field--s3 inputclass ParameterLevelListClass" />
                                     @*<span asp-validation-for="Description" class="text-danger"></span>*@
                                     <label class="floating-label">Level  </label>
                                 </div>
 
 
                                 @*<label class="control-label lb-sm">Level</label>
-        <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />*@
+                                    <input asp-for="ParameterLevelList[0]" type="text" id="parameterLevel" value="1" disabled class="form-control inputclass ParameterLevelListClass" />*@
                             </div>
                             <div class=" col-md-2">
                                 <br />
                                 <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3" asp-for="ParameterValueList[0]"
+                                    <select class="floating-label-field floating-label-field--s3 ParameterValueListClass" asp-for="ParameterValueList[0]"
                                             id="ddlOperationType" onchange="callTypeDropdown(0);">
 
                                         <option value="Role">Role Wise</option>
@@ -134,18 +134,18 @@
 
 
                                 @*<label class="control-label lb-sm">User Type</label>
-        <select asp-for="ParameterValueList[0]" class="form-control dda-dropdown ParameterValueListClass"
-                id="ddlOperationType" onchange="callTypeDropdown(0);">
-            <option value="Role">Role Wise</option>
-            <option value="User">User Wise</option>
-        </select>*@
+                                    <select asp-for="ParameterValueList[0]" class="form-control dda-dropdown ParameterValueListClass"
+                                            id="ddlOperationType" onchange="callTypeDropdown(0);">
+                                        <option value="Role">Role Wise</option>
+                                        <option value="User">User Wise</option>
+                                    </select>*@
                             </div>
                             <div class="col-md-2">
                                 <br />
                                 <div class="floating-label-wrap">
-                                   
+
                                     <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))"
-                                            class="floating-label-field floating-label-field--s3" id="dropdownlistDesrtoy">
+                                            class="floating-label-field floating-label-field--s3 dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
                                         <option value="0">--Select--</option>
                                     </select>
                                     @*<span  class="text-danger"></span>*@
@@ -155,41 +155,41 @@
 
 
                                 @*<label class="control-label lb-sm nameClass" name="ParameterLabelNameList[0]">Role Name</label>
-                                <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))" 
-                                        class="form-control dda-dropdown dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
-                                    <option value="0">--Select--</option>
-                                </select>*@
+                                    <select asp-for="ParameterNameList[0]" asp-items="@(new SelectList(ViewBag.Items,"Id","Name"))"
+                                            class="form-control dda-dropdown dropdownclass ParameterNameListClass" id="dropdownlistDesrtoy">
+                                        <option value="0">--Select--</option>
+                                    </select>*@
                             </div>
                             @*<div class="form-group col-md-2">
                                     <label class="control-label lb-sm">Parameter Value</label>
                                     <input asp-for="ParameterValueList[0]" type="text" id="parameterValue" class="form-control inputclass ParameterValueListClass" />
                                 </div>*@
-                        <div class="col-md-5">
-                            <br />
-                            <div class="floating-label-wrap">
-                                <select asp-for="ParameterActionList[0]" class="floating-label-field floating-label-field--s3" id="ddlActionType">
-                                    <option value="1">Forward</option>
-                                    <option value="3">Approved</option>
-                                    <option value="2">Revert</option>
-                                </select>
-                                @*<span  class="text-danger"></span>*@
-                                <label class="floating-label">Action Taken</label>
+                            <div class="col-md-5">
+                                <br />
+                                <div class="floating-label-wrap">
+                                    <select asp-for="ParameterActionList[0]" class="floating-label-field floating-label-field--s3 drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
+                                        <option value="1">Forward</option>
+                                        <option value="2">Revert</option>
+                                        <option value="3">Approved</option>
+                                    </select>
+                                    @*<span  class="text-danger"></span>*@
+                                    <label class="floating-label">Action Taken</label>
+                                </div>
+
+
+                                @*<label class="control-label lb-sm">Action Taken</label>
+                                    <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
+                                        <option value="1">Forward</option>
+                                        <option value="3">Approved</option>
+                                        <option value="2">Revert</option>
+                                    </select>*@
                             </div>
-
-
-                            @*<label class="control-label lb-sm">Action Taken</label>
-                            <select asp-for="ParameterActionList[0]" class="form-control dda-dropdown drpactiontakenclass dropdownclass ParameterActionListClass" id="ddlActionType">
-                                <option value="1">Forward</option>
-                                <option value="3">Approved</option>
-                                <option value="2">Revert</option>
-                            </select>*@
-                        </div>
                             <div class="form-group col-md-1">
                                 <div class="form-group">
                                     <label class="control-label lb-sm">Skip</label>
                                     <div class="checkbox checbox-switch switch-primary">
                                         <label>
-                                             <input type="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" class="ParameterSkipListClass"  />
+                                            <input type="checkbox" asp-for="ParameterSkipList[0]" id="paramenterSkip" class="ParameterSkipListClass" />
                                             <span></span>
                                         </label>
                                     </div>

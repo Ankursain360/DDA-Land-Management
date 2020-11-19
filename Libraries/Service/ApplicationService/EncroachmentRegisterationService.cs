@@ -82,6 +82,7 @@ namespace Libraries.Service.ApplicationService
             model.SecurityGuardOnDuty = encroachmentRegisteration.SecurityGuardOnDuty;
             model.StatusOfLand = encroachmentRegisteration.StatusOfLand;
             model.ZoneId = encroachmentRegisteration.ZoneId;
+            model.EncroacherName = encroachmentRegisteration.EncroacherName;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             model.IsActive = 1;

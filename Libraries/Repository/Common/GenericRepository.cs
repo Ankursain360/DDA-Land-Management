@@ -59,15 +59,9 @@ namespace Libraries.Repository.Common
             throw new NotImplementedException();
         }
 
-        //public object Any(Func<object, bool> p)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //public async  Task<List<T>> Any(int id, Func<object, bool> p)
-        //{
-        //    var result =await _dbContext.Designation.Any(t => t.Id != id && t.Name ==);
-        //    return result;
-        //}
+        public void RemoveRange(List<T> entities)
+        {
+            _dbset.RemoveRange(entities);
+        }
     }
 }

@@ -2,84 +2,76 @@
 @{int rowNo = 0; }
 
 
-@*<div class="card  table-card table-responsive">
-    <table class="table table-responsive table-bordered table-card">*@
-<table class="table table-sm table-bordered mb-0 table-striped">
-    <thead class="text-nowrap">
-
-    @*<thead class="thead">*@
-
-        <tr>
-            <th rowspan="2">Sr.No</th>
-            <th rowspan="2">Inventoried In</th>
-            <th rowspan="2">Planned/Unplanned Land</th>
-            <th rowspan="2">Classification of Land</th>
-            <th>Department</th>
-            <th rowspan="2">Zone </th>
-            <th rowspan="2">Division </th>
-            <th rowspan="2">Locality(Village) </th>
-            <th rowspan="2">Khasra Number</th>
-            <th>Plot No. & Address with Landmark</th>
-            <th rowspan="2">Primary List No </th>
-            <th rowspan="2">Area (In SQM) </th>
-            <th rowspan="2">Restore Reason</th>
-            <th rowspan="2">Restore Date</th>
-            <th rowspan="2"> View Details</th>
-        </tr>
-
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Results)
-        {
-        <tr>
+<div class="card  table-card table-responsive">
+    <table class="table table-responsive table-bordered table-card">
 
 
-            <td>@(rowNo += 1)</td>
-            <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
-            <td>@(item.PlannedUnplannedLand)</td>
-            <td>@item.ClassificationOfLand.Name</td>
-            <td>@item.Department.Name</td>
-            <td>@item.Zone.Name</td>
-            <td>@item.Division.Name</td>
-            <td>@(item.LocalityId == null ? "" :  item.Locality.Name)</td>
-            <td>@item.KhasraNo</td>
-            <td>@item.Palandmark</td>
-            <td>@item.PrimaryListNo</td>
-            <td>@item.TotalArea</td>
-            <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreReason)</td>
-            <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreDate.ToString("dd-MMM-yyyy"))</td>
-            @*<td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>*@
-            <td>
-                <div class="action-btns">
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                    
-                </div>
+        <thead class="thead">
 
-            </td>
-            @*<td>@(item.Restoreproperty==null?"Not Available":item.Restoreproperty.RestoreReason)</td>
+            <tr>
+                <th rowspan="2">Sr.No</th>
+                <th rowspan="2">Inventoried In</th>
+                <th rowspan="2">Planned/Unplanned Land</th>
+                <th rowspan="2">Classification of Land</th>
+                <th>Department</th>
+                <th rowspan="2">Zone </th>
+                <th rowspan="2">Division </th>
+                <th rowspan="2">Locality(Village) </th>
+                <th rowspan="2">Khasra Number</th>
+                <th>Plot No. & Address with Landmark</th>
+                <th rowspan="2">Primary List No </th>
+                <th rowspan="2">Area (In SQM) </th>
+                <th rowspan="2">Restore Reason</th>
+                <th rowspan="2">Restore Date</th>
+                <th rowspan="2"> View Details</th>
+            </tr>
+
+        </thead>
+        <tbody class="tbody">
+            @foreach (var item in Model.Results)
+            {
+            <tr>
+
+
+                <td>@(rowNo += 1)</td>
+                <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
+                <td>@(item.PlannedUnplannedLand)</td>
+                <td>@item.ClassificationOfLand.Name</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Zone.Name</td>
+                <td>@item.Division.Name</td>
+                <td>@item.Locality.Name</td>
+                <td>@item.KhasraNo</td>
+                <td>@item.Palandmark</td>
+                <td>@(item.PrimaryListNo == null ? "" : item.PrimaryListNo)</td>
+                <td>@item.TotalArea</td>
+                <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreReason)</td>
+                <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreDate.ToString("dd-MMM-yyyy"))</td>
+                <td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>
+                @*<td>@(item.Restoreproperty==null?"Not Available":item.Restoreproperty.RestoreReason)</td>
         <td>@(item.Restoreproperty==null?"Not Available":Convert.ToDateTime(item.Restoreproperty.RestoreDate).ToString("dd-MMM-yyyy"))</td>*@
 
 
-            @*asp-action="View" asp-route-id="@item.Id"*@
-            @*<td>
+                @*asp-action="View" asp-route-id="@item.Id"*@
+                @*<td>
             <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
 
         </td>*@
-        </tr>
-        }
-
-
-        @if (Model.Results.Count <= 0)
-        {
-            <tr>
-                <th style="text-align:center" colspan="999">
-                    Data Not Available
-                </th>
             </tr>
-        }
-    </tbody>
+            }
 
-</table>
 
-@*</div>*@
+            @if (Model.Results.Count <= 0)
+            {
+                <tr>
+                    <th style="text-align:center" colspan="999">
+                        Data Not Available
+                    </th>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

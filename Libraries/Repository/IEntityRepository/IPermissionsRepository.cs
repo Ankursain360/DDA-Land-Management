@@ -7,7 +7,8 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface IPermissionsRepository : IGenericRepository<Menuactionrolemap>
     {
-        Task GetPermission(int moduleId, int roleId);
+        Task<List<Menuactionrolemap>> GetPermission(int moduleId, int roleId);
         Task<List<Module>> GetModuleList();
+        Task<List<Menu>> GetMappedMenuWithAction(int moduleId, int roleId);
     }
 }

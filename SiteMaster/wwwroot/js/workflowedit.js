@@ -355,6 +355,8 @@ $(function () {
         if (checkresult) {
             var param = GetListData();
             HttpPost(`/WorkFlowTemplate/Edit`, 'json', param, function (response) {
+                debugger;
+                SuccessMessage('Data updated successfully.');
                 window.location.href = response; 
             });
         }

@@ -20,6 +20,8 @@ namespace Libraries.Model.Entity
             Landtransfer = new HashSet<Landtransfer>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             PlanningProperties = new HashSet<PlanningProperties>();
+            Watchandward = new HashSet<Watchandward>();
+
         }
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
@@ -271,5 +273,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public int unverifiedverfied { get; set; }
+
+        public ICollection<Watchandward> Watchandward { get; set; }
     }
 }

@@ -1,8 +1,6 @@
 ﻿@*@model DDAPropertyREG.Models.Tblzonemaster*@
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+@{ ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml"; }
 <style>
     /** {box-sizing: border-box;}*/
     ul {
@@ -135,20 +133,20 @@
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Month    </label>
 
-                        <select required style="height:30px;  background-color: #dddddd;" class="form-control">
+                        <select id="Month" required style="height:30px;  background-color: #dddddd;" class="form-control">
 
-                            <option value="value">June</option>
-                            <option value="value">July</option>
-                            <option value="value">August</option>
-                            <option value="value">September</option>
-                            <option value="value">October</option>
-                            <option value="value">November</option>
-                            <option value="value">December</option>
-                            <option value="value">jan</option>
-                            <option value="value">Feb</option>
-                            <option value="value">March</option>
-                            <option value="value">April</option>
-                            <option value="value">May</option>
+                            <option value="6">June</option>
+                            <option value="7">July</option>
+                            <option value="8">August</option>
+                            <option value="9">September</option>
+                            <option value="10">October</option>
+                            <option value="11">November</option>
+                            <option value="12">December</option>
+                            <option value="1">jan</option>
+                            <option value="2">Feb</option>
+                            <option value="3">March</option>
+                            <option value="4">April</option>
+                            <option value="5">May</option>
 
                         </select>
                     </div>
@@ -166,173 +164,161 @@
                 <br />
 
                 <div class="form-row">
+                    <div id="dialog"></div>
                     @*<div class="form-group col-md-1"></div>*@
-                    <div class="form-group col-md-12">
-                        <div class="month">
-                            <ul>
-                                <li class="prev">&#10094;</li>
-                                <li class="next">&#10095;</li>
-                                <li>
-                                    june<br>
-                                    <span style="font-size:18px">2020</span>
-                                </li>
+                    @*<div class="form-group col-md-12">
+                            <div class="month">
+                                <ul>
+                                    <li class="prev">&#10094;</li>
+                                    <li class="next">&#10095;</li>
+                                    <li>
+                                        june<br>
+                                        <span style="font-size:18px">2020</span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <ul class="weekdays">
+                                <li>Mo</li>
+                                <li>Tu</li>
+                                <li>We</li>
+                                <li>Th</li>
+                                <li>Fr</li>
+                                <li>Sa</li>
+                                <li>Su</li>
                             </ul>
-                        </div>
 
-                        <ul class="weekdays">
-                            <li>Mo</li>
-                            <li>Tu</li>
-                            <li>We</li>
-                            <li>Th</li>
-                            <li>Fr</li>
-                            <li>Sa</li>
-                            <li>Su</li>
-                        </ul>
-
-                        <ul class="days">
-                            <li>
-                                1 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                2 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                3 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                4 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                5 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                6 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                7 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                8 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                9 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                <span class="active">10 </span>
+                            <ul class="days">
+                                <li>
+                                    1 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    2 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    3 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    4 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    5 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    6 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    7 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    8 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    9 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span class="active">10 </span>
 
 
-                                <select class="js-states form-control framework" multiple>
-                                    <option value="Codeigniter">Bahapur</option>
-                                    <option value="CakePHP">Raipur Khurd</option>
-                                    <option value="Laravel">Tehkhand</option>
-                                    <option value="YII">Kilokari</option>
-                                    <option value="Zend">Jaitpur</option>
-                                    <option value="Symfony">Jasola</option>
-                                    <option value="Phalcon">Aali</option>
-                                    <option value="Slim">Tajpul</option>
-                                </select>
-                            </li>
-                            <li>
-                                11 <span>
                                     <select class="js-states form-control framework" multiple>
                                         <option value="Codeigniter">Bahapur</option>
                                         <option value="CakePHP">Raipur Khurd</option>
@@ -343,278 +329,294 @@
                                         <option value="Phalcon">Aali</option>
                                         <option value="Slim">Tajpul</option>
                                     </select>
-                                </span>
-                            </li>
-                            <li>
-                                12 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                13 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                14 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                15<span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                16 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                17<span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                18<span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                19 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                20 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                21 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                22<span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                23 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                24 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                25 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                26 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                27 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                28 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                29 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
-                            <li>
-                                30 <span>
-                                    <select class="js-states form-control framework" multiple>
-                                        <option value="Codeigniter">Bahapur</option>
-                                        <option value="CakePHP">Raipur Khurd</option>
-                                        <option value="Laravel">Tehkhand</option>
-                                        <option value="YII">Kilokari</option>
-                                        <option value="Zend">Jaitpur</option>
-                                        <option value="Symfony">Jasola</option>
-                                        <option value="Phalcon">Aali</option>
-                                        <option value="Slim">Tajpul</option>
-                                    </select>
-                                </span>
-                            </li>
+                                </li>
+                                <li>
+                                    11 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    12 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    13 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    14 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    15<span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    16 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    17<span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    18<span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    19 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    20 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    21 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    22<span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    23 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    24 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    25 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    26 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    27 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    28 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    29 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
+                                <li>
+                                    30 <span>
+                                        <select class="js-states form-control framework" multiple>
+                                            <option value="Codeigniter">Bahapur</option>
+                                            <option value="CakePHP">Raipur Khurd</option>
+                                            <option value="Laravel">Tehkhand</option>
+                                            <option value="YII">Kilokari</option>
+                                            <option value="Zend">Jaitpur</option>
+                                            <option value="Symfony">Jasola</option>
+                                            <option value="Phalcon">Aali</option>
+                                            <option value="Slim">Tajpul</option>
+                                        </select>
+                                    </span>
+                                </li>
 
-                        </ul>
-                    </div>
+                            </ul>
+                        </div>*@
                     @*<div class="form-group col-md-1"></div>*@
+
+
+
                 </div>
 
 
@@ -636,10 +638,10 @@
 
 
 @*@if (ViewData["Msg"] != null)
-{
-    DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}*@
+    {
+        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
+        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
+    }*@
 
 
 <script>
@@ -665,30 +667,60 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
-        $(document).ready(function () {
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    /**/
+    $(document).ready(function () {
 
-             $(".framework").select2({
-          placeholder: "Select Multiple Villages",
-          allowClear: true
-      });
-
-            //$('#framework_form').on('submit', function (event) {
-            //    event.preventDefault();
-            //    var form_data = $(this).serialize();
-            //    $.ajax({
-            //        url: "insert.php",
-            //        method: "POST",
-            //        data: form_data,
-            //        success: function (data) {
-            //            $('#framework option:selected').each(function () {
-            //                $(this).prop('selected', false);
-            //            });
-            //            $('#framework').multiselect('refresh');
-            //            alert(data);
-            //        }
-            //    });
-            //});
-
-
+        $(".framework").select2({
+            placeholder: "Select Multiple Villages",
+            allowClear: true
         });
+        $("#Month").change(function () {
+            var months = $("#Month option:selected").val();
+            debugger
+            $('#dialog').load("/MonthlyRoster/GetMonthlyDetails", { month: months });
+            //    type: "POST",
+            //    url: "/MonthlyRoster/GetMonthlyDetails",
+            //    data: { month: months },
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "html",
+            //    success: function (response) {
+            //        $('#dialog').html(response);
+            //        $('#dialog').dialog('open');
+            //    },
+            //    failure: function (response) {
+            //        alert(response.responseText);
+            //    },
+            //    error: function (response) {
+            //        alert(response.responseText);
+            //    }
+            //});
+        });
+        //$('#framework_form').on('submit', function (event) {
+        //    event.preventDefault();
+        //    var form_data = $(this).serialize();
+        //    $.ajax({
+        //        url: "insert.php",
+        //        method: "POST",
+        //        data: form_data,
+        //        success: function (data) {
+        //            $('#framework option:selected').each(function () {
+        //                $(this).prop('selected', false);
+        //            });
+        //            $('#framework').multiselect('refresh');
+        //            alert(data);
+        //        }
+        //    });
+        //});
+
+
+    });
 </script>

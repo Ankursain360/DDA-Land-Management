@@ -37,6 +37,8 @@ namespace Libraries.Service.ApplicationService
             return khasraList;
         }
 
+
+
         public async Task<List<Watchandward>> GetAllWatchandward()
         {
             return await _watchandwardRepository.GetAllWatchandward();
@@ -162,6 +164,14 @@ namespace Libraries.Service.ApplicationService
             return await _watchandwardRepository.DeleteWatchandwardreportfiledetails(Id);
         }
 
-       
+        public async Task<List<Propertyregistration>> GetAllPrimaryList()
+        {
+            return await _watchandwardRepository.GetAllPrimaryList();
+        }
+
+        public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)
+        {
+            return await _watchandwardRepository.FetchSingleResultOnPrimaryList(propertyId);
+        }
     }
 }
