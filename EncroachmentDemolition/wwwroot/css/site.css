@@ -16,7 +16,7 @@ body {
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
-    color:aqua;
+    color: aqua;
 }
 
 /* Make .svg files in the carousel display properly in older browsers */
