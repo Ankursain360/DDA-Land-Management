@@ -2,6 +2,7 @@
     <table class="table table-sm table-bordered mb-0 table-striped">
         <thead class="text-nowrap">
             <tr>
+                <th>Guid</th>
                 <th>Module Name</th>
                 <th>Description</th>
                 <th>Url</th>
@@ -15,6 +16,7 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
+                    <td>@item.Guid</td>
                     <td>@item.Name</td>
                     <td>@item.Description</td>
                     <td>@item.Url</td>
@@ -38,7 +40,6 @@
                         </div>
 
                     </td>
-
                 </tr>
             }
         </tbody>

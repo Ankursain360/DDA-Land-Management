@@ -45,18 +45,8 @@ namespace SiteMaster.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Module module)
         {
-            try
-            {
-
                 if (ModelState.IsValid)
                 {
-                    //if (Exist(0, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
-
-                    //}
-
                     var result = await _moduleService.Create(module);
 
                     if (result == true)
@@ -68,19 +58,12 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(module);
-
                     }
                 }
                 else
                 {
                     return View(module);
                 }
-            }
-            catch (Exception ex)
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(module);
-            }
         }
 
         public async Task<IActionResult> Edit(int id)
@@ -101,14 +84,6 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
-
-                    //if (Exist(id, designation))
-                    //{
-                    //    ViewBag.Message = Alert.Show("Unique Name Required for Designation Name", "", AlertType.Info);
-                    //    return View(designation);
-
-                    //}
-
                     var result = await _moduleService.Update(id, module);
                     if (result == true)
                     {
@@ -165,8 +140,6 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  
         {
-            
-
             var result = await _moduleService.Delete(id);
             if (result == true)
             {
@@ -180,8 +153,6 @@ namespace SiteMaster.Controllers
                 var result1 = await _moduleService.GetAllModule();
                 return View("Index", result1);
             }
-            //return RedirectToAction("Index", "Module");
-         
         }
 
         public async Task<IActionResult> View(int id)
@@ -193,7 +164,5 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
-
     }
 }

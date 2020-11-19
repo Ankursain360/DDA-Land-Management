@@ -9,7 +9,7 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IPermissionsService : IEntityService<Menuactionrolemap>
     {
-        Task<List<MenuDetailDto>> GetMappedMenu(int moduleId, int roleId);
+        Task<List<MenuDetailDto>> GetMappedMenu(string moduleId, int roleId);
         Task<List<Module>> GetModuleList();
         Task<List<PermissionDto>> GetMappedMenuWithAction(int moduleId, int roleId);
         Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model);

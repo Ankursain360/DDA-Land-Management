@@ -1,6 +1,8 @@
 ﻿using Dto.Master;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using SiteMaster.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,14 @@ namespace SiteMaster.Components
     public class PermissionViewComponent : ViewComponent
     {
         private readonly IPermissionsService _permissionsService;
-
+        
         public PermissionViewComponent(IPermissionsService permissionsService)
         {
             _permissionsService = permissionsService;
         }
-        public async Task<IViewComponentResult> InvokeAsync()
+        public async Task<IViewComponentResult> InvokeAsync(int moduleId, int roleId)
         {
-            var result = await _permissionsService.GetMappedMenuWithAction(5, 1);
+            var result = await _permissionsService.GetMappedMenuWithAction(moduleId, roleId);
             var menu = GetMenu(result, 0);
             return View("Permission", menu);
         }

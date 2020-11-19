@@ -10,7 +10,6 @@ namespace Libraries.Model.Entity
     {
         public Module()
         {
-          //  Menu = new HashSet<Menu>();
             Rolemodulemap = new HashSet<Rolemodulemap>();
         }
 
@@ -23,7 +22,7 @@ namespace Libraries.Model.Entity
         public string Url { get; set; }
         public string Icon { get; set; }
         public string Target { get; set; }
-      
+        public string Guid { get; set; }
         public ICollection<WorkflowTemplate> WorkflowTemplate { get; set; }
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Menu> Menu { get; set; }

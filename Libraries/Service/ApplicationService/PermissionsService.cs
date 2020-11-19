@@ -39,7 +39,7 @@ namespace Libraries.Service.ApplicationService
             return await _permissionsRepository.GetModuleList();
         }
 
-        public async Task<List<MenuDetailDto>> GetMappedMenu(int moduleId, int roleId)
+        public async Task<List<MenuDetailDto>> GetMappedMenu(string moduleId, int roleId)
         {
 
             var allocatedMenu = await _permissionsRepository.GetPermission(moduleId, roleId);
@@ -73,7 +73,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<PermissionDto>> GetMappedMenuWithAction(int moduleId, int roleId)
         {
             var actions = await _actionsRepository.FindBy(a => a.IsActive == 1);
-            var permissions = await _permissionsRepository.GetMappedMenuWithAction(moduleId, roleId);
+            var permissions = await _permissionsRepository.GetMappedMenuWithAction(moduleId);
             var menuAction = permissions.SelectMany(a => a.Menuactionrolemap).Where(b=>b.RoleId==roleId).ToList();
             var result = permissions.GroupBy(a => a.Id)
                 .Select(b => b.FirstOrDefault())

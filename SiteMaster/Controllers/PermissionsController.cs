@@ -53,5 +53,9 @@ namespace SiteMaster.Controllers
                 return Json("Please select atleast one record.");
             }
         }
+
+        public IActionResult GetPermissions(int moduleId, int roleId) {
+            return ViewComponent("Permission", new { moduleId = moduleId, roleId = roleId });
+        }
     }
 }

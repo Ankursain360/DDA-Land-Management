@@ -8,9 +8,8 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="ddlModuleId"
+                    <select class="floating-label-field floating-label-field--s3" id="ddlModule"
                             asp-items="@(new SelectList(ViewBag.Modules, "Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="null">--Select--</option>
                     </select>
                     <label for="ModuleId" class="floating-label">Module Name</label>
                 </div>
@@ -19,7 +18,6 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" id="ddlRole" 
                             asp-items="@(new SelectList(ViewBag.Roles,"Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="null">--Select--</option>
                     </select>
                     <label for="Role" class="floating-label">Role Name </label>
                 </div>
@@ -31,8 +29,8 @@
                 <button id="btnSaveTop" class="tn btn-theme btn-block">Save</button>
             </div>
         </div>
-        <div class="permission mt-2">
-            @await Component.InvokeAsync("Permission")
+        <div class="permission mt-2" id="divRolePermission">
+            @*@await Component.InvokeAsync("Permission")*@
         </div>
         <div class="row">
             <div class="col-md-10"></div>

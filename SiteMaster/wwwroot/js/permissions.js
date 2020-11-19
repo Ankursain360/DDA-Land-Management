@@ -1,8 +1,13 @@
 ﻿$(document).ready(function () {
     var arrPermission = [];
+    GetPermission();
 
-    $("#ddlModuleId").change(function () {
+    $("#ddlModule").change(function () {
+        GetPermission();
+    });
 
+    $("#ddlRole").change(function () {
+        GetPermission();
     });
 
     $("#btnSaveTop, #btnSaveBottom").click(function () {
@@ -15,28 +20,27 @@
         
         $('.chkAction:checkbox:checked').each(function () {
             console.log("Id: " + $(this).attr("id"));
-            var x = $(this).attr("id").split(',');
+            var arrIds = $(this).attr("id").split(',');
             var model = {
-                menuId: x[1],
-                actionId: x[0],
+                menuId: arrIds[1],
+                actionId: arrIds[0],
                 roleId: roleId
             }
             arrPermission.push(model);
         });
 
-    HttpPost('/Permissions/AddUpdatePermission','json', arrPermission, function (response) {
-        console.log(response);
-        arrPermission = [];
+        HttpPost('/Permissions/AddUpdatePermission', 'json', arrPermission, function (response) {
+            SuccessMessage(response);
+            arrPermission = [];
         });
     });
 
-
-
-    //HttpGet(`/Permissions/GetRoleList/`, 'json', function (response) {
-    //    var html = '<option value="0">---Select---</option>';
-    //    for (var i = 0; i < response.length; i++) {
-    //        html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
-    //    }
-    //    $("#ddlRole").html(html);
-    //});
 });
+
+function GetPermission() {
+    var moduleId = $("#ddlModule").val();
+    var roleId = $("#ddlRole").val();
+    HttpGet(`/Permissions/GetPermissions?moduleId=${moduleId}&roleId=${roleId}`, 'html', function (response) {
+        $("#divRolePermission").html(response);
+    });
+}

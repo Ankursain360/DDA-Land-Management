@@ -1,6 +1,8 @@
 ﻿using Dto.Component;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using SiteMaster.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +13,21 @@ namespace SiteMaster.Components
     public class SideNavViewComponent : ViewComponent
     {
         private readonly IPermissionsService _permissionsService;
-        public SideNavViewComponent(IPermissionsService permissionsService)
+        private readonly IConfiguration _configuration;
+        private readonly ISiteContext _siteContext;
+
+        public SideNavViewComponent(IPermissionsService permissionsService,
+            IConfiguration configuration,
+            ISiteContext siteContext)
         {
             _permissionsService = permissionsService;
+            _configuration = configuration;
+            _siteContext = siteContext;
         }
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var result = await _permissionsService.GetMappedMenu(5, 1);
+            var result = await _permissionsService.GetMappedMenu(_configuration.GetValue<string>("ModuleId"), _siteContext.RoleId.Value);
 			var menu = GetMenu(result, 0);
 			return View("SideNav", menu);
         }

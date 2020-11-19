@@ -23,28 +23,24 @@ namespace Libraries.Repository.EntityRepository
                 .ToListAsync();
         }
 
-        public async Task<List<Menuactionrolemap>> GetPermission(int moduleId, int roleId) {
+        public async Task<List<Menuactionrolemap>> GetPermission(string moduleId, int roleId) {
             
-                var x = await _dbContext.Menuactionrolemap
+                var result = await _dbContext.Menuactionrolemap
+                    .Include(a => a.Menu.Module)
                     .Include(a => a.Menu)
-                    .Where(a => a.Menu.ModuleId == moduleId
+                    .Where(a => a.Menu.Module.Guid == moduleId
                             && a.RoleId == roleId)
                     .ToListAsync();
-                return x;
+                return result;
             
         }
 
-        public async Task<List<Menu>> GetMappedMenuWithAction(int moduleId, int roleId)
+        public async Task<List<Menu>> GetMappedMenuWithAction(int moduleId)
         {
-            var result = await _dbContext.Menu.Include(a => a.Menuactionrolemap).ThenInclude(a=>a.Action)
+            var result = await _dbContext.Menu
+                .Include(a => a.Menuactionrolemap)
+                .ThenInclude(a=>a.Action)
                 .Where(a => a.ModuleId == moduleId).ToListAsync();
-
-            var x = await _dbContext.Menuactionrolemap
-                .Include(a => a.Menu)
-                .Include(a=>a.Action)
-                .Where(a => a.Menu.ModuleId == moduleId
-                        && a.RoleId == roleId)
-                .ToListAsync();
             return result;
 
         }

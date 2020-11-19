@@ -67,18 +67,16 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Module module)
         {
-
+            module.Guid = Guid.NewGuid().ToString();
             module.CreatedBy = 1;
             module.CreatedDate = DateTime.Now;
             _moduleRepository.Add(module);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
         public async Task<bool> CheckUniqueName(int id, string module)
         {
             bool result = await _moduleRepository.Any(id, module);
-            //  var result1 = _dbContext.Designation.Any(t => t.Id != id && t.Name == designation.Name);
             return result;
         }
 
