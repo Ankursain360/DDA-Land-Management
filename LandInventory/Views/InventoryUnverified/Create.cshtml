@@ -23,84 +23,104 @@
             @*<form>*@
             <div class="row">
 
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm">Inventoried In</label>
-                    <select class="form-control dda-dropdown" asp-for="InventoriedInId">
-                        <option value="0">All</option>
-                        <option value="1">VLMS</option>
-                        <option value="2">Used</option>
-                    </select>
-                    <span asp-validation-for="InventoriedInId" class="text-danger lb-sm"></span>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="InventoriedInId">
+                            <option value="0">All</option>
+                            <option value="1">VLMS</option>
+                            <option value="2">Used</option>
+                        </select>
+                        <span asp-validation-for="InventoriedInId" class="text-danger"></span>
+                        <label class="floating-label">Inventoried In</label>
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
-                    <select class="form-control dda-dropdown" asp-for="PlannedUnplannedLand">
-                        <option value="0">All</option>
-                        <option value="Planned Land">Planned Land</option>
-                        <option value="Unplanned Land">Unplanned Land</option>
-                    </select>
-                    <span asp-validation-for="PlannedUnplannedLand" class="text-danger lb-sm"></span>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand">
+                            <option value="0">All</option>
+                            <option value="Planned Land">Planned Land</option>
+                            <option value="Unplanned Land">Unplanned Land</option>
+                        </select>
+                        <span asp-validation-for="PlannedUnplannedLand" class="text-danger"></span>
+                        <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ClassificationOfLandId">Classification of Land</label>
-                    <select class="form-control dda-dropdown" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
-                        <option value="0">All</option>
-                    </select>
-                    <span asp-validation-for="ClassificationOfLandId" class="text-danger lb-sm"></span>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                            <option value="0">All</option>
+                        </select>
+                        <label asp-validation-for="ClassificationOfLandId" class="error"></label>
+                        <label class="floating-label" asp-for="ClassificationOfLandId">Classification of Land</label>
+                    </div>
                 </div>
 
-            </div>
+                </div>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DepartmentId">Department</label>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
 
-                    <select class="form-control dda-dropdown" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
-                        <option value="0">All</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="ZoneId">Zone</label>
 
-                    <select class="form-control dda-dropdown" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
-                        <option value="0">All</option>
-                    </select>
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                            <option value="0">All</option>
+                        </select>
+                        <label class="floating-label" asp-for="DepartmentId">Department</label>
+                    </div>
                 </div>
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="DivisionId">Division</label>
-                    <select class="form-control dda-dropdown" asp-for="DivisionId" onchange="return GetPrimaryNoList(this.options[this.selectedIndex].value);">
-                        <option value="0">All</option>
-                    </select>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                            <option value="0">All</option>
+                        </select>
+                        <label class="floating-label" asp-for="ZoneId">Zone</label>
+                    </div>
                 </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="return GetPrimaryNoList(this.options[this.selectedIndex].value);">
+                            <option value="0">All</option>
+                        </select>
+                        <label class="floating-label" asp-for="DivisionId">Division</label>
+                    </div>
+                </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap">
+
+                            <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId">
+                                <option value="0">All</option>
+                            </select>
+                            <label class="floating-label" asp-for="LocalityId">Locality(Village)</label>
+                        </div>
+                    </div>
+                        @*<div class="form-group col-md-4">
+            <label class="control-label lb-sm" asp-for="LocalityId">Unverified/Approved</label>
+            <select class="form-control dda-dropdown" asp-for="unverifiedverfied">
+                <option value="0">Unverified</option>
+                <option value="1">Approved</option>
+            </select>
+        </div>*@
+                    </div>
+
+
+                <div class="row ">
+                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                        @Html.ActionLink("Back", "Index", "InventoryUnverifiedApproved", null, new { @class = "btn btn-theme " })
+                    </div>
+                </div>
+
+                <div id="LoadReportView">
+
+                </div>
+                @*</form>*@
             </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="LocalityId">Locality(Village)</label>
-                    <select class="form-control dda-dropdown" asp-for="LocalityId">
-                        <option value="0">All</option>
-                    </select>
-                </div>
-                @*<div class="form-group col-md-4">
-                    <label class="control-label lb-sm" asp-for="LocalityId">Unverified/Approved</label>
-                    <select class="form-control dda-dropdown" asp-for="unverifiedverfied">
-                        <option value="0">Unverified</option>
-                        <option value="1">Approved</option>
-                    </select>
-                </div>*@
-            </div>
-
-
-            <div class="row ">
-                <div class="form-group col-md-12" style="margin-bottom:40px;">
-                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-primary dda-pageheading" />
-                    @Html.ActionLink("Back", "Index", "InventoryUnverifiedApproved", null, new { @class = "btn btn-primary dda-pageheading" })
-                </div>
-            </div>
-
-            <div id="LoadReportView">
-
-            </div>
-            @*</form>*@
-        </div>
     </div>
 </div>
 
