@@ -264,9 +264,8 @@ $("#btnCreate").click(function () {
     if (checkresult) {
         var param = GetListData();
         HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-            debugger;
-            SuccessMessage('Data updated successfully.');
             window.location.href = response;  //'/WorkFlowTemplate/Index';
+            SuccessMessage('Data updated successfully.');
         });
     }
 

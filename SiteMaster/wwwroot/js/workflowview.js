@@ -32,8 +32,7 @@ function FillLevels(response) {
     $(".ParameterNameListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterNameList[" + i + "]");
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
+        $(this).attr("readonly", "readonly");
         i = i + 1;
     });
 
@@ -42,10 +41,17 @@ function FillLevels(response) {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterValueList[" + a + "]");
         $(this).removeAttr("onchange");
-        $(this).attr("onchange", "callTypeDropdown(" + i + ")");
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
+        $(this).attr("onchange", "callTypeDropdown(" + a + ")");
+        $(this).attr("readonly", "readonly");
         a = a + 1;
+    });
+
+    var i = 0;
+    $(".nameClass").each(function () {
+        $(this).removeAttr("name");
+        $(this).attr("name", "ParameterLabelNameList[" + i + "]");
+        $(this).attr("readonly", "readonly");
+        i = i + 1;
     });
 
     var b = 0;
@@ -53,8 +59,7 @@ function FillLevels(response) {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterLevelList[" + b + "]");
         $(this).val(b + 1);
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
+        $(this).attr("readonly", "readonly");
         b = b + 1;
     });
 
@@ -62,8 +67,7 @@ function FillLevels(response) {
     $(".ParameterActionListClass").each(function () {
         $(this).removeAttr("name");
         $(this).attr("name", "ParameterActionList[" + c + "]");
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
+        $(this).attr("readonly", "readonly");
         c = c + 1;
     });
     $(".ParameterActionListClass").attr("multiple", "");
@@ -71,8 +75,7 @@ function FillLevels(response) {
     var d = 0;
     $(".ParameterSkipListClass").each(function () {
         $(this).removeAttr("name").attr("name", "ParameterSkipList[" + d + "]");
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
+        $(this).attr("readonly", "readonly");
         d = d + 1;
     });
 
@@ -86,8 +89,6 @@ function FillLevels(response) {
     $(".delete-record").each(function () {
         $(this).removeAttr("data-id");
         $(this).attr("data-id", i);
-        $(this).removeAttr("disabled", "disabled");
-        $(this).attr("disabled", "disabled");
         i = i + 1;
     });
 
@@ -110,8 +111,9 @@ function FillLevels(response) {
             $("input[name='ParameterSkipList[" + j + "]']").val("false");
         }
 
+        $("Select[name='ParameterValueList[" + j + "]']").val(response[j].parameterValue);
+        $("Select[name='ParameterValueList[" + j + "]']").trigger('change');
         $("Select[name='ParameterNameList[" + j + "]']").val(response[j].parameterName);
-        $("input[name='ParameterValueList[" + j + "]']").val(response[j].parameterValue);
         $("input[name='ParameterLevelList[" + j + "]']").val(response[j].parameterLevel);
         $("Select[name='ParameterActionList[" + j + "]']").val(response[j].parameterAction);
 
@@ -494,4 +496,30 @@ function DescriptionMessage() {
     } else {
         return "";
     }
+}
+
+function callTypeDropdown(element) {
+    debugger;
+    var name = element;
+    console.log(name);
+    var fragment_arr = name;
+    console.log(fragment_arr)
+    var value = $("select[name='ParameterValueList[" + name + "]']").val();
+    console.log(value);
+
+    HttpGet(`/WorkFlowTemplate/GetUserList/?value=${value}`, 'json', function (response) {
+        debugger;
+        var html = '<option value="0">---Select---</option>';
+        for (var i = 0; i < response.length; i++) {
+            if (value == "Role") {
+                html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+            }
+            else {
+                html = html + '<option value=' + response[i].user.id + '>' + response[i].user.name + '</option>';
+            }
+        }
+        $("select[name='ParameterNameList[" + fragment_arr + "]']").val(null).trigger('change');
+        $("select[name='ParameterNameList[" + fragment_arr + "]']").html(html);
+        $("label[name='ParameterLabelNameList[" + fragment_arr + "]']").html(value + ' Name');
+    });
 }

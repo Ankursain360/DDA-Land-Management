@@ -1,97 +1,91 @@
 ﻿@model Libraries.Model.Entity.Menu
 @await Component.InvokeAsync("PageHeader", new { pageName = "Menu" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
-
-        .success {
-            color: #28a745;
-        }
-    </style>*@
-
 <br />
 
 <br />
-<div class="container-fluid">
 
-    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Edit Details</h3>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <input type="hidden" asp-for="Id" />
+<form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Edit Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
 
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ModuleId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                    </select>
-                    <label asp-validation-for="ModuleId" class="error"></label>
-                    <label asp-for="ModuleId" class="floating-label">Module Name </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ParentMenuId" asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                    </select>
-                    <label asp-validation-for="ModuleId" class="error"></label>
-                    <label asp-for="ParentMenuId" class="floating-label">Parent Menu </label>
-                </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3"
+                        asp-for="ModuleId"
+                        asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
+                    <option selected="selected" disabled="disabled" value="">--Select--</option>
+                </select>
+                <label asp-validation-for="ModuleId" class="error"></label>
+                <label asp-for="ModuleId" class="floating-label">Module Name</label>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
-                    <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" placeholder="Menu Name"
-                           limit="200">
-                    <span asp-validation-for="Name" class="text-danger "></span>
-                    <label class="floating-label">Menu Name</label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
-                    <input asp-for="SortBy" type="number" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Sort By"
-                           limit="11">
-                    <span asp-validation-for="SortBy" class="text-danger "></span>
-                    <label class="floating-label">Sort By</label>
-                </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3"
+                        asp-for="ParentMenuId"
+                        asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
+                    <option selected="selected" disabled="disabled" value="">--Select--</option>
+                </select>
+                <label asp-validation-for="ModuleId" class="error"></label>
+                <label asp-for="ParentMenuId" class="floating-label">Parent Menu</label>
             </div>
         </div>
-        <div class="row">
-            <div class=" col-md-6">
-
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label asp-for="IsActive" class="floating-label">Status </label>
-                </div>
-
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="Name" type="text"
+                       class="floating-label-field floating-label-field--s3"
+                       placeholder="Menu Name"
+                       limit="200">
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <label class="floating-label">Menu Name</label>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Update</button>
-                @Html.ActionLink("Back", "Index", "Menu", null, new { @class = "btn btn-theme " })
-
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="Url" type="text"
+                       class="floating-label-field floating-label-field--s3"
+                       placeholder="/ControllerName/Actionname"
+                       limit="150">
+                <span asp-validation-for="Url" class="text-danger"></span>
+                <label class="floating-label">Url</label>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="SortBy" type="number"
+                       class="floating-label-field floating-label-field--s3 onlynumbers"
+                       placeholder="Sort By"
+                       limit="11">
+                <span asp-validation-for="SortBy" class="text-danger"></span>
+                <label class="floating-label">Sort By</label>
+            </div>
+        </div>
+        <div class=" col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+                <label asp-for="IsActive" class="floating-label">Status </label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            <button class="btn btn-theme " type="submit">Update</button>
+            @Html.ActionLink("Back", "Index", "Menu", null, new { @class = "btn btn-theme " })
 
-    </form>
+        </div>
+    </div>
 
-</div>
+</form>
+
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

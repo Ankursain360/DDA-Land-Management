@@ -49,13 +49,13 @@ namespace SiteMaster.Controllers
         {
             WorkflowTemplate model = new WorkflowTemplate();
             //  model.OperationId = WorkflowLevelDto.opertaionId;
-            //if (model.OperationId == "Role")
+            //if (WorkflowLevelDto.opertaionId == "Role")
             //{
-            ViewBag.Items = await _userProfileService.GetRole();
+                ViewBag.Items = await _userProfileService.GetRole();
             //}
             //else
             //{
-            //    ViewBag.Items = await _workflowtemplateService.GetUserlist();
+            //    ViewBag.Items = await _userProfileService.GetUser();
             //}
 
             return PartialView("_Levels", model);
