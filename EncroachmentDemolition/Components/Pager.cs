@@ -1,23 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Utility.Helper;
 
-namespace SiteMaster.Components
+namespace EncroachmentDemolition.Components
 {
     public class PagerViewComponent : ViewComponent
     {
-		public async Task<IViewComponentResult> InvokeAsync(int totalCount, int pageNumber, int pageSize = 10)
-		{
+        public async Task<IViewComponentResult> InvokeAsync(int totalCount, int pageNumber, int pageSize = 10)
+        {
 
-			PagerHelper pageHelper = new PagerHelper(totalCount, pageNumber, pageSize);
-			await Task.Run(() =>
-			{
+            PagerHelper pageHelper = new PagerHelper(totalCount, pageNumber, pageSize);
+            await Task.Run(() =>
+            {
 
-			});
-			return View("Pager", pageHelper);
-		}
-	}
+            });
+            return View("Pager", pageHelper);
+        }
+    }
 }

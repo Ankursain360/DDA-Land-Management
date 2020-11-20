@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
 using System.Threading.Tasks;
 
-namespace SiteMaster.Components
+namespace EncroachmentDemolition.Components
 {
     public class SignInProfileViewComponent : ViewComponent
     {

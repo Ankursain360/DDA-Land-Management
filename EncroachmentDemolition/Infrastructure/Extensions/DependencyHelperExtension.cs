@@ -1,14 +1,14 @@
-using Microsoft.Extensions.DependencyInjection;
-using Libraries.Repository.IEntityRepository;
-using Libraries.Repository.EntityRepository;
-using Libraries.Service.IApplicationService;
-using Libraries.Service.ApplicationService;
+﻿using EncroachmentDemolition.Helper;
 using Libraries.Repository.Common;
-using Repository.IEntityRepository;
+using Libraries.Repository.EntityRepository;
+using Libraries.Repository.IEntityRepository;
+using Libraries.Service.ApplicationService;
+using Libraries.Service.IApplicationService;
+using Microsoft.Extensions.DependencyInjection;
 using Repository.EntityRepository;
-using Service.IApplicationService;
+using Repository.IEntityRepository;
 using Service.ApplicationService;
-using EncroachmentDemolition.Helper;
+using Service.IApplicationService;
 
 namespace EncroachmentDemolition.Infrastructure.Extensions
 {
@@ -31,10 +31,13 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
-            services.AddScoped<IWatchandwardService,WatchandwardService>();
+            services.AddScoped<IWatchandwardService, WatchandwardService>();
             services.AddScoped<IEncroachmentRegisterationService, EncroachmentRegisterationService>();
             services.AddScoped<IOnlinecomplaintService, OnlinecomplaintService>();
             services.AddScoped<IWatchAndWardApprovalService, WatchAndWardApprovalService>();
@@ -43,6 +46,9 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IMenuService, MenuService>();
         }
     }
 }

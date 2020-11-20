@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SiteMaster.Components
+namespace EncroachmentDemolition.Components
 {
     public class SideNavViewComponent : ViewComponent
     {

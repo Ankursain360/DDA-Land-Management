@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace SiteMaster.Components
+namespace EncroachmentDemolition.Components
 {
     public class PageHeaderViewComponent : ViewComponent
     {
@@ -12,7 +12,8 @@ namespace SiteMaster.Components
             {
 
             });
-            return View("PageHeader", new PageHeaderDto() {
+            return View("PageHeader", new PageHeaderDto()
+            {
                 PageName = pageName
             });
         }
