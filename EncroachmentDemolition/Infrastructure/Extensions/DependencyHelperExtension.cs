@@ -30,6 +30,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IDemolitionstructuredetailsRepository, DemolitionStructureDetailsRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -41,6 +42,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IDemolitionstructuredetailsService, DemolitionstructuredetailsService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
         }
     }
 }

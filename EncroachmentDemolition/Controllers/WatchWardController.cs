@@ -22,12 +22,14 @@ namespace EncroachmentDemolition.Controllers
     {
         private readonly IWatchandwardService _watchandwardService;
         private readonly IPropertyRegistrationService _propertyregistrationService;
+        private readonly IWorkflowTemplateService _workflowtemplateService;
         public IConfiguration _configuration;
         //string targetPhotoPathLayout = string.Empty;
         //string targetReportfilePathLayout = string.Empty;
         string targetPathLayout = "";
-        public WatchWardController(IWatchandwardService watchandwardService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
+        public WatchWardController(IWatchandwardService watchandwardService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
         {
+            _workflowtemplateService = workflowtemplateService;
             _propertyregistrationService = propertyregistrationService;
             _watchandwardService = watchandwardService;
             _configuration = configuration;
@@ -262,6 +264,7 @@ namespace EncroachmentDemolition.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
+                        var DataFlow = await dataAsync();
                         return View("Index", result1);
                     }
                     else
@@ -280,6 +283,7 @@ namespace EncroachmentDemolition.Controllers
             {
                 return View(watchandward);
             }
+            
         }
 
 
@@ -341,17 +345,12 @@ namespace EncroachmentDemolition.Controllers
         [HttpGet]
         public void GetLattLongDetails(string path, string Latt, string Long)
         {
-            string path23 = "D:\\VedangWorkFromHome\\DDA_LandManagement_Project\\ExtraData\\40BAC009-7963-4F73-AD7A-3F0E52DEC3F3.jpeg";
-            var longi = "";
             double? latitdue = null;
             double? longitude = null;
             string url = null;
             if (path != null)
             {
                 Bitmap bmp = new Bitmap(path);
-                // set Variable Values
-                
-
                 foreach (PropertyItem propItem in bmp.PropertyItems)
                 {
                     switch (propItem.Type)
@@ -361,22 +360,17 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 latitdue = GetLatitudeAndLongitude(propItem);
                             }
-
                             if (propItem.Id == 4) //Longitude Array
                             {
                                 longitude = GetLatitudeAndLongitude(propItem);
                             }
-
                             break;
-
                     }
                 }
 
                 if (!string.IsNullOrEmpty(latitdue.ToString()) && !string.IsNullOrEmpty(longitude.ToString()))
                 {
                     url = $"https://www.google.com/maps/place/{latitdue},{longitude}";
-                    Console.WriteLine($"https://www.google.com/maps/place/{latitdue},{longitude}");
-                    //ViewState["ImagePath"]
                 }
                 else
                 {
@@ -409,6 +403,7 @@ namespace EncroachmentDemolition.Controllers
                 return null;
             }
         }
+
         [HttpGet]
         public async Task<JsonResult> GetOtherDetails(int? propertyId)
         {
@@ -466,5 +461,18 @@ namespace EncroachmentDemolition.Controllers
         }
 
         #endregion
+
+        private async  Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            //TemplateStructure ObjTemplateStructureList = new TemplateStructure();
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            //ObjTemplateStructureList = Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateStructure>(template);
+
+            return ObjList;
+
+        }
+
     }
 }
