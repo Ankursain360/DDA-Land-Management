@@ -1,150 +1,118 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
-<!--<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left color-white" style="margin-top:5px;">Deleted Property</h6>
-                <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Deleted Property" })
+
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Deleted Property Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="InventoriedInId">
+                    <option selected="selected" value="0">All</option>
+                    <option value="1">VLMS</option>
+                    <option value="2">Used</option>
+                </select>
+                <span asp-validation-for="InventoriedInId" class="text-danger"></span>
+                <label asp-for="InventoriedInId" class="floating-label">Inventoried In</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand">
+                    <option selected="selected" value="0">All</option>
+                    <option value="Planned Land">Planned Land</option>
+                    <option value="Unplanned Land">Unplanned Land</option>
+                </select>
+                <span asp-validation-for="PlannedUnplannedLand" class="text-danger"></span>
+                <label asp-for="PlannedUnplannedLand" class="floating-label">Planned/Unplanned Land</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
+                    <option selected="selected" value="0">All</option>
+                </select>
+                <label asp-validation-for="ClassificationOfLandId" class="error"></label>
+                <label class="floating-label" asp-for="ClassificationOfLandId">Classification of Land</label>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                    <option selected="selected" value="0">All</option>
+                </select>
+                <label asp-validation-for="DepartmentId" class="error"></label>
+                <label class="floating-label" asp-for="DepartmentId">Department</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
+                    <option selected="selected" value="0">All</option>
+                </select>
+                <label asp-validation-for="ZoneId" class="error"></label>
+                <label class="floating-label" asp-for="ZoneId">Zone</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="return GetPrimaryNoList(this.options[this.selectedIndex].value);">
+                    <option selected="selected" value="0">All</option>
+                </select>
+                <label asp-validation-for="DivisionId" class="error"></label>
+                <label class="floating-label" asp-for="DivisionId">Division</label>
+            </div>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="form-group col-md-12" style="margin-bottom:40px;">
+            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+        </div>
+    </div>
 </div>
-<br />
-<br />
-
-
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Deleted Property Details</h6>
-        </div>
-        <div class="panel-body">-->
-@await Component.InvokeAsync("PageHeader", new { pageName = "Deleted Property" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
-
-        .success {
-            color: #28a745;
-        }
-    </style>*@
-
-
-<div class="container-fluid">
-
-    @*<form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">*@
-        <h3 class="mb-3 d-flex">Deleted Property Details</h3>
-
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        @*<form>*@
-        <div class="row">
-
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="InventoriedInId">
-                        <option selected="selected" value="0">All</option>
-                        <option value="1">VLMS</option>
-                        <option value="2">Used</option>
-                    </select>
-                    <span asp-validation-for="InventoriedInId" class="text-danger"></span>
-                    <label asp-for="InventoriedInId" class="floating-label">Inventoried In</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand">
-                        <option selected="selected" value="0">All</option>
-                        <option value="Planned Land">Planned Land</option>
-                        <option value="Unplanned Land">Unplanned Land</option>
-                    </select>
-                    <span asp-validation-for="PlannedUnplannedLand" class="text-danger"></span>
-                    <label asp-for="PlannedUnplannedLand" class="floating-label">Planned/Unplanned Land</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ClassificationOfLandId" asp-items="@(new SelectList(Model.ClassificationOfLandList, "Id","Name"))">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label asp-validation-for="ClassificationOfLandId" class="error"></label>
-                    <label class="floating-label" asp-for="ClassificationOfLandId">Classification of Land</label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label asp-validation-for="DepartmentId" class="error"></label>
-                    <label class="floating-label" asp-for="DepartmentId">Department</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label asp-validation-for="ZoneId" class="error"></label>
-                    <label class="floating-label" asp-for="ZoneId">Zone</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    @*<select class="form-control dda-dropdown" asp-for="DivisionId" asp-items="@(new SelectList(Model.DivisionList, "Id","Name"))">
-                        <option value="0">All</option>
-                    </select>*@
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="return GetPrimaryNoList(this.options[this.selectedIndex].value);">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label asp-validation-for="DivisionId" class="error"></label>
-                    <label class="floating-label" asp-for="DivisionId">Division</label>
-                </div>
-            </div>
-            <!--<div class="form-group col-md-6">
-        <label class="control-label lb-sm">Select Primary No</label><span class="text-danger">*</span>-->
-            @*<select class="form-control dda-dropdown" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">*@
-            <!--<select class="form-control dda-dropdown" asp-for="Id">
-                <option value="0">All</option>
-            </select>
-        </div>-->
-
-        </div>
-
-
-
-        <div class="row ">
-            <div class="form-group col-md-12" style="margin-bottom:40px;">
-                <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
-                @*@Html.ActionLink("Back", "Index", "RestoreLandReport", null, new { @class = "btn btn-primary dda-pageheading" })*@
-            </div>
-        </div>
-    @*</form>*@
+@*<div class="table-section bg-white border shadow rounded">
         <div id="LoadReportView">
 
         </div>
-        @*</form>*@
-    
-</div>
-    @*</div>
-</div>*@
+    </div>*@
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" disabled="disabled">Select One</option>
+                    <option>Inventoried In</option>
+                    <option>Planned/Unplanned Land</option>
+                    <option>Classification of Land</option>
+                    <option>Department</option>
+                    <option>Zone</option>
+                    <option>Division</option>
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+            </div>
+        </div>
 
-<br />
-<br />
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="LoadReportView">
+
+    </div>
+</div>
+
+
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
