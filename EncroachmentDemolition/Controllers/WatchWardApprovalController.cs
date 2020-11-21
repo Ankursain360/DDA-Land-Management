@@ -23,9 +23,11 @@ namespace EncroachmentDemolition.Controllers
         public readonly IWatchAndWardApprovalService _watchAndWardApprovalService;
         private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
+        private readonly IWorkflowTemplateService _workflowtemplateService;
 
-        public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService, IConfiguration configuration, IWatchandwardService watchandwardService)
+        public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService, IWorkflowTemplateService workflowtemplateService ,IConfiguration configuration, IWatchandwardService watchandwardService)
         {
+            _workflowtemplateService = workflowtemplateService;
             _watchAndWardApprovalService = watchAndWardApprovalService;
             _watchandwardService = watchandwardService;
             _configuration = configuration;
@@ -38,7 +40,7 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] WatchandwardSearchDto model)
         {
-            var result = await _watchAndWardApprovalService.GetPagedWatchandward(model);
+            var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId);
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Create(int id)
@@ -77,6 +79,31 @@ namespace EncroachmentDemolition.Controllers
             string path = Data.PhotoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
+        }
+
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalDropdownList()
+        {
+            var DataFlow = await dataAsync();
+             
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    var dropdown = DataFlow[i].parameterAction;
+                    return Json(dropdown);
+                }
+                break;
+            }
+            return Json(DataFlow);
         }
     }
 }

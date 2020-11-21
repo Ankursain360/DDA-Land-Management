@@ -112,6 +112,7 @@ namespace Libraries.Model
         public virtual DbSet<AssignedPropertyDailyRoaster> Assignedpropertydailyroaster { get; set; }
         public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
+        public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -196,6 +197,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new AssignedPropertyDailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new MonthlyRosterConfiguration());
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
+            modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

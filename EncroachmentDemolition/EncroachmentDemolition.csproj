@@ -10,25 +10,6 @@
     <EmbeddedResource Remove="wwwroot\Admin\**" />
     <None Remove="wwwroot\Admin\**" />
   </ItemGroup>
-
-  <!--<ItemGroup>
-    <Content Remove="bundleconfig.json" />
-    <Content Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
-    <Content Remove="wwwroot\js\encroachmentreportcreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\Shared\Components\PageHeader\PageHeader.cshtml" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\EncroachmentRegisterationView.min.js" />
-    <_ContentIncludedByDefault Remove="wwwroot\js\encroachmentreportcreate.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="bundleconfig.json" />
-    <None Include="wwwroot\js\EncroachmentRegisterationView.min.js" />
-    <None Include="wwwroot\js\encroachmentreportcreate.min.js" />
-  </ItemGroup>-->
-
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />

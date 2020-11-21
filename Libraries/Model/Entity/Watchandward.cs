@@ -40,6 +40,8 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
+        public int? Status { get; set; }
+        public int? PendingAt { get; set; }
 
         [NotMapped]
         public List<Propertyregistration> PrimaryListNoList { get; set; }
@@ -57,7 +59,6 @@ namespace Libraries.Model.Entity
         public List<IFormFile> ReportFile { get; set; }
         public virtual ICollection<Watchandwardphotofiledetails> Watchandwardphotofiledetails { get; set; }
         public virtual ICollection<Watchandwardreportfiledetails> Watchandwardreportfiledetails { get; set; }
-        public int? Status { get; set; }
 
         [NotMapped]
         public int EncroachmentStatus { get; set; }
@@ -86,9 +87,11 @@ namespace Libraries.Model.Entity
         public string Pocket { get; set; }
 
         [NotMapped]
-        public string PlotNo { get; set; }
+        public string ApprovalStatus { get; set; }
 
         [NotMapped]
-        public string KhasraNo { get; set; }
+        public string ApprovalRemarks { get; set; }
+
+
     }
 }

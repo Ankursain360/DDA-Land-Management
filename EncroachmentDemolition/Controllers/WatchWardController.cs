@@ -262,9 +262,32 @@ namespace EncroachmentDemolition.Controllers
 
                     if (result)
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var result1 = await _watchandwardService.GetAllWatchandward();
                         var DataFlow = await dataAsync();
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if(!DataFlow[i].parameterSkip)
+                            {
+                                watchandward.Status = 1;
+                                watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
+                                if (result)
+                                {
+                                    Approvalproccess approvalproccess = new Approvalproccess();
+                                    approvalproccess.WatchWardId = watchandward.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId;
+                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                    approvalproccess.PendingStatus = 1;
+                                    approvalproccess.Status = 1;
+                                    result = await _watchandwardService.CreateApprovalProccess(approvalproccess);
+                                }
+
+                                    break;
+                            }
+                        }
+                           
+                        ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
+                        var result1 = await _watchandwardService.GetAllWatchandward();
+                       
                         return View("Index", result1);
                     }
                     else

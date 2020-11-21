@@ -26,13 +26,14 @@ namespace Libraries.Repository.EntityRepository
         //        .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
         //}
 
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId)
         {
             return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
                 .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
+                .Where(x => x.Status == 1 && x.PendingAt == userId)
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
         }
 

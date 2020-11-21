@@ -173,5 +173,24 @@ namespace Libraries.Service.ApplicationService
         {
             return await _watchandwardRepository.FetchSingleResultOnPrimaryList(propertyId);
         }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Watchandward watchandward)
+        {
+            var result = await _watchandwardRepository.FindBy(a => a.Id == id);
+            Watchandward model = result.FirstOrDefault();
+
+            model.Status = watchandward.Status;
+            model.PendingAt = watchandward.PendingAt;
+            _watchandwardRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> CreateApprovalProccess(Approvalproccess approvalproccess)
+        {
+
+            approvalproccess.CreatedBy = 1;
+            approvalproccess.CreatedDate = DateTime.Now;
+            return await _watchandwardRepository.InsertInApprovalProccess(approvalproccess);
+        }
     }
 }

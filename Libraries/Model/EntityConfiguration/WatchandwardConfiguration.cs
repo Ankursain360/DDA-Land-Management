@@ -43,6 +43,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Status).HasColumnType("int(11)");
 
+            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
+
             builder.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
