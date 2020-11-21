@@ -5,6 +5,7 @@ using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Service.IApplicationService;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
@@ -13,14 +14,14 @@ namespace Libraries.Service.ApplicationService
     {
 
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IMonthlyRosterRepository _monthlyRosterService;
+        private readonly IMonthlyRosterRepository _monthlyRosterRepository;
         protected readonly DataContext _dbContext;
 
-        public MonthlyRosterService(IUnitOfWork unitOfWork, IMonthlyRosterRepository monthlyRosterService, DataContext dbContext)
-       : base(unitOfWork, monthlyRosterService)
+        public MonthlyRosterService(IUnitOfWork unitOfWork, IMonthlyRosterRepository monthlyRosterRepository, DataContext dbContext)
+       : base(unitOfWork, monthlyRosterRepository)
         {
             _unitOfWork = unitOfWork;
-            _monthlyRosterService = monthlyRosterService;
+            _monthlyRosterRepository = monthlyRosterRepository;
             _dbContext = dbContext;
         }
         public async Task<bool> Create(MonthlyRoaster monthlyRoaster)
@@ -28,23 +29,27 @@ namespace Libraries.Service.ApplicationService
 
             monthlyRoaster.CreatedBy = 1;
             monthlyRoaster.CreatedDate = DateTime.Now;
-            _monthlyRosterService.Add(monthlyRoaster);
+            _monthlyRosterRepository.Add(monthlyRoaster);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-        public void Create(MonthlyRoster entity)
+        public async Task<List<Department>> GetAllDepartmentList()
         {
-            throw new NotImplementedException();
+            return (await _monthlyRosterRepository.GetAllDepartmentList());
         }
 
-        public void Delete(MonthlyRoster entity)
+        public async Task<List<Zone>> GetAllZone(int departmentId)
         {
-            throw new NotImplementedException();
+            return (await _monthlyRosterRepository.GetAllZone(departmentId));
         }
 
-        public void Update(MonthlyRoster entity)
+        public async Task<List<Division>> GetAllDivisionList(int zoneId)
         {
-            throw new NotImplementedException();
+            return (await _monthlyRosterRepository.GetAllDivisionList(zoneId));
+        }
+
+        public async Task<List<Locality>> GetAllLocalityList(int divisionId)
+        {
+            return (await _monthlyRosterRepository.GetAllLocalityList(divisionId));
         }
     }
 }

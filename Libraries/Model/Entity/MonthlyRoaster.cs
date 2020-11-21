@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Common;
+﻿using Dto.Master;
+using Libraries.Model.Common;
 using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -38,5 +39,9 @@ namespace Libraries.Model.Entity
         public List<Userprofile> UserprofileList { get; set; }
         [NotMapped]
         public List<Propertyregistration> PropertyregistrationList { get; set; }
+        [NotMapped]
+        public List<DropdownDto> YearList { get; set; }
+        [NotMapped]
+        public List<DropdownDto> MonthList { get; set; }
     }
 }

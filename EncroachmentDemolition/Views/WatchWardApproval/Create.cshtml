@@ -28,17 +28,21 @@
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label class="control-label lb-sm">Status</label>
-                        <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="form-control">
-                            <option value="1">Forward To CLM</option>
-                            <option value="2">Approved</option>
-                            <option value="3">Reject</option>
+                        <select asp-for="ApprovalStatus" style="height:30px; background-color: #dddddd;" class="form-control">
+                            @*<option value="1">Forward To CLM</option>
+                                <option value="2">Approved</option>
+                                <option value="3">Reject</option>*@
+                            <option value="0">--Select--</option>
+                            <option value="1">Forward</option>
+                            <option value="2">Revert</option>
+                            <option value="3">Approved</option>
                         </select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control"></textarea>
+                        <textarea type="text" class="form-control" asp-for="ApprovalRemarks"></textarea>
                     </div>
                 </div>
                 <div class="row ">

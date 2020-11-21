@@ -49,9 +49,9 @@ namespace Libraries.Service.ApplicationService
             return await _watchAndWardApprovalRepository.GetAllWatchandward();
         }
 
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId)
         {
-            return await _watchAndWardApprovalRepository.GetPagedWatchandward(model);
+            return await _watchAndWardApprovalRepository.GetPagedWatchandward(model,  userId);
         }
 
         public Task<bool> Update(int id, Watchandward watchandward)

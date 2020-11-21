@@ -9,6 +9,22 @@ $(document).ready(function () {
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
 
+    HttpGet(`/WatchWardApproval/GetApprovalDropdownList`, 'html', function (response) {
+        response = JSON.parse(response);
+        $('#ApprovalStatus option').each(function () {
+            if (response.length>0) {
+                for (var i = 0; i < response.length; i++) {
+                    if (response[i] == $(this).val()) {
+                        $(this).show();
+                    }
+                    else {
+                        $(this).remove();
+                    }
+                }
+            }
+        });
+    });
+   
 });
 
 

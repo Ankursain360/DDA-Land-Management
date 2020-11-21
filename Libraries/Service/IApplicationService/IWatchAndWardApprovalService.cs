@@ -18,6 +18,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Watchandward watchandward);
         Task<bool> Create(Watchandward watchandward);
         Task<Watchandward> FetchSingleResult(int id);
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId);
     }
 }

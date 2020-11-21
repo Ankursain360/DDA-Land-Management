@@ -12,7 +12,7 @@ namespace Libraries.Model.EntityConfiguration
     public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
 
-        public void Configure(EntityTypeBuilder<Designation> builder)
+        public void Configure(EntityTypeBuilder<Department> builder)
         {
             builder.ToTable("department", "lms");
 
@@ -34,11 +34,6 @@ namespace Libraries.Model.EntityConfiguration
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-        }
-
-        public void Configure(EntityTypeBuilder<Department> builder)
-        {
-            throw new NotImplementedException();
         }
     }
 }

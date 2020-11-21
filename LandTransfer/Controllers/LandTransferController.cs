@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Dto.Search;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using LandTransfer.Controllers;
-using Utility;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 using Utility.Helper;
-using System.Net;
 
 namespace LandTransfer.Controllers
 {
@@ -37,14 +31,14 @@ namespace LandTransfer.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LandTransferSearchDto model)
         {
-                var result = await _landTransferService.GetPropertyRegisterationDataForLandTransfer(model);
-                return PartialView("_List", result);
+            var result = await _landTransferService.GetPropertyRegisterationDataForLandTransfer(model);
+            return PartialView("_List", result);
         }
         [HttpPost]
         public async Task<PartialViewResult> UnverifiedList([FromBody] LandTransferSearchDto model)
         {
-                var result = await _landTransferService.GetPropertyRegisterationUnverifiedDataForLandTransfer(model);
-                return PartialView("_UnverifiedList", result);
+            var result = await _landTransferService.GetPropertyRegisterationUnverifiedDataForLandTransfer(model);
+            return PartialView("_UnverifiedList", result);
         }
         public async Task<IActionResult> IndexUnverified()
         {
@@ -57,7 +51,7 @@ namespace LandTransfer.Controllers
             propertyRegistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
             landtransfer.Propertyregistration = propertyRegistration;
             return View(landtransfer);
-        }        
+        }
         public async Task<IActionResult> Index()
         {
             Landtransfer landtransfer = new Landtransfer();
@@ -73,7 +67,7 @@ namespace LandTransfer.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = new Landtransfer();//await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
-            if (Data==null)
+            if (Data == null)
             {
                 Data = new Landtransfer();
             }
@@ -85,10 +79,10 @@ namespace LandTransfer.Controllers
             {
                 ViewBag.IsValidateUser = 0;
             }
-            Data.HandedOverZoneList= await _landTransferService.GetAllZone(Data.HandedOverDepartmentId??0);
+            Data.HandedOverZoneList = await _landTransferService.GetAllZone(Data.HandedOverDepartmentId ?? 0);
             Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
-            Data.TakenOverZoneList= await _landTransferService.GetAllZone(Data.TakenOverDepartmentId??0);
-            Data.TakenOverDivisionList= await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
+            Data.TakenOverZoneList = await _landTransferService.GetAllZone(Data.TakenOverDepartmentId ?? 0);
+            Data.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
 
             Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(id);
             Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
@@ -112,14 +106,14 @@ namespace LandTransfer.Controllers
             Data.IsValidateData = Data.IsValidate == 1 ? true : false;
             if (Data == null)
             {
-                return NotFound();  
+                return NotFound();
             }
             return View(Data);
         }
         public async Task<IActionResult> View(int id)
         {
             var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
-            if (Data==null)
+            if (Data == null)
             {
                 Data = new Landtransfer();
             }
@@ -131,10 +125,10 @@ namespace LandTransfer.Controllers
             {
                 ViewBag.IsValidateUser = 0;
             }
-            Data.HandedOverZoneList= await _landTransferService.GetAllZone(Data.HandedOverDepartmentId??0);
+            Data.HandedOverZoneList = await _landTransferService.GetAllZone(Data.HandedOverDepartmentId ?? 0);
             Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
-            Data.TakenOverZoneList= await _landTransferService.GetAllZone(Data.TakenOverDepartmentId??0);
-            Data.TakenOverDivisionList= await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
+            Data.TakenOverZoneList = await _landTransferService.GetAllZone(Data.TakenOverDepartmentId ?? 0);
+            Data.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
 
             Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(id);
             Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
@@ -158,14 +152,14 @@ namespace LandTransfer.Controllers
             Data.IsValidateData = Data.IsValidate == 1 ? true : false;
             if (Data == null)
             {
-                return NotFound();  
+                return NotFound();
             }
             return View(Data);
         }
         public async Task<IActionResult> Verify(int id)
         {
             var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
-            if (Data==null)
+            if (Data == null)
             {
                 Data = new Landtransfer();
             }
@@ -177,10 +171,10 @@ namespace LandTransfer.Controllers
             {
                 ViewBag.IsValidateUser = 0;
             }
-            Data.HandedOverZoneList= await _landTransferService.GetAllZone(Data.HandedOverDepartmentId??0);
+            Data.HandedOverZoneList = await _landTransferService.GetAllZone(Data.HandedOverDepartmentId ?? 0);
             Data.HandedOverDivisionList = await _landTransferService.GetAllDivisionList(Data.HandedOverZoneId == null ? 0 : Data.HandedOverZoneId);
-            Data.TakenOverZoneList= await _landTransferService.GetAllZone(Data.TakenOverDepartmentId??0);
-            Data.TakenOverDivisionList= await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
+            Data.TakenOverZoneList = await _landTransferService.GetAllZone(Data.TakenOverDepartmentId ?? 0);
+            Data.TakenOverDivisionList = await _landTransferService.GetAllDivisionList(Data.TakenOverZoneId == null ? 0 : Data.HandedOverZoneId);
 
             Data.Propertyregistration = await _propertyregistrationService.FetchSingleResult(id);
             Data.Propertyregistration.ClassificationOfLandList = await _propertyregistrationService.GetClassificationOfLandDropDownList();
@@ -204,7 +198,7 @@ namespace LandTransfer.Controllers
             Data.IsValidateData = Data.IsValidate == 1 ? true : false;
             if (Data == null)
             {
-                return NotFound();  
+                return NotFound();
             }
             return View(Data);
         }
@@ -254,7 +248,7 @@ namespace LandTransfer.Controllers
                 else
                 {
                     landtransfer.IsValidate = 1;
-                }   
+                }
                 copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
                 takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
@@ -296,14 +290,14 @@ namespace LandTransfer.Controllers
                     PropertyRegistrationHistory propertyRegistrationHistory = new PropertyRegistrationHistory();
                     propertyRegistrationHistory.LandTransferId = landtransfer.Id;
                     propertyRegistrationHistory.PropertyRegistrationId = landtransfer.PropertyRegistrationId;
-                    propertyRegistrationHistory.DepartmentId = landtransfer.HandedOverDepartmentId??0;
+                    propertyRegistrationHistory.DepartmentId = landtransfer.HandedOverDepartmentId ?? 0;
                     propertyRegistrationHistory.ZoneId = landtransfer.HandedOverZoneId;
                     propertyRegistrationHistory.DivisionId = landtransfer.HandedOverDivisionId;
                     result = await _landTransferService.CreateHistory(propertyRegistrationHistory);
                     if (result)
                     {
                         Propertyregistration propertyregistration = new Propertyregistration();
-                        propertyregistration.DepartmentId = landtransfer.HandedOverDepartmentId??0;
+                        propertyregistration.DepartmentId = landtransfer.HandedOverDepartmentId ?? 0;
                         propertyregistration.ZoneId = landtransfer.HandedOverZoneId;
                         propertyregistration.DivisionId = landtransfer.HandedOverDivisionId;
 
@@ -372,7 +366,7 @@ namespace LandTransfer.Controllers
                 else
                 {
                     landtransfer.IsValidate = 1;
-                }   
+                }
                 copyOfOrderDoc = _configuration.GetSection("FilePaths:LandTransfer:CopyOfOrderDoc").Value.ToString();
                 actionTakenReport = _configuration.GetSection("FilePaths:LandTransfer:ActionTakenReport").Value.ToString();
                 takenOverFile = _configuration.GetSection("FilePaths:LandTransfer:TakenOverFile").Value.ToString();
