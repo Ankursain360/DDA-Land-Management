@@ -1,8 +1,9 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
-<div class="card  table-card table-responsive">
-    <table class="table table-responsive table-bordered table-card">
-        <thead class="thead">
+<div class="table-section bg-white border shadow rounded">
+
+    <table class="table table-sm table-bordered mb-0 table-striped">
+        <thead class="text-nowrap">
             <tr>
                 <th rowspan="2">Sr.No</th>
                 <th rowspan="2">Inventoried In</th>
@@ -22,7 +23,7 @@
                 <th rowspan="2">Restore</th>
             </tr>
         </thead>
-        <tbody class="tbody">
+        <tbody>
             @foreach (var item in Model.Results)
             {
             <tr>
@@ -40,10 +41,17 @@
                 <td>@item.TotalArea</td>
                 <td>@(item.Reason == null ? "" : item.Deletedproperty.Reason)</td>
                 <td>@(item.Deletedproperty == null ? "" : item.Deletedproperty.DeletedDate.ToString("dd-MMM-yyyy"))</td>
-                <td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>
+                @*<td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>*@
+                <td>
+                    <div class="action-btns">
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+
+                    </div>
+
+                </td>
 
                 <td>
-                    <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+                    <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn btn-theme " /></a>
                 </td>
 
 

@@ -1,61 +1,61 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
 
-<table class="table table-responsive table-bordered table-card">
+<div class="table-section bg-white border shadow rounded">
 
+    <table class="table table-sm table-bordered mb-0 table-striped">
+        <thead class="text-nowrap">
+            <tr>
+                <th>Sr.No</th>
+                <th>Inventoried In</th>
+                <th>Planned/Unplanned Land </th>
+                <th>Classification of Land</th>
+                <th>Department</th>
+                <th>Zone</th>
+                <th>Division</th>
+                <th>Primary List No.</th>
+                <th>Total Area(in Sq. Mt.)</th>
+                <th>Operation</th>
+            </tr>
 
-    <thead class="thead">
-        <tr>
-            <th>Sr.No</th>
-            <th>Inventoried In</th>
-            <th>Planned/Unplanned Land </th>
-            <th>Classification of Land</th>
-            <th>Department</th>
-            <th>Zone</th>
-            <th>Division</th>
-            <th>Primary List No.</th>
-            <th>Total Area(in Sq. Mt.)</th>
-            <th>Operation</th>
-        </tr>
-
-    </thead>
-    <tbody class="tbody">
-        @if (Model != null && Model.Results.Count() > 0)
-        {
-        @foreach (var item in Model.Results)
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Results.Count() > 0)
             {
-        <tr>
-            <td>@(rowNo += 1)</td>
-            <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
-            <td>@(item.PlannedUnplannedLand)</td>
-            <td>@item.ClassificationOfLand.Name</td>
-            <td>@item.Department.Name</td>
-            <td>@item.Zone.Name</td>
-            <td>@item.Division.Name</td>
-            <td>@item.PrimaryListNo</td>
-            <td>@item.TotalArea</td>
-            <td>
-                <a asp-action="View" asp-route-id="@item.Id" title="View"> View </a>
-                @if (item.IsValidate == 0)
+                @foreach (var item in Model.Results)
                 {
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp; Delete</a>
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
+                        <td>@(item.PlannedUnplannedLand)</td>
+                        <td>@item.ClassificationOfLand.Name</td>
+                        <td>@item.Department.Name</td>
+                        <td>@item.Zone.Name</td>
+                        <td>@item.Division.Name</td>
+                        <td>@item.PrimaryListNo</td>
+                        <td>@item.TotalArea</td>
+                        <td>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View"> View </a>
+                            @if (item.IsValidate == 0)
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp; Delete</a>
+                            }
+                            @if (ViewBag.IsUserCanEdit == 14)
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.Id" title="Verify"> &nbsp; | &nbsp; Verify</a>
+                            }
+                        </td>
+                    </tr>
                 }
-                @if (ViewBag.IsUserCanEdit == 14)
-                {
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Verify"> &nbsp; | &nbsp; Verify</a>
-                }
-                </td>
-        </tr>
             }
-        }
-        else
-        {
-        <tr>
-            <th colspan="14" style="text-align:center"> No Record Available! </th>
-        </tr>
-        }
-    </tbody>
+            else
+            {
+                <tr>
+                    <th colspan="14" style="text-align:center"> No Record Available! </th>
+                </tr>
+            }
+        </tbody>
 
-</table>
-
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+    </table>
+</div>
+    @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

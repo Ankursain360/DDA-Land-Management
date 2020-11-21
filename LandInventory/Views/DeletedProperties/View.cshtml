@@ -155,9 +155,9 @@
                 </div>
             </div>
         </div>
-            
-               
-        
+
+
+
         <div class="row">
             <div class="col-md-12">
                 <div class="floating-label-wrap">
@@ -166,79 +166,78 @@
                     <div id="feedbackPalandmark"></div>
                 </div>
             </div>
-            </div>
+        </div>
 
 
         <div id="DivArea">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-
-                    <div class="col-md-12">
-                        <h6 class="mb-3 d-flex">Area</h6>
-                        @*<h6 class="pull-left color-white" style="margin-top:5px;">Area</h6>*@
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="AreaUnit">
-                        <option value="0">bigha-biswa-bishwani</option>
-                        <option value="1">Sq Yd.</option>
-                        <option value="2">Acre</option>
-                        <option value="3">Hectare</option>
-                        <option value="4">Sq. Mt.</option>
-                    </select>
-                    <span asp-validation-for="AreaUnit" class="text-danger"></span>
-                    <label asp-for="AreaUnit" class="floating-label">Area Unit</label>
-                </div>
-            </div>
-            <div id="bighabis">
-                <div class="col-md-1">
+            <h2 class="my-3 sub-heading">Area</h2>
+            <div class="row">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                        <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
-                        <label class="floating-label">Bigha</label>
+                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="AreaUnit">
+                            <option value="0">bigha-biswa-bishwani</option>
+                            <option value="1">Sq Yd.</option>
+                            <option value="2">Acre</option>
+                            <option value="3">Hectare</option>
+                            <option value="4">Sq. Mt.</option>
+                        </select>
+                        <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                        <label asp-for="AreaUnit" class="floating-label">Area Unit</label>
                     </div>
                 </div>
-                <div class="col-md-1">
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <div id="bighabis">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap">
+
+                                    <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
+                                    <label class="floating-label">Bigha</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap">
+
+                                    <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
+                                    <label class="floating-label">Biswa</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="floating-label-wrap">
+
+                                    <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
+                                    <label class="floating-label">Biswani</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
                     <div class="floating-label-wrap">
 
-                        <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                        <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
-                        <label class="floating-label">Biswa</label>
+                        <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
                     </div>
                 </div>
-                <div class="col-md-1">
+                <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                        <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
-                        <label class="floating-label">Biswani</label>
+                        <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                        <span asp-validation-for="TotalArea" class="text-danger"></span>
+                        <label class="floating-label">Total Area(in sq. mt.)</label>
                     </div>
                 </div>
             </div>
-            <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                <div class="floating-label-wrap">
-
-                    <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                    <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                    <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-
-                    <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                    <span asp-validation-for="TotalArea" class="text-danger"></span>
-                    <label class="floating-label">Total Area(in sq. mt.)</label>
-                </div>
-            </div>
-
             <div class="row">
 
 
@@ -246,15 +245,7 @@
         </div>
 
         <div id="divEncroachment">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Encroached Details</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="my-3 sub-heading">Encroached Details</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
@@ -266,7 +257,9 @@
                         <label asp-for="EncroachmentStatusId" class="floating-label">Encroachment</label>
                     </div>
                 </div>
-                <div id="divEncroachmentYesSelection" style="display:none;">
+            </div>
+            <div id="divEncroachmentYesSelection" style="display:none;">
+                <div class="row pt-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachedPartiallyFully">
@@ -285,7 +278,6 @@
                             <label class="floating-label">Encroched Area(in sq. mt.)</label>
                         </div>
                     </div>
-
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
                             <input disabled asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
@@ -293,6 +285,11 @@
                             <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
                         </div>
                     </div>
+                </div>
+
+
+
+                <div class="row pt-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
@@ -330,30 +327,22 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="row">
+
+            <div class="row pt-3">
                 <div class="col-md-12" id="divEncroachmentDetails" style="display:none;">
-
-                    <input disabled asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
-                    <span asp-validation-for="EncraochmentDetails" class="text-danger lb-sm"></span>
-                    <label id="l1" class="floating-label">Encroachment Details</label>
+                    <div class="floating-label-wrap">
+                        <input disabled asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
+                        <span asp-validation-for="EncraochmentDetails" class="text-danger lb-sm"></span>
+                        <label id="l1" class="floating-label">Encroachment Details</label>
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
 
         <div id="divFencingBoundaryWall">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Boundary Wall/Fencing</h6>
-                            <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;color:white"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="my-3 sub-heading">Boundary Wall/Fencing</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
@@ -366,7 +355,9 @@
                         <label class="floating-label">Protection of Land</label>
                     </div>
                 </div>
-                <div id="divBoundarySelection" style="display:none;">
+            </div>
+            <div id="divBoundarySelection" style="display:none;">
+                <div class="row pt-3">
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
                             <input type="text" class="floating-label-field floating-label-field--s3 numbers" disabled asp-for="BoundaryAreaCovered" />
@@ -393,17 +384,9 @@
         </div>
 
         <div id="DivLandUse">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Land Use</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div id="divPlannedLand">
+            <h2 class="my-3 sub-heading">Land Use</h2>
+            <div id="divPlannedLand">
+                <div class="row">
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
@@ -426,15 +409,7 @@
         </div>
 
         <div id="divLitigation">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Litigation</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="my-3 sub-heading">Litigation</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
@@ -446,15 +421,17 @@
                         <label class="floating-label">Litigation Status</label>
                     </div>
                 </div>
-                <div id="divLitigationStatusSelection" style="display:none;">
-                    <div class="col-md-4">
+            </div>
+            <div id="divLitigationStatusSelection" style="display:none;">
+                <div class="row pt-3">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <input disabled asp-for="CourtName" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="CourtName" class="text-danger"></span>
                             <label class="floating-label">Court Name</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
 
                             <input disabled asp-for="CaseNo" class="floating-label-field floating-label-field--s3" />
@@ -462,14 +439,17 @@
                             <label class="floating-label">Case No.</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                </div>
+
+                <div class="row pt-3">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <input disabled asp-for="OppositeParty" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="OppositeParty" class="text-danger"></span>
                             <label class="floating-label">Opposite Party</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="floating-label-wrap">
                             <input disabled asp-for="LitigationStatusRemarks" class="floating-label-field floating-label-field--s3" limit="4000" />
                             <span asp-validation-for="LitigationStatusRemarks" class="text-danger"></span>
@@ -479,16 +459,9 @@
                 </div>
             </div>
         </div>
+        <br />
         <div id="DivOtherDetails">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Other Details</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="my-3 sub-heading">Other Details</h2>
 
             <div class="row">
                 <div class="col-md-4">
@@ -508,7 +481,7 @@
                         <label class="floating-label">Built-Up Remarks</label>
                     </div>
                 </div>
-
+                <br />
                 <div class="col-md-4" id="divLayoutPlan" style="display:none;">
                     <div class="floating-label-wrap">
 
@@ -529,7 +502,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pt-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
@@ -537,10 +510,12 @@
                             <option value="0">No</option>
                             <option value="1">Yes</option>
                         </select>
-                        <label class="floating-label">GEO Referencing Done</label><span class="text-danger"></span>
+                         <label class="floating-label">GEO Referencing Done</label><span class="text-danger"></span>
                     </div>
                 </div>
-                <div id="divGEOReferencingSelection" style="display:none;">
+                </div>
+            <div id="divGEOReferencingSelection" style="display:none;">
+                <div class="row pt-3">
                     <div class="col-md-4" id="divGEOReferencing">
 
                         <input type="hidden" asp-for="GeoFilePath" />
@@ -556,7 +531,7 @@
                             }
                         }
                         <span asp-validation-for="GeoFileData" class="text-danger"></span>
-                        <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                        <br /> <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
@@ -573,7 +548,8 @@
                             <label class="floating-label">Longitude</label>
                         </div>
                     </div>
-
+                </div>
+                <div class="row pt-3">
                     <div class="col-md-4">
                         <a class="btn btn-theme " style="width:auto;margin-top:15px;">Get Lat Long</a>
                         @*@Html.ActionLink("Get Latt Longitude", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading", style = "width:auto;" })*@
@@ -583,15 +559,7 @@
         </div>
 
         <div id="DivHandedOver" style="display:none;">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Handed Over</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h2 class="my-3 sub-heading">Handed Over</h2>
             <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
@@ -734,15 +702,7 @@
         </div>
         <div id="DivTakenOver" style="display:none;">
 
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class="dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left color-white" style="margin-top:5px;">Taken Over</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <h6 class="my-3 sub-heading">Taken Over</h6>
             <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
@@ -854,15 +814,7 @@
         @if (ViewBag.Isdispodedtrue == 0)
         {
             <div id="DivDisposal">
-                <div class="row" style="margin-bottom:35px;">
-                    <div class="col-sm-12">
-                        <div class="dda-innerheading">
-                            <div class="col-md-12">
-                                <h6 class="pull-left color-white" style="margin-top:5px;">Disposal</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="my-3 sub-heading">Disposal</h2>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
@@ -903,17 +855,17 @@
                 </div>
             </div>
         }
+       
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="floating-label-wrap">
-
-                    <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                    <label class="floating-label">Remarks</label>
-                    <div id="feedbackRemarks"></div>
-                </div>
+                <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                <label class="floating-label">Remarks</label>
+                <div id="feedbackRemarks"></div>
             </div>
         </div>
+    </div>
         <div class="row" style="display:none;">
             <div class="col-md-4">
                 <div class="floating-label-wrap">
@@ -949,8 +901,7 @@
 
     </form>
 </div>
-    @*</div>
-</div>*@
+    
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
