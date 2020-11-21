@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Libraries.Model.MonthlyRoster>
-<table class="table table-sm table-bordered mb-0 table-striped">
-    <thead class="thead">
+﻿@model IEnumerable<Dto.Master.MonthlyRoasterPartial>
+<table class="table">
+    <thead class="thead table-striped table-bordered table">
         <tr>
             <th>Date</th>
             <th>Day</th>
@@ -14,7 +14,7 @@
     <td>@item.Date</td>
     <td>@item.Day</td>
     <td>
-        <select multiple>
+        <select class="roaster" multiple>
             <option value="Codeigniter">Bahapur</option>
             <option value="CakePHP">Raipur Khurd</option>
             <option value="Laravel">Tehkhand</option>
@@ -28,11 +28,10 @@
 </tr>}
     </tbody>
 </table>
-<script>
-    $(document).ready(function () {
-        $("select").select2({
-            placeholder: "Select",
-            allowClear: true
-        });
-    });
-</script>
+
+<environment include="Development">
+    <script src="~/js/MonthlyRoasterCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/MonthlyRoasterCreate.js" asp-append-version="true"></script>
+</environment>
