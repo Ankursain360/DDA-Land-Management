@@ -28,19 +28,19 @@
                 <th rowspan="2">Operation</th>
             </tr>
             <tr>
-                <th>Boundary</th>
-                <th>Total Area</th>
-                <th>Encrochment</th>
-                <th>Vacant</th>
-                <th>Taken Over Name</th>
-                <th>Taken Over/Date</th>
-                <th>Taken Over/Comments</th>
-                <th>Handed Over Name/Designation</th>
-                <th>Handed Over/Date</th>
-                <th>Handed Over/Comments</th>
-                <th>Disposal type</th>
-                <th>Disposal/Date</th>
-                <th>Disposal/Comments</th>
+                <th scope="col">Boundary</th>
+                <th scope="col">Total Area</th>
+                <th scope="col">Encrochment</th>
+                <th scope="col">Vacant</th>
+                <th scope="col">Taken Over Name</th>
+                <th scope="col">Taken Over/Date</th>
+                <th scope="col">Taken Over/Comments</th>
+                <th scope="col">Handed Over Name/Designation</th>
+                <th scope="col">Handed Over/Date</th>
+                <th scope="col">Handed Over/Comments</th>
+                <th scope="col">Disposal type</th>
+                <th scope="col">Disposal/Date</th>
+                <th scope="col">Disposal/Comments</th>
 
             </tr>*@
         @*Old with few fields End*@
@@ -73,127 +73,133 @@
                 <th rowspan="2">Operation</th>
             </tr>
             <tr>
-                <th>Boundary</th>
-                <th>Total Area(In bigha-biswa/Sq Yd./Acre)</th>
-                <th>Total Area(in Sq. Mt.)</th>
-                <th>Encrochment(in Sq. Mt.)</th>
-                <th>Builtup in Encroachment Area(in sq. mt.)</th>
-                <th>Vacant(in Sq. Mt.)</th>
-                <th>Name/Designation</th>
-                <th>Date</th>
-                <th>Mobile No.</th>
-                <th>Comments</th>
-                <th>Name/Designation</th>
-                <th>Date</th>
-                <th>Mobile No.</th>
-                <th>Comments</th>
-                <th>type</th>
-                <th>Date</th>
-                <th>Comments</th>
+                <th scope="col">Boundary</th>
+                <th scope="col">Total Area(In bigha-biswa/Sq Yd./Acre)</th>
+                <th scope="col">Total Area(in Sq. Mt.)</th>
+                <th scope="col">Encrochment(in Sq. Mt.)</th>
+                <th scope="col">Builtup in Encroachment Area(in sq. mt.)</th>
+                <th scope="col">Vacant(in Sq. Mt.)</th>
+                <th scope="col">Name/Designation</th>
+                <th scope="col">Date</th>
+                <th scope="col">Mobile No.</th>
+                <th scope="col">Comments</th>
+                <th scope="col">Name/Designation</th>
+                <th scope="col">Date</th>
+                <th scope="col">Mobile No.</th>
+                <th scope="col">Comments</th>
+                <th scope="col">type</th>
+                <th scope="col">Date</th>
+                <th scope="col">Comments</th>
 
             </tr>*@
         @*New with all fields start*@
 
 
         <tr>
-            <th>Sr.No</th>
-            <th>Inventoried In</th>
-            <th>Planned/Unplanned Land </th>
-            <th>Classification of Land</th>
-            <th>Department</th>
-            <th>Zone</th>
-            <th>Division</th>
-            @*<th>Locality(Village)</th>*@
-            @*<th>Khasra No.</th>*@
-            <th>Primary List No.</th>
-            @*<th>Encroachment Status</th>*@
-            @*<th>Encroachment Details</th>*@
-            <th>Total Area(in Sq. Mt.)</th>
-            <th>Operation</th>
+            <th scope="col">Sr.No</th>
+            <th scope="col">Inventoried In</th>
+            <th scope="col">Planned/Unplanned Land </th>
+            <th scope="col">Classification of Land</th>
+            <th scope="col">Department</th>
+            <th scope="col">Zone</th>
+            <th scope="col">Division</th>
+            @*<th scope="col">Locality(Village)</th>*@
+            @*<th scope="col">Khasra No.</th>*@
+            <th scope="col">Primary List No.</th>
+            @*<th scope="col">Encroachment Status</th>*@
+            @*<th scope="col">Encroachment Details</th>*@
+            <th scope="col">Total Area(in Sq. Mt.)</th>
+            <th scope="col" style="min-width: 105px;">Operation</th>
         </tr>
 
     </thead>
-    <tbody>
+    <tbody class="tbody">
 
         @*New with all fields start*@
         @if (Model != null && Model.Results.Count() > 0)
         {
-@foreach (var item in Model.Results)
-{
-<tr>
-    <td>@(rowNo += 1)</td>
-    <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
-    <td>@(item.PlannedUnplannedLand)</td>
-    <td>@item.ClassificationOfLand.Name</td>
-    <td>@item.Department.Name</td>
-    <td>@item.Zone.Name</td>
-    <td>@item.Division.Name</td>
-    @*<td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>*@
-    @*<td>@item.KhasraNo</td>*@
-    <td>@item.PrimaryListNo</td>
-    @*<td>@item.Palandmark</td>*@
-    @*<td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>*@
-    @*<td>@item.EncraochmentDetails</td>*@
-    @*<td>@(item.Boundary == 0 ? "No" : "Yes")</td>
-        <td>@item.TotalAreaInBigha</td>*@
-    <td>@item.TotalArea</td>
-    @*<td>@item.Encroached</td>
-        <td>@item.BuiltUpEncraochmentArea</td>
-        <td>@item.Vacant</td>
-        <td>@(item.PlannedUnplannedLand)</td>
-        <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
-        <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
-        <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
-        <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>*@
-    @*<td>
-            @if (item.LayoutFilePath != null)
+            @foreach (var item in Model.Results)
             {
-                @Html.ActionLink("Download", "Download", new { id = item.Id })
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
+                    <td>@(item.PlannedUnplannedLand)</td>
+                    <td>@item.ClassificationOfLand.Name</td>
+                    <td>@item.Department.Name</td>
+                    <td>@item.Zone.Name</td>
+                    <td>@item.Division.Name</td>
+                    @*<td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>*@
+                    @*<td>@item.KhasraNo</td>*@
+                    <td>@item.PrimaryListNo</td>
+                    @*<td>@item.Palandmark</td>*@
+                    @*<td>@(item.EncroachmentStatusId== 0 ? "No" : "Yes")</td>*@
+                    @*<td>@item.EncraochmentDetails</td>*@
+                    @*<td>@(item.Boundary == 0 ? "No" : "Yes")</td>
+                        <td>@item.TotalAreaInBigha</td>*@
+                    <td>@item.TotalArea</td>
+                    @*<td>@item.Encroached</td>
+                        <td>@item.BuiltUpEncraochmentArea</td>
+                        <td>@item.Vacant</td>
+                        <td>@(item.PlannedUnplannedLand)</td>
+                        <td>@(item.BuiltUp == 0 ? "No" : "Yes")</td>
+                        <td>@(item.LayoutPlan == 0 ? "No" : "Yes")</td>
+                        <td>@(item.LitigationStatus  == 0 ? "No" : "Yes")</td>
+                        <td>@(item.GeoReferencing == 0 ? "No" : "Yes")</td>*@
+                    @*<td>
+                            @if (item.LayoutFilePath != null)
+                            {
+                                @Html.ActionLink("Download", "Download", new { id = item.Id })
+                            }
+                            else
+                            {
+                                <p class="text-danger">No Document</p>
+                            }
+                        </td>*@
+
+                    @*<td>@item.TakenOverName</td>
+                        <td>@item.TakenOverDate</td>
+                        <td>@item.TakenOverMobileNo</td>
+                        <td>@item.TakenOverComments</td>
+                        <td>@item.HandedOverName</td>
+                        <td>@item.HandedOverDate</td>
+                        <td>@item.HandedOverMobileNo</td>
+                        <td>@item.HandedOverComments</td>
+                        <td>@item.DisposalType.Name</td>
+                        <td>@item.DisposalDate</td>
+                        <td>@item.DisposalComments</td>
+                        <td>@item.Remarks</td>*@
+
+                    <td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+
+                        @if (ViewBag.IsUserCanEdit == 14)
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                        }
+
+
+                        @if (item.IsValidate == 0)
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove"
+                               onclick="return confirm('Are You Sure, You want to Delete this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+                        }
+                        @if (item.IsValidate == 1)
+                        {
+                            @if (ViewBag.IsDisposedRightsUser == 15)
+                            {
+                                <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" class="remove" onclick="return confirm('Are You Sure, You want to Dispose this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+                            }
+                        }
+                    </td>
+                </tr>
             }
-            else
-            {
-                <p class="text-danger">No Document</p>
-            }
-        </td>*@
-
-    @*<td>@item.TakenOverName</td>
-        <td>@item.TakenOverDate</td>
-        <td>@item.TakenOverMobileNo</td>
-        <td>@item.TakenOverComments</td>
-        <td>@item.HandedOverName</td>
-        <td>@item.HandedOverDate</td>
-        <td>@item.HandedOverMobileNo</td>
-        <td>@item.HandedOverComments</td>
-        <td>@item.DisposalType.Name</td>
-        <td>@item.DisposalDate</td>
-        <td>@item.DisposalComments</td>
-        <td>@item.Remarks</td>*@
-    <td>
-        <div class="action-btns">
-            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-
-            @if (ViewBag.IsUserCanEdit == 14)
-            {
-<a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>}
-
-
-            @if (item.IsValidate == 0)
-            {
-<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>}
-            @if (item.IsValidate == 1)
-            {
-@if (ViewBag.IsDisposedRightsUser == 15)
-{
-<a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" onclick="return confirm('Are You Sure, You want to Dispose this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-erase" aria-hidden="true"></i></a>}}
-
-        </div>
-    </td>
-</tr>} }
-else
-{
-<tr>
-    <th colspan="14" style="text-align:center"> No Record Available! </th>
-</tr>}
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
         @*New with all fields start*@
 
 

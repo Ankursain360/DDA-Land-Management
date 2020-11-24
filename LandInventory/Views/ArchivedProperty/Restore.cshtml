@@ -21,18 +21,21 @@
     <form asp-action="Restore" method="post">
 
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="control-label lb-sm">Restore Reason</label>
-                <textarea asp-for="RestoreReason" type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <textarea asp-for="RestoreReason" type="text" class="floating-label-field floating-label-field--s3" style=" background-color: #dddddd;"></textarea>
+                    <label class="floating-label">Restore Reason</label>
+                </div>
             </div>
 
-            <div class="form-group col-md-6">
-                <br />
-                <h6 class="p-4">Are you sure you want to restore this?</h6>
-                <input type="hidden" asp-for="Id" />
+                <div class="form-group col-md-6">
+                    <br />
+                    <h6 class="p-4">Are you sure you want to restore this?</h6>
+                    <input type="hidden" asp-for="Id" />
+                </div>
             </div>
-        </div>
         <div class="form-row">
             <div class="form-group col-md-12">
 

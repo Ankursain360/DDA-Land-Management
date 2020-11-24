@@ -309,7 +309,7 @@
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
-                            <input type="hidden" asp-for="EncroachAtrfilepath" />
+                           <br /> <input type="hidden" asp-for="EncroachAtrfilepath" />
                             @{
                                 @if (ViewBag.EncroachAtrDocView != null)
                                 {
@@ -323,7 +323,7 @@
                                 }
                             }
                             <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                            <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                           <br /> <label class="floating-label">Upload Action Taken Report(ATR)</label>
                         </div>
                     </div>
                 </div>
@@ -485,7 +485,7 @@
                 <div class="col-md-4" id="divLayoutPlan" style="display:none;">
                     <div class="floating-label-wrap">
 
-                        <input type="hidden" asp-for="LayoutFilePath" />
+                      <br />  <input type="hidden" asp-for="LayoutFilePath" />
                         @{
                             @if (ViewBag.LayoutDocView != null)
                             {
@@ -498,7 +498,7 @@
                             }
                         }
                         <span asp-validation-for="FileData" class="text-danger"></span>
-                        <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
+                       <br/> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
                     </div>
                 </div>
             </div>
@@ -518,7 +518,7 @@
                 <div class="row pt-3">
                     <div class="col-md-4" id="divGEOReferencing">
 
-                        <input type="hidden" asp-for="GeoFilePath" />
+                       <br /> <input type="hidden" asp-for="GeoFilePath" />
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
@@ -551,7 +551,7 @@
                 </div>
                 <div class="row pt-3">
                     <div class="col-md-4">
-                        <a class="btn btn-theme " style="width:auto;margin-top:15px;">Get Lat Long</a>
+                        <a class="btn btn-theme " style="color:white;">Get Lat Long</a>
                         @*@Html.ActionLink("Get Latt Longitude", "Create", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading", style = "width:auto;" })*@
                     </div>
                 </div>
@@ -801,7 +801,7 @@
 
             </div>
             <div class="row">
-                <div class="form-group col-md-12">
+                <div class="col-md-12">
 
                     <textarea disabled asp-for="TakenOverComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
                     <span asp-validation-for="TakenOverComments" class="text-danger"></span>
