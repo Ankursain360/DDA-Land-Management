@@ -238,6 +238,7 @@
                     <label asp-for="AreaUnit" class="floating-label">Area Unit </label>
                 </div>
             </div>
+            
         </div>
         <div class="row pt-3">
             <div class="col-md-4">
@@ -246,7 +247,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBigha" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBigha" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                 <label class="floating-label">Bigha</label>
                             </div>
@@ -254,7 +255,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBiswa" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswa" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                 <label class="floating-label">Biswa</label>
                             </div>
@@ -262,7 +263,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBiswani" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswani" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                 <label class="floating-label">Biswani</label>
                             </div>
@@ -271,29 +272,31 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
-            <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                <div class="floating-label-wrap mb-3 mb-md-0">
+        
+        <div id="AreainSqAcreHec" style="display:none;">
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TotalAreaInSqAcreHt" type="text" id="txtName" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                    <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                    <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                        <input asp-for="TotalAreaInSqAcreHt" type="text" id="txtName" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="TotalArea" id="txtName" value="" class="floating-label-field floating-label-field--s3  numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                        <input asp-for="TotalArea" id="txtName" value="" class="floating-label-field floating-label-field--s3  numbers" placeholder="Total Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                         <span asp-validation-for="TotalArea" class="text-danger"></span>
                         <label class="floating-label">Total Area(in sq. mt.)</label>
                     </div>
                 </div>
             </div>
-            <div class="row">
 
-
-            </div>
         </div>
-    </div>
+           
+        </div>
+    
     <div id="divEncroachment">
         <h2 class="my-3 sub-heading">Encroached Details</h2>
         <div class="row">
@@ -325,7 +328,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="EncrochedArea" value="" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="EncrochedArea" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Encroched Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span id="EncroachedValidation" asp-validation-for="EncrochedArea" class="text-danger"></span>
                         <label class="floating-label">Encroched Area(in sq. mt.)</label>
                     </div>
@@ -334,7 +337,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" placeholder="Builtup in Encroachment Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger"></span>
                         <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
                     </div>
@@ -344,7 +347,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="Vacant" value="" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="Vacant" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Vacant Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span asp-validation-for="Vacant" class="text-danger"></span>
                         <label class="floating-label">Vacant Area(in sq. mt.)</label>
                     </div>
@@ -352,7 +355,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" maxlength="200" />
+                        <input asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" placeholder="Action On Encroachment" maxlength="200" />
                         <span asp-validation-for="ActionOnEncroachment" class="text-danger"></span>
                         <label class="floating-label">Action On Encroachment</label>
                     </div>
@@ -360,7 +363,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Upload Action Taken Report(ATR)" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
                         <label class="floating-label">Upload Action Taken Report(ATR)</label>
                     </div>
@@ -373,7 +376,7 @@
             <div class="col-md-12" id="divEncroachmentDetails" style="display:none;">
                 <div class="floating-label-wrap">
 
-                    <input asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
+                    <input asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" placeholder="Encroachment Details" maxlength="4000" limit="4000" />
                     <span asp-validation-for="EncraochmentDetails" class="text-danger lb-sm"></span>
                     <label id="l1" class="floating-label">Encroachment Details</label>
                 </div>
@@ -491,7 +494,7 @@
 
         <div id="divLitigationStatusSelection" style="display:none;">
             <div class="row pt-3">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Court Name</label>
                             <input asp-for="CourtName" class="form-control" maxlength="50" />
@@ -502,7 +505,7 @@
                         <label class="floating-label">Court Name</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Case No.</label>
                             <input asp-for="CaseNo" class="form-control" maxlength="50" />
@@ -514,23 +517,23 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row pt-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Opposite Party</label>
-                            <input asp-for="OppositeParty" class="form-control" maxlength="100" />
-                            <span asp-validation-for="OppositeParty" class="text-danger lb-sm"></span>*@
+                <input asp-for="OppositeParty" class="form-control" maxlength="100" />
+                <span asp-validation-for="OppositeParty" class="text-danger lb-sm"></span>*@
                         <input asp-for="OppositeParty" class="floating-label-field floating-label-field--s3" maxlength="100" placeholder="Opposite Party">
 
                         <span asp-validation-for="OppositeParty" class="text-danger "></span>
                         <label class="floating-label">Opposite Party</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Remarks</label>
-                            <input asp-for="LitigationStatusRemarks" class="form-control" limit="4000" />
-                            <span asp-validation-for="LitigationStatusRemarks" class="text-danger lb-sm"></span>*@
+                <input asp-for="LitigationStatusRemarks" class="form-control" limit="4000" />
+                <span asp-validation-for="LitigationStatusRemarks" class="text-danger lb-sm"></span>*@
                         <input asp-for="LitigationStatusRemarks" class="floating-label-field floating-label-field--s3" limit="4000" placeholder="Remarks">
 
                         <span asp-validation-for="LitigationStatusRemarks" class="text-danger "></span>
@@ -609,7 +612,7 @@
                         @*<label class="control-label lb-sm" asp-for="GeoFileData">Upload Geo Referencing</label>
                             <input type="file" class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             <span asp-validation-for="GeoFileData" class="text-danger lb-sm"></span>*@
-                        <input asp-for="GeoFileData" type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        <input asp-for="GeoFileData" placeholder="Upload Geo Referencing" type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                         <span asp-validation-for="GeoFileData" class="text-danger "></span>
                         <label class="floating-label">Upload Geo Referencing</label>
@@ -724,7 +727,7 @@
                     @*<label class="control-label lb-sm">Email Id</label>
                         <input asp-for="HandedOverEmailId" class="form-control" type="email" limit="200" />
                         <span asp-validation-for="HandedOverEmailId" class="text-danger lb-sm"></span>*@
-                    <input asp-for="HandedOverEmailId" type="email" limit="200" class="floating-label-field floating-label-field--s3">
+                    <input asp-for="HandedOverEmailId" type="email" placeholder=">Email Id" limit="200" class="floating-label-field floating-label-field--s3">
 
                     <span asp-validation-for="HandedOverEmailId" class="text-danger "></span>
                     <label class="floating-label">Email Id</label>
@@ -737,7 +740,7 @@
                     @*<label class="control-label lb-sm">Mobile No.</label>
                         <input asp-for="HandedOverMobileNo" class="form-control onlynumbers" maxlength="10" />
                         <span asp-validation-for="HandedOverMobileNo" class="text-danger lb-sm"></span>*@
-                    <input asp-for="HandedOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10">
+                    <input asp-for="HandedOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Mobile No" maxlength="10">
 
                     <span asp-validation-for="HandedOverMobileNo" class="text-danger "></span>
                     <label class="floating-label">Mobile No.</label>
@@ -748,7 +751,7 @@
                     @*<label class="control-label lb-sm">Land Line No.</label>
                         <input asp-for="HandedOverLandlineNo" class="form-control onlynumbers" maxlength="10" />
                         <span asp-validation-for="HandedOverLandlineNo" class="text-danger lb-sm"></span>*@
-                    <input asp-for="HandedOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10">
+                    <input asp-for="HandedOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" placeholder="Land Line" maxlength="10">
 
                     <span asp-validation-for="HandedOverLandlineNo" class="text-danger "></span>
                     <label class="floating-label">Land Line No.</label>
@@ -772,7 +775,7 @@
                     @*<label class="control-label lb-sm">Copy of Order</label>
                         <input type="file" class="form-control" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger lb-sm"></span>*@
-                    <input asp-for="HandedOverCopyofOrderDoc" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                    <input asp-for="HandedOverCopyofOrderDoc" type="file" placeholder="Copy of Order" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                     <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger "></span>
                     <label class="floating-label">Copy of Order</label>
@@ -943,7 +946,7 @@
                     @*<label class="control-label lb-sm">Comments</label>
                         <textarea asp-for="TakenOverComments" class="form-control" maxlength="4000" limit="4000"></textarea>
                         <span asp-validation-for="TakenOverComments" class="text-danger lb-sm"></span>*@
-                    <input asp-for="HandedOverComments" maxlength="4000" limit="4000" class="floating-label-field floating-label-field--s3">
+                    <input asp-for="HandedOverComments" maxlength="4000" limit="4000" placeholder="Comments" class="floating-label-field floating-label-field--s3">
 
                     <span asp-validation-for="HandedOverComments" class="text-danger "></span>
                     <label class="floating-label">Comments</label>
@@ -958,7 +961,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
                 @*<label class="control-label lb-sm">Remarks</label>
                     <textarea asp-for="Remarks" class="form-control" maxlength="4000" limit="4000"></textarea>*@
-                <input asp-for="Remarks" maxlength="4000" limit="4000" class="floating-label-field floating-label-field--s3">
+                <input asp-for="Remarks" maxlength="4000" limit="4000" placeholder="Remarks" class="floating-label-field floating-label-field--s3">
 
                 <span asp-validation-for="Remarks" class="text-danger "></span>
                 <label class="floating-label">Remarks</label>

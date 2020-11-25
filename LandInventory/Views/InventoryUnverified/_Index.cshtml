@@ -1,7 +1,7 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Propertyregistration>
 @{int rowNo = 0; }
 
-<div class="table-section bg-white border shadow rounded">
+
 
     <table class="table table-sm table-bordered mb-0 table-striped">
         <thead class="text-nowrap">
@@ -57,5 +57,5 @@
         </tbody>
 
     </table>
-</div>
+
     @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -40,14 +40,22 @@
                 <td>@item.Department.Name</td>
                 <td>@item.Zone.Name</td>
                 <td>@item.Division.Name</td>
-                <td>@item.Locality.Name</td>
+                @*<td>@item.Locality.Name</td>*@
+                <td>@(item.LocalityId == null ? "" : item.Locality.Name)</td>
                 <td>@item.KhasraNo</td>
                 <td>@item.Palandmark</td>
                 <td>@(item.PrimaryListNo == null ? "" : item.PrimaryListNo)</td>
                 <td>@item.TotalArea</td>
                 <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreReason)</td>
                 <td>@(item.Restoreproperty == null ? "" : item.Restoreproperty.RestoreDate.ToString("dd-MMM-yyyy"))</td>
-                <td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>
+                @*<td><a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a></td>*@
+                <td>
+                    <div class="action-btns">
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+
+                    </div>
+
+                </td>
                 @*<td>@(item.Restoreproperty==null?"Not Available":item.Restoreproperty.RestoreReason)</td>
         <td>@(item.Restoreproperty==null?"Not Available":Convert.ToDateTime(item.Restoreproperty.RestoreDate).ToString("dd-MMM-yyyy"))</td>*@
 

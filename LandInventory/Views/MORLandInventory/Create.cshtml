@@ -63,7 +63,7 @@
                 <label asp-validation-for="ClassificationOfLandId" class="error"></label>
                 <label asp-for="ClassificationOfLandId" class="floating-label">Classification of Land </label>
             </div>
-           
+
         </div>
     </div>
     <div class="row">
@@ -234,6 +234,7 @@
                     <label asp-for="AreaUnit" class="floating-label">Area Unit </label>
                 </div>
             </div>
+
         </div>
         <div class="row pt-3">
             <div class="col-md-4">
@@ -242,7 +243,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBigha" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBigha" type="text" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Bigha" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                 <label class="floating-label">Bigha</label>
                             </div>
@@ -250,7 +251,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBiswa" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswa" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswa" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                 <label class="floating-label">Biswa</label>
                             </div>
@@ -258,7 +259,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="TotalAreaInBiswani" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswani" type="text" id="txtName" value="" class="floating-label-field floating-label-field--s3 onlynumbers bbbcalculation" placeholder="Biswani" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                 <label class="floating-label">Biswani</label>
                             </div>
@@ -267,28 +268,29 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
-            <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TotalAreaInSqAcreHt" type="text" id="txtName" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                    <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                    <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+        <div id="AreainSqAcreHec" style="display:none;">
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input asp-for="TotalAreaInSqAcreHt" type="text" id="txtName" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" placeholder="Total Area(Sq Yd./Acre/Hectare)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label">Total Area(Sq Yd./Acre/Hectare)</label>
+                    </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="TotalArea" id="txtName" value="" class="floating-label-field floating-label-field--s3  numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                        <input asp-for="TotalArea" id="txtName" value="" class="floating-label-field floating-label-field--s3  numbers" placeholder="Total Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
                         <span asp-validation-for="TotalArea" class="text-danger"></span>
                         <label class="floating-label">Total Area(in sq. mt.)</label>
                     </div>
                 </div>
             </div>
-            <div class="row">
 
-
-            </div>
         </div>
+
     </div>
 
     <div id="divEncroachment">
@@ -322,7 +324,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="EncrochedArea" value="" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="EncrochedArea" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Encroched Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span id="EncroachedValidation" asp-validation-for="EncrochedArea" class="text-danger"></span>
                         <label class="floating-label">Encroched Area(in sq. mt.)</label>
                     </div>
@@ -331,7 +333,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" placeholder="Builtup in Encroachment Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger"></span>
                         <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
                     </div>
@@ -341,7 +343,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="Vacant" value="" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <input asp-for="Vacant" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Vacant Area(in sq. mt.)" onkeypress="return numericDecimal(this);" onpaste="return false;" />
                         <span asp-validation-for="Vacant" class="text-danger"></span>
                         <label class="floating-label">Vacant Area(in sq. mt.)</label>
                     </div>
@@ -349,7 +351,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" maxlength="200" />
+                        <input asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" placeholder="Action On Encroachment" maxlength="200" />
                         <span asp-validation-for="ActionOnEncroachment" class="text-danger"></span>
                         <label class="floating-label">Action On Encroachment</label>
                     </div>
@@ -357,7 +359,7 @@
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Upload Action Taken Report(ATR)" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
                         <label class="floating-label">Upload Action Taken Report(ATR)</label>
                     </div>
@@ -370,7 +372,7 @@
             <div class="col-md-12" id="divEncroachmentDetails" style="display:none;">
                 <div class="floating-label-wrap">
 
-                    <input asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
+                    <input asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" placeholder="Encroachment Details" maxlength="4000" limit="4000" />
                     <span asp-validation-for="EncraochmentDetails" class="text-danger lb-sm"></span>
                     <label id="l1" class="floating-label">Encroachment Details</label>
                 </div>
@@ -488,7 +490,7 @@
 
         <div id="divLitigationStatusSelection" style="display:none;">
             <div class="row pt-3">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Court Name</label>
                             <input asp-for="CourtName" class="form-control" maxlength="50" />
@@ -499,7 +501,7 @@
                         <label class="floating-label">Court Name</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Case No.</label>
                             <input asp-for="CaseNo" class="form-control" maxlength="50" />
@@ -511,8 +513,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-4">
+            <div class="row pt-3">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Opposite Party</label>
                             <input asp-for="OppositeParty" class="form-control" maxlength="100" />
@@ -523,7 +525,7 @@
                         <label class="floating-label">Opposite Party</label>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         @*<label class="control-label lb-sm">Remarks</label>
                             <input asp-for="LitigationStatusRemarks" class="form-control" limit="4000" />
@@ -989,12 +991,12 @@
         }*@
 
 
-<div class="row mt-md-3">
-    <div class=" col-md-12">
-        <input type="submit" value="Create" class="btn btn-theme " onclick="return ValidateForm();" />
-        @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-theme " })
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            <input type="submit" value="Create" class="btn btn-theme " onclick="return ValidateForm();" />
+            @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-theme " })
+        </div>
     </div>
-</div>
 
 </form>
     

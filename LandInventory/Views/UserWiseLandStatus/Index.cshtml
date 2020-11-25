@@ -1,6 +1,6 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "User Wise Land Status" })
 
-@{ ViewData["Title"] = "Index"; }
+@*@{ ViewData["Title"] = "Index"; }
 
 
 <style>
@@ -47,217 +47,246 @@
         Font-Family: Open SansSemibold;
         color: #ffffff
     }
-</style>
+</style>*@
 
 
 <div class="pt-3">
 
-    <div class="container-fluid" id="MainContentForm">
-        <div class="panel">
+    @*<div class="container-fluid" id="MainContentForm">*@
+    @*<div class="panel">
 
-            <div class="panel-body">
+        <div class="panel-body">*@
 
-                <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <h3 class="mb-3 d-flex">User Wise Land Status Report</h3>
+    @*<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">*@
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">User Wise Land Status Report</h3>
 
-                    <div class="row ">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
+        <div class="row ">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
 
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
-                                    <option value="dept1">All</option>
-                                    <option value="dept2">Patwari </option>
-                                    <option value="dept3">Section Officer</option>
-                                    <option value="dept3">Feild Investigator</option>
-                                    <option value="dept3">Assistant Engineer</option>
-                                    <option value="dept3"> Junior Engineer</option>
-                                    <option value="dept2">Executive Engineer </option>
-                                    <option value="dept2">Assistant Director </option>
-                                    <option value="dept2">  Deputy Director   </option>
-                                    <option value="dept2">Surveyor </option>
-                                    <option value="dept2">Director </option>
-                                    <option value="dept2">Tehsildar </option>
-                                    <option value="dept2">Naib Tehsildar </option>
-                                    <option value="dept2">Kanoongo </option>
-                                </select>
-                                <label class="floating-label">Select Designation </label>
-
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                    <option value="dept1">Engineering</option>
-                                    <option value="dept2">Land Management</option>
-                                    <option value="dept3">MOR</option>
-                                    <option value="dept3">Horticulture</option>
-                                    <option value="dept3">Pre-Monsoon</option>
-                                    <option value="dept3">  Yamuna Flood Plain </option>
-                                </select>
-                                <label class="floating-label">Select Department </label>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-6 ">
-                            <div class="floating-label-wrap">
-
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                    <option value="dept1">Zone 1</option>
-                                    <option value="dept2">Zone 2</option>
-                                    <option value="dept3">Zone 3</option>SelectZone
-                                </select>
-                                <label class="floating-label">Select Zone </label>
-
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                    <option value="dept1">Division 1</option>
-                                    <option value="dept2">Division 2</option>
-                                    <option value="dept3">Division 3</option>
-                                </select>
-                                <label class="floating-label">Select Division </label>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-
-                                <select class="floating-label-field floating-label-field--s3">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                    <option value="dept1">Location 1</option>
-                                    <option value="dept2">Location 2</option>
-                                    <option value="dept3">Location 3</option>
-                                </select>
-                                <label class="floating-label">Select Location (Village) </label>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                </form>
-                <div class="form-row">
-                    <div class=" col-md-12">
-                        <input type="submit" class="btn btn-theme " value="Retrieve Report" />
-                    </div>
-
-                </div>
-
-                <div class="row mt-md-3">
-                    <div class="table-section bg-white border shadow rounded">
-
-
-                        @*<div class="card-body ">*@
-
-                        <table class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>S.NO</th>
-
-                                    <th>ZONE </th>
-                                    <th> DIVISION </th>
-                                    <th> LOCALITY (Village)</th>
-                                    <th> USER ID</th>
-                                    <th> USER NAME </th>
-                                    <th> DESIGNATION </th>
-                                    <th> PHOTOS </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>LM/NORTH</td>
-                                    <td>    LM NZ</td>
-                                    <td>LM NZ 006</td>
-                                    <td> JPSH</td>
-                                    <td>JAG PAL SINGH</td>
-                                    <td>    PTW</td>
-                                    <td>10</td>
-
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>LM/NORTH</td>
-                                    <td>    LM NZ</td>
-                                    <td>LM NZ 006</td>
-                                    <td> SHCH</td>
-                                    <td>SHRI CHAND</td>
-                                    <td>    PTW</td>
-                                    <td>10</td>
-
-
-                                </tr>
-
-
-                                <tr>
-                                    <td>3</td>
-                                    <td>LM/NORTH</td>
-                                    <td>    LM NZ</td>
-                                    <td>LM NZ 006</td>
-                                    <td> JPSH</td>
-                                    <td>JAG PAL SINGH</td>
-                                    <td>    PTW</td>
-                                    <td>10</td>
-
-
-                                </tr>
-
-
-                                <tr>
-                                    <td>4 </td>
-                                    <td>LM/NORTH</td>
-                                    <td>    LM NZ</td>
-                                    <td>LM NZ 006</td>
-                                    <td> JPya</td>
-                                    <td>JAG PAL yadav</td>
-                                    <td>    PTW</td>
-                                    <td>10</td>
-
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-
-                    </div>
-                    <div class="row mt-md-3">
-
-
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <input type="submit" value="Export to Excel" class="btn btn-theme" />
-                            </div>
-
-                        </div>
-                    </div>
-
+                        <option value="dept1">All</option>
+                        <option value="dept2">Patwari </option>
+                        <option value="dept3">Section Officer</option>
+                        <option value="dept3">Feild Investigator</option>
+                        <option value="dept3">Assistant Engineer</option>
+                        <option value="dept3"> Junior Engineer</option>
+                        <option value="dept2">Executive Engineer </option>
+                        <option value="dept2">Assistant Director </option>
+                        <option value="dept2">  Deputy Director   </option>
+                        <option value="dept2">Surveyor </option>
+                        <option value="dept2">Director </option>
+                        <option value="dept2">Tehsildar </option>
+                        <option value="dept2">Naib Tehsildar </option>
+                        <option value="dept2">Kanoongo </option>
+                    </select>
+                    <label class="floating-label">Select Designation </label>
 
                 </div>
             </div>
 
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                        <option value="dept1">Engineering</option>
+                        <option value="dept2">Land Management</option>
+                        <option value="dept3">MOR</option>
+                        <option value="dept3">Horticulture</option>
+                        <option value="dept3">Pre-Monsoon</option>
+                        <option value="dept3">  Yamuna Flood Plain </option>
+                    </select>
+                    <label class="floating-label">Select Department </label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6 ">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                        <option value="dept1">Zone 1</option>
+                        <option value="dept2">Zone 2</option>
+                        <option value="dept3">Zone 3</option>SelectZone
+                    </select>
+                    <label class="floating-label">Select Zone </label>
+
+                </div>
+            </div>
+
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                        <option value="dept1">Division 1</option>
+                        <option value="dept2">Division 2</option>
+                        <option value="dept3">Division 3</option>
+                    </select>
+                    <label class="floating-label">Select Division </label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                        <option value="dept1">Location 1</option>
+                        <option value="dept2">Location 2</option>
+                        <option value="dept3">Location 3</option>
+                    </select>
+                    <label class="floating-label">Select Location (Village) </label>
+
+                </div>
+            </div>
+        </div>
+
+
+        @*</form>*@
+        <div class="row pt-3">
+            <div class=" col-md-12">
+                <input type="submit" class="btn btn-theme " value="Retrieve Report" />
+            </div>
+
         </div>
     </div>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled">Select One</option>
+                        <option>Department</option>
+                        <option>Zone</option>
+                        <option>Division</option>
+                        <option>User Name</option>
+                        <option>User Id</option>
+                        <option>Designation</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        @*<div class="table-responsive px-2" id="LoadReportView">
+
+            </div>*@
+
+
+        @*<div class="row mt-md-3">*@
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
+                        <th>S.NO</th>
+
+                        <th>ZONE </th>
+                        <th> DIVISION </th>
+                        <th> LOCALITY (Village)</th>
+                        <th> USER ID</th>
+                        <th> USER NAME </th>
+                        <th> DESIGNATION </th>
+                        <th> PHOTOS </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>LM/NORTH</td>
+                        <td>    LM NZ</td>
+                        <td>LM NZ 006</td>
+                        <td> JPSH</td>
+                        <td>JAG PAL SINGH</td>
+                        <td>    PTW</td>
+                        <td>10</td>
+
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>LM/NORTH</td>
+                        <td>    LM NZ</td>
+                        <td>LM NZ 006</td>
+                        <td> SHCH</td>
+                        <td>SHRI CHAND</td>
+                        <td>    PTW</td>
+                        <td>10</td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <td>3</td>
+                        <td>LM/NORTH</td>
+                        <td>    LM NZ</td>
+                        <td>LM NZ 006</td>
+                        <td> JPSH</td>
+                        <td>JAG PAL SINGH</td>
+                        <td>    PTW</td>
+                        <td>10</td>
+
+
+                    </tr>
+
+
+                    <tr>
+                        <td>4 </td>
+                        <td>LM/NORTH</td>
+                        <td>    LM NZ</td>
+                        <td>LM NZ 006</td>
+                        <td> JPya</td>
+                        <td>JAG PAL yadav</td>
+                        <td>    PTW</td>
+                        <td>10</td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <!--<div class="row mt-md-3">-->
+        @*<div class="form-row">
+                <div class="col-md-12">
+                    <input type="submit" value="Export to Excel" class="btn btn-theme" />
+                </div>
+
+            </div>*@
+        <!--</div>-->
+
+
+    </div>
+@*</div>*@
+@*</div>
+
+        </div>
+    </div>*@
     @*</div>*@
-</div>
+

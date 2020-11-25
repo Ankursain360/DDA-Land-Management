@@ -174,7 +174,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap">
 
-                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="AreaUnit">
                         <option value="0">bigha-biswa-bishwani</option>
                         <option value="1">Sq Yd.</option>
                         <option value="2">Acre</option>
@@ -193,7 +193,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBigha" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                 <label class="floating-label">Bigha</label>
                             </div>
@@ -201,7 +201,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswa" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                 <label class="floating-label">Biswa</label>
                             </div>
@@ -209,7 +209,7 @@
                         <div class="col-md-4">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <input asp-for="TotalAreaInBiswani" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                 <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                 <label class="floating-label">Biswani</label>
                             </div>
@@ -218,26 +218,26 @@
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
-            <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                <div class="floating-label-wrap">
-                    <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                    <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                    <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+
+        <div id="AreainSqAcreHec" style="display:none;">
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="TotalAreaInSqAcreHt" type="text" disabled class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
-                    <span asp-validation-for="TotalArea" class="text-danger"></span>
-                    <label class="floating-label">Total Area(in sq. mt.)</label>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                        <span asp-validation-for="TotalArea" class="text-danger"></span>
+                        <label class="floating-label">Total Area(in sq. mt.)</label>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-    </div>
-
 
     <div id="divEncroachment">
         <h2 class="my-3 sub-heading">Encroached Details</h2>
@@ -877,11 +877,11 @@
 
 
 
-<div class="row mt-md-3">
-    <div class=" col-md-12">
-    @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-theme " })
-</div>
-</div>
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            @Html.ActionLink("Back", "Index", "MORLandInventory", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
 
 
 

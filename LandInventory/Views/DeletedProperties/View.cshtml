@@ -183,7 +183,7 @@
                             <option value="4">Sq. Mt.</option>
                         </select>
                         <span asp-validation-for="AreaUnit" class="text-danger"></span>
-                        <label asp-for="AreaUnit" class="floating-label">Area Unit</label>
+                        <label class="floating-label">Area Unit</label>
                     </div>
                 </div>
             </div>
@@ -192,25 +192,25 @@
                     <div id="bighabis">
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="floating-label-wrap">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBigha" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
                                     <label class="floating-label">Bigha</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="floating-label-wrap">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBiswa" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
                                     <label class="floating-label">Biswa</label>
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="floating-label-wrap">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                    <input asp-for="TotalAreaInBiswani" disabled class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
                                     <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
                                     <label class="floating-label">Biswani</label>
                                 </div>
@@ -218,29 +218,25 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-            <div class="row">
-                <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
-                    <div class="floating-label-wrap">
 
-                        <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+            <div id="AreainSqAcreHec" style="display:none;">
+                <div class="row pt-3">
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="TotalAreaInSqAcreHt" type="text" disabled class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                            <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                            <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" disabled onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                            <span asp-validation-for="TotalArea" class="text-danger"></span>
+                            <label class="floating-label">Total Area(in sq. mt.)</label>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                        <span asp-validation-for="TotalArea" class="text-danger"></span>
-                        <label class="floating-label">Total Area(in sq. mt.)</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-
             </div>
         </div>
 
@@ -309,7 +305,7 @@
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
-                           <br /> <input type="hidden" asp-for="EncroachAtrfilepath" />
+                            <br /> <input type="hidden" asp-for="EncroachAtrfilepath" />
                             @{
                                 @if (ViewBag.EncroachAtrDocView != null)
                                 {
@@ -323,7 +319,7 @@
                                 }
                             }
                             <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                           <br /> <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                            <br /> <label class="floating-label">Upload Action Taken Report(ATR)</label>
                         </div>
                     </div>
                 </div>
@@ -477,7 +473,7 @@
                 <div class="col-md-4" id="divBuilttype" style="display:none;">
                     <div class="floating-label-wrap">
                         <input disabled asp-for="BuiltUpRemarks" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="BuiltUpRemarks" class="text-danger lb-sm"></span>
+                        <span asp-validation-for="BuiltUpRemarks" class="text-danger"></span>
                         <label class="floating-label">Built-Up Remarks</label>
                     </div>
                 </div>
@@ -485,12 +481,12 @@
                 <div class="col-md-4" id="divLayoutPlan" style="display:none;">
                     <div class="floating-label-wrap">
 
-                      <br />  <input type="hidden" asp-for="LayoutFilePath" />
+                        <br />  <input type="hidden" asp-for="LayoutFilePath" />
                         @{
                             @if (ViewBag.LayoutDocView != null)
                             {
                                 @Html.ActionLink(" (View File)", "Download", new { id = Model.Id })
-                                <input type="file" disabled class="form-control" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" disabled class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                             else
                             {
@@ -498,7 +494,7 @@
                             }
                         }
                         <span asp-validation-for="FileData" class="text-danger"></span>
-                       <br/> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
+                        <br /> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
                     </div>
                 </div>
             </div>
@@ -510,24 +506,24 @@
                             <option value="0">No</option>
                             <option value="1">Yes</option>
                         </select>
-                         <label class="floating-label">GEO Referencing Done</label><span class="text-danger"></span>
+                        <label class="floating-label">GEO Referencing Done</label><span class="text-danger"></span>
                     </div>
                 </div>
-                </div>
+            </div>
             <div id="divGEOReferencingSelection" style="display:none;">
                 <div class="row pt-3">
                     <div class="col-md-4" id="divGEOReferencing">
 
-                       <br /> <input type="hidden" asp-for="GeoFilePath" />
+                        <br /> <input type="hidden" asp-for="GeoFilePath" />
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
                                 <a>(View File)</a>
-                                <input type="file" disabled class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" disabled class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                             else
                             {
-                                <input type="file" disabled class="form-control" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <input type="file" disabled class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                         }
                         <span asp-validation-for="GeoFileData" class="text-danger"></span>
@@ -855,17 +851,17 @@
                 </div>
             </div>
         }
-       
-    <div class="row pt-3">
-        <div class="col-md-12">
-            <div class="floating-label-wrap">
 
-                <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                <label class="floating-label">Remarks</label>
-                <div id="feedbackRemarks"></div>
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap">
+
+                    <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                    <label class="floating-label">Remarks</label>
+                    <div id="feedbackRemarks"></div>
+                </div>
             </div>
         </div>
-    </div>
         <div class="row" style="display:none;">
             <div class="col-md-4">
                 <div class="floating-label-wrap">
