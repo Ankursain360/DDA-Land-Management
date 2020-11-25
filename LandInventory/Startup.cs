@@ -14,16 +14,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 //using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-using LandInventory.Models;
+
 using Microsoft.Extensions.Hosting;
 using Libraries.Model.Entity;
-using Libraries.Service.IApplicationService;
-using Libraries.Repository.IEntityRepository;
-using Libraries.Repository.EntityRepository;
 using Libraries.Model;
 using LandInventory.Infrastructure.Extensions;
-using Microsoft.AspNetCore.Http.Features;
+
 using Service.Common;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.IdentityModel.Tokens.Jwt;

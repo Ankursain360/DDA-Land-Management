@@ -7,18 +7,30 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using LandingPage.Models;
 using Libraries.Service.IApplicationService;
+using LandingPage.Helper;
+using Service.IApplicationService;
+using Dto.Master;
 
 namespace LandingPage.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
 
-        public HomeController(ILogger<HomeController> logger, IModuleService moduleService)
+        //private readonly ILogger<HomeController> _logger;
+        public HomeController(ISiteContext siteContext,
+          IUserProfileService userProfileService, IModuleService moduleService)
         {
-            _logger = logger;
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
             _moduleService = moduleService;
         }
+        //public HomeController(ILogger<HomeController> logger, IModuleService moduleService)
+        //{
+        //    _logger = logger;
+        //    _moduleService = moduleService;
+        //}
 
 
         private readonly IModuleService _moduleService;
@@ -26,6 +38,8 @@ namespace LandingPage.Controllers
 
         public async Task<IActionResult> Index()
         {
+           UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+
             var list = await _moduleService.GetAllModule();
             return View(list);
         }
@@ -35,6 +49,11 @@ namespace LandingPage.Controllers
         {
             return View();
         }
+        public IActionResult Logout()
+        {
+            return SignOut("Cookies", "oidc");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

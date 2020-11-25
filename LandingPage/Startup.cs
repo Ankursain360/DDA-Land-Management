@@ -13,6 +13,11 @@ using Microsoft.Extensions.Hosting;
 using Libraries.Model;
 using LandingPage.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Service.Common;
+using Microsoft.AspNetCore.Identity;
+using Libraries.Model.Entity;
+using Model.Entity;
 
 //using LandingPage.Filters;
 
@@ -31,6 +36,19 @@ namespace LandingPage
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //if (HostEnvironment.IsDevelopment())
+            //{
+            //    services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    );
+            //}
+            //else
+            //{
+            //    services.AddControllersWithViews().AddNewtonsoftJson(options =>
+            //    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            //    );
+            //}
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -42,12 +60,16 @@ namespace LandingPage
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
 
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
+            //services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
+            //services.Configure<CookieTempDataProviderOptions>(options =>
+            //{
+            //    options.Cookie.Name = "MyTempDataCookie";
+            //});
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+               .AddEntityFrameworkStores<DataContext>()
+               .AddDefaultTokenProviders();
             //services.AddMvc(option =>
             //{
             //    option.Filters.Add(new CustomExceptionHandlerFilter());
@@ -58,7 +80,7 @@ namespace LandingPage
                 options.Cookie.IsEssential = true;
             });
             services.RegisterDependency();
-
+            services.AddAutoMapperSetup();
 #if DEBUG
             if (HostEnvironment.IsDevelopment())
             {
@@ -70,26 +92,39 @@ namespace LandingPage
             }
 #endif
 
-            //JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultScheme = "Cookies";
-            //    options.DefaultChallengeScheme = "oidc";
-            //})
-            //.AddCookie("Cookies")
-            //.AddOpenIdConnect("oidc", options =>
-            //{
-            //    options.Authority = "https://localhost:5001";
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 
-            //    options.ClientId = "mvc";
-            //    options.ClientSecret = "secret";
-            //    options.ResponseType = "code";
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
 
-            //    options.Scope.Add("api1");
+                options.Scope.Add("api1");
 
-            //    options.SaveTokens = true;
-            //});
+                options.SaveTokens = true;
+
+                //options.Authority = "https://localhost:5001";
+
+                //options.ClientId = "mvc";
+                //options.ClientSecret = "secret";
+                //options.ResponseType = "code";
+
+                //options.Scope.Add("api1");
+
+                //options.SaveTokens = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -102,7 +137,7 @@ namespace LandingPage
             }
             else
             {
-                app.UseExceptionHandler("/LandingPage/Index");
+                app.UseExceptionHandler("/Home/Index");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
@@ -115,7 +150,8 @@ namespace LandingPage
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
+                //endpoints.MapDefaultControllerRoute();
             });
         }
     }
