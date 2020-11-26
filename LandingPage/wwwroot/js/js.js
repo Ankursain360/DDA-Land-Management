@@ -1,3 +1,11 @@
+
+
+$(document).ready(function () {
+    $('#mobileMenu').toggleClass('open');
+    //$('#leftMenu').css('small');
+    //$('#leftMenu').hide()
+    //$('#rightSection').toggleClass('menu-close');
+});
 $('#ForgotPassword').on('click', function () {
     $('#Login').hide()
     $('#Password').show()

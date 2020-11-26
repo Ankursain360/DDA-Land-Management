@@ -18,7 +18,7 @@ namespace LandingPage.Controllers
         private readonly ISiteContext _siteContext;
         private readonly IUserProfileService _userProfileService;
 
-        //private readonly ILogger<HomeController> _logger;
+       
         public HomeController(ISiteContext siteContext,
           IUserProfileService userProfileService, IModuleService moduleService)
         {
@@ -26,22 +26,17 @@ namespace LandingPage.Controllers
             _userProfileService = userProfileService;
             _moduleService = moduleService;
         }
-        //public HomeController(ILogger<HomeController> logger, IModuleService moduleService)
-        //{
-        //    _logger = logger;
-        //    _moduleService = moduleService;
-        //}
-
+       
 
         private readonly IModuleService _moduleService;
 
 
         public async Task<IActionResult> Index()
         {
-           UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
-
+           
             var list = await _moduleService.GetAllModule();
-            return View(list);
+           return View(list);
+           
         }
 
 
