@@ -73,7 +73,50 @@ namespace EncroachmentDemolition.Controllers
             {
                 if (!DataFlow[i].parameterSkip)
                 {
-                    
+                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                    {
+                        int previousApprovalId = _approvalproccessService.GetPreviousApprovalId(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), watchandward.Id);
+                        Approvalproccess approvalproccess1 = new Approvalproccess();
+                        approvalproccess1.Remarks = watchandward.ApprovalRemarks;
+                        approvalproccess1.PendingStatus = 0;
+                        approvalproccess1.Status = 0;
+                        result = await _approvalproccessService.UpdatePreviousApprovalProccess(previousApprovalId, approvalproccess1, SiteContext.UserId);
+
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                            approvalproccess.ServiceId = watchandward.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Status = 1;
+                            if (i == DataFlow.Count - 1)
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                            else
+                            {
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                            }
+                            if (i != DataFlow.Count - 1)
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                            if (result)
+                            {
+                                if (i == DataFlow.Count - 1)
+                                {
+                                    watchandward.Status = 0;
+                                    watchandward.PendingAt = 0;
+                                }
+                                else
+                                {
+                                    watchandward.Status = 1;
+                                    watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                }
+                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
+                            }
+                        }
+                        break;
+                    }
 
                 }
             }
