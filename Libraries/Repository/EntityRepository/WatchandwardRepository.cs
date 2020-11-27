@@ -130,11 +130,5 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.Id == propertyId).FirstOrDefaultAsync();
         }
 
-
-        public async Task<bool> InsertInApprovalProccess(Approvalproccess approvalproccess)
-        {
-            var result = _dbContext.Approvalproccess.Add(approvalproccess);
-            return await _dbContext.SaveChangesAsync() > 0;
-        }
     }
 }

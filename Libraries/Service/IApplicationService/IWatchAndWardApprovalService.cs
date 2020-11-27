@@ -19,5 +19,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Watchandward watchandward);
         Task<Watchandward> FetchSingleResult(int id);
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId);
+        
     }
 }

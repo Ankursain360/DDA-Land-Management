@@ -17,7 +17,7 @@
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
         </div>
         <div class="panel-body">
-            <form asp-action="Create">
+            <form asp-action="Create" id="myForm">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
 
@@ -32,7 +32,6 @@
                             @*<option value="1">Forward To CLM</option>
                                 <option value="2">Approved</option>
                                 <option value="3">Reject</option>*@
-                            <option value="0">--Select--</option>
                             <option value="1">Forward</option>
                             <option value="2">Revert</option>
                             <option value="3">Approved</option>

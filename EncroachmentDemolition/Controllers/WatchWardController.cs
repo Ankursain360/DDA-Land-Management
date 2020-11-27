@@ -23,16 +23,17 @@ namespace EncroachmentDemolition.Controllers
         private readonly IWatchandwardService _watchandwardService;
         private readonly IPropertyRegistrationService _propertyregistrationService;
         private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+
         public IConfiguration _configuration;
-        //string targetPhotoPathLayout = string.Empty;
-        //string targetReportfilePathLayout = string.Empty;
         string targetPathLayout = "";
-        public WatchWardController(IWatchandwardService watchandwardService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
+        public WatchWardController(IWatchandwardService watchandwardService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _propertyregistrationService = propertyregistrationService;
             _watchandwardService = watchandwardService;
             _configuration = configuration;
+            _approvalproccessService = approvalproccessService;
         }
 
         public IActionResult Index()
@@ -269,16 +270,18 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 watchandward.Status = 1;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
+                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
                                 if (result)
                                 {
                                     Approvalproccess approvalproccess = new Approvalproccess();
-                                    approvalproccess.WatchWardId = watchandward.Id;
+                                    approvalproccess.ModuleId =Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                                    approvalproccess.ServiceId = watchandward.Id;
                                     approvalproccess.SendFrom = SiteContext.UserId;
                                     approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
                                     approvalproccess.PendingStatus = 1;
                                     approvalproccess.Status = 1;
-                                    result = await _watchandwardService.CreateApprovalProccess(approvalproccess);
+                                    result = await _approvalproccessService.Create(approvalproccess); //Create a row in approvalproccess Table
                                 }
 
                                     break;

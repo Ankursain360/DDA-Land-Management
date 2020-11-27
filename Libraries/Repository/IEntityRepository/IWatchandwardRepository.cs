@@ -34,7 +34,5 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteWatchandwardreportfiledetails(int Id);
         Task<List<Propertyregistration>> GetAllPrimaryList();
         Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId);
-
-        Task<bool> InsertInApprovalProccess(Approvalproccess approvalproccess);
     }
 }

@@ -35,6 +35,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IMonthlyRosterRepository, MonthlyRosterRepository>();
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -51,6 +52,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMonthlyRosterService, MonthlyRosterService>();
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
         }
     }
 }
