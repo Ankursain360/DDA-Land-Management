@@ -5,7 +5,9 @@
 }
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Watch & Ward" })
+<br />
 
+<br />
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -19,7 +21,7 @@
                 <label class="floating-label">Date</label>
             </div>
         </div>
-        </div>
+    </div>
     <div id="DivPrimaryList">
         <h2 class="my-3 sub-heading">Primary List No. and other details</h2>
         <div class="row">
@@ -35,79 +37,79 @@
             </div>
 
         </div>
-        </div>
-        <div id="InventoryOtherDiv">
+    </div>
+    <div id="InventoryOtherDiv">
 
+    </div>
+    <div id="PlannedUnplanedDiv" class="row" style="display:none;">
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand" disabled>
+                    <option value="Planned Land">Planned Land</option>
+                    <option value="Unplanned Land">Unplanned Land</option>
+                </select>
+                <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
+                <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
+            </div>
         </div>
-        <div id="PlannedUnplanedDiv" class="row" style="display:none;">
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand" disabled>
-                        <option value="Planned Land">Planned Land</option>
-                        <option value="Unplanned Land">Unplanned Land</option>
+
+        <div id="divUnplannedSelection" style="display:none;">
+
+            <div class="floating-label-wrap">
+                <div class="col-md-6">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" disabled>
+
+                        <option value="">--Select--</option>
                     </select>
-                    <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
-                    <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
-                </div>
-            </div>
-
-            <div id="divUnplannedSelection" style="display:none;">
-
-                <div class="floating-label-wrap">
-                    <div class="col-md-6">
-
-                        <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" disabled>
-
-                            <option value="">--Select--</option>
-                        </select>
-                        <label asp-validation-for="LocalityId" class="error"></label>
-                        <label class="floating-label" asp-for="LocalityId">Locality(Village)</label>
-                    </div>
+                    <label asp-validation-for="LocalityId" class="error"></label>
+                    <label class="floating-label" asp-for="LocalityId">Locality(Village)</label>
                 </div>
             </div>
         </div>
-        <div id="divPlannedSelection" style="display:none;">
+    </div>
+    <div id="divPlannedSelection" style="display:none;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Colony" placeholder="Colony" type="text" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
+                    <span asp-validation-for="Colony" class="text-danger"></span>
+                    <label class="floating-label">Colony</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Sector" placeholder="Sector" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
+                    <span asp-validation-for="Sector" class="text-danger"></span>
+                    <label class="floating-label">Sector</label>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="Colony" placeholder="Colony" type="text" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                        <span asp-validation-for="Colony" class="text-danger"></span>
-                        <label class="floating-label">Colony</label>
+                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Block" maxlength="50" asp-for="Block" disabled />
+                        <span asp-validation-for="Block" class="text-danger"></span>
+                        <label class="floating-label">Block</label>
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        <input asp-for="Sector" placeholder="Sector" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                        <span asp-validation-for="Sector" class="text-danger"></span>
-                        <label class="floating-label">Sector</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Block" maxlength="50" asp-for="Block" disabled />
-                            <span asp-validation-for="Block" class="text-danger"></span>
-                            <label class="floating-label">Block</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                            <input asp-for="Pocket" placeholder="Pocket" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                            <span asp-validation-for="Pocket" class="text-danger"></span>
-                            <label class="floating-label">Pocket</label>
-                        </div>
+                        <input asp-for="Pocket" placeholder="Pocket" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
+                        <span asp-validation-for="Pocket" class="text-danger"></span>
+                        <label class="floating-label">Pocket</label>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="InventoryOtherDiv">
+    </div>
+    <div id="InventoryOtherDiv">
 
-        </div>
+    </div>
     @*</div>*@
     <div class="row">
         <div class="col-md-6">
@@ -136,67 +138,68 @@
             <span asp-validation-for="Encroachment" class="text-danger"></span>
             <label class="floating-label"> Encroachment</label>
         </div>
-        </div>
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="StatusOnGround" type="text" placeholder="Status on Ground" class="floating-label-field floating-label-field--s3"></textarea>
-                    <span asp-validation-for="StatusOnGround" class="text-danger"></span>
-                    <label class="floating-label">Status on Ground</label>
-                </div></div>
-            </div>
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    
-                    <input placeholder="Photo" asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" multiple accept="image/png, image/jpeg, image/gif" />
-                    <span asp-validation-for="Photo" class="text-danger"></span>
-                    <label class="floating-label">Photos</label>
-                </div>
-            </div>
-            <div class="col-md-6" style="display:none;">
-
-                <input asp-for="ReportFile" placeholder="Report" type="file" class="floating-label-field floating-label-field--s3" multiple />
-                <span asp-validation-for="ReportFile" class="text-danger"></span>
-                <label class="floating-label">Report</label>
-            </div>
-            </div>
-        <div class="row" style="display:none;">
-
-            <div class="col-md-6">
-                <div class="floating-label-wrap">
-
-                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                    <label class="floating-label">Status</label>
-                </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <textarea asp-for="StatusOnGround" type="text" placeholder="Status on Ground" class="floating-label-field floating-label-field--s3"></textarea>
+                <span asp-validation-for="StatusOnGround" class="text-danger"></span>
+                <label class="floating-label">Status on Ground</label>
             </div>
         </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-        <div class="row" style="display:none;">
-            <div class="col-md-12">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
-                    <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label class="floating-label">Remarks</label>
-                </div>
-            </div>
-
-            </div>
-
-
-        <div class="row pt-3">
-            <div class="col-md-12">
-                <input type="submit" value="Create" class="btn btn-theme " />
-                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-theme " })
+                <input placeholder="Photo" asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" multiple accept="image/png, image/jpeg, image/gif" />
+                <span asp-validation-for="Photo" class="text-danger"></span>
+                <label class="floating-label">Photos</label>
             </div>
         </div>
+        <div class="col-md-6" style="display:none;">
+
+            <input asp-for="ReportFile" placeholder="Report" type="file" class="floating-label-field floating-label-field--s3" multiple />
+            <span asp-validation-for="ReportFile" class="text-danger"></span>
+            <label class="floating-label">Report</label>
+        </div>
+    </div>
+    <div class="row" style="display:none;">
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+
+                <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+                <label class="floating-label">Status</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="display:none;">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <textarea asp-for="Remarks" type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
+                <label class="floating-label">Remarks</label>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <input type="submit" value="Create" class="btn btn-theme " />
+            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+            @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
 </form>
-       
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/watchward.js"></script>
