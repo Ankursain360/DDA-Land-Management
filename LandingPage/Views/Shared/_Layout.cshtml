@@ -24,17 +24,17 @@
 </head>
 
 <body class="bg-gray">
-    <div style="display:none;">
+    @*<div style="display:none;">
         <div class="body-loading loader-active"></div>
-    </div>
+    </div>*@
     <div class="top-header">
         <header>
             <div class="container-fluid">
                 <div class="d-flex align-items-center">
-                    <div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu">
+                    @*<div class="menu mr-3 p-2 text-white order-md-2 mr-md-auto open" id="mobileMenu">
                         <i class="ri-menu-fold-line"></i>
                         <i class="ri-menu-unfold-line"></i>
-                    </div>
+                    </div>*@
                     <div class="logo py-1 mr-auto mr-md-4 order-md-1">
                         <a href="/" class="d-block">
                             <figure class="m-0">
@@ -42,7 +42,7 @@
                             </figure>
                         </a>
                     </div>
-                    <div class="dropdown noti text-white my-2  mr-3 order-md-3">
+                    <div class="dropdown noti text-white my-2  mr-3 order-md-3 ml-auto">
                         <a href="#" role="button" id="notification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class='p-2 d-block text-white no-dec'>
                             <i class="ri-notification-2-line"></i>
                             <small class="bg-success rounded-circle position-absolute nofi-active">99</small>
@@ -81,7 +81,7 @@
             </div>
         </header>
     </div>
-    <aside class="left-menu small slow" id="leftMenu">
+    @*<aside class="left-menu small slow" id="leftMenu">
         <div class="accordion" id="leftMenu">
             <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button" aria-expanded="false" aria-controls="m0">
                 <i class="main-icon ri-dashboard-line"></i>
@@ -90,16 +90,16 @@
             </a>
 
         </div>
-    </aside>
+    </aside>*@
     <partial name="_CookieConsentPartial" />
-    <section id="rightSection" class="slow bg-gray">
+    <section id="rightSection" class="slow bg-gray w-100">
         <div class="container-fluid">
-            <div class="section-wraper p-3 pb-md-0">
+            <div class="section-wraper p-2 pb-md-0">
                 @RenderBody()
             </div>
         </div>
     </section>
-    <footer class="footer slow">
+    <footer class="footer slow w-100">
         <div class="container-fluid">
             <p class="my-0 py-2">
                 <a href="#">Terms & Conditions</a>
