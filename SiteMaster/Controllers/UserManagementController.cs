@@ -99,9 +99,6 @@ namespace SiteMaster.Controllers
             var user = await _userProfileService.GetUserById(id);
             EditUserDto model = new EditUserDto()
             { 
-                //Email = user.User.Email,
-                //Name = user.User.Name,
-                //PhoneNumber = user.User.PhoneNumber
             };
             return View(model);
         }
@@ -143,13 +140,6 @@ namespace SiteMaster.Controllers
         public async Task<PartialViewResult> LoadPersonalDetails([FromBody] UsermanagementEditPartialLoad dtodata)
         {
             var user = await _userProfileService.GetUserById(dtodata.id);
-            //EditUserDto model = new EditUserDto()
-            //{
-            //    Email = user.User.Email,
-            //    Name = user.User.Name,
-
-            //    PhoneNumber = user.User.PhoneNumber
-            //};
             UserPersonalInfoDto model = new UserPersonalInfoDto()
             {
                 Id = user.User.Id,
@@ -165,12 +155,6 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<PartialViewResult> LoadProfileDetails([FromBody] UsermanagementEditPartialLoad dtodata)
         {
-            //AddUserDto model1 = new AddUserDto()
-            //{
-            //    DepartmentList = await _departmentService.GetDepartment(),
-            //    ZoneList = await _zoneService.GetZone(),
-            //    RoleList = await _userProfileService.GetRole()
-            //};
             var user = await _userProfileService.GetUserById(dtodata.id);
             UserProfileInfoDto model = new UserProfileInfoDto()
             {

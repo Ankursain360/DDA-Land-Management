@@ -69,5 +69,6 @@ namespace Libraries.Repository.EntityRepository
             List<Locality> localitylist = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localitylist;
         }
+
     }
 }

@@ -32,7 +32,11 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Status).HasColumnType("int(11)");
 
-            builder.Property(e => e.WatchWardId).HasColumnType("int(11)");
+            builder.Property(e => e.ModuleId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ProccessID).HasColumnType("int(11)");
+
+            builder.Property(e => e.ServiceId).HasColumnType("int(11)");
 
             builder.Property(e => e.Remarks)
                 .HasMaxLength(5000)
