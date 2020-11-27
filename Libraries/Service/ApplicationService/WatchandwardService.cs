@@ -185,12 +185,6 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> CreateApprovalProccess(Approvalproccess approvalproccess)
-        {
-
-            approvalproccess.CreatedBy = 1;
-            approvalproccess.CreatedDate = DateTime.Now;
-            return await _watchandwardRepository.InsertInApprovalProccess(approvalproccess);
-        }
+       
     }
 }

@@ -47,6 +47,5 @@ namespace Libraries.Service.IApplicationService
         Task<Propertyregistration> FetchSingleResultOnPrimaryList(int v);
 
         Task<bool> UpdateBeforeApproval(int id, Watchandward watchandward);
-        Task<bool> CreateApprovalProccess(Approvalproccess approvalproccess);
     }
 }

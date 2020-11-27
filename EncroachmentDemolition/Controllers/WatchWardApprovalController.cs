@@ -24,13 +24,15 @@ namespace EncroachmentDemolition.Controllers
         private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
         private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
 
-        public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService, IWorkflowTemplateService workflowtemplateService ,IConfiguration configuration, IWatchandwardService watchandwardService)
+        public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IWatchandwardService watchandwardService)
         {
             _workflowtemplateService = workflowtemplateService;
             _watchAndWardApprovalService = watchAndWardApprovalService;
             _watchandwardService = watchandwardService;
             _configuration = configuration;
+            _approvalproccessService = approvalproccessService;
         }
         public IActionResult Index()
         {
@@ -54,6 +56,36 @@ namespace EncroachmentDemolition.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(int id, Watchandward watchandward)
+        {
+            var result = false;
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            Data.LocalityList = await _watchandwardService.GetAllLocality();
+            Data.KhasraList = await _watchandwardService.GetAllKhasra();
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+            //if (ModelState.IsValid)
+            //{
+            var DataFlow = await DataAsync();
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (!DataFlow[i].parameterSkip)
+                {
+                    
+
+                }
+            }
+
+            ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
+            return View("Index");
+            //}
+            //else
+            //{
+            //    return View(watchandward);
+            //}
+
         }
 
         public async Task<PartialViewResult> WatchWardView(int id)
@@ -81,7 +113,7 @@ namespace EncroachmentDemolition.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
-        private async Task<List<TemplateStructure>> dataAsync()
+        private async Task<List<TemplateStructure>> DataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
             var template = Data.Template;
@@ -92,16 +124,17 @@ namespace EncroachmentDemolition.Controllers
         [HttpGet]
         public async Task<JsonResult> GetApprovalDropdownList()
         {
-            var DataFlow = await dataAsync();
-             
+            var DataFlow = await DataAsync();
+
             for (int i = 0; i < DataFlow.Count; i++)
             {
                 if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                 {
                     var dropdown = DataFlow[i].parameterAction;
                     return Json(dropdown);
+                    break;
                 }
-                break;
+
             }
             return Json(DataFlow);
         }

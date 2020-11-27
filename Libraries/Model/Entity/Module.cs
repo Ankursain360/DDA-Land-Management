@@ -1,17 +1,15 @@
-﻿using Libraries.Model.Common;
+﻿using Dto.Master;
+using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
     public class Module : AuditableEntity<int>
     {
-        public Module()
-        {
-            Rolemodulemap = new HashSet<Rolemodulemap>();
-        }
 
         [Required]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
@@ -27,6 +25,6 @@ namespace Libraries.Model.Entity
         public ICollection<Onlinecomplaint> Onlinecomplaint { get; set; }
         public ICollection<Menu> Menu { get; set; }
         public ICollection<Rolemodulemap> Rolemodulemap { get; set; }
+       
     }
-   
 }

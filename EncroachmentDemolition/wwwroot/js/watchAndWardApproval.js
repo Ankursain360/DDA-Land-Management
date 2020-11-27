@@ -15,10 +15,10 @@ $(document).ready(function () {
             if (response.length>0) {
                 for (var i = 0; i < response.length; i++) {
                     if (response[i] == $(this).val()) {
-                        $(this).show();
+                        $(this).show().trigger('change');
                     }
                     else {
-                        $(this).remove();
+                        $(this).remove().trigger('change');
                     }
                 }
             }
@@ -51,3 +51,61 @@ $("#collapse").click(function () {
         });
     })
 });
+
+
+$('#myForm').validate({
+    rules: {
+        ApprovalStatusId: {
+            required: true
+        },
+        ApprovalRemarks: {
+            required: true
+        }
+    },
+
+    messages: {
+        ApprovalStatusId: {
+            required: ApprovalStatusIdMessage //this is a function that returns custom messages
+        },
+        ApprovalRemarks: {
+            required: ApprovalRemarksMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        // alert('Form validated and submitted ok.');
+        return true;
+    }
+});
+
+function ApprovalRemarksMessage() {
+    var dropdown_val = $('#ApprovalRemarks').val();
+    if (dropdown_val == "") {
+        return "Approval Remarks is Mandatory";
+    } else {
+        return "";
+    }
+}
+
+function ApprovalStatusIdMessage() {
+    var dropdown_val = $('#ApprovalStatus').val();
+    if (dropdown_val == "") {
+        return "Approval Status is Mandatory";
+    } else {
+        return "";
+    }
+}
