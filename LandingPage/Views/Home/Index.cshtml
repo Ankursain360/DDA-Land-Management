@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    
+  
         <div class="pt-3">
             <div class="row">
                 @foreach (var item in Model)
@@ -15,19 +15,17 @@
                 <div class="col-md-4 col-xl-3 mb-4">
                     <a href=@item.Url target=@item.Target class="project-box card slow">
                         <div class="card-header d-flex">
-
-                            @*<img src="img/profile/face.jpg" class="project-img rounded-circle">*@
-                         @*<div class="project-img rounded-circle"><i class="@item.Icon" aria-hidden="true"></i> </div>*@   
-                            <small>Few Second</small>
+                            <i class="@item.Icon " aria-hidden="true"></i>
+                            <small> Open</small>
                         </div>
-                        <div class="card-body">
-                            <p class="name"> Module Name</p>
+                       <div class="card-body">
+                            <p class="name"></p>
                             <h2 class="text-truncate">@item.Name</h2>
-                            <p class="pro-detail"></p>
+                            <p class="pro-detail">@item.Description</p>
 
                         </div>
                     </a>
-                    <a href=@item.Url target=@item.Target>Click here</a>
+                   
                 </div>
                 }
             </div>

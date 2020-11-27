@@ -23,20 +23,20 @@ namespace LandingPage.Infrastructure.Extensions
 
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-           // services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
-           // services.AddScoped<IPermissionsRepository, PermissionsRepository>();
-           // services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
-           
+
 
             /* Application Services */
 
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-           // services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
-           // services.AddScoped<IPermissionsService, PermissionsService>();
-          //  services.AddScoped<IActionsService, ActionsService>();
-           
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
+
             services.AddScoped<IMenuService, MenuService>();
 
         }
