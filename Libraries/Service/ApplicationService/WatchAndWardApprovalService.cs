@@ -49,7 +49,7 @@ namespace Libraries.Service.ApplicationService
             return await _watchAndWardApprovalRepository.GetAllWatchandward();
         }
 
-        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId)
+        public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId)
         {
             return await _watchAndWardApprovalRepository.GetPagedWatchandward(model,  userId);
         }

@@ -179,7 +179,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _watchandwardRepository.FindBy(a => a.Id == id);
             Watchandward model = result.FirstOrDefault();
 
-            model.Status = watchandward.Status;
+            model.ApprovedStatus = watchandward.ApprovedStatus;
             model.PendingAt = watchandward.PendingAt;
             _watchandwardRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Dto.Search
 {
-   
-       public class WatchandwardSearchDto : BaseSearchDto
+
+    public class WatchandwardSearchDto : BaseSearchDto
     {
         public string name { get; set; }
         public int localityId { get; set; }
