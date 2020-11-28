@@ -76,13 +76,8 @@ namespace EncroachmentDemolition.Controllers
 
                 if (result)
                 {
-
                     FileHelper fileHelper = new FileHelper();
-
-
                     ///for photo file:
-
-
                     if (watchandward.Photo != null && watchandward.Photo.Count > 0)
                     {
                         List<Watchandwardphotofiledetails> watchandwardphotofiledetails = new List<Watchandwardphotofiledetails>();
@@ -110,9 +105,7 @@ namespace EncroachmentDemolition.Controllers
                             result = await _watchandwardService.SaveWatchandwardphotofiledetails(item);
                         }
                     }
-
                     //for report file:
-
                     if (watchandward.ReportFile != null && watchandward.ReportFile.Count > 0)
                     {
                         List<Watchandwardreportfiledetails> watchandwardreportfiledetails = new List<Watchandwardreportfiledetails>();
@@ -149,8 +142,9 @@ namespace EncroachmentDemolition.Controllers
                                     approvalproccess.ServiceId = watchandward.Id;
                                     approvalproccess.SendFrom = SiteContext.UserId;
                                     approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                    approvalproccess.PendingStatus = 1;
-                                    approvalproccess.Status = 1;
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess,SiteContext.UserId); //Create a row in approvalproccess Table
                                 }
 
@@ -158,7 +152,7 @@ namespace EncroachmentDemolition.Controllers
                             }
                         }
 
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
                         return View("Index", result1);
                     }
@@ -293,7 +287,7 @@ namespace EncroachmentDemolition.Controllers
                         {
                             if(!DataFlow[i].parameterSkip)
                             {
-                                watchandward.Status = 1;
+                                watchandward.Status = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
                                 result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
                                 if (result)
@@ -304,8 +298,11 @@ namespace EncroachmentDemolition.Controllers
                                     approvalproccess.ServiceId = watchandward.Id;
                                     approvalproccess.SendFrom = SiteContext.UserId;
                                     approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                    approvalproccess.PendingStatus = 1;
-                                    approvalproccess.Status = 1;
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    approvalproccess.ModifiedBy = SiteContext.UserId;///May be Uncomment
+                                    approvalproccess.ModifiedDate = DateTime.Now;///May be Uncomment
                                     result = await _approvalproccessService.Create(approvalproccess,SiteContext.UserId); //Create a row in approvalproccess Table
                                 }
 
@@ -517,12 +514,8 @@ namespace EncroachmentDemolition.Controllers
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
             var template = Data.Template;
-            //TemplateStructure ObjTemplateStructureList = new TemplateStructure();
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
-            //ObjTemplateStructureList = Newtonsoft.Json.JsonConvert.DeserializeObject<TemplateStructure>(template);
-
             return ObjList;
-
         }
 
     }

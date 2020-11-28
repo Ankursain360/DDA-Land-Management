@@ -5,14 +5,15 @@
 //});
 
 $(document).ready(function () {
-   
+
     var id = parseInt($('#Id').val());
     GetOtherDetails(id);
+    GetHistoryDetails(id);
 
     HttpGet(`/WatchWardApproval/GetApprovalDropdownList`, 'html', function (response) {
         response = JSON.parse(response);
         $('#ApprovalStatus option').each(function () {
-            if (response.length>0) {
+            if (response.length > 0) {
                 for (var i = 0; i < response.length; i++) {
                     if (response[i] == $(this).val()) {
                         $(this).show().trigger('change');
@@ -24,7 +25,7 @@ $(document).ready(function () {
             }
         });
     });
-   
+
 });
 
 
@@ -32,6 +33,13 @@ function GetOtherDetails(id) {
     HttpGet(`/WatchWardApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
+    });
+};
+
+function GetHistoryDetails(id) {
+    HttpGet(`/WatchWardApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
+        $('#divHistoryDetails').html("");
+        $('#divHistoryDetails').html(response);
     });
 };
 
@@ -49,9 +57,17 @@ $("#collapse").click(function () {
             placeholder: "Select",
             allowClear: true
         });
-    })
+    });
 });
 
+$("#collapse").click(function () {
+    $("#collapseHistoryApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
 
 $('#myForm').validate({
     rules: {
@@ -99,7 +115,7 @@ function ApprovalRemarksMessage() {
     } else {
         return "";
     }
-}
+};
 
 function ApprovalStatusIdMessage() {
     var dropdown_val = $('#ApprovalStatus').val();
@@ -108,4 +124,4 @@ function ApprovalStatusIdMessage() {
     } else {
         return "";
     }
-}
+};

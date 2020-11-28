@@ -62,5 +62,10 @@ namespace Libraries.Service.ApplicationService
             _approvalproccessRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        {
+            return await _approvalproccessRepository.GetHistoryDetails(proccessid,  id);
+        }
     }
 }
