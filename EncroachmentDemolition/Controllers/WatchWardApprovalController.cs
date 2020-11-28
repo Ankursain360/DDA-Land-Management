@@ -91,7 +91,7 @@ namespace EncroachmentDemolition.Controllers
                             approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
                             if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                approvalproccess.SendTo =null;
                             else
                             {
                                 approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
