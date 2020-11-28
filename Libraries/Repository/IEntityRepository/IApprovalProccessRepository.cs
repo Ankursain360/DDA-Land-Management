@@ -10,5 +10,6 @@ namespace Libraries.Repository.IEntityRepository
     public interface IApprovalProccessRepository : IGenericRepository<Approvalproccess>
     {
         int GetPreviousApprovalId(int proccessid, int serviceid);
+        Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
     }
 }

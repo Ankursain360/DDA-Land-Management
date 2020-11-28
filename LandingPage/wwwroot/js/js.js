@@ -1,11 +1,3 @@
-
-
-$(document).ready(function () {
-    $('#mobileMenu').toggleClass('open');
-    //$('#leftMenu').css('small');
-    //$('#leftMenu').hide()
-    //$('#rightSection').toggleClass('menu-close');
-});
 $('#ForgotPassword').on('click', function () {
     $('#Login').hide()
     $('#Password').show()
@@ -23,7 +15,7 @@ $('#mobileMenu').on('click', function () {
     $('footer').toggleClass('menu-close');
 });
 
-$('.short-btn .btn').on('click', function(){
+$('.short-btn .btn').on('click', function () {
     $('.short-btn .btn').removeClass('active');
     $(this).addClass('active');
 })

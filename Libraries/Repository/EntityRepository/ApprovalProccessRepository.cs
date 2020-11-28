@@ -19,6 +19,18 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+
+        public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
+        {
+            var result =await _dbContext.Approvalproccess
+                                   // .Include(x => x.SendFromUser)
+                                    .Where(x => x.ProccessID == proccessid && x.ServiceId == id)
+                                    .ToListAsync();
+
+            return result;
+
+        }
+
         public int GetPreviousApprovalId(int proccessid, int serviceid)
         {
             var File = (from f in _dbContext.Approvalproccess

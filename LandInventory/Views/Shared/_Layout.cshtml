@@ -6,6 +6,7 @@
     <link rel="icon" href="~/images/favicon.png" type="image/png" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Admin Dashboard</title>
+    @********* Land Inventory **********@
     <!--font css-->
     <link rel="stylesheet" href="~/font/open-sans/stylesheet.css" />
 
@@ -18,8 +19,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <link href="~/lib/select2/select2.css" rel="stylesheet" />
     <script src="~/lib/select2/select2.js"></script>
-</head>
 
+</head>
 <body class="bg-gray">
     <div style="display:none;">
         <div class="body-loading loader-active"></div>
@@ -79,156 +80,11 @@
         </header>
     </div>
     <aside class="left-menu small slow" id="leftMenu">
-        <div class="accordion" id="leftMenu">
-            <a class="no-dec d-flex align-items-center collapsed active" data-toggle="collapse" href="#m0" role="button" aria-expanded="false" aria-controls="m0">
-                <i class="main-icon ri-dashboard-line"></i>
-                <span class="text mr-auto">Dashboard</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m1" role="button" aria-expanded="false" aria-controls="m1">
-                <i class="main-icon ri-group-line"></i>
-                <span class="text mr-auto">Land Inventory Module</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <div class="collapse sub-menu" id="m1" data-parent="#leftMenu">
-                <ul class="list-unstyled m-0 p-0">
-                    <li>
-                        <a href="/PropertyRegistration/Index" class="d-block">Property Inventory</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/InventoryUnverified/Create">Unverified/Unapproved Property</a>
-                    </li>
-                    @*<li>
-                            <a class="d-block" href="/FormN1/Index">Nazul Land Information</a>
-                        </li>*@
-                    <li>
-                        <a class="d-block" href="/DeletedProperties/Create">Deleted Properties</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/ArchivedProperty/Create">Restore Property</a>
-                    </li>
-                    @*<li>
-                            <a class="d-block" href="/ListOfDataUploaded/Index">List Of Data Uploaded</a>
-                        </li>*@
-                    <li>
-                        <a class="d-block" href="/PropertyInventoryReport/Create">Property Inventory Report</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/UserWiseLandStatus/Index">User Wise Land Status</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/StatusOfVacantLand/Index">Status Of Vacant Land</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/VacantPlots/Index">Vacant Plots</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/RestorePropertyReport/Create">Restore Property Report</a>
-                    </li>
-                   
-                    <li>
-                        <a class="d-block" href="/MORLandInventory/Index">Ministry of rehabilitation (MOR) Land Inventory</a>
-                    </li>
-
-                    @*<li>
-                            <a class="d-block" href="/DemolitionStatusReport/Index">Demolition Status Report</a>
-                        </li>
-                        <li>
-                            <a class="d-block" href="/Discripency/Index">Discripency</a>
-                        </li>
-                        <li>
-                            <a class="d-block" href="/DemolitionUploadedPhotos/Index">Demolition Uploaded Photos</a>
-                        </li>*@
-                    @*<li>
-                        <a class="d-block" href="/ListOfLocalitiesImagesNotUploaded/Index">List Of Localities(Images Not Uploaded)</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/ListOfLocalitiesNotUploadedImage/Index">List Of Localities(Not Uploaded Image)</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/IntervalReportsOfPictureUploaded/Index">Interval Reports Of Photos Uploaded</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/StatusOfAllotedProperties/Index">Status Of Alloted Properties</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/StatusReportEngineering_Land/Index">Status Report Engineering LandManagement Horticulture</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/LandUserWisePhotoNotUploadedWithinTime/Index">Photo Not Uploaded WithinTime</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/ListOfPropertiesImagesNotUploadedDuringSelectedDates/Index">Photo Not Uploaded During Dates</a>
-                    </li>*@
-
-
-                </ul>
-            </div>
-
-
-            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m2" role="button" aria-expanded="false" aria-controls="m2">
-                <i class="main-icon ri-group-line"></i>
-                <span class="text mr-auto">Hand Over/Take Over</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <div class="collapse sub-menu" id="m2" data-parent="#leftMenu">
-                <ul class="list-unstyled m-0 p-0">
-                    <li>
-                        <a href="/LandTransfer/Index" class="d-block">Hand Over/Take Over</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/LandTransfer/IndexUnverified">Unverified Transfer Records</a>
-                    </li>
-                    @*<li>
-                            <a class="d-block" href="/LandTransferApproval/Index">Land Transfer Approval</a>
-                        </li>*@
-                    <li>
-                        <a class="d-block" href="/ReportofLandTransferDepartmentWise/Create">Hand Over/Take Over Report of Land Transfer(Department Wise)</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/ReportofLandTransferDivisionLocalityWise/Create">Hand Over/Take Over Report(Zone/Division and Locality Wise)</a>
-                    </li>
-                    <li>
-                        <a class="d-block" href="/ReportofLandTransferPropertyNoWise/Index">Hand Over/Take Over Report(Khasra No. Wise)</a>
-                    </li>
-                    @*<li>
-                            <a class="d-block" href="/CurrentStatusOfHandedOverTakenOverLand/Index">Current Status Of Handed Over Taken Over Land</a>
-                        </li>*@
-                </ul>
-            </div>
-
-            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m3" role="button" aria-expanded="false" aria-controls="m3">
-                <i class="main-icon ri-group-line"></i>
-                <span class="text mr-auto">Update Plot Details</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <div class="collapse sub-menu" id="m3" data-parent="#leftMenu">
-                <ul class="list-unstyled m-0 p-0">
-
-                    <li>
-                        <a class="d-block" href="/CurrentStatusOfHandedOverTakenOverLand/Index">Current Status Of Handed Over Taken Over Land</a>
-                    </li>
-                </ul>
-            </div>
-            <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m4" role="button" aria-expanded="false" aria-controls="m4">
-                <i class="main-icon ri-group-line"></i>
-                <span class="text mr-auto">Planning Detail</span>
-                <i class="arrow ri-arrow-drop-down-line slow"></i>
-            </a>
-            <div class="collapse sub-menu" id="m4" data-parent="#leftMenu">
-                <ul class="list-unstyled m-0 p-0">
-                    <li>
-                        <a class="d-block" href="/Planning/Index">Update Planning Details</a>
-                    </li>
-                </ul>
-                <ul class="list-unstyled m-0 p-0">
-                    <li>
-                        <a class="d-block" href="/Planning/VerificationPage">Unverified Planning Details</a>
-                    </li>
-                </ul>
-            </div>
-</div>
+        <ul class="accordion list-unstyled mb-0">
+            @await Component.InvokeAsync("SideNav")
+        </ul>
     </aside>
+
     <partial name="_CookieConsentPartial" />
     <section id="rightSection" class="slow bg-gray">
         <div class="container-fluid">

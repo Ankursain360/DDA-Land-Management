@@ -10,6 +10,7 @@ namespace Libraries.Model.Entity
         public ApplicationUser()
         {
             Userprofile = new HashSet<Userprofile>();
+           // ApprovalproccessSendFromUser = new HashSet<Approvalproccess>();
         }
 
         public DateTime? PasswordSetDate { get; set; }
@@ -21,5 +22,7 @@ namespace Libraries.Model.Entity
         public int? ModifiedBy { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
+
+      //  public virtual ICollection<Approvalproccess> ApprovalproccessSendFromUser { get; set; }
     }
 }

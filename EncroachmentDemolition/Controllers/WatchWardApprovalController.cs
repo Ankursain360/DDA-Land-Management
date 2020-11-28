@@ -66,26 +66,62 @@ namespace EncroachmentDemolition.Controllers
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-            //if (ModelState.IsValid)
-            //{
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
             {
                 if (!DataFlow[i].parameterSkip)
                 {
-                    
+                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                    {
+                        //int previousApprovalId = _approvalproccessService.GetPreviousApprovalId(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), watchandward.Id);
+                        //Approvalproccess approvalproccess1 = new Approvalproccess();
+                        //// approvalproccess1.Remarks = watchandward.ApprovalRemarks;  ///May be Uncomment
+                        //approvalproccess1.PendingStatus = 0;
+                        //approvalproccess1.Status = Convert.ToInt32(watchandward.ApprovalStatus);
+                        //result = await _approvalproccessService.UpdatePreviousApprovalProccess(previousApprovalId, approvalproccess1, SiteContext.UserId);
+                        result = true;  ///May be comment
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                            approvalproccess.ServiceId = watchandward.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
+                            if (i == DataFlow.Count - 1)
+                                approvalproccess.SendTo =null;
+                            else
+                            {
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                            }
+                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
+                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                            if (result)
+                            {
+                                if (i == DataFlow.Count - 1)
+                                {
+                                    watchandward.Status = 0;
+                                    watchandward.PendingAt = 0;
+                                }
+                                else
+                                {
+                                    watchandward.Status = 1;
+                                    watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                }
+                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
+                            }
+                        }
+                        break;
+                    }
 
                 }
             }
 
-            ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
+            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");
-            //}
-            //else
-            //{
-            //    return View(watchandward);
-            //}
-
         }
 
         public async Task<PartialViewResult> WatchWardView(int id)
@@ -94,6 +130,13 @@ namespace EncroachmentDemolition.Controllers
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
             return PartialView("_WatchWardView", Data);
+        }
+
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
         }
 
         public async Task<IActionResult> DownloadPhotoFile(int Id)

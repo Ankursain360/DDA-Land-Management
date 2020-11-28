@@ -1,0 +1,53 @@
+﻿@model System.Collections.Generic.IList<Dto.Component.SideNavDto>
+
+@foreach (var menu in Model)
+{
+    if (menu.Children.Any())
+    {
+        <li>
+            @if (menu.ParentId == 0)
+            {
+                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
+                    <i class="main-icon ri-dashboard-line"></i>
+                    <span class="text mr-auto">@menu.Name</span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+            }
+            else
+            {
+                <a class="no-dec d-flex align-items-center collapsed" data-toggle="collapse" href="#m_@menu.Id" role="button" aria-expanded="false" aria-controls="m_@menu.Id">
+                    <i class="main-icon ri-dashboard-line"></i>
+                    <span class="text mr-auto">@menu.Name</span>
+                    <i class="arrow ri-arrow-drop-down-line slow"></i>
+                </a>
+            }
+            @if (menu.ParentId == 0)
+            {
+                <ul class="collapse sub-menu list-unstyled m-0 p-0" id="m_@menu.Id">
+                    <partial name="Components/SideNav/SideNav" model="menu.Children" />
+                </ul>
+            }
+            else
+            {
+                <ul class="collapse sub-menu list-unstyled m-0 p-0" id="m_@menu.Id">
+                    <partial name="Components/SideNav/SideNav" model="menu.Children" />
+                </ul>
+            }
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            @{
+                if (string.IsNullOrEmpty(menu.Url))
+                {
+                    <a href="javascript:void(0)" class="d-block">@menu.Name</a>
+                }
+                else
+                {
+                    <a href="@menu.Url" class="d-block">@menu.Name</a>
+                }
+            }
+        </li>
+    }
+}

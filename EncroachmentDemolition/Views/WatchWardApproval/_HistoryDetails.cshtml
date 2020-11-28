@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Libraries.Model.Entity.Approvalproccess>
+@{int rowNo = 0; }
+
+
+<a data-toggle="collapse" href="#collapseHistoryApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseHistoryApprroval">
+    <div class="row" style="margin-bottom:35px;">
+        <div class="col-sm-12">
+            <div class="dda-innerheading">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Approval History Details</h6>
+                    <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</a>
+<div class="collapse" id="collapseHistoryApprroval">
+    @if (Model != null && Model.Count() > 0)
+    {
+        <div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class="dda-innerheading">
+                    <div class="col-md-12">
+                        <h6 class="pull-left color-white" style="margin-top:5px;">Approval History Details</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table table-striped table-bordered" border="0">
+            <thead>
+                <tr>
+                    <th>Sr.No</th>
+                    <th>Send From </th>
+                    <th>Send To</th>
+                    <th>Date</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>
+                            @item.SendFrom
+                        </td>
+                        <td>
+                            @item.SendTo
+                        </td>
+                        <td>
+                            @(item.CreatedDate!= null ? Convert.ToDateTime(item.CreatedDate).ToString("dd-MMM-yyyy h:mm tt") : "Not Available")  
+                        </td>
+                        <td>
+                            @item.Remarks
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    }
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
