@@ -30,6 +30,10 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IPlanningRepositry, PlanningRepositry>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
@@ -41,6 +45,10 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IPlanningService, PlanningService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IMenuService, MenuService>();
         }
     }
 }
