@@ -222,25 +222,26 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <label class="control-label lb-sm">FIR Details</label>
+
                     @{
                         if (Model.EncroachmentFirFileDetails != null && Model.EncroachmentFirFileDetails.Count > 0)
                         {
                             <br />
                             foreach (var item in Model.EncroachmentFirFileDetails)
                             {
-                                <a asp-action="DownloadFirfile" asp-route-id="@item.Id"> (View Existing Document @(FirFile += 1) )</a>
+                                <a asp-action="DownloadFirfile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(FirFile += 1) )</a>
                                 <br />
                             }
-                            <input type="file" asp-for="Firfile" id="Firfile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                            <span asp-validation-for="Firfile" class="text-danger"></span>
+                            <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                            <span asp-validation-for="Firfile" class="d-block text-danger field-validation-valid"></span>
                         }
                         else
                         {
-                            <input type="file" asp-for="Firfile" id="Firfile" class="form-control" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                            <span asp-validation-for="Firfile" class="text-danger"></span>
+                            <input type="file" asp-for="Firfile" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                            <span asp-validation-for="Firfile" class="d-block text-danger field-validation-valid"></span>
                         }
                     }
+                    <label for="Firfile" class="floating-label">FIR Details</label>
                 </div>
             </div>
             <div class="col-md-6">
