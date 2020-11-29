@@ -305,12 +305,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
-<br />
+                        <br />
                         <input type="hidden" asp-for="EncroachAtrfilepath" />
                         @{
                             @if (ViewBag.EncroachAtrDocView != null)
                             {
-                                @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id })
+                    <a href="#" class="badge badge-primary px-2"> @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id })</a>
+                               
                                 <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                             else
@@ -320,7 +321,7 @@
                             }
                         }
                         <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                       <br/> <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                        <br /> <label class="floating-label">Upload Action Taken Report(ATR)</label>
                     </div>
                 </div>
 
@@ -489,14 +490,15 @@
             </div>
 
             <div class="col-md-4" id="divLayoutPlan" style="display:none;">
-                <div class="floating-label-wrap">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input type="hidden" asp-for="LayoutFilePath" />
                     <br />
                     @{
                         @if (ViewBag.LayoutDocView != null)
                         {
-                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id })
+                            <a href="#" class="badge badge-primary px-2"> @Html.ActionLink(" (View File)", "Download", new { id = Model.Id })</a>
+
                             <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         }
                         else
@@ -504,8 +506,8 @@
                             <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         }
                     }
-                    <span asp-validation-for="FileData" class="text-danger"></span>
-                   <br /> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
+                    <span asp-validation-for="FileData" class="d-block text-danger field-validation-valid"></span>
+                    <br /> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
                 </div>
 
             </div>
@@ -525,14 +527,15 @@
         <div id="divGEOReferencingSelection" style="display:none;">
             <div class="row pt-3">
                 <div class="col-md-4" id="divGEOReferencing">
-                    <div class="floating-label-wrap">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input type="hidden" asp-for="GeoFilePath" />
                         <br />
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
-                                @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id })
+                                <a href="#" class="badge badge-primary px-2"> @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id })</a>
+
                                 <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                             else
@@ -540,8 +543,8 @@
                                 <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             }
                         }
-                        <span asp-validation-for="GeoFileData" class="text-danger"></span>
-                      <br />  <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                        <span asp-validation-for="GeoFileData" class="d-block text-danger field-validation-valid"></span>
+                        <br />  <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
                     </div>
                 </div>
                 <div class="col-md-4">
