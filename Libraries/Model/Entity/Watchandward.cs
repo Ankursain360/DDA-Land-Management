@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         {
             Watchandwardphotofiledetails = new HashSet<Watchandwardphotofiledetails>();
             Watchandwardreportfiledetails = new HashSet<Watchandwardreportfiledetails>();
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
         }
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
@@ -92,6 +93,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string ApprovalRemarks { get; set; }
 
+        public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
 
     }
 }

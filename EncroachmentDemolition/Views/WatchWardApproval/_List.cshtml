@@ -26,9 +26,7 @@
                     <td>@item.PrimaryListNoNavigation.KhasraNo</td>
                     <td>@item.PrimaryListNo</td>
                     <td>@item.StatusOnGround</td>
-                    <td>
-                        Pending
-                    </td>
+                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
                     <td>
                         <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
                     </td>
