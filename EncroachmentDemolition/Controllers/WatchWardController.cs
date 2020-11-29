@@ -131,7 +131,7 @@ namespace EncroachmentDemolition.Controllers
                         {
                             if (!DataFlow[i].parameterSkip)
                             {
-                                watchandward.Status = 1;
+                                watchandward.ApprovedStatus = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
                                 result = await _watchandwardService.UpdateBeforeApproval(watchandward.Id, watchandward);  //Update Table details 
                                 if (result)
@@ -287,7 +287,7 @@ namespace EncroachmentDemolition.Controllers
                         {
                             if(!DataFlow[i].parameterSkip)
                             {
-                                watchandward.Status = 0;
+                                watchandward.ApprovedStatus = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
                                 result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
                                 if (result)

@@ -40,7 +40,7 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
-        public int? Status { get; set; }
+        public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
 
         [NotMapped]

@@ -40,7 +40,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] WatchandwardSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] WatchandwardApprovalSearchDto model)
         {
             var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId);
             return PartialView("_List", result);
@@ -103,12 +103,12 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 if (i == DataFlow.Count - 1)
                                 {
-                                    watchandward.Status = 0;
+                                    watchandward.ApprovedStatus = 0;
                                     watchandward.PendingAt = 0;
                                 }
                                 else
                                 {
-                                    watchandward.Status = 1;
+                                    watchandward.ApprovedStatus = 1;
                                     watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
                                 }
                                 result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
