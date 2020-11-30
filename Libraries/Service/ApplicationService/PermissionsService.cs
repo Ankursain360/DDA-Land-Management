@@ -102,7 +102,8 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model)
         {
             int roleId = model.FirstOrDefault().RoleId;
-            var result = await _permissionsRepository.FindBy(a => a.RoleId == roleId);
+            int moduleId = model.FirstOrDefault().ModuleId;
+            var result = await _permissionsRepository.FindBy(a => a.RoleId == roleId && a.ModuleId==moduleId);
             _permissionsRepository.RemoveRange(result);
 
             List<Menuactionrolemap> permission = model.Select(a => new Menuactionrolemap()
@@ -110,6 +111,7 @@ namespace Libraries.Service.ApplicationService
                 MenuId = a.MenuId,
                 ActionId = a.ActionId,
                 RoleId = a.RoleId,
+                ModuleId= a.ModuleId,
                 CreatedBy = 1,
                 CreatedDate = DateTime.Now
             }).ToList();

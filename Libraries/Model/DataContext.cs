@@ -105,7 +105,6 @@ namespace Libraries.Model
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Disposedproperty> Disposedproperty { get; set; }
         public virtual DbSet<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
-        public virtual DbSet<Rolemodulemap> Rolemodulemap { get; set; }
         public virtual DbSet<Menuactionrolemap> Menuactionrolemap { get; set; }
         public virtual DbSet<PlanningProperties> PlanningProperties { get; set; }
         public virtual DbSet<Planning> Planning { get; set; }
@@ -190,7 +189,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MenuConfiguration());
             modelBuilder.ApplyConfiguration(new DisposedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyRegistrationHistoryConfiguration());
-            modelBuilder.ApplyConfiguration(new RolemodulemapConfiguration());
             modelBuilder.ApplyConfiguration(new MenuactionrolemapConfiguration());
             modelBuilder.ApplyConfiguration(new PlanningConfiguration());
             modelBuilder.ApplyConfiguration(new PlanningPropertiesConfiguration());
