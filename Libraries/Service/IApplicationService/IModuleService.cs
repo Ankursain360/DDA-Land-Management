@@ -18,5 +18,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueName(int id, string Module);   // To check Unique Value  
         Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model);
         Task<List<Module>> GetActiveModule();
+        Task<Module> GetModuleByGuid(string guid);
     }
 }

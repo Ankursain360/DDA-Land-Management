@@ -10,5 +10,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Menuactionrolemap>> GetPermission(string moduleId, int roleId);
         Task<List<Module>> GetModuleList();
         Task<List<Menu>> GetMappedMenuWithAction(int moduleId);
+        Task<bool> AuthorizeUser(string url, string actionName, int roleId, int moduleId);
     }
 }

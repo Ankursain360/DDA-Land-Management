@@ -44,5 +44,17 @@ namespace Libraries.Repository.EntityRepository
             return result;
 
         }
+
+        public async Task<bool> AuthorizeUser(string url, string actionName, int roleId, int moduleId)
+        {
+            return await _dbContext.Menuactionrolemap
+                .Include(a => a.Action)
+                .Include(a => a.Menu)
+                .Where(a => a.Menu.Url==url
+                    && a.Action.Name == actionName
+                    && a.RoleId == roleId
+                    && a.ModuleId == moduleId)
+                .AnyAsync();
+        }
     }
 }

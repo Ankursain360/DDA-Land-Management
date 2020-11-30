@@ -1,13 +1,12 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dto.Search;
+﻿using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -31,13 +30,14 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Module.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
 
-
-
         public async Task<List<Module>> GetAllModule()
         {
             return await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<Module> GetModuleByGuid(string guid)
+        {
+            return await _dbContext.Module.FirstOrDefaultAsync(x => x.Guid == guid && x.IsActive == 1);
+        }
     }
-
 }
