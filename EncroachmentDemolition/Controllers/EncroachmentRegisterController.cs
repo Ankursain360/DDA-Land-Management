@@ -53,7 +53,7 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
-            return PartialView("_WatchWardView", Data);
+            return PartialView("_WatchWard", Data);
         }
 
         [HttpPost]
