@@ -14,11 +14,10 @@
     <a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
         <span class="collapsed"><b>+</b></span>
         <span class="expanded"><b>-</b></span>
-
         <h3 class="my-3 d-flex sub-heading">View Watch & Ward Details</h3>
     </a>
     <div class="collapse" id="collapseApprroval">
-        @if (Model.Id != null)
+        @if (Model != null)
         {
             <div id="divShowData">
                 <div class="row">

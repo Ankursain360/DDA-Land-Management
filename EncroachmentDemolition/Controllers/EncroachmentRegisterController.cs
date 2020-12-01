@@ -51,6 +51,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> WatchWardView(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
+            if(Data!=null)
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
             return PartialView("_WatchWard", Data);
