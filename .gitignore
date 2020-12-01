@@ -35,3 +35,4 @@ Version.h
 Version.cpp
 *.defaults
 *.pubxml
+/DDA-Land-Management.v11.suo

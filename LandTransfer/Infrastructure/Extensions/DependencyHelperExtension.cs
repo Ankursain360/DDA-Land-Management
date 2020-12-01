@@ -26,6 +26,9 @@ namespace LandTransfer.Infrastructure.Extensions
             services.AddScoped<ICurrentstatusoflandhistoryRepository, CurrentstatusoflandhistoryRepository>();
             services.AddScoped<IPropertyRegistrationRepository, PropertyRegistrationRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
 
             /* Application Services */
             services.AddScoped<INazullandService, NazullandService>();
@@ -33,6 +36,9 @@ namespace LandTransfer.Infrastructure.Extensions
             services.AddScoped<ICurrentstatusoflandhistoryService, CurrentstatusoflandhistoryService>();
             services.AddScoped<IPropertyRegistrationService, PropertyRegistrationService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IModuleService, ModuleService>();
         }
     }
 }
