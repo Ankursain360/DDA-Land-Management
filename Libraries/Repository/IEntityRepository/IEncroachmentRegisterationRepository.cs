@@ -27,7 +27,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeleteEncroachmentLocationMapFileDetails(int Id);
         Task<List<Division>> GetAllDivision(int zoneId);
         Task<List<Department>> GetAllDepartment();
-        Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
+        Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);

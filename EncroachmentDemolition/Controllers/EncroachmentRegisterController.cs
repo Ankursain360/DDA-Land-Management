@@ -20,10 +20,12 @@ namespace EncroachmentDemolition.Controllers
     {
         public IConfiguration _configuration;
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
-        public EncroachmentRegisterController(IEncroachmentRegisterationService encroachmentRegisterationService, IConfiguration configuration)
+        private readonly IWatchandwardService _watchandwardService;
+        public EncroachmentRegisterController(IEncroachmentRegisterationService encroachmentRegisterationService, IConfiguration configuration, IWatchandwardService watchandwardService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
+            _watchandwardService = watchandwardService;
         }
         public IActionResult Index()
         {
@@ -35,7 +37,7 @@ namespace EncroachmentDemolition.Controllers
             var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model);
             return PartialView("_List", result);
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
             EncroachmentRegisteration encroachmentRegisterations = new EncroachmentRegisteration();
             encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
@@ -45,6 +47,15 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
             return View(encroachmentRegisterations);
         }
+
+        public async Task<PartialViewResult> WatchWardView(int id)
+        {
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
+            return PartialView("_WatchWardView", Data);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(EncroachmentRegisteration encroachmentRegisterations)
         {

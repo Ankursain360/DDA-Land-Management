@@ -109,10 +109,25 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.EncroachmentPhotoFileDetails.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
-        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
+        public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
-            try { 
-                return await _dbContext.EncroachmentRegisteration.Include(x => x.Locality).Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
+            try {
+                return await _dbContext.Watchandward
+                .Include(x => x.PrimaryListNoNavigation)
+                .Include(x => x.PrimaryListNoNavigation.Locality)
+                .Include(x => x.Locality)
+                .Include(x => x.Khasra)
+                .Where(x =>x.ApprovedStatus == 1 && x.IsActive == 1)
+                .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                //return await _dbContext.EncroachmentRegisteration
+                //                        .Include(x=> x.WatchWard)
+                //                        .Include(x => x.Locality)
+                //                        .Where(x =>  x.WatchWard.ApprovedStatus == 1 || x.IsActive == 1 )
+                //                        .GetPaged(model.PageNumber, model.PageSize);
+                //return await _dbContext.EncroachmentRegisteration
+                //                        .Include(x => x.Locality)
+                //                        .Where(x => x.IsActive == 1)
+                //                        .GetPaged(model.PageNumber, model.PageSize);
             }
             catch(Exception ex)
             {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Component;
 using Dto.Master;
 using Libraries.Model.Entity;
@@ -13,5 +14,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Module>> GetModuleList();
         Task<List<PermissionDto>> GetMappedMenuWithAction(int moduleId, int roleId);
         Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model);
+        Task<bool> ValidatePermission(string url, ViewAction action, int roleId, string moduleGuid);
     }
 }

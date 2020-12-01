@@ -1,4 +1,18 @@
-﻿function onChangeLandStatus(status) {
+﻿$(document).ready(function () {
+
+    var id = parseInt($('#Id').val());
+    GetOtherDetails(id);
+});
+
+function GetOtherDetails(id) {
+    HttpGet(`/EncroachmentRegister/WatchWardView/?Id=${id}`, 'html', function (response) {
+        debugger;
+        $('#WatchWardDetailsDiv').html("");
+        $('#WatchWardDetailsDiv').html(response);
+    });
+};
+
+function onChangeLandStatus(status) {
     if (status == 'DDA Land') {
         $("#divForLandStatus").show();
     }

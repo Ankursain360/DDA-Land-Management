@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Enum;
 using Dto.Component;
 using Dto.Master;
 using Libraries.Model.Entity;
@@ -19,11 +20,13 @@ namespace Libraries.Service.ApplicationService
         private readonly IPermissionsRepository _permissionsRepository;
         private readonly IActionsRepository _actionsRepository;
         private readonly IMenuRepository _menuRepository;
+        private readonly IModuleRepository _moduleRepository;
         private readonly IMapper _mapper;
         public PermissionsService(IUnitOfWork unitOfWork,
             IPermissionsRepository permissionsRepository,
             IActionsRepository actionsRepository,
             IMenuRepository menuRepository,
+            IModuleRepository moduleRepository,
             IMapper mapper)
         : base(unitOfWork, permissionsRepository)
         {
@@ -31,6 +34,7 @@ namespace Libraries.Service.ApplicationService
             _permissionsRepository = permissionsRepository;
             _actionsRepository = actionsRepository;
             _menuRepository = menuRepository;
+            _moduleRepository = moduleRepository;
             _mapper = mapper;
         }
 
@@ -102,7 +106,8 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> AddUpdatePermission(List<MenuActionRoleMapDto> model)
         {
             int roleId = model.FirstOrDefault().RoleId;
-            var result = await _permissionsRepository.FindBy(a => a.RoleId == roleId);
+            int moduleId = model.FirstOrDefault().ModuleId;
+            var result = await _permissionsRepository.FindBy(a => a.RoleId == roleId && a.ModuleId==moduleId);
             _permissionsRepository.RemoveRange(result);
 
             List<Menuactionrolemap> permission = model.Select(a => new Menuactionrolemap()
@@ -110,6 +115,7 @@ namespace Libraries.Service.ApplicationService
                 MenuId = a.MenuId,
                 ActionId = a.ActionId,
                 RoleId = a.RoleId,
+                ModuleId= a.ModuleId,
                 CreatedBy = 1,
                 CreatedDate = DateTime.Now
             }).ToList();
@@ -118,6 +124,13 @@ namespace Libraries.Service.ApplicationService
             int saved = await _unitOfWork.CommitAsync();
 
             return saved > 0;
+        }
+
+        public async Task<bool> ValidatePermission(string url, ViewAction action, int roleId, string moduleGuid)
+        {
+            Module module = await _moduleRepository.GetModuleByGuid(moduleGuid);
+            string actionName= action.ToString();
+            return await _permissionsRepository.AuthorizeUser(url, actionName, roleId, module.Id);
         }
     }
 }

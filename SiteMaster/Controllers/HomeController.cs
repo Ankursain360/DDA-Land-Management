@@ -1,4 +1,5 @@
-﻿using Dto.Master;
+﻿using Core.Enum;
+using Dto.Master;
 using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
 using SiteMaster.Filters;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
-    [TypeFilter(typeof(CustomExceptionHandlerFilter))]
+   // [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;
@@ -21,6 +22,8 @@ namespace SiteMaster.Controllers
             _siteContext = siteContext;
             _userProfileService = userProfileService;
         }
+
+        //[AuthorizeClaimContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
@@ -41,6 +44,10 @@ namespace SiteMaster.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult UnAuthorized() {
+            return View();
         }
     }
 }

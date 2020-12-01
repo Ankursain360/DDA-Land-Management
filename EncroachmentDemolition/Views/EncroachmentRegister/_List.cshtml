@@ -1,6 +1,103 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Watchandward>
 @{int rowNo = 0;}
-<table class="table table-sm table-bordered mb-0 table-striped">
+
+    <table class="table table-sm table-bordered mb-0 table-striped">
+
+
+        <thead class="text-nowrap">
+            <tr>
+                <th>Sr.No</th>
+                <th>Date</th>
+                <th>Locality(Village)</th>
+                <th>Khasra No.</th>
+                <th>Primary List No.</th>
+                <th>Status on Ground</th>
+
+                @*<th>Remarks</th>
+                <th>Status</th>*@
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Results)
+
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
+                    <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
+                    <td>@item.PrimaryListNoNavigation.KhasraNo</td>
+                    <td>@item.PrimaryListNo</td>
+                    <td>@item.StatusOnGround</td>
+                    @*<td>@item.Remarks</td>
+                    <td>
+                        @(item.IsActive == 1 ? "Active" : "Inactive")
+                    </td>*@
+
+                    @*<td>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
+
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
+
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
+                    </td>*@
+                    <td style="min-width:120px;">
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+
+
+
+    @*<table class="table table-sm table-bordered mb-0 table-striped">
+
+
+        <thead class="text-nowrap">
+            <tr>
+                <th>Sr.No</th>
+                <th>Date</th>
+                <th>Locality(Village)</th>
+                <th>Khasra No.</th>
+                <th>Primary List No.</th>
+                <th>Status on Ground</th>
+                <th>Operations</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Results)
+
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td>@(item.WatchWardId == null ? "" : item.WatchWard.Date != null ? Convert.ToDateTime(item.WatchWard.Date).ToString("dd-MMM-yyyy") : "Not Available") </td>
+                    <td>@(item.WatchWardId == null ? "" :  item.WatchWard.PrimaryListNoNavigation.LocalityId == null ? ""  : item.WatchWard.PrimaryListNoNavigation.Locality.Name)</td>
+                    <td>@(item.WatchWardId == null ? "" :    item.WatchWard.PrimaryListNoNavigation.KhasraNo)</td>
+                    <td> @(item.WatchWardId == null ? "" : (item.WatchWard.PrimaryListNo).ToString())</td>
+                    <td>@(item.WatchWardId == null ? "" : item.WatchWard.StatusOnGround)</td>
+                    <td style="min-width:120px;">
+                        <div class="action-btns">
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>*@
+
+
+@*<table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
             <th>Sr.No</th>
@@ -14,31 +111,35 @@
         </tr>
     </thead>
     <tbody class="tbody">
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
-            <td>@(rowNo += 1)</td>
-            <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
-            <td>@item.Locality.Name</td>
-            <td>@item.KhasraNo</td>
-            <td>@item.PoliceStation</td>
-            <td>@item.SecurityGuardOnDuty</td>
-            <td>@item.StatusOfLand</td>
-            @*<td>
-            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-        </td>*@
-            <td style="min-width:120px;">
-                <div class="action-btns">
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                </div>
-            </td>
-        </tr>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+                    <td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
+                    <td>@item.Locality.Name</td>
+                    <td>@item.KhasraNo</td>
+                    <td>@item.PoliceStation</td>
+                    <td>@item.SecurityGuardOnDuty</td>
+                    <td>@item.StatusOfLand</td>
+                    <td style="min-width:120px;">
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
         }
     </tbody>
 
-</table>
+</table>*@
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
