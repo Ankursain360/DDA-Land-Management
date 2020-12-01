@@ -5,16 +5,12 @@ using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
 using System.Linq;
 using Dto.Search;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Service.ApplicationService
 {
-   
     public class ModuleService : EntityService<Module>, IModuleService
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -36,7 +32,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _moduleRepository.FindBy(a => a.IsActive == 1);
         }
-
 
         public async Task<List<Module>> GetModuleUsingRepo()
         {
@@ -94,5 +89,9 @@ namespace Libraries.Service.ApplicationService
             return await _moduleRepository.GetPagedModule(model);
         }
 
+        public Task<Module> GetModuleByGuid(string guid)
+        {
+            return _moduleRepository.GetModuleByGuid(guid);
+        }
     }
 }

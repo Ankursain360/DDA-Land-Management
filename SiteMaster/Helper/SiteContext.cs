@@ -9,6 +9,7 @@ namespace SiteMaster.Helper
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IUserProfileService _userProfileService;
+        
         public SiteContext(IHttpContextAccessor httpContextAccessor,
             IUserProfileService userProfileService)
         {

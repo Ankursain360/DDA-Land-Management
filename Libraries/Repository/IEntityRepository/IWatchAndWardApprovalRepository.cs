@@ -15,6 +15,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Village>> GetAllVillage();
         Task<List<Locality>> GetAllLocality();
         Task<List<Khasra>> GetAllKhasra();
-        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model, int userId);
+        Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId);
     }
 }

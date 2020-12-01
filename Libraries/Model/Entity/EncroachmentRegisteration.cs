@@ -21,6 +21,8 @@ namespace Libraries.Model.Entity
             EncroachmentLocationMapFileDetails = new HashSet<EncroachmentLocationMapFileDetails>();
             EncroachmentPhotoFileDetails = new HashSet<EncroachmentPhotoFileDetails>();
         }
+        public int? WatchWardId { get; set; }
+
         [Required]
         public int DepartmentId { get; set; }
         [Required] 
@@ -57,6 +59,7 @@ namespace Libraries.Model.Entity
         public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }
         public virtual Locality Locality { get; set; }
+        public Watchandward WatchWard { get; set; }
         public virtual Zone Zone { get; set; }
         public virtual ICollection<DetailsOfEncroachment> DetailsOfEncroachment { get; set; }
         public virtual ICollection<EncroachmentFirFileDetails> EncroachmentFirFileDetails { get; set; }

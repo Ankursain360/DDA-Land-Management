@@ -12,6 +12,7 @@
 
     $("#btnSaveTop, #btnSaveBottom").click(function () {
         var roleId = $("#ddlRole").val();
+        var moduleId = $("#ddlModule").val();
 
         if (roleId === null) {
             ErrorMessage("Please select role.")
@@ -24,7 +25,8 @@
             var model = {
                 menuId: arrIds[1],
                 actionId: arrIds[0],
-                roleId: roleId
+                roleId: roleId,
+                moduleId: moduleId
             }
             arrPermission.push(model);
         });

@@ -1,42 +1,8 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
-@*<div class="row">
-        <div class="col-sm-12">
-            <div class="dda-topheading">
-                <div class="col-md-12">
-                    <h6 class="pull-left color-white" style="margin-top:5px;">Property Inventory</h6>
-                    <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />
 
-
-    <div class="container-fluid">
-        <div class="panel">
-            <div class="panel-heading  dda-pageheading">
-                <h6 class="pull-left color-white" style="margin-top:-0.4%">View Details</h6>
-            </div>
-            <div class="panel-body">
-                <form asp-action="Edit" id="myForm" method="post" enctype="multipart/form-data" autocomplete="off">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="Id" />*@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
-
-        .success {
-            color: #28a745;
-        }
-    </style>*@
+<br />
+<br />
 
 <form asp-action="Edit" id="myForm" method="post" enctype="multipart/form-data" autocomplete="off" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">View Details</h3>
@@ -343,12 +309,13 @@
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
-                        <br />   <input type="hidden" asp-for="EncroachAtrfilepath" />
+                       <input type="hidden" asp-for="EncroachAtrfilepath" />
                         @{
                             @if (ViewBag.EncroachAtrDocView != null)
                             {
-                                <a>(View File)</a>
+
                                 <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <a class="badge badge-primary px-2">(View File)</a>
                             }
                             else
                             {
@@ -357,7 +324,7 @@
                             }
                         }
                         <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                        <br /> <label class="floating-label">Upload Action Taken Report(ATR)</label>
+                        <label class="floating-label">Upload Action Taken Report(ATR)</label>
                     </div>
                 </div>
             </div>
@@ -522,13 +489,14 @@
             <br />
             <div class="col-md-4" id="divLayoutPlan" style="display:none;">
                 <div class="floating-label-wrap">
-                    <br />
+                   
                     <input type="hidden" asp-for="LayoutFilePath" />
                     @{
                         @if (ViewBag.LayoutDocView != null)
                         {
-                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id })
+
                             <input type="file" disabled class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
                         }
                         else
                         {
@@ -536,7 +504,7 @@
                         }
                     }
                     <span asp-validation-for="FileData" class="text-danger"></span>
-                    <br /> <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
+                   <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
                 </div>
             </div>
 
@@ -557,13 +525,14 @@
             <div class="row pt-3">
                 <div class="col-md-4" id="divGEOReferencing">
                     <div class="floating-label-wrap">
-                        <br />
+
                         <input type="hidden" asp-for="GeoFilePath" />
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
-                                <a>(View File)</a>
+
                                 <input type="file" disabled class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                <a class="badge badge-primary px-2">(View File)</a>
                             }
                             else
                             {
@@ -571,7 +540,7 @@
                             }
                         }
                         <span asp-validation-for="GeoFileData" class="text-danger"></span>
-                        <br /> <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                        <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -697,8 +666,9 @@
                     @{
                         @if (ViewBag.HandedOverCopyofOrderView != null)
                         {
-                            <a>(View File)</a>
+
                             <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <a class="badge badge-primary px-2">(View File)</a>
                         }
                         else
                         {
@@ -725,8 +695,9 @@
                     @{
                         @if (ViewBag.HandedOverDocView != null)
                         {
-                            <a>(View File)</a>
+
                             <input type="file" class="floating-label-field floating-label-field--s3" disabled id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <a class="badge badge-primary px-2">(View File)</a>
                         }
                         else
                         {
@@ -839,8 +810,9 @@
                     @{
                         @if (ViewBag.TakenOverDocView != null)
                         {
-                            <a>(View File)</a>
+
                             <input type="file" class="floating-label-field floating-label-field--s3" disabled id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <a class="badge badge-primary px-2">(View File)</a>
                         }
                         else
                         {
@@ -950,7 +922,7 @@
 
     <div class="form-row ">
         <div class="form-group col-md-12" style="margin-bottom:40px;">
-            @Html.ActionLink("Back", "Create", "RestorePropertyReport", null, new { @class = "btn btn-primary dda-pageheading" })
+            @Html.ActionLink("Back", "Create", "RestorePropertyReport", null, new { @class = "btn btn-theme " })
         </div>
     </div>
 

@@ -20,6 +20,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.DivisionId)
                 .HasName("EncroachmentDivisionId_idx");
 
+            builder.HasIndex(e => e.WatchWardId)
+                    .HasName("fk_watchwardid_idx");
+
             builder.HasIndex(e => e.LocalityId)
                 .HasName("EncroachmentLocality_idx");
 
@@ -115,6 +118,12 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.EncroachmentregisterationOtherDepartmentNavigation)
                 .HasForeignKey(d => d.OtherDepartment)
                 .HasConstraintName("EncroachmentOtherDeptId");
+
+            builder.HasOne(d => d.WatchWard)
+                .WithMany(p => p.EncroachmentRegisteration)
+                .HasForeignKey(d => d.WatchWardId)
+                .HasConstraintName("fk_watchwardid");
+
 
             builder.HasOne(d => d.Zone)
                 .WithMany(p => p.EncroachmentRegisteration)

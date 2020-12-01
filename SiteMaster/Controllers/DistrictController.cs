@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,6 +28,8 @@ namespace SiteMaster.Controllers
         {
             _districtService = districtService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _districtService.GetAllDistrict();

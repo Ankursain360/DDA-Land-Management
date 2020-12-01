@@ -16,6 +16,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.MenuId)
                 .HasName("fk_menumap_menu_id_idx");
 
+            builder.HasIndex(e => e.ModuleId)
+                .HasName("fh_module_module_id_idx");
+
             builder.HasIndex(e => e.RoleId)
                 .HasName("fk_menumap_role_id_idx");
 
@@ -33,6 +36,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
 
+            builder.Property(e => e.ModuleId).HasColumnType("int(11)");
+
             builder.Property(e => e.RoleId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Action)
@@ -46,6 +51,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.MenuId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_menumap_menu_id");
+
+            builder.HasOne(d => d.Module)
+                .WithMany(p => p.Menuactionrolemap)
+                .HasForeignKey(d => d.ModuleId)
+                .HasConstraintName("fh_module_module_id");
 
             builder.HasOne(d => d.Role)
                 .WithMany(p => p.Menuactionrolemap)

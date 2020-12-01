@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         {
             Watchandwardphotofiledetails = new HashSet<Watchandwardphotofiledetails>();
             Watchandwardreportfiledetails = new HashSet<Watchandwardreportfiledetails>();
+            EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
         }
         [Required (ErrorMessage ="Please fill date")]
         public DateTime? Date { get; set; }
@@ -40,7 +41,7 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
         //[Required(ErrorMessage = "Please select  status")]
         public byte? IsActive { get; set; }
-        public int? Status { get; set; }
+        public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
 
         [NotMapped]
@@ -92,6 +93,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public string ApprovalRemarks { get; set; }
 
+        public ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
 
     }
 }

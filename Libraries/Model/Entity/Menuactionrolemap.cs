@@ -8,9 +8,10 @@ namespace Libraries.Model.Entity
         public int MenuId { get; set; }
         public int ActionId { get; set; }
         public int RoleId { get; set; }
-
+        public int? ModuleId { get; set; }
         public virtual Actions Action { get; set; }
         public virtual Menu Menu { get; set; }
         public virtual ApplicationRole Role { get; set; }
+        public virtual Module Module { get; set; }
     }
 }

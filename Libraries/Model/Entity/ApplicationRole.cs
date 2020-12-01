@@ -10,7 +10,6 @@ namespace Model.Entity
         public ApplicationRole()
         {
             Userprofile = new HashSet<Userprofile>();
-            Rolemodulemap = new HashSet<Rolemodulemap>();
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
         public short IsActive { get; set; }
@@ -20,7 +19,6 @@ namespace Model.Entity
         public int? ModifiedBy { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
-        public virtual ICollection<Rolemodulemap> Rolemodulemap { get; set; }
         public virtual ICollection<Menuactionrolemap> Menuactionrolemap { get; set; }
     }
 }
