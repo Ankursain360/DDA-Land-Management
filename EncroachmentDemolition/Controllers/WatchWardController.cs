@@ -145,7 +145,7 @@ namespace EncroachmentDemolition.Controllers
                                     approvalproccess.PendingStatus = 1;   //1
                                     approvalproccess.Status = null;   //1
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                    result = await _approvalproccessService.Create(approvalproccess,SiteContext.UserId); //Create a row in approvalproccess Table
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                 }
 
                                 break;
@@ -177,7 +177,7 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-          //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
+            //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
             var Data = await _watchandwardService.FetchSingleResult(id);
             //if (Data.Encroachment == 0)
             //    Data.EncroachmentStatus = 0;
@@ -285,7 +285,7 @@ namespace EncroachmentDemolition.Controllers
                         var DataFlow = await dataAsync();
                         for (int i = 0; i < DataFlow.Count; i++)
                         {
-                            if(!DataFlow[i].parameterSkip)
+                            if (!DataFlow[i].parameterSkip)
                             {
                                 watchandward.ApprovedStatus = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
@@ -293,7 +293,7 @@ namespace EncroachmentDemolition.Controllers
                                 if (result)
                                 {
                                     Approvalproccess approvalproccess = new Approvalproccess();
-                                    approvalproccess.ModuleId =Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
                                     approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
                                     approvalproccess.ServiceId = watchandward.Id;
                                     approvalproccess.SendFrom = SiteContext.UserId;
@@ -303,16 +303,16 @@ namespace EncroachmentDemolition.Controllers
                                     approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
                                     approvalproccess.ModifiedBy = SiteContext.UserId;///May be Uncomment
                                     approvalproccess.ModifiedDate = DateTime.Now;///May be Uncomment
-                                    result = await _approvalproccessService.Create(approvalproccess,SiteContext.UserId); //Create a row in approvalproccess Table
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
                                 }
 
-                                    break;
+                                break;
                             }
                         }
-                           
+
                         ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
-                       
+
                         return View("Index", result1);
                     }
                     else
@@ -331,7 +331,7 @@ namespace EncroachmentDemolition.Controllers
             {
                 return View(watchandward);
             }
-            
+
         }
 
 
@@ -485,32 +485,34 @@ namespace EncroachmentDemolition.Controllers
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
-            
+
         }
         public async Task<PartialViewResult> InventoryView(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
-            ViewBag.LayoutDocView = Data.LayoutFilePath;
-            ViewBag.GeoDocView = Data.GeoFilePath;
-            ViewBag.TakenOverDocView = Data.TakenOverFilePath;
-            ViewBag.HandedOverDocView = Data.HandedOverFilePath;
-            ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
-            await BindDropDown(Data);
+            if (Data != null)
+            {
+                ViewBag.LayoutDocView = Data.LayoutFilePath;
+                ViewBag.GeoDocView = Data.GeoFilePath;
+                ViewBag.TakenOverDocView = Data.TakenOverFilePath;
+                ViewBag.HandedOverDocView = Data.HandedOverFilePath;
+                ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+                await BindDropDown(Data);
 
-            Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
-            Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
-            Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
-            Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
-            Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
-            Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
-            Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
-
+                Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+                Data.LocalityList = await _propertyregistrationService.GetLocalityDropDownList(Data.ZoneId);
+                Data.DivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+                Data.HandedOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+                Data.HandedOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+                Data.TakenOverZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
+                Data.TakenOverDivisionList = await _propertyregistrationService.GetDivisionDropDownList(Data.ZoneId);
+            }
             return PartialView("_InventoryView", Data);
         }
 
         #endregion
 
-        private async  Task<List<TemplateStructure>> dataAsync()
+        private async Task<List<TemplateStructure>> dataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
             var template = Data.Template;
