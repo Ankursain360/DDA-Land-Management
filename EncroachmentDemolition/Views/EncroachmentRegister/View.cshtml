@@ -185,7 +185,9 @@
                 <label class="floating-label">Land Ownership</label>
             </div>
         </div>
-        <div id="divForLandStatus">
+    </div>
+    <div id="divForLandStatus">
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
@@ -198,27 +200,32 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row pt-3">
         <div class="col-md-6" id="divPossessionGroup" style="display:block;">
+
             <input type="hidden" asp-for="PossessionType" id="PossessionType" value="Formal Possession" />
             <input type="hidden" asp-for="Id" id="hdnId" />
             <input type="hidden" asp-for="IsActive" value="1" />
-            <label class="radio-inline">
-                <input type="radio" name="grpPossession" id="rdbFormal" checked>Formal Possession
-            </label>
-            <label class="radio-inline">
-                <input type="radio" name="grpPossession" id="rdbFlexible">Physical Possession
-            </label>
+            <div class="form-check theme">
+                
+                    <input type="radio" name="grpPossession" id="rdbFormal" checked>
+                    <label class="radio-inline">Formal Possession </label>
+            </div>
+            <div class="form-check theme">
+                
+                    <input type="radio" name="grpPossession" id="rdbFlexible">
+                    <label class="radio-inline">Physical Possession </label>
+            </div>
         </div>
-        <div class="form-group col-md-6" id="divDepartment" style="display:block;">
+            <div class="form-group col-md-6" id="divDepartment" style="display:block;">
 
-            <select asp-for="OtherDepartment" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
-                <option value="0">Select</option>
-            </select>
-            <label asp-validation-for="OtherDepartment" class="error"></label>
-            <label class="floating-label">Other Department </label>
+                <select asp-for="OtherDepartment" disabled class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))">
+                    <option value="0">Select</option>
+                </select>
+                <label asp-validation-for="OtherDepartment" class="error"></label>
+                <label class="floating-label">Other Department </label>
+            </div>
         </div>
-    </div>
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap">

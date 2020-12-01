@@ -58,20 +58,23 @@
 
             <div class="row">
                 <div class="col-md-4">
-                    <label class="radio-inline  ">
-                        <input type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>Yes
-                    </label>
+                    <div class="form-check theme">
+
+                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>
+                        <label for="Encroachment" class="form-check-label">Yes </label>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <label class="radio-inline ">
-                        <input type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">No
-                    </label>
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">
+                        <label for="Encroachment" class="form-check-label">No </label>
 
+                    </div>
                 </div>
-            </div>
+                </div>
 
             <span asp-validation-for="Encroachment" class="text-danger"></span>
-            <label class="floating-label"> Encroachment</label><span style="color:red">*</span>
+            @*<label class="floating-label"> Encroachment</label><span style="color:red">*</span>*@
         </div>
 
     </div>
@@ -93,7 +96,7 @@
                         <br />
                         foreach (var item in Model.Watchandwardphotofiledetails)
                         {
-                            <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
 
                             if (item.LattLongUrl != null)
                             {
@@ -102,12 +105,12 @@
                             <br />
                         }
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="Photo" class="text-danger"></span>
+                        <span asp-validation-for="Photo" class="d-block text-danger field-validation-valid"></span>
                     }
                     else
                     {
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="Photo" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="Photo" class="text-danger"></span>
+                        <span asp-validation-for="Photo" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Photo</label>
                     }
                 }
@@ -119,19 +122,19 @@
                 @{
                     if (Model.Watchandwardreportfiledetails != null && Model.Watchandwardreportfiledetails.Count > 0)
                     {
-                        <br />
+                       
                         foreach (var item in Model.Watchandwardreportfiledetails)
                         {
-                            <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
-                            <br />
+                            <a class="badge badge-primary px-2" asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                          
                         }
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="ReportFile" class="text-danger"></span>
+                        <span asp-validation-for="ReportFile" class="d-block text-danger field-validation-valid"></span>
                     }
                     else
                     {
                         <input type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="ReportFile" class="text-danger"></span>
+                        <span asp-validation-for="ReportFile" class="d-block text-danger field-validation-valid"></span>
                         <label class="floating-label">Report</label>
                     }
                 }
