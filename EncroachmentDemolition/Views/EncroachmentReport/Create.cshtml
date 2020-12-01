@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
@@ -52,14 +52,9 @@
             <div class="col-md-12 ">
                
                     <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                    @*@Html.ActionLink("Back", "Index", "RestoreLandReport", null, new { @class = "btn btn-primary dda-pageheading" })*@
+                  
                 </div>
             </div>
-
-            @*<div id="LoadReportView">
-
-        </div>*@
-            @*</form>*@
         </div>
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
@@ -67,11 +62,11 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3">
                         <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Date</option>
-                        <option>Locality Name (Village)</option>
-                        <option>Khasra No.</option>
-                        <option> Land Mark</option>
-                        <option>Status on Ground</option>
+                        <option>Department</option>
+                        <option>Zone</option>
+                        <option>Division</option>
+                        <option> Locality(Village)</option>
+                        
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
@@ -83,10 +78,7 @@
 
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                @*<a href="/Zone/create" class="d-flex align-items-center btn btn-primary mr-2">
-                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                        <small>Add More</small>
-                    </a>*@
+               
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
