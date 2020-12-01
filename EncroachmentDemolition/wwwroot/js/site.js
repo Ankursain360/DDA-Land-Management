@@ -44,12 +44,12 @@ $(document).ready(function () {
 });
 function ValidateForm() {
     var isFormValid = true;
+    debugger;
     $("input,select,textarea").each(function () {
         var FieldId = "span_" + $(this).attr("id");
         if ($.trim($(this).val()).length == 0) {
             if ($(this).is("[required]")) {
                 if ($("#" + FieldId).length == 0) {
-                    debugger
                     var ValidationMsg = 'This Field is Mandatory';
                     if ($(this).is('[requiredmsg]')) {
                         $("#" + $(this).attr("id") + "-error")

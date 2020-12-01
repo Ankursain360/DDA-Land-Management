@@ -9,7 +9,7 @@
     }
 </style>
 
-<form asp-action="Edit" enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<div enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
         <span class="collapsed"><b>+</b></span>
@@ -164,7 +164,7 @@
         }
 
     </div>
-</form>
+</div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
