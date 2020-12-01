@@ -33,6 +33,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
 
             /* Application Services */
@@ -49,6 +50,7 @@ namespace LandInventory.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IModuleService, ModuleService>();
         }
     }
 }

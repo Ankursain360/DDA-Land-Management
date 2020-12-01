@@ -19,17 +19,18 @@ namespace NewLandAcquisition.Infrastructure.Extensions
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
-
-
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
 
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
-
-
-
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IModuleService, ModuleService>();
         }
     }
 }
