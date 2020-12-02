@@ -196,6 +196,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MonthlyRosterConfiguration());
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
+            modelBuilder.ApplyConfiguration(new StructureConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
