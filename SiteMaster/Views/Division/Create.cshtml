@@ -1,17 +1,11 @@
 ﻿@model Libraries.Model.Entity.Division
 @await Component.InvokeAsync("PageHeader", new { pageName = "Division" })
 
-<br />
 
-<br />
-<div class="container-fluid">
-    
-        
+<div class="pt-3">
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
         <div class="row">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
@@ -23,12 +17,8 @@
                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     <label asp-for="DepartmentId" class="floating-label">Department </label>
                 </div>
-
-
-              
             </div>
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId">
                         
@@ -37,7 +27,6 @@
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
                 </div>
-  
             </div>
         </div>
 
@@ -93,8 +82,6 @@
         </div>
 
     </form>
-      
-   
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

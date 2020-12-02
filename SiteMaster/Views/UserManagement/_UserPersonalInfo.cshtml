@@ -4,60 +4,56 @@
 
 <div class="pt-3">
 
-    <div class="container-fluid">
-        <div class="panel">
+   
+    <form id="frmUserPersonalInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex"> Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <div class="panel-body">
-                <form id="frmUserPersonalInfo" >
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Name" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="150" />
 
-                                <input asp-for="Name" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="150" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
 
-                                <span asp-validation-for="Name" class="text-danger"></span>
-
-                                <label class="floating-label">Name   </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="UserName" placeholder="UserName" type="text" class="floating-label-field floating-label-field--s3" limit="256" />
-                                <span asp-validation-for="UserName" class="text-danger"></span>
-                                <label class="floating-label"> UserName   </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="Email" placeholder="Email" class="floating-label-field floating-label-field--s3" type="email" limit="256" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
-                                <label class="floating-label"> Email   </label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="PhoneNumber" placeholder="Phone Number" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" onpaste="return false;" />
-                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                                <label class="floating-label">Phone Number</label>
-
-                            </div>
-                        </div>
-                    </div>
-                 
-                    <div class="row mt-md-3">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme " type="button" id="btnSavePersonalInfo">Update</button>
-                            @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
-
-                        </div>
-                    </div> 
-                </form>
+                    <label class="floating-label">Name   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="UserName" placeholder="UserName" type="text" class="floating-label-field floating-label-field--s3" limit="256" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                    <label class="floating-label"> UserName   </label>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Email" placeholder="Email" class="floating-label-field floating-label-field--s3" type="email" limit="256" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <label class="floating-label"> Email   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PhoneNumber" placeholder="Phone Number" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" onpaste="return false;" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    <label class="floating-label">Phone Number</label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="button" id="btnSavePersonalInfo">Update</button>
+                @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+    </form>
+           
 
 </div>
 

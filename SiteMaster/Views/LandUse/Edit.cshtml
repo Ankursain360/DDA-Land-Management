@@ -1,12 +1,7 @@
 ﻿@model Libraries.Model.Entity.Landuse
 @await Component.InvokeAsync("PageHeader", new { pageName = "Land Use" })
 <div class="pt-3">
-
-
-    <div class="container-fluid">
-        <div class="panel">
-
-            <div class="panel-body">
+   
                 <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                     <h3 class="mb-3 d-flex">Edit Details</h3>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -51,9 +46,8 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
-    </div>
+           
+   
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
