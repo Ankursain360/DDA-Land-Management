@@ -82,29 +82,29 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Khasra> KhasraList { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<string> NameOfStructure { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<string> ConstructionStatus { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<decimal> AreaApprox { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<string> Type { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<int> DateOfEncroachment { get; set; }
 
         [NotMapped]
         public List<string> ReligiousStructure { get; set; }
 
         [NotMapped]
-        [Required]
+        //[Required]
         public List<decimal> CountOfStructure { get; set; }
         [NotMapped]
-        [Required]
+        //[Required]
         public List<string> ReferenceNoOnLocation { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
        

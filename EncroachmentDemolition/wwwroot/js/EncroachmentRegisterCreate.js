@@ -6,7 +6,6 @@
 
 function GetOtherDetails(id) {
     HttpGet(`/EncroachmentRegister/WatchWardView/?Id=${id}`, 'html', function (response) {
-        debugger;
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
     });
@@ -34,12 +33,12 @@ function onChangeDepartment(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#ZoneId").html(html);
-        $("#DivisionId").html('<option value="">Select</option>');
-        $("#LocalityId").html('<option value="">Select</option>');
-        $("#LocalityId").select2('val', '')
-        $("#DivisionId").select2('val', '');
-        $("#ZoneId").select2('val', '');
+        $(".ZoneClass").html(html);
+        $(".DivisionClass").html('<option value="">Select</option>');
+        $(".LocalitiyClass").html('<option value="">Select</option>');
+        $(".LocalitiyClass").select2('val', '')
+        $(".DivisionClass").select2('val', '');
+        $(".ZoneClass").select2('val', '');
     });
 };
 function onChangeZone(id) {
@@ -48,10 +47,20 @@ function onChangeZone(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#DivisionId").html(html);
-        $("#LocalityId").html('<option value="">Select</option>');
-        $("#LocalityId").select2('val', '');
-        $("#DivisionId").select2('val', '')
+        $(".DivisionClass").html(html);
+        $(".LocalitiyClass").html('<option value="">Select</option>');
+        $(".LocalitiyClass").select2('val', '')
+        $(".DivisionClass").select2('val', '');
+    });
+
+
+    HttpGet(`/EncroachmentRegister/GetLocalityList/?DivisionId=${id}`, 'json', function (response) {
+        var html = '<option value="">Select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $(".LocalitiyClass").html(html);
+        $(".LocalitiyClass").select2('val', '')
     });
 };
 function onChangeDivision(id) {
@@ -60,8 +69,8 @@ function onChangeDivision(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
-        $("#LocalityId").html(html);
-        $("#LocalityId").select2('val', '')
+        $(".LocalitiyClass").html(html);
+        $(".LocalitiyClass").select2('val', '')
     });
 };
 $(function () {
@@ -98,11 +107,12 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+        $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        $("#tbl_posts #add .form-control").val('');
+        /*$("#tbl_posts #add .form-control").val('');*/ 
+        $("#tbl_posts #add .floating-label-field").val('');
     }
     else {
         alert('Please fill record before add new record ');
