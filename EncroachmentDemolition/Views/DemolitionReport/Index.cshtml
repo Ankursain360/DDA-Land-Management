@@ -52,7 +52,7 @@
                                     <option> From Date</option>
 
                                     <option>To Date</option>
-                                    
+
                                 </select>
                                 <label for="field-1" class="floating-label">Sort by</label>
                             </div>
@@ -77,82 +77,86 @@
                     </div>
                 </div>*@
                 </div>
-                </div>
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-                        <div id="DivReportDetails">
-                            @*<div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class=" myapp-hed2">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
-                                    </div>
+            </div>
+            @{
+                @if (ViewBag.IsShowData == "Yes")
+                {
+                    <div id="DivReportDetails">
+                        @*<div class="row" style="margin-bottom:35px;">
+                        <div class="col-sm-12">
+                            <div class=" myapp-hed2">
+                                <div class="col-md-12">
+                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
                                 </div>
                             </div>
-                        </div>*@
-                            @*<h3 class="mb-3 d-flex">Report</h3>*@
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div style="overflow:scroll;">
-                                        <table class="table table-sm table-bordered mb-0 table-striped">
-                                            <thead class="text-nowrap">
-                                            <thead class="thead">
-                                                <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Village Name</th>
-                                                    <th>Khasra No.</th>
-                                                    <th>Area</th>
-                                                    <th>Encroachment On</th>
-                                                    <th>Demolition Start</th>
-                                                    <th>Demolition Within Time Line</th>
-                                                    <th>Demolition After Time Line</th>
-                                                    <th>Reason of Demolition</th>
-                                                    <th>Remarks</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
+                        </div>
+                    </div>*@
+                        @*<h3 class="mb-3 d-flex">Report</h3>*@
+                        <div class="form-row">
+                            <div class="col-md-12">
+                                <div style="overflow:scroll;">
+                                    <div class="table-section bg-white border shadow rounded">
+                                        <div class="short-section d-md-flex align-items-center">
+                                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                                <thead class="text-nowrap">
+                                                <thead class="thead">
+                                                    <tr>
+                                                        <th>Sr.No</th>
+                                                        <th>Village Name</th>
+                                                        <th>Khasra No.</th>
+                                                        <th>Area</th>
+                                                        <th>Encroachment On</th>
+                                                        <th>Demolition Start</th>
+                                                        <th>Demolition Within Time Line</th>
+                                                        <th>Demolition After Time Line</th>
+                                                        <th>Reason of Demolition</th>
+                                                        <th>Remarks</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td></td>
+                                                    </tr>
 
 
-                                            </tbody>
+                                                </tbody>
 
-                                        </table>
+                                            </table>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
-                    }
-                    else
-                    {
-
-                    }
                 }
+                else
+                {
+
+                }
+            }
 
 
         </form>

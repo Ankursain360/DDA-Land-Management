@@ -1,32 +1,36 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Onlinecomplaint>
+@*@{int rowNo = 0; }*@
 
-@{int rowNo = 0; }
 
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Online complaint</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+@*<div class="row">
+        <div class="col-sm-12">
+            <div class="dda-topheading">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Online complaint</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Online Complaint" })
 <br />
 <br />
 <div>
-    <a asp-action="Create" class="btn btn-primary pull-right dda-pageheading " style="margin-top: -10px;">Add New</a>
+    <a asp-action="Create" class="btn btn-theme " style="margin-top: -10px;">Add New</a>
     @*@Html.ActionLink("Add New", "Create", "District", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
 </div>
 <br />
 <br />
-<div class="container-fluid">
-    <div class="card  table-card" style="overflow:scroll;">
-        <div id="divComplaint">
+@*<div class="container-fluid">*@
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="card  table-card" style="overflow:scroll;">
+                <div class="table-responsive px-2" id="divComplaint">
 
+                </div>
+            </div>
         </div>
-
 
     </div>
 </div>
