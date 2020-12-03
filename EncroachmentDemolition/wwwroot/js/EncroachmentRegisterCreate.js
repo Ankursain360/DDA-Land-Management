@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
 
-    var id = parseInt($('#Id').val());
+    var id = parseInt($('#WatchWardId').val());
     GetOtherDetails(id);
 });
 
