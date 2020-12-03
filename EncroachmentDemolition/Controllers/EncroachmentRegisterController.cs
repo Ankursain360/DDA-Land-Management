@@ -40,6 +40,8 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Create(int id)
         {
             EncroachmentRegisteration encroachmentRegisterations = new EncroachmentRegisteration();
+            encroachmentRegisterations.WatchWardId = id;
+            encroachmentRegisterations.Id = 0;
             encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
@@ -70,6 +72,7 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
+                encroachmentRegisterations.Id = 0;
                 var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                 if (result)
                 {

@@ -47,6 +47,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDemolitionprogrammasterRepository, DemolitionprogrammasterRepository>();
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IStructureRepository, StructureRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -76,7 +77,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IDemolitionprogrammasterService, DemolitionprogrammasterService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
-
+            services.AddScoped<IStructureService, StructureService>();
         }
     }
 }

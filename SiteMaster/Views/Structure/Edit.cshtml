@@ -1,43 +1,26 @@
-﻿@model Libraries.Model.Entity.District
-
-@await Component.InvokeAsync("PageHeader", new { pageName = "District" })
+﻿@model Libraries.Model.Entity.Structure
+@await Component.InvokeAsync("PageHeader", new { pageName = "Structure" })
 
 <div class="pt-3">
-
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
-
         <div class="row">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="Name" placeholder="District Name" type="text"
+                    <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
 
                     <span asp-validation-for="Name" class="text-danger"></span>
 
-                    <label class="floating-label">District Name   </label>
+                    <label class="floating-label">Structure Name   </label>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*<span class="text-danger">*</span>*@
-                    <input asp-for="Code" placeholder="Code" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
-
-                    <span asp-validation-for="Code" class="text-danger"></span>
-
-                    <label class="floating-label">Code   </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
 
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
 
@@ -50,10 +33,11 @@
 
             </div>
         </div>
-        <div class="row mt-md-3">
+
+        <div class="row ">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
-                @Html.ActionLink("Back", "Index", "District", null, new { @class = "btn btn-theme " })
+                @Html.ActionLink("Back", "Index", "Structure", null, new { @class = "btn btn-theme " })
 
             </div>
         </div>
@@ -63,3 +47,10 @@
 </div>
 
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/zonecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/zonecreate.js" asp-append-version="true"></script>
+</environment>

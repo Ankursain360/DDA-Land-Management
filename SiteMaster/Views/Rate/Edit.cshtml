@@ -1,25 +1,8 @@
 ﻿@model Libraries.Model.Entity.Rate
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Rate" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
 
-        .success {
-            color: #28a745;
-        }
-    </style>*@
-
-<br />
-
-<br />
-<div class="container-fluid">
+<div class="pt-3">
 
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Edit Details</h3>

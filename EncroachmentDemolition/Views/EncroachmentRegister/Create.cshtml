@@ -7,7 +7,8 @@
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="Id" id="enc_@Guid.NewGuid()" />
+    <input type="hidden" asp-for="WatchWardId" />
     <div id="WatchWardDetailsDiv">
 
     </div>
@@ -71,7 +72,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="Date" asp-for="EncrochmentDate" class="floating-label-field floating-label-field--s3" />
+                <input type="Date" asp-for="EncrochmentDate" value="" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="EncrochmentDate" class="text-danger"></span>
                 <label class="floating-label">Date</label>
             </div>
@@ -81,7 +82,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
+                <input type="text" value="" class="floating-label-field floating-label-field--s3 numbers" placeholder="Area" asp-for="Area" />
                 <span asp-validation-for="Area" class="text-danger"></span>
                 <label class="floating-label">Area</label>
             </div>
@@ -171,7 +172,7 @@
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                    <input asp-for="ReferenceNoOnLocation" type="text" class="floating-label-field floating-label-field--s3 number" id="ReferenceNoOnLocation" />
+                                    <input asp-for="ReferenceNoOnLocation" type="text" class="floating-label-field floating-label-field--s3" id="ReferenceNoOnLocation" />
                                 </div>
                             </td>
                             <td>
