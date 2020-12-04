@@ -21,11 +21,17 @@ namespace EncroachmentDemolition.Controllers
         public IConfiguration _configuration;
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
         private readonly IWatchandwardService _watchandwardService;
-        public EncroachmentRegisterController(IEncroachmentRegisterationService encroachmentRegisterationService, IConfiguration configuration, IWatchandwardService watchandwardService)
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        public EncroachmentRegisterController(IEncroachmentRegisterationService encroachmentRegisterationService, 
+            IConfiguration configuration, IWatchandwardService watchandwardService, 
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
             _watchandwardService = watchandwardService;
+            _workflowtemplateService = workflowtemplateService;
+            _approvalproccessService = approvalproccessService;
         }
         public IActionResult Index()
         {
@@ -41,6 +47,7 @@ namespace EncroachmentDemolition.Controllers
         {
             EncroachmentRegisteration encroachmentRegisterations = new EncroachmentRegisteration();
             encroachmentRegisterations.WatchWardId = id;
+            ViewBag.PrimaryId = 0;
             encroachmentRegisterations.Id = 0;
             encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
             encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
@@ -72,7 +79,6 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
-                encroachmentRegisterations.Id = 0;
                 var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                 if (result)
                 {
@@ -153,6 +159,34 @@ namespace EncroachmentDemolition.Controllers
                     }
                     if (result)
                     {
+                        #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                        var DataFlow = await dataAsync();
+                        for (int i = 0; i < DataFlow.Count; i++)
+                        {
+                            if (!DataFlow[i].parameterSkip)
+                            {
+                                encroachmentRegisterations.ApprovedStatus = 0;
+                                encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                               // result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
+                                if (result)
+                                {
+                                    Approvalproccess approvalproccess = new Approvalproccess();
+                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdInspection").Value);
+                                    approvalproccess.ServiceId = encroachmentRegisterations.Id;
+                                    approvalproccess.SendFrom = SiteContext.UserId;
+                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                    approvalproccess.PendingStatus = 1;   //1
+                                    approvalproccess.Status = null;   //1
+                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                }
+
+                                break;
+                            }
+                        }
+
+                        #endregion 
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
                         return View("Index", result1);
@@ -393,5 +427,15 @@ namespace EncroachmentDemolition.Controllers
         {
             return View();
         }
+
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }

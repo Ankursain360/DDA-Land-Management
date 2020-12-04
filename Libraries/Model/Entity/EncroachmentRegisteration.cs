@@ -55,6 +55,8 @@ namespace Libraries.Model.Entity
         [Required]
         public string LocationAddressWithLandMark { get; set; }
         public byte IsActive { get; set; }
+        public int? ApprovedStatus { get; set; }
+        public int? PendingAt { get; set; }
         public virtual Department Department { get; set; }
         public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }

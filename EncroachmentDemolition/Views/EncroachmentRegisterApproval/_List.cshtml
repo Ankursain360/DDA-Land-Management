@@ -1,0 +1,40 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
+@{int rowNo = 0; }
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th>Sr.No</th>
+            <th>Date</th>
+            <th>Locality(Village)</th>
+            <th>Khasra No.</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@(rowNo += 1)</td>
+
+                    <td> @(Convert.ToDateTime(item.DateOfEncroachment).ToString("dd MMM yyyy"))</td>
+                    <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
+                    <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
+                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+                    <td>
+                        <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

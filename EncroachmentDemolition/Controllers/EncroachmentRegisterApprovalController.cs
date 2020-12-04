@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Libraries.Service.IApplicationService;
 using Libraries.Model.Entity;
-//using AutoMapper.Configuration;
 using Utility.Helper;
 using Notification;
 using Notification.Constants;
@@ -13,25 +11,27 @@ using Notification.OptionEnums;
 using Microsoft.Extensions.Configuration;
 using Dto.Search;
 using System.IO;
-using System.Drawing;
-using System.Drawing.Imaging;
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class WatchWardApprovalController : BaseController
+    public class EncroachmentRegisterApprovalController : BaseController
     {
-        public readonly IWatchAndWardApprovalService _watchAndWardApprovalService;
-        private readonly IWatchandwardService _watchandwardService;
+        public readonly IEncroachmentRegisterationApprovalService _encroachmentRegisterationApprovalService;
         public IConfiguration _configuration;
+        public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
+        private readonly IWatchandwardService _watchandwardService;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
 
-        public WatchWardApprovalController(IWatchAndWardApprovalService watchAndWardApprovalService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IWatchandwardService watchandwardService)
+        public EncroachmentRegisterApprovalController(IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService,IEncroachmentRegisterationService encroachmentRegisterationService,
+            IConfiguration configuration, IWatchandwardService watchandwardService,
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
         {
-            _workflowtemplateService = workflowtemplateService;
-            _watchAndWardApprovalService = watchAndWardApprovalService;
-            _watchandwardService = watchandwardService;
+            _encroachmentRegisterationApprovalService = encroachmentRegisterationApprovalService;
+            _encroachmentRegisterationService = encroachmentRegisterationService;
             _configuration = configuration;
+            _watchandwardService = watchandwardService;
+            _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
         }
         public IActionResult Index()
@@ -40,17 +40,14 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] WatchandwardApprovalSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] EncroachmentRegisterApprovalSearchDto model)
         {
-            var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId);
+            var result = await _encroachmentRegisterationApprovalService.GetPagedEncroachmentRegisteration(model, SiteContext.UserId);
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Create(int id)
         {
-            var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
-            //Data.VillageList = await _watchAndWardApprovalService.GetAllVillage();
-            //Data.LocalityList = await _watchAndWardApprovalService.GetAllLocality();
-            //Data.KhasraList = await _watchAndWardApprovalService.GetAllKhasra();
+            var Data = await _encroachmentRegisterationApprovalService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -75,13 +72,7 @@ namespace EncroachmentDemolition.Controllers
                 {
                     if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                     {
-                        //int previousApprovalId = _approvalproccessService.GetPreviousApprovalId(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), watchandward.Id);
-                        //Approvalproccess approvalproccess1 = new Approvalproccess();
-                        //// approvalproccess1.Remarks = watchandward.ApprovalRemarks;  ///May be Uncomment
-                        //approvalproccess1.PendingStatus = 0;
-                        //approvalproccess1.Status = Convert.ToInt32(watchandward.ApprovalStatus);
-                        //result = await _approvalproccessService.UpdatePreviousApprovalProccess(previousApprovalId, approvalproccess1, SiteContext.UserId);
-                        result = true;  ///May be comment
+                      result = true; 
                         if (result)
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
@@ -93,12 +84,11 @@ namespace EncroachmentDemolition.Controllers
                             approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
                             if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo =null;
+                                approvalproccess.SendTo = null;
                             else
                             {
                                 approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
                             }
-                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
                             result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
 
                             if (result)

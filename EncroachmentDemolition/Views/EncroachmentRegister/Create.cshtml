@@ -7,7 +7,7 @@
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id" id="enc_@Guid.NewGuid()" />
+    <input type="hidden" asp-for="Id"  id="enc_@Guid.NewGuid()" value="@ViewBag.PrimaryId" />
     <input type="hidden" asp-for="WatchWardId" />
     <div id="WatchWardDetailsDiv">
 

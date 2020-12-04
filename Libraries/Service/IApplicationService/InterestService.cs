@@ -10,7 +10,7 @@ using System;
 using Libraries.Model;
 using Dto.Search;
 
-namespace Libraries.Service.ApplicationService
+namespace Libraries.Service.IApplicationService
 {
 
     public class InterestService : EntityService<Interest>, IInterestService

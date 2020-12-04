@@ -94,6 +94,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
+
+            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
+
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Department)

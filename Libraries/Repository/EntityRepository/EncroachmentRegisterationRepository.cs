@@ -112,12 +112,18 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
             try {
+
+                var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
+                                      where x.WatchWard != null && x.IsActive == 1
+                                      select x.WatchWardId).ToArray(); 
+
                 return await _dbContext.Watchandward
                 .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x =>x.ApprovedStatus == 1 && x.IsActive == 1)
+                .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
+                 && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
                 //return await _dbContext.EncroachmentRegisteration
                 //                        .Include(x=> x.WatchWard)
