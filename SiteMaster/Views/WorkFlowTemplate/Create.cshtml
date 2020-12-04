@@ -18,18 +18,11 @@
 </style>
 
 
-<br />
-<br />
-
-<div class="container-fluid">
-    @*<div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left color-white" style="margin-top:-0.4%">Add Details</h6>
-        </div>
-        <div class="panel-body">*@
-    <form  class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<div class="pt-3">
+  
+    <form  class="d-block rounded border p-3 bg-white search-filer shadow mb-3" id="myForm"  method="post" asp-action="Create">
         <h3 class="mb-3 d-flex">Add Details</h3>
-        @*<form id="myForm"  method="post" asp-action="Create" >*@
+      
         <div asp-validation-summary="ModelOnly" class="text-danger lb-sm"></div>
 
         <div class="row">
@@ -72,7 +65,7 @@
         </div>
         <br />
         <div class="row">
-            <div class=" col-md-3">
+            <div class="col-md-3">
                 <label class="control-label lb-sm">IsActive</label>
                 <input type="checkbox" asp-for="IsActiveData" checked />
             </div>

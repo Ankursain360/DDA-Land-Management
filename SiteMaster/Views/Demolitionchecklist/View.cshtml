@@ -2,11 +2,6 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Demolition Checklist" })
 
 <div class="pt-3">
-
-    <div class="container-fluid">
-        <div class="panel">
-
-            <div class="panel-body">
                 <form asp-action="View" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                     <h3 class="mb-3 d-flex">View Details</h3>
 
@@ -39,10 +34,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div class="row ">
                         <div class=" col-md-12">
                             @Html.ActionLink("Back", "Index", "Demolitionchecklist", null, new { @class = "btn btn-theme " })
@@ -51,9 +42,7 @@
                     </div>
 
                 </form>
-            </div>
-        </div>
-    </div>
+          
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
