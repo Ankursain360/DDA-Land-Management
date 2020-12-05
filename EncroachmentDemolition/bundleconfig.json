@@ -208,5 +208,17 @@
     "inputFiles": [
       "wwwroot/js/watchwardedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentregisterationapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentregisterationapprovalindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/encroachmentregisterapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/encroachmentregisterapprovalcreate.js"
+    ]
   }
 ]

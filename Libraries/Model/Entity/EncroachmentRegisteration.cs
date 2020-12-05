@@ -109,7 +109,11 @@ namespace Libraries.Model.Entity
         //[Required]
         public List<string> ReferenceNoOnLocation { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
-       
 
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
     }
 }

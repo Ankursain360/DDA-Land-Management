@@ -19,13 +19,22 @@
                 <tr>
                     <td>@(rowNo += 1)</td>
 
-                    <td> @(Convert.ToDateTime(item.DateOfEncroachment).ToString("dd MMM yyyy"))</td>
+                    <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
                     <td>@(item.Locality == null ? ""  : item.Locality.Name)</td>
                     <td>@(item.KhasraNo == null ? ""  :item.KhasraNo)</td>
                     <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
-                    <td>
-                        <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                    </td>
+                    @if (ViewBag.IsApproved == 0)
+                    {
+                        <td>
+
+                            <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+
+                        </td>
+                    }
+                    else
+                    {
+                        <td>No Action</td>
+                    }
                 </tr>
             }
         }

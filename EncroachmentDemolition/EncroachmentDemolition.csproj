@@ -10,6 +10,10 @@
     <EmbeddedResource Remove="wwwroot\Admin\**" />
     <None Remove="wwwroot\Admin\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
@@ -48,6 +52,14 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\Shared\Components\PageHeader\PageHeader.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
   </ItemGroup>
 
 </Project>

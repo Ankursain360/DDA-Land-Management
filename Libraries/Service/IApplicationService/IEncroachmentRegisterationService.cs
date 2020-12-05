@@ -36,6 +36,6 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int encroachmentId);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);
-
+        Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations);
     }
 }

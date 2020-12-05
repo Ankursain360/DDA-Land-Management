@@ -79,6 +79,7 @@ namespace EncroachmentDemolition.Controllers
             string FirfilePath = _configuration.GetSection("FilePaths:EncroachmentRegisterationFiles:FIRFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
+                encroachmentRegisterations.WatchWardId = null;
                 var result = await _encroachmentRegisterationService.Create(encroachmentRegisterations);
                 if (result)
                 {
@@ -167,7 +168,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 encroachmentRegisterations.ApprovedStatus = 0;
                                 encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                               // result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
+                                result = await _encroachmentRegisterationService.UpdateBeforeApproval(encroachmentRegisterations.Id, encroachmentRegisterations);  //Update Table details 
                                 if (result)
                                 {
                                     Approvalproccess approvalproccess = new Approvalproccess();

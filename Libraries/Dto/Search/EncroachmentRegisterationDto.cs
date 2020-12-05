@@ -8,5 +8,6 @@ namespace Dto.Search
     public class EncroachmentRegisterationDto:BaseSearchDto
     {
         public string name { get; set; }
+        public int StatusId { get; set; }
     }
 }

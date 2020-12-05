@@ -16,28 +16,37 @@
     <tbody>
         @if (Model != null && Model.Results.Count() > 0)
         {
-            @foreach (var item in Model.Results)
+        @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
+        <tr>
+            <td>@(rowNo += 1)</td>
 
-                    <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
-                    <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
-                    <td>@item.PrimaryListNoNavigation.KhasraNo</td>
-                    <td>@item.PrimaryListNo</td>
-                    <td>@item.StatusOnGround</td>
-                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
-                    <td>
-                        <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                    </td>
-                </tr>
+            <td> @(Convert.ToDateTime(item.Date).ToString("dd MMM yyyy"))</td>
+            <td>@(item.PrimaryListNoNavigation.LocalityId == null ? ""  : item.PrimaryListNoNavigation.Locality.Name)</td>
+            <td>@item.PrimaryListNoNavigation.KhasraNo</td>
+            <td>@item.PrimaryListNo</td>
+            <td>@item.StatusOnGround</td>
+            <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+            @if (ViewBag.IsApproved == 0)
+                    {
+            <td>
+
+                <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+
+            </td>
+                    }
+                    else
+                    {
+            <td>No Action</td>
+                    }
+        </tr>
             }
         }
         else
         {
-            <tr>
-                <th colspan="14" style="text-align:center"> No Record Available! </th>
-            </tr>
+        <tr>
+            <th colspan="14" style="text-align:center"> No Record Available! </th>
+        </tr>
         }
     </tbody>
 </table>

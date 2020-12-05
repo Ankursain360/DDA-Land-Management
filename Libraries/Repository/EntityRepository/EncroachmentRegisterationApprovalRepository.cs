@@ -22,10 +22,8 @@ namespace Libraries.Repository.EntityRepository
         {
 
             return await _dbContext.EncroachmentRegisteration
-                                    .Include(x => x.WatchWard)
-                                    .Include(x => x.Locality)
-                                    //.Include(x => x.WatchWard.PrimaryListNo)
-                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId && x.PendingAt == userId)
+                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
+                                    && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))
                                     .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
         }
 

@@ -1,8 +1,30 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register" })
 <br />
 <br />
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Details</h3></div>
+<form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Filter</h3>
+
+    <div class="row mt-md-3">
+
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
+                <label class="form-check-label" for="radio">
+                    Pending
+                </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                <label class="form-check-label" for="radio">
+                    Approved
+                </label>
+            </div>
+        </div>
+
+    </div>
+</form>
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
@@ -38,9 +60,9 @@
 
         </div>
     </div>
-    <environment include="Development">
-        <script src="~/js/EncroachmentRegistraionIndex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/EncroachmentRegistraionIndex.min.js" asp-append-version="true"></script>
-    </environment>
+<environment include="Development">
+    <script src="~/js/encroachmentregistraionindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/encroachmentregistraionindex.min.js" asp-append-version="true"></script>
+</environment>
