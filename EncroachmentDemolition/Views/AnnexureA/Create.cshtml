@@ -1,24 +1,19 @@
 ﻿@model Libraries.Model.Entity.Fixingdemolition
 @await Component.InvokeAsync("PageHeader", new { pageName = "Request For Fixing of Demolition Programme" })
-
 @{ int recNo = 0;}
-
 @{int FirFile = 0;}
 @{int LocationMapFile = 0;}
 @{int PhotoFile = 0;}
-
-
 @*<style>
-    .bg {
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-    }
-</style>*@
-
+        .bg {
+            background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
+        }
+    </style>*@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
         <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <h3 class="my-3 d-flex sub-heading">Inspection/Encroachment Register Details </h3>
+            <h3 class="my-3 d-flex sub-heading">View Inspection/Encroachment Register Details </h3>
         </a>
         <div class="collapse" id="collapseExample">
             <div class="row">
@@ -362,7 +357,6 @@
         <form asp-action="Create" enctype="multipart/form-data">
             <h3 class="my-3 d-flex sub-heading">Summary</h3>
             <input type="hidden" asp-for="EncroachmentId" value="@(Model.Encroachment.Id)" />
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
@@ -389,10 +383,7 @@
 
                                     </td>
                                 </tr>
-
                             }
-
-
                         </tbody>
                     </table>
                 </div>
@@ -414,11 +405,8 @@
                                 <tr>
                                     <td>@(recNo += 1)</td>
                                     <td>@(item.ChecklistDescription)</td>
-
-
                                     @*<td>1</td>
-                                <td>Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached</td>*@
-
+                                        <td>Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached</td>*@
                                     <td>
                                         <div class="floating-label-wrap">
                                             <select class="floating-label-field floating-label-field--s3"
@@ -429,44 +417,31 @@
                                             </select>
                                             @*<label class="floating-label">Department</label>*@
                                             <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />
-
                                         </div>
-
-
                                         @*<select style="height:30px;   background-color: #dddddd;" asp-for="ChecklistDetails" required class="form-control">
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Not Required">Not Required</option>
-                                    </select>
-                                    <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />*@
-
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                                <option value="Not Required">Not Required</option>
+                                            </select>
+                                            <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />*@
                                     </td>
                                 </tr>
-
-
-
-
-
                                 @*<tr>
-                                <td>2</td>
-                                <td>Whether any structure proposed for demolition is protected under any Act including special provisio
-                                <td>
-                                    <select style="height:30px; background-color: #dddddd;" required class="form-control">
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                        <option>Not Required</option>
-                                    </select>
-                                </td>
-                            </tr>*@
-
-
+                                        <td>2</td>
+                                        <td>Whether any structure proposed for demolition is protected under any Act including special provisio
+                                        <td>
+                                            <select style="height:30px; background-color: #dddddd;" required class="form-control">
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                                <option>Not Required</option>
+                                            </select>
+                                        </td>
+                                    </tr>*@
                             }
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <h3 class="my-3 d-flex sub-heading">Encloures</h3>
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
@@ -488,44 +463,31 @@
                                     <td>
                                         @item.DocumentName
                                     </td>
-
                                     <td>
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input type="file" class="floating-label-field floating-label-field--s3" asp-for="DocumentDetails" id="PhotoFile" multiple placeholder="file">
                                             <span class="d-block text-danger field-validation-valid"></span>
                                             @*<label for="field-1" class="floating-label">Upload layout Plan</label>*@
                                             <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />
-
                                         </div>
-
-
                                         @*<input type="file" class="form-control" asp-for="DocumentDetails" id="PhotoFile" multiple />
-                                    <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />*@
-
+                                            <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />*@
                                     </td>
                                 </tr>
                             }
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="row mt-md-4">
                 <div class="col-md-12">
                     <input type="submit" value="Create" class="btn btn-theme" />
                     @*<a asp-action="Index" class="btn btn-theme">Back </a>*@
                     @Html.ActionLink("Back", "Index", "AnnexureA", null, new { @class = "btn btn-theme" })
-
                 </div>
             </div>
-
         </form>
-                  
-
-
-        </div>
+    </div>
 </div>
-    <br />
-    <br />
+<br />
+<br />

@@ -1,10 +1,4 @@
-﻿//$(function () {
-//    $("#DivLandTransferDetails input").attr("readonly", true);
-//    $("#DivLandTransferDetails textarea").attr("readonly", true);
-//    $("#DivLandTransferDetails select").attr("disabled", true);
-//});
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     $(".collapse.show").each(function () {
         $(this).prev(".card-header").find(".fa").addClass("fa-minus").removeClass("fa-plus");

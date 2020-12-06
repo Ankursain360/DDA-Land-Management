@@ -17,53 +17,28 @@ namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAController : BaseController
     {
-        //  private readonly  IAnnexureAService _annexureAService;
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
-
-        // public IConfiguration _configuration;
         public readonly IAnnexureAService _annexureAService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
 
-        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService ,IAnnexureAService annexureAService, IConfiguration configuration)
+        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService, IAnnexureAService annexureAService, IConfiguration configuration)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
-
-
             _annexureAService = annexureAService;
             _configuration = configuration;
         }
-
-
-
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] EncroachmentRegisterationDto model)
+        public async Task<PartialViewResult> List([FromBody] AnnexureASearchDto model)
         {
-            var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model);
+            var result = await _annexureAService.GetPagedDetails(model);
             return PartialView("_List", result);
         }
         public IActionResult Index()
         {
             return View();
         }
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] EncroachmentRegisterationDto model)
-        //{
-        //    var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model);
-        //    return PartialView("_List", result);
-        //}
-
-
-
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
-
         public async Task<IActionResult> Create(int id)
         {
             Fixingdemolition Model = new Fixingdemolition();
@@ -73,27 +48,12 @@ namespace EncroachmentDemolition.Controllers
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
             Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
             Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
-
-
-
             Model.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
             Model.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
-
             Model.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
-
             Model.Encroachment = Data;
-
-
             return View(Model);
         }
-
-
-
-
-
-
-
-
         [HttpPost]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
@@ -106,42 +66,14 @@ namespace EncroachmentDemolition.Controllers
             {
                 return NotFound();
             }
-
-
-
-
-
-
-
-
-
-          
-
-
-
-
-
-
-
-
             fixingdemolition.EncroachmentId = fixingdemolition.Encroachment.Id;
-                var result = await _annexureAService.Create(fixingdemolition);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-                  //  return View("Index", result1);
-                }
-
-
-
-
-
-
-
-
-
-
+            var result = await _annexureAService.Create(fixingdemolition);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+                //  return View("Index", result1);
+            }
             if (fixingdemolition.DemolitionProgramId != null)
             {
                 List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
@@ -160,12 +92,6 @@ namespace EncroachmentDemolition.Controllers
                     result = await _annexureAService.SaveFixingprogram(item);
                 }
             }
-
-
-
-
-
-
             if (fixingdemolition.DemolitionChecklistId != null)
             {
                 List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
@@ -184,14 +110,6 @@ namespace EncroachmentDemolition.Controllers
                     result = await _annexureAService.Savefixingchecklist(item);
                 }
             }
-
-
-
-
-
-
-
-
             //if (fixingdemolition.DemolitionDocumentId != null)
             //{
             //    List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
@@ -210,16 +128,9 @@ namespace EncroachmentDemolition.Controllers
             //        result = await _annexureAService.SaveFixingdocument(item);
             //    }
             //}
-
             string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
-
-
             // targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-
-
-             FileHelper fileHelper = new FileHelper();
-
-
+            FileHelper fileHelper = new FileHelper();
             if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
             {
                 List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
@@ -238,59 +149,24 @@ namespace EncroachmentDemolition.Controllers
                     result = await _annexureAService.SaveFixingdocument(item);
                 }
             }
-
-
-
-
-
-
-
-
             if (result)
             {
                 ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                 var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
                 return View("Index", result1);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             else
             {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(fixingdemolition);
-                }
-           
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(fixingdemolition);
+            }
         }
-
-
-
-
-
-
         public async Task<IActionResult> View(int id)
         {
             List<Fixingdemolition> list = await _annexureAService.GetFixingdemolition(id);
             return View(list);
             //return View();
         }
-
-
-
-
-
-
         //[HttpPost]
         //public async Task<IActionResult> Create(Fixingdemolition fixingdemolition)
         //{

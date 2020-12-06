@@ -122,6 +122,36 @@ namespace EncroachmentDemolition.Controllers
             return View("Index");
         }
 
+        #region History Details Only For Approval Page
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+        #endregion
+
+        #region Watch & Ward  Details
+        public async Task<PartialViewResult> WatchWardView(int id)
+        {
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            if (Data != null)
+                Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
+            return PartialView("_WatchWard", Data);
+        }
+        public async Task<FileResult> ViewDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.PhotoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        #endregion
+
+        #region EncroachmentRegisteration Details
         public async Task<PartialViewResult> EncroachmentRegisterView(int id)
         {
             var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -130,17 +160,9 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
             encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-           
+
             return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
         }
-
-        public async Task<PartialViewResult> HistoryDetails(int id)
-        {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
-
-            return PartialView("_HistoryDetails", Data);
-        }
-
         public async Task<IActionResult> DownloadPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
@@ -171,6 +193,9 @@ namespace EncroachmentDemolition.Controllers
             string filename = Data.LocationMapFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+        #endregion
+
+
         #region Fetch workflow data for approval prrocess Added by Renu 4 Dec 2020
         private async Task<List<TemplateStructure>> DataAsync()
         {

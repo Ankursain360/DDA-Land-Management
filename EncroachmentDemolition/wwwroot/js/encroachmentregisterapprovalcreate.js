@@ -1,6 +1,8 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
+    var watchWardId = parseInt($('#WatchWardId').val());
+    GetWatchWardDetails(watchWardId);
     GetOtherDetails(id);
     GetHistoryDetails(id);
 
@@ -22,7 +24,12 @@
 
 });
 
-
+function GetWatchWardDetails(id) {
+    HttpGet(`/EncroachmentRegisterApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
+        $('#WatchWardDetailsDiv').html("");
+        $('#WatchWardDetailsDiv').html(response);
+    });
+};
 function GetOtherDetails(id) {
     HttpGet(`/EncroachmentRegisterApproval/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
         $('#EncroachmentRegisterDetailsDiv').html("");
@@ -45,7 +52,6 @@ function callSelect2() {
 }
 
 $("#collapse").click(function () {
-    debugger;
     $('#collapseApprroval').collapse("toggle").promise().done(function () {
         $("select").select2({
             placeholder: "Select",
@@ -56,6 +62,14 @@ $("#collapse").click(function () {
 
 $("#collapse").click(function () {
     $("#collapseHistoryApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+$("#collapse").click(function () {
+    $("#collapseWatchWardApprroval").collapse("toggle").promise().done(function () {
         $('#select').select2({
             placeholder: "Select",
             allowClear: true

@@ -129,19 +129,20 @@ namespace EncroachmentDemolition.Controllers
             return View("Index");
         }
 
+        public async Task<PartialViewResult> HistoryDetails(int id)
+        {
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+
+            return PartialView("_HistoryDetails", Data);
+        }
+
+        #region Watch & Ward  Details
         public async Task<PartialViewResult> WatchWardView(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
             return PartialView("_WatchWardView", Data);
-        }
-
-        public async Task<PartialViewResult> HistoryDetails(int id)
-        {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
-
-            return PartialView("_HistoryDetails", Data);
         }
 
         public async Task<IActionResult> DownloadPhotoFile(int Id)
@@ -160,6 +161,8 @@ namespace EncroachmentDemolition.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+        #endregion
 
         #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> DataAsync()

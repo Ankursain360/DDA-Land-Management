@@ -11,6 +11,10 @@
     <h3 class="mb-3 d-flex"> Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="WatchWardId" />
+    <div id="WatchWardDetailsDiv">
+
+    </div>
 
     <div id="EncroachmentRegisterDetailsDiv">
 
@@ -46,7 +50,7 @@
     <div class="row pt-3">
         <div class="col-md-12">
             <input type="submit" value="Submit" class="btn btn-theme " />
-            @Html.ActionLink("Back", "Index", "WatchWardApproval", null, new { @class = "btn btn-theme " })
+            @Html.ActionLink("Back", "Index", "EncroachmentRegisterApproval", null, new { @class = "btn btn-theme " })
         </div>
     </div>
 </form>

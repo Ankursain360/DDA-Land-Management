@@ -419,15 +419,6 @@ namespace EncroachmentDemolition.Controllers
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
 
-        public IActionResult EncroachmentRegisterApproval()
-        {
-            return View();
-        }
-
-        public IActionResult EncroachmentRegisterApprovalCreate()
-        {
-            return View();
-        }
 
         #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> dataAsync()

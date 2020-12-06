@@ -122,7 +122,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x => x.ApprovedStatus == model.StatusId && x.IsActive == 1 
+                .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
                  && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
                 //return await _dbContext.EncroachmentRegisteration

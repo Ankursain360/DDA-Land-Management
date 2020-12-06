@@ -39,12 +39,12 @@ function onChangePageSize(pageSize) {
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId);
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId);
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId);
     }
 
 });
