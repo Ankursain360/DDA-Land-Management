@@ -67,6 +67,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _demolitionstructuredetailsRepository.GetPagedDemolitionstructuredetailsList(model);
         }
+        public async Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto dto)
+        {
+            return await _demolitionstructuredetailsRepository.GetPagedDemolitionReportDataDepartmentZoneWise(dto);
+        }
+        public async Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality)
+        {
+            return await _demolitionstructuredetailsRepository.GetDemolitionReportDataDepartmentZoneWise(department, zone, division, locality);
+        }
         public async Task<bool> Update(int id, Demolitionstructuredetails demolitionstructuredetails)
         {
             var result = await _demolitionstructuredetailsRepository.FindBy(a => a.Id == id);

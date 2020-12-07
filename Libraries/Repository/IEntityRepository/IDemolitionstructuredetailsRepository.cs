@@ -35,6 +35,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocalityList(int localityId);
         Task<List<Demolitionstructure>> GetStructure();
         Task<List<Structure>> GetMasterStructure();
-
+        Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);
+        Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto dto);
     }
 }

@@ -157,5 +157,35 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Structure.Where(x => x.IsActive == 1).ToListAsync();
         }
+
+        public async Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto dto)//added by shalini
+        {
+            var data = await _dbContext.Demolitionstructuredetails
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId)) && (x.IsActive == 1)).OrderByDescending(x => x.Id).GetPaged(dto.PageNumber, dto.PageSize);
+            return data;
+        }
+
+        public async Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality)
+        {
+            var data = await _dbContext.Demolitionstructuredetails
+                .Include(x => x.Locality)
+                .Include(x => x.Department)
+                .Include(x => x.Zone)
+                .Include(x => x.Division)
+                .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
+                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
+                && (x.IsActive == 1))
+                .OrderByDescending(x => x.Id).ToListAsync();
+            return data;
+        }
     }
 }

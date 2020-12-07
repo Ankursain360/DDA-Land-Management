@@ -1,0 +1,62 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demolitionstructuredetails>
+@{int rowNo = 0;}
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+            <th rowspan="2">Sr.No</th>
+            <th rowspan="2">Department</th>
+            <th rowspan="2">Zone</th>
+            <th rowspan="2">Division</th>
+            <th rowspan="2"> Locality(Village Name)</th>
+            <th rowspan="2">Khasra No.</th>
+            <th rowspan="2">Demolition Date</th>
+            <th rowspan="2">Status </th>
+            <th rowspan="2">Area Reclaimed</th>
+            <th rowspan="2">Reason of Demolition</th>
+        </tr>
+
+    </thead>
+    <tbody>
+
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@(rowNo += 1)</td>
+
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
+            <td>@item.Division.Name</td>
+            <td>@item.Locality.Name</td>
+            <td>@item.Name</td>
+            <td>@item.Date</td>
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>
+                }
+            </td>
+
+            <td>@item.AreaReclaimed</td>
+            <td>@item.Remarks</td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="13" style="text-align:center"> Data Not Available </th>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

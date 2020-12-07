@@ -37,8 +37,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Demolitionstructure>> GetStructure();
         Task<List<Structure>> GetMasterStructure();
 
-        //Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
-        //Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);
+        Task<PagedResult<Demolitionstructuredetails>> GetPagedDemolitionReportDataDepartmentZoneWise(DemolitionReportZoneDivisionLocalityWiseSearchDto demolitionReportZoneDivisionLocalityWiseSearchDto);
+        Task<List<Demolitionstructuredetails>> GetDemolitionReportDataDepartmentZoneWise(int department, int zone, int division, int locality);
 
     }
 }
