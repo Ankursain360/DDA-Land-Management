@@ -19,15 +19,18 @@ namespace EncroachmentDemolition.Controllers
     {
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
         public readonly IAnnexureAService _annexureAService;
+        private readonly IWatchandwardService _watchandwardService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
 
-        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService, IAnnexureAService annexureAService, IConfiguration configuration)
+        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService, 
+            IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _annexureAService = annexureAService;
             _configuration = configuration;
+            _watchandwardService = watchandwardService;
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AnnexureASearchDto model)
@@ -46,12 +49,14 @@ namespace EncroachmentDemolition.Controllers
             Data.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
             Data.ZoneList = await _encroachmentRegisterationService.GetAllZone(Data.DepartmentId);
             Data.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(Data.ZoneId);
-            Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.DivisionId);
+            Data.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(Data.ZoneId);
             Data.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(Data.LocalityId);
             Model.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
             Model.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
             Model.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
             Model.Encroachment = Data;
+            if(Model.Encroachment.WatchWardId == null)
+            Model.Encroachment.WatchWardId = 0;
             return View(Model);
         }
         [HttpPost]
@@ -243,6 +248,24 @@ namespace EncroachmentDemolition.Controllers
         //    return View();
         //   // return View(list1);
         //}
+        #region Watch & Ward  Details
+        public async Task<PartialViewResult> WatchWardView(int id)
+        {
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            if (Data != null)
+                Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
 
+            return PartialView("_WatchWard", Data);
+        }
+        public async Task<FileResult> ViewDocument(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.PhotoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        #endregion
     }
 }

@@ -81,7 +81,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
-            return await _dbContext.Locality.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Locality.Where(x => x.ZoneId == divisionId && x.IsActive == 1).ToListAsync();
         }
 
         public async Task<List<Zone>> GetAllZone(int departmentId)

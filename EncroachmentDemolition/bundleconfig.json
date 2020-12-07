@@ -220,5 +220,17 @@
     "inputFiles": [
       "wwwroot/js/encroachmentregisterapprovalcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/annexureacreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/annexureacreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fixingdemolitionindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/fixingdemolitionindex.js"
+    ]
   }
 ]
