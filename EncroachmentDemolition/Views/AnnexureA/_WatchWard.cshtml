@@ -11,12 +11,10 @@
 
 <div enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
-        <span class="collapsed"><b>+</b></span>
-        <span class="expanded"><b>-</b></span>
+    <a data-toggle="collapse" href="#collapseWatchWardApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseWatchWardApprroval">
         <h3 class="my-3 d-flex sub-heading">View Watch & Ward Details</h3>
     </a>
-    <div class="collapse" id="collapseApprroval">
+    <div class="collapse" id="collapseWatchWardApprroval">
         @if (Model != null)
         {
             <div id="divShowData">
@@ -169,6 +167,8 @@
 </div>
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
 <environment include="Development">
     <script src="~/js/watchwardedit.js"></script>
 </environment>

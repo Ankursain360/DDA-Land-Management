@@ -134,7 +134,7 @@
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap">
-                                        <select  asp-for="ConstructionStatus" disabled class="floating-label-field floating-label-field--s3">
+                                        <select asp-for="ConstructionStatus" disabled class="floating-label-field floating-label-field--s3">
                                             <option value="Select">Select</option>
                                             <option value="Kachcha">Kachcha</option>
                                             <option value="Pakka">Pakka</option>
@@ -154,7 +154,7 @@
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap">
-                                        <select  asp-for="ReligiousStructure" disabled class="floating-label-field floating-label-field--s3">
+                                        <select asp-for="ReligiousStructure" disabled class="floating-label-field floating-label-field--s3">
                                             <option value="No">No</option>
                                             <option value="Yes">Yes</option>
                                         </select>
@@ -176,11 +176,11 @@
                                     </div>
                                 </td>
                                 @*<td>
-                                    <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                        <a class="btn dda-pageheading add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </td>*@
+                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                            <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                            <a class="btn dda-pageheading add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                        </div>
+                                    </td>*@
                             </tr>
                         </tbody>
                     </table>
@@ -354,6 +354,7 @@
     </div>
 </form>
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/encroachmentregisterationview.js"></script>
 </environment>
