@@ -1,52 +1,52 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Apply For Mutation" })
 @*@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
-
-<style>
-    .p {
-        color: black;
+        ViewData["Title"] = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
-</style>
-
-<style>
-
-    .bg {
-        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
-        Color: #ffffff;
-        Font-size: 0.95rem;
-        Font-Family: Open SansRegular;
-        height: 28px;
-    }
-</style>
 
 
-<script src="js/bootstrap.min.js"></script>
-<link href="Styles/bootstrap.css" rel="stylesheet" />
+    <script src="~/js/jquery.min.js"></script>
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>*@
+    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+
+
+    <style>
+        .p {
+            color: black;
+        }
+    </style>
+
+    <style>
+
+        .bg {
+            background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
+            Color: #ffffff;
+            Font-size: 0.95rem;
+            Font-Family: Open SansRegular;
+            height: 28px;
+        }
+    </style>
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <link href="Styles/bootstrap.css" rel="stylesheet" />
+
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>*@
 @*<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Apply For Mutation</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+        <div class="col-sm-12">
+            <div class="myapp-hed">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Apply For Mutation</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
+    <br />
 
-<br />*@
+    <br />*@
 
 <div class="container-fluid" id="MainContentForm">
     @*<div class="panel">
@@ -59,537 +59,674 @@
                 </div>
             </div>
         </div>*@
-        @*<div class="panel-body">*@
-            <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-                <h3 class="mb-3 d-flex">File Information</h3>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    @*<div class="panel-body">*@
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">File Information</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
-                <div id="DivForFileName">
+        <div id="DivForFileName">
 
-                    <div class="row">
+            <div class="row">
 
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap mb-3 mb-md-0">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input type="text" placeholder="File No" required class="floating-label-field floating-label-field--s3" />
-                                <span class="d-block text-danger field-validation-valid"></span>
-                                <label class="floating-label">File No.</label>
-                                <br />
-                            </div>
-                        </div>
-
-                        </div>
-
+                        <input type="text" placeholder="File No" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">File No.</label>
+                        <br />
+                    </div>
                 </div>
 
-                <div id="DivForPreviousDamagee">
-                    @*<div class="row" style="margin-bottom:35px;">
+            </div>
+
+        </div>
+
+        <div id="DivForPreviousDamagee">
+            @*<div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Previous Damage Assessee Details</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <h2 class="mb-3 d-flex">Previous Damage Assessee Detailst</h2>
+            @*<div class="row">*@
+            @*<div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered" border="0" id="tbl_posts">
+                        <thead class="thead">*@
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
+                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name</th>
+                                <th>Father's Name</th>
+                                <th>Date Of GPA & STA/Will/Other Deed</th>
+                                <th> Upload GPA & STA</th>
+
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody class="tbody" id="add">
+                            <tr id="">
+                                <td>1</td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="date" class="floating-label-field floating-label-field--s3" />
+                                        </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="file" class="floating-label-field floating-label-field--s3" />
+                                        </div>
+                                </td>
+                                
+
+                                <td>
+                                    
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @*</div>*@
+        <div id="DivForNewDamageAssesseDetails">
+            @*<div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">New Damagee Assessee Details</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <h2 class="mb-3 d-flex">New Damagee Assessee Details</h2>
+
+            
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive ">
+                    <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name</th>
+                                <th>Father's/Husband's Name</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>Mobile No.</th>
+                                <th>Email-Id  (if any)</th>
+                                <th>Aadhar No.</th>
+                                <th>PAN No.</th>
+                                <th>Photograph</th>
+                                <th>Signature</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody class="tbody" id="add">
+                            <tr id="">
+                                <td>1</td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap">
+                                        <select class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
+                                            <option value="0">---Select---</option>
+                                            <option value="1">Male</option>
+                                            <option value="2">Female</option>
+                                            <option value="3">Other</option>
+                                        </select>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="file" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="file" class="floating-label-field floating-label-field--s3" />
+                                    </div>
+                                </td>
+                                <td>
+                                    @*<button id="addToList" class="btn btn-primary myapp-hed1">
+                                            <i class="fa fa-plus"></i>
+                                        </button>*@
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                    </div>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            @*</div>*@
+
+        </div>
+
+
+        <div id="DivLocation">
+            @*<div class="row" style="margin-bottom:35px;">
+                    <div class="col-sm-12">
+                        <div class=" myapp-hed2">
+                            <div class="col-md-12">
+                                <h6 class="pull-left" style="color:white;margin-top:5px;">Property Identification Details</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>*@
+            <h2 class="mb-3 d-flex">Property Identification Details</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" required placeholder="Property/House/Municipal No" class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Property/House/Municipal No.</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input placeholder="Locality Name" type="text" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Locality Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" placeholder="Floor No.(if purchased floor wise)" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Floor No.(if purchased floor wise)</label>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" placeholder="Road/Street Name" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Road/Street Name</label><span style="color:red">*</span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="Number" placeholder="Pincode" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Pin Code</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="text" required placeholder="District" class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">District</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="file" required placeholder="Upload Photograph" class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Upload Photograph Of Property</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="number" required placeholder="Plot Area" class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Plot Area in Sq.Yds</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="Number" placeholder="Floor Area" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Floor Area in Sq.Yds (if purchased floor wise)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Purpose">
+            @*<div class="row" style="margin-bottom:35px;">
             <div class="col-sm-12">
                 <div class=" myapp-hed2">
                     <div class="col-md-12">
-                        <h6 class="pull-left" style="color:white;margin-top:5px;">Previous Damage Assessee Details</h6>
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Purpose Of Mutation/Change Of Title</h6>
                     </div>
                 </div>
             </div>
         </div>*@
-                    <h2 class="mb-3 d-flex">Previous Damage Assessee Detailst</h2>        
-                    <div class="row">
-                        @*<div class="col-sm-12">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered" border="0" id="tbl_posts">
-                <thead class="thead">*@
-                        <div class="table-section bg-white border shadow rounded">
-                            <div class="table-responsive ">
-                                <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                                    <thead class="text-nowrap">
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Name</th>
-                                            <th>Father's Name</th>
-                                            <th>Date Of GPA & STA/Will/Other Deed</th>
-                                            <th> Upload GPA & STA</th>
+            <h2 class="mb-3 d-flex">Purpose Of Mutation/Change Of Title</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-check theme">
 
-                                            <th>Operation</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_posts_body">
-                                    </tbody>
-                                    <tbody class="tbody" id="add">
-                                        <tr id="">
-                                            <td>1</td>
-                                            <td>
-                                                <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>   <input type="date" class="floating-label-field floating-label-field--s3" /></td>
-                                            <td> <input type="file" class="floating-label-field floating-label-field--s3" /></td>
-                                            @*<td>
-                                <select class="form-control" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                    <option value="0">---Select---</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Other</option>
-                                </select>
-                            </td>*@
+                        <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
 
-                                            <td>
-                                                @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                    <i class="fa fa-plus"></i>
-                                </button>*@
-                                                <a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                                <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        <label class="form-check-label">Purchaser</label>
                     </div>
-                </div>
-                <div id="DivForNewDamageAssesseDetails">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">New Damagee Assessee Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-md-6">
+                        <div class="form-check theme">
 
-                    <div class="form-row">
-                        <div class="col-sm-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered" border="0" id="tbl_posts">
-                                    <thead class="thead">
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Name</th>
-                                            <th>Father's/Husband's Name</th>
-                                            <th>Gender</th>
-                                            <th>Address</th>
-                                            <th>Mobile No.</th>
-                                            <th>Email-Id  (if any)</th>
-                                            <th>Aadhar No.</th>
-                                            <th>PAN No.</th>
-                                            <th>Photograph</th>
-                                            <th>Signature</th>
-                                            <th>Operation</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_posts_body">
-                                    </tbody>
-                                    <tbody class="tbody" id="add">
-                                        <tr id="">
-                                            <td>1</td>
-                                            <td>
-                                                <input type="text" id="txtPersonalName" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalFatherName" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                    <option value="0">---Select---</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <input type="text" class="form-control" />
-                                            </td>
-                                            <td>  <input type="text" class="form-control" /></td>
-                                            <td>  <input type="text" class="form-control" /></td>
-                                            <td>  <input type="file" class="form-control" /></td>
-                                            <td> <input type="file" class="form-control" /></td>
-                                            <td>
-                                                @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                            <i class="fa fa-plus"></i>
-                                        </button>*@
-                                                <a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                                <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                            </td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div id="DivLocation">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Property Identification Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Property/House/Municipal No.</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Locality Name</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Floor No.(if purchased floor wise)</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Road/Street Name</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Pin Code</label><span style="color:red">*</span>
-                            <input type="Number" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">District</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Upload Photograph Of Property</label><span style="color:red">*</span>
-                            <input type="file" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Plot Area in Sq.Yds</label><span style="color:red">*</span>
-                            <input type="number" required class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Floor Area in Sq.Yds (if purchased floor wise)</label><span style="color:red">*</span>
-                            <input type="Number" required class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div id="Purpose">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Purpose Of Mutation/Change Of Title</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Purchaser
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbDocumentname" />Inheritance
-                            </label>
-                        </div>
-
-                    </div>
-
-
-                </div>
-
-
-                <div id="one">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">If Purchased</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <div class=" col-md-12">
-                                <label class="control-label lb-sm">Date Of Purchase</label><span style="color:red">*</span>
-                                <input type="date" required class="form-control" />
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Upload ATS(Agreement To sell)</label><span style="color:red">*</span>
-                            <input type="File" required class="form-control" />
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Upload GPA(General Power Attorny If any) </label><span style="color:red;width:15px"></span>
-                            <input type="file" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Upload Money Receipts( If any) </label><span style="color:red;width:15px"></span>
-                            <input type="file" required class="form-control" />
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Signature Specimen</label><span style="color:red;width:15px">*</span>
-                            <input type="file" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row" style="margin-bottom:35px;">
-                    <div class="col-sm-12">
-                        <div class=" myapp-hed2">
-                            <div class="col-md-12">
-                                <h6 class="pull-left" style="color:white;margin-top:5px;">Upload Latest Address Proof</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-3">
-                        <label class="radio-inline">
-                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />House Tax Bill
-                        </label>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="radio-inline">
-                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Electricity Bill
-                        </label>
-                    </div>
-
-
-                    <div class="form-group col-md-3">
-                        <label class="radio-inline">
-                            <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Water Bill
-                        </label>
-                    </div>
-                    <div class="form-group col-md-3">
-                        <label class="radio-inline">
-                            <input type="radio" name="grpSearchby" id="rdbDocumentname" />Any Other
-                        </label>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Choose file</label><span style="color:red;width:15px">*</span>
-                        <input type="file" required class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <br />
-                        <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                    </div>
-                </div>
-
-                <div id="Affidavit">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Affidavit</label><span style="color:red;width:15px">*</span>
-                            <input type="file" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                        <br />
-                        <div class="form-group col-md-3">
-                            <a href="url">click for Download Affidavit Format</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="indemnity">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">IndemnityBond</label><span style="color:red;width:15px">*</span>
-                            <input type="file" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-3">
-                            <br />
-                            <input type="submit" value="Upload" class="btn btn-primary myapp-hed1" />
-                        </div>
-                        <br />
-                        <div class="form-group col-md-3">
-                            <a href="url">click for Download Indemnity Bond Format</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="Litigation">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Litigation Status</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />The Land/Property is not a subject matter of any Litigation/Court case
-                            </label> <br />
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbDocumentname" />The Land/ Property title is under Litigation
-                            </label>
+                            <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                            <label class="form-check-label">Inheritance </label>
                         </div>
 
                     </div>
                 </div>
-                <div id="court">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Details Of Court Case(if any)</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Name Of Court</label><span style="color:red;width:15px"></span>
-                            <input type="text" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Case Number</label><span style="color:red;width:15px">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Name Of Opposition Party</label><span style="color:red;width:15px"></span>
-                            <input type="text" required class="form-control" />
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">I am</label>
-                            <br />
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />Petitioner
-                            </label>
-
-
-                            <label class="radio-inline">
-                                <input type="radio" name="grpSearchby" id="rdbDocumentname" />Respondant
-                            </label>
-
-                        </div>
-
-
-
-                    </div>
-                </div>
-                <div id="Declaration">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Declaration</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="form-row">
-                            <div class="form-group col-md-12">
-                                <input type="checkbox" name="View">
-
-
-                                I/WE hereby expressly warranty and declare that the above information provided in support of my/ our application is correct and genuine and We expressly acknowledge that I am / we are aware and accept that the decision on the application will be made by the DDA on the basis of the information supplied
-                                by me/ us and may be immediately Cancelled in the event that such information is found to be false or misleading.<br />
-                                <br />
-                                Note: Please fill all Details Crefully.You can't make any changes after final Submission
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group  col-md-12" style="justify-content:center">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Create", "SubstitutionMutationDetails", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
-    @*</div>*@
-@*</div>*@
+        <div id="one">
+            @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">If Purchased</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+            <h2 class="mb-3 d-flex">If Purchased</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="date" required class="floating-label-field floating-label-field--s3"/>
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Date Of Purchase</label>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="File" placeholder="Upload ATS(Agreement To sell)" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
+                        <label class="floating-label">Upload ATS(Agreement To sell)</label>
+                    </div>
+                </div>
+
+                    <div class="col-md-6">
+                        <br />
+                        <input type="submit" value="Upload" class="btn btn-theme "/>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="file" placeholder="Upload GPA(General Power Attorny If any)" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red;width:15px"></span>
+                        <label class="floating-label">Upload GPA(General Power Attorny If any) </label>
+                    </div>
+                </div>
+                    <div class="col-md-6">
+                        <br />
+                        <input type="submit" value="Upload" class="btn btn-theme " />
+                    </div>
+                </div>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input type="file"placeholder="Upload Money Receipts( If any)"  required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red;width:15px"></span>
+                        <label class="floating-label">Upload Money Receipts( If any) </label>
+                    </div>
+                </div>
+
+                    <div class="col-md-6">
+                        <br />
+                        <input type="submit" value="Upload" class="btn btn-theme "/>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" placeholder="Signature Specimen" required class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid" style="color:red;width:15px">*</span>
+                        <label class="floating-label">Signature Specimen</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <input type="submit" value="Upload" class="btn btn-theme "/>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:35px;">
+            @*<div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;"></h6>
+                    </div>
+                </div>
+            </div>*@
+            <h2 class="mb-3 d-flex">Upload Latest Address Proof</h2>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                    <label class="form-check-label">House Tax Bill</label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <label class="form-check-label">Electricity Bill  </label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                    <label class="form-check-label">Water Bill</label>
+                </div>
+            </div>
+            <div class="form-group col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <label class="form-check-label">Any Other </label>
+                </div>
+
+            </div>
+        </div>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+            <input type="file" required class="floating-label-field floating-label-field--s3" />
+            
+            <label class="floating-label">Choose file</label>
+        </div>
+    </div>
+        <div class="col-md-6">
+            <br />
+            <input type="submit" value="Upload" class="btn btn-theme "/>
+        </div>
+    </div>
+
+<div id="Affidavit">
+    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <h2 class="mb-3 d-flex">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="file" placeholder="Affidavit" required class="floating-label-field floating-label-field--s3" />
+                <span class="d-block text-danger field-validation-valid" style="color:red;width:15px">*</span>
+                <label class="floating-label">Affidavit</label>
+            </div>
+        </div>
+            <div class="col-md-3">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme "/>
+            </div>
+            <br />
+            <div class="col-md-3">
+                <a href="url">click for Download Affidavit Format</a>
+            </div>
+        </div>
+</div>
+<div id="indemnity">
+    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <h2 class="mb-3 d-flex">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="file" placeholder="IndemnityBond" required class="floating-label-field floating-label-field--s3" />
+                <span class="d-block text-danger field-validation-valid" style="color:red;width:15px">*</span>
+                <label class="floating-label">IndemnityBond</label>
+            </div>
+        </div>
+            <div class="col-md-3">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme "/>
+            </div>
+            <br />
+            <div class="col-md-3">
+                <a href="url">click for Download Indemnity Bond Format</a>
+            </div>
+        </div>
+    </div>
+<div id="Litigation">
+    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Litigation Status</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <h2 class="mb-3 d-flex">Litigation Status</h2>
+    <div class="form-row">
+        <div class="col-md-6">
+            <div class="form-check theme">
+
+                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                <label class="form-check-label">
+                    The Land/Property is not a subject matter of any Litigation/Court case
+                </label>
+            </div>
+        </div>
+                <div class="col-md-6">
+                    <div class="form-check theme">
+                        
+                            <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                            <label class="form-check-label">The Land/ Property title is under Litigation </label>
+                    </div>
+                </div>
+           
+            </div>
+</div>
+<div id="court">
+    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Details Of Court Case(if any)</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <h2 class="mb-3 d-flex">Details Of Court Case(if any)</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" required class="floating-label-field floating-label-field--s3" />
+                
+                <label class="floating-label">Name Of Court</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Case Number" required class="floating-label-field floating-label-field--s3"/>
+                <span class="d-block text-danger field-validation-valid" style="color:red;width:15px"></span>
+                <label class="floating-label">Case Number</label>
+            </div>
+        </div>
+        </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Name Of Opposition Party" required class="floating-label-field floating-label-field--s3" />
+                <span class="d-block text-danger field-validation-valid" style="color:red;width:15px"></span>
+                <label class="floating-label">Name Of Opposition Party</label>
+            </div>
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <label class="control-label lb-sm">I am</label>
+                <br />
+
+                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                <label class="form-check-label">Petitioner </label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <label class="form-check-label">Respondant</label>
+
+            </div>
+        </div>
+
+
+
+        </div>
+    </div>
+<div id="Declaration">
+    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Declaration</h6>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <h2 class="mb-3 d-flex">Declaration</h2>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-12">
+                <input type="checkbox" name="View">
+
+
+                I/WE hereby expressly warranty and declare that the above information provided in support of my/ our application is correct and genuine and We expressly acknowledge that I am / we are aware and accept that the decision on the application will be made by the DDA on the basis of the information supplied
+                by me/ us and may be immediately Cancelled in the event that such information is found to be false or misleading.<br />
+                <br />
+                Note: Please fill all Details Crefully.You can't make any changes after final Submission
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+    <div class="col-md-12">
+        
+            <input type="submit" value="Create" class="btn btn-theme " />
+            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+            @Html.ActionLink("Back", "Create", "SubstitutionMutationDetails", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+
+</form>
+        </div>
+
 
 
 
