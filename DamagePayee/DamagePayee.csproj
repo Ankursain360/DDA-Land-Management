@@ -55,10 +55,6 @@
     <None Include="Views\PaymentVeridonebyAccSection\Index.cshtml" />
     <None Include="Views\Payment\Index.cshtml" />
     <None Include="Views\ReliefReport\Index.cshtml" />
-    <None Include="Views\Shared\Error.cshtml" />
-    <None Include="Views\Shared\_CookieConsentPartial.cshtml" />
-    <None Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="Views\SubstitutionMutationApplicantsDetail\Create.cshtml" />
     <None Include="Views\SubstitutionMutationDetails\Create.cshtml" />
     <None Include="Views\_ViewImports.cshtml" />
