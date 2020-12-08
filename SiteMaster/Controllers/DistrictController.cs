@@ -40,6 +40,7 @@ namespace SiteMaster.Controllers
             var result = await _districtService.GetPagedDistrict(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -47,6 +48,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(District district)
         {
             try
