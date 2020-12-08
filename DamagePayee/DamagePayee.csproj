@@ -5,16 +5,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="DataAccess\**" />
+    <Compile Remove="wwwroot\Admin\**" />
     <Content Remove="DataAccess\**" />
+    <Content Remove="wwwroot\Admin\**" />
     <EmbeddedResource Remove="DataAccess\**" />
+    <EmbeddedResource Remove="wwwroot\Admin\**" />
     <None Remove="DataAccess\**" />
+    <None Remove="wwwroot\Admin\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Admin\img\" />
   </ItemGroup>
 
   <ItemGroup>
