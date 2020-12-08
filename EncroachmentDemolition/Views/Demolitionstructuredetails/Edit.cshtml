@@ -171,90 +171,105 @@
             </div>
         </div>
 
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
-                <label class="control-label lb-sm">End of Demolition Action</label>
-                <input type="Date" asp-for="EndOfDemolitionActionDate" class="form-control" />
-                <span asp-validation-for="EndOfDemolitionActionDate" class="text-danger"></span>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="EndOfDemolitionActionDate" type="date" placeholder="End of Demolition Action"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="EndOfDemolitionActionDate"></span>
+                    <label class="floating-label">End of Demolition Action</label>
+                </div>
             </div>
             <div class="form-group col-md-6">
-                @*<label class="control-label lb-sm">Photographs After Demolition</label>
-                <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" multiple />
-                <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>*@
-                <label class="control-label lb-sm">Photographs After Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
-                @{
+                       @{
                     if (Model.Demolitionstructureafterdemolitionphotofiledetails != null && Model.Demolitionstructureafterdemolitionphotofiledetails.Count > 0)
                     {
-                        <br />
+
+
+                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
                         foreach (var item in Model.Demolitionstructureafterdemolitionphotofiledetails)
                         {
-                            <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
-                            <br />
+                            <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(AfterPhotoFile += 1 ))</a>
+
                         }
-                        <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                        <span asp-validation-for="AfterPhotoFile" class="d-block text-danger field-validation-valid"></span>
                     }
                     else
                     {
-                        <input type="file" class="form-control" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                        <span asp-validation-for="AfterPhotoFile" class="text-danger"></span>
+                        <input type="file" class="floating-label-field floating-label-field--s3" asp-for="AfterPhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                        <span asp-validation-for="AfterPhotoFile" class="d-block text-danger field-validation-valid"></span>
                     }
                 }
+                <label class="floating-label">Photographs After Demolition (<span style="color:red;"> max size: 5 mb</span>)</label>
+
             </div>
         </div>
-        <div class="row">
+        <div class="row pt-3">
             <div class="col-md-12">
-                <div class="table-responsive">
-                    <table id="tbl_posts" class="table table-striped table-bordered">
-                        <thead class="thead">
-                            <tr>
-                                <th>Sr.No</th>
-                                <th>Name of Structure</th>
-                                <th>No of Structure</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model.DemolitionStructure)
-                            {
+                <div class="table-section bg-white border shadow rounded">
+                    <div class="table-responsive ">
+                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
                                 <tr>
-                                    <td>@(recNo += 1)</td>
-                                    <td>@(item.Structure.Name)</td>
-                                    <td>
-                                        <input class="form-control" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" />
-                                        <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
-                                    </td>
+                                    <th>Sr.No</th>
+                                    <th>Name of Structure</th>
+                                    <th>No of Structure</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.DemolitionStructure)
+                                {
+                                    <tr>
+                                        <td>@(recNo += 1)</td>
+                                        <td>@(item.Structure.Name)</td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="NoOfStructrure" type="text" value="@(item.NoOfStructrure)" placeholder="No Of Structrure"
+                                                       class="floating-label-field floating-label-field--s3" />
+                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br />
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label class="control-label lb-sm">Area Reclaimed(approx.)</label>
-                <input type="text" class="form-control" asp-for="AreaReclaimed" />
-                <span asp-validation-for="AreaReclaimed" class="text-danger"></span>
-            </div>
-            <div class="form-group col-md-6">
-                <label class="control-label lb-sm">Remarks, If Any </label>
-                <textarea type="text" asp-for="Remarks" class="form-control"></textarea>
-                <span asp-validation-for="Remarks" class="text-danger"></span>
-            </div>
-        </div>
+         </div>
+                <br />
+                <div class="row pt-3">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
+                            <label class="floating-label">Area Reclaimed(approx.)</label>
+                        </div>
 
-        <div class="row mt-md-4">
-            <div class="col-md-12">
-                <input type="submit" value="Update" class="btn btn-theme" />
-                @*<a asp-action="Index" class="btn btn-theme">Back </a>*@
-                @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea asp-for="Remarks" type="text" placeholder="Remarks"
+                                      class="floating-label-field floating-label-field--s3"></textarea>
+                            <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
+                            <label class="floating-label">Remarks, If Any</label>
+                        </div>
 
-            </div>
-        </div>
-       
+                    </div>
+                </div>
 
-    </form>
+                <div class="row mt-md-4">
+                    <div class="col-md-12">
+                        <input type="submit" value="Update" class="btn btn-theme" />
+                        @*<a asp-action="Index" class="btn btn-theme">Back </a>*@
+                        @Html.ActionLink("Back", "Index", "Demolitionstructuredetails", null, new { @class = "btn btn-theme" })
+
+                    </div>
+                </div>
+
+
+</form>
         
 </div>
 <environment include="Development">
