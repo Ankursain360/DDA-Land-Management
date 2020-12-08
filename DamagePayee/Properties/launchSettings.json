@@ -7,6 +7,7 @@
       "sslPort": 44348
     }
   },
+ 
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
@@ -14,6 +15,15 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "DamagePayee": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:1011;http://localhost:2011"
     }
   }
 }
+
