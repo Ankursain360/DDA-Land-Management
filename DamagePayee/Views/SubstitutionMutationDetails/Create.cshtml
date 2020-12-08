@@ -93,7 +93,7 @@
                         </div>
                     </div>
                 </div>*@
-            <h2 class="mb-3 d-flex">Previous Damage Assessee Detailst</h2>
+            <h2 class="my-3 sub-heading">Previous Damage Assessee Detailst</h2>
             @*<div class="row">*@
             @*<div class="col-sm-12">
                 <div class="table-responsive">
@@ -141,10 +141,14 @@
                                 
 
                                 <td>
-                                    
+
+                                    @*<div class="floating-label-wrap mb-3 mb-md-0">
+            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+        </div>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -165,7 +169,7 @@
                         </div>
                     </div>
                 </div>*@
-            <h2 class="mb-3 d-flex">New Damagee Assessee Details</h2>
+            <h2 class="my-3 sub-heading">New Damagee Assessee Details</h2>
 
             
             <div class="table-section bg-white border shadow rounded">
@@ -202,7 +206,7 @@
                                         <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
                                     </div>
                                 </td>
-                                <td>
+                                <td style="min-width:200px">
                                     <div class="floating-label-wrap">
                                         <select class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
                                             <option value="0">---Select---</option>
@@ -238,23 +242,27 @@
                                         <input type="text" class="floating-label-field floating-label-field--s3" />
                                     </div>
                                 </td>
-                                <td>
+                                <td style="min-width:200px">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <input type="file" class="floating-label-field floating-label-field--s3" />
                                     </div>
                                 </td>
-                                <td>
+                                <td style="min-width:200px">
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <input type="file" class="floating-label-field floating-label-field--s3" />
                                     </div>
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                            <i class="fa fa-plus"></i>
-                                        </button>*@
+            <i class="fa fa-plus"></i>
+        </button>*@
+                                    @*<div class="floating-label-wrap mb-3 mb-md-0">
+            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+        </div>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -278,7 +286,7 @@
                         </div>
                     </div>
                 </div>*@
-            <h2 class="mb-3 d-flex">Property Identification Details</h2>
+            <h2 class="my-3 sub-heading">Property Identification Details</h2>
             <div class="row">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -303,8 +311,8 @@
                     <div class="floating-label-wrap mb-3 mb-md-0">
 
                         <input type="text" placeholder="Floor No.(if purchased floor wise)" required class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid" style="color:red">*</span>
-                        <label class="floating-label">Floor No.(if purchased floor wise)</label>
+                        
+                        <label class="floating-label"> Floor No.(if purchased floor wise) <span class="text-danger" style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -377,7 +385,7 @@
                 </div>
             </div>
         </div>*@
-            <h2 class="mb-3 d-flex">Purpose Of Mutation/Change Of Title</h2>
+            <h2 class="my-3 sub-heading">Purpose Of Mutation/Change Of Title</h2>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-check theme">
@@ -386,6 +394,7 @@
 
                         <label class="form-check-label">Purchaser</label>
                     </div>
+                </div>
                     <div class="col-md-6">
                         <div class="form-check theme">
 
@@ -396,7 +405,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
         <div id="one">
             @*<div class="row" style="margin-bottom:35px;">
             <div class="col-sm-12">
@@ -407,7 +416,7 @@
                 </div>
             </div>
         </div>*@
-            <h2 class="mb-3 d-flex">If Purchased</h2>
+            <h2 class="my-3 sub-heading">If Purchased</h2>
             <div class="row">
                 <div class="col-md-12">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -488,7 +497,7 @@
                     </div>
                 </div>
             </div>*@
-            <h2 class="mb-3 d-flex">Upload Latest Address Proof</h2>
+            <h2 class="my-3 sub-heading">Upload Latest Address Proof</h2>
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
@@ -547,7 +556,7 @@
                 </div>
             </div>
         </div>*@
-    <h2 class="mb-3 d-flex">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h2>
+    <h2 class="my-3 sub-heading">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h2>
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -562,7 +571,7 @@
             </div>
             <br />
             <div class="col-md-3">
-                <a href="url">click for Download Affidavit Format</a>
+                <a class="badge badge-primary px-2" href="url">click for Download Affidavit Format</a>
             </div>
         </div>
 </div>
@@ -576,7 +585,7 @@
                 </div>
             </div>
         </div>*@
-    <h2 class="mb-3 d-flex">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h2>
+    <h2 class="my-3 sub-heading">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h2>
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -592,7 +601,7 @@
             </div>
             <br />
             <div class="col-md-3">
-                <a href="url">click for Download Indemnity Bond Format</a>
+                <a class="badge badge-primary px-2" href="url">click for Download Indemnity Bond Format</a>
             </div>
         </div>
     </div>
@@ -606,7 +615,7 @@
                 </div>
             </div>
         </div>*@
-    <h2 class="mb-3 d-flex">Litigation Status</h2>
+    <h2 class="my-3 sub-heading">Litigation Status</h2>
     <div class="form-row">
         <div class="col-md-6">
             <div class="form-check theme">
@@ -637,12 +646,12 @@
                 </div>
             </div>
         </div>*@
-    <h2 class="mb-3 d-flex">Details Of Court Case(if any)</h2>
+    <h2 class="my-3 sub-heading">Details Of Court Case(if any)</h2>
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input type="text" required class="floating-label-field floating-label-field--s3" />
+                <input type="text" required placeholder="Name Of Court" class="floating-label-field floating-label-field--s3" />
                 
                 <label class="floating-label">Name Of Court</label>
             </div>
@@ -656,7 +665,7 @@
             </div>
         </div>
         </div>
-    <div class="row">
+    <div class="row pt-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -670,7 +679,7 @@
         <div class="col-md-3">
             <div class="form-check theme">
                 <label class="control-label lb-sm">I am</label>
-                <br />
+                
 
                 <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
                 <label class="form-check-label">Petitioner </label>
@@ -699,7 +708,7 @@
                 </div>
             </div>
         </div>*@
-    <h2 class="mb-3 d-flex">Declaration</h2>
+    <h2 class="my-3 sub-heading">Declaration</h2>
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
