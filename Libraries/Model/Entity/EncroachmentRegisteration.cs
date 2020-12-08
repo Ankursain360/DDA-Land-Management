@@ -115,5 +115,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string ApprovalRemarks { get; set; }
+        [NotMapped]
+        public DateTime? Date { get; set; }
+       
     }
 }

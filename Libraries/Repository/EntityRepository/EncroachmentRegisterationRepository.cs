@@ -63,7 +63,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
-
+        public async Task<List<Locality>> GetAllLocalityList()//for demolition report -- ishu
+        {
+            return await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+        }
         public async Task<List<Division>> GetAllDivision(int zoneId)
         {
             return await _dbContext.Division.Where(x =>x.ZoneId==zoneId && x.IsActive == 1).ToListAsync();
@@ -199,7 +202,17 @@ namespace Libraries.Repository.EntityRepository
                 .OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)//added by ishu
+        {
+            return await _dbContext.EncroachmentRegisteration
+                .Where(x=>(x.LocalityId==model.Locality)
+                 && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate)
 
+                .Include(x => x.Locality)
+                //.Include(x => x.Demolitionstructuredetails)
+                .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+          
 
+        }
     }
 }
