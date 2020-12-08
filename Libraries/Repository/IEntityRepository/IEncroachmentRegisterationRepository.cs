@@ -29,6 +29,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetAllDepartment();
         Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
+        Task<List<Locality>> GetAllLocalityList();//for demolition report -- ishu
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);//for demolition report -- ishu
+
         Task<List<Khasra>> GetAllKhasraList(int localityId);
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);

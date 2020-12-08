@@ -27,7 +27,9 @@ namespace EncroachmentDemolition.Controllers
 
         public IConfiguration _configuration;
         string targetPathLayout = "";
-        public WatchWardController(IWatchandwardService watchandwardService, IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, IPropertyRegistrationService propertyregistrationService)
+        public WatchWardController(IWatchandwardService watchandwardService, IApprovalProccessService approvalproccessService,
+            IWorkflowTemplateService workflowtemplateService, IConfiguration configuration, 
+            IPropertyRegistrationService propertyregistrationService)
         {
             _workflowtemplateService = workflowtemplateService;
             _propertyregistrationService = propertyregistrationService;
@@ -126,6 +128,7 @@ namespace EncroachmentDemolition.Controllers
 
                     if (result)
                     {
+                        #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
                         var DataFlow = await dataAsync();
                         for (int i = 0; i < DataFlow.Count; i++)
                         {
@@ -151,6 +154,8 @@ namespace EncroachmentDemolition.Controllers
                                 break;
                             }
                         }
+
+                        #endregion 
 
                         ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
@@ -282,33 +287,33 @@ namespace EncroachmentDemolition.Controllers
 
                     if (result)
                     {
-                        var DataFlow = await dataAsync();
-                        for (int i = 0; i < DataFlow.Count; i++)
-                        {
-                            if (!DataFlow[i].parameterSkip)
-                            {
-                                watchandward.ApprovedStatus = 0;
-                                watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
-                                result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
-                                if (result)
-                                {
-                                    Approvalproccess approvalproccess = new Approvalproccess();
-                                    approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                    approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-                                    approvalproccess.ServiceId = watchandward.Id;
-                                    approvalproccess.SendFrom = SiteContext.UserId;
-                                    approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
-                                    approvalproccess.PendingStatus = 1;   //1
-                                    approvalproccess.Status = null;   //1
-                                    approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
-                                    approvalproccess.ModifiedBy = SiteContext.UserId;///May be Uncomment
-                                    approvalproccess.ModifiedDate = DateTime.Now;///May be Uncomment
-                                    result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
-                                }
+                        //var DataFlow = await dataAsync();
+                        //for (int i = 0; i < DataFlow.Count; i++)
+                        //{
+                        //    if (!DataFlow[i].parameterSkip)
+                        //    {
+                        //        watchandward.ApprovedStatus = 0;
+                        //        watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                        //        result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);  //Update Table details 
+                        //        if (result)
+                        //        {
+                        //            Approvalproccess approvalproccess = new Approvalproccess();
+                        //            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                        //            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                        //            approvalproccess.ServiceId = watchandward.Id;
+                        //            approvalproccess.SendFrom = SiteContext.UserId;
+                        //            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                        //            approvalproccess.PendingStatus = 1;   //1
+                        //            approvalproccess.Status = null;   //1
+                        //            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                        //            approvalproccess.ModifiedBy = SiteContext.UserId;///May be Uncomment
+                        //            approvalproccess.ModifiedDate = DateTime.Now;///May be Uncomment
+                        //            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                        //        }
 
-                                break;
-                            }
-                        }
+                        //        break;
+                        //    }
+                        //}
 
                         ViewBag.Message = Alert.Show(Messages.UpdateAndApprovalRecordSuccess, "", AlertType.Success);
                         var result1 = await _watchandwardService.GetAllWatchandward();
@@ -512,6 +517,7 @@ namespace EncroachmentDemolition.Controllers
 
         #endregion
 
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> dataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
@@ -519,6 +525,6 @@ namespace EncroachmentDemolition.Controllers
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
-
+        #endregion
     }
 }

@@ -43,6 +43,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> List([FromBody] WatchandwardApprovalSearchDto model)
         {
             var result = await _watchAndWardApprovalService.GetPagedWatchandward(model, SiteContext.UserId);
+            ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
         public async Task<IActionResult> Create(int id)
@@ -66,6 +67,8 @@ namespace EncroachmentDemolition.Controllers
             Data.LocalityList = await _watchandwardService.GetAllLocality();
             Data.KhasraList = await _watchandwardService.GetAllKhasra();
             Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
+            #region Approval Proccess At Further level start Added by Renu 27 Nov 2020
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
             {
@@ -91,7 +94,7 @@ namespace EncroachmentDemolition.Controllers
                             approvalproccess.Remarks = watchandward.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(watchandward.ApprovalStatus);
                             if (i == DataFlow.Count - 1)
-                                approvalproccess.SendTo =null;
+                                approvalproccess.SendTo = null;
                             else
                             {
                                 approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
@@ -103,12 +106,12 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 if (i == DataFlow.Count - 1)
                                 {
-                                    watchandward.ApprovedStatus = 0;
+                                    watchandward.ApprovedStatus = 1;
                                     watchandward.PendingAt = 0;
                                 }
                                 else
                                 {
-                                    watchandward.ApprovedStatus = 1;
+                                    watchandward.ApprovedStatus = 0;
                                     watchandward.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
                                 }
                                 result = await _watchandwardService.UpdateBeforeApproval(id, watchandward);
@@ -120,16 +123,10 @@ namespace EncroachmentDemolition.Controllers
                 }
             }
 
+            #endregion
+
             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");
-        }
-
-        public async Task<PartialViewResult> WatchWardView(int id)
-        {
-            var Data = await _watchandwardService.FetchSingleResult(id);
-            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
-
-            return PartialView("_WatchWardView", Data);
         }
 
         public async Task<PartialViewResult> HistoryDetails(int id)
@@ -137,6 +134,15 @@ namespace EncroachmentDemolition.Controllers
             var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
 
             return PartialView("_HistoryDetails", Data);
+        }
+
+        #region Watch & Ward  Details
+        public async Task<PartialViewResult> WatchWardView(int id)
+        {
+            var Data = await _watchandwardService.FetchSingleResult(id);
+            Data.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
+
+            return PartialView("_WatchWardView", Data);
         }
 
         public async Task<IActionResult> DownloadPhotoFile(int Id)
@@ -156,6 +162,9 @@ namespace EncroachmentDemolition.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
+        #endregion
+
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> DataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
@@ -165,7 +174,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
         {
             var DataFlow = await DataAsync();
 
@@ -181,5 +190,6 @@ namespace EncroachmentDemolition.Controllers
             }
             return Json(DataFlow);
         }
+        #endregion
     }
 }

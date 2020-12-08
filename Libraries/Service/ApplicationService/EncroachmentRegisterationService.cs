@@ -41,6 +41,11 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetAllDepartment();
         }
+
+        public async Task<List<Locality>> GetAllLocalityList()//for demolition report -- ishu
+        {
+            return await _encroachmentRegisterationRepository.GetAllLocalityList();
+        }
         public async Task<List<Division>> GetAllDivisionList(int zone)
         {
             return await _encroachmentRegisterationRepository.GetAllDivision(zone);
@@ -177,5 +182,22 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetEncroachmentRegisterationReportData( department,  zone,  division,  locality, fromdate, todate);
         }
+
+        public async Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations)
+        {
+            var result = await _encroachmentRegisterationRepository.FindBy(a => a.Id == id);
+            EncroachmentRegisteration model = result.FirstOrDefault();
+
+            model.ApprovedStatus = encroachmentRegisterations.ApprovedStatus;
+            model.PendingAt = encroachmentRegisterations.PendingAt;
+            _encroachmentRegisterationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)
+        {
+            return await _encroachmentRegisterationRepository.GetPagedDemolitionReport(model);  //demolition report ---ishu
+        }
+
     }
 }

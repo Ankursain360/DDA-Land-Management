@@ -46,7 +46,7 @@ function onChangeDivision(id) {
 };
 $(function () {
     $("#tbl_posts #tbl_posts_body .odd").remove();
-    $("#tbl_posts #add .form-control").attr("multiple", false);
+    $("#tbl_posts #add .floating-label-field").attr("multiple", false);
     if ($('#StatusOfLand option:selected').val() == 'DDA Land') {
         $("#divForLandStatus").show();
     }
@@ -96,7 +96,7 @@ $(function () {
                 element.find('.sn').html(size);
                 $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
                 $("#tbl_posts #add .add").remove();
-                $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
                 element.find(".add-record").hide();
                 element.find(".delete-record").show();
             }
@@ -125,11 +125,11 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+        $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        $("#tbl_posts #add .form-control").val('');
+        $("#tbl_posts #add .floating-label-field").val('');
         $("#tbl_posts #add #ReligiousStructure").val(null).trigger('change');
         $("#tbl_posts #add #ConstructionStatus").val(null).trigger('change');
         $("#tbl_posts #add #ReligiousStructure").val('No');

@@ -24,19 +24,14 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _annexureARepository = annexureARepository;
         }
-
-
         public async Task<List<Demolitionchecklist>> GetDemolitionchecklist()
         {
             return await _annexureARepository.GetDemolitionchecklist();
         }
-
         public async Task<List<Demolitionprogram>> GetDemolitionprogram()
         {
             return await _annexureARepository.GetDemolitionprogram();
         }
-
-
         public async Task<List<Demolitiondocument>> GetDemolitiondocument()
         {
             return await _annexureARepository.GetDemolitiondocument();
@@ -45,9 +40,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureARepository.GetFixingdemolition(id);
         }
-
-
-
         public async Task<bool> Create(Fixingdemolition model)
         {
             model.CreatedBy = 1;
@@ -56,9 +48,6 @@ namespace Libraries.Service.ApplicationService
             _annexureARepository.Add(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-
-
         //public async Task<bool> SaveFixingdemolition(Fixingdemolition fixingdemolition)
         //{
         //    fixingdemolition.CreatedBy = 1;
@@ -66,8 +55,6 @@ namespace Libraries.Service.ApplicationService
         //    fixingdemolition.IsActive = 1;
         //    return await _annexureARepository.SaveFixingdemolition(fixingdemolition);
         //}
-
-
         public async Task<bool> Savefixingchecklist(Fixingchecklist fixingchecklist)
         {
             fixingchecklist.CreatedBy = 1;
@@ -75,7 +62,6 @@ namespace Libraries.Service.ApplicationService
             fixingchecklist.IsActive = 1;
             return await _annexureARepository.Savefixingchecklist(fixingchecklist);
         }
-
         public async Task<List<Fixingchecklist>> Getfixingchecklist(int Id)
         {
             return await _annexureARepository.Getfixingchecklist(Id);
@@ -90,9 +76,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureARepository.Getfixingdocument(Id);
         }
-
-
-
         public async Task<bool> SaveFixingprogram(Fixingprogram fixingprogram)
         {
             fixingprogram.CreatedBy = 1;
@@ -100,9 +83,6 @@ namespace Libraries.Service.ApplicationService
             fixingprogram.IsActive = 1;
             return await _annexureARepository.SaveFixingprogram(fixingprogram);
         }
-
-
-
         public async Task<bool> SaveFixingdocument(Fixingdocument fixingdocument)
         {
             fixingdocument.CreatedBy = 1;
@@ -111,8 +91,9 @@ namespace Libraries.Service.ApplicationService
             return await _annexureARepository.SaveFixingdocument(fixingdocument);
         }
 
-
-
-
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model)
+        {
+            return await _annexureARepository.GetPagedDetails(model);
+        }
     }
 }

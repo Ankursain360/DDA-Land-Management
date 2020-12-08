@@ -63,7 +63,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
         }
-
+        public async Task<List<Locality>> GetAllLocalityList()//for demolition report -- ishu
+        {
+            return await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+        }
         public async Task<List<Division>> GetAllDivision(int zoneId)
         {
             return await _dbContext.Division.Where(x =>x.ZoneId==zoneId && x.IsActive == 1).ToListAsync();
@@ -81,7 +84,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
-            return await _dbContext.Locality.Where(x => x.DivisionId == divisionId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Locality.Where(x => x.ZoneId == divisionId && x.IsActive == 1).ToListAsync();
         }
 
         public async Task<List<Zone>> GetAllZone(int departmentId)
@@ -112,12 +115,18 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
             try {
+
+                var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
+                                      where x.WatchWard != null && x.IsActive == 1
+                                      select x.WatchWardId).ToArray(); 
+
                 return await _dbContext.Watchandward
                 .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x =>x.ApprovedStatus == 1 && x.IsActive == 1)
+                .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
+                 && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
                 //return await _dbContext.EncroachmentRegisteration
                 //                        .Include(x=> x.WatchWard)
@@ -193,7 +202,17 @@ namespace Libraries.Repository.EntityRepository
                 .OrderByDescending(x => x.Id).ToListAsync();
             return data;
         }
+        public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)//added by ishu
+        {
+            return await _dbContext.EncroachmentRegisteration
+                .Where(x=>(x.LocalityId==model.Locality)
+                 && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate)
 
+                .Include(x => x.Locality)
+                //.Include(x => x.Demolitionstructuredetails)
+                .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+          
 
+        }
     }
 }

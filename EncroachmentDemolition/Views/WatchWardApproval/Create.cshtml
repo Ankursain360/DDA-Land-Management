@@ -32,7 +32,7 @@
                         <option value="3">Approved</option>
                     </select>
                     <label asp-validation-for="ApprovalStatus" class="error"></label>
-                    <label class="floating-label">Status</label>
+                    <label class="floating-label">Status<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="ApprovalRemarks" type="text" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
                     <span asp-validation-for="ApprovalRemarks" class="text-danger"></span>
-                    <label class="floating-label">Remarks</label>
+                    <label class="floating-label">Remarks<span style="color:red">*</span></label>
                 </div>
             </div>
         </div>
@@ -54,7 +54,7 @@
         </div>
 </form>
 
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/watchandwardapproval.js"></script>
 </environment>

@@ -2,65 +2,59 @@
 
 
 <div class="pt-3">
+    <form id="frmUserProfileInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex"> Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div class="container-fluid">
-        <div class="panel">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
 
-            <div class="panel-body">
-                <form id="frmUserProfileInfo" >
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                  
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
+                            asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
-                                <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
-                                        asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
-                                        onchange="return onChange(this.options[this.selectedIndex].value);">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <label asp-validation-for="DepartmentId" class="error"></label>
 
-                                </select>
-                                <label asp-validation-for="DepartmentId" class="error"></label>
+                    <label class="floating-label">Department </label>
 
-                                <label class="floating-label">Department </label>
-
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-                                </select>
-                                <label asp-validation-for="ZoneId" class="error"></label>
-                                <label asp-for="ZoneId" class="floating-label">Zone </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row mt-md-3">
-                        <div class="col-md-6">
-                            <div class="floating-label-wrap">
-                                <select class="floating-label-field floating-label-field--s3" asp-for="RoleId"
-                                        asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
-                                    <option selected="selected" disabled="disabled" value="">--Select-- </option>
-
-                                </select>
-                                <label asp-validation-for="RoleId" class="error"></label>
-                                <label asp-for="RoleId" class="floating-label">Role </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row mt-md-3">
-                        <div class=" col-md-12">
-                            <button class="btn btn-theme " type="button" id="btnSaveProfileInfo">Update</button>
-                            @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
-
-                        </div>
-                    </div>
-                </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <label asp-validation-for="ZoneId" class="error"></label>
+                    <label asp-for="ZoneId" class="floating-label">Zone </label>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="RoleId"
+                            asp-items="@(new SelectList(Model.RoleList, "Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                    </select>
+                    <label asp-validation-for="RoleId" class="error"></label>
+                    <label asp-for="RoleId" class="floating-label">Role </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="button" id="btnSaveProfileInfo">Update</button>
+                @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+    </form>
+           
 
 </div>
 @*<form id="frmUserProfileInfo">

@@ -29,12 +29,14 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId)
         {
 
-            return await _dbContext.Watchandward.Where(x => x.IsActive == 1)
+            return await _dbContext.Watchandward
                                     .Include(x => x.PrimaryListNoNavigation)
                                     .Include(x => x.PrimaryListNoNavigation.Locality)
                                     .Include(x => x.Locality)
                                     .Include(x => x.Khasra)
-                                    .Where(x => x.ApprovedStatus == model.StatusId && x.PendingAt == userId)
+                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
+                                    && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                    )
                                     .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
         }
 

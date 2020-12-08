@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Zone>> GetAllZone(int departmentId); // To Get all data added by Praveen
         Task<List<Department>> GetAllDepartment(); // To Get all data added by Praveen
+        Task<List<Locality>> GetAllLocalityList();//for demolition report -- ishu
         Task<bool> Update(int id, EncroachmentRegisteration encroachmentRegisteration); // To Upadte Particular data added by Praveen
         Task<bool> Create(EncroachmentRegisteration encroachmentRegisteration);
         Task<EncroachmentRegisteration> FetchSingleResult(int id);  // To fetch Particular data added by Praveen
@@ -36,6 +37,8 @@ namespace Libraries.Service.IApplicationService
         Task<EncroachmentFirFileDetails> GetEncroachmentFirFileDetails(int encroachmentId);
         Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentReportData(EnchroachmentSearchDto enchroachmentSearchDto);
         Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate);
+        Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations);
+        Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model);
 
     }
 }

@@ -55,6 +55,8 @@ namespace Libraries.Model.Entity
         [Required]
         public string LocationAddressWithLandMark { get; set; }
         public byte IsActive { get; set; }
+        public int? ApprovedStatus { get; set; }
+        public int? PendingAt { get; set; }
         public virtual Department Department { get; set; }
         public virtual Department OtherDepartmentNavigation { get; set; }
         public virtual Division Division { get; set; }
@@ -107,7 +109,14 @@ namespace Libraries.Model.Entity
         //[Required]
         public List<string> ReferenceNoOnLocation { get; set; }
         public ICollection<Fixingdemolition> Fixingdemolition { get; set; }
-       
 
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+        [NotMapped]
+        public DateTime? Date { get; set; }
+       
     }
 }

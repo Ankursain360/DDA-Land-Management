@@ -1,46 +1,69 @@
 ﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register" })
 <br />
 <br />
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Details</h3></div>
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Locality</option>
-                        <option>Khasra No</option>
-                        <option>Primary List No.</option>
-                        <option>Status On Ground</option>
+<form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Filter</h3>
 
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
-                </div>
-                <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                </div>
-            </div>
+    <div class="row mt-md-3">
 
-            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/EncroachmentRegister/create" class="d-flex align-items-center btn btn-primary mr-2">
-                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                    <small>Add More</small>
-                </a>
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                    <small>Download</small>
-                </a>
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="0" checked>
+                <label class="form-check-label" for="radio">
+                    Pending
+                </label>
             </div>
         </div>
-        <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+        <div class="col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                <label class="form-check-label" for="radio">
+                    Approved
+                </label>
+            </div>
+        </div>
 
+    </div>
+</form>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" disabled="disabled">Select One</option>
+                    <option>Locality</option>
+                    <option>Khasra No</option>
+                    <option>Primary List No.</option>
+                    <option>Status On Ground</option>
+
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+            </div>
+        </div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+            <a href="/EncroachmentRegister/create" class="d-flex align-items-center btn btn-primary mr-2">
+                <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                <small>Add More</small>
+            </a>
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
         </div>
     </div>
-    <environment include="Development">
-        <script src="~/js/EncroachmentRegistraionIndex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/EncroachmentRegistraionIndex.min.js" asp-append-version="true"></script>
-    </environment>
+    <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+
+    </div>
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/encroachmentregistraionindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/encroachmentregistraionindex.min.js" asp-append-version="true"></script>
+</environment>

@@ -1,368 +1,374 @@
 ﻿@model Libraries.Model.Entity.Fixingdemolition
 @await Component.InvokeAsync("PageHeader", new { pageName = "Request For Fixing of Demolition Programme" })
-
 @{ int recNo = 0;}
-
 @{int FirFile = 0;}
 @{int LocationMapFile = 0;}
 @{int PhotoFile = 0;}
-
-
 @*<style>
-    .bg {
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-    }
-</style>*@
-
+        .bg {
+            background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
+        }
+    </style>*@
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
-        <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-            <h3 class="my-3 d-flex sub-heading">Inspection/Encroachment Register Details </h3>
-        </a>
-        <div class="collapse" id="collapseExample">
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" disabled
-                                asp-for="Encroachment.DepartmentId"
-                                asp-items="@(new SelectList(Model.Encroachment.DepartmentList,"Id","Name"))"
-                                onchange="return onChangeDepartment(this.options[this.selectedIndex].value);" style="width:100%;">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label class="floating-label">Department</label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" disabled
-                                asp-for="Encroachment.ZoneId"
-                                asp-items="@(new SelectList(Model.Encroachment.ZoneList,"Id","Name"))"
-                                onchange="return onChangeZone(this.options[this.selectedIndex].value)"
-                                style="width:100%;">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label class="floating-label">Zone</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" disabled
-                                asp-items="@(new SelectList(Model.Encroachment.DivisionList,"Id","Name"))"
-                                onchange="return onChangeDivision(this.options[this.selectedIndex].value)"
-                                asp-for="Encroachment.DivisionId"
-                                style="width:100%;">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label class="floating-label">Division</label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" disabled
-                                asp-for="Encroachment.LocalityId"
-                                asp-items="@(new SelectList(Model.Encroachment.LocalityList,"Id","Name"))"
-                                style="width:100%;">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label class="floating-label">Locality(Village) Name</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Encroachment.KhasraNo" placeholder="Khasra No" disabled class="floating-label-field floating-label-field--s3" />
-                        <label class="floating-label">Khasra No.</label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="Date" asp-for="Encroachment.EncrochmentDate" placeholder="Date" disabled class="floating-label-field floating-label-field--s3" />
-                        <label class="floating-label">Date</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Encroachment.Area" placeholder="Area" disabled
-                               class="floating-label-field floating-label-field--s3 numbers" />
-                        <label class="floating-label">Area</label>
-                    </div>
-                </div>
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea asp-for="Encroachment.LocationAddressWithLandMark" placeholder="Location/Address with land mark" disabled
-                                  class="floating-label-field floating-label-field--s3 "></textarea>
-                        <label class="floating-label">Location/Address with land mark</label>
-                    </div>
-                </div>
-            </div>
-            <div id="Divclsification">
-                <h2 class="my-3 sub-heading">Details of Encroachment</h2>
-                <div class="table-section bg-white border shadow rounded">
-                    <div class="table-responsive ">
-                        <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Name of Structure</th>
-                                    <th>Construction Status</th>
-                                    <th>Area[Approx.]</th>
-                                    <th>Type[residential/religious/compercial]</th>
-                                    <th>Date/Age of Encroachment</th>
-                                    <th>Reference No. on  Location</th>
-                                    <th>Count of Structure</th>
-                                    <th>Operation</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_posts_body">
-                            </tbody>
-                            <tbody id="add">
-                                <tr id="">
-                                    <td style="text-align:center;"><span class="sn">1</span></td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.NameOfStructure" placeholder="Name Of Structure" id="NameOfStructure" disabled
-                                                   class="floating-label-field floating-label-field--s3 " />
+        <input type="hidden" asp-for="Encroachment.WatchWardId" />
+        <div id="WatchWardDetailsDiv">
 
-                                        </div>
-                                        @*<input type="text" asp-for="Encroachment.NameOfStructure" class="form-control" id="NameOfStructure" disabled />*@
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap">
-                                            <select class="floating-label-field floating-label-field--s3" disabled
-                                                    asp-for="Encroachment.ConstructionStatus" style="width:100%;">
-                                                <option value="Select">Select</option>
-                                                <option value="Kachcha">Kachcha</option>
-                                                <option value="Pakka">Pakka</option>
-                                                <option value="Under Construction">Under Construction</option>
-                                            </select>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.AreaApprox" placeholder="Area Approx" id="AreaApprox" disabled
-                                                   class="floating-label-field floating-label-field--s3 " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.Type" type="text" placeholder="Type" id="Type" disabled
-                                                   class="floating-label-field floating-label-field--s3 " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.DateOfEncroachment" type="date" placeholder="Date Of Encroachment" id="DateOfEncroachment" disabled
-                                                   class="floating-label-field floating-label-field--s3 " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.ReferenceNoOnLocation" type="text" placeholder="Reference No On Location" id="ReferenceNoOnLocation" disabled
-                                                   class="floating-label-field floating-label-field--s3 number " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="Encroachment.CountOfStructure" type="text" placeholder="Count Of Structure" id="CountOfStructure" disabled
-                                                   class="floating-label-field floating-label-field--s3 onlynumbers " />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            @*<a class="badge badge-primary px-2 delete-record" data-id="0" style="display:none;"><i class="fa fa-trash"></i></a>*@
-                                            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-
-                                            <a class="btn btn-theme  add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-                </div>
-            </div>
-            <br /> <br />
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" disabled
-                                asp-for="Encroachment.StatusOfLand"
-                                onchange="onChangeLandStatus(this.value)" style="width:100%;">
-                            <option value="DDA Land">DDA Land</option>
-                            <option value="Non DDA Land">Non DDA Land</option>
-                        </select>
-                        <label class="floating-label">Staus of Land</label>
-                    </div>
-                </div>
-            </div>
-            <div id="divForLandStatus">
+        </div>
+        <div enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <a data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                <h3 class="my-3 d-flex sub-heading">View Inspection/Encroachment Register Details </h3>
+            </a>
+            <div class="collapse" id="collapseExample">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment.IsPossession"
-                                    onchange="onChangePossationStatus(this.value)" disabled style="width:100%;">
-                                <option value="Yes">Yes</option>
-                                <option value="No">No</option>
+                            <select class="floating-label-field floating-label-field--s3" disabled
+                                    asp-for="Encroachment.DepartmentId"
+                                    asp-items="@(new SelectList(Model.Encroachment.DepartmentList,"Id","Name"))"
+                                    onchange="return onChangeDepartment(this.options[this.selectedIndex].value);" style="width:100%;">
+                                <option value="">--Select--</option>
                             </select>
-                            <label class="floating-label">Possession</label>
+                            <label class="floating-label">Department</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" disabled
+                                    asp-for="Encroachment.ZoneId"
+                                    asp-items="@(new SelectList(Model.Encroachment.ZoneList,"Id","Name"))"
+                                    onchange="return onChangeZone(this.options[this.selectedIndex].value)"
+                                    style="width:100%;">
+                                <option value="">--Select--</option>
+                            </select>
+                            <label class="floating-label">Zone</label>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6" id="divPossessionGroup" style="display:block;">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="hidden" asp-for="Encroachment.PossessionType" id="PossessionType" value="Formal Possession" disabled />
-                                <input type="hidden" asp-for="Id" id="hdnId" />
-                                <input type="hidden" asp-for="IsActive" value="1" />
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpPossession" id="rdbFormal" checked disabled>
-                                    <label class="form-check-label" for="radio">
-                                        Formal Possession
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpPossession" id="rdbFlexible" disabled>
-                                    <label class="form-check-label" for="radio">
-                                        Physical Possession
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6" id="divDepartment" style="display:block;">
+                    <div class="form-group col-md-6">
                         <div class="floating-label-wrap">
                             <select class="floating-label-field floating-label-field--s3" disabled
-                                    asp-for="Encroachment.OtherDepartment"
-                                    asp-items="@(new SelectList(Model.Encroachment.DepartmentList,"Id","Name"))" style="width:100%;">
-                                <option value="0">Select</option>
+                                    asp-items="@(new SelectList(Model.Encroachment.DivisionList,"Id","Name"))"
+                                    asp-for="Encroachment.DivisionId"
+                                    style="width:100%;">
+                                <option value="">--Select--</option>
                             </select>
-                            <span asp-validation-for="Encroachment.OtherDepartment" class="text-danger"></span>
-                            <label class="floating-label">Other Department </label>
+                            <label class="floating-label">Division</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" disabled
+                                    asp-for="Encroachment.LocalityId"
+                                    asp-items="@(new SelectList(Model.Encroachment.LocalityList,"Id","Name"))"
+                                    style="width:100%;">
+                                <option value="">--Select--</option>
+                            </select>
+                            <label class="floating-label">Locality(Village) Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="Encroachment.KhasraNo" placeholder="Khasra No" disabled class="floating-label-field floating-label-field--s3" />
+                            <label class="floating-label">Khasra No.</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="Date" asp-for="Encroachment.EncrochmentDate" placeholder="Date" disabled class="floating-label-field floating-label-field--s3" />
+                            <label class="floating-label">Date</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input asp-for="Encroachment.Area" placeholder="Area" disabled
+                                   class="floating-label-field floating-label-field--s3 numbers" />
+                            <label class="floating-label">Area</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea asp-for="Encroachment.LocationAddressWithLandMark" placeholder="Location/Address with land mark" disabled
+                                      class="floating-label-field floating-label-field--s3 "></textarea>
+                            <label class="floating-label">Location/Address with land mark</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="Divclsification">
+                    <h2 class="my-3 sub-heading">Details of Encroachment</h2>
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Name of Structure</th>
+                                        <th>Construction Status</th>
+                                        <th>Area[Approx.]</th>
+                                        <th>Type[residential/religious/compercial]</th>
+                                        <th>Religious Structure</th>
+                                        <th>Age of Encroachment</th>
+                                        <th>Reference No. on  Location</th>
+                                        <th>Count of Structure</th>
+                                        @*<th>Operation</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody id="tbl_posts_body">
+                                </tbody>
+                                <tbody id="add">
+                                    <tr id="">
+                                        <td style="text-align:center;"><span class="sn">1</span></td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.NameOfStructure" placeholder="Name Of Structure" id="NameOfStructure" disabled
+                                                       class="floating-label-field floating-label-field--s3 " />
+
+                                            </div>
+                                            @*<input type="text" asp-for="Encroachment.NameOfStructure" class="form-control" id="NameOfStructure" disabled />*@
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap">
+                                                <select class="floating-label-field floating-label-field--s3" disabled
+                                                        asp-for="Encroachment.ConstructionStatus" style="width:100%;">
+                                                    <option value="Select">Select</option>
+                                                    <option value="Kachcha">Kachcha</option>
+                                                    <option value="Pakka">Pakka</option>
+                                                    <option value="Under Construction">Under Construction</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.AreaApprox" placeholder="Area Approx" id="AreaApprox" disabled
+                                                       class="floating-label-field floating-label-field--s3 " />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.Type" type="text" placeholder="Type" id="Type" disabled
+                                                       class="floating-label-field floating-label-field--s3 " />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap">
+                                                <select asp-for="Encroachment.ReligiousStructure" disabled class="floating-label-field floating-label-field--s3">
+                                                    <option value="No">No</option>
+                                                    <option value="Yes">Yes</option>
+                                                </select>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.DateOfEncroachment"  placeholder="Date Of Encroachment" id="DateOfEncroachment" disabled
+                                                       class="floating-label-field floating-label-field--s3 onlynumbers" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.ReferenceNoOnLocation" type="text" placeholder="Reference No On Location" id="ReferenceNoOnLocation" disabled
+                                                       class="floating-label-field floating-label-field--s3 number " />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <input asp-for="Encroachment.CountOfStructure" type="text" placeholder="Count Of Structure" id="CountOfStructure" disabled
+                                                       class="floating-label-field floating-label-field--s3 onlynumbers " />
+                                            </div>
+                                        </td>
+                                        @*<td>
+                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+
+                                                <a class="btn btn-theme  add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                            </div>
+                                        </td>*@
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+                <br /> <br />
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3" disabled
+                                    asp-for="Encroachment.StatusOfLand"
+                                    onchange="onChangeLandStatus(this.value)" style="width:100%;">
+                                <option value="DDA Land">DDA Land</option>
+                                <option value="Non DDA Land">Non DDA Land</option>
+                            </select>
+                            <label class="floating-label">Staus of Land</label>
+                        </div>
+                    </div>
+                </div>
+                <div id="divForLandStatus">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="Encroachment.IsPossession"
+                                        onchange="onChangePossationStatus(this.value)" disabled style="width:100%;">
+                                    <option value="Yes">Yes</option>
+                                    <option value="No">No</option>
+                                </select>
+                                <label class="floating-label">Possession</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6" id="divPossessionGroup" style="display:block;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="hidden" asp-for="Encroachment.PossessionType" id="PossessionType" value="Formal Possession" disabled />
+                                    <input type="hidden" asp-for="Id" id="hdnId" />
+                                    <input type="hidden" asp-for="IsActive" value="1" />
+                                    <div class="form-check theme">
+                                        <input class="form-check-input" type="radio" name="grpPossession" id="rdbFormal" checked disabled>
+                                        <label class="form-check-label" for="radio">
+                                            Formal Possession
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check theme">
+                                        <input class="form-check-input" type="radio" name="grpPossession" id="rdbFlexible" disabled>
+                                        <label class="form-check-label" for="radio">
+                                            Physical Possession
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="divDepartment" style="display:block;">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" disabled
+                                        asp-for="Encroachment.OtherDepartment"
+                                        asp-items="@(new SelectList(Model.Encroachment.DepartmentList,"Id","Name"))" style="width:100%;">
+                                    <option value="0">Select</option>
+                                </select>
+                                <span asp-validation-for="Encroachment.OtherDepartment" class="text-danger"></span>
+                                <label class="floating-label">Other Department </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            @{
+                                if (Model.Encroachment.EncroachmentFirFileDetails != null && Model.Encroachment.EncroachmentFirFileDetails.Count > 0)
+                                {
+                                    <input type="file" asp-for="Encroachment.Firfile" placeholder="Fir Details" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    foreach (var item in Model.Encroachment.EncroachmentFirFileDetails)
+                                    {
+                                        <a asp-action="DownloadFirfile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(FirFile += 1) )</a>
+
+                                    }
+                                    <span asp-validation-for="Encroachment.Firfile" class="text-danger"></span>
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="Encroachment.Firfile" id="Firfile"
+                                           class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    <span asp-validation-for="Encroachment.Firfile" class="text-danger"></span>
+                                }
+                            }
+                            <label class="floating-label">FIR Details</label>
+
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" asp-for="Encroachment.PoliceStation" placeholder="Police Station" disabled class="floating-label-field floating-label-field--s3" />
+                            <span asp-validation-for="Encroachment.PoliceStation" class="text-danger"></span>
+                            <label class="floating-label">Police Station</label>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input type="text" asp-for="Encroachment.SecurityGuardOnDuty" placeholder="Security Guard on Duty" disabled class="floating-label-field floating-label-field--s3" />
+                            <span asp-validation-for="Encroachment.SecurityGuardOnDuty" class="text-danger"></span>
+                            <label class="floating-label">Security Guard on Duty</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            @{
+                                if (Model.Encroachment.EncroachmentLocationMapFileDetails != null && Model.Encroachment.EncroachmentLocationMapFileDetails.Count > 0)
+                                {
+                                    <input type="file" asp-for="Encroachment.LocationMapFile" id="LocationMapFile" placeholder="Location Map" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    foreach (var item in Model.Encroachment.EncroachmentLocationMapFileDetails)
+                                    {
+                                        <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(LocationMapFile += 1) )</a>
+
+                                    }
+                                    <span asp-validation-for="Encroachment.LocationMapFile" class="text-danger"></span>
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="Encroachment.LocationMapFile" id="LocationMapFile" placeholder="Location Map" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    <span asp-validation-for="Encroachment.LocationMapFile" class="text-danger"></span>
+                                }
+                            }
+                            <label class="floating-label">Location Map</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+
+                            @{
+                                if (Model.Encroachment.EncroachmentPhotoFileDetails != null && Model.Encroachment.EncroachmentPhotoFileDetails.Count > 0)
+                                {
+                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    foreach (var item in Model.Encroachment.EncroachmentPhotoFileDetails)
+                                    {
+                                        <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotoFile += 1 ))</a>
+
+                                    }
+                                    <span asp-validation-for="Encroachment.PhotoFile" class="text-danger"></span>
+                                }
+                                else
+                                {
+                                    <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
+                                    <span asp-validation-for="Encroachment.PhotoFile" class="text-danger"></span>
+                                }
+                            }
+                            <label class="floating-label">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <textarea type="text" asp-for="Encroachment.Remarks" placeholder="Remarks" disabled class="floating-label-field floating-label-field--s3"></textarea>
+                            <span asp-validation-for="Encroachment.Remarks" class="text-danger"></span>
+                            <label class="floating-label">Remarks</label>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row pt-3">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        @{
-                            if (Model.Encroachment.EncroachmentFirFileDetails != null && Model.Encroachment.EncroachmentFirFileDetails.Count > 0)
-                            {
-                                <input type="file" asp-for="Encroachment.Firfile" placeholder="Fir Details" id="Firfile" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                foreach (var item in Model.Encroachment.EncroachmentFirFileDetails)
-                                {
-                                    <a asp-action="DownloadFirfile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(FirFile += 1) )</a>
 
-                                }
-                                <span asp-validation-for="Encroachment.Firfile" class="text-danger"></span>
-                            }
-                            else
-                            {
-                                <input type="file" asp-for="Encroachment.Firfile" id="Firfile"
-                                       class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="Encroachment.Firfile" class="text-danger"></span>
-                            }
-                        }
-                        <label class="floating-label">FIR Details</label>
-
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Encroachment.PoliceStation" placeholder="Police Station" disabled class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="Encroachment.PoliceStation" class="text-danger"></span>
-                        <label class="floating-label">Police Station</label>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row ">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" asp-for="Encroachment.SecurityGuardOnDuty" placeholder="Security Guard on Duty" disabled class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="Encroachment.SecurityGuardOnDuty" class="text-danger"></span>
-                        <label class="floating-label">Security Guard on Duty</label>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        @{
-                            if (Model.Encroachment.EncroachmentLocationMapFileDetails != null && Model.Encroachment.EncroachmentLocationMapFileDetails.Count > 0)
-                            {
-                                <input type="file" asp-for="Encroachment.LocationMapFile" id="LocationMapFile" placeholder="Location Map" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                foreach (var item in Model.Encroachment.EncroachmentLocationMapFileDetails)
-                                {
-                                    <a asp-action="DownloadLocationMapFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(LocationMapFile += 1) )</a>
-
-                                }
-                                <span asp-validation-for="Encroachment.LocationMapFile" class="text-danger"></span>
-                            }
-                            else
-                            {
-                                <input type="file" asp-for="Encroachment.LocationMapFile" id="LocationMapFile" placeholder="Location Map" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="Encroachment.LocationMapFile" class="text-danger"></span>
-                            }
-                        }
-                        <label class="floating-label">Location Map</label>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        @{
-                            if (Model.Encroachment.EncroachmentPhotoFileDetails != null && Model.Encroachment.EncroachmentPhotoFileDetails.Count > 0)
-                            {
-                                <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                foreach (var item in Model.Encroachment.EncroachmentPhotoFileDetails)
-                                {
-                                    <a asp-action="DownloadPhotoFile" asp-route-id="@item.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotoFile += 1 ))</a>
-
-                                }
-                                <span asp-validation-for="Encroachment.PhotoFile" class="text-danger"></span>
-                            }
-                            else
-                            {
-                                <input type="file" placeholder="Photo" class="floating-label-field floating-label-field--s3" asp-for="Encroachment.PhotoFile" id="PhotoFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
-                                <span asp-validation-for="Encroachment.PhotoFile" class="text-danger"></span>
-                            }
-                        }
-                        <label class="floating-label">Photo (<span style="color:red;"> max size 5 mb</span>)</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea type="text" asp-for="Encroachment.Remarks" placeholder="Remarks" disabled class="floating-label-field floating-label-field--s3"></textarea>
-                        <span asp-validation-for="Encroachment.Remarks" class="text-danger"></span>
-                        <label class="floating-label">Remarks</label>
-                    </div>
-                </div>
-            </div>
         </div>
-
-
 
         <form asp-action="Create" enctype="multipart/form-data">
             <h3 class="my-3 d-flex sub-heading">Summary</h3>
             <input type="hidden" asp-for="EncroachmentId" value="@(Model.Encroachment.Id)" />
-
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
@@ -389,10 +395,7 @@
 
                                     </td>
                                 </tr>
-
                             }
-
-
                         </tbody>
                     </table>
                 </div>
@@ -414,11 +417,8 @@
                                 <tr>
                                     <td>@(recNo += 1)</td>
                                     <td>@(item.ChecklistDescription)</td>
-
-
                                     @*<td>1</td>
-                                <td>Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached</td>*@
-
+                                        <td>Order/Approval of Religious Committe (GNCTD) for demolition of religious structures obtained and attached</td>*@
                                     <td>
                                         <div class="floating-label-wrap">
                                             <select class="floating-label-field floating-label-field--s3"
@@ -429,44 +429,31 @@
                                             </select>
                                             @*<label class="floating-label">Department</label>*@
                                             <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />
-
                                         </div>
-
-
                                         @*<select style="height:30px;   background-color: #dddddd;" asp-for="ChecklistDetails" required class="form-control">
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                        <option value="Not Required">Not Required</option>
-                                    </select>
-                                    <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />*@
-
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                                <option value="Not Required">Not Required</option>
+                                            </select>
+                                            <input type="hidden" asp-for="DemolitionChecklistId" value="@(item.Id)" />*@
                                     </td>
                                 </tr>
-
-
-
-
-
                                 @*<tr>
-                                <td>2</td>
-                                <td>Whether any structure proposed for demolition is protected under any Act including special provisio
-                                <td>
-                                    <select style="height:30px; background-color: #dddddd;" required class="form-control">
-                                        <option>Yes</option>
-                                        <option>No</option>
-                                        <option>Not Required</option>
-                                    </select>
-                                </td>
-                            </tr>*@
-
-
+                                        <td>2</td>
+                                        <td>Whether any structure proposed for demolition is protected under any Act including special provisio
+                                        <td>
+                                            <select style="height:30px; background-color: #dddddd;" required class="form-control">
+                                                <option>Yes</option>
+                                                <option>No</option>
+                                                <option>Not Required</option>
+                                            </select>
+                                        </td>
+                                    </tr>*@
                             }
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <h3 class="my-3 d-flex sub-heading">Encloures</h3>
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive ">
@@ -488,44 +475,38 @@
                                     <td>
                                         @item.DocumentName
                                     </td>
-
                                     <td>
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input type="file" class="floating-label-field floating-label-field--s3" asp-for="DocumentDetails" id="PhotoFile" multiple placeholder="file">
                                             <span class="d-block text-danger field-validation-valid"></span>
                                             @*<label for="field-1" class="floating-label">Upload layout Plan</label>*@
                                             <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />
-
                                         </div>
-
-
                                         @*<input type="file" class="form-control" asp-for="DocumentDetails" id="PhotoFile" multiple />
-                                    <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />*@
-
+                                            <input type="hidden" asp-for="DemolitionDocumentId" value="@(item.Id)" />*@
                                     </td>
                                 </tr>
                             }
-
-
                         </tbody>
                     </table>
                 </div>
             </div>
-
             <div class="row mt-md-4">
                 <div class="col-md-12">
                     <input type="submit" value="Create" class="btn btn-theme" />
                     @*<a asp-action="Index" class="btn btn-theme">Back </a>*@
                     @Html.ActionLink("Back", "Index", "AnnexureA", null, new { @class = "btn btn-theme" })
-
                 </div>
             </div>
-
         </form>
-                  
-
-
-        </div>
+    </div>
 </div>
-    <br />
-    <br />
+<br />
+<br />
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/annexureacreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/annexureacreate.min.js" asp-append-version="true"></script>
+</environment>

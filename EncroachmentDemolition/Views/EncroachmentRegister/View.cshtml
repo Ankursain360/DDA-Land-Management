@@ -121,7 +121,7 @@
                             <th>Age of Encroachment</th>
                             <th>Reference No. on  Location</th>
                             <th>Count of Structure</th>
-                            <th>Operation</th>
+                            @*<th>Operation</th>*@
                         </tr>
                     </thead>
                     <tbody id="tbl_posts_body">
@@ -131,56 +131,58 @@
                             <td style="text-align:center;"><span class="sn">1</span></td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" asp-for="NameOfStructure" class="floating-label-field floating-label-field--s3" id="NameOfStructure" /></div>
+                                    <input type="text" asp-for="NameOfStructure" disabled class="floating-label-field floating-label-field--s3" id="NameOfStructure" />
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap">
-                                    <select disabled asp-for="ConstructionStatus" class="floating-label-field floating-label-field--s3">
+                                    <select asp-for="ConstructionStatus" disabled class="floating-label-field floating-label-field--s3">
                                         <option value="Select">Select</option>
                                         <option value="Kachcha">Kachcha</option>
                                         <option value="Pakka">Pakka</option>
                                         <option value="Under Construction">Under Construction</option>
                                     </select>
-                                    </div>
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" asp-for="AreaApprox" class="floating-label-field floating-label-field--s3 numbers" id="AreaApprox" /></div>
+                                    <input type="text" asp-for="AreaApprox" disabled class="floating-label-field floating-label-field--s3 numbers" id="AreaApprox" />
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" asp-for="Type" class="form-control" id="Type" />
-                                    </div>
+                                    <input type="text" asp-for="Type" disabled class="form-control" id="Type" />
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap">
-                                    <select disabled asp-for="ReligiousStructure" class="floating-label-field floating-label-field--s3">
+                                    <select asp-for="ReligiousStructure" disabled class="floating-label-field floating-label-field--s3">
                                         <option value="No">No</option>
                                         <option value="Yes">Yes</option>
                                     </select>
-                                    </div>
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DateOfEncroachment" class="floating-label-field floating-label-field--s3 onlynumbers" id="DateOfEncroachment" />
-                                    </div>
+                                    <input asp-for="DateOfEncroachment" disabled class="floating-label-field floating-label-field--s3 onlynumbers" id="DateOfEncroachment" />
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="ReferenceNoOnLocation" type="text" class="floating-label-field floating-label-field--s3 number" id="ReferenceNoOnLocation" />
-                                    </div>
+                                    <input asp-for="ReferenceNoOnLocation" type="text" disabled class="floating-label-field floating-label-field--s3 number" id="ReferenceNoOnLocation" />
+                                </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="CountOfStructure" type="text" class="floating-label-field floating-label-field--s3 onlynumbers" id="CountOfStructure" />
-                                    </div>
+                                    <input asp-for="CountOfStructure" type="text" disabled class="floating-label-field floating-label-field--s3 onlynumbers" id="CountOfStructure" />
+                                </div>
                             </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                    <a class="btn dda-pageheading add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                    </div>
-                            </td>
+                            @*<td>
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <a class="btn dda-pageheading delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                    <a class="btn dda-pageheading add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                </div>
+            </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -215,7 +217,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row pt-3">
             <div class="col-md-6" id="divPossessionGroup" style="display:block;">
                 <div class="row">
                     <div class="col-md-6">
@@ -357,10 +359,10 @@
             </div>
         </div>
 </form>
-       
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />    
 <environment include="Development">
-    <script src="~/js/EncroachmentRegisterationView.js"></script>
+    <script src="~/js/encroachmentregisterationview.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/EncroachmentRegisterationView.min.js" asp-append-version="true"></script>
+    <script src="~/js/encroachmentregisterationview.min.js" asp-append-version="true"></script>
 </environment>
