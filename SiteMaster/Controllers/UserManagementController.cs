@@ -21,18 +21,16 @@ namespace SiteMaster.Controllers
 {
     public class UserManagementController : BaseController
     {
-        private readonly IUserService _userService;
         private readonly IUserProfileService _userProfileService;
         private readonly IDepartmentService _departmentService;
         private readonly IZoneService _zoneService;
         private readonly UserManager<ApplicationUser> _userManager;
-        public UserManagementController(IUserService userService,
+        public UserManagementController(
             IDepartmentService departmentService,
             IZoneService zoneService,
             IUserProfileService userProfileService,
             UserManager<ApplicationUser> userManager)
         {
-            _userService = userService;
             _departmentService = departmentService;
             _zoneService = zoneService;
             _userProfileService = userProfileService;
@@ -133,7 +131,8 @@ namespace SiteMaster.Controllers
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
-            return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
+            //return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
+            return Json("");
         }
 
         [HttpPost]

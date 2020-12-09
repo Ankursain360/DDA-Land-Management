@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<bool> Any(int id, string name);
         Task<List<Module>> GetAllModuleList();
-        Task<List<Role>> GetRolelist();
-        Task<List<User>> GetUserlist();
+        //Task<List<Role>> GetRolelist();
+        //Task<List<User>> GetUserlist();
     }
 }
