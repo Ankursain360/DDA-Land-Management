@@ -1,32 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
+using Service.IApplicationService;
+using DamagePayee.Filters;
 using DamagePayee.Models;
+using System.Diagnostics;
+using DamagePayee.Helper;
+using System.Threading.Tasks;
+using Dto.Master;
 
 
 namespace DamagePayee.Controllers
 {
-    public class HomeController : Controller
+    [TypeFilter(typeof(CustomExceptionHandlerFilter))]
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ISiteContext siteContext,
+           IUserProfileService userProfileService)
         {
-            _logger = logger;
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
         }
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            return View(user);
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Logout()
+        {
+            return SignOut("Cookies", "oidc");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

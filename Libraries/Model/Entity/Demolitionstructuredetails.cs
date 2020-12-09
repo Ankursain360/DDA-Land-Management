@@ -66,5 +66,6 @@ namespace Libraries.Model.Entity
         public ICollection<Demolitionstructure> Demolitionstructure { get; set; }
         public ICollection<Demolitionstructureafterdemolitionphotofiledetails> Demolitionstructureafterdemolitionphotofiledetails { get; set; }
         public ICollection<Demolitionstructurebeforedemolitionphotofiledetails> Demolitionstructurebeforedemolitionphotofiledetails { get; set; }
+        
     }
 }
