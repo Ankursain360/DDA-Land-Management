@@ -232,5 +232,11 @@
     "inputFiles": [
       "wwwroot/js/fixingdemolitionindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/annexureaapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/annexureaapprovalindex.js"
+    ]
   }
 ]

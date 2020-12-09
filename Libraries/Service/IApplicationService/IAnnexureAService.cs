@@ -29,5 +29,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveFixingprogram(Fixingprogram fixingprogram);//save 
         Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model);
+        Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition);
     }
 }
