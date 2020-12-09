@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\annexureaapprovalindex.min.js" />
     <Content Remove="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
   </ItemGroup>
   <ItemGroup>
@@ -55,10 +56,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\annexureaapprovalindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\annexureaapprovalindex.min.js" />
     <None Include="wwwroot\js\encroachmentregisterationapprovalindex.min.js" />
   </ItemGroup>
 

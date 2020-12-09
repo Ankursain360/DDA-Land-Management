@@ -95,5 +95,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureARepository.GetPagedDetails(model);
         }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition)
+        {
+            var result = await _annexureARepository.FindBy(a => a.Id == id);
+            Fixingdemolition model = result.FirstOrDefault();
+
+            model.ApprovedStatus = fixingdemolition.ApprovedStatus;
+            model.PendingAt = fixingdemolition.PendingAt;
+            _annexureARepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

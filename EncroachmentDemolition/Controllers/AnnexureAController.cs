@@ -20,17 +20,22 @@ namespace EncroachmentDemolition.Controllers
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
         public readonly IAnnexureAService _annexureAService;
         private readonly IWatchandwardService _watchandwardService;
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
 
         public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService, 
-            IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration)
+            IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration,
+            IWorkflowTemplateService workflowtemplateService, IApprovalProccessService approvalproccessService)
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
             _annexureAService = annexureAService;
             _configuration = configuration;
             _watchandwardService = watchandwardService;
+            _workflowtemplateService = workflowtemplateService;
+            _approvalproccessService = approvalproccessService;
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AnnexureASearchDto model)
@@ -156,7 +161,36 @@ namespace EncroachmentDemolition.Controllers
             }
             if (result)
             {
-                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                var DataFlow = await dataAsync();
+                for (int i = 0; i < DataFlow.Count; i++)
+                {
+                    if (!DataFlow[i].parameterSkip)
+                    {
+                        fixingdemolition.ApprovedStatus = 0;
+                        fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                        result = await _annexureAService.UpdateBeforeApproval(fixingdemolition.Id, fixingdemolition);  //Update Table details 
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
+                            approvalproccess.ServiceId = fixingdemolition.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                            approvalproccess.PendingStatus = 1;   //1
+                            approvalproccess.Status = null;   //1
+                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                        }
+
+                        break;
+                    }
+                }
+
+                #endregion
+
+                ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                 var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
                 return View("Index", result1);
             }
@@ -170,7 +204,6 @@ namespace EncroachmentDemolition.Controllers
         {
             List<Fixingdemolition> list = await _annexureAService.GetFixingdemolition(id);
             return View(list);
-            //return View();
         }
         //[HttpPost]
         //public async Task<IActionResult> Create(Fixingdemolition fixingdemolition)
@@ -178,19 +211,9 @@ namespace EncroachmentDemolition.Controllers
         //    fixingdemolition.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
         //      if (ModelState.IsValid)
         //    {
-
         //        var result = await _annexureAService.Create(fixingdemolition);
-
-
-
         //            ///for after file:
-
-
-
-
         //            //for before file:
-
-
         //            //if (demolitionstructuredetails.NameOfStructure != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
 
         //            //if (demolitionstructuredetails.StructrureId != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
@@ -227,13 +250,6 @@ namespace EncroachmentDemolition.Controllers
         //        }
 
         //    }
-
-
-
-
-
-
-
         //public async Task<IActionResult> Create()
         //{
 
@@ -266,6 +282,16 @@ namespace EncroachmentDemolition.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
+        #endregion
+
+        #region Fetch workflow data for approval prrocess Added by Renu 08 Dec 2020
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
         #endregion
     }
 }

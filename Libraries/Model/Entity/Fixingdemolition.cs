@@ -18,9 +18,11 @@ namespace Libraries.Model.Entity
             Fixingdocument = new HashSet<Fixingdocument>();
         }
 
+        public string DemolitionUniqueId { get; set; }
         public int EncroachmentId { get; set; }
         public byte IsActive { get; set; }
-
+        public int? ApprovedStatus { get; set; }
+        public int? PendingAt { get; set; }
 
         [NotMapped]
         public List<Demolitionchecklist> Demolitionchecklist { get; set; }
@@ -50,17 +52,21 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<decimal> DemolitionDocumentId { get; set; }  //add from fixing document table
 
-       
+
         //[NotMapped]
         //public List<IFormFile> Document { get; set; }
 
         public EncroachmentRegisteration Encroachment { get; set; }
         //public virtual EncroachmentRegisteration Encroachment { get; set; }
-       public  ICollection<Fixingchecklist> Fixingchecklist { get; set; }
+        public ICollection<Fixingchecklist> Fixingchecklist { get; set; }
         public ICollection<Fixingprogram> Fixingprogram { get; set; }
         public ICollection<Fixingdocument> Fixingdocument { get; set; }
 
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
 
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
 
 
     }
