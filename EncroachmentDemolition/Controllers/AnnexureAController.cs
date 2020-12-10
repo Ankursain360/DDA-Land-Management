@@ -26,7 +26,7 @@ namespace EncroachmentDemolition.Controllers
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
 
-        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService, 
+        public AnnexureAController(IEncroachmentRegisterationService encroachmentRegisterationService,
             IAnnexureAService annexureAService, IWatchandwardService watchandwardService, IConfiguration configuration,
             IWorkflowTemplateService workflowtemplateService, IApprovalProccessService approvalproccessService)
         {
@@ -60,8 +60,8 @@ namespace EncroachmentDemolition.Controllers
             Model.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
             Model.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
             Model.Encroachment = Data;
-            if(Model.Encroachment.WatchWardId == null)
-            Model.Encroachment.WatchWardId = 0;
+            if (Model.Encroachment.WatchWardId == null)
+                Model.Encroachment.WatchWardId = 0;
             return View(Model);
         }
         [HttpPost]
@@ -78,48 +78,50 @@ namespace EncroachmentDemolition.Controllers
             }
             fixingdemolition.EncroachmentId = fixingdemolition.Encroachment.Id;
             var result = await _annexureAService.Create(fixingdemolition);
-            if (result == true)
-            {
-                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-                //  return View("Index", result1);
-            }
-            if (fixingdemolition.DemolitionProgramId != null)
-            {
-                List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
-                for (int i = 0; i < fixingdemolition.DemolitionProgramId.Count(); i++)
-                {
-                    fixingprogram.Add(new Fixingprogram
-                    {
+            //if (result == true)
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+            //    var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+            //    //  return View("Index", result1);
+            //}
+            //if (fixingdemolition.DemolitionProgramId != null)
+            //{
 
-                        DemolitionProgramId = (int)fixingdemolition.DemolitionProgramId[i],
-                        ItemsDetails = fixingdemolition.ItemsDetails[i],
-                        FixingdemolitionId = fixingdemolition.Id
-                    });
-                }
-                foreach (var item in fixingprogram)
-                {
-                    result = await _annexureAService.SaveFixingprogram(item);
-                }
-            }
-            if (fixingdemolition.DemolitionChecklistId != null)
+            List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
+            for (int i = 0; i < fixingdemolition.DemolitionProgramId.Count(); i++)
             {
-                List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
-                for (int i = 0; i < fixingdemolition.DemolitionChecklistId.Count(); i++)
+                fixingprogram.Add(new Fixingprogram
                 {
-                    fixingchecklist.Add(new Fixingchecklist
-                    {
 
-                        DemolitionChecklistId = (int)fixingdemolition.DemolitionChecklistId[i],
-                        ChecklistDetails = fixingdemolition.ChecklistDetails[i],
-                        FixingdemolitionId = fixingdemolition.Id
-                    });
-                }
-                foreach (var item in fixingchecklist)
-                {
-                    result = await _annexureAService.Savefixingchecklist(item);
-                }
+                    DemolitionProgramId = (int)fixingdemolition.DemolitionProgramId[i],
+                    ItemsDetails = fixingdemolition.ItemsDetails[i],
+                    FixingdemolitionId = fixingdemolition.Id
+                });
             }
+            foreach (var item in fixingprogram)
+            {
+                result = await _annexureAService.SaveFixingprogram(item);
+            }
+            //}
+            //if (fixingdemolition.DemolitionChecklistId != null)
+            //{
+
+            List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
+            for (int i = 0; i < fixingdemolition.DemolitionChecklistId.Count(); i++)
+            {
+                fixingchecklist.Add(new Fixingchecklist
+                {
+
+                    DemolitionChecklistId = (int)fixingdemolition.DemolitionChecklistId[i],
+                    ChecklistDetails = fixingdemolition.ChecklistDetails[i],
+                    FixingdemolitionId = fixingdemolition.Id
+                });
+            }
+            foreach (var item in fixingchecklist)
+            {
+                result = await _annexureAService.Savefixingchecklist(item);
+            }
+            //}
             //if (fixingdemolition.DemolitionDocumentId != null)
             //{
             //    List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
@@ -141,24 +143,28 @@ namespace EncroachmentDemolition.Controllers
             string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
             // targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             FileHelper fileHelper = new FileHelper();
-            if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
+            //if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
+            //{
+
+            List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
+            for (int i = 0; i < fixingdemolition.DocumentDetails.Count; i++)
             {
-                List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
-                for (int i = 0; i < fixingdemolition.DocumentDetails.Count; i++)
+                string FilePath = null;
+                if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
+                    FilePath = fileHelper.SaveFile(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
+                fixingdocument.Add(new Fixingdocument
                 {
-                    string FilePath = fileHelper.SaveFile(DocumentFilePath, fixingdemolition.DocumentDetails[i]);
-                    fixingdocument.Add(new Fixingdocument
-                    {
-                        DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
-                        DocumentDetails = FilePath,
-                        FixingdemolitionId = fixingdemolition.Id
-                    });
-                }
-                foreach (var item in fixingdocument)
-                {
-                    result = await _annexureAService.SaveFixingdocument(item);
-                }
+                    DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
+                    DocumentDetails = FilePath,
+                    FixingdemolitionId = fixingdemolition.Id
+                });
             }
+            foreach (var item in fixingdocument)
+            {
+                result = await _annexureAService.SaveFixingdocument(item);
+            }
+
+            //}
             if (result)
             {
                 #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
@@ -191,8 +197,8 @@ namespace EncroachmentDemolition.Controllers
                 #endregion
 
                 ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-                return View("Index", result1);
+                // var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
+                return View("Index");
             }
             else
             {

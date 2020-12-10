@@ -12,14 +12,6 @@ namespace Libraries.Model.Entity
    public partial class Demolitionchecklist : AuditableEntity<int>
     {
 
-
-        //public Demolitionchecklist()
-        //{
-        //    Fixingchecklist = new HashSet<Fixingchecklist>();
-        //}
-
-
-
         [Required(ErrorMessage = "The Checklist Description field is required")]
 
         public string ChecklistDescription { get; set; }
