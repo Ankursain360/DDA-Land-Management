@@ -59,7 +59,10 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Fixingprogram>> Getfixingprogram(int fixingdemolitionId)
         {
-            return await _dbContext.Fixingprogram.Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Fixingprogram
+                                    .Include(x => x.DemolitionProgram)
+                                    .Where(x => x.FixingdemolitionId == fixingdemolitionId && x.IsActive == 1)
+                                    .ToListAsync();
         }
         public async Task<List<Fixingdocument>> Getfixingdocument(int fixingdemolitionId)
         {
@@ -67,9 +70,25 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model)
         {
+            var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
+                                  where x.WatchWard != null && x.IsActive == 1
+                                  select x.WatchWardId).ToArray();
+
             return await _dbContext.EncroachmentRegisteration
-                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == 1)
+                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == 1
+                                      && !(InInspectionId).Contains(x.Id))
                                      .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
         }
+
+        public async Task<Fixingdemolition> FetchSingleResult(int id)
+        {
+            return await _dbContext.Fixingdemolition
+                               .Include(x => x.Fixingchecklist)
+                               .Include(x => x.Fixingdocument)
+                               .Include(x => x.Fixingprogram)
+                               .Where(x => x.Id == id)
+                               .FirstOrDefaultAsync();
+        }
+
     }
 }

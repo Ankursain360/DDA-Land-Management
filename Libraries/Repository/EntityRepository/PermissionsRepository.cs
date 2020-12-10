@@ -23,35 +23,42 @@ namespace Libraries.Repository.EntityRepository
                 .ToListAsync();
         }
 
-        public async Task<List<Menuactionrolemap>> GetPermission(string moduleId, int roleId) {
-            
-                var result = await _dbContext.Menuactionrolemap
-                    .Include(a => a.Menu.Module)
-                    .Include(a => a.Menu)
-                    .Where(a => a.Menu.Module.Guid == moduleId
-                            && a.RoleId == roleId)
-                    .ToListAsync();
-                return result;
-            
+        public async Task<List<Menuactionrolemap>> GetPermission(string moduleId, int roleId)
+        {
+            var result = await _dbContext.Menuactionrolemap
+                .Include(a => a.Menu.Module)
+                .Include(a => a.Menu)
+                .Where(a => a.Menu.Module.Guid == moduleId
+                        && a.RoleId == roleId)
+                .ToListAsync();
+            return result;
         }
 
         public async Task<List<Menu>> GetMappedMenuWithAction(int moduleId)
         {
-            var result = await _dbContext.Menu
+            try
+            {
+                var result = await _dbContext.Menu
                 .Include(a => a.Menuactionrolemap)
-                .ThenInclude(a=>a.Action)
-                .Where(a => a.ModuleId == moduleId).ToListAsync();
-            return result;
+                .ThenInclude(a => a.Action)
+                .Where(a => a.ModuleId == moduleId)
+                .ToListAsync();
+                return result;
+            }
+            catch (System.Exception ex)
+            {
 
+                throw;
+            }
+            
         }
 
-        public async Task<bool> AuthorizeUser(string url, string actionName, int roleId, int moduleId)
+        public async Task<bool> AuthorizeUser(string actionName, int roleId, int moduleId)
         {
             return await _dbContext.Menuactionrolemap
                 .Include(a => a.Action)
                 .Include(a => a.Menu)
-                .Where(a => a.Menu.Url==url
-                    && a.Action.Name == actionName
+                .Where(a => a.Action.Name == actionName
                     && a.RoleId == roleId
                     && a.ModuleId == moduleId)
                 .AnyAsync();

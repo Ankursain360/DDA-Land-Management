@@ -26,6 +26,7 @@ namespace Libraries.Model.Entity
         public string Url { get; set; }
         public int? ParentMenuId { get; set; }
         public byte? IsActive { get; set; }
+        public byte? OpenInNewTab { get; set; }
 
         [NotMapped]
         public List<Menu> parentmenulist { get; set; }

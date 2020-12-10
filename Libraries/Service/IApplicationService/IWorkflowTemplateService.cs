@@ -24,7 +24,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<WorkflowTemplate>> GetPagedWorkflowTemplate(WorkflowTemplateSearchDto model);
         Task<List<Module>> GetAllModuleList();
-        Task<List<User>> GetUserlist();
-        Task<List<Role>> GetRolelist();
+        //Task<List<User>> GetUserlist();
+        //Task<List<Role>> GetRolelist();
     }
 }

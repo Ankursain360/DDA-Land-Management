@@ -19,7 +19,6 @@ namespace Libraries.Model
         public virtual DbSet<Country> Country { get; set; }
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Module> Module { get; set; }
-        public virtual DbSet<Page> Page { get; set; }
         public virtual DbSet<Designation> Designation { get; set; }
         public virtual DbSet<District> District { get; set; }
         public virtual DbSet<Natureofencroachment> Natureofencroachment { get; set; }
@@ -29,12 +28,10 @@ namespace Libraries.Model
         public virtual DbSet<LandNotification> LandNotification { get; set; }
         public virtual DbSet<Interest> Interest { get; set; }
         public virtual DbSet<PropertyType> PropertyType { get; set; }
-        public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Locality> Locality { get; set; }
         public virtual DbSet<Reasons> Reasons { get; set; }
         public virtual DbSet<Rate> Rate { get; set; }
         public virtual DbSet<Rebate> Rebate { get; set; }
-        public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Nazulland> Nazulland { get; set; }
         public virtual DbSet<Tehsil> Tehsil { get; set; }
         public virtual DbSet<Villagetype> Villagetype { get; set; }
@@ -68,7 +65,6 @@ namespace Libraries.Model
         public virtual DbSet<Booktransferland> Booktransferland { get; set; }
         public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
         public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
-        public virtual DbSet<AssignPageRoleWise> AssignPageRoleWises { get; set; }
         public virtual DbSet<Khewat> Khewat { get; set; }
         public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
         public virtual DbSet<Khatauni> Khatauni { get; set; }
@@ -123,15 +119,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DivisionConfiguration());
             modelBuilder.ApplyConfiguration(new ModuleConfiguration());
             modelBuilder.ApplyConfiguration(new NotificationConfiguration());
-            modelBuilder.ApplyConfiguration(new PageConfiguration());
             modelBuilder.ApplyConfiguration(new InterestConfiguration());
             modelBuilder.ApplyConfiguration(new PropertyTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new LocalityConfiguration());
             modelBuilder.ApplyConfiguration(new RateConfiguration());
             modelBuilder.ApplyConfiguration(new RebateConfiguration());
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            //modelBuilder.ApplyConfiguration(new PageRoleConfiguration());
             modelBuilder.ApplyConfiguration(new NazullandConfiguration());
             modelBuilder.ApplyConfiguration(new ClassificationoflandConfiguration());
             modelBuilder.ApplyConfiguration(new LanduseConfiguration());
@@ -159,7 +151,6 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
-            modelBuilder.ApplyConfiguration(new AssignPageRoleWiseConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
             modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());

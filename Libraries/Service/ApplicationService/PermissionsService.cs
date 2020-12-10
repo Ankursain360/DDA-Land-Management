@@ -126,11 +126,11 @@ namespace Libraries.Service.ApplicationService
             return saved > 0;
         }
 
-        public async Task<bool> ValidatePermission(string url, ViewAction action, int roleId, string moduleGuid)
+        public async Task<bool> ValidatePermission(ViewAction action, int roleId, string moduleGuid)
         {
             Module module = await _moduleRepository.GetModuleByGuid(moduleGuid);
             string actionName= action.ToString();
-            return await _permissionsRepository.AuthorizeUser(url, actionName, roleId, module.Id);
+            return await _permissionsRepository.AuthorizeUser(actionName, roleId, module.Id);
         }
     }
 }

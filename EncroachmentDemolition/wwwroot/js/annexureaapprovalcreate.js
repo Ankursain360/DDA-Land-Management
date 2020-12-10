@@ -1,10 +1,12 @@
 ﻿$(document).ready(function () {
 
     var id = parseInt($('#Id').val());
+    var encroachmentId = parseInt($('#EncroachmentId').val());
     var watchWardId = parseInt($('#WatchWardId').val());
     GetWatchWardDetails(watchWardId);
-    GetOtherDetails(id);
+    GetEncroachmentDetails(encroachmentId);
     GetHistoryDetails(id);
+    GetAnnexureADetails(id);
 
     HttpGet(`/AnnexureAApproval/GetApprovalDropdownList`, 'html', function (response) {
         response = JSON.parse(response);
@@ -25,22 +27,29 @@
 });
 
 function GetWatchWardDetails(id) {
-    HttpGet(`/EncroachmentRegisterApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
+    HttpGet(`/AnnexureAApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
         $('#WatchWardDetailsDiv').html("");
         $('#WatchWardDetailsDiv').html(response);
     });
 };
-function GetOtherDetails(id) {
-    HttpGet(`/EncroachmentRegisterApproval/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
+function GetEncroachmentDetails(id) {
+    HttpGet(`/AnnexureAApproval/EncroachmentRegisterView/?Id=${id}`, 'html', function (response) {
         $('#EncroachmentRegisterDetailsDiv').html("");
         $('#EncroachmentRegisterDetailsDiv').html(response);
     });
 };
 
 function GetHistoryDetails(id) {
-    HttpGet(`/EncroachmentRegisterApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
+    HttpGet(`/AnnexureAApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
         $('#divHistoryDetails').html("");
         $('#divHistoryDetails').html(response);
+    });
+};
+
+function GetAnnexureADetails(id) {
+    HttpGet(`/AnnexureAApproval/AnnexureADetails/?Id=${id}`, 'html', function (response) {
+        $('#AnnexureADetailsDiv').html("");
+        $('#AnnexureADetailsDiv').html(response);
     });
 };
 
@@ -70,6 +79,15 @@ $("#collapse").click(function () {
 });
 $("#collapse").click(function () {
     $("#collapseWatchWardApprroval").collapse("toggle").promise().done(function () {
+        $('#select').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+    });
+});
+
+$("#collapse").click(function () {
+    $("#collapseAnnexureA").collapse("toggle").promise().done(function () {
         $('#select').select2({
             placeholder: "Select",
             allowClear: true

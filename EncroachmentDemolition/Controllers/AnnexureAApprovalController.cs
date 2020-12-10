@@ -18,6 +18,7 @@ namespace EncroachmentDemolition.Controllers
     public class AnnexureAApprovalController : BaseController
     {
         public readonly IAnnexureAApprovalService _annexureAApprovalService;
+        public readonly IAnnexureAService _annexureAService;
         public readonly IEncroachmentRegisterationApprovalService _encroachmentRegisterationApprovalService;
         public IConfiguration _configuration;
         public readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
@@ -27,7 +28,8 @@ namespace EncroachmentDemolition.Controllers
 
         public AnnexureAApprovalController(IEncroachmentRegisterationApprovalService encroachmentRegisterationApprovalService, IEncroachmentRegisterationService encroachmentRegisterationService,
             IConfiguration configuration, IWatchandwardService watchandwardService,
-            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService)
+            IApprovalProccessService approvalproccessService, IWorkflowTemplateService workflowtemplateService,
+            IAnnexureAService annexureAService, IAnnexureAApprovalService annexureAApprovalService)
         {
             _encroachmentRegisterationApprovalService = encroachmentRegisterationApprovalService;
             _encroachmentRegisterationService = encroachmentRegisterationService;
@@ -35,6 +37,8 @@ namespace EncroachmentDemolition.Controllers
             _watchandwardService = watchandwardService;
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
+            _annexureAService = annexureAService;
+            _annexureAApprovalService = annexureAApprovalService;
         }
         public IActionResult Index()
         {
@@ -69,7 +73,7 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
             encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
 
-            #region Approval Proccess At Further level start Added by Renu 4 Dec 2020
+            #region Approval Proccess At Further level start Added by Renu 9 Dec 2020
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
             {
@@ -196,8 +200,18 @@ namespace EncroachmentDemolition.Controllers
         }
         #endregion
 
+        #region AnnexureA Details
+        public async Task<PartialViewResult> AnnexureADetails(int id)
+        {
+            var Data = await _annexureAService.FetchSingleResult(id);
+            Data.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
+            Data.Demolitionprogram = await _annexureAService.GetDemolitionprogram();
+            Data.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
+            return PartialView("_AnnexureAView", Data);
+        }
+        #endregion
 
-        #region Fetch workflow data for approval prrocess Added by Renu 4 Dec 2020
+        #region Fetch workflow data for approval prrocess Added by Renu 9 Dec 2020
         private async Task<List<TemplateStructure>> DataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(2);
