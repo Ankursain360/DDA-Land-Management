@@ -23,7 +23,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="FromDate" value="" placeholder="From Date" type="date"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                           class="floating-label-field floating-label-field--s3"/>
 
                     <span asp-validation-for="FromDate" class="text-danger"></span>
 
@@ -36,8 +36,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="ToDate" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="To Date"
-                           limit="100">
+                    <input asp-for="ToDate" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="To Date" />
+                          
                     <span asp-validation-for="ToDate" class="text-danger "></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -45,7 +45,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="Percentage" value="" type="text"  class="floating-label-field floating-label-field--s3 numbers" placeholder="To Date"
+                    <input asp-for="Percentage" value="" type="text"  class="floating-label-field floating-label-field--s3 numbers" placeholder="Percentage"
                            limit="18">
                     <span asp-validation-for="Percentage" class="text-danger "></span>
                     <label class="floating-label">Interest Percentage</label>
