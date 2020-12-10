@@ -238,5 +238,17 @@
     "inputFiles": [
       "wwwroot/js/annexureaapprovalindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/annexureaview.min.js",
+    "inputFiles": [
+      "wwwroot/js/annexureaview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/annexureaapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/annexureaapprovalcreate.js"
+    ]
   }
 ]

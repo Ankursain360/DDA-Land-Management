@@ -30,5 +30,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveFixingdocument(Fixingdocument fixingdocument);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model);
         Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition);
+        Task<Fixingdemolition> FetchSingleResult(int id);
     }
 }

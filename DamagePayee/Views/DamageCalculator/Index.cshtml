@@ -1,7 +1,4 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Damage Calculator" })
 
 
 @{
@@ -9,227 +6,213 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<div class="pt-3">
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Damage Calculator</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+
+    <form asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="0">---Select---</option>
+                        <option value="1">Residential</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label  class="floating-label">Damage Property<span style="color:red">*</span> </label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Date of Encroachment" type="date" id="txtEncroachmentDate"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label"> Date of Encroachment <span style="color:red">*</span></label>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="From Date" type="date" id="txtEncroachmentFromDate"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label"> From Date <span style="color:red">*</span></label>
+                </div>
+            </div>
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="To Date" type="date" id="txtEncroachmentToDate"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label"> To Date <span style="color:red">*</span></label>
+                </div>
+            </div>
+
+
         </div>
-        <div class="panel-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Damage Property</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Residential</option>
-                        </select>
-                    </div>
 
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Date of Encroachment</label><span style="color:red">*</span>
-                        <input type="date" class="form-control" id="txtEncroachmentDate" />
-                    </div>
-
-
+        <div class="row">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" >
+                        <option value="0">---Select---</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label  class="floating-label">Locality<span style="color:red">*</span> </label>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">From Date</label><span style="color:red">*</span>
-                        <input type="date" class="form-control" id="txtEncroachmentFromDate" />
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">To Date</label><span style="color:red">*</span>
-                        <input type="date" class="form-control" id="txtEncroachmentToDate" />
-                    </div>
+            </div>
 
 
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Area in sq. yds." type="text" id="txtEncroachmentFromDate"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">Area in sq. yds.<span style="color:red">*</span></label>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Locality</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Puth</option>
-                        </select>
-                    </div>
-
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Area in sq. yds.</label><span style="color:red">*</span>
-                        <input type="text" class="form-control" />
-                    </div>
-
-
-                </div>
-
-
-                <div class="row">
-                    <div class="row col-md-12" align="center">
-                        <input type="submit" value="Calculate" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-                <br />
-                <div id="DivMainContentForm">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Damage Calculation</label>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Interest Calculation</label>
-                        </div>
-
-
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <div class="row form-group">
-                                <div class="form-group col-md-6">
-                                    <div style="overflow-x:auto;">
-                                        <table class="table table-responsive table-bordered table-card">
-
-                                            <thead class="thead">
-                                                <tr class="myapp-hed1">
-                                                    <th>Sr.No</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th>Rate</th>
-                                                    <th>Area</th>
-                                                    <th>Month</th>
-                                                    <th>Damage Charges</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>01/08/2008</td>
-                                                    <td>31/03/2009</td>
-                                                    <td>80.05</td>
-                                                    <td>1500</td>
-                                                    <td>8</td>
-                                                    <td>960600</td>
-
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>01/04/2009</td>
-                                                    <td>31/03/2010</td>
-                                                    <td>80.05</td>
-                                                    <td>1500</td>
-                                                    <td>12</td>
-                                                    <td>1440900</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>3</td>
-                                                    <td>01/04/2010</td>
-                                                    <td>31/03/2011</td>
-                                                    <td>88.06</td>
-                                                    <td>1500</td>
-                                                    <td>12</td>
-                                                    <td>174360</td>
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <div style="overflow-x:auto;">
-                                        <table class="table table-responsive table-bordered table-card">
-
-                                            <thead class="thead">
-                                                <tr class="myapp-hed1">
-                                                    <th>Sr.No</th>
-                                                    <th>Start Date</th>
-                                                    <th>End Date</th>
-                                                    <th>Month</th>
-                                                    <th>Outstanding Damage</th>
-                                                    <th>Paid Amount as claimed by assessee</th>
-                                                    <th>Interest</th>
-                                                    <th>Cumlative Interest</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>01/08/2008</td>
-                                                    <td>31/03/2009</td>
-                                                    <td>8</td>
-                                                    <td>960600</td>
-                                                    <td>0</td>
-                                                    <td>44828</td>
-                                                    <td>44828</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>01/04/2009</td>
-                                                    <td>31/03/2010</td>
-                                                    <td>12</td>
-                                                    <td>2401500</td>
-                                                    <td>0</td>
-                                                    <td>168105</td>
-                                                    <td>212933</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>01/04/2010</td>
-                                                    <td>31/03/2011</td>
-                                                    <td>12</td>
-                                                    <td>3986530</td>
-                                                    <td>0</td>
-                                                    <td>279061</td>
-                                                    <td>491994</td>
-                                                </tr>
-
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
-    </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                  <button class="btn btn-theme " type="submit">Calculate</button>
+                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
+            </div>
+        </div>
+
+        <br />
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Details</h3>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <h2 class="my-3 sub-heading">Damage Calculation</h2>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <h2 class="my-3 sub-heading">Interest Calculation</h2>
+                </div>
+            </div>
+            <div class="row">
+
+
+                <div class="form-group col-md-6">
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Rate</th>
+                                        <th>Area</th>
+                                        <th>Month</th>
+                                        <th>Damage Charges</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/08/2008</td>
+                                        <td>31/03/2009</td>
+                                        <td>80.05</td>
+                                        <td>1500</td>
+                                        <td>8</td>
+                                        <td>960600</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>01/04/2009</td>
+                                        <td>31/03/2010</td>
+                                        <td>80.05</td>
+                                        <td>1500</td>
+                                        <td>12</td>
+                                        <td>1440900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>01/04/2010</td>
+                                        <td>31/03/2011</td>
+                                        <td>88.06</td>
+                                        <td>1500</td>
+                                        <td>12</td>
+                                        <td>174360</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Month</th>
+                                        <th>Outstanding Damage</th>
+                                        <th>Paid Amount as claimed by assessee</th>
+                                        <th>Interest</th>
+                                        <th>Cumlative Interest</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/08/2008</td>
+                                        <td>31/03/2009</td>
+                                        <td>8</td>
+                                        <td>960600</td>
+                                        <td>0</td>
+                                        <td>44828</td>
+                                        <td>44828</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/04/2009</td>
+                                        <td>31/03/2010</td>
+                                        <td>12</td>
+                                        <td>2401500</td>
+                                        <td>0</td>
+                                        <td>168105</td>
+                                        <td>212933</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/04/2010</td>
+                                        <td>31/03/2011</td>
+                                        <td>12</td>
+                                        <td>3986530</td>
+                                        <td>0</td>
+                                        <td>279061</td>
+                                        <td>491994</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+
+
 </div>
 
 

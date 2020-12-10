@@ -44,7 +44,7 @@ namespace Libraries.Service.ApplicationService
         {
             model.CreatedBy = 1;
             model.CreatedDate = DateTime.Now;
-           
+            model.IsActive = 1;
             _annexureARepository.Add(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -105,6 +105,11 @@ namespace Libraries.Service.ApplicationService
             model.PendingAt = fixingdemolition.PendingAt;
             _annexureARepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Fixingdemolition> FetchSingleResult(int id)
+        {
+            return await _annexureARepository.FetchSingleResult(id);
         }
     }
 }

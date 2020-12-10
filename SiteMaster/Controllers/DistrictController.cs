@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using SiteMaster.Models;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
@@ -21,7 +14,6 @@ namespace SiteMaster.Controllers
 {
     public class DistrictController : BaseController
     {
-
         private readonly IDistrictService _districtService;
 
         public DistrictController(IDistrictService districtService)
@@ -40,6 +32,7 @@ namespace SiteMaster.Controllers
             var result = await _districtService.GetPagedDistrict(model);
             return PartialView("_List", result);
         }
+
         [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
@@ -47,7 +40,6 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(District district)
         {
@@ -86,6 +78,7 @@ namespace SiteMaster.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _districtService.FetchSingleResult(id);
@@ -97,43 +90,29 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, District district)
         {
             if (ModelState.IsValid)
             {
-                try
+                var result = await _districtService.Update(id, district);
+                if (result == true)
                 {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-
-
-                    var result = await _districtService.Update(id, district);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-
-                        var list = await _districtService.GetAllDistrict();
-                        return View("Index", list);
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(district);
-
-                    }
+                    var list = await _districtService.GetAllDistrict();
+                    return View("Index", list);
                 }
-                catch (Exception ex)
+                else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(district);
-
                 }
             }
             return View(district);
         }
 
         [AcceptVerbs("Get", "Post")]
-        [AllowAnonymous]
         public async Task<IActionResult> Exist(int Id, string Name)
         {
             var result = await _districtService.CheckUniqueName(Id, Name);
@@ -147,32 +126,6 @@ namespace SiteMaster.Controllers
             }
         }
 
-
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
-        {
-            //try
-            //{
-
-            var result = await _districtService.Delete(id);
-            if (result == true)
-            {
-                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            }
-            return RedirectToAction("Index", "District");
-            //}
-            //catch(Exception ex)
-            //{
-            //    ViewData["Msg"] = new Message { Msg = "Dear User,<br/>Something went wrong", Status = "S", BackPageAction = "Index", BackPageController = "Designation" };
-            //    return View();
-            //}
-
-        }
-
         public async Task<IActionResult> View(int id)
         {
             var Data = await _districtService.FetchSingleResult(id);
@@ -183,11 +136,24 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        {
+            var result = await _districtService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            return RedirectToAction("Index", "District");
+        }
+
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try
             {
-
                 var result = await _districtService.Delete(id);
                 if (result == true)
                 {
@@ -206,5 +172,4 @@ namespace SiteMaster.Controllers
             return View("Index", list);
         }
     }
-
 }

@@ -26,5 +26,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Fixingprogram>> Getfixingprogram(int fixingdemolitionId);
         Task<List<Fixingdocument>> Getfixingdocument(int fixingdemolitionId);
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model);
+        Task<Fixingdemolition> FetchSingleResult(int id);
     }
 }
