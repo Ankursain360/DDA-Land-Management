@@ -1,219 +1,286 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@*@{
+        ViewData["Title"] = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Door To Door Survey</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="myapp-hed">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Door To Door Survey</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
+<br />
 <br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
+@*<div class="container-fluid" id="MainContentForm">
     <div class="panel">
         <div class="panel-heading  myapp-hed1">
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
-        <div class="panel-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="panel-body">*@
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Add Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Location/Address of Property</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Municipal Number, if any</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Geo Referencing</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Present Use</label>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">Residential</option>
-                            <option value="1">Commercial</option>
-                            <option value="0">Industrial</option>
-                            <option value="1">Mixed</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Approx Area of the Property</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Number of Floors</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
+                <input type="text" placeholder="Location/Address of Property" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Location/Address of Property</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <div id="DivFamilyDetails">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Family Details</h6>
+                <input type="text" placeholder="Municipal Number" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Municipal Number, if any</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Geo Referencing" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Geo Referencing</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+
+                <select class="floating-label-field floating-label-field--s3">
+                    <option value="0">Residential</option>
+                    <option value="1">Commercial</option>
+                    <option value="0">Industrial</option>
+                    <option value="1">Mixed</option>
+                </select>
+                <label class="floating-label">Present Use</label>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Approx Area of the Property" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Approx Area of the Property</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Number of Floors" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Number of Floors</label>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivFamilyDetails">
+       
+        <h2 class="my-3 sub-heading">Family Details</h2>
+       
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive ">
+                <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Name</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts_body">
+                    </tbody>
+                    <tbody class="tbody" id="add">
+                        <tr id="">
+                            <td>1</td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered" border="0" id="tbl_posts">
-                                    <thead class="thead">
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Name</th>
-                                            <th>Age</th>
-                                            <th>Gender</th>
-                                            <th>Operation</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_posts_body">
-                                    </tbody>
-                                    <tbody class="tbody" id="add">
-                                        <tr id="">
-                                            <td>1</td>
-                                            <td>
-                                                <input type="text" id="txtPersonalName" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalFatherName" class="form-control" />
-                                            </td>
-                                            <td>
-                                                <select class="form-control" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                    <option value="0">---Select---</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                                <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                            </td>
-                                        </tr>
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                </div>
+                                @*<a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+        <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>*@
+                            </td>
+                        </tr>
 
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @*</div>*@
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">CA-Number of Electricity Connection(s)</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">K-Number of Water Connection(s)</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Property/House Tax Number issued by MCD/local body</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Name of Occupant</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Address</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">E-mail</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Telephone</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Mobile</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Aadhar Number of Occupant</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Voter ID Number</label>
-                        <input type="text" class="form-control" />
-                    </div>
-                   
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
-                        <input type="file" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Damage Paid in the Past, if any </label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-row">
-                   
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Document of Property, if any</label>
-                        <input type="file" class="form-control" />
-                    </div>
-                </div>
+            <input type="text" placeholder="CA-Number of Electricity Connection" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">CA-Number of Electricity Connection(s)</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control"></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-            </form>
+            <input type="text" placeholder="K-Number of Water Connection(s)" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">K-Number of Water Connection(s)</label>
         </div>
     </div>
 </div>
+
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Property/House Tax Number" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Property/House Tax Number issued by MCD/local body</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Name of Occupant" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Name of Occupant</label>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Address" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Address</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="E-mail" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">E-mail</label>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Telephone" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Telephone</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Mobile" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Mobile</label>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Aadhar Number" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Aadhar Number of Occupant</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Voter ID" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Voter ID Number</label>
+
+        </div>
+    </div>
+
+</div>
+<div class="row pt-3">
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="file" placeholder="Identity Proof" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="text" placeholder="Damage Paid" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Damage Paid in the Past, if any </label>
+        </div>
+    </div>
+</div>
+<div class="row pt-3">
+
+    <div class="col-md-6">
+        <div class="floating-label-wrap mb-3 mb-md-0">
+
+            <input type="file" placeholder="Document of Property" class="floating-label-field floating-label-field--s3" />
+            <label class="floating-label">Document of Property, if any</label>
+        </div>
+    </div>
+</div>
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <textarea type="text" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                <label class="floating-label">Remarks</label>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <input type="submit" value="Create" class="btn btn-theme " />
+            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+            @Html.ActionLink("Back", "Index", "Door2DoorSurvey", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+
+</form>
+        @*</div>
+    </div>
+</div>*@
 
 <script>
 
