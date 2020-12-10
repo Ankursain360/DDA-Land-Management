@@ -42,7 +42,7 @@
 
                                         <h6 class="my-3 sub-heading">Damage Payee Register Details</h6>
 
-                                        <i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                        @*<i class="fa-angle-right fa pull-right" aria-hidden="true" style="padding-top:4px;"></i>*@
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,6 @@
                     </a>
 
                     <div class="collapse" id="collapseExample">
-
 
 
                         <div id="DivFileInformation">
@@ -288,9 +287,9 @@
                                         <label class="floating-label">Property/House/Municipal No.</label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="form-group col-md-6">
                                     <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <select class="floating-label-field floating-label-field--s3">
                                             <option value="0">---Select---</option>
                                             <option value="1">Inactive</option>
                                         </select>
@@ -670,9 +669,9 @@
                         </div>
                     </div>
                 </div>
-
+                <br/>
                 <div class="row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
+                    <div class=" col-md-12">
                         <input type="submit" value="Submit" class="btn btn-theme " />
                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
                         @Html.ActionLink("Back", "Index", "RequestFromPlanningDepartmentApproval", null, new { @class = "btn btn-theme" })

@@ -6,8 +6,8 @@
 }
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register Approval Proccess" })
 
-<br/>
-<br/>
+<br />
+<br />
 @*<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
     <script src="~/js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
@@ -38,7 +38,7 @@
                     <option>Whether present occupant's is/are damage payee in DDA record</option>
                     <option>Submitted On</option>
                     <option>Status</option>
-                   
+
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
@@ -55,68 +55,63 @@
             </a>
         </div>
     </div>
-</div>
-<div class="table-responsive px-2">
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
 
-                <table class="table table-sm table-bordered mb-0 table-striped">
+    <div class="table-responsive px-2">
 
+        <table class="table table-sm table-bordered mb-0 table-striped">
 
-                    <thead class="text-nowrap">
-                        <tr>
-                            <th>Sr.No</th>
-                            <th>File No.</th>
-                            <th>Type of Damage Assessee</th>
-                            <th>Property/House/Municipal No.</th>
-                            <th>Locality</th>
-                            <th>Whether present occupant's is/are damage payee in DDA record </th>
-                            <th>Submitted On</th>
-                            <th>Status</th>
-                            <th>Operations</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>F.001.2019</td>
-                            <td>Original</td>
-                            <td>P45</td>
-                            <td>Nimri</td>
-                            <td>No</td>
-                            <td>10-Aug-2019</td>
-                            <td>Pending</td>
-                            <td style="min-width:120px;">
-                                <div class="action-btns">
-                                    @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>*@
-                                    <a asp-action="Create" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                    @*<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>*@
-                                </div>
-                            </td>
-                            @*<td> <a href="/DamagePayeeApproval/Create"><i class="fa fa-pencil" aria-hidden="true"></i> </a></td>*@
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>F.005.2019</td>
-                            <td>Original</td>
-                            <td>P47</td>
-                            <td>Saroda</td>
-                            <td>No</td>
-                            <td>10-Aug-2019</td>
-                            <td>Pending</td>
-                            <td style="min-width:120px;">
-                                <div class="action-btns">
-                                    @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>*@
-                                    <a asp-action="Create" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                    @*<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>*@
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
+            <thead class="text-nowrap">
+                <tr>
+                    <th>Sr.No</th>
+                    <th>File No.</th>
+                    <th>Type of Damage Assessee</th>
+                    <th>Property/House/Municipal No.</th>
+                    <th>Locality</th>
+                    <th>Whether present occupant's is/are damage payee in DDA record </th>
+                    <th>Submitted On</th>
+                    <th>Status</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>F.001.2019</td>
+                    <td>Original</td>
+                    <td>P45</td>
+                    <td>Nimri</td>
+                    <td>No</td>
+                    <td>10-Aug-2019</td>
+                    <td>Pending</td>
+                    <td>
+                        <div class="action-btns">
+                            @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>*@
+                            <a asp-action="Create" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
 
-                </table>
-            </div>
-        </div>
+                            @*<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>*@
+                        </div>
+                    </td>
+                    @*<td> <a href="/DamagePayeeApproval/Create"><i class="fa fa-pencil" aria-hidden="true"></i> </a></td>*@
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>F.005.2019</td>
+                    <td>Original</td>
+                    <td>P47</td>
+                    <td>Saroda</td>
+                    <td>No</td>
+                    <td>10-Aug-2019</td>
+                    <td>Pending</td>
+                    <td>
+                        <div class="action-btns">
+                            @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>*@
+                            <a asp-action="Create" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                            @*<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>*@
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
     </div>
 </div>
