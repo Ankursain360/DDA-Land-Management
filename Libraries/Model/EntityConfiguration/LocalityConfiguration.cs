@@ -49,14 +49,14 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.LocalityCode)
                 .IsRequired()
-                .HasMaxLength(200)
+                .HasMaxLength(10)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(200)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
