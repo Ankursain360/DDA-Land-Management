@@ -10,7 +10,7 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                <input asp-for="Name" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="150" />
+                                <input asp-for="Name" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="30" />
 
                                 <span asp-validation-for="Name" class="text-danger"></span>
 
@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="UserName" placeholder="UserName" type="text" class="floating-label-field floating-label-field--s3" limit="256" />
+                                <input asp-for="UserName" placeholder="UserName" type="text" class="floating-label-field floating-label-field--s3" limit="30" />
                                 <span asp-validation-for="UserName" class="text-danger"></span>
                                 <label class="floating-label"> UserName   </label>
                             </div>
@@ -28,7 +28,7 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input asp-for="Email" placeholder="Email" class="floating-label-field floating-label-field--s3" type="email" limit="256" />
+                                <input asp-for="Email" placeholder="Email" class="floating-label-field floating-label-field--s3" type="email" limit="30" />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                                 <label class="floating-label"> Email   </label>
                             </div>

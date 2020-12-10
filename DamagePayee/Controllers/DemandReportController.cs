@@ -14,11 +14,11 @@ namespace DamagePayee.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Index(int id)
-        {
-            ViewBag.IsShowData = "Yes";
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult Index(int id)
+        //{
+        //    ViewBag.IsShowData = "Yes";
+        //    return View();
+        //}
     }
 }
