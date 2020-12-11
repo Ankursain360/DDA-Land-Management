@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
         public string EncroachmentDetails { get; set; }
 
         public string ActionReportFilePath { get; set; }
-        public string FencingBoundaryWall { get; set; }
+        public string? FencingBoundaryWall { get; set; }
         public decimal? AreaCovered { get; set; }
         public string Dimension { get; set; }
         public string PlotUtilization { get; set; }

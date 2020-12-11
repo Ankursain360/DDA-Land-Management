@@ -78,7 +78,7 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.HandedOverDivisionId).HasColumnType("int(11)");
 
             entity.Property(e => e.HandedOverEmailId)
-                .HasMaxLength(200)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             entity.Property(e => e.HandedOverLandLineNo).HasColumnType("decimal(12,0)");
