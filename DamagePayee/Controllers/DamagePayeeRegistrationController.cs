@@ -13,34 +13,34 @@ namespace DamagePayee.Controllers
             return View();
         }
 
-        public IActionResult PayeeRegistration()
+        public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult DamagePayeeRegister()
-        {
-            return View();
-        }
+        //public IActionResult DamagePayeeRegister()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult NoticeToDamagePayee()
-        {
-            return View();
-        }
+        //public IActionResult NoticeToDamagePayee()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult DemandLetter()
-        {
-            return View();
-        }
+        //public IActionResult DemandLetter()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult DamageCalculator()
-        {
-            return View();
-        }
+        //public IActionResult DamageCalculator()
+        //{
+        //    return View();
+        //}
 
-        public IActionResult DamageCalculationReport()
-        {
-            return View();
-        }
+        //public IActionResult DamageCalculationReport()
+        //{
+        //    return View();
+        //}
     }
 }

@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
 
         public int DemolitionStructureDetailsId { get; set; }
         public int StructureId { get; set; }
-        public decimal NoOfStructrure { get; set; }
+        public int NoOfStructrure { get; set; }
         public byte IsActive { get; set; }
         [NotMapped]
         public List<string> NameOfStructure { get; set; }

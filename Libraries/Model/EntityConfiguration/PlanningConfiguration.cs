@@ -30,7 +30,7 @@ namespace Model.EntityConfiguration
 
             entity.Property(e => e.Remarks)
                 .IsRequired()
-                .HasMaxLength(5000)
+                .HasMaxLength(4000)
                 .IsUnicode(false);
 
             entity.Property(e => e.ZoneId).HasColumnType("int(11)");

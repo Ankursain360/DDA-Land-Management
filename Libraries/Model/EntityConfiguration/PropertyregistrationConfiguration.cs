@@ -72,7 +72,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.BoundaryAreaCovered).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.BoundaryDimension)
-                .HasMaxLength(100)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.BoundaryRemarks)
@@ -144,11 +144,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.GeoFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.GeoLattitude)
-                .HasMaxLength(1000)
+                .HasMaxLength(50)
                 .IsUnicode(false);
-
             builder.Property(e => e.GeoLongitude)
-                .HasMaxLength(1000)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.GeoPhotoFilePath).HasColumnType("longtext");
@@ -231,7 +230,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Palandmark)
                 .HasColumnName("PALandmark")
-                .HasMaxLength(5000)
+                .HasMaxLength(4000)
                 .IsUnicode(false);
 
             builder.Property(e => e.PlannedUnplannedLand)
@@ -248,7 +247,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PrimaryListNo)
-                .HasMaxLength(200)
+                .HasMaxLength(20)
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
@@ -260,7 +259,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.SubUse)
-                .HasMaxLength(500)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.TakenOverComments)
