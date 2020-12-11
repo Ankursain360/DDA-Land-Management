@@ -31,5 +31,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<EncroachmentRegisteration>> GetPagedDetails(AnnexureASearchDto model);
         Task<bool> UpdateBeforeApproval(int id, Fixingdemolition fixingdemolition);
         Task<Fixingdemolition> FetchSingleResult(int id);
+        Task<Fixingdocument> GetAnnexureAfiledetails(int id);
     }
 }

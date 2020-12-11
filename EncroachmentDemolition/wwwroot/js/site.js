@@ -12,11 +12,13 @@ $(document).ready(function () {
     });
 
 
-    $(".ParameterActionListClass").attr("multiple", "");
+    
     $("select[class!='form-control destroy']").select2({
         placeholder: "--Select--",
         allowClear: true
     });
+    $(".ParameterActionListClass").attr("multiple", "");
+    $(".selectnotmultiple").removeAttr("multiple", "multiple");
     $('input,textarea').each(function () {
         if ($(this).is("[limit]")) {
             if ($(this).attr("limit") != undefined && $(this).attr("limit") != null) {

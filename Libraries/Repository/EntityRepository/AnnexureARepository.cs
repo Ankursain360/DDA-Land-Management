@@ -90,5 +90,9 @@ namespace Libraries.Repository.EntityRepository
                                .FirstOrDefaultAsync();
         }
 
+        public async Task<Fixingdocument> GetAnnexureAfiledetails(int id)
+        {
+            return await _dbContext.Fixingdocument.Where(x => x.FixingdemolitionId == id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
     }
 }

@@ -78,15 +78,6 @@ namespace EncroachmentDemolition.Controllers
             }
             fixingdemolition.EncroachmentId = fixingdemolition.Encroachment.Id;
             var result = await _annexureAService.Create(fixingdemolition);
-            //if (result == true)
-            //{
-            //    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-            //    var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
-            //    //  return View("Index", result1);
-            //}
-            //if (fixingdemolition.DemolitionProgramId != null)
-            //{
-
             List<Fixingprogram> fixingprogram = new List<Fixingprogram>();
             for (int i = 0; i < fixingdemolition.DemolitionProgramId.Count(); i++)
             {
@@ -102,10 +93,6 @@ namespace EncroachmentDemolition.Controllers
             {
                 result = await _annexureAService.SaveFixingprogram(item);
             }
-            //}
-            //if (fixingdemolition.DemolitionChecklistId != null)
-            //{
-
             List<Fixingchecklist> fixingchecklist = new List<Fixingchecklist>();
             for (int i = 0; i < fixingdemolition.DemolitionChecklistId.Count(); i++)
             {
@@ -121,33 +108,13 @@ namespace EncroachmentDemolition.Controllers
             {
                 result = await _annexureAService.Savefixingchecklist(item);
             }
-            //}
-            //if (fixingdemolition.DemolitionDocumentId != null)
-            //{
-            //    List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
-            //    for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count(); i++)
-            //    {
-            //        fixingdocument.Add(new Fixingdocument
-            //        {
-
-            //            DemolitionDocumentId = (int)fixingdemolition.DemolitionDocumentId[i],
-            //            DocumentDetails = fixingdemolition.DocumentDetails[i],
-            //            FixingdemolitionId = fixingdemolition.Id
-            //        });
-            //    }
-            //    foreach (var item in fixingdocument)
-            //    {
-            //        result = await _annexureAService.SaveFixingdocument(item);
-            //    }
-            //}
             string DocumentFilePath = _configuration.GetSection("FilePaths:FixingDemolitionFiles:DocumentFilePath").Value.ToString();
             // targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
             FileHelper fileHelper = new FileHelper();
             //if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
             //{
-
             List<Fixingdocument> fixingdocument = new List<Fixingdocument>();
-            for (int i = 0; i < fixingdemolition.DocumentDetails.Count; i++)
+            for (int i = 0; i < fixingdemolition.DemolitionDocumentId.Count; i++)
             {
                 string FilePath = null;
                 if (fixingdemolition.DocumentDetails != null && fixingdemolition.DocumentDetails.Count > 0)
@@ -163,7 +130,6 @@ namespace EncroachmentDemolition.Controllers
             {
                 result = await _annexureAService.SaveFixingdocument(item);
             }
-
             //}
             if (result)
             {
@@ -197,7 +163,6 @@ namespace EncroachmentDemolition.Controllers
                 #endregion
 
                 ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
-                // var result1 = await _encroachmentRegisterationService.GetAllEncroachmentRegisteration();
                 return View("Index");
             }
             else
@@ -211,65 +176,6 @@ namespace EncroachmentDemolition.Controllers
             List<Fixingdemolition> list = await _annexureAService.GetFixingdemolition(id);
             return View(list);
         }
-        //[HttpPost]
-        //public async Task<IActionResult> Create(Fixingdemolition fixingdemolition)
-        //{
-        //    fixingdemolition.Demolitionchecklist = await _annexureAService.GetDemolitionchecklist();
-        //      if (ModelState.IsValid)
-        //    {
-        //        var result = await _annexureAService.Create(fixingdemolition);
-        //            ///for after file:
-        //            //for before file:
-        //            //if (demolitionstructuredetails.NameOfStructure != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
-
-        //            //if (demolitionstructuredetails.StructrureId != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
-        //            if (demolitionstructuredetails.StructrureId != null)
-        //            {
-        //                List<Demolitionstructure> demolitionstructure = new List<Demolitionstructure>();
-        //                for (int i = 0; i < demolitionstructuredetails.StructrureId.Count(); i++)
-        //                {
-        //                    demolitionstructure.Add(new Demolitionstructure
-        //                    {
-
-        //                        StructureId = (int)demolitionstructuredetails.StructrureId[i],
-        //                        NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
-        //                        DemolitionStructureDetailsId = demolitionstructuredetails.Id
-        //                    });
-        //                }
-        //                foreach (var item in demolitionstructure)
-        //                {
-        //                    result = await _demolitionstructuredetailsService.SaveDemolitionstructure(item);
-        //                }
-        //            }
-
-        //            if (result)
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-        //                var result1 = await _demolitionstructuredetailsService.GetAllDemolitionstructuredetails();
-        //                return View("Index", result1);
-        //            }
-        //            else
-        //            {
-        //                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //                return View(demolitionstructuredetails);
-        //            }
-        //        }
-
-        //    }
-        //public async Task<IActionResult> Create()
-        //{
-
-
-        //    demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetStructure();
-
-
-
-        //    //     var list = await _annexureAService.GetDemolitionchecklist();
-
-        //    // var list1 = await _annexureAService.GetDemolitiondocument();
-        //    return View();
-        //   // return View(list1);
-        //}
         #region Watch & Ward  Details
         public async Task<PartialViewResult> WatchWardView(int id)
         {

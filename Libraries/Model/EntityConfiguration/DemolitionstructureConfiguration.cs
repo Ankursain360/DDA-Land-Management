@@ -30,7 +30,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.NoOfStructrure)
                             .HasColumnName("No of structrure")
-                            .HasColumnType("decimal(18,2)");
+                            .HasColumnType("int(11)");
 
             builder.Property(e => e.StructureId).HasColumnType("int(11)");
 

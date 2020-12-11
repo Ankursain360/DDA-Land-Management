@@ -29,7 +29,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Code)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(10)
                 .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -44,7 +44,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(30)
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");

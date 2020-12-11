@@ -109,7 +109,7 @@
                                                 </td>
                                                 <td>
                                                     <div class="floating-label-wrap">
-                                                        <select class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
+                                                        <select style="width:100%" class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
                                                             <option value="0">---Select---</option>
                                                             <option value="1">Male</option>
                                                             <option value="2">Female</option>
@@ -287,9 +287,9 @@
                                         <label class="floating-label">Property/House/Municipal No.</label>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="col-md-6">
                                     <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3">
+                                        <select class="floating-label-field floating-label-field--s3" style="width:100%">
                                             <option value="0">---Select---</option>
                                             <option value="1">Inactive</option>
                                         </select>
@@ -322,7 +322,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="floating-label-wrap">
-                                        <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <select class="floating-label-field floating-label-field--s3" style="width:100%">
                                             <option value="0">---Select---</option>
                                             <option value="1">Inactive</option>
                                         </select>
@@ -650,14 +650,15 @@
                 </div>
                 <br />
                 <div class="row form-group">
-                    <div class="form-group col-md-6">
-
-                        <select style="height:30px; background-color: #dddddd;" id="drpReqType" required="" class="floating-label-field floating-label-field--s3">
-                            <option value="1">Forward To CLM</option>
-                            <option value="2">Approved</option>
-                            <option value="3">Reject</option>
-                        </select>
-                        <label class="floating-label">Status</label>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <select required="" class="floating-label-field floating-label-field--s3" style="width:100%">
+                                <option value="1">Forward To CLM</option>
+                                <option value="2">Approved</option>
+                                <option value="3">Reject</option>
+                            </select>
+                            <label class="floating-label">Status</label>
+                        </div>
                     </div>
                 </div>
 
@@ -669,7 +670,7 @@
                         </div>
                     </div>
                 </div>
-                <br/>
+                <br />
                 <div class="row ">
                     <div class=" col-md-12">
                         <input type="submit" value="Submit" class="btn btn-theme " />
