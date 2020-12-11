@@ -63,16 +63,10 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id, EncroachmentRegisteration encroachmentRegisterations)
+        public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
             var result = false;
-            var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
-            encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
-            encroachmentRegisterations.ZoneList = await _encroachmentRegisterationService.GetAllZone(encroachmentRegisterations.DepartmentId);
-            encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
-            encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
-            encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-
+           
             #region Approval Proccess At Further level start Added by Renu 9 Dec 2020
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
@@ -86,12 +80,12 @@ namespace EncroachmentDemolition.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
-                            approvalproccess.ServiceId = encroachmentRegisterations.Id;
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value);
+                            approvalproccess.ServiceId = fixingdemolition.Id;
                             approvalproccess.SendFrom = SiteContext.UserId;
                             approvalproccess.PendingStatus = 1;
-                            approvalproccess.Remarks = encroachmentRegisterations.ApprovalRemarks; ///May be comment
-                            approvalproccess.Status = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
+                            approvalproccess.Remarks = fixingdemolition.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(fixingdemolition.ApprovalStatus);
                             if (i == DataFlow.Count - 1)
                                 approvalproccess.SendTo = null;
                             else
@@ -104,15 +98,15 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 if (i == DataFlow.Count - 1)
                                 {
-                                    encroachmentRegisterations.ApprovedStatus = 1;
-                                    encroachmentRegisterations.PendingAt = 0;
+                                    fixingdemolition.ApprovedStatus = 1;
+                                    fixingdemolition.PendingAt = 0;
                                 }
                                 else
                                 {
-                                    encroachmentRegisterations.ApprovedStatus = 0;
-                                    encroachmentRegisterations.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                    fixingdemolition.ApprovedStatus = 0;
+                                    fixingdemolition.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
                                 }
-                                result = await _encroachmentRegisterationService.UpdateBeforeApproval(id, encroachmentRegisterations);
+                                result = await _annexureAService.UpdateBeforeApproval(id, fixingdemolition);
                             }
                         }
                         break;
@@ -130,7 +124,7 @@ namespace EncroachmentDemolition.Controllers
         #region History Details Only For Approval Page
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdRequestDemolition").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -209,6 +203,16 @@ namespace EncroachmentDemolition.Controllers
             Data.Demolitiondocument = await _annexureAService.GetDemolitiondocument();
             return PartialView("_AnnexureAView", Data);
         }
+
+        public async Task<FileResult> ViewDocumentAnnexureA(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Fixingdocument Data = await _annexureAService.GetAnnexureAfiledetails(Id);
+            string path = Data.DocumentDetails;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
         #endregion
 
         #region Fetch workflow data for approval prrocess Added by Renu 9 Dec 2020

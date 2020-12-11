@@ -4,7 +4,7 @@
     var watchWardId = parseInt($('#Encroachment_WatchWardId').val());
     GetWatchWardDetails(watchWardId);
 
-
+   
 });
 
 function GetWatchWardDetails(id) {
@@ -65,8 +65,7 @@ $(function () {
         }
     });
     HttpGet(`/EncroachmentRegister/DetailsOfRepeater/?Id=${$("#hdnId").val() == null ? "" : $("#hdnId").val()}`, 'json', function (data) {
-        debugger
-        for (var i = 0; i < data.length; i++) {
+       for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #NameOfStructure").val(data[i].nameOfStructure);
             $("#tbl_posts #add #AreaApprox").val(data[i].area);
             $("#tbl_posts #add #Type").val(data[i].type);

@@ -111,5 +111,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _annexureARepository.FetchSingleResult(id);
         }
+
+        public async Task<Fixingdocument> GetAnnexureAfiledetails(int id)
+        {
+            return await _annexureARepository.GetAnnexureAfiledetails(id);
+        }
     }
 }
