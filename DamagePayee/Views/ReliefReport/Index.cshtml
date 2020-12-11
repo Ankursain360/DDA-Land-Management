@@ -4,146 +4,149 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@model DDAPropertyREG.Models.Tblzonemaster*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Relief Report" })
 
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Relief Report</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+@*<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="myapp-hed">
+                <div class="col-md-12">
+                    <h6 class="pull-left" style="color:white;margin-top:5px;">Relief Report</h6>
+                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
+    <br />
 
-<br />
+    <br />*@
 <div class="container-fluid" id="MainContentForm">
     <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Specify Details  </h6>
-        </div>
+        @*<div class="panel-heading  myapp-hed1">
+                <h6 class="pull-left" style="color:white; margin-top:-0.4%">Specify Details  </h6>
+            </div>*@
+        <br /><br />
         <div class="panel-body">
-            <form asp-action="RptCasesCourtWise">
+            <form asp-action="RptCasesCourtWise" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+                <h2 class="my-3 sub-heading">Specify Details</h2>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-row">
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">---Select---</option>
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Payee Name</label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-
-                        </select>
+                            </select>
+                            <label class="floating-label">Payee Name <span style="color:red">*</span></label>
+                        </div>
                     </div>
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Locality </label><span style="color:red">*</span>
-                        <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
 
-                        </select>
+                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                <option value="0">---Select---</option>
+
+                            </select>
+                            <label class="floating-label">Locality <span style="color:red">*</span></label>
+                        </div>
                     </div>
-
 
                 </div>
-                <div class="form-row">
+                <div class="row pt-3">
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">From Date  </label><span style="color:red">*</span>
-                        <input required type="date" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input required type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                            <label class="floating-label">From Date  <span style="color:red">*</span></label>
+                        </div>
                     </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> To Date </label><span style="color:red">*</span>
-                        <input required type="date" class="form-control" />
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input required type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                            <label class="floating-label"> To Date <span style="color:red">*</span></label>
+                        </div>
                     </div>
-
-
                 </div>
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-                        <input type="submit" value="Generate" class="btn btn-primary myapp-hed1" />
+                <div class="row pt-3">
+                    <div class="col-md-12">
+                        <input type="submit" value="Generate" class="btn btn-theme" />
 
                     </div>
                 </div>
 
                 <div id="divsearch">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Relief Report</h6>
-                                </div>
-                            </div>
-                        </div>
+                    @*<div class="row" style="margin-bottom:35px;">
+            <div class="col-sm-12">
+                <div class=" myapp-hed2">
+                    <div class="col-md-12">
+                        <h6 class="pull-left" style="color:white;margin-top:5px;">Relief Report</h6>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
+                </div>
+            </div>
+        </div>*@
+                    <h2 class="my-3 sub-heading">Relief Report</h2>
+                    <div class="table-section">
+                        <div class="table-responsive px-2">
 
-                            <div id="courtwiserpt">
-                                <div class="card  table-card table-responsive">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
 
-                                    <table class="table  table-bordered table-card">
+                                <thead class="text-nowrap">
+                                    <tr class="myapp-hed1">
+                                        <th>Sr.No</th>
 
-                                        <thead class="thead">
-                                            <tr class="myapp-hed1">
-                                                <th>Sr.No</th>
+                                        <th> Locality </th>
 
-                                                <th> Locality </th>
+                                        <th> Payee Name </th>
+                                        <th>  Property No   </th>
+                                        <th>Demand Number</th>
+                                        <th> Demand Amount   </th>
+                                        <th> Rebate Amount </th>
 
-                                                <th> Payee Name </th>
-                                                <th>  Property No   </th>
-                                                <th>Demand Number</th>
-                                                <th> Demand Amount   </th>
-                                                <th> Rebate Amount </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
 
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
 
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
 
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
+                                    </tr>
+                                </tbody>
 
-                                            </tr>
-                                        </tbody>
+                            </table>
 
-                                    </table>
-
-                                </div>
-
-                            </div>
                         </div>
 
                     </div>
                 </div>
+
+                    
                 <br />
                 <div class="form-row">
-                    <div class=" form-group  col-md-12">
+                    <div class="col-md-12">
 
-                        <input type="submit" value="Export to Excel" class="btn btn-primary  myapp-hed1" style="width:150px !important;" />
+                        <input type="submit" value="Export to Excel" class="btn btn-theme" style="width:150px !important;" />
 
                     </div>
                 </div>
