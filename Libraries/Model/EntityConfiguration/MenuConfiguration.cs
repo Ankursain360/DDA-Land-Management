@@ -36,7 +36,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Url)
-                   .HasMaxLength(150)
+                   .HasMaxLength(200)
                    .IsUnicode(false);
 
             builder.Property(e => e.ParentMenuId).HasColumnType("int(11)");

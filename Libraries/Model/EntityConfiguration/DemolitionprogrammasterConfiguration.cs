@@ -28,7 +28,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ItemsType)
                 .IsRequired()
-                .HasMaxLength(200)
+                .HasMaxLength(20)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
