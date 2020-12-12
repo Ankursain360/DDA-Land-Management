@@ -1,9 +1,6 @@
 ﻿using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
@@ -46,25 +43,25 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.NotificationDate).HasColumnType("date");
 
             builder.Property(e => e.OccupiedBy)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.PropertySiteNo)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(400)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
-                .HasMaxLength(300)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.StatusOfLand)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.HasOne(d => d.LandNotification)
@@ -79,5 +76,5 @@ namespace Libraries.Model.EntityConfiguration
         }
 
     }
-   
+
 }

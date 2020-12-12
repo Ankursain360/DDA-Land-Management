@@ -113,14 +113,16 @@
                                 <div class="form-check theme">
 
                                     <label class="form-check-label">
-                                        <input type="radio" name="grpDamageAssesseeType" id="rOriginal" checked>Original
+                                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rOriginal" checked>Original
                                     </label>
                                 </div>
+                            </div> <div class="col-md-6">
+
                                 <div class="form-check theme">
 
 
                                     <label class="form-check-label">
-                                        <input type="radio" name="grpDamageAssesseeType" id="rSubsequent">Subsequent Purchaser/Occupier
+                                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent">Subsequent Purchaser/Occupier
                                     </label>
                                 </div>
                             </div>
@@ -132,12 +134,14 @@
 
 
                         <div class="row">
-                            <div class="table-section bg-white border shadow rounded">
 
-                                <div class="col-md-12">
-                                    <div class="table-responsive">
+                            <div class="col-md-12">
+                                <div class="table-section bg-white border shadow rounded">
+
+                                    <div class="table-responsive px-2">
                                         <table class="table table-striped table-bordered" border="0" id="tbl_DamageAssessee">
-                                            <thead class="thead">
+                                            <thead class="text-nowrap">
+
                                                 <tr>
                                                     <th>Sr.No</th>
                                                     <th>Name</th>
@@ -165,11 +169,10 @@
                                                         <input type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
                                                     </td>
                                                     <td>
-                                                        @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>*@
-                                                        <a class="btn btn-xs delete-recordDamageAssessee " data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                                        <a class="btn btn-xs add-recordDamageAssessee" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                                            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                                            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                                        </div>
                                                     </td>
                                                 </tr>
 
@@ -291,26 +294,26 @@
                         <div id="DivMainContentForm">
                             <h3 class="mb-3 d-flex">Use of Property</h3>
 
-
-
-
-
-
-
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-4">
                                     <div class="form-check theme">
 
                                         <input type="radio" class="form-check-input" name="grpUseofpeoperty" id="rdbResidential"> <label class="form-check-label">
                                             Residential
                                         </label>
                                     </div>
+                                </div>
+                                <div class="col-md-4">
+
                                     <div class="form-check theme">
 
                                         <input type="radio" class="form-check-input" name="grpUseofpeoperty" id="rdbCommercial">  <label class="form-check-label" ">
                                             Commercial
                                         </label>
-                                    </div> <div class="form-check theme">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-check theme">
 
                                         <input type="radio" class="form-check-input" name="grpUseofpeoperty" id="rdbMixed">  <label class="form-check-label" ">
                                             Mixed
@@ -359,13 +362,16 @@
                             <h3 class="mb-3 d-flex">Litigation Status</h3>
 
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-6">
                                     <div class="form-check theme">
 
                                         <label class="form-check-label">
                                             <input type="radio" class="form-check-input" name="grpLitigation" id="rdbNoLitigation" checked>The Land Property is not a subject matter of any litigation/Court Case
                                         </label>
                                     </div>
+                                </div>
+                                <div class="col-md-6">
+
                                     <div class="form-check theme">
 
                                         <label class="form-check-label">
@@ -433,14 +439,23 @@
                             <h3 class="mb-3 d-flex">Whether present occupant's is/are damage payee in DDA record</h3>
 
 
-                            <div class="form-row">
-                                <div class="form-group col-md-12">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="grpYESNO" id="rdbPayeeYes" checked>Yes
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="grpYESNO" id="rdbPayeeNo">No
-                                    </label>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-check theme">
+
+                                        <input type="radio" class="form-check-input" name="grpYESNO" id="rdbPayeeYes" checked> <label class="form-check-label">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-check theme">
+
+
+                                        <input type="radio" class="form-check-input" name="grpYESNO" id="rdbPayeeNo"> <label class="form-check-label">
+                                            No
+                                        </label>
+                                    </div>
                                 </div>
 
                                 <div class="form-group" id="DivForPayeeNo" style="display:none;">
@@ -450,65 +465,68 @@
                             </div>
                         </div>
                     </div>
-                    <div id="DivMainContentForm">
+                    <div class="mt-md-3">
 
-                        <h3 class="mb-3 d-flex">Payment History</h3>
+                        <div id="DivMainContentForm">
 
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <div class="table-section bg-white border shadow rounded">
-                                    <div class="table-responsive px-2">
+                            <h3 class="mb-3 d-flex">Payment History</h3>
 
-                                        <table class="table table-sm table-bordered mb-0 table-striped">
-                                            <thead class="text-nowrap">
-                                            <thead class="thead">
-                                                <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Payee Name</th>
-                                                    <th>Receipt No.</th>
-                                                    <th>Mode of Payment</th>
-                                                    <th>Date of Payment</th>
-                                                    <th>Amount</th>
-                                                    <th>Upload receipt</th>
-                                                    <th>Operation</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody class="tbody">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="file" />
-                                                    </td>
-                                                    <td>
-                                                        @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>*@
-                                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                                            <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                                            <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                                        </div>
-                                                        @* <a class="btn btn-xs delete-recordPaymentHistory" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                                            <a class="btn btn-xs add-recordPaymentHistory" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                                        *@
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                            <div class="form-row">
+                                <div class="col-md-12">
+                                    <div class="table-section bg-white border shadow rounded">
+                                        <div class="table-responsive px-2">
+
+                                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                                <thead class="text-nowrap">
+                                                <thead class="thead">
+                                                    <tr>
+                                                        <th>Sr.No</th>
+                                                        <th>Payee Name</th>
+                                                        <th>Receipt No.</th>
+                                                        <th>Mode of Payment</th>
+                                                        <th>Date of Payment</th>
+                                                        <th>Amount</th>
+                                                        <th>Upload receipt</th>
+                                                        <th>Operation</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody class="tbody">
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>
+                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
+                                                        </td>
+                                                        <td>
+                                                            <input type="file" />
+                                                        </td>
+                                                        <td>
+                                                            @*<button id="addToList" class="btn btn-primary myapp-hed1">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </button>*@
+                                                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                                                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                                                <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                                            </div>
+                                                            @* <a class="btn btn-xs delete-recordPaymentHistory" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
+                                                                <a class="btn btn-xs add-recordPaymentHistory" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                                            *@
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -702,7 +720,7 @@
                                                                 <td>44828</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>1</td>
+                                                                <td>2</td>
                                                                 <td>01/04/2009</td>
                                                                 <td>31/03/2010</td>
                                                                 <td>12</td>
@@ -712,7 +730,7 @@
                                                                 <td>212933</td>
                                                             </tr>
                                                             <tr>
-                                                                <td>1</td>
+                                                                <td>3</td>
                                                                 <td>01/04/2010</td>
                                                                 <td>31/03/2011</td>
                                                                 <td>12</td>
