@@ -32,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Name)
                 .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(30)
                 .IsUnicode(false);
         }
     }

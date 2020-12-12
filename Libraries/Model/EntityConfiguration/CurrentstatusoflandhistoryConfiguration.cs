@@ -71,6 +71,7 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.NatureOfUtilization).HasColumnType("int(11)");
             entity.Property(e => e.EncroachmentStatus).HasColumnType("int(11)");
 
+
             entity.Property(e => e.PlannedUnplannedLand)
                 .HasMaxLength(50)
                 .IsUnicode(false);
@@ -95,15 +96,15 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
-            entity.Property(e => e.TotalArea).HasColumnType("decimal(12,3)");
+            entity.Property(e => e.TotalArea).HasColumnType("decimal(18,3)");
 
-            entity.Property(e => e.TotalAreaInBigha).HasColumnType("decimal(12,3)");
+            entity.Property(e => e.TotalAreaInBigha).HasColumnType("decimal(18,3)");
 
-            entity.Property(e => e.TotalAreaInBiswa).HasColumnType("decimal(12,3)");
+            entity.Property(e => e.TotalAreaInBiswa).HasColumnType("decimal(18,3)");
 
-            entity.Property(e => e.TotalAreaInBiswani).HasColumnType("decimal(12,3)");
+            entity.Property(e => e.TotalAreaInBiswani).HasColumnType("decimal(18,3)");
 
-            entity.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(12,3)");
+            entity.Property(e => e.TotalAreaInSqAcreHt).HasColumnType("decimal(18,3)");
 
             entity.Property(e => e.Tsssurvey)
                 .HasColumnName("TSSSurvey")

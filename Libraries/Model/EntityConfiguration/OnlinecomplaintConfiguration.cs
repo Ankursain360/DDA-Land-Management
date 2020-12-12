@@ -20,13 +20,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.AddressOfComplaint)
-                .HasMaxLength(200)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.ComplaintTypeId).HasColumnType("int(11)");
 
             builder.Property(e => e.Contact)
-                .HasMaxLength(50)
+                .HasMaxLength(20)
                 .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -40,23 +40,23 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             builder.Property(e => e.Lattitude)
-                .HasMaxLength(100)
+                .HasMaxLength(45)
                 .IsUnicode(false);
 
             builder.Property(e => e.LocationId).HasColumnType("int(11)");
 
             builder.Property(e => e.Longitude)
-                .HasMaxLength(100)
+                .HasMaxLength(45)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
-                .HasMaxLength(100)
+                .HasMaxLength(400)
                 .IsUnicode(false);
 
             builder.Property(e => e.PhotoPath)
-                .HasMaxLength(500)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.HasOne(d => d.ComplaintType)
