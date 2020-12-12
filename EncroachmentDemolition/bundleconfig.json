@@ -250,5 +250,11 @@
     "inputFiles": [
       "wwwroot/js/annexureaapprovalcreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionpoliceassistenceletterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionpoliceassistenceletterindex.js"
+    ]
   }
 ]
