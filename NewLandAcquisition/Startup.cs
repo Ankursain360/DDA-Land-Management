@@ -13,8 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Libraries.Model;
 using NewLandAcquisition.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
-
-//using SiteMaster.Filters;
+using NewLandAcquisition.Filters;
 
 namespace NewLandAcquisition
 {
@@ -44,19 +43,13 @@ namespace NewLandAcquisition
 
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
 
-            services.Configure<CookieTempDataProviderOptions>(options =>
+            
+
+            services.AddMvc(option =>
             {
-                options.Cookie.Name = "MyTempDataCookie";
+                option.Filters.Add(typeof(ExceptionLogFilter));
             });
-            //services.AddMvc(option =>
-            //{
-            //    option.Filters.Add(new CustomExceptionHandlerFilter());
-            //});
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
+            
             services.RegisterDependency();
 
 #if DEBUG
@@ -111,7 +104,6 @@ namespace NewLandAcquisition
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSession();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {

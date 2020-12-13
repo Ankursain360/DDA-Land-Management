@@ -28,6 +28,11 @@ namespace NewLandAcquisition.Controllers
             return View();
         }
 
+        public IActionResult ErrorLog()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

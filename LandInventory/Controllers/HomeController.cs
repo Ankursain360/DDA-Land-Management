@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
-using LandInventory.Filters;
 using LandInventory.Models;
 using System.Diagnostics;
 using LandInventory.Helper;
@@ -9,7 +8,6 @@ using Dto.Master;
 
 namespace LandInventory.Controllers
 {
-    [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;
@@ -35,6 +33,11 @@ namespace LandInventory.Controllers
         public IActionResult Logout()
         {
             return SignOut("Cookies", "oidc");
+        }
+
+        public IActionResult ErrorLog()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
