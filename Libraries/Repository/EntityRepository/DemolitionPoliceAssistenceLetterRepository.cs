@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Repository.EntityRepository
 {
-   public class DemolitionPoliceAssistenceLetterRepository  : GenericRepository<Fixingdemolition>, IDemolitionPoliceAssistenceLetterRepository
+   public class DemolitionPoliceAssistenceLetterRepository  : GenericRepository<Demolitionpoliceassistenceletter>, IDemolitionPoliceAssistenceLetterRepository
     {
         public DemolitionPoliceAssistenceLetterRepository(DataContext dbContext) : base(dbContext)
         {

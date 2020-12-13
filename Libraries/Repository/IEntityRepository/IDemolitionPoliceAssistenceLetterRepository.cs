@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDemolitionPoliceAssistenceLetterRepository : IGenericRepository<Fixingdemolition>
+    public interface IDemolitionPoliceAssistenceLetterRepository : IGenericRepository<Demolitionpoliceassistenceletter>
     {
         Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
     }

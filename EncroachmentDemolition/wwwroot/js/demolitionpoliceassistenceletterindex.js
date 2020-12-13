@@ -3,10 +3,10 @@ var currentPageSize = 10;
 
 $(document).ready(function () {
     var StatusId = 1;
-    GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId);
+    GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
 });
 
-function GetEncroachmentRegisterApproval(pageNumber, pageSize, StatusId) {
+function GetDemolitionList(pageNumber, pageSize, StatusId) {
     var param = GetSearchParam(pageNumber, pageSize, StatusId);
     HttpPost(`/DemolitionPoliceAssistenceLetter/List`, 'html', param, function (response) {
         $('#divTable').html("");
@@ -26,13 +26,13 @@ function GetSearchParam(pageNumber, pageSize, StatusId) {
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);
-    GetEncroachmentRegisterApproval(pageNo, currentPageSize);
+    GetDemolitionList(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetEncroachmentRegisterApproval(currentPageNumber, pageSize);
+    GetDemolitionList(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
 
@@ -40,12 +40,12 @@ function onChangePageSize(pageSize) {
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 1;
-        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId);
+        GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetEncroachmentRegisterApproval(currentPageNumber, currentPageSize, StatusId);
+        GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
     }
 
 });
