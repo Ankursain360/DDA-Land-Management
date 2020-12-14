@@ -108,6 +108,16 @@ namespace Libraries.Model
         public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
+
+        //**********  Damage Payee **********
+        
+        public virtual DbSet<Allottetype> Allottetype { get; set; }
+
+        public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
+        public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
+        public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -188,6 +198,14 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
+
+            //**********  Damage Payee **********
+
+            modelBuilder.ApplyConfiguration(new AllottetypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfoConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }
