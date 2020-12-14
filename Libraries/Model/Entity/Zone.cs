@@ -22,6 +22,7 @@ namespace Libraries.Model.Entity
             Locality = new HashSet<Locality>();
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
+            Mutationdetails = new HashSet<Mutationdetails>();
         }
 
         [Required(ErrorMessage = "The Department field is required")]
@@ -62,5 +63,6 @@ namespace Libraries.Model.Entity
         public ICollection<Propertyregistration> PropertyregistrationZone { get; set; }
         public ICollection<Planning> Planning { get; set; }
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
+        public ICollection<Mutationdetails> Mutationdetails { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Libraries.Model.builderConfiguration;
+using Libraries.Model.Entity;
 using Libraries.Model.EntityConfiguration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -108,6 +109,11 @@ namespace Libraries.Model
         public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
+        public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
+        public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
+        public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
+        public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -188,6 +194,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationDetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationOldDamageAssesseConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationNewDamageAssesseConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationDetailsPhotoPropertyConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

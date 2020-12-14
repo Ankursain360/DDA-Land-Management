@@ -33,7 +33,9 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive == 1).ToListAsync();
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage
+                                                                        .Where(x => x.IsActive == 1)
+                                                                        .ToListAsync();
             return villageList;
         }
 
@@ -48,7 +50,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model)
         {
-            return await _dbContext.Awardplotdetails.Include(x => x.AwardMaster).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
+            return await _dbContext.Awardplotdetails
+                                        .Include(x => x.AwardMaster)
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .OrderByDescending(x => x.Id)
+                                    .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
         }
 
 
