@@ -256,5 +256,11 @@
     "inputFiles": [
       "wwwroot/js/demolitionpoliceassistenceletterindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionpoliceassistencelettercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionpoliceassistencelettercreate.js"
+    ]
   }
 ]

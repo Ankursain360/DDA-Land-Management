@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
     {
         public District()
         {
+            Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Userprofile = new HashSet<Userprofile>();
         }
         [Required(ErrorMessage = "District name is required")]
@@ -25,6 +26,7 @@ namespace Libraries.Model.Entity
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+        public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
 
     }
 }

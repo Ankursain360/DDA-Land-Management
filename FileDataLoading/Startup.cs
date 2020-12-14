@@ -1,22 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using FileDataLoading.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-//using BotDetect.Web;
-using Newtonsoft.Json.Serialization;
-using FileDataLoading.Models;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 
 namespace FileDataLoading
 {
@@ -43,31 +34,6 @@ namespace FileDataLoading
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddDbContext<lmsContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
-            //  services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
-
-            // services.AddMvc()
-            //.AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-            services.AddSession();
-            services.AddMvc();
-            services.AddMvc().AddSessionStateTempDataProvider();
-            services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-            services.AddMvc().AddViewOptions(options =>
-            {
-                //   options.SuppressTempDataAttributePrefix = true;
-            });
-            services.Configure<CookieTempDataProviderOptions>(options =>
-            {
-                options.Cookie.Name = "MyTempDataCookie";
-            });
-            // services.AddScoped<ILogger, Logger>();
-            // Add Session services.
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(20);
-                options.Cookie.IsEssential = true;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,14 +51,10 @@ namespace FileDataLoading
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-            app.UseSession();
-            // app.UseMvc();
             app.UseCookiePolicy();
-            //app.UseCaptcha(Configuration);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

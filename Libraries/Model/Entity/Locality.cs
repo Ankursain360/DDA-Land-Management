@@ -16,6 +16,9 @@ namespace Libraries.Model.Entity
             EncroachmentRegisteration = new HashSet<EncroachmentRegisteration>();
             Propertyregistration = new HashSet<Propertyregistration>();
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
+            DamagepayeeregisterLocality = new HashSet<Damagepayeeregister>();
+            DamagepayeeregisterOnlinePaymentLocality = new HashSet<Damagepayeeregister>();
+
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -53,6 +56,9 @@ namespace Libraries.Model.Entity
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Demolitionstructuredetails> Demolitionstructuredetails { get; set; }
         public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
+        public ICollection<Damagepayeeregister> DamagepayeeregisterLocality { get; set; }
+        public ICollection<Damagepayeeregister> DamagepayeeregisterOnlinePaymentLocality { get; set; }
+
 
     }
 }

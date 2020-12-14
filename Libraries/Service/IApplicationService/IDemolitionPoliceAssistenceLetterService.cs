@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IDemolitionPoliceAssistenceLetterService : IEntityService<Fixingdemolition>
+    public interface IDemolitionPoliceAssistenceLetterService : IEntityService<Demolitionpoliceassistenceletter>
     {
         Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
+        Task<bool> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter);
     }
 }

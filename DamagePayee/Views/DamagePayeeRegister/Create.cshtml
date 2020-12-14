@@ -412,290 +412,261 @@
                         </div>
                     </div>
 
-                        <div id="DivMainContentForm">
+                    <div id="DivMainContentForm">
+                        <h3 class="my-3 d-flex sub-heading">Payment History</h3>
+                       
+                                <div class="table-section bg-white border shadow rounded">
+                                    <div class="table-responsive">
 
-                            <h3 class="mb-3 d-flex">Payment History</h3>
-
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="table-section bg-white border shadow rounded">
-                                        <div class="table-responsive px-2">
-
-                                            <table class="table table-sm table-bordered mb-0 table-striped">
-                                                <thead class="text-nowrap">
-                                                <thead class="thead">
-                                                    <tr>
-                                                        <th>Sr.No</th>
-                                                        <th>Payee Name</th>
-                                                        <th>Receipt No.</th>
-                                                        <th>Mode of Payment</th>
-                                                        <th>Date of Payment</th>
-                                                        <th>Amount</th>
-                                                        <th>Upload receipt</th>
-                                                        <th>Operation</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbody">
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="file" />
-                                                        </td>
-                                                        <td>
-                                                            @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                                <i class="fa fa-plus"></i>
-                                            </button>*@
-                                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                                                <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                                            </div>
-                                                            @* <a class="btn btn-xs delete-recordPaymentHistory" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                            <a class="btn btn-xs add-recordPaymentHistory" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                                            *@
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                        <table class="table table-sm table-bordered mb-0 table-striped">
+                                            <thead class="text-nowrap">
+                                                <tr>
+                                                    <th>Sr.No</th>
+                                                    <th>Payee Name</th>
+                                                    <th>Receipt No.</th>
+                                                    <th>Mode of Payment</th>
+                                                    <th>Date of Payment</th>
+                                                    <th>Amount</th>
+                                                    <th>Upload receipt</th>
+                                                    <th>Operation</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>
+                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
+                                                    </td>
+                                                    <td>
+                                                        <input type="file" />
+                                                    </td>
+                                                    <td>
+                                                        @*<button id="addToList" class="btn btn-primary myapp-hed1">
+                                            <i class="fa fa-plus"></i>
+                                        </button>*@
+                                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                                            <a class="btn btn-theme delete-recordPaymentHistory" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                                            <a class="btn btn-theme add-recordPaymentHistory" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                                        </div>
+                                                      
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
+                                </div>
+                           
+                    </div>
+                      
+                    <div id="DivMainContentForm">
+                        <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Residential</option>
+                                    </select>
+                                    <label class="floating-label">Damage Property</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentDate" />
+                                    <label class="floating-label">Date of Encroachment</label>
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-md-3">
 
-                            <div id="DivMainContentForm">
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentFromDate" />
 
-                                <h3 class="mb-3 d-flex">Online Payment</h3>
+                                    <label class="floating-label">From Date</label>
+                                </div>
+                            </div>
 
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentToDate" />
 
-                                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Residential</option>
-                                            </select>
-                                            <label class="floating-label">Damage Property</label>
+                                    <label class="floating-label">To Date</label>
+                                </div>
+                            </div>
+                        </div>
 
-                                        </div>
-                                    </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Puth</option>
+                                    </select>
+                                    <label class="floating-label">Locality</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" />
 
-
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentDate" />
-                                            <label class="floating-label">Date of Encroachment</label>
-
-                                        </div>
-                                    </div>
-
+                                    <label class="floating-label">Area in sq. yds.</label>
 
                                 </div>
-
-                                <div class="row mt-md-3">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentFromDate" />
-
-                                            <label class="floating-label">From Date</label>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentToDate" />
-
-                                            <label class="floating-label">To Date</label>
-
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
 
 
-                                </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-12">
+                                <input type="submit" value="Calculate" class="btn btn-theme" />
+                                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                                @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
+                            </div>
+                        </div>
 
-                                <div class="row mt-md-3">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap">
-                                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Puth</option>
-                                            </select>
+                        <br />
+                    </div>
+                    <div id="DivMainContentForm">
+                        <h3 class="my-3 d-flex sub-heading">Details</h3>
 
-                                            <label class="floating-label">Locality</label>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <h3 class="my-3 d-flex sub-heading">Damage Calculation</h3>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h3 class="my-3 d-flex sub-heading">Interest Calculation</h3>
+                            </div>
+                        </div>
+                   
+                              
+                                    <div class="row">
+                                        <div class=" form-group col-md-6">
 
-                                        </div>
-                                    </div>
+                                            <div class="table-section bg-white border shadow rounded">
+                                                <div class="table-responsive ">
+                                                    <table class="table table-sm table-bordered mb-0 table-striped">
+                                                        <thead class="text-nowrap">
+                                                            <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Start Date</th>
+                                                                <th>End Date</th>
+                                                                <th>Rate</th>
+                                                                <th>Area</th>
+                                                                <th>Month</th>
+                                                                <th>Damage Charges</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="tbody">
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>01/08/2008</td>
+                                                                <td>31/03/2009</td>
+                                                                <td>80.05</td>
+                                                                <td>1500</td>
+                                                                <td>8</td>
+                                                                <td>960600</td>
 
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>01/04/2009</td>
+                                                                <td>31/03/2010</td>
+                                                                <td>80.05</td>
+                                                                <td>1500</td>
+                                                                <td>12</td>
+                                                                <td>1440900</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>01/04/2010</td>
+                                                                <td>31/03/2011</td>
+                                                                <td>88.06</td>
+                                                                <td>1500</td>
+                                                                <td>12</td>
+                                                                <td>174360</td>
+                                                            </tr>
 
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" />
+                                                        </tbody>
 
-                                            <label class="floating-label">Area in sq. yds.</label>
+                                                    </table>
 
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row mt-md-3">
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Calculate" class="btn btn-theme" />
-                                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                        @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
-                                    </div>
-                                </div>
-
-                                <br />
-                                <div id="DivMainContentForm">
-
-                                    <h3 class="mb-3 d-flex">Details</h3>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label lb-sm">Damage Calculation</label>
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label lb-sm">Interest Calculation</label>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="table-section bg-white border shadow rounded">
-
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div style="overflow-x:auto;">
-                                                        <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                                            <thead class="text-nowrap">
-                                                                <tr>
-                                                                    <th>Sr.No</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>End Date</th>
-                                                                    <th>Rate</th>
-                                                                    <th>Area</th>
-                                                                    <th>Month</th>
-                                                                    <th>Damage Charges</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/08/2008</td>
-                                                                    <td>31/03/2009</td>
-                                                                    <td>80.05</td>
-                                                                    <td>1500</td>
-                                                                    <td>8</td>
-                                                                    <td>960600</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>01/04/2009</td>
-                                                                    <td>31/03/2010</td>
-                                                                    <td>80.05</td>
-                                                                    <td>1500</td>
-                                                                    <td>12</td>
-                                                                    <td>1440900</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>01/04/2010</td>
-                                                                    <td>31/03/2011</td>
-                                                                    <td>88.06</td>
-                                                                    <td>1500</td>
-                                                                    <td>12</td>
-                                                                    <td>174360</td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <div style="overflow-x:auto;">
-                                                        <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                                            <thead class="text-nowrap">
-                                                                <tr>
-                                                                    <th>Sr.No</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>End Date</th>
-                                                                    <th>Month</th>
-                                                                    <th>Outstanding Damage</th>
-                                                                    <th>Paid Amount as claimed by assessee</th>
-                                                                    <th>Interest</th>
-                                                                    <th>Cumlative Interest</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/08/2008</td>
-                                                                    <td>31/03/2009</td>
-                                                                    <td>8</td>
-                                                                    <td>960600</td>
-                                                                    <td>0</td>
-                                                                    <td>44828</td>
-                                                                    <td>44828</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/04/2009</td>
-                                                                    <td>31/03/2010</td>
-                                                                    <td>12</td>
-                                                                    <td>2401500</td>
-                                                                    <td>0</td>
-                                                                    <td>168105</td>
-                                                                    <td>212933</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/04/2010</td>
-                                                                    <td>31/03/2011</td>
-                                                                    <td>12</td>
-                                                                    <td>3986530</td>
-                                                                    <td>0</td>
-                                                                    <td>279061</td>
-                                                                    <td>491994</td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
 
+                                        <div class="form-group col-md-6">
+                                            <div class="table-section bg-white border shadow rounded">
+                                                <div class="table-responsive ">
+                                                    <table class="table table-sm table-bordered mb-0 table-striped">
+                                                        <thead class="text-nowrap">
+                                                                    <tr>
+                                                                        <th>Sr.No</th>
+                                                                        <th>Start Date</th>
+                                                                        <th>End Date</th>
+                                                                        <th>Month</th>
+                                                                        <th>Outstanding Damage</th>
+                                                                        <th>Paid Amount as claimed by assessee</th>
+                                                                        <th>Interest</th>
+                                                                        <th>Cumlative Interest</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody class="tbody">
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>01/08/2008</td>
+                                                                        <td>31/03/2009</td>
+                                                                        <td>8</td>
+                                                                        <td>960600</td>
+                                                                        <td>0</td>
+                                                                        <td>44828</td>
+                                                                        <td>44828</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>01/04/2009</td>
+                                                                        <td>31/03/2010</td>
+                                                                        <td>12</td>
+                                                                        <td>2401500</td>
+                                                                        <td>0</td>
+                                                                        <td>168105</td>
+                                                                        <td>212933</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>1</td>
+                                                                        <td>01/04/2010</td>
+                                                                        <td>31/03/2011</td>
+                                                                        <td>12</td>
+                                                                        <td>3986530</td>
+                                                                        <td>0</td>
+                                                                        <td>279061</td>
+                                                                        <td>491994</td>
+                                                                    </tr>
+
+                                                                </tbody>
+
+                                                            </table>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
                         </div>
+                   
+
 
                         <div class="row mt-md-3">
                             <div class="col-md-12">

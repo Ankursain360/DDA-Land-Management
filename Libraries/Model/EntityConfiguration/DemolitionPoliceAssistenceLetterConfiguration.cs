@@ -23,7 +23,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedDate).HasColumnType("date");
+            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.FilePath).HasColumnType("longtext");
 
