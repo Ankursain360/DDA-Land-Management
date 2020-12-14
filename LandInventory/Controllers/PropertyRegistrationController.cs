@@ -27,7 +27,6 @@ namespace LandInventory.Controllers
        // Let suppose user = 13 can Create, user = 14 can validate, user = 13 can delete, user = 15 can dispose, and untill validate 1,2 can only look index
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
-       // int userId =  SiteContext.UserId;
         string targetPathLayout = "";
         string targetPathGeo = "";
         string targetPathHandedOver = "";

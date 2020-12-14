@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -30,11 +27,18 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.LandArate)
+            builder.Property(e => e.Rate1)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.LandCrate)
+            builder.Property(e => e.Rate2)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+            builder.Property(e => e.Rate3)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Rate4)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
@@ -71,10 +75,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnType("int(11)");
 
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
-     
 
 
-        }
 
         }
+
     }
+}

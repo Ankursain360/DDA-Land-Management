@@ -39,6 +39,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IEncroachmentRegisterationApprovalRepository, EncroachmentRegisterationApprovalRepository>();
             services.AddScoped<IAnnexureAApprovalRepository, AnnexureAApprovalRepository>();
+            services.AddScoped<IDemolitionPoliceAssistenceLetterRepository, DemolitionPoliceAssistenceLetterRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -59,6 +60,7 @@ namespace EncroachmentDemolition.Infrastructure.Extensions
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IEncroachmentRegisterationApprovalService, EncroachmentRegisterationApprovalService>();
             services.AddScoped<IAnnexureAApprovalService, AnnexureAApprovalService>();
+            services.AddScoped<IDemolitionPoliceAssistenceLetterService, DemolitionPoliceAssistenceLetterService>();
         }
     }
 }
