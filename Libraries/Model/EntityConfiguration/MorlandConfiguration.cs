@@ -1,9 +1,6 @@
 ﻿using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
@@ -64,13 +61,13 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Remarks)
-                .HasMaxLength(500)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.SerialnumberId).HasColumnType("int(11)");
 
             builder.Property(e => e.SiteDescription)
-                .HasMaxLength(400)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.StatusOfLand)

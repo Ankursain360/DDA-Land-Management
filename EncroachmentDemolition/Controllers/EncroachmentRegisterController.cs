@@ -84,7 +84,18 @@ namespace EncroachmentDemolition.Controllers
                 if (result)
                 {
                     FileHelper fileHelper = new FileHelper();
-                    if (encroachmentRegisterations.NameOfStructure != null && encroachmentRegisterations.AreaApprox != null && encroachmentRegisterations.Type != null && encroachmentRegisterations.DateOfEncroachment != null && encroachmentRegisterations.CountOfStructure != null && encroachmentRegisterations.ReferenceNoOnLocation != null && encroachmentRegisterations.NameOfStructure.Count > 0 && encroachmentRegisterations.AreaApprox.Count > 0 && encroachmentRegisterations.Type.Count > 0 && encroachmentRegisterations.DateOfEncroachment.Count > 0 && encroachmentRegisterations.CountOfStructure.Count > 0 && encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
+                    if (encroachmentRegisterations.NameOfStructure != null && 
+                        encroachmentRegisterations.AreaApprox != null &&
+                        encroachmentRegisterations.Type != null && 
+                        encroachmentRegisterations.DateOfEncroachment != null && 
+                        encroachmentRegisterations.CountOfStructure != null && 
+                        encroachmentRegisterations.ReferenceNoOnLocation != null && 
+                        encroachmentRegisterations.NameOfStructure.Count > 0 &&
+                        encroachmentRegisterations.AreaApprox.Count > 0 &&
+                        encroachmentRegisterations.Type.Count > 0 && 
+                        encroachmentRegisterations.DateOfEncroachment.Count > 0 &&
+                        encroachmentRegisterations.CountOfStructure.Count > 0 &&
+                        encroachmentRegisterations.ReferenceNoOnLocation.Count > 0)
                     {
                         List<DetailsOfEncroachment> detailsOfEncroachment = new List<DetailsOfEncroachment>();
                         for (int i = 0; i < encroachmentRegisterations.NameOfStructure.Count; i++)

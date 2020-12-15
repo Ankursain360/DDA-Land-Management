@@ -17,7 +17,9 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="DepartmentId" id="DepartmentId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                <select asp-for="DepartmentId" id="DepartmentId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3"
+                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" 
+                        onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
                     <option value="">Select</option>
                 </select>
                 <label asp-validation-for="DepartmentId" class="error"></label>
@@ -50,7 +52,8 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="LocalityId" id="LocalityId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 LocalitiyClass" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                <select asp-for="LocalityId" id="LocalityId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 LocalitiyClass" 
+                        asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                     <option value="value">Select</option>
                 </select>
                 <label asp-validation-for="LocalityId" class="error"></label>

@@ -1,30 +1,22 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using LandInventory.Filters;
+using LandInventory.Infrastructure.Extensions;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
-//using BotDetect.Web;
-
 using Microsoft.Extensions.Hosting;
-using Libraries.Model.Entity;
-using Libraries.Model;
-using LandInventory.Infrastructure.Extensions;
-
-using Service.Common;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using System.IdentityModel.Tokens.Jwt;
 using Model.Entity;
-using Microsoft.AspNetCore.Identity;
+using Service.Common;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 
 namespace LandInventory
 {
@@ -72,6 +64,11 @@ namespace LandInventory
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();
+
+            services.AddMvc(option =>
+            {
+                option.Filters.Add(typeof(ExceptionLogFilter));
+            });
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 

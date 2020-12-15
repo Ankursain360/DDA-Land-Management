@@ -1,5 +1,4 @@
-﻿using Libraries.Model.builderConfiguration;
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
 using Libraries.Model.EntityConfiguration;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -109,11 +108,14 @@ namespace Libraries.Model
         public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
-        public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
-        public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
-        public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
-        public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+        public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+        //**********  Damage Payee **********
 
+        public virtual DbSet<Allottetype> Allottetype { get; set; }
+
+        public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
+        public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
+        public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -194,10 +196,14 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
-            modelBuilder.ApplyConfiguration(new MutationDetailsConfiguration());
-            modelBuilder.ApplyConfiguration(new MutationOldDamageAssesseConfiguration());
-            modelBuilder.ApplyConfiguration(new MutationNewDamageAssesseConfiguration());
-            modelBuilder.ApplyConfiguration(new MutationDetailsPhotoPropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new DemolitionPoliceAssistenceLetterConfiguration());
+
+            //**********  Damage Payee **********
+
+            modelBuilder.ApplyConfiguration(new AllottetypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfoConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

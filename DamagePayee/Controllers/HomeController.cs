@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
-using DamagePayee.Filters;
 using DamagePayee.Models;
 using System.Diagnostics;
 using DamagePayee.Helper;
@@ -10,7 +9,6 @@ using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
-    [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;
@@ -36,6 +34,11 @@ namespace DamagePayee.Controllers
         public IActionResult Logout()
         {
             return SignOut("Cookies", "oidc");
+        }
+
+        public IActionResult ErrorLog()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
