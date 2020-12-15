@@ -109,6 +109,8 @@ namespace Libraries.Model
         public virtual DbSet<DailyRoaster> DailyRoaster { get; set; }
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
+        public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
+
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         //**********  Damage Payee **********
 
@@ -122,6 +124,9 @@ namespace Libraries.Model
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
         public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+        public virtual DbSet<Presentuse> Presentuse { get; set; }
+        public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -203,6 +208,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
+
+            //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
+
             modelBuilder.ApplyConfiguration(new DemolitionPoliceAssistenceLetterConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new MutationOldDamageAssesseConfiguration());
@@ -215,6 +223,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfoConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }

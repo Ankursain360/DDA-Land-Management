@@ -2,7 +2,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Police Assistence letter" })
 <br />
 <br />
-
+<script src="~/lib/jQuery.print.min.js"></script>
 <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex"> Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -11,10 +11,10 @@
     <h3 class="mb-3 d-flex">Police Assistence letter By</h3>
 
     <div class="row mt-md-3">
-
+        <input type="hidden" asp-for="GenerateUpload" value="0" id="GenerateUpload"/>
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" asp-for="GenerateUpload" id="Generate" value="0">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Generate" value="0" checked>
                 <label class="form-check-label" for="radio">
                     Generate
                 </label>
@@ -22,7 +22,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" asp-for="GenerateUpload" id="Upload" value="1">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Upload" value="1">
                 <label class="form-check-label" for="radio">
                     Upload
                 </label>
@@ -36,24 +36,18 @@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="Date" asp-for="MeetingDate" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                    <span asp-validation-for="MeetingDate" class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
                     <label class="floating-label">Meeting Date</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="time" asp-for="MeetingTime" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="MeetingTime" class="text-danger"></span>
+                    <span asp-validation-for="MeetingTime" class="text-danger" style="display:none;" id="MessageTime">Meeting Time is Mandatory</span>
                     <label class="floating-label">Meeting Time</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-3">
-                <input type="submit" value="Generate" class="btn btn-theme " />
-            </div>
-        </div>
-
     </div>
     <div id="divUpload" style="display:none;">
         <div class="row pt-3">
@@ -62,37 +56,39 @@
                     @{
                         @if (Model.FilePath != null)
                         {
-                            @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "ViewLetter", new { id = Model.Id }, new { @class = "badge badge-primary px-2", target="_blank" })
+                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                         }
                         else
                         {
-                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            <label class="floating-label">Upload Document</label>
                         }
                     }
 
-                    <span asp-validation-for="Document" class="text-danger"></span>
-                    <label class="floating-label">Upload Document</label>
+                    <span asp-validation-for="Document" class="text-danger" style="display:none;" id="MessageFileUpload">File Upload is Mandatory</span>
+
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
-
-            <div class="col-md-3">
-                <input type="submit" value="Upload" class="btn btn-theme " />
-            </div>
-
         </div>
     </div>
     <div class="row pt-3">
         <div class="col-md-12">
+            <input type="submit" value="Generate" class="btn btn-theme"  id="btnSubmit"  onclick="return check();"/>
             @Html.ActionLink("Back", "Index", "DemolitionPoliceAssistenceLetter", null, new { @class = "btn btn-theme " })
         </div>
     </div>
+    <br />
 
-    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 pt-5">
-        <input value="Print" class="btn btn-theme " onclick="PrintData();"/>
-        <div id="LetterData">
+
+
+
+</form>
+@if (ViewBag.IsVisible == true)
+{
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 ">
+        <input type="submit" value="Print" class="btn btn-theme" id="btnCreate" />
+        <div id="LetterData" >
             @{
                 @if (ViewBag.DataLetter != null)
                 {
@@ -101,8 +97,11 @@
             }
         </div>
     </div>
-    
-</form>
+}
+else
+{
+
+}
 
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>*@

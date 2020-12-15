@@ -27,14 +27,6 @@ namespace Libraries.Repository.EntityRepository
                 .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
         }
 
-        public async Task<List<Damagepayeeregister>> GetDamagepayeeregister()
-        {
-            return await _dbContext.Damagepayeeregister
-                .Where(x => x.IsActive == 1)
-                .ToListAsync();
-        }
-       
-
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
                  return await _dbContext.Damagepayeeregister
@@ -54,6 +46,62 @@ namespace Libraries.Repository.EntityRepository
             var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
+        //********* rpt 1 Persolnal info of damage assesse ***********
+        public async Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo)
+        {
+            _dbContext.Damagepayeepersonelinfo.Add(damagepayeepersonelinfo);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
-    }
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
+        {
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<bool> DeletePayeePersonalInfo(int Id)
+         {
+            _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        //********* rpt 2 Allotte Type **********
+
+        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
+        {
+            await _dbContext.Allottetype.AddRangeAsync(allottetype);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Allottetype>> GetAllottetype(int id)
+        { 
+             return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeleteAllotteType(int Id)
+          {
+            _dbContext.RemoveRange(_dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+    //********* rpt 3 Damage payment history ***********
+
+    public async Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory)
+        {
+            _dbContext.Damagepaymenthistory.Add(Damagepaymenthistory);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
+        {
+            return await _dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<bool> DeletePaymentHistory(int Id)
+         {
+            _dbContext.RemoveRange(_dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+}
 }
