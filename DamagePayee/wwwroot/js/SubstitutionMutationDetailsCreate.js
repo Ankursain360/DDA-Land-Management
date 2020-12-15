@@ -6,6 +6,6 @@
         }
         debugger;
         $("#LocalityId").html(html);
-       // $("#LocalityId").html('<option value="">Select</option>');
+        // $("#LocalityId").html('<option value="">Select</option>');
     });
 };

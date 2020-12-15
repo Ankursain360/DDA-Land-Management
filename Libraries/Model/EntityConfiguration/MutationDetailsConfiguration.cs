@@ -39,7 +39,7 @@ namespace Libraries.Model.builderConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Declaration).HasColumnType("int(11)");
+            builder.Property(e => e.Declaration).HasColumnType("tinyint(1)");
 
             builder.Property(e => e.FileNo)
                 .HasMaxLength(45)

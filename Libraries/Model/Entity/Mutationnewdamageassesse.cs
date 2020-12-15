@@ -7,7 +7,7 @@ namespace Libraries.Model.Entity
 {
     public class Mutationnewdamageassesse : AuditableEntity<int>
     {
-        public int Id { get; set; }
+       
         public int MutationDetailsId { get; set; }
         public string Name { get; set; }
         public string GuardianName { get; set; }

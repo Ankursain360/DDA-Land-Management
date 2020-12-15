@@ -14,10 +14,9 @@ namespace Libraries.Model.Entity
         {
             Mutationnewdamageassesse = new HashSet<Mutationnewdamageassesse>();
             Mutationolddamageassesse = new HashSet<Mutationolddamageassesse>();
-           // Mutationdetailsphotoproperty = new HashSet<Mutationdetailsphotoproperty>();
+           Mutationdetailsphotoproperty = new HashSet<Mutationdetailsphotoproperty>();
         }
 
-        public int Id { get; set; }
         public string FileNo { get; set; }
         public string PropertyNo { get; set; }
         public int? LocalityId { get; set; }
@@ -43,7 +42,8 @@ namespace Libraries.Model.Entity
         public string CaseNo { get; set; }
         public string OppositionPartyName { get; set; }
         public string PetitionerRespondent { get; set; }
-        public int? Declaration { get; set; }
+        public byte Declaration { get; set; }
+
         [NotMapped]
         public bool DeclarationNew { get; set; }
 
@@ -51,7 +51,7 @@ namespace Libraries.Model.Entity
         public Zone Zone { get; set; }
         public ICollection<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public ICollection<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
-        //public ICollection<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+        public ICollection<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
 
 
         [NotMapped]
