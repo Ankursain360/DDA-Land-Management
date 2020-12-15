@@ -122,6 +122,8 @@ namespace Libraries.Model
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
         public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+        public virtual DbSet<Presentuse> Presentuse { get; set; }
+        public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -215,6 +217,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfoConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
