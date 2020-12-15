@@ -4,5 +4,11 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/SubstitutionMutationDetailsCreate.js"
+    ]
   }
 ]

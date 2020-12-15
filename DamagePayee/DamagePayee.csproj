@@ -19,5 +19,17 @@
 		<ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
 		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
 	</ItemGroup>
+  
+  <ItemGroup>
+  <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
 
 </Project>

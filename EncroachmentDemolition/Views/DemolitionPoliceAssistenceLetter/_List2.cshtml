@@ -1,4 +1,4 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Fixingdemolition>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demolitionpoliceassistenceletter>
 @{int rowNo = 0; }
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
@@ -19,10 +19,10 @@
                 <tr>
                     <td>@(rowNo += 1)</td>
 
-                    <td> @(Convert.ToDateTime(item.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
-                    <td>@(item.Encroachment.Locality == null ? ""  : item.Encroachment.Locality.Name)</td>
-                    <td>@(item.Encroachment.KhasraNo == null ? ""  :item.Encroachment.KhasraNo)</td>
-                    <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+                    <td> @(Convert.ToDateTime(item.FixingDemolition.Encroachment.EncrochmentDate).ToString("dd-MMM-yyyy"))</td>
+                    <td>@(item.FixingDemolition.Encroachment.Locality == null ? ""  : item.FixingDemolition.Encroachment.Locality.Name)</td>
+                    <td>@(item.FixingDemolition.Encroachment.KhasraNo == null ? ""  :item.FixingDemolition.Encroachment.KhasraNo)</td>
+                    <td>@(item.FixingDemolition.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
                     @if (ViewBag.IsApproved == 1)
                     {
                         <td>

@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
 {
 
 
-    public class InterestConfiguration : IEntityTypeConfiguration<Interest>
+    public class InterestConfiguration : IEntityTypeConfiguration<Interest>     
     {
 
         public void Configure(EntityTypeBuilder<Interest> builder)

@@ -19,5 +19,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile Document { get; set; }
+
+        [NotMapped]
+        public int GenerateUpload { get; set; }
     }
 }

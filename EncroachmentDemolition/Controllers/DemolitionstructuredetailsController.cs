@@ -40,13 +40,13 @@ namespace EncroachmentDemolition.Controllers
         {
             Demolitionstructuredetails demolitionstructuredetails = new Demolitionstructuredetails();
             demolitionstructuredetails.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
-            demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId??0));
-            demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId??0));
-            demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId??0));
+            demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
+            demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
+            demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
             demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
             return View(demolitionstructuredetails);
-           
+
         }
         [HttpPost]
         public async Task<IActionResult> Create(Demolitionstructuredetails demolitionstructuredetails)
@@ -61,13 +61,13 @@ namespace EncroachmentDemolition.Controllers
             string AfterPhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:AfterPhotoFilePath").Value.ToString();
             string BeforePhotoFilePath = _configuration.GetSection("FilePaths:DemolitionstructuredetailsFiles:BeforePhotoFilePath").Value.ToString();
 
-if (ModelState.IsValid)
+            if (ModelState.IsValid)
             {
 
                 var result = await _demolitionstructuredetailsService.Create(demolitionstructuredetails);
 
                 if (result)
-                {            
+                {
 
                     FileHelper fileHelper = new FileHelper();
 
@@ -115,7 +115,7 @@ if (ModelState.IsValid)
                     //if (demolitionstructuredetails.NameOfStructure != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
 
                     //if (demolitionstructuredetails.StructrureId != null && demolitionstructuredetails.NoOfStructrure != null && demolitionstructuredetails.NameOfStructure.Count > 0 && demolitionstructuredetails.NoOfStructrure.Count > 0)
-                    if (demolitionstructuredetails.StructrureId != null )
+                    if (demolitionstructuredetails.StructrureId != null)
                     {
                         List<Demolitionstructure> demolitionstructure = new List<Demolitionstructure>();
                         for (int i = 0; i < demolitionstructuredetails.StructrureId.Count(); i++)
@@ -289,9 +289,9 @@ if (ModelState.IsValid)
         {
             var demolitionstructuredetails = await _demolitionstructuredetailsService.FetchSingleResult(id);
             demolitionstructuredetails.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
-            demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId??0));
-            demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId??0));
-            demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId??0));
+            demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
+            demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
+            demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
             demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
             if (demolitionstructuredetails == null)
@@ -301,7 +301,7 @@ if (ModelState.IsValid)
             return View(demolitionstructuredetails);
         }
 
-       
+
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _demolitionstructuredetailsService.Delete(id);
@@ -343,7 +343,7 @@ if (ModelState.IsValid)
             DivisionId = DivisionId ?? 0;
             return Json(await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
-       
+
         public async Task<IActionResult> DownloadPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();

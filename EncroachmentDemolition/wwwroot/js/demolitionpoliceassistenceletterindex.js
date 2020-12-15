@@ -38,13 +38,13 @@ function onChangePageSize(pageSize) {
 
 
 $("input[name='radioStatus']").click(function () {
-    if ($("#Pending").is(":checked")) {
+    if ($("#Approved").is(":checked")) {
         var StatusId = 1;
         GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
 
     }
-    else if ($("#Approved").is(":checked")) {
-        var StatusId = 1;
+    else if ($("#Generated").is(":checked")) {
+        var StatusId = 2;
         GetDemolitionList(currentPageNumber, currentPageSize, StatusId);
     }
 
