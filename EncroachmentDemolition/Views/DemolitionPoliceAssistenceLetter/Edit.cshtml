@@ -3,36 +3,18 @@
 <br />
 <br />
 
-<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+<form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex"> Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
-    <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
-    @*<input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="EncroachmentId" />
-        <input type="hidden" asp-for="Encroachment.WatchWardId" />
-        <div id="WatchWardDetailsDiv">
-
-        </div>
-
-        <div id="EncroachmentRegisterDetailsDiv">
-
-        </div>
-        <div id="AnnexureADetailsDiv">
-
-        </div>
-        <div class="table-section bg-white border shadow rounded pb-3">
-            <div class="table-responsive px-2" id="divHistoryDetails">
-
-            </div>
-        </div>*@
+    <input type="hidden" asp-for="Id" />
     <h3 class="mb-3 d-flex">Police Assistence letter By</h3>
 
     <div class="row mt-md-3">
 
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Generate" value="0">
+                <input class="form-check-input" type="radio" name="radioStatus" asp-for="GenerateUpload" id="Generate" value="0">
                 <label class="form-check-label" for="radio">
                     Generate
                 </label>
@@ -40,7 +22,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Upload" value="1">
+                <input class="form-check-input" type="radio" name="radioStatus" asp-for="GenerateUpload" id="Upload" value="1">
                 <label class="form-check-label" for="radio">
                     Upload
                 </label>
@@ -75,9 +57,20 @@
     </div>
     <div id="divUpload" style="display:none;">
         <div class="row pt-3">
-            <div class="col-md-6">
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                    @{
+                        @if (Model.FilePath != null)
+                        {
+                            @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                        else
+                        {
+                            <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+
                     <span asp-validation-for="Document" class="text-danger"></span>
                     <label class="floating-label">Upload Document</label>
                 </div>
@@ -97,7 +90,9 @@
         </div>
     </div>
 
-    <div>
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 pt-5">
+        <input value="Print" class="btn btn-theme " onclick="PrintData();"/>
+        <div id="LetterData">
             @{
                 @if (ViewBag.DataLetter != null)
                 {
@@ -105,9 +100,12 @@
                 }
             }
         </div>
+    </div>
+    
 </form>
+
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>*@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

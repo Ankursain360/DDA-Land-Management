@@ -11,7 +11,7 @@
 
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Pending" value="1" checked>
+                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1" checked>
                 <label class="form-check-label" for="radio">
                     Approved But Not Generated
                 </label>
@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Approved" value="1">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Generated" value="2">
                 <label class="form-check-label" for="radio">
                     Approved and Generated
                 </label>
@@ -58,6 +58,14 @@
     <div class="table-responsive px-2" id="divTable">
 
     </div>
+    @*<div>
+        @{
+            @if (ViewBag.DataLetter != null)
+            {
+                @Html.Raw(ViewBag.DataLetter);
+            }
+        }
+    </div>*@
 </div>
 
 <br />

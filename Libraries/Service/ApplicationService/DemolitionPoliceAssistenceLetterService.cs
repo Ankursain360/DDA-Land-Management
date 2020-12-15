@@ -7,6 +7,7 @@ using Libraries.Service.IApplicationService;
 using Repository.EntityRepository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,30 @@ namespace Libraries.Service.ApplicationService
             demolitionpoliceassistenceletter.CreatedDate = DateTime.Now;
             _demolitionPoliceAssistenceLetterRepository.Add(demolitionpoliceassistenceletter);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Demolitionpoliceassistenceletter>> GetPagedApprovedAnnexureAListedit(DemolitionPoliceAssistenceLetterSearchDto model, int userId)
+        {
+            return await _demolitionPoliceAssistenceLetterRepository.GetPagedApprovedAnnexureAListedit(model, userId);
+        }
+
+        public async Task<bool> Update(int id, Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
+        {
+            var result = await _demolitionPoliceAssistenceLetterRepository.FindBy(a => a.Id == id);
+            Demolitionpoliceassistenceletter model = result.FirstOrDefault();
+            model.FixingDemolitionId = demolitionpoliceassistenceletter.FixingDemolitionId;
+            model.MeetingDate = demolitionpoliceassistenceletter.MeetingDate;
+            model.MeetingTime = demolitionpoliceassistenceletter.MeetingTime;
+            model.FilePath = demolitionpoliceassistenceletter.FilePath;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = demolitionpoliceassistenceletter.ModifiedBy;
+            _demolitionPoliceAssistenceLetterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Demolitionpoliceassistenceletter> FetchSingleResult(int id)
+        {
+            return await _demolitionPoliceAssistenceLetterRepository.FetchSingleResult(id);
         }
     }
 }

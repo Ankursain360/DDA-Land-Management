@@ -9,5 +9,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDemolitionPoliceAssistenceLetterRepository : IGenericRepository<Demolitionpoliceassistenceletter>
     {
         Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
+        Task<PagedResult<Demolitionpoliceassistenceletter>> GetPagedApprovedAnnexureAListedit(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
+        Task<Demolitionpoliceassistenceletter> FetchSingleResult(int id);
     }
 }
