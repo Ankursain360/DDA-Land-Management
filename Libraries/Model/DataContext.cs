@@ -116,6 +116,9 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
         public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
+        public virtual DbSet<Presentuse> Presentuse { get; set; }
+        public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -204,6 +207,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfoConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
