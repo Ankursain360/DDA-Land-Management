@@ -45,5 +45,68 @@ namespace Libraries.Repository.EntityRepository
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return zoneList;
         }
+
+        public async Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details)
+        {
+            _dbContext.Mutationdetailsphotoproperty.Add(details);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+        public string SaveMutationAtsFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.AtsfilePath).First();
+
+            return File;
+        }
+        public string SaveMutationGPAFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.AtsfilePath).First();
+
+            return File;
+        }
+        public string SaveMutationMoneyReceiptFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.MoneyRecieptFilePath).First();
+
+            return File;
+        }
+        public string SaveMutationSignSPCFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.SignatureSpecimenFilePath).First();
+
+            return File;
+        }
+        public string SaveMutationAddressProofFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.IsAddressProof).First();
+
+            return File;
+        }
+        public string SaveMutationAffitDevitFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.AffidavitFilePath).First();
+
+            return File;
+        }
+        public string SaveMutationIndemnityFilePath(int id)
+        {
+            var File = (from f in _dbContext.Mutationdetails
+                        where f.Id == id
+                        select f.IndemnityFilePath).First();
+
+            return File;
+        }
     }
 }

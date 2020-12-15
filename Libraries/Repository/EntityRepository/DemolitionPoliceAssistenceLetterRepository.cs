@@ -23,7 +23,21 @@ namespace Repository.EntityRepository
         {
             return await _dbContext.Demolitionpoliceassistenceletter
                                    .Include(x => x.FixingDemolition)
-                                  .Include(x => x.FixingDemolition.Encroachment).FirstOrDefaultAsync();
+                                  .Include(x => x.FixingDemolition.Encroachment)
+                                  .Include(x => x.FixingDemolition.Encroachment.Locality)
+                                  .Where(x=> x.Id == id)
+                                  .FirstOrDefaultAsync();
+        }
+
+        public async Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id)
+        {
+            var data = await _dbContext.Demolitionpoliceassistenceletter
+                                   .Include(x => x.FixingDemolition)
+                                  .Include(x => x.FixingDemolition.Encroachment)
+                                  .Include(x => x.FixingDemolition.Encroachment.Locality)
+                                  .Where(x => x.FixingDemolitionId == id)
+                                  .FirstOrDefaultAsync();
+            return data;
         }
 
         public async Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId)
@@ -38,7 +52,8 @@ namespace Repository.EntityRepository
                                         .Include(x => x.Encroachment)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
                                         && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
-                                        && !(InDemolitionPoliceAssistenceTable).Contains(x.Id))
+                                       // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
+                                        )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
             }
             else

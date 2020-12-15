@@ -13,6 +13,14 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetAllLocality(int zoneId);
         Task<List<Zone>> GetAllZone();
         Task<bool> Any(int id, string name);
-        
+        Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details);
+        string SaveMutationAtsFilePath(int id);
+        string SaveMutationGPAFilePath(int id);
+        string SaveMutationMoneyReceiptFilePath(int id);
+        string SaveMutationSignSPCFilePath(int id);
+        string SaveMutationAddressProofFilePath(int id);
+        string SaveMutationAffitDevitFilePath(int id);
+        string SaveMutationIndemnityFilePath(int id);
+
     }
 }

@@ -7,9 +7,9 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class DamagePayeeRegistrationConfiguration : IEntityTypeConfiguration<DamagePayeeRegistration>
+    public class PayeeregistrationConfiguration : IEntityTypeConfiguration<Payeeregistration>
     {
-        public void Configure(EntityTypeBuilder<DamagePayeeRegistration> entity)
+        public void Configure(EntityTypeBuilder<Payeeregistration> entity)
         {
             entity.ToTable("payeeregistration", "lms");
 

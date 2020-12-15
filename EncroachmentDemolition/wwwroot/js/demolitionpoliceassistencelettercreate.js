@@ -1,70 +1,263 @@
 ﻿$(document).ready(function () {
-    if ($("#Generate").is(":checked")) {
-
+    var value = $("#GenerateUpload").val();
+    if (value == 0) {
         $("#divGenerate").show();
         $("#divUpload").hide();
-
+        $("#btnSubmit").val("Generate");
     }
-    else if ($("#Upload").is(":checked")) {
+    else {
         $("#divGenerate").hide();
         $("#divUpload").show();
+        $("#btnSubmit").val("Upload");
+
     }
+    //if ($("#Generate").is(":checked")) {
+    //    $("#divGenerate").show();
+    //    $("#divUpload").hide();
+    //    $("#btnSubmit").val("Generate");
+    //}
+    //else if ($("#Upload").is(":checked")) {
+    //    $("#divGenerate").hide();
+    //    $("#divUpload").show();
+    //    $("#btnSubmit").val("Upload");
+    //}
 });
 
 $("input[name='radioStatus']").click(function () {
-    if ($("#Generate").is(":checked")) {
-
+    var selected = $("input[type='radio'][name='radioStatus']:checked");
+    $("#GenerateUpload").val(selected.val());
+    if (selected.val() == 0) {
         $("#divGenerate").show();
         $("#divUpload").hide();
-
+        $("#btnSubmit").val("Generate");
     }
-    else if ($("#Upload").is(":checked")) {
+    else {
         $("#divGenerate").hide();
         $("#divUpload").show();
+        $("#btnSubmit").val("Upload");
+       
     }
+    //if ($("#Generate").is(":checked")) {
+    //    $("#divGenerate").show();
+    //    $("#divUpload").hide();
+
+    //}
+    //else if ($("#Upload").is(":checked")) {
+    //    $("#divGenerate").hide();
+    //    $("#divUpload").show();
+    //}
 
 });
+//$("#btnCreate").click(function () {
+   
+//    //getPDF();
+//    //debugger
+//    var printContents = document.getElementById("LetterData").innerHTML;
+//    var originalContents = document.body.innerHTML;
+//    document.body.innerHTML = printContents;
+//    window.print();
+//    document.body.innerHTML = originalContents;
+//    $.noConflict();
+//});
 
+$(function () {
+    $("#btnCreate").click(function () { nWin($("#LetterData").html(), $("#pagename").html()); });
+});
+function nWin(context, title) {
+    var printWindow = window.open('', '');
+    var doc = printWindow.document;
+    var printContents = document.getElementById("LetterData").innerHTML;
+    doc.write(document.getElementById("divPrintRef").innerHTML);
+    doc.write(printContents);
+    doc.close();
+    function show() {
+        if (doc.readyState === "complete") {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        } else {
+            setTimeout(show, 100);
+        }
+    };
+    show();
+};
+
+//$("#btnCreate").click(function () {
+//    var contents = $("#LetterData").html();
+//    var frame1 = $('<iframe />');
+//    frame1[0].name = "frame1";
+//    frame1.css({ "position": "absolute", "top": "-1000000px" });
+//    $("body").append(frame1);
+//    var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
+//    frameDoc.document.open();
+//    //Create a new HTML document.
+//    frameDoc.document.write('<html><head><title>DIV Contents</title>');
+//    frameDoc.document.write('</head><body>');
+//    //Append the external CSS file.
+//    frameDoc.document.write('<link href="style.css" rel="stylesheet" type="text/css" />');
+//    //Append the DIV contents.
+//    frameDoc.document.write(contents);
+//    frameDoc.document.write('</body></html>');
+//    frameDoc.document.close();
+//    setTimeout(function () {
+//        window.frames["frame1"].focus();
+//        window.frames["frame1"].print();
+//        frame1.remove();
+//    }, 500);
+//});
+function getPDF() {
+
+    var HTML_Width = $(".canvas_div_pdf").width();
+    var HTML_Height = $(".canvas_div_pdf").height();
+    var top_left_margin = 15;
+    var PDF_Width = HTML_Width + (top_left_margin * 2);
+    var PDF_Height = (PDF_Width * 1.5) + (top_left_margin * 2);
+    var canvas_image_width = HTML_Width;
+    var canvas_image_height = HTML_Height;
+
+    var totalPDFPages = Math.ceil(HTML_Height / PDF_Height) - 1;
+
+
+    html2canvas($(".canvas_div_pdf")[0], { allowTaint: true }).then(function (canvas) {
+        canvas.getContext('2d');
+
+        console.log(canvas.height + "  " + canvas.width);
+
+
+        var imgData = canvas.toDataURL("image/jpeg", 1.0);
+        var pdf = new jsPDF('p', 'pt', [PDF_Width, PDF_Height]);
+        pdf.addImage(imgData, 'JPG', top_left_margin, top_left_margin, canvas_image_width, canvas_image_height);
+
+
+        for (var i = 1; i <= totalPDFPages; i++) {
+            pdf.addPage(PDF_Width, PDF_Height);
+            pdf.addImage(imgData, 'JPG', top_left_margin, -(PDF_Height * i) + (top_left_margin * 4), canvas_image_width, canvas_image_height);
+        }
+
+        pdf.save("HTML-Document.pdf");
+    });
+};
 //$(function () {
 //    $('#MeetingTime').datetimepicker();
 //});
 
-//$("#btnCreate").click(function () {
+function check() {
+    var checkresult = false;
+    var selected = $("input[type='radio'][name='radioStatus']:checked");
+    $("#GenerateUpload").val(selected.val());
+    if (selected.val() == 0) {
+        var Date_val = $('#MeetingDate').val();
+        if (Date_val == "") {
+            checkresult = false;
+            $("#MessageDate").show();
+        } else {
+            checkresult = true;
+        }
+
+        var Time_val = $('#MeetingTime').val();
+        if (Time_val == "") {
+            checkresult = false;
+            $("#MessageTime").show();
+        } else {
+            checkresult = true;
+        }
+        if (Date_val == "" || Time_val == "") {
+            checkresult = false;
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    else {
+        var fileInput = document.getElementById('Document');
+        var filePath = fileInput.value;
+        if (filePath == "") {
+            checkresult = false;
+            $("#MessageFileUpload").show();
+        } else {
+            checkresult = true;
+        }
+
+        if (filePath == "") {
+            checkresult = false;
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+}
+//$("#btnSubmit").click(function () {
 //    var checkresult = false;
-//    var dropdown_val = $('#ModuleId option:selected').val();
-//    if (parseInt(dropdown_val) < 1) {
-//        checkresult = false;
-//        $("#ModuleIdMessage").show();
-//    } else {
-//        checkresult = true;
+//    var selected = $("input[type='radio'][name='radioStatus']:checked");
+//    $("#GenerateUpload").val(selected.val());
+//    if (selected.val() == 0) {
+//        var Date_val = $('#MeetingDate').val();
+//        if (Date_val =="") {
+//            checkresult = false;
+//            $("#MessageDate").show();
+//        } else {
+//            checkresult = true;
+//        }
+
+//        var Time_val = $('#MeetingTime').val();
+//        if (Time_val == "") {
+//            checkresult = false;
+//            $("#MessageTime").show();
+//        } else {
+//            checkresult = true;
+//        }
+//        if (Date_val == "" || Time_val == "") {
+//            checkresult = false;
+//            return false;
+//        }
+//        else {
+//            return true;
+//        }
+//    }
+//    else {
+//        var fileInput = document.getElementById('Document');
+//        var filePath = fileInput.value;
+//        if (filePath == "") {
+//            checkresult = false;
+//            $("#MessageFileUpload").show();
+//        } else {
+//            checkresult = true;
+//        }
+
+//        if (filePath == "") {
+//            checkresult = false;
+//        }
+//        else {
+//            return true;
+//        }
+        
 //    }
 
-//    var Name_val = $('#Name').val();
-//    if (Name_val == "") {
-//        checkresult = false;
-//        $("#NameMessage").show();
-//    } else {
-//        checkresult = true;
-//    }
-
-//    var Description_val = $('#Description').val();
-//    if (Description_val == "") {
-//        checkresult = false;
-//        $("#DescriptionMessage").show();
-//    } else {
-//        checkresult = true;
-//    }
-
-//    if (parseInt(dropdown_val) < 1 || Name_val == "" || Description_val == "") {
-//        checkresult = false;
-//    }
-
-//    if (checkresult) {
-//        var param = GetListData();
-//        HttpPost(`/WorkFlowTemplate/Create`, 'json', param, function (response) {
-//            window.location.href = response;  //'/WorkFlowTemplate/Index';
-//            SuccessMessage('Data updated successfully.');
-//        });
-//    }
-
+   
 //});
+
+$('#Document').change(function () {
+    var fileInput = document.getElementById('Document');
+    var filePath = fileInput.value;
+    const size = (EncroachAtrDoc.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif|\.pdf|\.docx|\.doc)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 10535049) {
+        alert("File must be of 10 MB or Lesser Than 10 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}

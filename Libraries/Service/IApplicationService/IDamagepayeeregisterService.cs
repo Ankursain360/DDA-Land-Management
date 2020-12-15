@@ -21,6 +21,24 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
+       
+        //********* rpt 1 Persolnal info of damage assesse ***********
+        Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo);
+        Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);
+        Task<bool> DeletePayeePersonalInfo(int Id);
 
+
+        //********* rpt 2 Allotte Type **********
+
+        Task<bool> SaveAllotteType(List<Allottetype> allottetype);
+        Task<List<Allottetype>> GetAllottetype(int id);
+        Task<bool> DeleteAllotteType(int Id);
+
+
+        //********* rpt 3 Damage payment history ***********
+
+        Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory);
+        Task<List<Damagepaymenthistory>> GetPaymentHistory(int id);
+        Task<bool> DeletePaymentHistory(int Id);
     }
 }

@@ -45,7 +45,7 @@
                         </tbody>
                         <tbody class="tbody" id="add">
                             <tr id="">
-                                <td>1</td>
+                                <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
                                     <input asp-for="payeeName" type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
                                 </td>
@@ -53,7 +53,7 @@
                                     <input asp-for="payeeFatherName" type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
                                 </td>
                                 <td>
-                                    <select asp-for="Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                    <select asp-for="Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
                                         <option value="0">---Select---</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
@@ -130,8 +130,9 @@
                         <tbody id="tbl_DamageAssessee_body">
                         </tbody>
                         <tbody class="tbody" id="addDamageAssessee">
-                            <tr>
-                                <td>1</td>
+                            <tr id="">
+                               
+                                <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
                                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
                                 </td>
@@ -176,7 +177,7 @@
                         <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
                                 asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                             <option value="0">---Select---</option>
-                          
+
                         </select>
                         <label class="floating-label">Locality</label>
                     </div>
@@ -208,9 +209,9 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <select asp-for="DistrictId" class="floating-label-field floating-label-field--s3"
-                                 asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
+                                asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
                             <option value="0">---Select---</option>
-                           
+
                         </select>
                         <label class="floating-label">District</label>
                     </div>
@@ -420,7 +421,7 @@
             <div class="table-section bg-white border shadow rounded">
                 <div class="table-responsive">
 
-                    <table class="table table-sm table-bordered mb-0 table-striped">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_Payment">
                         <thead class="text-nowrap">
                             <tr>
                                 <th>Sr.No</th>
@@ -433,34 +434,36 @@
                                 <th>Operation</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody">
-                            <tr>
-                                <td>1</td>
+                        <tbody id="tbl_Payment_body">
+                        </tbody>
+                        <tbody class="tbody" id="addPayment">
+                            <tr id="">
+                                <td style="text-align:center;"><span class="sn">1</span></td>
                                 <td>
-                                    <input asp-for="PaymntName" type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
+                                    <input asp-for="PaymntName" type="text" class="floating-label-field floating-label-field--s3" id="txtPaymentName" />
                                 </td>
                                 <td>
-                                    <input asp-for="RecieptNo" type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
+                                    <input asp-for="RecieptNo" type="text" class="floating-label-field floating-label-field--s3" id="txtRecieptNo" />
                                 </td>
                                 <td>
-                                    <input asp-for="PaymentMode" type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
+                                    <input asp-for="PaymentMode" type="text" class="floating-label-field floating-label-field--s3" id="txtPaymentMode" />
                                 </td>
                                 <td>
-                                    <input asp-for="PaymentDate" type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
+                                    <input asp-for="PaymentDate" type="date" class="floating-label-field floating-label-field--s3" id="txtPaymentDate" />
                                 </td>
                                 <td>
-                                    <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
+                                    <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtAmount" />
                                 </td>
                                 <td>
                                     <input asp-for="Reciept" type="file" />
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                            <i class="fa fa-plus"></i>
-                                        </button>*@
+                    <i class="fa fa-plus"></i>
+                </button>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-recordPaymentHistory" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                        <a class="btn btn-theme add-recordPaymentHistory" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                        <a class="btn btn-theme delete-recordPayment" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-recordPayment" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                     </div>
 
                                 </td>
@@ -514,10 +517,10 @@
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select asp-for="OnlinePaymentLocalityId" class="floating-label-field floating-label-field--s3" 
+                        <select asp-for="OnlinePaymentLocalityId" class="floating-label-field floating-label-field--s3"
                                 asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                             <option value="0">---Select---</option>
-                           
+
                         </select>
                         <label class="floating-label">Locality</label>
                     </div>
@@ -681,227 +684,12 @@
     </form>
 
 </div>
-<script>
-    //For dropdown change event
-    $(document).ready(function () {
-        $("#drpKhasra").change(function () {
-            var courses = $("#txtArea");
-            var semesterName = $("#drpKhasra option:selected").text();
-            $.getJSON('/EncroachmentRegister/GetAreaFromKhasra', { semester: semesterName }, function (response) {
-                console.log(response);
-                var courseField = "";
-                $.each(response, function (key, value) {
-                    if (value == null) {
-                        $("#txtArea").empty();
-                    } else {
-                        courseField += "<div class=\"input-field col s12 l12\">\n" +
-                            "                        <input id=\"" + value.CourseId + "\" type=\"text\" value=\"" + value.CourseCode + "\">\n" +
-                            "                        <label class=\"active\" for=\"course\">" + value.CourseCode + "</label>\n" +
-                            "                    </div>";
-                    }
-                });
-                courses.html(courseField);
-            })
-        });
-    });
-</script>
-
-<script>
-
-    $(function () {
-        var dtToday = new Date();
-
-        var month = dtToday.getMonth() + 1;
-        var day = dtToday.getDate();
-        var year = dtToday.getFullYear();
-        if (month < 10)
-            month = '0' + month.toString();
-        if (day < 10)
-            day = '0' + day.toString();
-
-        var maxDate = year + '-' + month + '-' + day;
-        //alert(maxDate);
-        $('#txtDateofWill').attr('max', maxDate);
-        $('txtTakenOverDate').attr('max', maxDate);
-        $('txtDateRep').attr('max', maxDate);
-    });
 
 
-
-</script>
-
-@*For radio button event click*@
-<script>
-    $(function () {
-        $("input[name='grpDamageAssesseeType']").click(function () {
-            if ($("#rSubsequent").is(":checked")) {
-                $("#DivForSubsequentPurchaser").show();
-            } else {
-                $("#DivForSubsequentPurchaser").hide();
-            }
-        });
-    });
-
-    $(function () {
-        $("input[name='grpLitigation']").click(function () {
-            if ($("#rbdYesLitigation").is(":checked")) {
-                $("#DivForLitigationStatus").show();
-            } else {
-                $("#DivForLitigationStatus").hide();
-            }
-        });
-    });
-
-    $(function () {
-        $("input[name='grpYESNO']").click(function () {
-            if ($("#rdbPayeeYes").is(":checked")) {
-                $("#DivForPayeeNo").hide();
-            } else {
-                $("#DivForPayeeNo").show();
-            }
-        });
-    });
-
-    $(function () {
-        $("input[name='grpUseofpeoperty']").click(function () {
-            if ($("#rdbResidential").is(":checked")) { //1st radio button
-                $("#txtResidential").attr("disabled", "disabled");
-                $("#txtCommercial").attr("disabled", "disabled");
-                $("#txtResidential").removeAttr("disabled", "disabled");
-                $("#txtCommercial").attr("disabled", "disabled");
-                $("#txtCommercialmts").val('');
-                $("#txtCommercial").val('');
-
-            }
-            else if ($("#rdbCommercial").is(":checked")) {
-                $("#txtResidential").attr("disabled", "disabled");
-                $("#txtCommercial").attr("disabled", "disabled");
-                $("#txtResidential").attr("disabled", "disabled");
-                $("#txtCommercial").removeAttr("disabled", "disabled");
-                $("#txtResidentialmts").val('');
-                $("#txtResidential").val('');
-            }
-
-            else if ($("#rdbMixed").is(":checked")) {
-                $("#txtResidential").attr("disabled", "disabled");
-                $("#txtCommercial").attr("disabled", "disabled");
-                $("#txtResidential").removeAttr("disabled", "disabled");
-                $("#txtCommercial").removeAttr("disabled", "disabled");
-                $("#txtResidentialmts").val('');
-                $("#txtResidential").val('');
-                $("#txtCommercialmts").val('');
-                $("#txtCommercial").val('');
-            }
-
-            else {
-                $("#txtResidential").attr("disabled", "disabled");
-                $("#txtCommercial").attr("disabled", "disabled");
-                $("#txtResidentialmts").val('');
-                $("#txtResidential").val('');
-                $("#txtCommercialmts").val('');
-                $("#txtCommercial").val('');
-            }
-
-        });
-    });
-
-</script>
-
-<script>
- @* convert yds to meters*@
-    $("#txtPlotyds").change(function () {
-        var plotyds = $("#txtPlotyds").val();
-        var plotmeter = '';
-        plotmeter = plotyds / 1.19599005;
-        $("#txtPlotmts").val(plotmeter);
-    });
-
-    $("#txtFlooryds").change(function () {
-        var flooryds = $("#txtFlooryds").val();
-        var floormeter = '';
-        floormeter = flooryds / 1.19599005;
-        $("#txtFloormts").val(floormeter);
-    });
-
-    $("#txtResidential").change(function () {
-        var yds = $("#txtResidential").val();
-        var meter = '';
-        meter = yds / 1.19599005;
-        $("#txtResidentialmts").val(meter);
-    });
-
-    $("#txtCommercial").change(function () {
-        var yds = $("#txtCommercial").val();
-        var meter = '';
-        meter = yds / 1.19599005;
-        $("#txtCommercialmts").val(meter);
-    });
-
-</script>
-
-
-<script>
-
-
-    @*Repeator code  *@
-    $(document).ready(function () {
-        $("#tbl_posts #tbl_posts_body .odd").remove();
-        $("#tbl_posts #add .form-control").attr("multiple", false);
-    })
-    $(document).delegate('a.add-record', 'click', function (e) {
-        var name = $("#tbl_posts #add #txtPersonalName").val();
-        //var father = $("#tbl_posts #add #txtPersonalFatherName").val();
-        //var gender = $("#tbl_posts #add #drpPersonalGender").val();
-        debugger
-        if ($("#tbl_posts #add #txtPersonalName").val() != '' && $("#tbl_posts #add #txtPersonalFatherName").val() != '' && $("#tbl_posts #add #drpPersonalGender").val() != '0'
-            && $("#tbl_posts #add #drpPersonalGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
-            && $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != '')
-             {
-                    var GenderValue = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-                    //var father = $("#tbl_posts #add #txtPersonalFatherName").children("option:selected").val();
-                    //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-                    debugger
-            e.preventDefault();
-                    var content = jQuery('#tbl_posts #add tr'),
-                    size = jQuery('#tbl_posts >tbody >tr').length,
-                    element = null,
-                    element = content.clone();
-                    element.attr('id', 'rec-' + size);
-                    element.find('.delete-record').attr('data-id', size);
-                    element.appendTo('#tbl_posts_body');
-                    $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
-        //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
-        //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
-        element.find('.sn').html(size);
-        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-        $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-        element.find(".add-record").hide();
-        element.find(".delete-record").show();
-        debugger
-        $("#tbl_posts #add .form-control").val('');
-    }
-        else {
-            alert('Please fill record before add new record ');
-        }
-    });
-    $(document).delegate('a.delete-record', 'click', function (e) {
-        e.preventDefault();
-        var didConfirm = confirm("Are you sure You want to delete");
-        if (didConfirm == true) {
-            var id = jQuery(this).attr('data-id');
-            var targetDiv = jQuery(this).attr('targetDiv');
-            jQuery('#rec-' + id).remove();
-
-            //regnerate index number on table
-            $('#tbl_posts_body tr').each(function (index) {
-                //alert(index);
-                $(this).find('span.sn').html(index + 1);
-            });
-            $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-            return true;
-        } else {
-            return false;
-        }
-    });
-</script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/damagepayeeregistercreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/damagepayeeregistercreate.min.js" asp-append-version="true"></script>
+</environment>
