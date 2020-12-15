@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PropertyId).HasColumnType("int(11)");
 
-            builder.Property(e => e.RatePercentage).HasColumnType("decimal(18,2)");
+            builder.Property(e => e.RatePercentage).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.ToDate).HasColumnType("date");
         }

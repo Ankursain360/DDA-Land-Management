@@ -6,145 +6,119 @@
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Dues Vs Paid Amount Report" })
 
-@*<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Dues Vs Paid Amount Report</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+<div class="pt-3">
+
+    <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" asp-action="Index" id="1">
+        <h2 class="my-3 sub-heading">Details</h2>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select style="width:100%" id="" required="" class="floating-label-field floating-label-field--s3">
+                        <option value="0">---Select---</option>
+                        <option value="1">Nimri</option>
+                    </select>
+                    <label class="floating-label">Locality Name(Village)</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                    <label class="floating-label">From Date</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
+                    <label class="floating-label">To Date</label>
                 </div>
             </div>
         </div>
-    </div>
-*@
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        @*<div class="panel-heading  myapp-hed1">
-                <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
-            </div>*@
-        <div class="panel-body">
-            <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" asp-action="Index" id="1">
-                <h2 class="my-3 sub-heading">Details</h2>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row pt-3">
+            <div class="col-md-12" style="margin-bottom:40px;">
+                <input type="submit" value="Generate" class="btn btn-theme" />
+                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-theme" })
+            </div>
+        </div>
 
-                <div class="row pt-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-                            <select style="width:100%" id="" required="" class="floating-label-field floating-label-field--s3">
-                                <option value="0">---Select---</option>
-                                <option value="1">Nimri</option>
-                            </select>
-                            <label class="floating-label">Locality Name(Village)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                            <label class="floating-label">From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                            <label class="floating-label">To Date</label>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row pt-3">
-                    <div class="col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Generate" class="btn btn-theme" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-theme" })
-                    </div>
-                </div>
-
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-                        <div id="DivReportDetails">
-                            @*<div class="row" style="margin-bottom:35px;">
-                                    <div class="col-sm-12">
-                                        <div class=" myapp-hed2">
-                                            <div class="col-md-12">
-                                                <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
-                                            </div>
-                                        </div>
+        @{
+            @if (ViewBag.IsShowData == "Yes")
+            {
+                <div id="DivReportDetails">
+                    @*<div class="row" style="margin-bottom:35px;">
+                            <div class="col-sm-12">
+                                <div class=" myapp-hed2">
+                                    <div class="col-md-12">
+                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
                                     </div>
-                                </div>*@
-                            <h2 class="my-3 sub-heading">Report</h2>
-                            <div class="table-section">
-                                <div class="table-responsive px-2">
-                                    <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                        <thead class="text-nowrap">
-                                            <tr>
-                                                <th>Sr.No</th>
-                                                <th>Locality(Village)</th>
-                                                <th>File No.</th>
-                                                <th>Payee Name</th>
-                                                <th>Property No.</th>
-                                                <th>Address</th>
-                                                <th>Property/Plot Area(Sq. Yds)</th>
-                                                <th>Demand No.</th>
-                                                <th>Demand Amount</th>
-                                                <th>Paid Amount</th>
-                                                <th>Balance Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
+                        </div>*@
+                    <h2 class="my-3 sub-heading">Report</h2>
+                    <div class="table-section">
+                        <div class="table-responsive px-2">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Locality(Village)</th>
+                                        <th>File No.</th>
+                                        <th>Payee Name</th>
+                                        <th>Property No.</th>
+                                        <th>Address</th>
+                                        <th>Property/Plot Area(Sq. Yds)</th>
+                                        <th>Demand No.</th>
+                                        <th>Demand Amount</th>
+                                        <th>Paid Amount</th>
+                                        <th>Balance Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr>
+                                        <td>1</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+                </div>
 
-                    }
-                    else
-                    {
+            }
+            else
+            {
 
-                    }
-                }
+            }
+        }
 
 
-            </form>
-        </div>
-    </div>
+    </form>
+
+
 </div>
-
-
-
-
-

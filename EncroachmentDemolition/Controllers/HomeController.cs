@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Service.IApplicationService;
-using EncroachmentDemolition.Filters;
 using EncroachmentDemolition.Models;
 using System.Diagnostics;
 using EncroachmentDemolition.Helper;
@@ -9,7 +8,6 @@ using Dto.Master;
 
 namespace EncroachmentDemolition.Controllers
 {
-    [TypeFilter(typeof(CustomExceptionHandlerFilter))]
     public class HomeController : BaseController
     {
         private readonly ISiteContext _siteContext;
@@ -35,6 +33,11 @@ namespace EncroachmentDemolition.Controllers
         public IActionResult Logout()
         {
             return SignOut("Cookies", "oidc");
+        }
+
+        public IActionResult ErrorLog()
+        {
+            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

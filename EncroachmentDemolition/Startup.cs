@@ -1,30 +1,27 @@
-using System;
-using System.IO;
+using EncroachmentDemolition.Filters;
+using EncroachmentDemolition.Infrastructure.Extensions;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
-using Libraries.Model;
-using EncroachmentDemolition.Infrastructure.Extensions;
-using System.IdentityModel.Tokens.Jwt;
-using EncroachmentDemolition.Filters;
-using Service.Common;
-using Libraries.Model.Entity;
 using Model.Entity;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Authentication.Cookies;
+using Service.Common;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 
 namespace EncroachmentDemolition
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
@@ -68,6 +65,11 @@ namespace EncroachmentDemolition
 
             services.RegisterDependency();
             services.AddAutoMapperSetup();
+
+            services.AddMvc(option =>
+            {
+                option.Filters.Add(typeof(ExceptionLogFilter));
+            });
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 

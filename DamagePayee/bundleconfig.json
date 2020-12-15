@@ -6,9 +6,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/damagepayeeregistrationindex.min.js",
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsCreate.min.js",
     "inputFiles": [
-      "wwwroot/js/damagepayeeregistrationindex.js"
+      "wwwroot/js/SubstitutionMutationDetailsCreate.js"
     ]
   }
 ]

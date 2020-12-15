@@ -1,9 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Libraries.Model.Entity;
+﻿using Libraries.Model.Entity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 
 namespace Libraries.Model.EntityConfiguration
@@ -35,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.Description)
-                .HasMaxLength(400)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
@@ -50,7 +47,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ProposalDate).HasColumnType("date");
 
             builder.Property(e => e.ProposalFileNo)
-                .HasMaxLength(200)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.RequiredAgency)

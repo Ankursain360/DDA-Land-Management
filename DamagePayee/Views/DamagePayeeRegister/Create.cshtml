@@ -1,711 +1,685 @@
-﻿
+﻿@model Libraries.Model.Entity.Damagepayeeregister
 @{ ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register" })
 <div class="pt-3">
-                <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">Add Details</h3>
 
-                    <div id="DivFileInformation">
+        <div id="DivFileInformation">
 
-                        <h3 class="my-3 d-flex sub-heading">File Information</h3>
+            <h3 class="my-3 d-flex sub-heading">File Information</h3>
 
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="File No." class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">File No.</label>
-                                </div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FileNo" type="text" placeholder="File No." class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">File No.</label>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div id="DivPersonalInformationofDamageAssessee">
-                        <h3 class="my-3 d-flex sub-heading">Personal Information of Damage Assessee</h3>
-                      
-                        <div class="table-section bg-white border shadow rounded">
-                            <div class="table-responsive">
-                                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
-                                    <thead class="text-nowrap">
+        <div id="DivPersonalInformationofDamageAssessee">
+            <h3 class="my-3 d-flex sub-heading">Personal Information of Damage Assessee</h3>
 
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>Name</th>
-                                            <th>Father's/Husband's Name</th>
-                                            <th>Gender</th>
-                                            <th>Address</th>
-                                            <th>Mobile No.</th>
-                                            <th>Email-Id</th>
-                                            <th>Operation</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbl_posts_body">
-                                    </tbody>
-                                    <tbody class="tbody" id="add">
-                                        <tr id="">
-                                            <td>1</td>
-                                            <td>
-                                                <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <select class="floating-label-field floating-label-field--s3" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                    <option value="0">---Select---</option>
-                                                    <option value="1">Male</option>
-                                                    <option value="2">Female</option>
-                                                    <option value="3">Other</option>
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalAddress" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalMobileNo." class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <input type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
-                                            </td>
-                                            <td>
-                                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                                    <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                                    <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                        <thead class="text-nowrap">
 
-                                    </tbody>
-                                </table>
-                            </div>
-
-
-                        </div>
-
-                    </div>
-                    <br />
-                    <div id="Divclsification" class="mt-md-3">
-                        <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
-
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rOriginal" value="" checked="checked">
-                                    <label class="form-check-label" for="radio">
-                                        Original
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent" value="" checked="checked">
-                                    <label class="form-check-label" for="radio">
-                                        Subsequent Purchaser/Occupier
-                                    </label>
-                                </div>
-                            </div>
-                            </div>
-                    </div>
-                    <div id="DivForSubsequentPurchaser" style="display:none">
-
-                        <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
-
-
-                       
-                            <div class="table-section bg-white border shadow rounded">
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_DamageAssessee">
-                                            <thead class="text-nowrap">
-                                                <tr>
-                                                    <th>Sr.No</th>
-                                                    <th>Name</th>
-                                                    <th>Father's Name</th>
-                                                    <th>Date of GPA/Will/Other Deed</th>
-                                                    <th>Upload ATS & GPA/Will</th>
-                                                    <th>Operation</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tbl_DamageAssessee_body">
-                                            </tbody>
-                                            <tbody class="tbody" id="addDamageAssessee">
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
-                                                    </td>
-                                                    <td>
-                                                        <input type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                                        <a class="btn btn-theme add-recordDamageAssessee" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                                     </td>
-                                                </tr>
-
-                                            </tbody>
-                                        </table>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name</th>
+                                <th>Father's/Husband's Name</th>
+                                <th>Gender</th>
+                                <th>Address</th>
+                                <th>Mobile No.</th>
+                                <th>Email-Id</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody class="tbody" id="add">
+                            <tr id="">
+                                <td>1</td>
+                                <td>
+                                    <input asp-for="payeeName" type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <input asp-for="payeeFatherName" type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <select asp-for="Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                                        <option value="0">---Select---</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                        <option value="3">Other</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input asp-for="Address" type="text" id="txtPersonalAddress" class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <input asp-for="MobileNo" type="text" id="txtPersonalMobileNo." class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <input asp-for="EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                     </div>
-                            </div>
-                       
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+            </div>
+
+        </div>
+        <br />
+        <div id="Divclsification" class="mt-md-3">
+            <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked="checked">
+                        <label class="form-check-label" for="radio">
+                            Original
+                        </label>
                     </div>
-                   
-                    <div id="MainContentForm">
-                        <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
-
-                        <div class="row">
-
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
-
-                                    <label class="floating-label">Property/House/Municipal No.</label>
-
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Inactive</option>
-                                    </select>
-                                    <label class="floating-label">Locality</label>
-                                </div>
-                            </div>
-
-
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Floor No(if purchased floor wise)</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Road/Street Name</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Pin Code</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Inactive</option>
-                                    </select>
-                                    <label class="floating-label">District</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
-                                    <label class="floating-label">Plot Area in Sq.yds.</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0 ">
-                                    <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" disabled />
-                                    <label class="floating-label">Sq. Mtr.-</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                    <input type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
-                                    <label class="floating-label">Floor Area in Sq. yds.(if purchased floor wise)</label>
-                                </div>
-                            </div> 
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0 ">
-                                    <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" disabled />
-                                    <label class="floating-label">Sq. Mtr.-</label>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent" checked="checked">
+                        <label class="form-check-label" for="radio">
+                            Subsequent Purchaser/Occupier
+                        </label>
                     </div>
-                    
-                    <div id="DivMainContentForm">
-                        <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
-                        <div class="row mt-md-3">
-                            <div class="col-md-2">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbResidential" value="">
-                                    <label class="form-check-label" for="radio">
-                                        Residential
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbCommercial" value="">
-                                    <label class="form-check-label" for="radio">
-                                        Commercial
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbMixed" value="">
-                                    <label class="form-check-label" for="radio">
-                                        Mixed
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <br />
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Residential floor area in Sq.yds" class="floating-label-field floating-label-field--s3" id="txtResidential" disabled />
-                                    <label class="floating-label">Residential floor area in Sq.yds.</label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Commercial floor area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtCommercial" disabled />
-                                    <label class="floating-label">Commercial floor area in Sq.yds.</label>
-                                </div>
-                            </div>
+                </div>
+            </div>
+        </div>
+        <div id="DivForSubsequentPurchaser" style="display:none">
+
+            <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
+
+
+
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_DamageAssessee">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Name</th>
+                                <th>Father's Name</th>
+                                <th>Date of GPA/Will/Other Deed</th>
+                                <th>Upload ATS & GPA/Will</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_DamageAssessee_body">
+                        </tbody>
+                        <tbody class="tbody" id="addDamageAssessee">
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
+                                </td>
+                                <td>
+                                    <input asp-for="FatherName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
+                                </td>
+                                <td>
+                                    <input asp-for="Date" type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
+                                </td>
+                                <td>
+                                    <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                </td>
+                                <td>
+                                    <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-theme add-recordDamageAssessee" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="MainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PropertyNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
+
+                        <label class="floating-label">Property/House/Municipal No.</label>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
+                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                            <option value="0">---Select---</option>
                           
+                        </select>
+                        <label class="floating-label">Locality</label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="FloorNo" type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Floor No(if purchased floor wise)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="StreetNo" type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Road/Street Name</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PinCode" type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Pin Code</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select asp-for="DistrictId" class="floating-label-field floating-label-field--s3"
+                                 asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
+                            <option value="0">---Select---</option>
+                           
+                        </select>
+                        <label class="floating-label">District</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PlotAreaSqYard" type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
+                        <label class="floating-label">Plot Area in Sq.yds.</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0 ">
+                        <input asp-for="PlotAreaSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" disabled />
+                        <label class="floating-label">Sq. Mtr.-</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                        <input asp-for="FloorAreaSqYard" type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
+                        <label class="floating-label">Floor Area in Sq. yds.(if purchased floor wise)</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0 ">
+                        <input asp-for="FloorAreaSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" disabled />
+                        <label class="floating-label">Sq. Mtr.-</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-2">
+                    <div class="form-check theme">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbResidential" value="">
+                        <label class="form-check-label" for="radio">
+                            Residential
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check theme">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbCommercial" value="">
+                        <label class="form-check-label" for="radio">
+                            Commercial
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-check theme">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbMixed" value="">
+                        <label class="form-check-label" for="radio">
+                            Mixed
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="ResidentialSqYard" type="text" placeholder="Residential floor area in Sq.yds" class="floating-label-field floating-label-field--s3" id="txtResidential" disabled />
+                        <label class="floating-label">Residential floor area in Sq.yds.</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="CommercialSqYard" type="text" placeholder="Commercial floor area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtCommercial" disabled />
+                        <label class="floating-label">Commercial floor area in Sq.yds.</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0 ">
+                        <input asp-for="ResidentialSqYard" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtResidentialmts" disabled />
+                        <label class="floating-label">Sq. Mtr.-</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="CommercialSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtCommercialmts" disabled />
+                        <label class="floating-label">Sq. Mtr.-</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Litigation Status</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="form-check theme">
+                        <input asp-for="LitigationStatus" class="form-check-input" type="radio" name="grpLitigation" id="rdbNoLitigation" checked value=" no case ">
+                        <label class="form-check-label" for="radio">
+                            The Land Property is not a subject matter of any litigation/Court Case
+
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-check theme">
+                        <input asp-for="LitigationStatus" class="form-check-input" type="radio" name="grpLitigation" id="rbdYesLitigation" value="under litigation">
+                        <label class="form-check-label" for="radio">
+                            LandProperty title is under litigation
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="DivForLitigationStatus" style="display:none">
+            <h3 class="my-3 d-flex sub-heading">Details of Court Case(if any)</h3>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="CourtName" type="text" placeholder="Name of Court" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Name of Court </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="CaseNo" type="text" placeholder="Case Number" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Case Number</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="OppositionName" type="text" placeholder="Case Number" class="floating-label-field floating-label-field--s3" />
+                        <label class="floating-label">Name of Opposition Party</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <label>I am</label>
                         </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0 ">
-                                    <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtResidentialmts" disabled />
-                                    <label class="floating-label">Sq. Mtr.-</label>
-                                </div>
+                        <div class="col-md-4">
+                            <div class="form-check theme">
+                                <input asp-for="PetitionerRespondent" class="form-check-input" type="radio" name="grpCaseperson" checked value="Petitioner">
+                                <label class="form-check-label" for="radio">
+                                    Petitioner
+                                </label>
                             </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtCommercialmts" disabled />
-                                    <label class="floating-label">Sq. Mtr.-</label>
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-check theme">
+                                <input asp-for="PetitionerRespondent" class="form-check-input" type="radio" name="grpCaseperson" checked value="Respondant">
+                                <label class="form-check-label" for="radio">
+                                    Respondant
+                                </label>
                             </div>
+
                         </div>
                     </div>
-                    <div id="DivMainContentForm">
-                        <h3 class="my-3 d-flex sub-heading">Litigation Status</h3>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpLitigation" id="rdbNoLitigation" checked value="">
-                                    <label class="form-check-label" for="radio">
-                                        The Land Property is not a subject matter of any litigation/Court Case
+                </div>
 
-                                    </label>
-                                </div>
-                            </div>
+            </div>
+        </div>
 
-                            <div class="col-md-3">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpLitigation" id="rbdYesLitigation"  value="">
-                                    <label class="form-check-label" for="radio">
-                                        LandProperty title is under litigation
-                                    </label>
-                                </div>
-                            </div>
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Whether present occupant's is/are damage payee in DDA record</h3>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-2">
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeYes" checked value="yes">
+                        <label class="form-check-label" for="radio">
+                            Yes
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-2">
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo" checked value="no">
+                        <label class="form-check-label" for="radio">
+                            No
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-12">
+                    <div class="form-group" id="DivForPayeeNo" style="display:none;">
+                        <label class="control-label lb-sm">Apply for mutation/ substitution</label>
+                        @Html.ActionLink("Open Substitution Form", "Create", "SubstitutionMutationApplicantsDetail", null, new { })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Payment History</h3>
+
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+
+                    <table class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Payee Name</th>
+                                <th>Receipt No.</th>
+                                <th>Mode of Payment</th>
+                                <th>Date of Payment</th>
+                                <th>Amount</th>
+                                <th>Upload receipt</th>
+                                <th>Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody class="tbody">
+                            <tr>
+                                <td>1</td>
+                                <td>
+                                    <input asp-for="PaymntName" type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
+                                </td>
+                                <td>
+                                    <input asp-for="RecieptNo" type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
+                                </td>
+                                <td>
+                                    <input asp-for="PaymentMode" type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
+                                </td>
+                                <td>
+                                    <input asp-for="PaymentDate" type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
+                                </td>
+                                <td>
+                                    <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
+                                </td>
+                                <td>
+                                    <input asp-for="Reciept" type="file" />
+                                </td>
+                                <td>
+                                    @*<button id="addToList" class="btn btn-primary myapp-hed1">
+                                            <i class="fa fa-plus"></i>
+                                        </button>*@
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-recordPaymentHistory" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-recordPaymentHistory" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select asp-for="DamageProperty" class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Residential</option>
+                        </select>
+                        <label class="floating-label">Damage Property</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="EncroachmentDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentDate" />
+                        <label class="floating-label">Date of Encroachment</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="StartDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentFromDate" />
+
+                        <label class="floating-label">From Date</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="EndDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentToDate" />
+
+                        <label class="floating-label">To Date</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select asp-for="OnlinePaymentLocalityId" class="floating-label-field floating-label-field--s3" 
+                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                            <option value="0">---Select---</option>
+                           
+                        </select>
+                        <label class="floating-label">Locality</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="OnlinePaymentAreaSqYds" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" />
+
+                        <label class="floating-label">Area in sq. yds.</label>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-md-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Calculate" class="btn btn-theme" />
+                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                    @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
+                </div>
+            </div>
+
+            <br />
+        </div>
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Details</h3>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <h3 class="my-3 d-flex sub-heading">Damage Calculation</h3>
+                </div>
+                <div class="form-group col-md-6">
+                    <h3 class="my-3 d-flex sub-heading">Interest Calculation</h3>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class=" form-group col-md-6">
+
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Rate</th>
+                                        <th>Area</th>
+                                        <th>Month</th>
+                                        <th>Damage Charges</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/08/2008</td>
+                                        <td>31/03/2009</td>
+                                        <td>80.05</td>
+                                        <td>1500</td>
+                                        <td>8</td>
+                                        <td>960600</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>01/04/2009</td>
+                                        <td>31/03/2010</td>
+                                        <td>80.05</td>
+                                        <td>1500</td>
+                                        <td>12</td>
+                                        <td>1440900</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>01/04/2010</td>
+                                        <td>31/03/2011</td>
+                                        <td>88.06</td>
+                                        <td>1500</td>
+                                        <td>12</td>
+                                        <td>174360</td>
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
                         </div>
                     </div>
-                   
-                  
-                    <div id="DivForLitigationStatus" style="display:none">
-                        <h3 class="my-3 d-flex sub-heading">Details of Court Case(if any)</h3>
+                </div>
 
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Name of Court" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Name of Court </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Case Number" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Case Number</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="col-md-6">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" placeholder="Case Number" class="floating-label-field floating-label-field--s3" />
-                                    <label class="floating-label">Name of Opposition Party</label>
-                                </div>
-                            </div>
+                <div class="form-group col-md-6">
+                    <div class="table-section bg-white border shadow rounded">
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Sr.No</th>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Month</th>
+                                        <th>Outstanding Damage</th>
+                                        <th>Paid Amount as claimed by assessee</th>
+                                        <th>Interest</th>
+                                        <th>Cumlative Interest</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="tbody">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/08/2008</td>
+                                        <td>31/03/2009</td>
+                                        <td>8</td>
+                                        <td>960600</td>
+                                        <td>0</td>
+                                        <td>44828</td>
+                                        <td>44828</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/04/2009</td>
+                                        <td>31/03/2010</td>
+                                        <td>12</td>
+                                        <td>2401500</td>
+                                        <td>0</td>
+                                        <td>168105</td>
+                                        <td>212933</td>
+                                    </tr>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>01/04/2010</td>
+                                        <td>31/03/2011</td>
+                                        <td>12</td>
+                                        <td>3986530</td>
+                                        <td>0</td>
+                                        <td>279061</td>
+                                        <td>491994</td>
+                                    </tr>
 
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <label >I am</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check theme">
-                                            <input class="form-check-input" type="radio" name="grpCaseperson" checked value="">
-                                            <label class="form-check-label" for="radio">
-                                                Petitioner
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-check theme">
-                                            <input class="form-check-input" type="radio" name="grpCaseperson" checked value="">
-                                            <label class="form-check-label" for="radio">
-                                                Respondant
-                                            </label>
-                                        </div>
+                                </tbody>
 
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                   
-                    <div id="DivMainContentForm">
-                        <h3 class="my-3 d-flex sub-heading">Whether present occupant's is/are damage payee in DDA record</h3>
-                        <div class="row mt-md-3">
-                            <div class="form-group col-md-2">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeYes" checked value="">
-                                    <label class="form-check-label" for="radio">
-                                        Yes
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-2">
-                                <div class="form-check theme">
-                                    <input class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo" checked value="">
-                                    <label class="form-check-label" for="radio">
-                                        No
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mt-md-3">
-                            <div class="form-group col-md-12">
-                                <div class="form-group" id="DivForPayeeNo" style="display:none;">
-                                    <label class="control-label lb-sm">Apply for mutation/ substitution</label>
-                                    @Html.ActionLink("Open Substitution Form", "Create", "SubstitutionMutationApplicantsDetail", null, new { })
-                                </div>
-                            </div>
+                            </table>
                         </div>
                     </div>
+                </div>
 
-                        <div id="DivMainContentForm">
-
-                            <h3 class="mb-3 d-flex">Payment History</h3>
-
-                            <div class="form-row">
-                                <div class="col-md-12">
-                                    <div class="table-section bg-white border shadow rounded">
-                                        <div class="table-responsive px-2">
-
-                                            <table class="table table-sm table-bordered mb-0 table-striped">
-                                                <thead class="text-nowrap">
-                                                <thead class="thead">
-                                                    <tr>
-                                                        <th>Sr.No</th>
-                                                        <th>Payee Name</th>
-                                                        <th>Receipt No.</th>
-                                                        <th>Mode of Payment</th>
-                                                        <th>Date of Payment</th>
-                                                        <th>Amount</th>
-                                                        <th>Upload receipt</th>
-                                                        <th>Operation</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody class="tbody">
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtStructure" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtAreaRep" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtType" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateRep" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="text" class="floating-label-field floating-label-field--s3" id="txtReferenceNo" />
-                                                        </td>
-                                                        <td>
-                                                            <input type="file" />
-                                                        </td>
-                                                        <td>
-                                                            @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                                <i class="fa fa-plus"></i>
-                                            </button>*@
-                                                            <div class="floating-label-wrap mb-3 mb-md-0">
-                                                                <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                                                <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                                            </div>
-                                                            @* <a class="btn btn-xs delete-recordPaymentHistory" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                            <a class="btn btn-xs add-recordPaymentHistory" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                                            *@
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mt-md-3">
-
-                            <div id="DivMainContentForm">
-
-                                <h3 class="mb-3 d-flex">Online Payment</h3>
-
-                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap">
-
-                                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Residential</option>
-                                            </select>
-                                            <label class="floating-label">Damage Property</label>
-
-                                        </div>
-                                    </div>
+            </div>
+        </div>
 
 
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
 
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentDate" />
-                                            <label class="floating-label">Date of Encroachment</label>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <input type="submit" value="Create" class="btn btn-theme" />
+                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
+            </div>
+        </div>
+    </form>
 
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row mt-md-3">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentFromDate" />
-
-                                            <label class="floating-label">From Date</label>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentToDate" />
-
-                                            <label class="floating-label">To Date</label>
-
-                                        </div>
-                                    </div>
-
-
-                                </div>
-
-                                <div class="row mt-md-3">
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap">
-                                            <select class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                                <option value="0">---Select---</option>
-                                                <option value="1">Puth</option>
-                                            </select>
-
-                                            <label class="floating-label">Locality</label>
-
-                                        </div>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" />
-
-                                            <label class="floating-label">Area in sq. yds.</label>
-
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row mt-md-3">
-                                    <div class="col-md-12">
-                                        <input type="submit" value="Calculate" class="btn btn-theme" />
-                                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                        @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
-                                    </div>
-                                </div>
-
-                                <br />
-                                <div id="DivMainContentForm">
-
-                                    <h3 class="mb-3 d-flex">Details</h3>
-
-                                    <div class="form-row">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label lb-sm">Damage Calculation</label>
-                                        </div>
-
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label lb-sm">Interest Calculation</label>
-                                        </div>
-
-
-                                    </div>
-                                    <div class="table-section bg-white border shadow rounded">
-
-                                        <div class="col-md-12">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <div style="overflow-x:auto;">
-                                                        <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                                            <thead class="text-nowrap">
-                                                                <tr>
-                                                                    <th>Sr.No</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>End Date</th>
-                                                                    <th>Rate</th>
-                                                                    <th>Area</th>
-                                                                    <th>Month</th>
-                                                                    <th>Damage Charges</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/08/2008</td>
-                                                                    <td>31/03/2009</td>
-                                                                    <td>80.05</td>
-                                                                    <td>1500</td>
-                                                                    <td>8</td>
-                                                                    <td>960600</td>
-
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>01/04/2009</td>
-                                                                    <td>31/03/2010</td>
-                                                                    <td>80.05</td>
-                                                                    <td>1500</td>
-                                                                    <td>12</td>
-                                                                    <td>1440900</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>01/04/2010</td>
-                                                                    <td>31/03/2011</td>
-                                                                    <td>88.06</td>
-                                                                    <td>1500</td>
-                                                                    <td>12</td>
-                                                                    <td>174360</td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group col-md-6">
-                                                    <div style="overflow-x:auto;">
-                                                        <table class="table table-sm table-bordered mb-0 table-striped">
-
-                                                            <thead class="text-nowrap">
-                                                                <tr>
-                                                                    <th>Sr.No</th>
-                                                                    <th>Start Date</th>
-                                                                    <th>End Date</th>
-                                                                    <th>Month</th>
-                                                                    <th>Outstanding Damage</th>
-                                                                    <th>Paid Amount as claimed by assessee</th>
-                                                                    <th>Interest</th>
-                                                                    <th>Cumlative Interest</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/08/2008</td>
-                                                                    <td>31/03/2009</td>
-                                                                    <td>8</td>
-                                                                    <td>960600</td>
-                                                                    <td>0</td>
-                                                                    <td>44828</td>
-                                                                    <td>44828</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/04/2009</td>
-                                                                    <td>31/03/2010</td>
-                                                                    <td>12</td>
-                                                                    <td>2401500</td>
-                                                                    <td>0</td>
-                                                                    <td>168105</td>
-                                                                    <td>212933</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>01/04/2010</td>
-                                                                    <td>31/03/2011</td>
-                                                                    <td>12</td>
-                                                                    <td>3986530</td>
-                                                                    <td>0</td>
-                                                                    <td>279061</td>
-                                                                    <td>491994</td>
-                                                                </tr>
-
-                                                            </tbody>
-
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="row mt-md-3">
-                            <div class="col-md-12">
-                                <input type="submit" value="Create" class="btn btn-theme" />
-                                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
-                            </div>
-                        </div>
-</form>
-           
 </div>
 <script>
     //For dropdown change event

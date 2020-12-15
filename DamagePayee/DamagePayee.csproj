@@ -4,7 +4,6 @@
 		<TargetFramework>netcoreapp3.1</TargetFramework>
 	</PropertyGroup>
 
-
 	<ItemGroup>
 		<PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
@@ -13,12 +12,24 @@
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
 		<PackageReference Include="NLog" Version="4.7.5" />
 		<PackageReference Include="NLog.Web.AspNetCore" Version="4.9.3" />
+    <PackageReference Include="MySql.Data" Version="8.0.22" />
 	</ItemGroup>
-
 
 	<ItemGroup>
 		<ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
 		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
 	</ItemGroup>
+  
+  <ItemGroup>
+  <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
+  </ItemGroup>
 
 </Project>

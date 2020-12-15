@@ -9,7 +9,7 @@ namespace Libraries.Model.EntityConfiguration
 {
 
 
-    public class InterestConfiguration : IEntityTypeConfiguration<Interest>
+    public class InterestConfiguration : IEntityTypeConfiguration<Interest>     
     {
 
         public void Configure(EntityTypeBuilder<Interest> builder)
@@ -30,7 +30,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Percentage)
                 .HasColumnName("percentage")
-                .HasColumnType("decimal(18,2)");
+                .HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.PropertyId).HasColumnType("int(11)");
 
