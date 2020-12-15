@@ -23,8 +23,7 @@ namespace Libraries.Model.Entity
         public string FloorNo { get; set; }
         public string StreetName { get; set; }
         public string PindCode { get; set; }
-        public int ZoneId { get; set; }
-        public string PropertyPhoto { get; set; }
+        public int ZoneId { get; set; }        
         public decimal? PlotAreaSqYds { get; set; }
         public decimal? FloorAreaSqYds { get; set; }
         public string MutationPurpose { get; set; }
@@ -43,19 +42,20 @@ namespace Libraries.Model.Entity
         public string OppositionPartyName { get; set; }
         public string PetitionerRespondent { get; set; }
         public byte Declaration { get; set; }
-
-        [NotMapped]
-        public bool DeclarationNew { get; set; }
-
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
         public ICollection<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public ICollection<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public ICollection<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
 
-
         [NotMapped]
-        public List<IFormFile> PhotoProp { get; set; }
+        public IFormFile AtsfilePathNew { get; set; }
+        [NotMapped]
+        public IFormFile GpafilePathNew { get; set; }
+        [NotMapped]
+        public IFormFile MoneyfilePathNew { get; set; }
+        [NotMapped]
+        public List<IFormFile> PropertyPhoto { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]

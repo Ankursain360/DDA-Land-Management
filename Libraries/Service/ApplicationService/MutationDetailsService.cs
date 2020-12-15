@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class MutationDetailsService: EntityService<Mutationdetails>, IMutationDetailsService
+    public class MutationDetailsService : EntityService<Mutationdetails>, IMutationDetailsService
 
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -62,6 +62,41 @@ namespace Libraries.Service.ApplicationService
             throw new NotImplementedException();
         }
 
-        
+        public async Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details)
+        {
+            details.CreatedBy = 1;
+            details.CreatedDate = DateTime.Now;
+            details.IsActive = 1;
+            return await _mutationDetailsRepository.SaveMutationPhotoPropFile(details);
+        }
+
+        public string SaveMutationAtsFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationAtsFilePath(id);
+        }
+        public string SaveMutationGPAFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationGPAFilePath(id);
+        }
+        public string SaveMutationMoneyReceiptFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationMoneyReceiptFilePath(id);
+        }
+        public string SaveMutationSignSPCFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationSignSPCFilePath(id);
+        }
+        public string SaveMutationAddressProofFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationAddressProofFilePath(id);
+        }
+        public string SaveMutationAffitDevitFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationAffitDevitFilePath(id);
+        }
+        public string SaveMutationIndemnityFilePath(int id)
+        {
+            return _mutationDetailsRepository.SaveMutationIndemnityFilePath(id);
+        }
     }
 }

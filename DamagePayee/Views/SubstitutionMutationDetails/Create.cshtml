@@ -4,7 +4,7 @@
 <br />
 <br />
 
-<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">File Information</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -256,7 +256,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))" >
+                    <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                         <option value="">Select</option>
                     </select>
                     @*<input asp-for="LocalityId" placeholder="Locality Name" type="text" required class="floating-label-field floating-label-field--s3" />*@
@@ -270,7 +270,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="PropertyPhoto" type="file" required placeholder="Upload Photograph" class="floating-label-field floating-label-field--s3" multiple />
+                    <input asp-for="PropertyPhoto" id="PropertyPhoto" type="file" required placeholder="Upload Photograph" class="floating-label-field floating-label-field--s3" multiple />
 
                     <label class="floating-label">Upload Photograph Of Property<span class="text-danger" style="color:red">*</span></label>
                 </div>
@@ -342,7 +342,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="AtsfilePath" type="File" placeholder="Upload ATS(Agreement To sell)" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="AtsfilePathNew" type="File" placeholder="Upload ATS(Agreement To sell)" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">Upload ATS(Agreement To sell)<span class="text-danger" style="color:red">*</span></label>
                 </div>
@@ -583,14 +583,14 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-md-12">
-                    <input asp-for="DeclarationNew" type="checkbox" name="View">
-
+                    <input id="DeclarationNew" type="checkbox" name="View">
+                    <input type="hidden" asp-for="Declaration" id="Declarationhdn"/>
 
                     I/WE hereby expressly warranty and declare that the above information provided in support of my/ our application is correct and genuine and We expressly acknowledge that I am / we are aware and accept that the decision on the application will be made by the DDA on the basis of the information supplied
                     by me/ us and may be immediately Cancelled in the event that such information is found to be false or misleading.<br />
                     <br />
                     Note: Please fill all Details Crefully.You can't make any changes after final Submission
-                    
+
                 </div>
             </div>
         </div>

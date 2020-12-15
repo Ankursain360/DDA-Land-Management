@@ -93,7 +93,6 @@ namespace Libraries.Model.builderConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PropertyPhoto).HasColumnType("longtext");
 
             builder.Property(e => e.SignatureSpecimenFilePath).HasColumnType("longtext");
 

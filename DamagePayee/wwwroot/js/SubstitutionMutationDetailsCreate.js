@@ -9,3 +9,12 @@
         // $("#LocalityId").html('<option value="">Select</option>');
     });
 };
+
+$(function () {
+    $('#Declarationhdn').val("0");
+    $('#DeclarationNew').change(function () {
+        var data = $(this).is(':checked');
+        console.log(data);
+        $('#Declarationhdn').val( data== true ? "1" : "0");
+    });
+});

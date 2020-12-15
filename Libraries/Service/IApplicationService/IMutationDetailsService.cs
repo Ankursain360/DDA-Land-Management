@@ -14,7 +14,17 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetAllLocality(int zoneId);
         Task<List<Zone>> GetAllZone();
         Task<bool> Create(Mutationdetails details);
+        Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details);
+        
         Task<bool> Update(int id, Mutationdetails details);
         Task<bool> Delete(int id);
+        string SaveMutationAtsFilePath(int id);
+        string SaveMutationGPAFilePath(int id);
+        string SaveMutationMoneyReceiptFilePath(int id);
+        string SaveMutationSignSPCFilePath(int id);
+        string SaveMutationAddressProofFilePath(int id);
+        string SaveMutationAffitDevitFilePath(int id);
+        string SaveMutationIndemnityFilePath(int id);
+
     }
 }
