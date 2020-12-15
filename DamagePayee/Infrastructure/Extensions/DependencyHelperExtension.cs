@@ -39,6 +39,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<IEncroachmentRegisterationApprovalRepository, EncroachmentRegisterationApprovalRepository>();
+            services.AddScoped<IDamagePayeeRegistrationRepository, DamagePayeeRegistrationRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -58,6 +59,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IEncroachmentRegisterationApprovalService, EncroachmentRegisterationApprovalService>();
+            services.AddScoped<IDamagePayeeRegistrationService, DamagePayeeRegistrationService>();
 
 
         }

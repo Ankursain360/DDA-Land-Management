@@ -4,5 +4,11 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregistrationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregistrationindex.js"
+    ]
   }
 ]

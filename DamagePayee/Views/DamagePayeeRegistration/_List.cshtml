@@ -1,0 +1,47 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Payeeregistration>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+            <th> Name</th>
+            <th> Mobile No</th>
+            <th> Email Id</th>
+            <th> Status</th>
+            <th>Operation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Results)
+        {
+        <tr>
+
+            <td>@item.Name</td>
+            <td>@item.MobileNumber</td>
+            <td>@item.EmailId</td>
+           
+
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span> }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
+            </td>
+            <td>
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                    <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                </div>
+
+            </td>
+
+        </tr>
+}
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
