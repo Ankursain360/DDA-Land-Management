@@ -11,5 +11,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Fixingdemolition>> GetPagedApprovedAnnexureA(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
         Task<PagedResult<Demolitionpoliceassistenceletter>> GetPagedApprovedAnnexureAListedit(DemolitionPoliceAssistenceLetterSearchDto model, int userId);
         Task<Demolitionpoliceassistenceletter> FetchSingleResult(int id);
+        Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id);
     }
 }

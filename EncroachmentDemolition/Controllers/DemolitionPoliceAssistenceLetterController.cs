@@ -85,9 +85,10 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
         {
+            var result = false;
             targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
             if(ModelState.IsValid)
-            { 
+            {
                 string LetterFileName = "";
                 string LetterfilePath = "";
                 if (demolitionpoliceassistenceletter.Document != null)
@@ -105,13 +106,30 @@ namespace EncroachmentDemolition.Controllers
                     demolitionpoliceassistenceletter.FilePath = LetterfilePath;
                 }
 
-                demolitionpoliceassistenceletter.CreatedBy = SiteContext.UserId;
-                var result = await _demolitionPoliceAssistenceLetterService.Create(demolitionpoliceassistenceletter);
+
+                var demolitionpoliceData =await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(demolitionpoliceassistenceletter.FixingDemolitionId);
+                if (demolitionpoliceData == null)
+                {
+                    demolitionpoliceassistenceletter.CreatedBy = SiteContext.UserId;
+                    result = await _demolitionPoliceAssistenceLetterService.Create(demolitionpoliceassistenceletter);
+                }
+                else
+                {
+                    demolitionpoliceassistenceletter.ModifiedBy = SiteContext.UserId;
+                    result = await _demolitionPoliceAssistenceLetterService.Update(demolitionpoliceData.Id, demolitionpoliceassistenceletter);
+                }
+              
 
                 if(result)
                 {
+                    var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(demolitionpoliceData.Id);
+                    demolitionpoliceassistenceletter.FilePath = Data.FilePath;
+                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
+                    var Body = PopulateBody(Data, path);
+                    ViewBag.IsVisible = true;
+                    ViewBag.DataLetter = Body;
                     ViewBag.Message = Alert.Show("Generate Successfully", "", AlertType.Success);
-                    return View("Index");
+                    return View(demolitionpoliceassistenceletter);
                 }
                 else
                 {
@@ -141,7 +159,23 @@ namespace EncroachmentDemolition.Controllers
             targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
             if (ModelState.IsValid)
             {
-
+               
+                if(demolitionpoliceassistenceletter.GenerateUpload == 0 )
+                {
+                    if(demolitionpoliceassistenceletter.MeetingDate == null || demolitionpoliceassistenceletter.MeetingTime == null)
+                    {
+                        ViewBag.Message = Alert.Show("Meeting Date and Time is Mandatory", "", AlertType.Warning);
+                        return View(demolitionpoliceassistenceletter);
+                    }
+                }
+                else if (demolitionpoliceassistenceletter.GenerateUpload == 1)
+                {
+                    if (demolitionpoliceassistenceletter.Document == null )
+                    {
+                        ViewBag.Message = Alert.Show("Document is Mandatory", "", AlertType.Warning);
+                        return View(demolitionpoliceassistenceletter);
+                    }
+                }
                 string LetterFileName = "";
                 string LetterfilePath = "";
                 if (demolitionpoliceassistenceletter.Document != null)
@@ -164,8 +198,11 @@ namespace EncroachmentDemolition.Controllers
 
                 if (result)
                 {
+                    var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(id);
+                    demolitionpoliceassistenceletter.FilePath = Data.FilePath;
                     string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "DemolitionLetter.html");
-                    var Body = PopulateBody(demolitionpoliceassistenceletter, path);
+                    var Body = PopulateBody(Data, path);
+                    ViewBag.IsVisible = true;
                     ViewBag.DataLetter = Body;
                     ViewBag.Message = Alert.Show("Generate Successfully", "", AlertType.Success);
                     return View(demolitionpoliceassistenceletter);
@@ -191,12 +228,23 @@ namespace EncroachmentDemolition.Controllers
             {
                 body = reader.ReadToEnd();
             }
-            body = body.Replace("{MeetingDate}", demolitionpoliceassistenceletter.MeetingDate.ToString());
-
+            body = body.Replace("{MeetingDate}", Convert.ToDateTime((demolitionpoliceassistenceletter.MeetingDate)).ToString("dd-MMM-yyyy"));
+            body = body.Replace("{KhasraNo}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.KhasraNo);
+            body = body.Replace("{Locality}", demolitionpoliceassistenceletter.FixingDemolition.Encroachment.Locality.Name);
+            body = body.Replace("{MeetingTime}", demolitionpoliceassistenceletter.MeetingTime);
 
             return body;
         }
 
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            FileHelper file = new FileHelper();
+            var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(Id);
+            //Watchandwardphotofiledetails Data = await _watchandwardService.GetWatchandwardphotofiledetails(Id);
+            string path = Data.FilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
 
     }
 }

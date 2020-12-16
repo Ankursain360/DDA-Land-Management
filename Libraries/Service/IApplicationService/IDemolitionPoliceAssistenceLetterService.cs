@@ -14,5 +14,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter);
         Task<bool> Update(int id, Demolitionpoliceassistenceletter demolitionpoliceassistenceletter);
         Task<Demolitionpoliceassistenceletter> FetchSingleResult(int id);
+        Task<Demolitionpoliceassistenceletter> FetchSingleResultButOnAneexureId(int id);
     }
 }

@@ -8,31 +8,13 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="FixingDemolitionId" />
     <input type="hidden" asp-for="Id" value="@ViewBag.PrimaryId" />
-    @*<input type="hidden" asp-for="Id" />
-        <input type="hidden" asp-for="EncroachmentId" />
-        <input type="hidden" asp-for="Encroachment.WatchWardId" />
-        <div id="WatchWardDetailsDiv">
-
-        </div>
-
-        <div id="EncroachmentRegisterDetailsDiv">
-
-        </div>
-        <div id="AnnexureADetailsDiv">
-
-        </div>
-        <div class="table-section bg-white border shadow rounded pb-3">
-            <div class="table-responsive px-2" id="divHistoryDetails">
-
-            </div>
-        </div>*@
     <h3 class="mb-3 d-flex">Police Assistence letter By</h3>
 
     <div class="row mt-md-3">
-
+        <input type="hidden" asp-for="GenerateUpload" value="0" id="GenerateUpload" />
         <div class="col-md-3">
             <div class="form-check theme">
-                <input class="form-check-input" type="radio" name="radioStatus" id="Generate" value="0">
+                <input class="form-check-input" type="radio" name="radioStatus" id="Generate" value="0" checked>
                 <label class="form-check-label" for="radio">
                     Generate
                 </label>
@@ -54,21 +36,16 @@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="Date" asp-for="MeetingDate" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="MeetingDate" class="text-danger"></span>
+                    <span asp-validation-for="MeetingDate" class="text-danger" style="display:none;" id="MessageDate">Meeting Date is Mandatory</span>
                     <label class="floating-label">Meeting Date</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="time" asp-for="MeetingTime" class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="MeetingTime" class="text-danger"></span>
+                    <span asp-validation-for="MeetingTime" class="text-danger" style="display:none;" id="MessageTime">Meeting Time is Mandatory</span>
                     <label class="floating-label">Meeting Time</label>
                 </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
-            <div class="col-md-3">
-                <input type="submit" value="Generate" class="btn btn-theme " />
             </div>
         </div>
 
@@ -77,27 +54,26 @@
         <div class="row pt-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                    <input placeholder="Photo" asp-for="Document" type="file" class="floating-label-field floating-label-field--s3" accept="application/pdf,  application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                     <span asp-validation-for="Document" class="text-danger"></span>
                     <label class="floating-label">Upload Document</label>
                 </div>
             </div>
         </div>
-        <div class="row mt-md-3">
-
-            <div class="col-md-3">
-                <input type="submit" value="Upload" class="btn btn-theme " />
-            </div>
-
-        </div>
     </div>
     <div class="row pt-3">
         <div class="col-md-12">
+            <input type="submit" value="Generate" class="btn btn-theme " id="btnSubmit" onclick="return check();" />
             @Html.ActionLink("Back", "Index", "DemolitionPoliceAssistenceLetter", null, new { @class = "btn btn-theme " })
         </div>
     </div>
 
-    <div>
+</form>
+@if (ViewBag.IsVisible == true)
+{
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3 ">
+        <input type="submit" value="Print" class="btn btn-theme" id="btnCreate" />
+        <div id="LetterData">
             @{
                 @if (ViewBag.DataLetter != null)
                 {
@@ -105,9 +81,16 @@
                 }
             }
         </div>
-</form>
+    </div>
+}
+else
+{
+
+}
+
+
 @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>*@
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.min.js"></script>*@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
