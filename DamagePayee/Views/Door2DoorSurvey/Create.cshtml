@@ -1,22 +1,5 @@
-﻿@*@{
-        ViewData["Title"] = "Create";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
+﻿@model Libraries.Model.Entity.Doortodoorsurvey
 
-
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Door To Door Survey</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                </div>
-            </div>
-        </div>
-    </div>*@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 <br />
 <br />
@@ -61,6 +44,18 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
+
+                <select class="floating-label-field floating-label-field--s3" asp-for="PresentUseId"
+                        asp-items="@(new SelectList(Model.PresentuseList, "Id","Name"))"
+                        onchange="return onChange(this.options[this.selectedIndex].value);">
+                    <option selected="selected" disabled="disabled" value="">Select </option>
+                </select>
+
+
+                <span asp-validation-for="PresentUseId" class="text-danger"></span>
+                <label asp-for="PresentUseId" class="floating-label">Present Use </label>
+
+
                 <select class="floating-label-field floating-label-field--s3">
                     <option value="0">Residential</option>
                     <option value="1">Commercial</option>
@@ -89,9 +84,9 @@
     </div>
 
     <div id="DivFamilyDetails">
-       
+
         <h2 class="my-3 sub-heading">Family Details</h2>
-       
+
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive ">
                 <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
@@ -135,7 +130,7 @@
                                     <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                 </div>
                                 @*<a class="btn btn-xs delete-record" data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-        <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>*@
+                                    <a class="btn btn-xs add-record" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>*@
                             </td>
                         </tr>
 
@@ -146,115 +141,115 @@
     </div>
     @*</div>*@
 
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <input type="text" placeholder="CA-Number of Electricity Connection" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">CA-Number of Electricity Connection(s)</label>
+                <input type="text" placeholder="CA-Number of Electricity Connection" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">CA-Number of Electricity Connection(s)</label>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <input type="text" placeholder="K-Number of Water Connection(s)" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">K-Number of Water Connection(s)</label>
-        </div>
-    </div>
-</div>
-
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Property/House Tax Number" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Property/House Tax Number issued by MCD/local body</label>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Name of Occupant" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Name of Occupant</label>
-        </div>
-    </div>
-</div>
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Address" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Address</label>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="E-mail" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">E-mail</label>
-        </div>
-    </div>
-</div>
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Telephone" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Telephone</label>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Mobile" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Mobile</label>
-        </div>
-    </div>
-</div>
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Aadhar Number" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Aadhar Number of Occupant</label>
-        </div>
-    </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
-
-            <input type="text" placeholder="Voter ID" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Voter ID Number</label>
-
+                <input type="text" placeholder="K-Number of Water Connection(s)" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">K-Number of Water Connection(s)</label>
+            </div>
         </div>
     </div>
 
-</div>
-<div class="row pt-3">
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <input type="file" placeholder="Identity Proof" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
+                <input type="text" placeholder="Property/House Tax Number" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Property/House Tax Number issued by MCD/local body</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Name of Occupant" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Name of Occupant</label>
+            </div>
         </div>
     </div>
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <input type="text" placeholder="Damage Paid" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Damage Paid in the Past, if any </label>
+                <input type="text" placeholder="Address" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Address</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="E-mail" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">E-mail</label>
+            </div>
         </div>
     </div>
-</div>
-<div class="row pt-3">
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-    <div class="col-md-6">
-        <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="text" placeholder="Telephone" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Telephone</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
 
-            <input type="file" placeholder="Document of Property" class="floating-label-field floating-label-field--s3" />
-            <label class="floating-label">Document of Property, if any</label>
+                <input type="text" placeholder="Mobile" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Mobile</label>
+            </div>
         </div>
     </div>
-</div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Aadhar Number" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Aadhar Number of Occupant</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Voter ID" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Voter ID Number</label>
+
+            </div>
+        </div>
+
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="file" placeholder="Identity Proof" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="text" placeholder="Damage Paid" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Damage Paid in the Past, if any </label>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <input type="file" placeholder="Document of Property" class="floating-label-field floating-label-field--s3" />
+                <label class="floating-label">Document of Property, if any</label>
+            </div>
+        </div>
+    </div>
 
     <div class="row pt-3">
         <div class="col-md-12">
@@ -278,9 +273,9 @@
     </div>
 
 </form>
-        @*</div>
-    </div>
-</div>*@
+@*</div>
+        </div>
+    </div>*@
 
 <script>
 
@@ -347,6 +342,3 @@
         }
     });
 </script>
-
-
-

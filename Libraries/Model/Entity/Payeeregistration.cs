@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
-    public class DamagePayeeRegistration : AuditableEntity<int>
+    public class Payeeregistration : AuditableEntity<int>
     {
         public string Name { get; set; }
         public string MobileNumber { get; set; }

@@ -89,6 +89,62 @@ namespace Service.ApplicationService
             return await _damagepayeeregisterRepository.GetPagedDamagepayeeregister(model);
         }
 
+        //********* rpt 1 Persolnal info of damage assesse ***********
+        public async Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo)
+        {
+            damagepayeepersonelinfo.CreatedBy = 1;
+            damagepayeepersonelinfo.CreatedDate = DateTime.Now;
+            damagepayeepersonelinfo.IsActive = 1;
+            return await _damagepayeeregisterRepository.SavePayeePersonalInfo(damagepayeepersonelinfo);
+        }
+
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
+        {
+            return await _damagepayeeregisterRepository.GetPersonalInfo(id);
+        }
+        public async Task<bool> DeletePayeePersonalInfo(int Id)
+        {
+            return await _damagepayeeregisterRepository.DeletePayeePersonalInfo(Id);
+        }
+
+
+        //********* rpt 2 Allotte Type **********
+
+        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
+        {
+            allottetype.ForEach(x => x.CreatedBy = 1);
+            allottetype.ForEach(x => x.CreatedDate =DateTime.Now);
+            allottetype.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SaveAllotteType(allottetype);
+        }
+        public async Task<List<Allottetype>> GetAllottetype(int id)
+        {
+            return await _damagepayeeregisterRepository.GetAllottetype(id);
+        }
+        public async Task<bool> DeleteAllotteType(int Id)
+        {
+            return await _damagepayeeregisterRepository.DeleteAllotteType(Id);
+        }
+
+
+
+        //********* rpt 3 Damage payment history ***********
+
+        public async Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory)
+        {
+            Damagepaymenthistory.CreatedBy = 1;
+            Damagepaymenthistory.CreatedDate = DateTime.Now;
+            Damagepaymenthistory.IsActive = 1;
+            return await _damagepayeeregisterRepository.SavePaymentHistory(Damagepaymenthistory);
+        }
+        public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
+        {
+            return await _damagepayeeregisterRepository.GetPaymentHistory(id);
+        }
+        public async Task<bool> DeletePaymentHistory(int Id)
+        {
+            return await _damagepayeeregisterRepository.DeletePaymentHistory(Id);
+        }
 
     }
 }
