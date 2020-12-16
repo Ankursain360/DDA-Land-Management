@@ -130,12 +130,12 @@ namespace Service.ApplicationService
 
         //********* rpt 3 Damage payment history ***********
 
-        public async Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory)
+        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
         {
-            Damagepaymenthistory.CreatedBy = 1;
-            Damagepaymenthistory.CreatedDate = DateTime.Now;
-            Damagepaymenthistory.IsActive = 1;
-            return await _damagepayeeregisterRepository.SavePaymentHistory(Damagepaymenthistory);
+            damagepaymenthistory.ForEach(x => x.CreatedBy = 1);
+            damagepaymenthistory.ForEach(x => x.CreatedDate = DateTime.Now);
+            damagepaymenthistory.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SavePaymentHistory(damagepaymenthistory);
         }
         public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
         {

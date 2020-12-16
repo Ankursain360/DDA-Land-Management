@@ -141,63 +141,7 @@
     //    $("#tbl_posts #add .form-control").attr("multiple", false);
     //})
 
-    //$(document).delegate('a.add-record', 'click', function (e) {
-    //    var name = $("#tbl_posts #add #txtPersonalName").val();
-    //    //var father = $("#tbl_posts #add #txtPersonalFatherName").val();
-    //    //var gender = $("#tbl_posts #add #drpPersonalGender").val();
-    //    debugger
-    //    if ($("#tbl_posts #add #txtPersonalName").val() != '' && $("#tbl_posts #add #txtPersonalFatherName").val() != '' && $("#tbl_posts #add #drpPersonalGender").val() != '0'
-    //        && $("#tbl_posts #add #drpPersonalGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
-    //        && $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != '')
-    //         {
-    //                var GenderValue = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-    //                //var father = $("#tbl_posts #add #txtPersonalFatherName").children("option:selected").val();
-    //                //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-    //                debugger
-    //        e.preventDefault();
-    //                var content = jQuery('#tbl_posts #add tr'),
-    //                size = jQuery('#tbl_posts >tbody >tr').length,
-    //                element = null,
-    //                element = content.clone();
-    //                element.attr('id', 'rec-' + size);
-    //                element.find('.delete-record').attr('data-id', size);
-    //                element.appendTo('#tbl_posts_body');
-    //                $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
-    //    //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
-    //    //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
-    //    element.find('.sn').html(size);
-    //    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-    //    $("#tbl_posts #add .add").remove();
-    //    $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-    //    element.find(".add-record").hide();
-    //    element.find(".delete-record").show();
-    //    debugger
-    //    $("#tbl_posts #add .form-control").val('');
-    //}
-    //    else {
-    //        alert('Please fill record before add new record ');
-    //    }
-    //});
-    //$(document).delegate('a.delete-record', 'click', function (e) {
-    //        e.preventDefault();
-    //    var didConfirm = confirm("Are you sure You want to delete");
-    //    if (didConfirm == true) {
-    //        var id = jQuery(this).attr('data-id');
-    //        var targetDiv = jQuery(this).attr('targetDiv');
-    //        jQuery('#rec-' + id).remove();
-
-    //        //regnerate index number on table
-    //        $('#tbl_posts_body tr').each(function (index) {
-    //        //alert(index);
-    //        $(this).find('span.sn').html(index + 1);
-    //        });
-    //        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-    //        return true;
-    //    } else {
-    //        return false;
-    //    }
-    //});
-
+   
 
 //****************** code for personal info Rpt ************************
 
@@ -213,7 +157,6 @@ $(document).delegate('a.add-record', 'click', function (e) {
        
     ) {
         var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-      //  var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -267,11 +210,10 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFile").val() != ''
        
     ) {
-       // var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
-        //  var ReligiousStructure = $("#tbl_posts #add #ReligiousStructure").children("option:selected").val();
-        e.preventDefault();
+      e.preventDefault();
         var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
             size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
             element = null,
@@ -279,10 +221,8 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-recordDamageAssessee').attr('data-id', size);
         element.appendTo('#tbl_DamageAssessee_body');
-      //  $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
-        //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
-        element.find('.sn').html(size);
-        $("#tbl_DamageAssessee #addDamageAssessee .sn").text($('#tbl_DamageAssessee >tbody >tr').length);
+         element.find('.sn1').html(size);
+        $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
         $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
         $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
         element.find(".add-recordDamageAssessee").hide();
@@ -305,9 +245,9 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
         //regnerate index number on table
         $('#tbl_DamageAssessee_body tr').each(function (index) {
             //alert(index);
-            $(this).find('span.sn').html(index + 1);
+            $(this).find('span.sn1').html(index + 1);
         });
-        $("#tbl_DamageAssessee #addDamageAssessee .sn").text($('#tbl_DamageAssessee >tbody >tr').length);
+        $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
         return true;
     } else {
         return false;
@@ -321,35 +261,35 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
 $(document).delegate('a.add-recordPayment', 'click', function (e) {
     debugger
 
-    if ( $("#tbl_Payment #add #txtPersonalName").val() != ''
-        && $("#tbl_Payment #add #txtPersonalFatherName").val() != ''
-        && $("#tbl_Payment #add #txtPersonalMobileNo").val() != ''
-        && $("#tbl_Payment #add #txtPersonalEmailid").val() != ''
-
-    ) {
+    if ($("#tbl_Payment #addPayment #txtPersonalName").val() != ''
+        && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
+        && $("#tbl_Payment #addPayment #txtPersonalMobileNo").val() != ''
+        && $("#tbl_Payment #addPayment #txtPersonalEmailid").val() != ''
+        && $("#tbl_Payment #addPayment #PaymentReceipt").val() != '')
+    {
         e.preventDefault();
-        var content = jQuery('#tbl_Payment #add tr'),
+        var content = jQuery('#tbl_Payment #addPayment tr'),
             size = jQuery('#tbl_Payment >tbody >tr').length,
             element = null,
             element = content.clone();
         element.attr('id', 'rec-' + size);
-        element.find('.delete-record').attr('data-id', size);
+        element.find('.delete-recordPayment').attr('data-id', size);
         element.appendTo('#tbl_Payment_body');
-        element.find('.sn').html(size);
-        $("#tbl_Payment #add .sn").text($('#tbl_Payment >tbody >tr').length);
-        $("#tbl_Payment #add .add-recordPayment").remove();
+        element.find('.sn2').html(size);
+        $("#tbl_Payment #addPayment .sn2").text($('#tbl_Payment >tbody >tr').length);
+        $("#tbl_Payment #addPayment .add").remove();
         $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
         element.find(".add-recordPayment ").hide();
-        element.find(".delete-record").show();
+        element.find(".delete-recordPayment").show();
         debugger
-        /*$("#tbl_posts #add .form-control").val('');*/
-        $("#tbl_Payment #add .floating-label-field").val('');
+        
+        $("#tbl_Payment #addPayment .floating-label-field").val('');
     }
     else {
         alert('Please fill record before add new record ');
     }
 });
-$(document).delegate('a.delete-record', 'click', function (e) {
+$(document).delegate('a.delete-recordPayment', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
     if (didConfirm == true) {
@@ -359,9 +299,9 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         //regnerate index number on table
         $('#tbl_Payment_body tr').each(function (index) {
             //alert(index);
-            $(this).find('span.sn').html(index + 1);
+            $(this).find('span.sn2').html(index + 1);
         });
-        $("#tbl_Payment #add .sn").text($('#tbl_Payment >tbody >tr').length);
+        $("#tbl_Payment #addPayment .sn2").text($('#tbl_Payment >tbody >tr').length);
         return true;
     } else {
         return false;

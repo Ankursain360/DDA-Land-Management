@@ -91,6 +91,8 @@
 
             <div class="row">
                 <div class="col-md-3">
+                    <input type="hidden" asp-for="TypeOfDamageAssessee" id="AssesseeType" value="Original" />
+                   
                     <div class="form-check theme">
                         <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked="checked">
                         <label class="form-check-label" for="radio">
@@ -100,7 +102,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent" checked="checked">
+                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent" >
                         <label class="form-check-label" for="radio">
                             Subsequent Purchaser/Occupier
                         </label>
@@ -132,7 +134,7 @@
                         <tbody class="tbody" id="addDamageAssessee">
                             <tr id="">
                                
-                                <td style="text-align:center;"><span class="sn">1</span></td>
+                                <td style="text-align:center;"><span class="sn1">1</span></td>
                                 <td>
                                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
                                 </td>
@@ -143,7 +145,7 @@
                                     <input asp-for="Date" type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
                                 </td>
                                 <td>
-                                    <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                    <input asp-for="ATSGPA"  type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
                                 </td>
                                 <td>
                                     <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -438,7 +440,7 @@
                         </tbody>
                         <tbody class="tbody" id="addPayment">
                             <tr id="">
-                                <td style="text-align:center;"><span class="sn">1</span></td>
+                                <td style="text-align:center;"><span class="sn2">1</span></td>
                                 <td>
                                     <input asp-for="PaymntName" type="text" class="floating-label-field floating-label-field--s3" id="txtPaymentName" />
                                 </td>
@@ -455,7 +457,7 @@
                                     <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtAmount" />
                                 </td>
                                 <td>
-                                    <input asp-for="Reciept" type="file" />
+                                    <input asp-for="Reciept" id="PaymentReceipt" type="file" />
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
