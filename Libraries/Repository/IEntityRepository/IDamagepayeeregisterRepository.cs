@@ -33,7 +33,7 @@ namespace Libraries.Repository.IEntityRepository
 
         //********* rpt 3 Damage payment history ***********
 
-        Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory);
+        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> Damagepaymenthistory);
         Task<List<Damagepaymenthistory>> GetPaymentHistory(int id);
         Task<bool> DeletePaymentHistory(int Id);
     }

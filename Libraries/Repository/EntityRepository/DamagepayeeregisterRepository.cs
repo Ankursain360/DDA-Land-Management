@@ -87,9 +87,9 @@ namespace Libraries.Repository.EntityRepository
 
     //********* rpt 3 Damage payment history ***********
 
-    public async Task<bool> SavePaymentHistory(Damagepaymenthistory Damagepaymenthistory)
+    public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> Damagepaymenthistory)
         {
-            _dbContext.Damagepaymenthistory.Add(Damagepaymenthistory);
+            await _dbContext.Damagepaymenthistory.AddRangeAsync(Damagepaymenthistory);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }

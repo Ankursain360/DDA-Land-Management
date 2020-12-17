@@ -44,6 +44,7 @@ namespace Libraries.Model.Entity
         public byte Declaration { get; set; }
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
+        public byte IsActive { get; set; }
         public ICollection<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public ICollection<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public ICollection<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
@@ -55,22 +56,32 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile MoneyfilePathNew { get; set; }
         [NotMapped]
+        public IFormFile SignSpecPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AddressProofPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AffidavitPathNew { get; set; }
+        [NotMapped]
+        public IFormFile IndemnityPathNew { get; set; }
+        [NotMapped]
         public List<IFormFile> PropertyPhoto { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
 
-
+        /* 1st Repeater*/
         [NotMapped]
         public List<string> Name { get; set; }
         [NotMapped]
         public List<string> FatherName { get; set; }
         [NotMapped]
-        public List<int> DateGpadead { get; set; }
+        public List<DateTime> DateGpadead { get; set; }
         [NotMapped]
-        public List<IFormFile> GpastafilePath { get; set; }
+        public List<string> GpastafilePath { get; set; }
 
+
+        /* 2nd Repeater*/
         [NotMapped]
         public List<string> NameNew { get; set; }
         [NotMapped]
