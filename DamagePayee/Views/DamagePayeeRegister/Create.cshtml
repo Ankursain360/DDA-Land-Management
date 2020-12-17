@@ -38,6 +38,11 @@
                                 <th>Address</th>
                                 <th>Mobile No.</th>
                                 <th>Email-Id</th>
+                                <th>Aadhar No.</th>
+                                <th>Pan No.</th>
+                                <th>Photo</th>
+                                <th>Signature</th>
+
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -69,6 +74,24 @@
                                 <td>
                                     <input asp-for="EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
                                 </td>
+                                @*<td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class="floating-label-field floating-label-field--s3" />
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="floating-label-field floating-label-field--s3" />
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <input asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                </td>
+                                <td>
+                                    <input asp-for="Signature" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                </td>*@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -91,10 +114,10 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <input type="hidden" asp-for="TypeOfDamageAssessee" id="AssesseeType" value="Original" />
-                   
+                    <input type="hidden" asp-for="TypeOfDamageAssessee" id="TypeOfDamageAssessee" value="Original" />
+
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked="checked">
+                        <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked>
                         <label class="form-check-label" for="radio">
                             Original
                         </label>
@@ -102,7 +125,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent" >
+                        <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent">
                         <label class="form-check-label" for="radio">
                             Subsequent Purchaser/Occupier
                         </label>
@@ -133,7 +156,7 @@
                         </tbody>
                         <tbody class="tbody" id="addDamageAssessee">
                             <tr id="">
-                               
+
                                 <td style="text-align:center;"><span class="sn1">1</span></td>
                                 <td>
                                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
@@ -145,7 +168,7 @@
                                     <input asp-for="Date" type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
                                 </td>
                                 <td>
-                                    <input asp-for="ATSGPA"  type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                    <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
                                 </td>
                                 <td>
                                     <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -248,14 +271,27 @@
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+                        @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                    </div>
+                </div>
+            </div>
 
+        </div>
+        
         <div id="DivMainContentForm">
             <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
             <div class="row mt-md-3">
                 <div class="col-md-2">
+                    <input type="hidden" asp-for="UseOfProperty" id="UseOfProperty" value="Residential" />
+
                     <div class="form-check theme">
-                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbResidential" value="">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbResidential" value="Residential">
                         <label class="form-check-label" for="radio">
                             Residential
                         </label>
@@ -263,7 +299,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-check theme">
-                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbCommercial" value="">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbCommercial" value="Commercial">
                         <label class="form-check-label" for="radio">
                             Commercial
                         </label>
@@ -271,7 +307,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-check theme">
-                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbMixed" value="">
+                        <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbMixed" value="Mixed">
                         <label class="form-check-label" for="radio">
                             Mixed
                         </label>
@@ -313,6 +349,8 @@
             <h3 class="my-3 d-flex sub-heading">Litigation Status</h3>
             <div class="row mt-md-3">
                 <div class="col-md-6">
+                    <input type="hidden" asp-for="LitigationStatus" id="LitigationStatus" value="no case" />
+
                     <div class="form-check theme">
                         <input asp-for="LitigationStatus" class="form-check-input" type="radio" name="grpLitigation" id="rdbNoLitigation" checked value=" no case ">
                         <label class="form-check-label" for="radio">
@@ -365,6 +403,8 @@
                             <label>I am</label>
                         </div>
                         <div class="col-md-4">
+                            <input type="hidden" asp-for="PetitionerRespondent" id="PetitionerRespondent" value="Petitioner" />
+
                             <div class="form-check theme">
                                 <input asp-for="PetitionerRespondent" class="form-check-input" type="radio" name="grpCaseperson" checked value="Petitioner">
                                 <label class="form-check-label" for="radio">
@@ -391,6 +431,8 @@
             <h3 class="my-3 d-flex sub-heading">Whether present occupant's is/are damage payee in DDA record</h3>
             <div class="row mt-md-3">
                 <div class="form-group col-md-2">
+                    <input type="hidden" asp-for="IsDdadamagePayee" id="IsDdadamagePayee" value="Yes" />
+
                     <div class="form-check theme">
                         <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeYes" checked value="yes">
                         <label class="form-check-label" for="radio">
@@ -416,7 +458,72 @@
                 </div>
             </div>
         </div>
+        <div id="DivDamagePropertyDocs">
+            <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h6 class="my-3" style="color:blue;"> Note: If you have more than one document, create a single PDF and upload.</h6>
 
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label"> Show Cause Notice(if issued) </label>
+                        @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label"> F /G Form </label>
+                        @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="form-group col-md-6">
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeYes" checked value="HouseTax Bill">
+                        <label class="form-check-label" for="radio">
+                            HouseTax Bill
+                        </label>
+                    </div>
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Electricity Bill">
+                        <label class="form-check-label" for="radio">
+                            Electricity Bill
+                        </label>
+                    </div>
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Water Bill">
+                        <label class="form-check-label" for="radio">
+                            Water Bill
+                        </label>
+                    </div>
+                    <div class="form-check theme">
+                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value=" Any Other">
+                        <label class="form-check-label" for="radio">
+                            Any Other
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
+                        @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br />
+        </div>
         <div id="DivMainContentForm">
             <h3 class="my-3 d-flex sub-heading">Payment History</h3>
 
@@ -461,8 +568,8 @@
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                    <i class="fa fa-plus"></i>
-                </button>*@
+                                        <i class="fa fa-plus"></i>
+                                    </button>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-recordPayment" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
                                         <a class="btn btn-theme add-recordPayment" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
@@ -477,202 +584,6 @@
 
         </div>
 
-        <div id="DivMainContentForm">
-            <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select asp-for="DamageProperty" class="floating-label-field floating-label-field--s3" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                            <option value="0">---Select---</option>
-                            <option value="1">Residential</option>
-                        </select>
-                        <label class="floating-label">Damage Property</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="EncroachmentDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentDate" />
-                        <label class="floating-label">Date of Encroachment</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="StartDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentFromDate" />
-
-                        <label class="floating-label">From Date</label>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="EndDate" type="date" class="floating-label-field floating-label-field--s3" id="txtEncroachmentToDate" />
-
-                        <label class="floating-label">To Date</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-                        <select asp-for="OnlinePaymentLocalityId" class="floating-label-field floating-label-field--s3"
-                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                            <option value="0">---Select---</option>
-
-                        </select>
-                        <label class="floating-label">Locality</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="OnlinePaymentAreaSqYds" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" />
-
-                        <label class="floating-label">Area in sq. yds.</label>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row mt-md-3">
-                <div class="col-md-12">
-                    <input type="submit" value="Calculate" class="btn btn-theme" />
-                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                    @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
-                </div>
-            </div>
-
-            <br />
-        </div>
-        <div id="DivMainContentForm">
-            <h3 class="my-3 d-flex sub-heading">Details</h3>
-
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <h3 class="my-3 d-flex sub-heading">Damage Calculation</h3>
-                </div>
-                <div class="form-group col-md-6">
-                    <h3 class="my-3 d-flex sub-heading">Interest Calculation</h3>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class=" form-group col-md-6">
-
-                    <div class="table-section bg-white border shadow rounded">
-                        <div class="table-responsive ">
-                            <table class="table table-sm table-bordered mb-0 table-striped">
-                                <thead class="text-nowrap">
-                                    <tr>
-                                        <th>Sr.No</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Rate</th>
-                                        <th>Area</th>
-                                        <th>Month</th>
-                                        <th>Damage Charges</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbody">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/08/2008</td>
-                                        <td>31/03/2009</td>
-                                        <td>80.05</td>
-                                        <td>1500</td>
-                                        <td>8</td>
-                                        <td>960600</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>01/04/2009</td>
-                                        <td>31/03/2010</td>
-                                        <td>80.05</td>
-                                        <td>1500</td>
-                                        <td>12</td>
-                                        <td>1440900</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>01/04/2010</td>
-                                        <td>31/03/2011</td>
-                                        <td>88.06</td>
-                                        <td>1500</td>
-                                        <td>12</td>
-                                        <td>174360</td>
-                                    </tr>
-
-                                </tbody>
-
-                            </table>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group col-md-6">
-                    <div class="table-section bg-white border shadow rounded">
-                        <div class="table-responsive ">
-                            <table class="table table-sm table-bordered mb-0 table-striped">
-                                <thead class="text-nowrap">
-                                    <tr>
-                                        <th>Sr.No</th>
-                                        <th>Start Date</th>
-                                        <th>End Date</th>
-                                        <th>Month</th>
-                                        <th>Outstanding Damage</th>
-                                        <th>Paid Amount as claimed by assessee</th>
-                                        <th>Interest</th>
-                                        <th>Cumlative Interest</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="tbody">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/08/2008</td>
-                                        <td>31/03/2009</td>
-                                        <td>8</td>
-                                        <td>960600</td>
-                                        <td>0</td>
-                                        <td>44828</td>
-                                        <td>44828</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/04/2009</td>
-                                        <td>31/03/2010</td>
-                                        <td>12</td>
-                                        <td>2401500</td>
-                                        <td>0</td>
-                                        <td>168105</td>
-                                        <td>212933</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>01/04/2010</td>
-                                        <td>31/03/2011</td>
-                                        <td>12</td>
-                                        <td>3986530</td>
-                                        <td>0</td>
-                                        <td>279061</td>
-                                        <td>491994</td>
-                                    </tr>
-
-                                </tbody>
-
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
 
 
 
