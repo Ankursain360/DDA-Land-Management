@@ -7,7 +7,7 @@
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="Id"  id="enc_@Guid.NewGuid()" value="@ViewBag.PrimaryId" />
+    <input type="hidden" asp-for="Id" id="enc_@Guid.NewGuid()" value="@ViewBag.PrimaryId" />
     <input type="hidden" asp-for="WatchWardId" />
     <div id="WatchWardDetailsDiv">
 
@@ -18,7 +18,7 @@
             <div class="floating-label-wrap">
 
                 <select asp-for="DepartmentId" id="DepartmentId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3"
-                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" 
+                        asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))"
                         onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
                     <option value="">Select</option>
                 </select>
@@ -52,7 +52,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select asp-for="LocalityId" id="LocalityId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 LocalitiyClass" 
+                <select asp-for="LocalityId" id="LocalityId_@Guid.NewGuid()" class="floating-label-field floating-label-field--s3 LocalitiyClass"
                         asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                     <option value="value">Select</option>
                 </select>

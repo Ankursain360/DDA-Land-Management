@@ -7,6 +7,12 @@ namespace Libraries.Model.Entity
     public class Doortodoorsurvey : AuditableEntity<int>
     {
 
+        public Doortodoorsurvey()
+        {
+            Familydetails = new HashSet<Familydetails>();
+
+        }
+
         public string PropertyAddress { get; set; }
         public string MuncipalNo { get; set; }
         public string GeoReferencing { get; set; }
@@ -29,12 +35,25 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
 
 
+        [NotMapped]
+
+        public List<string> Name { get; set; }
+
+        [NotMapped]
+
+        public List<string> Age { get; set; }
+        [NotMapped]
+
+        public List<string> Gender { get; set; }
+
 
 
         [NotMapped]
         public List<Presentuse> PresentuseList { get; set; }
         public virtual Presentuse PresentUseNavigation { get; set; }
 
+
+        public ICollection<Familydetails> Familydetails { get; set; }
 
 
     }

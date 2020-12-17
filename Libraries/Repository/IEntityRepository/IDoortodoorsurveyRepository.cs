@@ -11,6 +11,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Doortodoorsurvey>> GetDoortodoorsurvey();
         Task<List<Presentuse>> GetAllPresentuse();
         Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurvey(DoortodoorsurveySearchDto model);
+        Task<List<Familydetails>> GetFamilydetails(int d2dId);
+        Task<bool> SaveFamilyDetails(Familydetails familydetails);
+
+
 
     }
 }
