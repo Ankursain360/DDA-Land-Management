@@ -1,4 +1,5 @@
-﻿@model Libraries.Model.Entity.Doortodoorsurvey
+﻿
+@model Libraries.Model.Entity.Doortodoorsurvey
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 <br />
@@ -10,7 +11,7 @@
             <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
         </div>
         <div class="panel-body">*@
-<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -111,7 +112,7 @@
                             </td>
                             <td>
                                 <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3 unsel">
+                                    <select class="floating-label-field floating-label-field--s3">
                                         <option value="0">---Select---</option>
                                         <option value="1">Male</option>
                                         <option value="2">Female</option>
@@ -311,8 +312,7 @@
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-            $("#tbl_posts #add .floating-label-field").val('');
-            $('.unsel').selected = false;
+        $("#tbl_posts #add .form-control").val('');
     }
         else {
             alert('Please fill record before add new record ');

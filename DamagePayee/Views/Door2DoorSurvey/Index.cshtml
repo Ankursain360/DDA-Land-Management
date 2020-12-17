@@ -1,22 +1,4 @@
-﻿@*@{
-        ViewData["Title"] = "Index";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-
-
-    <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Door To Door Survey</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                </div>
-            </div>
-        </div>
-    </div>*@
+﻿@model IEnumerable<Libraries.Model.Entity.Doortodoorsurvey>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
 <br />
 <br />
@@ -57,55 +39,16 @@
             </a>
         </div>
     </div>
-    <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+    <div class="table-responsive px-2" id="divDoortodoorsurveyTable">
 
     </div>
 </div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
 
-@*<div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card" style="overflow:scroll;">*@
-<div class="table-section bg-white border shadow rounded">
-    <div class="short-section d-md-flex align-items-center">
-        <div class="p-3 d-flex align-items-end mr-auto">
-            <table class="table table-responsive table-bordered table-card">
+    <script src="~/js/doortodoorsurvey.js"></script>
 
-                <thead class="text-nowrap">
-                    <tr>
-                        <th>Sr.No</th>
-                        <th>Location/Address of Property</th>
-                        <th>Municipal Number, if any</th>
-                        <th>Geo Referencing</th>
-                        <th>Approx Area of the Property</th>
-                        <th>Number of Floors</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Saroda</td>
-                        <td>M456</td>
-                        <td>Yes</td>
-                        <td>(6,4,3)</td>
-                        <td>2</td>
-                        @*<td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>*@
-                        
-                    <td>
-                        <div class="action-btns">
-                            @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>*@
-                            <a asp-action="Create" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                            @*<a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>*@
-                        </div>
-                    </td>
-                    </tr>
-
-
-                </tbody>
-
-            </table>
-
-        </div>
-    </div>
-</div>
-
-
+</environment>
+<environment exclude="Development">
+    <script src="~/js/doortodoorsurvey.min.js" asp-append-version="true"></script>
+</environment>

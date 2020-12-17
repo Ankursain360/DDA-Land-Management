@@ -48,17 +48,25 @@ $("input[name='radioStatus']").click(function () {
     //}
 
 });
-//$("#btnCreate").click(function () {
-   
-//    //getPDF();
-//    //debugger
-//    var printContents = document.getElementById("LetterData").innerHTML;
-//    var originalContents = document.body.innerHTML;
-//    document.body.innerHTML = printContents;
-//    window.print();
-//    document.body.innerHTML = originalContents;
-//    $.noConflict();
-//});
+$("#btnCreate").click(function () {
+    //getPDF();
+    var printWindow = window.open('', '');
+    var doc = printWindow.document;
+    var printContents = document.getElementById("LetterData").innerHTML;
+    doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
+    doc.write(printContents);
+    doc.close();
+    function show() {
+        if (doc.readyState === "complete") {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        } else {
+            setTimeout(show, 100);
+        }
+    };
+    show();
+});
 
 $(function () {
     $("#btnCreate").click(function () { nWin($("#LetterData").html(), $("#pagename").html()); });
@@ -82,29 +90,6 @@ function nWin(context, title) {
     show();
 };
 
-//$("#btnCreate").click(function () {
-//    var contents = $("#LetterData").html();
-//    var frame1 = $('<iframe />');
-//    frame1[0].name = "frame1";
-//    frame1.css({ "position": "absolute", "top": "-1000000px" });
-//    $("body").append(frame1);
-//    var frameDoc = frame1[0].contentWindow ? frame1[0].contentWindow : frame1[0].contentDocument.document ? frame1[0].contentDocument.document : frame1[0].contentDocument;
-//    frameDoc.document.open();
-//    //Create a new HTML document.
-//    frameDoc.document.write('<html><head><title>DIV Contents</title>');
-//    frameDoc.document.write('</head><body>');
-//    //Append the external CSS file.
-//    frameDoc.document.write('<link href="style.css" rel="stylesheet" type="text/css" />');
-//    //Append the DIV contents.
-//    frameDoc.document.write(contents);
-//    frameDoc.document.write('</body></html>');
-//    frameDoc.document.close();
-//    setTimeout(function () {
-//        window.frames["frame1"].focus();
-//        window.frames["frame1"].print();
-//        frame1.remove();
-//    }, 500);
-//});
 function getPDF() {
 
     var HTML_Width = $(".canvas_div_pdf").width();
@@ -189,60 +174,10 @@ function check() {
 
     }
 }
-//$("#btnSubmit").click(function () {
-//    var checkresult = false;
-//    var selected = $("input[type='radio'][name='radioStatus']:checked");
-//    $("#GenerateUpload").val(selected.val());
-//    if (selected.val() == 0) {
-//        var Date_val = $('#MeetingDate').val();
-//        if (Date_val =="") {
-//            checkresult = false;
-//            $("#MessageDate").show();
-//        } else {
-//            checkresult = true;
-//        }
-
-//        var Time_val = $('#MeetingTime').val();
-//        if (Time_val == "") {
-//            checkresult = false;
-//            $("#MessageTime").show();
-//        } else {
-//            checkresult = true;
-//        }
-//        if (Date_val == "" || Time_val == "") {
-//            checkresult = false;
-//            return false;
-//        }
-//        else {
-//            return true;
-//        }
-//    }
-//    else {
-//        var fileInput = document.getElementById('Document');
-//        var filePath = fileInput.value;
-//        if (filePath == "") {
-//            checkresult = false;
-//            $("#MessageFileUpload").show();
-//        } else {
-//            checkresult = true;
-//        }
-
-//        if (filePath == "") {
-//            checkresult = false;
-//        }
-//        else {
-//            return true;
-//        }
-        
-//    }
-
-   
-//});
-
 $('#Document').change(function () {
     var fileInput = document.getElementById('Document');
     var filePath = fileInput.value;
-    const size = (EncroachAtrDoc.files[0].size);
+    const size = (fileInput.files[0].size);
     fileValidation(filePath, fileInput, size);
 });
 
