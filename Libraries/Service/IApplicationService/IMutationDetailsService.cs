@@ -26,5 +26,8 @@ namespace Libraries.Service.IApplicationService
         string SaveMutationAffitDevitFilePath(int id);
         string SaveMutationIndemnityFilePath(int id);
 
+        Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
+
+
     }
 }

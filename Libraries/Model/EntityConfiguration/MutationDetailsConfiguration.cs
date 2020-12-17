@@ -37,6 +37,8 @@ namespace Libraries.Model.builderConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Declaration).HasColumnType("tinyint(1)");

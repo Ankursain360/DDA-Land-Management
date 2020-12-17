@@ -55,6 +55,8 @@ namespace Libraries.Model.builderConfiguration
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.PhotoFilePath).HasColumnType("longtext");
 
             builder.Property(e => e.SignatureFilePath).HasColumnType("longtext");

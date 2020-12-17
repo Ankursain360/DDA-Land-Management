@@ -19,6 +19,8 @@ namespace Libraries.Model.Entity
         public string PanNo { get; set; }
         public string PhotoFilePath { get; set; }
         public string SignatureFilePath { get; set; }
+        public byte IsActive { get; set; }
+
         public Mutationdetails MutationDetails { get; set; }
     }
 }

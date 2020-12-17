@@ -88,7 +88,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var File = (from f in _dbContext.Mutationdetails
                         where f.Id == id
-                        select f.IsAddressProof).First();
+                        select f.AddressProofFilePath).First();
 
             return File;
         }
@@ -107,6 +107,13 @@ namespace Libraries.Repository.EntityRepository
                         select f.IndemnityFilePath).First();
 
             return File;
+        }
+
+        public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
+        {
+            _dbContext.Mutationolddamageassesse.Add(oldDamage);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }

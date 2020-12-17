@@ -300,13 +300,11 @@
 
         <h2 class="my-3 sub-heading">Purpose Of Mutation/Change Of Title</h2>
         <div class="row">
+            <input type="hidden" asp-for="MutationPurpose" id="MutationPurpose" value="Purchaser" />
+
             <div class="col-md-6">
                 <div class="form-check theme">
-                    <input type="hidden" asp-for="MutationPurpose" id="PossessionType" value="Formal Possession" />
-                    <input type="hidden" asp-for="Id" id="hdnId" />
-                    @*<input type="hidden" asp-for="IsActive" value="1" />*@
-
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                    <input class="form-check-input" type="radio" name="grpPurpose" id="rdbPurchaser" value="Purchaser" checked="checked" />
 
                     <label class="form-check-label">Purchaser</label>
                 </div>
@@ -314,7 +312,7 @@
             <div class="col-md-6">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <input class="form-check-input" type="radio" name="grpPurpose" value="Inheritance" id="rdbInheritance" />
                     <label class="form-check-label">Inheritance </label>
                 </div>
 
@@ -357,7 +355,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="GpafilePath" type="file" placeholder="Upload GPA(General Power Attorny If any)" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="GpafilePathNew" type="file" placeholder="Upload GPA(General Power Attorny If any)" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">Upload GPA(General Power Attorny If any)<span class="text-danger" style="color:red">*</span> </label>
                 </div>
@@ -372,7 +370,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="MoneyRecieptFilePath" type="file" placeholder="Upload Money Receipts( If any)" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="MoneyfilePathNew" type="file" placeholder="Upload Money Receipts( If any)" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">Upload Money Receipts( If any)<span class="text-danger" style="color:red">*</span> </label>
                 </div>
@@ -386,7 +384,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="SignatureSpecimenFilePath" type="file" placeholder="Signature Specimen" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="SignSpecPathNew" type="file" placeholder="Signature Specimen" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">Signature Specimen<span class="text-danger" style="color:red">*</span></label>
                 </div>
@@ -401,46 +399,44 @@
 
     <h2 class="my-3 sub-heading">Upload Latest Address Proof</h2>
     @*</div>*@
-    <div class="row">
-        <div class="form-group col-md-3">
-            <input type="hidden" asp-for="IsAddressProof" id="IsAddressProof" value="Formal Possession" />
-            <input type="hidden" asp-for="Id" id="hdnId" />
-            @*<input type="hidden" asp-for="IsActive" value="1" />*@
-            <div class="form-check theme">
+<div class="row">
+    <input type="hidden" asp-for="IsAddressProof" id="IsAddressProof" value="House" />
 
-                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
-                <label class="form-check-label">House Tax Bill</label>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <div class="form-check theme">
-
-                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
-                <label class="form-check-label">Electricity Bill  </label>
-            </div>
-        </div>
-
-        <div class="form-group col-md-3">
-            <div class="form-check theme">
-
-                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
-                <label class="form-check-label">Water Bill</label>
-            </div>
-        </div>
-        <div class="form-group col-md-3">
-            <div class="form-check theme">
-
-                <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
-                <label class="form-check-label">Any Other </label>
-            </div>
-
+    <div class="form-group col-md-3">
+        <div class="form-check theme">
+            <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbHouse" value="House" checked="checked" />
+            <label class="form-check-label">House Tax Bill</label>
         </div>
     </div>
+    <div class="form-group col-md-3">
+        <div class="form-check theme">
+
+            <input class="form-check-input" type="radio" name="grpAddressProof" value="Electricity" id="rdbElectricity" />
+            <label class="form-check-label">Electricity Bill  </label>
+        </div>
+    </div>
+
+    <div class="form-group col-md-3">
+        <div class="form-check theme">
+
+            <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbWater" value="Water"/>
+            <label class="form-check-label">Water Bill</label>
+        </div>
+    </div>
+    <div class="form-group col-md-3">
+        <div class="form-check theme">
+
+            <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbAny" value="Any"/>
+            <label class="form-check-label">Any Other </label>
+        </div>
+
+    </div>
+</div>
 
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input asp-for="AddressProofFilePath" type="file" required class="floating-label-field floating-label-field--s3" />
+                <input asp-for="AddressProofPathNew" type="file" required class="floating-label-field floating-label-field--s3" />
 
                 <label class="floating-label">Choose file</label>
             </div>
@@ -457,7 +453,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AffidavitFilePath" type="file" placeholder="Affidavit" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="AffidavitPathNew" type="file" placeholder="Affidavit" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">Affidavit<span class="text-danger" style="color:red">*</span></label>
                 </div>
@@ -479,7 +475,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="IndemnityFilePath" type="file" placeholder="IndemnityBond" required class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="IndemnityPathNew" type="file" placeholder="IndemnityBond" required class="floating-label-field floating-label-field--s3" />
 
                     <label class="floating-label">IndemnityBond<span class="text-danger" style="color:red">*</span></label>
                 </div>
@@ -500,11 +496,10 @@
         <div class="form-row">
             <div class="col-md-6">
                 <div class="form-check theme">
-                    <input type="hidden" asp-for="LitigationStatus" id="PossessionType" value="Formal Possession" />
-                    <input type="hidden" asp-for="Id" id="hdnId" />
-                    @*<input type="hidden" asp-for="IsActive" value="1" />*@
+                    <input type="hidden" asp-for="LitigationStatus" id="LitigationStatus" value="AnyLitigation" />
+                   
 
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                    <input class="form-check-input" type="radio" name="grpLitigation" id="rdbAnyLitigation" value="AnyLitigation" checked="checked" />
                     <label class="form-check-label">
                         The Land/Property is not a subject matter of any Litigation/Court case
                     </label>
@@ -513,7 +508,7 @@
             <div class="col-md-6">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <input class="form-check-input" type="radio" name="grpLitigation" value="UnderLitigation" id="rdbUnderLitigation" />
                     <label class="form-check-label">The Land/ Property title is under Litigation </label>
                 </div>
             </div>
@@ -553,27 +548,25 @@
 
 
             <div class="col-md-3">
+                <input type="hidden" asp-for="PetitionerRespondent" value="Petitioner" id="PetitionerRespondent" />
                 <div class="form-check theme">
                     @*<label class="control-label lb-sm">I am</label>*@
 
-                    <input type="hidden" asp-for="PetitionerRespondent" id="PossessionType" value="Formal Possession" />
-                    <input type="hidden" asp-for="Id" id="hdnId" />
-                    @*<input type="hidden" asp-for="IsActive" value="1" />*@
+                    @*<input type="hidden" asp-for="PetitionerRespondent" id="PossessionType" value="0" />
+            <input type="hidden" asp-for="Id" id="hdnId" />
+            <input type="hidden" asp-for="IsActive" value="1" />*@
 
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />
+                    <input class="form-check-input" asp-for="PetitionerRespondent" type="radio" name="grpPetitione" value="Petitioner" checked="checked" />
                     <label class="form-check-label">Petitioner </label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-
-                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbDocumentname" />
+                    <input class="form-check-input" asp-for="PetitionerRespondent" type="radio" name="grpPetitione" value="Respondant"/>
                     <label class="form-check-label">Respondant</label>
 
                 </div>
             </div>
-
-
 
         </div>
     </div>
