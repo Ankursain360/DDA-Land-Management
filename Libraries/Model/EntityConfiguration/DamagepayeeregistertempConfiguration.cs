@@ -125,6 +125,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.PropertyPhotoPath).HasColumnType("longtext");
+
             builder.Property(e => e.Rebate).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.ResidentialSqMt).HasColumnType("decimal(18,3)");
@@ -160,6 +162,7 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Damagepayeeregistertemp)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fk_TempLocality");
+
 
         }
     }

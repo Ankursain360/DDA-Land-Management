@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Damagepayeeregister
+﻿@model Libraries.Model.Entity.Damagepayeeregistertemp
 @{ ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
@@ -34,14 +34,14 @@
                                 <th>Sr.No</th>
                                 <th>Name</th>
                                 <th>Father's/Husband's Name</th>
-                                <th>Gender</th>
-                                <th>Address</th>
+                                <th style="min-width:100px;">Gender</th>
+                                <th >Address</th>
                                 <th>Mobile No.</th>
                                 <th>Email-Id</th>
-                                <th>Aadhar No.</th>
-                                <th>Pan No.</th>
-                                <th>Photo</th>
-                                <th>Signature</th>
+                                <th style="min-width:200px;">Aadhar No.</th>
+                                <th style="min-width:200px;">Pan No.</th>
+                                <th style="min-width:200px;">Photo</th>
+                                <th style="min-width:200px;">Signature</th>
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -73,24 +73,25 @@
                                 <td>
                                     <input asp-for="EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
                                 </td>
-                                @*<td>
+                                <td>
+                          <div class="floating-label-wrap mb-3 mb-md-0">
+                                   <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class=" floating-label-field--s3" />
+                             
+                                   <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 "  />
+                           </div>
+                             </td>
+                                 <td>
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class="floating-label-field floating-label-field--s3" />
-                        <input asp-for="AadharNoDocument" type="file" class="floating-label-field floating-label-field--s3"  />
+                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 "  />
                     </div>
                 </td>
                 <td>
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="floating-label-field floating-label-field--s3" />
-                        <input asp-for="PanNoDocument" type="file" class="floating-label-field floating-label-field--s3"  />
-                    </div>
+                    <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
                 </td>
                 <td>
-                    <input asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                    <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
                 </td>
-                <td>
-                    <input asp-for="Signature" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                </td>*@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -273,7 +274,7 @@
             <div class="row mt-md-3">
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <input type="file" asp-for="PropertyPhoto" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span class="d-block text-danger field-validation-valid"></span>
                         <label for="field-1" class="floating-label">Upload Photograph of Property </label>
                         @*<a href="#" class="badge badge-primary px-2">View file</a>*@
@@ -466,7 +467,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span class="d-block text-danger field-validation-valid"></span>
                         <label for="field-1" class="floating-label"> Show Cause Notice(if issued) </label>
                         @*<a href="#" class="badge badge-primary px-2">View file</a>*@
@@ -485,7 +486,7 @@
             <div class="row mt-3">
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeYes" checked value="HouseTax Bill">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="rdbPayeeYes" checked value="HouseTax Bill">
                         <label class="form-check-label" for="radio">
                             HouseTax Bill
                         </label>
@@ -493,7 +494,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Electricity Bill">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Electricity Bill">
                         <label class="form-check-label" for="radio">
                             Electricity Bill
                         </label>
@@ -501,7 +502,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Water Bill">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value="Water Bill">
                         <label class="form-check-label" for="radio">
                             Water Bill
                         </label>
@@ -509,7 +510,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <div class="form-check theme">
-                        <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value=" Any Other">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="rdbPayeeNo" value=" Any Other">
                         <label class="form-check-label" for="radio">
                             Any Other
                         </label>
@@ -520,7 +521,7 @@
             <div class="row">
                 <div class="form-group col-md-4">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="file" class="floating-label-field floating-label-field--s3" placeholder="Name">
+                        <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                         <span class="d-block text-danger field-validation-valid"></span>
                         <label for="field-1" class="floating-label"> Upload copy of the document selected </label>
                         @*<a href="#" class="badge badge-primary px-2">View file</a>*@
@@ -572,7 +573,7 @@
                                     <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtAmount" />
                                 </td>
                                 <td>
-                                    <input asp-for="Reciept" id="PaymentReceipt" type="file" />
+                                    <input asp-for="Reciept" id="PaymentReceipt" class="floating-label-field floating-label-field--s3" type="file" />
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
