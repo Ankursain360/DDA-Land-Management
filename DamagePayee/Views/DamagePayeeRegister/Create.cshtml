@@ -42,7 +42,6 @@
                                 <th>Pan No.</th>
                                 <th>Photo</th>
                                 <th>Signature</th>
-
                                 <th>Operation</th>
                             </tr>
                         </thead>
@@ -75,23 +74,23 @@
                                     <input asp-for="EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
                                 </td>
                                 @*<td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class="floating-label-field floating-label-field--s3" />
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="PanNo" type="text" placeholder="Pan No." class="floating-label-field floating-label-field--s3" />
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <input asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                                    </td>
-                                    <td>
-                                        <input asp-for="Signature" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                                    </td>*@
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class="floating-label-field floating-label-field--s3" />
+                        <input asp-for="AadharNoDocument" type="file" class="floating-label-field floating-label-field--s3"  />
+                    </div>
+                </td>
+                <td>
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="floating-label-field floating-label-field--s3" />
+                        <input asp-for="PanNoDocument" type="file" class="floating-label-field floating-label-field--s3"  />
+                    </div>
+                </td>
+                <td>
+                    <input asp-for="Photo" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                </td>
+                <td>
+                    <input asp-for="Signature" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                </td>*@
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
