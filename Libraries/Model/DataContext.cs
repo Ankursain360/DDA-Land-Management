@@ -120,7 +120,10 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
         public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
-
+        public virtual DbSet<Allottetypetemp> Allottetypetemp { get; set; }
+        public virtual DbSet<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
+        public virtual DbSet<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
+        public virtual DbSet<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
@@ -226,7 +229,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
             modelBuilder.ApplyConfiguration(new FamilydetailsConfiguration());
-
+            modelBuilder.ApplyConfiguration(new AllottetypetempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
 
 
             base.OnModelCreating(modelBuilder);

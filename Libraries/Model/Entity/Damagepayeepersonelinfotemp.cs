@@ -4,11 +4,10 @@ using System.Collections.Generic;
 
 namespace Libraries.Model.Entity
 {
-    public  class Damagepayeepersonelinfo : AuditableEntity<int>
+    public partial class Damagepayeepersonelinfotemp : AuditableEntity<int>
     {
-
       
-        public int DamagePayeeRegisterId { get; set; }
+        public int DamagePayeeRegisterTempId { get; set; }
         public string Name { get; set; }
         public string FatherName { get; set; }
         public string Gender { get; set; }
@@ -21,8 +20,9 @@ namespace Libraries.Model.Entity
         public string PanNoFilePath { get; set; }
         public string PhotographPath { get; set; }
         public string SignaturePath { get; set; }
+       
         public byte? IsActive { get; set; }
 
-        public Damagepayeeregister DamagePayeeRegister { get; set; }
+        public Damagepayeeregistertemp DamagePayeeRegisterTemp { get; set; }
     }
 }
