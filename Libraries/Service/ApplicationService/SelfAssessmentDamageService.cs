@@ -12,56 +12,56 @@ using System.Threading.Tasks;
 
 namespace Service.ApplicationService
 {
-     public class DamagepayeeregisterService : EntityService<Damagepayeeregister>, IDamagepayeeregisterService
+    public class SelfAssessmentDamageService : EntityService<Damagepayeeregister>, ISelfAssessmentDamageService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IDamagepayeeregisterRepository _damagepayeeregisterRepository;
+        private readonly ISelfAssessmentDamageRepository _selfAssessmentDamageRepository;
 
-        public DamagepayeeregisterService(IUnitOfWork unitOfWork, IDamagepayeeregisterRepository damagepayeeregisterRepository)
-        : base(unitOfWork, damagepayeeregisterRepository)
+        public SelfAssessmentDamageService(IUnitOfWork unitOfWork, ISelfAssessmentDamageRepository selfAssessmentDamageRepository)
+        : base(unitOfWork, selfAssessmentDamageRepository)
         {
             _unitOfWork = unitOfWork;
-            _damagepayeeregisterRepository = damagepayeeregisterRepository;
+            _selfAssessmentDamageRepository = selfAssessmentDamageRepository;
         }
 
         public async Task<List<Locality>> GetLocalityList()
         {
-            List<Locality> localityList = await _damagepayeeregisterRepository.GetLocalityList();
+            List<Locality> localityList = await _selfAssessmentDamageRepository.GetLocalityList();
             return localityList;
         }
         public async Task<List<District>> GetDistrictList()
         {
-            List<District> districtList = await _damagepayeeregisterRepository.GetDistrictList();
+            List<District> districtList = await _selfAssessmentDamageRepository.GetDistrictList();
             return districtList;
         }
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
-            return await _damagepayeeregisterRepository.GetAllDamagepayeeregister();
+            return await _selfAssessmentDamageRepository.GetAllDamagepayeeregister();
         }
 
 
 
         public async Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo()
         {
-            return await _damagepayeeregisterRepository.GetAllDamagepayeeregister();
+            return await _selfAssessmentDamageRepository.GetAllDamagepayeeregister();
         }
 
         public async Task<Damagepayeeregister> FetchSingleResult(int id)
         {
-            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            var result = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
             Damagepayeeregister model = result.FirstOrDefault();
             return model;
         }
 
         public async Task<bool> Update(int id, Damagepayeeregister damagepayeeregister)
         {
-            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            var result = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
             Damagepayeeregister model = result.FirstOrDefault();
             model.FileNo = damagepayeeregister.FileNo;
 
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
-            _damagepayeeregisterRepository.Edit(model);
+            _selfAssessmentDamageRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
@@ -69,24 +69,24 @@ namespace Service.ApplicationService
         {
             damagepayeeregister.CreatedBy = 1;
             damagepayeeregister.CreatedDate = DateTime.Now;
-            _damagepayeeregisterRepository.Add(damagepayeeregister);
+            _selfAssessmentDamageRepository.Add(damagepayeeregister);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-      
+
 
         public async Task<bool> Delete(int id)
         {
-            var form = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            var form = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
             Damagepayeeregister model = form.FirstOrDefault();
             model.IsActive = 0;
-            _damagepayeeregisterRepository.Edit(model);
+            _selfAssessmentDamageRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
         public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
         {
-            return await _damagepayeeregisterRepository.GetPagedDamagepayeeregister(model);
+            return await _selfAssessmentDamageRepository.GetPagedDamagepayeeregister(model);
         }
 
         //********* rpt 1 Persolnal info of damage assesse ***********
@@ -95,16 +95,16 @@ namespace Service.ApplicationService
             damagepayeepersonelinfo.CreatedBy = 1;
             damagepayeepersonelinfo.CreatedDate = DateTime.Now;
             damagepayeepersonelinfo.IsActive = 1;
-            return await _damagepayeeregisterRepository.SavePayeePersonalInfo(damagepayeepersonelinfo);
+            return await _selfAssessmentDamageRepository.SavePayeePersonalInfo(damagepayeepersonelinfo);
         }
 
         public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
         {
-            return await _damagepayeeregisterRepository.GetPersonalInfo(id);
+            return await _selfAssessmentDamageRepository.GetPersonalInfo(id);
         }
         public async Task<bool> DeletePayeePersonalInfo(int Id)
         {
-            return await _damagepayeeregisterRepository.DeletePayeePersonalInfo(Id);
+            return await _selfAssessmentDamageRepository.DeletePayeePersonalInfo(Id);
         }
 
 
@@ -113,17 +113,17 @@ namespace Service.ApplicationService
         public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
         {
             allottetype.ForEach(x => x.CreatedBy = 1);
-            allottetype.ForEach(x => x.CreatedDate =DateTime.Now);
+            allottetype.ForEach(x => x.CreatedDate = DateTime.Now);
             allottetype.ForEach(x => x.IsActive = 1);
-            return await _damagepayeeregisterRepository.SaveAllotteType(allottetype);
+            return await _selfAssessmentDamageRepository.SaveAllotteType(allottetype);
         }
         public async Task<List<Allottetype>> GetAllottetype(int id)
         {
-            return await _damagepayeeregisterRepository.GetAllottetype(id);
+            return await _selfAssessmentDamageRepository.GetAllottetype(id);
         }
         public async Task<bool> DeleteAllotteType(int Id)
         {
-            return await _damagepayeeregisterRepository.DeleteAllotteType(Id);
+            return await _selfAssessmentDamageRepository.DeleteAllotteType(Id);
         }
 
 
@@ -135,15 +135,15 @@ namespace Service.ApplicationService
             damagepaymenthistory.ForEach(x => x.CreatedBy = 1);
             damagepaymenthistory.ForEach(x => x.CreatedDate = DateTime.Now);
             damagepaymenthistory.ForEach(x => x.IsActive = 1);
-            return await _damagepayeeregisterRepository.SavePaymentHistory(damagepaymenthistory);
+            return await _selfAssessmentDamageRepository.SavePaymentHistory(damagepaymenthistory);
         }
         public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
         {
-            return await _damagepayeeregisterRepository.GetPaymentHistory(id);
+            return await _selfAssessmentDamageRepository.GetPaymentHistory(id);
         }
         public async Task<bool> DeletePaymentHistory(int Id)
         {
-            return await _damagepayeeregisterRepository.DeletePaymentHistory(Id);
+            return await _selfAssessmentDamageRepository.DeletePaymentHistory(Id);
         }
 
     }

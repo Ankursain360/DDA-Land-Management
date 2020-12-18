@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class DamagepayeeregisterRepository : GenericRepository<Damagepayeeregister>, IDamagepayeeregisterRepository
+    public class SelfAssessmentDamageRepository : GenericRepository<Damagepayeeregister>, ISelfAssessmentDamageRepository
     {
-        public DamagepayeeregisterRepository(DataContext dbContext) : base(dbContext)
+        public SelfAssessmentDamageRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
@@ -29,11 +29,11 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
-                 return await _dbContext.Damagepayeeregister
-                .Where(x => x.IsActive == 1)
-                .Include(x => x.Locality)
-                .Include(x => x.District)
-                .ToListAsync();
+            return await _dbContext.Damagepayeeregister
+           .Where(x => x.IsActive == 1)
+           .Include(x => x.Locality)
+           .Include(x => x.District)
+           .ToListAsync();
         }
 
         public async Task<List<Locality>> GetLocalityList()
@@ -60,7 +60,7 @@ namespace Libraries.Repository.EntityRepository
         }
 
         public async Task<bool> DeletePayeePersonalInfo(int Id)
-         {
+        {
             _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
@@ -75,19 +75,19 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
         public async Task<List<Allottetype>> GetAllottetype(int id)
-        { 
-             return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        {
+            return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
         }
         public async Task<bool> DeleteAllotteType(int Id)
-          {
+        {
             _dbContext.RemoveRange(_dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-    //********* rpt 3 Damage payment history ***********
+        //********* rpt 3 Damage payment history ***********
 
-    public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> Damagepaymenthistory)
+        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> Damagepaymenthistory)
         {
             await _dbContext.Damagepaymenthistory.AddRangeAsync(Damagepaymenthistory);
             var Result = await _dbContext.SaveChangesAsync();
@@ -98,10 +98,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
         }
         public async Task<bool> DeletePaymentHistory(int Id)
-         {
+        {
             _dbContext.RemoveRange(_dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-}
+    }
 }

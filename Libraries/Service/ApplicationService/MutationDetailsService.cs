@@ -98,5 +98,13 @@ namespace Libraries.Service.ApplicationService
         {
             return _mutationDetailsRepository.SaveMutationIndemnityFilePath(id);
         }
+
+        public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
+        {
+            oldDamage.CreatedBy = 1;
+            oldDamage.CreatedDate = DateTime.Now;
+            oldDamage.IsActive = 1;
+            return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
+        }
     }
 }

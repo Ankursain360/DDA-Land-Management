@@ -14,33 +14,29 @@ using Notification.OptionEnums;
 
 namespace DamagePayee.Controllers
 {
-    public class DamagePayeeRegisterController : BaseController
+    public class SelfAssessmentDamageController : BaseController
     {
-        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+        private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         public IConfiguration _configuration;
-        public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration)
+        public SelfAssessmentDamageController(ISelfAssessmentDamageService selfAssessmentDamageService, IConfiguration configuration)
         {
             _configuration = configuration;
-            _damagepayeeregisterService = damagepayeeregisterService;
+            _selfAssessmentDamageService = selfAssessmentDamageService;
         }
         public IActionResult Index()
         {
             return View();
         }
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeregisterSearchDto model)
         {
-            var result = await _damagepayeeregisterService.GetPagedDamagepayeeregister(model);
+            var result = await _selfAssessmentDamageService.GetPagedDamagepayeeregister(model);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Damagepayeeregister damagepayeeregister)
         {
-            damagepayeeregister.LocalityList = await _damagepayeeregisterService.GetLocalityList();
-            damagepayeeregister.DistrictList = await _damagepayeeregisterService.GetDistrictList();
+            damagepayeeregister.LocalityList = await _selfAssessmentDamageService.GetLocalityList();
+            damagepayeeregister.DistrictList = await _selfAssessmentDamageService.GetDistrictList();
         }
         public async Task<IActionResult> Create()
         {
@@ -58,8 +54,8 @@ namespace DamagePayee.Controllers
             string RecieptDocumentPathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:RecieptDocument").Value.ToString();
             if (ModelState.IsValid)
             {
-                
-                var result = await _damagepayeeregisterService.Create(damagepayeeregister);
+
+                var result = await _selfAssessmentDamageService.Create(damagepayeeregister);
                 if (result)
                 {
                     FileHelper fileHelper = new FileHelper();
@@ -93,7 +89,7 @@ namespace DamagePayee.Controllers
                             }
                             foreach (var item in damagepayeepersonelinfo)
                             {
-                                result = await _damagepayeeregisterService.SavePayeePersonalInfo(item);
+                                result = await _selfAssessmentDamageService.SavePayeePersonalInfo(item);
                             }
                         }
                     }
@@ -121,7 +117,7 @@ namespace DamagePayee.Controllers
                                     AtsgpadocumentPath = damagepayeeregister.ATSGPA == null ? "" : damagepayeeregister.ATSGPA[i] == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregister.ATSGPA[i])
                                 });
                             }
-                            result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
+                            result = await _selfAssessmentDamageService.SaveAllotteType(allottetype);
                         }
                     }
 
@@ -164,7 +160,7 @@ namespace DamagePayee.Controllers
                                 });
                             }
 
-                            result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
+                            result = await _selfAssessmentDamageService.SavePaymentHistory(damagepaymenthistory);
 
                         }
                     }

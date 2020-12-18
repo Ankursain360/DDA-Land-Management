@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-   
-     public interface IDamagepayeeregisterService : IEntityService<Damagepayeeregister>
+    public interface ISelfAssessmentDamageService : IEntityService<Damagepayeeregister>
     {
         Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
         Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
@@ -21,7 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
-       
+
         //********* rpt 1 Persolnal info of damage assesse ***********
         Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo);
         Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);

@@ -1,27 +1,23 @@
 ﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
-using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Libraries.Service.IApplicationService
+namespace Libraries.Repository.IEntityRepository
 {
-   
-     public interface IDamagepayeeregisterService : IEntityService<Damagepayeeregister>
+
+    public interface ISelfAssessmentDamageRepository : IGenericRepository<Damagepayeeregister>
     {
-        Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
-        Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
-        Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
-        Task<bool> Create(Damagepayeeregister damagepayeeregister);
-        Task<Damagepayeeregister> FetchSingleResult(int id);
-        Task<bool> Delete(int id);
+
+        //Task<bool> Any(int id, string name);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
+        Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
-       
+
         //********* rpt 1 Persolnal info of damage assesse ***********
         Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo);
         Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);
@@ -37,7 +33,7 @@ namespace Libraries.Service.IApplicationService
 
         //********* rpt 3 Damage payment history ***********
 
-        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
+        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> Damagepaymenthistory);
         Task<List<Damagepaymenthistory>> GetPaymentHistory(int id);
         Task<bool> DeletePaymentHistory(int Id);
     }

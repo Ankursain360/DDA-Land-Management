@@ -39,6 +39,8 @@ namespace Libraries.Model.builderConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.HasOne(d => d.MutationDetails)
                 .WithMany(p => p.Mutationolddamageassesse)
                 .HasForeignKey(d => d.MutationDetailsId)

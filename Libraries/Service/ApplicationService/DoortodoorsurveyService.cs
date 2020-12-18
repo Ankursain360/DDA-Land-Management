@@ -103,10 +103,19 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<bool> SaveFamilyDetails(Familydetails familydetails)
+        {
+            familydetails.CreatedBy = 1;
+            // familydetails.CreatedDate =" 0001 - 01 - 01"
+            familydetails.IsActive = 1;
+            return await _doortodoorsurveyRepository.SaveFamilyDetails(familydetails);
+        }
 
 
-
-
+        public async Task<List<Familydetails>> GetFamilydetails(int Id)
+        {
+            return await _doortodoorsurveyRepository.GetFamilydetails(Id);
+        }
 
     }
 }

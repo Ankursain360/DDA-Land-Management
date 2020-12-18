@@ -6,6 +6,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -57,8 +59,27 @@ namespace DamagePayee.Controllers
                 {
                     var result = await _doortodoorsurveyService.Create(doortodoorsurvey);
 
+                    List<Familydetails> fixingprogram = new List<Familydetails>();
+                    for (int i = 0; i < doortodoorsurvey.Name.Count(); i++)
+                    {
+                        fixingprogram.Add(new Familydetails
+                        {
+                            Name = doortodoorsurvey.Name[i],
+                            Age = doortodoorsurvey.Age[i],
+                            Gender = doortodoorsurvey.Gender[i],
+                            D2dId = doortodoorsurvey.Id
+                        });
+                    }
+                    foreach (var item in fixingprogram)
+                    {
+                        result = await _doortodoorsurveyService.SaveFamilyDetails(item);
+                    }
+
+
                     if (result == true)
                     {
+
+
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _doortodoorsurveyService.GetDoortodoorsurvey();
                         return View("Index", list);

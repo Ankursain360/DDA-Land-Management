@@ -1,21 +1,18 @@
 ﻿using Libraries.Model.Common;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
-    public  class Damagepayeeregister : AuditableEntity<int>
+    public partial class Damagepayeeregistertemp : AuditableEntity<int>
     {
-        public Damagepayeeregister()
+        public Damagepayeeregistertemp()
         {
-            Allottetype = new HashSet<Allottetype>();
-            Damagepayeepersonelinfo = new HashSet<Damagepayeepersonelinfo>();
-            Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
+            Allottetypetemp = new HashSet<Allottetypetemp>();
+            Damagepayeepersonelinfotemp = new HashSet<Damagepayeepersonelinfotemp>();
+            Damagepaymenthistorytemp = new HashSet<Damagepaymenthistorytemp>();
         }
 
-       
         public string FileNo { get; set; }
         public string TypeOfDamageAssessee { get; set; }
         public string PropertyNo { get; set; }
@@ -58,65 +55,13 @@ namespace Libraries.Model.Entity
         public string Achknowledgement { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-
+      
         public byte? IsActive { get; set; }
 
         public District District { get; set; }
-        [NotMapped]
-        public List<District> DistrictList { get; set; }
         public Locality Locality { get; set; }
-        [NotMapped]
-        public List<Locality> LocalityList { get; set; }
-        public Locality OnlinePaymentLocality { get; set; }
-        public ICollection<Allottetype> Allottetype { get; set; }
-        public ICollection<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
-        public ICollection<Damagepaymenthistory> Damagepaymenthistory { get; set; }
-
-
-        //****** ALLOTTE TYPE *****
-
-        [NotMapped]
-       
-        public List <string> Name { get; set; }
-        [NotMapped]
-        public List <string> FatherName { get; set; }
-        [NotMapped]
-        public List <DateTime?> Date { get; set; }
-      
-        [NotMapped]
-        public List <IFormFile> ATSGPA { get; set; }
-
-        //****** Damage payee personal info *****
-        [NotMapped]
-        public List<string> payeeName { get; set; }
-        [NotMapped]
-        public List <string> payeeFatherName { get; set; }
-        [NotMapped]
-        public List <string> Gender { get; set; }
-        [NotMapped]
-        public List <string> Address { get; set; }
-        [NotMapped]
-        public List <string> MobileNo { get; set; }
-        [NotMapped]
-        public List <string> EmailId { get; set; }
-
-
-        //****** Damagepaymenthistory ***
-        [NotMapped]
-        public List <string> PaymntName { get; set; }
-        [NotMapped]
-        public List <string> RecieptNo { get; set; }
-        [NotMapped]
-        public List <string> PaymentMode { get; set; }
-        [NotMapped]
-        public List <DateTime?> PaymentDate { get; set; }
-        [NotMapped]
-        public List <decimal?> Amount { get; set; }
-       
-       
-        [NotMapped]
-        public List<IFormFile> Reciept { get; set; }
-       
-
+        public ICollection<Allottetypetemp> Allottetypetemp { get; set; }
+        public ICollection<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
+        public ICollection<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
     }
 }
