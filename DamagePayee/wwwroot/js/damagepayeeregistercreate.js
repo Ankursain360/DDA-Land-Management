@@ -133,7 +133,36 @@
         $("#txtCommercialmts").val(meter);
     });
 
+// CODE FOR SAVING VALUE OF RADIO BUTTON
+$("input[name='grpDamageAssesseeType']").click(function () {
+    var selected = $("input[type='radio'][name='grpDamageAssesseeType']:checked");
+    $("#TypeOfDamageAssessee").val(selected.val());
 
+});
+
+$("input[name='grpUseofpeoperty']").click(function () {
+    var selected = $("input[type='radio'][name='grpUseofpeoperty']:checked");
+    $("#UseOfProperty").val(selected.val());
+
+});
+
+$("input[name='grpLitigation']").click(function () {
+    var selected = $("input[type='radio'][name='grpLitigation']:checked");
+    $("#LitigationStatus").val(selected.val());
+
+});
+
+$("input[name='grpCaseperson']").click(function () {
+    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
+    $("#PetitionerRespondent").val(selected.val());
+
+});
+
+$("input[name='grpYESNO']").click(function () {
+    var selected = $("input[type='radio'][name='grpYESNO']:checked");
+    $("#IsDdadamagePayee").val(selected.val());
+
+});
 
         //@*Repeator code  *@
     //$(document).ready(function () {

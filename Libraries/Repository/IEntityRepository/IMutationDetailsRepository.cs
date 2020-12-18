@@ -14,6 +14,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetAllZone();
         Task<bool> Any(int id, string name);
         Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details);
+
+        /* open Single file upload */
         string SaveMutationAtsFilePath(int id);
         string SaveMutationGPAFilePath(int id);
         string SaveMutationMoneyReceiptFilePath(int id);
@@ -21,6 +23,10 @@ namespace Libraries.Repository.IEntityRepository
         string SaveMutationAddressProofFilePath(int id);
         string SaveMutationAffitDevitFilePath(int id);
         string SaveMutationIndemnityFilePath(int id);
+        /* Close*/
+
+        /*Repeater*/
+        Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
 
     }
 }

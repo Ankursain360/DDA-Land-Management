@@ -18,6 +18,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Doortodoorsurvey doortodoorsurvey);
         Task<Doortodoorsurvey> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<List<Familydetails>> GetFamilydetails(int d2dId);
+        Task<bool> SaveFamilyDetails(Familydetails familydetails);
 
 
     }

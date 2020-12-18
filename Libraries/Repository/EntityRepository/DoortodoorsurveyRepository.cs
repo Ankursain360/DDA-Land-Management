@@ -16,6 +16,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+
+        public async Task<List<Familydetails>> GetFamilydetails(int d2dId)
+        {
+            return await _dbContext.Familydetails.Where(x => x.D2dId == d2dId && x.IsActive == 1).ToListAsync();
+        }
+
+
         public async Task<List<Presentuse>> GetAllPresentuse()
         {
             List<Presentuse> presentuseList = await _dbContext.Presentuse.Where(x => x.IsActive == 1).ToListAsync();
@@ -35,7 +42,12 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
+        public async Task<bool> SaveFamilyDetails(Familydetails familydetails)
+        {
+            _dbContext.Familydetails.Add(familydetails);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
 
     }
 }
