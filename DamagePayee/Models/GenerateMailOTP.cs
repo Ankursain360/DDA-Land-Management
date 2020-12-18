@@ -13,11 +13,9 @@ namespace DamagePayee.Models
 {
     public class GenerateMailOTP
     {
-        public void GenerateMailFormatForPassword(string DisplayName, String EmailID, String LoginName, string Password, string path, string Action)
+        public void GenerateMailFormatForPassword(string DisplayName, String EmailID, String LoginName, string link, string path, string Action)
         {
-
-            string link = "Now You Can Login";
-            string body = this.PopulateBodyForPassword(DisplayName, EmailID, LoginName, Password, link, path, Action);
+            string body = this.PopulateBodyForPassword(DisplayName, EmailID, LoginName,"", link, path, Action);
             string Sub = "User Login Details ";
 
             this.sendMail(EmailID, Sub, body, link);
@@ -46,7 +44,7 @@ namespace DamagePayee.Models
             MailMessage msg = new MailMessage();
             try
             {
-                msg.From = new MailAddress("vedangofficeserver@gmail.com");
+                msg.From = new MailAddress("shalinirai0111@gmail.com");
                 if (EmailID != "" || EmailID != string.Empty)
                 {
                     msg.To.Add(EmailID);
@@ -55,7 +53,8 @@ namespace DamagePayee.Models
                     msg.Subject = Subject;
                     SmtpClient smt = new SmtpClient("smtp.gmail.com");
                     smt.Port = 587;
-                    smt.Credentials = new NetworkCredential("vedangofficeserver@gmail.com", "Vedang@1234");
+                    smt.UseDefaultCredentials = false;
+                    smt.Credentials = new NetworkCredential("shalinirai0111@gmail.com", "Gold@shal123");
                     smt.EnableSsl = true;
                     smt.Send(msg);
                 }
