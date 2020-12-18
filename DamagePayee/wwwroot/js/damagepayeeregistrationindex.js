@@ -2,10 +2,10 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-    GetStructure(currentPageNumber, currentPageSize);
+    GetDamagePayeeRegistration(currentPageNumber, currentPageSize);
 });
 
-function GetStructure(pageNumber, pageSize) {
+function GetDamagePayeeRegistration(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/DamagePayeeRegistration/List`, 'html', param, function (response) {
         $('#divdamagepayeeregistrationTable').html("");
@@ -23,12 +23,12 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetStructure(pageNo, currentPageSize);
+    GetDamagePayeeRegistration(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetStructure(currentPageNumber, pageSize);
+    GetDamagePayeeRegistration(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
 

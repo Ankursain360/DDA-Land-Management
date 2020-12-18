@@ -23,10 +23,10 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Payeeregistration.GetPaged<Payeeregistration>(model.PageNumber, model.PageSize);
         }
 
-        public async Task<List<Payeeregistration>> GetPayeeregistration()
-        {
-            return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
-        }
+        //public async Task<List<Payeeregistration>> GetPayeeregistration()
+        //{
+        //    return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
+        //}
         //public async Task<bool> Any(int id, string name)
         //{
         //    return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
