@@ -43,6 +43,8 @@ namespace DamagePayee.Controllers
         {
             return View();
         }
+
+
         public async Task<IActionResult> Create()
         {
             Mutationdetails details = new Mutationdetails();
@@ -76,20 +78,20 @@ namespace DamagePayee.Controllers
                         mutationDetails.FatherName != null &&
                         mutationDetails.DateGpadead != null &&
                         mutationDetails.GpastafilePath != null &&
-                        mutationDetails.Name.Count > 0 &&
-                        mutationDetails.FatherName.Count > 0 &&
+                        mutationDetails.Name2.Count > 0 &&
+                        mutationDetails.FatherName2.Count > 0 &&
                         mutationDetails.DateGpadead.Count > 0 &&
                         mutationDetails.GpastafilePath.Count > 0)
 
 
                     {
                         List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
-                        for (int i = 0; i < mutationDetails.Name.Count; i++)
+                        for (int i = 0; i < mutationDetails.Name2.Count; i++)
                         {
                             oldDamageAssess.Add(new Mutationolddamageassesse
                             {
-                                Name = mutationDetails.Name[i],
-                                FatherName = mutationDetails.FatherName[i],
+                                Name = mutationDetails.Name2[i],
+                                FatherName = mutationDetails.FatherName2[i],
                                 DateGpadead = mutationDetails.DateGpadead[i],
                                 GpastafilePath = mutationDetails.GpastafilePath[i],
                                 MutationDetailsId = mutationDetails.Id

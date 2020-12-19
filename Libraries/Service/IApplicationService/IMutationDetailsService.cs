@@ -27,6 +27,8 @@ namespace Libraries.Service.IApplicationService
         string SaveMutationIndemnityFilePath(int id);
 
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
+        //Task<PagedResult<>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model);
+
 
 
     }

@@ -7,24 +7,22 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-     class DamagepayeeregisterConfiguration : IEntityTypeConfiguration<Damagepayeeregister>
+    class DamagepayeeregistertempConfiguration : IEntityTypeConfiguration<Damagepayeeregistertemp>
     {
-        public void Configure(EntityTypeBuilder<Damagepayeeregister> builder)
+        public void Configure(EntityTypeBuilder<Damagepayeeregistertemp> builder)
         {
-            builder.ToTable("damagepayeeregister", "lms");
 
-            builder.HasIndex(e => e.CalculatorValue)
-                .HasName("fk_OnlinepaymntLocality_idx");
+            builder.ToTable("damagepayeeregistertemp", "lms");
 
             builder.HasIndex(e => e.DistrictId)
-                .HasName("Fk_District_idx");
+                .HasName("Fk_TempDistrict_idx");
 
             builder.HasIndex(e => e.Id)
                 .HasName("Id_UNIQUE")
                 .IsUnique();
 
             builder.HasIndex(e => e.LocalityId)
-                .HasName("fk_Locality_idx");
+                .HasName("fk_TempLocality_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -156,14 +154,15 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.HasOne(d => d.District)
-                .WithMany(p => p.Damagepayeeregister)
+                .WithMany(p => p.Damagepayeeregistertemp)
                 .HasForeignKey(d => d.DistrictId)
-                .HasConstraintName("Fk_District");
+                .HasConstraintName("Fk_TempDistrict");
 
             builder.HasOne(d => d.Locality)
-                .WithMany(p => p.Damagepayeeregister)
+                .WithMany(p => p.Damagepayeeregistertemp)
                 .HasForeignKey(d => d.LocalityId)
-                .HasConstraintName("fk_Locality");
+                .HasConstraintName("fk_TempLocality");
+
 
         }
     }
