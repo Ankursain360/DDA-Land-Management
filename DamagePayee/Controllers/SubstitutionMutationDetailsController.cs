@@ -24,6 +24,8 @@ namespace DamagePayee.Controllers
     {
         public IConfiguration _configuration;
         private readonly IMutationDetailsService _mutationDetailsService;
+        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+       
         string AtsfilePath = "";
         string GPAfilePath = "";
         //string PhotofilePath= "";
@@ -34,14 +36,27 @@ namespace DamagePayee.Controllers
         string AddprooffilePath = "";
         string AffidevitfilePath = "";
         string IndemnityfilePath = "";
-        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration)
+        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration,IDamagepayeeregisterService damagePayeeReg)
         {
             _mutationDetailsService = detailsService;
             _configuration = configuration;
+            _damagepayeeregisterService = damagePayeeReg;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View();
+            Mutationdetails Model = new Mutationdetails();
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+
+            Data.PropLocalityList = await _damagepayeeregisterService.GetLocalityList();
+            Data.PropDistrictList = await _damagepayeeregisterService.GetDistrictList();
+
+            Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
+            Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
+
+            Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
+            Model.DamagePayeeRegister = Data;
+
+            return View(Model);
         }
 
 
