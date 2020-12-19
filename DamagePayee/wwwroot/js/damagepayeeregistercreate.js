@@ -245,7 +245,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFile").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
        
     ) {
       e.preventDefault();
@@ -300,7 +300,7 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
         && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalMobileNo").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalEmailid").val() != ''
-        && $("#tbl_Payment #addPayment #PaymentReceipt").val() != '')
+        && $("#tbl_Payment #addPayment #Reciept").val() != '')
     {
         e.preventDefault();
         var content = jQuery('#tbl_Payment #addPayment tr'),

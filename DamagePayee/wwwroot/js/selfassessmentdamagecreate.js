@@ -236,7 +236,7 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
         && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalMobileNo").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalEmailid").val() != ''
-        && $("#tbl_Payment #addPayment #PaymentReceipt").val() != '') {
+        && $("#tbl_Payment #addPayment #Reciept").val() != '') {
         e.preventDefault();
         var content = jQuery('#tbl_Payment #addPayment tr'),
             size = jQuery('#tbl_Payment >tbody >tr').length,
