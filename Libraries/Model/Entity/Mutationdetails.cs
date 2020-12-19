@@ -22,6 +22,8 @@ namespace Libraries.Model.Entity
 
         }
 
+        [Required]
+        public int? DamagePayeeRegisterId { get; set; }
         public string FileNo { get; set; }
         public string PropertyNo { get; set; }
         public int? LocalityId { get; set; }
@@ -67,7 +69,8 @@ namespace Libraries.Model.Entity
         public string Declaration3 { get; set; }
         public string AffidevitLegalUploadPath { get; set; }
         public string SpecimenSignLegalUpload { get; set; }
-        public int? DamagePayeeRegisterId { get; set; }
+
+        
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
         public Damagepayeeregistertemp DamagePayeeRegister { get; set; }

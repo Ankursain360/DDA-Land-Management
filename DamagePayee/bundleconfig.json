@@ -10,5 +10,11 @@
     "inputFiles": [
       "wwwroot/js/SubstitutionMutationDetailsCreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/SubstitutionMutationDetailsIndex.js"
+    ]
   }
 ]
