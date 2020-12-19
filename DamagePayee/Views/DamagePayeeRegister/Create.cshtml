@@ -4,7 +4,7 @@
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register" })
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h3 class="mb-3 d-flex">Add Details</h3>
 
@@ -35,7 +35,7 @@
                                 <th>Name</th>
                                 <th>Father's/Husband's Name</th>
                                 <th style="min-width:100px;">Gender</th>
-                                <th >Address</th>
+                                <th>Address</th>
                                 <th>Mobile No.</th>
                                 <th>Email-Id</th>
                                 <th style="min-width:200px;">Aadhar No.</th>
@@ -74,24 +74,24 @@
                                     <input asp-for="EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
                                 </td>
                                 <td>
-                          <div class="floating-label-wrap mb-3 mb-md-0">
-                                   <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class=" floating-label-field--s3" />
-                             
-                                   <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 "  />
-                           </div>
-                             </td>
-                                 <td>
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
-                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 "  />
-                    </div>
-                </td>
-                <td>
-                    <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                </td>
-                <td>
-                    <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
-                </td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input asp-for="AadharNo" type="text" placeholder="Aadhar No." class=" floating-label-field--s3" />
+
+                                        <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input asp-for="PanNo" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                        <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                    </div>
+                                </td>
+                                <td>
+                                    <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+                                </td>
+                                <td>
+                                    <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -168,7 +168,7 @@
                                     <input asp-for="Date" type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
                                 </td>
                                 <td>
-                                    <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFile" />
+                                    <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3"  />
                                 </td>
                                 <td>
                                     <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
@@ -516,7 +516,7 @@
                         </label>
                     </div>
                 </div>
-              
+
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
@@ -573,7 +573,7 @@
                                     <input asp-for="Amount" type="text" class="floating-label-field floating-label-field--s3" id="txtAmount" />
                                 </td>
                                 <td>
-                                    <input asp-for="Reciept" id="PaymentReceipt" class="floating-label-field floating-label-field--s3" type="file" />
+                                    <input asp-for="Reciept" class="floating-label-field floating-label-field--s3" type="file" />
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
