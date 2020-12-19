@@ -110,6 +110,7 @@ namespace Libraries.Model
         public virtual DbSet<MonthlyRoaster> MonthlyRoaster { get; set; }
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
+        public virtual DbSet<Familydetails> Familydetails { get; set; }
 
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         //**********  Damage Payee **********
@@ -119,15 +120,14 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
         public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
-
-        //******** Damage Mutation *******
+        public virtual DbSet<Allottetypetemp> Allottetypetemp { get; set; }
+        public virtual DbSet<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
+        public virtual DbSet<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
+        public virtual DbSet<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
         public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
-       
-        //******///
-
         public virtual DbSet<Presentuse> Presentuse { get; set; }
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
 
@@ -216,13 +216,10 @@ namespace Libraries.Model
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 
             modelBuilder.ApplyConfiguration(new DemolitionPoliceAssistenceLetterConfiguration());
-
-            //**********  Mutation  **********
             modelBuilder.ApplyConfiguration(new MutationDetailsConfiguration());
             modelBuilder.ApplyConfiguration(new MutationOldDamageAssesseConfiguration());
             modelBuilder.ApplyConfiguration(new MutationNewDamageAssesseConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsPhotoPropertyConfiguration());
-           
 
             //**********  Damage Payee **********
 
@@ -231,6 +228,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeeregisterConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
+            modelBuilder.ApplyConfiguration(new FamilydetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new AllottetypetempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
+            modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
 
 
             base.OnModelCreating(modelBuilder);

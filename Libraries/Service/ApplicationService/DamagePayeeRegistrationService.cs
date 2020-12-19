@@ -31,10 +31,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        //public async Task<List<Payeeregistration>> GetStructureUsingRepo()
-        //{
-        //    return await _structureRepository.GetAllStructure();
-        //}
+        public async Task<List<Payeeregistration>> GetStructureUsingRepo()
+        {
+            return await _damagePayeeRegistrationRepository.GetAllPayeeregistration();
+        }
 
         public async Task<Payeeregistration> FetchSingleResult(int id)
         {
@@ -50,6 +50,7 @@ namespace Libraries.Service.ApplicationService
             model.Name = payeeregistration.Name;
             model.MobileNumber = payeeregistration.MobileNumber;
             model.EmailId = payeeregistration.EmailId;
+            model.IsVerified = payeeregistration.IsVerified;
             model.IsActive = payeeregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
