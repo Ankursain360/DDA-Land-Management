@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -44,7 +45,7 @@ namespace Libraries.Model.Entity
         public List<string> Age { get; set; }
         [NotMapped]
 
-        public List<string> Gender { get; set; }
+        public List<string> FGender { get; set; }
 
 
 
@@ -54,6 +55,8 @@ namespace Libraries.Model.Entity
 
 
         public ICollection<Familydetails> Familydetails { get; set; }
+        [NotMapped]
+        public IFormFile Photo { get; set; }
 
 
     }
