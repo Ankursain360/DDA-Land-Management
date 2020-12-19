@@ -18,7 +18,7 @@ namespace DamagePayee.Controllers
     public class DamagePayeeRegistrationController : BaseController
 
     {
-        private readonly lmsContext _context;
+        //private readonly lmsContext _context;
         static string result = string.Empty;
         private readonly IHostingEnvironment _hostingEnvironment;
 

@@ -8,7 +8,7 @@ namespace Libraries.Model.Entity
         public int D2dId { get; set; }
         public string Name { get; set; }
         public string Age { get; set; }
-        public string Gender { get; set; }
+        public string FGender { get; set; }
         public byte IsActive { get; set; }
 
 

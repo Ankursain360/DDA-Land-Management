@@ -60,13 +60,40 @@ namespace DamagePayee.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
+            
+            string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
+            string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
+            string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
+            string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
+
+
+
+
             if (ModelState.IsValid)
             {
-                
+                FileHelper fileHelper = new FileHelper();
+
+                if (damagepayeeregistertemp.PropertyPhoto != null)
+                {
+                    damagepayeeregistertemp.PropertyPhotoPath = fileHelper.SaveFile(PropertyPhotographLayout, damagepayeeregistertemp.PropertyPhoto);
+                }
+                if (damagepayeeregistertemp.ShowCauseNotice != null)
+                {
+                    damagepayeeregistertemp.ShowCauseNoticePath = fileHelper.SaveFile(ShowCauseNoticeDocument, damagepayeeregistertemp.ShowCauseNotice);
+                }
+                if (damagepayeeregistertemp.Fgform != null)
+                {
+                    damagepayeeregistertemp.FgformPath = fileHelper.SaveFile(FGFormDocument, damagepayeeregistertemp.Fgform);
+                }
+                if (damagepayeeregistertemp.DocumentForFile != null)
+                {
+                    damagepayeeregistertemp.DocumentForFilePath = fileHelper.SaveFile(BillDocument, damagepayeeregistertemp.DocumentForFile);
+                }
+
                 var result = await _damagepayeeregisterService.Create(damagepayeeregistertemp);
                 if (result)
                 {
-                    FileHelper fileHelper = new FileHelper();
+                  //  FileHelper fileHelper = new FileHelper();
 
                     //****** code for saving  Damage payee personal info *****
 
@@ -174,7 +201,7 @@ namespace DamagePayee.Controllers
 
                         }
                     }
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     return View(damagepayeeregistertemp);
                 }
                 else

@@ -60,7 +60,7 @@ namespace DamagePayee.Controllers
         }
 
 
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
             Mutationdetails details = new Mutationdetails();
             details.ZoneList = await _mutationDetailsService.GetAllZone();
