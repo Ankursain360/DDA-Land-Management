@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Allottetypetemp = new HashSet<Allottetypetemp>();
             Damagepayeepersonelinfotemp = new HashSet<Damagepayeepersonelinfotemp>();
             Damagepaymenthistorytemp = new HashSet<Damagepaymenthistorytemp>();
+            Mutationdetails = new HashSet<Mutationdetails>();
         }
 
         public string FileNo { get; set; }
@@ -78,7 +79,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> DocumentForFile { get; set; }
 
-        
+        public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Allottetypetemp> Allottetypetemp { get; set; }
         public ICollection<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
         public ICollection<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
@@ -141,5 +142,17 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
 
+
+        //******* Mutation  **********//
+        [NotMapped]
+        public List<Locality> PropLocalityList { get; set; }
+        [NotMapped]
+        public List<District> PropDistrictList { get; set; }
+        [NotMapped]
+        public List<Damagepayeepersonelinfotemp> PersonalInfoDamageList { get; set; }
+        [NotMapped]
+        public List<Allottetypetemp> AlloteeTypeDamageList { get; set; }
+        [NotMapped]
+        public List<Damagepayeeregistertemp> DamagePayeeRegisterList { get; set; }
     }
 }
