@@ -69,14 +69,14 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
-        public List<IFormFile> PropertyPhoto { get; set; }
+        public IFormFile PropertyPhoto { get; set; }
         [NotMapped]
-        public List<IFormFile> ShowCauseNotice { get; set; }
+        public IFormFile ShowCauseNotice { get; set; }
 
         [NotMapped]
-        public List<IFormFile> Fgform { get; set; }
+        public IFormFile Fgform { get; set; }
         [NotMapped]
-        public List<IFormFile> DocumentForFile { get; set; }
+        public IFormFile DocumentForFile { get; set; }
 
         
         public ICollection<Allottetypetemp> Allottetypetemp { get; set; }
