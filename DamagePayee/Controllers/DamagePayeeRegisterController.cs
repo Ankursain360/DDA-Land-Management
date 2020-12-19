@@ -56,6 +56,8 @@ namespace DamagePayee.Controllers
             await BindDropDown(damagepayeeregistertemp);
             string PhotoFilePathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATSGPADocument").Value.ToString();
             string RecieptDocumentPathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:RecieptDocument").Value.ToString();
+           
+            
             if (ModelState.IsValid)
             {
                 
@@ -118,7 +120,7 @@ namespace DamagePayee.Controllers
                                     FatherName = damagepayeeregistertemp.FatherName[i],
                                     Date = damagepayeeregistertemp.Date[i],
                                     DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                    AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? "" : damagepayeeregistertemp.ATSGPA[i] == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
+                                   // AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? "" : damagepayeeregistertemp.ATSGPA[i] == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
                                 });
                             }
                             result = await _damagepayeeregisterService.SaveAllotteTypeTemp(allottetypetemp);
@@ -156,7 +158,7 @@ namespace DamagePayee.Controllers
                                     Amount = damagepayeeregistertemp.Amount[i],
 
                                     //RecieptDocumentPath = damagepayeeregister.Reciept[i] == null ? string.Empty : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]),
-                                    RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : damagepayeeregistertemp.Reciept[i] == null ? string.Empty : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                  //  RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : damagepayeeregistertemp.Reciept[i] == null ? string.Empty : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
 
                                     DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                 });

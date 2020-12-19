@@ -164,6 +164,12 @@ $("input[name='grpYESNO']").click(function () {
 
 });
 
+$("input[name='Bill']").click(function () {
+    var selected = $("input[type='radio'][name='Bill']:checked");
+    $("#IsDocumentFor").val(selected.val());
+
+});
+
         //@*Repeator code  *@
     //$(document).ready(function () {
     //        $("#tbl_posts #tbl_posts_body .odd").remove();
