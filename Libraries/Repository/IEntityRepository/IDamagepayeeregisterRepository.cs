@@ -15,6 +15,7 @@ namespace Libraries.Repository.IEntityRepository
         //Task<bool> Any(int id, string name);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
+        
         Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
 

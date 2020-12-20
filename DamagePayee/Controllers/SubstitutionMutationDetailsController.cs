@@ -24,6 +24,8 @@ namespace DamagePayee.Controllers
     {
         public IConfiguration _configuration;
         private readonly IMutationDetailsService _mutationDetailsService;
+        private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+       
         string AtsfilePath = "";
         string GPAfilePath = "";
         //string PhotofilePath= "";
@@ -34,29 +36,54 @@ namespace DamagePayee.Controllers
         string AddprooffilePath = "";
         string AffidevitfilePath = "";
         string IndemnityfilePath = "";
-        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration)
+        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration,IDamagepayeeregisterService damagePayeeReg)
         {
             _mutationDetailsService = detailsService;
             _configuration = configuration;
+            _damagepayeeregisterService = damagePayeeReg;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int id)
         {
-            return View();
+            Mutationdetails Model = new Mutationdetails();
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+
+            Data.PropLocalityList = await _damagepayeeregisterService.GetLocalityList();
+            Data.PropDistrictList = await _damagepayeeregisterService.GetDistrictList();
+
+            Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
+            Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
+
+            Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
+            Model.DamagePayeeRegister = Data;
+
+            return View(Model);
         }
 
 
         public async Task<IActionResult> Create(int id)
         {
-            Mutationdetails details = new Mutationdetails();
-            details.ZoneList = await _mutationDetailsService.GetAllZone();
-            details.LocalityList = await _mutationDetailsService.GetAllLocality(details.ZoneId);
+            Mutationdetails Model = new Mutationdetails();
+            //var Data = await _damagepayeeregisterService.FetchSingleResult(id);
 
-            return View(details);
+            //Data.PropLocalityList = await _damagepayeeregisterService.GetLocalityList();
+            //Data.PropDistrictList = await _damagepayeeregisterService.GetDistrictList();
+
+            //Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
+            //Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
+
+            //Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
+            //Model.DamagePayeeRegister = Data;
+
+            Model.ZoneList = await _mutationDetailsService.GetAllZone();
+            Model.LocalityList = await _mutationDetailsService.GetAllLocality(Model.ZoneId);
+
+            return View(Model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Mutationdetails mutationDetails)
+        public async Task<IActionResult> Create(int id,Mutationdetails mutationDetails)
         {
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             mutationDetails.ZoneList = await _mutationDetailsService.GetAllZone();
             mutationDetails.LocalityList = await _mutationDetailsService.GetAllLocality(mutationDetails.ZoneId);
 
@@ -65,6 +92,154 @@ namespace DamagePayee.Controllers
 
             if (true)
             {
+                //var mainFile = new FileHelper();
+                //mutationDetails.AffidavitFilePath = mainFile.SaveFile(PhotoPropfilePath, mutationDetails.AtsfilePathNew);
+                /* For Ats File Upload*/
+                string ATSFileName = "";
+                string atsfilePath = "";
+                // mutationDetails.AtsfilePathNew = agreementfilePath;
+                AtsfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ATSFilePath").Value.ToString();
+                if (mutationDetails.AtsfilePathNew != null)
+                {
+                    if (!Directory.Exists(AtsfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(AtsfilePath);
+                    }
+                    ATSFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AtsfilePathNew.FileName;
+                    atsfilePath = Path.Combine(AtsfilePath, ATSFileName);
+                    using (var stream = new FileStream(atsfilePath, FileMode.Create))
+                    {
+                        mutationDetails.AtsfilePathNew.CopyTo(stream);
+                    }
+                    mutationDetails.AtsfilePath = atsfilePath;
+                }
+
+                /* For GPA File Upload*/
+                string GPAFileName = "";
+                string gpafilePath = "";
+
+                GPAfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:GPAFilePath").Value.ToString();
+                if (mutationDetails.GpafilePathNew != null)
+                {
+                    if (!Directory.Exists(GPAfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(GPAfilePath);
+                    }
+                    GPAFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.GpafilePathNew.FileName;
+                    gpafilePath = Path.Combine(GPAfilePath, GPAFileName);
+                    using (var stream = new FileStream(gpafilePath, FileMode.Create))
+                    {
+                        mutationDetails.GpafilePathNew.CopyTo(stream);
+                    }
+                    mutationDetails.GpafilePath = gpafilePath;
+                }
+
+                /* For MoneyReceipt File Upload*/
+                string MoneyFileName = "";
+                string MoneyfilePath = "";
+
+                MoneyRecfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:MONEYRECFilePath").Value.ToString();
+                if (mutationDetails.MoneyfilePathNew != null)
+                {
+                    if (!Directory.Exists(MoneyRecfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(MoneyRecfilePath);
+                    }
+                    MoneyFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.MoneyfilePathNew.FileName;
+                    MoneyfilePath = Path.Combine(MoneyRecfilePath, MoneyFileName);
+                    using (var stream = new FileStream(MoneyfilePath, FileMode.Create))
+                    {
+                        mutationDetails.MoneyfilePathNew.CopyTo(stream);
+                    }
+                    mutationDetails.MoneyRecieptFilePath = MoneyfilePath;
+                }
+
+                /* For Signature Specimen File Upload*/
+                string SignSpecFileName = "";
+                string signSpecfilePath = "";
+
+                SignspcfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:SIGNSPECFIRFilePath").Value.ToString();
+                if (mutationDetails.SignSpecPathNew != null)
+                {
+                    if (!Directory.Exists(SignspcfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(SignspcfilePath);
+                    }
+                    SignSpecFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.SignSpecPathNew.FileName;
+                    signSpecfilePath = Path.Combine(SignspcfilePath, SignSpecFileName);
+                    using (var stream = new FileStream(signSpecfilePath, FileMode.Create))
+                    {
+                        mutationDetails.SignSpecPathNew.CopyTo(stream);
+                    }
+                    mutationDetails.SignatureSpecimenFilePath = signSpecfilePath;
+                }
+
+                /* For Address proof File Upload*/
+                string AddProofFileName = "";
+                string addProoffilePath = "";
+
+                AddprooffilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ADDPROOFFIRFilePath").Value.ToString();
+                if (mutationDetails.AddressProofPathNew != null)
+                {
+                    if (!Directory.Exists(AddprooffilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(AddprooffilePath);
+                    }
+                    AddProofFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AddressProofPathNew.FileName;
+                    addProoffilePath = Path.Combine(AddprooffilePath, AddProofFileName);
+                    using (var stream = new FileStream(addProoffilePath, FileMode.Create))
+                    {
+                        mutationDetails.AddressProofPathNew.CopyTo(stream);
+                    }
+                    mutationDetails.AddressProofFilePath = addProoffilePath;
+                }
+
+                /* For AffiDevit File Upload*/
+                string AffidevitFileName = "";
+                string affidevitfilePath = "";
+
+                AffidevitfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:AFFIDEVITFIRFilePath").Value.ToString();
+                if (mutationDetails.AffidavitPathNew != null)
+                {
+                    if (!Directory.Exists(AffidevitfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(AffidevitfilePath);
+                    }
+                    AffidevitFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AffidavitPathNew.FileName;
+                    affidevitfilePath = Path.Combine(AffidevitfilePath, AffidevitFileName);
+                    using (var stream = new FileStream(affidevitfilePath, FileMode.Create))
+                    {
+                        mutationDetails.AffidavitPathNew.CopyTo(stream);
+                    }
+                    mutationDetails.AffidavitFilePath = affidevitfilePath;
+                }
+
+                /* For IndemnityBond File Upload*/
+                string IndemnitybondFileName = "";
+                string IindemnityBondfilePath = "";
+
+                IndemnityfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:INDEMNITYFIRFilePath").Value.ToString();
+                if (mutationDetails.IndemnityPathNew != null)
+                {
+                    if (!Directory.Exists(IndemnityfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(IndemnityfilePath);
+                    }
+                    IndemnitybondFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.IndemnityPathNew.FileName;
+                    IindemnityBondfilePath = Path.Combine(IndemnityfilePath, IndemnitybondFileName);
+                    using (var stream = new FileStream(IindemnityBondfilePath, FileMode.Create))
+                    {
+                        mutationDetails.IndemnityPathNew.CopyTo(stream);
+                    }
+                    mutationDetails.IndemnityFilePath = IindemnityBondfilePath;
+                }
 
                 var result = await _mutationDetailsService.Create(mutationDetails);
 
@@ -124,153 +299,7 @@ namespace DamagePayee.Controllers
                         }
                     }
 
-                    /* For Ats File Upload*/
-                    string ATSFileName = "";
-                    string atsfilePath = "";
-                    // mutationDetails.AtsfilePathNew = agreementfilePath;
-                    AtsfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ATSFilePath").Value.ToString();
-                    if (mutationDetails.AtsfilePathNew != null)
-                    {
-                        if (!Directory.Exists(AtsfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(AtsfilePath);
-                        }
-                        ATSFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AtsfilePathNew.FileName;
-                        atsfilePath = Path.Combine(AtsfilePath, ATSFileName);
-                        using (var stream = new FileStream(atsfilePath, FileMode.Create))
-                        {
-                            mutationDetails.AtsfilePathNew.CopyTo(stream);
-                        }
-                        mutationDetails.AtsfilePath = atsfilePath;
-                    }
-
-                    /* For GPA File Upload*/
-                    string GPAFileName = "";
-                    string gpafilePath = "";
-
-                    GPAfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:GPAFilePath").Value.ToString();
-                    if (mutationDetails.GpafilePathNew != null)
-                    {
-                        if (!Directory.Exists(GPAfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(GPAfilePath);
-                        }
-                        GPAFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.GpafilePathNew.FileName;
-                        gpafilePath = Path.Combine(GPAfilePath, GPAFileName);
-                        using (var stream = new FileStream(gpafilePath, FileMode.Create))
-                        {
-                            mutationDetails.GpafilePathNew.CopyTo(stream);
-                        }
-                        mutationDetails.GpafilePath = gpafilePath;
-                    }
-
-                    /* For MoneyReceipt File Upload*/
-                    string MoneyFileName = "";
-                    string MoneyfilePath = "";
-
-                    MoneyRecfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:MONEYRECFilePath").Value.ToString();
-                    if (mutationDetails.MoneyfilePathNew != null)
-                    {
-                        if (!Directory.Exists(MoneyRecfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(MoneyRecfilePath);
-                        }
-                        MoneyFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.MoneyfilePathNew.FileName;
-                        MoneyfilePath = Path.Combine(MoneyRecfilePath, MoneyFileName);
-                        using (var stream = new FileStream(MoneyfilePath, FileMode.Create))
-                        {
-                            mutationDetails.MoneyfilePathNew.CopyTo(stream);
-                        }
-                        mutationDetails.MoneyRecieptFilePath = MoneyfilePath;
-                    }
-
-                    /* For Signature Specimen File Upload*/
-                    string SignSpecFileName = "";
-                    string signSpecfilePath = "";
-
-                    SignspcfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:SIGNSPECFIRFilePath").Value.ToString();
-                    if (mutationDetails.SignSpecPathNew != null)
-                    {
-                        if (!Directory.Exists(SignspcfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(SignspcfilePath);
-                        }
-                        SignSpecFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.SignSpecPathNew.FileName;
-                        signSpecfilePath = Path.Combine(SignspcfilePath, SignSpecFileName);
-                        using (var stream = new FileStream(signSpecfilePath, FileMode.Create))
-                        {
-                            mutationDetails.SignSpecPathNew.CopyTo(stream);
-                        }
-                        mutationDetails.SignatureSpecimenFilePath = signSpecfilePath;
-                    }
-
-                    /* For Address proof File Upload*/
-                    string AddProofFileName = "";
-                    string addProoffilePath = "";
-
-                    AddprooffilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ADDPROOFFIRFilePath").Value.ToString();
-                    if (mutationDetails.AddressProofPathNew != null)
-                    {
-                        if (!Directory.Exists(AddprooffilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(AddprooffilePath);
-                        }
-                        AddProofFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AddressProofPathNew.FileName;
-                        addProoffilePath = Path.Combine(AddprooffilePath, AddProofFileName);
-                        using (var stream = new FileStream(addProoffilePath, FileMode.Create))
-                        {
-                            mutationDetails.AddressProofPathNew.CopyTo(stream);
-                        }
-                        mutationDetails.AddressProofFilePath = addProoffilePath;
-                    }
-
-                    /* For AffiDevit File Upload*/
-                    string AffidevitFileName = "";
-                    string affidevitfilePath = "";
-
-                    AffidevitfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:AFFIDEVITFIRFilePath").Value.ToString();
-                    if (mutationDetails.AffidavitPathNew != null)
-                    {
-                        if (!Directory.Exists(AffidevitfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(AffidevitfilePath);
-                        }
-                        AffidevitFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.AffidavitPathNew.FileName;
-                        affidevitfilePath = Path.Combine(AffidevitfilePath, AffidevitFileName);
-                        using (var stream = new FileStream(affidevitfilePath, FileMode.Create))
-                        {
-                            mutationDetails.AffidavitPathNew.CopyTo(stream);
-                        }
-                        mutationDetails.AffidavitFilePath = affidevitfilePath;
-                    }
-
-                    /* For IndemnityBond File Upload*/
-                    string IndemnitybondFileName = "";
-                    string IindemnityBondfilePath = "";
-
-                    IndemnityfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:INDEMNITYFIRFilePath").Value.ToString();
-                    if (mutationDetails.IndemnityPathNew != null)
-                    {
-                        if (!Directory.Exists(IndemnityfilePath))
-                        {
-                            // Try to create the directory.
-                            DirectoryInfo di = Directory.CreateDirectory(IndemnityfilePath);
-                        }
-                        IndemnitybondFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.IndemnityPathNew.FileName;
-                        IindemnityBondfilePath = Path.Combine(IndemnityfilePath, IndemnitybondFileName);
-                        using (var stream = new FileStream(IindemnityBondfilePath, FileMode.Create))
-                        {
-                            mutationDetails.IndemnityPathNew.CopyTo(stream);
-                        }
-                        mutationDetails.IndemnityFilePath = IindemnityBondfilePath;
-                    }
-
+                  
                 }
 
                 if (result == true)

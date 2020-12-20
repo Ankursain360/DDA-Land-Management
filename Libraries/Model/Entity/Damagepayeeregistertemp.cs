@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Allottetypetemp = new HashSet<Allottetypetemp>();
             Damagepayeepersonelinfotemp = new HashSet<Damagepayeepersonelinfotemp>();
             Damagepaymenthistorytemp = new HashSet<Damagepaymenthistorytemp>();
+            Mutationdetails = new HashSet<Mutationdetails>();
         }
 
         public string FileNo { get; set; }
@@ -57,7 +58,7 @@ namespace Libraries.Model.Entity
         public string Achknowledgement { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-        public int? UserId { get; set; }
+      
         public byte? IsActive { get; set; }
         public string PropertyPhotoPath { get; set; }
 
@@ -78,7 +79,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile DocumentForFile { get; set; }
 
-        
+        public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Allottetypetemp> Allottetypetemp { get; set; }
         public ICollection<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
         public ICollection<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
@@ -141,11 +142,17 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
 
+
+        //******* Mutation  **********//
         [NotMapped]
-        public bool DeclarationStatus1 { get; set; }
+        public List<Locality> PropLocalityList { get; set; }
         [NotMapped]
-        public bool DeclarationStatus2 { get; set; }
+        public List<District> PropDistrictList { get; set; }
         [NotMapped]
-        public bool DeclarationStatus3 { get; set; }
+        public List<Damagepayeepersonelinfotemp> PersonalInfoDamageList { get; set; }
+        [NotMapped]
+        public List<Allottetypetemp> AlloteeTypeDamageList { get; set; }
+        [NotMapped]
+        public List<Damagepayeeregistertemp> DamagePayeeRegisterList { get; set; }
     }
 }

@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Allottetype = new HashSet<Allottetype>();
             Damagepayeepersonelinfo = new HashSet<Damagepayeepersonelinfo>();
             Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
+            
         }
 
        
@@ -80,7 +81,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> DocumentForFile { get; set; }
 
-
+      
         public ICollection<Allottetype> Allottetype { get; set; }
         public ICollection<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public ICollection<Damagepaymenthistory> Damagepaymenthistory { get; set; }
@@ -140,7 +141,10 @@ namespace Libraries.Model.Entity
        
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
+
+
        
+
 
     }
 }

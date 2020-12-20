@@ -22,6 +22,8 @@ namespace Libraries.Model.Entity
 
         }
 
+        [Required]
+        public int? DamagePayeeRegisterId { get; set; }
         public string FileNo { get; set; }
         public string PropertyNo { get; set; }
         public int? LocalityId { get; set; }
@@ -68,8 +70,11 @@ namespace Libraries.Model.Entity
         public string AffidevitLegalUploadPath { get; set; }
         public string SpecimenSignLegalUpload { get; set; }
 
+        
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
+        public Damagepayeeregistertemp DamagePayeeRegister { get; set; }
+
         public ICollection<Mutationnewowner> Mutationnewowner { get; set; }
         public ICollection<Mutationnewownertemp> Mutationnewownertemp { get; set; }
         public ICollection<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
