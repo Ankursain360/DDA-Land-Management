@@ -23,7 +23,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister(int fileNo)
         {
-            return await _dbContext.Damagepayeeregister.Where(x => x.FileNo == fileNo && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepayeeregister.Where(x => x.IsActive == 1).ToListAsync();// x.FileNo == fileNo &&
 
         }
 
