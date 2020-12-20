@@ -57,7 +57,7 @@ namespace Libraries.Model.Entity
         public string Achknowledgement { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-      
+        public int? UserId { get; set; }
         public byte? IsActive { get; set; }
         public string PropertyPhotoPath { get; set; }
 
@@ -141,5 +141,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
 
+        [NotMapped]
+        public bool DeclarationStatus1 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus2 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus3 { get; set; }
     }
 }

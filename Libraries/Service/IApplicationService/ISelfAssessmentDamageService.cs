@@ -38,6 +38,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
+        Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId);
         Task<bool> DeletePaymentHistoryTemp(int Id);
     }
 }

@@ -103,5 +103,15 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        public async Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId)
+        {
+            return await _dbContext.Damagepayeeregistertemp
+                                    .Include(x => x.Damagepayeepersonelinfotemp)
+                                    .Include(x => x.Damagepaymenthistorytemp)
+                                    .Include(x => x.Allottetypetemp)
+                                    .Where(x => x.UserId == userId)
+                                    .FirstOrDefaultAsync();
+        }
     }
 }

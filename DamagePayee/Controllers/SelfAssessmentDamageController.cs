@@ -41,9 +41,18 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create()
         {
             Damagepayeeregistertemp damagepayeeregistertemp = new Damagepayeeregistertemp();
-
-            await BindDropDown(damagepayeeregistertemp);
-            return View(damagepayeeregistertemp);
+            var Data =await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
+            if(Data != null)
+            {
+                await BindDropDown(Data);
+                return View(Data);
+            }
+            else
+            {
+                await BindDropDown(damagepayeeregistertemp);
+                return View(damagepayeeregistertemp);
+            }
+            
         }
         [HttpPost]
 
@@ -56,15 +65,10 @@ namespace DamagePayee.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-
             string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
             string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
-
-
-
-
             if (ModelState.IsValid)
             {
                 FileHelper fileHelper = new FileHelper();
@@ -89,8 +93,6 @@ namespace DamagePayee.Controllers
                 var result = await _selfAssessmentDamageService.Create(damagepayeeregistertemp);
                 if (result)
                 {
-                    //  FileHelper fileHelper = new FileHelper();
-
                     //****** code for saving  Damage payee personal info *****
 
                     if (damagepayeeregistertemp.payeeName != null &&
@@ -164,8 +166,6 @@ namespace DamagePayee.Controllers
                           damagepayeeregistertemp.PaymentDate != null &&
                           damagepayeeregistertemp.Amount != null)
                     {
-
-                        //damagepayeeregister.Reciept != null &&)
                         if (
                              damagepayeeregistertemp.PaymntName.Count > 0 &&
                              damagepayeeregistertemp.RecieptNo.Count > 0 &&
@@ -185,10 +185,7 @@ namespace DamagePayee.Controllers
                                     PaymentMode = damagepayeeregistertemp.PaymentMode[i],
                                     PaymentDate = damagepayeeregistertemp.PaymentDate[i],
                                     Amount = damagepayeeregistertemp.Amount[i],
-
-                                    //RecieptDocumentPath = damagepayeeregister.Reciept[i] == null ? string.Empty : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregister.Reciept[i]),
                                     RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
-
                                     DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                 });
                             }
