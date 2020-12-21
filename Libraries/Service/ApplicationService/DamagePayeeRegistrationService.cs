@@ -76,12 +76,31 @@ namespace Libraries.Service.ApplicationService
             _damagePayeeRegistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<bool> CheckUniqueName(int Id, string Name)
+        {
+            bool result = await _damagePayeeRegistrationRepository.Any(Id, Name);
+            return result;
+        }
+        public async Task<bool> CheckUniqueemail(int id, string emailid)
+        {
+            bool result = await _damagePayeeRegistrationRepository.Anyemail(id, emailid);
+            return result;
+        }
 
         public async Task<PagedResult<Payeeregistration>> GetPagedDamagePayeeRegistration(DamagePayeeRegistrationSearchDto model)
         {
             return await _damagePayeeRegistrationRepository.GetPagedDamagePayeeRegistration(model);
         }
 
-
+        public async Task<bool> UpdateVerification(Payeeregistration payeeregistration)
+        {
+            var result = await _damagePayeeRegistrationRepository.FindBy(a => a.Id == payeeregistration.Id);
+            Payeeregistration model = result.FirstOrDefault();
+            model.IsVerified = payeeregistration.IsVerified;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _damagePayeeRegistrationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

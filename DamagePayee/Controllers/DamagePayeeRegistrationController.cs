@@ -7,19 +7,24 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-//using Microsoft.AspNetCore.Identity.UI.Pages.Account.Internal;
+
 using DamagePayee.Models;
 using System.Net;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http.Extensions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegistrationController : BaseController
 
     {
-        private readonly lmsContext _context;
+
+        //private readonly IDataProtector protector;
         static string result = string.Empty;
+        [Obsolete]
         private readonly IHostingEnvironment _hostingEnvironment;
 
         //public DamagePayeeRegistrationController(lmsContext context, IHostingEnvironment en)
@@ -31,6 +36,7 @@ namespace DamagePayee.Controllers
 
         private readonly IDamagePayeeRegistrationService _damagePayeeRegistrationService;
 
+        [Obsolete]
         public DamagePayeeRegistrationController(IDamagePayeeRegistrationService damagePayeeRegistrationService, IHostingEnvironment en)
         {
             _damagePayeeRegistrationService = damagePayeeRegistrationService;
@@ -58,70 +64,37 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [Obsolete]
         public async Task<IActionResult> Create(Payeeregistration payeeregistration)
         {
-            ////At successfull completion send mail and sms
-            //string DisplayName = payeeregistration.Name.ToString();
-            //string EmailID = payeeregistration.EmailId.ToString();
-            //string LoginName = payeeregistration.Name.ToString();
-            ////string LoginName = result[0].Name.ToString();
-            //// string EmailID = result[0].EmailId.ToString();
-            //// string Password = result[0].".ToString();
-            //string contactno = payeeregistration.MobileNumber.ToString();
-            //Uri uri = new Uri("http://49.50.87.108:8181/Login");
-            //string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
-
-            //string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
-            //string link = "https://meet.google.com/qca-ysgd-nqh";
-            //// Using WebRequest
-            //WebRequest request = WebRequest.Create(url);
-            //WebResponse response = request.GetResponse();
-            //string Result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-            //// Using WebClien
-            //string Res1 = new WebClient().DownloadString(url);
-            //string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
-
-
-            //GenerateMailOTP mail = new GenerateMailOTP();
-
-
-            //mail.GenerateMailFormatForPassword(DisplayName, EmailID, LoginName, link,  path, Action);
-
-            //ViewData["Msg"] = new Message { Msg = "Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", Status = "E", BackPageAction = "ForgetPassword", BackPageController = "Login" };
-            //return RedirectToAction("Create", "Login");
-
-
-
+            
            
             try
             {
 
                 if (ModelState.IsValid)
                 {
-
                     payeeregistration.IsVerified = "F";
                      var result = await _damagePayeeRegistrationService.Create(payeeregistration);
-                   // var result = await (_damagePayeeRegistrationService.Where(r => r.LoginName == model.LoginName).ToListAsync());
-                    //var test = await payeeregistration.N
+                  
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //return View();
+                      
                         var list = await _damagePayeeRegistrationService.GetAllPayeeregistration();
                         //At successfull completion send mail and sms
                         string DisplayName = payeeregistration.Name.ToString();
                         string EmailID = payeeregistration.EmailId.ToString();
+                        string Id = payeeregistration.Id.ToString();
                         string LoginName = payeeregistration.Name.ToString();
-                        //string LoginName = result[0].Name.ToString();
-                        // string EmailID = result[0].EmailId.ToString();
-                        // string Password = result[0].".ToString();
+                        
+                       
                         string contactno = payeeregistration.MobileNumber.ToString();
-                        Uri uri = new Uri("http://49.50.87.108:8181/Login");
+                        Uri uri = new Uri("http://localhost:1011/DamagePayeeRegistration");
                         string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
-
+                        var aburl = Request.GetDisplayUrl().Replace("Create", "RegistrationConfirmed");
                         string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
-                        string link = "https://meet.google.com/qca-ysgd-nqh";
+                        string link = "<a target=\"_blank\" href=\""+aburl +"?EmailID=" + EmailID + "&Id=" + Id + "\">Click Here</a>";
                         // Using WebRequest
                         WebRequest request = WebRequest.Create(url);
                         WebResponse response = request.GetResponse();
@@ -137,7 +110,7 @@ namespace DamagePayee.Controllers
                         mail.GenerateMailFormatForPassword(DisplayName, EmailID, LoginName, link, path, Action);
 
                         ViewData["Msg"] = new Message { Msg = "Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", Status = "E", BackPageAction = "ForgetPassword", BackPageController = "Login" };
-                        return RedirectToAction("Create", "DamagePayeeRegistration");
+                        //return RedirectToAction("Create", "DamagePayeeRegistration");
 
                         return View("Index", list);
                     }
@@ -165,6 +138,46 @@ namespace DamagePayee.Controllers
 
             
 
+
+
+        }
+        public async Task<IActionResult>RegistrationConfirmed()  
+        {
+
+            Payeeregistration payeeregistration = new Payeeregistration();
+            var id2 = HttpContext.Request.Query["EmailID"];
+            var id3 = HttpContext.Request.Query["Id"];
+            var UniqueId = (Convert.ToInt32(id3));
+            var id = Request.QueryString.Value;
+           
+            if(id == null)
+            {
+                id = "0";
+            }
+            if (ModelState.IsValid)
+            {
+                payeeregistration.IsVerified = "T";
+                var result = await _damagePayeeRegistrationService.FetchSingleResult(UniqueId);
+                if (result != null)
+                {
+                    payeeregistration.Id = UniqueId;
+                    var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
+                    if(result1 ==true)
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+
+                    var list = await _damagePayeeRegistrationService.GetAllPayeeregistration();
+                    return View("Index", list);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("User Not Found", "", AlertType.Error);
+                    return View("Index");
+                }
+
+
+            }
+
+            return View();
 
 
         }
@@ -231,6 +244,34 @@ namespace DamagePayee.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 var result1 = await _damagePayeeRegistrationService.GetAllPayeeregistration();
                 return View("Index", result1);
+            }
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExistName(int Id, string Name)
+        {
+            var result = await _damagePayeeRegistrationService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Name: {Name} already exist");
+            }
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Existemail(int Id, string EmailId)
+        {
+            var result = await _damagePayeeRegistrationService.CheckUniqueemail(Id, EmailId);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Email Id : {EmailId} already exist");
             }
         }
 
