@@ -25,7 +25,8 @@ namespace DamagePayee.Controllers
         public IConfiguration _configuration;
         private readonly IMutationDetailsService _mutationDetailsService;
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
-       
+
+        string PropertyfilePath = "";
         string AtsfilePath = "";
         string GPAfilePath = "";
         //string PhotofilePath= "";
@@ -36,7 +37,7 @@ namespace DamagePayee.Controllers
         string AddprooffilePath = "";
         string AffidevitfilePath = "";
         string IndemnityfilePath = "";
-        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration,IDamagepayeeregisterService damagePayeeReg)
+        public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration, IDamagepayeeregisterService damagePayeeReg)
         {
             _mutationDetailsService = detailsService;
             _configuration = configuration;
@@ -53,7 +54,7 @@ namespace DamagePayee.Controllers
             Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
             Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
 
-            Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
+            //Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
             Model.DamagePayeeRegister = Data;
 
             return View(Model);
@@ -81,19 +82,39 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id,Mutationdetails mutationDetails)
+        public async Task<IActionResult> Create(int id, Mutationdetails mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             mutationDetails.ZoneList = await _mutationDetailsService.GetAllZone();
             mutationDetails.LocalityList = await _mutationDetailsService.GetAllLocality(mutationDetails.ZoneId);
 
 
-            string PhotoPropfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:PHOTOPROPFilePath").Value.ToString();
-
             if (true)
             {
                 //var mainFile = new FileHelper();
                 //mutationDetails.AffidavitFilePath = mainFile.SaveFile(PhotoPropfilePath, mutationDetails.AtsfilePathNew);
+
+                /*For Photo of property file upload */
+
+                string PropertyFileName = "";
+                string PropfilePath = "";
+                // mutationDetails.AtsfilePathNew = agreementfilePath;
+                PropertyfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:PHOTOPROPFilePath").Value.ToString();
+                if (mutationDetails.PropertyPhotoPathNew != null)
+                {
+                    if (!Directory.Exists(PropertyfilePath))
+                    {
+                        // Try to create the directory.
+                        DirectoryInfo di = Directory.CreateDirectory(PropertyfilePath);
+                    }
+                    PropertyFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.PropertyPhotoPathNew.FileName;
+                    PropfilePath = Path.Combine(PropertyfilePath, PropertyFileName);
+                    using (var stream = new FileStream(PropfilePath, FileMode.Create))
+                    {
+                        mutationDetails.PropertyPhotoPathNew.CopyTo(stream);
+                    }
+                    mutationDetails.PropertyPhotoPath = PropfilePath;
+                }
                 /* For Ats File Upload*/
                 string ATSFileName = "";
                 string atsfilePath = "";
@@ -243,64 +264,42 @@ namespace DamagePayee.Controllers
 
                 var result = await _mutationDetailsService.Create(mutationDetails);
 
-                if (result == true)
-                {
+               
 
                     /*Previous Damage Assessee Details Repeater*/
 
-                    FileHelper fileHelper = new FileHelper();
-                    if (mutationDetails.Name != null &&
-                        mutationDetails.FatherName != null &&
-                        mutationDetails.DateGpadead != null &&
-                        mutationDetails.GpastafilePath != null &&
-                        mutationDetails.Name2.Count > 0 &&
-                        mutationDetails.FatherName2.Count > 0 &&
-                        mutationDetails.DateGpadead.Count > 0 &&
-                        mutationDetails.GpastafilePath.Count > 0)
+                    //FileHelper fileHelper = new FileHelper();
+                    //if (mutationDetails.Name != null &&
+                    //    mutationDetails.FatherName != null &&
+                    //    mutationDetails.DateGpadead != null &&
+                    //    mutationDetails.GpastafilePath != null &&
+                    //    mutationDetails.Name2.Count > 0 &&
+                    //    mutationDetails.FatherName2.Count > 0 &&
+                    //    mutationDetails.DateGpadead.Count > 0 &&
+                    //    mutationDetails.GpastafilePath.Count > 0)
 
 
-                    {
-                        List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
-                        for (int i = 0; i < mutationDetails.Name2.Count; i++)
-                        {
-                            oldDamageAssess.Add(new Mutationolddamageassesse
-                            {
-                                Name = mutationDetails.Name2[i],
-                                FatherName = mutationDetails.FatherName2[i],
-                                DateGpadead = mutationDetails.DateGpadead[i],
-                                GpastafilePath = mutationDetails.GpastafilePath[i],
-                                MutationDetailsId = mutationDetails.Id
-                            });
-                        }
-                        foreach (var item in oldDamageAssess)
-                        {
-                            result = await _mutationDetailsService.SaveMutationOldDamage(item);
-                        }
-                    }
+                    //{
+                    //    List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
+                    //    for (int i = 0; i < mutationDetails.Name2.Count; i++)
+                    //    {
+                    //        oldDamageAssess.Add(new Mutationolddamageassesse
+                    //        {
+                    //            Name = mutationDetails.Name2[i],
+                    //            FatherName = mutationDetails.FatherName2[i],
+                    //            DateGpadead = mutationDetails.DateGpadead[i],
+                    //            GpastafilePath = mutationDetails.GpastafilePath[i],
+                    //            MutationDetailsId = mutationDetails.Id
+                    //        });
+                    //    }
+                    //    foreach (var item in oldDamageAssess)
+                    //    {
+                    //        result = await _mutationDetailsService.SaveMutationOldDamage(item);
+                    //    }
+                    //}
 
-                    /*For Photo of property file upload */
 
-                    if (mutationDetails.PropertyPhoto != null && mutationDetails.PropertyPhoto.Count > 0)
-                    {
-                        List<Mutationdetailsphotoproperty> MutationDetails = new List<Mutationdetailsphotoproperty>();
-                        for (int i = 0; i < mutationDetails.PropertyPhoto.Count; i++)
-                        {
-                            string FilePath = fileHelper.SaveFile(PhotoPropfilePath, mutationDetails.PropertyPhoto[i]);
-                            MutationDetails.Add(new Mutationdetailsphotoproperty
-                            {
-
-                                MutationDetailsId = mutationDetails.Id,
-                                PhotoPropFilePath = FilePath
-                            });
-                        }
-                        foreach (var item in MutationDetails)
-                        {
-                            result = await _mutationDetailsService.SaveMutationPhotoPropFile(item);
-                        }
-                    }
-
-                  
-                }
+               
 
                 if (result == true)
                 {
@@ -321,6 +320,99 @@ namespace DamagePayee.Controllers
         {
             zoneId = zoneId ?? 0;
             return Json(await _mutationDetailsService.GetAllLocality(Convert.ToInt32(zoneId)));
+        }
+
+        public async Task<IActionResult> DownloadATSFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Allottetypetemp Data = await _damagepayeeregisterService.GetATSFilePath(Id);
+            string filename = Data.AtsgpadocumentPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadAadharPathFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetAadharFilePath(Id);
+            string filename = Data.AadharNoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadPanPathFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPanFilePath(Id);
+            string filename = Data.PanNoFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadPhotographPathFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPhotographPath(Id);
+            string filename = Data.PhotographPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadSignaturePathFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetSignaturePath(Id);
+            string filename = Data.SignaturePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+
+        public async Task<IActionResult> DownloadPropertyPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.GetPhotoPropFile(Id);
+            string filename = Data.PropertyPhotoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadAgreementFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationAtsFilePath(Id);
+            string filename = Data.AtsfilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadGPAFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationGPAFilePath(Id);
+            string filename = Data.GpafilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadMoneyReceiptFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationMoneyReceiptFilePath(Id);
+            string filename = Data.MoneyRecieptFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadSignSpecFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationSignSPCFilePath(Id);
+            string filename = Data.SignatureSpecimenFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadAddressProofFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationAddressProofFilePath(Id);
+            string filename = Data.AddressProofFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadAffitDevitFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationAffitDevitFilePath(Id);
+            string filename = Data.AffidavitFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadIndemnityFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetails Data = await _mutationDetailsService.SaveMutationIndemnityFilePath(Id);
+            string filename = Data.IndemnityFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }

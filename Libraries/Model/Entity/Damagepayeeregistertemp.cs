@@ -154,5 +154,8 @@ namespace Libraries.Model.Entity
         public List<Allottetypetemp> AlloteeTypeDamageList { get; set; }
         [NotMapped]
         public List<Damagepayeeregistertemp> DamagePayeeRegisterList { get; set; }
+        [NotMapped]
+        public List<Damagepayeeregistertemp> PageResultList { get; set; }
+
     }
 }

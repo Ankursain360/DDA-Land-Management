@@ -36,6 +36,7 @@ namespace Libraries.Model.Entity
         public string MutationPurpose { get; set; }
         public DateTime? PurchaseDate { get; set; }
         public string AtsfilePath { get; set; }
+        public string PropertyPhotoPath { get; set; }
         public string GpafilePath { get; set; }
         public string MoneyRecieptFilePath { get; set; }
         public string SignatureSpecimenFilePath { get; set; }
@@ -49,7 +50,7 @@ namespace Libraries.Model.Entity
         public string OppositionPartyName { get; set; }
         public string PetitionerRespondent { get; set; }
         public string Declaration1 { get; set; }
-       
+
         public byte? IsActive { get; set; }
         public string ColonyName { get; set; }
         public int? PinCode { get; set; }
@@ -70,7 +71,7 @@ namespace Libraries.Model.Entity
         public string AffidevitLegalUploadPath { get; set; }
         public string SpecimenSignLegalUpload { get; set; }
 
-        
+
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
         public Damagepayeeregistertemp DamagePayeeRegister { get; set; }
@@ -98,7 +99,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public IFormFile IndemnityPathNew { get; set; }
         [NotMapped]
-        public List<IFormFile> PropertyPhoto { get; set; }
+        public IFormFile PropertyPhotoPathNew { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]

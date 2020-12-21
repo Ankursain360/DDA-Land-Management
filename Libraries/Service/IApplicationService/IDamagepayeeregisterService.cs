@@ -26,6 +26,10 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
         Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id);
         Task<bool> DeletePayeePersonalInfoTemp(int Id);
+        Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
 
 
         //********* rpt 2 Allotte Type **********
@@ -33,7 +37,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp);
         Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
-
+        Task<Allottetypetemp> GetATSFilePath(int Id);
 
         //********* rpt 3 Damage payment history ***********
 

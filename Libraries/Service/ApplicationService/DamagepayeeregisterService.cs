@@ -106,7 +106,22 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeletePayeePersonalInfoTemp(Id);
         }
-
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetAadharFilePath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPanFilePath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPhotographPath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetSignaturePath(Id);
+        }
 
         //********* rpt 2 Allotte Type **********
 
@@ -125,8 +140,10 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeleteAllotteTypeTemp(Id);
         }
-
-
+        public async Task<Allottetypetemp> GetATSFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetATSFilePath(Id);
+        }
 
         //********* rpt 3 Damage payment history ***********
 

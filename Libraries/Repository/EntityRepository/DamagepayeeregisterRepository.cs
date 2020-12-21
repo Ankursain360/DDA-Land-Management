@@ -46,6 +46,7 @@ namespace Libraries.Repository.EntityRepository
             var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
+
         //********* rpt 1 Persolnal info of damage assesse ***********
         public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
         {
@@ -65,6 +66,23 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
 
         //********* rpt 2 Allotte Type **********
 
@@ -84,10 +102,15 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<Allottetypetemp> GetATSFilePath(int Id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
 
-    //********* rpt 3 Damage payment history ***********
 
-    public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
+        //********* rpt 3 Damage payment history ***********
+
+        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
         {
             await _dbContext.Damagepaymenthistorytemp.AddRangeAsync(damagepaymenthistorytemp);
             var Result = await _dbContext.SaveChangesAsync();
