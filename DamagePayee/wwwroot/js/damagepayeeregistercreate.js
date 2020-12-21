@@ -164,6 +164,12 @@ $("input[name='grpYESNO']").click(function () {
 
 });
 
+$("input[name='Bill']").click(function () {
+    var selected = $("input[type='radio'][name='Bill']:checked");
+    $("#IsDocumentFor").val(selected.val());
+
+});
+
         //@*Repeator code  *@
     //$(document).ready(function () {
     //        $("#tbl_posts #tbl_posts_body .odd").remove();
@@ -239,7 +245,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFile").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
        
     ) {
       e.preventDefault();
@@ -294,7 +300,7 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
         && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalMobileNo").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalEmailid").val() != ''
-        && $("#tbl_Payment #addPayment #PaymentReceipt").val() != '')
+        && $("#tbl_Payment #addPayment #Reciept").val() != '')
     {
         e.preventDefault();
         var content = jQuery('#tbl_Payment #addPayment tr'),
@@ -337,3 +343,22 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+//********************* Length validation****************************
+
+//var minLength = 0;
+//var maxLength = 45;
+
+//$('#payeeName').on('keydown keyup change', function () {
+//        var char = $(this).val();
+//        var charLength = $(this).val().length;
+//        //if (charLength < minLength) {
+//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+//    //} else 
+//    if (charLength > maxLength) {
+//            $('span').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+//            $(this).val(char.substring(0, maxLength));
+//    }
+//    else {
+//            $('span').text('Length is valid');
+//        }
+//    });

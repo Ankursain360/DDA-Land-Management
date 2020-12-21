@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Service.ApplicationService
 {
-     public class DamagepayeeregisterService : EntityService<Damagepayeeregister>, IDamagepayeeregisterService
+     public class DamagepayeeregisterService : EntityService<Damagepayeeregistertemp>, IDamagepayeeregisterService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDamagepayeeregisterRepository _damagepayeeregisterRepository;
@@ -34,42 +34,42 @@ namespace Service.ApplicationService
             List<District> districtList = await _damagepayeeregisterRepository.GetDistrictList();
             return districtList;
         }
-        public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
+        public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()
         {
-            return await _damagepayeeregisterRepository.GetAllDamagepayeeregister();
+            return await _damagepayeeregisterRepository.GetAllDamagepayeeregisterTemp();
         }
 
 
 
-        public async Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo()
-        {
-            return await _damagepayeeregisterRepository.GetAllDamagepayeeregister();
-        }
+        //public async Task<List<Damagepayeeregistertemp>> GetDamagepayeeregisterUsingRepo()
+        //{
+        //    return await _damagepayeeregisterRepository.GetAllDamagepayeeregisterTemp();
+        //}
 
-        public async Task<Damagepayeeregister> FetchSingleResult(int id)
+        public async Task<Damagepayeeregistertemp> FetchSingleResult(int id)
         {
             var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
-            Damagepayeeregister model = result.FirstOrDefault();
+            Damagepayeeregistertemp model = result.FirstOrDefault();
             return model;
         }
 
-        public async Task<bool> Update(int id, Damagepayeeregister damagepayeeregister)
-        {
-            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
-            Damagepayeeregister model = result.FirstOrDefault();
-            model.FileNo = damagepayeeregister.FileNo;
+        //public async Task<bool> Update(int id, Damagepayeeregister damagepayeeregister)
+        //{
+        //    var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+        //    Damagepayeeregister model = result.FirstOrDefault();
+        //    model.FileNo = damagepayeeregister.FileNo;
 
-            model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
-            _damagepayeeregisterRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
-        }
+        //    model.ModifiedDate = DateTime.Now;
+        //    model.ModifiedBy = 1;
+        //    _damagepayeeregisterRepository.Edit(model);
+        //    return await _unitOfWork.CommitAsync() > 0;
+        //}
 
-        public async Task<bool> Create(Damagepayeeregister damagepayeeregister)
+        public async Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp)
         {
-            damagepayeeregister.CreatedBy = 1;
-            damagepayeeregister.CreatedDate = DateTime.Now;
-            _damagepayeeregisterRepository.Add(damagepayeeregister);
+            damagepayeeregistertemp.CreatedBy = 1;
+            damagepayeeregistertemp.CreatedDate = DateTime.Now;
+            _damagepayeeregisterRepository.Add(damagepayeeregistertemp);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
@@ -78,7 +78,7 @@ namespace Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
-            Damagepayeeregister model = form.FirstOrDefault();
+            Damagepayeeregistertemp model = form.FirstOrDefault();
             model.IsActive = 0;
             _damagepayeeregisterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -90,60 +90,77 @@ namespace Service.ApplicationService
         }
 
         //********* rpt 1 Persolnal info of damage assesse ***********
-        public async Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo)
+        public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
         {
-            damagepayeepersonelinfo.CreatedBy = 1;
-            damagepayeepersonelinfo.CreatedDate = DateTime.Now;
-            damagepayeepersonelinfo.IsActive = 1;
-            return await _damagepayeeregisterRepository.SavePayeePersonalInfo(damagepayeepersonelinfo);
+            damagepayeepersonelinfotemp.CreatedBy = 1;
+            damagepayeepersonelinfotemp.CreatedDate = DateTime.Now;
+            damagepayeepersonelinfotemp.IsActive = 1;
+            return await _damagepayeeregisterRepository.SavePayeePersonalInfoTemp(damagepayeepersonelinfotemp);
         }
 
-        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
+        public async Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id)
         {
-            return await _damagepayeeregisterRepository.GetPersonalInfo(id);
+            return await _damagepayeeregisterRepository.GetPersonalInfoTemp(id);
         }
-        public async Task<bool> DeletePayeePersonalInfo(int Id)
+        public async Task<bool> DeletePayeePersonalInfoTemp(int Id)
         {
-            return await _damagepayeeregisterRepository.DeletePayeePersonalInfo(Id);
+            return await _damagepayeeregisterRepository.DeletePayeePersonalInfoTemp(Id);
         }
-
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetAadharFilePath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPanFilePath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPhotographPath(Id);
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetSignaturePath(Id);
+        }
 
         //********* rpt 2 Allotte Type **********
 
-        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
+        public async Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp)
         {
-            allottetype.ForEach(x => x.CreatedBy = 1);
-            allottetype.ForEach(x => x.CreatedDate =DateTime.Now);
-            allottetype.ForEach(x => x.IsActive = 1);
-            return await _damagepayeeregisterRepository.SaveAllotteType(allottetype);
+            allottetypetemp.ForEach(x => x.CreatedBy = 1);
+            allottetypetemp.ForEach(x => x.CreatedDate =DateTime.Now);
+            allottetypetemp.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SaveAllotteTypeTemp(allottetypetemp);
         }
-        public async Task<List<Allottetype>> GetAllottetype(int id)
+        public async Task<List<Allottetypetemp>> GetAllottetypeTemp(int id)
         {
-            return await _damagepayeeregisterRepository.GetAllottetype(id);
+            return await _damagepayeeregisterRepository.GetAllottetypeTemp(id);
         }
-        public async Task<bool> DeleteAllotteType(int Id)
+        public async Task<bool> DeleteAllotteTypeTemp(int Id)
         {
-            return await _damagepayeeregisterRepository.DeleteAllotteType(Id);
+            return await _damagepayeeregisterRepository.DeleteAllotteTypeTemp(Id);
         }
-
-
+        public async Task<Allottetypetemp> GetATSFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetATSFilePath(Id);
+        }
 
         //********* rpt 3 Damage payment history ***********
 
-        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
+        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
         {
-            damagepaymenthistory.ForEach(x => x.CreatedBy = 1);
-            damagepaymenthistory.ForEach(x => x.CreatedDate = DateTime.Now);
-            damagepaymenthistory.ForEach(x => x.IsActive = 1);
-            return await _damagepayeeregisterRepository.SavePaymentHistory(damagepaymenthistory);
+            damagepaymenthistorytemp.ForEach(x => x.CreatedBy = 1);
+            damagepaymenthistorytemp.ForEach(x => x.CreatedDate = DateTime.Now);
+            damagepaymenthistorytemp.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SavePaymentHistoryTemp(damagepaymenthistorytemp);
         }
-        public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
+        public async Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id)
         {
-            return await _damagepayeeregisterRepository.GetPaymentHistory(id);
+            return await _damagepayeeregisterRepository.GetPaymentHistoryTemp(id);
         }
-        public async Task<bool> DeletePaymentHistory(int Id)
+        public async Task<bool> DeletePaymentHistoryTemp(int Id)
         {
-            return await _damagepayeeregisterRepository.DeletePaymentHistory(Id);
+            return await _damagepayeeregisterRepository.DeletePaymentHistoryTemp(Id);
         }
 
     }

@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthServer", "AuthServer\Au
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LandingPage", "LandingPage\LandingPage.csproj", "{81AC83B3-6FB7-413B-843D-8A9D2A2A2FFC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DamagePayeePublicInterface", "DamagePayeePublicInterface\DamagePayeePublicInterface.csproj", "{AE65A948-E63F-401A-BB75-5E08700601BB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -295,6 +297,18 @@ Global
 		{81AC83B3-6FB7-413B-843D-8A9D2A2A2FFC}.Release|x64.Build.0 = Release|Any CPU
 		{81AC83B3-6FB7-413B-843D-8A9D2A2A2FFC}.Release|x86.ActiveCfg = Release|Any CPU
 		{81AC83B3-6FB7-413B-843D-8A9D2A2A2FFC}.Release|x86.Build.0 = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|x64.Build.0 = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Debug|x86.Build.0 = Debug|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|x64.ActiveCfg = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|x64.Build.0 = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|x86.ActiveCfg = Release|Any CPU
+		{AE65A948-E63F-401A-BB75-5E08700601BB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -2,6 +2,7 @@
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
@@ -9,7 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using Utility.Helper;
 
 
 namespace DamagePayee.Controllers
@@ -18,10 +19,14 @@ namespace DamagePayee.Controllers
     {
 
         private readonly IDoortodoorsurveyService _doortodoorsurveyService;
+        public IConfiguration _configuration;
+        string targetPhotoPathLayout = string.Empty;
+        string targetReportfilePathLayout = string.Empty;
 
-        public Door2DoorSurveyController(IDoortodoorsurveyService doortodoorsurveyService)
+        public Door2DoorSurveyController(IDoortodoorsurveyService doortodoorsurveyService, IConfiguration configuration)
         {
             _doortodoorsurveyService = doortodoorsurveyService;
+            _configuration = configuration;
         }
 
         public IActionResult Index()
@@ -56,7 +61,16 @@ namespace DamagePayee.Controllers
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
 
                 if (ModelState.IsValid)
+
                 {
+                    string DocumentFilePath = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
+                    FileHelper file = new FileHelper();
+                    if (doortodoorsurvey.Photo != null)
+                    {
+                        doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(targetPhotoPathLayout, doortodoorsurvey.Photo);
+                    }
+
+
                     var result = await _doortodoorsurveyService.Create(doortodoorsurvey);
 
                     List<Familydetails> fixingprogram = new List<Familydetails>();
@@ -66,7 +80,7 @@ namespace DamagePayee.Controllers
                         {
                             Name = doortodoorsurvey.Name[i],
                             Age = doortodoorsurvey.Age[i],
-                            Gender = doortodoorsurvey.Gender[i],
+                            FGender = doortodoorsurvey.FGender[i],
                             D2dId = doortodoorsurvey.Id
                         });
                     }

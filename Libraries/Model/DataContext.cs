@@ -124,10 +124,17 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
         public virtual DbSet<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
         public virtual DbSet<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
+
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
         public virtual DbSet<Mutationdetailsphotoproperty> Mutationdetailsphotoproperty { get; set; }
+        public virtual DbSet<Mutationnewowner> Mutationnewowner { get; set; }
+        public virtual DbSet<Mutationnewownertemp> Mutationnewownertemp { get; set; }
+        public virtual DbSet<Mutationoriginalowner> Mutationoriginalowner { get; set; }
+        public virtual DbSet<Mutationoriginalownertemp> Mutationoriginalownertemp { get; set; }
+
+
         public virtual DbSet<Presentuse> Presentuse { get; set; }
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
 
@@ -220,6 +227,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MutationOldDamageAssesseConfiguration());
             modelBuilder.ApplyConfiguration(new MutationNewDamageAssesseConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsPhotoPropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationNewOwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationNewOwnerTempConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationOriginalOwnerConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationOriginalOwnerTempConfiguration());
 
             //**********  Damage Payee **********
 

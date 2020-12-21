@@ -107,6 +107,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.PendingAt).HasColumnType("int(11)");
 
+            builder.Property(e => e.UserId).HasColumnType("int(11)");
+
             builder.Property(e => e.PetitionerRespondent)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -124,6 +126,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.PropertyNo)
                 .HasMaxLength(45)
                 .IsUnicode(false);
+
+            builder.Property(e => e.PropertyPhotoPath).HasColumnType("longtext");
 
             builder.Property(e => e.Rebate).HasColumnType("decimal(18,3)");
 
@@ -160,6 +164,7 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Damagepayeeregistertemp)
                 .HasForeignKey(d => d.LocalityId)
                 .HasConstraintName("fk_TempLocality");
+
 
         }
     }

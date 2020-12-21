@@ -28,7 +28,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("d2dId")
                 .HasColumnType("int(11)");
 
-            builder.Property(e => e.Gender)
+            builder.Property(e => e.FGender)
                 .IsRequired()
                 .HasMaxLength(30)
                 .IsUnicode(false);

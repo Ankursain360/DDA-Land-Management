@@ -9,35 +9,37 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface ISelfAssessmentDamageService : IEntityService<Damagepayeeregister>
+    public interface ISelfAssessmentDamageService : IEntityService<Damagepayeeregistertemp>
     {
-        Task<List<Damagepayeeregister>> GetAllDamagepayeeregister();
-        Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
-        Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
-        Task<bool> Create(Damagepayeeregister damagepayeeregister);
-        Task<Damagepayeeregister> FetchSingleResult(int id);
+        Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp();
+        // Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
+        //Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
+        Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp);
+        Task<Damagepayeeregistertemp> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
 
         //********* rpt 1 Persolnal info of damage assesse ***********
-        Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo);
-        Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);
-        Task<bool> DeletePayeePersonalInfo(int Id);
+        Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
+        Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id);
+        Task<bool> DeletePayeePersonalInfoTemp(int Id);
 
 
         //********* rpt 2 Allotte Type **********
 
-        Task<bool> SaveAllotteType(List<Allottetype> allottetype);
-        Task<List<Allottetype>> GetAllottetype(int id);
-        Task<bool> DeleteAllotteType(int Id);
+        Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp);
+        Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
+        Task<bool> DeleteAllotteTypeTemp(int Id);
 
 
         //********* rpt 3 Damage payment history ***********
 
-        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
-        Task<List<Damagepaymenthistory>> GetPaymentHistory(int id);
-        Task<bool> DeletePaymentHistory(int Id);
+        Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
+        Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
+        Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId);
+        Task<bool> DeletePaymentHistoryTemp(int Id);
+        Task<Rebate> GetRebateValue();
     }
 }

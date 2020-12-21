@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
             Allottetype = new HashSet<Allottetype>();
             Damagepayeepersonelinfo = new HashSet<Damagepayeepersonelinfo>();
             Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
+            
         }
 
        
@@ -58,8 +59,9 @@ namespace Libraries.Model.Entity
         public string Achknowledgement { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-
+        public int? UserId { get; set; }
         public byte? IsActive { get; set; }
+        public string PropertyPhotoPath { get; set; }
 
         public District District { get; set; }
         [NotMapped]
@@ -67,7 +69,19 @@ namespace Libraries.Model.Entity
         public Locality Locality { get; set; }
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
-        public Locality OnlinePaymentLocality { get; set; }
+        [NotMapped]
+        public List<IFormFile> PropertyPhoto { get; set; }
+
+       
+        [NotMapped]
+        public List<IFormFile> ShowCauseNotice { get; set; }
+
+        [NotMapped]
+        public List<IFormFile> Fgform { get; set; }
+        [NotMapped]
+        public List<IFormFile> DocumentForFile { get; set; }
+
+      
         public ICollection<Allottetype> Allottetype { get; set; }
         public ICollection<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public ICollection<Damagepaymenthistory> Damagepaymenthistory { get; set; }
@@ -99,7 +113,18 @@ namespace Libraries.Model.Entity
         public List <string> MobileNo { get; set; }
         [NotMapped]
         public List <string> EmailId { get; set; }
-
+        [NotMapped]
+        public List<string> AadharNo { get; set; }
+        [NotMapped]
+        public List<IFormFile> Aadhar { get; set; }
+        [NotMapped]
+        public List<string> PanNo { get; set; }
+        [NotMapped]
+        public List<IFormFile> Pan { get; set; }
+        [NotMapped]
+        public List<IFormFile> Photograph { get; set; }
+        [NotMapped]
+        public List<IFormFile> SignatureFile { get; set; }
 
         //****** Damagepaymenthistory ***
         [NotMapped]
@@ -116,7 +141,10 @@ namespace Libraries.Model.Entity
        
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
+
+
        
+
 
     }
 }
