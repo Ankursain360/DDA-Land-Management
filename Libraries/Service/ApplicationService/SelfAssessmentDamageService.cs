@@ -145,5 +145,15 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeletePaymentHistoryTemp(Id);
         }
+
+        public async Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId)
+        {
+            return await _selfAssessmentDamageRepository.FetchSelfAssessmentUserId(userId);
+        }
+
+        public async Task<Rebate> GetRebateValue()
+        {
+            return await _selfAssessmentDamageRepository.GetRebateValue();
+        }
     }
 }

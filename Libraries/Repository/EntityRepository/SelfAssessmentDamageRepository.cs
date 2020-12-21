@@ -103,5 +103,26 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        public async Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId)
+        {
+            return await _dbContext.Damagepayeeregistertemp
+                                    .Include(x => x.Damagepayeepersonelinfotemp)
+                                    .Include(x => x.Damagepaymenthistorytemp)
+                                    .Include(x => x.Allottetypetemp)
+                                    .Where(x => x.UserId == userId)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Rebate> GetRebateValue()
+        {
+            return await _dbContext.Rebate
+                              .Where(x => x.IsActive == 1 && x.IsRebateOn == 1 )
+                              .OrderByDescending(d => d.ToDate)
+                              .FirstOrDefaultAsync();
+            //List<Rebate> olist = new List<Rebate>();
+            //olist = await _dbContext.Rebate.Where(x => x.IsActive == 1 && x.IsRebateOn == 1).ToListAsync();
+            //return (olist.GroupBy(x => x.IsRebateOn).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).FirstOrDefaultAsync());
+        }
     }
 }

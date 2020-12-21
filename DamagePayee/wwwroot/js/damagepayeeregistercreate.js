@@ -343,3 +343,22 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+//********************* Length validation****************************
+
+//var minLength = 0;
+//var maxLength = 45;
+
+//$('#payeeName').on('keydown keyup change', function () {
+//        var char = $(this).val();
+//        var charLength = $(this).val().length;
+//        //if (charLength < minLength) {
+//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+//    //} else 
+//    if (charLength > maxLength) {
+//            $('span').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+//            $(this).val(char.substring(0, maxLength));
+//    }
+//    else {
+//            $('span').text('Length is valid');
+//        }
+//    });

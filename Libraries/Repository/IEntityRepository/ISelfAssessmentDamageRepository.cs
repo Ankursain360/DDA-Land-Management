@@ -35,5 +35,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
+        Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId);
+        Task<Rebate> GetRebateValue();
     }
 }
