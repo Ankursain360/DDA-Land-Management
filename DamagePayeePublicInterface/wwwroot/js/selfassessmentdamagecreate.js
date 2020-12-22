@@ -11,6 +11,7 @@
         var amount = $('#TotalValueWithInterest').val();
         var interest = $('#InterestDueAmountCompund').val();
         var rebate = $('#Rebate').val();
+        var rebatePercentage = $('#RebatePercentage').val();
         if (amount == "") {
           //  $("input[name='InterestDueAmountCompund']").val("");
             $("input[name='TotalPayable']").val("");
@@ -20,7 +21,8 @@
             $("input[name='TotalPayable']").val("");
         }
         else {
-            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebate == '' ? 0 : rebate )));
+            $("input[name='Rebate']").val(parseInt(rebatePercentage == '' ? 0 : ((interest * rebatePercentage) / 100)) );
+            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebatePercentage == '' ? 0 : ((interest*rebatePercentage)/100) )));
         }
     });
 

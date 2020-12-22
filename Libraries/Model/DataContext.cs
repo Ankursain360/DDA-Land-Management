@@ -137,7 +137,8 @@ namespace Libraries.Model
 
         public virtual DbSet<Presentuse> Presentuse { get; set; }
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
-
+        public virtual DbSet<Processworkflow> Processworkflow { get; set; }
+        public virtual DbSet<Workflowaction> Workflowaction { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -244,7 +245,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
-
+            modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
+            modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

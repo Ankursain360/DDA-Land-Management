@@ -1,0 +1,161 @@
+﻿
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled">Select One</option>
+                        <option>Demand No</option>
+                        <option>Due Date</option>
+                        <option>Payee Name</option>
+                      
+
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                </div>
+            </div>
+
+            @*<div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/EncroachmentRegister/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>*@
+        </div>
+        <div class="table-responsive px-2" id="divEncroachmentRegisterationTable">
+
+        </div>
+    </div>
+
+
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <table class="table table-responsive table-bordered table-card">
+
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>
+
+                                Demand No
+
+                            </th>
+                            <th>
+                                Due Date
+                            </th>
+                            <th>
+                                Payee Name
+                            </th>
+                            <th>
+                                Demand Amount
+                            </th>
+                            <th>Interest Amount</th>
+                            <th>Rebate Amount</th>
+                            <th>Total Amount</th>
+                            <th colspan="2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                F-1(73)
+
+                            </td>
+                            <td>
+                                11/8/2020
+                            </td>
+                            <td>
+                                Payee name
+                            </td>
+                            <td>40000</td>
+                            <td>1000</td>
+                            <td>3000</td>
+                            <td>44000</td>
+                            <td>
+
+                                <input type="button" value="PayNow" class="btn btn-theme" />
+
+
+
+                            </td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                F-1(73)
+
+                            </td>
+                            <td>
+                                11/8/2020
+                            </td>
+                            <td>
+                                Payee name
+                            </td>
+                            <td>40000</td>
+                            <td>1000</td>
+                            <td>3000</td>
+                            <td>44000</td>
+                            <td>
+
+                                <input type="button" value="PayNow" class="btn btn-theme" />
+
+
+
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+        
+    <script>
+        $(function () {
+            $("input[name=btnsubmit]").click(function () {
+                if ($(this).val() == "Search") {
+                    $("#DivForSubsequentPurchaser").show();
+                } else {
+                    $("#DivForSubsequentPurchaser").hide();
+                }
+            });
+        });
+
+    </script>
+
+
+    <script>
+        function showcollection() {
+            $("#showcollection").toggle();
+            $("#showtr").toggle();
+
+        }
+    </script>
