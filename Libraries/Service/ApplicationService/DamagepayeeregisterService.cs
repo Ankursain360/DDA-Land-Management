@@ -84,9 +84,9 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model)
         {
-            return await _damagepayeeregisterRepository.GetPagedDamagepayeeregister(model);
+            return await _damagepayeeregisterRepository.GetPagedDamagepayeeregistertemp(model);
         }
 
         //********* rpt 1 Persolnal info of damage assesse ***********

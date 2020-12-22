@@ -18,7 +18,7 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model)
         {
             return await _dbContext.Damagepayeeregister
                 .Where(x => x.IsActive == 1)

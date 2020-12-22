@@ -27,14 +27,13 @@ namespace DamagePayee.Controllers
         {
             return View();
         }
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
+
+       
+
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DamagepayeeregisterSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
         {
-            var result = await _damagepayeeregisterService.GetPagedDamagepayeeregister(model);
+            var result = await _damagepayeeregisterService.GetPagedDamagepayeeregistertemp(model);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Damagepayeeregistertemp damagepayeeregistertemp)
