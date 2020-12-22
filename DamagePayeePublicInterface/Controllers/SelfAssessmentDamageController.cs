@@ -41,9 +41,12 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> Create()
         {
             Damagepayeeregistertemp damagepayeeregistertemp = new Damagepayeeregistertemp();
-            var Data =await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
+            var Data = await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
-            ViewBag.RebateValue = 3.00;
+            if (value == null)
+                ViewBag.RebateValue = 0;
+            else
+                ViewBag.RebateValue = value.RebatePercentage;
             if (Data != null)
             {
                 await BindDropDown(Data);
@@ -54,7 +57,7 @@ namespace DamagePayeePublicInterface.Controllers
                 await BindDropDown(damagepayeeregistertemp);
                 return View(damagepayeeregistertemp);
             }
-            
+
         }
         [HttpPost]
 

@@ -37,15 +37,20 @@
     }
     else
     {
-        <li class="nav-item">
+        <li >
             @{
                 if (string.IsNullOrEmpty(menu.Url))
                 {
-                    <a href="javascript:void(0)" class="d-block">@menu.Name</a>
+                    <a href="javascript:void(0)" class="d-block">
+                        <i class="main-icon ri-dashboard-line"></i>@menu.Name
+                    </a>
                 }
                 else
                 {
-                    <a href="@menu.Url" class="d-block">@menu.Name</a>
+                    <a class="no-dec d-flex align-items-center collapsed" href="@menu.Url" >
+                        <i class="main-icon ri-dashboard-line"></i>
+                        <span class="text mr-auto">@menu.Name</span>
+                    </a>
                 }
             }
         </li>

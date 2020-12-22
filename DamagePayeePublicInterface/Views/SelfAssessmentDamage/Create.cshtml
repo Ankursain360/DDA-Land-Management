@@ -602,7 +602,7 @@
         </div>
         <div id="divSelfAssessmentAmount">
             <h3 class="my-3 d-flex sub-heading">Amount Payable as per self assessment</h3>
-            <input type="hidden" value="@ViewBag.RebateValue" />
+            <input id="RebatePercentage" type="hidden" value="@ViewBag.RebateValue" />
             <div class="row mt-md-3">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -622,7 +622,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0 ">
                         <input asp-for="Rebate" type="text"  class="floating-label-field floating-label-field--s3 onlynumbers"  disabled />
-                        <label class="floating-label">Rebate 50% of total Interest<span style="color:red">*</span></label>
+                        <label class="floating-label">Rebate @ViewBag.RebateValue% of total Interest<span style="color:red">*</span></label>
                     </div>
                 </div>
                 <div class="col-md-6">
