@@ -9,12 +9,17 @@ namespace Libraries.Model.Entity
 {
     public class Payeeregistration : AuditableEntity<int>
     {
+        [Required]
+        [Remote(action: "ExistName", controller: "DamagePayeeRegistration", AdditionalFields = "Id,Name")]
         public string Name { get; set; }
         public string MobileNumber { get; set; }
+        [Required(ErrorMessage = "The EmailId field is required")]
+        [Remote(action: "Existemail", controller: "DamagePayeeRegistration", AdditionalFields = "Id,EmailId")]
         public string EmailId { get; set; }
         public string IsVerified { get; set; }
         public byte? IsActive { get; set; }
-
+        //[NotMapped]
+        //public string EncryptedId { get; set; }
 
     }
 }

@@ -1,5 +1,13 @@
-﻿@model Libraries.Model.Entity.Mutationdetails
+﻿
+@model Libraries.Model.Entity.Mutationdetails
 @{int rowNo = 0;}
+@{int AtsgpadocumentPath = 0;}
+@{int AadharNoFilePath = 0;}
+@{int PanNoFilePath = 0; }
+@{int PhotographPath = 0; }
+@{int SignaturePath = 0; }
+@{int PropertyPhoto = 0; }
+
 
 
 <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
@@ -25,7 +33,7 @@
 
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive">
-                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                <table class="table table-sm table-bordered mb-0 table-striped">
                     <thead class="text-nowrap">
 
                         <tr>
@@ -40,68 +48,130 @@
                             <th style="min-width:200px;">Pan No.</th>
                             <th style="min-width:200px;">Photo</th>
                             <th style="min-width:200px;">Signature</th>
-                            <th>Operation</th>
+
                         </tr>
                     </thead>
-                    <tbody id="tbl_posts_body">
-                    </tbody>
-                    <tbody class="tbody" id="add">
-                        <tr id="">
-                            <td style="text-align:center;"><span class="sn">1</span></td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.payeeName" disabled type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.payeeFatherName" disabled type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <select asp-for="DamagePayeeRegister.Gender" disabled class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
-                                    <option value="0">---Select---</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
-                                    <option value="3">Other</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.Address" disabled type="text" id="txtPersonalAddress" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.MobileNo" disabled type="text" id="txtPersonalMobileNo." class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.EmailId" disabled type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DamagePayeeRegister.AadharNo" disabled type="text" placeholder="Aadhar No." class=" floating-label-field--s3" />
 
-                                    <input asp-for="DamagePayeeRegister.Aadhar" disabled type="file" class="floating-label-field floating-label-field--s3 " />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DamagePayeeRegister.PanNo" disabled type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
-                                    <input asp-for="DamagePayeeRegister.Pan" disabled type="file" class="floating-label-field floating-label-field--s3 " />
-                                </div>
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.Photograph" disabled type="file" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.SignatureFile" disabled type="file" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            @*<td>
+                    <tbody>
+                        @foreach (var item in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                        {
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.FatherName
+                                </td>
+                                <td>
+                                    @if (Convert.ToInt32(item.Gender) == 1)
+                                    {
+                                        <span class="badge badge-primary px-2 py-1">Male</span>
+                                    }
+                                    else if (Convert.ToInt32(item.Gender) == 2)
+                                    {
+                                        <span class="badge badge-danger px-2 py-1">Female</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger px-2 py-1">Other</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td>
+                                    @item.MobileNo
+                                </td>
+                                <td>
+                                    @item.EmailId
+                                </td>
+                                <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                    </div>
-                                </td>*@
-                        </tr>
 
+                                        @item.AadharNo
+                                        @{
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            {
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                {
+                                                    <a asp-action="DownloadAadharPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AadharNoFilePath += 1 ))</a>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @item.AadharNoFilePath
+
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        @item.PanNo
+                                        @{
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            {
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                {
+                                                    <a asp-action="DownloadPanPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PanNoFilePath += 1 ))</a>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @item.PanNoFilePath
+
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            {
+                                                <a asp-action="DownloadPhotographPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotographPath += 1 ))</a>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.PhotographPath
+
+                                        }
+                                    }
+
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            {
+                                                <a asp-action="DownloadSignaturePathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(SignaturePath += 1 ))</a>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.SignaturePath
+
+                                        }
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
-
 
         </div>
 
@@ -136,11 +206,9 @@
 
         <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
 
-
-
         <div class="table-section bg-white border shadow rounded">
             <div class="table-responsive">
-                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_DamageAssessee">
+                <table class="table table-sm table-bordered mb-0 table-striped">
                     <thead class="text-nowrap">
                         <tr>
                             <th>Sr.No</th>
@@ -148,33 +216,44 @@
                             <th>Father's Name</th>
                             <th>Date of GPA/Will/Other Deed</th>
                             <th>Upload ATS & GPA/Will</th>
-                            <th>Operation</th>
+
                         </tr>
                     </thead>
-                    <tbody id="tbl_DamageAssessee_body">
-                    </tbody>
-                    <tbody class="tbody" id="addDamageAssessee">
-                        <tr id="">
 
-                            <td style="text-align:center;"><span class="sn1">1</span></td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.Name" disabled type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.FatherName" disabled type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.Date" disabled type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
-                            </td>
-                            <td>
-                                <input asp-for="DamagePayeeRegister.ATSGPA" disabled type="file" class="floating-label-field floating-label-field--s3" />
-                            </td>
-                            @*<td>
-                                    <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                    <a class="btn btn-theme add-recordDamageAssessee" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                </td>*@
-                        </tr>
+                    <tbody>
+                        @foreach (var item in Model.DamagePayeeRegister.Allottetypetemp)
+                        {
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.FatherName
+                                </td>
+                                <td>
+                                    @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Allottetypetemp != null && Model.DamagePayeeRegister.Allottetypetemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Allottetypetemp)
+                                            {
+                                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AtsgpadocumentPath += 1 ))</a>
 
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.AtsgpadocumentPath
+
+                                        }
+                                    }
+                                </td>
+
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -274,15 +353,32 @@
         <div class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    @*@{
+                        if (Model.DamagePayeeRegister != null && Model.DamagePayeeRegister.Count > 0)
+                        {
+                            foreach (var data in Model.DamagePayeeRegister)
+                            {
+                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhoto += 1 ))</a>
+
+                            }
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
+
+                        }
+                        else
+                        {*@
                     <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
                     <span class="d-block text-danger field-validation-valid"></span>
                     <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+
+                    @*}
+                    }*@
+
                     @*<a href="#" class="badge badge-primary px-2">View file</a>*@
                 </div>
             </div>
         </div>
 
-
+    </div>
 
 </form>
 
