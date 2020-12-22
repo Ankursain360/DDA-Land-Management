@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
-        Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
+        Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model);
 
         //********* rpt 1 Persolnal info of damage assesse ***********
         Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
