@@ -12,7 +12,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 
-namespace DamagePayee.Controllers
+namespace DamagePayeePublicInterface.Controllers
 {
     public class SelfAssessmentDamageController : BaseController
     {

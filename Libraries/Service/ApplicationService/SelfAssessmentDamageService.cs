@@ -150,5 +150,10 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.FetchSelfAssessmentUserId(userId);
         }
+
+        public async Task<Rebate> GetRebateValue()
+        {
+            return await _selfAssessmentDamageRepository.GetRebateValue();
+        }
     }
 }

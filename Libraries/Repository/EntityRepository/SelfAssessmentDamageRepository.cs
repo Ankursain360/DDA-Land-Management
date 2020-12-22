@@ -113,5 +113,16 @@ namespace Libraries.Repository.EntityRepository
                                     .Where(x => x.UserId == userId)
                                     .FirstOrDefaultAsync();
         }
+
+        public async Task<Rebate> GetRebateValue()
+        {
+            return await _dbContext.Rebate
+                              .Where(x => x.IsActive == 1 && x.IsRebateOn == 1 )
+                              .OrderByDescending(d => d.ToDate)
+                              .FirstOrDefaultAsync();
+            //List<Rebate> olist = new List<Rebate>();
+            //olist = await _dbContext.Rebate.Where(x => x.IsActive == 1 && x.IsRebateOn == 1).ToListAsync();
+            //return (olist.GroupBy(x => x.IsRebateOn).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).FirstOrDefaultAsync());
+        }
     }
 }
