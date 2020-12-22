@@ -14,7 +14,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp();
        // Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
-        //Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
+        Task<bool> Update(int id, Damagepayeeregistertemp damagepayeeregistertemp);
         Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp);
         Task<Damagepayeeregistertemp> FetchSingleResult(int id);
         Task<bool> Delete(int id);
