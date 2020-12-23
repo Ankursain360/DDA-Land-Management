@@ -17,16 +17,17 @@ using System.Drawing.Imaging;
 using Microsoft.AspNetCore.Hosting;
 using Model.Entity;
 using Microsoft.AspNetCore.Http;
+using DamagePayee.Helper;
 
 namespace DamagePayee.Controllers
 {
-    public class SubstitutionMutationDetailsController : Controller
+    public class SubstitutionMutationDetailsController : BaseController
     {
         public IConfiguration _configuration;
         private readonly IMutationDetailsService _mutationDetailsService;
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
 
-        string PropertyfilePath = "";
+        string PropPhotofilePath = "";
         string AtsfilePath = "";
         string GPAfilePath = "";
         //string PhotofilePath= "";
@@ -60,61 +61,45 @@ namespace DamagePayee.Controllers
             return View(Model);
         }
 
-
-        public async Task<IActionResult> Create(int id)
+        async Task BindDropDown(Damagepayeeregistertemp DamagePayeeRegister)
         {
-            Mutationdetails Model = new Mutationdetails();
-            //var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            Damagepayeeregistertemp damage = new Damagepayeeregistertemp();
 
-            //Data.PropLocalityList = await _damagepayeeregisterService.GetLocalityList();
-            //Data.PropDistrictList = await _damagepayeeregisterService.GetDistrictList();
+            DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
+            DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
+        }
+        public async Task<IActionResult> Create()
+        {
+            Mutationdetails mutationdetails = new Mutationdetails();
 
-            //Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
-            //Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
+            mutationdetails.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(SiteContext.UserId);
+            ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
+            ViewBag.District = await _mutationDetailsService.GetDistrictList();
+            if (mutationdetails != null)
+            {
+                return View(mutationdetails);
+            }
+            else
+            {
+                return View(mutationdetails);
+            }
 
-            //Data.DamagePayeeRegisterList = await _damagepayeeregisterService.GetAllDamagepayeeregisterTemp();
-            //Model.DamagePayeeRegister = Data;
-
-            Model.ZoneList = await _mutationDetailsService.GetAllZone();
-            Model.LocalityList = await _mutationDetailsService.GetAllLocality(Model.ZoneId);
-
-            return View(Model);
+            
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int id, Mutationdetails mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
-            mutationDetails.ZoneList = await _mutationDetailsService.GetAllZone();
-            mutationDetails.LocalityList = await _mutationDetailsService.GetAllLocality(mutationDetails.ZoneId);
-
+            await BindDropDown(Data);
 
             if (true)
             {
                 //var mainFile = new FileHelper();
                 //mutationDetails.AffidavitFilePath = mainFile.SaveFile(PhotoPropfilePath, mutationDetails.AtsfilePathNew);
 
-                /*For Photo of property file upload */
 
-                string PropertyFileName = "";
-                string PropfilePath = "";
-                // mutationDetails.AtsfilePathNew = agreementfilePath;
-                PropertyfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:PHOTOPROPFilePath").Value.ToString();
-                if (mutationDetails.PropertyPhotoPathNew != null)
-                {
-                    if (!Directory.Exists(PropertyfilePath))
-                    {
-                        // Try to create the directory.
-                        DirectoryInfo di = Directory.CreateDirectory(PropertyfilePath);
-                    }
-                    PropertyFileName = Guid.NewGuid().ToString() + "_" + mutationDetails.PropertyPhotoPathNew.FileName;
-                    PropfilePath = Path.Combine(PropertyfilePath, PropertyFileName);
-                    using (var stream = new FileStream(PropfilePath, FileMode.Create))
-                    {
-                        mutationDetails.PropertyPhotoPathNew.CopyTo(stream);
-                    }
-                    mutationDetails.PropertyPhotoPath = PropfilePath;
-                }
+
                 /* For Ats File Upload*/
                 string ATSFileName = "";
                 string atsfilePath = "";
@@ -264,42 +249,71 @@ namespace DamagePayee.Controllers
 
                 var result = await _mutationDetailsService.Create(mutationDetails);
 
-               
 
+                if (result == true)
+                {
                     /*Previous Damage Assessee Details Repeater*/
 
-                    //FileHelper fileHelper = new FileHelper();
-                    //if (mutationDetails.Name != null &&
-                    //    mutationDetails.FatherName != null &&
-                    //    mutationDetails.DateGpadead != null &&
-                    //    mutationDetails.GpastafilePath != null &&
-                    //    mutationDetails.Name2.Count > 0 &&
-                    //    mutationDetails.FatherName2.Count > 0 &&
-                    //    mutationDetails.DateGpadead.Count > 0 &&
-                    //    mutationDetails.GpastafilePath.Count > 0)
+                    // FileHelper fileHelper = new FileHelper();
+                    //    if (mutationDetails.Name != null &&
+                    //        mutationDetails.FatherName != null &&
+                    //        mutationDetails.DateGpadead != null &&
+                    //        mutationDetails.GpastafilePath != null &&
+                    //        mutationDetails.Name2.Count > 0 &&
+                    //        mutationDetails.FatherName2.Count > 0 &&
+                    //        mutationDetails.DateGpadead.Count > 0 &&
+                    //        mutationDetails.GpastafilePath.Count > 0)
 
 
-                    //{
-                    //    List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
-                    //    for (int i = 0; i < mutationDetails.Name2.Count; i++)
                     //    {
-                    //        oldDamageAssess.Add(new Mutationolddamageassesse
+                    //        List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
+                    //        for (int i = 0; i < mutationDetails.Name2.Count; i++)
                     //        {
-                    //            Name = mutationDetails.Name2[i],
-                    //            FatherName = mutationDetails.FatherName2[i],
-                    //            DateGpadead = mutationDetails.DateGpadead[i],
-                    //            GpastafilePath = mutationDetails.GpastafilePath[i],
-                    //            MutationDetailsId = mutationDetails.Id
-                    //        });
+                    //            oldDamageAssess.Add(new Mutationolddamageassesse
+                    //            {
+                    //                Name = mutationDetails.Name2[i],
+                    //                FatherName = mutationDetails.FatherName2[i],
+                    //                DateGpadead = mutationDetails.DateGpadead[i],
+                    //                GpastafilePath = mutationDetails.GpastafilePath[i],
+                    //                MutationDetailsId = mutationDetails.Id
+                    //            });
+                    //        }
+                    //        foreach (var item in oldDamageAssess)
+                    //        {
+                    //            result = await _mutationDetailsService.SaveMutationOldDamage(item);
+                    //        }
                     //    }
-                    //    foreach (var item in oldDamageAssess)
+
+                    //    if (mutationDetails.Name != null &&
+                    //        mutationDetails.FatherName != null &&
+                    //        mutationDetails.DateGpadead != null &&
+                    //        mutationDetails.GpastafilePath != null &&
+                    //        mutationDetails.Name2.Count > 0 &&
+                    //        mutationDetails.FatherName2.Count > 0 &&
+                    //        mutationDetails.DateGpadead.Count > 0 &&
+                    //        mutationDetails.GpastafilePath.Count > 0)
+
+
                     //    {
-                    //        result = await _mutationDetailsService.SaveMutationOldDamage(item);
+                    //        List<Mutationolddamageassesse> oldDamageAssess = new List<Mutationolddamageassesse>();
+                    //        for (int i = 0; i < mutationDetails.Name2.Count; i++)
+                    //        {
+                    //            oldDamageAssess.Add(new Mutationolddamageassesse
+                    //            {
+                    //                Name = mutationDetails.Name2[i],
+                    //                FatherName = mutationDetails.FatherName2[i],
+                    //                DateGpadead = mutationDetails.DateGpadead[i],
+                    //                GpastafilePath = mutationDetails.GpastafilePath[i],
+                    //                MutationDetailsId = mutationDetails.Id
+                    //            });
+                    //        }
+                    //        foreach (var item in oldDamageAssess)
+                    //        {
+                    //            result = await _mutationDetailsService.SaveMutationOldDamage(item);
+                    //        }
                     //    }
-                    //}
+                }
 
-
-               
 
                 if (result == true)
                 {
@@ -315,11 +329,12 @@ namespace DamagePayee.Controllers
             }
         }
 
-        [HttpGet]
-        public async Task<JsonResult> GetLocalityList(int? zoneId)
+        public async Task<JsonResult> AlloteeTypeRepeter(int? Id)
         {
-            zoneId = zoneId ?? 0;
-            return Json(await _mutationDetailsService.GetAllLocality(Convert.ToInt32(zoneId)));
+            Id = Id ?? 0;
+            var data = await _damagepayeeregisterService.GetNewAlloteeRepeater(Convert.ToInt32(Id));
+            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
+            return Json(data.Select(x => new { x.Name, x.FatherName, Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"), x.AtsgpadocumentPath }));
         }
 
         public async Task<IActionResult> DownloadATSFile(int Id)
@@ -361,7 +376,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> DownloadPropertyPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Mutationdetails Data = await _mutationDetailsService.GetPhotoPropFile(Id);
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.GetPropertyPhotoPath(Id);
             string filename = Data.PropertyPhotoPath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }

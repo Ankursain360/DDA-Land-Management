@@ -34,6 +34,12 @@ namespace Service.ApplicationService
             List<District> districtList = await _damagepayeeregisterRepository.GetDistrictList();
             return districtList;
         }
+
+        public async Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPropertyPhotoPath(Id);
+        }
+
         public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()
         {
             return await _damagepayeeregisterRepository.GetAllDamagepayeeregisterTemp();
@@ -71,9 +77,7 @@ namespace Service.ApplicationService
             damagepayeeregistertemp.CreatedDate = DateTime.Now;
             _damagepayeeregisterRepository.Add(damagepayeeregistertemp);
             return await _unitOfWork.CommitAsync() > 0;
-        }
-
-      
+        }      
 
         public async Task<bool> Delete(int id)
         {
@@ -121,6 +125,10 @@ namespace Service.ApplicationService
         public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
         {
             return await _damagepayeeregisterRepository.GetSignaturePath(Id);
+        }
+        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetNewAlloteeRepeater(Id);
         }
 
         //********* rpt 2 Allotte Type **********

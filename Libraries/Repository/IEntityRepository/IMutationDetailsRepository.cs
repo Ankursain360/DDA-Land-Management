@@ -10,8 +10,8 @@ namespace Libraries.Repository.IEntityRepository
     public interface IMutationDetailsRepository : IGenericRepository<Mutationdetails>
     {
         Task<List<Mutationdetails>> GetAllMutationDetails();
-        Task<List<Locality>> GetAllLocality(int zoneId);
-        Task<List<Zone>> GetAllZone();
+        Task<List<Locality>> GetLocalityList();
+        Task<List<District>> GetDistrictList();
         Task<bool> Any(int id, string name);
 
 
@@ -29,6 +29,7 @@ namespace Libraries.Repository.IEntityRepository
         /*Repeater*/
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
         Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id);
+        Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId);
 
     }
 }

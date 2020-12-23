@@ -43,6 +43,7 @@ namespace DamagePayee.Controllers
             Damagepayeeregistertemp damagepayeeregistertemp = new Damagepayeeregistertemp();
             var Data =await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
+
             ViewBag.RebateValue = 3.00;
             if (Data != null)
             {

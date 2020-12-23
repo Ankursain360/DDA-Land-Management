@@ -30,7 +30,6 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-
         public async Task<List<Payeeregistration>> GetStructureUsingRepo()
         {
             return await _damagePayeeRegistrationRepository.GetAllPayeeregistration();

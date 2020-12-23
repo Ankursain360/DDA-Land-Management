@@ -15,7 +15,8 @@ namespace Libraries.Repository.IEntityRepository
         //Task<bool> Any(int id, string name);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
-        
+        Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id);
+
         Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp();
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
 
@@ -40,5 +41,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
+
+        //************ Persolnal info of damage assesse Repeater ************//
+        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
+
     }
 }

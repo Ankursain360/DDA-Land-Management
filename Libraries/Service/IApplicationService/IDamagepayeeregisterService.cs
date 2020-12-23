@@ -20,6 +20,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
+        Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id);
+
         Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
        
         //********* rpt 1 Persolnal info of damage assesse ***********
@@ -30,6 +32,7 @@ namespace Libraries.Service.IApplicationService
         Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
         Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
+        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
 
 
         //********* rpt 2 Allotte Type **********
