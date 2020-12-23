@@ -18,13 +18,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model)
         {
-            return await _dbContext.Damagepayeeregister
+            return await _dbContext.Damagepayeeregistertemp
                 .Where(x => x.IsActive == 1)
                 .Include(x => x.Locality)
                 .Include(x => x.District)
-                .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                .GetPaged<Damagepayeeregistertemp>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()

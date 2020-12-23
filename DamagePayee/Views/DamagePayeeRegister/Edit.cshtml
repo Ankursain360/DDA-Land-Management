@@ -1,17 +1,18 @@
 ﻿@model Libraries.Model.Entity.Damagepayeeregistertemp
-@{ ViewData["Title"] = "Create";
+@{ ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register" })
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <input type="hidden" asp-for="Id" />
+        <h3 class="mb-3 d-flex">Edit Details</h3>
         <div id="DivOpenSubstitutionForm">
             <div id="DivFileInformation">
 
                 <h3 class="my-3 d-flex sub-heading">File Information</h3>
-                    <div class="row">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="FileNo" type="text" placeholder="File No." class="floating-label-field floating-label-field--s3" />
@@ -508,7 +509,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <div class="form-check theme">
-                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo"  value="no">
+                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo" value="no">
                             <label class="form-check-label" for="radio">
                                 No
                             </label>
@@ -656,8 +657,8 @@
                                 </td>
                                 <td>
                                     @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                            <i class="fa fa-plus"></i>
-                                        </button>*@
+                                        <i class="fa fa-plus"></i>
+                                    </button>*@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         <a class="btn btn-theme delete-recordPayment" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
                                         <a class="btn btn-theme add-recordPayment" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
@@ -679,7 +680,7 @@
             <div class="col-md-12">
                 <input type="submit" value="Create" class="btn btn-theme" />
                 @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                @Html.ActionLink("Back", "Index", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
+                @Html.ActionLink("Back", "Create", "DamagePayeeRegister", null, new { @class = "btn btn-theme" })
             </div>
         </div>
     </form>

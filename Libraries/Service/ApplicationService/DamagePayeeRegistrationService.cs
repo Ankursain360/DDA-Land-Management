@@ -29,7 +29,7 @@ namespace Libraries.Service.ApplicationService
             return await _damagePayeeRegistrationRepository.GetAllPayeeregistration();
         }
 
-
+      
 
         public async Task<List<Payeeregistration>> GetStructureUsingRepo()
         {
@@ -51,7 +51,7 @@ namespace Libraries.Service.ApplicationService
             model.MobileNumber = payeeregistration.MobileNumber;
             model.EmailId = payeeregistration.EmailId;
             model.IsVerified = payeeregistration.IsVerified;
-            model.IsActive = payeeregistration.IsActive;
+            //model.IsActive = payeeregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _damagePayeeRegistrationRepository.Edit(model);

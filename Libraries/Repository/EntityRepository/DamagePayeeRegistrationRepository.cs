@@ -34,9 +34,12 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Payeeregistration>> GetAllPayeeregistration()
         {
-            return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Payeeregistration.ToListAsync();
         }
-
+        //public async Task<List<Payeeregistration>> GetAllEncryptPayeeregistration()
+        //{
+        //    return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
+        //}
 
     }
 }
