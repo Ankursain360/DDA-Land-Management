@@ -23,20 +23,23 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Payeeregistration.GetPaged<Payeeregistration>(model.PageNumber, model.PageSize);
         }
 
-        //public async Task<List<Payeeregistration>> GetPayeeregistration()
-        //{
-        //    return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
-        //}
-        //public async Task<bool> Any(int id, string name)
-        //{
-        //    return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
-        //}
+        public async Task<bool> Anyemail(int id, string emailid)
+        {
+            return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.EmailId.ToLower() == emailid.ToLower());
+        }
+        public async Task<bool> Any(int id, string name)
+        {
+            return await _dbContext.Payeeregistration.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
 
         public async Task<List<Payeeregistration>> GetAllPayeeregistration()
         {
-            return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Payeeregistration.ToListAsync();
         }
-
+        //public async Task<List<Payeeregistration>> GetAllEncryptPayeeregistration()
+        //{
+        //    return await _dbContext.Payeeregistration.Where(x => x.IsActive == 1).ToListAsync();
+        //}
 
     }
 }

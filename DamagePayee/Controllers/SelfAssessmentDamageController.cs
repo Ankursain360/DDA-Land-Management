@@ -28,7 +28,7 @@ namespace DamagePayee.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DamagepayeeregisterSearchDto model)
+        public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
         {
             var result = await _selfAssessmentDamageService.GetPagedDamagepayeeregister(model);
             return PartialView("_List", result);

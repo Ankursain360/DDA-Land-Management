@@ -1,182 +1,125 @@
-﻿$(document).ready(function () {
-    /* -----------Apply for Mutation   --------------- */
-    var selected = $("input[type='radio'][name='grpYESNO']:checked");
-    $("#IsDdadamagePayee").val(selected.val());
-    if ($("#rdbPayeeYes").is(":checked")) {
-        $("#DivForPayeeNo").hide();
-    } else {
-        $("#DivForPayeeNo").show();
-    }
+﻿
 
-    $(".TotalCalculation").keyup(function () {
-        debugger;
-        var amount = $('#TotalValueWithInterest').val();
-        var interest = $('#InterestDueAmountCompund').val();
-        var rebate = $('#Rebate').val();
-        var rebatePercentage = $('#RebatePercentage').val();
-        if (amount == "") {
-            $("input[name='TotalPayable']").val("");
-        }
-        else if (interest == "") {
-            $("input[name='TotalPayable']").val("");
-        }
-        else {
-            $("input[name='Rebate']").val(parseInt(rebatePercentage == '' ? 0 : ((interest * rebatePercentage) / 100)) );
-            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebatePercentage == '' ? 0 : ((interest*rebatePercentage)/100) )));
+
+
+//    <script>
+
+//        $(function () {
+//        var dtToday = new Date();
+
+//        var month = dtToday.getMonth() + 1;
+//        var day = dtToday.getDate();
+//        var year = dtToday.getFullYear();
+//        if (month < 10)
+//            month = '0' + month.toString();
+//        if (day < 10)
+//            day = '0' + day.toString();
+
+//        var maxDate = year + '-' + month + '-' + day;
+//        //alert(maxDate);
+//        $('#txtDateofWill').attr('max', maxDate);
+//        $('txtTakenOverDate').attr('max', maxDate);
+//        $('txtDateRep').attr('max', maxDate);
+//    });
+
+
+
+//</script>
+
+//@* For radio button event click *@
+
+$(function () {
+    $("input[name='grpDamageAssesseeType']").click(function () {
+        if ($("#rSubsequent").is(":checked")) {
+            $("#DivForSubsequentPurchaser").show();
+        } else {
+            $("#DivForSubsequentPurchaser").hide();
         }
     });
-
 });
-function CheckToApply() {
-    var show = true;
-    if ($("#rdbPayeeYes").is(":checked")) {
-        $("#DivForPayeeNo").hide();
-    } else {
-        $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
-            if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
-                if (show == true) {
-                    if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
-                    }
-                    else {
-                        show = false;
+
+$(function () {
+    $("input[name='grpLitigation']").click(function () {
+        if ($("#rbdYesLitigation").is(":checked")) {
+            $("#DivForLitigationStatus").show();
+        } else {
+            $("#DivForLitigationStatus").hide();
+        }
+    });
+});
+
+$(function () {
+    $("input[name='grpYESNO']").click(function () {
+        var show = true;
+        if ($("#rdbPayeeYes").is(":checked")) {
+            $("#DivForPayeeNo").hide();
+        } else {
+            $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
+                if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
+                    if (show == true) {
+                        if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
+                        }
+                        else {
+                            show = false;
+                        }
                     }
                 }
+            });
+            if (show) {
+
+                $("#DivForPayeeNo").show();
             }
-        });
-        if (show) {
-            $("#IsMutaionYes").val(0);
-            return true;
+            else {
+                alert('Please Fill All Mandatory Fields');
+                $("#DivForPayeeNo").hide();
+            }
         }
+    });
+});
+
+$(function () {
+    $("input[name='grpUseofpeoperty']").click(function () {
+        if ($("#rdbResidential").is(":checked")) { //1st radio button
+            $("#txtResidential").attr("disabled", "disabled");
+            $("#txtCommercial").attr("disabled", "disabled");
+            $("#txtResidential").removeAttr("disabled", "disabled");
+            $("#txtCommercial").attr("disabled", "disabled");
+            $("#txtCommercialmts").val('');
+            $("#txtCommercial").val('');
+
+        }
+        else if ($("#rdbCommercial").is(":checked")) {
+            $("#txtResidential").attr("disabled", "disabled");
+            $("#txtCommercial").attr("disabled", "disabled");
+            $("#txtResidential").attr("disabled", "disabled");
+            $("#txtCommercial").removeAttr("disabled", "disabled");
+            $("#txtResidentialmts").val('');
+            $("#txtResidential").val('');
+        }
+
+        else if ($("#rdbMixed").is(":checked")) {
+            $("#txtResidential").attr("disabled", "disabled");
+            $("#txtCommercial").attr("disabled", "disabled");
+            $("#txtResidential").removeAttr("disabled", "disabled");
+            $("#txtCommercial").removeAttr("disabled", "disabled");
+            $("#txtResidentialmts").val('');
+            $("#txtResidential").val('');
+            $("#txtCommercialmts").val('');
+            $("#txtCommercial").val('');
+        }
+
         else {
-            alert('Please Fill All Mandatory Fields');
-            return false;
+            $("#txtResidential").attr("disabled", "disabled");
+            $("#txtCommercial").attr("disabled", "disabled");
+            $("#txtResidentialmts").val('');
+            $("#txtResidential").val('');
+            $("#txtCommercialmts").val('');
+            $("#txtCommercial").val('');
         }
-    }
-}
 
-function PageValidation() {
-    var checkresult = false;
-    var Damageamount = $('#TotalValueWithInterest').val();
-    if (Damageamount == "") {
-        checkresult = false;
-        $("#TotalValueWithInterestMsg").show();
-    } else {
-        checkresult = true;
-    }
-
-    var interest = $('#InterestDueAmountCompund').val();
-    if (interest == "") {
-        checkresult = false;
-        $("#InterestDueAmountCompundMsg").show();
-    } else {
-        checkresult = true;
-    }
-    var TotalPayable = $('#TotalPayable').val();
-    if (TotalPayable == "") {
-        checkresult = false;
-        $("#TotalPayableMsg").show();
-    } else {
-        checkresult = true;
-    }
-
-    var Rebate = $('#Rebate').val();
-    if (Rebate == "") {
-        checkresult = false;
-        $("#RebateMsg").show();
-    } else {
-        checkresult = true;
-    }
-    if ($("#DeclarationStatus1").not(":checked"))
-        $("#DeclarationStatus1Msg").show();
-    if ($("#DeclarationStatus2").not(":checked"))
-        $("#DeclarationStatus2Msg").show();
-    if ($("#DeclarationStatus3").not(":checked"))
-        $("#DeclarationStatus3Msg").show();
-    if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").not(":checked") || $("#DeclarationStatus2").not(":checked") || $("#DeclarationStatus3").not(":checked")) {
-        $("#IsMutaionYes").val(1);
-        checkresult = false;
-    }
-}
-$("input[name='DeclarationStatus1']").click(function () {
-    var selected = $("input[type='checkbox'][name='DeclarationStatus1']:checked");
-    $("#Declaration1").val(1);
-
-});
-$("input[name='DeclarationStatus2']").click(function () {
-    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
-    $("#PetitionerRespondent").val(selected.val());
-
-});
-$("input[name='DeclarationStatus3']").click(function () {
-    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
-    $("#PetitionerRespondent").val(selected.val());
-
-});
-$("input[name='grpDamageAssesseeType']").click(function () {
-    if ($("#rSubsequent").is(":checked")) {
-        $("#DivForSubsequentPurchaser").show();
-    } else {
-        $("#DivForSubsequentPurchaser").hide();
-    }
+    });
 });
 
-$("input[name='grpLitigation']").click(function () {
-    if ($("#rbdYesLitigation").is(":checked")) {
-        $("#DivForLitigationStatus").show();
-    } else {
-        $("#DivForLitigationStatus").hide();
-    }
-});
-$("input[name='grpYESNO']").click(function () {
-    var selected = $("input[type='radio'][name='grpYESNO']:checked");
-    $("#IsDdadamagePayee").val(selected.val());
-    if ($("#rdbPayeeYes").is(":checked")) {
-        $("#DivForPayeeNo").hide();
-    } else {
-        $("#DivForPayeeNo").show();
-    }
-});
-
-$("input[name='grpUseofpeoperty']").click(function () {
-    if ($("#rdbResidential").is(":checked")) { //1st radio button
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").removeAttr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
-
-    }
-    else if ($("#rdbCommercial").is(":checked")) {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").removeAttr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
-    }
-
-    else if ($("#rdbMixed").is(":checked")) {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").removeAttr("disabled", "disabled");
-        $("#txtCommercial").removeAttr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
-    }
-
-    else {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
-    }
-
-});
 
 
 
@@ -231,6 +174,12 @@ $("input[name='grpLitigation']").click(function () {
 $("input[name='grpCaseperson']").click(function () {
     var selected = $("input[type='radio'][name='grpCaseperson']:checked");
     $("#PetitionerRespondent").val(selected.val());
+
+});
+
+$("input[name='grpYESNO']").click(function () {
+    var selected = $("input[type='radio'][name='grpYESNO']:checked");
+    $("#IsDdadamagePayee").val(selected.val());
 
 });
 
@@ -412,3 +361,108 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+//********************* Length validation****************************
+var minLength = 0;
+var maxLength = 45;
+
+//$(function () {
+//$('.Namecheck').on('keydown keyup change', function () {
+//        var char = $(this).val();
+//        var charLength = $(this).val().length;
+//        //if (charLength < minLength) {
+//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+//    //} else 
+//    if (charLength > maxLength) {
+//            $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+//            $(this).val(char.substring(0, maxLength));
+//    }
+//    else {
+//        $('.msg').text('Length is valid');
+//        }
+//    });
+//});
+$(function () {
+    $('.Namecheck').keyup(function () {
+        debugger;
+        var char = $(this).val();
+        var charLength = $(this).val().length;
+        //if (charLength < minLength) {
+        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+        //} else 
+        if (charLength > maxLength) {
+            $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+            $(this).val(char.substring(0, maxLength));
+        }
+        else {
+            // $('.msg').text('Length is valid');
+        }
+    });
+});
+
+
+
+$(function () {
+    $('.EmailCheck').on('change', function () {
+        debugger;
+        var input = $(this);
+        var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var is_email = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_email == false) {
+            // alert('Please enter valid email id');
+            $('.msg1').text('Please enter valid email id');
+        }
+
+    });
+});
+
+
+
+$(function () {
+    $('.NoCheck').on('change', function () {
+        debugger;
+        var input = $(this);
+        var re = /^([0-9]{10})$/;
+        var is_mobile = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_mobile == false) {
+            // alert('Please enter valid email id');
+            $('.msg2').text('Please enter valid mobile number ');
+        }
+
+    });
+});
+
+
+
+$(function () {
+    $('#AadharNo').on('change', function () {
+        debugger;
+        var input = $(this);
+        var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
+        var is_valid = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_valid == false) {
+            // alert('Please enter valid email id');
+            $('.msg3').text('Please enter valid Aadhar card number ');
+        }
+
+    });
+});
+
+$(function () {
+    $('#PanNo').on('change', function () {
+        debugger;
+        var input = $(this);
+
+        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
+        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+        var is_valid = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_valid == false) {
+            // alert('Please enter valid email id');
+            $('.msg4').text('Please enter valid Pan card number ');
+        }
+
+    });
+});

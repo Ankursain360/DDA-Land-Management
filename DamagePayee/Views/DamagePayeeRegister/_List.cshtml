@@ -1,4 +1,4 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Damagepayeeregister>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Damagepayeeregistertemp>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
@@ -8,72 +8,57 @@
             <th> Type Of Damage Assessee</th>
             <th> Property No</th>
             <th> Locality</th>
-            <th> Floor No</th>
-            <th> Street No</th>
-            <th> Pin Code</th>
-            <th> District</th>
+          
             <th> Plot Area Sq Yard</th>
             <th> Floor Area Sq Yard</th>
-
-            <th> Floor Area Sq Mt</th>
-            <th> Plot Area Sq Mt</th>
+            <th>Is Dda damage Payee</th>
+           <th>Status</th>
             <th>Operation</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
-            <td>@item.FileNo</td>
-            <td>@item.TypeOfDamageAssessee</td>
-            <td>@item.PropertyNo</td>
-            @*<td>@item.Locality.Name</td>*@
-            <td>@item.FloorNo</td>
-            <td>@item.StreetNo</td>
-            <td>@item.PinCode</td>
-            @*<td>@item.District.Name</td>*@
-            <td>@item.PlotAreaSqYard</td>
-            <td>@item.FloorAreaSqYard</td>
-            <td>@item.FloorAreaSqMt</td>
-            <td>@item.UseOfProperty</td>
-            @*<td>@item.ResidentialSqYard</td>
-            <td>@item.ResidentialSqMt</td>
-            <td>@item.CommercialSqYard</td>
-            <td>@item.CommercialSqMt</td>
-            <td>@item.LitigationStatus</td>
-            <td>@item.CourtName</td>
-            <td>@item.CaseNo</td>
-            <td>@item.OppositionName</td>
-            <td>@item.PetitionerRespondent</td>
-            <td>@item.IsDdadamagePayee</td>
-            <td>@item.DamageProperty</td>
-            <td>@item.EncroachmentDate</td>
-            <td>@item.StartDate</td>
-            <td>@item.EndDate</td>
-            <td>@item.Locality.Name</td>
-            <td>@item.OnlinePaymentAreaSqYds</td>*@
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.FileNo</td>
+                    <td>@item.TypeOfDamageAssessee</td>
+                    <td>@item.PropertyNo</td>
+                    <td>@item.Locality.Name</td>
 
+                    <td>@item.PlotAreaSqYard</td>
 
+                    <td>@item.UseOfProperty</td>
 
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Active</span> }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
-            </td>
-            <td>
-                <div class="action-btns">
-                    @*<a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
-                <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>*@
-                </div>
+                    <td>@item.IsDdadamagePayee</td>
 
-            </td>
+                    <td>
+                        @if (item.IsActive == 1)
+                        {
+                            <span class="badge badge-primary px-2 py-1">Active</span> }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">Inactive</span>}
+                    </td>
+                    <td>
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                            <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                        </div>
 
-        </tr>
-}
+                    </td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
     </tbody>
 
 </table>

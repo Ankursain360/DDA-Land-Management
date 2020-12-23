@@ -1,0 +1,15 @@
+﻿@model Libraries.Model.Entity.Mutationdetails
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Apply For Mutation" })
+<br />
+<br />
+
+
+
+
+<environment include="Development">
+    <script src="~/js/SubstitutionMutationDetailsCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/SubstitutionMutationDetailsCreate.min.js" asp-append-version="true"></script>
+</environment>

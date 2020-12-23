@@ -59,17 +59,46 @@ namespace Service.ApplicationService
             return model;
         }
 
-        //public async Task<bool> Update(int id, Damagepayeeregister damagepayeeregister)
-        //{
-        //    var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
-        //    Damagepayeeregister model = result.FirstOrDefault();
-        //    model.FileNo = damagepayeeregister.FileNo;
+        public async Task<bool> Update(int id, Damagepayeeregistertemp damagepayeeregistertemp)
+        {
+            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            Damagepayeeregistertemp model = result.FirstOrDefault();
+            model.FileNo = damagepayeeregistertemp.FileNo;
+            model.TypeOfDamageAssessee = damagepayeeregistertemp.TypeOfDamageAssessee;
+            model.PropertyNo = damagepayeeregistertemp.PropertyNo;
+            model.LocalityId = damagepayeeregistertemp.LocalityId;
+            model.FloorNo = damagepayeeregistertemp.FloorNo;
+            model.StreetNo = damagepayeeregistertemp.StreetNo;
+            model.PinCode = damagepayeeregistertemp.PinCode;
+            model.DistrictId = damagepayeeregistertemp.DistrictId;
+            model.PlotAreaSqYard = damagepayeeregistertemp.PlotAreaSqYard;
+            model.FloorAreaSqYard = damagepayeeregistertemp.FloorAreaSqYard;
+            model.PlotAreaSqMt = damagepayeeregistertemp.PlotAreaSqMt;
+            model.FloorAreaSqMt = damagepayeeregistertemp.FloorAreaSqMt;
+            model.PropertyPhotoPath = damagepayeeregistertemp.PropertyPhotoPath;
+            model.UseOfProperty = damagepayeeregistertemp.UseOfProperty;
+            model.ResidentialSqYard = damagepayeeregistertemp.ResidentialSqYard;
+            model.ResidentialSqMt = damagepayeeregistertemp.ResidentialSqMt;
+            model.CommercialSqYard = damagepayeeregistertemp.CommercialSqYard;
+            model.CommercialSqMt = damagepayeeregistertemp.CommercialSqMt;
+            model.LitigationStatus = damagepayeeregistertemp.LitigationStatus;
+            model.CourtName = damagepayeeregistertemp.CourtName;
+            model.CaseNo = damagepayeeregistertemp.CaseNo; 
 
-        //    model.ModifiedDate = DateTime.Now;
-        //    model.ModifiedBy = 1;
-        //    _damagepayeeregisterRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
+            model.OppositionName = damagepayeeregistertemp.OppositionName;
+            model.PetitionerRespondent = damagepayeeregistertemp.PetitionerRespondent;
+            model.IsDdadamagePayee = damagepayeeregistertemp.IsDdadamagePayee;
+            model.IsApplyForMutation = damagepayeeregistertemp.IsApplyForMutation;
+            model.ShowCauseNoticePath = damagepayeeregistertemp.ShowCauseNoticePath;
+            model.FgformPath = damagepayeeregistertemp.FgformPath;
+            model.IsDocumentFor = damagepayeeregistertemp.IsDocumentFor;
+            model.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;
+           
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _damagepayeeregisterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
         public async Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp)
         {
@@ -88,9 +117,9 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model)
         {
-            return await _damagepayeeregisterRepository.GetPagedDamagepayeeregister(model);
+            return await _damagepayeeregisterRepository.GetPagedDamagepayeeregistertemp(model);
         }
 
         //********* rpt 1 Persolnal info of damage assesse ***********

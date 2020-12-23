@@ -18,7 +18,7 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model)
         {
             return await _dbContext.Damagepayeeregister
                 .Where(x => x.IsActive == 1)
@@ -117,8 +117,10 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Rebate> GetRebateValue()
         {
             return await _dbContext.Rebate
-                              .Where(x => x.IsActive == 1 && x.IsRebateOn == 1 )
-                              .OrderByDescending(d => d.ToDate)
+                              .Where(x => x.IsActive == 1 && x.IsRebateOn == 1 
+                              && x.FromDate <= DateTime.Now && x.ToDate>= DateTime.Now 
+                              )
+                             // .OrderByDescending(d => d.ToDate)
                               .FirstOrDefaultAsync();
             //List<Rebate> olist = new List<Rebate>();
             //olist = await _dbContext.Rebate.Where(x => x.IsActive == 1 && x.IsRebateOn == 1).ToListAsync();
