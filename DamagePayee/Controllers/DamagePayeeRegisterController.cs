@@ -11,6 +11,7 @@ using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using System.IO;
 
 namespace DamagePayee.Controllers
 {
@@ -455,6 +456,35 @@ namespace DamagePayee.Controllers
                 return View(damagepayeeregistertemp);
             }
            
+        }
+        //******************  download files **************************
+        public async Task<IActionResult> DownloadPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.PropertyPhotoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadShowCauseNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.ShowCauseNoticePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadFgform(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.FgformPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadBillfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.DocumentForFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }

@@ -198,6 +198,43 @@ $("input[name='Bill']").click(function () {
 
 
 //****************** code for personal info Rpt ************************
+jQuery(document).ready(function () {
+    debugger;
+    $.ajax({
+        type: "post",
+        url: "/DamagePayeeRegister/GetDetailspersonelinfotemp",
+        data: "id=" + $("#Id").val() + "",
+        success: function (data) {
+            debugger;
+            for (var i = 0; i < data.length; i++) {
+                $("#tbl_posts #add #drpPersonalGender").val(data[i].drpPersonalGender);
+
+                $("#tbl_posts #add #txtPersonalName").val(data[i].txtPersonalName);
+                $("#tbl_posts #add #txtPersonalFatherName").val(data[i].txtPersonalFatherName);
+                $("#tbl_posts #add #txtPersonalMobileNo").val(data[i].txtPersonalMobileNo);
+                $("#tbl_posts #add #txtPersonalEmailid").val(data[i].approvedDevQty);
+
+
+
+                if (i < data.length - 1) {
+                    var content = jQuery('#tbl_posts #add tr'),
+                        size = jQuery('#tbl_posts >tbody >tr').length,
+                        element = null,
+                        element = content.clone();
+                    element.attr('id', 'rec-' + size);
+                    element.find('.delete-record').attr('data-id', size);
+                    element.appendTo('#tbl_posts_body');
+                    element.find('.sn').html(size);
+                    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                    $("#tbl_posts #add .add").remove();
+                    //$("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+                    element.find(".add-record").hide();
+                    element.find(".delete-record").show();
+                }
+            }
+        }
+    });
+});
 
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
