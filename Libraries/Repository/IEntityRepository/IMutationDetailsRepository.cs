@@ -10,23 +10,26 @@ namespace Libraries.Repository.IEntityRepository
     public interface IMutationDetailsRepository : IGenericRepository<Mutationdetails>
     {
         Task<List<Mutationdetails>> GetAllMutationDetails();
-        Task<List<Locality>> GetAllLocality(int zoneId);
-        Task<List<Zone>> GetAllZone();
+        Task<List<Locality>> GetLocalityList();
+        Task<List<District>> GetDistrictList();
         Task<bool> Any(int id, string name);
-        Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details);
+
 
         /* open Single file upload */
-        string SaveMutationAtsFilePath(int id);
-        string SaveMutationGPAFilePath(int id);
-        string SaveMutationMoneyReceiptFilePath(int id);
-        string SaveMutationSignSPCFilePath(int id);
-        string SaveMutationAddressProofFilePath(int id);
-        string SaveMutationAffitDevitFilePath(int id);
-        string SaveMutationIndemnityFilePath(int id);
+        Task<Mutationdetails> SaveMutationAtsFilePath(int id);
+        Task<Mutationdetails> SaveMutationGPAFilePath(int id);
+        Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id);
+        Task<Mutationdetails> SaveMutationSignSPCFilePath(int id);
+        Task<Mutationdetails> SaveMutationAddressProofFilePath(int id);
+        Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id);
+        Task<Mutationdetails> SaveMutationIndemnityFilePath(int id);
+        Task<Mutationdetails> GetPhotoPropFile(int id);
         /* Close*/
 
         /*Repeater*/
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
+        Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id);
+        Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId);
 
     }
 }

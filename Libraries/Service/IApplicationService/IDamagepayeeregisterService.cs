@@ -14,18 +14,25 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp();
        // Task<List<Damagepayeeregister>> GetDamagepayeeregisterUsingRepo();
-        //Task<bool> Update(int id, Damagepayeeregister damagepayeeregister);
+        Task<bool> Update(int id, Damagepayeeregistertemp damagepayeeregistertemp);
         Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp);
         Task<Damagepayeeregistertemp> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
-        Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model);
+        Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model);
        
         //********* rpt 1 Persolnal info of damage assesse ***********
         Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
         Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id);
         Task<bool> DeletePayeePersonalInfoTemp(int Id);
+        Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
+        Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
+        Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id);
+        Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id);
 
 
         //********* rpt 2 Allotte Type **********
@@ -33,6 +40,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp);
         Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
+        Task<Allottetypetemp> GetATSFilePath(int Id);
+        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
 
 
         //********* rpt 3 Damage payment history ***********

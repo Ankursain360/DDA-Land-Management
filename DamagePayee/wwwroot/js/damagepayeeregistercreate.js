@@ -1,5 +1,5 @@
 ﻿
-   
+
 
 
 //    <script>
@@ -50,10 +50,29 @@
 
     $(function () {
         $("input[name='grpYESNO']").click(function () {
+            var show = true;
             if ($("#rdbPayeeYes").is(":checked")) {
                 $("#DivForPayeeNo").hide();
             } else {
-                $("#DivForPayeeNo").show();
+                $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
+                        if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
+                            if (show == true) {
+                                if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
+                                }
+                                else {
+                                    show = false;
+                                }
+                            }
+                        }
+                    });
+                if (show) {
+                 
+                        $("#DivForPayeeNo").show();
+                    }
+                    else {
+                        alert('Please Fill All Mandatory Fields');
+                        $("#DivForPayeeNo").hide();
+                    }
             }
         });
     });
@@ -183,15 +202,15 @@ $("input[name='Bill']").click(function () {
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != ''
-        && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != undefined
-        && $("#tbl_posts #add #txtPersonalName").val() != ''
-        && $("#tbl_posts #add #txtPersonalFatherName").val() != ''
-        && $("#tbl_posts #add #txtPersonalMobileNo").val() != ''
-        && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
-       
+    if ($("#tbl_posts #add #Gender").children("option:selected").val() != ''
+        && $("#tbl_posts #add #Gender").children("option:selected").val() != undefined
+        && $("#tbl_posts #add #payeeName").val() != ''
+        && $("#tbl_posts #add #payeeFatherName").val() != ''
+        && $("#tbl_posts #add #MobileNo").val() != ''
+        && $("#tbl_posts #add #EmailId").val() != ''
+
     ) {
-        var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+        var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -200,8 +219,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
-        $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
-     //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
+        $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
@@ -209,7 +228,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        /*$("#tbl_posts #add .form-control").val('');*/
+
         $("#tbl_posts #add .floating-label-field").val('');
     }
     else {
@@ -343,3 +362,108 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+//********************* Length validation****************************
+var minLength = 0;
+var maxLength = 45;
+
+//$(function () {
+//$('.Namecheck').on('keydown keyup change', function () {
+//        var char = $(this).val();
+//        var charLength = $(this).val().length;
+//        //if (charLength < minLength) {
+//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+//    //} else 
+//    if (charLength > maxLength) {
+//            $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+//            $(this).val(char.substring(0, maxLength));
+//    }
+//    else {
+//        $('.msg').text('Length is valid');
+//        }
+//    });
+//});
+$(function () {
+    $('.Namecheck').keyup(function () {
+        debugger;
+    var char = $(this).val();
+    var charLength = $(this).val().length;
+    //if (charLength < minLength) {
+    //    $('span').text('Length is short, minimum ' + minLength + ' required.');
+    //} else 
+    if (charLength > maxLength) {
+        $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
+        $(this).val(char.substring(0, maxLength));
+    }
+    else {
+       // $('.msg').text('Length is valid');
+    }
+});
+});
+
+
+
+$(function () {
+    $('.EmailCheck').on('change', function () {
+        debugger;
+        var input = $(this); 
+    var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        var is_email = re.test(input.val());
+     //alert('Please enter valid email id');
+        if (is_email == false) {
+           // alert('Please enter valid email id');
+            $('.msg1').text('Please enter valid email id');
+        }
+    
+});
+});
+
+
+
+$(function () {
+    $('.NoCheck').on('change', function () {
+        debugger;
+        var input = $(this);
+        var re = /^([0-9]{10})$/;
+        var is_mobile = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_mobile == false) {
+            // alert('Please enter valid email id');
+            $('.msg2').text('Please enter valid mobile number ');
+        }
+
+    });
+});
+
+
+
+$(function () {
+    $('#AadharNo').on('change', function () {
+        debugger;
+        var input = $(this);
+        var re = /^([2-9]{1}[0-9]{3}\s{1}[0-9]{4}\s{1}[0-9]{4})$/;
+        var is_valid = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_valid == false) {
+            // alert('Please enter valid email id');
+            $('.msg3').text('Please enter valid Aadhar card number ');
+        }
+
+    });
+});
+
+$(function () {
+    $('#PanNo').on('change', function () {
+        debugger;
+        var input = $(this);
+       
+            /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
+        var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+        var is_valid = re.test(input.val());
+        //alert('Please enter valid email id');
+        if (is_valid == false) {
+            // alert('Please enter valid email id');
+            $('.msg4').text('Please enter valid Pan card number ');
+        }
+
+    });
+});

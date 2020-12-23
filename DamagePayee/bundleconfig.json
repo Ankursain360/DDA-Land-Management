@@ -12,9 +12,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/noticetodamagepayeeindex.min.js",
+    "outputFileName": "wwwroot/js/SubstitutionMutationDetailsIndex.min.js",
     "inputFiles": [
-      "wwwroot/js/noticetodamagepayeeindex.js"
+      "wwwroot/js/SubstitutionMutationDetailsIndex.js"
     ]
   }
 ]

@@ -18,13 +18,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregisterSearchDto model)
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model)
         {
-            return await _dbContext.Damagepayeeregister
+            return await _dbContext.Damagepayeeregistertemp
                 .Where(x => x.IsActive == 1)
                 .Include(x => x.Locality)
                 .Include(x => x.District)
-                .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                .GetPaged<Damagepayeeregistertemp>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()
@@ -46,6 +46,12 @@ namespace Libraries.Repository.EntityRepository
             var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
+        public async Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id)
+        {
+            return await _dbContext.Damagepayeeregistertemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
+
         //********* rpt 1 Persolnal info of damage assesse ***********
         public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
         {
@@ -58,12 +64,36 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
-
         public async Task<bool> DeletePayeePersonalInfoTemp(int Id)
          {
             _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
+        }
+       
+        public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
         //********* rpt 2 Allotte Type **********
@@ -84,10 +114,19 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<Allottetypetemp> GetATSFilePath(int Id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+        }
 
-    //********* rpt 3 Damage payment history ***********
 
-    public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
+        //********* rpt 3 Damage payment history ***********
+
+        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
         {
             await _dbContext.Damagepaymenthistorytemp.AddRangeAsync(damagepaymenthistorytemp);
             var Result = await _dbContext.SaveChangesAsync();
@@ -103,5 +142,7 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        
 }
 }

@@ -1,297 +1,390 @@
-﻿@model Libraries.Model.Entity.Mutationdetails
+﻿
+@model Libraries.Model.Entity.Mutationdetails
+@{int rowNo = 0;}
+@{int AtsgpadocumentPath = 0;}
+@{int AadharNoFilePath = 0;}
+@{int PanNoFilePath = 0; }
+@{int PhotographPath = 0; }
+@{int SignaturePath = 0; }
+@{int PropertyPhotoPath = 0; }
+
+
 
 <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
-    <h3 class="mb-3 d-flex">File Information</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <h3 class="mb-3 d-flex">Add Details</h3>
 
+    <div id="DivFileInformation">
 
-    <div id="DivForFileName">
+        <h3 class="my-3 d-flex sub-heading">File Information</h3>
 
         <div class="row">
-
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="FileNo" type="text" placeholder="File No" required class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="FileNo" class="d-block text-danger field-validation-valid"></span>
+                    <input asp-for="DamagePayeeRegister.FileNo" type="text" disabled placeholder="File No." class="floating-label-field floating-label-field--s3" />
                     <label class="floating-label">File No.</label>
-                    <br />
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivPersonalInformationofDamageAssessee">
+        <h3 class="my-3 d-flex sub-heading">Personal Information of Damage Assessee</h3>
+
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Name</th>
+                            <th>Father's/Husband's Name</th>
+                            <th style="min-width:100px;">Gender</th>
+                            <th>Address</th>
+                            <th>Mobile No.</th>
+                            <th>Email-Id</th>
+                            <th style="min-width:200px;">Aadhar No.</th>
+                            <th style="min-width:200px;">Pan No.</th>
+                            <th style="min-width:200px;">Photo</th>
+                            <th style="min-width:200px;">Signature</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                        {
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.FatherName
+                                </td>
+                                <td>
+                                    @if (Convert.ToInt32(item.Gender) == 1)
+                                    {
+                                        <span class="badge badge-primary px-2 py-1">Male</span>
+                                    }
+                                    else if (Convert.ToInt32(item.Gender) == 2)
+                                    {
+                                        <span class="badge badge-danger px-2 py-1">Female</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger px-2 py-1">Other</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @item.Address
+                                </td>
+                                <td>
+                                    @item.MobileNo
+                                </td>
+                                <td>
+                                    @item.EmailId
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                        @item.AadharNo
+                                        @{
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            {
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                {
+                                                    <a asp-action="DownloadAadharPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AadharNoFilePath += 1 ))</a>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @item.AadharNoFilePath
+
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        @item.PanNo
+                                        @{
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            {
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                {
+                                                    <a asp-action="DownloadPanPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PanNoFilePath += 1 ))</a>
+
+                                                }
+                                            }
+                                            else
+                                            {
+                                                @item.PanNoFilePath
+
+                                            }
+                                        }
+
+                                    </div>
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            {
+                                                <a asp-action="DownloadPhotographPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotographPath += 1 ))</a>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.PhotographPath
+
+                                        }
+                                    }
+
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            {
+                                                <a asp-action="DownloadSignaturePathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(SignaturePath += 1 ))</a>
+
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.SignaturePath
+
+                                        }
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
 
         </div>
 
     </div>
+    <br />
+    <div id="Divclsification" class="mt-md-3">
+        <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
 
-    <div id="DivForPreviousDamagee">
+        <div class="row">
+            <div class="col-md-3">
+                <input type="hidden" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" disabled id="TypeOfDamageAssessee" value="Original" />
 
-        <h2 class="my-3 sub-heading">Previous Damage Assessee Detailst</h2>
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked>
+                    <label class="form-check-label" for="radio">
+                        Original
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent">
+                    <label class="form-check-label" for="radio">
+                        Subsequent Purchaser/Occupier
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivForSubsequentPurchaser" style="display:none">
+
+        <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
 
         <div class="table-section bg-white border shadow rounded">
-            <div class="table-responsive ">
-                <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped">
                     <thead class="text-nowrap">
                         <tr>
                             <th>Sr.No</th>
                             <th>Name</th>
                             <th>Father's Name</th>
-                            <th>Date Of GPA & STA/Will/Other Deed</th>
-                            <th> Upload GPA & STA</th>
+                            <th>Date of GPA/Will/Other Deed</th>
+                            <th>Upload ATS & GPA/Will</th>
 
-                            <th>Operation</th>
                         </tr>
                     </thead>
-                    <tbody id="tbl_posts_body">
-                    </tbody>
-                    <tbody class="tbody" id="add">
-                        <tr id="">
-                            <td>1</td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" asp-for="Name" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="FatherName" type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DateGpadead" type="date" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="GpastafilePath" type="file" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
 
+                    <tbody>
+                        @foreach (var item in Model.DamagePayeeRegister.Allottetypetemp)
+                        {
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.FatherName
+                                </td>
+                                <td>
+                                    @(Convert.ToDateTime(item.Date).ToString("dd-MMM-yyyy"))
+                                </td>
+                                <td>
+                                    @{
+                                        if (Model.DamagePayeeRegister.Allottetypetemp != null && Model.DamagePayeeRegister.Allottetypetemp.Count > 0)
+                                        {
+                                            foreach (var data in Model.DamagePayeeRegister.Allottetypetemp)
+                                            {
+                                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AtsgpadocumentPath += 1 ))</a>
 
-                            <td>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @item.AtsgpadocumentPath
 
-                                @*<div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                    </div>*@
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                    <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                                        }
+                                    }
+                                </td>
 
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>
-
-    <div id="DivForNewDamageAssesseDetails">
-
-        <h2 class="my-3 sub-heading">New Damagee Assessee Details</h2>
-
-
-        <div class="table-section bg-white border shadow rounded">
-            <div class="table-responsive ">
-                <table id="tbl_posts" class="table table-sm table-bordered mb-0 table-striped">
-                    <thead class="text-nowrap">
-                        <tr>
-                            <th>Sr.No</th>
-                            <th>Name</th>
-                            <th>Father's/Husband's Name</th>
-                            <th>Gender</th>
-                            <th>Address</th>
-                            <th>Mobile No.</th>
-                            <th>Email-Id  (if any)</th>
-                            <th>Aadhar No.</th>
-                            <th>PAN No.</th>
-                            <th>Photograph</th>
-                            <th>Signature</th>
-                            <th>Operation</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbl_posts_body">
-                    </tbody>
-                    <tbody class="tbody" id="add">
-                        <tr id="">
-                            <td>1</td>
-                            <td style="min-width:200px">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="NameNew" type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="GuardianName" type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td style="min-width:110px">
-                                <div class="floating-label-wrap">
-                                    <select asp-for="Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
-                                    </select>
-                                </div>
-                            </td>
-                            <td style="min-width:200px">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Address" type="text" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="MobileNo" type="text" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="Email" type="text" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="AadharNo" type="text" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-
-                            <td>
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="PanNo" type="text" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td style="min-width:200px">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="PhotoFilePath" type="file" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td style="min-width:200px">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="SignatureFilePath" type="file" class="floating-label-field floating-label-field--s3" />
-                                </div>
-                            </td>
-                            <td>
-                                @*<button id="addToList" class="btn btn-primary myapp-hed1">
-                                        <i class="fa fa-plus"></i>
-                                    </button>*@
-                                @*<div class="floating-label-wrap mb-3 mb-md-0">
-                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
-                                    </div>*@
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
-                                    <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
-                                </div>
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @*</div>*@
 
     </div>
 
+    <div id="MainContentForm">
+        <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
 
-    <div id="DivLocation">
-
-        <h2 class="my-3 sub-heading">Property Identification Details</h2>
         <div class="row">
+
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.PropertyNo" disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
 
-                    <input type="text" asp-for="PropertyNo" required placeholder="Property/House/Municipal No" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Property/House/Municipal No.</label>
 
-                    <label class="floating-label">Property/House/Municipal No.<span class="text-danger" style="color:red">*</span></label>
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="onChangeZone(this.options[this.selectedIndex].value);">
-                        <option value="">Select</option>
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="DamagePayeeRegister.LocalityId"
+                            asp-items="@(new SelectList(Model.DamagePayeeRegister.PropLocalityList,"Id","Name"))">
+                        <option value="0">---Select---</option>
+
                     </select>
-                    @*<input asp-for="zoneId" type="text" required placeholder="District" class="floating-label-field floating-label-field--s3" />*@
+                    <label class="floating-label">Locality</label>
+                </div>
+            </div>
 
-                    <label class="floating-label">Zone<span class="text-danger" style="color:red">*</span></label>
+
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.FloorNo" disabled type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Floor No(if purchased floor wise)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.StreetNo" disabled type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Road/Street Name</label>
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="FloorNo" type="text" placeholder="Floor No.(if purchased floor wise)" required class="floating-label-field floating-label-field--s3" />
-
-                    <label class="floating-label"> Floor No.(if purchased floor wise) <span class="text-danger" style="color:red">*</span></label>
-                </div>
-            </div>
-
-
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="StreetName" type="text" placeholder="Road/Street Name" required class="floating-label-field floating-label-field--s3" />
-
-                    <label class="floating-label">Road/Street Name <span class="text-danger" style="color:red">*</span></label>
-                </div>
-            </div>
-
-        </div>
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PindCode" type="Number" placeholder="Pincode" required class="floating-label-field floating-label-field--s3" />
-
-                    <label class="floating-label">Pin Code<span class="text-danger" style="color:red">*</span> </label>
+                    <input asp-for="DamagePayeeRegister.PinCode" disabled type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Pin Code</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                        <option value="">Select</option>
+                    <select asp-for="DamagePayeeRegister.DistrictId" disabled class="floating-label-field floating-label-field--s3"
+                            asp-items="@(new SelectList(Model.DamagePayeeRegister.PropDistrictList,"Id","Name"))">
+                        <option value="0">---Select---</option>
+
                     </select>
-                    @*<input asp-for="LocalityId" placeholder="Locality Name" type="text" required class="floating-label-field floating-label-field--s3" />*@
-
-                    <label class="floating-label">Locality Name<span class="text-danger" style="color:red">*</span></label>
-                </div>
-
-            </div>
-        </div>
-        <div class="row pt-3">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="PropertyPhoto" id="PropertyPhoto" type="file" required placeholder="Upload Photograph" class="floating-label-field floating-label-field--s3" multiple />
-
-                    <label class="floating-label">Upload Photograph Of Property<span class="text-danger" style="color:red">*</span></label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-                    <input asp-for="PlotAreaSqYds" type="number" required placeholder="Plot Area" class="floating-label-field floating-label-field--s3" />
-                    <label class="floating-label">Plot Area in Sq.Yds<span class="text-danger" style="color:red">*</span></label>
+                    <label class="floating-label">District</label>
                 </div>
             </div>
         </div>
-        <div class="row pt-3">
-
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="FloorAreaSqYds" type="Number" placeholder="Floor Area" required class="floating-label-field floating-label-field--s3" />
-
-                    <label class="floating-label">Floor Area in Sq.Yds (if purchased floor wise)<span class="text-danger" style="color:red">*</span></label>
+                    <input asp-for="DamagePayeeRegister.PlotAreaSqYard" disabled type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
+                    <label class="floating-label">Plot Area in Sq.yds.</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0 ">
+                    <input asp-for="DamagePayeeRegister.PlotAreaSqMt" disabled type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" disabled />
+                    <label class="floating-label">Sq. Mtr.-</label>
                 </div>
             </div>
         </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DamagePayeeRegister.FloorAreaSqYard" disabled type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
+                    <label class="floating-label">Floor Area in Sq. yds.(if purchased floor wise)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0 ">
+                    <input asp-for="DamagePayeeRegister.FloorAreaSqMt" disabled type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" disabled />
+                    <label class="floating-label">Sq. Mtr.-</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @{
+                        if (Model.DamagePayeeRegister.DamagePayeeRegisterList != null && Model.DamagePayeeRegister.DamagePayeeRegisterList.Count > 0)
+                        {
+                            foreach (var data in Model.DamagePayeeRegister.DamagePayeeRegisterList)
+                            {
+                                <a asp-action="DownloadPropertyPhotoFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhotoPath += 1 ))</a>
+
+                            }
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhotoPath"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-for="PropertyPhotoPath" class="d-block text-danger field-validation-valid"></span>
+                        }
+                        else
+                        {
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhotoPath"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-for="PropertyPhotoPath" class="d-block text-danger field-validation-valid"></span>
+                            <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+
+                        }
+                    }
+
+                    @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                </div>
+            </div>
+        </div>
+
     </div>
 
-
 </form>
+
+<environment include="Development">
+    <script src="~/js/SubstitutionMutationDetailsIndex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/SubstitutionMutationDetailsIndex.min.js" asp-append-version="true"></script>
+</environment>

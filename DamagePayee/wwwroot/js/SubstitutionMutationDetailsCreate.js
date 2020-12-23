@@ -15,7 +15,7 @@ $(function () {
     $('#DeclarationNew').change(function () {
         var data = $(this).is(':checked');
         console.log(data);
-        $('#Declarationhdn').val( data== true ? "1" : "0");
+        $('#Declarationhdn').val(data == true ? "1" : "0");
     });
 });
 
@@ -23,7 +23,7 @@ $(function () {
 $("input[name='grpPetitione']").click(function () {
     var selected = $("input[type='radio'][name='grpPetitione']:checked");
     $("#PetitionerRespondent").val(selected.val());
-    
+
 });
 $("input[name='grpPurpose']").click(function () {
     var selected = $("input[type='radio'][name='grpPurpose']:checked");
@@ -48,3 +48,215 @@ $("input[name='grpLitigation']").click(function () {
 
 
 // close radio button //
+
+$(function () {
+    $("input[name='grpDamageAssesseeType']").click(function () {
+        if ($("#rSubsequent").is(":checked")) {
+            $("#DivForSubsequentPurchaser").show();
+        } else {
+            $("#DivForSubsequentPurchaser").hide();
+        }
+    });
+});
+
+$(function () {
+    $("input[name='grpPurpose']").click(function () {
+        if ($("#rdbPurchaser").is(":checked")) {
+            $("#DivForInheritancePurpose").show();
+        } else {
+            $("#DivForInheritancePurpose").hide();
+        }
+    });
+});
+//************* Previous Damage assese RPT ******************
+
+$(document).ready(function () {
+    $("#tbl_posts #tbl_posts_body .odd").remove();
+    $("#tbl_posts #add .form-control").attr("multiple", false);
+})
+jQuery(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "/SubstitutionMutationDetails/PreviousDamageAssesseeRepeter",
+        data: "id=" + 3 + "",
+        success: function (data) {
+            debugger;
+            for (var i = 0; i < data.length; i++) {
+                $("#tbl_posts #add #drpPersonalGender").children("option:selected").val(data[i].gender)
+                    && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val(data[i].gender != undefined)
+                    && $("#tbl_posts #add #txtPersonalName").val(data[i].name) 
+                    && $("#tbl_posts #add #txtPersonalFatherName").val(data[i].fatherName) 
+                    && $("#tbl_posts #add #txtPersonalAddress").val(data[i].address) 
+                    && $("#tbl_posts #add #txtPersonalMobileNo").val(data[i].mobileNo)
+                    && $("#tbl_posts #add #txtPersonalEmailid").val(data[i].emailId) 
+                    && $("#tbl_posts #add #txtAadharNo").val(data[i].aadharNo)
+                    && $("#tbl_posts #add #AadharFile").val(data[i].aadharFile)
+                    && $("#tbl_posts #add #txtPanNo").val(data[i].panNo)
+                    && $("#tbl_posts #add #PanNoFile").val(data[i].panFile)
+                    && $("#tbl_posts #add #Photograph").val(data[i].photograph)
+                    && $("#tbl_posts #add #Signature").val(data[i].signature)
+                if (i < data.length - 1) {
+                    var content = jQuery('#tbl_posts #add tr'),
+                        size = jQuery('#tbl_posts >tbody >tr').length,
+                        element = null,
+                        element = content.clone();
+                    element.attr('id', 'rec-' + size);
+                    element.find('.delete-record').attr('data-id', size);
+                    element.appendTo('#tbl_posts_body');
+                    $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
+                    //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
+                    element.find('.sn').html(size);
+                    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                    $("#tbl_posts #add .add").remove();
+                    $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+                    element.find(".add-record").hide();
+                    element.find(".delete-record").show();
+                }
+            }
+        }
+    });
+});
+$(document).delegate('a.add-record', 'click', function (e) {
+    debugger
+
+    if ($("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != ''
+        && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != undefined
+        && $("#tbl_posts #add #txtPersonalName").val() != ''
+        && $("#tbl_posts #add #txtPersonalFatherName").val() != ''
+        && $("#tbl_posts #add #txtPersonalMobileNo").val() != ''
+        && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
+
+    ) {
+        var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+        e.preventDefault();
+        var content = jQuery('#tbl_posts #add tr'),
+            size = jQuery('#tbl_posts >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-record').attr('data-id', size);
+        element.appendTo('#tbl_posts_body');
+        $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
+        //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
+        element.find('.sn').html(size);
+        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+        $("#tbl_posts #add .add").remove();
+        $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+        element.find(".add-record").hide();
+        element.find(".delete-record").show();
+        debugger
+        /*$("#tbl_posts #add .form-control").val('');*/
+        $("#tbl_posts #add .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+$(document).delegate('a.delete-record', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_posts_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span.sn').html(index + 1);
+        });
+        $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});
+
+
+//************* New Damage assese RPT *******************
+$(document).ready(function () {
+    $("#tbl_posts #tbl_posts_body .odd").remove();
+    $("#tbl_posts #add .form-control").attr("multiple", false);
+})
+jQuery(document).ready(function () {
+    $.ajax({
+        type: "post",
+        url: "/SubstitutionMutationDetails/AlloteeTypeRepeter",
+        data: "id=" + 3 + "",
+        success: function (data) {
+            debugger;
+            for (var i = 0; i < data.length; i++) {
+                $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val(data[i].name)
+                    && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val(data[i].fatherName)
+                    && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val(data[i].date)
+                    && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val(data[i].atsgpa)
+
+
+
+                if (i < data.length - 1) {
+                    var content = jQuery('#tbl_posts #add tr'),
+                        size = jQuery('#tbl_posts >tbody >tr').length,
+                        element = null,
+                        element = content.clone();
+                    element.attr('id', 'rec-' + size);
+                    element.find('.delete-recordDamageAssessee').attr('data-id', size);
+                    element.appendTo('#tbl_DamageAssessee_body');
+                    element.find('.sn1').html(size);
+                    $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
+                    $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
+                    $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
+                    element.find(".add-recordDamageAssessee").hide();
+                    element.find(".delete-recordDamageAssessee").show();
+                }
+            }
+        }
+    });
+});
+$(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
+    debugger
+
+    if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
+
+    ) {
+        e.preventDefault();
+        var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
+            size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
+            element = null,
+            element = content.clone();
+        element.attr('id', 'rec-' + size);
+        element.find('.delete-recordDamageAssessee').attr('data-id', size);
+        element.appendTo('#tbl_DamageAssessee_body');
+        element.find('.sn1').html(size);
+        $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
+        $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
+        $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
+        element.find(".add-recordDamageAssessee").hide();
+        element.find(".delete-recordDamageAssessee").show();
+        debugger
+        /*$("#tbl_posts #add .form-control").val('');*/
+        $("#tbl_DamageAssessee #addDamageAssessee .floating-label-field").val('');
+    }
+    else {
+        alert('Please fill record before add new record ');
+    }
+});
+$(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
+    e.preventDefault();
+    var didConfirm = confirm("Are you sure You want to delete");
+    if (didConfirm == true) {
+        var id = jQuery(this).attr('data-id');
+        var targetDiv = jQuery(this).attr('targetDiv');
+        jQuery('#rec-' + id).remove();
+        //regnerate index number on table
+        $('#tbl_DamageAssessee_body tr').each(function (index) {
+            //alert(index);
+            $(this).find('span.sn1').html(index + 1);
+        });
+        $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
+        return true;
+    } else {
+        return false;
+    }
+});

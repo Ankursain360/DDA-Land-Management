@@ -1,77 +1,94 @@
-﻿//@* For radio button event click *@
-$(function () {
-    $("input[name='grpDamageAssesseeType']").click(function () {
-        if ($("#rSubsequent").is(":checked")) {
-            $("#DivForSubsequentPurchaser").show();
-        } else {
-            $("#DivForSubsequentPurchaser").hide();
-        }
-    });
-});
+﻿$(document).ready(function () {
 
-$(function () {
-    $("input[name='grpLitigation']").click(function () {
-        if ($("#rbdYesLitigation").is(":checked")) {
-            $("#DivForLitigationStatus").show();
-        } else {
-            $("#DivForLitigationStatus").hide();
-        }
-    });
-});
+    if ($("#rdbPayeeYes").is(":checked")) {
+        $("#DivForPayeeNo").hide();
+    } else {
+        $("#DivForPayeeNo").show();
+    }
 
-$(function () {
-    $("input[name='grpYESNO']").click(function () {
-        if ($("#rdbPayeeYes").is(":checked")) {
-            $("#DivForPayeeNo").hide();
-        } else {
-            $("#DivForPayeeNo").show();
+    $(".TotalCalculation").keyup(function () {
+        debugger;
+        var amount = $('#TotalValueWithInterest').val();
+        var interest = $('#InterestDueAmountCompund').val();
+        var rebate = $('#Rebate').val();
+        if (amount == "") {
+          //  $("input[name='InterestDueAmountCompund']").val("");
+            $("input[name='TotalPayable']").val("");
         }
-    });
-});
-
-$(function () {
-    $("input[name='grpUseofpeoperty']").click(function () {
-        if ($("#rdbResidential").is(":checked")) { //1st radio button
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").removeAttr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
-
+        else if (interest == "") {
+           // $("input[name='TotalValueWithInterest']").val("");
+            $("input[name='TotalPayable']").val("");
         }
-        else if ($("#rdbCommercial").is(":checked")) {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").removeAttr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-        }
-
-        else if ($("#rdbMixed").is(":checked")) {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").removeAttr("disabled", "disabled");
-            $("#txtCommercial").removeAttr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
-        }
-
         else {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
+            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebate == '' ? 0 : rebate )));
         }
-
     });
+
 });
 
+$("input[name='grpDamageAssesseeType']").click(function () {
+    if ($("#rSubsequent").is(":checked")) {
+        $("#DivForSubsequentPurchaser").show();
+    } else {
+        $("#DivForSubsequentPurchaser").hide();
+    }
+});
+
+$("input[name='grpLitigation']").click(function () {
+    if ($("#rbdYesLitigation").is(":checked")) {
+        $("#DivForLitigationStatus").show();
+    } else {
+        $("#DivForLitigationStatus").hide();
+    }
+});
+$("input[name='grpYESNO']").click(function () {
+    if ($("#rdbPayeeYes").is(":checked")) {
+        $("#DivForPayeeNo").hide();
+    } else {
+        $("#DivForPayeeNo").show();
+    }
+});
+
+$("input[name='grpUseofpeoperty']").click(function () {
+    if ($("#rdbResidential").is(":checked")) { //1st radio button
+        $("#txtResidential").attr("disabled", "disabled");
+        $("#txtCommercial").attr("disabled", "disabled");
+        $("#txtResidential").removeAttr("disabled", "disabled");
+        $("#txtCommercial").attr("disabled", "disabled");
+        $("#txtCommercialmts").val('');
+        $("#txtCommercial").val('');
+
+    }
+    else if ($("#rdbCommercial").is(":checked")) {
+        $("#txtResidential").attr("disabled", "disabled");
+        $("#txtCommercial").attr("disabled", "disabled");
+        $("#txtResidential").attr("disabled", "disabled");
+        $("#txtCommercial").removeAttr("disabled", "disabled");
+        $("#txtResidentialmts").val('');
+        $("#txtResidential").val('');
+    }
+
+    else if ($("#rdbMixed").is(":checked")) {
+        $("#txtResidential").attr("disabled", "disabled");
+        $("#txtCommercial").attr("disabled", "disabled");
+        $("#txtResidential").removeAttr("disabled", "disabled");
+        $("#txtCommercial").removeAttr("disabled", "disabled");
+        $("#txtResidentialmts").val('');
+        $("#txtResidential").val('');
+        $("#txtCommercialmts").val('');
+        $("#txtCommercial").val('');
+    }
+
+    else {
+        $("#txtResidential").attr("disabled", "disabled");
+        $("#txtCommercial").attr("disabled", "disabled");
+        $("#txtResidentialmts").val('');
+        $("#txtResidential").val('');
+        $("#txtCommercialmts").val('');
+        $("#txtCommercial").val('');
+    }
+
+});
 
 
 
@@ -104,7 +121,42 @@ $("#txtCommercial").change(function () {
     $("#txtCommercialmts").val(meter);
 });
 
+// CODE FOR SAVING VALUE OF RADIO BUTTON
+$("input[name='grpDamageAssesseeType']").click(function () {
+    var selected = $("input[type='radio'][name='grpDamageAssesseeType']:checked");
+    $("#TypeOfDamageAssessee").val(selected.val());
 
+});
+
+$("input[name='grpUseofpeoperty']").click(function () {
+    var selected = $("input[type='radio'][name='grpUseofpeoperty']:checked");
+    $("#UseOfProperty").val(selected.val());
+
+});
+
+$("input[name='grpLitigation']").click(function () {
+    var selected = $("input[type='radio'][name='grpLitigation']:checked");
+    $("#LitigationStatus").val(selected.val());
+
+});
+
+$("input[name='grpCaseperson']").click(function () {
+    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
+    $("#PetitionerRespondent").val(selected.val());
+
+});
+
+$("input[name='grpYESNO']").click(function () {
+    var selected = $("input[type='radio'][name='grpYESNO']:checked");
+    $("#IsDdadamagePayee").val(selected.val());
+
+});
+
+$("input[name='Bill']").click(function () {
+    var selected = $("input[type='radio'][name='Bill']:checked");
+    $("#IsDocumentFor").val(selected.val());
+
+});
 
 //@*Repeator code  *@
 //$(document).ready(function () {
@@ -181,7 +233,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFile").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
 
     ) {
         e.preventDefault();

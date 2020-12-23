@@ -40,16 +40,15 @@ namespace Libraries.Service.ApplicationService
             return await _mutationDetailsRepository.GetAllMutationDetails();
         }
 
-        public async Task<List<Locality>> GetAllLocality(int zoneId)
+        public async Task<List<Locality>> GetLocalityList()
         {
-            List<Locality> localityList = await _mutationDetailsRepository.GetAllLocality(zoneId);
+            List<Locality> localityList = await _mutationDetailsRepository.GetLocalityList();
             return localityList;
         }
-
-        public async Task<List<Zone>> GetAllZone()
+        public async Task<List<District>> GetDistrictList()
         {
-            List<Zone> zoneList = await _mutationDetailsRepository.GetAllZone();
-            return zoneList;
+            List<District> districtList = await _mutationDetailsRepository.GetDistrictList();
+            return districtList;
         }
 
         public Task<bool> Update(int id, Mutationdetails details)
@@ -62,41 +61,39 @@ namespace Libraries.Service.ApplicationService
             throw new NotImplementedException();
         }
 
-        public async Task<bool> SaveMutationPhotoPropFile(Mutationdetailsphotoproperty details)
+        public async Task<Mutationdetails> GetPhotoPropFile(int id)
         {
-            details.CreatedBy = 1;
-            details.CreatedDate = DateTime.Now;
-            details.IsActive = 1;
-            return await _mutationDetailsRepository.SaveMutationPhotoPropFile(details);
+            return await _mutationDetailsRepository.GetPhotoPropFile(id);
+
         }
 
-        public string SaveMutationAtsFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationAtsFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationAtsFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationAtsFilePath(id);
         }
-        public string SaveMutationGPAFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationGPAFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationGPAFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationGPAFilePath(id);
         }
-        public string SaveMutationMoneyReceiptFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationMoneyReceiptFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationMoneyReceiptFilePath(id);
         }
-        public string SaveMutationSignSPCFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationSignSPCFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationSignSPCFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationSignSPCFilePath(id);
         }
-        public string SaveMutationAddressProofFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationAddressProofFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationAddressProofFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationAddressProofFilePath(id);
         }
-        public string SaveMutationAffitDevitFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationAffitDevitFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationAffitDevitFilePath(id);
         }
-        public string SaveMutationIndemnityFilePath(int id)
+        public async Task<Mutationdetails> SaveMutationIndemnityFilePath(int id)
         {
-            return _mutationDetailsRepository.SaveMutationIndemnityFilePath(id);
+            return await _mutationDetailsRepository.SaveMutationIndemnityFilePath(id);
         }
 
         public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
@@ -105,6 +102,10 @@ namespace Libraries.Service.ApplicationService
             oldDamage.CreatedDate = DateTime.Now;
             oldDamage.IsActive = 1;
             return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
+        }
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
+        {
+            return await _mutationDetailsRepository.FetchMutationDetailsUserId(userId);
         }
     }
 }

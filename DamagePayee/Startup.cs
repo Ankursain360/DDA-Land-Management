@@ -47,7 +47,7 @@ namespace DamagePayee
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
             }
-
+            
 
             services.Configure<CookiePolicyOptions>(options =>
             {
