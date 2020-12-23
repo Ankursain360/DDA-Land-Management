@@ -1,56 +1,39 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Damagepayeeregister>
+﻿@model Libraries.Model.Entity.Noticetodamagepayee
+<div class="content" id="MainContentForm" style="max-width: 780px; margin: auto; background: white; padding: 10px;">
 
 
+    <div class="panel panel-default">
 
+        <div class="row" style="border: groove; height:140px">
 
-@if (Model != null && Model.Count() > 0)
-{
-@foreach (var item in Model)
-{
+            <div class="col-md-3" style="border-right:groove; height:135px">
 
-
-
-
-
-<div class="content" style="max-width: 1200px; margin: auto; background: white; padding: 10px;">
-
-
-    <div style="margin-left:90px; max-width:80%">
-
-        <div class="row" style="border: groove; height:128px">
-
-            <div class="col-md-3" style="border-right:groove;">
-
-
-                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:110px" class="img-responsive" alt="">
-
-
+                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
             </div>
 
-            <div class="col-md-6" style="">
-                <div>
-                    <h style="font-size:20px; color:black">
+            <div class="col-md-6" style="height:135px">
+                <div style="margin-left: 10px;">
+                    <h style="font-size:16px; color:black">
 
-                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
-
+                        <b> DELHI DEVELOPMENT AUTHORITY</b><br />
+                        दिल्ली विकास प्राधिकरण
                     </h>
-                    <p style="color:black; font-size:16px">
-                        <u>
-                            <b>
-                                IN THE COURT OF ESTATE OFFICER-||<br />
+                    <p style="color:black; font-size:11px; text-align:justify">
 
-                                Room No.-05, A-Block, Ground Floor,<br />
-
-                                VIKAS SADAN INA, NEW DELHI -110023<br />
-
-                            </b>
-                        </u>
+                        <b>
+                            IN THE COURT OF ESTATE OFFICER-||<br />
+                            संपदा अधिकारी-II कार्यालय<br />
+                            Room No.-05, A-Block, Ground Floor,<br />
+                            कमरा नं. 05, ए-ब्लॉक, भूतल<br />
+                            VIKAS SADAN INA, NEW DELHI -110023<br />
+                            विकास सदन, आई.एन.ए. नई दिल्ली
+                        </b>
                     </p>
                 </div>
             </div>
 
-            <div class="col-md-3" style="border-left:groove;">
-                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:110px" class="img-responsive" alt="">
+            <div class="col-md-3" style="border-left:groove;height:135px">
+                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
 
 
             </div>
@@ -60,13 +43,12 @@
         <div class="panel-body">
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label> फाइल सं. </label>
-
-                    <p style="color:black;">File No.-@item.FileNo</p>
+                    <p style="color:black;">File No.-</p> @Model.FileNo
                 </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-3">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
                     <label> दिनांक</label>
 
                     <p style="color:black">Dated</p>
@@ -74,11 +56,11 @@
 
             </div>
 
-
+            <br />
             <div class="row">
                 <div class="col-md-6">
-                    <label> Shri/smt :</label>
-                    <p style="color:black">Add :</p>
+                    <label> श्री/श्रीमती    &nbsp;&nbsp;  .................................................................</label>
+                    <p style="color:black">Shri/smt &nbsp;&nbsp;   @Model.Name     ........................................</p>
                 </div>
                 <div class="col-md-6">
                     <label> </label>
@@ -87,118 +69,231 @@
             </div>
 
 
-
+            <br />
             <div class="row">
                 <div class="col-md-12">
-                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
+                    <label> पता  &nbsp;&nbsp; ..............................................................................................................................................</label>
+                    <p style="color:black">Address &nbsp;&nbsp; @Model.Address.........................................................................................................................................</p>
+                </div>
 
 
-                        विषय : सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली ) अधिनियम , 1971  की  धरा 4(1)/7(3) के <br />
-                    </p>  <p style="color:black; margin-left:55px; text-align-last:justify">
-                        अंतर्गत...........................................................................................  दिल्ली  में  स्थित  सम्पति  सं.
-                        <br />
-                        .................................................के संबध में  श्री/श्रीमान................................................. के
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color: black">
+                        विषय :
 
 
+
+
+                        क्षतिपूर्ति प्रभारो के स्व आकलन हेतु सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली )
                     </p>
-
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
-
+                    <p style="margin-left:42px; color:black">
+                        अधिनियम , 1971  की  धारा 7 की उपधारा (3) के अंतर्गत नोटिस |
+                    </p>
 
 
 
                 </div>
 
 
-            </div>
+            </div><br />
 
             <div class="row">
                 <div class="col-md-12">
-                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-
-
-                        Sub:
-
+                    <p style="color:black">
+                        Subject:
 
 
 
 
-                        Proceeedings U/S  4(1) / 7(3)  of the public premises ( Eviction of unauthorised <br />
-                    </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
-                        occupants ) Act , 1971 , against ____________________in respect of permises <br />
-
-
-
-
+                        Notice under Sub Section (3) of Section 7 of Public Premises (Eviction of Unauthorized
                     </p>
-
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">
-                        _________________________________
-
+                    <p style="margin-left:50px; color:black">
+                        occupants) Act ,for self-assessment of damage charges.
                     </p>
-
-
-
 
                 </div>
 
 
             </div>
 
+            <br />
 
 
             <div class="row">
                 <div class="col-md-12">
-                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
+                    <p style="color: black;
+        margin-left: 50px;
+        text-align: justify
+">
 
-                        सरकारी स्थान (अप्राधिकृत अभिभोगियो की बेदखली ) अधिनियम , 1971 की धरा 4(1)/7(3) के
 
-                        <br />
-                    </p>   <p style="color:black; text-align-last:justify">
-                        अंतर्गत नोटिस के संम्बंध में आपको आयेतंत्द्वारा निर्देश दिया जाता है कि आप नोटिस की अपनी<br />
-                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक..................को
 
-                        <br />
+
+
+                        जबकि मेरी जानकारी में यह लाया गया है कि आप निम्न वर्णित सरकारी स्थान के अप्राधिकृत<br />
+                    </p>
+                    <p style="color:black; margin-left:30px;">
+                        अधिभोगी हैं/थेः-<br />
+                    </p>
+
+                    <br />
+                    <p style="color: black;
+        margin-left: 50px;
+        text-align: justify
+">
+                        Whereas , it  has  been  brought  to  my  notice  that    you   are /   were   in   unauthorized <br />
+                    </p>     <p style="color:black; margin-left:30px;">
+                        occupation of the public premises described below: -
+
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+            <br />
+
+
+
+
+            <div class="row" style="color:black; margin-left:12px">
+                <div class="col-md-3">
+                    <p style="color:black">संपत्ति विवरण </p>
+                    <p style="color:black">Property Details: </p> @Model.PropertyDetails<br />
+                    <p style="color:black">क्षेत्रफल (वर्ग गज)</p>
+                    <p style="color:black"> Area (Sq. Yds): @Model.Area</p>
+
+                </div>
+                <div class="col-md-6">
+                    @* <input style="height:60px; width:400px" id="email" name="email" type="text"><br /><br />
+                        <input style="height:40px; width:80px" id="email" name="email" type="text">*@
+                </div>
+
+
+                <div class="col-md-3"></div>
+
+
+
+            </div>
+
+            <br />
+
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:100px;margin-bottom:0.2%; text-align-last:justify">
+
+
+                        और जबकि सरकारी स्थान (अप्राधिकृत अधिभागियों की बेदखली) अधिनियम, 1971 की धारा 7 <br />
+                    </p>  <p style="color:black; margin-left:30px; text-align-last:justify">
+                        की उपधारा (2ए) द्वारा प्रदत्त शक्तियों का प्रयोग करते हुए मेरा विचार है कि उक्त स्थान के संबंध में<br />
+                        क्षतिपूर्ति की बकाया राशि देय है, जिसका भुगतान आपके द्वारा दिल्ली विकास प्राधिकरण को किया जाना<br />
+                        है।
+
+
+
+                    </p>
+
+                </div>
+
+
+            </div><br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:100px; margin-bottom:0.2%;text-align-last:justify">
+
+
+                        And whereas in exercise of the powers conferred on me by SubSection (2A) of Section 7 <br />
+                    </p>  <p style="color:black; margin-left:30px; text-align-last:justify">
+                        of the Public Premises (Eviction of Unauthorized Occupants)Act 1971, I consider that arrears of<br />
+                        damages in respect of the said premises is due and payable by you to the Delhi Development<br />
+                        Authority.
+
+
+
+                    </p>
+
+                </div>
+
+
+            </div>
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:100px;margin-bottom:0.2% ;text-align-last:justify">
+
+                        और जबकि सरकारी स्थान (अप्राधिकृत अधिभोगियों की बेदखली) अधिनियम, 1971 की धारा 7 की<br />
+                    </p>   <p style="color:black; margin-left:30px; text-align-last:justify">
+                        उपधारा (2ए) द्वारा प्रदत्त शक्तियों का प्रयोग करते हुए मेरा विचार है कि आपको दिल्ली विकास प्राधिकरण<br />
+                        को उक्त बकाया राशि के ब्याज का भुगतान प्राधिकरण द्वारा निर्धारित दर पर इसके अंतिम भुगतान तक <br />
 
 
 
                     </p>
                     <p style="        color: black;
-
+        margin-left: 30px;
         margin-top: -1.2%;
-">______ उपस्थित हो |</p>
+"> करना होगा।</p>
 
                 </div>
 
 
             </div>
 
+            <br />
             <div class="row">
                 <div class="col-md-12">
                     <p style="        color: black;
-        margin-left: 55px;
+        margin-left: 100px;
+        text-align-last: justify;
+        margin-bottom: -0.2%
+">
+                        And whereas in exercise of the powers conferred on me by Sub Section (2A) of Section 7 <br />
+                    </p> <p style="color:black; margin-left:30px; text-align-last:justify">
+                        of the Public Premises (Eviction of Unauthorized Occupants)Act 1971, I consider that you are<br />
+                        also liable to pay interest to the Delhi Development Authority on the said arrears at the rate<br />
+
+
+                    </p>
+                    <p style="        color: black;
+        margin-left: 30px;
+        margin-top: -1.2%;
+">determined by the Authority till its final payment.</p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="        color: black;
+        margin-left: 100px;
         text-align-last: justify;
         margin-bottom: -0.2%
 ">
 
-                        In connection with the notice under Section 4(1)/7(3) of the Public Premises
-                    </p> <p style="        color: black;
-        margin-top: 0.8%; text-align-last:justify">
-                        ( Eviction of Unauthorised Occupants&nbsp;  ) Act ,&nbsp;  1971 &nbsp;  You are hereby directed  that  you may
-                        produce evidence in support of your objections to the notice and appear before the<br />
-
-
+                        इसलिए अब सरकारी स्थान (अप्राधिकृत अधिभोगियों की बेदखली) अधिनियम, 1971 की धारा 7
                     </p>
-                    <p style="        color: black;
+                    <p style="color:black; margin-left:30px; text-align-last:justify">
+                        की उपधारा (3) के अनुपालन में,  मैं एतद् द्वारा आपसे देय क्षतिपूर्ति प्रभारों का स्व आकलन करने और<br />
+                        ब्याज सहित आपके प्रति लंबित बकाया राशि का भुगतान करने तथा सात दिन के अंदर डी.डी.ए. के पोर्टल <br />
+                        (http://dda.org.in/damage) पर भुगतान के प्रमाण और आपत्ति, यदि कोई हो, को फाइल करने की
+                    </p>
+                    <p style="color:black; margin-left:30px; margin-top:-1.2%"> अपेक्षा करता हूं।</p>
 
-        margin-top: -1.2%;
-">court of undersigned on __________ at __________</p>
 
 
                 </div>
@@ -207,38 +302,28 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
 
-                        आप उक्त तिथि को उपस्थित होने में विफल रहेंगे, पूर्व-पक्षीय कार्यवाही शुरू की
-
-                        <br />
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-"> जाएगी |</p>
-
-                </div>
-
-
-            </div>
-
-
+            <br />
             <div class="row">
                 <div class="col-md-12">
                     <p style="        color: black;
-        margin-left: 55px;
+        margin-left: 100px;
         text-align-last: justify;
-
+        margin-bottom: -0.2%
 ">
-                        In you fail to appear on the said date ex-parte  proceedings will be started
-                    </p>
-                    <p style="        color: black;
 
-        margin-top: -1.2%;
-">against you</p>
+                        Now, therefore, in pursuance of Sub Section (3) of Section 7 of Public Premises (Eviction
+                    </p>
+                    <p style="color:black; margin-left:30px; text-align-last:justify">
+                        of Unauthorized Occupants)Act 1971, I hereby call upon you to make the self-assessment of<br />
+                        damage charges due against you and pay the outstanding amount pending against you along <br />
+                        with interest and file the proof of payment and the objections, if any, on the DDA’s <br />
+
+
+                    </p>
+
+                    <p style="color:black; margin-left:30px; margin-top:-1.2%">  Portal(http://dda.org.in/damage) within seven days.</p>
+
 
 
                 </div>
@@ -246,6 +331,98 @@
 
             </div>
 
+
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:100px; text-align-last:justify">
+                        आपकी सुविधा के लिए दि.वि.प्रा. ने स्व आकलन स्कीम का लाभ उठान वाले व्यक्तियों के संबंध में <br />
+
+
+
+                    </p>
+
+                    <p style="color:black; margin-left:30px; margin-top:-1.2%">
+
+                        बकाया राशि पर देय @Model.InterestPercentage ब्याज प्रभार को माफ कर दिया है।
+
+                    </p>
+
+                    <p style="color:black; margin-left:100px; text-align-last:justify">
+                        For your convenience the DDA has waived @Model.InterestPercentage of interest charges due on the  <br />
+
+
+
+                    </p>
+
+                    <p style="color:black; margin-left:30px; margin-top:-1.2%">
+
+                        outstanding amount in respect of the persons availing self-assessment scheme.
+
+                    </p>
+
+
+
+                </div>
+
+
+            </div>
+
+            <br />
+
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="color:black; margin-left:100px;margin-bottom:0.2% ;text-align-last:justify">
+
+                        यदि निर्धारित अवधि के अंदर कोई उत्तर प्राप्त नहीं होता है, तो आपके द्वारा चक्रवृद्धि ब्याज सहित<br />
+                    </p>   <p style="color:black; margin-left:30px; text-align-last:justify">
+                        क्षतिपूर्ति की उक्त बकाया राशि का भुगतान करने के लिए आदेश पारित किया जाएगा तथा सरकारी स्थान<br />
+                        (अप्राधिकृत अधिभोगियों की बेदखली) अधिनियम, 1971 की धारा 4 (1) के अंतर्गत आपके विरूद्ध बेदखली
+                        <br />
+
+
+
+                    </p>
+                    <p style="        color: black;
+        margin-left: 30px;
+        margin-top: -1.2%;
+"> की कार्रवाई शुरू की जाएगी।</p>
+
+                </div>
+
+
+            </div>
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <p style="        color: black;
+        margin-left: 100px;
+        text-align-last: justify;
+        margin-bottom: -0.2%
+">
+                        If no reply is received within the prescribed period then order requiring you to pay the  <br />
+                    </p> <p style="color:black; margin-left:30px; text-align-last:justify">
+                        said arrears of the damages together with compound interest will be passed and action for <br />
+                        eviction under Section 4(1) of the Public Premises (Eviction of Unauthorized Occupants) Act <br />
+
+
+                    </p>
+                    <p style="        color: black;
+        margin-left: 30px;
+        margin-top: -1.2%;
+">1971, will be initiated against you.</p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <br /><br />
 
             <div class="row">
                 <div class="col-md-6">
@@ -254,17 +431,54 @@
                 </div>
 
 
-                <div class="col-md-3">
+                <div class="col-md-2">
 
 
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
 
                     <p style="color:black">
-                        संपदा अधिकारी-II D<br />
-                        Estate Officer-II D
+                        संपदा अधिकारी के हस्ताक्षर और मोहर<br />
+                        Sign & Seal of the Estate Officer
                     </p>
+
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-1">
+
+
+
+
+
+                </div>
+
+                <div class="col-md-9">
+                    <p style="color:black">Date</p><p style="color:black">
+
+                        दिनांक
+                    </p>
+
+                </div>
+
+                <
+                <div class="row">
+                    <div class="col-md-12">
+                        <button class="btn btn-theme " id="btnGenerate" type="button">Generate</button>
+                        @*<input type="submit" value="Generate"  class="btn btn-primary myapp-hed1" />*@
+                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                        @Html.ActionLink("Back", "Create", "NoticeToDamagePayee", null, new { @class = "btn btn-theme" })
+                    </div>
+                </div>
+
+
+
+                <div class="col-md-2">
+
+
 
 
 
@@ -273,9 +487,4 @@
 
         </div>
     </div>
-</div>} }
-else
-{
-<div>
-    <p> Data Not Available </p>
-</div>}
+</div>

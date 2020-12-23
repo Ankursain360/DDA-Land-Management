@@ -111,7 +111,7 @@ namespace Libraries.Model
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
         public virtual DbSet<Familydetails> Familydetails { get; set; }
-
+        public virtual DbSet<Noticetodamagepayee> Noticetodamagepayee { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         //**********  Damage Payee **********
 
@@ -244,7 +244,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
-
+            modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Damagepayeeregister>
+﻿@model Libraries.Model.Entity.Noticetodamagepayee
 @await Component.InvokeAsync("PageHeader", new { pageName = "Notice To Damage Payee" })
 
 @{ ViewData["Title"] = "Create";
@@ -34,15 +34,125 @@
         <div id="DivForFileName" style="display:none">
             <h3 class="my-3 d-flex sub-heading">By File Name</h3>
             <div class="row">
+
+
                 <div class="form-group col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input placeholder="Date of Encroachment" type="text"
-                               class="floating-label-field floating-label-field--s3" id="file_id" />
+                               class="floating-label-field floating-label-field--s3" asp-for="FileNo" />
                         <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> File Name <span style="color:red">*</span></label>
+                        <label class="floating-label"> File No <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+
+
+
+                @*  <div class="form-group col-md-6">
+                        <label class="control-label lb-sm">File No <span style="color:red">*</span></label>
+                        <select class="form-control" required="required" id="file_id" asp-items="@(new SelectList(Model.DamageList,"Id","FileNo"))">
+                            <option value="">Select</option>
+                        </select>
+                    </div>*@
+
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="Date"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label"> Generate Date <span style="color:red">*</span></label>
                     </div>
                 </div>
             </div>
+
+
+
+            <div class="row">
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text" asp-for="Name"
+                               class="floating-label-field floating-label-field--s3" id="file_id" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Name <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text" asp-for="Address"
+                               class="floating-label-field floating-label-field--s3" id="file_id" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label"> Address <span style="color:red">*</span></label>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text" asp-for="PropertyDetails"
+                               class="floating-label-field floating-label-field--s3" id="file_id" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Property Details <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text"
+                               class="floating-label-field floating-label-field--s3" asp-for="Area" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label"> Area <span style="color:red">*</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text"
+                               class="floating-label-field floating-label-field--s3" asp-for="InterestPercentage" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Interest % <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-theme " />
+                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                    @Html.ActionLink("Back", "Index", "NoticeToDamagePayee", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+
+
         </div>
 
         <div id="DivForPayeeName" style="display:none">
@@ -86,287 +196,12 @@
         </div>
 
 
-        <div id="DivForGenerate" style="display:none;">
-            <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-theme " id="btnGenerate" type="button">Generate</button>
-                    @*<input type="submit" value="Generate"  class="btn btn-primary myapp-hed1" />*@
-                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                    @Html.ActionLink("Back", "Create", "NoticeToDamagePayee", null, new { @class = "btn btn-theme" })
-                </div>
-            </div>
-        </div>
+
         <div id="LoadView">
         </div>
     </form>
 
 </div>
-@**@
-<div class="content" style="max-width: 1200px; margin: auto; background: white; padding: 10px;">
-
-
-    <div style="margin-left:90px; max-width:80%">
-
-        <div class="row" style="border: groove; height:128px">
-
-            <div class="col-md-3" style="border-right:groove;">
-
-
-                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:110px" class="img-responsive" alt="">
-
-
-            </div>
-
-            <div class="col-md-6" style="">
-                <div>
-                    <h style="font-size:20px; color:black">
-
-                        <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
-
-                    </h>
-                    <p style="color:black; font-size:16px">
-                        <u>
-                            <b>
-                                IN THE COURT OF ESTATE OFFICER-||<br />
-
-                                Room No.-05, A-Block, Ground Floor,<br />
-
-                                VIKAS SADAN INA, NEW DELHI -110023<br />
-
-                            </b>
-                        </u>
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-3" style="border-left:groove;">
-                <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:110px" class="img-responsive" alt="">
-
-
-            </div>
-
-        </div>
-
-        <div class="panel-body">
-
-            <div class="row">
-                <div class="col-md-3">
-                    <label> फाइल सं. </label>
-
-                    <p style="color:black;">File No.</p>
-                </div>
-                <div class="col-md-6"></div>
-                <div class="col-md-3">
-                    <label> दिनांक</label>
-
-                    <p style="color:black">Dated</p>
-                </div>
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-6">
-                    <label> Shri/smt :</label>
-                    <p style="color:black">Add :</p>
-                </div>
-                <div class="col-md-6">
-                    <label> </label>
-                </div>
-
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-
-
-                        विषय : सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली ) अधिनियम , 1971  की  धरा 4(1)/7(3) के <br />
-                    </p>  <p style="color:black; margin-left:55px; text-align-last:justify">
-                        अंतर्गत...........................................................................................  दिल्ली  में  स्थित  सम्पति  सं.
-                        <br />
-                        .................................................के संबध में  श्री/श्रीमान................................................. के
-
-
-                    </p>
-
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
-
-
-
-
-                </div>
-
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-
-
-                        Sub:
-
-
-
-
-
-                        Proceeedings U/S  4(1) / 7(3)  of the public premises ( Eviction of unauthorised <br />
-                    </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
-                        occupants ) Act , 1971 , against ____________________in respect of permises <br />
-
-
-
-
-                    </p>
-
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">
-                        _________________________________
-
-                    </p>
-
-
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
-
-                        सरकारी स्थान (अप्राधिकृत अभिभोगियो की बेदखली ) अधिनियम , 1971 की धरा 4(1)/7(3) के
-
-                        <br />
-                    </p>   <p style="color:black; text-align-last:justify">
-                        अंतर्गत नोटिस के संम्बंध में आपको आयेतंत्द्वारा निर्देश दिया जाता है कि आप नोटिस की अपनी<br />
-                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक..................को
-
-                        <br />
-
-
-
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-">______ उपस्थित हो |</p>
-
-                </div>
-
-
-            </div>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="        color: black;
-        margin-left: 55px;
-        text-align-last: justify;
-        margin-bottom: -0.2%
-">
-
-                        In connection with the notice under Section 4(1)/7(3) of the Public Premises
-                    </p> <p style="        color: black;
-        margin-top: 0.8%; text-align-last:justify">
-                        ( Eviction of Unauthorised Occupants&nbsp;  ) Act ,&nbsp;  1971 &nbsp;  You are hereby directed  that  you may
-                        produce evidence in support of your objections to the notice and appear before the<br />
-
-
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-">court of undersigned on __________ at __________</p>
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
-
-                        आप उक्त तिथि को उपस्थित होने में विफल रहेंगे, पूर्व-पक्षीय कार्यवाही शुरू की
-
-                        <br />
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-"> जाएगी |</p>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="        color: black;
-        margin-left: 55px;
-        text-align-last: justify;
-
-">
-                        In you fail to appear on the said date ex-parte  proceedings will be started
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-">against you</p>
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-6">
-
-
-                </div>
-
-
-                <div class="col-md-3">
-
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <p style="color:black">
-                        संपदा अधिकारी-II D<br />
-                        Estate Officer-II D
-                    </p>
-
-
-
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-
-
 
 <script>
 
@@ -403,9 +238,12 @@
             var Id = $("#file_id").val();
             alert(Id);
             $.get(`/NoticeToDamagePayee/GetDetails/?fileNo=${Id}`, function (response) {
-                alert(response);
-                $('#LoadView').html("");
-                $('#LoadView').html(response);
+               // alert(response);
+                $.get(`/NoticeToDamagePayee/GetPersonalInfo/?Id=${response}`, function (res) {
+                    alert(res);
+                    $('#LoadView').html("");
+                    $('#LoadView').html(res);
+                });
             });
         }
     });
