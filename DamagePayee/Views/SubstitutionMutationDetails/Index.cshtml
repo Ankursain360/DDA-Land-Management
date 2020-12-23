@@ -6,7 +6,7 @@
 @{int PanNoFilePath = 0; }
 @{int PhotographPath = 0; }
 @{int SignaturePath = 0; }
-@{int PropertyPhoto = 0; }
+@{int PropertyPhotoPath = 0; }
 
 
 
@@ -353,25 +353,25 @@
         <div class="row mt-md-3">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    @*@{
-                        if (Model.DamagePayeeRegister != null && Model.DamagePayeeRegister.Count > 0)
+                    @{
+                        if (Model.DamagePayeeRegister.DamagePayeeRegisterList != null && Model.DamagePayeeRegister.DamagePayeeRegisterList.Count > 0)
                         {
-                            foreach (var data in Model.DamagePayeeRegister)
+                            foreach (var data in Model.DamagePayeeRegister.DamagePayeeRegisterList)
                             {
-                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhoto += 1 ))</a>
+                                <a asp-action="DownloadPropertyPhotoFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhotoPath += 1 ))</a>
 
                             }
-                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
-
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhotoPath"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-for="PropertyPhotoPath" class="d-block text-danger field-validation-valid"></span>
                         }
                         else
-                        {*@
-                    <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
-                    <span class="d-block text-danger field-validation-valid"></span>
-                    <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+                        {
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhotoPath"  class="floating-label-field floating-label-field--s3" placeholder="Name">
+                            <span asp-for="PropertyPhotoPath" class="d-block text-danger field-validation-valid"></span>
+                            <label for="field-1" class="floating-label">Upload Photograph of Property </label>
 
-                    @*}
-                    }*@
+                        }
+                    }
 
                     @*<a href="#" class="badge badge-primary px-2">View file</a>*@
                 </div>

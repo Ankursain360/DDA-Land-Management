@@ -60,7 +60,7 @@ namespace DamagePayee.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-            
+
             string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
@@ -93,7 +93,7 @@ namespace DamagePayee.Controllers
                 var result = await _damagepayeeregisterService.Create(damagepayeeregistertemp);
                 if (result)
                 {
-                  //  FileHelper fileHelper = new FileHelper();
+                    //  FileHelper fileHelper = new FileHelper();
 
                     //****** code for saving  Damage payee personal info *****
 

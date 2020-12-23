@@ -30,6 +30,7 @@ namespace Libraries.Service.IApplicationService
         Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
         Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
+        Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id);
 
 
         //********* rpt 2 Allotte Type **********
@@ -38,6 +39,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
         Task<Allottetypetemp> GetATSFilePath(int Id);
+        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
+
 
         //********* rpt 3 Damage payment history ***********
 
