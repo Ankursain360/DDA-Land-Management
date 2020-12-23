@@ -134,7 +134,7 @@ namespace Libraries.Model
         public virtual DbSet<Mutationoriginalowner> Mutationoriginalowner { get; set; }
         public virtual DbSet<Mutationoriginalownertemp> Mutationoriginalownertemp { get; set; }
 
-
+        public virtual DbSet<Noticetodamagepayee> Noticetodamagepayee { get; set; }
         public virtual DbSet<Presentuse> Presentuse { get; set; }
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
         public virtual DbSet<Processworkflow> Processworkflow { get; set; }
@@ -247,6 +247,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
+            modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }
