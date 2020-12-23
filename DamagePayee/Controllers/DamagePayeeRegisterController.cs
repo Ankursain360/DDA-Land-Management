@@ -486,5 +486,41 @@ namespace DamagePayee.Controllers
             string filename = Data.DocumentForFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+
+
+        //**********************  download repeater files****************************
+        public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
+            string path = Data.AadharNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoPanFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
+            string path = Data.PanNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
+            string path = Data.PhotographPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoSignautreFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _damagepayeeregisterService.GetPersonelInfoFilePath(Id);
+            string path = Data.SignaturePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
     }
 }
