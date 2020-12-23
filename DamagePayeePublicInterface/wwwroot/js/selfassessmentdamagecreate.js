@@ -1,5 +1,7 @@
 ﻿$(document).ready(function () {
-
+    /* -----------Apply for Mutation   --------------- */
+    var selected = $("input[type='radio'][name='grpYESNO']:checked");
+    $("#IsDdadamagePayee").val(selected.val());
     if ($("#rdbPayeeYes").is(":checked")) {
         $("#DivForPayeeNo").hide();
     } else {
@@ -13,11 +15,9 @@
         var rebate = $('#Rebate').val();
         var rebatePercentage = $('#RebatePercentage').val();
         if (amount == "") {
-          //  $("input[name='InterestDueAmountCompund']").val("");
             $("input[name='TotalPayable']").val("");
         }
         else if (interest == "") {
-           // $("input[name='TotalValueWithInterest']").val("");
             $("input[name='TotalPayable']").val("");
         }
         else {
@@ -27,7 +27,91 @@
     });
 
 });
+function CheckToApply() {
+    var show = true;
+    if ($("#rdbPayeeYes").is(":checked")) {
+        $("#DivForPayeeNo").hide();
+    } else {
+        $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
+            if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
+                if (show == true) {
+                    if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
+                    }
+                    else {
+                        show = false;
+                    }
+                }
+            }
+        });
+        if (show) {
+            $("#IsMutaionYes").val(0);
+            return true;
+        }
+        else {
+            alert('Please Fill All Mandatory Fields');
+            return false;
+        }
+    }
+}
 
+function PageValidation() {
+    var checkresult = false;
+    var Damageamount = $('#TotalValueWithInterest').val();
+    if (Damageamount == "") {
+        checkresult = false;
+        $("#TotalValueWithInterestMsg").show();
+    } else {
+        checkresult = true;
+    }
+
+    var interest = $('#InterestDueAmountCompund').val();
+    if (interest == "") {
+        checkresult = false;
+        $("#InterestDueAmountCompundMsg").show();
+    } else {
+        checkresult = true;
+    }
+    var TotalPayable = $('#TotalPayable').val();
+    if (TotalPayable == "") {
+        checkresult = false;
+        $("#TotalPayableMsg").show();
+    } else {
+        checkresult = true;
+    }
+
+    var Rebate = $('#Rebate').val();
+    if (Rebate == "") {
+        checkresult = false;
+        $("#RebateMsg").show();
+    } else {
+        checkresult = true;
+    }
+    if ($("#DeclarationStatus1").not(":checked"))
+        $("#DeclarationStatus1Msg").show();
+    if ($("#DeclarationStatus2").not(":checked"))
+        $("#DeclarationStatus2Msg").show();
+    if ($("#DeclarationStatus3").not(":checked"))
+        $("#DeclarationStatus3Msg").show();
+    if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").not(":checked") || $("#DeclarationStatus2").not(":checked") || $("#DeclarationStatus3").not(":checked")) {
+        $("#IsMutaionYes").val(1);
+        checkresult = false;
+    }
+}
+$("input[name='DeclarationStatus1']").click(function () {
+    var selected = $("input[type='checkbox'][name='DeclarationStatus1']:checked");
+    $("#Declaration1").val(1);
+
+});
+$("input[name='DeclarationStatus2']").click(function () {
+    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
+    $("#PetitionerRespondent").val(selected.val());
+
+});
+$("input[name='DeclarationStatus3']").click(function () {
+    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
+    $("#PetitionerRespondent").val(selected.val());
+
+});
 $("input[name='grpDamageAssesseeType']").click(function () {
     if ($("#rSubsequent").is(":checked")) {
         $("#DivForSubsequentPurchaser").show();
@@ -44,6 +128,8 @@ $("input[name='grpLitigation']").click(function () {
     }
 });
 $("input[name='grpYESNO']").click(function () {
+    var selected = $("input[type='radio'][name='grpYESNO']:checked");
+    $("#IsDdadamagePayee").val(selected.val());
     if ($("#rdbPayeeYes").is(":checked")) {
         $("#DivForPayeeNo").hide();
     } else {
@@ -145,12 +231,6 @@ $("input[name='grpLitigation']").click(function () {
 $("input[name='grpCaseperson']").click(function () {
     var selected = $("input[type='radio'][name='grpCaseperson']:checked");
     $("#PetitionerRespondent").val(selected.val());
-
-});
-
-$("input[name='grpYESNO']").click(function () {
-    var selected = $("input[type='radio'][name='grpYESNO']:checked");
-    $("#IsDdadamagePayee").val(selected.val());
 
 });
 

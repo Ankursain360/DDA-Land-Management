@@ -208,5 +208,7 @@ namespace Libraries.Model.Entity
         public bool DeclarationStatus2 { get; set; }
         [NotMapped]
         public bool DeclarationStatus3 { get; set; }
+        [NotMapped]
+        public int IsMutaionYes { get; set; }
     }
 }
