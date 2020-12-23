@@ -105,38 +105,50 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
 
+
+        [NotMapped]
+        public IFormFile DeathCertificatePathNew { get; set; }
+        [NotMapped]
+        public IFormFile RelationshipUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AffidevitLegalUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile NonObjectUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile SpecimenSignLegalUploadNew { get; set; }
+
         /* 1st Repeater*/
-        [NotMapped]
-        public List<string> Name2 { get; set; }
-        [NotMapped]
-        public List<string> FatherName2 { get; set; }
-        [NotMapped]
-        public List<DateTime> DateGpadead { get; set; }
-        [NotMapped]
-        public List<string> GpastafilePath { get; set; }
+        //[NotMapped]
+        //public List<string> Name2 { get; set; }
+        //[NotMapped]
+        //public List<string> FatherName2 { get; set; }
+        //[NotMapped]
+        //public List<DateTime> DateGpadead { get; set; }
+        //[NotMapped]
+        //public List<string> GpastafilePath { get; set; }
 
 
         /* 2nd Repeater*/
-        [NotMapped]
-        public List<string> NameNew { get; set; }
-        [NotMapped]
-        public List<string> GuardianName { get; set; }
-        [NotMapped]
-        public List<string> Gender { get; set; }
-        [NotMapped]
-        public List<string> Address { get; set; }
-        [NotMapped]
-        public List<string> MobileNo { get; set; }
-        [NotMapped]
-        public List<string> Email { get; set; }
-        [NotMapped]
-        public List<string> AadharNo { get; set; }
-        [NotMapped]
-        public List<string> PanNo { get; set; }
-        [NotMapped]
-        public List<IFormFile> PhotoFilePath { get; set; }
-        [NotMapped]
-        public List<IFormFile> SignatureFilePath { get; set; }
+        //[NotMapped]
+        //public List<string> NameNew { get; set; }
+        //[NotMapped]
+        //public List<string> GuardianName { get; set; }
+        //[NotMapped]
+        //public List<string> Gender { get; set; }
+        //[NotMapped]
+        //public List<string> Address { get; set; }
+        //[NotMapped]
+        //public List<string> MobileNo { get; set; }
+        //[NotMapped]
+        //public List<string> Email { get; set; }
+        //[NotMapped]
+        //public List<string> AadharNo { get; set; }
+        //[NotMapped]
+        //public List<string> PanNo { get; set; }
+        //[NotMapped]
+        //public List<IFormFile> PhotoFilePath { get; set; }
+        //[NotMapped]
+        //public List<IFormFile> SignatureFilePath { get; set; }
 
 
     }

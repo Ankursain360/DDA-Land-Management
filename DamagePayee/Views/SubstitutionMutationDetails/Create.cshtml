@@ -55,7 +55,7 @@
                     <tbody id="tbl_posts_body">
                     </tbody>
                     <tbody class="tbody" id="add">
-                       
+
                         <tr id="">
                             <td style="text-align:center;"><span class="sn">1</span></td>
                             <td>
@@ -68,6 +68,7 @@
 
                             </td>
                             <td>
+
                                 <select asp-for="DamagePayeeRegister.Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
                                     <option value="0">---Select---</option>
                                     <option value="1">Male</option>
@@ -83,7 +84,7 @@
 
                             </td>
                             <td>
-                                <input asp-for="DamagePayeeRegister.MobileNo" type="text" id="txtPersonalMobileNo." class="floating-label-field floating-label-field--s3" />
+                                <input asp-for="DamagePayeeRegister.MobileNo" type="number" id="txtPersonalMobileNo" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="DamagePayeeRegister.MobileNo" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
@@ -94,31 +95,31 @@
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DamagePayeeRegister.AadharNo" type="text" placeholder="Aadhar No." class=" floating-label-field--s3" />
+                                    <input asp-for="DamagePayeeRegister.AadharNo" type="text" id="txtAadharNo" placeholder="Aadhar No." class=" floating-label-field--s3" />
                                     <span asp-validation-for="DamagePayeeRegister.AadharNo" class="d-block text-danger field-validation-valid"></span>
 
-                                    <input asp-for="DamagePayeeRegister.Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                    <input asp-for="DamagePayeeRegister.Aadhar" type="file" id="AadharFile" class="floating-label-field floating-label-field--s3 " />
                                     <span asp-validation-for="DamagePayeeRegister.Aadhar" class="d-block text-danger field-validation-valid"></span>
 
                                 </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input asp-for="DamagePayeeRegister.PanNo" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                    <input asp-for="DamagePayeeRegister.PanNo" type="text" id="txtPanNo" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
                                     <span asp-validation-for="DamagePayeeRegister.PanNo" class="d-block text-danger field-validation-valid"></span>
 
-                                    <input asp-for="DamagePayeeRegister.Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                    <input asp-for="DamagePayeeRegister.Pan" type="file" id="PanNoFile" class="floating-label-field floating-label-field--s3 " />
                                     <span asp-validation-for="DamagePayeeRegister.Pan" class="d-block text-danger field-validation-valid"></span>
 
                                 </div>
                             </td>
                             <td>
-                                <input asp-for="DamagePayeeRegister.Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+                                <input asp-for="DamagePayeeRegister.Photograph" type="file" id="Photograph" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="DamagePayeeRegister.Photograph" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input asp-for="DamagePayeeRegister.SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                <input asp-for="DamagePayeeRegister.SignatureFile" type="file" id="Signature" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="DamagePayeeRegister.SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
@@ -129,7 +130,7 @@
                                 </div>
                             </td>
 
-                        </tr>                      
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -343,7 +344,7 @@
 
         <h2 class="my-3 sub-heading">Purpose Of Mutation/Change Of Title</h2>
         <div class="row">
-            <input type="hidden" asp-for="MutationPurpose" id="MutationPurpose" value="Purchaser" />
+            <input type="hidden" asp-for="MutationPurpose" disabled id="MutationPurpose" value="Purchaser" />
 
             <div class="col-md-6">
                 <div class="form-check theme">
@@ -355,7 +356,7 @@
             <div class="col-md-6">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpPurpose" value="Inheritance" id="rdbInheritance" />
+                    <input class="form-check-input" type="radio" name="grpPurpose" value="rdbInheritance" id="rdbInheritance" />
                     <label class="form-check-label">Inheritance </label>
                 </div>
 
@@ -363,7 +364,7 @@
         </div>
     </div>
 
-    <div id="one">
+    <div id="DivForInheritancePurpose">
 
         <h2 class="my-3 sub-heading">If Purchased</h2>
         <div class="row">
@@ -438,6 +439,86 @@
             </div>
         </div>
     </div>
+    <div id="DivForInheritancePurpose">
+
+        <h2 class="my-3 sub-heading">If transfer through Inheritance:-</h2>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DeathCertificatePathNew" type="file" placeholder="Death Certificate Original"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Death Certificate Original<span class="text-danger" style="color:red">*</span></label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+
+        <div class="row pt-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="RelationshipUploadPathNew" type="File" placeholder="Proof of Relationship with Previous damage assess(ID proof,Retion Card,etc.)"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Proof of Relationship with Previous damage assess(ID proof,Retion Card,etc.)<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="AffidevitLegalUploadPathNew" type="file" placeholder="Affidavit for Legal Heirs"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Affidavit for Legal Heirs<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="NonObjectUploadPathNew" type="file" placeholder="No Objection Certificate from other legal heirs"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">No Objection Certificate from other legal heirs<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="SpecimenSignLegalUploadNew" type="file" placeholder="Signature of Specimen"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Signature of Specimen<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+    </div>
+
     @*<div class="row">*@
 
     <h2 class="my-3 sub-heading">Upload Latest Address Proof</h2>

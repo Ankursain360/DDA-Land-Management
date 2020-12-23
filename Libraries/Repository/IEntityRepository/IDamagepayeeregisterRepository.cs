@@ -28,6 +28,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
         Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
+        Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id);
+
 
         //********* rpt 2 Allotte Type **********
 
@@ -35,15 +37,15 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
         Task<Allottetypetemp> GetATSFilePath(int Id);
-       
+        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
+
         //********* rpt 3 Damage payment history ***********
 
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
 
-        //************ Persolnal info of damage assesse Repeater ************//
-        Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id);
+        
 
     }
 }
