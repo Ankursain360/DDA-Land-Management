@@ -209,6 +209,10 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeletePaymentHistoryTemp(Id);
         }
-
+      
+        public async Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetReceiptFilePath(Id);
+        }
     }
 }

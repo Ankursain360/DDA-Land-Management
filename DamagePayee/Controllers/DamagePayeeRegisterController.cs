@@ -119,6 +119,8 @@ namespace DamagePayee.Controllers
                                     Address = damagepayeeregistertemp.Address[i],
                                     MobileNo = damagepayeeregistertemp.MobileNo[i],
                                     EmailId = damagepayeeregistertemp.EmailId[i],
+                                    AadharNo = damagepayeeregistertemp.AadharNo[i],
+                                    PanNo = damagepayeeregistertemp.PanNo[i],
                                     DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                     AadharNoFilePath = damagepayeeregistertemp.Aadhar[i] == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
                                     PanNoFilePath = damagepayeeregistertemp.Pan[i] == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
@@ -224,6 +226,7 @@ namespace DamagePayee.Controllers
             var data = await _damagepayeeregisterService.GetPersonalInfoTemp(Convert.ToInt32(Id));
             //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.FatherName,
                 x.Gender,
@@ -241,9 +244,10 @@ namespace DamagePayee.Controllers
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetAllottetypeTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.FatherName,
-                x.Date,
+                Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"),
                 x.AtsgpadocumentPath
             }));
         }
@@ -252,10 +256,11 @@ namespace DamagePayee.Controllers
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.RecieptNo,
                 x.PaymentMode,
-                x.PaymentDate,
+                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
                 x.Amount,
                 x.RecieptDocumentPath
             }));
@@ -343,6 +348,8 @@ namespace DamagePayee.Controllers
                                     Address = damagepayeeregistertemp.Address[i],
                                     MobileNo = damagepayeeregistertemp.MobileNo[i],
                                     EmailId = damagepayeeregistertemp.EmailId[i],
+                                    AadharNo = damagepayeeregistertemp.AadharNo[i],
+                                    PanNo = damagepayeeregistertemp.PanNo[i],
                                     DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                     AadharNoFilePath = damagepayeeregistertemp.Aadhar[i] == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
                                     PanNoFilePath = damagepayeeregistertemp.Pan[i] == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
@@ -368,8 +375,9 @@ namespace DamagePayee.Controllers
                          damagepayeeregistertemp.Date.Count > 0
                          )
                         {
-                            result = await _damagepayeeregisterService.DeleteAllotteTypeTemp(id);
+                           
                             List<Allottetypetemp> allottetypetemp = new List<Allottetypetemp>();
+                            result = await _damagepayeeregisterService.DeleteAllotteTypeTemp(id);
                             for (int i = 0; i < damagepayeeregistertemp.Name.Count; i++)
                             {
                                 allottetypetemp.Add(new Allottetypetemp
@@ -522,5 +530,23 @@ namespace DamagePayee.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
+        
+        public async Task<FileResult> ViewATSFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Allottetypetemp Data = await _damagepayeeregisterService.GetATSFilePath(Id);
+            string path = Data.AtsgpadocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        public async Task<FileResult> ViewReceiptFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepaymenthistorytemp Data = await _damagepayeeregisterService.GetReceiptFilePath(Id);
+            string path = Data.RecieptDocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
     }
 }

@@ -3,6 +3,8 @@ $(document).ready(function () {
 
 
     FillRepeatorAtEdit();
+    FillAllotteAtEdit();
+    FillPaymentHistoryAtEdit();
 });
 
 
@@ -132,28 +134,28 @@ $("#txtPlotyds").change(function () {
     var plotyds = $("#txtPlotyds").val();
     var plotmeter = '';
     plotmeter = plotyds / 1.19599005;
-    $("#txtPlotmts").val(plotmeter);
+    $("#txtPlotmts").val((plotmeter).toFixed(3));
 });
 
 $("#txtFlooryds").change(function () {
     var flooryds = $("#txtFlooryds").val();
     var floormeter = '';
     floormeter = flooryds / 1.19599005;
-    $("#txtFloormts").val(floormeter);
+    $("#txtFloormts").val((floormeter).toFixed(3));
 });
 
 $("#txtResidential").change(function () {
     var yds = $("#txtResidential").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtResidentialmts").val(meter);
+    $("#txtResidentialmts").val((meter).toFixed(3));
 });
 
 $("#txtCommercial").change(function () {
     var yds = $("#txtCommercial").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtCommercialmts").val(meter);
+    $("#txtCommercialmts").val((meter).toFixed(3));
 });
 
 // CODE FOR SAVING VALUE OF RADIO BUTTON
@@ -363,12 +365,53 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
 //****************** code for Allotte type Rpt ************************
 
+
+function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
+
+    /* -----------Personeel Info Repeator Added by ishu  --------------- */
+    HttpGet(`/DamagePayeeRegister/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
+            $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val(data[i].fatherName);
+            $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
+          
+            if (data[i].atsgpadocumentPath != "") {
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").show();
+            }
+           
+           
+            if (i < data.length - 1) {
+               // var Gender = $("#tbl_DamageAssessee #addDamageAssessee #Gender").children("option:selected").val();
+                var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
+                    size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-recordDamageAssessee').attr('data-id', size);
+                element.appendTo('#tbl_DamageAssessee_body');
+             //   $('#tbl_DamageAssessee_body #rec-' + size + ' #Gender').val(Gender);
+                element.find('.sn1').html(size);
+                $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
+                $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
+                $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
+                element.find(".add-recordDamageAssessee").hide();
+                element.find(".delete-recordDamageAssessee").show();
+            }
+        }
+    });
+
+
+}
+
+
 $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     debugger
 
-    if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
+    if ($("#tbl_DamageAssessee #addDamageAssessee #Name").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #Date").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
 
     ) {
@@ -417,14 +460,57 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
 
 //****************** code for Payment History ************************
 
+function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------- */
+
+    /* -----------Personeel Info Repeator Added by ishu  --------------- */
+    HttpGet(`/DamagePayeeRegister/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_Payment #addPayment #PaymntName").val(data[i].name);
+            $("#tbl_Payment #addPayment #RecieptNo").val(data[i].recieptNo);
+            $("#tbl_Payment #addPayment #PaymentMode").val(data[i].paymentMode);
+            $("#tbl_Payment #addPayment #PaymentDate").val(data[i].paymentDate);
+            $("#tbl_Payment #addPayment #Amount").val(data[i].amount);
+          
+            if (data[i].recieptDocumentPath != "") {
+                $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewReceiptId").show();
+            }
+
+
+            if (i < data.length - 1) {
+                // var Gender = $("#tbl_DamageAssessee #addDamageAssessee #Gender").children("option:selected").val();
+                var content = jQuery('#tbl_Payment #addPayment tr'),
+                    size = jQuery('#tbl_Payment >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-recordPayment').attr('data-id', size);
+                element.appendTo('#tbl_Payment_body');
+                //   $('#tbl_DamageAssessee_body #rec-' + size + ' #Gender').val(Gender);
+                element.find('.sn2').html(size);
+                $("#tbl_Payment #addPayment .sn2").text($('#tbl_Payment >tbody >tr').length);
+                $("#tbl_Payment #addPayment .add").remove();
+                $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
+                element.find(".add-recordPayment").hide();
+                element.find(".delete-recordPayment").show();
+            }
+        }
+    });
+
+
+}
+
+
 $(document).delegate('a.add-recordPayment', 'click', function (e) {
     debugger
 
-    if ($("#tbl_Payment #addPayment #txtPersonalName").val() != ''
-        && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
-        && $("#tbl_Payment #addPayment #txtPersonalMobileNo").val() != ''
-        && $("#tbl_Payment #addPayment #txtPersonalEmailid").val() != ''
-        && $("#tbl_Payment #addPayment #Reciept").val() != '') {
+    if ($("#tbl_Payment #addPayment #PaymntName").val() != ''
+        && $("#tbl_Payment #addPayment #RecieptNo").val() != ''
+        && $("#tbl_Payment #addPayment #PaymentMode").val() != ''
+        && $("#tbl_Payment #addPayment #PaymentDate").val() != ''
+        && $("#tbl_Payment #addPayment #Amount").val() != ''
+       ) {
         e.preventDefault();
         var content = jQuery('#tbl_Payment #addPayment tr'),
             size = jQuery('#tbl_Payment >tbody >tr').length,
@@ -549,9 +635,13 @@ $(function () {
         //alert('Please enter valid email id');
         if (is_valid == false) {
             // alert('Please enter valid email id');
+
+            $('#AadharNo').val(' ');
             $('.msg3').text('Please enter valid Aadhar card number ');
         }
-
+        else {
+            $('#AadharNo').val(input.val());
+        }
     });
 });
 
@@ -566,7 +656,13 @@ $(function () {
         //alert('Please enter valid email id');
         if (is_valid == false) {
             // alert('Please enter valid email id');
+
+            $('#PanNo').val(' ');
             $('.msg4').text('Please enter valid Pan card number ');
+        }
+        else {
+            $('#PanNo').val(input.val());
+
         }
 
     });
