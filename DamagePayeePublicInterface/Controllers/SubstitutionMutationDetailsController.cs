@@ -8,7 +8,7 @@ namespace DamagePayeePublicInterface.Controllers
 {
     public class SubstitutionMutationDetailsController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Index(string id)
         {
             return View();
         }

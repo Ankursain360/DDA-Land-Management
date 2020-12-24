@@ -126,7 +126,8 @@ namespace DamagePayeePublicInterface.Controllers
                                         MobileNo = damagepayeeregistertemp.MobileNo[i],
                                         EmailId = damagepayeeregistertemp.EmailId[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
+                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?  fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) : damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ? damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
+                                       // AadharNoFilePath = damagepayeeregistertemp.Aadhar == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
                                         PanNoFilePath = damagepayeeregistertemp.Pan == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
                                         PhotographPath = damagepayeeregistertemp.Photograph == null ? string.Empty : fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]),
                                         SignaturePath = damagepayeeregistertemp.SignatureFile == null ? string.Empty : fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i])
@@ -249,10 +250,10 @@ namespace DamagePayeePublicInterface.Controllers
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
                                         AadharNo = damagepayeeregistertemp.AadharNo[i],
                                         PanNo = damagepayeeregistertemp.PanNo[i],
-                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
-                                        PanNoFilePath = damagepayeeregistertemp.Pan == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
-                                        PhotographPath = damagepayeeregistertemp.Photograph == null ? string.Empty : fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]),
-                                        SignaturePath = damagepayeeregistertemp.SignatureFile == null ? string.Empty : fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i])
+                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ? fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) : damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ? damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
+                                        PanNoFilePath = damagepayeeregistertemp.Pan != null ? fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) : damagepayeeregistertemp.PanNoFilePath[i] != null || damagepayeeregistertemp.PanNoFilePath[i] != "" ? damagepayeeregistertemp.PanNoFilePath[i] : string.Empty,
+                                        PhotographPath = damagepayeeregistertemp.Photograph != null ?  fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]) : damagepayeeregistertemp.PhotographFilePath[i] != null || damagepayeeregistertemp.PhotographFilePath[i] != "" ? damagepayeeregistertemp.PhotographFilePath[i] : string.Empty,
+                                        SignaturePath = damagepayeeregistertemp.SignatureFile != null ?  fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) : damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ? damagepayeeregistertemp.SignatureFilePath[i] : string.Empty
                                     });
                                 }
                                 foreach (var item in damagepayeepersonelinfotemp)
@@ -398,7 +399,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.AadharNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -406,7 +407,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoPanFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PanNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -414,7 +415,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PhotographPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -422,7 +423,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoSignautreFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.SignaturePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));

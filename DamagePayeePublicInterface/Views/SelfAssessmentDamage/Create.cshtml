@@ -93,6 +93,7 @@
                                             <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
                                             
                                             <a id="viewAadharId" asp-action="ViewPersonelInfoAadharFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
+                                            <input type="hidden" asp-for="AadharNoFilePath" />
                                             <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
@@ -105,6 +106,7 @@
 
                                             <a id="viewPanId" asp-action="ViewPersonelInfoPanFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                             <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                            <input type="hidden" asp-for="PanNoFilePath" />
                                             <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
                                         </div>
@@ -112,12 +114,14 @@
                                     <td>
                                         <a id="viewPhotoId" asp-action="ViewPersonelInfoPhotoFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input type="hidden" asp-for="PhotographFilePath" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <a id="viewSignatureId" asp-action="ViewPersonelInfoSignautreFile" class="badge badge-primary px-2" target="_blank" style="display:none;">(View File)</a>
                                         <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
+                                        <input type="hidden" asp-for="SignatureFilePath" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
@@ -378,14 +382,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0 ">
-                            <input asp-for="ResidentialSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtResidentialmts" disabled />
+                            <input asp-for="ResidentialSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtResidentialmts"  />
                             <span asp-validation-for="ResidentialSqMt" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Sq. Mtr.-</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="CommercialSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtCommercialmts" disabled />
+                            <input asp-for="CommercialSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtCommercialmts"  />
                             <span asp-validation-for="CommercialSqMt" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Sq. Mtr.-</label>
                         </div>

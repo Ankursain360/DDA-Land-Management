@@ -157,17 +157,26 @@ namespace Libraries.Model.Entity
      
         public List<string> AadharNo { get; set; }
         [NotMapped]
-        public List<IFormFile> Aadhar { get; set; }
+
+        public List<string> AadharNoFilePath { get; set; }
         [NotMapped]
-      
+        public List<IFormFile> Aadhar { get; set; }
+        [NotMapped]      
         public List<string> PanNo { get; set; }
+        [NotMapped]
+        public List<string> PanNoFilePath { get; set; }
         [NotMapped]
         public List<IFormFile> Pan { get; set; }
         [NotMapped]
         public List<IFormFile> Photograph { get; set; }
         [NotMapped]
+        public List<string> PhotographFilePath { get; set; }
+        [NotMapped]
         public List<IFormFile> SignatureFile { get; set; }
-      
+
+        [NotMapped]
+        public List<string> SignatureFilePath { get; set; }
+
 
         //****** Damagepaymenthistory temp ***
         [NotMapped]

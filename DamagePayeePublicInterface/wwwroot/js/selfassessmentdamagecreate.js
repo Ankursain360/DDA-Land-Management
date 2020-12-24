@@ -2,6 +2,8 @@
 /* -----------Apply for Mutation Added by Renu  --------------- */
     $("#Rebate").attr("readonly", "readonly");
     $("#TotalPayable").attr("readonly", "readonly");
+    $("#txtResidentialmts").attr("readonly", "readonly");
+    $("#txtCommercialmts").attr("readonly", "readonly");
 
     var selected = $("input[type='radio'][name='grpYESNO']:checked");
     $("#IsDdadamagePayee").val(selected.val());
@@ -149,6 +151,10 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #EmailId").val(data[i].emailId);
             $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
             $("#tbl_posts #add #PanNo").val(data[i].panNo);
+            $("#tbl_posts #add #AadharNoFilePath").val(data[i].aadharNoFilePath);
+            $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
+            $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
+            $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
             if ( data[i].aadharNoFilePath != "") {
                 $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' +data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
@@ -276,14 +282,14 @@ $("#txtResidential").change(function () {
     var yds = $("#txtResidential").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtResidentialmts").val(meter);
+    $("#txtResidentialmts").val((meter).toFixed(3));
 });
 
 $("#txtCommercial").change(function () {
     var yds = $("#txtCommercial").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtCommercialmts").val(meter);
+    $("#txtCommercialmts").val((meter).toFixed(3));
 });
 
 // CODE FOR SAVING VALUE OF RADIO BUTTON
