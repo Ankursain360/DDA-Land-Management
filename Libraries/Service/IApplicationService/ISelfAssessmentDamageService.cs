@@ -26,6 +26,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
         Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id);
         Task<bool> DeletePayeePersonalInfoTemp(int Id);
+        Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int id);
 
 
         //********* rpt 2 Allotte Type **********

@@ -1,5 +1,8 @@
 ﻿$(document).ready(function () {
-    /* -----------Apply for Mutation   --------------- */
+/* -----------Apply for Mutation Added by Renu  --------------- */
+    $("#Rebate").attr("readonly", "readonly");
+    $("#TotalPayable").attr("readonly", "readonly");
+
     var selected = $("input[type='radio'][name='grpYESNO']:checked");
     $("#IsDdadamagePayee").val(selected.val());
     if ($("#rdbPayeeYes").is(":checked")) {
@@ -8,7 +11,7 @@
         $("#DivForPayeeNo").show();
     }
 
-    $(".TotalCalculation").keyup(function () {
+    $(".TotalCalculation").keyup(function () {/* -----------For calculation of Total payable Added by Renu  --------------- */
         debugger;
         var amount = $('#TotalValueWithInterest').val();
         var interest = $('#InterestDueAmountCompund').val();
@@ -21,13 +24,20 @@
             $("input[name='TotalPayable']").val("");
         }
         else {
-            $("input[name='Rebate']").val(parseInt(rebatePercentage == '' ? 0 : ((interest * rebatePercentage) / 100)) );
-            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebatePercentage == '' ? 0 : ((interest*rebatePercentage)/100) )));
+            $("input[name='Rebate']").val(parseInt(rebatePercentage == '' ? 0 : ((interest * rebatePercentage) / 100)));
+            $("input[name='TotalPayable']").val(parseFloat(parseInt(amount) + parseInt(interest) - parseInt(rebatePercentage == '' ? 0 : ((interest * rebatePercentage) / 100))));
         }
     });
 
+    /* -----------Start Call Repeator Added by Renu  --------------- */
+    if ($("#Id").val() != 0) {
+        FillRepeatorAtEdit();
+    }
+
+
+
 });
-function CheckToApply() {
+function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
     var show = true;
     if ($("#rdbPayeeYes").is(":checked")) {
         $("#DivForPayeeNo").hide();
@@ -54,7 +64,8 @@ function CheckToApply() {
     }
 }
 
-function PageValidation() {
+function PageValidation() {/* -----------check validation before create click Added by Renu  --------------- */
+    debugger;
     var checkresult = false;
     var Damageamount = $('#TotalValueWithInterest').val();
     if (Damageamount == "") {
@@ -86,32 +97,98 @@ function PageValidation() {
     } else {
         checkresult = true;
     }
-    if ($("#DeclarationStatus1").not(":checked"))
+    if ($("#DeclarationStatus1").prop("checked") == false)
         $("#DeclarationStatus1Msg").show();
-    if ($("#DeclarationStatus2").not(":checked"))
+    if ($("#DeclarationStatus2").prop("checked") == false)
         $("#DeclarationStatus2Msg").show();
-    if ($("#DeclarationStatus3").not(":checked"))
+    if ($("#DeclarationStatus3").prop("checked") == false)
         $("#DeclarationStatus3Msg").show();
-    if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").not(":checked") || $("#DeclarationStatus2").not(":checked") || $("#DeclarationStatus3").not(":checked")) {
-        $("#IsMutaionYes").val(1);
+    if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").prop("checked") == false || $("#DeclarationStatus2").prop("checked") == false || $("#DeclarationStatus3").prop("checked") == false) {
+       
         checkresult = false;
     }
+    else {
+        $("#IsMutaionYes").val(1);
+        checkresult = true;
+    }
+    return checkresult;
 }
-$("input[name='DeclarationStatus1']").click(function () {
-    var selected = $("input[type='checkbox'][name='DeclarationStatus1']:checked");
-    $("#Declaration1").val(1);
+$("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
+    if ($("#DeclarationStatus1").is(":checked"))
+        $("#Declaration1").val(1);
+    else
+        $("#Declaration1").val(0);
 
 });
-$("input[name='DeclarationStatus2']").click(function () {
-    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
-    $("#PetitionerRespondent").val(selected.val());
+$("input[name='DeclarationStatus2']").click(function () {/* -----------Added by Renu  --------------- */
+    if ($("#DeclarationStatus2").is(":checked"))
+        $("#Declaration2").val(1);
+    else
+        $("#Declaration2").val(0);
 
 });
-$("input[name='DeclarationStatus3']").click(function () {
-    var selected = $("input[type='radio'][name='grpCaseperson']:checked");
-    $("#PetitionerRespondent").val(selected.val());
+$("input[name='DeclarationStatus3']").click(function () {/* -----------Added by Renu  --------------- */
+    if ($("#DeclarationStatus3").is(":checked"))
+        $("#Declaration3").val(1);
+    else
+        $("#Declaration3").val(0);
 
 });
+
+function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
+
+     /* -----------Personeel Info Repeator Added by Renu  --------------- */
+    HttpGet(`/SelfAssessmentDamage/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_posts #add #payeeName").val(data[i].name);
+            $("#tbl_posts #add #payeeFatherName").val(data[i].fatherName);
+            $("#tbl_posts #add #Gender").val(data[i].gender);
+            $("#tbl_posts #add #Address").val(data[i].address);
+            $("#tbl_posts #add #MobileNo").val(data[i].mobileNo);
+            $("#tbl_posts #add #EmailId").val(data[i].emailId);
+            $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
+            $("#tbl_posts #add #PanNo").val(data[i].panNo);
+            if ( data[i].aadharNoFilePath != "") {
+                $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' +data[i].id)
+                $("#tbl_posts #add #viewAadharId").show();
+            }
+            if (data[i].panNoFilePath != "") {
+                $("#tbl_posts #add #viewPanId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPanFile/' + data[i].id)
+                $("#tbl_posts #add #viewPanId").show();
+            }
+            if ( data[i].photographPath != "") {
+                $("#tbl_posts #add #viewPhotoId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPhotoFile/' + data[i].id)
+                $("#tbl_posts #add #viewPhotoId").show();
+            }
+            if ( data[i].signaturePath != "") {
+                $("#tbl_posts #add #viewSignatureId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoSignautreFile/' + data[i].id)
+                $("#tbl_posts #add #viewSignatureId").show();
+            }
+            $('#tbl_posts #add #Gender').trigger('change');
+            if (i < data.length - 1) {
+                var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+                $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
+            }
+        }
+    });
+
+
+}
+
 $("input[name='grpDamageAssesseeType']").click(function () {
     if ($("#rSubsequent").is(":checked")) {
         $("#DivForSubsequentPurchaser").show();
@@ -253,15 +330,14 @@ $("input[name='Bill']").click(function () {
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != ''
-        && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != undefined
-        && $("#tbl_posts #add #txtPersonalName").val() != ''
-        && $("#tbl_posts #add #txtPersonalFatherName").val() != ''
-        && $("#tbl_posts #add #txtPersonalMobileNo").val() != ''
-        && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
+    if ($("#tbl_posts #add #Gender").children("option:selected").val() != ''
+        && $("#tbl_posts #add #payeeName").val() != ''
+        && $("#tbl_posts #add #payeeFatherName").val() != ''
+        && $("#tbl_posts #add #MobileNo").val() != ''
+        && $("#tbl_posts #add #EmailId").val() != ''
 
     ) {
-        var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+        var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -270,7 +346,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
-        $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
+        $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
         //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);

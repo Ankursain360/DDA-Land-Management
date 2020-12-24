@@ -148,7 +148,10 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeletePayeePersonalInfoTemp(Id);
         }
-
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _selfAssessmentDamageRepository.GetAadharFilePath(Id);
+        }
 
         //********* rpt 2 Allotte Type **********
 

@@ -159,7 +159,7 @@ namespace DamagePayeePublicInterface.Controllers
                                         FatherName = damagepayeeregistertemp.FatherName[i],
                                         Date = damagepayeeregistertemp.Date[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA[i] == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
+                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
                                     });
                                 }
                                 result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
@@ -193,7 +193,7 @@ namespace DamagePayeePublicInterface.Controllers
                                         PaymentMode = damagepayeeregistertemp.PaymentMode[i],
                                         PaymentDate = damagepayeeregistertemp.PaymentDate[i],
                                         Amount = damagepayeeregistertemp.Amount[i],
-                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                     });
                                 }
@@ -247,6 +247,8 @@ namespace DamagePayeePublicInterface.Controllers
                                         MobileNo = damagepayeeregistertemp.MobileNo[i],
                                         EmailId = damagepayeeregistertemp.EmailId[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
+                                        AadharNo = damagepayeeregistertemp.AadharNo[i],
+                                        PanNo = damagepayeeregistertemp.PanNo[i],
                                         AadharNoFilePath = damagepayeeregistertemp.Aadhar == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
                                         PanNoFilePath = damagepayeeregistertemp.Pan == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
                                         PhotographPath = damagepayeeregistertemp.Photograph == null ? string.Empty : fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]),
@@ -346,6 +348,84 @@ namespace DamagePayeePublicInterface.Controllers
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(damagepayeeregistertemp);
             }
+        }
+
+        public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _selfAssessmentDamageService.GetPersonalInfoTemp(Convert.ToInt32(Id));
+            return Json(data.Select(x => new {
+                x.Id,
+                x.Name,
+                x.FatherName,
+                x.Gender,
+                x.Address,
+                x.MobileNo,
+                x.EmailId,
+                x.AadharNoFilePath,
+                x.PanNoFilePath,
+                x.PhotographPath,
+                x.SignaturePath,
+                x.AadharNo,
+                x.PanNo
+            }));
+        }
+        public async Task<JsonResult> GetDetailsAllottetypetemp(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _selfAssessmentDamageService.GetAllottetypeTemp(Convert.ToInt32(Id));
+            return Json(data.Select(x => new {
+                x.Name,
+                x.FatherName,
+                x.Date,
+                x.AtsgpadocumentPath
+            }));
+        }
+        public async Task<JsonResult> GetDetailspaymenthistorytemp(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
+            return Json(data.Select(x => new {
+                x.Name,
+                x.RecieptNo,
+                x.PaymentMode,
+                x.PaymentDate,
+                x.Amount,
+                x.RecieptDocumentPath
+            }));
+        }
+
+        public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            string path = Data.AadharNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoPanFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            string path = Data.PanNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoPhotoFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            string path = Data.PhotographPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewPersonelInfoSignautreFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetAadharFilePath(Id);
+            string path = Data.SignaturePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
         }
     }
 }

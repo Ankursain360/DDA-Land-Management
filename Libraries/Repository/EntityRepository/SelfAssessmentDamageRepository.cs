@@ -65,6 +65,22 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
 
         //********* rpt 2 Allotte Type **********
 
@@ -120,11 +136,7 @@ namespace Libraries.Repository.EntityRepository
                               .Where(x => x.IsActive == 1 && x.IsRebateOn == 1 
                               && x.FromDate <= DateTime.Now && x.ToDate>= DateTime.Now 
                               )
-                             // .OrderByDescending(d => d.ToDate)
                               .FirstOrDefaultAsync();
-            //List<Rebate> olist = new List<Rebate>();
-            //olist = await _dbContext.Rebate.Where(x => x.IsActive == 1 && x.IsRebateOn == 1).ToListAsync();
-            //return (olist.GroupBy(x => x.IsRebateOn).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).FirstOrDefaultAsync());
         }
     }
 }
