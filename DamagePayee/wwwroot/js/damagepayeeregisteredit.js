@@ -1,5 +1,9 @@
 ﻿
+$(document).ready(function () {
 
+
+    FillRepeatorAtEdit();
+});
 
 
 //    <script>
@@ -198,56 +202,120 @@ $("input[name='Bill']").click(function () {
 
 
 //****************** code for personal info Rpt ************************
-jQuery(document).ready(function () {
-    debugger;
-    $.ajax({
-        type: "post",
-        url: "/DamagePayeeRegister/GetDetailspersonelinfotemp",
-        data: "id=" + $("#Id").val() + "",
-        success: function (data) {
-            debugger;
-            for (var i = 0; i < data.length; i++) {
-                $("#tbl_posts #add #drpPersonalGender").val(data[i].drpPersonalGender);
+//$(document).ready(function () {
+//    debugger;
+//    $.ajax({
+//        type: "post",
+//        url: "/DamagePayeeRegister/GetDetailspersonelinfotemp",
+//        data: "id=" + $("#Id").val() + "",
+//        success: function (data) {
+//            debugger;
+//            for (var i = 0; i < data.length; i++) {
+//                $("#tbl_posts #add #Gender").val(data[i].Gender);
 
-                $("#tbl_posts #add #txtPersonalName").val(data[i].txtPersonalName);
-                $("#tbl_posts #add #txtPersonalFatherName").val(data[i].txtPersonalFatherName);
-                $("#tbl_posts #add #txtPersonalMobileNo").val(data[i].txtPersonalMobileNo);
-                $("#tbl_posts #add #txtPersonalEmailid").val(data[i].approvedDevQty);
+//                $("#tbl_posts #add #payeeName").val(data[i].Name);
+//                $("#tbl_posts #add #payeeFatherName").val(data[i].FatherName);
+//                $("#tbl_posts #add #Address").val(data[i].Address);
+//                $("#tbl_posts #add #MobileNo").val(data[i].MobileNo);
+//                $("#tbl_posts #add #EmailId").val(data[i].EmailId);
+//                $("#tbl_posts #add #AadharNo").val(data[i].AadharNo);
+//                $("#tbl_posts #add #Aadhar").val(data[i].AadharNoFilePath);
+//                $("#tbl_posts #add #PanNo").val(data[i].PanNo);
+//                $("#tbl_posts #add #Pan").val(data[i].PanNoFilePath);
+//                $("#tbl_posts #add #Photograph").val(data[i].PhotographPath);
+//                $("#tbl_posts #add #SignatureFile").val(data[i].SignaturePath);
 
 
 
-                if (i < data.length - 1) {
-                    var content = jQuery('#tbl_posts #add tr'),
-                        size = jQuery('#tbl_posts >tbody >tr').length,
-                        element = null,
-                        element = content.clone();
-                    element.attr('id', 'rec-' + size);
-                    element.find('.delete-record').attr('data-id', size);
-                    element.appendTo('#tbl_posts_body');
-                    element.find('.sn').html(size);
-                    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-                    $("#tbl_posts #add .add").remove();
-                    //$("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-                    element.find(".add-record").hide();
-                    element.find(".delete-record").show();
-                }
+//                if (i < data.length - 1) {
+//                    var content = jQuery('#tbl_posts #add tr'),
+//                        size = jQuery('#tbl_posts >tbody >tr').length,
+//                        element = null,
+//                        element = content.clone();
+//                    element.attr('id', 'rec-' + size);
+//                    element.find('.delete-record').attr('data-id', size);
+//                    element.appendTo('#tbl_posts_body');
+//                    element.find('.sn').html(size);
+//                    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+//                    $("#tbl_posts #add .add").remove();
+//                    //$("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+//                    element.find(".add-record").hide();
+//                    element.find(".delete-record").show();
+//                }
+//            }
+//        }
+//    });
+//});
+
+
+function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
+
+     /* -----------Personeel Info Repeator Added by ishu  --------------- */
+    HttpGet(`/DamagePayeeRegister/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_posts #add #payeeName").val(data[i].name);
+            $("#tbl_posts #add #payeeFatherName").val(data[i].fatherName);
+            $("#tbl_posts #add #Gender").val(data[i].gender);
+            $("#tbl_posts #add #Address").val(data[i].address);
+            $("#tbl_posts #add #MobileNo").val(data[i].mobileNo);
+            $("#tbl_posts #add #EmailId").val(data[i].emailId);
+            $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
+            $("#tbl_posts #add #PanNo").val(data[i].panNo);
+            if ( data[i].aadharNoFilePath != "") {
+                $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' +data[i].id)
+                $("#tbl_posts #add #viewAadharId").show();
+            }
+            if (data[i].panNoFilePath != "") {
+                $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPanFile/' + data[i].id)
+                $("#tbl_posts #add #viewPanId").show();
+            }
+            if ( data[i].photographPath != "") {
+                $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPhotoFile/' + data[i].id)
+                $("#tbl_posts #add #viewPhotoId").show();
+            }
+            if ( data[i].signaturePath != "") {
+                $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoSignautreFile/' + data[i].id)
+                $("#tbl_posts #add #viewSignatureId").show();
+            }
+            $('#tbl_posts #add #Gender').trigger('change');
+            if (i < data.length - 1) {
+                var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
+                var content = jQuery('#tbl_posts #add tr'),
+                    size = jQuery('#tbl_posts >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_posts_body');
+                $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+                element.find('.sn').html(size);
+                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
+                $("#tbl_posts #add .add").remove();
+                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
+                element.find(".add-record").hide();
+                element.find(".delete-record").show();
             }
         }
     });
-});
+
+
+}
+
+
 
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != ''
-        && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != undefined
-        && $("#tbl_posts #add #txtPersonalName").val() != ''
-        && $("#tbl_posts #add #txtPersonalFatherName").val() != ''
-        && $("#tbl_posts #add #txtPersonalMobileNo").val() != ''
-        && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
+    if ($("#tbl_posts #add #Gender").children("option:selected").val() != ''
+        && $("#tbl_posts #add #Gender").children("option:selected").val() != undefined
+        && $("#tbl_posts #add #payeeName").val() != ''
+        && $("#tbl_posts #add #payeeFatherName").val() != ''
+        && $("#tbl_posts #add #MobileNo").val() != ''
+        && $("#tbl_posts #add #EmailId").val() != ''
 
     ) {
-        var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+        var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -256,8 +324,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
-        $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
-        //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
+        $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+      
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
@@ -265,7 +333,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        /*$("#tbl_posts #add .form-control").val('');*/
+        
         $("#tbl_posts #add .floating-label-field").val('');
     }
     else {

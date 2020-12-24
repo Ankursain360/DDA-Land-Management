@@ -202,15 +202,15 @@ $("input[name='Bill']").click(function () {
 $(document).delegate('a.add-record', 'click', function (e) {
     debugger
 
-    if ($("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != ''
-        && $("#tbl_posts #add #drpPersonalGender").children("option:selected").val() != undefined
-        && $("#tbl_posts #add #txtPersonalName").val() != ''
-        && $("#tbl_posts #add #txtPersonalFatherName").val() != ''
-        && $("#tbl_posts #add #txtPersonalMobileNo").val() != ''
-        && $("#tbl_posts #add #txtPersonalEmailid").val() != ''
-       
+    if ($("#tbl_posts #add #Gender").children("option:selected").val() != ''
+        && $("#tbl_posts #add #Gender").children("option:selected").val() != undefined
+        && $("#tbl_posts #add #payeeName").val() != ''
+        && $("#tbl_posts #add #payeeFatherName").val() != ''
+        && $("#tbl_posts #add #MobileNo").val() != ''
+        && $("#tbl_posts #add #EmailId").val() != ''
+
     ) {
-        var Gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+        var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
         e.preventDefault();
         var content = jQuery('#tbl_posts #add tr'),
             size = jQuery('#tbl_posts >tbody >tr').length,
@@ -219,8 +219,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.attr('id', 'rec-' + size);
         element.find('.delete-record').attr('data-id', size);
         element.appendTo('#tbl_posts_body');
-        $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(Gender);
-     //   $('#tbl_posts_body #rec-' + size + ' #ReligiousStructure').val(ReligiousStructure);
+        $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
+
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
@@ -228,7 +228,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        /*$("#tbl_posts #add .form-control").val('');*/
+
         $("#tbl_posts #add .floating-label-field").val('');
     }
     else {

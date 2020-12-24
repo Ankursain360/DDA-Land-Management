@@ -24,6 +24,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp);
         Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id);
         Task<bool> DeletePayeePersonalInfoTemp(int Id);
+        
+        Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id);
         Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);

@@ -70,6 +70,11 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+       
+        public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
+        {
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
         public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
         {
             return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();

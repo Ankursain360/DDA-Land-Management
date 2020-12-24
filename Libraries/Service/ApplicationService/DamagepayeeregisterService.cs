@@ -139,6 +139,11 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeletePayeePersonalInfoTemp(Id);
         }
+       
+        public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetPersonelInfoFilePath(Id);
+        }
         public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
         {
             return await _damagepayeeregisterRepository.GetAadharFilePath(Id);
