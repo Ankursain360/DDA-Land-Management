@@ -37,9 +37,7 @@ namespace Libraries.Model.builderConfiguration
                 .HasColumnName("ATSFilePath")
                 .HasColumnType("longtext");
 
-            builder.Property(e => e.PropertyPhotoPath)
-                .HasColumnName("ATSFilePath")
-                .HasColumnType("longtext");
+            
 
             builder.Property(e => e.CaseNo)
                 .HasMaxLength(50)

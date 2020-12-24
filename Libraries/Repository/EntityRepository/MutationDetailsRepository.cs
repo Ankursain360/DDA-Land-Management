@@ -22,12 +22,7 @@ namespace Libraries.Repository.EntityRepository
         {
             throw new NotImplementedException();
         }
-
-        public async Task<List<Locality>> GetAllLocality(int zoneId)
-        {
-            List<Locality> localityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
-            return localityList;
-        }
+              
 
         public async Task<List<Mutationdetails>> GetAllMutationDetails()
         {
@@ -40,10 +35,15 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<List<Zone>> GetAllZone()
+        public async Task<List<Locality>> GetLocalityList()
         {
-            List<Zone> zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
-            return zoneList;
+            var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localityList;
+        }
+        public async Task<List<District>> GetDistrictList()
+        {
+            var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
+            return districtList;
         }
 
         public async Task<Mutationdetails> GetPhotoPropFile(int id)
@@ -106,6 +106,16 @@ namespace Libraries.Repository.EntityRepository
                .ToListAsync();
 
             return data;
+        }
+
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
+        {
+            return await _dbContext.Damagepayeeregistertemp
+                                    .Include(x => x.Damagepayeepersonelinfotemp)
+                                    .Include(x => x.Damagepaymenthistorytemp)
+                                    .Include(x => x.Allottetypetemp)
+                                    .Where(x => x.UserId == userId)
+                                    .FirstOrDefaultAsync();
         }
     }
 }

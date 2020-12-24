@@ -11,6 +11,7 @@ using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using System.IO;
 
 namespace DamagePayee.Controllers
 {
@@ -59,7 +60,7 @@ namespace DamagePayee.Controllers
             string PanNoDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PanNoDocument").Value.ToString();
             string PhotographPersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:PhotographPersonelDocument").Value.ToString();
             string SignaturePersonelDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:SignaturePersonelDocument").Value.ToString();
-            
+
             string PropertyPhotographLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:PropertyPhotograph").Value.ToString();
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
@@ -92,7 +93,7 @@ namespace DamagePayee.Controllers
                 var result = await _damagepayeeregisterService.Create(damagepayeeregistertemp);
                 if (result)
                 {
-                  //  FileHelper fileHelper = new FileHelper();
+                    //  FileHelper fileHelper = new FileHelper();
 
                     //****** code for saving  Damage payee personal info *****
 
@@ -455,6 +456,35 @@ namespace DamagePayee.Controllers
                 return View(damagepayeeregistertemp);
             }
            
+        }
+        //******************  download files **************************
+        public async Task<IActionResult> DownloadPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.PropertyPhotoPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadShowCauseNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.ShowCauseNoticePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadFgform(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.FgformPath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<IActionResult> DownloadBillfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string filename = Data.DocumentForFilePath;
+            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
     }
 }

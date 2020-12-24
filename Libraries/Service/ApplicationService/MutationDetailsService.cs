@@ -40,16 +40,15 @@ namespace Libraries.Service.ApplicationService
             return await _mutationDetailsRepository.GetAllMutationDetails();
         }
 
-        public async Task<List<Locality>> GetAllLocality(int zoneId)
+        public async Task<List<Locality>> GetLocalityList()
         {
-            List<Locality> localityList = await _mutationDetailsRepository.GetAllLocality(zoneId);
+            List<Locality> localityList = await _mutationDetailsRepository.GetLocalityList();
             return localityList;
         }
-
-        public async Task<List<Zone>> GetAllZone()
+        public async Task<List<District>> GetDistrictList()
         {
-            List<Zone> zoneList = await _mutationDetailsRepository.GetAllZone();
-            return zoneList;
+            List<District> districtList = await _mutationDetailsRepository.GetDistrictList();
+            return districtList;
         }
 
         public Task<bool> Update(int id, Mutationdetails details)
@@ -103,6 +102,10 @@ namespace Libraries.Service.ApplicationService
             oldDamage.CreatedDate = DateTime.Now;
             oldDamage.IsActive = 1;
             return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
+        }
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
+        {
+            return await _mutationDetailsRepository.FetchMutationDetailsUserId(userId);
         }
     }
 }

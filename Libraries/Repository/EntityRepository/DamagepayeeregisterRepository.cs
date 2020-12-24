@@ -46,6 +46,11 @@ namespace Libraries.Repository.EntityRepository
             var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
+        public async Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id)
+        {
+            return await _dbContext.Damagepayeeregistertemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+
 
         //********* rpt 1 Persolnal info of damage assesse ***********
         public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
@@ -82,7 +87,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-
+        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+        }
 
         //********* rpt 2 Allotte Type **********
 
@@ -126,5 +134,7 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+
+        
 }
 }

@@ -36,7 +36,7 @@ namespace Libraries.Model.Entity
         public string MutationPurpose { get; set; }
         public DateTime? PurchaseDate { get; set; }
         public string AtsfilePath { get; set; }
-        public string PropertyPhotoPath { get; set; }
+       
         public string GpafilePath { get; set; }
         public string MoneyRecieptFilePath { get; set; }
         public string SignatureSpecimenFilePath { get; set; }
