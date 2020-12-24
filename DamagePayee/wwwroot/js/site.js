@@ -4,6 +4,13 @@
 // Write your JavaScript code.
 var AllRules = '';
 $(document).ready(function () {
+	$('#mobileMenu').on('click', function () {
+		$('#leftMenu').toggleClass('small');
+		$('#mobileMenu').toggleClass('open');
+		$('#rightSection').toggleClass('menu-close');
+		$('footer').toggleClass('menu-close');
+	});
+
 	$("select").each(function () {
 		if ($(this).hasClass("select2destroy") == false) {
 			$(this).select2({

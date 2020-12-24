@@ -334,7 +334,7 @@ namespace DamagePayeePublicInterface.Controllers
                         if (damagepayeeregistertemp.IsMutaionYes != 0)
                             return View(damagepayeeregistertemp);
                         else
-                            return RedirectToAction("Index", "SubstitutionMutationDetailsController", new { id = damagepayeeregistertemp.Id });
+                            return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
                     else
                     {
