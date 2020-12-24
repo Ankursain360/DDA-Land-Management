@@ -64,7 +64,6 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
-
         public async Task<bool> DeletePayeePersonalInfoTemp(int Id)
          {
             _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == Id));
@@ -87,9 +86,9 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id)
+        public async Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id)
         {
-            return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
         //********* rpt 2 Allotte Type **********
@@ -113,6 +112,10 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Allottetypetemp> GetATSFilePath(int Id)
         {
             return await _dbContext.Allottetypetemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
 

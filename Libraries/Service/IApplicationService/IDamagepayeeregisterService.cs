@@ -31,6 +31,7 @@ namespace Libraries.Service.IApplicationService
         Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id);
         Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id);
         Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id);
+        Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id);
 
 
         //********* rpt 2 Allotte Type **********

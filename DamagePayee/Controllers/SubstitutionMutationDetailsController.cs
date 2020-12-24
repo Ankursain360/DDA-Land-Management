@@ -84,22 +84,23 @@ namespace DamagePayee.Controllers
                 return View(mutationdetails);
             }
 
-            
+
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(int id, Mutationdetails mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
-            await BindDropDown(Data);
+          
+            string deathCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:DeathCertificate").Value.ToString();
+            string relationshipProof = _configuration.GetSection("FilePaths:MutationDetaliFiles:RelationshipProof").Value.ToString();
+            string affitDevitLegal = _configuration.GetSection("FilePaths:MutationDetaliFiles:AffitdevitLegal").Value.ToString();
+            string noObjectionCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:NoObjectionCertificate").Value.ToString();
+            string signatureOfSpec = _configuration.GetSection("FilePaths:MutationDetaliFiles:SignatureOfSpecimen").Value.ToString();
 
             if (true)
             {
-                //var mainFile = new FileHelper();
-                //mutationDetails.AffidavitFilePath = mainFile.SaveFile(PhotoPropfilePath, mutationDetails.AtsfilePathNew);
-
-
-
+                FileHelper fileHelper = new FileHelper();
                 /* For Ats File Upload*/
                 string ATSFileName = "";
                 string atsfilePath = "";
@@ -246,12 +247,33 @@ namespace DamagePayee.Controllers
                     }
                     mutationDetails.IndemnityFilePath = IindemnityBondfilePath;
                 }
+              
+                if (mutationDetails.DeathCertificatePathNew != null)
+                {
+                    mutationDetails.DeathCertificatePath = fileHelper.SaveFile(deathCertificate, mutationDetails.DeathCertificatePathNew);
+                }
+                if (mutationDetails.RelationshipUploadPathNew != null)
+                {
+                    mutationDetails.RelationshipUploadPath = fileHelper.SaveFile(relationshipProof, mutationDetails.RelationshipUploadPathNew);
+                }
+                if (mutationDetails.AffidevitLegalUploadPathNew != null)
+                {
+                    mutationDetails.AffidevitLegalUploadPath = fileHelper.SaveFile(affitDevitLegal, mutationDetails.AffidevitLegalUploadPathNew);
+                }
+                if (mutationDetails.NonObjectUploadPathNew != null)
+                {
+                    mutationDetails.NonObjectUploadPath = fileHelper.SaveFile(noObjectionCertificate, mutationDetails.NonObjectUploadPathNew);
+                }
+                if (mutationDetails.SpecimenSignLegalUploadNew != null)
+                {
+                    mutationDetails.SpecimenSignLegalUpload = fileHelper.SaveFile(signatureOfSpec, mutationDetails.SpecimenSignLegalUploadNew);
+                }
 
                 var result = await _mutationDetailsService.Create(mutationDetails);
 
 
-                if (result == true)
-                {
+                //if (result == true)
+                //{
                     /*Previous Damage Assessee Details Repeater*/
 
                     // FileHelper fileHelper = new FileHelper();
@@ -312,7 +334,7 @@ namespace DamagePayee.Controllers
                     //            result = await _mutationDetailsService.SaveMutationOldDamage(item);
                     //        }
                     //    }
-                }
+                //}
 
 
                 if (result == true)
@@ -335,6 +357,14 @@ namespace DamagePayee.Controllers
             var data = await _damagepayeeregisterService.GetNewAlloteeRepeater(Convert.ToInt32(Id));
             //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
             return Json(data.Select(x => new { x.Name, x.FatherName, Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"), x.AtsgpadocumentPath }));
+        }
+
+        public async Task<JsonResult> PreviousDamageAssesseeRepeter(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _damagepayeeregisterService.GetPreviousAssesseRepeater(Convert.ToInt32(Id));
+            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
+            return Json(data.Select(x => new { x.Name, x.FatherName, x.Gender, x.Address, x.MobileNo, x.EmailId, x.AadharNo, x.AadharNoFilePath, x.PanNo, x.PanNoFilePath, x.PhotographPath, x.SignaturePath }));
         }
 
         public async Task<IActionResult> DownloadATSFile(int Id)

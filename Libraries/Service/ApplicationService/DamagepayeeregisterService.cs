@@ -155,9 +155,9 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.GetSignaturePath(Id);
         }
-        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int Id)
+        public async Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int Id)
         {
-            return await _damagepayeeregisterRepository.GetNewAlloteeRepeater(Id);
+            return await _damagepayeeregisterRepository.GetPreviousAssesseRepeater(Id);
         }
 
         //********* rpt 2 Allotte Type **********
@@ -181,6 +181,11 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.GetATSFilePath(Id);
         }
+        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int Id)
+        {
+            return await _damagepayeeregisterRepository.GetNewAlloteeRepeater(Id);
+        }
+
 
         //********* rpt 3 Damage payment history ***********
 
