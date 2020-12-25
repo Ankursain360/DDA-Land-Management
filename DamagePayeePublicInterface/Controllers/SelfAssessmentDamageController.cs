@@ -321,10 +321,10 @@ namespace DamagePayeePublicInterface.Controllers
                                         PaymentDate = damagepayeeregistertemp.PaymentDate[i],
                                         Amount = damagepayeeregistertemp.Amount[i],
                                         RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
-                                        damagepayeeregistertemp.Reciept.Count<=i ? string.Empty : 
-                                        fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) : 
-                                        damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
-                                        damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
+                                                                damagepayeeregistertemp.Reciept.Count<=i ? string.Empty : 
+                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) : 
+                                                                damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                     });
                                 }

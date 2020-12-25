@@ -209,18 +209,26 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
                 $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
+            }  else {
+                $("#tbl_posts #add #viewAadharId").hide();
             }
             if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
                 $("#tbl_posts #add #viewPanId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPanFile/' + data[i].id)
                 $("#tbl_posts #add #viewPanId").show();
+            } else {
+                $("#tbl_posts #add #viewPanId").hide();
             }
             if (data[i].photographPath != "" && data[i].photographPath != null) {
                 $("#tbl_posts #add #viewPhotoId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPhotoFile/' + data[i].id)
                 $("#tbl_posts #add #viewPhotoId").show();
+            } else {
+                $("#tbl_posts #add #viewPhotoId").hide();
             }
             if (data[i].signaturePath != "" && data[i].signaturePath != null) {
                 $("#tbl_posts #add #viewSignatureId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoSignautreFile/' + data[i].id)
                 $("#tbl_posts #add #viewSignatureId").show();
+            } else {
+                $("#tbl_posts #add #viewSignatureId").hide();
             }
             $('#tbl_posts #add #Gender').trigger('change');
             if (i < data.length - 1) {
@@ -254,6 +262,8 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SelfAssessmentDamage/ViewATSGPAFile/' + data[i].id)
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
+            } else {
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
             }
             if (i < data.length - 1) {
                 var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
@@ -286,6 +296,8 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
                 $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/SelfAssessmentDamage/ViewRecieptFile/' + data[i].id)
                 $("#tbl_Payment #addPayment #viewRecieptId").show();
+            } else {
+                $("#tbl_Payment #addPayment #viewRecieptId").hide();
             }
             if (i < data.length - 1) {
                 var content = jQuery('#tbl_Payment #addPayment tr'),
