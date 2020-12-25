@@ -284,7 +284,7 @@ namespace DamagePayeePublicInterface.Controllers
                                         FatherName = damagepayeeregistertemp.FatherName[i],
                                         Date = damagepayeeregistertemp.Date[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
+                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA != null ?  fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i]) : damagepayeeregistertemp.ATSGPAFilePath[i] != null || damagepayeeregistertemp.ATSGPAFilePath[i] != "" ? damagepayeeregistertemp.ATSGPAFilePath[i] : string.Empty
                                     });
                                 }
                                 result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
@@ -311,7 +311,7 @@ namespace DamagePayeePublicInterface.Controllers
                                 List<Damagepaymenthistorytemp> damagepaymenthistorytemp = new List<Damagepaymenthistorytemp>();
                                 result = await _selfAssessmentDamageService.DeletePaymentHistoryTemp(damagepayeeregistertemp.Id);
 
-                                for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
+                                for (int i = 0; i < damagepayeeregistertemp.PaymntName.Count; i++)
                                 {
                                     damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
                                     {
@@ -320,7 +320,11 @@ namespace DamagePayeePublicInterface.Controllers
                                         PaymentMode = damagepayeeregistertemp.PaymentMode[i],
                                         PaymentDate = damagepayeeregistertemp.PaymentDate[i],
                                         Amount = damagepayeeregistertemp.Amount[i],
-                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
+                                        damagepayeeregistertemp.Reciept.Count<=i ? string.Empty : 
+                                        fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) : 
+                                        damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
+                                        damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                     });
                                 }
@@ -376,9 +380,10 @@ namespace DamagePayeePublicInterface.Controllers
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetAllottetypeTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.FatherName,
-                x.Date,
+                Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"),
                 x.AtsgpadocumentPath
             }));
         }
@@ -387,10 +392,11 @@ namespace DamagePayeePublicInterface.Controllers
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.RecieptNo,
                 x.PaymentMode,
-                x.PaymentDate,
+                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
                 x.Amount,
                 x.RecieptDocumentPath
             }));
@@ -428,5 +434,57 @@ namespace DamagePayeePublicInterface.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+        public async Task<FileResult> ViewATSGPAFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Allottetypetemp Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
+            string path = Data.AtsgpadocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewRecieptFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepaymenthistorytemp Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
+            string path = Data.RecieptDocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        //******************  download files **************************
+        public async Task<IActionResult> DownloadPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.PropertyPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadShowCauseNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.ShowCauseNoticePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadFgform(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.FgformPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadBillfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+           string path = Data.DocumentForFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+
     }
 }

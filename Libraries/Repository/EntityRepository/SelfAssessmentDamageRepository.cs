@@ -88,6 +88,10 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
+        public async Task<Allottetypetemp> GetAllotteTypeSingleResult(int id)
+        {
+            return await _dbContext.Allottetypetemp.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
 
         //********* rpt 3 Damage payment history ***********
 
@@ -125,6 +129,10 @@ namespace Libraries.Repository.EntityRepository
                               && x.FromDate <= DateTime.Now && x.ToDate>= DateTime.Now 
                               )
                               .FirstOrDefaultAsync();
+        }
+        public async Task<Damagepaymenthistorytemp> GetPaymentHistorySingleResult(int id)
+        {
+            return await _dbContext.Damagepaymenthistorytemp.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
         }
     }
 }

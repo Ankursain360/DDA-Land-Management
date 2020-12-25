@@ -132,7 +132,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<IFormFile> ATSGPA { get; set; }
-
+        [NotMapped]
+        public List<string> ATSGPAFilePath { get; set; }
 
         //****** Damage payee personal info temp *****
         [NotMapped]
@@ -197,7 +198,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
+        [NotMapped]
 
+        public List<string> RecieptFilePath { get; set; }
 
         //******* Mutation  **********//
         [NotMapped]

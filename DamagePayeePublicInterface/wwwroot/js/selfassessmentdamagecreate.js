@@ -1,9 +1,11 @@
 ﻿$(document).ready(function () {
-/* -----------Apply for Mutation Added by Renu  --------------- */
+    /* -----------Apply for Mutation Added by Renu  --------------- */
     $("#Rebate").attr("readonly", "readonly");
     $("#TotalPayable").attr("readonly", "readonly");
-    $("#txtResidentialmts").attr("readonly", "readonly");
-    $("#txtCommercialmts").attr("readonly", "readonly");
+    $("#ResidentialSqYard").attr("readonly", "readonly");
+    $("#CommercialSqYard").attr("readonly", "readonly");
+    $("#ResidentialSqMt").attr("readonly", "readonly");
+    $("#CommercialSqMt").attr("readonly", "readonly");
 
     var selected = $("input[type='radio'][name='grpYESNO']:checked");
     $("#IsDdadamagePayee").val(selected.val());
@@ -36,7 +38,56 @@
         FillRepeatorAtEdit();
     }
 
+    /*----Use of Property----*/
+    if ($("#rdbResidential").is(":checked")) { //1st radio button
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+        $("#UseOfProperty").val("Residential");
 
+    }
+    else if ($("#rdbCommercial").is(":checked")) {
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#UseOfProperty").val("Commercial");
+    }
+    else if ($("#rdbMixed").is(":checked")) {
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#UseOfProperty").val("Mixed");
+    }
+    else {
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+    }
+
+    /*Litigation checks*/
+    if ($("#rbdYesLitigation").is(":checked")) {
+        $("#DivForLitigationStatus").show();
+        $("#LitigationStatus").val("Under litigation");
+    } else {
+        $("#DivForLitigationStatus").hide();
+        $("#LitigationStatus").val("no case");
+    }
+
+    /*Type of Damage Assessee*/
+    if ($("#rSubsequent").is(":checked")) {
+        $("#DivForSubsequentPurchaser").show();
+        $("#TypeOfDamageAssessee").val("Subsequent");
+    } else {
+        $("#DivForSubsequentPurchaser").hide();
+        $("#TypeOfDamageAssessee").val("Original");
+    }
+
+/*Is Document For*/
+    if ($("#HouseBill").is(":checked")) {
+        $("#IsDocumentFor").val("HouseTax Bill");
+    } else if ($("#ElectricityBill").is(":checked")) {
+        $("#IsDocumentFor").val("Electricity Bill");
+    } else if ($("#WaterBill").is(":checked")) {
+        $("#IsDocumentFor").val("Water Bill");
+    } else if ($("#Other").is(":checked")) {
+        $("#IsDocumentFor").val("Any Other");
+    }
 
 });
 function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
@@ -106,7 +157,7 @@ function PageValidation() {/* -----------check validation before create click Ad
     if ($("#DeclarationStatus3").prop("checked") == false)
         $("#DeclarationStatus3Msg").show();
     if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").prop("checked") == false || $("#DeclarationStatus2").prop("checked") == false || $("#DeclarationStatus3").prop("checked") == false) {
-       
+
         checkresult = false;
     }
     else {
@@ -139,7 +190,7 @@ $("input[name='DeclarationStatus3']").click(function () {/* -----------Added by 
 
 function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
-     /* -----------Personeel Info Repeator Added by Renu  --------------- */
+    /* -----------Personeel Info Repeator Added by Renu  --------------- */
     HttpGet(`/SelfAssessmentDamage/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
@@ -155,19 +206,19 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
-            if ( data[i].aadharNoFilePath != "") {
-                $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' +data[i].id)
+            if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
+                $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
             }
-            if (data[i].panNoFilePath != "") {
+            if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
                 $("#tbl_posts #add #viewPanId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPanFile/' + data[i].id)
                 $("#tbl_posts #add #viewPanId").show();
             }
-            if ( data[i].photographPath != "") {
+            if (data[i].photographPath != "" && data[i].photographPath != null) {
                 $("#tbl_posts #add #viewPhotoId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPhotoFile/' + data[i].id)
                 $("#tbl_posts #add #viewPhotoId").show();
             }
-            if ( data[i].signaturePath != "") {
+            if (data[i].signaturePath != "" && data[i].signaturePath != null) {
                 $("#tbl_posts #add #viewSignatureId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoSignautreFile/' + data[i].id)
                 $("#tbl_posts #add #viewSignatureId").show();
             }
@@ -192,7 +243,67 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
         }
     });
 
+    /* -----------Allotte Type Repeator Added by Renu  --------------- */
+    HttpGet(`/SelfAssessmentDamage/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
+            $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val(data[i].fatherName);
+            $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
+            $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
+            if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SelfAssessmentDamage/ViewATSGPAFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
+            }
+            if (i < data.length - 1) {
+                var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
+                    size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_DamageAssessee_body');
+                element.find('.sn').html(size);
+                $("#tbl_DamageAssessee #addDamageAssessee .sn").text($('#tbl_DamageAssessee >tbody >tr').length);
+                $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
+                $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
+                element.find(".add-recordDamageAssessee").hide();
+                element.find(".delete-recordDamageAssessee").show();
+            }
+        }
+    });
 
+    /* -----------Payment History Repeator Added by Renu  --------------- */
+    HttpGet(`/SelfAssessmentDamage/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+        debugger
+        for (var i = 0; i < data.length; i++) {
+            $("#tbl_Payment #addPayment #txtPaymentName").val(data[i].name);
+            $("#tbl_Payment #addPayment #txtRecieptNo").val(data[i].recieptNo);
+            $("#tbl_Payment #addPayment #txtPaymentMode").val(data[i].paymentMode);
+            $("#tbl_Payment #addPayment #txtPaymentDate").val(data[i].paymentDate);
+            $("#tbl_Payment #addPayment #txtAmount").val(data[i].amount);
+            $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
+            if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
+                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/SelfAssessmentDamage/ViewRecieptFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewRecieptId").show();
+            }
+            if (i < data.length - 1) {
+                var content = jQuery('#tbl_Payment #addPayment tr'),
+                    size = jQuery('#tbl_Payment >tbody >tr').length,
+                    element = null,
+                    element = content.clone();
+                element.attr('id', 'rec-' + size);
+                element.find('.delete-record').attr('data-id', size);
+                element.appendTo('#tbl_Payment_body');
+                element.find('.sn').html(size);
+                $("#tbl_Payment #addPayment .sn").text($('#tbl_Payment >tbody >tr').length);
+                $("#tbl_Payment #addPayment .add").remove();
+                $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
+                element.find(".add-recordPayment").hide();
+                element.find(".delete-recordPayment").show();
+            }
+        }
+    });
 }
 
 $("input[name='grpDamageAssesseeType']").click(function () {
@@ -222,41 +333,36 @@ $("input[name='grpYESNO']").click(function () {
 
 $("input[name='grpUseofpeoperty']").click(function () {
     if ($("#rdbResidential").is(":checked")) { //1st radio button
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").removeAttr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqMt").val('');
+        $("#CommercialSqYard").val('');
+        $("#UseOfProperty").val("Residential");
 
     }
     else if ($("#rdbCommercial").is(":checked")) {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").removeAttr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#ResidentialSqMt").val('');
+        $("#ResidentialSqYard").val('');
+        $("#UseOfProperty").val("Commercial");
     }
-
     else if ($("#rdbMixed").is(":checked")) {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidential").removeAttr("disabled", "disabled");
-        $("#txtCommercial").removeAttr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#ResidentialSqMt").val('');
+        $("#ResidentialSqYard").val('');
+        $("#CommercialSqMt").val('');
+        $("#CommercialSqYard").val('');
+        $("#UseOfProperty").val("Mixed");
     }
-
     else {
-        $("#txtResidential").attr("disabled", "disabled");
-        $("#txtCommercial").attr("disabled", "disabled");
-        $("#txtResidentialmts").val('');
-        $("#txtResidential").val('');
-        $("#txtCommercialmts").val('');
-        $("#txtCommercial").val('');
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+        $("#ResidentialSqMt").val('');
+        $("#ResidentialSqYard").val('');
+        $("#CommercialSqMt").val('');
+        $("#CommercialSqYard").val('');
     }
 
 });
@@ -268,28 +374,28 @@ $("#txtPlotyds").change(function () {
     var plotyds = $("#txtPlotyds").val();
     var plotmeter = '';
     plotmeter = plotyds / 1.19599005;
-    $("#txtPlotmts").val(plotmeter);
+    $("#txtPlotmts").val((plotmeter).toFixed(3));
 });
 
 $("#txtFlooryds").change(function () {
     var flooryds = $("#txtFlooryds").val();
     var floormeter = '';
     floormeter = flooryds / 1.19599005;
-    $("#txtFloormts").val(floormeter);
+    $("#txtFloormts").val((floormeter).toFixed(3));
 });
 
-$("#txtResidential").change(function () {
-    var yds = $("#txtResidential").val();
+$("#ResidentialSqYard").change(function () {
+    var yds = $("#ResidentialSqYard").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtResidentialmts").val((meter).toFixed(3));
+    $("#ResidentialSqMt").val((meter).toFixed(3));
 });
 
-$("#txtCommercial").change(function () {
-    var yds = $("#txtCommercial").val();
+$("#CommercialSqYard").change(function () {
+    var yds = $("#CommercialSqYard").val();
     var meter = '';
     meter = yds / 1.19599005;
-    $("#txtCommercialmts").val((meter).toFixed(3));
+    $("#CommercialSqMt").val((meter).toFixed(3));
 });
 
 // CODE FOR SAVING VALUE OF RADIO BUTTON
@@ -394,9 +500,9 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
     debugger
 
-    if ($("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeName").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDamageAssesseeFather").val() != ''
-        && $("#tbl_DamageAssessee #addDamageAssessee #txtDateofWill").val() != ''
+    if ($("#tbl_DamageAssessee #addDamageAssessee #Name").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val() != ''
+        && $("#tbl_DamageAssessee #addDamageAssessee #Date").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #ATSGPA").val() != ''
 
     ) {

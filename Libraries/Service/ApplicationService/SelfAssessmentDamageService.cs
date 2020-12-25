@@ -170,8 +170,10 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeleteAllotteTypeTemp(Id);
         }
-
-
+        public async Task<Allottetypetemp> GetAllotteTypeSingleResult(int id)
+        {
+            return await _selfAssessmentDamageRepository.GetAllotteTypeSingleResult(id);
+        }
 
         //********* rpt 3 Damage payment history ***********
 
@@ -190,6 +192,10 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeletePaymentHistoryTemp(Id);
         }
+        public async Task<Damagepaymenthistorytemp> GetPaymentHistorySingleResult(int id)
+        {
+            return await _selfAssessmentDamageRepository.GetPaymentHistorySingleResult(id);
+        }
 
         public async Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId)
         {
@@ -201,5 +207,6 @@ namespace Service.ApplicationService
             return await _selfAssessmentDamageRepository.GetRebateValue();
         }
 
+        
     }
 }
