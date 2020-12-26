@@ -1,0 +1,62 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Damagepayeeregistertemp>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+           
+            <th>File No.</th>
+            <th>Type of Damage Assessee</th>
+            <th>Property/House/Municipal No.</th>
+            <th>Locality</th>
+            <th>Whether present occupant's is/are damage payee in DDA record </th>
+            <th>Submitted On</th>
+            <th>Status</th>
+            <th>Operations</th>
+        </tr>
+      
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@item.FileNo</td>
+            <td>@item.TypeOfDamageAssessee</td>
+            <td>@item.PropertyNo</td>
+            <td>@item.Locality.Name</td>
+
+            <td>@item.IsDdadamagePayee</td>
+            <td> @(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy"))</td>
+           
+            <td>@(item.ApprovedStatus == 0 ?  "Pending" : "Approved")</td>
+            @*<td>
+            @if (item.IsActive == 1)
+            {
+                <span class="badge badge-primary px-2 py-1">Active</span> }
+            else
+            {
+                <span class="badge badge-danger px-2 py-1">Inactive</span>}
+        </td>*@
+            <td>
+                <div class="action-btns">
+                    <a asp-action="Create" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+
+                </div>
+
+            </td>
+
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
