@@ -16,7 +16,6 @@ namespace Service.ApplicationService
     public class DamagePayeeApprovalService : EntityService<Damagepayeeregistertemp>, IDamagePayeeApprovalService
     {
         private readonly IUnitOfWork _unitOfWork;
-      //  private readonly IDamagepayeeregisterRepository _damagepayeeregisterRepository;
         private readonly IDamagePayeeApprovalRepository _damagePayeeApprovalRepository;
 
 
@@ -27,5 +26,9 @@ namespace Service.ApplicationService
             _damagePayeeApprovalRepository = damagePayeeApprovalRepository;
         }
 
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model)
+        {
+            return await _damagePayeeApprovalRepository.GetPagedDamagePayeeRegisterForApproval(model);
+        }
     }
 }
