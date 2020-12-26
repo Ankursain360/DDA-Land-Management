@@ -6,6 +6,7 @@ using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Service.ApplicationService
@@ -57,11 +58,37 @@ namespace Service.ApplicationService
             return await _noticeToDamagePayeeRepository.GetPagedNoticetodamagepayee(model);
         }
 
-       
+
         public async Task<List<Noticetodamagepayee>> GetFileNoList()
         {
             List<Noticetodamagepayee> fileNoList = await _noticeToDamagePayeeRepository.GetFileNoList();
             return fileNoList;
         }
+        public async Task<Noticetodamagepayee> FetchSingleResult(int id)
+        {
+            var result = await _noticeToDamagePayeeRepository.FindBy(a => a.Id == id);
+            Noticetodamagepayee model = result.FirstOrDefault();
+            return model;
+        }
+
+        public async Task<bool> Update(int id, Noticetodamagepayee noticetodamagepayee)
+        {
+            var result = await _noticeToDamagePayeeRepository.FindBy(a => a.Id == id);
+            Noticetodamagepayee model = result.FirstOrDefault();
+            model.FileNo = noticetodamagepayee.FileNo;
+            model.GenerateDate = DateTime.Now;
+            model.Name = noticetodamagepayee.Name;
+            model.Address = noticetodamagepayee.Address;
+            model.PropertyDetails = noticetodamagepayee.PropertyDetails;
+            model.Area = noticetodamagepayee.Area;
+            model.InterestPercentage = noticetodamagepayee.InterestPercentage;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _noticeToDamagePayeeRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+
+
     }
 }

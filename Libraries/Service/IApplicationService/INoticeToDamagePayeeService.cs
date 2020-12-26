@@ -10,8 +10,6 @@ namespace Libraries.Service.IApplicationService
     public interface INoticeToDamagePayeeService : IEntityService<Noticetodamagepayee>
     {
 
-        //  Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregister(string fileNo);
-        //  Task<List<Damagepayeeregistertemp>> Getpersonelinfotemp(int Id);
         Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee();
 
         Task<bool> Create(Noticetodamagepayee noticetodamagepayee);
@@ -20,6 +18,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model);
 
         Task<List<Noticetodamagepayee>> GetFileNoList();
+        Task<bool> Update(int id, Noticetodamagepayee noticetodamagepayee);
+        Task<Noticetodamagepayee> FetchSingleResult(int id);
+
 
 
 
