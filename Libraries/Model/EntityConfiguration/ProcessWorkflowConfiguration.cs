@@ -16,6 +16,9 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("processworkflow", "lms");
 
+            builder.HasIndex(e => e.WorkflowTemplateId)
+                .HasName("fk_WorkflowTemplateID_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.ActionId).HasColumnType("int(11)");
@@ -27,7 +30,13 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(2000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.WorkflowId).HasColumnType("int(11)");
+            builder.Property(e => e.WorkflowTemplateId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.WorkflowTemplate)
+                .WithMany(p => p.Processworkflow)
+                .HasForeignKey(d => d.WorkflowTemplateId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_WorkflowTemplateID");
         }
     }
 }

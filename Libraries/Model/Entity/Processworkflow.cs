@@ -12,7 +12,9 @@ namespace Libraries.Model.Entity
     public class Processworkflow : AuditableEntity<int>
     {
         public string TransactionTemplate { get; set; }
-        public int? WorkflowId { get; set; }
+        public int WorkflowTemplateId { get; set; }
         public int? ActionId { get; set; }
+
+        public WorkflowTemplate WorkflowTemplate { get; set; }
     }
 }
