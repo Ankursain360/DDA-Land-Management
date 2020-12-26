@@ -2,11 +2,13 @@
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
+
 
 namespace DamagePayee.Controllers
 {
@@ -28,6 +30,52 @@ namespace DamagePayee.Controllers
         {
             return View();
         }
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _noticeToDamagePayeeService.FetchSingleResult(id);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Noticetodamagepayee noticetodamagepayee)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+
+                    var result = await _noticeToDamagePayeeService.Update(id, noticetodamagepayee);
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                        return View("_List", noticetodamagepayee);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(noticetodamagepayee);
+
+                    }
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+
+                }
+            }
+            return View(noticetodamagepayee);
+        }
+
+
+
+
 
 
         [HttpPost]
