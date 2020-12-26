@@ -102,6 +102,7 @@ namespace Service.ApplicationService
 
         public async Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp)
         {
+            damagepayeeregistertemp.IsActive = 1;
             damagepayeeregistertemp.CreatedBy = 1;
             damagepayeeregistertemp.CreatedDate = DateTime.Now;
             _damagepayeeregisterRepository.Add(damagepayeeregistertemp);
