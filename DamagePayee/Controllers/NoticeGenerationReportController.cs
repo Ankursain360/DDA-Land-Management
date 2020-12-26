@@ -2,23 +2,46 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
 
 namespace DamagePayee.Controllers
 {
     public class NoticeGenerationReportController : Controller
     {
-        public IActionResult Index()
+        private readonly INoticeToDamagePayeeService _noticeToDamagePayeeService;
+
+        public NoticeGenerationReportController(INoticeToDamagePayeeService noticeToDamagePayeeService)
         {
-            return View();
+            _noticeToDamagePayeeService = noticeToDamagePayeeService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            Noticetodamagepayee model = new Noticetodamagepayee();
+
+            model.FileNoList = await _noticeToDamagePayeeService.GetFileNoList();
+            return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Index(int id)
-        {
-            ViewBag.IsShowData = "Yes";
-            return View();
-        }
+        //[HttpPost]
+        //public async Task<PartialViewResult> GetDetails([FromBody] NoticeGenerationReportSearchDto noticeGenerationReportSearchDto)
+        //{
+        //    var result = await _noticeToDamagePayeeService.GetWatchandwardReportData(noticeGenerationReportSearchDto);
+        //    if (result != null)
+        //    {
+        //        return PartialView("_List", result);
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return PartialView();
+        //    }
+        //}
 
     }
 }

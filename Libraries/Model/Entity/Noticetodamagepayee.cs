@@ -1,5 +1,7 @@
 ﻿using Libraries.Model.Common;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -15,5 +17,9 @@ namespace Libraries.Model.Entity
         public string InterestPercentage { get; set; }
         public byte IsActive { get; set; }
 
+        [NotMapped]
+        public List<Noticetodamagepayee> FileNoList { get; set; }
+        [NotMapped]
+        public int? FileId { get; set; }
     }
 }

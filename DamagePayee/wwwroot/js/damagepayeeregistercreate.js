@@ -447,8 +447,8 @@ $(function () {
         if (is_valid == false) {
             // alert('Please enter valid email id');
            
-            $('#AadharNo').val(' ');
-            $('.msg3').text('Please enter valid Aadhar card number ');
+            $('#AadharNo').val('');
+            $('.msg3').empty().html('Please enter valid Aadhar card number ');
         }
         else {
             $('#AadharNo').val(input.val());
@@ -469,7 +469,7 @@ $(function () {
             // alert('Please enter valid email id');
            
             $('#PanNo').val(' ');
-            $('.msg4').text('Please enter valid Pan card number ');
+            $('.msg4').empty().html('Please enter valid Pan card number ');
         }
         else {
             $('#PanNo').val(input.val());
