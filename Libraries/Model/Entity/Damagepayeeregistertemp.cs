@@ -222,5 +222,11 @@ namespace Libraries.Model.Entity
         public bool DeclarationStatus3 { get; set; }
         [NotMapped]
         public int IsMutaionYes { get; set; }
+
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
     }
 }
