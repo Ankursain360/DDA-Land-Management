@@ -264,22 +264,51 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_posts #add #EmailId").val(data[i].emailId);
             $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
             $("#tbl_posts #add #PanNo").val(data[i].panNo);
-            if ( data[i].aadharNoFilePath != "") {
-                $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' +data[i].id)
+            $("#tbl_posts #add #AadharNoFilePath").val(data[i].aadharNoFilePath);
+            $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
+            $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
+            $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
+
+            if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
+                $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
+            } else {
+                $("#tbl_posts #add #viewAadharId").hide();
             }
-            if (data[i].panNoFilePath != "") {
+            if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
                 $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPanFile/' + data[i].id)
                 $("#tbl_posts #add #viewPanId").show();
+            } else {
+                $("#tbl_posts #add #viewPanId").hide();
             }
-            if ( data[i].photographPath != "") {
+            if (data[i].photographPath != "" && data[i].photographPath != null) {
                 $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPhotoFile/' + data[i].id)
                 $("#tbl_posts #add #viewPhotoId").show();
+            } else {
+                $("#tbl_posts #add #viewPhotoId").hide();
             }
-            if ( data[i].signaturePath != "") {
+            if (data[i].signaturePath != "" && data[i].signaturePath != null) {
                 $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoSignautreFile/' + data[i].id)
                 $("#tbl_posts #add #viewSignatureId").show();
+            } else {
+                $("#tbl_posts #add #viewSignatureId").hide();
             }
+            //if ( data[i].aadharNoFilePath != "") {
+            //    $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' +data[i].id)
+            //    $("#tbl_posts #add #viewAadharId").show();
+            //}
+            //if (data[i].panNoFilePath != "") {
+            //    $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPanFile/' + data[i].id)
+            //    $("#tbl_posts #add #viewPanId").show();
+            //}
+            //if ( data[i].photographPath != "") {
+            //    $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPhotoFile/' + data[i].id)
+            //    $("#tbl_posts #add #viewPhotoId").show();
+            //}
+            //if ( data[i].signaturePath != "") {
+            //    $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoSignautreFile/' + data[i].id)
+            //    $("#tbl_posts #add #viewSignatureId").show();
+            //}
             $('#tbl_posts #add #Gender').trigger('change');
             if (i < data.length - 1) {
                 var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
@@ -368,18 +397,24 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
 function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
 
-    /* -----------Personeel Info Repeator Added by ishu  --------------- */
+    
     HttpGet(`/DamagePayeeRegister/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
             $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val(data[i].fatherName);
             $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
-          
-            if (data[i].atsgpadocumentPath != "") {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").show();
+            $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
+            if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
+            } else {
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
             }
+            //if (data[i].atsgpadocumentPath != "") {
+            //    $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
+            //    $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").show();
+            //}
            
            
             if (i < data.length - 1) {
@@ -462,7 +497,7 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
 
 function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------- */
 
-    /* -----------Personeel Info Repeator Added by ishu  --------------- */
+   
     HttpGet(`/DamagePayeeRegister/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
@@ -471,11 +506,18 @@ function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------
             $("#tbl_Payment #addPayment #PaymentMode").val(data[i].paymentMode);
             $("#tbl_Payment #addPayment #PaymentDate").val(data[i].paymentDate);
             $("#tbl_Payment #addPayment #Amount").val(data[i].amount);
-          
-            if (data[i].recieptDocumentPath != "") {
-                $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
-                $("#tbl_Payment #addPayment #viewReceiptId").show();
+            $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
+
+            if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
+                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewRecieptId").show();
+            } else {
+                $("#tbl_Payment #addPayment #viewRecieptId").hide();
             }
+            //if (data[i].recieptDocumentPath != "") {
+            //    $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
+            //    $("#tbl_Payment #addPayment #viewReceiptId").show();
+            //}
 
 
             if (i < data.length - 1) {
