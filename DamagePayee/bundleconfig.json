@@ -16,5 +16,29 @@
     "inputFiles": [
       "wwwroot/js/SubstitutionMutationDetailsIndex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeapprovalindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeapprovalindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregistercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregistercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregisteredit.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregisteredit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregisterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregisterindex.js"
+    ]
   }
 ]

@@ -9,6 +9,10 @@ namespace Libraries.Model.Entity
 {
     public class WorkflowTemplate : AuditableEntity<int>
     {
+        public WorkflowTemplate()
+        {
+            Processworkflow = new HashSet<Processworkflow>();
+        }
         public string Name { get; set; }
         public string Description { get; set; }
         public int ModuleId { get; set; }
@@ -43,5 +47,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string OperationId { get; set; }
+
+        public ICollection<Processworkflow> Processworkflow { get; set; }
     }
 }

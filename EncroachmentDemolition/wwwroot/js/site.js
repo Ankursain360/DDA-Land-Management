@@ -10,8 +10,6 @@ $(document).ready(function () {
         $('#rightSection').toggleClass('menu-close');
         $('footer').toggleClass('menu-close');
     });
-
-
     
     $("select[class!='form-control destroy']").select2({
         placeholder: "--Select--",

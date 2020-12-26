@@ -28,6 +28,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp);
         Task<List<Allottetypetemp>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
+        Task<Allottetypetemp> GetAllotteTypeSingleResult(int id);
 
 
         //********* rpt 3 Damage payment history ***********
@@ -37,5 +38,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> DeletePaymentHistoryTemp(int Id);
         Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId);
         Task<Rebate> GetRebateValue();
+        Task<Damagepaymenthistorytemp> GetPaymentHistorySingleResult(int id);
     }
 }

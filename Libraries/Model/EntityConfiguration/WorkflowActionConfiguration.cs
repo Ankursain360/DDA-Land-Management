@@ -34,8 +34,6 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.TaskRequestId).HasColumnType("int(11)");
 
-            builder.Property(e => e.TransactionId).HasColumnType("int(11)");
-
             builder.Property(e => e.WorkflowType)
                 .HasMaxLength(500)
                 .IsUnicode(false);

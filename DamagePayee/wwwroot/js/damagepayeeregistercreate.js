@@ -128,28 +128,29 @@
         var plotyds = $("#txtPlotyds").val();
         var plotmeter = '';
         plotmeter = plotyds / 1.19599005;
-        $("#txtPlotmts").val(plotmeter);
+        $("#txtPlotmts").val((plotmeter).toFixed(3));
     });
 
     $("#txtFlooryds").change(function () {
         var flooryds = $("#txtFlooryds").val();
         var floormeter = '';
         floormeter = flooryds / 1.19599005;
-        $("#txtFloormts").val(floormeter);
+        $("#txtFloormts").val((floormeter).toFixed(3));
     });
 
     $("#txtResidential").change(function () {
         var yds = $("#txtResidential").val();
         var meter = '';
         meter = yds / 1.19599005;
-        $("#txtResidentialmts").val(meter);
+        $("#txtResidentialmts").val((meter).toFixed(3));
+       
     });
 
     $("#txtCommercial").change(function () {
         var yds = $("#txtCommercial").val();
         var meter = '';
         meter = yds / 1.19599005;
-        $("#txtCommercialmts").val(meter);
+        $("#txtCommercialmts").val((meter).toFixed(3));
     });
 
 // CODE FOR SAVING VALUE OF RADIO BUTTON
@@ -445,9 +446,13 @@ $(function () {
         //alert('Please enter valid email id');
         if (is_valid == false) {
             // alert('Please enter valid email id');
-            $('.msg3').text('Please enter valid Aadhar card number ');
+           
+            $('#AadharNo').val('');
+            $('.msg3').empty().html('Please enter valid Aadhar card number ');
         }
-
+        else {
+            $('#AadharNo').val(input.val());
+        }
     });
 });
 
@@ -455,14 +460,20 @@ $(function () {
     $('#PanNo').on('change', function () {
         debugger;
         var input = $(this);
-       
-            /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
+
+        /// [A - Z]{ 5 } [0 - 9]{ 4 } [A - Z]{ 1 } $ /
         var re = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
         var is_valid = re.test(input.val());
         //alert('Please enter valid email id');
         if (is_valid == false) {
             // alert('Please enter valid email id');
-            $('.msg4').text('Please enter valid Pan card number ');
+           
+            $('#PanNo').val(' ');
+            $('.msg4').empty().html('Please enter valid Pan card number ');
+        }
+        else {
+            $('#PanNo').val(input.val());
+           
         }
 
     });

@@ -143,6 +143,9 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        
-}
+        public async Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id)
+        {
+            return await _dbContext.Damagepaymenthistorytemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+        }
+    }
 }

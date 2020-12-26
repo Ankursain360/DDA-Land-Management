@@ -19,8 +19,8 @@ namespace Libraries.Service.IApplicationService
         Task<List<Noticetodamagepayee>> GetsingleData(int id);
         Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model);
 
-        Task<bool> Update(int id, Noticetodamagepayee noticetodamagepayee);
-        Task<Noticetodamagepayee> FetchSingleResult(int id);
+        Task<List<Noticetodamagepayee>> GetFileNoList();
+
 
 
     }

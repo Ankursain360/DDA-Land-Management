@@ -119,18 +119,35 @@ namespace DamagePayeePublicInterface.Controllers
                                 {
                                     damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfotemp
                                     {
-                                        Name = damagepayeeregistertemp.payeeName[i],
-                                        FatherName = damagepayeeregistertemp.payeeFatherName[i],
-                                        Gender = damagepayeeregistertemp.Gender[i],
-                                        Address = damagepayeeregistertemp.Address[i],
-                                        MobileNo = damagepayeeregistertemp.MobileNo[i],
-                                        EmailId = damagepayeeregistertemp.EmailId[i],
+                                        Name = damagepayeeregistertemp.payeeName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeName[i],
+                                        FatherName = damagepayeeregistertemp.payeeFatherName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeFatherName[i],
+                                        Gender = damagepayeeregistertemp.Gender.Count <= i ? "1" : damagepayeeregistertemp.Gender[i],
+                                        Address = damagepayeeregistertemp.Address.Count <= i ? string.Empty : damagepayeeregistertemp.Address[i],
+                                        MobileNo = damagepayeeregistertemp.MobileNo.Count <= i ? string.Empty : damagepayeeregistertemp.MobileNo[i],
+                                        EmailId = damagepayeeregistertemp.EmailId.Count <= i ? string.Empty : damagepayeeregistertemp.EmailId[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?  fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) : damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ? damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
-                                       // AadharNoFilePath = damagepayeeregistertemp.Aadhar == null ? string.Empty : fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]),
-                                        PanNoFilePath = damagepayeeregistertemp.Pan == null ? string.Empty : fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]),
-                                        PhotographPath = damagepayeeregistertemp.Photograph == null ? string.Empty : fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]),
-                                        SignaturePath = damagepayeeregistertemp.SignatureFile == null ? string.Empty : fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i])
+                                        AadharNo = damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],
+                                        PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
+                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
+                                                                damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
+                                                                damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
+                                        PanNoFilePath = damagepayeeregistertemp.Pan != null ?
+                                                                damagepayeeregistertemp.Pan.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) :
+                                                                damagepayeeregistertemp.PanNoFilePath[i] != null || damagepayeeregistertemp.PanNoFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.PanNoFilePath[i] : string.Empty,
+                                        PhotographPath = damagepayeeregistertemp.Photograph != null ?
+                                                                damagepayeeregistertemp.Photograph.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]) :
+                                                                damagepayeeregistertemp.PhotographFilePath[i] != null || damagepayeeregistertemp.PhotographFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.PhotographFilePath[i] : string.Empty,
+                                        SignaturePath = damagepayeeregistertemp.SignatureFile != null ?
+                                                                damagepayeeregistertemp.SignatureFile.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) :
+                                                                damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.SignatureFilePath[i] : string.Empty
                                     });
                                 }
                                 foreach (var item in damagepayeepersonelinfotemp)
@@ -156,11 +173,15 @@ namespace DamagePayeePublicInterface.Controllers
                                 {
                                     allottetypetemp.Add(new Allottetypetemp
                                     {
-                                        Name = damagepayeeregistertemp.Name[i],
-                                        FatherName = damagepayeeregistertemp.FatherName[i],
-                                        Date = damagepayeeregistertemp.Date[i],
+                                        Name = damagepayeeregistertemp.Name.Count <= i ? string.Empty : damagepayeeregistertemp.Name[i],
+                                        FatherName = damagepayeeregistertemp.FatherName.Count <= i ? string.Empty : damagepayeeregistertemp.FatherName[i],
+                                        Date = damagepayeeregistertemp.Date.Count <= i ? DateTime.Now : damagepayeeregistertemp.Date[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
+                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA != null ?
+                                                                damagepayeeregistertemp.ATSGPA.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i]) :
+                                                                damagepayeeregistertemp.ATSGPAFilePath[i] != null || damagepayeeregistertemp.ATSGPAFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.ATSGPAFilePath[i] : string.Empty
                                     });
                                 }
                                 result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
@@ -189,12 +210,16 @@ namespace DamagePayeePublicInterface.Controllers
                                 {
                                     damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
                                     {
-                                        Name = damagepayeeregistertemp.PaymntName[i],
-                                        RecieptNo = damagepayeeregistertemp.RecieptNo[i],
-                                        PaymentMode = damagepayeeregistertemp.PaymentMode[i],
-                                        PaymentDate = damagepayeeregistertemp.PaymentDate[i],
-                                        Amount = damagepayeeregistertemp.Amount[i],
-                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                        Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
+                                        RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
+                                        PaymentMode = damagepayeeregistertemp.PaymentMode.Count <= i ? string.Empty : damagepayeeregistertemp.PaymentMode[i],
+                                        PaymentDate = damagepayeeregistertemp.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregistertemp.PaymentDate[i],
+                                        Amount = damagepayeeregistertemp.Amount.Count <= i ? 0 : damagepayeeregistertemp.Amount[i],
+                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
+                                                                damagepayeeregistertemp.Reciept.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) :
+                                                                damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                     });
                                 }
@@ -205,10 +230,10 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         ViewBag.MainDamagePayeeId = damagepayeeregistertemp.Id;
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        if (damagepayeeregistertemp.IsMutaionYes == 0)
+                        if (damagepayeeregistertemp.IsMutaionYes != 0)
                             return View(damagepayeeregistertemp);
                         else
-                            return RedirectToAction("Index", "SubstitutionMutationDetailsController", new { id = damagepayeeregistertemp.Id });
+                            return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
                     else
                     {
@@ -241,19 +266,35 @@ namespace DamagePayeePublicInterface.Controllers
                                 {
                                     damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfotemp
                                     {
-                                        Name = damagepayeeregistertemp.payeeName[i],
-                                        FatherName = damagepayeeregistertemp.payeeFatherName[i],
-                                        Gender = damagepayeeregistertemp.Gender[i],
-                                        Address = damagepayeeregistertemp.Address[i],
-                                        MobileNo = damagepayeeregistertemp.MobileNo[i],
-                                        EmailId = damagepayeeregistertemp.EmailId[i],
+                                        Name = damagepayeeregistertemp.payeeName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeName[i],
+                                        FatherName = damagepayeeregistertemp.payeeFatherName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeFatherName[i],
+                                        Gender = damagepayeeregistertemp.Gender.Count <= i ? "1" : damagepayeeregistertemp.Gender[i],
+                                        Address = damagepayeeregistertemp.Address.Count <= i ? string.Empty : damagepayeeregistertemp.Address[i],
+                                        MobileNo = damagepayeeregistertemp.MobileNo.Count <= i ? string.Empty : damagepayeeregistertemp.MobileNo[i],
+                                        EmailId = damagepayeeregistertemp.EmailId.Count <= i ? string.Empty : damagepayeeregistertemp.EmailId[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AadharNo = damagepayeeregistertemp.AadharNo[i],
-                                        PanNo = damagepayeeregistertemp.PanNo[i],
-                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ? fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) : damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ? damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
-                                        PanNoFilePath = damagepayeeregistertemp.Pan != null ? fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) : damagepayeeregistertemp.PanNoFilePath[i] != null || damagepayeeregistertemp.PanNoFilePath[i] != "" ? damagepayeeregistertemp.PanNoFilePath[i] : string.Empty,
-                                        PhotographPath = damagepayeeregistertemp.Photograph != null ?  fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]) : damagepayeeregistertemp.PhotographFilePath[i] != null || damagepayeeregistertemp.PhotographFilePath[i] != "" ? damagepayeeregistertemp.PhotographFilePath[i] : string.Empty,
-                                        SignaturePath = damagepayeeregistertemp.SignatureFile != null ?  fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) : damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ? damagepayeeregistertemp.SignatureFilePath[i] : string.Empty
+                                        AadharNo = damagepayeeregistertemp.AadharNo.Count <= i ? string.Empty : damagepayeeregistertemp.AadharNo[i],
+                                        PanNo = damagepayeeregistertemp.PanNo.Count <= i ? string.Empty : damagepayeeregistertemp.PanNo[i],
+                                        AadharNoFilePath = damagepayeeregistertemp.Aadhar != null ?
+                                                                damagepayeeregistertemp.Aadhar.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
+                                                                damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
+                                        PanNoFilePath =damagepayeeregistertemp.Pan != null ?
+                                                                damagepayeeregistertemp.Pan.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) :
+                                                                damagepayeeregistertemp.PanNoFilePath[i] != null || damagepayeeregistertemp.PanNoFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.PanNoFilePath[i] : string.Empty,
+                                        PhotographPath = damagepayeeregistertemp.Photograph != null ?
+                                                                damagepayeeregistertemp.Photograph.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PhotographPersonelDocument, damagepayeeregistertemp.Photograph[i]) :
+                                                                damagepayeeregistertemp.PhotographFilePath[i] != null || damagepayeeregistertemp.PhotographFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.PhotographFilePath[i] : string.Empty,
+                                        SignaturePath = damagepayeeregistertemp.SignatureFile != null ?
+                                                                damagepayeeregistertemp.SignatureFile.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(SignaturePersonelDocument, damagepayeeregistertemp.SignatureFile[i]) :
+                                                                damagepayeeregistertemp.SignatureFilePath[i] != null || damagepayeeregistertemp.SignatureFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.SignatureFilePath[i] : string.Empty,
                                     });
                                 }
                                 foreach (var item in damagepayeepersonelinfotemp)
@@ -280,11 +321,15 @@ namespace DamagePayeePublicInterface.Controllers
                                 {
                                     allottetypetemp.Add(new Allottetypetemp
                                     {
-                                        Name = damagepayeeregistertemp.Name[i],
-                                        FatherName = damagepayeeregistertemp.FatherName[i],
-                                        Date = damagepayeeregistertemp.Date[i],
+                                        Name = damagepayeeregistertemp.Name.Count <= i ? string.Empty : damagepayeeregistertemp.Name[i],
+                                        FatherName = damagepayeeregistertemp.FatherName.Count <= i ? string.Empty : damagepayeeregistertemp.FatherName[i],
+                                        Date = damagepayeeregistertemp.Date.Count <= i ? DateTime.Now : damagepayeeregistertemp.Date[i],
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id,
-                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA == null ? string.Empty : fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i])
+                                        AtsgpadocumentPath = damagepayeeregistertemp.ATSGPA != null ?
+                                                                damagepayeeregistertemp.ATSGPA.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(PhotoFilePathLayout, damagepayeeregistertemp.ATSGPA[i]) :
+                                                                damagepayeeregistertemp.ATSGPAFilePath[i] != null || damagepayeeregistertemp.ATSGPAFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.ATSGPAFilePath[i] : string.Empty
                                     });
                                 }
                                 result = await _selfAssessmentDamageService.SaveAllotteTypeTemp(allottetypetemp);
@@ -311,16 +356,20 @@ namespace DamagePayeePublicInterface.Controllers
                                 List<Damagepaymenthistorytemp> damagepaymenthistorytemp = new List<Damagepaymenthistorytemp>();
                                 result = await _selfAssessmentDamageService.DeletePaymentHistoryTemp(damagepayeeregistertemp.Id);
 
-                                for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
+                                for (int i = 0; i < damagepayeeregistertemp.PaymntName.Count; i++)
                                 {
                                     damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
                                     {
-                                        Name = damagepayeeregistertemp.PaymntName[i],
-                                        RecieptNo = damagepayeeregistertemp.RecieptNo[i],
-                                        PaymentMode = damagepayeeregistertemp.PaymentMode[i],
-                                        PaymentDate = damagepayeeregistertemp.PaymentDate[i],
-                                        Amount = damagepayeeregistertemp.Amount[i],
-                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                        Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
+                                        RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
+                                        PaymentMode = damagepayeeregistertemp.PaymentMode.Count <= i ? string.Empty : damagepayeeregistertemp.PaymentMode[i],
+                                        PaymentDate = damagepayeeregistertemp.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregistertemp.PaymentDate[i],
+                                        Amount = damagepayeeregistertemp.Amount.Count <= i ? 0 : damagepayeeregistertemp.Amount[i],
+                                        RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
+                                                                damagepayeeregistertemp.Reciept.Count<=i ? string.Empty : 
+                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) : 
+                                                                damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
+                                                                damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
                                     });
                                 }
@@ -334,7 +383,7 @@ namespace DamagePayeePublicInterface.Controllers
                         if (damagepayeeregistertemp.IsMutaionYes != 0)
                             return View(damagepayeeregistertemp);
                         else
-                            return RedirectToAction("Index", "SubstitutionMutationDetailsController", new { id = damagepayeeregistertemp.Id });
+                            return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
                     else
                     {
@@ -376,9 +425,10 @@ namespace DamagePayeePublicInterface.Controllers
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetAllottetypeTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.FatherName,
-                x.Date,
+                Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"),
                 x.AtsgpadocumentPath
             }));
         }
@@ -387,10 +437,11 @@ namespace DamagePayeePublicInterface.Controllers
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
             return Json(data.Select(x => new {
+                x.Id,
                 x.Name,
                 x.RecieptNo,
                 x.PaymentMode,
-                x.PaymentDate,
+                PaymentDate = Convert.ToDateTime(x.PaymentDate).ToString("yyyy-MM-dd"),
                 x.Amount,
                 x.RecieptDocumentPath
             }));
@@ -428,5 +479,57 @@ namespace DamagePayeePublicInterface.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+        public async Task<FileResult> ViewATSGPAFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Allottetypetemp Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
+            string path = Data.AtsgpadocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<FileResult> ViewRecieptFile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepaymenthistorytemp Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
+            string path = Data.RecieptDocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+        //******************  download files **************************
+        public async Task<IActionResult> DownloadPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.PropertyPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadShowCauseNotice(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.ShowCauseNoticePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadFgform(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            string path = Data.FgformPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> DownloadBillfile(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+           string path = Data.DocumentForFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+
+
     }
 }
