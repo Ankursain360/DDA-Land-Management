@@ -19,7 +19,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Noticetodamagepayee>> GetsingleData(int id);
         Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model);
 
-
+        Task<List<Noticetodamagepayee>> GetFileNoList();
 
 
 

@@ -11,10 +11,11 @@ namespace Libraries.Repository.IEntityRepository
         // Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregister(string fileNo);
         // Task<List<Damagepayeeregistertemp>> Getpersonelinfotemp(int Id);
         Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model);
+        Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model);
 
-
+        Task<List<Noticetodamagepayee>> GetFileNoList();
         Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee();
-
+        
 
 
 

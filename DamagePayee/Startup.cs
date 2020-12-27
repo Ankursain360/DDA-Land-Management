@@ -22,7 +22,7 @@ namespace DamagePayee
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration,IWebHostEnvironment env)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             HostEnvironment = env;
@@ -47,7 +47,7 @@ namespace DamagePayee
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
                 );
             }
-            
+
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -60,6 +60,11 @@ namespace DamagePayee
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
             });
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -125,6 +130,7 @@ namespace DamagePayee
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

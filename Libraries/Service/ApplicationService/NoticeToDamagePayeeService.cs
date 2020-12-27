@@ -57,7 +57,11 @@ namespace Service.ApplicationService
             return await _noticeToDamagePayeeRepository.GetPagedNoticetodamagepayee(model);
         }
 
-
-
+       
+        public async Task<List<Noticetodamagepayee>> GetFileNoList()
+        {
+            List<Noticetodamagepayee> fileNoList = await _noticeToDamagePayeeRepository.GetFileNoList();
+            return fileNoList;
+        }
     }
 }
