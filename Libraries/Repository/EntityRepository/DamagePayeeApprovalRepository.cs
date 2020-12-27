@@ -19,5 +19,13 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model)
+        {
+            return await _dbContext.Damagepayeeregistertemp
+                                    .Include(x => x.Locality)
+                                    .Include(x => x.District)
+                                    .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId)
+                                    .GetPaged<Damagepayeeregistertemp>(model.PageNumber, model.PageSize);
+        }
     }
 }

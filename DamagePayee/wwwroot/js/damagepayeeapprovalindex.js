@@ -2,20 +2,22 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-    GetDamagePayeeRegister(currentPageNumber, currentPageSize);
+    var StatusId = 0;
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
 });
 
-function GetDamagePayeeRegister(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetWatchandward(pageNumber, pageSize, StatusId) {
+    var param = GetSearchParam(pageNumber, pageSize, StatusId);
     HttpPost(`/DamagePayeeApproval/List`, 'html', param, function (response) {
         $('#divDamagePayeeRegisterTable').html("");
         $('#divDamagePayeeRegisterTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, StatusId) {
     var model = {
         name: "test",
+        StatusId: StatusId,
         pageSize: pageSize,
         pageNumber: pageNumber
     }
@@ -24,12 +26,26 @@ function GetSearchParam(pageNumber, pageSize) {
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);
-    GetDamagePayeeRegister(pageNo, currentPageSize);
+    GetWatchandward(pageNo, currentPageSize);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDamagePayeeRegister(currentPageNumber, pageSize);
-    currentPageSize = parseInt(pageSize);;
+    pageSize = parseInt(pageSize);
+    GetWatchandward(currentPageNumber, pageSize);
+    currentPageSize = pageSize;
 }
 
+
+$("input[name='radioStatus']").click(function () {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    }
+
+});
