@@ -4,7 +4,7 @@
     GetOtherDetails(id);
     GetHistoryDetails(id);
 
-    HttpGet(`/WatchWardApproval/GetApprovalDropdownList`, 'html', function (response) {
+    HttpGet(`/DamagePayeeApproval/GetApprovalDropdownList`, 'html', function (response) {
         response = JSON.parse(response);
         $('#ApprovalStatus option').each(function () {
             if (response.length > 0) {
@@ -24,14 +24,14 @@
 
 
 function GetOtherDetails(id) {
-    HttpGet(`/WatchWardApproval/WatchWardView/?Id=${id}`, 'html', function (response) {
-        $('#WatchWardDetailsDiv').html("");
-        $('#WatchWardDetailsDiv').html(response);
+    HttpGet(`/DamagePayeeApproval/DamagePayeeRegisterView/?Id=${id}`, 'html', function (response) {
+        $('#DamagePayeeRegisterDetailsDiv').html("");
+        $('#DamagePayeeRegisterDetailsDiv').html(response);
     });
 };
 
 function GetHistoryDetails(id) {
-    HttpGet(`/WatchWardApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
+    HttpGet(`/DamagePayeeApproval/HistoryDetails/?Id=${id}`, 'html', function (response) {
         $('#divHistoryDetails').html("");
         $('#divHistoryDetails').html(response);
     });
