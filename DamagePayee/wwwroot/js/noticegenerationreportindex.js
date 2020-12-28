@@ -4,13 +4,13 @@ $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var result = ValidateForm();
-        var localityid = $('#LocalityId option:selected').val();
+        var fileid = $('#Id option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
 
         //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
         if (result) {
-            GetDetails(currentPageNumber, currentPageSize);
+            GetDetails(currentPageNumber, currentPageSize, fileid, fromDate, toDate);
         }
         //}
         //else {
@@ -18,15 +18,15 @@ $(document).ready(function () {
         //}
     });
 
-    $(".linkdisabled").click(function () {
-        return false;
-    });
+    //$(".linkdisabled").click(function () {
+    //    return false;
+    //});
 });
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     debugger
-    HttpPost(`/WacthWardPeriodReport/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/NoticeGenerationReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
@@ -34,16 +34,16 @@ function GetDetails(pageNumber, pageSize) {
 
 function GetSearchParam(pageNumber, pageSize) {
     debugger;
-    var localityid = $('#LocalityId option:selected').val();
-    var FromDate = $('#txtFromDate').val();
-    var ToDate = $('#txtToDate').val();
+    var fileid = $('#Id option:selected').val();
+    var fromDate = $('#txtFromDate').val();
+    var toDate = $('#txtToDate').val();
     var model = {
         name: "test",
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
-        localityId: parseInt(localityid),
-        fromDate: FromDate,
-        toDate: ToDate
+        FileNo: parseInt(fileid),
+        FromDate: fromDate,
+        ToDate: toDate
     }
     return model;
 }

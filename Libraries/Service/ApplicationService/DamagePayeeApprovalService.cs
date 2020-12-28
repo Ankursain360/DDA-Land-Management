@@ -26,9 +26,9 @@ namespace Service.ApplicationService
             _damagePayeeApprovalRepository = damagePayeeApprovalRepository;
         }
 
-        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model)
+        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser)
         {
-            return await _damagePayeeApprovalRepository.GetPagedDamagePayeeRegisterForApproval(model);
+            return await _damagePayeeApprovalRepository.GetPagedDamagePayeeRegisterForApproval(model,  IsUser);
         }
     }
 }

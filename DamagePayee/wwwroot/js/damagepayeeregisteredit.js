@@ -195,59 +195,7 @@ $("input[name='Bill']").click(function () {
 
 });
 
-//@*Repeator code  *@
-//$(document).ready(function () {
-//        $("#tbl_posts #tbl_posts_body .odd").remove();
-//    $("#tbl_posts #add .form-control").attr("multiple", false);
-//})
 
-
-
-//****************** code for personal info Rpt ************************
-//$(document).ready(function () {
-//    debugger;
-//    $.ajax({
-//        type: "post",
-//        url: "/DamagePayeeRegister/GetDetailspersonelinfotemp",
-//        data: "id=" + $("#Id").val() + "",
-//        success: function (data) {
-//            debugger;
-//            for (var i = 0; i < data.length; i++) {
-//                $("#tbl_posts #add #Gender").val(data[i].Gender);
-
-//                $("#tbl_posts #add #payeeName").val(data[i].Name);
-//                $("#tbl_posts #add #payeeFatherName").val(data[i].FatherName);
-//                $("#tbl_posts #add #Address").val(data[i].Address);
-//                $("#tbl_posts #add #MobileNo").val(data[i].MobileNo);
-//                $("#tbl_posts #add #EmailId").val(data[i].EmailId);
-//                $("#tbl_posts #add #AadharNo").val(data[i].AadharNo);
-//                $("#tbl_posts #add #Aadhar").val(data[i].AadharNoFilePath);
-//                $("#tbl_posts #add #PanNo").val(data[i].PanNo);
-//                $("#tbl_posts #add #Pan").val(data[i].PanNoFilePath);
-//                $("#tbl_posts #add #Photograph").val(data[i].PhotographPath);
-//                $("#tbl_posts #add #SignatureFile").val(data[i].SignaturePath);
-
-
-
-//                if (i < data.length - 1) {
-//                    var content = jQuery('#tbl_posts #add tr'),
-//                        size = jQuery('#tbl_posts >tbody >tr').length,
-//                        element = null,
-//                        element = content.clone();
-//                    element.attr('id', 'rec-' + size);
-//                    element.find('.delete-record').attr('data-id', size);
-//                    element.appendTo('#tbl_posts_body');
-//                    element.find('.sn').html(size);
-//                    $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-//                    $("#tbl_posts #add .add").remove();
-//                    //$("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
-//                    element.find(".add-record").hide();
-//                    element.find(".delete-record").show();
-//                }
-//            }
-//        }
-//    });
-//});
 
 
 function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
@@ -293,22 +241,7 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             } else {
                 $("#tbl_posts #add #viewSignatureId").hide();
             }
-            //if ( data[i].aadharNoFilePath != "") {
-            //    $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' +data[i].id)
-            //    $("#tbl_posts #add #viewAadharId").show();
-            //}
-            //if (data[i].panNoFilePath != "") {
-            //    $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPanFile/' + data[i].id)
-            //    $("#tbl_posts #add #viewPanId").show();
-            //}
-            //if ( data[i].photographPath != "") {
-            //    $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPhotoFile/' + data[i].id)
-            //    $("#tbl_posts #add #viewPhotoId").show();
-            //}
-            //if ( data[i].signaturePath != "") {
-            //    $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoSignautreFile/' + data[i].id)
-            //    $("#tbl_posts #add #viewSignatureId").show();
-            //}
+           
             $('#tbl_posts #add #Gender').trigger('change');
             if (i < data.length - 1) {
                 var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
@@ -406,10 +339,10 @@ function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
             $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").show();
             } else {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").hide();
             }
             //if (data[i].atsgpadocumentPath != "") {
             //    $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
@@ -509,16 +442,12 @@ function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------
             $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
 
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
-                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
-                $("#tbl_Payment #addPayment #viewRecieptId").show();
+                $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewReceiptId").show();
             } else {
-                $("#tbl_Payment #addPayment #viewRecieptId").hide();
+                $("#tbl_Payment #addPayment #viewReceiptId").hide();
             }
-            //if (data[i].recieptDocumentPath != "") {
-            //    $("#tbl_Payment #addPayment #viewReceiptId").attr('href', '/DamagePayeeRegister/ViewReceiptFile/' + data[i].id)
-            //    $("#tbl_Payment #addPayment #viewReceiptId").show();
-            //}
-
+          
 
             if (i < data.length - 1) {
                 // var Gender = $("#tbl_DamageAssessee #addDamageAssessee #Gender").children("option:selected").val();
@@ -598,22 +527,6 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
 var minLength = 0;
 var maxLength = 45;
 
-//$(function () {
-//$('.Namecheck').on('keydown keyup change', function () {
-//        var char = $(this).val();
-//        var charLength = $(this).val().length;
-//        //if (charLength < minLength) {
-//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
-//    //} else 
-//    if (charLength > maxLength) {
-//            $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
-//            $(this).val(char.substring(0, maxLength));
-//    }
-//    else {
-//        $('.msg').text('Length is valid');
-//        }
-//    });
-//});
 $(function () {
     $('.Namecheck').keyup(function () {
         debugger;
@@ -634,16 +547,21 @@ $(function () {
 
 
 
+
 $(function () {
     $('.EmailCheck').on('change', function () {
         debugger;
         var input = $(this);
         var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var is_email = re.test(input.val());
-        //alert('Please enter valid email id');
+
         if (is_email == false) {
-            // alert('Please enter valid email id');
-            $('.msg1').text('Please enter valid email id');
+
+            $('.EmailCheck').val('');
+            $('.msg1').empty().html('Please enter valid email id ');
+        }
+        else {
+            $('.EmailCheck').val(input.val());
         }
 
     });
@@ -658,9 +576,14 @@ $(function () {
         var re = /^([0-9]{10})$/;
         var is_mobile = re.test(input.val());
         //alert('Please enter valid email id');
+
         if (is_mobile == false) {
-            // alert('Please enter valid email id');
-            $('.msg2').text('Please enter valid mobile number ');
+
+            $('.NoCheck').val('');
+            $('.msg2').empty().html('Please enter valid mobile number ');
+        }
+        else {
+            $('.NoCheck').val(input.val());
         }
 
     });
@@ -678,8 +601,8 @@ $(function () {
         if (is_valid == false) {
             // alert('Please enter valid email id');
 
-            $('#AadharNo').val(' ');
-            $('.msg3').text('Please enter valid Aadhar card number ');
+            $('#AadharNo').val('');
+            $('.msg3').empty().html('Please enter valid Aadhar card number ');
         }
         else {
             $('#AadharNo').val(input.val());
@@ -700,7 +623,7 @@ $(function () {
             // alert('Please enter valid email id');
 
             $('#PanNo').val(' ');
-            $('.msg4').text('Please enter valid Pan card number ');
+            $('.msg4').empty().html('Please enter valid Pan card number ');
         }
         else {
             $('#PanNo').val(input.val());

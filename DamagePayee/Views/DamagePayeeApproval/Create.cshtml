@@ -7,7 +7,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register Approval Proccess" })
 <br />
 <br />
-<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+<form asp-action="Create" id="myForm" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
     <h3 class="mb-3 d-flex"> Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
@@ -46,7 +46,7 @@
     <div class="row pt-3">
         <div class="col-md-12">
             <input type="submit" value="Submit" class="btn btn-theme " />
-            @Html.ActionLink("Back", "Index", "WatchWardApproval", null, new { @class = "btn btn-theme " })
+            @Html.ActionLink("Back", "Index", "DamagePayeeApproval", null, new { @class = "btn btn-theme " })
         </div>
     </div>
 </form>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Dto.Search;
+using Dto.Master;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,8 @@ using Notification.OptionEnums;
 using System.IO;
 namespace DamagePayee.Controllers
 {
-
-     public class DamagePayeeApprovalController : BaseController
+    //This is right user yes : 1, This is right user No : 0
+    public class DamagePayeeApprovalController : BaseController
     {
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
         private readonly IDamagePayeeApprovalService _damagePayeeApprovalService;
@@ -23,7 +24,7 @@ namespace DamagePayee.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         private readonly IProccessWorkflowService _proccessWorkflowService;
-        public DamagePayeeApprovalController(IDamagePayeeApprovalService damagePayeeApprovalService, 
+        public DamagePayeeApprovalController(IDamagePayeeApprovalService damagePayeeApprovalService,
             IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration,
             IWorkflowTemplateService workflowtemplateService, ISelfAssessmentDamageService selfAssessmentDamageService,
             IProccessWorkflowService proccessWorkflowService)
@@ -42,7 +43,8 @@ namespace DamagePayee.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
         {
-            var result = await _damagePayeeApprovalService.GetPagedDamagePayeeRegisterForApproval(model);
+            var IsUser =await CheckThisisUser();
+            var result = await _damagePayeeApprovalService.GetPagedDamagePayeeRegisterForApproval(model, IsUser);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Damagepayeeregistertemp damagepayeeregistertemp)
@@ -66,8 +68,45 @@ namespace DamagePayee.Controllers
             return View(Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(int id, Watchandward watchandward)
+        public async Task<IActionResult> Create([FromBody] DamagePayeeApprovalCreateDto damagepayeeapprovalcreatedto)
         {
+            Processworkflow processworkflow = new Processworkflow();
+            WorkflowTemplate model = new WorkflowTemplate();
+            //model.Name = workflowtemplatecreatedto.name;
+            //model.Description = workflowtemplatecreatedto.description;
+            //model.ModuleId = workflowtemplatecreatedto.moduleId;
+            //model.UserType = workflowtemplatecreatedto.usertype;
+            //model.IsActive = workflowtemplatecreatedto.isActive;
+            //model.Template = workflowtemplatecreatedto.template;
+
+            if (ModelState.IsValid)
+            {
+                if (model.Template != null)
+                {
+                    var result = await _workflowtemplateService.Create(model);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        return Json(Url.Action("Index", "DamagePayeeApproval"));
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return Json(Url.Action("Create", "DamagePayeeApproval"));
+
+                    }
+                }
+                else
+                {
+                    return Json(Url.Action("Create", "DamagePayeeApproval"));
+                }
+
+            }
+            else
+            {
+                return Json(Url.Action("Create", "DamagePayeeApproval"));
+            }
             //var result = false;
             //var Data = await _watchandwardService.FetchSingleResult(id);
             //Data.LocalityList = await _watchandwardService.GetAllLocality();
@@ -147,7 +186,8 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPersonalInfoTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -167,7 +207,8 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetAllottetypeTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -179,7 +220,8 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.RecieptNo,
@@ -275,10 +317,10 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        #region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
         private async Task<List<TemplateStructure>> DataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(1);
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
@@ -295,12 +337,83 @@ namespace DamagePayee.Controllers
                 {
                     var dropdown = DataFlow[i].parameterAction;
                     return Json(dropdown);
-                    break;
                 }
 
             }
             return Json(DataFlow);
         }
+        #endregion
+
+        #region Fetch ProccessWorkflow Data Added by Renu 28 Dec 2020
+        private int ProccessWorkflowData()
+        {
+            var Count = _proccessWorkflowService.FetchCountResultForProccessWorkflow(1);
+            return Count;
+        }
+        private async Task<bool> CheckThisisUser()
+        {
+            bool Result = false;
+            var Count = ProccessWorkflowData();
+            if (Count == 0)
+            {
+                var DataFlow = await DataAsync();
+                for (int i = 0; i < DataFlow.Count; i++)
+                {
+                    if (!DataFlow[i].parameterSkip)
+                    {
+                        if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
+                        {
+                            Result = true;
+                            break;
+                        }
+                        else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                        {
+                            Result = true;
+                            break;
+                        }
+                        else
+                        {
+                            Result = false;
+                            break;
+                        }
+
+                    }
+                }
+            }
+            else
+            {
+                var DataFlow = await DataAsync();
+                for (int i = 1; i < DataFlow.Count; i++)
+                {
+                    if(i > Count && i < DataFlow.Count)
+                    {
+
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
+                            {
+                                Result = true;
+                                break;
+                            }
+                            else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                            {
+                                Result = true;
+                                break;
+                            }
+                            else
+                            {
+                                Result = false;
+                                break;
+                            }
+
+                        }
+                    }
+                }
+
+            }
+            return Result;
+        }
+
         #endregion
     }
 }

@@ -67,5 +67,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _proccessWorkflowRepository.GetHistoryDetails(proccessid, id);
         }
+
+        public int FetchCountResultForProccessWorkflow(int workflowTemplateId)
+        {
+            return _proccessWorkflowRepository.FetchCountResultForProccessWorkflow(workflowTemplateId);
+        }
     }
 }

@@ -97,7 +97,11 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        // alert('Form validated and submitted ok.');
+        var param = GetListData();
+        HttpPost(`/DamagePayeeApproval/Create`, 'json', param, function (response) {
+            window.location.href = response;  //'/WorkFlowTemplate/Index';
+            SuccessMessage('Data updated successfully.');
+        });
         return true;
     }
 });
@@ -119,3 +123,54 @@ function ApprovalStatusIdMessage() {
         return "";
     }
 };
+
+function GetListData() {
+    
+    var status = $('#ApprovalStatus option:selected').val();
+    var remarks = $('#ApprovalRemarks').val();
+    var damagepayeeregisterid = $('#Id').val();
+    var workflow = [];
+    var model = {};
+    var data = {};
+    debugger;
+    var count = $('.myWebsiteTable').find('table').length;
+    for (var i = 0; i < count; i++) {
+        var parameterName = $("select[name='ParameterNameList[" + i + "]']").val();
+        var parameterValue = $("select[name='ParameterValueList[" + i + "]']").val();
+        var parameterLevel = $("input[name='ParameterLevelList[" + i + "]']").val();
+        var parameterSkip = $("input[name='ParameterSkipList[" + i + "]']").val();
+        var parameterAction = $("Select[name='ParameterActionList[" + i + "]']").val();
+
+        if ((parameterName == "0")) {
+
+        }
+        else {
+            model = {
+                parameterValue: parameterValue,
+                parameterName: parameterName,
+                parameterLevel: parameterLevel,
+                parameterSkip: (parameterSkip),
+                parameterAction: parameterAction
+            }
+            workflow.push(model);
+        }
+
+    };
+    console.log(workflow);
+    if ($.isEmptyObject(workflow)) {
+
+    }
+    else {
+        data = {
+            Id: parseInt(id),
+            moduleId: parseInt(moduleId),
+            name: name,
+            description: description,
+            usertype: usertype,
+            isActive: isActive,
+            template: JSON.stringify(workflow)
+        }
+    }
+    console.log(data);
+    return data;
+}

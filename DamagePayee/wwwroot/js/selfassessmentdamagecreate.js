@@ -523,7 +523,7 @@ $("input[name='DeclarationStatus3']").click(function () {/* -----------Added by 
 function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Personeel Info Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/DamagePayeeApproval/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #payeeName").val(data[i].name);
@@ -540,25 +540,25 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
-                $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
+                $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeApproval/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
             } else {
                 $("#tbl_posts #add #viewAadharId").hide();
             }
             if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
-                $("#tbl_posts #add #viewPanId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPanFile/' + data[i].id)
+                $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeApproval/ViewPersonelInfoPanFile/' + data[i].id)
                 $("#tbl_posts #add #viewPanId").show();
             } else {
                 $("#tbl_posts #add #viewPanId").hide();
             }
             if (data[i].photographPath != "" && data[i].photographPath != null) {
-                $("#tbl_posts #add #viewPhotoId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPhotoFile/' + data[i].id)
+                $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeApproval/ViewPersonelInfoPhotoFile/' + data[i].id)
                 $("#tbl_posts #add #viewPhotoId").show();
             } else {
                 $("#tbl_posts #add #viewPhotoId").hide();
             }
             if (data[i].signaturePath != "" && data[i].signaturePath != null) {
-                $("#tbl_posts #add #viewSignatureId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoSignautreFile/' + data[i].id)
+                $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeApproval/ViewPersonelInfoSignautreFile/' + data[i].id)
                 $("#tbl_posts #add #viewSignatureId").show();
             } else {
                 $("#tbl_posts #add #viewSignatureId").hide();
@@ -585,7 +585,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
     });
 
     /* -----------Allotte Type Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/DamagePayeeApproval/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
@@ -593,7 +593,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
             $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SelfAssessmentDamage/ViewATSGPAFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/DamagePayeeApproval/ViewATSGPAFile/' + data[i].id)
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
             } else {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
@@ -617,7 +617,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
     });
 
     /* -----------Payment History Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
+    HttpGet(`/DamagePayeeApproval/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_Payment #addPayment #txtPaymentName").val(data[i].name);
@@ -627,7 +627,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_Payment #addPayment #txtAmount").val(data[i].amount);
             $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
             if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
-                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/SelfAssessmentDamage/ViewRecieptFile/' + data[i].id)
+                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/DamagePayeeApproval/ViewRecieptFile/' + data[i].id)
                 $("#tbl_Payment #addPayment #viewRecieptId").show();
             } else {
                 $("#tbl_Payment #addPayment #viewRecieptId").hide();

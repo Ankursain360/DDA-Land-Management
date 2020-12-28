@@ -28,20 +28,20 @@ namespace DamagePayee.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<PartialViewResult> GetDetails([FromBody] NoticeGenerationReportSearchDto noticeGenerationReportSearchDto)
-        //{
-        //    var result = await _noticeToDamagePayeeService.GetWatchandwardReportData(noticeGenerationReportSearchDto);
-        //    if (result != null)
-        //    {
-        //        return PartialView("_List", result);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //        return PartialView();
-        //    }
-        //}
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] NoticeGenerationReportSearchDto notice)
+        {
+            var result = await _noticeToDamagePayeeService.GetPagedNoticeGenerationReport(notice);
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+        }
 
     }
 }
