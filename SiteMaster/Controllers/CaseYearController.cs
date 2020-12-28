@@ -34,6 +34,11 @@ namespace SiteMaster.Controllers
             return View();
         }
 
+        public IActionResult View()
+        {
+            return View();
+        }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
