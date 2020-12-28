@@ -367,22 +367,7 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
 var minLength = 0;
 var maxLength = 45;
 
-//$(function () {
-//$('.Namecheck').on('keydown keyup change', function () {
-//        var char = $(this).val();
-//        var charLength = $(this).val().length;
-//        //if (charLength < minLength) {
-//        //    $('span').text('Length is short, minimum ' + minLength + ' required.');
-//    //} else 
-//    if (charLength > maxLength) {
-//            $('.msg').text('Length is not valid, maximum ' + maxLength + ' allowed.');
-//            $(this).val(char.substring(0, maxLength));
-//    }
-//    else {
-//        $('.msg').text('Length is valid');
-//        }
-//    });
-//});
+
 $(function () {
     $('.Namecheck').keyup(function () {
         debugger;
@@ -396,7 +381,7 @@ $(function () {
         $(this).val(char.substring(0, maxLength));
     }
     else {
-       // $('.msg').text('Length is valid');
+      
     }
 });
 });
@@ -409,10 +394,14 @@ $(function () {
         var input = $(this); 
     var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         var is_email = re.test(input.val());
-     //alert('Please enter valid email id');
+     
         if (is_email == false) {
-           // alert('Please enter valid email id');
-            $('.msg1').text('Please enter valid email id');
+
+            $('.EmailCheck').val('');
+            $('.msg1').empty().html('Please enter valid email id ');
+        }
+        else {
+            $('.EmailCheck').val(input.val());
         }
     
 });
@@ -427,9 +416,14 @@ $(function () {
         var re = /^([0-9]{10})$/;
         var is_mobile = re.test(input.val());
         //alert('Please enter valid email id');
+     
         if (is_mobile == false) {
-            // alert('Please enter valid email id');
-            $('.msg2').text('Please enter valid mobile number ');
+            
+            $('.NoCheck').val('');
+            $('.msg2').empty().html('Please enter valid mobile number ');
+        }
+        else {
+            $('.NoCheck').val(input.val());
         }
 
     });
