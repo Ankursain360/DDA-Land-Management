@@ -1,14 +1,23 @@
+using CourtCasesManagement.Filters;
+using CourtCasesManagement.Infrastructure.Extensions;
+using Libraries.Model;
+using Libraries.Model.Entity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Model.Entity;
+using Service.Common;
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.IO;
+
 
 namespace CourtCasesManagement
 {
@@ -26,6 +35,18 @@ namespace CourtCasesManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+            else
+            {
+                services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -36,18 +57,43 @@ namespace CourtCasesManagement
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IFileProvider>(
             new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-            
 
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
+            services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
+
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+               .AddEntityFrameworkStores<DataContext>()
+               .AddDefaultTokenProviders();
+
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
+
+            services.AddMvc(option =>
             {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
+                option.Filters.Add(typeof(ExceptionLogFilter));
+            });
+
+            JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+            services.AddAuthentication(options =>
             {
-                services.AddControllersWithViews();
-            }
-#endif
+                options.DefaultScheme = "Cookies";
+                options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie("Cookies")
+            .AddOpenIdConnect("oidc", options =>
+            {
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
+                options.ClientId = "mvc";
+                options.ClientSecret = "secret";
+                options.ResponseType = "code";
+
+                options.Scope.Add("api1");
+
+                options.SaveTokens = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,6 +102,7 @@ namespace CourtCasesManagement
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
             }
             else
             {
@@ -66,13 +113,12 @@ namespace CourtCasesManagement
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Login}/{action=Create}/{id?}");
+                endpoints.MapDefaultControllerRoute().RequireAuthorization();
             });
         }
     }
