@@ -20,6 +20,16 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        public int FetchCountResultForProccessWorkflow(int workflowTemplateId)
+        {
+            var count = (from f in _dbContext.Processworkflow
+                        where f.WorkflowTemplateId == workflowTemplateId 
+                        orderby f.Id 
+                        select f.Id).Count();
+
+            return count;
+        }
+
         public async Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id)
         {
             var result = await _dbContext.Approvalproccess

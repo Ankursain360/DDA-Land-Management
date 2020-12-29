@@ -1,13 +1,13 @@
-using Microsoft.Extensions.DependencyInjection;
-using Libraries.Repository.IEntityRepository;
+﻿using Libraries.Repository.Common;
 using Libraries.Repository.EntityRepository;
-using Libraries.Service.IApplicationService;
+using Libraries.Repository.IEntityRepository;
 using Libraries.Service.ApplicationService;
-using Libraries.Repository.Common;
-using Repository.IEntityRepository;
+using Libraries.Service.IApplicationService;
+using Microsoft.Extensions.DependencyInjection;
 using Repository.EntityRepository;
-using Service.IApplicationService;
+using Repository.IEntityRepository;
 using Service.ApplicationService;
+using Service.IApplicationService;
 using SiteMaster.Helper;
 
 namespace SiteMaster.Infrastructure.Extensions
@@ -44,6 +44,9 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IStructureRepository, StructureRepository>();
+            services.AddScoped<ICaseyearRepository, CaseyearRepository>();
+            services.AddScoped<ICourtRepository, CourtRepository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -70,6 +73,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IStructureService, StructureService>();
+            services.AddScoped<ICaseyearService, CaseyearService>();
+            services.AddScoped<ICourtService, CourtService>();
         }
     }
 }

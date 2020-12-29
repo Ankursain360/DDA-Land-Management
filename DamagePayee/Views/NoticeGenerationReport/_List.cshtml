@@ -18,13 +18,14 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-            @*<td>@item.Locality.Name</td>*@
+          
             <td>@item.FileNo</td>
+            @*<td>@item.FileNo.Distinct()</td>*@
             <td>@item.Name</td>
             <td>@item.PropertyDetails</td>
             <td>@item.Address</td>
-            <td></td>
-
+            @*<td>@item.FileNo.Distinct().Count()</td>*@
+            <td>@item.FileNo.Count()</td>
         </tr>
             }
         }

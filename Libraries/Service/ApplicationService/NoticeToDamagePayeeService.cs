@@ -51,8 +51,11 @@ namespace Service.ApplicationService
         }
 
 
-
-
+       
+        public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model)
+        {
+            return await _noticeToDamagePayeeRepository.GetPagedNoticeGenerationReport(model);
+        }
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model)
         {
             return await _noticeToDamagePayeeRepository.GetPagedNoticetodamagepayee(model);

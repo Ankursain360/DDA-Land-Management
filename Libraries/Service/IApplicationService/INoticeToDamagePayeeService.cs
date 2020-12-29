@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Noticetodamagepayee noticetodamagepayee);
         Task<Noticetodamagepayee> FetchSingleResult(int id);
 
+        Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model);
 
 
 

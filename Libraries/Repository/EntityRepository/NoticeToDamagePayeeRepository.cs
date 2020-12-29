@@ -22,17 +22,42 @@ namespace Libraries.Repository.EntityRepository
             var fileNoList = await _dbContext.Noticetodamagepayee.Where(x => x.IsActive == 1).ToListAsync();
             return fileNoList;
         }
-       // Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model);
 
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticeGenerationReport(NoticeGenerationReportSearchDto model)
         {
-            var data = await _dbContext.Noticetodamagepayee
-                .Where(x => (x.FileId == (model.FileNo == 0 ? x.FileId : model.FileNo))
-               && x.CreatedDate >= model.FromDate
-               && x.CreatedDate <= model.ToDate)
-                .OrderByDescending(x => x.Id).GetPaged(model.PageNumber, model.PageSize);
+            try
+            {
+                var data = await _dbContext.Noticetodamagepayee
+                    .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                    && x.CreatedDate >= model.FromDate
+                    && x.CreatedDate <= model.ToDate)
+                    .OrderByDescending(x => x.Id)
 
-            return data;
+                    .GetPaged(model.PageNumber, model.PageSize);
+
+                //var data = await _dbContext.Noticetodamagepayee
+                //    .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                //    && x.CreatedDate >= model.FromDate
+                //    && x.CreatedDate <= model.ToDate)
+                //    //.OrderByDescending(x => x.Id)
+                //    .GroupBy(x => x.FileNo).Select(s => new
+                //    {
+                //        FileNo = s.Key,
+                //       count= s.Count()
+                //    })
+                //    .GetPaged(model.PageNumber, model.PageSize);
+
+                return data;
+                //return _context.Sates.Where(a => a.Id == id)
+                //                        .GroupBy(a => a.State)
+                //                        .Select(n => new { n.StateId, n.Count() });
+            }
+            catch (System.Exception ex)
+            {
+
+                return null;
+            }
+
         }
         //public async Task<List<Damagepayeeregistertemp>> Getpersonelinfotemp(int Id)
         //{
