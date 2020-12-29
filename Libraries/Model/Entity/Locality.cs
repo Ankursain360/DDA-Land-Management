@@ -64,7 +64,7 @@ namespace Libraries.Model.Entity
         public ICollection<Damagepayeeregister> DamagepayeeregisterOnlinePaymentLocality { get; set; }
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
-        public ICollection<LegalManagementSystem> LegalManagementSystem { get; set; }
+       
 
 
     }
