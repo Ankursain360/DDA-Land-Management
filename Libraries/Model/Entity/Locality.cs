@@ -22,7 +22,7 @@ namespace Libraries.Model.Entity
             DamagepayeeregisterOnlinePaymentLocality = new HashSet<Damagepayeeregister>();
             Mutationdetails = new HashSet<Mutationdetails>();
             Damagepayeeregistertemp = new HashSet<Damagepayeeregistertemp>();
-
+            Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
         }
         [Required(ErrorMessage = "The Department field is required")]
         public int DepartmentId { get; set; }
@@ -65,6 +65,7 @@ namespace Libraries.Model.Entity
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
 
+        public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
 
     }
 }

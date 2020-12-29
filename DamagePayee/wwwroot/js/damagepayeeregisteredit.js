@@ -84,49 +84,30 @@ $(function () {
 });
 
 $(function () {
-    $("input[name='grpUseofpeoperty']").click(function () {
-        if ($("#rdbResidential").is(":checked")) { //1st radio button
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").removeAttr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
 
-        }
-        else if ($("#rdbCommercial").is(":checked")) {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").removeAttr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-        }
+    /*----Use of Property----*/
+    if ($("#rdbResidential").is(":checked")) { //1st radio button
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+        $("#UseOfProperty").val("Residential");
 
-        else if ($("#rdbMixed").is(":checked")) {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidential").removeAttr("disabled", "disabled");
-            $("#txtCommercial").removeAttr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
-        }
+    }
+    else if ($("#rdbCommercial").is(":checked")) {
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#UseOfProperty").val("Commercial");
+    }
+    else if ($("#rdbMixed").is(":checked")) {
+        $("#ResidentialSqYard").removeAttr("readonly", "readonly");
+        $("#CommercialSqYard").removeAttr("readonly", "readonly");
+        $("#UseOfProperty").val("Mixed");
+    }
+    else {
+        $("#ResidentialSqYard").attr("readonly", "readonly");
+        $("#CommercialSqYard").attr("readonly", "readonly");
+    }
 
-        else {
-            $("#txtResidential").attr("disabled", "disabled");
-            $("#txtCommercial").attr("disabled", "disabled");
-            $("#txtResidentialmts").val('');
-            $("#txtResidential").val('');
-            $("#txtCommercialmts").val('');
-            $("#txtCommercial").val('');
-        }
-
-    });
 });
-
-
 
 
 //@* convert yds to meters*@
@@ -212,11 +193,13 @@ function FillRepeatorAtEdit() {/* -----------Added by ishu  --------------- */
             $("#tbl_posts #add #EmailId").val(data[i].emailId);
             $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
             $("#tbl_posts #add #PanNo").val(data[i].panNo);
+
             $("#tbl_posts #add #AadharNoFilePath").val(data[i].aadharNoFilePath);
             $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
             $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
 
+           
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
                 $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
@@ -344,14 +327,9 @@ function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
             } else {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").hide();
             }
-            //if (data[i].atsgpadocumentPath != "") {
-            //    $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").attr('href', '/DamagePayeeRegister/ViewATSFile/' + data[i].id)
-            //    $("#tbl_DamageAssessee #addDamageAssessee #viewATSId").show();
-            //}
            
            
             if (i < data.length - 1) {
-               // var Gender = $("#tbl_DamageAssessee #addDamageAssessee #Gender").children("option:selected").val();
                 var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
                     size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
                     element = null,
@@ -359,7 +337,7 @@ function FillAllotteAtEdit() {/* -----------Added by ishu  --------------- */
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-recordDamageAssessee').attr('data-id', size);
                 element.appendTo('#tbl_DamageAssessee_body');
-             //   $('#tbl_DamageAssessee_body #rec-' + size + ' #Gender').val(Gender);
+           
                 element.find('.sn1').html(size);
                 $("#tbl_DamageAssessee #addDamageAssessee .sn1").text($('#tbl_DamageAssessee >tbody >tr').length);
                 $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
@@ -450,15 +428,13 @@ function FillPaymentHistoryAtEdit() {/* -----------Added by ishu  --------------
           
 
             if (i < data.length - 1) {
-                // var Gender = $("#tbl_DamageAssessee #addDamageAssessee #Gender").children("option:selected").val();
-                var content = jQuery('#tbl_Payment #addPayment tr'),
+              var content = jQuery('#tbl_Payment #addPayment tr'),
                     size = jQuery('#tbl_Payment >tbody >tr').length,
                     element = null,
                     element = content.clone();
                 element.attr('id', 'rec-' + size);
                 element.find('.delete-recordPayment').attr('data-id', size);
                 element.appendTo('#tbl_Payment_body');
-                //   $('#tbl_DamageAssessee_body #rec-' + size + ' #Gender').val(Gender);
                 element.find('.sn2').html(size);
                 $("#tbl_Payment #addPayment .sn2").text($('#tbl_Payment >tbody >tr').length);
                 $("#tbl_Payment #addPayment .add").remove();

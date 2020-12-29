@@ -111,6 +111,10 @@ namespace Libraries.Model
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
         public virtual DbSet<Familydetails> Familydetails { get; set; }
+
+
+        //**********  Court case management**********
+        public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
         public virtual DbSet<Caseyear> Caseyear { get; set; }
 
@@ -222,6 +226,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
+
+            
+            modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
 
@@ -252,6 +259,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
             modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
+
 
             base.OnModelCreating(modelBuilder);
         }

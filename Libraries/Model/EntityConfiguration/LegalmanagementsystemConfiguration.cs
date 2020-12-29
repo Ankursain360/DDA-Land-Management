@@ -1,0 +1,101 @@
+﻿using Libraries.Model.Entity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace Libraries.Model.EntityConfiguration
+{
+    class LegalmanagementsystemConfiguration : IEntityTypeConfiguration<Legalmanagementsystem>
+    {
+        public void Configure(EntityTypeBuilder<Legalmanagementsystem> builder)
+        {
+            builder.ToTable("legalmanagementsystem", "lms");
+
+            builder.HasIndex(e => e.Id)
+                .HasName("Id_UNIQUE")
+                .IsUnique();
+
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("LegalLocalityId_idx");
+
+            builder.HasIndex(e => e.ZoneId)
+                .HasName("LegalZoneId_idx");
+
+            builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.CaseStatus).HasColumnType("int(11)");
+
+            builder.Property(e => e.CaseType).HasColumnType("int(11)");
+
+            builder.Property(e => e.ContemptOfCourt).HasColumnType("int(11)");
+
+            builder.Property(e => e.CourtCaseNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.CourtCaseTitle)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.CourtType).HasColumnType("int(11)");
+
+            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.CreatedDate).HasColumnType("date");
+
+            builder.Property(e => e.FileNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.HearingDate).HasColumnType("date");
+
+            builder.Property(e => e.InFavour).HasColumnType("int(11)");
+
+            builder.Property(e => e.Judgement).HasColumnType("int(11)");
+
+            builder.Property(e => e.JudgementFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.LastDecision)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.ModifiedDate).HasColumnType("date");
+
+            builder.Property(e => e.NextHearingDate).HasColumnType("date");
+
+            builder.Property(e => e.PanelLawyer)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.Remarks)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+
+            builder.Property(e => e.StayInterimGranted).HasColumnType("int(11)");
+
+            builder.Property(e => e.Subject)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Locality)
+                .WithMany(p => p.Legalmanagementsystem)
+                .HasForeignKey(d => d.LocalityId)
+                .HasConstraintName("LegalLocalityId");
+
+            builder.HasOne(d => d.Zone)
+                .WithMany(p => p.Legalmanagementsystem)
+                .HasForeignKey(d => d.ZoneId)
+                .HasConstraintName("LegalZoneId");
+
+
+        }
+    }
+}
