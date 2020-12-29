@@ -11,6 +11,6 @@ namespace Libraries.Repository.IEntityRepository
 
     public interface IDamagePayeeApprovalRepository : IGenericRepository<Damagepayeeregistertemp>
     {
-        Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model);
+        Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
     }
 }
