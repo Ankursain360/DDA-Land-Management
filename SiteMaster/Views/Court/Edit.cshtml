@@ -3,8 +3,8 @@
 
 <div class="pt-3">
 
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="row">
@@ -59,7 +59,7 @@
 
         <div class="row mt-md-3 ">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "Court", null, new { @class = "btn btn-theme " })
 
             </div>
@@ -67,3 +67,4 @@
 
     </form>
 </div>
+

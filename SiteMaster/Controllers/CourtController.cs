@@ -133,6 +133,27 @@ namespace SiteMaster.Controllers
         }
 
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
 
+                var result = await _courtService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _courtService.GetAllCourt();
+            return View("Index", list);
+        }
     }
 }

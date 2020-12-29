@@ -1,7 +1,7 @@
 ﻿
 
 @model IEnumerable<Libraries.Model.Entity.Court>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Case Year" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Court" })
 
 
 
@@ -12,28 +12,23 @@
         <div class="row">
             <div class="col-md-3    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Location" />
-                    <label for="txtName" class="floating-label">Location</label>
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Court Name" />
+                    <label for="txtName" class="floating-label">Court Name</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtUserName" class="floating-label-field floating-label-field--s3" placeholder="Municipal Number" />
-                    <label for="txtUserName" class="floating-label">Municipal Number</label>
+                    <input type="text" id="txtUserName" class="floating-label-field floating-label-field--s3" placeholder="Address" />
+                    <label for="txtUserName" class="floating-label">Address</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="email" id="txtEmail" class="floating-label-field floating-label-field--s3" placeholder="Geo Referencing">
-                    <label for="txtEmail" class="floating-label">Geo Referencing</label>
+                    <input type="email" id="txtEmail" class="floating-label-field floating-label-field--s3" placeholder="Phone Number">
+                    <label for="txtEmail" class="floating-label">Phone Number</label>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="email" id="txtPhoneNumber" class="floating-label-field floating-label-field--s3" placeholder="Number of Floors">
-                    <label for="txtPhoneNumber" class="floating-label">Number of Floors</label>
-                </div>
-            </div>
+          
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -58,11 +53,9 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3">
                         <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Location/Address of Property</option>
-                        <option>Municipal Number</option>
-                        <option>Geo Referencing</option>
-                        <option>Approx Area of the Property</option>
-                        <option>Number of Floors</option>
+                        <option>Court Name</option>
+                        <option>Address</option>
+                        <option>Phone Number</option>
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>

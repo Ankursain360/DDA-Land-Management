@@ -10,14 +10,15 @@ using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
-    public class CaseYearController : BaseController
+    public class yearcaseController : BaseController
     {
-        private readonly ICaseyearService _courtService;
+        private readonly ICaseyearService _caseService;
 
-        public CaseYearController(ICaseyearService caseyearService)
+        public yearcaseController(ICaseyearService caseService)
         {
-            _courtService = caseyearService;
+            _caseService = caseService;
         }
+
         public IActionResult Index()
         {
             return View();
@@ -25,16 +26,12 @@ namespace SiteMaster.Controllers
 
         public async Task<PartialViewResult> List([FromBody] CaseyearSearchDto model)
         {
-            var result = await _courtService.GetPagedCaseyear(model);
-            return PartialView("_List", result);
+            var result = await _caseService.GetPagedCaseyear(model);
+            return PartialView("_List",result);
         }
+
 
         public IActionResult Create()
-        {
-            return View();
-        }
-
-        public IActionResult View()
         {
             return View();
         }
@@ -42,7 +39,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Caseyear court)
+        public async Task<IActionResult> Create(Caseyear caseyear)
         {
             try
             {
@@ -51,37 +48,43 @@ namespace SiteMaster.Controllers
                 {
 
 
-                    var result = await _courtService.Create(court);
+                    var result = await _caseService.Create(caseyear);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         //return View();
-                        var list = await _courtService.GetAllCaseyear();
+                        var list = await _caseService.GetAllCaseyear();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(court);
+                        return View(caseyear);
 
                     }
                 }
                 else
                 {
-                    return View(court);
+                    return View(caseyear);
                 }
             }
             catch (Exception ex)
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(court);
+                return View(caseyear);
             }
         }
 
+
+
+
+
+
+
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _courtService.FetchSingleResult(id);
+            var Data = await _caseService.FetchSingleResult(id);
             if (Data == null)
             {
                 return NotFound();
@@ -91,7 +94,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Caseyear court)
+        public async Task<IActionResult> Edit(int id, Caseyear caseyear)
         {
             if (ModelState.IsValid)
             {
@@ -100,31 +103,69 @@ namespace SiteMaster.Controllers
 
 
 
-                    var result = await _courtService.Update(id, court);
+                    var result = await _caseService.Update(id, caseyear);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                        var list = await _courtService.GetAllCaseyear();
+                        var list = await _caseService.GetAllCaseyear();
                         return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(court);
+                        return View(caseyear);
 
                     }
                 }
                 catch (Exception ex)
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(court);
+                    return View(caseyear);
 
                 }
             }
-            return View(court);
+            return View(caseyear);
         }
 
+
+
+
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _caseService.FetchSingleResult(id);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+
+                var result = await _caseService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _caseService.GetAllCaseyear();
+            return View("Index", list);
+        }
 
 
 

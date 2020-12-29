@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 function GetDepartment(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/CaseYear/List`, 'html', param, function (response) {
+    HttpPost(`/yearcase/List`, 'html', param, function (response) {
         $('#divCaseYearTable').html("");
         $('#divCaseYearTable').html(response);
     });

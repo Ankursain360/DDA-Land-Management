@@ -17,6 +17,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> Update(int id, Caseyear caseyear);
         Task<Caseyear> FetchSingleResult(int id);
+        Task<bool> Delete(int id);
 
     }
 }
