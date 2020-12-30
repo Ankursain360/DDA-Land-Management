@@ -13,6 +13,8 @@ namespace Libraries.Service.IApplicationService
     public interface ILegalmanagementsystemservice : IEntityService<Legalmanagementsystem>
 
     {
-        Task<List<Locality>> GetLocalityList();
+       
+        Task<List<Zone>> GetZoneList();
+        Task<List<Locality>> GetLocalityList(int zoneId);
     }
 }

@@ -45,6 +45,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasColumnType("date");
 
+            builder.Property(e => e.DocumentFilePath).HasColumnType("longtext");
+
             builder.Property(e => e.FileNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -53,9 +55,15 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.InFavour).HasColumnType("int(11)");
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.Judgement).HasColumnType("int(11)");
 
             builder.Property(e => e.JudgementFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.JudgementRemarks)
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.LastDecision)
                 .HasMaxLength(100)
@@ -78,6 +86,12 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.StayInterimGranted).HasColumnType("int(11)");
+
+            builder.Property(e => e.StayInterimGrantedDocument).HasColumnType("longtext");
+
+            builder.Property(e => e.StayInterimGrantedRemarks)
+                .HasMaxLength(500)
+                .IsUnicode(false);
 
             builder.Property(e => e.Subject)
                 .HasMaxLength(100)
