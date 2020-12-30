@@ -76,8 +76,14 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-
-
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _courtRepository.FindBy(a => a.Id == id);
+            Court model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _courtRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
 
 

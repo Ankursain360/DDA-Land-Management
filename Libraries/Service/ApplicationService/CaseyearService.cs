@@ -66,7 +66,14 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _caseyearRepository.FindBy(a => a.Id == id);
+            Caseyear model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _caseyearRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
 
     }
