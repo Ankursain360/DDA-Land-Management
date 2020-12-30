@@ -1,29 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Service.IApplicationService;
 using FileDataLoading.Models;
+using System.Diagnostics;
+using FileDataLoading.Helper;
+using System.Threading.Tasks;
+using Dto.Master;
 
 namespace FileDataLoading.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ISiteContext siteContext,
+           IUserProfileService userProfileService)
         {
-            _logger = logger;
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
+        }
+        public async Task<IActionResult> Index()
+        {
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            return View(user);
         }
 
-        public IActionResult Index()
+        public IActionResult Privacy()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Logout()
+        {
+            return SignOut("Cookies", "oidc");
+        }
+
+        public IActionResult ErrorLog()
         {
             return View();
         }
