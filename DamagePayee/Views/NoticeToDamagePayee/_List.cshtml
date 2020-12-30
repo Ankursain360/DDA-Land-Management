@@ -37,47 +37,6 @@
         </div>
 
 
-
-
-
-        @*
-
-            <div class="row" style="border: groove; height:140px">
-
-                <div class="col-md-3" style="border-right:groove; height:135px">
-
-                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
-                </div>
-
-                <div class="col-md-6" style="height:135px">
-                    <div style="margin-left: 10px;">
-                        <h style="font-size:16px; color:black">
-
-                            <b> DELHI DEVELOPMENT AUTHORITY</b><br />
-                            दिल्ली विकास प्राधिकरण
-                        </h>
-                        <p style="color:black; font-size:11px; text-align:justify">
-
-                            <b>
-                                IN THE COURT OF ESTATE OFFICER-||<br />
-                                संपदा अधिकारी-II कार्यालय<br />
-                                Room No.-05, A-Block, Ground Floor,<br />
-                                कमरा नं. 05, ए-ब्लॉक, भूतल<br />
-                                VIKAS SADAN INA, NEW DELHI -110023<br />
-                                विकास सदन, आई.एन.ए. नई दिल्ली
-                            </b>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-md-3" style="border-left:groove;height:135px">
-                    <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
-
-
-                </div>
-
-            </div>
-        *@
         <div class="panel-body">
 
             <div class="row">
@@ -557,8 +516,6 @@
 
 <div class="row mt-md-3">
     <div class="col-md-12">
-        <button class="btn btn-theme " onclick="convert_HTML_To_PDF()" type="button">Generate</button>
-
 
         <button class="btn btn-theme " id="btnCreate" type="button">Print</button>
 
@@ -574,54 +531,6 @@
 
 
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.0.272/jspdf.debug.js"></script>
-
-<script>
-    $("#btnCreate").click(function () {
-        //getPDF();
-        var printWindow = window.open('', '');
-        var doc = printWindow.document;
-        var printContents = document.getElementById("MainContentForm").innerHTML;
-        // doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
-        doc.write(printContents);
-        doc.close();
-        function show() {
-            if (doc.readyState === "complete") {
-                printWindow.focus();
-                printWindow.print();
-                printWindow.close();
-            } else {
-                setTimeout(show, 100);
-            }
-        };
-        show();
-    });
-
-
-
-
-
-
-
-    function convert_HTML_To_PDF() {
-        var doc = new jsPDF();
-
-
-
-        var elementHTML = $('#contnet').html();
-        var specialElementHandlers = {
-            '#elementH': function (element, renderer) {
-                return true;
-            }
-        };
-        doc.fromHTML(elementHTML, 15, 15, {
-            'width': 170,
-            'elementHandlers': specialElementHandlers
-        });
-
-        // Save the PDF
-        doc.save('sample-document.pdf');
-    }
-</script>
+<script src="~/js/noticetodamagepayeelist.js"></script>
