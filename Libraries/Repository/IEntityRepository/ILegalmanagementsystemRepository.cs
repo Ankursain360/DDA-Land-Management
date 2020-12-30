@@ -13,5 +13,8 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Zone>> GetZoneList();
         Task<List<Locality>> GetLocalityList(int zoneId);
+
+        Task<List<Legalmanagementsystem>> GetFileNoList();
+        Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
     }
 }
