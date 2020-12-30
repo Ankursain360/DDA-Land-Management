@@ -45,9 +45,12 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp);
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
+        Task<Damagepayeeregistertemp> FetchSingleResult(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
         Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id);
-
-
+        Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregister model);
+        Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data);
+        Task<bool> SaveAllotteType(List<Allottetype> allottetype);
+        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
     }
 }

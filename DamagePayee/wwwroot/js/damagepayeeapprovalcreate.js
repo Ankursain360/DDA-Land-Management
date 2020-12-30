@@ -6,18 +6,25 @@
 
     HttpGet(`/DamagePayeeApproval/GetApprovalDropdownList`, 'html', function (response) {
         response = JSON.parse(response);
-        $('#ApprovalStatus option').each(function () {
-            if (response.length > 0) {
-                for (var i = 0; i < response.length; i++) {
-                    if (response[i] == $(this).val()) {
-                        $(this).show().trigger('change');
-                    }
-                    else {
-                        $(this).remove().trigger('change');
-                    }
-                }
-            }
-        });
+        $('#ApprovalStatus option').filter(function () {
+            return $.inArray($(this).val(), response) == -1
+        }).remove();
+        //$('#ApprovalStatus option').each(function () {
+        //    //var Case = true;
+        //    //if (response.length > 0) {
+        //    //    for (var i = 0; i < response.length; i++) {
+        //    //        if (Case == true) {
+        //    //            if (response[i] == $(this).val()) {
+        //    //                Case = false;
+        //    //            }
+        //    //            else {
+        //    //                $(this).remove();
+        //    //            }
+        //    //        }
+        //    //    }
+        //    //}
+        //});
+        callSelect2();
     });
 
 });
@@ -45,7 +52,6 @@ function callSelect2() {
 }
 
 $("#collapse").click(function () {
-    debugger;
     $('#collapseApprroval').collapse("toggle").promise().done(function () {
         $("select").select2({
             placeholder: "Select",
@@ -97,11 +103,6 @@ $('#myForm').validate({
         }
     },
     submitHandler: function (form) {
-        var param = GetListData();
-        HttpPost(`/DamagePayeeApproval/Create`, 'json', param, function (response) {
-            window.location.href = response;  //'/WorkFlowTemplate/Index';
-            SuccessMessage('Data updated successfully.');
-        });
         return true;
     }
 });

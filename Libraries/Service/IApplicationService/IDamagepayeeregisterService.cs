@@ -50,5 +50,10 @@ namespace Libraries.Service.IApplicationService
         Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
         Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id);
+        Task<bool> UpdateBeforeApproval(int id, Damagepayeeregistertemp damagepayeeregistertemp);
+        Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregistertemp damagepayeeregistertemp, Damagepayeeregister model);
+        Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data);
+        Task<bool> SaveAllotteType(List<Allottetype> allottetype);
+        Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
     }
 }

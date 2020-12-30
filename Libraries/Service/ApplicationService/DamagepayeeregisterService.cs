@@ -54,9 +54,10 @@ namespace Service.ApplicationService
 
         public async Task<Damagepayeeregistertemp> FetchSingleResult(int id)
         {
-            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
-            Damagepayeeregistertemp model = result.FirstOrDefault();
-            return model;
+            return await _damagepayeeregisterRepository.FetchSingleResult(id);
+            //var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            //Damagepayeeregistertemp model = result.FirstOrDefault();
+            //return model;
         }
 
         public async Task<bool> Update(int id, Damagepayeeregistertemp damagepayeeregistertemp)
@@ -214,6 +215,88 @@ namespace Service.ApplicationService
         public async Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id)
         {
             return await _damagepayeeregisterRepository.GetReceiptFilePath(Id);
+        }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Damagepayeeregistertemp damagepayeeregistertemp)
+        {
+            var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
+            Damagepayeeregistertemp model = result.FirstOrDefault();
+            model.ApprovedStatus = damagepayeeregistertemp.ApprovedStatus;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _damagepayeeregisterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregistertemp damagepayeeregistertemp, Damagepayeeregister model)
+        {
+            model.FileNo = damagepayeeregistertemp.FileNo;
+            model.TypeOfDamageAssessee = damagepayeeregistertemp.TypeOfDamageAssessee;
+            model.PropertyNo = damagepayeeregistertemp.PropertyNo;
+            model.LocalityId = damagepayeeregistertemp.LocalityId;
+            model.FloorNo = damagepayeeregistertemp.FloorNo;
+            model.StreetNo = damagepayeeregistertemp.StreetNo;
+            model.PinCode = damagepayeeregistertemp.PinCode;
+            model.DistrictId = damagepayeeregistertemp.DistrictId;
+            model.PlotAreaSqYard = damagepayeeregistertemp.PlotAreaSqYard;
+            model.PlotAreaSqMt = damagepayeeregistertemp.PlotAreaSqMt;
+            model.FloorAreaSqYard = damagepayeeregistertemp.FloorAreaSqYard;
+            model.FloorAreaSqMt = damagepayeeregistertemp.FloorAreaSqMt;
+            model.PropertyPhotoPath = damagepayeeregistertemp.PropertyPhotoPath;
+            model.UseOfProperty = damagepayeeregistertemp.UseOfProperty;
+            model.ResidentialSqYard = damagepayeeregistertemp.ResidentialSqYard;
+            model.ResidentialSqMt = damagepayeeregistertemp.ResidentialSqMt;
+            model.CommercialSqYard = damagepayeeregistertemp.CommercialSqYard;
+            model.CommercialSqMt = damagepayeeregistertemp.CommercialSqMt;
+            model.LitigationStatus = damagepayeeregistertemp.LitigationStatus;
+            model.CourtName = damagepayeeregistertemp.CourtName;
+            model.CaseNo = damagepayeeregistertemp.CaseNo;
+            model.OppositionName = damagepayeeregistertemp.OppositionName;
+            model.PetitionerRespondent = damagepayeeregistertemp.PetitionerRespondent;
+            model.IsDdadamagePayee = damagepayeeregistertemp.IsDdadamagePayee;
+            model.IsApplyForMutation = damagepayeeregistertemp.IsApplyForMutation;
+            model.ShowCauseNoticePath = damagepayeeregistertemp.ShowCauseNoticePath;
+            model.FgformPath = damagepayeeregistertemp.FgformPath;
+            model.IsDocumentFor = damagepayeeregistertemp.IsDocumentFor;
+            model.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;
+            model.InterestDueAmountCompund = damagepayeeregistertemp.InterestDueAmountCompund;
+            model.TotalValueWithInterest = damagepayeeregistertemp.TotalValueWithInterest;
+            model.Rebate = damagepayeeregistertemp.Rebate;
+            model.TotalPayable = damagepayeeregistertemp.TotalPayable;
+            model.CalculatorValue = damagepayeeregistertemp.CalculatorValue;
+            model.Declaration1 = damagepayeeregistertemp.Declaration1;
+            model.Declaration2 = damagepayeeregistertemp.Declaration2;
+            model.Declaration3 = damagepayeeregistertemp.Declaration3;
+            model.Otp = damagepayeeregistertemp.Otp;
+            model.ProceedToPay = damagepayeeregistertemp.ProceedToPay;
+            model.Signature = damagepayeeregistertemp.Signature;
+            model.Achknowledgement = damagepayeeregistertemp.Achknowledgement;
+            model.IsActive = 1;
+            model.UserId = damagepayeeregistertemp.UserId;
+            model.CreatedDate = DateTime.Now;
+            model.CreatedBy = damagepayeeregistertemp.CreatedBy;
+            return await _damagepayeeregisterRepository.CreateApprovedDamagepayeeRegister(model);
+        }
+
+        public async Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data)
+        {
+            data.ForEach(x => x.CreatedDate = DateTime.Now);
+            data.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SavePersonelInfo(data);
+        }
+
+        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
+        {
+            allottetype.ForEach(x => x.CreatedDate = DateTime.Now);
+            allottetype.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SaveAllotteType(allottetype);
+        }
+
+        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
+        {
+            damagepaymenthistory.ForEach(x => x.CreatedDate = DateTime.Now);
+            damagepaymenthistory.ForEach(x => x.IsActive = 1);
+            return await _damagepayeeregisterRepository.SavePaymentHistory(damagepaymenthistory);
         }
     }
 }

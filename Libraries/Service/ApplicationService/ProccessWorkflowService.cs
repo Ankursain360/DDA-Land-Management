@@ -36,14 +36,12 @@ namespace Libraries.Service.ApplicationService
         //    return await _unitOfWork.CommitAsync() > 0;
         //}
 
-        //public async Task<bool> Create(Approvalproccess approvalproccess, int userId)
-        //{
-
-        //    approvalproccess.CreatedBy = userId;
-        //    approvalproccess.CreatedDate = DateTime.Now;
-        //    _proccessWorkflowRepository.Add(approvalproccess);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
+        public async Task<bool> Create(Processworkflow proccess)
+        {
+            proccess.CreatedDate = DateTime.Now;
+            _proccessWorkflowRepository.Add(proccess);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
         public int GetPreviousApprovalId(int proccessid, int serviceid)
         {

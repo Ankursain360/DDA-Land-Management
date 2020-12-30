@@ -13,9 +13,6 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("damagepayeeregister", "lms");
 
-            builder.HasIndex(e => e.CalculatorValue)
-                .HasName("fk_OnlinepaymntLocality_idx");
-
             builder.HasIndex(e => e.DistrictId)
                 .HasName("Fk_District_idx");
 
