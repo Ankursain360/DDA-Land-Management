@@ -19,24 +19,21 @@ namespace CourtCasesManagement.Controllers
         async Task BindDropDownView(Legalmanagementsystem legalmanagementsystem)
         {
             legalmanagementsystem.ZoneList = await _legalmanagementsystemservice.GetZoneList();
+            legalmanagementsystem.FileNoList = await _legalmanagementsystemservice.GetFileNoList();
         }
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult Index()
+      
+        public async Task<IActionResult> Index()
         {
-            return View();
+            Legalmanagementsystem model = new Legalmanagementsystem();
+
+            await BindDropDownView(model);
+            return View(model);
         }
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    Noticetodamagepayee model = new Noticetodamagepayee();
-
-        //    model.FileNoList = await _noticeToDamagePayeeService.GetFileNoList();
-        //    return View(model);
-        //}
 
         //[HttpPost]
         //public async Task<PartialViewResult> GetDetails([FromBody] NoticeGenerationReportSearchDto notice)
@@ -59,6 +56,12 @@ namespace CourtCasesManagement.Controllers
         {
             zoneId = zoneId ?? 0;
             return Json(await _legalmanagementsystemservice.GetLocalityList(Convert.ToInt32(zoneId)));
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetCourtCaseNoList(int? filenoId)
+        {
+            filenoId = filenoId ?? 0;
+            return Json(await _legalmanagementsystemservice.GetCourtCaseNoList(Convert.ToInt32(filenoId)));
         }
     }
 }

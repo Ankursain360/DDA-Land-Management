@@ -29,5 +29,17 @@ namespace Libraries.Repository.EntityRepository
 
             return localityList;
         }
+       
+        public async Task<List<Legalmanagementsystem>> GetFileNoList()
+        {
+            var fileNoList = await _dbContext.Legalmanagementsystem.Where(x => x.IsActive == 1).ToListAsync();
+            return fileNoList;
+        }
+        public async Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId)
+        {
+            List<Legalmanagementsystem> caseNoList = await _dbContext.Legalmanagementsystem.Where(x => x.Id == filenoId).ToListAsync();
+
+            return caseNoList;
+        }
     }
 }

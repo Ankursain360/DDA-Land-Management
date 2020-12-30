@@ -23,17 +23,28 @@ namespace Service.ApplicationService
             _unitOfWork = unitOfWork;
             _legalmanagementsystemRepository = legalmanagementsystemRepository;
         }
-       
-      
-        public async Task<List<Zone>> GetZoneList()
+
+        // * *********** methods for legal report added by ishu ************
+        public async Task<List<Zone>> GetZoneList()  
         {
             List<Zone> zoneList = await _legalmanagementsystemRepository.GetZoneList();
             return zoneList;
         }
-        public async Task<List<Locality>> GetLocalityList(int zoneId) //added by ishu
+        public async Task<List<Locality>> GetLocalityList(int zoneId)    
         {
             List<Locality> localityList = await _legalmanagementsystemRepository.GetLocalityList(zoneId);
             return localityList;
+        }
+       
+        public async Task<List<Legalmanagementsystem>> GetFileNoList()   
+        {
+            List<Legalmanagementsystem> fileNoList = await _legalmanagementsystemRepository.GetFileNoList();
+            return fileNoList;
+        }
+        public async Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId)     
+        {
+            List<Legalmanagementsystem> caseNoList = await _legalmanagementsystemRepository.GetCourtCaseNoList(filenoId);
+            return caseNoList;
         }
     }
 }
