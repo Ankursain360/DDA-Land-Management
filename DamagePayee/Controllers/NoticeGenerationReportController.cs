@@ -12,7 +12,7 @@ using Notification.OptionEnums;
 
 namespace DamagePayee.Controllers
 {
-    public class NoticeGenerationReportController : Controller
+    public class NoticeGenerationReportController : BaseController
     {
         private readonly INoticeToDamagePayeeService _noticeToDamagePayeeService;
 
