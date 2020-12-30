@@ -18,9 +18,15 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<List<Locality>> GetLocalityList()
+        public async Task<List<Zone>> GetZoneList()
         {
-            var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            var zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
+            return zoneList;
+        }
+        public async Task<List<Locality>> GetLocalityList(int zoneId)
+        {
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
+
             return localityList;
         }
     }

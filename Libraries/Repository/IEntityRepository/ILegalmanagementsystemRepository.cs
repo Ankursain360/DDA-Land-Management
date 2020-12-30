@@ -11,6 +11,7 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ILegalmanagementsystemRepository : IGenericRepository<Legalmanagementsystem>
     {
-        Task<List<Locality>> GetLocalityList();
+        Task<List<Zone>> GetZoneList();
+        Task<List<Locality>> GetLocalityList(int zoneId);
     }
 }
