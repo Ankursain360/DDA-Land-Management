@@ -16,5 +16,8 @@ namespace Libraries.Service.IApplicationService
        
         Task<List<Zone>> GetZoneList();
         Task<List<Locality>> GetLocalityList(int zoneId);
+        Task<List<Legalmanagementsystem>> GetFileNoList();
+        Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
+        Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
     }
 }
