@@ -33,6 +33,9 @@ namespace CourtCasesManagement.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
             services.AddScoped<ILawyerRepository,LawyerRespository>();
+            services.AddScoped<ILegalmanagementsystemRepository, LegalmanagementsystemRepository>();
+
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
@@ -45,6 +48,7 @@ namespace CourtCasesManagement.Infrastructure.Extensions
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<ILawyerService, LawyerService>();
+            services.AddScoped<ILegalmanagementsystemservice, Legalmanagementsystemservice>();
 
         }
     }
