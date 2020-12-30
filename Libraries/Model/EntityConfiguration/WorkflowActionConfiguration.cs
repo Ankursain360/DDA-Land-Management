@@ -24,6 +24,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Level).HasColumnType("int(11)");
 
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
             builder.Property(e => e.Remarks)
                 .HasMaxLength(1000)
                 .IsUnicode(false);

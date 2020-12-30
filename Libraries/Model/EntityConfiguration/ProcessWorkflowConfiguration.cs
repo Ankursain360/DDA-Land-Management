@@ -25,6 +25,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+
             builder.Property(e => e.TransactionTemplate)
                 .IsRequired()
                 .HasMaxLength(2000)

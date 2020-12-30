@@ -147,5 +147,43 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepaymenthistorytemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
+
+        public async Task<Damagepayeeregistertemp> FetchSingleResult(int id)
+        {
+            return await _dbContext.Damagepayeeregistertemp
+                                     .Include(x => x.Damagepayeepersonelinfotemp)
+                                     .Include(x => x.Damagepaymenthistorytemp)
+                                     .Include(x => x.Allottetypetemp)
+                                     .Where(x => x.Id == id)
+                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> CreateApprovedDamagepayeeRegister(Damagepayeeregister model)
+        {
+            _dbContext.Damagepayeeregister.Add(model);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data)
+        {
+            await _dbContext.Damagepayeepersonelinfo.AddRangeAsync(data);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
+        {
+            await _dbContext.Allottetype.AddRangeAsync(allottetype);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
+        {
+            await _dbContext.Damagepaymenthistory.AddRangeAsync(damagepaymenthistory);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
     }
 }

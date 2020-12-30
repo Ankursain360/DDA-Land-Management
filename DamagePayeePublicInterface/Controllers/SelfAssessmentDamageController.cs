@@ -112,7 +112,6 @@ namespace DamagePayeePublicInterface.Controllers
                         damagepayeeregistertemp.Gender.Count > 0 &&
                         damagepayeeregistertemp.Address.Count > 0 &&
                         damagepayeeregistertemp.MobileNo.Count > 0)
-
                             {
                                 List<Damagepayeepersonelinfotemp> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfotemp>();
                                 for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
