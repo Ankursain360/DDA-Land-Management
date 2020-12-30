@@ -1,0 +1,95 @@
+﻿@model Libraries.Model.Entity.Damagecalculation
+@{int rowNo = 0,rowNo2=0; }
+<h3 class="my-3 d-flex sub-heading">Details</h3>
+<div class="row">
+    <div class="form-group col-md-6">
+        <h2 class="my-3 sub-heading">Damage Calculation</h2>
+    </div>
+
+    <div class="form-group col-md-6">
+        <h2 class="my-3 sub-heading">Interest Calculation</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="table-responsive px-2 form-group col-md-6" id="divTableForRate">
+        <table class="table table-bordered table-card">
+            <thead class="thead">
+                <tr class="myapp-hed1">
+                    <th>Sr.No</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Rate</th>
+                    <th>Area</th>
+                    <th>Month</th>
+                    <th>Damage Charges</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                @{
+                    if (Model.DamageRateCalculationList != null)
+                    {
+                        foreach (var item in Model.DamageRateCalculationList)
+                        {
+                            <tr>
+                                <td>@(rowNo += 1)</td>
+                                <td>@item</td>
+                                <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@item.Rate</td>
+                                <td>@item.Area</td>
+                                <td>@item.Months</td>
+                                <td>@item.DamageCharges</td>
+                                <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>
+
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="table-responsive px-2 form-group col-md-6" id="divTableForInterest">
+        <table class="table table-bordered table-card">
+            <thead class="thead">
+                <tr class="myapp-hed1">
+                    <th>Sr.No</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Month</th>
+                    <th>Outstanding Damage</th>
+                    <th>Interest</th>
+                    <th>Cumlative Interest</th>
+                </tr>
+            </thead>
+            <tbody class="tbody">
+                @{
+                    if (Model.DamageIntrestCalculationList != null)
+                    {
+                        foreach (var item in Model.DamageIntrestCalculationList)
+                        {
+                            <tr>
+                                <td>@(rowNo2 += 1)</td>
+                                <td>@item</td>
+                                <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@item.Months</td>
+                                <td>@item.Compunding</td>
+                                <td>@item.TotalInterest</td>
+                                <td>@item.TotalPayAmount</td>
+                                <td>@(item.IsActive == 1 ? "Active" : "InActive")</td>
+
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+
+
+
+        </table>
+    </div>
+
+
+
+</div>

@@ -64,6 +64,7 @@ namespace Libraries.Model.Entity
         public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
 
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
-
+        [NotMapped]
+        public ICollection<Damagecalculation> Damagecalculation { get; set; }
     }
 }

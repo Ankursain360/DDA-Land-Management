@@ -47,7 +47,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<INoticeToDamagePayeeRepository, NoticeToDamagePayeeRepository>();
             services.AddScoped<IDamagePayeeApprovalRepository,DamagePayeeApprovalRepository>();
             services.AddScoped<IProccessWorkflowRepository, ProccessWorkflowRepository>();
-
+            services.AddScoped<IDamageCalculationRepository, DamageCalculationRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IWatchandwardService, WatchandwardService>();
@@ -74,6 +74,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<INoticeToDamagePayeeService, NoticeToDamagePayeeService>();
             services.AddScoped<IDamagePayeeApprovalService, DamagePayeeApprovalService>();
             services.AddScoped<IProccessWorkflowService, ProccessWorkflowService>();
+            services.AddScoped<IDamageCalculationService, DamageCalculationService>();
         }
     }
 }
