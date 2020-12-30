@@ -111,7 +111,7 @@ namespace Libraries.Model
         public virtual DbSet<Approvalproccess> Approvalproccess { get; set; }
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
         public virtual DbSet<Familydetails> Familydetails { get; set; }
-
+        public virtual DbSet<Lawyer> Lawyer { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }

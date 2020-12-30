@@ -1,72 +1,85 @@
-﻿
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Lawyer Master Type" })
 
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+<div class="pt-3">
 
+    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtLawyerName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtName" class="floating-label">Layer Name</label>
+                </div>
+            </div>
+            <div class="col-md-3    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtCourtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtName" class="floating-label">Court Name</label>
+                </div>
+            </div>
 
-
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Lawyer Master</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
-<br />
-<div>
-    @Html.ActionLink("Add New", "Create", "LawyerMaster", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })
-</div>
-<br />
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card" style="overflow:scroll;">
+    </form>
 
-        <table class="table table-responsive table-bordered table-card">
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" disabled="disabled">Select One</option>
+                        <option>Layer Name</option>
+                        <option>Court Name</option>
+                        <option>Status</option>
 
-            <thead class="thead">
-                <tr>
-                    <th>Sr.No</th>
-                    <th>Lawyer Type</th>
-                    <th>Lawyer Name</th>
-                    <th>Court Name</th>
-                    <th>Chamber Address</th>
-                    <th>Court Phone</th>
-                    <th>Pan No.</th>
-                    <th>Residential Address</th>
-                    <th>Phone/Mobile</th>
-                    <th>Status</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-                <tr>
-                    <td>1</td>
-                    <td>find something</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Active</td>
-                    <td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>
-
-                </tr>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                </div>
+            </div>
 
 
-            </tbody>
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a asp-action="Create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+      
+        <div class="table-responsive px-2" id="divLawyerTable">
 
-        </table>
+        </div>
+
 
     </div>
+
 </div>
-<br />
-<br />
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/lawyerindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/lawyerindex.min.js" asp-append-version="true"></script>
+</environment>
 
