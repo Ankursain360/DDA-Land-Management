@@ -33,5 +33,11 @@ namespace Libraries.Model.Entity
 
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
+
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
     }
 }
