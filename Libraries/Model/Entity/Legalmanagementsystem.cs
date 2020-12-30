@@ -43,5 +43,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Legalmanagementsystem> FileNoList { get; set; }
+        [NotMapped]
+        public List<Legalmanagementsystem> CourtCaseNoList { get; set; }
+       
     }
 }
