@@ -150,7 +150,7 @@
                     </div>
 
                 </div>
-                <br /> <br />
+
 
 
             </div>
@@ -191,39 +191,44 @@
                             <tr>
                                 <td>1</td>
                                 <td>
-                                    <input type="text" class="form-control" id="txtCategoryName" />
+                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtCategoryName" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="txtHeader" />
+                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtHeader" />
                                 </td>
                                 <td>
-                                    <input type="number" class="form-control" id="txtNumber" />
+                                    <input type="number" class="floating-label-field floating-label-field--s3" id="txtNumber" />
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="txtDate" />
+                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtDate" />
                                 </td>
                                 <td>
-                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="floating-label-field floating-label-field--s3">
                                         <option value="1">DDA</option>
                                         <option value="2">DDA2</option>
                                         <option value="3">DDA3</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="form-control">
+                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="floating-label-field floating-label-field--s3">
                                         <option value="1">LMTYPE</option>
                                         <option value="2">Engineering</option>
                                         <option value="3">Horticulture</option>
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="txtSubject" />
+                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtSubject" />
                                 </td>
                                 <td>
-
-                                    <a class="btn btn-xs delete-recordDamageAssessee " data-id="0" style="display:none;"><h3><i class="glyphicon glyphicon-minus-sign"></i></h3></a>
-                                    <a class="btn btn-xs add-recordDamageAssessee" data-added="0"><h3><i class="glyphicon glyphicon-plus-sign"></i></h3></a>
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                        <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                    </div>
                                 </td>
+
+
+
+                                
                             </tr>
 
                         </tbody>
@@ -242,7 +247,7 @@
 
 
 
-            <div class="form-row">
+            <div class="row">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Record Room No" />
@@ -269,115 +274,143 @@
 
 
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Row No</label><span style="color:red">*</span>
-                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                        <option value="0">--Select Row No--</option>
-                        <option value="1">col1</option>
-                        <option value="2">col2</option>
-                        <option value="3">col3</option>
-                        <option value="4">col4</option>
-                        <option value="5">col5</option>
-                    </select>
-                </div>
+            <div class="row mt-md-3">
 
 
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Column No</label><span style="color:red">*</span>
-                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                        <option value="0">--Select Column No--</option>
-                        <option value="1">col1</option>
-                        <option value="2">col2</option>
-                        <option value="3">col3</option>
-                        <option value="4">col4</option>
-                        <option value="5">col5</option>
-                    </select>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                            <option value="0">--Select Row No--</option>
+                            <option value="1">col1</option>
+                            <option value="2">col2</option>
+                            <option value="3">col3</option>
+                            <option value="4">col4</option>
+                            <option value="5">col5</option>
+                        </select>
+                        <label class="floating-label">Row No</label>
+                    </div>
                 </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                            <option value="0">--Select Column No--</option>
+                            <option value="1">col1</option>
+                            <option value="2">col2</option>
+                            <option value="3">col3</option>
+                            <option value="4">col4</option>
+                            <option value="5">col5</option>
+                        </select>
+                        <label class="floating-label">Column No</label>
+                    </div>
+                </div>
+
 
 
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Bundle No</label><span style="color:red">*</span>
-                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                        <option value="0">--Select Bundle No--</option>
-                        <option value="1">col1</option>
-                        <option value="2">col2</option>
-                        <option value="3">col3</option>
-                        <option value="4">col4</option>
-                        <option value="5">col5</option>
-                    </select>
+            <div class="row mt-md-3">
+
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                            <option value="0">--Select Bundle No--</option>
+                            <option value="1">col1</option>
+                            <option value="2">col2</option>
+                            <option value="3">col3</option>
+                            <option value="4">col4</option>
+                            <option value="5">col5</option>
+                        </select>
+                        <label class="floating-label">Bundle No</label>
+                    </div>
                 </div>
+
+
+
             </div>
         </div>
 
 
         <div id="Divflat">
 
-
+            <div class="row mt-md-3"></div>
             <h3 class="mb-3 d-flex">Property/Khasra No</h3>
 
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Zone</label><span style="color:red">*</span>
-                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                        <option value="0">--Select Zone--</option>
-                        <option value="1">East</option>
-                        <option value="2">West</option>
-                        <option value="3">Central</option>
-                        <option value="4">North</option>
-                        <option value="5">South</option>
-                    </select>
+            <div class="row">
+
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                            <option value="0">--Select Zone--</option>
+                            <option value="1">East</option>
+                            <option value="2">West</option>
+                            <option value="3">Central</option>
+                            <option value="4">North</option>
+                            <option value="5">South</option>
+                        </select>
+                        <label class="floating-label">Zone</label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                            <option value="0">--Select Locality--</option>
+                            <option value="1">Locality1</option>
+                            <option value="2">Locality2</option>
+                            <option value="3">Locality3</option>
+                            <option value="4">Locality4</option>
+                            <option value="5">Locality5</option>
+                        </select>
+                        <label class="floating-label">Locality(Village)</label>
+                    </div>
                 </div>
 
 
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Locality(Village)</label><span style="color:red">*</span>
-                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                        <option value="0">--Select Zone--</option>
-                        <option value="1">Locality1</option>
-                        <option value="2">Locality2</option>
-                        <option value="3">Locality3</option>
-                        <option value="4">Locality4</option>
-                        <option value="5">Locality5</option>
-                    </select>
-                </div>
+
 
 
             </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Khasra No/Property No</label><span style="color:red">*</span>
-                    <input type="text" required class="form-control" />
+            <div class="row mt-md-3">
+
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No/Property No" />
+                        <label class="floating-label">Khasra No/Property No</label>
+                    </div>
                 </div>
 
 
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Area</label><span style="color:red">*</span>
-                    <input type="text" required class="form-control" />
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Area" />
+                        <label class="floating-label">Area</label>
+                    </div>
                 </div>
 
 
             </div>
             @*<div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Pocket</label><span style="color:red">*</span>
-                        <input type="text" required class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Flat/Plot No</label><span style="color:red">*</span>
-                        <input type="text" required class="form-control" />
-                    </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label lb-sm">Pocket</label><span style="color:red">*</span>
+                    <input type="text" required class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label lb-sm">Flat/Plot No</label><span style="color:red">*</span>
+                    <input type="text" required class="form-control" />
+                </div>
 
-                </div>*@
+            </div>*@
 
             @*</div>
-                </div>*@
+            </div>*@
         </div>
 
         @*</div>
-            </div>*@
+        </div>*@
 
 
         @*</div>*@
@@ -386,133 +419,180 @@
         <div class="container-fluid" id="DivForDocumentName" style="display:none">
             <div class="panel-group">
                 <div class="panel">
-                    <div class="form-row ">
-                        <div class="form-group col-md-12 bg">File No</div>
+                    <div class="row mt-md-3"></div>
+                    <h3 class="mb-3 d-flex">File No</h3>
 
-                    </div>
-                    <div class="form-row">
+                    <div class="row">
 
-                        <div class="form-group col-md-2">
-                            <label class="control-label lb-sm">Category</label><span style="color:red">*</span>
-                            <input type="text" style="width:100%;max-width:100%;min-width:unset !important;" required class="form-control" />
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label lb-sm">Header</label><span style="color:red">*</span>
-                            <input type="text" style="width:100%;max-width:100%;min-width:unset !important;" required class="form-control" />
+                        <div class="col-md-1">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Category" />
+                                <label class="floating-label">Category</label>
+                            </div>
                         </div>
 
-
-
-                        <div class="form-group col-md-2">
-                            <label class="control-label lb-sm">Sequence No</label><span style="color:red">*</span>
-                            <input type="Number" style="width:100%;max-width:100%;min-width:unset !important;" required class="form-control" />
+                        <div class="col-md-2">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Header" />
+                                <label class="floating-label">Header</label>
+                            </div>
                         </div>
 
 
-                        <div class="form-group col-md-1">
-                            <label class="control-label lb-sm">Year</label><span style="color:red;width:15px">*</span>
-                            <input type="text" style="width:100%;max-width:100%;min-width:unset !important;" required class="form-control" />
+                        <div class="col-md-2">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Sequence No" />
+                                <label class="floating-label">Sequence No</label>
+                            </div>
                         </div>
 
-                        <div class="form-group col-md-1">
-                            <label class="control-label lb-sm"> </label><span style="color:red;width:15px"></span>
-                            <input type="Date" style="width:100%;max-width:100%;min-width:unset !important;" required class="form-control" />
+                        <div class="col-md-2">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Year" />
+                                <label class="floating-label">Year</label>
+                            </div>
                         </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label lb-sm">Scheme/Department/Branch</label>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select Scheme--</option>
-                                <option value="1">Scheme1</option>
-                                <option value="2">Scheme2</option>
-                                <option value="3">Scheme3</option>
-                                <option value="4">Scheme4</option>
-                                <option value="5">Scheme5</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label class="control-label lb-sm">Locality(Village)</label><span style="color:red">*</span>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1; width:10px;width:100%;max-width:100%;min-width:unset !important;">
-                                <option value="0">--Select--</option>
-                                <option value="1">Horticulture</option>
-                                <option value="2">LandManagement</option>
-                                <option value="3">Engineering</option>
 
-                            </select>
+
+                        <div class="col-md-1">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" />
+
+                            </div>
                         </div>
+
+
+                        <div class="col-md-2">
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select Scheme--</option>
+                                    <option value="1">Scheme1</option>
+                                    <option value="2">Scheme2</option>
+                                    <option value="3">Scheme3</option>
+                                    <option value="4">Scheme4</option>
+                                    <option value="5">Scheme5</option>
+                                </select>
+                                <label class="floating-label">Scheme/Department/Branch </label>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select--</option>
+                                    <option value="1">Horticulture</option>
+                                    <option value="2">LandManagement</option>
+                                    <option value="3">Engineering</option>
+                                </select>
+                                <label class="floating-label">Locality(Village)</label>
+                            </div>
+                        </div>
+
 
                     </div>
                     <br />
-                    <div class="form-row">
+                    <div class="row">
 
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Name/Subject</label><span style="color:red">*</span>
-                            <input type="text" required class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-row ">
-                        <div class="form-group col-md-12 bg">Location(Village) Details</div>
-
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Record Room No</label><span style="color:red">*</span>
-                            <input type="Number" required class="form-control" />
-                        </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Almirah No/Compactor No</label><span style="color:red">*</span>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select Almirah--</option>
-                                <option value="1">Almirah</option>
-                                <option value="2">Almirah</option>
-                                <option value="3">Almirah</option>
-                                <option value="4">Almirah</option>
-                                <option value="5">Almirah</option>
-                            </select>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Name/Subject" />
+                                <label class="floating-label">Name/Subject</label>
+                            </div>
                         </div>
 
 
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Row No</label><span style="color:red">*</span>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select Row No--</option>
-                                <option value="1">col1</option>
-                                <option value="2">col2</option>
-                                <option value="3">col3</option>
-                                <option value="4">col4</option>
-                                <option value="5">col5</option>
-                            </select>
+                    <div class="row mt-md-3"></div>
+                    <h3 class="mb-3 d-flex">Location(Village) Details</h3>
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Record Room No" />
+                                <label class="floating-label">Record Room No</label>
+                            </div>
                         </div>
 
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
 
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Column No</label><span style="color:red">*</span>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select Column No--</option>
-                                <option value="1">col1</option>
-                                <option value="2">col2</option>
-                                <option value="3">col3</option>
-                                <option value="4">col4</option>
-                                <option value="5">col5</option>
-                            </select>
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select Almirah--</option>
+                                    <option value="1">Almirah</option>
+                                    <option value="2">Almirah</option>
+                                    <option value="3">Almirah</option>
+                                    <option value="4">Almirah</option>
+                                    <option value="5">Almirah</option>
+                                </select>
+                                <label class="floating-label">Almirah No/Compactor No</label>
+                            </div>
+
+
+
                         </div>
 
 
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Bundle No</label><span style="color:red">*</span>
-                            <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                <option value="0">--Select Bundle No--</option>
-                                <option value="1">col1</option>
-                                <option value="2">col2</option>
-                                <option value="3">col3</option>
-                                <option value="4">col4</option>
-                                <option value="5">col5</option>
-                            </select>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+
+
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select Row No--</option>
+                                    <option value="1">col1</option>
+                                    <option value="2">col2</option>
+                                    <option value="3">col3</option>
+                                    <option value="4">col4</option>
+                                    <option value="5">col5</option>
+                                </select>
+                                <label class="floating-label">Row No</label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+
+
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select Column No--</option>
+                                    <option value="1">col1</option>
+                                    <option value="2">col2</option>
+                                    <option value="3">col3</option>
+                                    <option value="4">col4</option>
+                                    <option value="5">col5</option>
+                                </select>
+                                <label class="floating-label">Column No</label>
+                            </div>
+
+                        </div>
+
+
+
+
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class="col-md-6">
+
+                            <div class="floating-label-wrap">
+
+                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
+                                    <option value="0">--Select Bundle No--</option>
+                                    <option value="1">col1</option>
+                                    <option value="2">col2</option>
+                                    <option value="3">col3</option>
+                                    <option value="4">col4</option>
+                                    <option value="5">col5</option>
+                                </select>
+                                <label class="floating-label">Bundle No</label>
+                            </div>
+
                         </div>
 
                     </div>
@@ -521,13 +601,16 @@
             </div>
         </div>
 
-        <div class="form-row">
-            <div class="form-group  col-md-12" style="justify-content:center">
-                <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
+
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <input type="submit" value="Create" class="btn btn-theme" />
                 @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-primary myapp-hed1" })
+                @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
             </div>
         </div>
+
+     
     </form>
 
 
