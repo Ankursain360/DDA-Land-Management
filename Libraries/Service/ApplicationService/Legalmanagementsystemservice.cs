@@ -46,5 +46,9 @@ namespace Service.ApplicationService
             List<Legalmanagementsystem> caseNoList = await _legalmanagementsystemRepository.GetCourtCaseNoList(filenoId);
             return caseNoList;
         }
+        public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model)
+        {
+            return await _legalmanagementsystemRepository.GetPagedLegalReport(model);
+        }
     }
 }

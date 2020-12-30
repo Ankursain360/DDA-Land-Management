@@ -16,5 +16,8 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<Legalmanagementsystem>> GetFileNoList();
         Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
+
+        Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
+
     }
 }

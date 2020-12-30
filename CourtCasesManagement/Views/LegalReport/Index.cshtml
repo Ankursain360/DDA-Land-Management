@@ -20,7 +20,7 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="Id">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="Id" id="CaseNO">
                             
                         <option value="0">All</option>
                     </select>
@@ -30,13 +30,13 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" >
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ContemptOfCourt">
                            
                         <option value="0">All</option>
                         <option value="1">Yes</option>
                         <option value="2">No</option>
                     </select>
-                    <span class="d-block text-danger field-validation-valid" asp-validation-for="Id"></span>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="ContemptOfCourt"></span>
                     <label  class="floating-label">Contempt Of Court  </label>
                 </div>
             </div>
