@@ -4,5 +4,29 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/bundleindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/bundleindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/rowindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/rowindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/columnindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/columnindex.js"
+    ]
   }
 ]

@@ -32,6 +32,11 @@ namespace FileDataLoading.Infrastructure.Extensions
 
             services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IAlmirahRepository,AlmirahRespository>();
+            services.AddScoped<IRowRepository, RowRepository>();
+            services.AddScoped<IColumnRepository,ColumnRespository>();
+            services.AddScoped<IBundleRepository, BundleRespository>();
+
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -44,6 +49,10 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IAlmirahService, AlmirahService>();
+            services.AddScoped<IRowService, RowService>();
+            services.AddScoped<IColumnService, ColumnService>();
+            services.AddScoped<IBundleService, BundleService>();
 
         }
 
