@@ -1,0 +1,157 @@
+﻿$(document).ready(function () {
+
+    var dtToday = new Date();
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if (month < 10)
+        month = '0' + month.toString();
+    if (day < 10)
+        day = '0' + day.toString();
+    var maxDate = year + '-' + month + '-' + day;
+    $('#EncroachmentDate').attr('max', maxDate);
+    $('#txtEncroachmentFromDate').attr('max', maxDate);
+    $('#txtEncroachmentToDate').attr('max', maxDate);
+});
+
+$('#myForm').validate({
+    rules: {
+        PropertyTypeId: {
+            required: true
+        },
+        EncroachmentDate: {
+            required: true
+        },
+        StartDate: {
+            required: true
+        },
+        EndDate: {
+            required: true
+        },
+        LocalityId: {
+            required: true
+        },
+        Area: {
+            required: true
+        }
+    },
+
+    messages: {
+        PropertyTypeId: {
+            required: PropertyTypeIdMessage //this is a function that returns custom messages
+        },
+        EncroachmentDate: {
+            required: EncroachmentDateMessage //this is a function that returns custom messages
+        },
+        StartDate: {
+            required: StartDateMessage //this is a function that returns custom messages
+        },
+        EndDate: {
+            required: EndDateMessage //this is a function that returns custom messages
+        },
+        LocalityId: {
+            required: LocalityIdMessage //this is a function that returns custom messages
+        },
+        Area: {
+            required: AreaMessage //this is a function that returns custom messages
+        }
+    },
+    highlight: function (element) {
+        $(element).closest('.field-validation-valid').addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).closest('.field-validation-valid').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    },
+    submitHandler: function (form) {
+        var param = GetSearchParam();
+        HttpPost(`/DamageCalculator/DamageCalculate`, 'html', param, function (response) {
+            $('#DivMainContentForm').html("");
+            $('#DivMainContentForm').html(response);
+        });
+        return true;
+    }
+});
+function EncroachmentDateMessage() {
+    var dropdown_val = $('#EncroachmentDate').val();
+    if (dropdown_val == "") {
+        return "Encroachment Date is Mandatory";
+    } else {
+        return "";
+    }
+};
+
+function PropertyTypeIdMessage() {
+    var dropdown_val = $('#PropertyTypeId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Property Type is Mandatory";
+    } else {
+        return "";
+    }
+};
+function StartDateMessage() {
+    var dropdown_val = $('#StartDate').val();
+    if (dropdown_val == "") {
+        return "Start Date is Mandatory";
+    } else {
+        return "";
+    }
+};
+
+function EndDateMessage() {
+    var dropdown_val = $('#EndDate').val();
+    if (dropdown_val == "") {
+        return "End Date is Mandatory";
+    } else {
+        return "";
+    }
+};
+function LocalityIdMessage() {
+    var dropdown_val = $('#LocalityId option:selected').val();
+    if (dropdown_val < 1) {
+        return "Locality is Mandatory";
+    } else {
+        return "";
+    }
+};
+
+function AreaMessage() {
+    var dropdown_val = $('#Area').val();
+    if (dropdown_val == "") {
+        return "Area is Mandatory";
+    } else {
+        return "";
+    }
+};
+$("#btnCalculate").click(function () {
+    var result = ValidateForm();
+    if (result) {
+        var param = GetSearchParam();
+        HttpPost(`/DamageCalculator/DamageCalculate`, 'html', param, function (response) {
+            $('#DivMainContentForm').html("");
+            $('#DivMainContentForm').html(response);
+        });
+    }
+    
+});
+
+function GetSearchParam() {
+    var model = {
+        PropertyTypeId: $("#PropertyTypeId").children("option:selected").val(),
+        EncroachmentDate: $("#EncroachmentDate").val(),
+        FromDate: $("#StartDate").val(),
+        ToDate: $("#EndDate").val(),
+        LocalityId: $("#LocalityId").children("option:selected").val(),
+        Area: $("#Area").val(),
+    }
+    debugger
+    return model;
+}

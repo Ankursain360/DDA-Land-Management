@@ -4,7 +4,6 @@ namespace Dto.Master
 {
     public class DamageCalculationDto
     {
-
         public string PropertyTypeId { get; set; }
         public string EncroachmentDate { get; set; }
         public string FromDate { get; set; }

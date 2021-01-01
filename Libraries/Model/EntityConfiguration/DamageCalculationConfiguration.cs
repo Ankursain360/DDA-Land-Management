@@ -13,7 +13,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("damagecalculation", "lms");
 
             builder.HasIndex(e => e.LocalityId)
-                .HasName("LocalityId_idx");
+                .HasName("fk_LocalityIdDamageCalculation_idx");
 
             builder.HasIndex(e => e.PropertyTypeId)
                 .HasName("PropertyTypeId_idx");
@@ -58,11 +58,16 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.TotalPayAmount).HasColumnType("decimal(18,3)");
 
+            builder.HasOne(d => d.Locality)
+                .WithMany(p => p.Damagecalculation)
+                .HasForeignKey(d => d.LocalityId)
+                .HasConstraintName("fk_LocalityIdDamageCalculation");
+
             builder.HasOne(d => d.PropertyType)
-                  .WithMany(p => p.Damagecalculation)
-                  .HasForeignKey(d => d.PropertyTypeId)
-                  .OnDelete(DeleteBehavior.ClientSetNull)
-                  .HasConstraintName("Fk_PropertyTypeId");
+                .WithMany(p => p.Damagecalculation)
+                .HasForeignKey(d => d.PropertyTypeId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("Fk_PropertyTypeId");
         }
     }
 }

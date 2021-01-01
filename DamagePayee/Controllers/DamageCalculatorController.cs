@@ -38,7 +38,32 @@ namespace DamagePayee.Controllers
         public async Task<PartialViewResult> DamageCalculate([FromBody] DamageCalculationDto dto)
         {
             Damagecalculation damagecalculation = new Damagecalculation();
+            damagecalculation.DamageRateCalculationList.Add(new Damagecalculation
+            {
+                StartDate = DateTime.Now
+            });
             return PartialView("_DamageCalculate", damagecalculation);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> Index(Damagecalculation damagecalculation)
+        //{
+        //    if(ModelState.IsValid)
+        //    {
+        //        return RedirectToAction("DamageCalculate", "DamageCalculator", new { id = damagecalculation });
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //        return View(damagecalculation);
+        //    }
+        //}
+
+
+        //public async Task<PartialViewResult> DamageCalculate(Damagecalculation damagecalculation)
+        //{
+        //    return PartialView("_DamageCalculate", damagecalculation);
+        //}
+
     }
 }

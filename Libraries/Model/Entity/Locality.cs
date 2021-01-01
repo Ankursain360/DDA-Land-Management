@@ -10,8 +10,8 @@ namespace Libraries.Model.Entity
     {
         public Locality()
         {
-            
 
+            Damagecalculation = new HashSet<Damagecalculation>();
             Booktransferland = new HashSet<Booktransferland>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Watchandward = new HashSet<Watchandward>();
@@ -64,7 +64,6 @@ namespace Libraries.Model.Entity
         public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
 
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
-        [NotMapped]
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
     }
 }

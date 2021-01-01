@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Damagecalculation
+﻿@model Libraries.Model.Entity.DamageChargesCalculation
 @{int rowNo = 0,rowNo2=0; }
 <h3 class="my-3 d-flex sub-heading">Details</h3>
 <div class="row">
@@ -33,7 +33,7 @@
                             <tr>
                                 <td>@(rowNo += 1)</td>
                                 <td>@item</td>
-                                <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                <td>@(item.StartDate == null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
                                 <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
                                 <td>@item.Rate</td>
                                 <td>@item.Area</td>
