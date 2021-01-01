@@ -9,21 +9,6 @@
         $('#ApprovalStatus option').filter(function () {
             return $.inArray($(this).val(), response) == -1
         }).remove();
-        //$('#ApprovalStatus option').each(function () {
-        //    //var Case = true;
-        //    //if (response.length > 0) {
-        //    //    for (var i = 0; i < response.length; i++) {
-        //    //        if (Case == true) {
-        //    //            if (response[i] == $(this).val()) {
-        //    //                Case = false;
-        //    //            }
-        //    //            else {
-        //    //                $(this).remove();
-        //    //            }
-        //    //        }
-        //    //    }
-        //    //}
-        //});
         callSelect2();
     });
 

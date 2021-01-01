@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
         {
             Interest = new HashSet<Interest>();
             Rate = new HashSet<Rate>();
+            Damagecalculation = new HashSet<Damagecalculation>();
         }
         public string Name { get; set; }
         public byte IsActive { get; set; }

@@ -1,25 +1,8 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
-
-        .success {
-            color: #28a745;
-        }
-    </style>*@
-
 <br />
-
 <br />
-
 <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" id="myForm" enctype="multipart/form-data" autocomplete="off">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
