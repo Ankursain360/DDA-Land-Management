@@ -117,7 +117,8 @@ namespace Libraries.Model
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
         public virtual DbSet<Caseyear> Caseyear { get; set; }
-
+        public virtual DbSet<Courttype> Courttype { get; set; }
+        public virtual DbSet<Casestatus> Casestatus { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         //**********  File Loading **********
         public virtual DbSet<Almirah> Almirah { get; set; }

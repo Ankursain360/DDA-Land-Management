@@ -13,6 +13,12 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("legalmanagementsystem", "lms");
 
+            builder.HasIndex(e => e.CaseStatusId)
+                .HasName("LegalCaseStatusId_idx");
+
+            builder.HasIndex(e => e.CourtTypeId)
+                .HasName("legalCourttypeId_idx");
+
             builder.HasIndex(e => e.Id)
                 .HasName("Id_UNIQUE")
                 .IsUnique();
@@ -25,7 +31,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.CaseStatus).HasColumnType("int(11)");
+            builder.Property(e => e.CaseStatusId).HasColumnType("int(11)");
 
             builder.Property(e => e.CaseType).HasColumnType("int(11)");
 
@@ -39,7 +45,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.CourtType).HasColumnType("int(11)");
+            builder.Property(e => e.CourtTypeId).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -98,6 +104,16 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.CaseStatus)
+                .WithMany(p => p.Legalmanagementsystem)
+                .HasForeignKey(d => d.CaseStatusId)
+                .HasConstraintName("LegalCaseStatusId");
+
+            builder.HasOne(d => d.CourtType)
+                .WithMany(p => p.Legalmanagementsystem)
+                .HasForeignKey(d => d.CourtTypeId)
+                .HasConstraintName("Legalcourttypeid");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Legalmanagementsystem)
