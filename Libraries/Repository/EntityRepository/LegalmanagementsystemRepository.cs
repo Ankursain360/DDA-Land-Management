@@ -23,6 +23,18 @@ namespace Libraries.Repository.EntityRepository
             var zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
             return zoneList;
         }
+        
+        public async Task<List<Casestatus>> GetCasestatusList(int id)
+        {
+            var casestatusList = await _dbContext.Casestatus.Where(x => x.IsActive == 1).ToListAsync();
+            return casestatusList;
+        }
+        public async Task<List<Courttype>> GetCourttypeList(int id)
+        {
+            var courttypeList = await _dbContext.Courttype.Where(x => x.IsActive == 1).ToListAsync();
+            return courttypeList;
+        }
+
         public async Task<List<Locality>> GetLocalityList(int zoneId)
         {
             List<Locality> localityList = await _dbContext.Locality.Where(x => x.ZoneId == zoneId && x.IsActive == 1).ToListAsync();
@@ -51,8 +63,8 @@ namespace Libraries.Repository.EntityRepository
                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
                     && (x.Id == (model.CaseNo == 0 ? x.Id : model.CaseNo))
                     && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))
-                    //&& (x.CourtType == (model.CourtType == 0 ? x.CourtType : model.CourtType))
-                    //&& (x.CaseStatus == (model.CaseStatus == 0 ? x.CaseStatus : model.CaseStatus))
+                    && (x.CourtTypeId == (model.CourtType == 0 ? x.CourtTypeId : model.CourtType))
+                    && (x.CaseStatusId == (model.CaseStatus == 0 ? x.CaseStatusId : model.CaseStatus))
                     && (x.ZoneId == (model.Zone == 0 ? x.ZoneId : model.Zone))
                     && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                     && (x.StayInterimGranted == (model.StayInterimGranted == 0 ? x.StayInterimGranted : model.StayInterimGranted))
