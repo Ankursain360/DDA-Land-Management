@@ -156,6 +156,7 @@ namespace Libraries.Model
         public virtual DbSet<Resratelisttypea> Resratelisttypea { get; set; }
         public virtual DbSet<Resratelisttypeb> Resratelisttypeb { get; set; }
         public virtual DbSet<Resratelisttypec> Resratelisttypec { get; set; }
+        public virtual DbSet<Demandletter> Demandletter { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -274,6 +275,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ResRateListTypeBConfiguration());
             modelBuilder.ApplyConfiguration(new ResRateListTypeCConfiguration());
 
+            modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
