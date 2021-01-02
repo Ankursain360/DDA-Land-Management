@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         }
 
        
-        public string CaseStatus1 { get; set; }
+        public string CaseStatus { get; set; }
         public byte? IsActive { get; set; }
        
 

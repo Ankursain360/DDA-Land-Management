@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         }
 
       
-        public string CourtType1 { get; set; }
+        public string CourtType { get; set; }
         public byte? IsActive { get; set; }
       
 
