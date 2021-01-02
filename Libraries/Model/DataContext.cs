@@ -119,6 +119,12 @@ namespace Libraries.Model
         public virtual DbSet<Caseyear> Caseyear { get; set; }
 
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+        //**********  File Loading **********
+        public virtual DbSet<Almirah> Almirah { get; set; }
+        public virtual DbSet<Row> Row { get; set; }
+        public virtual DbSet<Column> Column { get; set; }
+
+        public virtual DbSet<Bundle> Bundle { get; set; }
         //**********  Damage Payee **********
 
         public virtual DbSet<Allottetype> Allottetype { get; set; }
