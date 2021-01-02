@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
     public class DamageChargesCalculation 
     {
         public decimal? Area { get; set; }
-        public int? Months { get; set; }
+        public string Months { get; set; }
         public decimal? DamageCharges { get; set; }
         public decimal? Compunding { get; set; }
 
