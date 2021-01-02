@@ -24,12 +24,12 @@ namespace Libraries.Repository.EntityRepository
             return zoneList;
         }
         
-        public async Task<List<Casestatus>> GetCasestatusList(int id)
+        public async Task<List<Casestatus>> GetCasestatusList()
         {
             var casestatusList = await _dbContext.Casestatus.Where(x => x.IsActive == 1).ToListAsync();
             return casestatusList;
         }
-        public async Task<List<Courttype>> GetCourttypeList(int id)
+        public async Task<List<Courttype>> GetCourttypeList()
         {
             var courttypeList = await _dbContext.Courttype.Where(x => x.IsActive == 1).ToListAsync();
             return courttypeList;
@@ -58,8 +58,10 @@ namespace Libraries.Repository.EntityRepository
         {
           
                 var data = await _dbContext.Legalmanagementsystem
-                    .Include(x => x.Zone)
-                    .Include(x => x.Locality)
+                                            .Include(x => x.CaseStatus)
+                                            .Include(x => x.CourtType)
+                                            .Include(x => x.Locality)
+                                            .Include(x => x.Zone)
                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
                     && (x.Id == (model.CaseNo == 0 ? x.Id : model.CaseNo))
                     && (x.ContemptOfCourt == (model.ContemptOfCourt == 0 ? x.ContemptOfCourt : model.ContemptOfCourt))

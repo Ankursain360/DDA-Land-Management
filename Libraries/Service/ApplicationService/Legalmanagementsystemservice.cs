@@ -37,15 +37,15 @@ namespace Service.ApplicationService
         }
 
        
-        public async Task<List<Casestatus>> GetCasestatusList(int id)
+        public async Task<List<Casestatus>> GetCasestatusList()
         {
-            List<Casestatus> casestatusList = await _legalmanagementsystemRepository.GetCasestatusList(id);
+            List<Casestatus> casestatusList = await _legalmanagementsystemRepository.GetCasestatusList();
             return casestatusList;
         }
 
-        public async Task<List<Courttype>> GetCourttypeList(int id)
+        public async Task<List<Courttype>> GetCourttypeList()
         {
-            List<Courttype> courttypeList = await _legalmanagementsystemRepository.GetCourttypeList(id);
+            List<Courttype> courttypeList = await _legalmanagementsystemRepository.GetCourttypeList();
             return courttypeList;
         }
 
