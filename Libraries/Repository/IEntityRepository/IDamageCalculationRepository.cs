@@ -13,5 +13,7 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<PropertyType>> GetPropertyType();
         Task<List<Locality>> GetLocalities();
+        Task<Encrochmenttype> FetchResultEncroachmentType(DateTime date1);
+        Task<Resratelisttypea> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId);
     }
 }

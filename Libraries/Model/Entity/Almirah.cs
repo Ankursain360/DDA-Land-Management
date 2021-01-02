@@ -1,0 +1,17 @@
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Libraries.Model.Entity
+{
+    public class Almirah : AuditableEntity<int>
+    {
+        [Required(ErrorMessage = "Almirah No is Mandatory Field")]
+        public string AlmirahNo { get; set; }
+     
+        public byte? IsActive { get; set; }
+    }
+}

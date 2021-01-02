@@ -117,8 +117,15 @@ namespace Libraries.Model
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
         public virtual DbSet<Caseyear> Caseyear { get; set; }
-
+        public virtual DbSet<Courttype> Courttype { get; set; }
+        public virtual DbSet<Casestatus> Casestatus { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+        //**********  File Loading **********
+        public virtual DbSet<Almirah> Almirah { get; set; }
+        public virtual DbSet<Row> Row { get; set; }
+        public virtual DbSet<Column> Column { get; set; }
+
+        public virtual DbSet<Bundle> Bundle { get; set; }
         //**********  Damage Payee **********
 
         public virtual DbSet<Allottetype> Allottetype { get; set; }
@@ -145,8 +152,10 @@ namespace Libraries.Model
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
         public virtual DbSet<Processworkflow> Processworkflow { get; set; }
         public virtual DbSet<Workflowaction> Workflowaction { get; set; }
-        public virtual DbSet<Demandletter> Demandletter { get; set; }
-
+        public virtual DbSet<Encrochmenttype> Encrochmenttype { get; set; }
+        public virtual DbSet<Resratelisttypea> Resratelisttypea { get; set; }
+        public virtual DbSet<Resratelisttypeb> Resratelisttypeb { get; set; }
+        public virtual DbSet<Resratelisttypec> Resratelisttypec { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -260,8 +269,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
             modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
-            modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
-
+            modelBuilder.ApplyConfiguration(new EncrochmentTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeAConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeBConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeCConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

@@ -22,6 +22,8 @@ namespace CourtCasesManagement.Controllers
 
         async Task BindDropDownView(Legalmanagementsystem legalmanagementsystem)
         {
+            legalmanagementsystem.CasestatusList = await _legalmanagementsystemservice.GetCasestatusList();
+            legalmanagementsystem.CourttypeList = await _legalmanagementsystemservice.GetCourttypeList();
             legalmanagementsystem.ZoneList = await _legalmanagementsystemservice.GetZoneList();
             legalmanagementsystem.FileNoList = await _legalmanagementsystemservice.GetFileNoList();
         }
