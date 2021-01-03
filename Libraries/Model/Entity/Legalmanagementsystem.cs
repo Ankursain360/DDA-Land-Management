@@ -8,7 +8,7 @@ namespace Libraries.Model.Entity
 {
     public partial class Legalmanagementsystem : AuditableEntity<int>
     {
-       
+
         public string FileNo { get; set; }
         public string CourtCaseNo { get; set; }
         public string CourtCaseTitle { get; set; }
@@ -16,8 +16,8 @@ namespace Libraries.Model.Entity
         public DateTime? HearingDate { get; set; }
         public DateTime? NextHearingDate { get; set; }
         public int? ContemptOfCourt { get; set; }
-        public int? CourtType { get; set; }
-        public int? CaseStatus { get; set; }
+        public int? CourtTypeId { get; set; }
+        public int? CaseStatusId { get; set; }
         public string LastDecision { get; set; }
         public int? ZoneId { get; set; }
         public int? LocalityId { get; set; }
@@ -33,10 +33,17 @@ namespace Libraries.Model.Entity
         public string DocumentFilePath { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
-      
 
+        public Casestatus CaseStatus { get; set; }
+        public Courttype CourtType { get; set; }
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
+
+
+        [NotMapped]
+        public List<Casestatus> CasestatusList { get; set; }
+        [NotMapped]
+        public List<Courttype> CourttypeList { get; set; }
 
         [NotMapped]
         public List<Zone> ZoneList { get; set; }

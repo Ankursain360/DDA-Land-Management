@@ -35,7 +35,20 @@ namespace Service.ApplicationService
             List<Locality> localityList = await _legalmanagementsystemRepository.GetLocalityList(zoneId);
             return localityList;
         }
+
        
+        public async Task<List<Casestatus>> GetCasestatusList()
+        {
+            List<Casestatus> casestatusList = await _legalmanagementsystemRepository.GetCasestatusList();
+            return casestatusList;
+        }
+
+        public async Task<List<Courttype>> GetCourttypeList()
+        {
+            List<Courttype> courttypeList = await _legalmanagementsystemRepository.GetCourttypeList();
+            return courttypeList;
+        }
+
         public async Task<List<Legalmanagementsystem>> GetFileNoList()   
         {
             List<Legalmanagementsystem> fileNoList = await _legalmanagementsystemRepository.GetFileNoList();
