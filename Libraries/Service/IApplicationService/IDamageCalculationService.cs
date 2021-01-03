@@ -13,5 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<PropertyType>> GetPropertyTypes();
         Task<List<Locality>> GetLocalities();
+        Task<Encrochmenttype> FetchResultEncroachmentType(DateTime date1);
+        Task<Resratelisttypea> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId);
     }
 }
