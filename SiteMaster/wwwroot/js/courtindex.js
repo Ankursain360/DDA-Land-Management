@@ -4,7 +4,17 @@ var currentPageSize = 10;
 $(document).ready(function () {
     GetDepartment(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetDepartment(currentPageNumber, currentPageSize);
+});
 
+$("#btnReset").click(function () {
+   
+    $('#txtName').val('');
+    $('#txtAddress').val('');
+    $('#txtPhoneno').val('')
+    GetDepartment(currentPageNumber, currentPageSize);
+});
 function GetDepartment(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/Court/List`, 'html', param, function (response) {
@@ -14,10 +24,19 @@ function GetDepartment(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
+    //var model = {
+    //    name: "test",
+    //    pageSize: pageSize,
+    //    pageNumber: pageNumber
+    //}
+    //return model;
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        address: $('#txtAddress').val(),
+        phoneno: $('#txtPhoneno').val(),
+       
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

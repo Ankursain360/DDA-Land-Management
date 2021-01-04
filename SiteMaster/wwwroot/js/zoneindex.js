@@ -4,6 +4,15 @@ var currentPageSize = 10;
 $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('')
+    GetDetails(currentPageNumber, currentPageSize);
+});
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -18,11 +27,19 @@ function GetDetails(pageNumber, pageSize) {
     //}
 }
 
+//function GetSearchParam(pageNumber, pageSize) {
+//    var model = {
+//        name: "test",
+//        pageSize: pageSize,
+//        pageNumber: pageNumber
+//    }
+//    return model;
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        code: $('#txtCode').val(),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

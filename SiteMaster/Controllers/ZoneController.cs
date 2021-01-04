@@ -162,20 +162,31 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-           
+
+            //var result = await _zoneService.Delete(id);
+            //if (result == true)
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            //    var result1 = await _zoneService.GetAllDetails();
+            //    return View("Index", result1);
+            //}
+            //else
+            //{
+            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //    var result1 = await _zoneService.GetAllDetails();
+            //    return View("Index", result1);
+            //}
             var result = await _zoneService.Delete(id);
             if (result == true)
             {
                 ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                var result1 = await _zoneService.GetAllDetails();
-                return View("Index", result1);
             }
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                var result1 = await _zoneService.GetAllDetails();
-                return View("Index", result1);
             }
+            return RedirectToAction("Index", "Zone");
+
         }
 
         public async Task<IActionResult> View(int id)
