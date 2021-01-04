@@ -238,6 +238,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
+            modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
 
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 
