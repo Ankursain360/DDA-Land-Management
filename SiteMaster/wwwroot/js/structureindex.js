@@ -5,6 +5,16 @@ $(document).ready(function () {
     GetStructure(currentPageNumber, currentPageSize);
 });
 
+$("#btnSearch").click(function () {
+    GetStructure(currentPageNumber, currentPageSize);
+});
+
+$("#btnReset").click(function () {
+   
+    $('#txtName').val('');
+  
+    GetStructure(currentPageNumber, currentPageSize);
+});
 function GetStructure(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/Structure/List`, 'html', param, function (response) {
@@ -15,9 +25,11 @@ function GetStructure(pageNumber, pageSize) {
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+       // name: "test",
+        name: $('#txtName').val(),
+       
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

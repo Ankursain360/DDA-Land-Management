@@ -19,14 +19,28 @@ namespace Libraries.Repository.EntityRepository
         { }
         public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
         {
-            return await _dbContext.Division
-                        .Include(x => x.Zone)
-                        .Include(x => x.Department)
-                            .Where(x => x.IsActive == 1)
-                            .OrderBy(s => s.Department.Name)
-                            .ThenBy(s => s.Zone.Name)
-                            .ThenBy(s => s.Name)
-                        .GetPaged<Division>(model.PageNumber, model.PageSize);
+           
+            try
+            {
+                return await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                                        )
+
+                                .OrderBy(s => s.Department.Name)
+
+                                .ThenBy(s => s.Zone.Name)
+                                .ThenBy(s => s.Name)
+                                 .ThenByDescending(s => s.IsActive)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
         public async Task<List<Division>> GetDivisions()
         {

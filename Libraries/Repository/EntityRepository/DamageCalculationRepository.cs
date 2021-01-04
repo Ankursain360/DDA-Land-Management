@@ -32,25 +32,35 @@ namespace Libraries.Repository.EntityRepository
         public async Task<Encrochmenttype> FetchResultEncroachmentType(DateTime date1)
         {
             return await  _dbContext.Encrochmenttype
-                                .Where(x => x.EncroachStartDate >= date1 && x.EncroachEndDate <= date1)
+                                .Where(x => x.EncroachStartDate <= date1 && x.EncroachEndDate >= date1)
                                 .FirstOrDefaultAsync();
         }
-        public async Task<Resratelisttypea> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
+        public async Task<List<Resratelisttypea>> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
         {
             return await _dbContext.Resratelisttypea
-                                    .Where(x => x.StartDate >= date1 && x.EndDate <= date1
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
                                     && subEncroachersId.Contains(x.SubEncroachId)
                                     && x.ColonyId == Convert.ToInt32(localityId)
                                     )
-                                    .FirstOrDefaultAsync();
+                                    .ToListAsync();
         }
-        public async Task<List<Classificationofland>> GetClassificationOfLandDropDownListMOR()
+        public async Task<List<Resratelisttypeb>> RateListTypeB(DateTime date1, string localityId, int[] subEncroachersId)
         {
-            var badCodes = new[] { 3, 5 };
-            List<Classificationofland> ClassificationoflandList = await _dbContext.Classificationofland
-                                                                        .Where(x => x.IsActive == 1 && badCodes.Contains(x.Id))
-                                                                        .ToListAsync();
-            return ClassificationoflandList;
+            return await _dbContext.Resratelisttypeb
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
+                                    && subEncroachersId.Contains(x.SubEncroachId)
+                                    && x.ColonyId == Convert.ToInt32(localityId)
+                                    )
+                                    .ToListAsync();
+        }
+        public async Task<List<Resratelisttypec>> RateListTypeC(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Resratelisttypec
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
+                                    && subEncroachersId.Contains(x.SubEncroachId)
+                                    && x.ColonyId == Convert.ToInt32(localityId)
+                                    )
+                                    .ToListAsync();
         }
     }
 }

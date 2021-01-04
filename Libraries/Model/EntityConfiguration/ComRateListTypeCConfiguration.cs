@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Model.EntityConfiguration
 {
-    public class ResRateListTypeBConfiguration : IEntityTypeConfiguration<Resratelisttypeb>
+    public class ComRateListTypeCConfiguration : IEntityTypeConfiguration<Comratelisttypec>
     {
-        public void Configure(EntityTypeBuilder<Resratelisttypeb> builder)
+        public void Configure(EntityTypeBuilder<Comratelisttypec> builder)
         {
-            builder.ToTable("resratelisttypeb", "lms");
+            builder.ToTable("comratelisttypec", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -22,7 +22,7 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Rate).HasColumnType("decimal(20,2)");
+            builder.Property(e => e.Rate).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.SubEncroachId).HasColumnType("int(11)");
         }
