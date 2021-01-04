@@ -7,7 +7,7 @@
 <div class="pt-3">
 
     <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+        <h3 class="mb-3 d-flex">Edit Details</h3>
         <h3 class="my-3 d-flex sub-heading">By File Name</h3>
         <div class="row">
             <div class="form-group col-md-6">
@@ -21,31 +21,6 @@
 
 
 
-
-            @*  <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">File No <span style="color:red">*</span></label>
-                    <select class="form-control" required="required" id="file_id" asp-items="@(new SelectList(Model.DamageList,"Id","FileNo"))">
-                        <option value="">Select</option>
-                    </select>
-                </div>*@
-
-
-
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Date of Encroachment" type="Date"
-                           class="floating-label-field floating-label-field--s3" disabled />
-                    <span class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label"> Generate Date <span style="color:red">*</span></label>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="row">
-
-
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input placeholder="Date of Encroachment" type="text" asp-for="Name"
@@ -56,10 +31,11 @@
             </div>
 
 
+        </div>
 
 
 
-
+        <div class="row">
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -69,12 +45,6 @@
                     <label class="floating-label"> Address <span style="color:red">*</span></label>
                 </div>
             </div>
-        </div>
-
-
-
-        <div class="row">
-
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -85,11 +55,11 @@
                 </div>
             </div>
 
+        </div>
 
 
 
-
-
+        <div class="row">
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -99,10 +69,6 @@
                     <label class="floating-label"> Area <span style="color:red">*</span></label>
                 </div>
             </div>
-        </div>
-        <div class="row">
-
-
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input placeholder="Date of Encroachment" type="text"
@@ -112,12 +78,8 @@
                 </div>
             </div>
 
-
-
-
         </div>
-
-
+        
         <div class="row pt-3">
             <div class="col-md-12">
                 <input type="submit" value="Update" class="btn btn-theme " />

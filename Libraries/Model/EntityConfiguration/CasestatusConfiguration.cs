@@ -16,7 +16,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.CaseStatus1)
+            builder.Property(e => e.CaseStatus)
                 .HasColumnName("CaseStatus")
                 .HasMaxLength(100)
                 .IsUnicode(false);
