@@ -1,40 +1,31 @@
-﻿var currentPageNumber = 1;
-var currentPageSize = 10;
-
+﻿
 $(document).ready(function () {
-    GetDetails(currentPageNumber, currentPageSize);
+    GetInterest();
+});
+$("#btnSearch").click(function () {
+    GetInterest();
 });
 
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+$("#btnReset").click(function () {
+    $('#txtProperty').val('');
+    GetInterest();
+});
+
+function GetInterest() {
+    var param = GetSearchParam();
     HttpPost(`/Interest/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 
-    ////if ($('table >tbody >tr').length <= 1) {
-    ////    GetDetails(1, $("#ddlPageSize option:selected").val());
-    ////}
+
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam() {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
-    }
+        name: "interest",
+        property: $('#txtProperty').val()
+    };
     return model;
-}
-
-function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDetails(pageNo, currentPageSize);
-    currentPageNumber = pageNo;
-}
-
-function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetDetails(currentPageNumber, pageSize);
-    currentPageSize = pageSize;
 }
 

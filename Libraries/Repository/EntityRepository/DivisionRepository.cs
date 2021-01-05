@@ -29,11 +29,11 @@ namespace Libraries.Repository.EntityRepository
                                       && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
                                         )
 
-                                .OrderBy(s => s.Department.Name)
-
+                                .OrderByDescending(s =>s.IsActive )
+                                .ThenBy(s => s.Department.Name)
                                 .ThenBy(s => s.Zone.Name)
                                 .ThenBy(s => s.Name)
-                                 .ThenByDescending(s => s.IsActive)
+                                
                             .GetPaged<Division>(model.PageNumber, model.PageSize);
             }
             catch (Exception ex)

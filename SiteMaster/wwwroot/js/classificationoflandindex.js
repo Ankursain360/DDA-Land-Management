@@ -13,17 +13,26 @@ function GetDetails(pageNumber, pageSize) {
         $('#divTable').html(response);
     });
 
-    if ($('table >tbody >tr').length <= 1) {
-        GetDetails(1, $("#ddlPageSize option:selected").val());
-    }
+    //if ($('table >tbody >tr').length <= 1) {
+    //    GetDetails(1, $("#ddlPageSize option:selected").val());
+    //}
 }
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize);
+});
+$("#btnReset").click(function () {
+    $("#txtName").val('');
+    GetDetails(currentPageNumber, currentPageSize);
+});
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
+        //name: "test",
+        name: $('#txtName').val(),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
+    //debugger
     return model;
 }
 

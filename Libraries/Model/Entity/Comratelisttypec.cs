@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         public int? ColonyId { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public int? SubEncroachId { get; set; }
+        public int SubEncroachId { get; set; }
         public decimal? Rate { get; set; }
         public byte IsActive { get; set; }
     }

@@ -62,5 +62,82 @@ namespace Libraries.Repository.EntityRepository
                                     )
                                     .ToListAsync();
         }
+
+        public async Task<List<Resratelisttypeb>> RateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Resratelisttypeb
+                                   .Where(x => ((x.StartDate <= dateTimeSpecific && x.EndDate >= dateTimeSpecific)
+                                   || (x.StartDate <= date1 && x.EndDate >= date1))
+                                   && (subEncroachersId.Contains(x.SubEncroachId))
+                                   && (x.ColonyId == Convert.ToInt32(localityId))
+                                   )
+                                   .ToListAsync();
+        }
+
+        public async Task<List<Resratelisttypea>> RateListTypeASpecific(DateTime specificDateTime, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Resratelisttypea
+                                    .Where(x => ((x.StartDate <= specificDateTime && x.EndDate >= specificDateTime)
+                                   || (x.StartDate <= date1 && x.EndDate >= date1))
+                                   && (subEncroachersId.Contains(x.SubEncroachId))
+                                   && (x.ColonyId == Convert.ToInt32(localityId))
+                                   )
+                                   .ToListAsync();
+        }
+
+        public async Task<Comencrochmenttype> FetchResultCOMEncroachmentType(DateTime date1)
+        {
+            return await _dbContext.Comencrochmenttype
+                               .Where(x => x.EncroachStartDate <= date1 && x.EncroachEndDate >= date1)
+                               .FirstOrDefaultAsync();
+        }
+        public async Task<List<Comratelisttypea>> ComRateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Comratelisttypea
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
+                                    && subEncroachersId.Contains(x.SubEncroachId)
+                                    && x.ColonyId == Convert.ToInt32(localityId)
+                                    )
+                                    .ToListAsync();
+        }
+        public async Task<List<Comratelisttypeb>> ComRateListTypeB(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Comratelisttypeb
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
+                                    && subEncroachersId.Contains(x.SubEncroachId)
+                                    && x.ColonyId == Convert.ToInt32(localityId)
+                                    )
+                                    .ToListAsync();
+        }
+        public async Task<List<Comratelisttypec>> ComRateListTypeC(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Comratelisttypec
+                                    .Where(x => x.StartDate <= date1 && x.EndDate >= date1
+                                    && subEncroachersId.Contains(x.SubEncroachId)
+                                    && x.ColonyId == Convert.ToInt32(localityId)
+                                    )
+                                    .ToListAsync();
+        }
+        public async Task<List<Comratelisttypeb>> ComRateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Comratelisttypeb
+                                   .Where(x => ((x.StartDate <= dateTimeSpecific && x.EndDate >= dateTimeSpecific)
+                                   || (x.StartDate <= date1 && x.EndDate >= date1))
+                                   && (subEncroachersId.Contains(x.SubEncroachId))
+                                   && (x.ColonyId == Convert.ToInt32(localityId))
+                                   )
+                                   .ToListAsync();
+        }
+
+        public async Task<List<Comratelisttypea>> ComRateListTypeASpecific(DateTime specificDateTime, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _dbContext.Comratelisttypea
+                                    .Where(x => ((x.StartDate <= specificDateTime && x.EndDate >= specificDateTime)
+                                   || (x.StartDate <= date1 && x.EndDate >= date1))
+                                   && (subEncroachersId.Contains(x.SubEncroachId))
+                                   && (x.ColonyId == Convert.ToInt32(localityId))
+                                   )
+                                   .ToListAsync();
+        }
     }
 }

@@ -13,12 +13,19 @@ function GetDemolitionprogrammaster(pageNumber, pageSize) {
     });
 
 }
-
+$("#btnSearch").click(function () {
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize);
+});
+$("#btnReset").click(function () {
+    $("#txtName").val('');
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize);
+});
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
+       // name: "test",
+        name: $('#txtName').val(),
+        pageSize: pageSize,
+        pageNumber: pageNumber
     }
     return model;
 }
