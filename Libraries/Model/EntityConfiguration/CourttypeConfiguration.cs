@@ -16,7 +16,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.CourtType1)
+            builder.Property(e => e.CourtType)
                 .HasColumnName("CourtType")
                 .HasMaxLength(100)
                 .IsUnicode(false);

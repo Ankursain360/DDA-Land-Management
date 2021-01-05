@@ -63,5 +63,14 @@ namespace Service.ApplicationService
         {
             return await _legalmanagementsystemRepository.GetPagedLegalReport(model);
         }
+        public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
+        {
+            return await _legalmanagementsystemRepository.GetLegalmanagementsystemReportData(hearingReportSearchDto);
+        }
+        public async Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList()
+        {
+            List<Legalmanagementsystem> legalmanagementsytemlist = await _legalmanagementsystemRepository.GetLegalmanagementsystemList();
+            return legalmanagementsytemlist;
+        }
     }
 }

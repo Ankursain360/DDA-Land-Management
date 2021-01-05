@@ -29,8 +29,8 @@ function GetSearchParam(pageNumber, pageSize) {
     var fileNo = $('#Id option:selected').val();
     var CaseNo = $('#CaseNO option:selected').val();
     var ContemptOfCourt = $('#ContemptOfCourt option:selected').val();
-    var CourtType = $('#CourtType option:selected').val();
-    var CaseStatus = $('#CaseStatus option:selected').val();
+    var CourtType = $('#CourtTypeId option:selected').val();
+    var CaseStatus = $('#CaseStatusId option:selected').val();
     var Zone = $('#ZoneId option:selected').val();
     var Locality = $('#LocalityId option:selected').val();
     var StayInterimGranted = $('#StayInterimGranted option:selected').val();

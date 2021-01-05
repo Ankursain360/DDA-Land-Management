@@ -1,0 +1,57 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Legalmanagementsystem>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+            <th>Sr.No</th>
+            <th>Legal File No </th>
+            <th>Case No </th>
+            <th>Case Title </th>
+            <th>Subject</th>
+            <th>Hearing Date</th>
+            <th>Next Date of Hearing(NDOH)</th>
+            <th>Case Type</th>
+            <th>In Favour</th>
+            <th>Panel Laywer</th>
+            <th>Stay Interim Granted</th>
+            <th>Judgement</th>
+            <th>Remarks</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+
+                    <td>@item.FileNo</td>
+                    @*<td>@item.FileNo.Distinct()</td>*@
+                    <td>@item.CourtCaseNo</td>
+                    <td>@item.CourtCaseTitle</td>
+                    <td>@item.Subject</td>
+                    <td>@item.HearingDate</td>
+                    <td>@item.NextHearingDate</td>
+                    <td>@item.CaseType</td>
+                    <td>@item.InFavour</td>
+                    <td>@item.PanelLawyer</td>
+                    <td>@item.StayInterimGranted</td>
+                    <td>@item.Judgement</td>
+                    <td>@item.Remarks</td>
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -39,8 +39,8 @@
             <td>@item.HearingDate</td>
             <td>@item.NextHearingDate</td>
             <td>@item.ContemptOfCourt</td>
-            <td>@item.CourtType</td>
-            <td>@item.CaseStatus</td>
+            <td>@item.CourtType.CourtType</td>
+            <td>@item.CaseStatus.CaseStatus</td>
             <td>@item.LastDecision</td>
             <td>@item.Zone.Name</td>
             <td>@item.Locality.Name</td>
@@ -58,7 +58,7 @@
         else
         {
             <tr>
-                <th colspan="14" style="text-align:center"> No Record Available! </th>
+                <th colspan="12" style="text-align:center"> No Record Available! </th>
             </tr>
         }
     </tbody>
