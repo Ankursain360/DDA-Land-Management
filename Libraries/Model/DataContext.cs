@@ -156,6 +156,12 @@ namespace Libraries.Model
         public virtual DbSet<Resratelisttypea> Resratelisttypea { get; set; }
         public virtual DbSet<Resratelisttypeb> Resratelisttypeb { get; set; }
         public virtual DbSet<Resratelisttypec> Resratelisttypec { get; set; }
+        public virtual DbSet<Comratelisttypea> Comratelisttypea { get; set; }
+        public virtual DbSet<Comratelisttypeb> Comratelisttypeb { get; set; }
+        public virtual DbSet<Comratelisttypec> Comratelisttypec { get; set; }
+        public virtual DbSet<Comsubencroacherstype> Comsubencroacherstype { get; set; }
+        public virtual DbSet<Ressubencroacherstype> Ressubencroacherstype { get; set; }
+        public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -273,7 +279,12 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ResRateListTypeAConfiguration());
             modelBuilder.ApplyConfiguration(new ResRateListTypeBConfiguration());
             modelBuilder.ApplyConfiguration(new ResRateListTypeCConfiguration());
-
+            modelBuilder.ApplyConfiguration(new ResSubEncroachersTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeAConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeBConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeCConfiguration());
+            modelBuilder.ApplyConfiguration(new ComSubEncroachersTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ComEncrochmentTypeConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

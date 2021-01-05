@@ -43,9 +43,17 @@ namespace Libraries.Service.ApplicationService
             return await _damgecalculationRepository.FetchResultEncroachmentType(date1);
         }
 
-        public async Task<Resratelisttypea> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
+        public async Task<List<Resratelisttypea>> RateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
         {
             return await _damgecalculationRepository.RateListTypeA(date1, localityId, subEncroachersId);
+        }
+        public async Task<List<Resratelisttypeb>> RateListTypeB(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.RateListTypeB(date1, localityId, subEncroachersId);
+        }
+        public async Task<List<Resratelisttypec>> RateListTypeC(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.RateListTypeC(date1, localityId, subEncroachersId);
         }
     }
 }

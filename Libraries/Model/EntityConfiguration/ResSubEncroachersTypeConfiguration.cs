@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Model.EntityConfiguration
 {
-    public class EncrochmentTypeConfiguration : IEntityTypeConfiguration<Encrochmenttype>
+    public class ResSubEncroachersTypeConfiguration : IEntityTypeConfiguration<Ressubencroacherstype>
     {
-        public void Configure(EntityTypeBuilder<Encrochmenttype> builder)
+        public void Configure(EntityTypeBuilder<Ressubencroacherstype> builder)
         {
-            builder.ToTable("encrochmenttype", "lms");
+            builder.ToTable("ressubencroacherstype", "lms");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
