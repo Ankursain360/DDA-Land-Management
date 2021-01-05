@@ -27,21 +27,21 @@ namespace SiteMaster.Controllers
             _rateService = rateService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var result = await _rateService.GetAllRate();
-            return View(result);
-        }
-
-        //public IActionResult Index()
+        //public async Task<IActionResult> Index()
         //{
-        //    return View();
+        //    var result = await _rateService.GetAllRate();
+        //    return View(result);
         //}
 
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RateSearchDto model)
+        public IActionResult Index()
         {
-            var result = await _rateService.GetPagedRate(model);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody]RateSearchDto model)
+        {
+            var result = await _rateService.GetSearchResult(model);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Rate rate)
