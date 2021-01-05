@@ -28,9 +28,24 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model)
         {
-            return await _dbContext.Landuse.Where(s => s.IsActive == 1).OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+
+            //string Data = model.name;
+            //if ((string.IsNullOrEmpty(model.name)))
+            //{
+            //    return await _dbContext.Landuse.Where(s => s.IsActive == 1).OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+
+            //}
+            //else
+            //{
+                return await _dbContext.Landuse.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                   .OrderBy(x => x.Id)
+                   .ThenByDescending(x => x.IsActive == 1)
+                   .ThenBy(x => x.Name)
+                   .GetPaged<Landuse>(model.PageNumber, model.PageSize);
+           // }
+        }
         }
     }
 
 
-}
+
