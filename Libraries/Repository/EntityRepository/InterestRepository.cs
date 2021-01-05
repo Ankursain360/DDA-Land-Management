@@ -108,6 +108,13 @@ namespace Libraries.Repository.EntityRepository
         {
             return _dbContext.Interest.Where(A => A.PropertyId == propertyId).Count();
         }
+       
+        public async Task<List<Interest>> GetSearchResult(InterestSearchDto model)
+        {
+            return (await _dbContext.Interest.Include(x => x.Property)
+                           .Where(x => x.Property.Name.ToUpper().Contains((model.property ?? "").ToUpper()))
+                           .ToListAsync()).GroupBy(x => x.PropertyId).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList();
+        }
     }
 
 

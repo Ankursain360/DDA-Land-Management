@@ -40,7 +40,7 @@ namespace Repository.EntityRepository
         {
             var data = await _dbContext.Roles
                            .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
-                           .OrderBy(s => s.IsActive ==1)
+                           .OrderByDescending(s => s.IsActive)
                        .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
             return data;
 

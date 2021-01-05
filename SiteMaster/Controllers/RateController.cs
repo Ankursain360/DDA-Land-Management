@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -32,7 +34,7 @@ namespace SiteMaster.Controllers
         //    var result = await _rateService.GetAllRate();
         //    return View(result);
         //}
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -48,6 +50,7 @@ namespace SiteMaster.Controllers
         {
             rate.PropertyTypeList = await _rateService.GetDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Rate rate = new Rate();
@@ -58,6 +61,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Rate rate)
         {
             try
@@ -93,7 +97,7 @@ namespace SiteMaster.Controllers
                 return View(rate);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _rateService.FetchSingleResult(id);
@@ -107,6 +111,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Rate rate)
         {
             await BindDropDown(rate);
