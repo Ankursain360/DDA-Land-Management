@@ -1,5 +1,6 @@
 ﻿using Dto.Search;
 using Libraries.Model;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
@@ -37,9 +38,15 @@ namespace Repository.EntityRepository
 
         public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
         {
-            var result = await _dbContext.Roles.
-                            GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
-            return result;
+            var data = await _dbContext.Roles
+                           .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderBy(s => s.IsActive ==1)
+                       .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+            return data;
+
+            //var result = await _dbContext.Roles.
+            //                GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+            //return result;
         }
 
         public async Task<List<Userprofile>> GetUser()
@@ -84,6 +91,12 @@ namespace Repository.EntityRepository
         public async Task<bool> ValidateUniqueUserName(int id, string userName)
         {
             return await _dbContext.Users.AnyAsync(t => t.Id != id && t.Name.ToLower() == userName.ToLower());
+        }
+
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
+            return zoneList;
         }
     }
 }

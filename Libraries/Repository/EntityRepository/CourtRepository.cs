@@ -24,6 +24,14 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Court>> GetPagedCourt(CourtSearchDto model)
         {
             return await _dbContext.Court.OrderByDescending(x => x.Id).GetPaged<Court>(model.PageNumber, model.PageSize);
+            //return await _dbContext.Court
+            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+            //                  && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+            //                  && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                           
+            //                .OrderByDescending(s => s.IsActive)
+
+            //            .GetPaged<Court>(model.PageNumber, model.PageSize);
         }
     }
 }

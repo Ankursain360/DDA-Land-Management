@@ -83,6 +83,23 @@ namespace Libraries.Repository.EntityRepository
                                  
 
         }
+        public async Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList()
+        {
+            var legalmanagementsytemlist = await _dbContext.Legalmanagementsystem.Where(x => x.IsActive == 1).ToListAsync();
+            return legalmanagementsytemlist;
+        }
+        public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
+        {
+            var data = await _dbContext.Legalmanagementsystem
+                    .Where(x => x.HearingDate >= hearingReportSearchDto.hearingDate
+                    && x.NextHearingDate <= hearingReportSearchDto.nextHearingDate)
+                    .OrderByDescending(x => x.Id)
+
+                    .GetPaged(hearingReportSearchDto.PageNumber, hearingReportSearchDto.PageSize);
+
+            return data;
+        }
+
 
     }
 }

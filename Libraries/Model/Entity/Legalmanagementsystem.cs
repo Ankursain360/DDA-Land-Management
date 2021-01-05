@@ -54,6 +54,8 @@ namespace Libraries.Model.Entity
         public List<Legalmanagementsystem> FileNoList { get; set; }
         [NotMapped]
         public List<Legalmanagementsystem> CourtCaseNoList { get; set; }
-       
+        [NotMapped]
+        public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
+
     }
 }

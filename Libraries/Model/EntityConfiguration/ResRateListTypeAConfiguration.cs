@@ -14,18 +14,13 @@ namespace Model.EntityConfiguration
 
             builder.Property(e => e.ColonyId).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedBy)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.EncroachId).HasColumnType("int(11)");
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.ModifiedBy)
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Rate).HasColumnType("decimal(20,2)");
 

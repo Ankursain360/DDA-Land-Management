@@ -20,7 +20,12 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Caseyear>> GetPagedCaseyear(CaseyearSearchDto model)
         {
-            return await _dbContext.Caseyear.OrderByDescending(x => x.Id).GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+            //return await _dbContext.Caseyear.OrderByDescending(x => x.Id).GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+            return await _dbContext.Caseyear
+            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderBy(s => s.Name)
+                            .OrderByDescending(s => s.IsActive)
+                             .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
         }
 
     }

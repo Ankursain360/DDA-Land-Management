@@ -204,5 +204,11 @@ namespace Service.ApplicationService
             _userProfileRepository.Edit(user);
             return await _unitOfWork.CommitAsync() > 0;
         }
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            List<Zone> zoneList = await _userProfileRepository.GetAllZone(departmentId);
+            return zoneList;
+        }
+
     }
 }
