@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.ApplicationService;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using SiteMaster.Filters;
 
 namespace SiteMaster.Controllers
 {
@@ -22,9 +24,10 @@ namespace SiteMaster.Controllers
         {
             _localityService = localityService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-           // List<Locality> list = await _localityService.GetAllLocality();
+           
             return View();
         }
 
@@ -34,6 +37,7 @@ namespace SiteMaster.Controllers
             var result = await _localityService.GetPagedLocality(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Locality model = new Locality();
@@ -43,6 +47,7 @@ namespace SiteMaster.Controllers
             return View(model);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Locality locality)
         {
             try
@@ -76,6 +81,7 @@ namespace SiteMaster.Controllers
                 return View(locality);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _localityService.FetchSingleResult(id);
@@ -101,6 +107,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Locality locality)
         {
             locality.DepartmentList = await _localityService.GetAllDepartment();

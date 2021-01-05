@@ -30,14 +30,21 @@ namespace Libraries.Repository.EntityRepository
                              && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
                               && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
                                && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
-                            .OrderBy(s => s.Department.Name)
+                            //.OrderBy(s => s.Department.Name)
+                            .OrderBy(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || s.LocalityCode.Contains(model.localityCode))
+                              && (string.IsNullOrEmpty(model.landmark) || s.Landmark.Contains(model.landmark))
+                               && (string.IsNullOrEmpty(model.address) || s.Address.Contains(model.address)))
                              .OrderByDescending(s => s.IsActive)
                             .ThenBy(s => s.Zone.Name)
                             .ThenBy(s => s.Division.Name)
                             .ThenBy(s => s.Name)
                         .GetPaged<Locality>(model.PageNumber, model.PageSize);
-        }
-        public async Task<List<Zone>> GetAllZone(int departmentId)
+           
+
+
+            }
+            public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             List<Zone> zoneList = await _dbContext.Zone.Where(x=>x.DepartmentId== departmentId && x.IsActive == 1).ToListAsync();
             return zoneList;

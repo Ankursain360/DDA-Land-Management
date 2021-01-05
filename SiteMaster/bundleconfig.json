@@ -90,12 +90,6 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/localityindex.min.js",
-    "inputFiles": [
-      "wwwroot/js/localityindex.js"
-    ]
-  },
-  {
     "outputFileName": "wwwroot/js/LocalityMaster.min.js",
     "inputFiles": [
       "wwwroot/js/LocalityMaster.js"
@@ -309,6 +303,12 @@
     "outputFileName": "wwwroot/js/permissionscreate.min.js",
     "inputFiles": [
       "wwwroot/js/permissionscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/localityindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/localityindex.js"
     ]
   }
 ]
