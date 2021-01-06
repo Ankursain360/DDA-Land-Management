@@ -23,15 +23,50 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Court>> GetPagedCourt(CourtSearchDto model)
         {
-            return await _dbContext.Court.OrderByDescending(x => x.Id).GetPaged<Court>(model.PageNumber, model.PageSize);
-            //return await _dbContext.Court
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                  && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
-            //                  && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
-                           
-            //                .OrderByDescending(s => s.IsActive)
+            //return await _dbContext.Court.OrderByDescending(x => x.Id).GetPaged<Court>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
 
-            //            .GetPaged<Court>(model.PageNumber, model.PageSize);
+                            .OrderByDescending(s => s.IsActive)
+
+                        .GetPaged<Court>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                   
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderBy(x => x.Address).ToList();
+                        break;
+                    case ("PHONENO"):
+                        data.Results = data.Results.OrderBy(x => x.PhoneNo).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                  
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderByDescending(x => x.Address).ToList();
+                        break;
+                    case ("PHONENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PhoneNo).ToList();
+                        break;
+                }
+            }
+            return data;
         }
     }
-}
+    }
+

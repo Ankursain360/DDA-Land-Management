@@ -21,11 +21,32 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Caseyear>> GetPagedCaseyear(CaseyearSearchDto model)
         {
             //return await _dbContext.Caseyear.OrderByDescending(x => x.Id).GetPaged<Caseyear>(model.PageNumber, model.PageSize);
-            return await _dbContext.Caseyear
+            var data = await _dbContext.Caseyear
             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
                             .OrderBy(s => s.Name)
                             .OrderByDescending(s => s.IsActive)
                              .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
     }
