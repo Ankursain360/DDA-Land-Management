@@ -30,19 +30,41 @@ namespace Libraries.Repository.EntityRepository
         {
 
             //string Data = model.name;
-            //if ((string.IsNullOrEmpty(model.name)))
-            //{
-            //    return await _dbContext.Landuse.Where(s => s.IsActive == 1).OrderBy(s => s.Id).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+            // string OrderAsc = conv(model.SortBy; //"NameAsc";
+            //string OrderDesc = model.SortOrder; //"NameDesc";
 
+
+            //if (Data == OrderAsc) //((model.SortBy =="Name") && (model.sortOrder =="Asc"))
+            //{
+            //    return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+            //        .OrderBy(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+
+            //}
+            //else if (Data==OrderDesc) //((model.SortBy == "Name") && (model.sortOrder == "Desc"))
+            //{ 
+            //    return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+            //        .OrderByDescending(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize); 
             //}
             //else
             //{
+            try
+            {
+                var modelorder = model.SortOrder.ToString();
+                var modelsort = model.SortBy.ToString();
+
                 return await _dbContext.Landuse.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-                   .OrderBy(x => x.Id)
+                   //.OrderBy(x => x.Id)
+                   .OrderBy(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
                    .ThenByDescending(x => x.IsActive == 1)
                    .ThenBy(x => x.Name)
                    .GetPaged<Landuse>(model.PageNumber, model.PageSize);
-           // }
+            }
+            catch(Exception ex)
+            {
+                return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                    .OrderByDescending(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+            }
+            // }
         }
         }
     }
