@@ -1,4 +1,8 @@
 ﻿
+var currentSortOrderAscending = 1;
+var currentSortOrderDescending = 2;
+
+
 $(document).ready(function () {
     GetInterest();
 });
@@ -28,4 +32,54 @@ function GetSearchParam() {
     };
     return model;
 }
+
+
+
+
+// ********** Sorting Code  **********
+
+
+function GetInterestOrderBy(order) {
+    var param = GetSearchParamaOrderby(order);
+    HttpPost(`/Interest/List`, 'html', param, function (response) {
+        $('#divTable').html("");
+        $('#divTable').html(response);
+    });
+
+}
+
+function Ascending() {
+    var value = $("#ddlSort").children("option:selected").val();
+   
+    if (value !== "0") {
+        GetInterestOrderBy(currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+function Descending() {
+    var value = $("#ddlSort").children("option:selected").val();
+
+    if (value !== "0") {
+        GetInterestOrderBy(currentSortOrderDescending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+
+
+function GetSearchParamaOrderby(sortOrder) {
+    var model = {
+
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+
+    }
+    return model;
+}
+
 

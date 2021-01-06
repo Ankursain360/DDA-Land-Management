@@ -1,6 +1,9 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
 
+var currentSortOrderAscending = 1;
+var currentSortOrderDescending = 2;
+
 $(document).ready(function () {
     GetUser(currentPageNumber, currentPageSize);
 });
@@ -49,4 +52,53 @@ function onPaging(pageNo) {
 function onChangePageSize(pageSize) {
     GetUser(currentPageNumber, pageSize);
     currentPageSize = pageSize;
+}
+
+
+
+
+// ********** Sorting Code  **********
+
+
+function GetUserOrderBy(pageNumber, pageSize, order) {
+    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+    HttpPost(`/usermanagement/List`, 'html', param, function (response) {
+        $('#divUser').html("");
+        $('#divUser').html(response);
+    });
+}
+
+function Ascending() {
+    var value = $("#ddlSort").children("option:selected").val();
+  
+    if (value !== "0") {
+        GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+function Descending() {
+    var value = $("#ddlSort").children("option:selected").val();
+  
+    if (value !== "0") {
+        GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+
+
+function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+    var model = {
+      
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
+    return model;
 }

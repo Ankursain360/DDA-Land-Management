@@ -19,10 +19,7 @@ namespace Libraries.Repository.EntityRepository
         { }
         public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
         {
-           
-            try
-            {
-                return await _dbContext.Division
+                var data = await _dbContext.Division
                             .Include(x => x.Zone)
                             .Include(x => x.Department)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
@@ -35,12 +32,34 @@ namespace Libraries.Repository.EntityRepository
                                 .ThenBy(s => s.Name)
                                 
                             .GetPaged<Division>(model.PageNumber, model.PageSize);
-            }
-            catch (Exception ex)
-            {
 
-                throw;
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        break;
+                }
             }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        break;
+                }
+            }
+            return data;
+
         }
         public async Task<List<Division>> GetDivisions()
         {

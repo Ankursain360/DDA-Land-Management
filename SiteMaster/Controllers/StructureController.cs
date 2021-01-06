@@ -33,6 +33,7 @@ namespace SiteMaster.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] StructureSearchDto model)
         {
+           
             var result = await _structureService.GetPagedStructure(model);
             return PartialView("_List", result);
         }
