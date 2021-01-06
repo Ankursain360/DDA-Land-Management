@@ -22,9 +22,9 @@ namespace DamagePayee.Controllers
         public IConfiguration _configuration;
 
         int GlobalRow = 0;
-        int IndxCounter2 = 0, DateChk2 = 0, CIntrst2 = 0 , Rmd2 = 0;
-        string rateStr = "" , str_lblCompoundTotal = "", str_lblCommrmnAmnt = "";
-        double grdDamageTotal = 0 , grdRemainTotal = 0 , grdRemainTotal_2 = 0 , grdCompoundTotal = 0;
+        int IndxCounter2 = 0, DateChk2 = 0, CIntrst2 = 0, Rmd2 = 0;
+        string rateStr = "", str_lblCompoundTotal = "", str_lblCommrmnAmnt = "";
+        double grdDamageTotal = 0, grdRemainTotal = 0, grdRemainTotal_2 = 0, grdCompoundTotal = 0;
         public DamageCalculatorController(IDamageCalculationService damagecalculationService, IConfiguration configuration)
         {
             _configuration = configuration;
@@ -68,29 +68,8 @@ namespace DamagePayee.Controllers
             else
             {
                 int yr = 0;
-                if (dto.FromDate.ToString() != "" && dto.ToDate.ToString() != "")
-                {
-                    yr = CalculateYearBetweenTwoDates(dto);
-                    SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
-                    //dttable = GetData_Grid_To_DataTable(Gridview2);
-                }
-                //else
-                //{
-                //    yr = CalculateYear();
-                //    SetInitialRow(yr);
-                //    dttable = GetData_Grid_To_DataTable(Gridview1);
-                //}
-                //gridInterest.DataSource = dttable;
-                //gridInterest.DataBind();
-
-                //tblfinalsubmit.Visible = true;
-                //btnFinalSubmit.Visible = true;
-
-
-                //damagecalculation.Add(new DamageChargesCalculation
-                //{
-                //    StartDate = DateTime.Now
-                //});
+                yr = CalculateYearBetweenTwoDates(dto);
+                SetInitialRowBetweenTwoDates(yr, dto, damagecalculation);
             }
 
             return PartialView("_DamageCalculate", damagecalculation);
@@ -254,13 +233,6 @@ namespace DamagePayee.Controllers
                     }
                     //----Month----
                     listMonth = (CalMonth(listFromDate, listToDate)).ToString();
-                    //damagecalculation.Add(new DamageChargesCalculation
-                    //{
-                    //    StartDate = Convert.ToDateTime(listFromDate),
-                    //    EndDate = Convert.ToDateTime(listToDate),
-                    //    Area = Convert.ToDecimal(dto.Area),
-                    //    Months = listMonth
-                    //});
                     IndxCounter2++;
                 }
                 else
@@ -269,14 +241,6 @@ namespace DamagePayee.Controllers
                     listToDate = "31/03/2016";
                     DateChk2 = 0;
                     listMonth = "9";
-                    //damagecalculation.Add(new DamageChargesCalculation
-                    //{
-                    //    StartDate = Convert.ToDateTime(listFromDate),
-                    //    EndDate = Convert.ToDateTime(listToDate),
-                    //    Area = Convert.ToDecimal(dto.Area),
-                    //    //----Month----
-                    //    Months = listMonth
-                    //});
                 }
 
                 //------------------------------------ Renu 15 june 2020------------------------
@@ -287,14 +251,6 @@ namespace DamagePayee.Controllers
                     DateChk2 = 1;
                     //----Month----
                     listMonth = "3";
-                    //damagecalculation.Add(new DamageChargesCalculation
-                    //{
-                    //    StartDate = Convert.ToDateTime(listFromDate),
-                    //    EndDate = Convert.ToDateTime(listToDate),
-                    //    Area = Convert.ToDecimal(dto.Area),
-                    //    //----Month----
-                    //    Months = listMonth
-                    //});
 
                 }
 
@@ -329,7 +285,7 @@ namespace DamagePayee.Controllers
                     }
                     else
                     {
-                        var dtt =await BindStartAndEndDateComm(listFromDate, listToDate, dto);
+                        var dtt = await BindStartAndEndDateComm(listFromDate, listToDate, dto);
                         if (dtt.Count > 0)
                         {
                             if (dtt.Count > 1)
@@ -356,12 +312,12 @@ namespace DamagePayee.Controllers
                     if (listRate.IndexOf("/") > 0)
                     {
                         string[] rtstr = listRate.Split('/');
-                        listDamageCharge = Math.Round((((Convert.ToDouble(rtstr[0]) * Convert.ToDouble(listArea) * 4) + (Convert.ToDouble(rtstr[1]) * Convert.ToDouble(listArea) * 8))),2).ToString();
-                       // e.Row.Cells[3].BackColor = System.Drawing.Color.Red;
+                        listDamageCharge = Math.Round((((Convert.ToDouble(rtstr[0]) * Convert.ToDouble(listArea) * 4) + (Convert.ToDouble(rtstr[1]) * Convert.ToDouble(listArea) * 8))), 2).ToString();
+                        // e.Row.Cells[3].BackColor = System.Drawing.Color.Red;
                     }
                     else
                     {
-                        listDamageCharge = Math.Round((((listRate == "" ? 0 : Convert.ToDouble(listRate)) * Convert.ToDouble(listArea) * Convert.ToDouble(listMonth))),2).ToString();
+                        listDamageCharge = Math.Round((((listRate == "" ? 0 : Convert.ToDouble(listRate)) * Convert.ToDouble(listArea) * Convert.ToDouble(listMonth))), 2).ToString();
                     }
                     grdDamageTotal = grdDamageTotal + Convert.ToDouble(listDamageCharge);
 
@@ -386,7 +342,7 @@ namespace DamagePayee.Controllers
                                     //TextBox txtdcharge11 = (TextBox)gv.FindControl("txtdcharge");
                                     //txtCoumpound1.Text = Math.Round(((Convert.ToDouble(txtCoumpound11.Text) + Convert.ToDouble(txtdcharge1.Text) - Convert.ToDouble(txtPaidAmount1.Text))), 0).ToString();
                                     //txtRemainAmount1.Text = Math.Round(((Convert.ToDouble(txtCoumpound1.Text) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
-                                    listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) == 0 ? 0 :  Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
+                                    listCompoundAmt = Math.Round(((Convert.ToDouble(listDamageCharge) == 0 ? 0 : Convert.ToDouble(listCompoundAmt) + Convert.ToDouble(listDamageCharge) - Convert.ToDouble(listPaidAmt))), 0).ToString();
                                     listRemainAmt = Math.Round(((Convert.ToDouble(listCompoundAmt) + grdRemainTotal) * 0.07 * ValMonth), 0).ToString();
 
                                 }
@@ -455,15 +411,18 @@ namespace DamagePayee.Controllers
                     EndDate = Convert.ToDateTime(listToDate),
                     Area = Convert.ToDecimal(dto.Area),
                     Months = listMonth,
-                    Rate = (listRate == "" ? 0 : Convert.ToDecimal(listRate)),
+                    Rate = (listRate == "" ? "" : listRate),
                     DamageCharges = (listDamageCharge == "" ? 0 : Convert.ToDecimal(listDamageCharge)),
                     Compunding = (listCompoundAmt == "" ? 0 : Convert.ToDecimal(listCompoundAmt)),
                     TotalInterest = (listRate == "" ? 0 : Convert.ToDecimal(listRemainAmt)),
                     TotalPayAmount = (listRate == "" ? 0 : Convert.ToDecimal(listCompoundRemainAmt))
                 });
 
+
+                ViewBag.GrandCompoundInterest = listCompoundRemainAmt;
             } //For each loop end
-            var sum=damagecalculation.Sum(x => x.DamageCharges);
+            ViewBag.GrandDamageTotoal = damagecalculation.Sum(x => x.DamageCharges);
+            ViewBag.GrandCompoundInterest = damagecalculation.Sum(x => x.TotalInterest);
         }
 
         public int CalMonth(string from_dt, string to_dt)
@@ -842,7 +801,7 @@ namespace DamagePayee.Controllers
             return damageCalculatorRateMappingDto;
         }
 
-
+        
         //[HttpPost]
         //public async Task<IActionResult> Index(Damagecalculation damagecalculation)
         //{
