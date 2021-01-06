@@ -10,37 +10,7 @@ $(document).ready(function () {
 $("#btnSearch").click(function () {
     GetLocality(currentPageNumber, currentPageSize);
 });
-
-$("#btnReset").click(function () {
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
-    GetLocality(currentPageNumber, currentPageSize);
-});
-
-$("#btnAscending").click(function () {
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
-    if (value !== "0") {
-        GetLocalityOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-});
-function GetLocalityOrderby(pageNumber, pageSize, order) {
-    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
-    HttpPost(`/locality/List`, 'html', param, function (response) {
-        $('#divLocalityTable').html("");
-        $('#divLocalityTable').html(response);
-    });
-}
-
-$("#btndescending").click(function () {
+function Descending() {
     var value = $("#ddlSort").children("option:selected").val();
     $('#txtName').val('');
     $('#txtCode').val('');
@@ -52,8 +22,37 @@ $("#btndescending").click(function () {
     else {
         alert('Please select SortBy Value');
     }
+};
+function Ascending() {
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('');
+    $('#txtCode').val('');
+    $('#txtAddress').val('');
+    $('#txtLandmark').val('')
+    if (value !== "0") {
+        debugger
+        GetLocalityOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('');
+    $('#txtAddress').val('');
+    $('#txtLandmark').val('')
+    GetLocality(currentPageNumber, currentPageSize);
 });
 
+function GetLocalityOrderby(pageNumber, pageSize, order) {
+    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+    HttpPost(`/locality/List`, 'html', param, function (response) {
+        $('#divLocalityTable').html("");
+        $('#divLocalityTable').html(response);
+    });
+}
 
 function GetLocality(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
