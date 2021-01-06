@@ -44,6 +44,16 @@ namespace DamagePayee.Controllers
             _configuration = configuration;
             _damagepayeeregisterService = damagePayeeReg;
         }
+        public IActionResult Index1()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] SubstitutionMutationDetailsDto model)
+        {
+            var result = await _mutationDetailsService.GetPagedSubsitutionMutationDetails(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Index(int id)
         {
             Mutationdetails Model = new Mutationdetails();
@@ -68,27 +78,27 @@ namespace DamagePayee.Controllers
             DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
             DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
-            Mutationdetails mutationdetails = new Mutationdetails();
+            Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
 
-            mutationdetails.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(SiteContext.UserId);
+            mutationdetailstemp.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(id);
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
-            if (mutationdetails != null)
+            if (mutationdetailstemp != null)
             {
-                return View(mutationdetails);
+                return View(mutationdetailstemp);
             }
             else
             {
-                return View(mutationdetails);
+                return View(mutationdetailstemp);
             }
 
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id, Mutationdetails mutationDetails)
+        public async Task<IActionResult> Create(int id, Mutationdetailstemp mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
           
@@ -262,7 +272,7 @@ namespace DamagePayee.Controllers
                 }
                 if (mutationDetails.NonObjectUploadPathNew != null)
                 {
-                    mutationDetails.NonObjectUploadPath = fileHelper.SaveFile(noObjectionCertificate, mutationDetails.NonObjectUploadPathNew);
+                    mutationDetails.NonObjectHeirUploadPath = fileHelper.SaveFile(noObjectionCertificate, mutationDetails.NonObjectUploadPathNew);
                 }
                 if (mutationDetails.SpecimenSignLegalUploadNew != null)
                 {
@@ -458,6 +468,46 @@ namespace DamagePayee.Controllers
             Mutationdetails Data = await _mutationDetailsService.SaveMutationIndemnityFilePath(Id);
             string filename = Data.IndemnityFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+        }
+        public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _mutationDetailsService.GetPersonalInfo(Convert.ToInt32(Id));
+            return Json(data.Select(x => new {
+                x.Id,
+                x.Name,
+                x.FatherName,
+                x.Gender,
+                x.Address,
+                x.MobileNo,
+                x.EmailId,
+                x.AadharNoFilePath,
+                x.PanNoFilePath,
+                x.PhotographPath,
+                x.SignaturePath,
+                x.AadharNo,
+                x.PanNo
+            }));
+        }
+        public async Task<JsonResult> GetDetailsAllottetypetemp(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _mutationDetailsService.GetAllottetype(Convert.ToInt32(Id));
+            return Json(data.Select(x => new {
+                x.Id,
+                x.Name,
+                x.FatherName,
+                Date = Convert.ToDateTime(x.Date).ToString("yyyy-MM-dd"),
+                x.AtsgpadocumentPath
+            }));
+        }
+        public async Task<IActionResult> DownloadPropertyPhoto(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
+            string path = Data.PropertyPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
         }
     }
 }

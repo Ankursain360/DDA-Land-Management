@@ -20,7 +20,7 @@ namespace Repository.EntityRepository
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)
         {
 
-            var result = await _dbContext.Userprofile
+            var data = await _dbContext.Userprofile
                                     .Include(a => a.User)
                                     .Include(a => a.Role)
                                     .Include(a => a.Department)
@@ -33,7 +33,46 @@ namespace Repository.EntityRepository
                                         && (a.IsActive == 1)
                                     )
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
-            return result;
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.User.Name).ToList();
+                        break;
+                    case ("USERNAME"):
+                        data.Results = data.Results.OrderBy(x => x.User.UserName).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderBy(x => x.User.Email).ToList();
+                        break;
+                    case ("PHONENUMBER"):
+                        data.Results = data.Results.OrderBy(x => x.User.PhoneNumber).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Name).ToList();
+                        break;
+                    case ("USERNAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.UserName).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Email).ToList();
+                        break;
+                    case ("PHONENUMBER"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.PhoneNumber).ToList();
+                        break;
+                }
+            }
+            
+            return data;
         }
 
         public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
@@ -42,6 +81,26 @@ namespace Repository.EntityRepository
                            .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
                            .OrderByDescending(s => s.IsActive)
                        .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+           
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                }
+            }
             return data;
 
             //var result = await _dbContext.Roles.

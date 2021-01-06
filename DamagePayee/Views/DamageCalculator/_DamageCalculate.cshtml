@@ -15,9 +15,9 @@
         <div class="table-section">
             <div class="table-responsive px-2" id="divTableForRate">
                 <table class="table table-sm table-bordered mb-0 table-striped">
-                    <thead class="text-nowrap">
+                    <thead>
                         <tr>
-                            <th>Sr.No</th>
+                            <th>#</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Rate</th>
@@ -28,28 +28,46 @@
                     </thead>
                     <tbody class="tbody">
                         @{
-                            //if (Model.DamageRateCalculationList != null)
-                            //{
-                            foreach (var item in Model)
+                            @if (Model.Count() > 1)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowNo += 1)</td>
+                                        <td>@(item.StartDate == null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td style="text-align:right;">@item.Rate</td>
+                                        <td style="text-align:right;">@item.Area</td>
+                                        <td style="text-align:right;">@item.Months</td>
+                                        <td style="text-align:right;">@item.DamageCharges</td>
+                                    </tr>
+                                }
+                            }
+                            else
                             {
                                 <tr>
-                                    <td>@(rowNo += 1)</td>
-                                    <td>@(item.StartDate == null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
-                                    <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
-                                    <td>@item.Rate</td>
-                                    <td>@item.Area</td>
-                                    <td>@item.Months</td>
-                                    <td>@item.DamageCharges</td>
+                                    <th colspan="14" style="text-align:center"> No Record Available! </th>
                                 </tr>
                             }
-                            //}
                         }
                     </tbody>
-                    <tfoot align="center">
-                        <tr>
-                            <th colspan="2">Cats win!</th>
-                        </tr>
-                    </tfoot>
+                    @{
+                        @if (Model.Count() > 1)
+                        {
+                            <tfoot align="center">
+                                <tr>
+                                    <th colspan="6" style="color:red">Grand Total</th>
+                                    <th style="color:red">@ViewBag.GrandDamageTotoal</th>
+                                </tr>
+                            </tfoot>
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
                 </table>
             </div>
         </div>
@@ -58,39 +76,61 @@
         <div class="table-section">
             <div class="table-responsive px-2" id="divTableForInterest">
                 <table class="table table-sm table-bordered mb-0 table-striped">
-                    <thead class="text-nowrap">
+                    <thead>
                         <tr>
-                            <th>Sr.No</th>
+                            <th>#</th>
                             <th>Start Date</th>
                             <th>End Date</th>
                             <th>Month</th>
-                            <th>Outstanding Damage</th>
+                            <th>O/S Damage</th>
                             <th>Interest</th>
                             <th>Cumlative Interest</th>
                         </tr>
                     </thead>
                     <tbody class="tbody">
                         @{
-                            //if (Model.DamageIntrestCalculationList != null)
-                            //{
-                            foreach (var item in Model)
+                            @if (Model.Count() > 1)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowNo2 += 1)</td>
+                                        <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td style="text-align:right;">@item.Months</td>
+                                        <td style="text-align:right;">@item.Compunding</td>
+                                        <td style="text-align:right;">@item.TotalInterest</td>
+                                        <td style="text-align:right;">@item.TotalPayAmount</td>
+                                    </tr>
+                                }
+                            }
+                            else
                             {
                                 <tr>
-                                    <td>@(rowNo2 += 1)</td>
-                                    <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
-                                    <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
-                                    <td>@item.Months</td>
-                                    <td>@item.Compunding</td>
-                                    <td>@item.TotalInterest</td>
-                                    <td>@item.TotalPayAmount</td>
+                                    <th colspan="14" style="text-align:center"> No Record Available! </th>
                                 </tr>
                             }
-                            // }
                         }
                     </tbody>
+                    @{
+                        @if (Model.Count() > 1)
+                        {
+                            <tfoot align="center">
+                                <tr>
+                                    <th colspan="4" style="color:red">Grand Total</th>
+                                    <th style="color:red">@ViewBag.GrandDamageTotoal</th>
+                                    <th></th>
+                                    <th style="color:red">@ViewBag.GrandCompoundInterest</th>
+                                </tr>
+                            </tfoot>
 
-
-
+                        }
+                        else
+                        {
+                           
+                        }
+                    }
                 </table>
             </div>
         </div>

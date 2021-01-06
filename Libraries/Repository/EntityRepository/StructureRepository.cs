@@ -24,7 +24,27 @@ namespace Libraries.Repository.EntityRepository
 
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
                             .OrderByDescending(s => s.IsActive)
-                        .GetPaged<Structure>(model.PageNumber, model.PageSize);
+                            .GetPaged<Structure>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                }
+            }
             return data;
             // return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
         }

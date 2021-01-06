@@ -1,5 +1,7 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
+var currentSortOrderAscending = 1;
+var currentSortOrderDescending = 2;
 
 $(document).ready(function () {
     GetStructure(currentPageNumber, currentPageSize);
@@ -15,6 +17,8 @@ $("#btnReset").click(function () {
   
     GetStructure(currentPageNumber, currentPageSize);
 });
+
+
 function GetStructure(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/Structure/List`, 'html', param, function (response) {
@@ -43,4 +47,57 @@ function onChangePageSize(pageSize) {
     GetStructure(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
+
+// ********** Sorting Code  **********
+
+
+function GetStructureOrderBy(pageNumber, pageSize, order) {
+    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+    HttpPost(`/Structure/List`, 'html', param, function (response) {
+        $('#divStructureTable').html("");
+        $('#divStructureTable').html(response);
+    });
+}
+
+function Ascending() {
+    var value = $("#ddlSort").children("option:selected").val();
+  
+  
+    if (value !== "0") {
+        GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+function Descending() {
+    var value = $("#ddlSort").children("option:selected").val();
+   
+   
+    if (value !== "0") {
+        GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+
+
+function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+    var model = {
+       
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
+    return model;
+}
+
+
+
+
+
 
