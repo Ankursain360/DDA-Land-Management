@@ -16,7 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
-
+using Core.Enum;
+using SiteMaster.Filters;
 namespace SiteMaster.Controllers
 {
     public class DemolitionprogrammasterController : BaseController
@@ -29,7 +30,7 @@ namespace SiteMaster.Controllers
             _demolitionprogrammasterService = demolitionprogrammasterService;
             _configuration = configuration;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
@@ -45,10 +46,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-
-
-
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitionprogram demolitionprogrammaster = new Demolitionprogram();
@@ -59,6 +57,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demolitionprogram demolitionprogrammaster)
         {
             try
@@ -91,10 +90,7 @@ namespace SiteMaster.Controllers
                 return View(demolitionprogrammaster);
             }
         }
-
-
-
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _demolitionprogrammasterService.FetchSingleResult(id);
@@ -108,6 +104,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Demolitionprogram demolitionprogrammaster)
         {
             if (ModelState.IsValid)
@@ -138,7 +135,7 @@ namespace SiteMaster.Controllers
                 return View(demolitionprogrammaster);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

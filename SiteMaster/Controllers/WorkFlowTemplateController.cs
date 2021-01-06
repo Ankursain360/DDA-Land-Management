@@ -7,6 +7,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Service.IApplicationService;
 using System.Threading.Tasks;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -16,11 +18,14 @@ namespace SiteMaster.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IUserProfileService _userProfileService;
 
+      
         public WorkFlowTemplateController(IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService)
         {
             _workflowtemplateService = workflowtemplateService;
             _userProfileService = userProfileService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -62,6 +67,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
@@ -102,7 +108,7 @@ namespace SiteMaster.Controllers
                 return Json(Url.Action("Create", "WorkFlowTemplate"));
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _workflowtemplateService.FetchSingleResult(id);
@@ -127,6 +133,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
