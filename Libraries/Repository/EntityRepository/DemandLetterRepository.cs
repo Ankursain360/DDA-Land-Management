@@ -26,6 +26,17 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Demandletter.OrderByDescending(x => x.Id).GetPaged<Demandletter>(model.PageNumber, model.PageSize);
         }
+        public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        {
+            var data = await _dbContext.Demandletter
+                    .Where(x => x.CreatedDate >= defaulterListingReportSearchDto.fromDate
+                    && x.CreatedDate <= defaulterListingReportSearchDto.toDate)
+                    .OrderByDescending(x => x.Id)
+
+                    .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
+
+            return data;
+        }
 
 
 
