@@ -31,7 +31,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<List<Division>> GetAllDivision()
         {
-            return await _divisionRepository.GetAll();
+            return await _divisionRepository.GetDivisions();
         }
 
         public async Task<List<Division>> GetDivisionUsingRepo()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using SiteMaster.Filters;
 
 namespace SiteMaster.Controllers
 {
@@ -21,6 +23,7 @@ namespace SiteMaster.Controllers
         {
             _structureService = structureService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -33,7 +36,7 @@ namespace SiteMaster.Controllers
             var result = await _structureService.GetPagedStructure(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -42,7 +45,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Structure structure)
         {
             try
@@ -79,7 +82,7 @@ namespace SiteMaster.Controllers
                 return View(structure);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _structureService.FetchSingleResult(id);
@@ -92,7 +95,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Structure structure)
         {
             if (ModelState.IsValid)

@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -27,26 +29,28 @@ namespace SiteMaster.Controllers
             _interestService = interestService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            var result = await _interestService.GetAllInterest();
-            return View(result);
-        }
-        //public IActionResult Index()
+        //public async Task<IActionResult> Index()
         //{
-        //    return View();
+        //    var result = await _interestService.GetAllInterest();
+        //    return View(result);
         //}
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] InterestSearchDto model)
         {
-            var result = await _interestService.GetPagedInterest(model);
+            var result = await _interestService.GetSearchResult(model);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Interest interest)
         {
             interest.PropertyTypeList = await _interestService.GetDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Interest interest = new Interest();
@@ -57,6 +61,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Interest interest)
         {
             try
@@ -91,7 +96,7 @@ namespace SiteMaster.Controllers
                 return View(interest);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _interestService.FetchSingleResult(id);
@@ -105,6 +110,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Interest interest)
         {
             await BindDropDown(interest);

@@ -15,6 +15,8 @@ using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -27,6 +29,7 @@ namespace SiteMaster.Controllers
         {
             _zoneService = zoneService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -42,6 +45,7 @@ namespace SiteMaster.Controllers
         {
             zone.DepartmentList = await _zoneService.GetDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Zone zone = new Zone();
@@ -51,6 +55,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Zone zone)
         {
@@ -85,7 +90,7 @@ namespace SiteMaster.Controllers
                 return View(zone);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);
@@ -98,6 +103,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Zone zone)
         {
@@ -162,20 +168,6 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-
-            //var result = await _zoneService.Delete(id);
-            //if (result == true)
-            //{
-            //    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            //    var result1 = await _zoneService.GetAllDetails();
-            //    return View("Index", result1);
-            //}
-            //else
-            //{
-            //    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-            //    var result1 = await _zoneService.GetAllDetails();
-            //    return View("Index", result1);
-            //}
             var result = await _zoneService.Delete(id);
             if (result == true)
             {

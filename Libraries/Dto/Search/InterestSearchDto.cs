@@ -8,5 +8,6 @@ namespace Dto.Search
     public class InterestSearchDto : BaseSearchDto
     {
         public string name { get; set; }
+        public string property { get; set; }
     }
 }

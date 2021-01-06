@@ -1,0 +1,732 @@
+﻿@model Libraries.Model.Entity.Mutationdetails
+
+@{int rowNo = 0;}
+@{int AtsgpadocumentPath = 0;}
+@{int AadharNoFilePath = 0;}
+@{int PanNoFilePath = 0; }
+@{int PhotographPath = 0; }
+@{int SignaturePath = 0; }
+@{int PropertyPhoto = 0; }
+@await Component.InvokeAsync("PageHeader", new { pageName = "Apply For Mutation" })
+<br />
+<br />
+
+<form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <h3 class="mb-3 d-flex">File Information</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div id="DivFileInformation">
+
+        <h3 class="my-3 d-flex sub-heading">File Information</h3>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.FileNo" type="text" disabled placeholder="File No." class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">File No.</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivPersonalInformationofDamageAssessee">
+        <h3 class="my-3 d-flex sub-heading">Personal Information of Damage Assessee</h3>
+
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Name</th>
+                            <th>Father's/Husband's Name</th>
+                            <th style="min-width:100px;">Gender</th>
+                            <th>Address</th>
+                            <th>Mobile No.</th>
+                            <th>Email-Id</th>
+                            <th style="min-width:200px;">Aadhar No.</th>
+                            <th style="min-width:200px;">Pan No.</th>
+                            <th style="min-width:200px;">Photo</th>
+                            <th style="min-width:200px;">Signature</th>
+                            <th>Operation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts_body">
+                    </tbody>
+                    <tbody class="tbody" id="add">
+
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn">1</span></td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.payeeName" type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.payeeName" class="d-block text-danger field-validation-valid"></span>
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.payeeFatherName" type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.payeeFatherName" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+
+                                <select asp-for="DamagePayeeRegister.Gender" class="floating-label-field floating-label-field--s3" id="drpPersonalGender">
+                                    <option value="0">---Select---</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Other</option>
+                                </select>
+                                <span asp-validation-for="DamagePayeeRegister.Gender" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.Address" type="text" id="txtPersonalAddress" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.Address" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.MobileNo" type="number" id="txtPersonalMobileNo" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.MobileNo" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.EmailId" type="text" id="txtPersonalEmailid" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.EmailId" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="DamagePayeeRegister.AadharNo" type="text" id="txtAadharNo" placeholder="Aadhar No." class=" floating-label-field--s3" />
+                                    <span asp-validation-for="DamagePayeeRegister.AadharNo" class="d-block text-danger field-validation-valid"></span>
+
+                                    <input asp-for="DamagePayeeRegister.Aadhar" type="file" id="AadharFile" class="floating-label-field floating-label-field--s3 " />
+                                    <span asp-validation-for="DamagePayeeRegister.Aadhar" class="d-block text-danger field-validation-valid"></span>
+
+                                </div>
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="DamagePayeeRegister.PanNo" type="text" id="txtPanNo" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="DamagePayeeRegister.PanNo" class="d-block text-danger field-validation-valid"></span>
+
+                                    <input asp-for="DamagePayeeRegister.Pan" type="file" id="PanNoFile" class="floating-label-field floating-label-field--s3 " />
+                                    <span asp-validation-for="DamagePayeeRegister.Pan" class="d-block text-danger field-validation-valid"></span>
+
+                                </div>
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.Photograph" type="file" id="Photograph" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.Photograph" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.SignatureFile" type="file" id="Signature" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.SignatureFile" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <a class="btn btn-theme delete-record" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <br />
+    <div id="Divclsification" class="mt-md-3">
+        <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="hidden" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" disabled id="TypeOfDamageAssessee" value="Original" />
+
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked>
+                    <label class="form-check-label" for="radio">
+                        Original
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" asp-for="DamagePayeeRegister.TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent">
+                    <label class="form-check-label" for="radio">
+                        Subsequent Purchaser/Occupier
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivForSubsequentPurchaser" style="display:none">
+
+        <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
+
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_DamageAssessee">
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Name</th>
+                            <th>Father's Name</th>
+                            <th>Date of GPA/Will/Other Deed</th>
+                            <th>Upload ATS & GPA/Will</th>
+                            <th>Option</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_DamageAssessee_body">
+                    </tbody>
+                    <tbody class="tbody" id="addDamageAssessee">
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn1">1</span></td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.Name" maxlength="45" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
+                                <span asp-validation-for="DamagePayeeRegister.Name" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.FatherName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
+                                <span asp-validation-for="FatherName" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.Date" type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
+                                <span asp-validation-for="DamagePayeeRegister.Date" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <input asp-for="DamagePayeeRegister.ATSGPA" type="file" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="DamagePayeeRegister.ATSGPA" class="d-block text-danger field-validation-valid"></span>
+
+                            </td>
+                            <td>
+                                <a class="btn btn-theme delete-recordDamageAssessee" data-id="0" style="display:none;color:white;"><i class="fa fa-trash"></i></a>
+                                <a class="btn btn-theme add-recordDamageAssessee" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="MainContentForm">
+        <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.PropertyNo" disabled type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
+
+                    <label class="floating-label">Property/House/Municipal No.</label>
+
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="DamagePayeeRegister.LocalityId"
+                            asp-items="@(new SelectList(@ViewBag.Locality,"Id","Name"))">
+                        <option value="0">---Select---</option>
+
+                    </select>
+                    <label class="floating-label">Locality</label>
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.FloorNo" disabled type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Floor No(if purchased floor wise)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.StreetNo" disabled type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Road/Street Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.PinCode" disabled type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Pin Code</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select asp-for="DamagePayeeRegister.DistrictId" disabled class="floating-label-field floating-label-field--s3"
+                            asp-items="@(new SelectList(ViewBag.District,"Id","Name"))">
+                        <option value="0">---Select---</option>
+
+                    </select>
+                    <label class="floating-label">District</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DamagePayeeRegister.PlotAreaSqYard" disabled type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
+                    <label class="floating-label">Plot Area in Sq.yds.</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0 ">
+                    <input asp-for="DamagePayeeRegister.PlotAreaSqMt" disabled type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" disabled />
+                    <label class="floating-label">Sq. Mtr.-</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DamagePayeeRegister.FloorAreaSqYard" disabled type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
+                    <label class="floating-label">Floor Area in Sq. yds.(if purchased floor wise)</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0 ">
+                    <input asp-for="DamagePayeeRegister.FloorAreaSqMt" disabled type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" disabled />
+                    <label class="floating-label">Sq. Mtr.-</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @*@{
+                        if (Model.DamagePayeeRegister != null && Model.DamagePayeeRegister.Count > 0)
+                        {
+                            foreach (var data in Model.DamagePayeeRegister)
+                            {
+                                <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PropertyPhoto += 1 ))</a>
+
+                            }
+                            <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
+
+                        }
+                        else
+                        {*@
+                    <input type="file" asp-for="DamagePayeeRegister.PropertyPhoto" disabled class="floating-label-field floating-label-field--s3" placeholder="Name">
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label for="field-1" class="floating-label">Upload Photograph of Property </label>
+
+                    @*}
+                        }*@
+
+                    @*<a href="#" class="badge badge-primary px-2">View file</a>*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div id="Purpose">
+
+        <h2 class="my-3 sub-heading">Purpose Of Mutation/Change Of Title</h2>
+        <div class="row">
+            <input type="hidden" asp-for="MutationPurpose" disabled id="MutationPurpose" value="Purchaser" />
+
+            <div class="col-md-6">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpPurpose" id="rdbPurchaser" value="Purchaser" checked="checked" />
+
+                    <label class="form-check-label">Purchaser</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpPurpose" value="rdbInheritance" id="rdbInheritance" />
+                    <label class="form-check-label">Inheritance </label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="DivForInheritancePurpose">
+
+        <h2 class="my-3 sub-heading">If Purchased</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="PurchaseDate" type="date" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Date Of Purchase<span class="text-danger" style="color:red">*</span></label>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row pt-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="AtsfilePathNew" type="File" placeholder="Upload ATS(Agreement To sell)" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Upload ATS(Agreement To sell)<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="GpafilePathNew" type="file" placeholder="Upload GPA(General Power Attorny If any)" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Upload GPA(General Power Attorny If any)<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="MoneyfilePathNew" type="file" placeholder="Upload Money Receipts( If any)" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Upload Money Receipts( If any)<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="SignSpecPathNew" type="file" placeholder="Signature Specimen" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Signature Specimen<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+    </div>
+    <div id="DivForInheritancePurpose">
+
+        <h2 class="my-3 sub-heading">If transfer through Inheritance:-</h2>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="DeathCertificatePathNew" type="file" placeholder="Death Certificate Original"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Death Certificate Original<span class="text-danger" style="color:red">*</span></label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+
+        <div class="row pt-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="RelationshipUploadPathNew" type="File" placeholder="Proof of Relationship with Previous damage assess(ID proof,Retion Card,etc.)"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Proof of Relationship with Previous damage assess(ID proof,Retion Card,etc.)<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="AffidevitLegalUploadPathNew" type="file" placeholder="Affidavit for Legal Heirs"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Affidavit for Legal Heirs<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="NonObjectUploadPathNew" type="file" placeholder="No Objection Certificate from other legal heirs"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">No Objection Certificate from other legal heirs<span class="text-danger" style="color:red">*</span> </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="SpecimenSignLegalUploadNew" type="file" placeholder="Signature of Specimen"  class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Signature of Specimen<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+        </div>
+    </div>
+
+    @*<div class="row">*@
+
+    <h2 class="my-3 sub-heading">Upload Latest Address Proof</h2>
+    @*</div>*@
+    <div class="row">
+        <input type="hidden" asp-for="IsAddressProof" id="IsAddressProof" value="House" />
+
+        <div class="form-group col-md-3">
+            <div class="form-check theme">
+                <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbHouse" value="House" checked="checked" />
+                <label class="form-check-label">House Tax Bill</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="form-check theme">
+
+                <input class="form-check-input" type="radio" name="grpAddressProof" value="Electricity" id="rdbElectricity" />
+                <label class="form-check-label">Electricity Bill  </label>
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <div class="form-check theme">
+
+                <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbWater" value="Water" />
+                <label class="form-check-label">Water Bill</label>
+            </div>
+        </div>
+        <div class="form-group col-md-3">
+            <div class="form-check theme">
+
+                <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbAny" value="Any" />
+                <label class="form-check-label">Any Other </label>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="AddressProofPathNew" type="file" required class="floating-label-field floating-label-field--s3" />
+
+                <label class="floating-label">Choose file</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <br />
+            <input type="submit" value="Upload" class="btn btn-theme " />
+        </div>
+    </div>
+
+    <div id="Affidavit">
+
+        <h2 class="my-3 sub-heading">Upload Affidavit On Non-Judicial Stamp paper (Download Format)</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AffidavitPathNew" type="file" placeholder="Affidavit" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Affidavit<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+            <br />
+            <div class="col-md-3">
+                <a class="badge badge-primary px-2" href="url">click for Download Affidavit Format</a>
+            </div>
+        </div>
+    </div>
+    <div id="indemnity">
+
+        <h2 class="my-3 sub-heading">Upload indemnity Bond on Non-Judicial Stamp paper(Download Format)</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="IndemnityPathNew" type="file" placeholder="IndemnityBond" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">IndemnityBond<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <br />
+                <input type="submit" value="Upload" class="btn btn-theme " />
+            </div>
+            <br />
+            <div class="col-md-3">
+                <a class="badge badge-primary px-2" href="url">click for Download Indemnity Bond Format</a>
+            </div>
+        </div>
+    </div>
+    <div id="Litigation">
+
+        <h2 class="my-3 sub-heading">Litigation Status</h2>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-check theme">
+                    <input type="hidden" asp-for="LitigationStatus" id="LitigationStatus" value="AnyLitigation" />
+
+
+                    <input class="form-check-input" type="radio" name="grpLitigation" id="rdbAnyLitigation" value="AnyLitigation" checked="checked" />
+                    <label class="form-check-label">
+                        The Land/Property is not a subject matter of any Litigation/Court case
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" name="grpLitigation" value="UnderLitigation" id="rdbUnderLitigation" />
+                    <label class="form-check-label">The Land/ Property title is under Litigation </label>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="court">
+
+        <h2 class="my-3 sub-heading">Details Of Court Case(if any)</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="CourtName" type="text" required placeholder="Name Of Court" class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Name Of Court</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="CaseNo" type="text" placeholder="Case Number" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Case Number<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="OppositionPartyName" type="text" placeholder="Name Of Opposition Party" required class="floating-label-field floating-label-field--s3" />
+
+                    <label class="floating-label">Name Of Opposition Party<span class="text-danger" style="color:red">*</span></label>
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <input type="hidden" asp-for="PetitionerRespondent" value="Petitioner" id="PetitionerRespondent" />
+                <div class="form-check theme">
+                    @*<label class="control-label lb-sm">I am</label>*@
+
+                    @*<input type="hidden" asp-for="PetitionerRespondent" id="PossessionType" value="0" />
+                        <input type="hidden" asp-for="Id" id="hdnId" />
+                        <input type="hidden" asp-for="IsActive" value="1" />*@
+
+                    <input class="form-check-input" asp-for="PetitionerRespondent" type="radio" name="grpPetitione" value="Petitioner" checked="checked" />
+                    <label class="form-check-label">Petitioner </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" asp-for="PetitionerRespondent" type="radio" name="grpPetitione" value="Respondant" />
+                    <label class="form-check-label">Respondant</label>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="Declaration">
+
+        <h2 class="my-3 sub-heading">Declaration</h2>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <input id="DeclarationNew" type="checkbox" name="View">
+                    <input type="hidden" asp-for="Declaration1" id="Declarationhdn" />
+
+                    I/WE hereby expressly warranty and declare that the above information provided in support of my/ our application is correct and genuine and We expressly acknowledge that I am / we are aware and accept that the decision on the application will be made by the DDA on the basis of the information supplied
+                    by me/ us and may be immediately Cancelled in the event that such information is found to be false or misleading.<br />
+                    <br />
+                    Note: Please fill all Details Crefully.You can't make any changes after final Submission
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-md-12">
+
+            <input type="submit" value="Create" class="btn btn-theme " />
+            @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+            @Html.ActionLink("Back", "Create", "SubstitutionMutationDetails", null, new { @class = "btn btn-theme " })
+        </div>
+    </div>
+
+</form>
+
+
+<environment include="Development">
+    <script src="~/js/SubstitutionMutationDetailsCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/SubstitutionMutationDetailsCreate.min.js" asp-append-version="true"></script>
+</environment>
