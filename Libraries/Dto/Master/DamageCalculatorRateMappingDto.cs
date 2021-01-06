@@ -8,6 +8,7 @@ namespace Dto.Master
 {
     public class DamageCalculatorRateMappingDto
     {
+        public int Id { get; set; }
         public int EncroachId { get; set; }
         public int ColonyId { get; set; }
         public DateTime StartDate { get; set; }

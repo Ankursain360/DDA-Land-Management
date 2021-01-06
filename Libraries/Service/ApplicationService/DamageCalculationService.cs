@@ -55,5 +55,41 @@ namespace Libraries.Service.ApplicationService
         {
             return await _damgecalculationRepository.RateListTypeC(date1, localityId, subEncroachersId);
         }
+
+        public async Task<List<Resratelisttypeb>> RateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.RateListTypeBSpecific(dateTimeSpecific,date1, localityId, subEncroachersId);
+        }
+
+        public async Task<List<Resratelisttypea>> RateListTypeASpecific(DateTime specificDateTime, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.RateListTypeASpecific(specificDateTime,date1, localityId, subEncroachersId);
+        }
+
+        public async Task<Comencrochmenttype> FetchResultCOMEncroachmentType(DateTime date1)
+        {
+            return await _damgecalculationRepository.FetchResultCOMEncroachmentType(date1);
+        }
+        public async Task<List<Comratelisttypea>> ComRateListTypeA(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.ComRateListTypeA(date1, localityId, subEncroachersId);
+        }
+        public async Task<List<Comratelisttypeb>> ComRateListTypeB(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.ComRateListTypeB(date1, localityId, subEncroachersId);
+        }
+        public async Task<List<Comratelisttypec>> ComRateListTypeC(DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.ComRateListTypeC(date1, localityId, subEncroachersId);
+        }
+        public async Task<List<Comratelisttypeb>> ComRateListTypeBSpecific(DateTime dateTimeSpecific, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.ComRateListTypeBSpecific(dateTimeSpecific, date1, localityId, subEncroachersId);
+        }
+
+        public async Task<List<Comratelisttypea>> ComRateListTypeASpecific(DateTime specificDateTime, DateTime date1, string localityId, int[] subEncroachersId)
+        {
+            return await _damgecalculationRepository.ComRateListTypeASpecific(specificDateTime, date1, localityId, subEncroachersId);
+        }
     }
 }
