@@ -94,7 +94,10 @@ function Descending() {
 
 function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
     var model = {
-      
+        userName: $('#txtUserName').val(),
+        name: $('#txtName').val(),
+        phoneNumber: $('#txtPhoneNumber').val(),
+        email: $('#txtEmail').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

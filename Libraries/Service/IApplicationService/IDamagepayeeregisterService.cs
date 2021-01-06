@@ -55,5 +55,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SavePersonelInfo(List<Damagepayeepersonelinfo> data);
         Task<bool> SaveAllotteType(List<Allottetype> allottetype);
         Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
+
+       // *************** to create user ************************
+       // Task<bool> CreateUser(Damagepayeepersonelinfotemp user);
     }
 }

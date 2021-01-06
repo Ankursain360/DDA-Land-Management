@@ -152,6 +152,7 @@ namespace DamagePayee.Controllers
                                 result = await _damagepayeeregisterService.SavePayeePersonalInfoTemp(item);
                             }
                         }
+                        //******* creating user ******
                     }
 
                     //****** code for saving  Allotte Type *****
