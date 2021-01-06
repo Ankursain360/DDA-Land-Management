@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using Core.Enum;
+using SiteMaster.Filters;
 
 namespace SiteMaster.Controllers
 {
@@ -25,7 +27,7 @@ namespace SiteMaster.Controllers
             _demolitionchecklistService = demolitionchecklistService;
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
@@ -40,9 +42,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-
-
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitionchecklist demolitionchecklist = new Demolitionchecklist();
@@ -53,6 +53,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demolitionchecklist demolitionchecklist)
         {
             try
@@ -86,9 +87,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
-
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _demolitionchecklistService.FetchSingleResult(id);
@@ -102,6 +101,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Demolitionchecklist demolitionchecklist)
         {
             if (ModelState.IsValid)
@@ -132,7 +132,7 @@ namespace SiteMaster.Controllers
                 return View(demolitionchecklist);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

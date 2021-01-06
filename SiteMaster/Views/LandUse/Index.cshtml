@@ -17,14 +17,10 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
-                        <i class="ri-refresh-line mr-2" ></i>
-                        @*<button class="btn btn-theme" type="submit" id="btnReset">*@
-                        Reset</button>
-                        
-                    </div>
+                       <button class="btn btn-theme" type="submit" id="btnReset">Reset</button>
+                                       </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme" type="submit" id="btnSearch" >Submit</button>
+                        <button class="btn btn-theme" type="submit" id="btnSearch">Submit</button>
                     </div>
                 </div>
             </div>
@@ -35,18 +31,17 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="ddlViewBy">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option value="1">Name</option>
+            <select id="ddlSort" class="floating-label-field floating-label-field--s3" >
+                        <option value="0" >Select One</option>
+                        <option value="Name">Name</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
-                   
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    @*<span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>*@
-                    <button class="btn slow" title="Ascending order" id="btnAsc"><i class="ri-sort-asc"></i></button>
-                                   </div>
+                     <button id="btndescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></button>
+                    <button id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
+
+                </div>
             </div>
 
 

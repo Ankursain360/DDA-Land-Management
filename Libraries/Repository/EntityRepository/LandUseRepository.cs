@@ -10,6 +10,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace Libraries.Repository.EntityRepository
 {
     public class LandUseRepository : GenericRepository<Landuse>, ILandUseRepository
@@ -28,46 +29,34 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model)
         {
-
-            //string Data = model.name;
-            // string OrderAsc = conv(model.SortBy; //"NameAsc";
-            //string OrderDesc = model.SortOrder; //"NameDesc";
-
-
-            //if (Data == OrderAsc) //((model.SortBy =="Name") && (model.sortOrder =="Asc"))
-            //{
-            //    return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-            //        .OrderBy(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize);
-
-            //}
-            //else if (Data==OrderDesc) //((model.SortBy == "Name") && (model.sortOrder == "Desc"))
-            //{ 
-            //    return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-            //        .OrderByDescending(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize); 
-            //}
-            //else
-            //{
-            try
-            {
-                var modelorder = model.SortOrder.ToString();
-                var modelsort = model.SortBy.ToString();
-
-                return await _dbContext.Landuse.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-                   //.OrderBy(x => x.Id)
-                   .OrderBy(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                 var data = await _dbContext.Landuse
+                 .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                 .OrderBy(x => x.Id)
                    .ThenByDescending(x => x.IsActive == 1)
                    .ThenBy(x => x.Name)
-                   .GetPaged<Landuse>(model.PageNumber, model.PageSize);
-            }
-            catch(Exception ex)
+                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
             {
-                return await _dbContext.Landuse//.Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-                    .OrderByDescending(s => s.Name).GetPaged<Landuse>(model.PageNumber, model.PageSize);
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
             }
-            // }
-        }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                }
+            }
+            return data;
         }
     }
-
-
+}
 

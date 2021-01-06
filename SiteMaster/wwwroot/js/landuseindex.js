@@ -1,84 +1,81 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
-var currentsortOrderAsc = 1;
-var currentsortOrderdesc = 2;
+var currentSortAsc = 1;
+var currentSortDesc = 2;
 
 $(document).ready(function () {
     GetDetails(currentPageNumber, currentPageSize);
 });
 
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize);
+});
 
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-      HttpPost(`/LandUse/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
+function Descending() {
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('');
 
-    //if ($('table >tbody >tr').length <= 1) {
-    //    GetDetails(1, $("#ddlPageSize option:selected").val());
-    //}
-}
-
-function GetLandUseOrderby(pageNumber, pageSize, order) {
+    if (value !== "0") {
+        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortDesc);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+function Ascending() {
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('');
+    if (value !== "0") {
+        debugger
+        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortAsc);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+function GetDetailsOrderby(pageNumber, pageSize, order) {
     var param = GetSearchParamOrderby(pageNumber, pageSize, order);
     HttpPost(`/LandUse/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 }
-
-
-function GetSearchParamOrderby(pageNumber, pageSize, order) {
+function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: $('#txtName').val(),
-        sortBy: $("ddlViewBy").childern("option:selected").val();
+         name: $('#txtName').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
+        pageSize: pageSize,
+        pageNumber: pageNumber
     }
-    debugger
-    return model;
+      return model;
 }
 
+function GetDetails(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/LandUse/List`, 'html', param, function (response) {
+        $('#divTable').html("");
+        $('#divTable').html(response);
+    });
 
-$("#btnSearch").click(function () {
-    GetDetails(currentPageNumber, currentPageSize);
-});
+    }
 
 $("#btnReset").click(function () {
     $("#txtName").val('');
     GetDetails(currentPageNumber, currentPageSize);
 });
 
-$("#btnAsc").click(function () {
-
-    // var e = document.getElementById("ddlViewBy");
-    //sortBy = e.value;
-    var sortBy = $("ddlViewBy").childern("option:selected").val();
-    $('#txtName').val('');
-    //document.getElementById("ddlViewBy").value;
-    //sortOrder = 'Asc';
-    if (sortBy !== "0") {
-
-        GetLandUseOrderby(currentpageNumber, currentpageSize, currentsortOrderAsc);
-    }
-    else { alert("Please select Sort by value."); }
-    //GetDetails(currentPageNumber, currentPageSize);
-});
-
-
-
 
 
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-          name: $('#txtName').val(),
-          pageSize: pageSize,
+        //name: "test",
+        name: $('#txtName').val(),
+        pageSize: pageSize,
         pageNumber: pageNumber
-            }
-   // debugger
+    }
+    //debugger
     return model;
 }
 

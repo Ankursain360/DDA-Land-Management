@@ -148,7 +148,7 @@ namespace SiteMaster.Controllers
         }
 
 
-       
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             //try
@@ -182,7 +182,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try
