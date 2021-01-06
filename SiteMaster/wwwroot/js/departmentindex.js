@@ -4,6 +4,14 @@ var currentPageSize = 10;
 $(document).ready(function () {
     GetDepartment(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetDepartment(currentPageNumber, currentPageSize);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('')
+    GetDepartment(currentPageNumber, currentPageSize);
+});
 
 function GetDepartment(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -13,11 +21,19 @@ function GetDepartment(pageNumber, pageSize) {
     });
 }
 
+//function GetSearchParam(pageNumber, pageSize) {
+//    var model = {
+//        name: "test",
+//        pageSize: pageSize,
+//        pageNumber: pageNumber
+//    }
+//    return model;
+//}
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

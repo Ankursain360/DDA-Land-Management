@@ -6,11 +6,11 @@ $(document).ready(function () {
 });
 
 function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/Interest/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
+    //var param = GetSearchParam(pageNumber, pageSize);
+    //HttpPost(`/Interest/List`, 'html', param, function (response) {
+    //    $('#divTable').html("");
+    //    $('#divTable').html(response);
+    //});
 
     ////if ($('table >tbody >tr').length <= 1) {
     ////    GetDetails(1, $("#ddlPageSize option:selected").val());

@@ -27,5 +27,6 @@ namespace Service.IApplicationService
         Task<bool> UpdateUserProfileDetails(UserProfileEditDto model);
         Task<bool> DeleteRole(RoleDto model);
         Task<bool> DeleteUser(int id);
+        Task<List<Zone>> GetAllZone(int departmentId);
     }
 }

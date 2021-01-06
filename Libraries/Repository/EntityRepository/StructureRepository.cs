@@ -20,7 +20,13 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Structure>> GetPagedStructure(StructureSearchDto model)
         {
-            return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Structure
+
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderByDescending(s => s.IsActive)
+                        .GetPaged<Structure>(model.PageNumber, model.PageSize);
+            return data;
+            // return await _dbContext.Structure.GetPaged<Structure>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Structure>> GetStructure()

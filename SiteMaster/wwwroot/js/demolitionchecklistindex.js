@@ -14,11 +14,19 @@ function GetDemolitionchecklist(pageNumber, pageSize) {
    
 }
 
+$("#btnSearch").click(function () {
+    GetDemolitionchecklist(currentPageNumber, currentPageSize);
+});
+$("#btnReset").click(function () {
+    $("#txtName").val('');
+    GetDemolitionchecklist(currentPageNumber, currentPageSize);
+});
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
+        //name: "test",
+        name: $('#txtName').val(),
+        pageSize: pageSize,
+        pageNumber: pageNumber
     }
     return model;
 }

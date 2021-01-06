@@ -3,6 +3,17 @@ var currentPageSize = 10;
 $(document).ready(function () {
     GetLocality(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetLocality(currentPageNumber, currentPageSize);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('');
+    $('#txtAddress').val('');
+    $('#txtLandmark').val('')
+    GetLocality(currentPageNumber, currentPageSize);
+});
 
 function GetLocality(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -16,8 +27,16 @@ function GetLocality(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
+    //var model = {
+    //    name: "test",
+    //    pageSize: parseInt(pageSize),
+    //    pageNumber: parseInt(pageNumber)
+    //}
     var model = {
-        name: "test",
+        name: $('#txtName').val(),
+        localityCode: $('#txtCode').val(),
+        address: $('#txtAddress').val(),
+        landmark: $('#txtLandmark').val(),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }

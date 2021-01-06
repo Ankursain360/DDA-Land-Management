@@ -83,6 +83,13 @@ namespace Libraries.Repository.EntityRepository
         {
             return _dbContext.Rate.Where(A => A.PropertyId == propertyId).Count();
         }
+
+        public async Task<List<Rate>> GetSearchResult(RateSearchDto model)
+        {
+            return (await _dbContext.Rate.Include(x => x.Property)
+                           .Where(x => x.Property.Name.ToUpper().Contains((model.property ?? "").ToUpper()))
+                           .ToListAsync()).GroupBy(x => x.PropertyId).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList();
+        }
     }
 
 

@@ -131,8 +131,8 @@ namespace SiteMaster.Controllers
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
-            //return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
-            return Json("");
+            return Json(await _userProfileService.GetAllZone(Convert.ToInt32(DepartmentId)));
+            
         }
 
         [HttpPost]
