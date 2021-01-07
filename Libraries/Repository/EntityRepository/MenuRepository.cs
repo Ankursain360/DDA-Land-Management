@@ -71,10 +71,6 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-
-
-
-
         public async Task<List<Module>> GetAllModule()
         {
             List<Module> modulelist = await _dbContext.Module.Where(x => x.IsActive == 1).ToListAsync();
