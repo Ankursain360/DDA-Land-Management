@@ -1,23 +1,26 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
+var sortby = 1;//default Ascending 
+
 $(document).ready(function () {
-    GetMenu(currentPageNumber, currentPageSize);
+    GetMenu(currentPageNumber, currentPageSize, sortby);
 });
 
-function GetMenu(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetMenu(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/menu/List`, 'html', param, function (response) {
         $('#divMenuTable').html("");
         $('#divMenuTable').html(response);
     });
-    //if ($('table >tbody >tr').length <= 1) {
-    //   // GetMenu(1, $("#ddlPageSize option:selected").val());
-    //}
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
+        name: $('#txtMenuName').val(),
+        moduleName: $('#txtName').val(),
+        parentname: $('#txtParent').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
@@ -25,12 +28,36 @@ function GetSearchParam(pageNumber, pageSize) {
     return model;
 }
 
+$("#btnAscending").click(function () {
+    sortby = 1;//for Ascending
+    GetMenu(currentPageNumber, currentPageSize, sortby);
+});
+
+
+$("#btnDescending").click(function () {
+    sortby = 2;//for Descending
+    GetMenu(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnSearch").click(function () {
+    GetMenu(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnReset").click(function () {
+    $('#txtMenuName').val('');
+    $('#txtName').val('');
+    $('#txtParent').val('');
+    GetMenu(currentPageNumber, currentPageSize, sortby);
+
+});
+
+
 function onPaging(pageNo) {
-    GetMenu(parseInt(pageNo), parseInt(currentPageSize));
+    GetMenu(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetMenu(parseInt(currentPageNumber), parseInt(pageSize));
+    GetMenu(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

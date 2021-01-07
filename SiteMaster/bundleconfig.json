@@ -310,5 +310,11 @@
     "inputFiles": [
       "wwwroot/js/permissionscreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/courtindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/courtindex.js"
+    ]
   }
 ]

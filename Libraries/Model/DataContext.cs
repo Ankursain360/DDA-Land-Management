@@ -14,7 +14,7 @@ namespace Libraries.Model
         {
 
         }
-
+        public virtual DbSet<Approvalstatus> Approvalstatus { get; set; }
         public virtual DbSet<Userprofile> Userprofile { get; set; }
         public virtual DbSet<SystemUser> SystemUser { get; set; }
         public virtual DbSet<Country> Country { get; set; }
@@ -232,8 +232,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DailyRoasterConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
+            modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
 
-            
+
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
