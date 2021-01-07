@@ -54,9 +54,6 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 
-
-
-
 // ********** Sorting Code  **********
 
 
@@ -69,8 +66,9 @@ function GetUserOrderBy(pageNumber, pageSize, order) {
 }
 
 function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-  
     if (value !== "0") {
         GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
     }
@@ -80,8 +78,9 @@ function Ascending() {
 };
 
 function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-  
     if (value !== "0") {
         GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
     }
@@ -89,8 +88,6 @@ function Descending() {
         alert('Please select SortBy Value');
     }
 };
-
-
 
 function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
     var model = {
