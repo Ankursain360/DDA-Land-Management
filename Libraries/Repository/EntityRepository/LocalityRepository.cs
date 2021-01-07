@@ -52,6 +52,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("LANDMARK"):
                         data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
                         break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
                 }
             }
             else if(SortOrder==2)
@@ -69,6 +72,9 @@ namespace Libraries.Repository.EntityRepository
                         break;
                     case ("LANDMARK"):
                         data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
                 }
             }

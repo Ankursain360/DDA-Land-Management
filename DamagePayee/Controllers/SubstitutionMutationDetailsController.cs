@@ -81,10 +81,11 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create(int id)
         {
             Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
-
             mutationdetailstemp.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(id);
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
+            ViewBag.DamagePayeeId = id;
+            ViewBag.Id = 0;
             if (mutationdetailstemp != null)
             {
                 return View(mutationdetailstemp);

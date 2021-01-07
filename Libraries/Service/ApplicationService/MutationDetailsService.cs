@@ -104,7 +104,7 @@ namespace Libraries.Service.ApplicationService
             oldDamage.IsActive = 1;
             return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
         }
-        public async Task<Damagepayeeregister> FetchMutationDetailsUserId(int Id)
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
         {
             return await _mutationDetailsRepository.FetchMutationDetailsUserId(Id);
         }

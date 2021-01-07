@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
       
     /* -----------Start Call Repeator Added by Renu  --------------- */
-    if ($("#DamagePayeeRegister_Id").val() != 0) {
+    if ($("#DamagePayeeRegisterId").val() != 0) {
         FillRepeatorAtEdit();
     }
 
@@ -35,7 +35,15 @@
         $("#DivForLitigationStatus").hide();
         $("#LitigationStatus").val("no case");
     }
-   
+
+    /*Mutation Purpose checks*/
+    if ($("#rdbPurchaser").is(":checked")) {
+        $("#DivForPurchasePurpose").show();
+        $("#MutationPurpose").val("Purchaser");
+    } else {
+        $("#DivForInheritancePurpose").hide();
+        $("#MutationPurpose").val("Inheritance");
+    }
 });
 
 //function onChangeZone(id) {
@@ -112,7 +120,7 @@ $(function () {
 function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Personeel Info Repeator Added by Renu  --------------- */
-    HttpGet(`/SubstitutionMutationDetails/GetDetailspersonelinfotemp/?Id=${$("#DamagePayeeRegister_Id").val() == null ? "" : $("#DamagePayeeRegister_Id").val()}`, 'json', function (data) {
+    HttpGet(`/SubstitutionMutationDetails/GetDetailspersonelinfotemp/?Id=${$("#DamagePayeeRegisterId").val() == null ? "" : $("#DamagePayeeRegisterId").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #DamagePayeeRegister_payeeName").val(data[i].name);
@@ -174,7 +182,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
     });
 
     /* -----------Allotte Type Repeator Added by Renu  --------------- */
-    HttpGet(`/SubstitutionMutationDetails/GetDetailsAllottetypetemp/?Id=${$("#DamagePayeeRegister_Id").val() == null ? "" : $("#DamagePayeeRegister_Id").val()}`, 'json', function (data) {
+    HttpGet(`/SubstitutionMutationDetails/GetDetailsAllottetypetemp/?Id=${$("#DamagePayeeRegisterId").val() == null ? "" : $("#DamagePayeeRegisterId").val()}`, 'json', function (data) {
         debugger
         for (var i = 0; i < data.length; i++) {
             $("#tbl_DamageAssessee #addDamageAssessee #DamagePayeeRegister_Name").val(data[i].name);
@@ -212,6 +220,16 @@ $("input[name='grpLitigation']").click(function () {
         $("#DivForLitigationStatus").hide();
     }
 });
+$("input[name='grpPurpose']").click(function () {
+    if ($("#rdbPurchaser").is(":checked")) {
+        $("#DivForPurchasePurpose").show();
+        $("#MutationPurpose").val("Purchaser");
+    } else {
+        $("#DivForInheritancePurpose").hide();
+        $("#MutationPurpose").val("Inheritance");
+    }
+});
+
 //************* Previous Damage assese RPT ******************
 
 //$(document).ready(function () {

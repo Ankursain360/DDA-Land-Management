@@ -30,8 +30,9 @@ namespace SiteMaster.Filters
         {
             var controllerName = context.ActionDescriptor.RouteValues["controller"];
             var actionName = context.ActionDescriptor.RouteValues["action"];
+            string url = "/" + controllerName + "/" ;
             bool hasPermission = await _permissionsService.ValidatePermission(_viewAction,
-                                _siteContext.RoleId.Value, _configuration.GetSection("ModuleId").Value);
+                                _siteContext.RoleId.Value, _configuration.GetSection("ModuleId").Value,url);
             if (!hasPermission)
             {
                 context.Result = new RedirectToRouteResult(
