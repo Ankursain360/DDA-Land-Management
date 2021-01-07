@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using EncroachmentDemolition.Models;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -14,6 +14,8 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
+
+
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -67,6 +69,8 @@ namespace EncroachmentDemolition.Controllers
         {
             try
             {
+                var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                onlinecomplaint.ReferenceNo = "TRN" + finalString;
                 onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
                 onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
               
@@ -85,6 +89,14 @@ namespace EncroachmentDemolition.Controllers
 
                     if (result == true)
                     {
+                        string DisplayName = onlinecomplaint.Name.ToString();
+                        string EmailID = onlinecomplaint.Email.ToString();
+                       
+                        string Action = "Dear " + DisplayName + ",  Your Complaint Register succesfully. Your Reference No is  "  +onlinecomplaint.ReferenceNo;
+                       
+                        GenerateMailOTP mail = new GenerateMailOTP();
+                        
+                        mail.GenerateMailFormatForComplaint(DisplayName, EmailID,  Action);
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
                         return View("Index", list);

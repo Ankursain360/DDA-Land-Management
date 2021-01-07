@@ -58,46 +58,40 @@ function GetStructureOrderBy(pageNumber, pageSize, order) {
         $('#divStructureTable').html(response);
     });
 }
+    function Ascending() {
+        $("#btnDescending").removeClass("active");
+        $("#btnAscending").addClass("active");
+        var value = $("#ddlSort").children("option:selected").val();
+        if (value !== "0") {
+            GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
+    };
 
-function Ascending() {
-    var value = $("#ddlSort").children("option:selected").val();
-  
-  
-    if (value !== "0") {
-        GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    function Descending() {
+        $("#btnAscending").removeClass("active");
+        $("#btnDescending").addClass("active");
+        var value = $("#ddlSort").children("option:selected").val();
+        if (value !== "0") {
+            GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
+        }
+        else {
+            alert('Please select SortBy Value');
+        }
+    };
+
+
+
+    function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+        var model = {
+            name: $('#txtName').val(),
+            sortBy: $("#ddlSort").children("option:selected").val(),
+            sortOrder: parseInt(sortOrder),
+            pageSize: parseInt(pageSize),
+            pageNumber: parseInt(pageNumber)
+        }
+        return model;
     }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-function Descending() {
-    var value = $("#ddlSort").children("option:selected").val();
-   
-   
-    if (value !== "0") {
-        GetStructureOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-
-
-function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
-    var model = {
-       
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
-    }
-    return model;
-}
-
-
-
-
-
 
