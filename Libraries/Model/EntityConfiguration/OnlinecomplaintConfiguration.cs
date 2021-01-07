@@ -59,6 +59,14 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+
+
+            builder.Property(e => e.ReferenceNo)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+
+
             builder.HasOne(d => d.ComplaintType)
                 .WithMany(p => p.Onlinecomplaint)
                 .HasForeignKey(d => d.ComplaintTypeId)
