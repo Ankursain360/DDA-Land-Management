@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
@@ -29,6 +31,32 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
         public Damagepayeeregister DamagePayeeRegister { get; set; }
+        [NotMapped]
+        public IFormFile AtsfilePathNew { get; set; }
+        [NotMapped]
+        public IFormFile GpafilePathNew { get; set; }
+        [NotMapped]
+        public IFormFile MoneyfilePathNew { get; set; }
+        [NotMapped]
+        public IFormFile SignSpecPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AddressProofPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AffidavitPathNew { get; set; }
+        [NotMapped]
+        public IFormFile IndemnityPathNew { get; set; }
+        [NotMapped]
+        public IFormFile PropertyPhotoPathNew { get; set; }
+        [NotMapped]
+        public IFormFile DeathCertificatePathNew { get; set; }
+        [NotMapped]
+        public IFormFile RelationshipUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile AffidevitLegalUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile NonObjectUploadPathNew { get; set; }
+        [NotMapped]
+        public IFormFile SpecimenSignLegalUploadNew { get; set; }
     }
 }
 

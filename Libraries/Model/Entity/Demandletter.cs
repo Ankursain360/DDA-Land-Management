@@ -23,6 +23,8 @@ namespace Libraries.Model.Entity
         public decimal? BalanceAmount { get; set; }
         public string DemandLetterFilePath { get; set; }
         public byte IsActive { get; set; }
+        [NotMapped]
+        public List<Demandletter> Damagelist { get; set; }
 
 
 

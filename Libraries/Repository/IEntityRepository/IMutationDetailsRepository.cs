@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IMutationDetailsRepository : IGenericRepository<Mutationdetails>
+    public interface IMutationDetailsRepository : IGenericRepository<Mutationdetailstemp>
     {
         Task<List<Mutationdetails>> GetAllMutationDetails();
         Task<List<Locality>> GetLocalityList();
@@ -30,7 +30,9 @@ namespace Libraries.Repository.IEntityRepository
         /*Repeater*/
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
         Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id);
-        Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId);
+        Task<Damagepayeeregister> FetchMutationDetailsUserId(int Id);
         Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model);
+        Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);
+        Task<List<Allottetype>> GetAllottetype(int id);
     }
 }

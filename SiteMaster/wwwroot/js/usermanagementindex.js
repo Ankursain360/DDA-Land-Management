@@ -54,9 +54,6 @@ function onChangePageSize(pageSize) {
     currentPageSize = pageSize;
 }
 
-
-
-
 // ********** Sorting Code  **********
 
 
@@ -69,8 +66,9 @@ function GetUserOrderBy(pageNumber, pageSize, order) {
 }
 
 function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-  
     if (value !== "0") {
         GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
     }
@@ -80,8 +78,9 @@ function Ascending() {
 };
 
 function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
-  
     if (value !== "0") {
         GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
     }
@@ -90,11 +89,12 @@ function Descending() {
     }
 };
 
-
-
 function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
     var model = {
-      
+        userName: $('#txtUserName').val(),
+        name: $('#txtName').val(),
+        phoneNumber: $('#txtPhoneNumber').val(),
+        email: $('#txtEmail').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

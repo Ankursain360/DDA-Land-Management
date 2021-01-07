@@ -51,6 +51,9 @@ namespace Repository.EntityRepository
                     case ("PHONENUMBER"):
                         data.Results = data.Results.OrderBy(x => x.User.PhoneNumber).ToList();
                         break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
                 }
             }
             else if (SortOrder == 2)
@@ -68,6 +71,9 @@ namespace Repository.EntityRepository
                         break;
                     case ("PHONENUMBER"):
                         data.Results = data.Results.OrderByDescending(x => x.User.PhoneNumber).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }
@@ -90,6 +96,9 @@ namespace Repository.EntityRepository
                     case ("NAME"):
                         data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
                 }
             }
             else if (SortOrder == 2)
@@ -98,6 +107,9 @@ namespace Repository.EntityRepository
                 {
                     case ("NAME"):
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }

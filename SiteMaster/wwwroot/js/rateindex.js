@@ -46,6 +46,8 @@ function GetRateOrderBy(order) {
 }
 
 function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
     $('#txtName').val('');
 
@@ -58,6 +60,8 @@ function Ascending() {
 };
 
 function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
    
     if (value !== "0") {
@@ -72,7 +76,8 @@ function Descending() {
 
 function GetSearchParamaOrderby(sortOrder) {
     var model = {
-       
+        name: "rate",
+        property: $('#txtProperty').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
        

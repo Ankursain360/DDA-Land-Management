@@ -129,6 +129,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("TODATE"):
                         data = data.OrderBy(x => x.ToDate).ToList();
                         break;
+                    case ("STATUS"):
+                        data = data.OrderBy(x => x.IsActive).ToList();
+                        break;
 
                 }
             }
@@ -144,6 +147,9 @@ namespace Libraries.Repository.EntityRepository
                         break;
                     case ("TODATE"):
                         data = data.OrderByDescending(x => x.ToDate).ToList();
+                        break;
+                    case ("STATUS"):
+                        data = data.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }

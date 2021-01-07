@@ -10,6 +10,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Demandletter>> GetPagedDemandletter(DemandletterSearchDto model);
         Task<List<Demandletter>> GetAllDemandletter();
+        Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
 
     }
 }

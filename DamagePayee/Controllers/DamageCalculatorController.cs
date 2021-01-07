@@ -801,7 +801,7 @@ namespace DamagePayee.Controllers
             return damageCalculatorRateMappingDto;
         }
 
-
+        
         //[HttpPost]
         //public async Task<IActionResult> Index(Damagecalculation damagecalculation)
         //{
