@@ -10,6 +10,8 @@ $("#btnSearch").click(function () {
     GetDepartment(currentPageNumber, currentPageSize);
 });
 function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
     $('#txtName').val('')
     if (value !== "0") {
@@ -20,6 +22,8 @@ function Descending() {
     }
 };
 function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
     var value = $("#ddlSort").children("option:selected").val();
     $('#txtName').val('')
    

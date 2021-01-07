@@ -88,7 +88,7 @@ namespace DamagePayeePublicInterface.Controllers
         {
             Mutationdetails mutationdetails = new Mutationdetails();
 
-            mutationdetails.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(SiteContext.UserId);
+            //mutationdetails.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(SiteContext.UserId);
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
             if (mutationdetails != null)
@@ -104,7 +104,7 @@ namespace DamagePayeePublicInterface.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(int id, Mutationdetails mutationDetails)
+        public async Task<IActionResult> Create(int id, Mutationdetailstemp mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
 
@@ -278,7 +278,7 @@ namespace DamagePayeePublicInterface.Controllers
                 }
                 if (mutationDetails.NonObjectUploadPathNew != null)
                 {
-                    mutationDetails.NonObjectUploadPath = fileHelper.SaveFile(noObjectionCertificate, mutationDetails.NonObjectUploadPathNew);
+                    mutationDetails.NonObjectHeirUploadPath = fileHelper.SaveFile(noObjectionCertificate, mutationDetails.NonObjectUploadPathNew);
                 }
                 if (mutationDetails.SpecimenSignLegalUploadNew != null)
                 {
