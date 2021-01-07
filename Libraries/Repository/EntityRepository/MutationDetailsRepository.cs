@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -116,6 +117,17 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Allottetypetemp)
                                     .Where(x => x.UserId == userId)
                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
+        {
+            return await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+                                   .Where(x => x.IsActive == 1  && x.ApprovedStatus == 1
+                                   //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                   )
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
         }
     }
 }

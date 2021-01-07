@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -106,6 +107,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
         {
             return await _mutationDetailsRepository.FetchMutationDetailsUserId(userId);
+        }
+
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
+        {
+            return await _mutationDetailsRepository.GetPagedSubsitutionMutationDetails(model);
         }
     }
 }

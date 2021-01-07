@@ -44,6 +44,16 @@ namespace DamagePayee.Controllers
             _configuration = configuration;
             _damagepayeeregisterService = damagePayeeReg;
         }
+        public IActionResult Index1()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] SubstitutionMutationDetailsDto model)
+        {
+            var result = await _mutationDetailsService.GetPagedSubsitutionMutationDetails(model);
+            return PartialView("_List", result);
+        }
         public async Task<IActionResult> Index(int id)
         {
             Mutationdetails Model = new Mutationdetails();
@@ -68,7 +78,7 @@ namespace DamagePayee.Controllers
             DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
             DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
             Mutationdetails mutationdetails = new Mutationdetails();
 

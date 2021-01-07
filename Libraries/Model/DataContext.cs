@@ -163,6 +163,7 @@ namespace Libraries.Model
         public virtual DbSet<Comsubencroacherstype> Comsubencroacherstype { get; set; }
         public virtual DbSet<Ressubencroacherstype> Ressubencroacherstype { get; set; }
         public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
+        public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -290,6 +291,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ComSubEncroachersTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ComEncrochmentTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

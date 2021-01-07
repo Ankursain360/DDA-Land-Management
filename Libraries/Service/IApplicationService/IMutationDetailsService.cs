@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Libraries.Repository.Common;
+using Dto.Search;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -29,6 +30,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
 
         Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId);
-
+        Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model);
     }
 }

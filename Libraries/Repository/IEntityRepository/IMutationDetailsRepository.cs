@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
         Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id);
         Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId);
-
+        Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model);
     }
 }
