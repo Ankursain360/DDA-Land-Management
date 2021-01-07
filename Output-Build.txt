@@ -1,0 +1,8 @@
+﻿Build started...
+1>------ Build started: Project: SiteMaster, Configuration: Debug Any CPU ------
+1>
+1>Bundler: Begin processing bundleconfig.json
+1>Bundler: Done processing bundleconfig.json
+1>SiteMaster -> C:\Users\Parul\DDA-Land-Management\SiteMaster\bin\Debug\netcoreapp3.1\SiteMaster.dll
+1>SiteMaster -> C:\Users\Parul\DDA-Land-Management\SiteMaster\bin\Debug\netcoreapp3.1\SiteMaster.Views.dll
+========== Build: 1 succeeded, 0 failed, 7 up-to-date, 0 skipped ==========

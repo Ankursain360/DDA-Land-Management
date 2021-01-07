@@ -44,13 +44,43 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Zone>> GetPagedZone(ZoneSearchDto model)
         {
-            return await _dbContext.Zone.Include(s => s.Department)
+            var data = await _dbContext.Zone.Include(s => s.Department)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
                             .OrderBy(s => s.Department.Name)
                             .OrderBy(s => s.Name)
                              .OrderByDescending(s => s.IsActive)
                         .GetPaged<Zone>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        break;
+                  
+                   
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        break;
+                  
+                   
+                }
+            }
+            return data;
         }
     }
 

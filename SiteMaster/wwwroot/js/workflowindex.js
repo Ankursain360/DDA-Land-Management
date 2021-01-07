@@ -2,13 +2,21 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-   // debugger;
+    // debugger;
     GetDetails(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize);
+});
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtModule').val('');
 
+    GetDetails(currentPageNumber, currentPageSize);
+});
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-  //  debugger;
+    //  debugger;
     HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
@@ -20,8 +28,16 @@ function GetDetails(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
+    var sorbyname = $('#Sortbyd').val();
+    var sortdesc = $("#sortdesc").val();
+    if (sorbyname) { } else {
+        sorbyname = 'Name';
+    }
     var model = {
-        name: "test",
+        name: $('#txtName').val(),
+        module: $('#txtModule').val(),
+        colname: sorbyname,
+        orderby: sortdesc,
         pageSize: pageSize,
         pageNumber: pageNumber
     }
@@ -39,3 +55,17 @@ function onChangePageSize(pageSize) {
     GetDetails(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
+
+$("#ascId").click(function () {
+    alert("dd");
+    $("#descId").removeClass("active");
+    $("#ascId").addClass("active");
+    $("#sortdesc").val(1);
+    GetDetails(currentPageNumber, currentPageSize);
+});
+$("#descId").click(function () {
+    $("#ascId").removeClass("active");
+    $("#descId").addClass("active");
+    $("#sortdesc").val(2);
+    GetDetails(currentPageNumber, currentPageSize);
+});

@@ -22,20 +22,57 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
         {
-            return await _dbContext.Locality
-                        .Include(x=>x.Zone)
-                        .Include(x=>x.Department)
-                        .Include(x=>x.Division)
+            var data= await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
                               && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
                                && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
-                            .OrderBy(s => s.Department.Name)
                              .OrderByDescending(s => s.IsActive)
                             .ThenBy(s => s.Zone.Name)
                             .ThenBy(s => s.Division.Name)
-                            .ThenBy(s => s.Name)
-                        .GetPaged<Locality>(model.PageNumber, model.PageSize);
+                            .ThenBy(s => s.Name).GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                      
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder==1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                       data.Results= data.Results.OrderBy(x => x.Name).ToList(); 
+                        break;
+                    case ("LOCALITYCODE"):
+                        data.Results = data.Results.OrderBy(x => x.LocalityCode).ToList(); 
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderBy(x => x.Address).ToList(); 
+                        break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                        break;
+                }
+            }
+            else if(SortOrder==2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("LOCALITYCODE"):
+                        data.Results = data.Results.OrderByDescending(x => x.LocalityCode).ToList();
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderByDescending(x => x.Address).ToList();
+                        break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
+                        break;
+                }
+            }
+            return data;
         }
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {

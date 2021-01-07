@@ -1,10 +1,12 @@
-﻿using Dto.Search;
+﻿using Core.Enum;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using SiteMaster.Filters;
 using System;
 using System.Threading.Tasks;
 
@@ -18,6 +20,7 @@ namespace SiteMaster.Controllers
         {
             _courtService = courtService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -28,7 +31,7 @@ namespace SiteMaster.Controllers
             var result = await _courtService.GetPagedCourt(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -36,6 +39,7 @@ namespace SiteMaster.Controllers
 
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Court court)
         {
@@ -73,7 +77,7 @@ namespace SiteMaster.Controllers
                 return View(court);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _courtService.FetchSingleResult(id);
@@ -85,6 +89,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Court court)
         {

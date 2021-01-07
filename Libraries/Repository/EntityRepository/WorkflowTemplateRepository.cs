@@ -22,10 +22,41 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<WorkflowTemplate>> GetPagedWorkflowTemplate(WorkflowTemplateSearchDto model)
         {
-            return await _dbContext.WorkflowTemplate.Include(x => x.Module).GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
+            model.name = model.name == null ? string.Empty : model.name.Trim();
+            model.module = model.module == null ? string.Empty : model.module.Trim();
+            var data = await _dbContext.WorkflowTemplate.Include(x => x.Module)
+              .Where(x => x.Name.Contains(model.name))
+              .Where(x=>x.Module.Name.Contains(model.module))
+                              .OrderByDescending(s => s.IsActive)
+                               .ThenBy(s => s.Name)
+                                 .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                   
+
+                }
+            }
+            return data;
         }
 
         public async Task<bool> Any(int id, string name)
+
         {
             return await _dbContext.Designation.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }

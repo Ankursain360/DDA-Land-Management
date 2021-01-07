@@ -28,7 +28,9 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
+                              asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" 
+                            onchange="return onChangeZone(this.options[this.selectedIndex].value)">
 
                         <option selected="selected" disabled="disabled" value="">Select </option>
                     </select>

@@ -16,9 +16,58 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        //public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
+        //{
+        //    return await _dbContext.Module.GetPaged<Module>(model.PageNumber, model.PageSize);
+        //}
+
         public async Task<PagedResult<Module>> GetPagedModule(ModuleSearchDto model)
         {
-            return await _dbContext.Module.GetPaged<Module>(model.PageNumber, model.PageSize);
+            
+            var data = await _dbContext.Module.Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.url) || x.Url.Contains(model.url))
+                   && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
+
+                
+                            
+                  .OrderByDescending(s => s.IsActive)
+                  .ThenBy(s => s.Name)
+                  .GetPaged<Module>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("DESCRIPTION"):
+                        data.Results = data.Results.OrderBy(x => x.Description).ToList();
+                        break;
+                    case ("URL"):
+                        data.Results = data.Results.OrderBy(x => x.Url).ToList();
+                        break;
+                   
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("DESCRIPTION"):
+                        data.Results = data.Results.OrderByDescending(x => x.Description).ToList();
+                        break;
+                    case ("URL"):
+                        data.Results = data.Results.OrderByDescending(x => x.Url).ToList();
+                        break;
+                   
+                }
+            }
+            return data;
         }
 
         public async Task<List<Module>> GetModule()

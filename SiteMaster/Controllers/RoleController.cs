@@ -1,4 +1,5 @@
-﻿using Dto.Master;
+﻿using Core.Enum;
+using Dto.Master;
 using Dto.Search;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -9,6 +10,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Service.IApplicationService;
+using SiteMaster.Filters;
 using System;
 using System.Threading.Tasks;
 
@@ -25,7 +27,7 @@ namespace SiteMaster.Controllers
             _roleService = roleService;
             _userProfileService = userProfileService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -38,6 +40,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -45,6 +48,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(RoleDto model)
         {
             if (ModelState.IsValid)
@@ -88,7 +92,7 @@ namespace SiteMaster.Controllers
                 return Json($"Role: {Name} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var result = await _userProfileService.GetRoleById(id);
@@ -101,6 +105,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, RoleDto model)
         {
             if (ModelState.IsValid)
@@ -115,8 +120,7 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
-
-
+     
 
 
         public async Task<IActionResult> Delete(int id, RoleDto model)
@@ -125,7 +129,7 @@ namespace SiteMaster.Controllers
             {
                 //if (ModelState.IsValid)
                 //{
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                     var list = await _userProfileService.DeleteRole(model);
                     return View("Index", list);
                 //}
