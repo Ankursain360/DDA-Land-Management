@@ -81,21 +81,17 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Create(int id)
         {
             Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
-            mutationdetailstemp.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(id);
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchMutationSingleResult(id);
+            if(Data != null)
+            {
+                mutationdetailstemp = Data;
+            }
+            mutationdetailstemp.DamagePayeeRegister = await _mutationDetailsService.FetchDamageResult(id);
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
             ViewBag.DamagePayeeId = id;
             ViewBag.Id = 0;
-            if (mutationdetailstemp != null)
-            {
-                return View(mutationdetailstemp);
-            }
-            else
-            {
-                return View(mutationdetailstemp);
-            }
-
-
+            return View(mutationdetailstemp);
         }
 
         [HttpPost]
@@ -507,6 +503,54 @@ namespace DamagePayee.Controllers
             FileHelper file = new FileHelper();
             Damagepayeeregistertemp Data = await _damagepayeeregisterService.FetchSingleResult(Id);
             string path = Data.PropertyPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewAtsFileMutation(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.AtsfilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewDeathCertificate(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.DeathCertificatePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewRelationshipUpload(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.RelationshipUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewAffidevitLegalUpload(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.AffidevitLegalUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewNonObjectHeirUpload(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.NonObjectHeirUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+        }
+        public async Task<IActionResult> ViewSpecimenSignLegalUpload(int Id)
+        {
+            FileHelper file = new FileHelper();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
+            string path = Data.SpecimenSignLegalUpload;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
