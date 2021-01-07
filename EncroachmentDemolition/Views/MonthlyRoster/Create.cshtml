@@ -50,7 +50,7 @@
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <select class="floating-label-field floating-label-field--s3" asp-for="SecurityGuard">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="SecurityGuard" asp-items="@(new SelectList(Model.SecurityGuardList, "Id","User.NormalizedUserName"))">
                                 </select>
                                 <label asp-for="SecurityGuard" class="floating-label">Security Guard</label>
 
