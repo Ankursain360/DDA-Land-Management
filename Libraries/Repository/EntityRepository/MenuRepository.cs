@@ -70,11 +70,12 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-
-
-
-
-
-
+        public  int GetMenuIdByUrl(string url, int id)
+        {
+           int menuId =   (from x in _dbContext.Menu
+                 where x.ModuleId == id && x.Url.Contains(url) /*x.Url == url*/
+                 select x.Id).First();
+            return menuId;
+        }
     }
 }

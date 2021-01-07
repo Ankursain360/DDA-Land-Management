@@ -53,14 +53,16 @@ namespace Libraries.Repository.EntityRepository
             
         }
 
-        public async Task<bool> AuthorizeUser(string actionName, int roleId, int moduleId)
+        public async Task<bool> AuthorizeUser(string actionName, int roleId, int moduleId, int menuId)
         {
             return await _dbContext.Menuactionrolemap
                 .Include(a => a.Action)
                 .Include(a => a.Menu)
                 .Where(a => a.Action.Name == actionName
                     && a.RoleId == roleId
-                    && a.ModuleId == moduleId)
+                    && a.ModuleId == moduleId
+                    && a.MenuId == menuId
+                    )
                 .AnyAsync();
         }
     }

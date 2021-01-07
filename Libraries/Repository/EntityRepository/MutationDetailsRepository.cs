@@ -109,12 +109,12 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<Damagepayeeregister> FetchMutationDetailsUserId(int Id)
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
         {
-            return await _dbContext.Damagepayeeregister
-                                    .Include(x => x.Damagepayeepersonelinfo)
-                                    .Include(x => x.Damagepaymenthistory)
-                                    .Include(x => x.Allottetype)
+            return await _dbContext.Damagepayeeregistertemp
+                                    .Include(x => x.Damagepayeepersonelinfotemp)
+                                    .Include(x => x.Damagepaymenthistorytemp)
+                                    .Include(x => x.Allottetypetemp)
                                     .Where(x => x.Id == Id)
                                     .FirstOrDefaultAsync();
         }
