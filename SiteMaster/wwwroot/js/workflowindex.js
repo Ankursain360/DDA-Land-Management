@@ -57,7 +57,7 @@ function onChangePageSize(pageSize) {
 }
 
 $("#ascId").click(function () {
-    alert("dd");
+ 
     $("#descId").removeClass("active");
     $("#ascId").addClass("active");
     $("#sortdesc").val(1);

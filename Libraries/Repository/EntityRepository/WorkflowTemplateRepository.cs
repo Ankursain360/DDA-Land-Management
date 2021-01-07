@@ -27,8 +27,8 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.WorkflowTemplate.Include(x => x.Module)
               .Where(x => x.Name.Contains(model.name))
               .Where(x=>x.Module.Name.Contains(model.module))
-                              .OrderByDescending(s => s.IsActive)
-                               .ThenBy(s => s.Name)
+                         
+                             
                                  .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.orderby;
             if (SortOrder == 1)
@@ -38,8 +38,16 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
-                    
+                    case ("MODULE"):
+                        data.Results = data.Results.OrderBy(x => x.ModuleId).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+
+
                 }
+
             }
             else if (SortOrder == 2)
             {
@@ -48,7 +56,13 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
-                   
+                    case ("MODULE"):
+                        data.Results = data.Results.OrderByDescending(x => x.ModuleId).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+
 
                 }
             }
