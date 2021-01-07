@@ -24,6 +24,18 @@ namespace EncroachmentDemolition.Models
 
         }
 
+        public void GenerateMailFormatForComplaint(string DisplayName, String EmailID,  string Action)
+        {
+
+           
+            string body = Action;
+            string Sub = "Complain Register ";
+            string link = "";
+
+            this.sendMail(EmailID, Sub, body, link);
+
+        }
+
         private string PopulateBodyForPassword(string DisplayName, String EmailID, String LoginName, string Password, string Link, string Path, string Action)
         {
             string body = string.Empty; 

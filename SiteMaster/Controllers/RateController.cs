@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -27,27 +29,28 @@ namespace SiteMaster.Controllers
             _rateService = rateService;
         }
 
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var result = await _rateService.GetAllRate();
+        //    return View(result);
+        //}
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
         {
-            var result = await _rateService.GetAllRate();
-            return View(result);
+            return View();
         }
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] RateSearchDto model)
+        public async Task<PartialViewResult> List([FromBody]RateSearchDto model)
         {
-            var result = await _rateService.GetPagedRate(model);
+            var result = await _rateService.GetSearchResult(model);
             return PartialView("_List", result);
         }
         async Task BindDropDown(Rate rate)
         {
             rate.PropertyTypeList = await _rateService.GetDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Rate rate = new Rate();
@@ -58,6 +61,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Rate rate)
         {
             try
@@ -93,7 +97,7 @@ namespace SiteMaster.Controllers
                 return View(rate);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _rateService.FetchSingleResult(id);
@@ -107,6 +111,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Rate rate)
         {
             await BindDropDown(rate);

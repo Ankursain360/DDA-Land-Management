@@ -16,6 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> AnyName(int Id,int ModuleId, string Name);
         //Task<bool> AnyCode(int id, string name);
         Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model);
-        
+        int GetMenuIdByUrl(string url, int id);
     }
 }

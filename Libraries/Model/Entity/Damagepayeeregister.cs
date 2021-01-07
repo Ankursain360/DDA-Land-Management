@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
             Allottetype = new HashSet<Allottetype>();
             Damagepayeepersonelinfo = new HashSet<Damagepayeepersonelinfo>();
             Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
-            
+            Mutationdetailstemp = new HashSet<Mutationdetailstemp>();
         }
 
        
@@ -137,13 +137,10 @@ namespace Libraries.Model.Entity
         public List <DateTime?> PaymentDate { get; set; }
         [NotMapped]
         public List <decimal?> Amount { get; set; }
-       
-       
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
+        public ICollection<Mutationdetailstemp> Mutationdetailstemp { get; set; }
 
-
-       
 
 
     }

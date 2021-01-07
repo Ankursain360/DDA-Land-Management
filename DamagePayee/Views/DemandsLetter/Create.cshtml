@@ -1,0 +1,155 @@
+﻿@model Libraries.Model.Entity.Demandletter
+@await Component.InvokeAsync("PageHeader", new { pageName = "Demandletter" })
+
+
+
+<div class="pt-3">
+
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbFilename" value="1">
+                    <label class="form-check-label" for="radio">
+                        By File Name
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="grpSearchby" id="rdbPayeename" value="1">
+                    <label class="form-check-label" for="radio">
+                        By Payee Name
+                    </label>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="DivForFileName" style="display:none">
+            <h3 class="my-3 d-flex sub-heading">By File Name</h3>
+            <div class="row">
+
+
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input placeholder="Date of Encroachment" type="text"
+                               class="floating-label-field floating-label-field--s3" asp-for="FileNo" />
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label"> File No <span style="color:red">*</span></label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row pt-3">
+                <div class="col-md-12">
+                    <input type="submit" value="Create" class="btn btn-theme " />
+                    @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
+                    @Html.ActionLink("Back", "Index", "DemandsLetter", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+
+
+        </div>
+
+        <div id="DivForPayeeName" style="display:none">
+            <h3 class="my-3 d-flex sub-heading">By Payee Name</h3>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Inactive</option>
+                        </select>
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Zone<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Inactive</option>
+                        </select>
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Locality(Village)<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" style="width:100%;">
+                            <option value="0">---Select---</option>
+                            <option value="1">Inactive</option>
+                        </select>
+                        <span class="d-block text-danger field-validation-valid"></span>
+                        <label class="floating-label">Payee Name<span style="color:red">*</span> </label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <div id="LoadView">
+        </div>
+    </form>
+
+</div>
+
+
+<script>
+
+    $(function () {
+        $("input[name='grpSearchby']").click(function () {
+            if ($("#rdbFilename").is(":checked")) {
+                $("#DivForFileName").show();
+                $("#DivForPayeeName").hide();
+                $("#DivForGenerate").show();
+            }
+           else if ($("#rdbPayeename").is(":checked")) {
+                $("#DivForFileName").hide();
+                $("#DivForPayeeName").show();
+                $("#DivForGenerate").show();
+            }
+                //else {
+            //    $("#DivForFileName").hide();
+            //    $("#DivForPayeeName").hide();
+            //}
+        });
+    });
+
+
+    @*on generate click show report*@
+    //$("#btnGenerate").click(function () {
+       // $("DivDemandReport").show();
+   // });
+
+
+    $("#btnGenerate").click(function () {
+        debugger
+        var result = ValidateForm();
+        if (result) {
+            var Id = $("#file_id").val();
+            alert(Id);
+            $.get(`/NoticeToDamagePayee/GetDetails/?fileNo=${Id}`, function (response) {
+               // alert(response);
+                $.get(`/NoticeToDamagePayee/GetPersonalInfo/?Id=${response}`, function (res) {
+                    alert(res);
+                    $('#LoadView').html("");
+                    $('#LoadView').html(res);
+                });
+            });
+        }
+    });
+
+</script>
+

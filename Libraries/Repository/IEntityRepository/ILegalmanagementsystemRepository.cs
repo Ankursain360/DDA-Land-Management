@@ -12,12 +12,18 @@ namespace Libraries.Repository.IEntityRepository
     public interface ILegalmanagementsystemRepository : IGenericRepository<Legalmanagementsystem>
     {
         Task<List<Zone>> GetZoneList();
-        Task<List<Locality>> GetLocalityList(int zoneId);
+        Task<List<Locality>> GetLocalityList (int zoneId);
+        Task<List<Casestatus>> GetCasestatusList();
+        Task<List<Courttype>> GetCourttypeList();
 
         Task<List<Legalmanagementsystem>> GetFileNoList();
         Task<List<Legalmanagementsystem>> GetCourtCaseNoList(int filenoId);
 
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
+        Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList();
+
+        Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto);
+
 
     }
 }

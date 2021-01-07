@@ -13,7 +13,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);" required="required" requiredmsg="The Department field is required">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        <option selected="selected"  value="">--Select-- </option>
                     </select>
                     <label asp-validation-for="DepartmentId" class="error"></label>
                     <label asp-for="DepartmentId" class="floating-label">Department </label>
@@ -22,8 +22,10 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Zone field is required">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" 
+                            asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" 
+                            onchange="return onChangeZone(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Zone field is required">
+                        <option selected="selected" value="">--Select-- </option>
                     </select>
                     <label asp-validation-for="ZoneId" class="error"></label>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
@@ -36,8 +38,10 @@
             <div class="col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" required="required" requiredMsg="The Division field is required">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" 
+                            asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" 
+                            onchange="return onChangeZone(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Division field is required">
+                        <option selected="selected" value="">--Select-- </option>
                     </select>
                     <label asp-validation-for="DivisionId" class="error"></label>
                     <label asp-for="DivisionId" class="floating-label">Division </label>

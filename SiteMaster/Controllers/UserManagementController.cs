@@ -16,6 +16,8 @@ using Model.Entity;
 using Dto.Master;
 using Service.IApplicationService;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -36,6 +38,7 @@ namespace SiteMaster.Controllers
             _userProfileService = userProfileService;
             _userManager = userManager;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -50,7 +53,7 @@ namespace SiteMaster.Controllers
             return PartialView("_List", result);
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             AddUserDto model = new AddUserDto()
@@ -64,6 +67,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(AddUserDto model)
         {
             if (ModelState.IsValid)
@@ -91,7 +95,7 @@ namespace SiteMaster.Controllers
                 return Json($"User: {UserName} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var user = await _userProfileService.GetUserById(id);
@@ -102,6 +106,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(EditUserDto model)
         {
             if (ModelState.IsValid)
@@ -131,8 +136,8 @@ namespace SiteMaster.Controllers
         public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
             DepartmentId = DepartmentId ?? 0;
-            //return Json(await _userService.GetAllZone(Convert.ToInt32(DepartmentId)));
-            return Json("");
+            return Json(await _userProfileService.GetAllZone(Convert.ToInt32(DepartmentId)));
+            
         }
 
         [HttpPost]

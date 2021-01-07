@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class MutationDetailsRepository : GenericRepository<Mutationdetails>, IMutationDetailsRepository
+    public class MutationDetailsRepository : GenericRepository<Mutationdetailstemp>, IMutationDetailsRepository
     {
         public MutationDetailsRepository(DataContext dbContext) : base(dbContext)
         {
@@ -108,14 +109,33 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
         {
             return await _dbContext.Damagepayeeregistertemp
                                     .Include(x => x.Damagepayeepersonelinfotemp)
                                     .Include(x => x.Damagepaymenthistorytemp)
                                     .Include(x => x.Allottetypetemp)
-                                    .Where(x => x.UserId == userId)
+                                    .Where(x => x.Id == Id)
                                     .FirstOrDefaultAsync();
+        }
+
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
+        {
+            return await _dbContext.Damagepayeeregister
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.District)
+                                   .Where(x => x.IsActive == 1  && x.ApprovedStatus == 1
+                                   //&& (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                   )
+                                   .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+        }
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
+        {
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        }
+        public async Task<List<Allottetype>> GetAllottetype(int id)
+        {
+            return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class MutationDetailsService : EntityService<Mutationdetails>, IMutationDetailsService
+    public class MutationDetailsService : EntityService<Mutationdetailstemp>, IMutationDetailsService
 
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -27,7 +28,7 @@ namespace Libraries.Service.ApplicationService
             _dbContext = dbContext;
         }
 
-        public async Task<bool> Create(Mutationdetails details)
+        public async Task<bool> Create(Mutationdetailstemp details)
         {
             details.CreatedBy = 1;
             details.CreatedDate = DateTime.Now;
@@ -51,7 +52,7 @@ namespace Libraries.Service.ApplicationService
             return districtList;
         }
 
-        public Task<bool> Update(int id, Mutationdetails details)
+        public Task<bool> Update(int id, Mutationdetailstemp details)
         {
             throw new NotImplementedException();
         }
@@ -103,9 +104,24 @@ namespace Libraries.Service.ApplicationService
             oldDamage.IsActive = 1;
             return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
         }
-        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int userId)
+        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
         {
-            return await _mutationDetailsRepository.FetchMutationDetailsUserId(userId);
+            return await _mutationDetailsRepository.FetchMutationDetailsUserId(Id);
+        }
+
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
+        {
+            return await _mutationDetailsRepository.GetPagedSubsitutionMutationDetails(model);
+        }
+
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
+        {
+            return await _mutationDetailsRepository.GetPersonalInfo(id);
+        }
+
+        public async Task<List<Allottetype>> GetAllottetype(int id)
+        {
+            return await _mutationDetailsRepository.GetAllottetype(id);
         }
     }
 }

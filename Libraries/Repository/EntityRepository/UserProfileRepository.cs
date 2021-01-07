@@ -1,5 +1,6 @@
 ﻿using Dto.Search;
 using Libraries.Model;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
@@ -19,7 +20,7 @@ namespace Repository.EntityRepository
         public async Task<PagedResult<Userprofile>> GetPagedUser(UserManagementSearchDto model)
         {
 
-            var result = await _dbContext.Userprofile
+            var data = await _dbContext.Userprofile
                                     .Include(a => a.User)
                                     .Include(a => a.Role)
                                     .Include(a => a.Department)
@@ -32,14 +33,91 @@ namespace Repository.EntityRepository
                                         && (a.IsActive == 1)
                                     )
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
-            return result;
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.User.Name).ToList();
+                        break;
+                    case ("USERNAME"):
+                        data.Results = data.Results.OrderBy(x => x.User.UserName).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderBy(x => x.User.Email).ToList();
+                        break;
+                    case ("PHONENUMBER"):
+                        data.Results = data.Results.OrderBy(x => x.User.PhoneNumber).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Name).ToList();
+                        break;
+                    case ("USERNAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.UserName).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Email).ToList();
+                        break;
+                    case ("PHONENUMBER"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.PhoneNumber).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            
+            return data;
         }
 
         public async Task<PagedResult<ApplicationRole>> GetPagedRole(RoleSearchDto model)
         {
-            var result = await _dbContext.Roles.
-                            GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
-            return result;
+            var data = await _dbContext.Roles
+                           .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderByDescending(s => s.IsActive)
+                       .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+           
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            return data;
+
+            //var result = await _dbContext.Roles.
+            //                GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+            //return result;
         }
 
         public async Task<List<Userprofile>> GetUser()
@@ -84,6 +162,12 @@ namespace Repository.EntityRepository
         public async Task<bool> ValidateUniqueUserName(int id, string userName)
         {
             return await _dbContext.Users.AnyAsync(t => t.Id != id && t.Name.ToLower() == userName.ToLower());
+        }
+
+        public async Task<List<Zone>> GetAllZone(int departmentId)
+        {
+            List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive == 1).ToListAsync();
+            return zoneList;
         }
     }
 }

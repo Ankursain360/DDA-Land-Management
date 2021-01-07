@@ -90,5 +90,9 @@ namespace Libraries.Service.IApplicationService
         {
             return _interestRepository.IsRecordExist(propertyId);
         }
+        public async Task<List<Interest>> GetSearchResult(InterestSearchDto model)
+        {
+            return await _interestRepository.GetSearchResult(model);
+        }
     }
 }

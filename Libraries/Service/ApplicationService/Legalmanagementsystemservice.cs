@@ -35,7 +35,20 @@ namespace Service.ApplicationService
             List<Locality> localityList = await _legalmanagementsystemRepository.GetLocalityList(zoneId);
             return localityList;
         }
+
        
+        public async Task<List<Casestatus>> GetCasestatusList()
+        {
+            List<Casestatus> casestatusList = await _legalmanagementsystemRepository.GetCasestatusList();
+            return casestatusList;
+        }
+
+        public async Task<List<Courttype>> GetCourttypeList()
+        {
+            List<Courttype> courttypeList = await _legalmanagementsystemRepository.GetCourttypeList();
+            return courttypeList;
+        }
+
         public async Task<List<Legalmanagementsystem>> GetFileNoList()   
         {
             List<Legalmanagementsystem> fileNoList = await _legalmanagementsystemRepository.GetFileNoList();
@@ -49,6 +62,15 @@ namespace Service.ApplicationService
         public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model)
         {
             return await _legalmanagementsystemRepository.GetPagedLegalReport(model);
+        }
+        public async Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto)
+        {
+            return await _legalmanagementsystemRepository.GetLegalmanagementsystemReportData(hearingReportSearchDto);
+        }
+        public async Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList()
+        {
+            List<Legalmanagementsystem> legalmanagementsytemlist = await _legalmanagementsystemRepository.GetLegalmanagementsystemList();
+            return legalmanagementsytemlist;
         }
     }
 }

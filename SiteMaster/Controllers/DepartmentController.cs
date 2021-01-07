@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,6 +28,7 @@ namespace SiteMaster.Controllers
         {
             _departmentService = departmentService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -36,12 +39,14 @@ namespace SiteMaster.Controllers
             var result = await _departmentService.GetPagedDepartment(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Department department)
         {
@@ -57,7 +62,7 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        //return View();
+                        
                         var list = await _departmentService.GetAllDepartment();
                         return View("Index", list);
                     }
@@ -79,7 +84,7 @@ namespace SiteMaster.Controllers
                 return View(department);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _departmentService.FetchSingleResult(id);
@@ -91,6 +96,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Department department)
         {
@@ -142,7 +148,7 @@ namespace SiteMaster.Controllers
         }
 
 
-       
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             //try
@@ -176,7 +182,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try

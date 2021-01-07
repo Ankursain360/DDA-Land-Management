@@ -4,6 +4,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +13,17 @@ using System.Threading.Tasks;
 
 namespace Service.ApplicationService
 {
-     public class DamagepayeeregisterService : EntityService<Damagepayeeregistertemp>, IDamagepayeeregisterService
+    public class DamagepayeeregisterService : EntityService<Damagepayeeregistertemp>, IDamagepayeeregisterService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDamagepayeeregisterRepository _damagepayeeregisterRepository;
-
-        public DamagepayeeregisterService(IUnitOfWork unitOfWork, IDamagepayeeregisterRepository damagepayeeregisterRepository)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public DamagepayeeregisterService(IUnitOfWork unitOfWork, IDamagepayeeregisterRepository damagepayeeregisterRepository, UserManager<ApplicationUser> userManager)
         : base(unitOfWork, damagepayeeregisterRepository)
         {
             _unitOfWork = unitOfWork;
             _damagepayeeregisterRepository = damagepayeeregisterRepository;
+            _userManager = userManager;
         }
 
         public async Task<List<Locality>> GetLocalityList()
@@ -84,7 +86,7 @@ namespace Service.ApplicationService
             model.CommercialSqMt = damagepayeeregistertemp.CommercialSqMt;
             model.LitigationStatus = damagepayeeregistertemp.LitigationStatus;
             model.CourtName = damagepayeeregistertemp.CourtName;
-            model.CaseNo = damagepayeeregistertemp.CaseNo; 
+            model.CaseNo = damagepayeeregistertemp.CaseNo;
 
             model.OppositionName = damagepayeeregistertemp.OppositionName;
             model.PetitionerRespondent = damagepayeeregistertemp.PetitionerRespondent;
@@ -94,7 +96,7 @@ namespace Service.ApplicationService
             model.FgformPath = damagepayeeregistertemp.FgformPath;
             model.IsDocumentFor = damagepayeeregistertemp.IsDocumentFor;
             model.DocumentForFilePath = damagepayeeregistertemp.DocumentForFilePath;
-           
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _damagepayeeregisterRepository.Edit(model);
@@ -108,7 +110,7 @@ namespace Service.ApplicationService
             damagepayeeregistertemp.CreatedDate = DateTime.Now;
             _damagepayeeregisterRepository.Add(damagepayeeregistertemp);
             return await _unitOfWork.CommitAsync() > 0;
-        }      
+        }
 
         public async Task<bool> Delete(int id)
         {
@@ -141,7 +143,7 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeletePayeePersonalInfoTemp(Id);
         }
-       
+
         public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
         {
             return await _damagepayeeregisterRepository.GetPersonelInfoFilePath(Id);
@@ -172,7 +174,7 @@ namespace Service.ApplicationService
         public async Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp)
         {
             allottetypetemp.ForEach(x => x.CreatedBy = 1);
-            allottetypetemp.ForEach(x => x.CreatedDate =DateTime.Now);
+            allottetypetemp.ForEach(x => x.CreatedDate = DateTime.Now);
             allottetypetemp.ForEach(x => x.IsActive = 1);
             return await _damagepayeeregisterRepository.SaveAllotteTypeTemp(allottetypetemp);
         }
@@ -211,7 +213,7 @@ namespace Service.ApplicationService
         {
             return await _damagepayeeregisterRepository.DeletePaymentHistoryTemp(Id);
         }
-      
+
         public async Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id)
         {
             return await _damagepayeeregisterRepository.GetReceiptFilePath(Id);
@@ -298,5 +300,26 @@ namespace Service.ApplicationService
             damagepaymenthistory.ForEach(x => x.IsActive = 1);
             return await _damagepayeeregisterRepository.SavePaymentHistory(damagepaymenthistory);
         }
+
+        // ************* to create user **************
+
+        //public async Task<bool> CreateUser(Damagepayeepersonelinfotemp damagepayeeuser)
+        //{
+
+        //    ApplicationUser user = new ApplicationUser()
+        //    {
+        //        Name = damagepayeeuser.Name,
+        //        UserName = damagepayeeuser.Name,
+        //        Email = damagepayeeuser.EmailId,
+        //        PhoneNumber = damagepayeeuser.MobileNo,
+        //        PasswordSetDate = DateTime.Now.AddDays(30),
+        //        CreatedBy = 1,
+        //        CreatedDate = DateTime.Now,
+        //        IsDefaultPassword = 1
+        //    };
+
+        //    return await _userManager.CreateAsync(user);
+
+        //}
     }
 }

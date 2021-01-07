@@ -117,7 +117,8 @@ namespace Libraries.Model
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
         public virtual DbSet<Caseyear> Caseyear { get; set; }
-
+        public virtual DbSet<Courttype> Courttype { get; set; }
+        public virtual DbSet<Casestatus> Casestatus { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
         //**********  File Loading **********
         public virtual DbSet<Almirah> Almirah { get; set; }
@@ -151,6 +152,18 @@ namespace Libraries.Model
         public virtual DbSet<Doortodoorsurvey> Doortodoorsurvey { get; set; }
         public virtual DbSet<Processworkflow> Processworkflow { get; set; }
         public virtual DbSet<Workflowaction> Workflowaction { get; set; }
+        public virtual DbSet<Encrochmenttype> Encrochmenttype { get; set; }
+        public virtual DbSet<Resratelisttypea> Resratelisttypea { get; set; }
+        public virtual DbSet<Resratelisttypeb> Resratelisttypeb { get; set; }
+        public virtual DbSet<Resratelisttypec> Resratelisttypec { get; set; }
+        public virtual DbSet<Demandletter> Demandletter { get; set; }
+        public virtual DbSet<Comratelisttypea> Comratelisttypea { get; set; }
+        public virtual DbSet<Comratelisttypeb> Comratelisttypeb { get; set; }
+        public virtual DbSet<Comratelisttypec> Comratelisttypec { get; set; }
+        public virtual DbSet<Comsubencroacherstype> Comsubencroacherstype { get; set; }
+        public virtual DbSet<Ressubencroacherstype> Ressubencroacherstype { get; set; }
+        public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
+        public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -238,6 +251,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
+            modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
+            modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
 
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 
@@ -266,7 +281,18 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
             modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
-
+            modelBuilder.ApplyConfiguration(new EncrochmentTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeAConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeBConfiguration());
+            modelBuilder.ApplyConfiguration(new ResRateListTypeCConfiguration());
+            modelBuilder.ApplyConfiguration(new ResSubEncroachersTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeAConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeBConfiguration());
+            modelBuilder.ApplyConfiguration(new ComRateListTypeCConfiguration());
+            modelBuilder.ApplyConfiguration(new ComSubEncroachersTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ComEncrochmentTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

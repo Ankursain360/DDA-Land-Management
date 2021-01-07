@@ -1,68 +1,69 @@
 ﻿@model IEnumerable<Libraries.Model.Entity.Interest>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Interest" })
-@{int rowNo = 0; }
+@*@{int rowNo = 0; }*@
 <div class="pt-3">
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3    ">
+            <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="text" id="txtProperty" class="floating-label-field floating-label-field--s3" placeholder="Property Type" />
                     <label for="txtProperty" class="floating-label">Property Type</label>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
-                    <label for="txtFromDate" class="floating-label">From Date</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
-                    <label for="txtToDate" class="floating-label">To Date</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="email" id="txtInterestPercentage" class="floating-label-field floating-label-field--s3" placeholder="Interest Percentage">
-                    <label for="txtInterestPercentage" class="floating-label">Interest Percentage</label>
-                </div>
+            @*<div class="col-md-3">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
+                <label for="txtFromDate" class="floating-label">From Date</label>
             </div>
         </div>
-        <div class="row mt-md-3">
-            <div class="col-md-12 col-xl-3">
-                <div class="row">
-                    <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
-                            <i class="ri-refresh-line mr-2"></i>Reset
-                        </button>
-                    </div>
-                    <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+        <div class="col-md-3">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="text" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                <label for="txtToDate" class="floating-label">To Date</label>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="email" id="txtInterestPercentage" class="floating-label-field floating-label-field--s3" placeholder="Interest Percentage">
+                <label for="txtInterestPercentage" class="floating-label">Interest Percentage</label>
+            </div>
+        </div>*@
+        </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12 col-xl-3">
+                    <div class="row">
+                        <div class="col-6 col-md-5 col-xl-6">
+                            <button class="btn btn-link btn-block d-flex align-items-center justify-content-center"id="btnReset"  type="reset">
+                                <i class="ri-refresh-line mr-2"></i>Reset
+                            </button>
+                        </div>
+                        <div class="col-6 col-md-7 col-xl-6">
+                            <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Submit</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+</div>
 
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Property Type</option>
-                        <option>From Date</option>
-                        <option>To date</option>
-                        <option>Interest Percentage</option>
-                        <option>Status</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+
+                        <option value="0" selected="selected" disabled="disabled">Select One</option>
+                        <option value="PropertyType">Property Type </option>
+                        <option value="FromDate">From date</option>
+                        <option value="ToDate">To Date</option>
+                        <option value="Status">Status</option>
+
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
 
@@ -78,55 +79,7 @@
             </div>
         </div>
         <div class="table-responsive px-2" id="divTable">
-            <table class="table table-sm table-bordered mb-0 table-striped">
-
-                <thead class="text-nowrap">
-                    <tr>
-                        <th>Sr.No</th>
-                        <th>Property Type </th>
-                        <th>From Date</th>
-                        <th>To Date</th>
-                        <th>Interest Percentage</th>
-                        <th>Status</th>
-                        <th>Operation</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@(rowNo += 1)</td>
-                            <td>@item.PropertyTypeName</td>
-                            <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
-
-                            <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
-                            <td>@item.Percentage</td>
-
-                            <td>
-                                @if (item.IsActive == 1)
-                                {
-                                    <span class="badge badge-primary px-2 py-1">Active</span>
-                                }
-                                else
-                                {
-                                    <span class="badge badge-danger px-2 py-1">Inactive</span>
-                                }
-                            </td>
-                            <td>
-                                <div class="action-btns">
-                                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                                </div>
-                            </td>
-
-                        </tr>
-
-
-                    }
-                </tbody>
-
-            </table>
+          
         </div>
     </div>
 </div>

@@ -27,10 +27,40 @@ namespace Repository.EntityRepository
 
         public async Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
         {
-            return await _dbContext.Demolitionprogram.Where(x => x.IsActive == 1).GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
+           
+                var data= await _dbContext.Demolitionprogram.Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                   .OrderBy(x => x.Id)
+                   .ThenByDescending(x => x.IsActive == 1)
+                   .ThenBy(x => x.Items)
+                   .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("ITEM"):
+                        data.Results = data.Results.OrderBy(x => x.Items).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive == 0).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("ITEM"):
+                        data.Results = data.Results.OrderByDescending(x => x.Items).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive == 0).ToList();
+                        break;
+                }
+            }
+            return data;
         }
-
-
+    }
 
     }
-}
+

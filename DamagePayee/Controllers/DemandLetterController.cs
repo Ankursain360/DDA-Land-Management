@@ -1,19 +1,130 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using System;
+using System.Threading.Tasks;
 
 namespace DamagePayee.Controllers
 {
     public class DemandLetterController : Controller
     {
-        public IActionResult GenerateDemandLetter()
+        private readonly IDemandLetterService _demandLetterService;
+
+        public DemandLetterController(IDemandLetterService demandLetterService)
         {
-            return PartialView();
+            _demandLetterService = demandLetterService;
         }
 
+        //public IActionResult GenerateDemandLetter()
+        //{
+        //    return PartialView();
+        //}
+
         public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create( Demandletter demandletter)
+        {
+            try
+            {
+
+                if (ModelState.IsValid)
+                {
+                    var result = await _demandLetterService.Create(demandletter);
+
+                    if (result == true)
+                    {
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        //var list = await _noticeToDamagePayeeService.GetAllNoticetoDamagePayee();
+                        // var F = noticetodamagepayee.FileNo;
+                        return View("_List", demandletter);
+                    }
+                    else
+                    {
+                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(demandletter);
+                    }
+                }
+                else
+                {
+                    return View(demandletter);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View(demandletter);
+            }
+        }
+
+
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] DemandletterSearchDto model)
+        //{
+        //    var result = await _demandLetterService.GetPagedDemandletter(model);
+
+        //    return PartialView("_List1", result);
+        //}
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var Data = await _demandLetterService.FetchSingleResult(id);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
+
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Edit(int id, Demandletter demandletter)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        try
+        //        {
+
+        //            var result = await _demandLetterService.Update(id, demandletter);
+        //            if (result == true)
+        //            {
+        //                ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+        //                return View("_List", demandletter);
+        //            }
+        //            else
+        //            {
+        //                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //                return View(demandletter);
+
+        //            }
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {
+
+        //        }
+        //    }
+        //    return View(demandletter);
+        //}
+
+
+
+        public IActionResult View()
         {
             return View();
         }

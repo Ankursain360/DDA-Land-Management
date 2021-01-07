@@ -16,7 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
-
+using Core.Enum;
+using SiteMaster.Filters;
 namespace SiteMaster.Controllers
 {
     public class DemolitiondocumentController : BaseController
@@ -32,18 +33,12 @@ namespace SiteMaster.Controllers
             _configuration = configuration;
         }
 
-
-
-
-
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
             return View();
         }
-
-
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemolitiondocumentSearchDto model)
         {
@@ -51,21 +46,16 @@ namespace SiteMaster.Controllers
 
             return PartialView("_List", result);
         }
-
-
-
-
-
+                [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitiondocument demolitiondocument = new Demolitiondocument();
             demolitiondocument.IsActive = 1;
             return View(demolitiondocument);
         }
-
-
-        [HttpPost]
+         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demolitiondocument demolitiondocument)
         {
             try
@@ -98,11 +88,8 @@ namespace SiteMaster.Controllers
                 return View(demolitiondocument);
             }
         }
-
-
-
-
-        public async Task<IActionResult> Edit(int id)
+         [AuthorizeContext(ViewAction.Edit)]
+          public async Task<IActionResult> Edit(int id)
         {
             var Data = await _demolitiondocumentService.FetchSingleResult(id);
 
@@ -112,9 +99,9 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
-        [HttpPost]
+         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Demolitiondocument demolitiondocument)
         {
             if (ModelState.IsValid)
@@ -145,7 +132,7 @@ namespace SiteMaster.Controllers
                 return View(demolitiondocument);
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

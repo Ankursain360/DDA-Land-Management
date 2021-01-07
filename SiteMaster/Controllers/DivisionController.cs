@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,7 +28,8 @@ namespace SiteMaster.Controllers
         {
             _divisionService = divisionService;
         }
-        public async Task<IActionResult> Index()
+        [AuthorizeContext(ViewAction.View)]
+        public  IActionResult Index()
         {
             //var result = await _divisionService.GetAllDivision();
             //return View(result);
@@ -41,6 +44,7 @@ namespace SiteMaster.Controllers
             var result = await _divisionService.GetPagedDivision(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Division model = new Division();
@@ -55,6 +59,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Division division)
         {
             try
@@ -94,7 +99,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _divisionService.FetchSingleResult(id);
@@ -114,35 +119,31 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Division division)
         {
             division.DepartmentList = await _divisionService.GetAllDepartment();
             division.ZoneList = await _divisionService.GetAllZone(division.DepartmentId);
-
             if (ModelState.IsValid)
             {
-                try
+                var result = await _divisionService.Update(id, division);
+                if (result == true)
                 {
-
-                    var result = await _divisionService.Update(id, division);
-                    if (result == true)
-                    {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View("Index");
-                    }
-                    else
-                    {
-                        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                        return View(division);
-
-                    }
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    var list = await _divisionService.GetAllDivision();
+                    return View("Index", list);
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(division);
                 }
             }
-            return View(division);
+            else
+            {
+                return View(division);
+            }
+          
         }
 
 

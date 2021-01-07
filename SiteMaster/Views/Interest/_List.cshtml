@@ -1,7 +1,9 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Interest>
+﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Interest>*@
+@model IEnumerable<Libraries.Model.Entity.Interest>
 @{int rowNo = 0; }
 
 <table class="table table-sm table-bordered mb-0 table-striped">
+
     <thead class="text-nowrap">
         <tr>
             <th>Sr.No</th>
@@ -14,11 +16,11 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Results)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>@(rowNo += 1)</td>
-                <td>@item.PropertyTypeName</td>
+                <td>@item.Property.Name</td>
                 <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
 
                 <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
@@ -50,4 +52,4 @@
 
 </table>
 
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

@@ -83,6 +83,54 @@ namespace Libraries.Repository.EntityRepository
         {
             return _dbContext.Rate.Where(A => A.PropertyId == propertyId).Count();
         }
+
+        public async Task<List<Rate>> GetSearchResult(RateSearchDto model)
+        {
+                       
+            var data = (await _dbContext.Rate.Include(x => x.Property)
+                               .Where(x => x.Property.Name.ToUpper().Contains((model.property ?? "").ToUpper()))
+                               .ToListAsync()).GroupBy(x => x.PropertyId).SelectMany(g => g.OrderByDescending(d => d.ToDate).Take(1)).ToList();
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("PROPERTYTYPE"):
+                        data = data.OrderBy(x => x.Property.Name).ToList();
+                        break;
+                    case ("FROMDATE"):
+                        data = data.OrderBy(x => x.FromDate).ToList();
+                        break;
+                    case ("TODATE"):
+                        data = data.OrderBy(x => x.ToDate).ToList();
+                        break;
+                    case ("STATUS"):
+                        data = data.OrderBy(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("PROPERTYTYPE"):
+                        data = data.OrderByDescending(x => x.Property.Name).ToList();
+                        break;
+                    case ("FROMDATE"):
+                        data = data.OrderByDescending(x => x.FromDate).ToList();
+                        break;
+                    case ("TODATE"):
+                        data = data.OrderByDescending(x => x.ToDate).ToList();
+                        break;
+                    case ("STATUS"):
+                        data = data.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            return data;
+        }
     }
 
 

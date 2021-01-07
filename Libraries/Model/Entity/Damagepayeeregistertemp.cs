@@ -15,6 +15,7 @@ namespace Libraries.Model.Entity
             Damagepayeepersonelinfotemp = new HashSet<Damagepayeepersonelinfotemp>();
             Damagepaymenthistorytemp = new HashSet<Damagepaymenthistorytemp>();
             Mutationdetails = new HashSet<Mutationdetails>();
+            Mutationdetailstemp = new HashSet<Mutationdetailstemp>();
         }
         [Required(ErrorMessage = "File No is mandatory feild")]
         public string FileNo { get; set; }
@@ -113,7 +114,7 @@ namespace Libraries.Model.Entity
         public IFormFile Fgform { get; set; }
         [NotMapped]
         public IFormFile DocumentForFile { get; set; }
-
+        public ICollection<Mutationdetailstemp> Mutationdetailstemp { get; set; }
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Allottetypetemp> Allottetypetemp { get; set; }
         public ICollection<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }

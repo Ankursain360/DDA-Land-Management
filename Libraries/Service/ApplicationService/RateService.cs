@@ -92,6 +92,11 @@ namespace Libraries.Service.ApplicationService
         {
             return _rateRepository.IsRecordExist(propertyId);
         }
+        public async Task<List<Rate>> GetSearchResult(RateSearchDto model)
+        {
+            return await _rateRepository.GetSearchResult(model);
+        }
+       
     }
 }
 

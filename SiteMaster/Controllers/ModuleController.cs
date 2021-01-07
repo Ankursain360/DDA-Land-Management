@@ -12,6 +12,9 @@ using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 
+using SiteMaster.Filters;
+using Core.Enum;
+
 namespace SiteMaster.Controllers
 {
     public class ModuleController : BaseController
@@ -22,6 +25,7 @@ namespace SiteMaster.Controllers
         {
             _moduleService = moduleService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _moduleService.GetAllModule();
@@ -35,6 +39,7 @@ namespace SiteMaster.Controllers
             var result = await _moduleService.GetPagedModule(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -42,7 +47,8 @@ namespace SiteMaster.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
+    
         public async Task<IActionResult> Create(Module module)
         {
                 if (ModelState.IsValid)
@@ -66,6 +72,8 @@ namespace SiteMaster.Controllers
                 }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _moduleService.FetchSingleResult(id);
@@ -77,7 +85,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Module module)
         {
             if (ModelState.IsValid)

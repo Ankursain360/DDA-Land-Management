@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
     public class DamageChargesCalculation 
     {
         public decimal? Area { get; set; }
-        public int? Months { get; set; }
+        public string Months { get; set; }
         public decimal? DamageCharges { get; set; }
         public decimal? Compunding { get; set; }
 
@@ -18,7 +18,7 @@ namespace Libraries.Model.Entity
         public DateTime? EncroachmentDate { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public decimal? Rate { get; set; }
+        public string Rate { get; set; }
         public decimal? TotalGrant { get; set; }
         public decimal? TotalInterest { get; set; }
         public decimal? RebateOfTotalInterest { get; set; }
@@ -26,24 +26,6 @@ namespace Libraries.Model.Entity
         public decimal? PaidAmount { get; set; }
         public decimal? RemainAmount { get; set; }
         public int? GridId { get; set; }
-        [NotMapped]
-        public List<Damagecalculation> DamageRateCalculationList { get; set; }
-        [NotMapped]
-        public List<Damagecalculation> DamageIntrestCalculationList { get; set; }
-        /*DamageCalculation Grid*/
-        //[NotMapped]
-        //public DateTime StartDateCal { get; set; }
-        //[NotMapped]
-        //public DateTime EndDateCal { get; set; }
-        //[NotMapped]
-        //public decimal RateCal { get; set; }
-        //[NotMapped]
-        //public decimal AreaCal { get; set; }
-        //[NotMapped]
-        //public int MonthCal { get; set; }
-        //[NotMapped]
-        //public decimal DamageChargesCal { get; set; }
-
     }
 
 

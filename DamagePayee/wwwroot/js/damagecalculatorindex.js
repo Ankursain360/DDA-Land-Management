@@ -10,8 +10,8 @@
         day = '0' + day.toString();
     var maxDate = year + '-' + month + '-' + day;
     $('#EncroachmentDate').attr('max', maxDate);
-    $('#txtEncroachmentFromDate').attr('max', maxDate);
-    $('#txtEncroachmentToDate').attr('max', maxDate);
+    $('#StartDate').attr('max', maxDate);
+    $('#EndDate').attr('max', maxDate);
 });
 
 $('#myForm').validate({
@@ -132,8 +132,65 @@ function AreaMessage() {
     }
 };
 $("#btnCalculate").click(function () {
-    var result = ValidateForm();
-    if (result) {
+    //var IsValid = $("#frmUserPersonalInfo").valid(); 
+    debugger;
+    var checkresult = false;
+    var PropertyTypeId = $('#PropertyTypeId option:selected').val();
+    if (PropertyTypeId < 1) {
+        $("#PropertyTypeIdMsg").show();
+    } else {
+        $("#PropertyTypeIdMsg").hide();
+        checkresult = true;
+    }
+    var LocalityId = $('#LocalityId option:selected').val();
+    if (LocalityId < 1) {
+        $("#LocalityIdMsg").show();
+    } else {
+        $("#LocalityIdMsg").hide();
+        checkresult = true;
+    }
+    var EncroachmentDate = $('#EncroachmentDate').val();
+    if (EncroachmentDate == "") {
+        $("#EncroachmentDateMsg").show();
+    } else {
+        $("#EncroachmentDateMsg").hide();
+        checkresult = true;
+    }
+
+    var StartDate = $('#StartDate').val();
+    if (StartDate == "") {
+        checkresult = false;
+        $("#StartDateMsg").show();
+    } else {
+        $("#StartDateMsg").hide();
+        checkresult = true;
+    }
+    var EndDate = $('#EndDate').val();
+    if (EndDate == "") {
+        checkresult = false;
+        $("#EndDateMsg").show();
+    } else {
+        $("#EndDateMsg").hide();
+        checkresult = true;
+    }
+
+    var Area = $('#Area').val();
+    if (Area == "") {
+        checkresult = false;
+        $("#AreaMsg").show();
+    } else {
+        $("#AreaMsg").hide();
+        checkresult = true;
+    }
+
+    if (LocalityId < 1 || PropertyTypeId < 1 || EncroachmentDate == "" || StartDate == "" || EndDate == "" || Area=="") {
+
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    if (checkresult) {
         var param = GetSearchParam();
         HttpPost(`/DamageCalculator/DamageCalculate`, 'html', param, function (response) {
             $('#DivMainContentForm').html("");

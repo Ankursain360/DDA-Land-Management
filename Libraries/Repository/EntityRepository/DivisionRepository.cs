@@ -19,14 +19,53 @@ namespace Libraries.Repository.EntityRepository
         { }
         public async Task<PagedResult<Division>> GetPagedDivision(DivisionSearchDto model)
         {
-            return await _dbContext.Division
-                        .Include(x => x.Zone)
-                        .Include(x => x.Department)
-                            .Where(x => x.IsActive == 1)
-                            .OrderBy(s => s.Department.Name)
-                            .ThenBy(s => s.Zone.Name)
-                            .ThenBy(s => s.Name)
-                        .GetPaged<Division>(model.PageNumber, model.PageSize);
+                var data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                                        )
+
+                                .OrderByDescending(s =>s.IsActive )
+                                .ThenBy(s => s.Department.Name)
+                                .ThenBy(s => s.Zone.Name)
+                                .ThenBy(s => s.Name)
+                                
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("CODE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            return data;
+
         }
         public async Task<List<Division>> GetDivisions()
         {

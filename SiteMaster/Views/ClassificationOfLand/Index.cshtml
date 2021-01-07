@@ -3,7 +3,7 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "ClassificationOfLand" })
 <div class="pt-3">
 
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
             <div class="col-md-3    ">
@@ -18,33 +18,34 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
                             <i class="ri-refresh-line mr-2"></i>Reset
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+                        <button class="btn btn-theme btn-block" type="submit" id="btnSearch">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+    </div>
 
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Name</option>
-                        <option>Status</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="0">Select One</option>
+                        <option value="Name">Name</option>
+                        <option value="Status">Status</option>
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                       <button id="btndescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></button>
+                    <button id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
+
                 </div>
             </div>
 

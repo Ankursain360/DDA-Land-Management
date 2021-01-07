@@ -14,7 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
-
+using Core.Enum;
+using SiteMaster.Filters;
 namespace SiteMaster.Controllers
 {
     public class LandUseController : BaseController
@@ -26,6 +27,7 @@ namespace SiteMaster.Controllers
         {
             _landuseService = landuseService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -37,6 +39,7 @@ namespace SiteMaster.Controllers
             var result = await _landuseService.GetPagedLandUse(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -44,6 +47,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Landuse landuse)
         {
             try
@@ -76,7 +80,7 @@ namespace SiteMaster.Controllers
                 return View(landuse);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _landuseService.FetchSingleResult(id);
@@ -89,6 +93,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Edit(int id, Landuse landuse)
         {
             if (ModelState.IsValid)
@@ -132,7 +137,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
             if (id == 0)
@@ -149,7 +154,7 @@ namespace SiteMaster.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View(form);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 

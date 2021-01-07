@@ -21,10 +21,39 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Department>> GetPagedDepartment(DepartmentSearchDto model)
         {
-            return await _dbContext.Department
-                            .Where(x => x.IsActive == 1)
+            var data = await _dbContext.Department
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
                             .OrderBy(s => s.Name)
-                        .GetPaged<Department>(model.PageNumber, model.PageSize);
+                            .OrderByDescending(s => s.IsActive)
+
+                        .GetPaged<Department>(model.PageNumber, model.PageSize); ;
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
         public async Task<List<Department>> GetDepartment()
         {
