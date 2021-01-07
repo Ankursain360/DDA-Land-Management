@@ -29,12 +29,16 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
     sortby = 1;//for Ascending
     GetMenu(currentPageNumber, currentPageSize, sortby);
 });
 
 
 $("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
     sortby = 2;//for Descending
     GetMenu(currentPageNumber, currentPageSize, sortby);
 });
@@ -50,6 +54,8 @@ $("#btnReset").click(function () {
     GetMenu(currentPageNumber, currentPageSize, sortby);
 
 });
+
+
 
 
 function onPaging(pageNo) {
