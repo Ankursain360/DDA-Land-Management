@@ -12,17 +12,24 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using System.IO;
+using Unidecode.NET;
+using System.Net;
+using DamagePayee.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Extensions;
 
 namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegisterController : BaseController
     {
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
+        private readonly IHostingEnvironment _hostingEnvironment;
         public IConfiguration _configuration;
-        public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration)
+        public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration, IHostingEnvironment en)
         {
             _configuration = configuration;
             _damagepayeeregisterService = damagepayeeregisterService;
+            _hostingEnvironment = en;
         }
         public IActionResult Index()
         {
@@ -91,9 +98,30 @@ namespace DamagePayee.Controllers
                 }
 
                 var result = await _damagepayeeregisterService.Create(damagepayeeregistertemp);
+
+
                 if (result)
                 {
-                   
+                    //******* creating damage payee user ******
+
+                    var resultpassword = await _damagepayeeregisterService.CreateUser(damagepayeeregistertemp);
+                    if (!resultpassword.Equals("False"))
+                    { 
+                        //At successfull completion send mail and sms
+                    string DisplayName = damagepayeeregistertemp.payeeName[0].ToString();
+                    string EmailID = damagepayeeregistertemp.EmailId[0].ToString();
+                    string Id = damagepayeeregistertemp.Id.ToString().Unidecode();
+                    string LoginName = damagepayeeregistertemp.payeeName[0].ToString();
+                    string ContactNo = damagepayeeregistertemp.MobileNo[0].ToString();
+                    string Password = resultpassword;
+                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
+
+
+                    GenerateMailUser mail = new GenerateMailUser();
+
+
+                    mail.GenerateMailFormatForUserDetails(DisplayName, EmailID, LoginName, path, Password, ContactNo);
+                    }
 
                     //****** code for saving  Damage payee personal info *****
 
@@ -152,8 +180,8 @@ namespace DamagePayee.Controllers
                                 result = await _damagepayeeregisterService.SavePayeePersonalInfoTemp(item);
                             }
                         }
-                        //******* creating user ******
                     }
+                
 
                     //****** code for saving  Allotte Type *****
                     if (damagepayeeregistertemp.Name != null &&
@@ -620,5 +648,21 @@ namespace DamagePayee.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+        // ******** create user *********
+       // [HttpPost]
+       
+        //public async Task<IActionResult> CreateUser(Damagepayeeregistertemp model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        await _damagepayeeregisterService.CreateUser(model);
+        //        return RedirectToAction("Index");
+        //    }
+        //    else
+        //    {
+        //        return View(model);
+        //    }
+        //}
     }
 }
