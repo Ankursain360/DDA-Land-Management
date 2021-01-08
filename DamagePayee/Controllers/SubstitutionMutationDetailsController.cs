@@ -90,7 +90,7 @@ namespace DamagePayee.Controllers
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
             ViewBag.DamagePayeeId = id;
-            ViewBag.Id = 0;
+            ViewBag.Id = (Data == null ? 0 : mutationdetailstemp.Id);
             return View(mutationdetailstemp);
         }
 
@@ -347,13 +347,12 @@ namespace DamagePayee.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    var list = await _mutationDetailsService.GetAllMutationDetails();
-                    return View("Index", list);
+                    return View("Index1");
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View();
+                    return View(mutationDetails);
                 }
             }
         }
