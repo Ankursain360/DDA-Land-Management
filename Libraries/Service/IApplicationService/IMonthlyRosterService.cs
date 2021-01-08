@@ -13,5 +13,6 @@ namespace Service.IApplicationService
         Task<List<Division>> GetAllDivisionList(int zoneId);
         Task<List<Locality>> GetAllLocalityList(int divisionId);
         Task<List<Userprofile>> SecurityGuardList();
+        Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId);
     }
 }

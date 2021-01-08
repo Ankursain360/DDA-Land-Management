@@ -57,5 +57,10 @@ namespace Libraries.Service.ApplicationService
         {
             return (await _monthlyRosterRepository.SecurityGuardList());
         }
+
+        public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId)
+        {
+            return await _monthlyRosterRepository.GetPrimaryListNoList(divisionId, departmentId, zoneId, localityId);
+        }
     }
 }

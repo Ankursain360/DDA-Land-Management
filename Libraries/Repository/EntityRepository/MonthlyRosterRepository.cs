@@ -34,5 +34,10 @@ namespace Libraries.Repository.EntityRepository
         {
             return (await _dbContext.Userprofile.Include(x => x.User).Include(x => x.Role).Where(x => x.IsActive == 1 && x.RoleId == 13).ToListAsync());
         }
+        public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId)
+        {
+            return await _dbContext.Propertyregistration.Where(x => x.DepartmentId == departmentId && x.ZoneId == zoneId && x.DivisionId == divisionId && x.LocalityId == localityId && x.IsActive == 1).ToListAsync();
+        }
+
     }
 }
