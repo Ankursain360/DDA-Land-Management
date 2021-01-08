@@ -104,9 +104,9 @@ namespace Libraries.Service.ApplicationService
             oldDamage.IsActive = 1;
             return await _mutationDetailsRepository.SaveMutationOldDamage(oldDamage);
         }
-        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
+        public async Task<Damagepayeeregister> FetchDamageResult(int Id)
         {
-            return await _mutationDetailsRepository.FetchMutationDetailsUserId(Id);
+            return await _mutationDetailsRepository.FetchDamageResult(Id);
         }
 
         public async Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model)
@@ -122,6 +122,15 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Allottetype>> GetAllottetype(int id)
         {
             return await _mutationDetailsRepository.GetAllottetype(id);
+        }
+
+        public async Task<Mutationdetailstemp> FetchMutationSingleResult(int id)
+        {
+            return await _mutationDetailsRepository.FetchMutationSingleResult(id);
+        }
+        public async Task<Mutationdetailstemp> FetchSingleResultMutationId(int id)
+        {
+            return await _mutationDetailsRepository.FetchSingleResultMutationId(id);
         }
     }
 }

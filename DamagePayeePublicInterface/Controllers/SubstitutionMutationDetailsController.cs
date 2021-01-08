@@ -84,23 +84,20 @@ namespace DamagePayeePublicInterface.Controllers
             DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
             DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
         }
-        public async Task<IActionResult> Create()
+        public async Task<IActionResult> Create(int id)
         {
-            Mutationdetails mutationdetails = new Mutationdetails();
-
-            mutationdetails.DamagePayeeRegister = await _mutationDetailsService.FetchMutationDetailsUserId(SiteContext.UserId);
+            Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
+            Mutationdetailstemp Data = await _mutationDetailsService.FetchMutationSingleResult(id);
+            if (Data != null)
+            {
+                mutationdetailstemp = Data;
+            }
+            mutationdetailstemp.DamagePayeeRegister = await _mutationDetailsService.FetchDamageResult(id);
             ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
             ViewBag.District = await _mutationDetailsService.GetDistrictList();
-            if (mutationdetails != null)
-            {
-                return View(mutationdetails);
-            }
-            else
-            {
-                return View(mutationdetails);
-            }
-
-
+            ViewBag.DamagePayeeId = id;
+            ViewBag.Id = 0;
+            return View(mutationdetailstemp);
         }
 
         [HttpPost]

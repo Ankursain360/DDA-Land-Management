@@ -109,12 +109,12 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public async Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id)
+        public async Task<Damagepayeeregister> FetchDamageResult(int Id)
         {
-            return await _dbContext.Damagepayeeregistertemp
-                                    .Include(x => x.Damagepayeepersonelinfotemp)
-                                    .Include(x => x.Damagepaymenthistorytemp)
-                                    .Include(x => x.Allottetypetemp)
+            return await _dbContext.Damagepayeeregister
+                                    .Include(x => x.Damagepayeepersonelinfo)
+                                    .Include(x => x.Damagepaymenthistory)
+                                    .Include(x => x.Allottetype)
                                     .Where(x => x.Id == Id)
                                     .FirstOrDefaultAsync();
         }
@@ -136,6 +136,21 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Allottetype>> GetAllottetype(int id)
         {
             return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<Mutationdetailstemp> FetchMutationSingleResult(int id)
+        {
+            return await _dbContext.Mutationdetailstemp
+                                    .Include(x => x.DamagePayeeRegister)
+                                    .Where(x => x.DamagePayeeRegisterId == id)
+                                    .FirstOrDefaultAsync();
+        }
+        public async Task<Mutationdetailstemp> FetchSingleResultMutationId(int id)
+        {
+            return await _dbContext.Mutationdetailstemp
+                                    .Include(x => x.DamagePayeeRegister)
+                                    .Where(x => x.DamagePayeeRegisterId == id)
+                                    .FirstOrDefaultAsync();
         }
     }
 }
