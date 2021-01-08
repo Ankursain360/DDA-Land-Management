@@ -120,11 +120,6 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-
-
-
-
-
         public async Task<bool> SaveDemolitionstructureafterdemolitionphotofiledetails(Demolitionstructureafterdemolitionphotofiledetails demolitionstructureafterdemolitionphotofiledetails)
         {
             _dbContext.Demolitionstructureafterdemolitionphotofiledetails.Add(demolitionstructureafterdemolitionphotofiledetails);

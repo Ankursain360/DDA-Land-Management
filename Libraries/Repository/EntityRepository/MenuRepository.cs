@@ -22,20 +22,53 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Menu>> GetPagedMenu(MenuSearchDto model)
         {
-            var data= await _dbContext.Menu
+            var data = await _dbContext.Menu
                         .Include(x => x.Module)
                         .Include(x => x.ParentMenu)
-
-                            .Where(x => x.IsActive == 1)
-                            .OrderBy(s => s.Module.Name)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.parentname) || x.ParentMenu.Name.Contains(model.parentname))
+                            && (string.IsNullOrEmpty(model.modulename) || x.Module.Name.Contains(model.modulename)) )
+                            .OrderBy(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))                               
+                            .OrderByDescending(s => s.IsActive)
                             .ThenBy(s => s.Name)
+                            .ThenBy(s => s.Module.Name)
+                            
                         .GetPaged<Menu>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("MODULENAME"):
+                        data.Results = data.Results.OrderBy(x => x.Module.Name).ToList();
+                        break;
+                    case ("PARENTNAME"):
+                        data.Results = data.Results.OrderBy(x => (x.ParentMenu!=null? x.ParentMenu.Name:null)).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("MODULENAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Module.Name).ToList();
+                        break;
+                    case ("PARENTNAME"):
+                        data.Results = data.Results.OrderByDescending(x => (x.ParentMenu != null ? x.ParentMenu.Name : null)).ToList();
+                        break;
+
+                }
+            }
+          
             return data;
         }
-
-
-
-
 
 
         public async Task<List<Module>> GetAllModule()
@@ -48,14 +81,14 @@ namespace Libraries.Repository.EntityRepository
             List<Menu> parentmenulist = await _dbContext.Menu.Where(x => x.IsActive == 1).ToListAsync();
             return parentmenulist;
         }
-        public async Task<bool> AnyName(int Id,int ModuleId, string Name)
+        public async Task<bool> AnyName(int Id, int ModuleId, string Name)
         {
             return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.Name.ToLower() == Name.ToLower() && t.IsActive == 1);
-            
+
         }
 
 
-       
+
 
 
 

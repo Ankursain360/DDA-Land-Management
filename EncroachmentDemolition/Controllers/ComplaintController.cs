@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using EncroachmentDemolition.Models;
+//using EncroachmentDemolition.Models;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
@@ -14,7 +14,7 @@ using Notification.OptionEnums;
 using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
-
+using Dto.Common;
 
 
 namespace EncroachmentDemolition.Controllers
@@ -93,11 +93,11 @@ namespace EncroachmentDemolition.Controllers
                         string EmailID = onlinecomplaint.Email.ToString();
                        
                         string Action = "Dear " + DisplayName + ",  Your Complaint Register succesfully. Your Reference No is  "  +onlinecomplaint.ReferenceNo;
-                       
-                        GenerateMailOTP mail = new GenerateMailOTP();
+
+                        SendMailDto mail = new SendMailDto();
                         
                         mail.GenerateMailFormatForComplaint(DisplayName, EmailID,  Action);
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess+" Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
                         var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
                         return View("Index", list);
                     }

@@ -1,0 +1,51 @@
+﻿@model Libraries.Model.Entity.Approvalstatus
+@await Component.InvokeAsync("PageHeader", new { pageName = "Approval Status" })
+
+
+<br />
+
+<br />
+
+
+
+<form asp-action="Edit" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">View Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+    <div class="row">
+        
+        <div class="col-md-4">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input asp-for="Name" type="text"
+                       class="floating-label-field floating-label-field--s3"
+                       placeholder="Menu Name"
+                       limit="200">
+                <span asp-validation-for="Name" class="text-danger"></span>
+                <label class="floating-label">Menu Name</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       
+        <div class=" col-md-4">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+                <label asp-for="IsActive" class="floating-label">Status </label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class="form-group col-md-12" style="margin-bottom:40px;">
+            @Html.ActionLink("Back", "Index", "Approvalstatus", null, new { @class = "btn btn-theme " })
+
+        </div>
+    </div>
+
+</form>
+
+

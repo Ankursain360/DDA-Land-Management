@@ -47,6 +47,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("PHONENO"):
                         data.Results = data.Results.OrderBy(x => x.PhoneNo).ToList();
                         break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
                 }
             }
             else if (SortOrder == 2)
@@ -62,6 +65,9 @@ namespace Libraries.Repository.EntityRepository
                         break;
                     case ("PHONENO"):
                         data.Results = data.Results.OrderByDescending(x => x.PhoneNo).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
                 }
             }

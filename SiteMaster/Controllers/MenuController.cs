@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.ApplicationService;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using SiteMaster.Filters;
 
 namespace SiteMaster.Controllers
 {
@@ -22,6 +24,8 @@ namespace SiteMaster.Controllers
         {
             _menuService = menuService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             
@@ -34,6 +38,8 @@ namespace SiteMaster.Controllers
             var result = await _menuService.GetPagedMenu(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Menu model = new Menu();
@@ -45,7 +51,10 @@ namespace SiteMaster.Controllers
 
             return View(model);
         }
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+
         public async Task<IActionResult> Create(Menu menu)
         {
             try
@@ -79,8 +88,8 @@ namespace SiteMaster.Controllers
                 return View(menu);
             }
         }
-       
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _menuService.FetchSingleResult(id);
@@ -100,6 +109,8 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
+
         public async Task<IActionResult> Edit(int id, Menu menu)
         {
             menu.modulelist = await _menuService.GetAllModule();
@@ -147,7 +158,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -170,6 +181,7 @@ namespace SiteMaster.Controllers
             var list = await _menuService.GetAllMenu();
             return View("Index", list);
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _menuService.FetchSingleResult(id);

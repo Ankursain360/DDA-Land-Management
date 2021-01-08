@@ -46,6 +46,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IStructureRepository, StructureRepository>();
             services.AddScoped<ICaseyearRepository, CaseyearRepository>();
             services.AddScoped<ICourtRepository, CourtRepository>();
+            services.AddScoped<IApprovalstatusRepository, ApprovalstatusRepository>();
 
 
             /* Application Services */
@@ -75,6 +76,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IStructureService, StructureService>();
             services.AddScoped<ICaseyearService, CaseyearService>();
             services.AddScoped<ICourtService, CourtService>();
+            services.AddScoped<IApprovalstatusService, ApprovalstatusService>();
+
         }
     }
 }

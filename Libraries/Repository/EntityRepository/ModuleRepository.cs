@@ -29,9 +29,7 @@ namespace Libraries.Repository.EntityRepository
                    && (string.IsNullOrEmpty(model.description) || x.Description.Contains(model.description)))
 
                 
-                            
-                  .OrderByDescending(s => s.IsActive)
-                  .ThenBy(s => s.Name)
+                 
                   .GetPaged<Module>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.orderby;
@@ -48,7 +46,10 @@ namespace Libraries.Repository.EntityRepository
                     case ("URL"):
                         data.Results = data.Results.OrderBy(x => x.Url).ToList();
                         break;
-                   
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+
                 }
             }
             else if (SortOrder == 2)
@@ -64,7 +65,10 @@ namespace Libraries.Repository.EntityRepository
                     case ("URL"):
                         data.Results = data.Results.OrderByDescending(x => x.Url).ToList();
                         break;
-                   
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+
                 }
             }
             return data;
