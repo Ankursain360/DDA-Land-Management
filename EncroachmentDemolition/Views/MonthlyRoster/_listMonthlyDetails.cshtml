@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Dto.Master.MonthlyRoasterPartial>
+﻿@model Libraries.Model.Entity.MonthlyRoaster
 <table class="table">
     <thead class="thead table-striped table-bordered table">
         <tr>
@@ -8,13 +8,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var itemRepeater in Model.Dailyroaster)
         {
+
 <tr>
-    <td>@item.Date</td>
-    <td>@item.Day</td>
+    <td>@itemRepeater.Date</td>
+    <td>@itemRepeater.Day</td>
     <td>
-        <select class="roaster" multiple>
+        <select class="roaster" multiple asp-for="PrimaryListNo">
             <option value="Codeigniter">Bahapur</option>
             <option value="CakePHP">Raipur Khurd</option>
             <option value="Laravel">Tehkhand</option>

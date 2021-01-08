@@ -30,6 +30,10 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
+        public List<int> PrimaryListNo { get; set; }
+        [NotMapped]
+        public List<Userprofile> SecurityGuardList { get; set; }
+        [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Division> DivisionList { get; set; }

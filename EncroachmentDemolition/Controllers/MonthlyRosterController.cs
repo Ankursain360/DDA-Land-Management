@@ -26,6 +26,17 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Create()
         {
             MonthlyRoaster model = new MonthlyRoaster();
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
+            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.YearList = await GetYearList();
+            model.MonthList = await GetMonthsList();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create(MonthlyRoaster monthlyRoaster)
+        {
+            MonthlyRoaster model = new MonthlyRoaster();
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
             model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
             model.YearList = await GetYearList();
             model.MonthList = await GetMonthsList();
@@ -59,16 +70,25 @@ namespace EncroachmentDemolition.Controllers
         }
         public async Task<PartialViewResult> GetMonthlyDetails(int? month)
         {
-            var dates = new List<MonthlyRoasterPartial>();
+            //var dates = new List<MonthlyRoasterPartial>();
+            //for (var date = new DateTime(2020, month ?? 0, 1); date.Month == month; date = date.AddDays(1))
+            //{
+            //    dates.Add(new MonthlyRoasterPartial
+            //    {
+            //        Date = Convert.ToDateTime(date).ToString("dd-MMM-yyyy"),
+            //        Day = Convert.ToDateTime(date).DayOfWeek.ToString()
+            //    });
+            //}
+            MonthlyRoaster model = new MonthlyRoaster();
             for (var date = new DateTime(2020, month ?? 0, 1); date.Month == month; date = date.AddDays(1))
             {
-                dates.Add(new MonthlyRoasterPartial
+                model.Dailyroaster.Add(new DailyRoaster
                 {
-                    Date = Convert.ToDateTime(date).ToString("dd-MMM-yyyy"),
+                    Date = Convert.ToDateTime(date),
                     Day = Convert.ToDateTime(date).DayOfWeek.ToString()
                 });
             }
-            return PartialView("_listMonthlyDetails", dates);
+            return PartialView("_listMonthlyDetails", model);
         }
         [HttpGet]
         public async Task<JsonResult> GetZoneList(int? DepartmentId)

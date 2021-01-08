@@ -93,10 +93,13 @@ namespace EncroachmentDemolition.Controllers
                         string EmailID = onlinecomplaint.Email.ToString();
                        
                         string Action = "Dear " + DisplayName + ",  Your Complaint Register succesfully. Your Reference No is  "  +onlinecomplaint.ReferenceNo;
-
+                        String Mobile = onlinecomplaint. Contact;
                         SendMailDto mail = new SendMailDto();
-                        
+                        SendSMSDto SMS = new SendSMSDto();
+
                         mail.GenerateMailFormatForComplaint(DisplayName, EmailID,  Action);
+                        SMS.GenerateSendSMS(Action, Mobile); 
+
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess+" Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
                         var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
                         return View("Index", list);
