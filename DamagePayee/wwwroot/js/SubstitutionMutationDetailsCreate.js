@@ -110,9 +110,11 @@ $(function () {
 $(function () {
     $("input[name='grpPurpose']").click(function () {
         if ($("#rdbPurchaser").is(":checked")) {
-            $("#DivForInheritancePurpose").show();
-        } else {
+            $("#DivForPurchasePurpose").show();
             $("#DivForInheritancePurpose").hide();
+        } else {
+            $("#DivForInheritancePurpose").show();
+            $("#DivForPurchasePurpose").hide();
         }
     });
 });
