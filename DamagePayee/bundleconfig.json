@@ -40,5 +40,53 @@
     "inputFiles": [
       "wwwroot/js/damagepayeeregisterindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagecalculatorindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagecalculatorindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeapprovalcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeapprovalcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/damagepayeeregistrationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/damagepayeeregistrationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/defaultlistingreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/defaultlistingreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandletterindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandletterindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandletterlist.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandletterlist.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/doortodoorsurvey.min.js",
+    "inputFiles": [
+      "wwwroot/js/doortodoorsurvey.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticegenerationreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticegenerationreportindex.js"
+    ]
   }
 ]

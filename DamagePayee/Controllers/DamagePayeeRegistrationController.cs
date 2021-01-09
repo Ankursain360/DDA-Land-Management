@@ -110,12 +110,12 @@ namespace DamagePayee.Controllers
                         WebResponse response = request.GetResponse();
                         string Result = new StreamReader(response.GetResponseStream()).ReadToEnd();
                         // Using WebClien
-                        string Res1 = new WebClient().DownloadString(url);
-                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
+                      
 
 
                         GenerateMailOTP mail = new GenerateMailOTP();
-
+  string Res1 = new WebClient().DownloadString(url);
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
 
                         mail.GenerateMailFormatForPassword(DisplayName, EmailID, LoginName, link, path, Action);
 

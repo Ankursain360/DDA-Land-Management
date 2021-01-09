@@ -310,5 +310,11 @@
     "inputFiles": [
       "wwwroot/js/localityindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/structureindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/structureindex.js"
+    ]
   }
 ]

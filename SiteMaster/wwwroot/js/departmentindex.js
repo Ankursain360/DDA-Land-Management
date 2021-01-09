@@ -28,7 +28,7 @@ function Ascending() {
     $('#txtName').val('')
    
     if (value !== "0") {
-        debugger
+        
         GetDepartmentOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
     }
     else {

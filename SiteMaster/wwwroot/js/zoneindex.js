@@ -31,7 +31,7 @@ function Ascending() {
     $('#txtCode').val('')
    
     if (value !== "0") {
-        debugger
+        
         GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
     }
     else {

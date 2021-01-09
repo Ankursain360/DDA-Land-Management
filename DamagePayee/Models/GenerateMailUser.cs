@@ -1,52 +1,46 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
-using System.Web;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using SiteMaster.Models;
 
-namespace SiteMaster.Models
+namespace DamagePayee.Models
 {
-    public class GenerateMailOTP
+    public class GenerateMailUser
     {
-        public void GenerateMailFormatForPassword(string DisplayName, String EmailID, String LoginName, string Password, string path, string Action)
+        public void GenerateMailFormatForUserDetails(string DisplayName, string EmailID, string LoginName, string path, string Password,string ContactNo)
         {
-
-            string link = "Now You Can Login";
-            string body = this.PopulateBodyForPassword(DisplayName, EmailID, LoginName, Password, link, path, Action);
-            string Sub = "User Login Details ";
-
-            this.sendMail(EmailID, Sub, body, link);
-
+            string body = this.PopulateBodyForUserDetails(DisplayName, EmailID,LoginName, path, Password, ContactNo);
+            string Sub = "Damage Payee User Details ";
+            this.sendMail(EmailID, Sub, body);
         }
 
-        private string PopulateBodyForPassword(string DisplayName, String EmailID, String LoginName, string Password, string Link, string Path, string Action)
+        private string PopulateBodyForUserDetails(string DisplayName, string EmailID, string LoginName, string Password, string Path,string ContactNo)
         {
-            string body = string.Empty; 
+            string body = string.Empty;
             using (StreamReader reader = new StreamReader(Path))
             {
                 body = reader.ReadToEnd();
             }
-
             body = body.Replace("{DisplayName}", DisplayName);
             body = body.Replace("{LoginName}", LoginName);
             body = body.Replace("{Password}", Password);
-            body = body.Replace("{Link}", Link);
-            body = body.Replace("{Action}", Action);
+            body = body.Replace("{EmailID}", EmailID);
+            body = body.Replace("{Password}", Password);
+            body = body.Replace("{PhoneNumber}", ContactNo);
+            
 
             return body;
         }
 
-        private void sendMail(string EmailID, string Subject, string Body, string link)
+        private void sendMail(string EmailID, string Subject, string Body)
         {
-            MailMessage msg = new MailMessage();
+            using (MailMessage msg = new MailMessage())
             try
             {
-                msg.From = new MailAddress("vedangofficeserver@gmail.com");
+                msg.From = new MailAddress("isharana24@gmail.com");
                 if (EmailID != "" || EmailID != string.Empty)
                 {
                     msg.To.Add(EmailID);
@@ -55,7 +49,8 @@ namespace SiteMaster.Models
                     msg.Subject = Subject;
                     SmtpClient smt = new SmtpClient("smtp.gmail.com");
                     smt.Port = 587;
-                    smt.Credentials = new NetworkCredential("vedangofficeserver@gmail.com", "Vedang@1234");
+                    smt.UseDefaultCredentials = false;
+                    smt.Credentials = new NetworkCredential("isharana24@gmail.com", "Suth@1990");
                     smt.EnableSsl = true;
                     smt.Send(msg);
                 }
@@ -72,6 +67,6 @@ namespace SiteMaster.Models
             }
         }
 
-       
+
     }
 }
