@@ -81,7 +81,7 @@ namespace Libraries.Service.ApplicationService
             model.Name = menu.Name;
             model.SortBy = menu.SortBy;
             model.ParentMenuId = menu.ParentMenuId == 0 ? null : menu.ParentMenuId;
-
+            model.Url = menu.Url;
             model.IsActive = menu.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

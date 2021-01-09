@@ -24,7 +24,15 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
               
-
+        //public async Task AddMutationDetails(Mutationdetailstemp mutationdetailstemp)
+        //{
+        //    Mutationdetailstemp obj = new Mutationdetailstemp();
+        //    obj.CreatedBy = 1;
+        //    obj.CreatedDate = DateTime.Now;
+        //    await  _dbContext.Mutationdetailstemp.AddAsync(obj);
+        //  await  _dbContext.SaveChangesAsync(); 
+            
+        //}
         public async Task<List<Mutationdetails>> GetAllMutationDetails()
         {
             var data = await _dbContext.Mutationdetails
@@ -47,53 +55,53 @@ namespace Libraries.Repository.EntityRepository
             return districtList;
         }
 
-        public async Task<Mutationdetails> GetPhotoPropFile(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //public async Task<Mutationdetails> GetPhotoPropFile(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationAtsFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationAtsFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationGPAFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationGPAFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationSignSPCFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationSignSPCFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationAddressProofFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationAddressProofFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
-        public async Task<Mutationdetails> SaveMutationIndemnityFilePath(int id)
-        {
-            return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
+        //}
+        //public async Task<Mutationdetails> SaveMutationIndemnityFilePath(int id)
+        //{
+        //    return await _dbContext.Mutationdetails.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
 
-        }
+        //}
 
-        public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
-        {
-            _dbContext.Mutationolddamageassesse.Add(oldDamage);
-            var Result = await _dbContext.SaveChangesAsync();
-            return Result > 0 ? true : false;
-        }
+        //public async Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage)
+        //{
+        //    _dbContext.Mutationolddamageassesse.Add(oldDamage);
+        //    var Result = await _dbContext.SaveChangesAsync();
+        //    return Result > 0 ? true : false;
+        //}
 
         public async Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id)
         {
@@ -149,7 +157,20 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Mutationdetailstemp
                                     .Include(x => x.DamagePayeeRegister)
-                                    .Where(x => x.DamagePayeeRegisterId == id)
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+
+        public async Task<Damagepayeepersonelinfo> GetPersonelInfoFile(int id)
+        {
+            return await _dbContext.Damagepayeepersonelinfo
+                                    .Where(x => x.Id == id)
+                                    .FirstOrDefaultAsync();
+        }
+        public async Task<Allottetype> GetAlloteeTypeFile(int id)
+        {
+            return await _dbContext.Allottetype
+                                    .Where(x => x.Id == id)
                                     .FirstOrDefaultAsync();
         }
     }

@@ -310,5 +310,23 @@
     "inputFiles": [
       "wwwroot/js/localityindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/permissions.min.js",
+    "inputFiles": [
+      "wwwroot/js/permissions.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/structureindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/structureindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/approvalstatusindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/approvalstatusindex.js"
+    ]
   }
 ]

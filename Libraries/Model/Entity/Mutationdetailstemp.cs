@@ -31,6 +31,7 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
         public Damagepayeeregister DamagePayeeRegister { get; set; }
+
         [NotMapped]
         public IFormFile AtsfilePathNew { get; set; }
         [NotMapped]

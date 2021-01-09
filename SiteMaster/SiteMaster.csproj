@@ -3,6 +3,18 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <Content Remove="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
 
   <ItemGroup>
 	   <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
