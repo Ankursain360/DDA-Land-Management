@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -39,5 +40,9 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.DepartmentId == departmentId && x.ZoneId == zoneId && x.DivisionId == divisionId && x.LocalityId == localityId && x.IsActive == 1).ToListAsync();
         }
 
+        public async Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto)
+        {
+            return await _dbContext.MonthlyRoaster.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Include(x => x.Userprofile).ThenInclude(x => x.User).GetPaged(monthlyRoasterSearchDto.PageNumber, monthlyRoasterSearchDto.PageSize);
+        }
     }
 }

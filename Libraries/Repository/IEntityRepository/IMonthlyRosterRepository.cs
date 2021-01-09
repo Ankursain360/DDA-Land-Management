@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Model.Entity;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetAllZone(int departmentId);
         Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId);
         Task<List<Userprofile>> SecurityGuardList();
+        Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto);
     }
 }
