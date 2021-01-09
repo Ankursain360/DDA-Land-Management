@@ -29,8 +29,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             var data = await _dbContext.Demandletter
-                    .Where(x => x.CreatedDate >= defaulterListingReportSearchDto.fromDate
-                    && x.CreatedDate <= defaulterListingReportSearchDto.toDate)
+                    .Where(x => x.DueDate >= defaulterListingReportSearchDto.fromDate
+                    && x.DueDate <= defaulterListingReportSearchDto.toDate)
                     .OrderByDescending(x => x.Id)
 
                     .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);

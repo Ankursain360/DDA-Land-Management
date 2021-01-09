@@ -34,7 +34,7 @@ function Ascending() {
     $('#txtAddress').val('');
     $('#txtLandmark').val('')
     if (value !== "0") {
-        debugger
+        
         GetLocalityOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
     }
     else {
