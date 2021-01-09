@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
-
+@{int Photo = 0;}
 @await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
 
 
@@ -78,7 +78,7 @@
                 <label class="floating-label" asp-for="DivisionId">Division</label>
             </div>
         </div>
-        </div>
+    </div>
     <div id="divUnplannedSelection" style="display:none;">
         <div class="row pt-3">
             <div class="col-md-4">
@@ -100,8 +100,8 @@
                     <label asp-for="KhasraNo" class="floating-label">Khasra No</label>
                 </div>
             </div>
-            </div>
         </div>
+    </div>
     <div id="divPlannedSelection">
         <div class="row pt-3">
             <div class="col-md-4">
@@ -157,157 +157,158 @@
         </div>
     </div>
 
-        <div class="row pt-3">
-            <div class="col-md-12">
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap">
+
+                <textarea disabled asp-for="Palandmark" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                <label class="floating-label">Address with Landmark</label>
+                <div id="feedbackPalandmark"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="DivArea">
+        <h2 class="my-3 sub-heading">Area</h2>
+        <div class="row">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
 
-                    <textarea disabled asp-for="Palandmark" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                    <label class="floating-label">Address with Landmark</label>
-                    <div id="feedbackPalandmark"></div>
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
+                        <option value="0">bigha-biswa-bishwani</option>
+                        <option value="1">Sq Yd.</option>
+                        <option value="2">Acre</option>
+                        <option value="3">Hectare</option>
+                        <option value="4">Sq. Mt.</option>
+                    </select>
+                    <span asp-validation-for="AreaUnit" class="text-danger"></span>
+                    <label class="floating-label">Area Unit</label>
                 </div>
             </div>
         </div>
+        <div class="row pt-3">
+            <div class="col-md-4">
+                <div id="bighabis">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
+                                <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
+                                <label class="floating-label">Bigha</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
 
-        <div id="DivArea">
-            <h2 class="my-3 sub-heading">Area</h2>
-            <div class="row">
+                                <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
+                                <label class="floating-label">Biswa</label>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
+                                <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
+                                <label class="floating-label">Biswani</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
+                <div class="floating-label-wrap">
+                    <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                    <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
+                    <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
+                    <span asp-validation-for="TotalArea" class="text-danger"></span>
+                    <label class="floating-label">Total Area(in sq. mt.)</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divEncroachment">
+        <h2 class="my-3 sub-heading">Encroached Details</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachmentStatusId">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <span asp-validation-for="EncroachmentStatusId" class="text-danger"></span>
+                    <label class="floating-label">Encroachment</label>
+                </div>
+            </div>
+        </div>
+        <div id="divEncroachmentYesSelection" style="display:none;">
+
+            <div class="row pt-3">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="AreaUnit">
-                            <option value="0">bigha-biswa-bishwani</option>
-                            <option value="1">Sq Yd.</option>
-                            <option value="2">Acre</option>
-                            <option value="3">Hectare</option>
-                            <option value="4">Sq. Mt.</option>
+                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachedPartiallyFully">
+                            <option value="0">Partially Encroached</option>
+                            <option value="1">Fully Encroached</option>
                         </select>
-                        <span asp-validation-for="AreaUnit" class="text-danger"></span>
-                        <label class="floating-label">Area Unit</label>
+                        <span asp-validation-for="EncroachedPartiallyFully" class="text-danger"></span>
+                        <label class="floating-label">Encroachment Status</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="EncrochedArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger"></span>
+                        <label class="floating-label">Encroched Area(in sq. mt.)</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger"></span>
+                        <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
                     </div>
                 </div>
             </div>
             <div class="row pt-3">
                 <div class="col-md-4">
-                    <div id="bighabis">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                    <input disabled asp-for="TotalAreaInBigha" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                    <span asp-validation-for="TotalAreaInBigha" class="text-danger"></span>
-                                    <label class="floating-label">Bigha</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                    <input disabled asp-for="TotalAreaInBiswa" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                    <span asp-validation-for="TotalAreaInBiswa" class="text-danger"></span>
-                                    <label class="floating-label">Biswa</label>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                                    <input disabled asp-for="TotalAreaInBiswani" class="floating-label-field floating-label-field--s3 numbers bbbcalculation" onkeypress="return numericDecimal(this);" onpaste="return false;">
-                                    <span asp-validation-for="TotalAreaInBiswani" class="text-danger"></span>
-                                    <label class="floating-label">Biswani</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row pt-3">
-                <div id="AreainSqAcreHec" class="col-md-4" style="display:none;">
                     <div class="floating-label-wrap">
-                        <input disabled asp-for="TotalAreaInSqAcreHt" type="text" class="floating-label-field floating-label-field--s3 numbers TotalCalculation" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                        <span asp-validation-for="TotalAreaInSqAcreHt" class="text-danger"></span>
-                        <label class="floating-label" id="LabelTotalAreaSqAcreHec">Total Area(Sq Yd./Acre/Hectare)</label>
+
+                        <input disabled asp-for="Vacant" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
+                        <span asp-validation-for="Vacant" class="text-danger"></span>
+                        <label class="floating-label">Vacant Area(in sq. mt.)</label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
-                        <input disabled asp-for="TotalArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" required="required" requiredmsg="Total Area is Mandatory">
-                        <span asp-validation-for="TotalArea" class="text-danger"></span>
-                        <label class="floating-label">Total Area(in sq. mt.)</label>
+
+                        <input disabled asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" maxlength="200" />
+                        <span asp-validation-for="ActionOnEncroachment" class="text-danger lb-sm"></span>
+                        <label class="floating-label">Action On Encroachment</label>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div id="divEncroachment">
-            <h2 class="my-3 sub-heading">Encroached Details</h2>
-            <div class="row">
                 <div class="col-md-4">
                     <div class="floating-label-wrap">
 
-                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachmentStatusId">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <span asp-validation-for="EncroachmentStatusId" class="text-danger"></span>
-                        <label class="floating-label">Encroachment</label>
-                    </div>
-                </div>
-            </div>
-            <div id="divEncroachmentYesSelection" style="display:none;">
-
-                <div class="row pt-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <select class="floating-label-field floating-label-field--s3" disabled asp-for="EncroachedPartiallyFully">
-                                <option value="0">Partially Encroached</option>
-                                <option value="1">Fully Encroached</option>
-                            </select>
-                            <span asp-validation-for="EncroachedPartiallyFully" class="text-danger"></span>
-                            <label class="floating-label">Encroachment Status</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="EncrochedArea" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                            <span id="EncroachedValidation" asp-validation-for="Encroached" class="text-danger"></span>
-                            <label class="floating-label">Encroched Area(in sq. mt.)</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="BuiltUpEncraochmentArea" class="floating-label-field floating-label-field--s3 numbers" id="BuiltupEncroachmentArea" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                            <span asp-validation-for="BuiltUpEncraochmentArea" class="text-danger"></span>
-                            <label class="floating-label">Builtup in Encroachment Area(in sq. mt.)</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="Vacant" class="floating-label-field floating-label-field--s3 numbers" onkeypress="return numericDecimal(this);" onpaste="return false;" />
-                            <span asp-validation-for="Vacant" class="text-danger"></span>
-                            <label class="floating-label">Vacant Area(in sq. mt.)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="ActionOnEncroachment" class="floating-label-field floating-label-field--s3" maxlength="200" />
-                            <span asp-validation-for="ActionOnEncroachment" class="text-danger lb-sm"></span>
-                            <label class="floating-label">Action On Encroachment</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input type="hidden" asp-for="EncroachAtrfilepath" />
-                            @{
-                                @if (ViewBag.EncroachAtrDocView != null)
-                                {
+                        <input type="hidden" asp-for="EncroachAtrfilepath" />
+                        @{
+                            @if (ViewBag.EncroachAtrDocView != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@Model.Id"> (View Existing Photo @(Photo += 1 ))</a>
                                 <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                 @Html.ActionLink(" (View File)", "EncroachAtrDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
                             }
@@ -316,569 +317,569 @@
                                 <input type="file" class="floating-label-field floating-label-field--s3" asp-for="EncroachAtrDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
 
                             }
-                            }
-                            <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
-                            <label class="floating-label">Upload Action Taken Report(ATR)</label>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="row pt-3">
-                <div class="col-md-12" id="divEncroachmentDetails" style="display:none;">
-                    <div class="floating-label-wrap">
-                        <input disabled asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
-                        <span asp-validation-for="EncraochmentDetails" class="text-danger"></span>
-                        <label id="l1" class="floating-label">Encroachment Details</label>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div id="divFencingBoundaryWall">
-            <h2 class="my-3 sub-heading">Boundary Wall/Fencing</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="Boundary">
-                            <option value="0">Boundary Wall</option>
-                            <option value="1">Fencing</option>
-                            <option value="2">None</option>
-                        </select>
-                        <span asp-validation-for="Boundary" class="text-danger"></span>
-                        <label class="floating-label">Protection of Land</label><span class="text-danger">*</span>
-                    </div>
-                </div>
-            </div>
-            <div id="divBoundarySelection" style="display:none;">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input type="text" class="floating-label-field floating-label-field--s3 numbers" disabled asp-for="BoundaryAreaCovered" />
-                            <span asp-validation-for="BoundaryAreaCovered" class="text-danger"></span>
-                            <label class="floating-label">Area Covered(Sq. mtr)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input type="text" class="floating-label-field floating-label-field--s3" disabled asp-for="BoundaryDimension" />
-                            <span asp-validation-for="BoundaryDimension" class="text-danger"></span>
-                            <label class="floating-label">Dimension (L*B*H)(mtr)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input asp-for="BoundaryRemarks" disabled class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="BoundaryRemarks" class="text-danger"></span>
-                            <label id="l1" class="floating-label">Boundary Remarks</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="DivLandUse">
-            <h2 class="my-3 sub-heading">Land Use</h2>
-
-            <div id="divPlannedLand">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <select class="floating-label-field floating-label-field--s3" disabled asp-for="MainLandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
-                                <option value="0">--Select--</option>
-                            </select>
-                            <label asp-validation-for="MainLandUseId" class="error"></label>
-                            <label class="floating-label">Main Land Use</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input type="text" disabled asp-for="SubUse" class="floating-label-field floating-label-field--s3" limit="500" />
-                            <span asp-validation-for="SubUse" class="text-danger"></span>
-                            <label class="floating-label">Sub Use</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="divLitigation">
-            <h2 class="my-3 sub-heading">Litigation</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="LitigationStatus">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <label class="floating-label">Litigation Status</label><span class="text-danger">*</span>
-                    </div>
-                </div>
-            </div>
-            <div id="divLitigationStatusSelection" style="display:none;">
-                <div class="row pt-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="CourtName" class="floating-label-field floating-label-field--s3" maxlength="50" />
-                            <span asp-validation-for="CourtName" class="text-danger"></span>
-                            <label class="floating-label">Court Name</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="CaseNo" class="floating-label-field floating-label-field--s3" maxlength="50" />
-                            <span asp-validation-for="CaseNo" class="text-danger"></span>
-                            <label class="floating-label">Case No.</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="OppositeParty" class="floating-label-field floating-label-field--s3" maxlength="100" />
-                            <span asp-validation-for="OppositeParty" class="text-danger"></span>
-                            <label class="floating-label">Opposite Party</label>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="LitigationStatusRemarks" class="floating-label-field floating-label-field--s3" limit="4000" />
-                            <span asp-validation-for="LitigationStatusRemarks" class="text-danger"></span>
-                            <label class="floating-label">Remarks</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="DivOtherDetails">
-            <h2 class="my-3 sub-heading">Other Details</h2>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="BuiltUp">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <label class="floating-label">Built-Up</label><span class="text-danger">*</span>
-                    </div>
-                </div>
-                <div class="col-md-4" id="divBuilttype" style="display:none;">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="BuiltUpRemarks" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="BuiltUpRemarks" class="text-danger"></span>
-                        <label class="floating-label">Built-Up Remarks</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4" id="divLayoutPlan" style="display:none;">
-                    <div class="floating-label-wrap">
-
-                        <input type="hidden" asp-for="LayoutFilePath" />
-                        @{
-                            @if (ViewBag.LayoutDocView != null)
-                            {
-
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                            }
-                            else
-                            {
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            }
                         }
-                        <span asp-validation-for="FileData" class="text-danger"></span>
-                       <label class="floating-label" asp-for="FileData">Upload Layout Plan</label>
-                    </div>
-
-                </div>
-            </div>
-            <div class="row pt-3">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="GeoReferencing">
-                            <option value="0">No</option>
-                            <option value="1">Yes</option>
-                        </select>
-                        <label class="floating-label">GEO Referencing Done</label>
+                        <span asp-validation-for="EncroachAtrDoc" class="text-danger"></span>
+                        @*<label class="floating-label">Upload Action Taken Report(ATR)</label>*@
                     </div>
                 </div>
-            </div>
-            <div id="divGEOReferencingSelection" style="display:none;">
-                <div class="row pt-3">
-                    <div class="col-md-4" id="divGEOReferencing">
-                        <div class="floating-label-wrap">
 
-                            <input type="hidden" asp-for="GeoFilePath" />
-                            @{
-                                @if (ViewBag.GeoDocView != null)
-                                {
-
-                                    <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                    @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                                }
-                                else
-                                {
-                                    <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                }
-                            }
-                            <span asp-validation-for="GeoFileData" class="text-danger"></span>
-                            <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="GeoLattitude" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="GeoLattitude" class="text-danger"></span>
-                            <label class="floating-label">Lattitude</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-
-                            <input disabled asp-for="GeoLongitude" class="floating-label-field floating-label-field--s3" />
-                            <span asp-validation-for="GeoLongitude" class="text-danger"></span>
-                            <label class="floating-label">Longitude</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row pt-3">
-                    <div class="col-md-4">
-                        <a class="btn btn-theme" style="color:white;">Get Lat Long</a>
-                    </div>
-                </div>
             </div>
         </div>
-
-        <div id="DivHandedOver" style="display:none;">
-            <h2 class="my-3 sub-heading">Handed Over</h2>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.HandOverDepartmentList, "Id","Name"))" onchange="return GetHandedOverZoneList(this.options[this.selectedIndex].value);">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label asp-validation-for="HandedOverDepartmentId" class="error"></label>
-                        <label class="floating-label" asp-for="HandedOverDepartmentId">Department</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverZoneId" asp-items="@(new SelectList(Model.HandedOverZoneList, "Id","Name"))" onchange="return GetHandedOverDivisionList(this.options[this.selectedIndex].value);">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label asp-validation-for="HandedOverZoneId" class="error"></label>
-                        <label class="floating-label" asp-for="HandedOverZoneId">Zone</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverDivisionId" asp-items="@(new SelectList(Model.HandedOverDivisionList, "Id","Name"))">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label asp-validation-for="HandedOverDivisionId" class="error"></label>
-                        <label class="floating-label" asp-for="HandedOverDivisionId">Division</label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="HandedOverName" class="floating-label-field floating-label-field--s3" limit="200" />
-                        <span asp-validation-for="HandedOverName" class="text-danger"></span>
-                        <label class="floating-label">Name/Designation</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="HandedOverDate" class="floating-label-field floating-label-field--s3" type="date" />
-                        <span asp-validation-for="HandedOverDate" class="text-danger"></span>
-                        <label class="floating-label">Date</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-                        <label class="floating-label">Email Id</label>
-                        <input disabled asp-for="HandedOverEmailId" class="floating-label-field floating-label-field--s3" type="email" limit="200" />
-                        <span asp-validation-for="HandedOverEmailId" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="HandedOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
-                        <span asp-validation-for="HandedOverMobileNo" class="text-danger"></span>
-                        <label class="floating-label">Mobile No.</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="HandedOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
-                        <span asp-validation-for="HandedOverLandlineNo" class="text-danger"></span>
-                        <label class="floating-label">Land Line No.</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled type="text" class="floating-label-field floating-label-field--s3" asp-for="HandedOverOrderNo" maxlength="100" />
-                        <span asp-validation-for="HandedOverOrderNo" class="text-danger"></span>
-                        <label class="floating-label">Order No.</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input type="hidden" asp-for="HandedOverCopyofOrderFilepath" />
-                        @{
-                            @if (ViewBag.HandedOverCopyofOrderView != null)
-                            {
-
-                                <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                @Html.ActionLink(" (View File)", "HandedOverCopyofOrderDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                            }
-                            else
-                            {
-                                <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            }
-                        }
-
-                        <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger"></span>
-                        <label class="floating-label">Copy of Order </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled type="text" class="floating-label-field floating-label-field--s3" asp-for="HandedTransferOrder" maxlength="100" />
-                        <span class="text-danger" asp-validation-for="HandedTransferOrder"></span>
-                        <label class="floating-label">Transfer order Issue Authority </label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                       <input type="hidden" asp-for="HandedOverFilePath" />
-                        @{
-                            @if (ViewBag.HandedOverDocView != null)
-                            {
-
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                @Html.ActionLink(" (View File)", "HandedOverDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                            }
-                            else
-                            {
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            }
-                        }
-                        <span asp-validation-for="HandedOverFileData" class="text-danger"></span>
-                       <label class="floating-label" asp-for="HandedOverFileData">Document</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <textarea disabled asp-for="HandedOverComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                        <span asp-validation-for="HandedOverComments" class="text-danger"></span>
-                        <label class="floating-label">Comments</label>
-                        <div id="feedbackHandedOverComments"></div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <div id="DivTakenOver" style="display:none;">
-            <h6 class="my-3 sub-heading">Taken Over</h6>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverDepartmentId" asp-items="@(new SelectList(Model.TakenOverDepartmentList, "Id","Name"))" onchange="return GetTakenOverZoneList(this.options[this.selectedIndex].value);">
-                            <option value="">--Select--</option>
-                        </select>
-                        <span asp-validation-for="TakenOverDepartmentId" class="text-danger"></span>
-                        <label class="floating-label" asp-for="TakenOverDepartmentId">Department</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverZoneId" asp-items="@(new SelectList(Model.TakenOverZoneList, "Id","Name"))" onchange="return GetTakenOverDivisionList(this.options[this.selectedIndex].value);">
-                            <option value="">--Select--</option>
-                        </select>
-                        <label asp-validation-for="TakenOverZoneId" class="error"></label>
-                        <label class="floating-label" asp-for="TakenOverZoneId">Zone</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverDivisionId" asp-items="@(new SelectList(Model.TakenOverDivisionList, "Id","Name"))">
-                            <option value="">--Select--</option>
-                        </select>
-                        <span asp-validation-for="TakenOverDivisionId" class="error"></span>
-                        <label class="floating-label" asp-for="TakenOverDivisionId">Division</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="TakenOverName" class="floating-label-field floating-label-field--s3" limit="200" />
-                        <span asp-validation-for="TakenOverName" class="text-danger"></span>
-                        <label class="floating-label">Name/Designation</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="TakenOverDate" type="date" class="floating-label-field floating-label-field--s3" />
-                        <span asp-validation-for="TakenOverDate" class="text-danger"></span>
-                        <label class="floating-label">Date</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input asp-for="TakenOverEmailId" class="floating-label-field floating-label-field--s3" type="email" limit="200" />
-                        <span asp-validation-for="TakenOverEmailId" class="text-danger"></span>
-                        <label class="floating-label">Email Id</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="TakenOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
-                        <span asp-validation-for="TakenOverMobileNo" class="text-danger"></span>
-                        <label class="floating-label">Mobile No.</label>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input disabled asp-for="TakenOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
-                        <span asp-validation-for="TakenOverLandlineNo" class="text-danger"></span>
-                        <label class="floating-label">Land Line No.</label>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="floating-label-wrap">
-
-                        <input type="hidden" asp-for="TakenOverFilePath" />
-                        @{
-                            @if (ViewBag.TakenOverDocView != null)
-                            {
-
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                                @Html.ActionLink(" (View File)", "TakenOverDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
-                            }
-                            else
-                            {
-                                <input type="file" class="floating-label-field floating-label-field--s3" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
-                            }
-                        }
-                        <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
-                        <label class="floating-label" asp-for="TakenOverFileData">Document</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <textarea disabled asp-for="TakenOverComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                        <span asp-validation-for="TakenOverComments" class="text-danger"></span>
-                        <label class="floating-label">Comments</label>
-                        <div id="feedbackTakenOverComments"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
 
         <div class="row pt-3">
+            <div class="col-md-12" id="divEncroachmentDetails" style="display:none;">
+                <div class="floating-label-wrap">
+                    <input disabled asp-for="EncraochmentDetails" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000" />
+                    <span asp-validation-for="EncraochmentDetails" class="text-danger"></span>
+                    <label id="l1" class="floating-label">Encroachment Details</label>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="divFencingBoundaryWall">
+        <h2 class="my-3 sub-heading">Boundary Wall/Fencing</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="Boundary">
+                        <option value="0">Boundary Wall</option>
+                        <option value="1">Fencing</option>
+                        <option value="2">None</option>
+                    </select>
+                    <span asp-validation-for="Boundary" class="text-danger"></span>
+                    <label class="floating-label">Protection of Land</label><span class="text-danger">*</span>
+                </div>
+            </div>
+        </div>
+        <div id="divBoundarySelection" style="display:none;">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input type="text" class="floating-label-field floating-label-field--s3 numbers" disabled asp-for="BoundaryAreaCovered" />
+                        <span asp-validation-for="BoundaryAreaCovered" class="text-danger"></span>
+                        <label class="floating-label">Area Covered(Sq. mtr)</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input type="text" class="floating-label-field floating-label-field--s3" disabled asp-for="BoundaryDimension" />
+                        <span asp-validation-for="BoundaryDimension" class="text-danger"></span>
+                        <label class="floating-label">Dimension (L*B*H)(mtr)</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input asp-for="BoundaryRemarks" disabled class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="BoundaryRemarks" class="text-danger"></span>
+                        <label id="l1" class="floating-label">Boundary Remarks</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivLandUse">
+        <h2 class="my-3 sub-heading">Land Use</h2>
+
+        <div id="divPlannedLand">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <select class="floating-label-field floating-label-field--s3" disabled asp-for="MainLandUseId" asp-items="@(new SelectList(Model.LandUseList, "Id","Name"))">
+                            <option value="0">--Select--</option>
+                        </select>
+                        <label asp-validation-for="MainLandUseId" class="error"></label>
+                        <label class="floating-label">Main Land Use</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input type="text" disabled asp-for="SubUse" class="floating-label-field floating-label-field--s3" limit="500" />
+                        <span asp-validation-for="SubUse" class="text-danger"></span>
+                        <label class="floating-label">Sub Use</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="divLitigation">
+        <h2 class="my-3 sub-heading">Litigation</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="LitigationStatus">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label">Litigation Status</label><span class="text-danger">*</span>
+                </div>
+            </div>
+        </div>
+        <div id="divLitigationStatusSelection" style="display:none;">
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="CourtName" class="floating-label-field floating-label-field--s3" maxlength="50" />
+                        <span asp-validation-for="CourtName" class="text-danger"></span>
+                        <label class="floating-label">Court Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="CaseNo" class="floating-label-field floating-label-field--s3" maxlength="50" />
+                        <span asp-validation-for="CaseNo" class="text-danger"></span>
+                        <label class="floating-label">Case No.</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="OppositeParty" class="floating-label-field floating-label-field--s3" maxlength="100" />
+                        <span asp-validation-for="OppositeParty" class="text-danger"></span>
+                        <label class="floating-label">Opposite Party</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="LitigationStatusRemarks" class="floating-label-field floating-label-field--s3" limit="4000" />
+                        <span asp-validation-for="LitigationStatusRemarks" class="text-danger"></span>
+                        <label class="floating-label">Remarks</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="DivOtherDetails">
+        <h2 class="my-3 sub-heading">Other Details</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="BuiltUp">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label">Built-Up</label><span class="text-danger">*</span>
+                </div>
+            </div>
+            <div class="col-md-4" id="divBuilttype" style="display:none;">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="BuiltUpRemarks" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="BuiltUpRemarks" class="text-danger"></span>
+                    <label class="floating-label">Built-Up Remarks</label>
+                </div>
+            </div>
+
+            <div class="col-md-4" id="divLayoutPlan" style="display:none;">
+                <div class="floating-label-wrap">
+
+                    <input type="hidden" asp-for="LayoutFilePath" />
+                    @{
+                        @if (ViewBag.LayoutDocView != null)
+                        {
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@Model.Id"> (View Existing Photo @(Photo += 1 ))</a>
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+                    <span asp-validation-for="FileData" class="text-danger"></span>
+                    @*<label class="floating-label" asp-for="FileData">Upload Layout Plan</label>*@
+                </div>
+
+            </div>
+        </div>
+        <div class="row pt-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="GeoReferencing">
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label">GEO Referencing Done</label>
+                </div>
+            </div>
+        </div>
+        <div id="divGEOReferencingSelection" style="display:none;">
+            <div class="row pt-3">
+                <div class="col-md-4" id="divGEOReferencing">
+                    <div class="floating-label-wrap">
+
+                        <input type="hidden" asp-for="GeoFilePath" />
+                        @{
+                            @if (ViewBag.GeoDocView != null)
+                            {
+
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                                @Html.ActionLink(" (View File)", "GeoDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                            }
+                            else
+                            {
+                                <input type="file" class="floating-label-field floating-label-field--s3" id="GeoAssignFile" name="GeoAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            }
+                        }
+                        <span asp-validation-for="GeoFileData" class="text-danger"></span>
+                        <label class="floating-label" asp-for="GeoFileData">Upload Geo Referencing File</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="GeoLattitude" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="GeoLattitude" class="text-danger"></span>
+                        <label class="floating-label">Lattitude</label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="floating-label-wrap">
+
+                        <input disabled asp-for="GeoLongitude" class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="GeoLongitude" class="text-danger"></span>
+                        <label class="floating-label">Longitude</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-md-4">
+                    <a class="btn btn-theme" style="color:white;">Get Lat Long</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="DivHandedOver" style="display:none;">
+        <h2 class="my-3 sub-heading">Handed Over</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverDepartmentId" asp-items="@(new SelectList(Model.HandOverDepartmentList, "Id","Name"))" onchange="return GetHandedOverZoneList(this.options[this.selectedIndex].value);">
+                        <option value="">--Select--</option>
+                    </select>
+                    <label asp-validation-for="HandedOverDepartmentId" class="error"></label>
+                    <label class="floating-label" asp-for="HandedOverDepartmentId">Department</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverZoneId" asp-items="@(new SelectList(Model.HandedOverZoneList, "Id","Name"))" onchange="return GetHandedOverDivisionList(this.options[this.selectedIndex].value);">
+                        <option value="">--Select--</option>
+                    </select>
+                    <label asp-validation-for="HandedOverZoneId" class="error"></label>
+                    <label class="floating-label" asp-for="HandedOverZoneId">Zone</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="HandedOverDivisionId" asp-items="@(new SelectList(Model.HandedOverDivisionList, "Id","Name"))">
+                        <option value="">--Select--</option>
+                    </select>
+                    <label asp-validation-for="HandedOverDivisionId" class="error"></label>
+                    <label class="floating-label" asp-for="HandedOverDivisionId">Division</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="HandedOverName" class="floating-label-field floating-label-field--s3" limit="200" />
+                    <span asp-validation-for="HandedOverName" class="text-danger"></span>
+                    <label class="floating-label">Name/Designation</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="HandedOverDate" class="floating-label-field floating-label-field--s3" type="date" />
+                    <span asp-validation-for="HandedOverDate" class="text-danger"></span>
+                    <label class="floating-label">Date</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <label class="floating-label">Email Id</label>
+                    <input disabled asp-for="HandedOverEmailId" class="floating-label-field floating-label-field--s3" type="email" limit="200" />
+                    <span asp-validation-for="HandedOverEmailId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="HandedOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
+                    <span asp-validation-for="HandedOverMobileNo" class="text-danger"></span>
+                    <label class="floating-label">Mobile No.</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="HandedOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
+                    <span asp-validation-for="HandedOverLandlineNo" class="text-danger"></span>
+                    <label class="floating-label">Land Line No.</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled type="text" class="floating-label-field floating-label-field--s3" asp-for="HandedOverOrderNo" maxlength="100" />
+                    <span asp-validation-for="HandedOverOrderNo" class="text-danger"></span>
+                    <label class="floating-label">Order No.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input type="hidden" asp-for="HandedOverCopyofOrderFilepath" />
+                    @{
+                        @if (ViewBag.HandedOverCopyofOrderView != null)
+                        {
+
+                            <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "HandedOverCopyofOrderDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" asp-for="HandedOverCopyofOrderDoc" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+
+                    <span asp-validation-for="HandedOverCopyofOrderDoc" class="text-danger"></span>
+                    <label class="floating-label">Copy of Order </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled type="text" class="floating-label-field floating-label-field--s3" asp-for="HandedTransferOrder" maxlength="100" />
+                    <span class="text-danger" asp-validation-for="HandedTransferOrder"></span>
+                    <label class="floating-label">Transfer order Issue Authority </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input type="hidden" asp-for="HandedOverFilePath" />
+                    @{
+                        @if (ViewBag.HandedOverDocView != null)
+                        {
+
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "HandedOverDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="HandedOverAssignFile" name="HandedOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+                    <span asp-validation-for="HandedOverFileData" class="text-danger"></span>
+                    <label class="floating-label" asp-for="HandedOverFileData">Document</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea disabled asp-for="HandedOverComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                    <span asp-validation-for="HandedOverComments" class="text-danger"></span>
+                    <label class="floating-label">Comments</label>
+                    <div id="feedbackHandedOverComments"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="DivTakenOver" style="display:none;">
+        <h6 class="my-3 sub-heading">Taken Over</h6>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverDepartmentId" asp-items="@(new SelectList(Model.TakenOverDepartmentList, "Id","Name"))" onchange="return GetTakenOverZoneList(this.options[this.selectedIndex].value);">
+                        <option value="">--Select--</option>
+                    </select>
+                    <span asp-validation-for="TakenOverDepartmentId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="TakenOverDepartmentId">Department</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverZoneId" asp-items="@(new SelectList(Model.TakenOverZoneList, "Id","Name"))" onchange="return GetTakenOverDivisionList(this.options[this.selectedIndex].value);">
+                        <option value="">--Select--</option>
+                    </select>
+                    <label asp-validation-for="TakenOverZoneId" class="error"></label>
+                    <label class="floating-label" asp-for="TakenOverZoneId">Zone</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="TakenOverDivisionId" asp-items="@(new SelectList(Model.TakenOverDivisionList, "Id","Name"))">
+                        <option value="">--Select--</option>
+                    </select>
+                    <span asp-validation-for="TakenOverDivisionId" class="error"></span>
+                    <label class="floating-label" asp-for="TakenOverDivisionId">Division</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="TakenOverName" class="floating-label-field floating-label-field--s3" limit="200" />
+                    <span asp-validation-for="TakenOverName" class="text-danger"></span>
+                    <label class="floating-label">Name/Designation</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="TakenOverDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="TakenOverDate" class="text-danger"></span>
+                    <label class="floating-label">Date</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input asp-for="TakenOverEmailId" class="floating-label-field floating-label-field--s3" type="email" limit="200" />
+                    <span asp-validation-for="TakenOverEmailId" class="text-danger"></span>
+                    <label class="floating-label">Email Id</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="TakenOverMobileNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
+                    <span asp-validation-for="TakenOverMobileNo" class="text-danger"></span>
+                    <label class="floating-label">Mobile No.</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input disabled asp-for="TakenOverLandlineNo" class="floating-label-field floating-label-field--s3 onlynumbers" maxlength="10" />
+                    <span asp-validation-for="TakenOverLandlineNo" class="text-danger"></span>
+                    <label class="floating-label">Land Line No.</label>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <input type="hidden" asp-for="TakenOverFilePath" />
+                    @{
+                        @if (ViewBag.TakenOverDocView != null)
+                        {
+
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "TakenOverDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="TakenOverAssignFile" name="TakenOverAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+                    <span asp-validation-for="TakenOverFileData" class="text-danger"></span>
+                    <label class="floating-label" asp-for="TakenOverFileData">Document</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+        <div class="row">
             <div class="col-md-12">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
-                    <label class="floating-label">Remarks</label>
-                    <div id="feedbackRemarks"></div>
+                    <textarea disabled asp-for="TakenOverComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                    <span asp-validation-for="TakenOverComments" class="text-danger"></span>
+                    <label class="floating-label">Comments</label>
+                    <div id="feedbackTakenOverComments"></div>
                 </div>
             </div>
         </div>
-        <div class="row" style="display:none;">
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <label class="floating-label">Status</label>
-                    <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
-                        <option value="1">Active</option>
-                        <option value="0">Inactive</option>
-                    </select>
-                    <span asp-validation-for="IsActive" class="text-danger"></span>
-                </div>
+    </div>
+
+
+
+    <div class="row pt-3">
+        <div class="col-md-12">
+            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                <textarea disabled asp-for="Remarks" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                <label class="floating-label">Remarks</label>
+                <div id="feedbackRemarks"></div>
             </div>
         </div>
-        @{
-            @if (ViewBag.IsValidateUser == 2)
-            {
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label class="control-label lb-sm">Validate</label>
-                        <input type="checkbox" disabled asp-for="IsValidateData" />
-                    </div>
+    </div>
+    <div class="row" style="display:none;">
+        <div class="col-md-4">
+            <div class="floating-label-wrap">
+                <label class="floating-label">Status</label>
+                <select disabled asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+    @{
+        @if (ViewBag.IsValidateUser == 2)
+        {
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label class="control-label lb-sm">Validate</label>
+                    <input type="checkbox" disabled asp-for="IsValidateData" />
                 </div>
-            }
+            </div>
         }
+    }
 
 
-        <div class="row ">
-            <div class="col-md-12" style="margin-bottom:40px;">
-                @Html.ActionLink("Back", "Create", "InventoryUnverified", null, new { @class = "btn btn-theme " })
-            </div>
+    <div class="row ">
+        <div class="col-md-12" style="margin-bottom:40px;">
+            @Html.ActionLink("Back", "Create", "InventoryUnverified", null, new { @class = "btn btn-theme " })
         </div>
+    </div>
 
 </form>
-    
+
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

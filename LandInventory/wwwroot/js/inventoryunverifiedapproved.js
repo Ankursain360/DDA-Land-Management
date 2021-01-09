@@ -59,7 +59,7 @@ function GetDetails(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
-    debugger;
+    
     var departmentId = $('#DepartmentId option:selected').val();
     var zoneId = $('#ZoneId option:selected').val();
     var divisionId = $('#DivisionId option:selected').val();
