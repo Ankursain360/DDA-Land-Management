@@ -3,6 +3,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
+using Model.Entity;
 using Service.IApplicationService;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Locality>> GetAllLocalityList(int divisionId)
         {
             return (await _monthlyRosterRepository.GetAllLocalityList(divisionId));
+        }
+
+        public async Task<List<Userprofile>> SecurityGuardList()
+        {
+            return (await _monthlyRosterRepository.SecurityGuardList());
+        }
+
+        public async Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId)
+        {
+            return await _monthlyRosterRepository.GetPrimaryListNoList(divisionId, departmentId, zoneId, localityId);
         }
     }
 }

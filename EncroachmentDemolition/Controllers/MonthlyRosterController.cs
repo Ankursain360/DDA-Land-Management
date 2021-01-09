@@ -26,9 +26,35 @@ namespace EncroachmentDemolition.Controllers
         public async Task<IActionResult> Create()
         {
             MonthlyRoaster model = new MonthlyRoaster();
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
             model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
             model.YearList = await GetYearList();
             model.MonthList = await GetMonthsList();
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] MonthlyRoasterDto monthlyRoasterDto)
+        {
+            MonthlyRoaster model = new MonthlyRoaster();
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
+            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.YearList = await GetYearList();
+            model.MonthList = await GetMonthsList();
+            if (ModelState.IsValid)
+            {
+                var modelData = new MonthlyRoaster
+                {
+                    Month = monthlyRoasterDto.month,
+                    Year = monthlyRoasterDto.year,
+                    DepartmentId = monthlyRoasterDto.Department,
+                    ZoneId = monthlyRoasterDto.Zone,
+                    DivisionId = monthlyRoasterDto.Division,
+                    Locality = monthlyRoasterDto.Locality,
+                    SecurityGuard = monthlyRoasterDto.securityGuard,
+                    Template = monthlyRoasterDto.Template
+                };
+                _monthlyRosterService.Create(modelData);
+            }
             return View(model);
         }
         public async Task<List<DropdownDto>> GetMonthsList()
@@ -57,10 +83,11 @@ namespace EncroachmentDemolition.Controllers
             }
             return Years;
         }
-        public async Task<PartialViewResult> GetMonthlyDetails(int? month)
+        public async Task<PartialViewResult> GetMonthlyDetails(int? month, int? year, int? department, int? division, int? zone, int? locality)
         {
             var dates = new List<MonthlyRoasterPartial>();
-            for (var date = new DateTime(2020, month ?? 0, 1); date.Month == month; date = date.AddDays(1))
+            ViewBag.PrimaryList = await _monthlyRosterService.GetPrimaryListNoList(division ?? 0, department ?? 0, zone ?? 0, locality ?? 0);
+            for (var date = new DateTime(Convert.ToInt32(year ?? 0), month ?? 0, 1); date.Month == month; date = date.AddDays(1))
             {
                 dates.Add(new MonthlyRoasterPartial
                 {

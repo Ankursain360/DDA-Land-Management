@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-      
+    debugger;
     /* -----------Start Call Repeator Added by Renu  --------------- */
     if ($("#DamagePayeeRegisterId").val() != 0) {
         FillRepeatorAtEdit();
@@ -37,13 +37,15 @@
     }
 
     /*Mutation Purpose checks*/
-    if ($("#rdbPurchaser").is(":checked")) {
-        $("#DivForPurchasePurpose").show();
-        $("#MutationPurpose").val("Purchaser");
-    } else {
-        $("#DivForInheritancePurpose").hide();
-        $("#MutationPurpose").val("Inheritance");
-    }
+    //if ($("#MutationPurpose").val() == "Purchaser") {
+    //    $("#DivForPurchasePurpose").show();
+    //    $("#DivForInheritancePurpose").hide();
+    //    $("#MutationPurpose").val("Purchaser");
+    //} else {
+    //    $("#DivForInheritancePurpose").show();
+    //    $("#DivForPurchasePurpose").hide();
+    //    $("#MutationPurpose").val("Inheritance");
+    //}
 });
 
 //function onChangeZone(id) {
@@ -107,21 +109,11 @@ $(function () {
     });
 });
 
-$(function () {
-    $("input[name='grpPurpose']").click(function () {
-        if ($("#rdbPurchaser").is(":checked")) {
-            $("#DivForInheritancePurpose").show();
-        } else {
-            $("#DivForInheritancePurpose").hide();
-        }
-    });
-});
-
 function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Personeel Info Repeator Added by Renu  --------------- */
     HttpGet(`/SubstitutionMutationDetails/GetDetailspersonelinfotemp/?Id=${$("#DamagePayeeRegisterId").val() == null ? "" : $("#DamagePayeeRegisterId").val()}`, 'json', function (data) {
-        debugger
+      
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #DamagePayeeRegister_payeeName").val(data[i].name);
             $("#tbl_posts #add #DamagePayeeRegister_payeeFatherName").val(data[i].fatherName);
@@ -137,25 +129,25 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             $("#tbl_posts #add #DamagePayeeRegister_PhotographFilePath").val(data[i].photographPath);
             $("#tbl_posts #add #DamagePayeeRegister_SignatureFilePath").val(data[i].signaturePath);
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
-                $("#tbl_posts #add #viewAadharId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoAadharFile/' + data[i].id)
+                $("#tbl_posts #add #viewAadharId").attr('href', '/SubstitutionMutationDetails/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
             } else {
                 $("#tbl_posts #add #viewAadharId").hide();
             }
             if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
-                $("#tbl_posts #add #viewPanId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPanFile/' + data[i].id)
+                $("#tbl_posts #add #viewPanId").attr('href', '/SubstitutionMutationDetails/ViewPersonelInfoPanFile/' + data[i].id)
                 $("#tbl_posts #add #viewPanId").show();
             } else {
                 $("#tbl_posts #add #viewPanId").hide();
             }
             if (data[i].photographPath != "" && data[i].photographPath != null) {
-                $("#tbl_posts #add #viewPhotoId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoPhotoFile/' + data[i].id)
+                $("#tbl_posts #add #viewPhotoId").attr('href', '/SubstitutionMutationDetails/ViewPersonelInfoPhotoFile/' + data[i].id)
                 $("#tbl_posts #add #viewPhotoId").show();
             } else {
                 $("#tbl_posts #add #viewPhotoId").hide();
             }
             if (data[i].signaturePath != "" && data[i].signaturePath != null) {
-                $("#tbl_posts #add #viewSignatureId").attr('href', '/DamagePayeeRegister/ViewPersonelInfoSignautreFile/' + data[i].id)
+                $("#tbl_posts #add #viewSignatureId").attr('href', '/SubstitutionMutationDetails/ViewPersonelInfoSignautreFile/' + data[i].id)
                 $("#tbl_posts #add #viewSignatureId").show();
             } else {
                 $("#tbl_posts #add #viewSignatureId").hide();
@@ -183,14 +175,14 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Allotte Type Repeator Added by Renu  --------------- */
     HttpGet(`/SubstitutionMutationDetails/GetDetailsAllottetypetemp/?Id=${$("#DamagePayeeRegisterId").val() == null ? "" : $("#DamagePayeeRegisterId").val()}`, 'json', function (data) {
-        debugger
+      
         for (var i = 0; i < data.length; i++) {
             $("#tbl_DamageAssessee #addDamageAssessee #DamagePayeeRegister_Name").val(data[i].name);
             $("#tbl_DamageAssessee #addDamageAssessee #DamagePayeeRegister_FatherName").val(data[i].fatherName);
             $("#tbl_DamageAssessee #addDamageAssessee #DamagePayeeRegister_Date").val(data[i].date);
             $("#tbl_DamageAssessee #addDamageAssessee #DamagePayeeRegister_ATSGPAFilePath").val(data[i].atsgpadocumentPath);
             if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/DamagePayeeRegister/ViewATSGPAFile/' + data[i].id)
+                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SubstitutionMutationDetails/ViewATSGPAFile/' + data[i].id)
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
             } else {
                 $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
@@ -223,12 +215,165 @@ $("input[name='grpLitigation']").click(function () {
 $("input[name='grpPurpose']").click(function () {
     if ($("#rdbPurchaser").is(":checked")) {
         $("#DivForPurchasePurpose").show();
+        $("#DivForInheritancePurpose").hide();
         $("#MutationPurpose").val("Purchaser");
     } else {
-        $("#DivForInheritancePurpose").hide();
+        $("#DivForInheritancePurpose").show();
+        $("#DivForPurchasePurpose").hide();
         $("#MutationPurpose").val("Inheritance");
     }
 });
+
+function PageValidation() {/* -----------check validation before create click Added by Renu  --------------- */
+    debugger;
+    //var checkresult = false;
+    //var Damageamount = $('#TotalValueWithInterest').val();
+    //if (Damageamount == "") {
+    //    checkresult = false;
+    //    $("#TotalValueWithInterestMsg").show();
+    //} else {
+    //    checkresult = true;
+    //}
+
+    //var interest = $('#InterestDueAmountCompund').val();
+    //if (interest == "") {
+    //    checkresult = false;
+    //    $("#InterestDueAmountCompundMsg").show();
+    //} else {
+    //    checkresult = true;
+    //}
+    //var TotalPayable = $('#TotalPayable').val();
+    //if (TotalPayable == "") {
+    //    checkresult = false;
+    //    $("#TotalPayableMsg").show();
+    //} else {
+    //    checkresult = true;
+    //}
+
+    //var Rebate = $('#Rebate').val();
+    //if (Rebate == "") {
+    //    checkresult = false;
+    //    $("#RebateMsg").show();
+    //} else {
+    //    checkresult = true;
+    //}
+    if ($("#DeclarationNew").prop("checked") == false)
+        WarningMessage('Please Check Declaration');
+    if ( $("#DeclarationNew").prop("checked") == false ) {
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    return checkresult;
+}
+
+/*File Upload Validation*/
+$('#AtsfilePathNew').change(function () {
+    debugger;
+    var fileInput = document.getElementById('AtsfilePathNew');
+    var filePath = fileInput.value;
+    const size = (AtsfilePathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+
+$('#GpafilePathNew').change(function () {
+    var fileInput = document.getElementById('GpafilePathNew');
+    var filePath = fileInput.value;
+    const size = (GpafilePathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#MoneyfilePathNew').change(function () {
+    var fileInput = document.getElementById('MoneyfilePathNew');
+    var filePath = fileInput.value;
+    const size = (MoneyfilePathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#SignSpecPathNew').change(function () {
+    var fileInput = document.getElementById('SignSpecPathNew');
+    var filePath = fileInput.value;
+    const size = (SignSpecPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#DeathCertificatePathNew').change(function () {
+    var fileInput = document.getElementById('DeathCertificatePathNew');
+    var filePath = fileInput.value;
+    const size = (DeathCertificatePathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+$('#RelationshipUploadPathNew').change(function () {
+    var fileInput = document.getElementById('RelationshipUploadPathNew');
+    var filePath = fileInput.value;
+    const size = (RelationshipUploadPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#AffidevitLegalUploadPathNew').change(function () {
+    var fileInput = document.getElementById('AffidevitLegalUploadPathNew');
+    var filePath = fileInput.value;
+    const size = (AffidevitLegalUploadPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+$('#NonObjectUploadPathNew').change(function () {
+    var fileInput = document.getElementById('NonObjectUploadPathNew');
+    var filePath = fileInput.value;
+    const size = (NonObjectUploadPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+$('#SpecimenSignLegalUploadNew').change(function () {
+    var fileInput = document.getElementById('SpecimenSignLegalUploadNew');
+    var filePath = fileInput.value;
+    const size = (SpecimenSignLegalUploadNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#AddressProofPathNew').change(function () {
+    var fileInput = document.getElementById('AddressProofPathNew');
+    var filePath = fileInput.value;
+    const size = (AddressProofPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+$('#AffidavitPathNew').change(function () {
+    var fileInput = document.getElementById('AffidavitPathNew');
+    var filePath = fileInput.value;
+    const size = (AffidavitPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+
+$('#IndemnityPathNew').change(function () {
+    var fileInput = document.getElementById('IndemnityPathNew');
+    var filePath = fileInput.value;
+    const size = (IndemnityPathNew.files[0].size);
+    fileValidation(filePath, fileInput, size);
+});
+
+function fileValidation(filePath, fileInput, size) {
+    var allowedExtensions = /(\.jpg|\.jpeg|\.pdf)$/i;
+    if (!allowedExtensions.exec(filePath)) {
+        alert('Invalid file type');
+        fileInput.value = '';
+        return false;
+    }
+    if (size > 3145728) {
+        alert("File must be of 3 MB or Lesser Than 3 MB");
+        fileInput.value = '';
+        return false;
+    }
+
+}
 
 //************* Previous Damage assese RPT ******************
 

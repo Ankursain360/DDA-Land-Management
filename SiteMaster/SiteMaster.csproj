@@ -2,7 +2,20 @@
 	
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>9eb41b81-99d2-4409-94a2-d895f7021fae</UserSecretsId>
   </PropertyGroup>
+	
+  <ItemGroup>
+    <Content Remove="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Include="wwwroot\js\structureindex.min.js" />
+  </ItemGroup>
 
   <ItemGroup>
 	   <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />

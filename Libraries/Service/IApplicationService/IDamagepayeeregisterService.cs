@@ -57,6 +57,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory);
 
        // *************** to create user ************************
-       // Task<bool> CreateUser(Damagepayeepersonelinfotemp user);
+        Task<string> CreateUser(Damagepayeeregistertemp model);
     }
 }

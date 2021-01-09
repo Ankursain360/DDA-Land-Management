@@ -1,9 +1,59 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
+var currentSortOrderAscending = 1;
+var currentSortOrderDescending = 2;
+
 
 $(document).ready(function () {
     GetDistrict(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetDistrict(currentPageNumber, currentPageSize);
+});
+function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('');
+    $('#txtCode').val('')
+   
+    if (value !== "0") {
+        GetDistrictOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('');
+    $('#txtCode').val('')
+   
+    if (value !== "0") {
+        
+        GetDistrictOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('')
+   
+    GetDistrict(currentPageNumber, currentPageSize);
+});
+
+function GetDistrictOrderby(pageNumber, pageSize, order) {
+    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+    HttpPost(`/district/List`, 'html', param, function (response) {
+        $('#divDistrict').html("");
+        $('#divDistrict').html(response);
+    });
+}
 
 function GetDistrict(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
@@ -11,6 +61,18 @@ function GetDistrict(pageNumber, pageSize) {
         $('#divDistrict').html("");
         $('#divDistrict').html(response);
     });
+}
+function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+    var model = {
+        name: $('#txtName').val(),
+        code: $('#txtCode').val(),
+       
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
+    }
+    return model;
 }
 
 function GetSearchParam(pageNumber, pageSize) {

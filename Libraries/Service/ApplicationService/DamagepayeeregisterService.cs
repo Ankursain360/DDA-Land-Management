@@ -303,23 +303,29 @@ namespace Service.ApplicationService
 
         // ************* to create user **************
 
-        //public async Task<bool> CreateUser(Damagepayeepersonelinfotemp damagepayeeuser)
-        //{
+        public async Task<string>CreateUser(Damagepayeeregistertemp model)
+        {
+            ApplicationUser user = new ApplicationUser()
+            {
+                Name = model.payeeName[0],
+                UserName = model.payeeName[0],
+                Email = model.EmailId[0],
+                PhoneNumber = model.MobileNo[0],
+                PasswordSetDate = DateTime.Now.AddDays(30),
+                CreatedBy = 1,
+                CreatedDate = DateTime.Now,
+                IsDefaultPassword = 1
+            };
+            string password = "Pass123$";
 
-        //    ApplicationUser user = new ApplicationUser()
-        //    {
-        //        Name = damagepayeeuser.Name,
-        //        UserName = damagepayeeuser.Name,
-        //        Email = damagepayeeuser.EmailId,
-        //        PhoneNumber = damagepayeeuser.MobileNo,
-        //        PasswordSetDate = DateTime.Now.AddDays(30),
-        //        CreatedBy = 1,
-        //        CreatedDate = DateTime.Now,
-        //        IsDefaultPassword = 1
-        //    };
-
-        //    return await _userManager.CreateAsync(user);
-
-        //}
+            var userSavedResult = await _userManager.CreateAsync(user, password);
+          //  var userSavedResult = await _userManager.CreateAsync(user, userDto.Password);
+            if (userSavedResult.Succeeded)
+            { 
+                return password;
+            }
+              return "False";
+           
+        }
     }
 }

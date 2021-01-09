@@ -6,25 +6,23 @@
             <div class="panel-body">
                 <form action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                     <h3 class="mb-3 d-flex">Add Details</h3>
-
                     <div class="row">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))" onchange="onChangeDepartment(this.value);">
-                                    <option>Select</option>
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="DepartmentId" class="floating-label">Department</label>
-                                <span asp-validation-for="DepartmentId" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="DepartmentId" id="DepartmentMessage" class="text-danger lb-sm" style="display:none;">Department is Mandatory</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
                                 <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="onChangeZone(this.value);">
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="ZoneId" class="floating-label">Zone</label>
-
-                                <span asp-validation-for="ZoneId" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="ZoneId" id="ZoneMessage" class="text-danger lb-sm" style="display:none;">Zone is Mandatory</span>
                             </div>
                         </div>
                     </div>
@@ -32,37 +30,39 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" onchange="onChangeDivision(this.value)">
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="DivisionId" class="floating-label">Division</label>
-
-                                <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="DivisionId" id="DivisionMessage" class="text-danger lb-sm" style="display:none;">Division is Mandatory</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="Locality">
+                                    <option value="">Select</option>
                                 </select>
-                                <label asp-for="DivisionId" class="floating-label"></label>
-                                <span asp-validation-for="DivisionId" class="text-danger lb-sm"></span>
+                                <label asp-for="Locality" class="floating-label">Locality</label>
+                                <span asp-validation-for="Locality" id="LocalityMessage" class="text-danger lb-sm" style="display:none;">Locality is Mandatory</span>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-md-3">
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <select class="floating-label-field floating-label-field--s3" asp-for="SecurityGuard">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="SecurityGuard" asp-items="@(new SelectList(Model.SecurityGuardList, "Id","User.NormalizedUserName"))">
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="SecurityGuard" class="floating-label">Security Guard</label>
-
-                                <span asp-validation-for="SecurityGuard" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="SecurityGuard" id="SecurityGuardMessage" class="text-danger lb-sm" style="display:none;">Security Guard is Mandatory</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="Year" asp-items="@(new SelectList(Model.YearList,"Value","Text"))">
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="Year" class="floating-label">Year</label>
-                                <span asp-validation-for="Year" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="Year" id="YearMessage" class="text-danger lb-sm" style="display:none;">Year is Mandatory</span>
                             </div>
                         </div>
                     </div>
@@ -70,18 +70,18 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="Month" asp-items="@(new SelectList(Model.MonthList,"Value","Text"))">
+                                    <option value="">Select</option>
                                 </select>
                                 <label asp-for="Month" class="floating-label">Month</label>
-
-                                <span asp-validation-for="Month" class="text-danger lb-sm"></span>
+                                <span asp-validation-for="Month" id="MonthMessage" class="text-danger lb-sm" style="display:none;">Month is Mandatory</span>
                             </div>
                         </div>
                     </div>
                     <div class="row mt-md-4 table-responsive" id="dialog"></div>
                     <div class="row mt-md-4">
                         <div class=" col-md-12">
-                            <input type="submit" value="Create" id="btnGenerate" class="btn btn-theme " />
-                            @Html.ActionLink("Back", "Index", "Planning", null, new { @class = "btn btn-theme" })
+                            <input type="button" value="Create" id="btnGenerate" class="btn btn-theme" onclick="onSubmitForm()" />
+                            <a asp-action="Index" asp-controller="Planning" class="btn btn-theme">Back</a>
                         </div>
                     </div>
                 </form>
@@ -90,7 +90,6 @@
     </div>
 </div>
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-
 <environment include="Development">
     <script src="~/js/monthlyroastercreate.js"></script>
 </environment>

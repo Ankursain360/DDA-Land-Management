@@ -9,14 +9,14 @@
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input type="date" asp-for="DueDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">From Date</label>
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input type="date" asp-for="DueDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -27,7 +27,10 @@
         <div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
+                @*<input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />*@
+            <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                <i class="ri-refresh-line mr-2"></i>Reset
+            </button>
 
             </div>
         </div>
@@ -39,17 +42,17 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Date</option>
-                        <option>Locality Name (Village)</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="0">Select One</option>
+                        <option value="D">Date</option>
+                        <option value="0">Locality Name (Village)</option>
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span id="btndescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
 
