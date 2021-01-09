@@ -43,13 +43,13 @@ namespace DamagePayee.Controllers
         {
             _demandLetterService = demandLetterService;
         }
-        public async Task<IActionResult> Index()
-        {
-            Demandletter model = new Demandletter();
+        //public async Task<IActionResult> Index()
+        //{
+        //    Demandletter model = new Demandletter();
 
-            model.Damagelist = await _demandLetterService.GetAllDemandletter();
-            return View(model);
-        }
+        //    model.Damagelist = await _demandLetterService.GetAllDemandletter();
+        //    return View(model);
+        //}
 
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] DefaulterListingReportSearchDto defaulterListingReportSearchDto)

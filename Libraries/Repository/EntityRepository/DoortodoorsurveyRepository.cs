@@ -49,5 +49,12 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
+        public async Task<bool> DeleteFamilyDetails(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Familydetails.Where(x => x.D2dId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
     }
 }
