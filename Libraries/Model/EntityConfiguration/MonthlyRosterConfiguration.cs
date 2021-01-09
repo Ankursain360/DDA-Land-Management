@@ -44,6 +44,7 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.Year).HasColumnType("int(11)");
 
             entity.Property(e => e.ZoneId).HasColumnType("int(11)");
+            entity.Property(e => e.Template).HasColumnType("Longtext");
         }
     }
 }

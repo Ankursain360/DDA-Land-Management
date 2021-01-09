@@ -15,23 +15,27 @@ namespace Libraries.Service.IApplicationService
         Task<List<Locality>> GetLocalityList();
         Task<List<District>> GetDistrictList();
         Task<bool> Create(Mutationdetailstemp details);
-        Task<Mutationdetails> GetPhotoPropFile(int id);
+        //Task<Mutationdetails> GetPhotoPropFile(int id);
         
         Task<bool> Update(int id, Mutationdetailstemp details);
         Task<bool> Delete(int id);
-        Task<Mutationdetails> SaveMutationAtsFilePath(int id);
-        Task<Mutationdetails> SaveMutationGPAFilePath(int id);
-        Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id);
-        Task<Mutationdetails> SaveMutationSignSPCFilePath(int id);
-        Task<Mutationdetails> SaveMutationAddressProofFilePath(int id);
-        Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id);
-        Task<Mutationdetails> SaveMutationIndemnityFilePath(int id);
+        //Task<Mutationdetails> SaveMutationAtsFilePath(int id);
+        //Task<Mutationdetails> SaveMutationGPAFilePath(int id);
+        //Task<Mutationdetails> SaveMutationMoneyReceiptFilePath(int id);
+        //Task<Mutationdetails> SaveMutationSignSPCFilePath(int id);
+        //Task<Mutationdetails> SaveMutationAddressProofFilePath(int id);
+        //Task<Mutationdetails> SaveMutationAffitDevitFilePath(int id);
+        //Task<Mutationdetails> SaveMutationIndemnityFilePath(int id);
 
-        Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
+        //Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
 
-        Task<Damagepayeeregistertemp> FetchMutationDetailsUserId(int Id);
+        Task<Damagepayeeregister> FetchDamageResult(int Id);
         Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model);
         Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);
         Task<List<Allottetype>> GetAllottetype(int id);
+        Task<Mutationdetailstemp> FetchMutationSingleResult(int id);
+        Task<Mutationdetailstemp> FetchSingleResultMutationId(int id);
+        Task<Damagepayeepersonelinfo> GetPersonelInfoFile(int id);
+        Task<Allottetype> GetAlloteeTypeFile(int id);
     }
 }

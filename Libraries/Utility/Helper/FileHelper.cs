@@ -26,6 +26,22 @@ namespace Utility.Helper
             }
             return filePath;
         }
+        public string SaveFile1(string path, IFormFile file)
+        {
+            string FileName = "";
+            string filePath = "";
+            if (!Directory.Exists(path))
+            {
+                DirectoryInfo directoryInfo = Directory.CreateDirectory(path);
+            }
+            FileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            filePath = Path.Combine(path, FileName);
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+            return FileName;
+        }
         public MemoryStream GetMemory(string path)
         {
             var memory = new MemoryStream();

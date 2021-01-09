@@ -30,7 +30,8 @@ namespace Libraries.Model.Entity
         public string Declaration1 { get; set; }
         public byte? IsActive { get; set; }
         public int? ApprovedStatus { get; set; }
-        public Damagepayeeregistertemp DamagePayeeRegister { get; set; }
+        public Damagepayeeregister DamagePayeeRegister { get; set; }
+
         [NotMapped]
         public IFormFile AtsfilePathNew { get; set; }
         [NotMapped]
