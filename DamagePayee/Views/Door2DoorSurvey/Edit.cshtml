@@ -14,7 +14,7 @@
 <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Edit Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+    <input type="hidden" asp-for="Id" />
 
 
     <div class="row">
@@ -99,24 +99,24 @@
                     </tbody>
                     <tbody class="tbody" id="add">
                         <tr id="">
-                            <td>1</td>
+                            <td><span class="sn">1</span></td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                    <input type="text" asp-for="Name"  class="floating-label-field floating-label-field--s3" />
                                 </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
-                                    <input type="text" id="txtPersonalFatherName" class="floating-label-field floating-label-field--s3" />
+                                    <input type="text" asp-for="Age"  class="floating-label-field floating-label-field--s3" />
                                 </div>
                             </td>
                             <td>
                                 <div class="floating-label-wrap">
-                                    <select class="floating-label-field floating-label-field--s3">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="FGender">
                                         <option value="0">---Select---</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
-                                        <option value="3">Other</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Other">Other</option>
                                     </select>
                                 </div>
                             </td>
@@ -243,6 +243,7 @@
 
                 <input type="file" asp-for="PropertyFilePath" placeholder="Document of Property" class="floating-label-field floating-label-field--s3" />
                 <label class="floating-label">Document of Property, if any</label>
+              
             </div>
         </div>
     </div>
@@ -252,7 +253,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <textarea type="text" asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
-                <label class="floating-label">Remarks</label>
+                <label class="floating-label">Remarks </label>
             </div>
         </div>
     </div>
@@ -278,19 +279,22 @@
 
     @*Repeator code  *@
     $(document).ready(function () {
+
+
         $("#tbl_posts #tbl_posts_body .odd").remove();
-        $("#tbl_posts #add .form-control").attr("multiple", false);
+        $("#tbl_posts #add .floating-label-field").attr("multiple", false);
     })
     $(document).delegate('a.add-record', 'click', function (e) {
         var name = $("#tbl_posts #add #txtPersonalName").val();
         //var father = $("#tbl_posts #add #txtPersonalFatherName").val();
         //var gender = $("#tbl_posts #add #drpPersonalGender").val();
         debugger
-        if ($("#tbl_posts #add #txtPersonalName").val() != '' && $("#tbl_posts #add #txtPersonalFatherName").val() != '' && $("#tbl_posts #add #drpPersonalGender").val() != '0'
-            && $("#tbl_posts #add #drpPersonalGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
+        if ($("#tbl_posts #add #txtPersonalName").val() != '' && $("#tbl_posts #add #txtPersonalFatherName").val() != '' && $("#tbl_posts #add #GGender").val() != '0'
+            && $("#tbl_posts #add #GGender").val() != '' && $("#tbl_posts #add #txtPersonalAddress").val() != ''
             && $("#tbl_posts #add #txtPersonalMobileNo").val() != '' && $("#tbl_posts #add #txtPersonalEmailid").val() != '')
              {
-                    var GenderValue = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
+            var GGender = $("#tbl_posts #add #GGender").children("option:selected").val();
+            //alert(GGender)
                     //var father = $("#tbl_posts #add #txtPersonalFatherName").children("option:selected").val();
                     //var gender = $("#tbl_posts #add #drpPersonalGender").children("option:selected").val();
                     debugger
@@ -302,17 +306,19 @@
                     element.attr('id', 'rec-' + size);
                     element.find('.delete-record').attr('data-id', size);
                     element.appendTo('#tbl_posts_body');
-                    $('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(GenderValue);
+                    $('#tbl_posts_body #rec-' + size + ' #GGender').val(GGender);
         //$('#tbl_posts_body #rec-' + size + ' #txtPersonalFatherName').val(father);
         //$('#tbl_posts_body #rec-' + size + ' #drpPersonalGender').val(gender);
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
-        $("#tbl_posts #tbl_posts_body .form-control").attr("readonly", true);
+            $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
         debugger
-        $("#tbl_posts #add .form-control").val('');
+            $("#tbl_posts #add .floating-label-field").val('');
+            $("#tbl_posts #add .floating-label-field").val(null).trigger("change");
+          //  $('.unsel').selected = false;
     }
         else {
             alert('Please fill record before add new record ');
@@ -338,3 +344,10 @@
         }
     });
 </script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/doortodoorsurveyedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/doortodoorsurveyedit.min.js" asp-append-version="true"></script>
+</environment>

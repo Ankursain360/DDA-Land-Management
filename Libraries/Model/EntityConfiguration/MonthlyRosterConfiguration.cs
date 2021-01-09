@@ -16,10 +16,10 @@ namespace Model.EntityConfiguration
             entity.HasIndex(e => e.DivisionId)
                 .HasName("MonthlyRousterDivisionId_idx");
 
-            entity.HasIndex(e => e.Locality)
+            entity.HasIndex(e => e.LocalityId)
                 .HasName("MonthlyRousterLocalityId_idx");
 
-            entity.HasIndex(e => e.SecurityGuard)
+            entity.HasIndex(e => e.UserprofileId)
                 .HasName("MonthlyRousterSecurityGuardId_idx");
 
             entity.HasIndex(e => e.ZoneId)
@@ -33,13 +33,13 @@ namespace Model.EntityConfiguration
 
             entity.Property(e => e.DivisionId).HasColumnType("int(11)");
 
-            entity.Property(e => e.Locality).HasColumnType("int(11)");
+            entity.Property(e => e.LocalityId).HasColumnType("int(11)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.Month).HasColumnType("int(11)");
 
-            entity.Property(e => e.SecurityGuard).HasColumnType("int(11)");
+            entity.Property(e => e.UserprofileId).HasColumnType("int(11)");
 
             entity.Property(e => e.Year).HasColumnType("int(11)");
 

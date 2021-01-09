@@ -13,7 +13,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Doortodoorsurvey>> GetPagedDoortodoorsurvey(DoortodoorsurveySearchDto model);
         Task<List<Familydetails>> GetFamilydetails(int d2dId);
         Task<bool> SaveFamilyDetails(Familydetails familydetails);
-
+        Task<bool> DeleteFamilyDetails(int Id);
 
 
     }

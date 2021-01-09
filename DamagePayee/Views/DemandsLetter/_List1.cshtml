@@ -1,11 +1,13 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demandletter>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demandletters>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
 
             <th> File No</th>
-          
+            <th> Name</th>
+            <th>Father Name</th>
+            <th>Address</th>
             <th>Status</th>
             <th>Operation</th>
         </tr>
@@ -15,6 +17,9 @@
         {
 <tr>
     <td>@item.FileNo</td>
+    <td>@item.Name</td>
+    <td>@item.FatherName</td>
+    <td>@item.Address</td>
  
 
 

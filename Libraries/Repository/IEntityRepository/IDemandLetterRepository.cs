@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IDemandLetterRepository : IGenericRepository<Demandletter>
+    public interface IDemandLetterRepository : IGenericRepository<Demandletters>
     {
-        Task<PagedResult<Demandletter>> GetPagedDemandletter(DemandletterSearchDto model);
-        Task<List<Demandletter>> GetAllDemandletter();
+        Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
+        Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
 
     }

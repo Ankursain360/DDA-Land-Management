@@ -71,6 +71,10 @@ namespace Libraries.Service.ApplicationService
             model.OccupantName = doortodoorsurvey.OccupantName;
             model.Address = doortodoorsurvey.Address;
             model.Email = doortodoorsurvey.Email;
+            model.TelephoneNo = doortodoorsurvey.TelephoneNo;
+            model.Remarks = doortodoorsurvey.Remarks;
+            model.OccupantIdentityPrrofFilePath = doortodoorsurvey.OccupantIdentityPrrofFilePath;
+            model.PropertyFilePath = doortodoorsurvey.PropertyFilePath;
 
             // model.ModifiedDate = datetime.Now;
             model.ModifiedBy = 1;
@@ -115,6 +119,11 @@ namespace Libraries.Service.ApplicationService
         public async Task<List<Familydetails>> GetFamilydetails(int Id)
         {
             return await _doortodoorsurveyRepository.GetFamilydetails(Id);
+        }
+
+        public async Task<bool> DeleteFamilyDetails(int Id)
+        {
+            return await _doortodoorsurveyRepository.DeleteFamilyDetails(Id);
         }
 
     }

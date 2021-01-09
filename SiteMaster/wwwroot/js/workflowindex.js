@@ -5,7 +5,7 @@ $(document).ready(function () {
     // debugger;
     GetDetails(currentPageNumber, currentPageSize);
 });
-$("#btnSearch").click(function () {
+$("#btnSearch2").click(function () {
     GetDetails(currentPageNumber, currentPageSize);
 });
 $("#btnReset").click(function () {
@@ -30,7 +30,10 @@ function GetDetails(pageNumber, pageSize) {
 function GetSearchParam(pageNumber, pageSize) {
     var sorbyname = $('#Sortbyd').val();
     var sortdesc = $("#sortdesc").val();
-    if (sorbyname) { } else {
+    // alert(sorbyname);
+    if (sorbyname) {
+        sorbyname = sorbyname;
+    } else {
         sorbyname = 'Name';
     }
     var model = {
@@ -55,17 +58,21 @@ function onChangePageSize(pageSize) {
     GetDetails(currentPageNumber, pageSize);
     currentPageSize = pageSize;
 }
+$("#Sortbyd").change(function () {
 
+    GetDetails(currentPageNumber, currentPageSize);
+
+});
 $("#ascId").click(function () {
- 
+
     $("#descId").removeClass("active");
     $("#ascId").addClass("active");
-    $("#sortdesc").val(1);
+    $("#sortdesc").val(2);
     GetDetails(currentPageNumber, currentPageSize);
 });
 $("#descId").click(function () {
     $("#ascId").removeClass("active");
     $("#descId").addClass("active");
-    $("#sortdesc").val(2);
+    $("#sortdesc").val(1);
     GetDetails(currentPageNumber, currentPageSize);
 });

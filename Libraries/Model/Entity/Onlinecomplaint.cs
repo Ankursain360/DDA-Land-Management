@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
         public string PhotoPath { get; set; }
         public string Email { get; set; }
         public string ReferenceNo { get; set; }
-      
+        public int? ApprovedStatus { get; set; }
 
 
         [NotMapped]

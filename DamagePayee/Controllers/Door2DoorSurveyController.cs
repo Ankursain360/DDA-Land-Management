@@ -69,11 +69,16 @@ namespace DamagePayee.Controllers
                     {
                         doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(targetPhotoPathLayout, doortodoorsurvey.Photo);
                     }
+                    if (doortodoorsurvey.Photo != null)
+                    {
+                        doortodoorsurvey.PropertyFilePath = file.SaveFile(targetPhotoPathLayout, doortodoorsurvey.Photo);
+                    }
 
 
                     var result = await _doortodoorsurveyService.Create(doortodoorsurvey);
 
                     List<Familydetails> fixingprogram = new List<Familydetails>();
+                 
                     for (int i = 0; i < doortodoorsurvey.Name.Count(); i++)
                     {
                         fixingprogram.Add(new Familydetails
@@ -119,6 +124,32 @@ namespace DamagePayee.Controllers
 
 
 
+
+
+        public async Task<JsonResult> GetDetailsFamily(int? Id)
+        {
+            Id = Id ?? 0;
+            var data = await _doortodoorsurveyService.GetFamilydetails(Convert.ToInt32(Id));
+            //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
+            return Json(data.Select(x => new {
+                x.Id,
+                x.Name,
+                x.FGender,
+                x.Age
+              
+            }));
+        }
+
+
+
+
+
+
+
+
+
+
+
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
@@ -140,6 +171,31 @@ namespace DamagePayee.Controllers
                 try
                 {
                     var result = await _doortodoorsurveyService.Update(id, doortodoorsurvey);
+
+
+
+
+                    List<Familydetails> fixingprogram = new List<Familydetails>();
+                    result = await _doortodoorsurveyService.DeleteFamilyDetails(id);
+                    for (int i = 0; i < doortodoorsurvey.Name.Count(); i++)
+                    {
+                        fixingprogram.Add(new Familydetails
+                        {
+                            Name = doortodoorsurvey.Name[i],
+                            Age = doortodoorsurvey.Age[i],
+                            FGender = doortodoorsurvey.FGender[i],
+                            D2dId = doortodoorsurvey.Id
+                        });
+                    }
+                    foreach (var item in fixingprogram)
+                    {
+                        result = await _doortodoorsurveyService.SaveFamilyDetails(item);
+                    }
+
+
+
+
+
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);

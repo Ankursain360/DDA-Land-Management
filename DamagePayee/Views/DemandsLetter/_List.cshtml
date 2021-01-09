@@ -1,5 +1,5 @@
-﻿@model Libraries.Model.Entity.Demandletter
-<div class="content" id="MainContentForm" style="max-width: 1200px; margin: auto; background: white; padding: 10px;">
+﻿@model Libraries.Model.Entity.Demandletters
+<div class="content" id="MainContentForm" style="max-width: 900px; margin: auto; background: white; padding: 10px;">
 
 
     <div style="margin-left:100px; max-width:80%">
@@ -17,7 +17,7 @@
                             <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
 
                         </h>
-                        <p style="color:black; font-size:11px; margin-left:80px; text-align:justify">
+                        <p style="color:black; font-size:8px; margin-left:80px; text-align:justify">
 
                             <b>
                                 IN THE COURT OF ESTATE OFFICER-||<br />
@@ -44,13 +44,13 @@
             <div class="row">
                 <div class="col-md-3">
                     <label> फाइल सं. </label>
-                    <p style="color:black;">File No. - @Model.FileNo</p>
+                    <p style="color:black;">File No. -<b> @Model.FileNo</b></p>
                 </div>
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
                     <label> दिनांक</label>
 
-                    <p style="color:black">Dated</p>
+                    <p style="color:black">Dated - <b>@Model.GenerateDate</b></p>
                 </div>
 
             </div>
@@ -58,8 +58,8 @@
 
             <div class="row">
                 <div class="col-md-6">
-                    <label> Shri/smt :</label>
-                    <p style="color:black">Add :</p>
+                    <label> Shri/smt : - <b>@Model.Name</b>&nbsp;&nbsp;<b>S/O @Model.FatherName</b></label>
+                    <p style="color:black">Add :-<b>@Model.Address</b></p>
                 </div>
                 <div class="col-md-6">
                     <label> </label>
@@ -80,59 +80,32 @@
                         <br />
                         .................................................के संबध में  श्री/श्रीमान................................................. के
 
-
                     </p>
 
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
-
-
-
+                    <p style="color: black; margin-left: 55px; margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
 
                 </div>
-
 
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-
-
                         Sub:
-
-
-
-
 
                         Proceeedings U/S  4(1) / 7(3)  of the public premises ( Eviction of unauthorised <br />
                     </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
-                        occupants ) Act , 1971 , against ____________________in respect of permises <br />
+                        occupants ) Act , 1971 , against <b>@Model.Name</b>&nbsp;&nbsp;<b>S/O @Model.FatherName</b>in respect of permises <br />
 
+                         </p>
 
-
-
-                    </p>
-
-
-                    <p style="        color: black;
-        margin-left: 55px;
-        margin-top: -1.2%;">
-                        _________________________________
+                    <p style="color: black; margin-left: 55px; margin-top: -1.2%;">
+                        <b>@Model.Address</b>
 
                     </p>
-
-
-
 
                 </div>
-
-
             </div>
-
-
 
             <div class="row">
                 <div class="col-md-12">
@@ -147,13 +120,8 @@
 
                         <br />
 
-
-
                     </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-"> __________ उपस्थित हो |</p>
+                    <p style="color: black;margin-top: -1.2%;"> __________ उपस्थित हो |</p>
 
                 </div>
 
@@ -162,139 +130,99 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <p style="        color: black;
-        margin-left: 55px;
-        text-align-last: justify;
-        margin-bottom: -0.2%
-">
+                    <p style=" color: black; margin-left: 55px; text-align-last: justify; margin-bottom: -0.2%">
 
                         In connection with the notice under Section 4(1)/7(3) of the Public Premises
-                    </p> <p style="        color: black;
-        margin-top: 0.8%; text-align-last:justify">
+                    </p> <p style="color: black;margin-top: 0.8%; text-align-last:justify">
                         ( Eviction of Unauthorised Occupants&nbsp;  ) Act ,&nbsp;  1971 &nbsp;  You are hereby directed  that  you may
                         produce evidence in support of your objections to the notice and appear before the<br />
 
 
                     </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-">court of undersigned on __________ at  __________</p>
+                    <p style="color: black;margin-top: -1.2%;">court of undersigned on <b>@Model.UndersignedDate</b> at <b>@Model.UndersignedTime</b></p>
 
 
-                </div>
+        </div>
 
 
-            </div>
+        </div>
 
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
+        <div class="row">
+            <div class="col-md-12">
+                <p style="color:black; margin-left:55px;margin-bottom:0.2% ;text-align-last:justify">
 
 
-                        यदि आप उप्रयुक्त तिथि को उपस्थित नही हुए तो आपके विरुद्ध एकतरफा कार्यवाही की
-                        <br />
-                    </p>
-                    <p style="        color: black;
-
-        margin-top: -1.2%;
-"> जाएगी |</p>
-
-                </div>
-
+                    यदि आप उप्रयुक्त तिथि को उपस्थित नही हुए तो आपके विरुद्ध एकतरफा कार्यवाही की
+                    <br />
+                </p>
+                <p style="color: black; margin-top: -1.2%;"> जाएगी |</p>
 
             </div>
 
+        </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="        color: black;
-        margin-left: 55px;
-        text-align-last: justify;
+        <div class="row">
+            <div class="col-md-12">
+                <p style="color: black;margin-left: 55px;text-align-last: justify;">
+                    In case you fail to appear on the said date ex-parte proceedings will be started
+                </p>
+                <p style="color: black;margin-top: -1.2%;">against you</p>
+            </div>
+        </div>
 
-">
-                        In case you fail to appear on the said date ex-parte proceedings will be started
-                    </p>
-                    <p style="        color: black;
+        <div class="row">
+            <div class="col-md-12">
+                <p style="color: black; margin-left: 55px;">
+                    Deposit the dues [Rs . <b>@Model.DepositDue</b>] - upto <b>@Model.UptoDate</b> (Provisional)].
+                </p>
+            
+            </div>
+            </div>
 
-        margin-top: -1.2%;
-">against you</p>
+        <div class="row">
+            <div class="col-md-12">
+                <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
+                    <b>
+                        Note:
+
+                        The above provisional demand is of principal amount only. The interest
+                    </b> <br />
+                </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
 
 
+                </p>
 
 
+                <p style="color: black;margin-left: 55px">
+                    <b>  component and final demand will be calculated thereafter.</b>
 
-
-
-                </div>
-
+                </p>
 
             </div>
 
+        </div>
 
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <p style="color:black;margin-bottom:0.2%; text-align-last:justify">
-
-
-                        <b>
-                            Note:
-
-
-                            The above provisional demand is of principal amount only. The interest
-                        </b> <br />
-                    </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
-
-
-
-
-                    </p>
-
-
-                    <p style=" color: black;
-        margin-left: 55px">
-                        <b>  component and final demand will be calculated thereafter.</b>
-
-                    </p>
-
-
-
-
-                </div>
-
+        <div class="row">
+            <div class="col-md-6">
 
             </div>
 
+            <div class="col-md-3">
 
-
-
-
-            <div class="row">
-                <div class="col-md-6">
-
-
-                </div>
-
-
-                <div class="col-md-3">
-
-
-                </div>
-
-                <div class="col-md-3">
-
-                    <p style="color:black">
-                        संपदा अधिकारी-II D<br />
-                        Estate Officer-II D
-                    </p>
-
-
-
-                </div>
             </div>
+
+            <div class="col-md-3">
+
+                <p style="color:black">
+                    संपदा अधिकारी-II D<br />
+                    Estate Officer-II D
+                </p>
+
+
+
+            </div>
+        </div>
 
 
         </div>
