@@ -279,7 +279,7 @@ namespace DamagePayeePublicInterface.Controllers
                                                                 fileHelper.SaveFile(AadharNoDocument, damagepayeeregistertemp.Aadhar[i]) :
                                                                 damagepayeeregistertemp.AadharNoFilePath[i] != null || damagepayeeregistertemp.AadharNoFilePath[i] != "" ?
                                                                 damagepayeeregistertemp.AadharNoFilePath[i] : string.Empty,
-                                        PanNoFilePath =damagepayeeregistertemp.Pan != null ?
+                                        PanNoFilePath = damagepayeeregistertemp.Pan != null ?
                                                                 damagepayeeregistertemp.Pan.Count <= i ? string.Empty :
                                                                 fileHelper.SaveFile(PanNoDocument, damagepayeeregistertemp.Pan[i]) :
                                                                 damagepayeeregistertemp.PanNoFilePath[i] != null || damagepayeeregistertemp.PanNoFilePath[i] != "" ?
@@ -365,8 +365,8 @@ namespace DamagePayeePublicInterface.Controllers
                                         PaymentDate = damagepayeeregistertemp.PaymentDate.Count <= i ? DateTime.Now : damagepayeeregistertemp.PaymentDate[i],
                                         Amount = damagepayeeregistertemp.Amount.Count <= i ? 0 : damagepayeeregistertemp.Amount[i],
                                         RecieptDocumentPath = damagepayeeregistertemp.Reciept != null ?
-                                                                damagepayeeregistertemp.Reciept.Count<=i ? string.Empty : 
-                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) : 
+                                                                damagepayeeregistertemp.Reciept.Count <= i ? string.Empty :
+                                                                fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]) :
                                                                 damagepayeeregistertemp.RecieptFilePath[i] != null || damagepayeeregistertemp.RecieptFilePath[i] != "" ?
                                                                 damagepayeeregistertemp.RecieptFilePath[i] : string.Empty,
                                         DamagePayeeRegisterTempId = damagepayeeregistertemp.Id
@@ -377,10 +377,13 @@ namespace DamagePayeePublicInterface.Controllers
 
                             }
                         }
+                        var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + damagepayeeregistertemp.FileNo + "&Locality=" + damagepayeeregistertemp.LocalityId + "&Amount=" + damagepayeeregistertemp.TotalValueWithInterest + "&Interest=" + damagepayeeregistertemp.InterestDueAmountCompund;
                         ViewBag.MainDamagePayeeId = damagepayeeregistertemp.Id;
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        if (damagepayeeregistertemp.IsMutaionYes != 0)
+                        if (damagepayeeregistertemp.IsMutaionYes == 1)
                             return View(damagepayeeregistertemp);
+                        else if (damagepayeeregistertemp.IsMutaionYes == 2)
+                            return Redirect(paymentLink);
                         else
                             return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
@@ -403,7 +406,8 @@ namespace DamagePayeePublicInterface.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPersonalInfoTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -423,7 +427,8 @@ namespace DamagePayeePublicInterface.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetAllottetypeTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -435,7 +440,8 @@ namespace DamagePayeePublicInterface.Controllers
         {
             Id = Id ?? 0;
             var data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.RecieptNo,
@@ -524,7 +530,7 @@ namespace DamagePayeePublicInterface.Controllers
         {
             FileHelper file = new FileHelper();
             Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
-           string path = Data.DocumentForFilePath;
+            string path = Data.DocumentForFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
