@@ -20,6 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<List<Familydetails>> GetFamilydetails(int d2dId);
         Task<bool> SaveFamilyDetails(Familydetails familydetails);
+        Task<bool> DeleteFamilyDetails(int Id);
 
 
     }

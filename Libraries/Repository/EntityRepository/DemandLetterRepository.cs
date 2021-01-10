@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-   public class DemandLetterRepository : GenericRepository<Demandletter>, IDemandLetterRepository
+   public class DemandLetterRepository : GenericRepository<Demandletters>, IDemandLetterRepository
     {
         public DemandLetterRepository(DataContext dbContext) : base(dbContext)
         {
@@ -18,19 +18,19 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<Demandletter>> GetAllDemandletter()
+        public async Task<List<Demandletters>> GetAllDemandletter()
         {
-            return await _dbContext.Demandletter.Where(x => x.IsActive == 1).ToListAsync();
+            return await _dbContext.Demandletters.Where(x => x.IsActive == 1).ToListAsync();
         }
-        public async Task<PagedResult<Demandletter>> GetPagedDemandletter(DemandletterSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {
-            return await _dbContext.Demandletter.OrderByDescending(x => x.Id).GetPaged<Demandletter>(model.PageNumber, model.PageSize);
+            return await _dbContext.Demandletters.OrderByDescending(x => x.Id).GetPaged<Demandletters>(model.PageNumber, model.PageSize);
         }
         public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             var data = await _dbContext.Demandletter
-                    .Where(x => x.CreatedDate >= defaulterListingReportSearchDto.fromDate
-                    && x.CreatedDate <= defaulterListingReportSearchDto.toDate)
+                    .Where(x => x.DueDate >= defaulterListingReportSearchDto.fromDate
+                    && x.DueDate <= defaulterListingReportSearchDto.toDate)
                     .OrderByDescending(x => x.Id)
 
                     .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
