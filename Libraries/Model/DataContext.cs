@@ -137,7 +137,7 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
         public virtual DbSet<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
         public virtual DbSet<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
-
+        public virtual DbSet<Paymentverification> Paymentverification { get; set; }
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
@@ -278,6 +278,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
             modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentverificationConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
             modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());

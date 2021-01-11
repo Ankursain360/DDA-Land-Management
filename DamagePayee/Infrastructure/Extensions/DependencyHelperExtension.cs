@@ -50,6 +50,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IDamageCalculationRepository, DamageCalculationRepository>();
             services.AddScoped<IDemandLetterRepository, DemandLetterRepository>();
             services.AddScoped<IMutationDetailsRepository, MutationDetailsRepository>();
+            services.AddScoped<IPaymentverificationRepository, PaymentverificationRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -80,6 +81,7 @@ namespace DamagePayee.Infrastructure.Extensions
             services.AddScoped<IDamageCalculationService, DamageCalculationService>();
             services.AddScoped<IDemandLetterService, DemandLetterService>();
             services.AddScoped<IMutationDetailsService, MutationDetailsService>();
+            services.AddScoped<IPaymentverificationService, PaymentverificationService>();
         }
     }
 }
