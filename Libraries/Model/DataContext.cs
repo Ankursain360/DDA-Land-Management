@@ -112,6 +112,7 @@ namespace Libraries.Model
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
         public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
+            public virtual DbSet<Demandletters> Demandletters { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -294,6 +295,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ComEncrochmentTypeConfiguration());
             modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
+            modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
 
             base.OnModelCreating(modelBuilder);
         }

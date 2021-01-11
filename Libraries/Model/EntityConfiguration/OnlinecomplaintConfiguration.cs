@@ -77,6 +77,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.LocationId)
                 .HasConstraintName("LocationId");
 
+            builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
+
         }
         }
     }

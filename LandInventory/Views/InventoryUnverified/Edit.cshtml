@@ -1,4 +1,6 @@
 ﻿@model Libraries.Model.Entity.Propertyregistration
+@{int Photo = 0;}
+
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
 <br />
@@ -479,7 +481,7 @@
             <div class="col-md-4" id="divBuilttype" style="display:none;">
                 <div class="floating-label-wrap">
 
-                    <input  asp-for="BuiltUpRemarks" class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="BuiltUpRemarks" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="BuiltUpRemarks" class="text-danger"></span>
                     <label class="floating-label">Built-Up Remarks</label>
                 </div>
@@ -492,7 +494,7 @@
                     @{
                         @if (ViewBag.LayoutDocView != null)
                         {
-
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@Model.Id"> (View Existing Photo @(Photo += 1 ))</a>
                             <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                             @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
                         }
@@ -524,7 +526,7 @@
                 <div class="col-md-4" id="divGEOReferencing">
                     <div class="floating-label-wrap">
 
-                         <input type="hidden" asp-for="GeoFilePath" />
+                        <input type="hidden" asp-for="GeoFilePath" />
                         @{
                             @if (ViewBag.GeoDocView != null)
                             {
@@ -875,7 +877,7 @@
             @Html.ActionLink("Back", "Create", "InventoryUnverified", null, new { @class = "btn btn-theme " })
         </div>
     </div>
-    
+
 
 </form>
 

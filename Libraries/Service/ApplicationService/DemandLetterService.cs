@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Service.ApplicationService
 {
-  public  class DemandLetterService : EntityService<Demandletter>, IDemandLetterService
+  public  class DemandLetterService : EntityService<Demandletters>, IDemandLetterService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDemandLetterRepository _demandLetterRepository;
@@ -23,13 +23,13 @@ namespace Service.ApplicationService
             _demandLetterRepository = demandLetterRepository;
         }
 
-        public async Task<List<Demandletter>> GetAllDemandletter()
+        public async Task<List<Demandletters>> GetAllDemandletter()
         {
-            List<Demandletter> DamageList = await _demandLetterRepository.GetAllDemandletter();
+            List<Demandletters> DamageList = await _demandLetterRepository.GetAllDemandletter();
             return DamageList;
         }
 
-        public async Task<PagedResult<Demandletter>> GetPagedDemandletter(DemandletterSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {
             return await _demandLetterRepository.GetPagedDemandletter(model);
         }
@@ -38,7 +38,7 @@ namespace Service.ApplicationService
             return await _demandLetterRepository.GetDefaultListingReportData(defaulterListingReportSearchDto);
         }
 
-        public async Task<bool> Create(Demandletter demandletter)
+        public async Task<bool> Create(Demandletters demandletter)
         {
             demandletter.CreatedBy = 1;
             demandletter.CreatedDate = DateTime.Now;
@@ -49,21 +49,29 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<Demandletter> FetchSingleResult(int id)
+        public async Task<Demandletters> FetchSingleResult(int id)
         {
             var result = await _demandLetterRepository.FindBy(a => a.Id == id);
-            Demandletter model = result.FirstOrDefault();
+            Demandletters model = result.FirstOrDefault();
             return model;
         }
 
 
 
 
-        public async Task<bool> Update(int id, Demandletter demandletter)
+        public async Task<bool> Update(int id, Demandletters demandletter)
         {
             var result = await _demandLetterRepository.FindBy(a => a.Id == id);
-            Demandletter model = result.FirstOrDefault();
+            Demandletters model = result.FirstOrDefault();
             model.FileNo = demandletter.FileNo;
+            model.Name = demandletter.Name;
+            model.FatherName = demandletter.FatherName;
+            model.Address = demandletter.Address;
+            model.GenerateDate = DateTime.Now;
+            model.UndersignedDate = demandletter.UndersignedDate;
+            model.UndersignedTime = demandletter.UndersignedTime;
+            model.DepositDue = demandletter.DepositDue;
+            model.UptoDate = demandletter.UptoDate;
           
             model.ModifiedBy = 1;
             _demandLetterRepository.Edit(model);

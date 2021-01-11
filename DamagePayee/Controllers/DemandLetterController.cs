@@ -33,7 +33,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Demandletter demandletter)
+        public async Task<IActionResult> Create( Demandletters demandletter)
         {
             try
             {

@@ -15,16 +15,16 @@ namespace Libraries.Model.Entity
         public int DepartmentId { get; set; }
         public int ZoneId { get; set; }
         public int DivisionId { get; set; }
-        public int? Locality { get; set; }
-        public int SecurityGuard { get; set; }
+        public int? LocalityId { get; set; }
+        public int UserprofileId { get; set; }
         public int Year { get; set; }
         public int Month { get; set; }
         public string Template { get; set; }
 
         public Department Department { get; set; }
         public Division Division { get; set; }
-        public Locality LocalityNavigation { get; set; }
-        public Userprofile SecurityGuardNavigation { get; set; }
+        public Locality Locality { get; set; }
+        public Userprofile Userprofile { get; set; }
         public Zone Zone { get; set; }
         public ICollection<DailyRoaster> Dailyroaster { get; set; }
 

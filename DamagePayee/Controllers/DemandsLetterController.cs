@@ -32,7 +32,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Demandletter demandletter)
+        public async Task<IActionResult> Create(Demandletters demandletter)
         {
             try
             {
@@ -91,7 +91,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Demandletter demandletter)
+        public async Task<IActionResult> Edit(int id, Demandletters demandletter)
         {
             if (ModelState.IsValid)
             {
@@ -111,7 +111,7 @@ namespace DamagePayee.Controllers
 
                     }
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
 
                 }

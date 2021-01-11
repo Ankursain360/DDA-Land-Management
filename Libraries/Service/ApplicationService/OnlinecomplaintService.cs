@@ -86,6 +86,7 @@ namespace Libraries.Service.ApplicationService
             model.PhotoPath = onlinecomplaint.PhotoPath;
           
             model.IsActive = onlinecomplaint.IsActive;
+            model.ApprovedStatus = onlinecomplaint.ApprovedStatus;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _onlinecomplaintRepository.Edit(model);
@@ -98,6 +99,7 @@ namespace Libraries.Service.ApplicationService
 
             onlinecomplaint.CreatedBy = 1;
             onlinecomplaint.CreatedDate = DateTime.Now;
+            onlinecomplaint.ApprovedStatus = 0;
 
 
 

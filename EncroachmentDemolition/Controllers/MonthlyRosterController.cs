@@ -1,6 +1,10 @@
 ﻿using Dto.Master;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
 using Service.IApplicationService;
 using System;
 using System.Collections.Generic;
@@ -9,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class MonthlyRosterController : Controller
+    public class MonthlyRosterController : BaseController
     {
         public readonly IMonthlyRosterService _monthlyRosterService;
         public MonthlyRosterController(IMonthlyRosterService monthlyRosterService)
@@ -18,8 +22,6 @@ namespace EncroachmentDemolition.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            MonthlyRoaster model = new MonthlyRoaster();
-            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
             return View();
         }
 
@@ -28,6 +30,19 @@ namespace EncroachmentDemolition.Controllers
             MonthlyRoaster model = new MonthlyRoaster();
             model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
             model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.YearList = await GetYearList();
+            model.MonthList = await GetMonthsList();
+            return View(model);
+        }
+        public async Task<IActionResult> Edit(int id)
+        {
+            MonthlyRoaster model = new MonthlyRoaster();
+            model = await _monthlyRosterService.GetMonthlyRoasterById(id);
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
+            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.ZoneList = await _monthlyRosterService.GetAllZone(model.DepartmentId);
+            model.DivisionList = await _monthlyRosterService.GetAllDivisionList(model.ZoneId);
+            model.LocalityList = await _monthlyRosterService.GetAllLocalityList(model.DivisionId);
             model.YearList = await GetYearList();
             model.MonthList = await GetMonthsList();
             return View(model);
@@ -49,13 +64,36 @@ namespace EncroachmentDemolition.Controllers
                     DepartmentId = monthlyRoasterDto.Department,
                     ZoneId = monthlyRoasterDto.Zone,
                     DivisionId = monthlyRoasterDto.Division,
-                    Locality = monthlyRoasterDto.Locality,
-                    SecurityGuard = monthlyRoasterDto.securityGuard,
+                    LocalityId = monthlyRoasterDto.Locality,
+                    UserprofileId = monthlyRoasterDto.securityGuard,
+                    CreatedBy = SiteContext.UserId,
+                    CreatedDate = DateTime.Now,
                     Template = monthlyRoasterDto.Template
                 };
-                _monthlyRosterService.Create(modelData);
+                bool result = await _monthlyRosterService.Create(modelData);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    return Json(Url.Action("Index", "MonthlyRoster"));
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return Json(Url.Action("Create", "MonthlyRoster"));
+
+                }
             }
-            return View(model);
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return Json(Url.Action("Create", "MonthlyRoster"));
+            }
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] MonthlyRoasterSearchDto monthlyRoasterSearchDto)
+        {
+            var model = await _monthlyRosterService.GetAllRoasterDetails(monthlyRoasterSearchDto);
+            return PartialView("_List", model);
         }
         public async Task<List<DropdownDto>> GetMonthsList()
         {
