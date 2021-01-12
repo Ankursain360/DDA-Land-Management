@@ -39,5 +39,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId);
         Task<Rebate> GetRebateValue();
         Task<Damagepaymenthistorytemp> GetPaymentHistorySingleResult(int id);
+        string GetLocalityName(int? localityId);
     }
 }

@@ -207,6 +207,9 @@ namespace Service.ApplicationService
             return await _selfAssessmentDamageRepository.GetRebateValue();
         }
 
-        
+        public string GetLocalityName(int? localityId)
+        {
+            return _selfAssessmentDamageRepository.GetLocalityName(localityId);
+        }
     }
 }

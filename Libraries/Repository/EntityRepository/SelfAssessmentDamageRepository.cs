@@ -134,5 +134,14 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Damagepaymenthistorytemp.Where(x => x.Id == id && x.IsActive == 1).FirstOrDefaultAsync();
         }
+
+        public string GetLocalityName(int? localityId)
+        {
+            var File = (from f in _dbContext.Locality
+                        where f.Id == localityId
+                        select f.LocalityCode).First();
+
+            return File;
+        }
     }
 }

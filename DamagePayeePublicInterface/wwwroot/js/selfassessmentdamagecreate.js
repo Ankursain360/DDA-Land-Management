@@ -652,3 +652,6 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+function Print() {
+    window.print();
+}

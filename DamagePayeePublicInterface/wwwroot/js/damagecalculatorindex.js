@@ -15,7 +15,7 @@
 
     localityid = $("#LocalityId option:selected").val();
     if (localityid != "") {
-        $("#LocalityId").attr("readonly", "readonly");
+        $("#LocalityId").attr("disabled", "disabled");
     }
 });
 

@@ -227,12 +227,8 @@ namespace DamagePayeePublicInterface.Controllers
 
                             }
                         }
-                        ViewBag.MainDamagePayeeId = damagepayeeregistertemp.Id;
+
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        if (damagepayeeregistertemp.IsMutaionYes != 0)
-                            return View(damagepayeeregistertemp);
-                        else
-                            return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
                     else
                     {
@@ -377,15 +373,8 @@ namespace DamagePayeePublicInterface.Controllers
 
                             }
                         }
-                        var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + damagepayeeregistertemp.FileNo + "&Locality=" + damagepayeeregistertemp.LocalityId + "&Amount=" + damagepayeeregistertemp.TotalValueWithInterest + "&Interest=" + damagepayeeregistertemp.InterestDueAmountCompund;
-                        ViewBag.MainDamagePayeeId = damagepayeeregistertemp.Id;
+
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        if (damagepayeeregistertemp.IsMutaionYes == 1)
-                            return View(damagepayeeregistertemp);
-                        else if (damagepayeeregistertemp.IsMutaionYes == 2)
-                            return Redirect(paymentLink);
-                        else
-                            return RedirectToAction("Index", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
                     }
                     else
                     {
@@ -394,6 +383,15 @@ namespace DamagePayeePublicInterface.Controllers
                     }
                 }
 
+                var LocalityCode = _selfAssessmentDamageService.GetLocalityName(damagepayeeregistertemp.LocalityId);
+                var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + damagepayeeregistertemp.FileNo + "&Locality=" + LocalityCode.Trim() + "&Amount=" + damagepayeeregistertemp.TotalValueWithInterest + "&Interest=" + damagepayeeregistertemp.InterestDueAmountCompund;
+                ViewBag.MainDamagePayeeId = damagepayeeregistertemp.Id;
+                if (damagepayeeregistertemp.IsMutaionYes == 1)
+                    return View(damagepayeeregistertemp);
+                else if (damagepayeeregistertemp.IsMutaionYes == 2)
+                    return Redirect(paymentLink);
+                else
+                    return RedirectToAction("Create", "SubstitutionMutationDetails", new { id = damagepayeeregistertemp.Id });
             }
             else
             {
