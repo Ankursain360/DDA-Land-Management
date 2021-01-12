@@ -24,7 +24,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-    debugger
+  
     return model;
 }
 
