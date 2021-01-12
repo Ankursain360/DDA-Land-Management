@@ -16,6 +16,8 @@ $("#btnReset").click(function () {
 
     GetModule(currentPageNumber, currentPageSize);
 });
+
+
 function GetModule(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     HttpPost(`/module/List`, 'html', param, function (response) {
@@ -66,3 +68,13 @@ $("#descId").click(function () {
 
 
 
+
+function onPaging(pageNo) {
+    GetComplaint(pageNo, currentPageSize);
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetComplaint(currentPageNumber, pageSize);
+    currentPageSize = pageSize;
+}
