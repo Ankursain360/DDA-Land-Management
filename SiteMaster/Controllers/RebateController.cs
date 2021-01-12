@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,6 +28,7 @@ namespace SiteMaster.Controllers
         {
             _rebateService = rebateService;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _rebateService.GetAllRebate();
@@ -37,11 +40,13 @@ namespace SiteMaster.Controllers
         //}
 
         [HttpPost]
+       
         public async Task<PartialViewResult> List([FromBody] RebateSearchDto model)
         {
             var result = await _rebateService.GetPagedRebate(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Rebate rebate = new Rebate();
@@ -51,6 +56,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Rebate rebate)
         {
             try
@@ -91,7 +97,7 @@ namespace SiteMaster.Controllers
                 return View(rebate);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _rebateService.FetchSingleResult(id);
@@ -104,6 +110,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Rebate rebate)
         {
             if (ModelState.IsValid)
@@ -131,7 +138,7 @@ namespace SiteMaster.Controllers
             }
             return View(rebate);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 

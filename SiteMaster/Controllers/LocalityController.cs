@@ -107,7 +107,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Locality locality)
         {
             locality.DepartmentList = await _localityService.GetAllDepartment();
