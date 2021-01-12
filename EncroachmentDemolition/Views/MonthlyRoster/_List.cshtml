@@ -1,0 +1,45 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.MonthlyRoaster>
+@{int rowNo = 0; }
+<table class="table table-sm table-bordered mb-0 table-striped">
+
+
+    <thead class="text-nowrap">
+        <tr>
+            <th>Sr.No</th>
+            <th>Department</th>
+            <th>Zone</th>
+            <th>Division</th>
+            <th>Locality(Village)</th>
+            <th>Security Guard</th>
+            <th>Year</th>
+            <th>Month</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Results)
+
+        {
+<tr>
+    <td>@(rowNo += 1)</td>
+
+    <td> @item.Department.Name</td>
+    <td>@item.Zone.Name</td>
+    <td>@item.Division.Name</td>
+    <td>@item.Locality.Name</td>
+    <td>@item.Userprofile.User.NormalizedUserName</td>
+    <td>@item.Year</td>
+    <td>@item.Month</td>
+    <td style="min-width:120px;">
+        <div class="action-btns">
+            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+        </div>
+    </td>
+</tr>
+}
+
+    </tbody>
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

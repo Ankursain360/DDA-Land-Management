@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Damagepayeeregistertemp
+﻿@model Libraries.Model.Entity.Damagepayeeregister
 @{ ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml"; }
 
@@ -328,7 +328,7 @@
                             @{
                                 if (Model.PropertyPhotoPath != null)
                                 {
-                                    <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id"  target="_blank"> (View File)</a>
+                                    <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
 
                                     <input type="file" placeholder="Property Photo" class="floating-label-field floating-label-field--s3" asp-for="PropertyPhoto" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
                                     <span asp-validation-for="PropertyPhoto" class="d-block text-danger field-validation-valid"></span>
@@ -542,7 +542,7 @@
                         @{
                             if (Model.ShowCauseNoticePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id"  target="_blank"> (View File)</a>
+                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file" asp-for="ShowCauseNotice" class="floating-label-field floating-label-field--s3" placeholder="ShowCauseNotice">
                                 <span asp-validation-for="ShowCauseNotice" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -561,7 +561,7 @@
                         @{
                             if (Model.FgformPath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id"  target="_blank"> (View File)</a>
+                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file" asp-for="Fgform" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="Fgform" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -619,7 +619,7 @@
                         @{
                             if (Model.DocumentForFilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id"  target="_blank"> (View File)</a>
+                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
                                 <input type="file" asp-for="DocumentForFile" class="floating-label-field floating-label-field--s3" placeholder="Name">
                                 <span asp-validation-for="DocumentForFile" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -700,7 +700,8 @@
 
         <div id="DivMainContentForm">
             <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
-            @Html.ActionLink("Damage Calculator", "Index", "DamageCalculator", null, new { @class = "btn btn-theme" })
+            @*<input type="submit" value="Damage Calculator" class="btn btn-theme" onclick="return CheckToApply();" />*@
+        <a class="btn btn-theme" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="return CheckToApply();">Damage Calculator</a>
         </div>
         <div class="row mt-3 mb-3">
             <div class="col-md-12">
@@ -778,9 +779,21 @@
         <div class="row mt-md-3">
             <div class="col-md-12">
                 <input type="submit" value="Create" class="btn btn-theme" onclick="return PageValidation();" />
-                @Html.ActionLink("Back", "Create", "SelfAssessmentDamage", null, new { @class = "btn btn-theme" })
+                @*<a class="badge badge-primary px-2" onclick="return CheckPaymentValidation();">Print</a>*@
+                @Html.ActionLink("Print", "Print", "SelfAssessmentDamage", null, new { @class = "btn btn-theme"  })
+                <input type="submit" value="Click Here For Payment" class="btn btn-theme" onclick="return CheckPaymentValidation();" />
+                @*<a class="badge badge-primary px-2" asp-action="Index" asp-controller="SubstitutionMutationDetails" asp-route-id="3" onclick="return CheckPaymentValidation();">Open Substitution Form</a>*@
             </div>
         </div>
+        @*<div class="row">
+            <div class="col-md-6 col-xl-4">
+                <div class="file-btn my-3 d-flex align-items-center">
+                    <input type="file" class="browes d-none" placeholder="Name" id="fileImg">
+                    <label for="fileImg" class="btn btn-theme px-4 mr-4">Browse</label>
+                    <img id="uploadedfile" src="img/Document-Management-System.png" class="d-block mx-auto img-thumbnail" style="max-height: 60px;max-width:120px">
+                </div>
+            </div>
+        </div>*@
     </form>
 
 </div>

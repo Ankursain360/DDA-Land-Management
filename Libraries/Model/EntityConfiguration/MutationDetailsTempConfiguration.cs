@@ -74,10 +74,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.SpecimenSignLegalUpload).HasColumnType("longtext");
 
-            builder.HasOne(d => d.DamagePayeeRegister)
-                .WithMany(p => p.Mutationdetailstemp)
-                .HasForeignKey(d => d.DamagePayeeRegisterId)
-                .HasConstraintName("fk_DamageRegisterIdMutationDetails");
+            //builder.HasOne(d => d.DamagePayeeRegister)
+            //    .WithMany(p => p.Mutationdetailstemp)
+            //    .HasForeignKey(d => d.DamagePayeeRegisterId)
+            //    .HasConstraintName("fk_DamageRegisterIdMutationDetails");
         }
     }
 

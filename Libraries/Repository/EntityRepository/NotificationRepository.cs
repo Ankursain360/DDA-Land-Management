@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
@@ -27,7 +28,40 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<LandNotification>> GetPagedZone(NotificationSearchDto model)
         {
-            return await _dbContext.LandNotification.GetPaged<LandNotification>(model.PageNumber, model.PageSize);
+            //return await _dbContext.LandNotification.GetPagedZone<LandNotification>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.LandNotification
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                           .OrderBy(s => s.Name)
+                           .OrderByDescending(s => s.IsActive)
+
+                       .GetPaged<LandNotification>(model.PageNumber, model.PageSize); ;
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("ISACTIVE"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
     }
 

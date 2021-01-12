@@ -23,7 +23,11 @@ function GetZoneList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        //$("#ZoneId").html(html);
+        $("#ZoneId").val('0').trigger('change');
         $("#ZoneId").html(html);
+        $("#DivisionId").val('0').trigger('change');
+        $("#LocalityId").val('0').trigger('change');
     });
 };
 //Bind Divison Dropdown from zone
@@ -34,12 +38,14 @@ function GetDivisionList(id) {
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
         }
+        //$("#DivisionId").html(html);
+        $("#DivisionId").val('0').trigger('change');
         $("#DivisionId").html(html);
     });
 };
 //Bind PrimaryNoList Dropdown from division
 function GetPrimaryNoList(id) {
-    debugger;
+  
 
     HttpGet(`/DeletedProperties/GetPrimaryNoList/?divisionId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
@@ -61,7 +67,7 @@ function GetDetails(pageNumber, pageSize, departmentId, zoneId, divisionId, Id) 
     });
 }
 function GetSearchParam(pageNumber, pageSize, departmentId, zoneId, divisionId, Id) {
-    debugger;
+    
     var model = {
         name: "test",
         pageSize: parseInt(pageSize),

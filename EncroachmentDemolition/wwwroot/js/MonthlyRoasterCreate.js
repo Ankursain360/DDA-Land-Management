@@ -106,28 +106,28 @@ function onSubmitForm() {
     } else if (checkresult) {
         $("#LocalityMessage").hide();
     }
-    var condition = 0;
+    //var condition = 0;
 
-    $('table#RoasterTable tr').each(function () {
-        var ddlValue = $(this).find('td').map(function () {
-            return $(this).find('select').map(function () {
-                if ($(this).prop("tagName") == "SELECT") {
-                    return JSON.stringify($(this).select2('val'));
-                } else {
-                    return $(this).val();
-                }
-            }).get();
-        }).get();
-        if (condition > 0) {
-            if (ddlValue == "[]") {
-                checkresult = false;
-                $(this).find("#PrimaryNoMessage").show();
-            } else if (checkresult) {
-                $(this).find("#PrimaryNoMessage").hide();
-            }
-        }
-        condition++;
-    });
+    //$('table#RoasterTable tr').each(function () {
+    //    var ddlValue = $(this).find('td').map(function () {
+    //        return $(this).find('select').map(function () {
+    //            if ($(this).prop("tagName") == "SELECT") {
+    //                return JSON.stringify($(this).select2('val'));
+    //            } else {
+    //                return $(this).val();
+    //            }
+    //        }).get();
+    //    }).get();
+    //    if (condition > 0) {
+    //        if (ddlValue == "[]") {
+    //            checkresult = false;
+    //            $(this).find("#PrimaryNoMessage").show();
+    //        } else if (checkresult) {
+    //            $(this).find("#PrimaryNoMessage").hide();
+    //        }
+    //    }
+    //    condition++;
+    //});
     debugger
     if (checkresult) {
         var param = GetListData();
@@ -144,7 +144,7 @@ function GetListData() {
     var ZoneId = $("#ZoneId option:selected").val();
     var DivisionId = $("#DivisionId option:selected").val();
     var Locality = $("#Locality option:selected").val();
-    var SecurityGuard = $("#SecurityGuard option:selected").val();
+    var SecurityGuard = $("#UserProfileId option:selected").val();
     var tableData = [];
     var Model = [];
     var condition = 0;

@@ -33,14 +33,14 @@ namespace DamagePayee.Controllers
             var result = await _selfAssessmentDamageService.GetPagedDamagepayeeregister(model);
             return PartialView("_List", result);
         }
-        async Task BindDropDown(Damagepayeeregistertemp damagepayeeregistertemp)
+        async Task BindDropDown(Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.LocalityList = await _selfAssessmentDamageService.GetLocalityList();
             damagepayeeregistertemp.DistrictList = await _selfAssessmentDamageService.GetDistrictList();
         }
         public async Task<IActionResult> Create()
         {
-            Damagepayeeregistertemp damagepayeeregistertemp = new Damagepayeeregistertemp();
+            Damagepayeeregister damagepayeeregistertemp = new Damagepayeeregister();
             var Data =await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
 
@@ -59,7 +59,7 @@ namespace DamagePayee.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Damagepayeeregistertemp damagepayeeregistertemp)
+        public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregistertemp)
         {
             await BindDropDown(damagepayeeregistertemp);
             string PhotoFilePathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATSGPADocument").Value.ToString();
@@ -109,10 +109,10 @@ namespace DamagePayee.Controllers
                     damagepayeeregistertemp.MobileNo.Count > 0)
 
                         {
-                            List<Damagepayeepersonelinfotemp> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfotemp>();
+                            List<Damagepayeepersonelinfo> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfo>();
                             for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                             {
-                                damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfotemp
+                                damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfo
                                 {
                                     Name = damagepayeeregistertemp.payeeName[i],
                                     FatherName = damagepayeeregistertemp.payeeFatherName[i],
@@ -145,10 +145,10 @@ namespace DamagePayee.Controllers
                          damagepayeeregistertemp.Date.Count > 0
                          )
                         {
-                            List<Allottetypetemp> allottetypetemp = new List<Allottetypetemp>();
+                            List<Allottetype> allottetypetemp = new List<Allottetype>();
                             for (int i = 0; i < damagepayeeregistertemp.Name.Count; i++)
                             {
-                                allottetypetemp.Add(new Allottetypetemp
+                                allottetypetemp.Add(new Allottetype
                                 {
                                     Name = damagepayeeregistertemp.Name[i],
                                     FatherName = damagepayeeregistertemp.FatherName[i],
@@ -178,10 +178,10 @@ namespace DamagePayee.Controllers
                              )
 
                         {
-                            List<Damagepaymenthistorytemp> damagepaymenthistorytemp = new List<Damagepaymenthistorytemp>();
+                            List<Damagepaymenthistory> damagepaymenthistorytemp = new List<Damagepaymenthistory>();
                             for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                             {
-                                damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
+                                damagepaymenthistorytemp.Add(new Damagepaymenthistory
                                 {
                                     Name = damagepayeeregistertemp.PaymntName[i],
                                     RecieptNo = damagepayeeregistertemp.RecieptNo[i],

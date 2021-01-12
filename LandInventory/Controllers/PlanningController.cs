@@ -226,7 +226,7 @@ namespace LandInventory.Controllers
                 result = await _planningService.VerifyProperties(planning.Id);
                 if (result)
                 {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show(Messages.Verifiedsuccesfuly, "", AlertType.Success);
                     return View("VerificationPage");
                 }
                 else
