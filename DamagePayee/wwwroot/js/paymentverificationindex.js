@@ -105,3 +105,14 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
     return model;
 }
 
+
+
+$(function () {
+    $("#btnverify").click(function () {
+        if ($("#checkbox1").is("false")) {
+            alert('Please select checkbox');
+        } else {
+            
+        }
+    });
+});

@@ -7,16 +7,14 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-   
     class AllottetypeConfiguration : IEntityTypeConfiguration<Allottetype>
     {
         public void Configure(EntityTypeBuilder<Allottetype> builder)
         {
-
             builder.ToTable("allottetype", "lms");
 
-            builder.HasIndex(e => e.DamagePayeeRegisterId)
-                .HasName("fk_damagepayeereg_idx");
+            builder.HasIndex(e => e.DamagePayeeRegisterTempId)
+                .HasName("FKdamagePayeetempId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -28,7 +26,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.DamagePayeeRegisterId).HasColumnType("int(11)");
+            builder.Property(e => e.DamagePayeeRegisterTempId).HasColumnType("int(11)");
 
             builder.Property(e => e.Date).HasColumnType("date");
 
@@ -46,9 +44,11 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasOne(d => d.DamagePayeeRegister)
                 .WithMany(p => p.Allottetype)
-                .HasForeignKey(d => d.DamagePayeeRegisterId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_damagepayeereg");
+                .HasForeignKey(d => d.DamagePayeeRegisterTempId)
+                .HasConstraintName("FKdamagePayeetempId");
+
+
+
         }
     }
 }

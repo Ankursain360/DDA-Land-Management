@@ -33,14 +33,14 @@ namespace DamagePayeePublicInterface.Controllers
             var result = await _selfAssessmentDamageService.GetPagedDamagepayeeregister(model);
             return PartialView("_List", result);
         }
-        async Task BindDropDown(Damagepayeeregistertemp damagepayeeregistertemp)
+        async Task BindDropDown(Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.LocalityList = await _selfAssessmentDamageService.GetLocalityList();
             damagepayeeregistertemp.DistrictList = await _selfAssessmentDamageService.GetDistrictList();
         }
         public async Task<IActionResult> Create()
         {
-            Damagepayeeregistertemp damagepayeeregistertemp = new Damagepayeeregistertemp();
+            Damagepayeeregister damagepayeeregistertemp = new Damagepayeeregister();
             var Data = await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
             if (value == null)
@@ -63,7 +63,7 @@ namespace DamagePayeePublicInterface.Controllers
         }
         [HttpPost]
 
-        public async Task<IActionResult> Create(Damagepayeeregistertemp damagepayeeregistertemp)
+        public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregistertemp)
         {
             await BindDropDown(damagepayeeregistertemp);
             string PhotoFilePathLayout = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATSGPADocument").Value.ToString();
@@ -113,10 +113,10 @@ namespace DamagePayeePublicInterface.Controllers
                         damagepayeeregistertemp.Address.Count > 0 &&
                         damagepayeeregistertemp.MobileNo.Count > 0)
                             {
-                                List<Damagepayeepersonelinfotemp> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfotemp>();
+                                List<Damagepayeepersonelinfo> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfo>();
                                 for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                                 {
-                                    damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfotemp
+                                    damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfo
                                     {
                                         Name = damagepayeeregistertemp.payeeName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeName[i],
                                         FatherName = damagepayeeregistertemp.payeeFatherName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeFatherName[i],
@@ -167,10 +167,10 @@ namespace DamagePayeePublicInterface.Controllers
                              damagepayeeregistertemp.Date.Count > 0
                              )
                             {
-                                List<Allottetypetemp> allottetypetemp = new List<Allottetypetemp>();
+                                List<Allottetype> allottetypetemp = new List<Allottetype>();
                                 for (int i = 0; i < damagepayeeregistertemp.Name.Count; i++)
                                 {
-                                    allottetypetemp.Add(new Allottetypetemp
+                                    allottetypetemp.Add(new Allottetype
                                     {
                                         Name = damagepayeeregistertemp.Name.Count <= i ? string.Empty : damagepayeeregistertemp.Name[i],
                                         FatherName = damagepayeeregistertemp.FatherName.Count <= i ? string.Empty : damagepayeeregistertemp.FatherName[i],
@@ -204,10 +204,10 @@ namespace DamagePayeePublicInterface.Controllers
                                  )
 
                             {
-                                List<Damagepaymenthistorytemp> damagepaymenthistorytemp = new List<Damagepaymenthistorytemp>();
+                                List<Damagepaymenthistory> damagepaymenthistorytemp = new List<Damagepaymenthistory>();
                                 for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                                 {
-                                    damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
+                                    damagepaymenthistorytemp.Add(new Damagepaymenthistory
                                     {
                                         Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
                                         RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
@@ -259,11 +259,11 @@ namespace DamagePayeePublicInterface.Controllers
                         damagepayeeregistertemp.MobileNo.Count > 0)
 
                             {
-                                List<Damagepayeepersonelinfotemp> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfotemp>();
+                                List<Damagepayeepersonelinfo> damagepayeepersonelinfotemp = new List<Damagepayeepersonelinfo>();
                                 result = await _selfAssessmentDamageService.DeletePayeePersonalInfoTemp(damagepayeeregistertemp.Id);
                                 for (int i = 0; i < damagepayeeregistertemp.payeeName.Count; i++)
                                 {
-                                    damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfotemp
+                                    damagepayeepersonelinfotemp.Add(new Damagepayeepersonelinfo
                                     {
                                         Name = damagepayeeregistertemp.payeeName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeName[i],
                                         FatherName = damagepayeeregistertemp.payeeFatherName.Count <= i ? string.Empty : damagepayeeregistertemp.payeeFatherName[i],
@@ -314,11 +314,11 @@ namespace DamagePayeePublicInterface.Controllers
                              damagepayeeregistertemp.Date.Count > 0
                              )
                             {
-                                List<Allottetypetemp> allottetypetemp = new List<Allottetypetemp>();
+                                List<Allottetype> allottetypetemp = new List<Allottetype>();
                                 result = await _selfAssessmentDamageService.DeleteAllotteTypeTemp(damagepayeeregistertemp.Id);
                                 for (int i = 0; i < damagepayeeregistertemp.Name.Count; i++)
                                 {
-                                    allottetypetemp.Add(new Allottetypetemp
+                                    allottetypetemp.Add(new Allottetype
                                     {
                                         Name = damagepayeeregistertemp.Name.Count <= i ? string.Empty : damagepayeeregistertemp.Name[i],
                                         FatherName = damagepayeeregistertemp.FatherName.Count <= i ? string.Empty : damagepayeeregistertemp.FatherName[i],
@@ -352,12 +352,12 @@ namespace DamagePayeePublicInterface.Controllers
                                  )
 
                             {
-                                List<Damagepaymenthistorytemp> damagepaymenthistorytemp = new List<Damagepaymenthistorytemp>();
+                                List<Damagepaymenthistory> damagepaymenthistorytemp = new List<Damagepaymenthistory>();
                                 result = await _selfAssessmentDamageService.DeletePaymentHistoryTemp(damagepayeeregistertemp.Id);
 
                                 for (int i = 0; i < damagepayeeregistertemp.PaymntName.Count; i++)
                                 {
-                                    damagepaymenthistorytemp.Add(new Damagepaymenthistorytemp
+                                    damagepaymenthistorytemp.Add(new Damagepaymenthistory
                                     {
                                         Name = damagepayeeregistertemp.PaymntName.Count <= i ? string.Empty : damagepayeeregistertemp.PaymntName[i],
                                         RecieptNo = damagepayeeregistertemp.RecieptNo.Count <= i ? string.Empty : damagepayeeregistertemp.RecieptNo[i],
@@ -455,7 +455,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.AadharNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -463,7 +463,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoPanFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PanNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -471,7 +471,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PhotographPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -479,7 +479,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewPersonelInfoSignautreFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.SignaturePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -487,7 +487,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewATSGPAFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Allottetypetemp Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
+            Allottetype Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
             string path = Data.AtsgpadocumentPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -495,7 +495,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<FileResult> ViewRecieptFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepaymenthistorytemp Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
+            Damagepaymenthistory Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
             string path = Data.RecieptDocumentPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -505,7 +505,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> DownloadPropertyPhoto(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.PropertyPhotoPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -513,7 +513,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> DownloadShowCauseNotice(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.ShowCauseNoticePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -521,7 +521,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> DownloadFgform(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.FgformPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -529,7 +529,7 @@ namespace DamagePayeePublicInterface.Controllers
         public async Task<IActionResult> DownloadBillfile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.DocumentForFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));

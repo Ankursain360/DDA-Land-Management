@@ -62,8 +62,8 @@
             <td style="min-width:100px;">
                 <div class="form-check">
                     
-                    <input  type="checkbox"  class="form-check-input chkAction " /> &nbsp;&nbsp;
-                    <a asp-action="Verify" asp-route-id="@item.Id"><input value="Verify" type="submit" class="btn btn-theme" /></a>
+                    @*<input  type="checkbox" id="checkbox1" class="form-check-input chkAction " /> &nbsp;&nbsp;*@
+                    <a asp-action="Verify"  asp-route-id="@item.Id"><input id="btnverify" value="Verify" type="submit" class="btn btn-theme" /></a>
                    
                 </div>
             </td>
