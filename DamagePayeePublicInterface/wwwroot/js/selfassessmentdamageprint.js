@@ -78,7 +78,7 @@
         $("#TypeOfDamageAssessee").val("Original");
     }
 
-/*Is Document For*/
+    /*Is Document For*/
     if ($("#HouseBill").is(":checked")) {
         $("#IsDocumentFor").val("HouseTax Bill");
     } else if ($("#ElectricityBill").is(":checked")) {
@@ -89,6 +89,7 @@
         $("#IsDocumentFor").val("Any Other");
     }
 
+    window.print();
 });
 function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
     var show = true;
@@ -194,16 +195,16 @@ function CheckPaymentValidation() {
     else {
         substutionValidation = false;
     }
-        if (substutionValidation && amountValidation) {
-            $("#IsMutaionYes").val(2);
-            window.document.forms[0].target = '_blank';
-            return true;
-        }
-        else {
-            WarningMessage('Please Fill All Mandatory Fields, before to Procceed Payment');
-            return false;
-        }
+    if (substutionValidation && amountValidation) {
+        $("#IsMutaionYes").val(2);
+        window.document.forms[0].target = '_blank';
+        return true;
     }
+    else {
+        WarningMessage('Please Fill All Mandatory Fields, before to Procceed Payment');
+        return false;
+    }
+}
 
 $("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
     if ($("#DeclarationStatus1").is(":checked"))
@@ -249,7 +250,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
                 $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
-            }  else {
+            } else {
                 $("#tbl_posts #add #viewAadharId").hide();
             }
             if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
@@ -651,7 +652,3 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
         return false;
     }
 });
-
-function Print() {
-    window.print();
-}
