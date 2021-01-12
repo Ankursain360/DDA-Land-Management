@@ -45,5 +45,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DeletePaymentHistoryTemp(int Id);
         Task<Rebate> GetRebateValue();
         Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id);
+        string GetLocalityName(int? localityId);
     }
 }

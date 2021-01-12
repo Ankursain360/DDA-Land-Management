@@ -535,7 +535,7 @@ namespace DamagePayeePublicInterface.Controllers
 
         public async Task<IActionResult> Print()
         {
-            Damagepayeeregistertemp damagepayeeregister = new Damagepayeeregistertemp();
+            Damagepayeeregister damagepayeeregister = new Damagepayeeregister();
             var Data = await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
             var value = await _selfAssessmentDamageService.GetRebateValue();
             if (value == null)
@@ -546,13 +546,13 @@ namespace DamagePayeePublicInterface.Controllers
             {
                 ViewBag.MainDamagePayeeId = Data.Id;
                 await BindDropDown(Data);
-                return View("",Data);
+                return View(Data);
             }
             else
             {
                 ViewBag.MainDamagePayeeId = 0;
                 await BindDropDown(damagepayeeregister);
-                return View("",damagepayeeregister);
+                return View(damagepayeeregister);
             }
 
         }
