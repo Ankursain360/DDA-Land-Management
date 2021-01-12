@@ -17,7 +17,7 @@ namespace DamagePayee.Models
             this.sendMail(EmailID, Sub, body);
         }
 
-        private string PopulateBodyForUserDetails(string DisplayName, string EmailID, string LoginName, string Password, string Path,string ContactNo)
+        private string PopulateBodyForUserDetails(string DisplayName, string EmailID, string LoginName,  string Path,string Password, string ContactNo)
         {
             string body = string.Empty;
             using (StreamReader reader = new StreamReader(Path))
