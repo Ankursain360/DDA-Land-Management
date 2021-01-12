@@ -5,10 +5,12 @@ var currentSortOrderDescending = 2;
 
 $(document).ready(function () {
     GetPayment(currentPageNumber, currentPageSize);
+    GetPayment2(currentPageNumber, currentPageSize);
 });
 
 $("#btnSearch").click(function () {
     GetPayment(currentPageNumber, currentPageSize);
+    GetPayment2(currentPageNumber, currentPageSize);
 });
 
 $("#btnReset").click(function () {
@@ -24,6 +26,14 @@ function GetPayment(pageNumber, pageSize) {
     HttpPost(`/Paymentverification/List`, 'html', param, function (response) {
         $('#divPaymentTable').html("");
         $('#divPaymentTable').html(response);
+    });
+}
+
+function GetPayment2(pageNumber, pageSize) {
+    var param = GetSearchParam(pageNumber, pageSize);
+    HttpPost(`/Paymentverification/List2`, 'html', param, function (response) {
+        $('#divPaymentTable2').html("");
+        $('#divPaymentTable2').html(response);
     });
 }
 

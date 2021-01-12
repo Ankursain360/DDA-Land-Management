@@ -6,6 +6,7 @@ using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +34,30 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaymentList(model);
         }
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentList2(PaymentverificationSearchDto model)
+        {
+            return await _paymentverificationRepository.GetPagedPaymentList2(model);
+        }
+       
+        public async Task<Paymentverification> FetchSingleResult(int id)
+        {
+            var result = await _paymentverificationRepository.FindBy(a => a.Id == id);
+            Paymentverification model = result.FirstOrDefault();
+            return model;
+        }
 
+        public async Task<bool> Verify(int id, int userid)
+        {
+            var result = await _paymentverificationRepository.FindBy(a => a.Id == id);
+            Paymentverification model = result.FirstOrDefault();
+            model.IsVerified = 1;
 
+            model.VerifiedOn = DateTime.Now;
+            model.ModifiedBy = userid;
+            model.ModifiedDate= DateTime.Now;
+            model.VerifiedBy = userid;
+            _paymentverificationRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

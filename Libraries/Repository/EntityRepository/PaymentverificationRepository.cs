@@ -62,6 +62,18 @@ namespace Libraries.Repository.EntityRepository
             return data;
            
         }
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentList2(PaymentverificationSearchDto model)
+        {
+            var data = await _dbContext.Paymentverification
+                           // .Where(a => a.IsVerified == 0)
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.PayeeName.Contains(model.name)) && (x.IsVerified == 1))
+
+                            .OrderByDescending(s => s.IsActive)
+                            .GetPaged<Paymentverification>(model.PageNumber, model.PageSize);
+         
+            return data;
+
+        }
 
         public async Task<List<Paymentverification>> GetAllPaymentList()
         {

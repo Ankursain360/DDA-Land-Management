@@ -12,6 +12,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Paymentverification>> GetAllPaymentList();
         Task<PagedResult<Paymentverification>> GetPagedPaymentList(PaymentverificationSearchDto model);
-
+        Task<PagedResult<Paymentverification>> GetPagedPaymentList2(PaymentverificationSearchDto model);
     }
 }
