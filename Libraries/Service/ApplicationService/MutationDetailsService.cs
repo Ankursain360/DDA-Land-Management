@@ -55,7 +55,7 @@ namespace Libraries.Service.ApplicationService
 
             model.CreatedDate = DateTime.Now;
             model.CreatedBy = details.CreatedBy;
-            _mutationDetailsRepository.Add(details);
+            _mutationDetailsRepository.Add(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 

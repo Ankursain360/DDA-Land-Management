@@ -111,7 +111,7 @@ function CheckToApply() {/* -----------Check Validation before Apply for mutatio
             return true;
         }
         else {
-            alert('Please Fill All Mandatory Fields');
+            WarningMessage('Please Fill All Mandatory Fields');
             return false;
         }
     }
@@ -166,6 +166,45 @@ function PageValidation() {/* -----------check validation before create click Ad
     }
     return checkresult;
 }
+
+function CheckPaymentValidation() {
+    debugger;
+    var substutionValidation = false;
+    var amountValidation = PageValidation();
+    var show = true;
+    if ($("#rdbPayeeYes").is(":checked")) {
+        $("#DivForPayeeNo").hide();
+    } else {
+        $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
+            if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
+                if (show == true) {
+                    if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
+                    }
+                    else {
+                        show = false;
+                    }
+                }
+            }
+        });
+    }
+
+    if (show) {
+        substutionValidation = true;
+    }
+    else {
+        substutionValidation = false;
+    }
+        if (substutionValidation && amountValidation) {
+            $("#IsMutaionYes").val(2);
+            window.document.forms[0].target = '_blank';
+            return true;
+        }
+        else {
+            WarningMessage('Please Fill All Mandatory Fields, before to Procceed Payment');
+            return false;
+        }
+    }
+
 $("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
     if ($("#DeclarationStatus1").is(":checked"))
         $("#Declaration1").val(1);
@@ -613,3 +652,6 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
+function Print() {
+    window.print();
+}

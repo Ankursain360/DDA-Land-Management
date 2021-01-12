@@ -12,24 +12,24 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class DamagepayeeregisterRepository : GenericRepository<Damagepayeeregistertemp>, IDamagepayeeregisterRepository
+    public class DamagepayeeregisterRepository : GenericRepository<Damagepayeeregister>, IDamagepayeeregisterRepository
     {
         public DamagepayeeregisterRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
-        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagepayeeregistertemp(DamagepayeeregistertempSearchDto model)
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model)
         {
-            return await _dbContext.Damagepayeeregistertemp
+            return await _dbContext.Damagepayeeregister
                 .Where(x => x.IsActive == 1)
                 .Include(x => x.Locality)
                 .Include(x => x.District)
-                .GetPaged<Damagepayeeregistertemp>(model.PageNumber, model.PageSize);
+                .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
         }
 
-        public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()
+        public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
-                 return await _dbContext.Damagepayeeregistertemp
+                 return await _dbContext.Damagepayeeregister
                 .Where(x => x.IsActive == 1)
                 .Include(x => x.Locality)
                 .Include(x => x.District)
@@ -46,114 +46,114 @@ namespace Libraries.Repository.EntityRepository
             var districtList = await _dbContext.District.Where(x => x.IsActive == 1).ToListAsync();
             return districtList;
         }
-        public async Task<Damagepayeeregistertemp> GetPropertyPhotoPath(int Id)
+        public async Task<Damagepayeeregister> GetPropertyPhotoPath(int Id)
         {
-            return await _dbContext.Damagepayeeregistertemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeeregister.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
 
         //********* rpt 1 Persolnal info of damage assesse ***********
-        public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
+        public async Task<bool> SavePayeePersonalInfo(Damagepayeepersonelinfo damagepayeepersonelinfo)
         {
-            _dbContext.Damagepayeepersonelinfotemp.Add(damagepayeepersonelinfotemp);
+            _dbContext.Damagepayeepersonelinfo.Add(damagepayeepersonelinfo);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-        public async Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id)
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
-        public async Task<bool> DeletePayeePersonalInfoTemp(int Id)
+        public async Task<bool> DeletePayeePersonalInfo(int Id)
          {
-            _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == Id));
+            _dbContext.RemoveRange(_dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterTempId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
        
-        public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetPersonelInfoFilePath(int Id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<Damagepayeepersonelinfotemp> GetAadharFilePath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetAadharFilePath(int Id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<Damagepayeepersonelinfotemp> GetPanFilePath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetPanFilePath(int Id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<Damagepayeepersonelinfotemp> GetPhotographPath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetPhotographPath(int Id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<Damagepayeepersonelinfotemp> GetSignaturePath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetSignaturePath(int Id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<List<Damagepayeepersonelinfotemp>> GetPreviousAssesseRepeater(int id)
+        public async Task<List<Damagepayeepersonelinfo>> GetPreviousAssesseRepeater(int id)
         {
-            return await _dbContext.Damagepayeepersonelinfotemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
         //********* rpt 2 Allotte Type **********
 
-        public async Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp)
+        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
         {
-            await _dbContext.Allottetypetemp.AddRangeAsync(allottetypetemp);
+            await _dbContext.Allottetype.AddRangeAsync(allottetype);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-        public async Task<List<Allottetypetemp>> GetAllottetypeTemp(int id)
+        public async Task<List<Allottetype>> GetAllottetype(int id)
         { 
-             return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+             return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
-        public async Task<bool> DeleteAllotteTypeTemp(int Id)
+        public async Task<bool> DeleteAllotteType(int Id)
           {
-            _dbContext.RemoveRange(_dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == Id));
+            _dbContext.RemoveRange(_dbContext.Allottetype.Where(x => x.DamagePayeeRegisterTempId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-        public async Task<Allottetypetemp> GetATSFilePath(int Id)
+        public async Task<Allottetype> GetATSFilePath(int Id)
         {
-            return await _dbContext.Allottetypetemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Allottetype.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
-        public async Task<List<Allottetypetemp>> GetNewAlloteeRepeater(int id)
+        public async Task<List<Allottetype>> GetNewAlloteeRepeater(int id)
         {
-            return await _dbContext.Allottetypetemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
 
         //********* rpt 3 Damage payment history ***********
 
-        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
+        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
         {
-            await _dbContext.Damagepaymenthistorytemp.AddRangeAsync(damagepaymenthistorytemp);
+            await _dbContext.Damagepaymenthistory.AddRangeAsync(damagepaymenthistory);
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-        public async Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id)
+        public async Task<List<Damagepaymenthistory>> GetPaymentHistory(int id)
         {
-            return await _dbContext.Damagepaymenthistorytemp.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
-        public async Task<bool> DeletePaymentHistoryTemp(int Id)
+        public async Task<bool> DeletePaymentHistory(int Id)
          {
-            _dbContext.RemoveRange(_dbContext.Damagepaymenthistorytemp.Where(x => x.DamagePayeeRegisterTempId == Id));
+            _dbContext.RemoveRange(_dbContext.Damagepaymenthistory.Where(x => x.DamagePayeeRegisterTempId == Id));
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
 
-        public async Task<Damagepaymenthistorytemp> GetReceiptFilePath(int Id)
+        public async Task<Damagepaymenthistory> GetReceiptFilePath(int Id)
         {
-            return await _dbContext.Damagepaymenthistorytemp.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
+            return await _dbContext.Damagepaymenthistory.Where(x => x.Id == Id && x.IsActive == 1).FirstOrDefaultAsync();
         }
 
-        public async Task<Damagepayeeregistertemp> FetchSingleResult(int id)
+        public async Task<Damagepayeeregister> FetchSingleResult(int id)
         {
-            return await _dbContext.Damagepayeeregistertemp
-                                     .Include(x => x.Damagepayeepersonelinfotemp)
-                                     .Include(x => x.Damagepaymenthistorytemp)
-                                     .Include(x => x.Allottetypetemp)
+            return await _dbContext.Damagepayeeregister
+                                     .Include(x => x.Damagepayeepersonelinfo)
+                                     .Include(x => x.Damagepaymenthistory)
+                                     .Include(x => x.Allottetype)
                                      .Where(x => x.Id == id)
                                      .FirstOrDefaultAsync();
         }
@@ -172,18 +172,7 @@ namespace Libraries.Repository.EntityRepository
             return Result > 0 ? true : false;
         }
 
-        public async Task<bool> SaveAllotteType(List<Allottetype> allottetype)
-        {
-            await _dbContext.Allottetype.AddRangeAsync(allottetype);
-            var Result = await _dbContext.SaveChangesAsync();
-            return Result > 0 ? true : false;
-        }
-
-        public async Task<bool> SavePaymentHistory(List<Damagepaymenthistory> damagepaymenthistory)
-        {
-            await _dbContext.Damagepaymenthistory.AddRangeAsync(damagepaymenthistory);
-            var Result = await _dbContext.SaveChangesAsync();
-            return Result > 0 ? true : false;
-        }
+      
+      
     }
 }

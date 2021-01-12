@@ -12,6 +12,11 @@
     $('#EncroachmentDate').attr('max', maxDate);
     $('#StartDate').attr('max', maxDate);
     $('#EndDate').attr('max', maxDate);
+
+    localityid = $("#LocalityId option:selected").val();
+    if (localityid != "") {
+        $("#LocalityId").attr("readonly", "readonly");
+    }
 });
 
 $('#myForm').validate({

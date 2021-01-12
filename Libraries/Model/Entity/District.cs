@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
         {
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Userprofile = new HashSet<Userprofile>();
-            Damagepayeeregistertemp = new HashSet<Damagepayeeregistertemp>();
+          
         }
         [Required(ErrorMessage = "District name is required")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
@@ -28,7 +28,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
-        public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
+       
 
     }
 }

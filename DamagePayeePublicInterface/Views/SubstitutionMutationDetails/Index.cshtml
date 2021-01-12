@@ -1,11 +1,4 @@
-﻿@*@{
-        ViewData["Title"] = "Index";
-    }
-
-    <h1>Index</h1>*@
-
-
-@model Libraries.Model.Entity.Mutationdetails
+﻿@model Libraries.Model.Entity.Mutationdetails
 @{int rowNo = 0;}
 @{int AtsgpadocumentPath = 0;}
 @{int AadharNoFilePath = 0;}
@@ -59,7 +52,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach (var item in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                        @foreach (var item in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                         {
                             <tr>
                                 <td>@(rowNo += 1)</td>
@@ -98,9 +91,9 @@
 
                                         @item.AadharNo
                                         @{
-                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfo != null && Model.DamagePayeeRegister.Damagepayeepersonelinfo.Count > 0)
                                             {
-                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                                 {
                                                     <a asp-action="DownloadAadharPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AadharNoFilePath += 1 ))</a>
 
@@ -119,9 +112,9 @@
                                     <div class="floating-label-wrap mb-3 mb-md-0">
                                         @item.PanNo
                                         @{
-                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                            if (Model.DamagePayeeRegister.Damagepayeepersonelinfo != null && Model.DamagePayeeRegister.Damagepayeepersonelinfo.Count > 0)
                                             {
-                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                                foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                                 {
                                                     <a asp-action="DownloadPanPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PanNoFilePath += 1 ))</a>
 
@@ -138,9 +131,9 @@
                                 </td>
                                 <td>
                                     @{
-                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfo != null && Model.DamagePayeeRegister.Damagepayeepersonelinfo.Count > 0)
                                         {
-                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                             {
                                                 <a asp-action="DownloadPhotographPathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(PhotographPath += 1 ))</a>
 
@@ -156,9 +149,9 @@
                                 </td>
                                 <td>
                                     @{
-                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfotemp != null && Model.DamagePayeeRegister.Damagepayeepersonelinfotemp.Count > 0)
+                                        if (Model.DamagePayeeRegister.Damagepayeepersonelinfo != null && Model.DamagePayeeRegister.Damagepayeepersonelinfo.Count > 0)
                                         {
-                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfotemp)
+                                            foreach (var data in Model.DamagePayeeRegister.Damagepayeepersonelinfo)
                                             {
                                                 <a asp-action="DownloadSignaturePathFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(SignaturePath += 1 ))</a>
 
@@ -227,7 +220,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach (var item in Model.DamagePayeeRegister.Allottetypetemp)
+                        @foreach (var item in Model.DamagePayeeRegister.Allottetype)
                         {
                             <tr>
                                 <td>@(rowNo += 1)</td>
@@ -242,9 +235,9 @@
                                 </td>
                                 <td>
                                     @{
-                                        if (Model.DamagePayeeRegister.Allottetypetemp != null && Model.DamagePayeeRegister.Allottetypetemp.Count > 0)
+                                        if (Model.DamagePayeeRegister.Allottetype != null && Model.DamagePayeeRegister.Allottetype.Count > 0)
                                         {
-                                            foreach (var data in Model.DamagePayeeRegister.Allottetypetemp)
+                                            foreach (var data in Model.DamagePayeeRegister.Allottetype)
                                             {
                                                 <a asp-action="DownloadATSFile" asp-route-id="@data.Id" class="badge badge-primary px-2"> (View Existing Document @(AtsgpadocumentPath += 1 ))</a>
 

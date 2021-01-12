@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 namespace Libraries.Service.IApplicationService
 {
 
-    public interface IDamagePayeeApprovalService : IEntityService<Damagepayeeregistertemp>
+    public interface IDamagePayeeApprovalService : IEntityService<Damagepayeeregister>
     {
-        Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
+        Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
     }
 }
