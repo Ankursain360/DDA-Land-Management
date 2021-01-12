@@ -533,6 +533,28 @@ namespace DamagePayeePublicInterface.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
+        public async Task<IActionResult> Print()
+        {
+            Damagepayeeregistertemp damagepayeeregister = new Damagepayeeregistertemp();
+            var Data = await _selfAssessmentDamageService.FetchSelfAssessmentUserId(SiteContext.UserId);
+            var value = await _selfAssessmentDamageService.GetRebateValue();
+            if (value == null)
+                ViewBag.RebateValue = 0;
+            else
+                ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
+            if (Data != null)
+            {
+                ViewBag.MainDamagePayeeId = Data.Id;
+                await BindDropDown(Data);
+                return View("",Data);
+            }
+            else
+            {
+                ViewBag.MainDamagePayeeId = 0;
+                await BindDropDown(damagepayeeregister);
+                return View("",damagepayeeregister);
+            }
 
+        }
     }
 }

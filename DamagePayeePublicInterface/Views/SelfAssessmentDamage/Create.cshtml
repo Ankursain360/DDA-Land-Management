@@ -780,7 +780,7 @@
             <div class="col-md-12">
                 <input type="submit" value="Create" class="btn btn-theme" onclick="return PageValidation();" />
                 @*<a class="badge badge-primary px-2" onclick="return CheckPaymentValidation();">Print</a>*@
-                @Html.ActionLink("Print", "", "", null, new { @class = "btn btn-theme", onclick = "Print();" })
+                @Html.ActionLink("Print", "Print", "SelfAssessmentDamage", null, new { @class = "btn btn-theme"  })
                 <input type="submit" value="Click Here For Payment" class="btn btn-theme" onclick="return CheckPaymentValidation();" />
                 @*<a class="badge badge-primary px-2" asp-action="Index" asp-controller="SubstitutionMutationDetails" asp-route-id="3" onclick="return CheckPaymentValidation();">Open Substitution Form</a>*@
             </div>
