@@ -24,8 +24,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         //  Task<bool> CheckUniqueLoginName(int id, string loginname);
 
-      
 
+        Task<bool> UpdateBeforeApproval(int id, Onlinecomplaint onlinecomplaint);
 
     }
 }

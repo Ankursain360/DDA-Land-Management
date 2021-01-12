@@ -16,21 +16,24 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Common;
 
-
 namespace EncroachmentDemolition.Controllers
 {
-    public class ComplaintController : Controller
+    public class ComplaintController : BaseController
     {
         private readonly IOnlinecomplaintService _onlinecomplaintService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
-
-
-        public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IConfiguration configuration)
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+       
+        public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
+            IWorkflowTemplateService workflowtemplateService, IConfiguration configuration)
         {
+            _workflowtemplateService = workflowtemplateService;
             _onlinecomplaintService = onlinecomplaintService;
             _configuration = configuration;
+            _approvalproccessService = approvalproccessService;
         }
 
 
@@ -87,12 +90,44 @@ namespace EncroachmentDemolition.Controllers
 
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
 
+
+                    var DataFlow = await dataAsync();
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            onlinecomplaint.ApprovedStatus = 0;
+                            onlinecomplaint.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                            result = await _onlinecomplaintService.UpdateBeforeApproval(onlinecomplaint.Id, onlinecomplaint);  //Update Table details 
+                            if (result)
+                            {
+                                Approvalproccess approvalproccess = new Approvalproccess();
+                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                                approvalproccess.ServiceId = onlinecomplaint.Id;
+                                approvalproccess.SendFrom = SiteContext.UserId;
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                approvalproccess.PendingStatus = 1;   //1
+                                approvalproccess.Status = null;   //1
+                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                            }
+
+                            break;
+                        }
+                    }
+
+
+
+
+
+
                     if (result == true)
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
                         string EmailID = onlinecomplaint.Email.ToString();
                        
-                        string Action = "Dear " + DisplayName + ",  Your Complaint Register succesfully. Your Reference No is  "  +onlinecomplaint.ReferenceNo;
+                        string Action = "Dear Requester, <br> Your Request for <b>"+ onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
                         String Mobile = onlinecomplaint. Contact;
                         SendMailDto mail = new SendMailDto();
                         SendSMSDto SMS = new SendSMSDto();
@@ -121,9 +156,6 @@ namespace EncroachmentDemolition.Controllers
                 return View(onlinecomplaint);
             }
         }
-
-
-
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -208,6 +240,15 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
+
+
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
 
 
 

@@ -99,6 +99,7 @@ namespace Libraries.Service.ApplicationService
 
             onlinecomplaint.CreatedBy = 1;
             onlinecomplaint.CreatedDate = DateTime.Now;
+            onlinecomplaint.IsActive = 1;
             onlinecomplaint.ApprovedStatus = 0;
 
 
@@ -117,7 +118,16 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<bool> UpdateBeforeApproval(int id, Onlinecomplaint onlinecomplaint)
+        {
+            var result = await _onlinecomplaintRepository.FindBy(a => a.Id == id);
+            Onlinecomplaint model = result.FirstOrDefault();
 
+            model.ApprovedStatus = onlinecomplaint.ApprovedStatus;
+            model.PendingAt = onlinecomplaint.PendingAt;
+            _onlinecomplaintRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
 
 

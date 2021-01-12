@@ -40,10 +40,64 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintSearchDto model)
         {
-            return await _dbContext.Onlinecomplaint.Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Onlinecomplaint.Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.contact) || x.Contact.Contains(model.contact))
+                   && (string.IsNullOrEmpty(model.email) || x.Email.Contains(model.email))).
+                Include(x => x.Location).Include(x => x.ComplaintType).OrderByDescending(x => x.Id).GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("CONTACT"):
+                        data.Results = data.Results.OrderBy(x => x.Contact).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderBy(x => x.Email).ToList();
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderBy(x => x.AddressOfComplaint).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("CONTACT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Contact).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderByDescending(x => x.Email).ToList();
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderByDescending(x => x.AddressOfComplaint).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            return data;
+
+
+
         }
 
 
-
     }
-}
+    }
+
