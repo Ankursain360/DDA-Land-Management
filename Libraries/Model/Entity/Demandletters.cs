@@ -24,6 +24,10 @@ namespace Libraries.Model.Entity
         public decimal? ReliefAmount { get; set; }
         public byte IsActive { get; set; }
         public Locality Locality { get; set; }
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Demandletters> FileNoList { get; set; }
 
     }
 }

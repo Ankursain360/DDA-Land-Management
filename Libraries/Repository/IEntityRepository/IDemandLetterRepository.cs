@@ -12,5 +12,12 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         Task<PagedResult<Demandletter>> GetPagedReliefReport();
+
+
+        //*******   Penalty Imposition Report**********
+        Task<List<Locality>> GetLocalityList();
+        Task<List<Demandletters>> GetFileNoList();
+        Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
+
     }
 }

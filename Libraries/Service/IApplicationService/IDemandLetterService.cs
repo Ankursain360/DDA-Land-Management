@@ -17,5 +17,10 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
         Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model);
+
+        //*******   Penalty Imposition Report**********
+        Task<List<Locality>> GetLocalityList();
+        Task<List<Demandletters>> GetFileNoList();
+        Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
     }
 }
