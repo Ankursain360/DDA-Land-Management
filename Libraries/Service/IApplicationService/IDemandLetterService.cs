@@ -16,6 +16,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Demandletters demandletter);
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
-
+        Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model);
     }
 }

@@ -20,7 +20,8 @@ namespace Libraries.Model.Entity
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Mutationdetails = new HashSet<Mutationdetails>();
-          
+            Demandletters = new HashSet<Demandletters>();
+
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
         }
         [Required(ErrorMessage = "The Department field is required")]
@@ -64,5 +65,6 @@ namespace Libraries.Model.Entity
       
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
+        public ICollection<Demandletters> Demandletters { get; set; }
     }
 }

@@ -38,9 +38,9 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-
-
-
-
+        public Task<PagedResult<Demandletter>> GetPagedReliefReport()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

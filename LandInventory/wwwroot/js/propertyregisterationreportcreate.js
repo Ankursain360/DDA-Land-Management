@@ -2,7 +2,6 @@
 var currentPageSize = 10;
 $(document).ready(function () {
 
-    // GetDetails(currentPageNumber, currentPageSize);
     var value = $('#PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
         $('#DivLandUse').show();
