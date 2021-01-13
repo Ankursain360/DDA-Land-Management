@@ -262,5 +262,47 @@
     "inputFiles": [
       "wwwroot/js/demolitionpoliceassistencelettercreate.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionreport2create.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionreport2create.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demolitionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demolitionreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/MonthlyRoasterCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/MonthlyRoasterCreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/MonthlyRoasterIndex.min.js",
+    "inputFiles": [
+      "wwwroot/js/MonthlyRoasterIndex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/monthlyroasterpartial.min.js",
+    "inputFiles": [
+      "wwwroot/js/monthlyroasterpartial.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/onlinecomplaintapprovalprocess.min.js",
+    "inputFiles": [
+      "wwwroot/js/onlinecomplaintapprovalprocess.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/onlinecomplaintapprovalprocessindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/onlinecomplaintapprovalprocessindex.js"
+    ]
   }
 ]
