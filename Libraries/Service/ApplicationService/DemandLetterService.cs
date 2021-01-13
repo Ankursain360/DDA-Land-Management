@@ -77,7 +77,7 @@ namespace Service.ApplicationService
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
             return await _demandLetterRepository.GetPagedReliefReport(model);
@@ -92,8 +92,8 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.BindLoclityList();
         }
+        /*-----------------Relief Report End------------------*/
 
-      
         //*******   Penalty Imposition Report**********
 
         public async Task<List<Locality>> GetLocalityList()

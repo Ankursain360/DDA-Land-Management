@@ -38,6 +38,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
             return await _dbContext.Demandletters
@@ -70,7 +71,7 @@ namespace Libraries.Repository.EntityRepository
                                     && (InLocalitiesId).Contains(x.Id))
                                     .ToListAsync();
         }
-
+        /*-----------------Relief Report End------------------*/
 
         //*******   Penalty Imposition Report**********
         public async Task<List<Locality>> GetLocalityList()
