@@ -94,5 +94,11 @@
     "inputFiles": [
       "wwwroot/js/common.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/penaltyimpositionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/penaltyimpositionreportindex.js"
+    ]
   }
 ]

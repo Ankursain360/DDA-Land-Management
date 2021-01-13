@@ -55,9 +55,15 @@ namespace Libraries.Repository.EntityRepository
             var fileNoList = await _dbContext.Demandletters.Where(x => x.IsActive == 1).ToListAsync();
             return fileNoList;
         }
-        public Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
         {
-            throw new System.NotImplementedException();
+            var data = await _dbContext.Demandletters 
+                    .Include(x => x.Locality)
+                    .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                   && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                    .GetPaged(model.PageNumber, model.PageSize);
+            return data;
+
         }
 
     }
