@@ -106,7 +106,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(EditUserDto model)
         {
             if (ModelState.IsValid)
@@ -119,6 +119,7 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             await _userProfileService.DeleteUser(id);

@@ -1,0 +1,95 @@
+﻿@model Libraries.Model.Entity.Onlinecomplaint
+@*@{int Photo = 0;}
+@{int ReportFile = 0;}*@
+
+<style>
+
+    [aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {
+        display: none;
+    }
+</style>
+
+<div disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <a data-toggle="collapse" href="#collapseWatchWardApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseWatchWardApprroval">
+        <h3 class="my-3 d-flex sub-heading">View Online Complaint Details</h3>
+    </a>
+    <div class="collapse" id="collapseWatchWardApprroval">
+        @if (Model != null)
+        {
+        <div id="divShowData">
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Name" type="text" disabled class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <label class="floating-label">Name</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Contact" type="text" disabled class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Contact" class="text-danger"></span>
+                        <label class="floating-label">Contact</label>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Email" type="text" disabled class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                        <label class="floating-label">Email</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="AddressOfComplaint" type="text" disabled class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="AddressOfComplaint" class="text-danger"></span>
+                        <label class="floating-label">Address</label>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6" style="display:none;">
+                    <div class="floating-label-wrap">
+                        <label class="floating-label">Status</label>
+                        <select disabled asp-for="IsActive" class="form-control dda-dropdown">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <span asp-validation-for="IsActive" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="display:none;">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <textarea asp-for="Remarks" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                        <span asp-validation-for="Remarks" class="text-danger"></span>
+                        <label class="floating-label">Remarks</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        else
+        {
+            <div id="divNoData">
+                <p>No Data Available</p>
+            </div>
+        }
+
+    </div>
+</div>
+
+

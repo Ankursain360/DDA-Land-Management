@@ -25,7 +25,8 @@ namespace Libraries.Repository.EntityRepository
                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
                  .OrderByDescending(s => s.IsActive)
-                .GetPaged<District>(model.PageNumber, model.PageSize);
+
+                .GetPaged<District>(model.PageNumber, model.PageSize); ;
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {

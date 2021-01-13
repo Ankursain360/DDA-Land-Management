@@ -103,7 +103,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Zone zone)
         {
@@ -165,7 +165,7 @@ namespace SiteMaster.Controllers
                 return Json($"Zone Code: {Code} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _zoneService.Delete(id);

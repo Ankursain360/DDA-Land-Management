@@ -89,7 +89,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Court court)
         {
@@ -137,7 +137,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try

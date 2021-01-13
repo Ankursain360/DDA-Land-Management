@@ -16,21 +16,19 @@ $("#btnReset").click(function () {
 });
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    //  debugger;
+   
     HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 
-    if ($('table >tbody >tr').length <= 1) {
-        GetDetails(1, $("#ddlPageSize option:selected").val());
-    }
+
 }
 
 function GetSearchParam(pageNumber, pageSize) {
     var sorbyname = $('#Sortbyd').val();
     var sortdesc = $("#sortdesc").val();
-    // alert(sorbyname);
+   
     if (sorbyname) {
         sorbyname = sorbyname;
     } else {

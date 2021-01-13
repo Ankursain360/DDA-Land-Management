@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,7 +28,7 @@ namespace SiteMaster.Controllers
         {
             _notificationService = notificationService;
         }
-       
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -38,7 +40,7 @@ namespace SiteMaster.Controllers
             var result = await _notificationService.GetPagedNotification(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -46,6 +48,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(LandNotification notification)
         {
             try
@@ -77,6 +80,7 @@ namespace SiteMaster.Controllers
                 return View(notification);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -90,6 +94,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, LandNotification notification)
         {
             if (ModelState.IsValid)
@@ -132,7 +137,7 @@ namespace SiteMaster.Controllers
                 return Json($"Notification Name : {Name} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _notificationService.Delete(id);

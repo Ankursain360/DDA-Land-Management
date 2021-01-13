@@ -29,8 +29,8 @@ namespace Libraries.Repository.EntityRepository
            
                 var data= await _dbContext.Demolitionchecklist
                 .Where(s => (string.IsNullOrEmpty(model.name) || s.ChecklistDescription.Contains(model.name)))
-                   .OrderBy(x => x.Id)
-                   .ThenByDescending(x => x.IsActive == 1)
+                  //.OrderBy(x => x.Id)
+                  .OrderByDescending(x => x.IsActive)
                    .ThenBy(x => x.ChecklistDescription)
                    .GetPaged<Demolitionchecklist>(model.PageNumber, model.PageSize);
 

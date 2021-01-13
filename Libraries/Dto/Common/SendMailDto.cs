@@ -19,7 +19,7 @@ namespace Dto.Common
 
 
             string body = Action;
-            string Sub = "Complain Register ";
+            string Sub = "DDA Alert-Your Complaint has been successfully submitted.";
             string link = "";
 
             this.sendMail(EmailID, Sub, body, link);

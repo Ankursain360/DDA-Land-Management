@@ -29,8 +29,9 @@ namespace Repository.EntityRepository
         {
            
                 var data= await _dbContext.Demolitionprogram.Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
-                   .OrderBy(x => x.Id)
-                   .ThenByDescending(x => x.IsActive == 1)
+                    //.OrderBy(x => x.Id)
+                    .OrderByDescending(s => s.IsActive)
+                   //.ThenByDescending(x => x.IsActive == 1)
                    .ThenBy(x => x.Items)
                    .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;

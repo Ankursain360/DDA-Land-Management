@@ -107,7 +107,7 @@ namespace SiteMaster.Controllers
             return View(Data);
         }
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Locality locality)
         {
             locality.DepartmentList = await _localityService.GetAllDepartment();
@@ -133,6 +133,7 @@ namespace SiteMaster.Controllers
                 return View(locality);
             }
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try

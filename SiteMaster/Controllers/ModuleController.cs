@@ -96,7 +96,8 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _moduleService.GetAllModule();
+                        return View("Index", list);
                     }
                     else
                     {

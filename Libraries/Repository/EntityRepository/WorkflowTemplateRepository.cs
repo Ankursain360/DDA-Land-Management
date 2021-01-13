@@ -27,6 +27,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.WorkflowTemplate.Include(x => x.Module)
               .Where(x => x.Name.Contains(model.name))
               .Where(x=>x.Module.Name.Contains(model.module))
+
                          
                              
                                  .GetPaged<WorkflowTemplate>(model.PageNumber, model.PageSize);

@@ -90,7 +90,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, District district)
         {
             if (ModelState.IsValid)
@@ -135,7 +135,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _districtService.Delete(id);
