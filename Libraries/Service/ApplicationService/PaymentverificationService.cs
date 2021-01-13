@@ -30,13 +30,13 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetAllPaymentList();
         }
-        public async Task<PagedResult<Paymentverification>> GetPagedPaymentList(PaymentverificationSearchDto model)
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentListUnverified(PaymentverificationSearchDto model)
         {
-            return await _paymentverificationRepository.GetPagedPaymentList(model);
+            return await _paymentverificationRepository.GetPagedPaymentListUnverified(model);
         }
-        public async Task<PagedResult<Paymentverification>> GetPagedPaymentList2(PaymentverificationSearchDto model)
+        public async Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model)
         {
-            return await _paymentverificationRepository.GetPagedPaymentList2(model);
+            return await _paymentverificationRepository.GetPagedPaymentListVerified(model);
         }
        
         public async Task<Paymentverification> FetchSingleResult(int id)

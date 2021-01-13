@@ -11,7 +11,7 @@
 </div>
 
 
-<form asp-action="History" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<div  class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -40,7 +40,8 @@
     </div>
     <div class="row mt-md-3">
         <div class="col-md-12" style="margin-bottom:40px;">
-            <input type="button" value="Filter" id="btnFilter" class="btn btn-theme" />
+            <button class="btn btn-theme " id="btnFilter" type="submit">Filter</button>
+            @*<input type="submit" value="Filter" id="btnFilter" class="btn btn-theme" />*@
             <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
         </div>
     </div>
@@ -50,7 +51,7 @@
     </div>*@
 
 
-</form>
+</div>
 <div class="table-section bg-white border shadow rounded">
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">

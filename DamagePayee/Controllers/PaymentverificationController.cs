@@ -31,19 +31,19 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] PaymentverificationSearchDto model)
+        public async Task<PartialViewResult> ListUnverified([FromBody] PaymentverificationSearchDto model)
         {
             
-                var result = await _paymentverificationService.GetPagedPaymentList(model);
-                return PartialView("_List", result);
+                var result = await _paymentverificationService.GetPagedPaymentListUnverified(model);
+                return PartialView("_ListUnverified", result);
            
         }
         [HttpPost]
-        public async Task<PartialViewResult> List2([FromBody] PaymentverificationSearchDto model)
+        public async Task<PartialViewResult> ListVerified([FromBody] PaymentverificationSearchDto model)
         {
           
-                var result = await _paymentverificationService.GetPagedPaymentList2(model);
-                return PartialView("_List2", result);
+                var result = await _paymentverificationService.GetPagedPaymentListVerified(model);
+                return PartialView("_ListVerified", result);
           
         }
        

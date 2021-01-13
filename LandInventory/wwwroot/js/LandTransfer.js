@@ -120,12 +120,14 @@ function callSelect2() {
         allowClear: true
     });
 }
-$(document).ready(function () {
-    $("input").each(function () {
-        if ($(this).val() == '0') {
-            $(this).val('');
-        }
-    });
+
+//$(document).ready(function () {
+//    $("input").each(function () {
+//        if ($(this).val() == '0') {
+//            $(this).val('');
+//        }
+      
+//    });
 
     var TakenOverLandLineNo = $("#TakenOverLandLineNo").val();
     $("#TakenOverLandLineNo").val(Math.trunc(TakenOverLandLineNo));
@@ -230,8 +232,8 @@ $(document).ready(function () {
         $("#divEncroachmentYesSelectionForLandTransfer input").attr("disabled", "disabled");
         $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
-    callSelect2();
-});
+callSelect2();
+
 function ChangeEncroachmentStatus(status) {
     if (status == '1') {
         $("#divEncroachmentYesSelectionForLandTransfer").show();

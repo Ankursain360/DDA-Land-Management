@@ -4,11 +4,7 @@ var currentPageNumber = 1;
 var currentPageSize = 10;
 $(document).ready(function () {
     debugger;
-  
-   // var date = (new Date()).toISOString().split('T')[0];
     var date = new Date();
-
-    //document.getElementById("currentdate").innerHTML = date;
     var fromDate ;
     var toDate ;
     var id = $('#txtid').val();
@@ -22,14 +18,10 @@ $(document).ready(function () {
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
         var id = $('#txtid').val();
-        
-      //  var Id = Request.Query["Id"];
-
-        //var departmentid = $('#DepartmentId option:selected').val();
-        //var reportType = $('#ReportType option:selected').val();
-        if (result) {
+    
+       
             GetHistory(currentPageNumber, currentPageSize, fromDate, toDate,id);
-        }
+        
     });
 
 
@@ -51,7 +43,7 @@ function GetSearchParam(pageNumber, pageSize, fromDate, toDate,Id) {
         fromDate: fromDate==undefined?null:fromDate,
         toDate: toDate == undefined ?null:toDate,
         landtransferId:parseInt(Id)
-       // id = Request.Query["Id"]
+      
     }
     return model;
 }
@@ -59,13 +51,12 @@ function GetSearchParam(pageNumber, pageSize, fromDate, toDate,Id) {
 function onPaging(pageNo) {
     debugger;
     pageNo = parseInt(pageNo);
-    //var Id = Request.Query["Id"];
+  
     var FromDate = $('#txtFromDate').val();
     var ToDate = $('#txtToDate').val();
     var id = $('#txtid').val();
 
-    //var departmentid = $('#DepartmentId option:selected').val();
-    //var reportType = $('#ReportType option:selected').val();
+  
     GetHistory(currentPageNumber, currentPageSize, FromDate, ToDate,id);
     currentPageNumber = pageNo;
 }
@@ -76,7 +67,7 @@ function onChangePageSize(pageSize) {
     var FromDate = $('#txtFromDate').val();
     var ToDate = $('#txtToDate').val();
     var id = $('#txtid').val();
-   // var Id = Request.Query["Id"];
+  
     GetHistory(currentPageNumber, currentPageSize, FromDate, ToDate,id);
     currentPageSize = pageSize;
 }
