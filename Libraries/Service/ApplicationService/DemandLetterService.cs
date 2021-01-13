@@ -78,9 +78,19 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
-            return await _demandLetterRepository.GetPagedReliefReport();
+            return await _demandLetterRepository.GetPagedReliefReport(model);
+        }
+
+        public async Task<List<Demandletters>> BindFileNoList()
+        {
+            return await _demandLetterRepository.BindFileNoList();
+        }
+
+        public async Task<List<Locality>> BindLoclityList()
+        {
+            return await _demandLetterRepository.BindLoclityList();
         }
     }
 }

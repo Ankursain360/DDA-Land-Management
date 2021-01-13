@@ -22,12 +22,12 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>@(item.Locality == null ? "" : item.Locality.Name)</td>
+                    <td>@item.FileNo</td>
+                    <td>@item.PropertyNo</td>
+                    <td>@item.DemandNo</td>
+                    <td>@item.DepositDue</td>
+                    <td>@item.ReliefAmount</td>
                 </tr>
             }
         }
