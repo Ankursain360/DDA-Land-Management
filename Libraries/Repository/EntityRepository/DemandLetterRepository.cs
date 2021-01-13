@@ -91,6 +91,47 @@ namespace Libraries.Repository.EntityRepository
                     .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
                    && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
                     .GetPaged(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderBy(x => x.PropertyNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PropertyNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+
+                }
+            }
+
             return data;
 
         }
