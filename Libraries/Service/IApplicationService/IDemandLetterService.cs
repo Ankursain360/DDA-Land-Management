@@ -18,7 +18,7 @@ namespace Libraries.Service.IApplicationService
         Task <Demandletters> FetchSingleResult(int id);
 
         /*-----------------Relief Report Start------------------*/
-        Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model);
+        Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
         /*-----------------Relief Report End------------------*/

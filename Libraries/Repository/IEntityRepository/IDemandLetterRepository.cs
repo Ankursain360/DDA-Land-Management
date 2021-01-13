@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         /*-----------------Relief Report Start------------------*/
-        Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model);
+        Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
         /*-----------------Relief Report End------------------*/

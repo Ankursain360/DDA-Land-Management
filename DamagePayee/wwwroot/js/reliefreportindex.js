@@ -5,7 +5,7 @@ $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
-        var IsValid = true;//$("#frmReliefReport").valid();
+        var IsValid = ValidCheck();//$("#frmReliefReport").valid();
         if (IsValid) {
             HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
                 $('#LoadReportView').html("");
@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    var IsValid = true;//$("#frmReliefReport").valid();
+    var IsValid = ValidCheck();//$("#frmReliefReport").valid();
     if (IsValid) {
         HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
             $('#LoadReportView').html("");
@@ -64,4 +64,34 @@ function callSelect2() {
         placeholder: "Select",
         allowClear: true
     });
+}
+
+
+function ValidCheck() {
+    var checkresult = false;
+    var FromDate = $('#FromDate').val();
+    if (FromDate == "") {
+        checkresult = false;
+        $("#FromDateMsg").show();
+    } else {
+        $("#FromDateMsg").hide();
+        checkresult = true;
+    }
+
+    var ToDate = $('#ToDate').val();
+    if (ToDate == "") {
+        checkresult = false;
+        $("#ToDateMsg").show();
+    } else {
+        checkresult = true;
+        $("#ToDateMsg").hide();
+    }
+
+    if (FromDate == "" || ToDate == "") {
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    return checkresult;
 }
