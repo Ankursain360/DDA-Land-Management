@@ -655,3 +655,12 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
 function Print() {
     window.print();
 }
+
+$("#btnGenerate").click(function () {
+    debugger;
+    var param = GetSearchParam(currentPageNumber, currentPageSize);
+    HttpPost(`/SelfAssessmentDamage/Print`, 'html', param, function (response) {
+        $('#LoadData').html("");
+        $('#LoadData').html(response);
+    });
+});

@@ -546,15 +546,30 @@ namespace DamagePayeePublicInterface.Controllers
             {
                 ViewBag.MainDamagePayeeId = Data.Id;
                 await BindDropDown(Data);
-                return View(Data);
+                return View("Print", Data);
             }
             else
             {
                 ViewBag.MainDamagePayeeId = 0;
                 await BindDropDown(damagepayeeregister);
-                return View(damagepayeeregister);
+                return View("Print",damagepayeeregister);
             }
 
+        }
+        public async Task<PartialViewResult> GetDetailspersonelinfoView(int id)
+        {
+            var Data = await _selfAssessmentDamageService.GetPersonalInfoTemp(id);
+            return PartialView("_PersonelInfoDamageAssessee", Data);
+        }
+        public async Task<PartialViewResult> GetDetailsAllottetypeInfoView(int id)
+        {
+            var Data = await _selfAssessmentDamageService.GetAllottetypeTemp(id);
+            return PartialView("_PreviousDamageAssessee", Data);
+        }
+        public async Task<PartialViewResult> GetDetailspaymenthistoryInfoView(int id)
+        {
+            var Data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(id);
+            return PartialView("_PaymentHistory", Data);
         }
     }
 }

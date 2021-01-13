@@ -89,122 +89,49 @@
         $("#IsDocumentFor").val("Any Other");
     }
 
-    window.print();
+    debugger;
+    //var printWindow = window.open('', '');
+    //var doc = printWindow.document;
+    //var printContents = document.getElementById("LetterData").innerHTML;
+    //doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
+    //doc.write(printContents);
+    //doc.close();
+    //function show() {
+    //    if (doc.readyState === "complete") {
+    //        printWindow.focus();
+    //        printWindow.print();
+    //        printWindow.close();
+    //    } else {
+    //        setTimeout(show, 100);
+    //    }
+    //};
+    //show();
+    var printWindow = window.open('', '');
+    var doc = printWindow.document;
+    var printContents = document.getElementById("LetterData").innerHTML;
+    debugger
+    doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
+    doc.write(printContents);
+    doc.close();
+    function show() {
+        if (doc.readyState === "complete") {
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        } else {
+            setTimeout(show, 100);
+        }
+    };
+    show();
+    doc.print();
+    printWindow.close();
+    window.onafterprint = closePrintWindow;
 });
-function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
-    var show = true;
-    if ($("#rdbPayeeYes").is(":checked")) {
-        $("#DivForPayeeNo").hide();
-    } else {
-        $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
-            if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
-                if (show == true) {
-                    if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
-                    }
-                    else {
-                        show = false;
-                    }
-                }
-            }
-        });
-        if (show) {
-            $("#IsMutaionYes").val(0);
-            return true;
-        }
-        else {
-            WarningMessage('Please Fill All Mandatory Fields');
-            return false;
-        }
-    }
+function closePrintWindow() {
+
+   window.close();
 }
 
-function PageValidation() {/* -----------check validation before create click Added by Renu  --------------- */
-    debugger;
-    var checkresult = false;
-    var Damageamount = $('#TotalValueWithInterest').val();
-    if (Damageamount == "") {
-        checkresult = false;
-        $("#TotalValueWithInterestMsg").show();
-    } else {
-        checkresult = true;
-    }
-
-    var interest = $('#InterestDueAmountCompund').val();
-    if (interest == "") {
-        checkresult = false;
-        $("#InterestDueAmountCompundMsg").show();
-    } else {
-        checkresult = true;
-    }
-    var TotalPayable = $('#TotalPayable').val();
-    if (TotalPayable == "") {
-        checkresult = false;
-        $("#TotalPayableMsg").show();
-    } else {
-        checkresult = true;
-    }
-
-    var Rebate = $('#Rebate').val();
-    if (Rebate == "") {
-        checkresult = false;
-        $("#RebateMsg").show();
-    } else {
-        checkresult = true;
-    }
-    if ($("#DeclarationStatus1").prop("checked") == false)
-        $("#DeclarationStatus1Msg").show();
-    if ($("#DeclarationStatus2").prop("checked") == false)
-        $("#DeclarationStatus2Msg").show();
-    if ($("#DeclarationStatus3").prop("checked") == false)
-        $("#DeclarationStatus3Msg").show();
-    if (Damageamount == "" || interest == "" || Rebate == "" || TotalPayable == "" || $("#DeclarationStatus1").prop("checked") == false || $("#DeclarationStatus2").prop("checked") == false || $("#DeclarationStatus3").prop("checked") == false) {
-
-        checkresult = false;
-    }
-    else {
-        $("#IsMutaionYes").val(1);
-        checkresult = true;
-    }
-    return checkresult;
-}
-
-function CheckPaymentValidation() {
-    debugger;
-    var substutionValidation = false;
-    var amountValidation = PageValidation();
-    var show = true;
-    if ($("#rdbPayeeYes").is(":checked")) {
-        $("#DivForPayeeNo").hide();
-    } else {
-        $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
-            if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
-                if (show == true) {
-                    if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {
-                    }
-                    else {
-                        show = false;
-                    }
-                }
-            }
-        });
-    }
-
-    if (show) {
-        substutionValidation = true;
-    }
-    else {
-        substutionValidation = false;
-    }
-    if (substutionValidation && amountValidation) {
-        $("#IsMutaionYes").val(2);
-        window.document.forms[0].target = '_blank';
-        return true;
-    }
-    else {
-        WarningMessage('Please Fill All Mandatory Fields, before to Procceed Payment');
-        return false;
-    }
-}
 
 $("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
     if ($("#DeclarationStatus1").is(":checked"))
@@ -231,132 +158,27 @@ $("input[name='DeclarationStatus3']").click(function () {/* -----------Added by 
 function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Personeel Info Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
-        for (var i = 0; i < data.length; i++) {
-            $("#tbl_posts #add #payeeName").val(data[i].name);
-            $("#tbl_posts #add #payeeFatherName").val(data[i].fatherName);
-            $("#tbl_posts #add #Gender").val(data[i].gender);
-            $("#tbl_posts #add #Address").val(data[i].address);
-            $("#tbl_posts #add #MobileNo").val(data[i].mobileNo);
-            $("#tbl_posts #add #EmailId").val(data[i].emailId);
-            $("#tbl_posts #add #AadharNo").val(data[i].aadharNo);
-            $("#tbl_posts #add #PanNo").val(data[i].panNo);
+    HttpGet(`/SelfAssessmentDamage/GetDetailspersonelinfoView/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'html', function (response) {
+        
+        $('#LoadPersonelInfoView').html("");
+        $('#LoadPersonelInfoView').html(response);
 
-            $("#tbl_posts #add #AadharNoFilePath").val(data[i].aadharNoFilePath);
-            $("#tbl_posts #add #PanNoFilePath").val(data[i].panNoFilePath);
-            $("#tbl_posts #add #PhotographFilePath").val(data[i].photographPath);
-            $("#tbl_posts #add #SignatureFilePath").val(data[i].signaturePath);
-            if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
-                $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
-                $("#tbl_posts #add #viewAadharId").show();
-            } else {
-                $("#tbl_posts #add #viewAadharId").hide();
-            }
-            if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {
-                $("#tbl_posts #add #viewPanId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPanFile/' + data[i].id)
-                $("#tbl_posts #add #viewPanId").show();
-            } else {
-                $("#tbl_posts #add #viewPanId").hide();
-            }
-            if (data[i].photographPath != "" && data[i].photographPath != null) {
-                $("#tbl_posts #add #viewPhotoId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoPhotoFile/' + data[i].id)
-                $("#tbl_posts #add #viewPhotoId").show();
-            } else {
-                $("#tbl_posts #add #viewPhotoId").hide();
-            }
-            if (data[i].signaturePath != "" && data[i].signaturePath != null) {
-                $("#tbl_posts #add #viewSignatureId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoSignautreFile/' + data[i].id)
-                $("#tbl_posts #add #viewSignatureId").show();
-            } else {
-                $("#tbl_posts #add #viewSignatureId").hide();
-            }
-            $('#tbl_posts #add #Gender').trigger('change');
-            if (i < data.length - 1) {
-                var Gender = $("#tbl_posts #add #Gender").children("option:selected").val();
-                var content = jQuery('#tbl_posts #add tr'),
-                    size = jQuery('#tbl_posts >tbody >tr').length,
-                    element = null,
-                    element = content.clone();
-                element.attr('id', 'rec-' + size);
-                element.find('.delete-record').attr('data-id', size);
-                element.appendTo('#tbl_posts_body');
-                $('#tbl_posts_body #rec-' + size + ' #Gender').val(Gender);
-                element.find('.sn').html(size);
-                $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
-                $("#tbl_posts #add .add").remove();
-                $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
-                element.find(".add-record").hide();
-                element.find(".delete-record").show();
-            }
-        }
     });
 
     /* -----------Allotte Type Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
-        for (var i = 0; i < data.length; i++) {
-            $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
-            $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val(data[i].fatherName);
-            $("#tbl_DamageAssessee #addDamageAssessee #Date").val(data[i].date);
-            $("#tbl_DamageAssessee #addDamageAssessee #ATSGPAFilePath").val(data[i].atsgpadocumentPath);
-            if (data[i].atsgpadocumentPath != "" && data[i].atsgpadocumentPath != null) {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").attr('href', '/SelfAssessmentDamage/ViewATSGPAFile/' + data[i].id)
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").show();
-            } else {
-                $("#tbl_DamageAssessee #addDamageAssessee #viewATSGPAId").hide();
-            }
-            if (i < data.length - 1) {
-                var content = jQuery('#tbl_DamageAssessee #addDamageAssessee tr'),
-                    size = jQuery('#tbl_DamageAssessee >tbody >tr').length,
-                    element = null,
-                    element = content.clone();
-                element.attr('id', 'rec-' + size);
-                element.find('.delete-record').attr('data-id', size);
-                element.appendTo('#tbl_DamageAssessee_body');
-                element.find('.sn').html(size);
-                $("#tbl_DamageAssessee #addDamageAssessee .sn").text($('#tbl_DamageAssessee >tbody >tr').length);
-                $("#tbl_DamageAssessee #addDamageAssessee .add").remove();
-                $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
-                element.find(".add-recordDamageAssessee").hide();
-                element.find(".delete-recordDamageAssessee").show();
-            }
-        }
+    HttpGet(`/SelfAssessmentDamage/GetDetailsAllottetypeInfoView/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'html', function (response) {
+        
+        $('#LoadPreviousDamageAssesseeInfoView').html("");
+        $('#LoadPreviousDamageAssesseeInfoView').html(response);
     });
 
     /* -----------Payment History Repeator Added by Renu  --------------- */
-    HttpGet(`/SelfAssessmentDamage/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
-        for (var i = 0; i < data.length; i++) {
-            $("#tbl_Payment #addPayment #txtPaymentName").val(data[i].name);
-            $("#tbl_Payment #addPayment #txtRecieptNo").val(data[i].recieptNo);
-            $("#tbl_Payment #addPayment #txtPaymentMode").val(data[i].paymentMode);
-            $("#tbl_Payment #addPayment #txtPaymentDate").val(data[i].paymentDate);
-            $("#tbl_Payment #addPayment #txtAmount").val(data[i].amount);
-            $("#tbl_Payment #addPayment #RecieptFilePath").val(data[i].recieptDocumentPath);
-            if (data[i].recieptDocumentPath != "" && data[i].recieptDocumentPath != null) {
-                $("#tbl_Payment #addPayment #viewRecieptId").attr('href', '/SelfAssessmentDamage/ViewRecieptFile/' + data[i].id)
-                $("#tbl_Payment #addPayment #viewRecieptId").show();
-            } else {
-                $("#tbl_Payment #addPayment #viewRecieptId").hide();
-            }
-            if (i < data.length - 1) {
-                var content = jQuery('#tbl_Payment #addPayment tr'),
-                    size = jQuery('#tbl_Payment >tbody >tr').length,
-                    element = null,
-                    element = content.clone();
-                element.attr('id', 'rec-' + size);
-                element.find('.delete-record').attr('data-id', size);
-                element.appendTo('#tbl_Payment_body');
-                element.find('.sn').html(size);
-                $("#tbl_Payment #addPayment .sn").text($('#tbl_Payment >tbody >tr').length);
-                $("#tbl_Payment #addPayment .add").remove();
-                $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
-                element.find(".add-recordPayment").hide();
-                element.find(".delete-recordPayment").show();
-            }
-        }
+    HttpGet(`/SelfAssessmentDamage/GetDetailspaymenthistoryInfoView/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'html', function (response) {
+        
+        $('#LoadPaymentHistoryInfoView').html("");
+        $('#LoadPaymentHistoryInfoView').html(response);
     });
+   
 }
 
 $("input[name='grpDamageAssesseeType']").click(function () {
