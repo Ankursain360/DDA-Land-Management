@@ -8,7 +8,7 @@ namespace Dto.Search
     public class PenaltyImpositionReportSearchDto : BaseSearchDto
     {
         public string name { get; set; }
-        public int? FileNo { get; set; }
-        public int? Locality { get; set; }
+        public int? fileNo { get; set; }
+        public int? locality { get; set; }
     }
 }

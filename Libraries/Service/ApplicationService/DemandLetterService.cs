@@ -92,5 +92,25 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.BindLoclityList();
         }
+
+      
+        //*******   Penalty Imposition Report**********
+
+        public async Task<List<Locality>> GetLocalityList()
+        {
+            List<Locality> localityList = await _demandLetterRepository.GetLocalityList();
+            return localityList;
+        }
+        public async Task<List<Demandletters>> GetFileNoList()
+        {
+            List<Demandletters> fileNoList = await _demandLetterRepository.GetFileNoList();
+            return fileNoList;
+        }
+
+        public async Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedPenaltyImpositionReport(model);
+        }
+
     }
 }

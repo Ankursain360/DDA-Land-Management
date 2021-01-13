@@ -16,8 +16,11 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Update(int id, Demandletters demandletter);
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
-        Task<List<Demandletters>> BindFileNoList();
-        Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
-        Task<List<Locality>> BindLoclityList();
+        Task<PagedResult<Demandletter>> GetPagedReliefReport(ReliefReportSearchDto model);
+
+        //*******   Penalty Imposition Report**********
+        Task<List<Locality>> GetLocalityList();
+        Task<List<Demandletters>> GetFileNoList();
+        Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
     }
 }

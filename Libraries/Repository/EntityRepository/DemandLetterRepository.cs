@@ -70,5 +70,23 @@ namespace Libraries.Repository.EntityRepository
                                     && (InLocalitiesId).Contains(x.Id))
                                     .ToListAsync();
         }
+
+
+        //*******   Penalty Imposition Report**********
+        public async Task<List<Locality>> GetLocalityList()
+        {
+            var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localityList;
+        }
+        public async Task<List<Demandletters>> GetFileNoList()
+        {
+            var fileNoList = await _dbContext.Demandletters.Where(x => x.IsActive == 1).ToListAsync();
+            return fileNoList;
+        }
+        public Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
+        {
+            throw new System.NotImplementedException();
+        }
+
     }
 }
