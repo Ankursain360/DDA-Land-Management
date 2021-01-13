@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IPaymentverificationRepository : IGenericRepository<Paymentverification>
     {
         Task<List<Paymentverification>> GetAllPaymentList();
-        Task<PagedResult<Paymentverification>> GetPagedPaymentList(PaymentverificationSearchDto model);
-        Task<PagedResult<Paymentverification>> GetPagedPaymentList2(PaymentverificationSearchDto model);
+        Task<PagedResult<Paymentverification>> GetPagedPaymentListUnverified(PaymentverificationSearchDto model);
+        Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model);
     }
 }

@@ -5,12 +5,12 @@ var currentSortOrderDescending = 2;
 
 $(document).ready(function () {
     GetPayment(currentPageNumber, currentPageSize);
-    GetPayment2(currentPageNumber, currentPageSize);
+    GetPaymentVerified(currentPageNumber, currentPageSize);
 });
 
 $("#btnSearch").click(function () {
     GetPayment(currentPageNumber, currentPageSize);
-    GetPayment2(currentPageNumber, currentPageSize);
+    GetPaymentVerified(currentPageNumber, currentPageSize);
 });
 
 $("#btnReset").click(function () {
@@ -23,17 +23,17 @@ $("#btnReset").click(function () {
 
 function GetPayment(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/Paymentverification/List`, 'html', param, function (response) {
+    HttpPost(`/Paymentverification/ListUnverified`, 'html', param, function (response) {
         $('#divPaymentTable').html("");
         $('#divPaymentTable').html(response);
     });
 }
 
-function GetPayment2(pageNumber, pageSize) {
+function GetPaymentVerified(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/Paymentverification/List2`, 'html', param, function (response) {
-        $('#divPaymentTable2').html("");
-        $('#divPaymentTable2').html(response);
+    HttpPost(`/Paymentverification/ListVerified`, 'html', param, function (response) {
+        $('#divPaymentTableVerified').html("");
+        $('#divPaymentTableVerified').html(response);
     });
 }
 
