@@ -41,7 +41,7 @@ namespace Libraries.Repository.EntityRepository
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
-            return await _dbContext.Demandletters
+          var data = await _dbContext.Demandletters
                                .Include(x => x.Locality)
                                    .Where(x => (x.IsActive == 1 )
                                    && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
@@ -50,6 +50,34 @@ namespace Libraries.Repository.EntityRepository
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.LocalityId).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.LocalityId).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
         public async Task<List<Demandletters>> BindFileNoList()
