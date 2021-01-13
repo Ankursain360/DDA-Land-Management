@@ -38,11 +38,40 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-        public Task<PagedResult<Demandletter>> GetPagedReliefReport()
+        /*-----------------Relief Report Start------------------*/
+        public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
-            throw new System.NotImplementedException();
+            return await _dbContext.Demandletters
+                               .Include(x => x.Locality)
+                                   .Where(x => (x.IsActive == 1 )
+                                   && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                   && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                   )
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
         }
 
+        public async Task<List<Demandletters>> BindFileNoList()
+        {
+            var list =await _dbContext.Demandletters
+                                    .Where(x => x.IsActive == 1)
+                                    .ToListAsync();
+            return list;
+        }
+
+        public async Task<List<Locality>> BindLoclityList()
+        {
+            var InLocalitiesId = (from x in _dbContext.Demandletters
+                                  where  x.IsActive == 1
+                                  select x.LocalityId).ToArray();
+
+            return await _dbContext.Locality
+                                    .Where(x => x.IsActive == 1
+                                    && (InLocalitiesId).Contains(x.Id))
+                                    .ToListAsync();
+        }
+        /*-----------------Relief Report End------------------*/
 
         //*******   Penalty Imposition Report**********
         public async Task<List<Locality>> GetLocalityList()
@@ -65,6 +94,5 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
         }
-
     }
 }

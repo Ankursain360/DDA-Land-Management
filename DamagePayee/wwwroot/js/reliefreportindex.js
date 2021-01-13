@@ -5,24 +5,30 @@ $(document).ready(function () {
     $("#btnGenerate").click(function () {
         debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
-        HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
-            $('#LoadReportView').html("");
-            $('#LoadReportView').html(response);
-        });
+        var IsValid = ValidCheck();//$("#frmReliefReport").valid();
+        if (IsValid) {
+            HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
+                $('#LoadReportView').html("");
+                $('#LoadReportView').html(response);
+            });
+        }
     });
 
 });
 
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
-        $('#LoadReportView').html("");
-        $('#LoadReportView').html(response);
-    });
+    var IsValid = ValidCheck();//$("#frmReliefReport").valid();
+    if (IsValid) {
+        HttpPost(`/ReliefReport/GetDetails`, 'html', param, function (response) {
+            $('#LoadReportView').html("");
+            $('#LoadReportView').html(response);
+        });
+    }
 }
 
 function GetSearchParam(pageNumber, pageSize) {
-    debugger;
+    
     var fileNoId = $('#FileNo option:selected').val();
     var localityId = $('#LocalityId option:selected').val();
     var fromDate = $('#FromDate').val();
@@ -58,4 +64,34 @@ function callSelect2() {
         placeholder: "Select",
         allowClear: true
     });
+}
+
+
+function ValidCheck() {
+    var checkresult = false;
+    var FromDate = $('#FromDate').val();
+    if (FromDate == "") {
+        checkresult = false;
+        $("#FromDateMsg").show();
+    } else {
+        $("#FromDateMsg").hide();
+        checkresult = true;
+    }
+
+    var ToDate = $('#ToDate').val();
+    if (ToDate == "") {
+        checkresult = false;
+        $("#ToDateMsg").show();
+    } else {
+        checkresult = true;
+        $("#ToDateMsg").hide();
+    }
+
+    if (FromDate == "" || ToDate == "") {
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    return checkresult;
 }

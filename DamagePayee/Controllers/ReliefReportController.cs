@@ -7,6 +7,7 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using Dto.Search;
+using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
@@ -21,8 +22,9 @@ namespace DamagePayee.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Demandletter demandletter = new Demandletter();
-            //ViewBag.LocalityList = _demandLetterService.BindLoclityList();
+            ReliefReportDtoProfile demandletter = new ReliefReportDtoProfile();
+            ViewBag.FileNoList = await _demandLetterService.BindFileNoList();
+            ViewBag.LocalityList = await _demandLetterService.BindLoclityList();
             return View(demandletter);
         }
 

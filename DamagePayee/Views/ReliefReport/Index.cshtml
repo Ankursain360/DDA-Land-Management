@@ -2,14 +2,14 @@
 @model Dto.Master.ReliefReportDtoProfile
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Relief Report" })
-<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+<div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Details</h3>
 
     <div class="row">
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "DepartmentRecNo","DepartmentName"))">
+                <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "Id","FileNo"))">
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="FileNo" class="error"></label>
@@ -19,7 +19,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
 
-                <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "DepartmentRecNo","DepartmentName"))">
+                <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "Id","Name"))">
                     <option value="0">All</option>
                 </select>
                 <label asp-validation-for="LocalityId" class="error"></label>
@@ -32,12 +32,14 @@
         <div class="col-md-6">
             <div class="floating-label-wrap">
                 <input asp-for="FromDate" type="date" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="FromDate" id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
                 <label class="floating-label">From Date  <span style="color:red">*</span></label>
             </div>
         </div>
         <div class="col-md-6">
             <div class="floating-label-wrap">
                 <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="ToDate" id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
                 <label class="floating-label">To Date  <span style="color:red">*</span></label>
             </div>
         </div>
@@ -55,12 +57,8 @@
             <div class="floating-label-wrap">
                 <select class="floating-label-field floating-label-field--s3">
                     <option selected="selected" disabled="disabled">Select One</option>
-                    <option>Inventoried In</option>
-                    <option>Planned/Unplanned Land</option>
-                    <option>Classification of Land</option>
-                    <option>Department</option>
-                    <option>Zone</option>
-                    <option>Division</option>
+                    <option>File No.</option>
+                    <option>Locality</option>
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
