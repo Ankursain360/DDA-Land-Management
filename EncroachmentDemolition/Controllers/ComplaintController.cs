@@ -79,7 +79,7 @@ namespace EncroachmentDemolition.Controllers
               
                 if (ModelState.IsValid)
                 {
-                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
+                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
