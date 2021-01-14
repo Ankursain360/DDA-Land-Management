@@ -41,6 +41,7 @@ $("#btnReset").click(function () {
     $('#txtName').val('')
     GetDepartment(currentPageNumber, currentPageSize);
 });
+
 function GetDepartmentOrderby(pageNumber, pageSize, order) {
     var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
     HttpPost(`/department/List`, 'html', param, function (response) {
