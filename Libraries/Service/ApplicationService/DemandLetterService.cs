@@ -33,7 +33,7 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedDemandletter(model);
         }
-        public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             return await _demandLetterRepository.GetDefaultListingReportData(defaulterListingReportSearchDto);
         }
@@ -124,6 +124,10 @@ namespace Service.ApplicationService
         public async Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
         {
             return await _demandLetterRepository.GetPagedPenaltyImpositionReport(model);
+        }
+        public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedImpositionReportOfCharges(model);
         }
 
     }
