@@ -48,23 +48,6 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-      
-
-      //  public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
-      //  {
-         //   var data = await _dbContext.Demandletters
-               //   .Include(x => x.Locality)
-                //  .Where(x => (x.Id == (model.propertyNo == 0 ? x.Id : model.propertyNo))
-                 //    && (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
-               //  && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
-                  //  && (x.GenerateDate >= model.fromDate && x.GenerateDate <= model.toDate)
-              //   )
-                 // .GetPaged(model.PageNumber, model.PageSize);
-           // return data;
-      //  }
-
-
-
         public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
         {
             return await _dbContext.Demandletters
@@ -74,7 +57,7 @@ namespace Libraries.Repository.EntityRepository
 
                                    && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
                                     && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
-                                    // &&(x.FileNo==model.FileNo ))
+                                   
                                     && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
                                    )
                                    .OrderByDescending(x => x.Id)
