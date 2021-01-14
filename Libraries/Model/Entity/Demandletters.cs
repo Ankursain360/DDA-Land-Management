@@ -28,6 +28,8 @@ namespace Libraries.Model.Entity
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
         public List<Demandletters> FileNoList { get; set; }
+        [NotMapped]
+        public List<Demandletters> Damagelist { get; set; }
 
     }
 }

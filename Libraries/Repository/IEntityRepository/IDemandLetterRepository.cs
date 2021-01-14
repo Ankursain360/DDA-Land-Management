@@ -10,7 +10,7 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
-        Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
+        Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
@@ -21,6 +21,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetLocalityList();
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
+        Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model); 
 
     }
 }

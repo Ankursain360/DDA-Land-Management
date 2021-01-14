@@ -26,11 +26,11 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Demandletters.OrderByDescending(x => x.Id).GetPaged<Demandletters>(model.PageNumber, model.PageSize);
         }
-        public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
-            var data = await _dbContext.Demandletter
-                    .Where(x => x.DueDate >= defaulterListingReportSearchDto.fromDate
-                    && x.DueDate <= defaulterListingReportSearchDto.toDate)
+            var data = await _dbContext.Demandletters
+                    .Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
+                    && x.UptoDate <= defaulterListingReportSearchDto.toDate)
                     .OrderByDescending(x => x.Id)
 
                     .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
@@ -94,5 +94,19 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
         }
+        //*******  Imposition Of Charges Report**********
+        public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
+        {
+            return await _dbContext.Demandletters
+                               .Include(x => x.Locality)
+                                   .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                   && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                   )
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+        }
+
     }
 }

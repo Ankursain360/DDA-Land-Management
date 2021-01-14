@@ -1,26 +1,4 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using Microsoft.AspNetCore.Mvc;
-
-//namespace DamagePayee.Controllers
-//{
-//    public class DefaulterListingReportController : Controller
-//    {
-//        public IActionResult Index()
-//        {
-//            return View();
-//        }
-
-//        [HttpPost]
-//        public IActionResult Index(int id)
-//        {
-//            ViewBag.IsShowData = "Yes";
-//            return View();
-//        }
-//    }
-//}
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,13 +21,13 @@ namespace DamagePayee.Controllers
         {
             _demandLetterService = demandLetterService;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    Demandletter model = new Demandletter();
+        public async Task<IActionResult> Index()
+        {
+            Demandletters model = new Demandletters();
 
-        //    model.Damagelist = await _demandLetterService.GetAllDemandletter();
-        //    return View(model);
-        //}
+            model.Damagelist = await _demandLetterService.GetAllDemandletter();
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] DefaulterListingReportSearchDto defaulterListingReportSearchDto)
