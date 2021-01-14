@@ -11,6 +11,9 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
+        
+        Task<List<Demandletters>> BindPropertyNoList();
+        Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model);
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
