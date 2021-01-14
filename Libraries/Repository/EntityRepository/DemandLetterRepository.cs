@@ -24,7 +24,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model)
         {
-            return await _dbContext.Demandletters.OrderByDescending(x => x.Id).GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+            return await _dbContext.Demandletters .Include(x => x.Locality).OrderByDescending(x => x.Id).GetPaged<Demandletters>(model.PageNumber, model.PageSize);
         }
         public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {

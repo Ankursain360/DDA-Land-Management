@@ -61,6 +61,18 @@ namespace Libraries.Model.EntityConfiguration
                     .HasMaxLength(100)
                     .IsUnicode(false);
 
+            builder.Property(e => e.InterestAmount)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+            builder.Property(e => e.DamageCharges)
+                  .IsRequired()
+                  .HasMaxLength(150)
+                  .IsUnicode(false);
+
+
+
             builder.Property(e => e.Penalty).HasColumnType("decimal(18,3)");
 
             builder.Property(e => e.PropertyNo)
