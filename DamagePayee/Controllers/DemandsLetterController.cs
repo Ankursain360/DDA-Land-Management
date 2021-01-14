@@ -20,20 +20,35 @@ namespace DamagePayee.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            Demandletters model = new Demandletters();
+
+            await BindDropDownView(model);
+            return View(model);
         }
-        public IActionResult Create()
+
+        async Task BindDropDownView(Demandletters demandletters)
         {
-            return View();
+            demandletters.LocalityList = await _demandLetterService.GetLocalityList();
+            //demandletters.FileNoList = await _demandLetterService.GetFileNoList();
         }
+        public async Task<IActionResult> Create()
+        {
+            Demandletters model = new Demandletters();
+            await BindDropDownView(model);
+            return View(model);
+        }
+
+
+
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Demandletters demandletter)
         {
+            await BindDropDownView(demandletter);
             try
             {
 

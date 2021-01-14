@@ -17,6 +17,10 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
 
+        Task<List<Demandletters>> BindPropertyNoList();
+        Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model);
+
+
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();

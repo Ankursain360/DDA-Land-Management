@@ -29,5 +29,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Demandletters> FileNoList { get; set; }
 
+        [NotMapped]
+        public List<Demandletters> propertNoList { get; set; }
+
     }
 }

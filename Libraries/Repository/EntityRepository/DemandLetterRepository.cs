@@ -38,6 +38,52 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
+        public async Task<List<Demandletters>> BindPropertyNoList()
+        {
+            var list = await _dbContext.Demandletters
+                                    .Where(x => x.IsActive == 1)
+                                    .ToListAsync();
+            return list;
+        }
+
+
+      
+
+      //  public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
+      //  {
+         //   var data = await _dbContext.Demandletters
+               //   .Include(x => x.Locality)
+                //  .Where(x => (x.Id == (model.propertyNo == 0 ? x.Id : model.propertyNo))
+                 //    && (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+               //  && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality))
+                  //  && (x.GenerateDate >= model.fromDate && x.GenerateDate <= model.toDate)
+              //   )
+                 // .GetPaged(model.PageNumber, model.PageSize);
+           // return data;
+      //  }
+
+
+
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
+        {
+            return await _dbContext.Demandletters
+                               .Include(x => x.Locality)
+                                   .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.PropertyNo == 0 ? x.Id : model.PropertyNo) )
+
+                                   && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+                                    && (string.IsNullOrEmpty(model.FileNo) || x.FileNo.Contains(model.FileNo))
+                                    // &&(x.FileNo==model.FileNo ))
+                                    && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+                                   )
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+        }
+
+
+
+
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {

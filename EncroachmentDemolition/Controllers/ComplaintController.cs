@@ -85,6 +85,11 @@ namespace EncroachmentDemolition.Controllers
                     if (onlinecomplaint.Photo != null)
                     {
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
+                        var LattitudeValue = TempData["LattitudeValue"] as string;
+                        onlinecomplaint.Lattitude = LattitudeValue;
+                        var LongitudeValue = TempData["LongitudeValue"] as string;
+                        onlinecomplaint.Longitude = LongitudeValue;
+                       // var lattlongurlvalue = TempData["url"] as string;
                     }
                    
 
@@ -103,7 +108,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 Approvalproccess approvalproccess = new Approvalproccess();
                                 approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessOnlineComplaintId").Value);
                                 approvalproccess.ServiceId = onlinecomplaint.Id;
                                 approvalproccess.SendFrom = SiteContext.UserId;
                                 approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
@@ -116,10 +121,6 @@ namespace EncroachmentDemolition.Controllers
                             break;
                         }
                     }
-
-
-
-
 
 
                     if (result == true)
@@ -136,8 +137,14 @@ namespace EncroachmentDemolition.Controllers
                         SMS.GenerateSendSMS(Action, Mobile); 
 
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess+" Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
-                        var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
-                        return View("Index", list);
+                      //  var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
+                     //   return View(onlinecomplaint);
+                       
+                       
+                       // onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
+                       // onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
+                        return View(onlinecomplaint);
+
                     }
                     else
                     {
@@ -244,7 +251,7 @@ namespace EncroachmentDemolition.Controllers
 
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(18);
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
