@@ -853,7 +853,7 @@
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
-                            <select class="floating-label-field floating-label-field--s3" asp-for="DisposalTypeId" asp-items="@(new SelectList(Model.DisposalTypeList, "Id","Name"))">
+                            <select disabled class="floating-label-field floating-label-field--s3" asp-for="DisposalTypeId" asp-items="@(new SelectList(Model.DisposalTypeList, "Id","Name"))">
                                 <option value="0">--Select--</option>
                             </select>
                             <label asp-validation-for="DisposalTypeId" class="error"></label>
@@ -863,14 +863,14 @@
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
 
-                            <input asp-for="DisposalDate" type="date" value="" class="floating-label-field floating-label-field--s3" />
+                            <input disabled asp-for="DisposalDate" type="date" value="" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="DisposalDate" class="text-danger"></span>
                             <label class="floating-label">Date</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="floating-label-wrap">
-                            <input type="file" id="DisposalTypeAssignFile" class="floating-label-field floating-label-field--s3" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
+                            <input disabled type="file" id="DisposalTypeAssignFile" class="floating-label-field floating-label-field--s3" name="DisposalTypeAssignFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />@*onchange="return fileValidation()"*@
                             <span asp-validation-for="DisposalTypeFileData" class="text-danger"></span>
                             <label class="floating-label" asp-for="DisposalTypeFileData">Document</label>
                         </div>
@@ -881,7 +881,7 @@
                     <div class="col-md-12">
                         <div class="floating-label-wrap">
 
-                            <textarea asp-for="DisposalComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
+                            <textarea disabled asp-for="DisposalComments" class="floating-label-field floating-label-field--s3" maxlength="4000" limit="4000"></textarea>
                             <span asp-validation-for="DisposalComments" class="text-danger"></span>
                             <label class="floating-label">Comments</label>
                             <div id="feedbackDisposalComments"></div>
