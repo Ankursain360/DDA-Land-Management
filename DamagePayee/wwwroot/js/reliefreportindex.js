@@ -109,6 +109,13 @@ function callSelect2() {
     });
 }
 
+$("#btnReset").click(function () {
+    $('#FileNo').val('0').trigger('change');
+    $('#LocalityId').val('0').trigger('change');
+    $('#FromDate').val('');
+    $('#ToDate').val('');
+    GetDetails(currentPageNumber, currentPageSize);
+});
 
 function ValidCheck() {
     var checkresult = false;
