@@ -67,6 +67,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<EncroachmentFirFileDetails> EncroachmentFirFileDetails { get; set; }
         public virtual ICollection<EncroachmentLocationMapFileDetails> EncroachmentLocationMapFileDetails { get; set; }
         public virtual ICollection<EncroachmentPhotoFileDetails> EncroachmentPhotoFileDetails { get; set; }
+
         [NotMapped]
         public List<IFormFile> PhotoFile { get; set; }
         [NotMapped]

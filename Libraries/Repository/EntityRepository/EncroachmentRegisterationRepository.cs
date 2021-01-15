@@ -206,11 +206,11 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)//added by ishu
         {
             return await _dbContext.EncroachmentRegisteration
-                .Where(x=>(x.LocalityId==model.Locality)
-                 && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate)
-
                 .Include(x => x.Locality)
-                //.Include(x => x.Demolitionstructuredetails)
+                .Where(x=>(x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)
+                 && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate))
+
+                
                 .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
           
 
