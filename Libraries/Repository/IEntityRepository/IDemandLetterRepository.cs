@@ -21,6 +21,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetLocalityList();
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
-
+        Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
+        Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
+        Task<List<Demandletters>> BindPropertyNoList();
     }
 }

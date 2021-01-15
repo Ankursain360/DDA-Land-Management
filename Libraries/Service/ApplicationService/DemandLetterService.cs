@@ -111,6 +111,21 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedPenaltyImpositionReport(model);
         }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
+        public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport(model);
+        }
 
+        public async Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport1(model);
+        }
+
+        public async Task<List<Demandletters>> BindPropertyNoList()
+        {
+            return await _demandLetterRepository.BindPropertyNoList();
+        }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }

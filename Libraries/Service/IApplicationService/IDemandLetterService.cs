@@ -21,11 +21,17 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
+        Task<List<Demandletters>> BindPropertyNoList();
+
         /*-----------------Relief Report End------------------*/
         //*******   Penalty Imposition Report**********
         Task<List<Locality>> GetLocalityList();
         Task<List<Demandletters>> GetFileNoList();
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
 
+        /*-----------------Demand Collection Ledger Report Start------------------*/
+        Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
+        Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
+        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }

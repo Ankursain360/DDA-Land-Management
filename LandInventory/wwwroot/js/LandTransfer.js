@@ -172,7 +172,7 @@ $(document).ready(function () {
         else if (value == 3)
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
     }
-    
+
     var value = $('#Propertyregistration_PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
         $('#divUnplannedSelection').hide();
@@ -231,8 +231,8 @@ $(document).ready(function () {
         $("#divEncroachmentYesSelectionForLandTransfer input").attr("disabled", "disabled");
         $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
-callSelect2();
-
+    callSelect2();
+});
 function ChangeEncroachmentStatus(status) {
     if (status == '1') {
         $("#divEncroachmentYesSelectionForLandTransfer").show();
@@ -250,4 +250,4 @@ function ChangeEncroachmentStatus(status) {
         $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
     callSelect2();
-};
+}
