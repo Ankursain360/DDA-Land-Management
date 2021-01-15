@@ -47,9 +47,15 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] OnlinecomplaintApprovalSearchDto model)
         {
-            var result = await _onlinecomplaintApprovalService.GetPagedOnlinecomplaint(model, SiteContext.UserId);
-            ViewBag.IsApproved = model.StatusId;
-            return PartialView("_List", result);
+            try
+            {
+                var result = await _onlinecomplaintApprovalService.GetPagedOnlinecomplaint(model, SiteContext.UserId);
+                ViewBag.IsApproved = model.StatusId;
+                return PartialView("_List", result);
+            }
+            catch (Exception Ex) {
+                return PartialView("_List", Ex);
+            }
         }
 
 
@@ -74,7 +80,7 @@ namespace EncroachmentDemolition.Controllers
             Data.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
             Data.LocationList = await _onlinecomplaintService.GetAllLocation();
 
-            #region Approval Proccess At Further level start Added by Renu 27 Nov 2020
+           
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
             {
@@ -123,7 +129,7 @@ namespace EncroachmentDemolition.Controllers
                 }
             }
 
-            #endregion
+         
 
             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");

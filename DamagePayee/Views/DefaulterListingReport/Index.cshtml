@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Demandletter
+﻿@model Libraries.Model.Entity.Demandletters
 @await Component.InvokeAsync("PageHeader", new { pageName = "Defaulter Listing Report" })
 
 
@@ -9,14 +9,14 @@
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="DueDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input type="date" asp-for="UptoDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">From Date</label>
                 </div>
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="DueDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <input type="date" asp-for="UptoDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
                     <label class="floating-label">To Date</label>
                 </div>

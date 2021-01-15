@@ -3,16 +3,14 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
-            <th>File No.</th>
-            
-          
-            <th>Demand No.</th>
-            <th>Due Amount</th>
-            <th>Payment Due Date</th>
-            
+            <th>Locality(Village) </th>
+            <th>File No </th>
+            <th>Property Number </th>
+         
+            <th>Demand No</th>
+           
         </tr>
-      
+
     </thead>
     <tbody>
         @if (Model != null && Model.Results.Count() > 0)
@@ -20,21 +18,20 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-          
+            <td>@item.Locality.Name</td>
             <td>@item.FileNo</td>
-            @*<td>@item.FileNo.Distinct()</td>*@
+            <td>@item.PropertyNo</td>
+         
             <td>@item.DemandNo</td>
-            <td>@item.DepositDue</td>
-            <td>@item.UptoDate</td>
-          
             
+           
         </tr>
             }
         }
         else
         {
             <tr>
-                <th colspan="14" style="text-align:center"> No Record Available! </th>
+                <th colspan="12" style="text-align:center"> No Record Available! </th>
             </tr>
         }
     </tbody>

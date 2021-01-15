@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         public string Longitude { get; set; }
         public byte? IsActive { get; set; }
 
-        [Required(ErrorMessage = "Please Select Photo")]
+    
         public string PhotoPath { get; set; }
         [Required(ErrorMessage = "Please enter Email")]
         public string Email { get; set; }

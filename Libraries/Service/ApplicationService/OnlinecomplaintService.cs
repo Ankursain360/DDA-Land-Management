@@ -84,7 +84,7 @@ namespace Libraries.Service.ApplicationService
 
             model.Longitude = onlinecomplaint.Longitude;
             model.PhotoPath = onlinecomplaint.PhotoPath;
-          
+            model.Remarks = onlinecomplaint.Remarks;
             model.IsActive = onlinecomplaint.IsActive;
             model.ApprovedStatus = onlinecomplaint.ApprovedStatus;
             model.ModifiedDate = DateTime.Now;

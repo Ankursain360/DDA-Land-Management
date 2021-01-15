@@ -33,7 +33,7 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedDemandletter(model);
         }
-        public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             return await _demandLetterRepository.GetDefaultListingReportData(defaulterListingReportSearchDto);
         }
@@ -77,6 +77,20 @@ namespace Service.ApplicationService
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Demandletters>> BindPropertyNoList()
+        {
+          
+            return await _demandLetterRepository.BindPropertyNoList();
+          
+        }
+
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandletterReport(model);
+        }
+
+
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
@@ -111,21 +125,10 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedPenaltyImpositionReport(model);
         }
-        /*-----------------Demand Collection Ledger Report Start------------------*/
-        public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)
+        public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
         {
-            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport(model);
+            return await _demandLetterRepository.GetPagedImpositionReportOfCharges(model);
         }
 
-        public async Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model)
-        {
-            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport1(model);
-        }
-
-        public async Task<List<Demandletters>> BindPropertyNoList()
-        {
-            return await _demandLetterRepository.BindPropertyNoList();
-        }
-        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }
