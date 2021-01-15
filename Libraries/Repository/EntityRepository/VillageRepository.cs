@@ -21,11 +21,48 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Village>> GetPagedVillage(VillageSearchDto model)
         {
-            return await _dbContext.Village
-                        .Include(x=>x.Zone)
-                            .Where(x => x.IsActive == 1)
+            var data = await _dbContext.Village
+                            .Include(x=>x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
                             .OrderBy(s => s.Zone.Name).ThenBy(s => s.Name)
-                        .GetPaged<Village>(model.PageNumber, model.PageSize);
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGENAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("ZONENAME"):
+                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGENAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("ZONENAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
         public async Task<List<Village>> GetVillage()

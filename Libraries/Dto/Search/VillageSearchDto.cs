@@ -7,6 +7,7 @@ namespace Dto.Search
 {
     public class VillageSearchDto : BaseSearchDto
     {
-        public string Name { get; set; }
+        public string name { get; set; }
+        public string zone { get; set; }
     }
 }

@@ -31,10 +31,12 @@
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3 " asp-for="ModuleId"
                             asp-items="@(new SelectList(Model.ModuleList, "Id","Name"))">
-                            
+
                         <option selected="selected" disabled="disabled" value="">Select </option>
                     </select>
-                    <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>
+                    @*<span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage">Module is Mandatory</span>*@
+                  <span asp-validation-for="ModuleId" class="text-danger" style="display:none;" id="ModuleIdMessage"></span>
+
                     <label asp-for="ModuleId" class="floating-label">Module </label>
                 </div>
 
@@ -44,8 +46,10 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>
-                    <label asp-for="Name" class="floating-label" >Proccess Name  </label>
+                    @*<span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage">Proccess Name is Mandatory</span>*@
+                    <span asp-validation-for="Name" class="text-danger" style="display:none;" id="NameMessage"></span>
+
+                    <label asp-for="Name" class="floating-label">Proccess Name  </label>
                 </div>
 
 
@@ -55,16 +59,15 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Description" placeholder="Proccess Description" type="text"
                            class="floating-label-field floating-label-field--s3 " />
-                    <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>
+                    @*<span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage">Proccess Description is Mandatory</span>*@
+                    <span asp-validation-for="Description" class="text-danger" style="display:none;" id="DescriptionMessage"></span>
+
                     <label asp-for="Description" class="floating-label">Proccess Description  </label>
                 </div>
-
-
             </div>
-
         </div>
-        <br />
-        <div class="row">
+       
+        <div class="row mt-md-3">
             <div class="col-md-3">
                 <label class="control-label lb-sm">IsActive</label>
                 <input type="checkbox" asp-for="IsActiveData" checked />
@@ -79,7 +82,7 @@
 
         </div>
 
-        <div class="row ">
+        <div class="row mt-md-3">
             <div class="col-md-12" >
                 <button class="btn btn-theme "id="btnCreate" type="submit">Create</button>
               

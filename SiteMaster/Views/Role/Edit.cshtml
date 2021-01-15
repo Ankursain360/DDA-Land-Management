@@ -9,25 +9,17 @@
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="Id" />
                     <div class="row">
-                        <div class="col-md-6    ">
+                        <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
                                 <input asp-for="Name" placeholder="Name" type="text"
                                        class="floating-label-field floating-label-field--s3" limit="100" />
-
                                 <span asp-validation-for="Name" class="text-danger"></span>
-
                                 <label class="floating-label">Role Name   </label>
                             </div>
                         </div>
 
-                        <div class="col-md-6    ">
+                        <div class="col-md-6">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-
-
                                 <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
@@ -38,7 +30,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row ">
+                    <div class="row mt-md-3">
                         <div class=" col-md-12">
                             <button class="btn btn-theme " type="submit">Update</button>
                             @Html.ActionLink("Back", "Index", "Role", null, new { @class = "btn btn-theme " })

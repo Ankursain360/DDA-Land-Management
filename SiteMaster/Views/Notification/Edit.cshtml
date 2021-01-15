@@ -8,23 +8,16 @@
 
                     <div class="row">
                         <div class="col-md-6">
-
-
-
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
                                 <input asp-for="Name" placeholder="Name" type="text"
                                        class="floating-label-field floating-label-field--s3" limit="100" />
-
                                 <span asp-validation-for="Name" class="text-danger"></span>
-
                                 <label class="floating-label">Notification   </label>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
                                 <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
                                 </select>
@@ -34,7 +27,7 @@
                         </div>
                     </div>
 
-                    <div class="row ">
+                    <div class="row mt-md-3">
                         <div class=" col-md-12">
                             <button class="btn btn-theme " type="submit">Update</button>
                             @Html.ActionLink("Back", "Index", "Notification", null, new { @class = "btn btn-theme " })
