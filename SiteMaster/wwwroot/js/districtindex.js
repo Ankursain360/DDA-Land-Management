@@ -77,9 +77,11 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        code: $('#txtCode').val(),
+
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

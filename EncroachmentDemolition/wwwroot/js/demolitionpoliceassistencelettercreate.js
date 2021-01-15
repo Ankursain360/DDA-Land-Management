@@ -137,6 +137,7 @@ function check() {
             $("#MessageDate").show();
         } else {
             checkresult = true;
+            $("#MessageDate").hide();
         }
 
         var Time_val = $('#MeetingTime').val();
@@ -145,6 +146,7 @@ function check() {
             $("#MessageTime").show();
         } else {
             checkresult = true;
+            $("#MessageTime").hide();
         }
         if (Date_val == "" || Time_val == "") {
             checkresult = false;
