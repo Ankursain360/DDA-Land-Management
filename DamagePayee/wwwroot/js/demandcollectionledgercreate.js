@@ -94,10 +94,9 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
         SortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
-        FileNo: parseInt(($('#FileNo option:selected').val())),
-        Locality: parseInt(($('#LocalityId option:selected').val())),
-        FromDate: (($('#FromDate').val())),
-        ToDate: (($('#ToDate').val()))
+        FileNo: (($('#FileNo option:selected').val())),
+        Locality: (($('#LocalityId option:selected').val())),
+        PropertyNo: (($('#PropertyNo').val()))
     }
     return model;
 }
@@ -108,6 +107,12 @@ function callSelect2() {
     });
 }
 
+$("#btnReset").click(function () {
+    $('#FileNo').val('0').trigger('change');
+    $('#LocalityId').val('0').trigger('change');
+    $('#PropertyNo').val('0').trigger('change');
+    GetDetails(currentPageNumber, currentPageSize);
+});
 
 function ValidCheck() {
     var checkresult = false;

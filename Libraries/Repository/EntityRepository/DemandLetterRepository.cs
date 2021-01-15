@@ -52,7 +52,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
         {
-            return await _dbContext.Demandletters
+            var data = await _dbContext.Demandletters
                                .Include(x => x.Locality)
                                    .Where(x => (x.IsActive == 1)
                                    && (x.Id == (model.PropertyNo == 0 ? x.Id : model.PropertyNo) )
@@ -64,6 +64,49 @@ namespace Libraries.Repository.EntityRepository
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderBy(x => x.PropertyNo).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                   
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("PROPERTYNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PropertyNo).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                   
+
+                }
+            }
+            return data;
+
+
+
+
         }
 
 
@@ -290,8 +333,11 @@ namespace Libraries.Repository.EntityRepository
 
             try
             {
+                int SortOrder = (int)model.SortOrder;
                 var data = await _dbContext.LoadStoredProcedure("BindDemandCollectionLedgerReport")
-                                            .WithSqlParams(("P_FileNo", model.FileNo), ("P_PropertyNo", model.PropertyNo), ("P_LocalityId", model.Locality))
+                                            .WithSqlParams(("P_FileNo", model.FileNo), ("P_PropertyNo", model.PropertyNo)
+                                            , ("P_LocalityId", model.Locality), ("P_SortOrder", SortOrder)
+                                            , ("P_SortBy", model.SortBy))
                                             .ExecuteStoredProcedureAsync<DemandCollectionLedgerListDataDto>();
 
                 return (List<DemandCollectionLedgerListDataDto>)data;
