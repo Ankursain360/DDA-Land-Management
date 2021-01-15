@@ -25,7 +25,6 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
-        Task<List<Demandletters>> BindPropertyNoList();
 
         /*-----------------Relief Report End------------------*/
         //*******   Penalty Imposition Report**********

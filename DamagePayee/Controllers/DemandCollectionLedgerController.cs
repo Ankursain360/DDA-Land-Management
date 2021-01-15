@@ -25,7 +25,7 @@ namespace DamagePayee.Controllers
             DemandCollectionLedgerReportDtoProfile demandletter = new DemandCollectionLedgerReportDtoProfile();
             ViewBag.FileNoList = await _demandLetterService.BindFileNoList();
             ViewBag.LocalityList = await _demandLetterService.BindLoclityList();
-            ViewBag.PropertyNo = await _demandLetterService.BindPropertyNoList();
+            ViewBag.PropertyNo = await _demandLetterService.BindFileNoList();
             return View(demandletter);
         }
 
