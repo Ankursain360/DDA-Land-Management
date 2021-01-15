@@ -11,6 +11,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Caseyear>> GetPagedCaseyear(CaseyearSearchDto model);
 
         Task<List<Caseyear>> GetAllCaseyear();
-
+        Task<bool> Any(int id, string caseyear);
     }
 }
