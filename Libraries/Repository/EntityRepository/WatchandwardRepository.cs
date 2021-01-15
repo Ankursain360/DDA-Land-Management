@@ -72,7 +72,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Watchandward
                 .Include(x => x.Locality)
-                .Include(x => x.Khasra)
+                
                 .Where(x => (x.LocalityId == (watchandwardSearchDto.localityId == 0 ? x.LocalityId : watchandwardSearchDto.localityId))
                && x.Date >= watchandwardSearchDto.fromDate
                && x.Date <= watchandwardSearchDto.toDate)

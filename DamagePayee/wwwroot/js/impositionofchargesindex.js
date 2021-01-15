@@ -3,7 +3,7 @@ var currentPageSize = 10;
 $(document).ready(function () {
 
     $("#btnGenerate").click(function () {
-        debugger;
+       // debugger;
         var param = GetSearchParam(currentPageNumber, currentPageSize);
         var IsValid = ValidCheck();
         if (IsValid) {
