@@ -63,7 +63,7 @@ namespace DamagePayee.Controllers
                 if (ModelState.IsValid)
 
                 {
-                    string DocumentFilePath = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
+                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (doortodoorsurvey.Photo != null)
                     {

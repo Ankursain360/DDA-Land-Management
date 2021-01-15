@@ -13,5 +13,7 @@ namespace Dto.Search
         public int Locality { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
+        public string colname { get; set; }
+        public int orderby { get; set; }
     }
 }
