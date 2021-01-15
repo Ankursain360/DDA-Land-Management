@@ -20,22 +20,36 @@ namespace DamagePayee.Controllers
         }
 
 
-        public IActionResult Index()
+       public IActionResult Index()
         {
             return View();
         }
-        public IActionResult Create()
+
+        async Task BindDropDownView(Demandletters demandletters)
         {
-            return View();
+            demandletters.LocalityList = await _demandLetterService.GetLocalityList();
+            //demandletters.FileNoList = await _demandLetterService.GetFileNoList();
         }
+        public async Task<IActionResult> Create()
+        {
+            Demandletters model = new Demandletters();
+            await BindDropDownView(model);
+            return View(model);
+        }
+
+
+
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Demandletters demandletter)
         {
+            await BindDropDownView(demandletter);
             try
             {
+                var finalString = (DateTime.Now.ToString("ddMMyyyy") + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToUpper();
+                demandletter.DemandNo = "DMN" + finalString;
 
                 if (ModelState.IsValid)
                 {
@@ -70,17 +84,24 @@ namespace DamagePayee.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DemandletterSearchDto model)
         {
-            var result = await _demandLetterService.GetPagedDemandletter(model);
+            try
+            {
+                var result = await _demandLetterService.GetPagedDemandletter(model);
 
-            return PartialView("_List1", result);
+                return PartialView("_List1", result);
+            } catch(Exception ex)
+            {
+                return PartialView(ex);
+            }
         }
 
 
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _demandLetterService.FetchSingleResult(id);
 
+            var Data = await _demandLetterService.FetchSingleResult(id);
+            Data.LocalityList = await _demandLetterService.GetLocalityList();
             if (Data == null)
             {
                 return NotFound();
@@ -93,6 +114,7 @@ namespace DamagePayee.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Demandletters demandletter)
         {
+            await BindDropDownView(demandletter);
             if (ModelState.IsValid)
             {
                 try
@@ -124,7 +146,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _demandLetterService.FetchSingleResult(id);
-           
+            Data.LocalityList = await _demandLetterService.GetLocalityList();
 
             if (Data == null)
             {

@@ -77,6 +77,20 @@ namespace Service.ApplicationService
             _demandLetterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<List<Demandletters>> BindPropertyNoList()
+        {
+          
+            return await _demandLetterRepository.BindPropertyNoList();
+          
+        }
+
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandletterReport(model);
+        }
+
+
         /*-----------------Relief Report Start------------------*/
         public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
         {
@@ -115,6 +129,16 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedImpositionReportOfCharges(model);
         }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
+        public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport(model);
+        }
 
+        public async Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport1(model);
+        }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }

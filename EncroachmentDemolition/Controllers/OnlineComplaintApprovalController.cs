@@ -47,9 +47,15 @@ namespace EncroachmentDemolition.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] OnlinecomplaintApprovalSearchDto model)
         {
-            var result = await _onlinecomplaintApprovalService.GetPagedOnlinecomplaint(model, SiteContext.UserId);
-            ViewBag.IsApproved = model.StatusId;
-            return PartialView("_List", result);
+            try
+            {
+                var result = await _onlinecomplaintApprovalService.GetPagedOnlinecomplaint(model, SiteContext.UserId);
+                ViewBag.IsApproved = model.StatusId;
+                return PartialView("_List", result);
+            }
+            catch (Exception Ex) {
+                return PartialView("_List", Ex);
+            }
         }
 
 
@@ -74,7 +80,7 @@ namespace EncroachmentDemolition.Controllers
             Data.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
             Data.LocationList = await _onlinecomplaintService.GetAllLocation();
 
-            #region Approval Proccess At Further level start Added by Renu 27 Nov 2020
+           
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
             {
@@ -87,7 +93,7 @@ namespace EncroachmentDemolition.Controllers
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
                             approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
-                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessOnlineComplaintId").Value);
                             approvalproccess.ServiceId = onlinecomplaint.Id;
                             approvalproccess.SendFrom = SiteContext.UserId;
                             approvalproccess.PendingStatus = 1;
@@ -123,7 +129,7 @@ namespace EncroachmentDemolition.Controllers
                 }
             }
 
-            #endregion
+         
 
             ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
             return View("Index");
@@ -131,7 +137,7 @@ namespace EncroachmentDemolition.Controllers
 
         private async Task<List<TemplateStructure>> DataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(18);
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
@@ -140,7 +146,7 @@ namespace EncroachmentDemolition.Controllers
 
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value), id);
+            var Data = await _approvalproccessService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessOnlineComplaintId").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -149,10 +155,30 @@ namespace EncroachmentDemolition.Controllers
         public async Task<PartialViewResult> OnlineComplaintView(int id)
         {
             var Data = await _onlinecomplaintService.FetchSingleResult(id);
-          
 
+            Data.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
+            Data.LocationList = await _onlinecomplaintService.GetAllLocation();
             return PartialView("_OnlineComplaintView", Data);
         }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    var dropdown = DataFlow[i].parameterAction;
+                    return Json(dropdown);
+                    break;
+                }
+
+            }
+            return Json(DataFlow);
+        }
+
 
 
 

@@ -17,10 +17,15 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Demandletters demandletter);
         Task <Demandletters> FetchSingleResult(int id);
 
+        Task<List<Demandletters>> BindPropertyNoList();
+        Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model);
+
+
         /*-----------------Relief Report Start------------------*/
         Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model);
         Task<List<Demandletters>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
+
         /*-----------------Relief Report End------------------*/
         //*******   Penalty Imposition Report**********
         Task<List<Locality>> GetLocalityList();
@@ -28,5 +33,9 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model);
         Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model);
 
+        /*-----------------Demand Collection Ledger Report Start------------------*/
+        Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model);
+        Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model);
+        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }

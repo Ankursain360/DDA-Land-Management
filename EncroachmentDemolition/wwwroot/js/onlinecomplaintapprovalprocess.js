@@ -26,6 +26,7 @@
 function GetOtherDetails(id) {
     HttpGet(`/OnlineComplaintApproval/OnlineComplaintView/?Id=${id}`, 'html', function (response) {
         $('#OnlineComplaintDiv').html("");
+      
         $('#OnlineComplaintDiv').html(response);
     });
 };

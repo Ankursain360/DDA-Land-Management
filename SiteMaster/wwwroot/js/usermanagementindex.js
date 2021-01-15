@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
@@ -12,7 +12,7 @@ $("#btnSearch").click(function () {
     GetUser(currentPageNumber, currentPageSize);
 });
 
-$("#btnReset").click(function () {
+$("#btnReset").click(function (){
     $('#txtUserName').val('');
     $('#txtName').val('');
     $('#txtPhoneNumber').val('');
@@ -20,7 +20,7 @@ $("#btnReset").click(function () {
     GetUser(currentPageNumber, currentPageSize);
 });
 
-function GetUser(pageNumber, pageSize) {
+function GetUser(pageNumber, pageSize){
     var param = GetSearchParam(parseInt(pageNumber), parseInt(pageSize));
     HttpPost(`/usermanagement/List`, 'html', param, function (response) {
         $('#divUser').html("");
