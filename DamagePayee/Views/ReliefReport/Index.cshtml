@@ -2,54 +2,63 @@
 @model Dto.Master.ReliefReportDtoProfile
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Relief Report" })
-<div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-    <h3 class="mb-3 d-flex">Details</h3>
+    <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Details</h3>
 
-    <div class="row">
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
 
-                <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "Id","FileNo"))">
-                    <option value="0">All</option>
-                </select>
-                <label asp-validation-for="FileNo" class="error"></label>
-                <label class="floating-label" asp-for="FileNo">File No.</label>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "Id","FileNo"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label asp-validation-for="FileNo" class="error"></label>
+                    <label class="floating-label" asp-for="FileNo">File No.</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label asp-validation-for="LocalityId" class="error"></label>
+                    <label class="floating-label" asp-for="LocalityId">Locality</label>
+                </div>
             </div>
         </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
 
-                <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "Id","Name"))">
-                    <option value="0">All</option>
-                </select>
-                <label asp-validation-for="LocalityId" class="error"></label>
-                <label class="floating-label" asp-for="LocalityId">Locality</label>
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="FromDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="FromDate" id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                    <label class="floating-label">From Date  <span style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="ToDate" id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                    <label class="floating-label">To Date  <span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-theme btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-    <div class="row pt-3">
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
-                <input asp-for="FromDate" type="date" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="FromDate" id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
-                <label class="floating-label">From Date  <span style="color:red">*</span></label>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
-                <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" />
-                <span asp-validation-for="ToDate" id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
-                <label class="floating-label">To Date  <span style="color:red">*</span></label>
-            </div>
-        </div>
-    </div>
-    <div class="row mt-md-3">
-        <div class=" col-md-12">
-            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
-        </div>
-    </div>
-</div>
 <div class="table-section bg-white border shadow rounded">
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">

@@ -333,8 +333,11 @@ namespace Libraries.Repository.EntityRepository
 
             try
             {
+                int SortOrder = (int)model.SortOrder;
                 var data = await _dbContext.LoadStoredProcedure("BindDemandCollectionLedgerReport")
-                                            .WithSqlParams(("P_FileNo", model.FileNo), ("P_PropertyNo", model.PropertyNo), ("P_LocalityId", model.Locality))
+                                            .WithSqlParams(("P_FileNo", model.FileNo), ("P_PropertyNo", model.PropertyNo)
+                                            , ("P_LocalityId", model.Locality), ("P_SortOrder", SortOrder)
+                                            , ("P_SortBy", model.SortBy))
                                             .ExecuteStoredProcedureAsync<DemandCollectionLedgerListDataDto>();
 
                 return (List<DemandCollectionLedgerListDataDto>)data;

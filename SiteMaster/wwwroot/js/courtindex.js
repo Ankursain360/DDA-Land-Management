@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
 $(document).ready(function () {

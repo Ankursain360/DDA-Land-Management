@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var currentSortOrderAscending = 1;
 var currentSortOrderDescending = 2;
 
@@ -77,9 +77,11 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
 
 function GetSearchParam(pageNumber, pageSize) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        code: $('#txtCode').val(),
+
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }

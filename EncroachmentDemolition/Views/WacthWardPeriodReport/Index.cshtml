@@ -8,7 +8,7 @@
                     <th rowspan="2">Sr.No</th>
                     <th rowspan="2">Date</th>
                     <th rowspan="2">Locality Name (Village) </th>
-                    <th rowspan="2">Khasra No.</th>
+                  
                     <th rowspan="2">Land Mark</th>
                     <th rowspan="2">Status on Ground</th>
                     <th rowspan="2">Remarks</th>
@@ -20,11 +20,11 @@
                     @foreach (var item in Model.Results)
                     {
                         <tr>
-                            <td>@(rowNo += 1)</td>
+                            @*<td>@(rowNo += 1)</td>*@
 
                             <td>@item.Date</td>
                             <td>@item.Locality.Name</td>
-                            <td>@item.Khasra.Name</td>
+                          
                             <td>@item.Landmark</td>
                             <td>@item.StatusOnGround</td>
                             <td>@item.Remarks</td>

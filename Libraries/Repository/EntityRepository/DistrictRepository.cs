@@ -26,7 +26,7 @@ namespace Libraries.Repository.EntityRepository
                              && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
                  .OrderByDescending(s => s.IsActive)
 
-                .GetPaged<District>(model.PageNumber, model.PageSize); ;
+                .GetPaged<District>(model.PageNumber, model.PageSize); 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -56,7 +56,7 @@ namespace Libraries.Repository.EntityRepository
                         break;
                    
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }

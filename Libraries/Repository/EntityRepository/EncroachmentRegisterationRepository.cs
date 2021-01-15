@@ -137,6 +137,7 @@ namespace Libraries.Repository.EntityRepository
                 //                        .Include(x => x.Locality)
                 //                        .Where(x => x.IsActive == 1)
                 //                        .GetPaged(model.PageNumber, model.PageSize);
+
             }
             catch(Exception ex)
             {
