@@ -16,6 +16,14 @@ $(document).ready(function () {
 
 });
 
+$("#btnReset").click(function () {
+    $('#FileNo').val('');
+    $('#txtLocality').val('');
+    $('#PropertyNo option:selected').val('')
+
+    GetDetails(currentPageNumber, currentPageSize);
+});
+
 function GetDetails(pageNumber, pageSize) {
     var param = GetSearchParam(pageNumber, pageSize);
     var IsValid = ValidCheck();//$("#frmReliefReport").valid();
@@ -28,6 +36,15 @@ function GetDetails(pageNumber, pageSize) {
 }
 
 function GetSearchParam(pageNumber, pageSize) {
+    var sorbyname = $('#Sortbyd').val();
+    var sortdesc = $("#sortdesc").val();
+
+    if (sorbyname) {
+        sorbyname = sorbyname;
+    } else {
+        sorbyname = 'PropertyNo';
+    }
+
 
     var propertyNoId = $('#PropertyNo option:selected').val();
     var fileNo = $('#FileNo').val();
@@ -38,6 +55,9 @@ function GetSearchParam(pageNumber, pageSize) {
     var test = [];
 
     var model = {
+        colname: sorbyname,
+        orderby: sortdesc,
+
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
         PropertyNo: parseInt(propertyNoId),
@@ -98,3 +118,23 @@ function ValidCheck() {
     }
     return checkresult;
 }
+
+
+$("#Sortbyd").change(function () {
+
+    GetDetails(currentPageNumber, currentPageSize);
+
+});
+$("#ascId").click(function () {
+
+    $("#descId").removeClass("active");
+    $("#ascId").addClass("active");
+    $("#sortdesc").val(2);
+    GetDetails(currentPageNumber, currentPageSize);
+});
+$("#descId").click(function () {
+    $("#ascId").removeClass("active");
+    $("#descId").addClass("active");
+    $("#sortdesc").val(1);
+    GetDetails(currentPageNumber, currentPageSize);
+});
