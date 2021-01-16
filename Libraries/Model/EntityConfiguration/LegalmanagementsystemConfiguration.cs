@@ -33,7 +33,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CaseStatusId).HasColumnType("int(11)");
 
-            builder.Property(e => e.CaseType).HasColumnType("int(11)");
+                 builder.Property(e => e.CaseType)
+                 .HasMaxLength(100)
+                 .IsUnicode(false);
 
             builder.Property(e => e.ContemptOfCourt).HasColumnType("int(11)");
 
@@ -51,7 +53,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasColumnType("date");
 
-            builder.Property(e => e.DocumentFilePath).HasColumnType("longtext");
+            builder.Property(e => e.DocumentFilePath)
+               // .HasColumnType("longtext");
+               .HasMaxLength(500)
+               .IsUnicode(false);
 
             builder.Property(e => e.FileNo)
                 .HasMaxLength(100)
@@ -59,7 +64,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.HearingDate).HasColumnType("date");
 
-            builder.Property(e => e.InFavour).HasColumnType("int(11)");
+           builder.Property(e => e.InFavour)
+                         .HasMaxLength(100)
+                         .IsUnicode(false);
 
             builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
