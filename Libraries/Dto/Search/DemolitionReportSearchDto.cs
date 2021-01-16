@@ -10,7 +10,7 @@ namespace Dto.Search
         public string name { get; set; }
         public DateTime? FromDate  { get; set; }
         public DateTime? ToDate { get; set; }
-        public int Locality { get; set; }
+        public int localityId { get; set; }
 
 
     }

@@ -1,5 +1,5 @@
 ﻿@model Libraries.Model.Entity.MonthlyRoaster
-@await Component.InvokeAsync("PageHeader", new { pageName = "Planning" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Monthly Roaster" })
 <div class="pt-3">
     <div class="container-fluid" id="MainContentForm">
         <div class="panel">
@@ -81,7 +81,7 @@
                     <div class="row mt-md-4">
                         <div class=" col-md-12">
                             <input type="button" value="Create" id="btnGenerate" class="btn btn-theme" onclick="onSubmitForm()" />
-                            <a asp-action="Index" asp-controller="Planning" class="btn btn-theme">Back</a>
+                            <a asp-action="Index" asp-controller="MonthlyRoster" class="btn btn-theme">Back</a>
                         </div>
                     </div>
                 </form>

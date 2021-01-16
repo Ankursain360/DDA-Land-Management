@@ -19,7 +19,8 @@
 
                     <label class="floating-label">Document Name  </label>
                 </div>
-            </div>  <div class="col-md-6    ">
+            </div>  
+        <div class="col-md-6 ">
 
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -32,9 +33,9 @@
                 </div>
 
             </div>
-        </div>  <div class="row">
-
-            <div class="col-md-6    ">
+        </div> 
+        <div class="row mt-md-3">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                         <option value="1">Active</option>
@@ -48,7 +49,6 @@
         </div>
 
         <div class="row mt-md-3">
-
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Edit</button>
                 @Html.ActionLink("Back", "Index", "Demolitiondocument", null, new { @class = "btn btn-theme " })
