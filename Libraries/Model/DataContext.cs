@@ -121,6 +121,7 @@ namespace Libraries.Model
         public virtual DbSet<Courttype> Courttype { get; set; }
         public virtual DbSet<Casestatus> Casestatus { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+        public virtual DbSet<Casenature> Casenature { get; set; }
         //**********  File Loading **********
         public virtual DbSet<Almirah> Almirah { get; set; }
         public virtual DbSet<Row> Row { get; set; }
@@ -244,7 +245,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
-
+            modelBuilder.ApplyConfiguration(new CasenatureConfiguration());
 
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());

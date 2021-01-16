@@ -10,15 +10,15 @@
         var ZoneId = $("#ZoneId option:selected").val();
         var DivisionId = $("#DivisionId option:selected").val();
         var Locality = $("#Locality option:selected").val();
-        debugger
+        
         $('#dialog').load("/MonthlyRoster/GetMonthlyDetails", { month: months, year: years, department: DepartmentId, zone: ZoneId, division: DivisionId, Locality: Locality });
     });
 });
 
 function onChangeDepartment(id) {
-    debugger
+    
     HttpGet(`/MonthlyRoster/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
-        debugger
+        
         var html = '<option value="">Select</option>';
         for (var i = 0; i < response.length; i++) {
             html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';

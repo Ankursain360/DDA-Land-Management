@@ -1,41 +1,45 @@
-﻿using Dto.Search;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Dto.Search;
+using System.Threading.Tasks;
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Dto.Master;
 
 namespace Libraries.Repository.EntityRepository
 {
     public class CaseyearRepository : GenericRepository<Caseyear>, ICaseyearRepository
     {
-        public CaseyearRepository(DataContext dbcontext) : base(dbcontext)
-        { }
-        public async Task<List<Caseyear>> GetAllCaseyear()
+        public CaseyearRepository(DataContext dbContext) : base(dbContext)
         {
-            return await _dbContext.Caseyear.Where(x => x.IsActive == 1).ToListAsync();
+
         }
+
         public async Task<PagedResult<Caseyear>> GetPagedCaseyear(CaseyearSearchDto model)
         {
-            //return await _dbContext.Caseyear.OrderByDescending(x => x.Id).GetPaged<Caseyear>(model.PageNumber, model.PageSize);
-            var data = await _dbContext.Caseyear
-            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-                            .OrderBy(s => s.Name)
-                            .OrderByDescending(s => s.IsActive)
-                             .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+            var data= await _dbContext.Caseyear
+                                //.Where(x => x.IsActive == 1)
+                                .OrderByDescending(s => s.IsActive==1)
+                            .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data.Results = data.Results
+                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            .OrderBy(x => x.Name).ToList();
                         break;
-                    case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                    case ("STATUS"):
+                        data.Results = data.Results
+                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            .OrderBy(x => x.IsActive == 0).ToList();
                         break;
                 }
             }
@@ -44,16 +48,29 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data.Results = data.Results
+                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            .OrderByDescending(x => x.Name).ToList();
                         break;
-                    case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                    case ("STATUS"):
+                        data.Results = data.Results
+                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             .OrderByDescending(x => x.IsActive == 0).ToList();
                         break;
-
                 }
             }
             return data;
         }
 
+        public async Task<bool> Any(int id, string name)
+        {
+            return await _dbContext.Caseyear.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
+        }
+
+       
+        public async Task<List<Caseyear>> GetAllCaseyear()
+        {
+            return await _dbContext.Caseyear.Where(x => x.IsActive == 1).ToListAsync();
+        }
     }
 }
