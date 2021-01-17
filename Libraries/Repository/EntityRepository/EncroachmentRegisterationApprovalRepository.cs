@@ -21,10 +21,49 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedEncroachmentRegisteration(EncroachmentRegisterApprovalSearchDto model, int userId)
         {
 
-            return await _dbContext.EncroachmentRegisteration
+            var data = await _dbContext.EncroachmentRegisteration
+                                    .Include(x => x.Locality)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId 
                                     && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))
                                     .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        break;
+                   
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
+                        break;
+                   
+
+                }
+            }
+            return data;
         }
 
 

@@ -29,7 +29,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardApprovalSearchDto model, int userId)
         {
 
-            return await _dbContext.Watchandward
+            var data = await _dbContext.Watchandward
                                     .Include(x => x.PrimaryListNoNavigation)
                                     .Include(x => x.PrimaryListNoNavigation.Locality)
                                     .Include(x => x.Locality)
@@ -38,6 +38,47 @@ namespace Libraries.Repository.EntityRepository
                                     && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                     )
                                     .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNo).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNo).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
 
