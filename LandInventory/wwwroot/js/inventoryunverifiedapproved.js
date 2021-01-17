@@ -101,3 +101,13 @@ function callSelect2() {
         allowClear: true
     });
 }
+
+$("#btnReset").click(function () {
+    $('#DepartmentId').val('0').trigger('change');
+    $('#ZoneId').val('0').trigger('change');
+    $('#DivisionId').val('0').trigger('change');
+    $('#InventoriedInId').val('0').trigger('change')
+    $('#ClassificationOfLandId').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('0').trigger('change');
+    GetDetails(currentPageNumber, currentPageSize);
+});

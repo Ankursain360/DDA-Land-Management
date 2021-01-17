@@ -586,39 +586,39 @@ namespace LandInventory.Controllers
             }
             return View(propertyregistration);
         }
-        [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
-        {
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
+        //[AuthorizeContext(ViewAction.Delete)]
+        //public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        //{
+        //    int userId = SiteContext.UserId;
+        //    var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
             
-            if (userId == 3)
-            {
-                var result = await _propertyregistrationService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
-                return View("Index", result1);
-            }
+        //    if (userId == 3)
+        //    {
+        //        var result = await _propertyregistrationService.Delete(id);
+        //        if (result == true)
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+        //            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+        //            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+        //            return View("Index");
+        //        }
+        //        else
+        //        {
+        //            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+        //            ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+        //            ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+        //            return View("Index");
+        //        }
+        //    }
+        //    else
+        //    {
+        //        ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+        //        var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
+        //        return View("Index", result1);
+        //    }
 
 
-        }
+        //}
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -686,6 +686,7 @@ namespace LandInventory.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
