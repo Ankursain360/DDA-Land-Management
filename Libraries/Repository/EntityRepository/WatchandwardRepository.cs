@@ -14,13 +14,13 @@ using System.Threading.Tasks;
 namespace Libraries.Repository.EntityRepository
 {
 
-  public class WatchandwardRepository : GenericRepository<Watchandward>, IWatchandwardRepository
+    public class WatchandwardRepository : GenericRepository<Watchandward>, IWatchandwardRepository
     {
         public WatchandwardRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
-      
+
 
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
         {
@@ -38,7 +38,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                   
+
                     case ("KHASRANO"):
                         data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
                         break;
@@ -51,7 +51,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    
+
                     case ("KHASRANO"):
                         data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
                         break;
@@ -99,15 +99,15 @@ namespace Libraries.Repository.EntityRepository
             List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
-        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
+        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
             var data = await _dbContext.Watchandward
                 .Include(x => x.Locality)
-                
-                .Where(x => (x.LocalityId == (watchandwardSearchDto.localityId == 0 ? x.LocalityId : watchandwardSearchDto.localityId))
-               && x.Date >= watchandwardSearchDto.fromDate
-               && x.Date <= watchandwardSearchDto.toDate)
-                .OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
+
+                .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+               && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+               && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                .OrderByDescending(x => x.Id).GetPaged(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
 
             return data;
         }
@@ -128,7 +128,7 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-        
+
         public async Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int watchandwardId)
         {
             return await _dbContext.Watchandwardphotofiledetails.Where(x => x.Id == watchandwardId && x.IsActive == 1).FirstOrDefaultAsync();
@@ -153,7 +153,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetAllPrimaryList()
         {
-            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 &&  x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
         }
 
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)

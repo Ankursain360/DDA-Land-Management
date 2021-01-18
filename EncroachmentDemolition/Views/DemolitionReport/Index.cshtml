@@ -41,11 +41,25 @@
             </div>
         </div>
 
-        <div class="row mt-md-3">
+        @*<div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
                 <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
 
+            </div>
+        </div>*@
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -53,21 +67,20 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Zone</option>
-                        <option>Division</option>
-                        <option>Village Name </option>
-                        <option>Khasra No.</option>
-                        <option> Demolition Date</option>
-                        <option>Area Reclaimed</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        
+                        
+                        <option value="LocalityId">Village Name </option>
+                        
+                        <option value="EncrochmentDate" > Demolition Date</option>
+                        <option value="Area">Area Reclaimed</option>
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
 
