@@ -1,35 +1,66 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
+var sortby = 1;
 
 $(document).ready(function () {
-    GetActions(currentPageNumber, currentPageSize);
+    GetActions(currentPageNumber, currentPageSize,sortby);
 });
 
-function GetActions(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+
+function GetActions(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/actions/List`, 'html', param, function (response) {
         $('#divActionsTable').html("");
         $('#divActionsTable').html(response);
     });
 }
+$("#btnSearch").click(function () {
+    GetActions(currentPageNumber, currentPageSize, sortby);
+});
 
-function GetSearchParam(pageNumber, pageSize) {
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetActions(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortby = 1;//for Ascending 
+    GetActions(currentPageNumber, currentPageSize, sortby);
+
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtColor').val('');
+    $('#txtIcon').val('');
+
+    GetActions(currentPageNumber, currentPageSize, sortby);
+});
+
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        icon: $('#txtIcon').val(),
+        color: $('#txtColor').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
 function onPaging(pageNo) {
-    GetActions(pageNo, currentPageSize);
+    GetActions(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetActions(currentPageNumber, pageSize);
+    GetActions(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }
-
 

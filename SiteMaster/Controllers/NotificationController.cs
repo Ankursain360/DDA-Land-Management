@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using SiteMaster.Models;
@@ -60,11 +55,13 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _notificationService.GetAllNotification();
+                        return View("Index",list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                        return View(notification);
                         return View(notification);
 
                     }
@@ -163,6 +160,27 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        {
+            try
+            {
+                var result = await _notificationService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _notificationService.GetAllNotification();
+            return View("Index", list);
         }
     }
 

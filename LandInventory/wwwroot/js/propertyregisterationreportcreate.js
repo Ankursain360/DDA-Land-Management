@@ -186,3 +186,22 @@ function callSelect2() {
         allowClear: true
     });
 }
+
+$("#btnReset").click(function () {
+    $('#DepartmentId').val('0').trigger('change');
+    $('#ZoneId').val('0').trigger('change');
+    $('#DivisionId').val('0').trigger('change');
+    $('#LocalityId').val('0').trigger('change');
+    $('#InventoriedInId').val('0').trigger('change')
+    $('#ClassificationOfLandId').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('0').trigger('change');
+    $('#Colony').val('');
+    $('#Sector').val('');
+    $('#Block').val('');
+    $('#Pocket').val('');
+    $('#PlotNo').val('');
+    $('#MainLandUseId').val('0').trigger('change')
+    $('#LitigationStatus').val('0').trigger('change');
+    $('#Encroached').val('0').trigger('change');
+    GetDetails(currentPageNumber, currentPageSize);
+});

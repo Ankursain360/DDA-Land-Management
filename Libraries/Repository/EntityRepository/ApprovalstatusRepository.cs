@@ -36,6 +36,10 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
+                    case ("STATUS"):
+                        data.Results = data.Results
+                                       .OrderBy(x => x.IsActive == 0).ToList();
+                        break;
                 }
             }
             else if (SortOrder == 2)
@@ -45,7 +49,10 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
-
+                    case ("STATUS"):
+                        data.Results = data.Results
+                                       .OrderByDescending(x => x.IsActive == 0).ToList();
+                        break;
                 }
             }
 
