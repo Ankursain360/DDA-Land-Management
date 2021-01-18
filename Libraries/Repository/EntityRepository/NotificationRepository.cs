@@ -31,10 +31,8 @@ namespace Libraries.Repository.EntityRepository
             //return await _dbContext.LandNotification.GetPagedZone<LandNotification>(model.PageNumber, model.PageSize);
             var data = await _dbContext.LandNotification
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-                           .OrderBy(s => s.Name)
-                           .OrderByDescending(s => s.IsActive)
-
-                       .GetPaged<LandNotification>(model.PageNumber, model.PageSize); ;
+                          // .OrderBy(s => s.Name)
+                           .GetPaged<LandNotification>(model.PageNumber, model.PageSize); ;
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -56,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
 
                 }

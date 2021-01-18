@@ -21,7 +21,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-    debugger
+    //debugger
     return model;
 }
 
@@ -49,11 +49,11 @@ $("#btnReset").click(function () {
 });
 
 function onPaging(pageNo) {
-    GetApprovalStatus(parseInt(pageNo), parseInt(currentPageSize));
+    GetApprovalStatus(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetApprovalStatus(parseInt(currentPageNumber), parseInt(pageSize));
+    GetApprovalStatus(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

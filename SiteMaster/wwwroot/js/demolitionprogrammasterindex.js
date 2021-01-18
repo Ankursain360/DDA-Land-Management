@@ -31,7 +31,7 @@ function Ascending() {
     var value = $("#ddlSort").children("option:selected").val();
     $('#txtName').val('');
     if (value !== "0") {
-        debugger
+      //  debugger
         GetDemolitionprogrammasterOrderby(currentPageNumber, currentPageSize, currentSortAsc);
     }
     else {
