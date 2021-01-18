@@ -10,13 +10,20 @@ namespace Libraries.Model.Entity
 {
     public class Onlinecomplaint : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "Please enter Name")]
+
+
+        [Required]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter   Mobile No ")]
+        //  [Required(ErrorMessage = "Please enter   Mobile No ")]
+
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Invalid Contact Format.")]
         public string Contact { get; set; }
-        [Required(ErrorMessage = "Please Select Complaint Type ")]
+        [Required]
         public int? ComplaintTypeId { get; set; }
-        [Required(ErrorMessage = "Please enter Address ")]
+        [Required(ErrorMessage = " The Address field is required")]
+
         public string AddressOfComplaint { get; set; }
         [Required(ErrorMessage = "Please Select Location")]
         public int? LocationId { get; set; }
@@ -24,14 +31,16 @@ namespace Libraries.Model.Entity
         public string Longitude { get; set; }
         public byte? IsActive { get; set; }
 
-    
+     
         public string PhotoPath { get; set; }
-        [Required(ErrorMessage = "Please enter Email")]
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+            ErrorMessage = "Invalid Email Format")]
         public string Email { get; set; }
         public string ReferenceNo { get; set; }
         public int? ApprovedStatus { get; set; }
         public int? PendingAt { get; set; }
-        [Required(ErrorMessage = "The Remarks is required")]
+
         public string Remarks { get; set; }
 
 
@@ -46,6 +55,8 @@ namespace Libraries.Model.Entity
         public virtual Location Location { get; set; }
 
         [NotMapped]
+        [Required]
+        [DataType(DataType.Upload)]
         public IFormFile Photo { get; set; }
 
         [NotMapped]

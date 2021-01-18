@@ -34,20 +34,22 @@
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" id="Sortbyd">
 
-                <select class="floating-label-field floating-label-field--s3">
-                    <option selected="selected" disabled="disabled">Select One</option>
-                    <option>Name</option>
-                    <option>Email</option>
-                    <option>Contact No</option>
-                    <option>Address</option>
+                    <option value="Name">Complaint Name</option>
+                    <option value="Contact">Contact</option>
+                    <option value="Email">Email</option>
+                    <option value="Address">Address</option>
+                    <option value="ComplaintType">Complaint Type</option>
+                 
 
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
+                <input type="hidden" name="sortdesc" id="sortdesc" value="1">
             </div>
             <div class="short-btn d-flex align-items-center">
-                <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow active" id="descId" title="Ascending order"><i class="ri-sort-desc"></i></span>
+                <span class="btn slow" id="ascId" title="Descending order"><i class="ri-sort-asc"></i></span>
             </div>
         </div>
 
