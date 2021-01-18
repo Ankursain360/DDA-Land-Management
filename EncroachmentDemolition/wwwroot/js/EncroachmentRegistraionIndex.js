@@ -33,8 +33,16 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortby = 1;//for Ascending
-    var StatusId = 0;
-    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+   if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+    }
+
 });
 
 
@@ -42,21 +50,49 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortby = 2;//for Descending
-    var StatusId = 0;
-    GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetEncroachmentRegisteration(currentPageNumber, currentPageSize, StatusId, sortby);
+    }
 });
 
+
+
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetEncroachmentRegisteration(pageNo, currentPageSize);
-    currentPageNumber = pageNo;
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetEncroachmentRegisteration(parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
+        currentPageNumber = pageNo;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetEncroachmentRegisteration(parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
+        currentPageNumber = pageNo;
+    }
+
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetEncroachmentRegisteration(currentPageNumber, pageSize);
-    currentPageSize = pageSize;
+   
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
+        currentPageSize = pageSize;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetEncroachmentRegisteration(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
+        currentPageSize = pageSize;
+    }
 }
+
+
+
 
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {

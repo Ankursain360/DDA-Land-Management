@@ -27,8 +27,8 @@
                     <td>@item.Division.Name</td>
                     <td>@item.Locality.Name</td>
                     <td>@item.KhasraNo</td>
-
-                    <td>@item.EncrochmentDate</td>
+                    <td> @(Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>
+                   
                 </tr>
             }
         }

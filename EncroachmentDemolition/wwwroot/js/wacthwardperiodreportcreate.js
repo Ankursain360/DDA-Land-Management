@@ -7,16 +7,6 @@ $(document).ready(function () {
         var localityid = $('#LocalityId option:selected').val();
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
-        if (selected.val() == 0) {
-            var Date_val = $('#LocalityId').val();
-            if (Date_val == "") {
-                checkresult = false;
-                $("#LocalityID").show();
-            } else {
-                checkresult = true;
-                $("#LocalityID").hide();
-            }
-        }
 
         //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
         if (result) {
@@ -26,7 +16,6 @@ $(document).ready(function () {
         //else {
         //    alert('Please Fill All Fields');
         //}
-        
     });
 
     $(".linkdisabled").click(function () {
