@@ -1,65 +1,4 @@
-﻿//var currentPageNumber = 1;
-//var currentPageSize = 10;
-
-//$(function () {
-//    $("#btnGenerate").click(function () {
-//        debugger;
-//        var result = ValidateForm();
-//        var localityId = $('#LocalityId option:selected').val();
-//        var fromDate = $('#txtFromDate').val();
-//        var toDate = $('#txtToDate').val();
-
-       
-//        if (result) {
-//            GetReport(currentPageNumber, currentPageSize, localityId, fromDate, toDate);
-//        }
-//    });
-//});
-
-//function GetReport(pageNumber, pageSize, localityId, fromDate, toDate) {
-//    var param = GetSearchParam(pageNumber, pageSize, localityId, fromDate, toDate);
-//    var IsValid = ValidCheck();
-//    if (IsValid) {
-//    HttpPost(`/DemolitionReport/List`, 'html', param, function (response) {
-//        $('#LoadReportView').html("");
-//        $('#LoadReportView').html(response);
-//    });
-//}
-
-//function GetSearchParam(pageNumber, pageSize, localityId, fromDate, toDate) {
-//    var model = {
-//        name: "test",
-//        pageSize: pageSize,
-//        pageNumber: pageNumber,
-//        Locality: parseInt(localityId),
-//        FromDate: fromDate,
-//        ToDate: toDate
-
-//    }
-//    return model;
-//}
-
-//function onPaging(pageNo) {
-//    pageNo = parseInt(pageNo);
-//    var localityId = $('#LocalityId option:selected').val();
-//    var fromDate = $('#txtFromDate').val();
-//    var toDate = $('#txtToDate').val();
-
-//    GetReport(currentPageNumber, currentPageSize, localityId, fromDate, toDate);
-//    currentPageNumber = pageNo;
-//}
-
-//function onChangePageSize(pageSize) {
-//    pageSize = parseInt(pageSize);
-//    var localityId = $('#LocalityId option:selected').val();
-//    var fromDate = $('#txtFromDate').val();
-//    var toDate = $('#txtToDate').val();
-
-   
-//    GetReport(currentPageNumber, currentPageSize, localityId, fromDate, toDate);
-//    currentPageSize = pageSize;
-//}
-var currentPageNumber = 1;
+﻿var currentPageNumber = 1;
 var currentPageSize = 10;
 $(document).ready(function () {
 
@@ -118,7 +57,52 @@ function onChangePageSize(pageSize) {
     GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
     currentPageSize = pageSize;
 }
+function Descending() {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('')
+    if (value !== "0") {
+        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+function Ascending() {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    var value = $("#ddlSort").children("option:selected").val();
+    $('#txtName').val('')
 
+    if (value !== "0") {
+
+        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
+    }
+    else {
+        alert('Please select SortBy Value');
+    }
+};
+function GetDetailsOrderby(pageNumber, pageSize, order) {
+    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+    HttpPost(`/DemolitionReport/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
+}
+function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+    var model = {
+        SortBy: $("#ddlSort").children("option:selected").val(),
+        SortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber),
+
+        localityId: parseInt(($('#LocalityId option:selected').val())),
+        FromDate: (($('#FromDate').val())),
+        ToDate: (($('#ToDate').val()))
+    }
+    return model;
+}
 
 function callSelect2() {
     $("select").select2({

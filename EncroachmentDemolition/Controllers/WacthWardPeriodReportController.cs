@@ -29,9 +29,9 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] WatchandwardSearchDto watchandwardSearchDto)
+        public async Task<PartialViewResult> GetDetails([FromBody] WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
-            var result = await _watchandwardService.GetWatchandwardReportData(watchandwardSearchDto);
+            var result = await _watchandwardService.GetWatchandwardReportData(watchAndWardPeriodReportSearchDto);
             if (result != null)
             {
                 return PartialView("Index", result);

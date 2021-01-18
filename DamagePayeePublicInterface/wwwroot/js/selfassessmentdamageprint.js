@@ -89,27 +89,19 @@
         $("#IsDocumentFor").val("Any Other");
     }
 
+    PrintData();
+    
+});
+function closePrintWindow() {
+
+   window.close();
+}
+
+function PrintData() {
     debugger;
-    //var printWindow = window.open('', '');
-    //var doc = printWindow.document;
-    //var printContents = document.getElementById("LetterData").innerHTML;
-    //doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
-    //doc.write(printContents);
-    //doc.close();
-    //function show() {
-    //    if (doc.readyState === "complete") {
-    //        printWindow.focus();
-    //        printWindow.print();
-    //        printWindow.close();
-    //    } else {
-    //        setTimeout(show, 100);
-    //    }
-    //};
-    //show();
-    var printWindow = window.open('', '');
+    var printWindow = this.window;
     var doc = printWindow.document;
     var printContents = document.getElementById("LetterData").innerHTML;
-    debugger
     doc.write(document.getElementById("divPrintRef").innerHTML);  // _Layout page div id (Mandatory)
     doc.write(printContents);
     doc.close();
@@ -123,15 +115,8 @@
         }
     };
     show();
-    doc.print();
-    printWindow.close();
     window.onafterprint = closePrintWindow;
-});
-function closePrintWindow() {
-
-   window.close();
 }
-
 
 $("input[name='DeclarationStatus1']").click(function () {/* -----------Added by Renu  --------------- */
     if ($("#DeclarationStatus1").is(":checked"))

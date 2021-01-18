@@ -4,47 +4,47 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
+        <tr>
+            <th rowspan="2">Sr.No</th>
+            <th rowspan="2">Date</th>
+            <th rowspan="2">Locality Name (Village) </th>
+
+            <th rowspan="2">Land Mark</th>
+            <th rowspan="2">Status on Ground</th>
+            <th rowspan="2">Remarks</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
                 <tr>
-                    <th rowspan="2">Sr.No</th>
-                    <th rowspan="2">Date</th>
-                    <th rowspan="2">Locality Name (Village) </th>
-                  
-                    <th rowspan="2">Land Mark</th>
-                    <th rowspan="2">Status on Ground</th>
-                    <th rowspan="2">Remarks</th>
+                    <td>@(rowNo += 1)</td>
+
+                    <td>@item.Date</td>
+                    <td>@item.Locality.Name</td>
+
+                    <td>@item.Landmark</td>
+                    <td>@item.StatusOnGround</td>
+                    <td>@item.Remarks</td>
+
+                    @*asp-action="View" asp-route-id="@item.Id"*@
+                    @*<td>
+                            <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
+
+                        </td>*@
                 </tr>
-            </thead>
-            <tbody>
-                @if (Model != null && Model.Results.Count() > 0)
-                {
-                    @foreach (var item in Model.Results)
-                    {
-                        <tr>
-                            @*<td>@(rowNo += 1)</td>*@
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="13" style="text-align:center"> Data Not Available </th>
+            </tr>
+        }
 
-                            <td>@item.Date</td>
-                            <td>@item.Locality.Name</td>
-                          
-                            <td>@item.Landmark</td>
-                            <td>@item.StatusOnGround</td>
-                            <td>@item.Remarks</td>
+    </tbody>
 
-                            @*asp-action="View" asp-route-id="@item.Id"*@
-                            @*<td>
-                                    <a style="text-decoration:none;" asp-action="Restore" asp-route-id="@item.Id" title="restore">  <input type="submit" value="Restore" class="btn dda-pageheading" /></a>
-
-                                </td>*@
-                        </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <th colspan="13" style="text-align:center"> Data Not Available </th>
-                    </tr>
-                }
-
-            </tbody>
-
-        </table>
-        @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+</table>
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -25,7 +25,7 @@ namespace Libraries.Service.ApplicationService
             _watchandwardRepository = watchandwardRepository;
         }
 
-       
+
         public async Task<List<Locality>> GetAllLocality()
         {
             List<Locality> localityList = await _watchandwardRepository.GetAllLocality();
@@ -115,9 +115,9 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
+        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
-            return await _watchandwardRepository.GetWatchandwardReportData(watchandwardSearchDto);
+            return await _watchandwardRepository.GetWatchandwardReportData(watchAndWardPeriodReportSearchDto);
         }
 
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
@@ -152,8 +152,8 @@ namespace Libraries.Service.ApplicationService
         {
             return await _watchandwardRepository.GetWatchandwardreportfiledetails(Id);
         }
-      
-       
+
+
         public async Task<bool> DeleteWatchandwardphotofiledetails(int Id)
         {
             return await _watchandwardRepository.DeleteWatchandwardphotofiledetails(Id);
@@ -185,6 +185,6 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-       
+
     }
 }

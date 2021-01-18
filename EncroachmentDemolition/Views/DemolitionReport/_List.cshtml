@@ -26,7 +26,7 @@
                         @foreach (var item in Model.Results)
                         {
                     <tr>
-                        <td>@item.LocalityId</td>
+                        <td>@item.Locality.Name</td>
                         <td>@item.KhasraNo </td>
                         <td>@item.Area </td>
                         <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
