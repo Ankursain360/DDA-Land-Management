@@ -224,6 +224,58 @@ namespace Libraries.Repository.EntityRepository
                 && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
                 && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
                 && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId)) && (x.IsActive == 1)).OrderByDescending(x => x.Id).GetPaged(dto.PageNumber, dto.PageSize);
+          
+            int SortOrder = (int)dto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (dto.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => x.Division.Name).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        break;
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (dto.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => x.Division.Name).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
+                        break;
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
+                        break;
+
+                }
+            }
             return data;
         }
 
