@@ -1,4 +1,5 @@
-﻿@model Libraries.Model.Entity.EncroachmentRegisteration
+﻿@*@model Libraries.Model.Entity.EncroachmentRegisteration*@
+@model Dto.Master.DemolitionReportDtoProfile
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Demolition Report" })
 
@@ -11,40 +12,54 @@
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
         <div class="row">
-            <div class="form-group col-md-4">
+            <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
-                            asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="localityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "Id","Name"))">
                         <option value="0">All</option>
-
                     </select>
-                    <span class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label">Locality (Village) Name </label>
-                </div>
-            </div>
-
-
-            <div class="form-group col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="Date" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
-                    <label class="floating-label">From Date</label>
-                </div>
-            </div>
-
-
-            <div class="form-group col-md-4">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="date" asp-for="Date" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
-                    <label class="floating-label">To Date</label>
+                    <label asp-validation-for="LocalityId" class="error"></label>
+                    <label class="floating-label" asp-for="localityId">Locality</label>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-md-3">
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="FromDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="FromDate" id="FromDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                    <label class="floating-label">From Date  <span style="color:red">*</span></label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="ToDate" id="ToDateMsg" class="text-danger" style="display:none;">Mandatory</span>
+                    <label class="floating-label">To Date  <span style="color:red">*</span></label>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="row mt-md-3">
             <div class="col-md-12 ">
                 <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
                 <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
 
+            </div>
+        </div>*@
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -52,21 +67,20 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Zone</option>
-                        <option>Division</option>
-                        <option>Village Name </option>
-                        <option>Khasra No.</option>
-                        <option> Demolition Date</option>
-                        <option>Area Reclaimed</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        
+                        
+                        <option value="LocalityId">Village Name </option>
+                        
+                        <option value="EncrochmentDate" > Demolition Date</option>
+                        <option value="Area">Area Reclaimed</option>
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span class="btn slow" id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
 

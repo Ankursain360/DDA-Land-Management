@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿
 using System.Threading.Tasks;
-using Dto.Search;
+using Microsoft.AspNetCore.Mvc;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Mvc;
 using Notification;
+using Notification.Constants;
 using Notification.OptionEnums;
+using System;
+using Dto.Search;
+using Dto.Master;
 
 namespace EncroachmentDemolition.Controllers
 {
     public class DemolitionReportController : BaseController
     {
-       
         private readonly IEncroachmentRegisterationService _encroachmentRegisterationService;
 
         public DemolitionReportController(IEncroachmentRegisterationService encroachmentRegisterationService)
@@ -21,36 +21,28 @@ namespace EncroachmentDemolition.Controllers
             _encroachmentRegisterationService = encroachmentRegisterationService;
         }
 
-        async Task BindDropDown(EncroachmentRegisteration encroachmentRegisteration)
-        {
-            encroachmentRegisteration.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList();
-
-        }
-       
         public async Task<IActionResult> Index()
         {
-            EncroachmentRegisteration model = new EncroachmentRegisteration();
-
-            await BindDropDown(model);
-            return View(model);
+            DemolitionReportDtoProfile encroachmentregistration = new DemolitionReportDtoProfile();
+           
+            ViewBag.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList();
+            return View(encroachmentregistration);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DemolitionReportSearchDto model)
+        public async Task<PartialViewResult> GetDetails([FromBody] DemolitionReportSearchDto model)
         {
+            var result = await _encroachmentRegisterationService.GetPagedDemolitionReport(model);
 
-            if (model != null)
+            if (result != null)
             {
-                var result = await _encroachmentRegisterationService.GetPagedDemolitionReport(model);
-               
                 return PartialView("_List", result);
             }
             else
             {
-                ViewBag.Message = Alert.Show("No Data Found", "", AlertType.Warning);
-                return PartialView("_List", null);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
             }
         }
-
     }
 }

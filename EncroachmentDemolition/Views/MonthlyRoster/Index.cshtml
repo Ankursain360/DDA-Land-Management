@@ -1,8 +1,79 @@
-﻿@await Component.InvokeAsync("PageHeader", new { pageName = "MonthlyRoaster" })
+﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Monthly Roaster" })
 
-<div class="pt-3" id="divTable">
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtName" class="floating-label">Name</label>
+                </div>
+            </div>
 
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+
+                        <option value="0">Select One</option>
+                        <option value="Name">Department Name</option>
+                        <option value="IsActive">Status</option>
+
+
+
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                </div>
+            </div>
+
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/MonthlyRoster/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+
+        <div class="table-responsive px-2" id="divDepartmentTable">
+
+        </div>
+
+
+    </div>
+    <div class="table-responsive px-2" id="divTable">
+
+    </div>
 </div>
+   
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">

@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
@@ -53,14 +53,14 @@ $("#btnReset").click(function () {
 
 });
 
+
+
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetWatchandward(pageNo, currentPageSize);
+    GetWatchandward(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetWatchandward(currentPageNumber, pageSize);
+    GetWatchandward(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

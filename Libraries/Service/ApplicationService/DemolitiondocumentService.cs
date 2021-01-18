@@ -48,6 +48,7 @@ namespace Libraries.Service.ApplicationService
             Demolitiondocument model = result.FirstOrDefault();
             model.DocumentName = demolitiondocument.DocumentName;
             model.IsMandatory = demolitiondocument.IsMandatory;
+            model.IsActive = demolitiondocument.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _demolitiondocumentRepository.Edit(model);

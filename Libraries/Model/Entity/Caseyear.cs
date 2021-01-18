@@ -1,14 +1,20 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Libraries.Model.Entity
 {
     public class Caseyear : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "CaseYear is required")]
+        public Caseyear()
+        { }
+        [Required(ErrorMessage = "Case Year name is required")]
+        [Remote(action: "Exist", controller: "caseyear", AdditionalFields = "Id")]
 
         public string Name { get; set; }
-       
+        [Required(ErrorMessage = "Status field is required")]
         public byte IsActive { get; set; }
 
     }

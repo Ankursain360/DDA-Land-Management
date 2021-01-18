@@ -12,7 +12,7 @@
                             asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
                         <option value="0">All</option>
                     </select>
-                    <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId" style="display:none;" id="LocalityID">LocalityId is Mandatory</span>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
                     <label asp-for="LocalityId" class="floating-label">Locality Name(Village) </label>
                 </div>
             </div>

@@ -24,15 +24,16 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="IsMandatory" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="10" />
+                           class="floating-label-field floating-label-field--s3" limit="1" />
 
                     <span asp-validation-for="IsMandatory" class="text-danger"></span>
 
-                    <label class="floating-label">Is Mandatory</label>
+                    <label class="floating-label">Is Mandatory (1/0/Y/N)</label>
                 </div>
 
             </div>
-        </div>  <div class="row">
+        </div>  
+        <div class="row mt-md-3">
 
             <div class="col-md-6    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -48,13 +49,11 @@
         </div>
 
         <div class="row mt-md-3">
-
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "Demolitiondocument", null, new { @class = "btn btn-theme " })
 
             </div>
-
         </div>
 
     </form>

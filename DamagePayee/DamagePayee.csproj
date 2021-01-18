@@ -22,22 +22,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<!--<ProjectReference Include="..\AuthServer\AuthServer.csproj" />-->
 		<ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
 		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
 	</ItemGroup>
   
   <ItemGroup>
   <Content Remove="wwwroot\js\demandletterindex.min.js" />
+  <Content Remove="wwwroot\js\reliefreportindex.min.js" />
   <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\demandletterindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\reliefreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\js\demandletterindex.min.js" />
+    <None Include="wwwroot\js\reliefreportindex.min.js" />
     <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 

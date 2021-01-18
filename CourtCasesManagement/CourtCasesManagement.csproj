@@ -5,6 +5,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Legalmanagementsystem\CreateRun.cshtml" />
+    <Content Remove="Views\Legalmanagementsystem\IndexRun.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\CaseNature\Create.cshtml" />
+    <None Include="Views\CaseNature\Index.cshtml" />
+    <None Include="Views\CaseYear\Create.cshtml" />
+    <None Include="Views\CaseYear\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="CCAvenueCryptoPackage" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />

@@ -44,7 +44,7 @@ using System.Threading.Tasks;
 using Dto.Master;
 using CourtCasesManagement.Controllers;
 
-namespace DamagePayee.Controllers
+namespace CourtCasesManagement.Controllers
 {
     public class HomeController : BaseController
     {
