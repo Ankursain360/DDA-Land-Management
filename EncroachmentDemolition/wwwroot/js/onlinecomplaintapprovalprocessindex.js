@@ -19,14 +19,73 @@ function GetWatchandward(pageNumber, pageSize, StatusId) {
 }
 
 function GetSearchParam(pageNumber, pageSize, StatusId) {
+
+    var sorbyname = $('#Sortbyd').val();
+    var sortdesc = $("#sortdesc").val();
+    if (sorbyname) { } else {
+        sorbyname = 'Name';
+    }
+
+
     var model = {
-        name: "test",
+
+        colname: sorbyname,
+        orderby: sortdesc,
+      
         StatusId: StatusId,
         pageSize: pageSize,
         pageNumber: pageNumber
     }
     return model;
 }
+
+$("#Sortbyd").change(function () {
+
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+
+    }
+
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+
+});
+$("#ascId").click(function () {
+    $("#descId").removeClass("active");
+    $("#ascId").addClass("active");
+    $("#sortdesc").val(2);
+
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+
+    }
+
+
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+});
+$("#descId").click(function () {
+    $("#ascId").removeClass("active");
+    $("#descId").addClass("active");
+    $("#sortdesc").val(1);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+     
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+      
+    }
+
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+});
+
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);

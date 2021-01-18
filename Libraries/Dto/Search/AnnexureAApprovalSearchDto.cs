@@ -9,5 +9,9 @@ namespace Dto.Search
     {
         public string name { get; set; }
         public int StatusId { get; set; }
+
+        public string colname { get; set; }
+        public int orderby { get; set; }
+
     }
 }
