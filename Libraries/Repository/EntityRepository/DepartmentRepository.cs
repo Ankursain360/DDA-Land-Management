@@ -27,6 +27,7 @@ namespace Libraries.Repository.EntityRepository
                             .OrderByDescending(s => s.IsActive)
 
                         .GetPaged<Department>(model.PageNumber, model.PageSize); ;
+
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -54,6 +55,8 @@ namespace Libraries.Repository.EntityRepository
                 }
             }
             return data;
+
+
         }
         public async Task<List<Department>> GetDepartment()
         {

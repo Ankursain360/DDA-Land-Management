@@ -56,6 +56,9 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => x.Department.Name).ToList();
+                        break;
                     case ("NAME"):
                         data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
@@ -73,6 +76,9 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        break;
                     case ("NAME"):
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
@@ -80,7 +86,7 @@ namespace Libraries.Repository.EntityRepository
                         data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
 
 
