@@ -61,16 +61,33 @@ $("#btnDescending").click(function () {
 });
 
 
-function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetWatchandward(pageNo, currentPageSize);
-    currentPageNumber = pageNo;
-}
-
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetWatchandward(currentPageNumber, pageSize);
-    currentPageSize = pageSize;
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetWatchandward(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
+        currentPageSize = pageSize;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetWatchandward(parseInt(currentPageNumber), parseInt(pageSize), StatusId, sortby);
+        currentPageSize = pageSize;
+    }
+}
+
+
+function onPaging(pageNo) {
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+        GetWatchandward( parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
+        currentPageNumber = pageNo;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+        GetWatchandward( parseInt(pageNo), parseInt(currentPageSize), StatusId, sortby);
+        currentPageNumber = pageNo;
+    }
+   
 }
 
 
