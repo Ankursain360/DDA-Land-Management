@@ -9,6 +9,10 @@ using Notification.OptionEnums;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using System.Data;
+using Newtonsoft.Json;
+using Utility.Helper;
+using System.Collections.Generic;
 
 namespace SiteMaster.Controllers
 {
@@ -170,6 +174,16 @@ namespace SiteMaster.Controllers
             }
             var list = await _districtService.GetAllDistrict();
             return View("Index", list);
+        }
+
+        public async Task<IActionResult> Download()
+        {
+            List<District> result = await _districtService.GetAllDistrict();
+            DataTable dt = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(result), (typeof(DataTable)));
+            var memory = ExcelHelper.CreateExcel(dt);
+            string sFileName = @"Employees.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }
