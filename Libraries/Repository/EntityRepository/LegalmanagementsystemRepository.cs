@@ -34,6 +34,10 @@ namespace Libraries.Repository.EntityRepository
             var courttypeList = await _dbContext.Courttype.Where(x => x.IsActive == 1).ToListAsync();
             return courttypeList;
         }
+        public async Task<bool> AnyCode(int id, string code)
+        {
+            return await _dbContext.Legalmanagementsystem.AnyAsync((t => t.Id != id && t.FileNo.ToLower() == code.ToLower()));
+        }
 
         public async Task<List<Locality>> GetLocalityList(int zoneId)
         {
@@ -100,6 +104,83 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        /*************************************** chnges for Module ********************************/
+        public async Task<PagedResult<Legalmanagementsystem>> GetPagedLegalmanagementsystem(LegalManagementSystemSearchDto model)
+        {
 
+            var data = await _dbContext.Legalmanagementsystem
+                     .Include(x => x.Zone)
+                     .Include(x => x.Locality)
+                     .Include(x => x.CaseStatus)
+                      .Include(x => x.CourtType)
+                     .Where(x => ((string.IsNullOrEmpty(model.name) || x.FileNo.Contains(model.name))))
+                      //.OrderByDescending(s => s.IsActive == 1)
+                      .GetPaged<Legalmanagementsystem>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderBy(x => x.IsActive == 0).ToList();
+
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("STATUS"):
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive == 0).ToList();
+
+                        break;
+                }
+            }
+            return data;
+        }
+
+        public async Task<List<Legalmanagementsystem>> GetAllLegalmanagementsystem()
+        {
+            return await _dbContext.Legalmanagementsystem
+                 .Where(x => x.IsActive == 1)
+               .Include(x => x.Zone)
+                    .Include(x => x.Locality)
+                    .Include(x => x.CaseStatus)
+                    .Include(x => x.CourtType)
+                    .ToListAsync();
+        }
+        public string GetDownload(int id)
+        {
+            var File = (from f in _dbContext.Legalmanagementsystem
+                        where f.Id == id
+                        select f.StayInterimGrantedDocument).First();
+
+            return File;
+        }
+        public string GetDocDownload(int id)
+        {
+            var File = (from f in _dbContext.Legalmanagementsystem
+                        where f.Id == id
+                        select f.DocumentFilePath).First();
+
+            return File;
+        }
+        public string GetJDocDownload(int id)
+        {
+            var File = (from f in _dbContext.Legalmanagementsystem
+                        where f.Id == id
+                        select f.JudgementFilePath).First();
+
+            return File;
+        }
     }
 }

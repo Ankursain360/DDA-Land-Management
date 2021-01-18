@@ -18,7 +18,7 @@ namespace SiteMaster.Controllers
         {
             _villageService = villageService;
         }
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
            // var list = await _villageService.GetAllVillage();
             return View();

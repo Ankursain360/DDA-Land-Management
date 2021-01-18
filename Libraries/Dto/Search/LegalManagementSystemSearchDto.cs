@@ -8,5 +8,6 @@ namespace Dto.Search
    public class LegalManagementSystemSearchDto : BaseSearchDto
     {
         public string FileNo { get; set; }
+        public string name { get; set; }
     }
 }

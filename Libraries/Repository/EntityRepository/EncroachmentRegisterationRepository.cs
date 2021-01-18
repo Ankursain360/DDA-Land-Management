@@ -114,13 +114,13 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Watchandward>> GetPagedEncroachmentRegisteration(EncroachmentRegisterationDto model)
         {
-            try {
+            //try {
 
                 var InInspectionId = (from x in _dbContext.EncroachmentRegisteration
                                       where x.WatchWard != null && x.IsActive == 1
-                                      select x.WatchWardId).ToArray(); 
+                                      select x.WatchWardId).ToArray();
 
-                return await _dbContext.Watchandward
+            var data = await _dbContext.Watchandward
                 .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
@@ -128,21 +128,62 @@ namespace Libraries.Repository.EntityRepository
                 .Where(x => x.ApprovedStatus == 1 && x.IsActive == 1 
                  && !(InInspectionId).Contains(x.Id))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
-                //return await _dbContext.EncroachmentRegisteration
-                //                        .Include(x=> x.WatchWard)
-                //                        .Include(x => x.Locality)
-                //                        .Where(x =>  x.WatchWard.ApprovedStatus == 1 || x.IsActive == 1 )
-                //                        .GetPaged(model.PageNumber, model.PageSize);
-                //return await _dbContext.EncroachmentRegisteration
-                //                        .Include(x => x.Locality)
-                //                        .Where(x => x.IsActive == 1)
-                //                        .GetPaged(model.PageNumber, model.PageSize);
+            //return await _dbContext.EncroachmentRegisteration
+            //                        .Include(x=> x.WatchWard)
+            //                        .Include(x => x.Locality)
+            //                        .Where(x =>  x.WatchWard.ApprovedStatus == 1 || x.IsActive == 1 )
+            //                        .GetPaged(model.PageNumber, model.PageSize);
+            //return await _dbContext.EncroachmentRegisteration
+            //                        .Include(x => x.Locality)
+            //                        .Where(x => x.IsActive == 1)
+            //                        .GetPaged(model.PageNumber, model.PageSize);
 
-            }
-            catch(Exception ex)
+            //}
+            //catch(Exception ex)
+            //{
+            //    throw;
+            //}
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
             {
-                throw;
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data.Results = data.Results.OrderBy(x => x.PrimaryListNo).ToList();
+                        break;
+                }
             }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.PrimaryListNo).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
         public async Task<bool> SaveDetailsOfEncroachment(DetailsOfEncroachment detailsOfEncroachment)

@@ -29,19 +29,17 @@
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3">
-                    <option selected="selected" disabled="disabled">Select One</option>
-                    <option>Locality</option>
-                    <option>Khasra No</option>
-                    <option>Primary List No.</option>
-                    <option>Status On Ground</option>
-
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                    <option value="Date">Date</option>
+                    <option value="Locality">Locality</option>
+                    <option value="KhasraNo">Khasra No</option>
+                    <option value="PrimaryListNo">Primary List No.</option>
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
             <div class="short-btn d-flex align-items-center">
-                <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
             </div>
         </div>
 

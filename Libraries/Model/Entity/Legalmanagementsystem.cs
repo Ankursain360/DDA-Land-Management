@@ -21,8 +21,8 @@ namespace Libraries.Model.Entity
         public string LastDecision { get; set; }
         public int? ZoneId { get; set; }
         public int? LocalityId { get; set; }
-        public int? CaseType { get; set; }
-        public int? InFavour { get; set; }
+        public string CaseType { get; set; }
+        public string InFavour { get; set; }
         public string PanelLawyer { get; set; }
         public int? StayInterimGranted { get; set; }
         public string StayInterimGrantedDocument { get; set; }
@@ -36,9 +36,8 @@ namespace Libraries.Model.Entity
 
         public Casestatus CaseStatus { get; set; }
         public Courttype CourtType { get; set; }
-        public Locality Locality { get; set; }
         public Zone Zone { get; set; }
-
+        public Locality Locality { get; set; }
 
         [NotMapped]
         public List<Casestatus> CasestatusList { get; set; }
@@ -55,7 +54,11 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Legalmanagementsystem> CourtCaseNoList { get; set; }
         [NotMapped]
-        public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
+        public IFormFile DocumentFile { get; set; }
 
+        [NotMapped]
+        public IFormFile JudgementFile { get; set; }
+        [NotMapped]
+        public IFormFile StayFile { get; set; }
     }
 }

@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Legalmanagementsystem\CreateRun.cshtml" />
+    <Content Remove="Views\Legalmanagementsystem\IndexRun.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\CaseNature\Create.cshtml" />
     <None Include="Views\CaseNature\Index.cshtml" />
     <None Include="Views\CaseYear\Create.cshtml" />
