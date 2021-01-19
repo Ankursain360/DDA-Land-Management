@@ -52,9 +52,8 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="0">Select One</option>
-                        <option value="Name"> Name</option>
-
+                     
+                        <option value="Name"> Court Name</option>
                         <option value="Address">Address</option>
                         <option value="PhoneNo">Phone No</option>
                         <option value="IsActive">Status</option>
@@ -63,8 +62,8 @@
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <button id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></button>
-                    <button id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

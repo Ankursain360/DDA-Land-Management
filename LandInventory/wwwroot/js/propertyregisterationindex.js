@@ -23,7 +23,9 @@ $("#btnDescending").click(function () {
     sortOrder = 2;//for Descending
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 $("#btnReset").click(function () {
     $('#DepartmentId').val('0').trigger('change');
     $('#ZoneId').val('0').trigger('change');

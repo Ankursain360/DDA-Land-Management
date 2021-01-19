@@ -1,5 +1,6 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 $(document).ready(function () {
 
     var value = $('#PlannedUnplannedLand').val();
@@ -24,18 +25,6 @@ $(document).ready(function () {
         $('#divUnplannedSelection').show();
         callSelect2();
     }
-
-
-    $("#btnGenerate").click(function () {
-        debugger;
-        var param = GetSearchParam(currentPageNumber, currentPageSize);
-        HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
-            $('#LoadReportView').html("");
-            $('#LoadReportView').html(response);
-        });
-    });
-
-
     $('#PlannedUnplannedLand').change(function () {
         var value = $('#PlannedUnplannedLand').val();
         if (value == 'Planned Land') {
@@ -82,6 +71,8 @@ $(document).ready(function () {
         }
     });
 
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+
 });
 //Bind Zone Dropdown from Department
 function GetZoneList(id) {
@@ -122,15 +113,30 @@ function GetDivisionList(id) {
 };
 
 
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetDetails(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/PropertyInventoryReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
 }
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
-function GetSearchParam(pageNumber, pageSize) {
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
     var classificationOfLandId = $('#ClassificationOfLandId option:selected').val();
     var departmentid = $('#DepartmentId option:selected').val();
@@ -145,8 +151,10 @@ function GetSearchParam(pageNumber, pageSize) {
 
     var model = {
         name: "test",
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: pageSize,
+        pageNumber: pageNumber,
         classificationofland: parseInt(classificationOfLandId),
         department: parseInt(departmentid),
         zone: parseInt(zoneId),
@@ -170,12 +178,12 @@ function GetSearchParam(pageNumber, pageSize) {
 
 
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 
@@ -203,5 +211,5 @@ $("#btnReset").click(function () {
     $('#MainLandUseId').val('0').trigger('change')
     $('#LitigationStatus').val('0').trigger('change');
     $('#Encroached').val('0').trigger('change');
-    GetDetails(currentPageNumber, currentPageSize);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });

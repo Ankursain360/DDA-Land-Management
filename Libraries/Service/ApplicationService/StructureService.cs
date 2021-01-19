@@ -49,7 +49,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _structureRepository.FindBy(a => a.Id == id);
             Structure model = result.FirstOrDefault();
             model.Name = structure.Name;
-           
+            model.IsActive = structure.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _structureRepository.Edit(model);

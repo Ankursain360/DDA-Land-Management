@@ -23,8 +23,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Caseyear>> GetPagedCaseyear(CaseyearSearchDto model)
         {
             var data= await _dbContext.Caseyear
-                                //.Where(x => x.IsActive == 1)
-                                .OrderByDescending(s => s.IsActive==1)
+                                .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                .OrderByDescending(x => x.IsActive)
                             .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -32,14 +32,10 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results
-                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderBy(x => x.Name).ToList();
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results
-                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderBy(x => x.IsActive == 0).ToList();
+                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
                 }
             }
@@ -48,14 +44,10 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results
-                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderByDescending(x => x.Name).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results
-                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             .OrderByDescending(x => x.IsActive == 0).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }
