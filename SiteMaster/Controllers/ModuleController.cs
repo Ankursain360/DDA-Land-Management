@@ -58,8 +58,9 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
-                    }
+                        var list = await _moduleService.GetAllModule();
+                        return View("Index", list);
+                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
@@ -132,19 +133,20 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            if (id == 0)
+            
+            var result = await _moduleService.Delete(id);
+            if (result == true)
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _moduleService.GetAllModule();
+                return View("Index", result1);
             }
-
-            var form = await _moduleService.Delete(id);
-            if (form == false)
+            else
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _moduleService.GetAllModule();
+                return View("Index", result1);
             }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  

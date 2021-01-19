@@ -131,19 +131,20 @@ namespace SiteMaster.Controllers
 
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            if (id == 0)
+            
+            var result = await _actionsService.Delete(id);
+            if (result == true)
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _actionsService.GetAllActions();
+                return View("Index", result1);
             }
-
-            var form = await _actionsService.Delete(id);
-            if (form == false)
+            else
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _actionsService.GetAllActions();
+                return View("Index", result1);
             }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
