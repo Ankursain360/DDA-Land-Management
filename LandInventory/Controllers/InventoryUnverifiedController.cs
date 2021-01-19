@@ -18,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
+using LandInventory.Filters;
+using Core.Enum;
 
 namespace LandInventory.Controllers
 {
@@ -48,6 +50,7 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
 
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
@@ -99,6 +102,7 @@ namespace LandInventory.Controllers
         #endregion
 
         #region Property Inventory changes
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -131,6 +135,7 @@ namespace LandInventory.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
@@ -359,7 +364,7 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -387,6 +392,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
         {
             Deletedproperty model = new Deletedproperty();
@@ -430,7 +436,7 @@ namespace LandInventory.Controllers
 
 
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);

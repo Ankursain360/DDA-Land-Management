@@ -830,6 +830,7 @@ namespace LandInventory.Controllers
         }
         #endregion
 
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -842,6 +843,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
         {
             Disposedproperty model = new Disposedproperty();
