@@ -40,17 +40,20 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                       data.Results= data.Results.OrderBy(x => x.Name).ToList(); 
+                    case ("DEPARTMENT"):
+                       data.Results= data.Results.OrderBy(x => x.Department.Name).ToList(); 
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList(); 
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => x.Division.Name).ToList(); 
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
                         break;
                     case ("LOCALITYCODE"):
-                        data.Results = data.Results.OrderBy(x => x.LocalityCode).ToList(); 
-                        break;
-                    case ("ADDRESS"):
-                        data.Results = data.Results.OrderBy(x => x.Address).ToList(); 
-                        break;
-                    case ("LANDMARK"):
-                        data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                        data.Results = data.Results.OrderBy(x => x.LocalityCode).ToList();
                         break;
                     case ("ISACTIVE"):
                         data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
@@ -61,20 +64,24 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
+                   
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => x.Division.Name).ToList();
+                        break;
+                    case ("LOCALITY"):
                         data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
                         break;
                     case ("LOCALITYCODE"):
                         data.Results = data.Results.OrderByDescending(x => x.LocalityCode).ToList();
                         break;
-                    case ("ADDRESS"):
-                        data.Results = data.Results.OrderByDescending(x => x.Address).ToList();
-                        break;
-                    case ("LANDMARK"):
-                        data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
-                        break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
                 }
             }

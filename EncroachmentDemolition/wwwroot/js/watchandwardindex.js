@@ -1,4 +1,5 @@
-﻿var currentPageNumber = 1;
+﻿
+var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortby = 1;//default Ascending 
 

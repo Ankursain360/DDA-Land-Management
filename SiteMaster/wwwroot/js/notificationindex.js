@@ -1,62 +1,44 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
-var currentSortOrderAscending = 1;
-var currentSortOrderDescending = 2;
+var sortby = 1;
+
 
 $(document).ready(function () {
-    GetDetails(currentPageNumber, currentPageSize);
+    GetDetails(currentPageNumber, currentPageSize, sortby);
 });
-$("#btnSearch").click(function () {
-    GetDetails(currentPageNumber, currentPageSize);
-});
-function Descending() {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
-    if (value !== "0") {
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-function Ascending() {
+
+$("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('')
+    sortby = 1;//for Ascending 
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
 
-    if (value !== "0") {
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
 
-        GetDetailsOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
 
 
 $("#btnReset").click(function () {
     $('#txtName').val('')
     GetDetails(currentPageNumber, currentPageSize);
 });
-function GetDetailsOrderby(pageNumber, pageSize, order) {
-    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+
+
+function GetDetails(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Notification/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 }
 
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/Notification/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
-}
-function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
@@ -64,26 +46,25 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
+    //debugger
     return model;
 }
 
-function GetSearchParam(pageNumber, pageSize) {
-    var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
-    }
-    return model;
-}
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
 
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDetails(pageNo, currentPageSize);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetDetails(currentPageNumber, pageSize);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

@@ -37,10 +37,60 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Onlinecomplaint>> GetPagedOnlinecomplaint(OnlinecomplaintApprovalSearchDto model, int userId)
         {
-            return  await _dbContext.Onlinecomplaint.
+            var data = await _dbContext.Onlinecomplaint.
                 Include(x => x.Location).Include(x => x.ComplaintType).
                Where(x=>x.IsActive==1 && x.ApprovedStatus==model.StatusId && (model.StatusId==0 ? x.PendingAt== userId : x.PendingAt == 0))
                 .OrderByDescending(x => x.Id).GetPaged<Onlinecomplaint>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                    case ("CONTACT"):
+                        data.Results = data.Results.OrderBy(x => x.Contact).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderBy(x => x.Email).ToList();
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderBy(x => x.AddressOfComplaint).ToList();
+                        break;
+
+                    case ("COMPLAINTTYPE"):
+                        data.Results = data.Results.OrderBy(x => x.ComplaintType.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                    case ("CONTACT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Contact).ToList();
+                        break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderByDescending(x => x.Email).ToList();
+                        break;
+                    case ("ADDRESS"):
+                        data.Results = data.Results.OrderByDescending(x => x.AddressOfComplaint).ToList();
+                        break;
+                    case ("COMPLAINTTYPE"):
+                        data.Results = data.Results.OrderByDescending(x => x.ComplaintType.Name).ToList();
+                        break;
+
+                }
+            }
+            return data;
+
+
 
 
         }

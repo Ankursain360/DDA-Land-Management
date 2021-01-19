@@ -30,8 +30,8 @@ namespace Repository.EntityRepository
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
                                         && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
-                                        && (a.IsActive == 1)
-                                    )
+                                        
+                                    ).OrderByDescending(a => a.IsActive)
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -39,18 +39,22 @@ namespace Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.User.Name).ToList();
-                        break;
                     case ("USERNAME"):
                         data.Results = data.Results.OrderBy(x => x.User.UserName).ToList();
                         break;
-                    case ("EMAIL"):
-                        data.Results = data.Results.OrderBy(x => x.User.Email).ToList();
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.User.Name).ToList();
+                        break;
+                    case ("ROLE"):
+                        data.Results = data.Results.OrderBy(x => x.Role.Name).ToList();
                         break;
                     case ("PHONENUMBER"):
                         data.Results = data.Results.OrderBy(x => x.User.PhoneNumber).ToList();
                         break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderBy(x => x.User.Email).ToList();
+                        break;
+                   
                     case ("STATUS"):
                         data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
@@ -60,18 +64,22 @@ namespace Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.User.Name).ToList();
-                        break;
                     case ("USERNAME"):
                         data.Results = data.Results.OrderByDescending(x => x.User.UserName).ToList();
                         break;
-                    case ("EMAIL"):
-                        data.Results = data.Results.OrderByDescending(x => x.User.Email).ToList();
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Name).ToList();
+                        break;
+                    case ("ROLE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Role.Name).ToList();
                         break;
                     case ("PHONENUMBER"):
                         data.Results = data.Results.OrderByDescending(x => x.User.PhoneNumber).ToList();
                         break;
+                    case ("EMAIL"):
+                        data.Results = data.Results.OrderByDescending(x => x.User.Email).ToList();
+                        break;
+                   
                     case ("STATUS"):
                         data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;
