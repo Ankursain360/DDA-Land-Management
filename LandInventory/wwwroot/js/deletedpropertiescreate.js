@@ -1,20 +1,19 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
     $(".linkdisabled").click(function () {
         return false;
     });
-    $("#btnGenerate").click(function () {
-        var departmentId = $('#DepartmentId option:selected').val();
-        var zoneId = $('#ZoneId option:selected').val();
-        var divisionId = $('#DivisionId option:selected').val();
-        var Id = $('#Id option:selected').val();
 
-        GetDetails(currentPageNumber, currentPageSize, departmentId, zoneId, divisionId, Id);
-    });
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+   
 })
 
+$("#btnGenerate").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
 //Bind Zone Dropdown from Department
 function GetZoneList(id) {
@@ -55,47 +54,67 @@ function GetPrimaryNoList(id) {
         $("#Id").html(html);
     });
 };
-//Bind Grid
 
+$("#btnReset").click(function () {
+    $('#DepartmentId').val('0').trigger('change');
+    $('#ZoneId').val('0').trigger('change');
+    $('#DivisionId').val('0').trigger('change');
+    $('#InventoriedInId').val('0').trigger('change')
+    $('#ClassificationOfLandId').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('0').trigger('change');
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
-function GetDetails(pageNumber, pageSize, departmentId, zoneId, divisionId, Id) {
-    var param = GetSearchParam(pageNumber, pageSize, departmentId, zoneId, divisionId, Id == undefined ? 0 : Id);
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+function GetDetails(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     debugger
     HttpPost(`/DeletedProperties/List`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
 }
-function GetSearchParam(pageNumber, pageSize, departmentId, zoneId, divisionId, Id) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     
     var model = {
         name: "test",
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber),
-        departmentId: parseInt(departmentId),
-        zoneId: parseInt(zoneId),
-        divisionId: parseInt(divisionId),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: pageSize,
+        pageNumber: pageNumber,
+        departmentId: parseInt($('#DepartmentId').val()),
+        zoneId: parseInt($('#ZoneId').val()),
+        divisionId: parseInt($('#DivisionId').val()),
         inventoriedId: parseInt($('#InventoriedInId').val()),
         classificationOfLandId: parseInt($('#ClassificationOfLandId').val()),
         plannedUnplannedLand: $('#PlannedUnplannedLand').val(),
-        Id: parseInt(Id)
+        Id: parseInt($('#LocalityId option:selected').val())
     }
     return model;
 }
 function onPaging(pageNo) {
-    var departmentId = $('#DepartmentId option:selected').val();
-    var zoneId = $('#ZoneId option:selected').val();
-    var divisionId = $('#DivisionId option:selected').val();
-    var Id = $('#Id option:selected').val();
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), departmentId, zoneId, divisionId, Id);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    var departmentId = $('#DepartmentId option:selected').val();
-    var zoneId = $('#ZoneId option:selected').val();
-    var divisionId = $('#DivisionId option:selected').val();
-    var Id = $('#Id option:selected').val();
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), departmentId, zoneId, divisionId, Id);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

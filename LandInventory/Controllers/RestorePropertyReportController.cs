@@ -36,7 +36,9 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestorePropertyReportData(model);
+            dynamic result = null;
+            if(model!= null)
+            result = await _propertyregistrationService.GetRestorePropertyReportData(model);
 
             if (result != null)
             {
@@ -45,7 +47,7 @@ namespace LandInventory.Controllers
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
+                return PartialView("_Index", result);
             }
 
         }

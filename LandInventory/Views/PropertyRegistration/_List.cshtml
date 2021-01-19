@@ -50,7 +50,6 @@
 
             </tr>*@
         <tr>
-            <th scope="col">Sr.No</th>
             <th scope="col">Inventoried In</th>
             <th scope="col">Planned/Unplanned Land </th>
             <th scope="col">Classification of Land</th>
@@ -72,7 +71,6 @@
             @foreach (var item in Model.Results)
             {
                 <tr>
-                    <td>@(rowNo += 1)</td>
                     <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
                     <td>@(item.PlannedUnplannedLand)</td>
                     <td>@item.ClassificationOfLand.Name</td>

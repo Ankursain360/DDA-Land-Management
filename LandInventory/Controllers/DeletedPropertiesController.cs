@@ -63,7 +63,7 @@ namespace LandInventory.Controllers
             var result = await _propertyregistrationService.GetRestoreLandReportData(model);
             if (result != null)
             {
-                return PartialView("Index", result);
+                return PartialView("_Index", result);
             }
             else
             {

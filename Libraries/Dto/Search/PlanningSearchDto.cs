@@ -7,6 +7,7 @@ namespace Dto.Search
 {
     public class PlanningSearchDto:BaseSearchDto
     {
-        public string name { get; set; }
+        public string unplannedname { get; set; }
+        public string plannedname { get; set; }
     }
 }
