@@ -26,7 +26,7 @@ namespace Libraries.Repository.EntityRepository
                                       && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
                                         )
 
-                                .OrderByDescending(s =>s.IsActive )
+                                .OrderByDescending(s =>s.IsActive)
                                 .ThenBy(s => s.Department.Name)
                                 .ThenBy(s => s.Zone.Name)
                                 .ThenBy(s => s.Name)

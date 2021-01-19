@@ -62,8 +62,7 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(notification);
-                        return View(notification);
-
+                        
                     }
                 }
                 else

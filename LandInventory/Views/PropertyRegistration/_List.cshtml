@@ -121,23 +121,23 @@
                         <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
 
                         @*@if (ViewBag.IsUserCanEdit == 14)
-                        {*@
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                            {*@
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
                         @*}
 
 
-                        @if (item.IsValidate == 0)
-                        {*@
-                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove"
-                               onclick="return confirm('Are You Sure, You want to Delete this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
-                        @*}
-                        @if (item.IsValidate == 1)
-                        {*@
-                            @if (ViewBag.IsDisposedRightsUser == 15)
+                            @if (item.IsValidate == 0)
                             {
-                                <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" class="remove" onclick="return confirm('Are You Sure, You want to Dispose this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
-                            }
-                        @*}*@
+                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove"
+                                   onclick="return confirm('Are You Sure, You want to Delete this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+                            }*@
+                        @if (item.IsValidate == 1)
+                        {
+                            @*@if (ViewBag.IsDisposedRightsUser == 15)
+                                {*@
+                            <a asp-action="Dispose" asp-route-id="@item.Id" title="Dispose" class="remove" onclick="return confirm('Are You Sure, You want to Dispose this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+                            //}
+                        }
                     </td>
                 </tr>
             }
