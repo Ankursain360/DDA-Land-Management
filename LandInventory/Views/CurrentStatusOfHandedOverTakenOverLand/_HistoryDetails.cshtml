@@ -39,45 +39,56 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
-                    <td>@item.LandTransfer.PropertyRegistration.Department.Name</td>
-                    <td>@item.LandTransfer.PropertyRegistration.Zone.Name</td>
-                    <td>@item.LandTransfer.PropertyRegistration.Division.Name</td>
-                    <td>@item.LandTransfer.PropertyRegistration.Locality.Name</td>
-                    <td>@item.LandTransfer.PropertyRegistration.KhasraNo</td>
-                    <td>@item.Tsssurvey</td>
-                    <td>
-                        @if (item.SurveyReportFilePath != null)
-                        {
-                            <a asp-action="DownloadSurveyReportFile" asp-route-id="@item.Id"> (View Existing Document)</a>
-                        }
-                    </td>
+        <tr>
+            <td>@(rowNo += 1)</td>
+            <td>@item.LandTransfer.PropertyRegistration.Department.Name</td>
+            <td>@item.LandTransfer.PropertyRegistration.Zone.Name</td>
+            <td>@item.LandTransfer.PropertyRegistration.Division.Name</td>
+            <td>@(item.LandTransfer.PropertyRegistration.Locality.Name == null ? ""  : item.LandTransfer.PropertyRegistration.Locality.Name)</td>
+
+            @*<td>@item.LandTransfer.PropertyRegistration.Locality.Name</td>*@
+            <td>@item.LandTransfer.PropertyRegistration.KhasraNo</td>
+            <td>@item.Tsssurvey</td>
+            <td>
+                @if (item.SurveyReportFilePath != null)
+                {
+                    <a asp-action="DownloadSurveyReportFile" asp-route-id="@item.Id"> (View Existing Document)</a>
+                }
+                else
+                {
+                    <a> (No Existing Document)</a>
+                }
+            </td>
 
 
 
-                    @*<td>@item.SurveyReportFilePath</td>*@
-                    <td>@item.Encroachment</td>
-                    <td>@item.EncroachementArea</td>
-                    <td>@item.ActionOnEncroachment</td>
-                    <td>
-                        @if (item.ActionReportFilePath != null)
-                        {
-                            <a asp-action="DownloadActionReportFile" asp-route-id="@item.Id"> (View Existing Document)</a>
-                        }
-                    </td>
+            @*<td>@item.SurveyReportFilePath</td>*@
+            <td>@item.Encroachment</td>
+           
+            <td>@item.EncroachementArea</td>
+            <td>@item.ActionOnEncroachment</td>
+            <td>
+                @if (item.ActionReportFilePath != null)
+                {
+                    <a asp-action="DownloadActionReportFile" asp-route-id="@item.Id"> (View Existing Document)</a>
+                }
+                else
+                {
+                    <a> (No Existing Document)</a>
+                }
+            </td>
 
-                    @*<td>@item.ActionReportFilePath</td>*@
-                    <td>@item.FencingBoundaryWall</td>
-                    <td>@item.AreaCovered</td>
-                    <td>@item.Dimension</td>
-                    <td> @item.PlotUtilization</td>
-                    <td>@item.AreaUtilised</td>
-                    <td>@item.BalanceArea</td>
-                    <td>@item.Remarks</td>
-                    <td>@(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy") )</td>
+            @*<td>@item.ActionReportFilePath</td>*@
+            <td>@item.FencingBoundaryWall</td>
+            <td>@item.AreaCovered</td>
+            <td>@item.Dimension</td>
+            <td> @item.PlotUtilization</td>
+            <td>@item.AreaUtilised</td>
+            <td>@item.BalanceArea</td>
+            <td>@item.Remarks</td>
+            <td>@(Convert.ToDateTime(item.CreatedDate).ToString("dd MMM yyyy") )</td>
 
-                </tr>
+        </tr>
             }
         }
         else

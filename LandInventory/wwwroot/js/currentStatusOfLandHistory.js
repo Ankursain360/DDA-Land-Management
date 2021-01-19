@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     $("#btnFilter").click(function () {
         debugger;
-        var result = ValidateForm();
+      
         var fromDate = $('#txtFromDate').val();
         var toDate = $('#txtToDate').val();
         var id = $('#txtid').val();
@@ -38,8 +38,8 @@ function GetSearchParam(pageNumber, pageSize, fromDate, toDate,Id) {
     debugger;
     var model = {
         name: "test",
-        PageSize: pageSize,
-        PageNumber: pageNumber,
+        PageSize: parseInt(pageSize),
+        PageNumber: parseInt( pageNumber),
         fromDate: fromDate==undefined?null:fromDate,
         toDate: toDate == undefined ?null:toDate,
         landtransferId:parseInt(Id)

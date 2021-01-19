@@ -134,10 +134,12 @@ namespace LandInventory.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult History(int id)
         {
+
+            Currentstatusoflandhistory _obj = new Currentstatusoflandhistory();
             var Id = id;
             // var Id = Request.Path.ToString().Split('/').LastOrDefault();
             //var Id = Context.Request.Query["id"];
-            return View();
+            return View(_obj);
         }
 
         [HttpPost]
