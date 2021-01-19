@@ -5,6 +5,7 @@ var sortOrder = 1;//default Ascending
 $(document).ready(function () {
     GetDepartment(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $("#btnSearch").click(function () {
     GetDepartment(currentPageNumber, currentPageSize, sortOrder);
 });
