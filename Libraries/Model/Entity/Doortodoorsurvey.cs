@@ -35,6 +35,8 @@ namespace Libraries.Model.Entity
         public string PropertyFilePath { get; set; }
         public string Remarks { get; set; }
 
+        public byte IsActive { get; set; }
+
 
         [NotMapped]
 
