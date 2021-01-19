@@ -178,9 +178,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _encroachmentRegisterationRepository.GetEncroachmentReportData(enchroachmentSearchDto);
         }
-        public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)
+        public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto inspectionEncroachmentregistrationSearchDto)
         {
-            return await _encroachmentRegisterationRepository.GetEncroachmentRegisterationReportData( department,  zone,  division,  locality, fromdate, todate);
+            return await _encroachmentRegisterationRepository.GetEncroachmentRegisterationReportData(inspectionEncroachmentregistrationSearchDto);
         }
 
         public async Task<bool> UpdateBeforeApproval(int id, EncroachmentRegisteration encroachmentRegisterations)

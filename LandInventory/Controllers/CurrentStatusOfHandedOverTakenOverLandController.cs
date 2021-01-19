@@ -1,4 +1,6 @@
-﻿using Dto.Search;
+﻿using Core.Enum;
+using Dto.Search;
+using LandInventory.Filters;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -36,12 +38,15 @@ namespace LandInventory.Controllers
             var result = await _landTransferService.GetPagedLandTransfer(model);
             return PartialView("_List", result);
         }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             //List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
             //return View(list);
             return View();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
@@ -76,6 +81,7 @@ namespace LandInventory.Controllers
             return View(Model);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Currentstatusoflandhistory currentstatusoflandhistory)
         {
             var Data = await _landTransferService.FetchSingleResult(id);
@@ -125,7 +131,7 @@ namespace LandInventory.Controllers
             return View(list);
             //return View();  
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult History(int id)
         {
             var Id = id;

@@ -280,68 +280,132 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(int department, int zone, int division, int locality, DateTime fromdate, DateTime todate)//added by Nikita
+        public async Task<PagedResult<EncroachmentRegisteration>> GetEncroachmentRegisterationReportData(InspectionEncroachmentregistrationSearchDto dto)//added by Nikita
         {
+            //var data = await _dbContext.EncroachmentRegisteration
+            //    .Include(x => x.Locality)
+            //    .Include(x => x.Department)
+            //    .Include(x => x.Zone)
+            //    .Include(x => x.Division)
+            //    .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
+            //    && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
+            //    && (x.DivisionId == (division == 0 ? x.DivisionId : division))
+            //    && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
+            //    && x.EncrochmentDate >= fromdate && x.EncrochmentDate <= todate
+            //    && (x.IsActive == 1))
+            //    .OrderByDescending(x => x.Id).ToListAsync();
+            //return data;
             var data = await _dbContext.EncroachmentRegisteration
                 .Include(x => x.Locality)
                 .Include(x => x.Department)
                 .Include(x => x.Zone)
                 .Include(x => x.Division)
-                .Where(x => (x.DepartmentId == (department == 0 ? x.DepartmentId : department))
-                && (x.ZoneId == (zone == 0 ? x.ZoneId : zone))
-                && (x.DivisionId == (division == 0 ? x.DivisionId : division))
-                && (x.LocalityId == (locality == 0 ? x.LocalityId : locality))
-                && x.EncrochmentDate >= fromdate && x.EncrochmentDate <= todate
-                && (x.IsActive == 1))
-                .OrderByDescending(x => x.Id).ToListAsync();
+                .Where(x => (x.DepartmentId == (dto.departmentId == 0 ? x.DepartmentId : dto.departmentId))
+                && (x.ZoneId == (dto.zoneId == 0 ? x.ZoneId : dto.zoneId))
+                && (x.DivisionId == (dto.divisionId == 0 ? x.DivisionId : dto.divisionId))
+                && (x.LocalityId == (dto.localityId == 0 ? x.LocalityId : dto.localityId))
+                  && x.EncrochmentDate >= dto.fromDate
+               && x.EncrochmentDate <= dto.toDate && (x.IsActive == 1)).OrderByDescending(x => x.Id).GetPaged(dto.PageNumber, dto.PageSize);
+
+            int SortOrder = (int)dto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (dto.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => x.Division.Name).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        break;
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (dto.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => x.Division.Name).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
+                        break;
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
+                        break;
+
+                }
+            }
             return data;
         }
         public async Task<PagedResult<EncroachmentRegisteration>> GetPagedDemolitionReport(DemolitionReportSearchDto model)//added by ishu
         {
             //return await _dbContext.EncroachmentRegisteration
-            var data = await _dbContext.EncroachmentRegisteration
-               .Include(x => x.Locality)
-                .Where(x=>(x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)
-                 && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate))
+            //var data = await _dbContext.EncroachmentRegisteration
+            //   .Include(x => x.Locality)
+            //    .Where(x=>(x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId)
+            //     && x.EncrochmentDate >= model.FromDate  && x.EncrochmentDate <= model.ToDate))
 
-                
-                .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+
+            //    .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.EncroachmentRegisteration
+                  .Include(x => x.Locality)
+
+                  .Where(x => (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                 && x.EncrochmentDate >= model.fromDate
+                 && x.EncrochmentDate <= model.toDate)
+                  .OrderByDescending(x => x.Id).GetPaged(model.PageNumber, model.PageSize);
+
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("ZONEID"):
-                        data.Results = data.Results.OrderBy(x => x.ZoneId).ToList();
-                        break;
-                    case ("LOCALITYID"):
+
+                    case ("LOCALITY"):
                         data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
                         break;
-                    case ("DIVISIONID"):
-                        data.Results = data.Results.OrderBy(x => x.DivisionId).ToList();
-                        break;
-                    case ("ENCROACHMENTDATE"):
+
+                    case ("ENCROCHMENTDATE"):
                         data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
                         break;
+
                 }
             }
             else if (SortOrder == 2)
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("ZONEID"):
-                        data.Results = data.Results.OrderByDescending(x => x.ZoneId).ToList();
-                        break;
-                    case ("LOCALITYID"):
+
+                    case ("LOCALITY"):
                         data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
                         break;
-                    case ("DIVISIONID"):
-                        data.Results = data.Results.OrderByDescending(x => x.DivisionId).ToList();
-                        break;
-                    case ("ENCROACHMENTDATE"):
+
+                    case ("ENCROCHMENTDATE"):
                         data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
                         break;
-                        
 
                 }
             }

@@ -23,7 +23,7 @@ namespace Libraries.Model.Entity
         public int? DivisionId { get; set; }
         public int? LocalityId { get; set; }
         public string FileNo { get; set; }
-        public string Name { get; set; }
+        //public string Name { get; set; }
         public DateTime? Date { get; set; }
         public string Area { get; set; }
         public string PoliceStation { get; set; }
