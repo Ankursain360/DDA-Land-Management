@@ -38,12 +38,19 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
                         break;
                     case ("CODE"):
                         data.Results = data.Results.OrderBy(x => x.Code).ToList();
                         break;
+                    case ("NAME"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                  
                     case ("STATUS"):
                         data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
@@ -53,12 +60,19 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
                         break;
                     case ("CODE"):
                         data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
                         break;
+                    case ("NAME"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                   
                     case ("STATUS"):
                         data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
                         break;

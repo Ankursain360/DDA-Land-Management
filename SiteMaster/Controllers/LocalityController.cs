@@ -25,7 +25,7 @@ namespace SiteMaster.Controllers
             _localityService = localityService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
            
             return View();

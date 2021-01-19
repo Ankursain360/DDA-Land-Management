@@ -8,5 +8,7 @@ namespace Dto.Search
     public class ActionsSearchDto : BaseSearchDto
     {
         public string Name { get; set; }
+        public string Icon { get; set; }
+        public string Color { get; set; }
     }
 }

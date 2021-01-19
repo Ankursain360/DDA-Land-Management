@@ -15,6 +15,12 @@ using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Common;
+using EncroachmentDemolition.Filters;
+
+
+
+using Core.Enum;
+
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -55,9 +61,10 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
+            ViewBag.Message = TempData["Message"] as string;
             Onlinecomplaint onlinecomplaint = new Onlinecomplaint();
             onlinecomplaint.IsActive = 1;
             onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
@@ -68,6 +75,7 @@ namespace EncroachmentDemolition.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Onlinecomplaint onlinecomplaint)
         {
             try
@@ -132,17 +140,24 @@ namespace EncroachmentDemolition.Controllers
                         String Mobile = onlinecomplaint. Contact;
                         SendMailDto mail = new SendMailDto();
                         SendSMSDto SMS = new SendSMSDto();
+                        SMS.GenerateSendSMS(Action, Mobile);
+                        try
+                        {
+                            mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
 
-                        mail.GenerateMailFormatForComplaint(DisplayName, EmailID,  Action);
-                        SMS.GenerateSendSMS(Action, Mobile); 
 
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess+" Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
-                      //  var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
-                     //   return View(onlinecomplaint);
-                       
-                       
-                       // onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
-                       // onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
+                           TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
+  
+                            return Redirect("/Complaint/Create");
+                        }
+                        catch(Exception ex)
+                        {
+                          
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo+ " system is unable to send the complaint details on mail.", "", AlertType.Success);
+                           return Redirect("/Complaint/Create");
+
+                        }
+
                         return View(onlinecomplaint);
 
                     }
