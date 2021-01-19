@@ -1,34 +1,12 @@
 ﻿@model Libraries.Model.Entity.EncroachmentRegisteration
 
-
-
 @await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register Period Report" })
-
 
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
         <div class="row pt-3">
-            @*<div class="col-md-6">
-                    <div class="floating-label-wrap">
-
-                        <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
-                            <option value="">Select</option>
-                        </select>
-                        <span asp-validation-for="DepartmentId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Department</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-
-                        <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
-                            <option value="value">Select</option>
-                        </select>
-                        <span asp-validation-for="ZoneId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Zone</label>
-                    </div>
-                </div>*@
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
                     <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Department" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
@@ -53,26 +31,7 @@
 
 
         <div class="row pt-3">
-            @*<div class="col-md-6">
-                    <div class="floating-label-wrap">
-
-                        <select asp-for="DivisionId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
-                            <option value="value">Select</option>
-                        </select>
-                        <span asp-validation-for="DivisionId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Division</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap">
-
-                        <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                            <option value="value">Select</option>
-                        </select>
-                        <span asp-validation-for="LocalityId" class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label">Locality(Village) Name</label>
-                    </div>
-                </div>*@
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
@@ -149,7 +108,7 @@
                         <option value="Division">Division</option>
                         <option value="Locality"> Locality(Village)</option>
                         <option value="KhasraNo">Khasra No</option>
-                        <option value="Date">Encroachment Date</option>
+                        <option value="Date">Date</option>
                     </select>
 
                     <label for="field-1" class="floating-label">Sort by</label>

@@ -391,6 +391,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("ENCROCHMENTDATE"):
                         data.Results = data.Results.OrderBy(x => x.EncrochmentDate).ToList();
                         break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        break;
 
                 }
             }
@@ -405,6 +408,9 @@ namespace Libraries.Repository.EntityRepository
 
                     case ("ENCROCHMENTDATE"):
                         data.Results = data.Results.OrderByDescending(x => x.EncrochmentDate).ToList();
+                        break;
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
                         break;
 
                 }

@@ -215,6 +215,7 @@ namespace EncroachmentDemolition.Controllers
                             });
                         }
 
+
                         foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
                         {
                             result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
