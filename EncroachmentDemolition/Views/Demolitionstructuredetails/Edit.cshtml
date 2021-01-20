@@ -217,16 +217,30 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (var item in Model.DemolitionStructure)
+                                @*@foreach (var item in Model.DemolitionStructure)
+        {
+            <tr>
+                <td>@(recNo += 1)</td>
+                <td>@(item.Structure.Name)</td>
+                <td>
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="NoOfStructrure" type="text" value="@(item.NoOfStructrure)" placeholder="No Of Structrure"
+                               class="floating-label-field floating-label-field--s3" />
+                        <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                    </div>
+                </td>
+            </tr>
+        }*@
+                                @foreach (var item in Model.Demolitionstructure)
                                 {
                                     <tr>
                                         <td>@(recNo += 1)</td>
                                         <td>@(item.Structure.Name)</td>
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input asp-for="NoOfStructrure" type="text" value="@(item.NoOfStructrure)" placeholder="No Of Structrure"
-                                                       class="floating-label-field floating-label-field--s3" />
-                                                <input type="hidden" asp-for="StructrureId" value="@(item.Id)" />
+                                                <input type="text" asp-for="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" />
+                                                <input type="hidden" asp-for="@(item.Id)" value="@(item.Id)" />
+                                                <input type="hidden" asp-for="@(item.StructureId)" value="@(item.StructureId)" />
                                             </div>
                                         </td>
                                     </tr>

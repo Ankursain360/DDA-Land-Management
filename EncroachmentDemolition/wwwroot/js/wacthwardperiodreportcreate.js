@@ -68,21 +68,13 @@ $("#btnDescending").click(function () {
 $("#btnReset").click(function () {
    
     $('#LocalityId').val('0').trigger('change');
-    $('#Date').val('0').trigger('change');
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
 
-
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    //GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
-//function onPaging(pageNo) {
-//    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
-//    currentPageNumber = pageNo;
-//}
 
-//function onChangePageSize(pageSize) {
-//    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
-//    currentPageSize = pageSize;
-//}
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;

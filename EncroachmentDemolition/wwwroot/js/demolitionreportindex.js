@@ -1,137 +1,4 @@
-﻿//var currentPageNumber = 1;
-//var currentPageSize = 10;
-//var sortby = 1;//default Ascending 
-//$(document).ready(function () {
-
-//    $("#btnGenerate").click(function () {
-//        // debugger;
-//        var param = GetSearchParam(currentPageNumber, currentPageSize);
-//        var IsValid = ValidCheck();
-//        if (IsValid) {
-//            HttpPost(`/DemolitionReport/GetDetails`, 'html', param, function (response) {
-//        $('#LoadReportView').html("");
-//      $('#LoadReportView').html(response);
-//            });
-//        }
-//    });
-
-//});
-
-//function GetDetails(pageNumber, pageSize, sortby, order) {
-//    var param = GetSearchParam(pageNumber, pageSize);
-//    var IsValid = ValidCheck();
-//    if (IsValid) {
-//        HttpPost(`/DemolitionReport/GetDetails`, 'html', param, function (response) {
-//       $('#LoadReportView').html("");
-//       $('#LoadReportView').html(response);
-//        });
-//    }
-//}
-
-//function GetSearchParam(pageNumber, pageSize, sortOrder) {
-
-   
-//    var localityId = $('#LocalityId option:selected').val();
-//    var FromDate = $('#FromDate').val();
-//    var ToDate = $('#ToDate').val();
-//    var test = [];
-
-//    var model = {
-//        name: "report",
-//        pageSize: parseInt(pageSize),
-//        pageNumber: parseInt(pageNumber),
-       
-//        Locality: parseInt(localityId),
-//        FromDate: (FromDate),
-//        ToDate: (ToDate),
-//         sortBy: $("#ddlSort").children("option:selected").val(),
-//        sortOrder: parseInt(sortOrder),
-//    }
-//    test.push(model);
-//    return model;
-//}
-//$("#btnAscending").click(function () {
-//    $("#btnDescending").removeClass("active");
-//    $("#btnAscending").addClass("active");
-//    sortby = 1;//for Ascending
-//    GetDetails(currentPageNumber, currentPageSize, sortby);
-//});
-
-
-//$("#btnDescending").click(function () {
-//    $("#btnAscending").removeClass("active");
-//    $("#btnDescending").addClass("active");
-//    sortby = 2;//for Descending
-//    GetDetails(currentPageNumber, currentPageSize, sortby);
-//});
-
-//$("#btnReset").click(function () {
-
-//    $('#LocalityId').val('0').trigger('change');
-//    $('#Date').val('0').trigger('change');
-
-
-//    GetDetails(currentPageNumber, currentPageSize, sortby);
-
-//});
-
-////function onPaging(pageNo) {
-////    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
-////    currentPageNumber = pageNo;
-////}
-
-////function onChangePageSize(pageSize) {
-////    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
-////    currentPageSize = pageSize;
-////}
-//function onPaging(pageNo) {
-//    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
-//    currentPageNumber = pageNo;
-//}
-
-//function onChangePageSize(pageSize) {
-//    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
-//    currentPageSize = pageSize;
-//}
-
-
-//function callSelect2() {
-//    $("select").select2({
-//        placeholder: "Select",
-//        allowClear: true
-//    });
-//}
-
-
-//function ValidCheck() {
-//    var checkresult = false;
-//    var FromDate = $('#FromDate').val();
-//    if (FromDate == "") {
-//        checkresult = false;
-//        $("#FromDateMsg").show();
-//    } else {
-//        $("#FromDateMsg").hide();
-//        checkresult = true;
-//    }
-
-//    var ToDate = $('#ToDate').val();
-//    if (ToDate == "") {
-//        checkresult = false;
-//        $("#ToDateMsg").show();
-//    } else {
-//        checkresult = true;
-//        $("#ToDateMsg").hide();
-//    }
-
-//    if (FromDate == "" || ToDate == "") {
-//        checkresult = false;
-//    }
-//    else {
-//        checkresult = true;
-//    }
-//    return checkresult;
-//}
-var currentPageNumber = 1;
+﻿var currentPageNumber = 1;
 var currentPageSize = 10;
 var sortby = 1;//default Ascending 
 $(document).ready(function () {
@@ -201,21 +68,14 @@ $("#btnDescending").click(function () {
 $("#btnReset").click(function () {
 
     $('#LocalityId').val('0').trigger('change');
-    $('#EncrochmentDate').val('0').trigger('change');
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
 
 
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    //GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
-//function onPaging(pageNo) {
-//    GetDetails(parseInt(pageNo), parseInt(currentPageSize));
-//    currentPageNumber = pageNo;
-//}
 
-//function onChangePageSize(pageSize) {
-//    GetDetails(parseInt(currentPageNumber), parseInt(pageSize));
-//    currentPageSize = pageSize;
-//}
 function onPaging(pageNo) {
     GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
