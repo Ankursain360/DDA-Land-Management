@@ -42,5 +42,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> InsertInDisposedProperty(Disposedproperty model);
         Task<List<Propertyregistration>> GetKhasraReportList();
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId);
+        Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
     }
 }

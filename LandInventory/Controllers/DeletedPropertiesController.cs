@@ -60,7 +60,7 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestoreLandReportData(model);
+            var result = await _propertyregistrationService.GetDeletedLandReportData(model);
             if (result != null)
             {
                 return PartialView("_Index", result);
