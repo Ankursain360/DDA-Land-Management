@@ -29,7 +29,7 @@ namespace Libraries.Service.ApplicationService
         {
             var form = await _doortodoorsurveyRepository.FindBy(a => a.Id == id);
             Doortodoorsurvey model = form.FirstOrDefault();
-            //model.isa = 0;
+            model.IsActive = 0;
             _doortodoorsurveyRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -65,7 +65,7 @@ namespace Libraries.Service.ApplicationService
             model.ApproxPropertyArea = doortodoorsurvey.ApproxPropertyArea;
             model.NumberOfFloors = doortodoorsurvey.NumberOfFloors;
             model.CaelectricityNo = doortodoorsurvey.CaelectricityNo;
-
+            model.IsActive = doortodoorsurvey.IsActive;
             model.KwaterNo = doortodoorsurvey.KwaterNo;
             model.PropertyHouseTaxNo = doortodoorsurvey.PropertyHouseTaxNo;
             model.OccupantName = doortodoorsurvey.OccupantName;

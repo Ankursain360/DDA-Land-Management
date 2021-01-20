@@ -156,9 +156,11 @@ $("#btnReset").click(function () {
     $('#ZoneId').val('0').trigger('change');
     $('#DivisionId').val('0').trigger('change');
     $('#LocalityId').val('0').trigger('change');
+    $('#txtFromDate').val('');
+    $('#txtToDate').val('');
 
 
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    //GetDetails(currentPageNumber, currentPageSize, sortby);
 
 });
 

@@ -50,7 +50,7 @@ $("#Sortbyd").change(function () {
 
     }
 
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId, colname);
 
 });
 $("#ascId").click(function () {
@@ -68,7 +68,7 @@ $("#ascId").click(function () {
     }
 
 
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId, colname);
 });
 $("#descId").click(function () {
     $("#ascId").removeClass("active");
@@ -83,7 +83,7 @@ $("#descId").click(function () {
       
     }
 
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+    GetWatchandward(currentPageNumber, currentPageSize, StatusId, colname);
 });
 
 

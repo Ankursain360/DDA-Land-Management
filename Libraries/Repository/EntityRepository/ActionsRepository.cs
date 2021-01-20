@@ -28,7 +28,7 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
                              && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
-                                  .OrderByDescending(x => x.IsActive)
+                                 .OrderByDescending(s => s.IsActive)
                                  .GetPaged<Actions>(model.PageNumber, model.PageSize); ;
 
             int SortOrder = (int)model.SortOrder;

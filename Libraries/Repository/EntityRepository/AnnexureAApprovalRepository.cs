@@ -21,7 +21,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
         {
 
-            var data = await _dbContext.Fixingdemolition
+            var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                     .Include(x => x.Encroachment)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
                                     && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))

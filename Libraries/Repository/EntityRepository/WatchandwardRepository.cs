@@ -122,6 +122,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("DATE"):
                         data.Results = data.Results.OrderBy(x => x.Date).ToList();
                         break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                        break;
 
                 }
             }
@@ -136,6 +139,9 @@ namespace Libraries.Repository.EntityRepository
                    
                     case ("DATE"):
                         data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
                         break;
 
                 }
