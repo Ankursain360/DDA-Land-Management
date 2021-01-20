@@ -373,6 +373,8 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = Data.TakenOverFilePath;
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
+            ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);

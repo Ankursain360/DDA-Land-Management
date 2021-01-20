@@ -250,6 +250,17 @@
                 <label class="floating-label">Document of Property, if any</label>
             </div>
         </div>
+
+        <div class=" col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+                <label asp-for="IsActive" class="floating-label">Status </label>
+            </div>
+        </div>
     </div>
 
     <div class="row pt-3">

@@ -74,10 +74,56 @@ namespace Libraries.Repository.EntityRepository
                                   where x.WatchWard != null && x.IsActive == 1
                                   select x.WatchWardId).ToArray();
 
-            return await _dbContext.EncroachmentRegisteration
+            var data = await _dbContext.EncroachmentRegisteration
+               .Include(x => x.Locality)
                                      .Where(x => x.IsActive == 1 && x.ApprovedStatus == 1
-                                      && !(InInspectionId).Contains(x.Id))
+                                      && !(InInspectionId).Contains(x.Id)
+                                      && (string.IsNullOrEmpty(model.khasra) || x.KhasraNo.Contains(model.khasra))
+                   && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                   && (string.IsNullOrEmpty(model.policestation) || x.PoliceStation.Contains(model.policestation))
+
+                                      )
                                      .GetPaged<EncroachmentRegisteration>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRA"):
+                        data.Results = data.Results.OrderBy(x => x.KhasraNo).ToList();
+                        break;
+                    case ("POLICESTATION"):
+                        data.Results = data.Results.OrderBy(x => x.PoliceStation).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                    case ("KHASRA"):
+                        data.Results = data.Results.OrderByDescending(x => x.KhasraNo).ToList();
+                        break;
+                    case ("POLICESTATION"):
+                        data.Results = data.Results.OrderByDescending(x => x.PoliceStation).ToList();
+                        break;
+
+                }
+            }
+            return data;
+
+
+
+
         }
 
         public async Task<Fixingdemolition> FetchSingleResult(int id)

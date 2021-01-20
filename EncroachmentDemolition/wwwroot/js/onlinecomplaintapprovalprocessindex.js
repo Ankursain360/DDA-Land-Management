@@ -2,7 +2,7 @@
 var currentPageSize = 10;
 
 $(document).ready(function () {
-  
+   
     var StatusId = 0;
     GetWatchandward(currentPageNumber, currentPageSize, StatusId);
 });
@@ -31,7 +31,7 @@ function GetSearchParam(pageNumber, pageSize, StatusId) {
 
         colname: sorbyname,
         orderby: sortdesc,
-      
+
         StatusId: StatusId,
         pageSize: pageSize,
         pageNumber: pageNumber
@@ -76,26 +76,45 @@ $("#descId").click(function () {
     $("#sortdesc").val(1);
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-     
+
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-      
+
     }
 
     GetWatchandward(currentPageNumber, currentPageSize, StatusId);
 });
 
 
-function onPaging(pageNo) {
+function onPaging(pageNo) {pageNo
+    
     pageNo = parseInt(pageNo);
-    GetWatchandward(pageNo, currentPageSize);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+    }
+    else if ($("#Approved").is(":checked")) {
+        var StatusId = 1;
+    }
+    
+    GetWatchandward(pageNo, currentPageSize, StatusId);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetWatchandward(currentPageNumber, pageSize);
+    if ($("#Pending").is(":checked")) {
+        var StatusId = 0;
+
+
+    }
+    else if ($("#Approved").is(":checked")) {
+
+        var StatusId = 1;
+
+    }
+   
+    GetWatchandward(currentPageNumber, pageSize, StatusId);
     currentPageSize = pageSize;
 }
 
@@ -103,10 +122,12 @@ function onChangePageSize(pageSize) {
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
+        currentPageNumber = 1;
         GetWatchandward(currentPageNumber, currentPageSize, StatusId);
 
     }
     else if ($("#Approved").is(":checked")) {
+        currentPageNumber = 1;
         var StatusId = 1;
         GetWatchandward(currentPageNumber, currentPageSize, StatusId);
     }

@@ -22,7 +22,7 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Date" asp-for="EncrochmentDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
+                    <input type="Date" asp-for="EncrochmentDate" value="" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Date"></span>
                     <label class="floating-label">From Date</label>
                 </div>
@@ -31,7 +31,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Date" asp-for="EncrochmentDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
+                    <input type="Date" asp-for="EncrochmentDate" value="" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Date"></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -66,9 +66,10 @@
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
                         <option value="Locality"> Locality(Village)</option>
-                     
-                        <option value="EncrochmentDate">From Date</option>
-                        <option value="EncrochmentDate">To Date</option>
+
+                        <option value="EncrochmentDate">Date</option>
+                        <option value="KhasraNo">Khasra No</option>
+
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>

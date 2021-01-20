@@ -10,9 +10,9 @@
             <th>Area</th>
             <th>Encroachment On</th>
             <th>Demolition Start</th>
-            <th>Demolition Within Time Line</th>
-            <th>Demolition After Time Line</th>
-            @*<th>Reason of Demolition</th>*@
+            @*<th>Demolition Within Time Line</th>*@
+            @*<th>Demolition After Time Line</th>*@
+            <th>Reason of Demolition</th>
 
         </tr>
 
@@ -23,17 +23,18 @@
         {
             @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@item.Locality.Name</td>
-                    <td>@item.KhasraNo </td>
-                    <td>@item.Area </td>
-                    <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
-                    @*<td>@item.Demolitionstructuredetails</td>*@
-                    <td></td>
-                    <td></td>
-                    @* <td>@item.Demolitionstructuredetails.Remarks </td>*@
-                    <td>@item.Remarks</td>
-                </tr>
+        <tr>
+            <td>@item.Locality.Name</td>
+            <td>@item.KhasraNo </td>
+            <td>@item.Area </td>
+            <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
+            <td>@(item.EncrochmentDate != null ? Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy") : "Not Available")</td>
+            @*<td>@item.Demolitionstructuredetails</td>*@
+            @*<td></td>
+            <td></td>*@
+            @* <td>@item.Demolitionstructuredetails.Remarks </td>*@
+            <td>@item.Remarks</td>
+        </tr>
             }
         }
         else

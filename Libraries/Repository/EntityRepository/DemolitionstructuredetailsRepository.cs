@@ -47,7 +47,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Demolitionstructuredetails
                             .Include(x => x.Demolitionstructureafterdemolitionphotofiledetails)
                             .Include(x => x.Demolitionstructurebeforedemolitionphotofiledetails)
-
+                            .Include(x => x.Demolitionstructure)
                             .Where(x => x.Id == id)
                             .FirstOrDefaultAsync();
         }

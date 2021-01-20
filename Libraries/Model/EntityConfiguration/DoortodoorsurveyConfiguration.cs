@@ -100,6 +100,8 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.HasOne(d => d.PresentUseNavigation)
                 .WithMany(p => p.Doortodoorsurvey)
                 .HasForeignKey(d => d.PresentUseId)
