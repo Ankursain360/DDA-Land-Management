@@ -40,10 +40,10 @@
                             {
                                 <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp; Delete</a>
                             }
-                            @if (ViewBag.IsUserCanEdit == 14)
-                            {
+                            @*@if (ViewBag.IsUserCanEdit == 14)
+                            {*@
                                 <a asp-action="Edit" asp-route-id="@item.Id" title="Verify"> &nbsp; | &nbsp; Verify</a>
-                            }
+                            @*}*@
                         </td>
                     </tr>
                 }

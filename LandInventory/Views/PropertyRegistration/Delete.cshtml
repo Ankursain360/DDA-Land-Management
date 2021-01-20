@@ -1,4 +1,4 @@
-﻿@model Libraries.Model.Entity.Propertyregistration
+﻿@*@model Libraries.Model.Entity.Propertyregistration
 
 <div class="row">
     <div class="col-sm-12">
@@ -40,11 +40,54 @@
                         @Html.ActionLink("Back", "Index", "PropertyRegistration", null, new { @class = "btn btn-primary dda-pageheading" })
                     </div>
                 </div>
-               
+
             </form>
         </div>
     </div>
-</div>
+</div>*@
+
+
+
+@model Libraries.Model.Entity.Propertyregistration
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
+<br />
+<br />
+<form asp-action="Delete" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" autocomplete="off">
+    <h3 class="mb-3 d-flex">Delete Property</h3>
+    <h6 class="p-4">Are you sure you want to delete this?</h6>
+    <input type="hidden" asp-for="Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="floating-label-wrap mb-3 mb-md-0">
+                <input type="text" asp-for="Reason" maxlength="4000" limit="4000" class="floating-label-field floating-label-field--s3" />
+                <label  class="floating-label">Reason</label>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            <button class="btn btn-theme" value="Delete"  type="submit">Delete</button>
+            @Html.ActionLink("Back", "Index", "PropertyRegistration", null, new { @class = "btn btn-theme " })
+
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/common.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/common.js" asp-append-version="true"></script>
+</environment>
 
 
 

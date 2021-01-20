@@ -8,6 +8,8 @@ namespace Core.Enum
         Edit = 3,
         Delete = 4,
         Upload = 5,
-        Download = 6
+        Download = 6,
+        Dispose = 7,
+        Verify = 8
     }
 }

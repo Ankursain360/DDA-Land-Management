@@ -18,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
+using LandInventory.Filters;
+using Core.Enum;
 
 namespace LandInventory.Controllers
 {
@@ -45,6 +47,7 @@ namespace LandInventory.Controllers
         //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
         //    return View(result);
         //}
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
@@ -75,6 +78,7 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
             //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -84,6 +88,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
@@ -311,7 +316,7 @@ namespace LandInventory.Controllers
             }
 
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -341,6 +346,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
@@ -583,6 +589,7 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
+
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             int userId = SiteContext.UserId;
@@ -615,7 +622,7 @@ namespace LandInventory.Controllers
 
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -643,6 +650,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
         {
             Deletedproperty model = new Deletedproperty();
@@ -680,7 +688,7 @@ namespace LandInventory.Controllers
 
 
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -823,7 +831,7 @@ namespace LandInventory.Controllers
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
-
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -836,6 +844,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
         {
             Disposedproperty model = new Disposedproperty();
