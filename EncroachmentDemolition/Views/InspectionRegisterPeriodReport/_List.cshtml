@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<Libraries.Model.Entity.EncroachmentRegisteration>
+@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.EncroachmentRegisteration>
 @{int rowNo = 0; }
 
 
@@ -8,12 +8,13 @@
         <tr>
             <th rowspan="2">Sr.No</th>
             <th rowspan="2">Date</th>
+            <th rowspan="2">Other Department</th>
             <th rowspan="2">Village Name</th>
             <th rowspan="2">Khasra No.</th>
             <th rowspan="2">Area</th>
             <th rowspan="2">Status on Land</th>
 
-            <th rowspan="2">Other Department</th>
+
 
             <th rowspan="2">Police Station</th>
             <th rowspan="2">Security Guard on duty</th>
@@ -23,28 +24,31 @@
 
     </thead>
     <tbody>
-        @if (Model != null && Model.Count() > 0)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-            @foreach (var item in Model)
+            @foreach (var item in Model.Results)
             {
-                <tr>
-                    <td>@(rowNo += 1)</td>
+        <tr>
+            <td>@(rowNo += 1)</td>
 
-                    <td>@item.EncrochmentDate</td>
-                    <td>@item.Locality.Name</td>
-                    <td>@item.KhasraNo</td>
-                    <td>@item.Area</td>
-                    <td>@item.StatusOfLand</td>
-                    <td>@item.Department.Name</td>
+            <td>@item.EncrochmentDate</td>
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
+            <td>@item.Division.Name</td>
+            <td>@item.Locality.Name</td>
+            <td>@item.KhasraNo</td>
+            <td>@item.Area</td>
+            <td>@item.StatusOfLand</td>
+            <td>@item.Department.Name</td>
 
-                    <td>@item.PoliceStation</td>
-                    <td>@item.SecurityGuardOnDuty</td>
+            <td>@item.PoliceStation</td>
+            <td>@item.SecurityGuardOnDuty</td>
 
 
-                    <td>@item.Remarks</td>
+            <td>@item.Remarks</td>
 
 
-                </tr>
+        </tr>
             }
         }
         else

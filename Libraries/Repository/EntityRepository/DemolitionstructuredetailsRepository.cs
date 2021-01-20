@@ -105,7 +105,11 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-                return await _dbContext.Demolitionstructuredetails.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Where(x => x.IsActive == 1).ToListAsync();
+                return await _dbContext.Demolitionstructuredetails
+                    .Include(x => x.Department)
+                    .Include(x => x.Zone)
+                    .Include(x => x.Division)
+                    .Include(x => x.Locality).Where(x => x.IsActive == 1).ToListAsync();
             }
             catch (Exception ex)
             {

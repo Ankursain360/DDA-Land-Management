@@ -109,6 +109,37 @@ namespace Libraries.Repository.EntityRepository
                && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
                 .OrderByDescending(x => x.Id).GetPaged(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
 
+            int SortOrder = (int)watchAndWardPeriodReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (watchAndWardPeriodReportSearchDto.SortBy.ToUpper())
+                {
+                    
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (watchAndWardPeriodReportSearchDto.SortBy.ToUpper())
+                {
+                   
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                   
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        break;
+
+                }
+            }
             return data;
         }
 
