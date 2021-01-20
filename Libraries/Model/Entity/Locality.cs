@@ -24,22 +24,22 @@ namespace Libraries.Model.Entity
 
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
         }
-        [Required(ErrorMessage = "The Department field is required")]
+        [Required(ErrorMessage = " Department is mandatory")]
         public int DepartmentId { get; set; }
-        [Required(ErrorMessage = "The Zone field is required")]
+        [Required(ErrorMessage = " Zone is mandatory")]
         public int ZoneId { get; set; }
 
-        [Required(ErrorMessage = "The Division field is required")]
+        [Required(ErrorMessage = " Division is mandatory")]
         public int DivisionId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Locality Name is mandatory")]
         [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id,DepartmentId,DivisionId,ZoneId")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "The Locality Code field is required")]
+        [Required(ErrorMessage = "Locality Code is mandatory")]
         [Remote(action: "ExistCode", controller: "Locality", AdditionalFields = "Id")]
         public string LocalityCode { get; set; }
-        [Required]
+        [Required (ErrorMessage = " Landmark is mandatory")]
         public string Landmark { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Locality address is mandatory")]
         public string Address { get; set; }
         [Required]
         public byte IsActive { get; set; }
