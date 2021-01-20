@@ -8,28 +8,28 @@
     <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
-            <div class="col-md-3    ">
+            @*<div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Rebate On" />
-                    <label for="txtName" class="floating-label">Rebate On</label>
+                    <input type="text" id="txtRebateOn" class="floating-label-field floating-label-field--s3" placeholder="Rebate On" />
+                    <label for="txtRebateOn" class="floating-label">Rebate On</label>
+                </div>
+            </div>*@
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
+                    <label for="txtFromDate" class="floating-label">From Date</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Date" id="txtUserName" class="floating-label-field floating-label-field--s3" placeholder="From Date" />
-                    <label for="txtUserName" class="floating-label">From Date</label>
+                    <input type="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+                    <label for="txtToDate" class="floating-label">To Date</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Date" id="txtEmail" class="floating-label-field floating-label-field--s3" placeholder="To Date">
-                    <label for="txtEmail" class="floating-label">To Date</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="Number" id="txtPhoneNumber" class="floating-label-field floating-label-field--s3" placeholder="Rebate Percentage">
-                    <label for="txtPhoneNumber" class="floating-label">Rebate Percentage</label>
+                    <input type="Number" id="txtPercentage" class="floating-label-field floating-label-field--s3" placeholder="Rebate Percentage">
+                    <label for="txtPercentage" class="floating-label">Rebate Percentage</label>
                 </div>
             </div>
         </div>
@@ -37,12 +37,12 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
                             <i class="ri-refresh-line mr-2"></i>Reset
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+                        <button class="btn btn-theme btn-block" type="button" id="btnSearch">Submit</button>
                     </div>
                 </div>
             </div>
@@ -53,20 +53,18 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Rebate On</option>
-                        <option>From date</option>
-                        <option>To Date</option>
-                        <option>Rebate Percentage</option>
-                        <option>Scheme</option>
-                        <option>Status</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" value="rebateon">Rebate On</option>
+                        <option value="fromdate">From date</option>
+                        <option value="todate">To Date</option>
+                        <option value="percentage">Rebate Percentage</option>
+                        <option value="isactive">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 
@@ -82,7 +80,10 @@
                 </a>
             </div>
         </div>
-        <div class="table-responsive px-2" id="divUser">
+        <div class="table-responsive px-2" id="divTable">
+
+        </div>
+        @*<div class="table-responsive px-2" id="divUser">
             <table class="table table-sm table-bordered mb-0 table-striped">
 
                 <thead class="text-nowrap">
@@ -98,49 +99,49 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model)
-            {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-                        <td>@(item.IsRebateOn == 0 ? "Rebate on Principal Amount" : item.IsRebateOn == 1 ? "Rebate on Interest": "Both")</td>
-                        <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
+                    {
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+                            <td>@(item.IsRebateOn == 0 ? "Rebate on Principal Amount" : item.IsRebateOn == 1 ? "Rebate on Interest": "Both")</td>
+                            <td>@item.FromDate.ToString("dd-MMM-yyyy")</td>
 
-                        <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
-                        <td>@item.RebatePercentage</td>
+                            <td>@item.ToDate.ToString("dd-MMM-yyyy")</td>
+                            <td>@item.RebatePercentage</td>
 
-                        <td>
-                            @if (item.IsActive == 1)
-                        {
-                            <span class="badge badge-primary px-2 py-1">Active</span>
-                        }
-                        else
-                        {
-                            <span class="badge badge-danger px-2 py-1">Inactive</span>
-                        }
-                        </td>
-                        <td>
-                            <div class="action-btns">
-                                <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
-                                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
-                            </div>
-                        </td>
+                            <td>
+                                @if (item.IsActive == 1)
+                                {
+                                    <span class="badge badge-primary px-2 py-1">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-danger px-2 py-1">Inactive</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="action-btns">
+                                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i> </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                                </div>
+                            </td>
 
-                    </tr>
+                        </tr>
 
-            }
+                    }
                 </tbody>
 
             </table>
-        </div>
+        </div>*@
     </div>
 </div>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-@*<environment include="Development">
-        <script src="~/js/rebateindex.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="~/js/rebateindex.min.js" asp-append-version="true"></script>
-    </environment>*@
+<environment include="Development">
+    <script src="~/js/rebateindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/rebateindex.min.js" asp-append-version="true"></script>
+</environment>
 

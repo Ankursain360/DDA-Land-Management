@@ -28,8 +28,8 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
                              && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
-                                 .OrderByDescending(s => s.IsActive)
-                                 .GetPaged<Actions>(model.PageNumber, model.PageSize); ;
+                               //  .OrderByDescending(x => x.IsActive)
+                                 .GetPaged<Actions>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -47,7 +47,7 @@ namespace Libraries.Repository.EntityRepository
                         break;
                    
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderBy(x => x.IsActive==0).ToList();
                         break;
                 }
             }
@@ -66,7 +66,7 @@ namespace Libraries.Repository.EntityRepository
                         break;
                    
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data.Results = data.Results.OrderByDescending(x => x.IsActive==0).ToList();
                         break;
                 }
             }

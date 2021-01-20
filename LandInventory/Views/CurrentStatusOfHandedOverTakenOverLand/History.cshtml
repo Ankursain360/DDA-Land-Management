@@ -21,7 +21,7 @@
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
-                <input asp-for="CreatedDate" type="date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
+                <input  type="date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="CreatedDate" class="text-danger"></span>
                 <label class="floating-label">From Date</label>
 
@@ -29,7 +29,7 @@
         </div>
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
-                <input asp-for="CreatedDate" type="date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
+                <input  type="date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
                 <span asp-validation-for="CreatedDate" class="text-danger"></span>
 
                 <label class="floating-label">To Date</label>
@@ -40,8 +40,9 @@
     </div>
     <div class="row mt-md-3">
         <div class="col-md-12" style="margin-bottom:40px;">
-            <button class="btn btn-theme " id="btnFilter" type="submit">Filter</button>
-            @*<input type="submit" value="Filter" id="btnFilter" class="btn btn-theme" />*@
+           
+            <input type="submit" value="Filter" id="btnFilter" class="btn btn-theme" />
+
             <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
         </div>
     </div>

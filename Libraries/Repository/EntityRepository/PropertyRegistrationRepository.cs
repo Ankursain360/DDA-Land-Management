@@ -187,6 +187,7 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
                                    && (x.MainLandUseId == (model.mainLandUse == 0 ? x.MainLandUseId : model.mainLandUse))
                                    && (x.LitigationStatus == (model.litigation == 2 ? x.LitigationStatus : model.litigation))
+                                   && (x.InventoriedInId == (model.inventoriedIn == 0 ? x.InventoriedInId : model.inventoriedIn))
                                    && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
                                    //&& (x.KhasraNo == (model.khasraNo == "0" ? x.KhasraNo : model.khasraNo))
                                    // && (x.KhasraNo.Contains(model.khasraNo == "" ? x.KhasraNo : model.khasraNo))
@@ -273,6 +274,7 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
                                    && (x.MainLandUseId == (model.mainLandUse == 0 ? x.MainLandUseId : model.mainLandUse))
                                    && (x.LitigationStatus == (model.litigation == 2 ? x.LitigationStatus : model.litigation))
+                                   && (x.InventoriedInId == (model.inventoriedIn == 0 ? x.InventoriedInId : model.inventoriedIn))
                                    && (x.EncroachmentStatusId == (model.encroached == 2 ? x.EncroachmentStatusId : model.encroached))
                                    //&& (x.KhasraNo == (model.khasraNo == "0" ? x.KhasraNo : model.khasraNo))
                                    && (x.KhasraNo.Contains(model.khasraNo == "" ? x.KhasraNo : model.khasraNo))
@@ -672,22 +674,28 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Propertyregistration>> GetRestoreLandReportData(PropertyRegisterationSearchDto model)
         {
+            var NonDeletedId = (from x in _dbContext.Propertyregistration
+                                where x.IsActive == 1 && x.IsDeleted !=0 || x.IsDisposed !=0
+                                  select x.Id).ToArray();
+
             var data = await _dbContext.Propertyregistration
-                .Include(x => x.Locality)
-                .Include(x => x.Department)
-                .Include(x => x.Zone)
-                .Include(x => x.Division)
-                .Include(x => x.Deletedproperty)
-                .Include(x => x.ClassificationOfLand)
-                .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)
-                 && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
-                 && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
-                && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
-                && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
-                && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
-                && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
-                && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id)))
-                .OrderBy(x => x.InventoriedInId)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.Deletedproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)
+                                         && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                                        && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                        && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                        && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                        && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                        && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))
+                                        && !(NonDeletedId).Contains(x.Id)
+                                        )
+                                        .OrderBy(x => x.InventoriedInId)
                                                 .OrderByDescending(x => x.IsActive)
                                                 .ThenBy(x => x.PlannedUnplannedLand)
                                                 .ThenBy(x => x.ClassificationOfLand.Name)
@@ -1014,6 +1022,85 @@ namespace Libraries.Repository.EntityRepository
                 return data;
             }
 
+        }
+
+        public async Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model)
+        {
+            var data = await _dbContext.Propertyregistration
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Zone)
+                                        .Include(x => x.Division)
+                                        .Include(x => x.Deletedproperty)
+                                        .Include(x => x.ClassificationOfLand)
+                                        .Where(x => (x.IsDeleted == 0 || x.IsDisposed == 0)
+                                         && (x.InventoriedInId == (model.inventoriedId == 0 ? x.InventoriedInId : model.inventoriedId))
+                                         && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand))
+                                        && (x.ClassificationOfLandId == (model.classificationOfLandId == 0 ? x.ClassificationOfLandId : model.classificationOfLandId))
+                                        && (x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId))
+                                        && (x.ZoneId == (model.zoneId == 0 ? x.ZoneId : model.zoneId))
+                                        && (x.DivisionId == (model.divisionId == 0 ? x.DivisionId : model.divisionId))
+                                        && (x.LocalityId == (model.Id == 0 ? x.LocalityId : model.Id))
+                                        )
+                                        .OrderBy(x => x.InventoriedInId)
+                                                .OrderByDescending(x => x.IsActive)
+                                                .ThenBy(x => x.PlannedUnplannedLand)
+                                                .ThenBy(x => x.ClassificationOfLand.Name)
+                                                .ThenBy(x => x.Department.Name)
+                                                .ThenBy(x => x.Zone.Name)
+                                                .ThenBy(x => x.Division.Name)
+                                            .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("INVENTORIEDIN"):
+                        data.Results = data.Results.OrderBy(x => x.InventoriedInId).ToList();
+                        break;
+                    case ("PLANNEDUNPLANNED"):
+                        data.Results = data.Results.OrderBy(x => x.PlannedUnplannedLand).ToList();
+                        break;
+                    case ("CLASSIFICATION"):
+                        data.Results = data.Results.OrderBy(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                        break;
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("INVENTORIEDIN"):
+                        data.Results = data.Results.OrderByDescending(x => x.InventoriedInId).ToList();
+                        break;
+                    case ("PLANNEDUNPLANNED"):
+                        data.Results = data.Results.OrderByDescending(x => x.PlannedUnplannedLand).ToList();
+                        break;
+                    case ("CLASSIFICATION"):
+                        data.Results = data.Results.OrderByDescending(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                        break;
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                        break;
+                }
+            }
+            return data;
         }
     }
 

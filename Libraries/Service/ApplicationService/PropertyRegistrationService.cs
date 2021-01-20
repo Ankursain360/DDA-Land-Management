@@ -374,5 +374,10 @@ namespace Libraries.Service.ApplicationService
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model)
+        {
+            return await _propertyregistrationRepository.GetDeletedLandReportData( model);
+        }
     }
 }

@@ -316,5 +316,17 @@
     "inputFiles": [
       "wwwroot/js/structureindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/caseyearindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/caseyearindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/courtindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/courtindex.js"
+    ]
   }
 ]
