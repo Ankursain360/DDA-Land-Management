@@ -26,6 +26,7 @@ namespace Service.ApplicationService
             planning.CreatedDate = DateTime.Now;
             planning.CreatedBy = 1;
             planning.IsActive = 1;
+            planning.IsVerify = 1;
             _planningRepositry.Add(planning);
             return await _unitOfWork.CommitAsync() > 0;
         }
