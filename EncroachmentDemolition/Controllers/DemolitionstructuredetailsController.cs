@@ -123,7 +123,7 @@ namespace EncroachmentDemolition.Controllers
                             demolitionstructure.Add(new Demolitionstructure
                             {
 
-                                StructureId = (int)demolitionstructuredetails.StructrureId[i],
+                                StructureId = demolitionstructuredetails.StructrureId[i],
                                 NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
                                 DemolitionStructureDetailsId = demolitionstructuredetails.Id
                             });
@@ -251,7 +251,7 @@ namespace EncroachmentDemolition.Controllers
                             demolitionstructure.Add(new Demolitionstructure
                             {
 
-                                StructureId = (int)demolitionstructuredetails.StructrureId[i],
+                                StructureId = demolitionstructuredetails.StructrureId[i],
                                 NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
                                 DemolitionStructureDetailsId = demolitionstructuredetails.Id
                             });
