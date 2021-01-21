@@ -250,7 +250,6 @@ namespace EncroachmentDemolition.Controllers
                         {
                             demolitionstructure.Add(new Demolitionstructure
                             {
-
                                 StructureId = demolitionstructuredetails.StructrureId[i],
                                 NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
                                 DemolitionStructureDetailsId = demolitionstructuredetails.Id
