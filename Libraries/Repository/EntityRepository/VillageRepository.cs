@@ -25,7 +25,6 @@ namespace Libraries.Repository.EntityRepository
                             .Include(x=>x.Zone)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                             && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
-                            .OrderBy(s => s.Zone.Name).ThenBy(s => s.Name)
                             .GetPaged<Village>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -35,13 +34,32 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGENAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
                         break;
                     case ("ZONENAME"):
-                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderBy(x => x.Zone.Name)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
+                       
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -51,13 +69,32 @@ namespace Libraries.Repository.EntityRepository
                 {
 
                     case ("VILLAGENAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
                         break;
                     case ("ZONENAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderByDescending(x => x.Zone.Name)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
+
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Village
+                            .Include(x => x.Zone)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Village>(model.PageNumber, model.PageSize);
                         break;
 
                 }

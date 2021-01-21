@@ -11,13 +11,13 @@
             <th>Zone</th>
             <th>Division</th>
             <th>Locality</th>
-            <th>Date</th>
+            @*<th>Date</th>
             <th>File No</th>
             <th>Police Station</th>
-            <th>Name Of Area</th>
+            <th>Name Of Area</th>*@
             <th>Date Of approval of demolition</th>
-            <th>Start of Demolition Action</th>
-            <th>End of Demolition Action</th>
+            @*<th>Start of Demolition Action</th>
+            <th>End of Demolition Action</th>*@
 
             <th>Operation</th>
         </tr>
@@ -26,27 +26,27 @@
         @*@foreach (var item in Model.Results)*@
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@(rowNo += 1)</td>
-                <td>@item.Department.Name</td>
-                <td>@item.Zone.Name</td>
-                <td>@item.Division.Name</td>
-                <td>@item.Locality.Name</td>
-                <td>@item.Date</td>
-                <td>@item.FileNo</td>
-                <td>@item.PoliceStation</td>
-                <td>@item.NameOfAreaSite</td>
-                <td>@item.DateOfApprovalDemolition</td>
-                <td>@item.StartOfDemolitionActionDate</td>
-                <td>@item.EndOfDemolitionActionDate</td>
-                @*<td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>*@
+        <tr>
+            <td>@(rowNo += 1)</td>
+            <td>@item.Department.Name</td>
+            <td>@item.Zone.Name</td>
+            <td>@item.Division.Name</td>
+            <td>@item.Locality.Name</td>
+            @*<td>@item.Date</td>
+        <td>@item.FileNo</td>
+        <td>@item.PoliceStation</td>
+        <td>@item.NameOfAreaSite</td>*@
+            <td>@(item.DateOfApprovalDemolition == null ? "" : Convert.ToDateTime(item.DateOfApprovalDemolition).ToString("dd-MMM-yyyy"))</td>
+            @*<td>@(item.StartOfDemolitionActionDate == null ? "" : Convert.ToDateTime(item.StartOfDemolitionActionDate).ToString("dd-MMM-yyyy"))</td>
+            <td>@(item.EndOfDemolitionActionDate == null ? "" : Convert.ToDateTime(item.EndOfDemolitionActionDate).ToString("dd-MMM-yyyy"))</td>*@
+            @*<td>@(item.EncrochmentDate==null?"Not Available":Convert.ToDateTime(item.EncrochmentDate).ToString("dd MMM yyyy"))</td>*@
 
-                <td>
-                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill" aria-hidden="true"></i> </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit"class="edit"> &nbsp; | &nbsp;  <i class="ri-edit-line" aria-hidden="true"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="ri-delete-bin-5-fill" aria-hidden="true"></i></a>
-                </td>
-            </tr>
+            <td>
+                <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill" aria-hidden="true"></i> </a>
+                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> &nbsp; | &nbsp;  <i class="ri-edit-line" aria-hidden="true"></i> </a>
+                <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="ri-delete-bin-5-fill" aria-hidden="true"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 

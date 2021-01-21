@@ -24,7 +24,7 @@ namespace Libraries.Repository.EntityRepository
         {
             var data= await _dbContext.Caseyear
                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+                                .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
@@ -32,17 +32,17 @@ namespace Libraries.Repository.EntityRepository
                 {
                     case ("NAME"):
                         data = null;
-                        data=  await _dbContext.Caseyear
+                        data = await _dbContext.Caseyear
                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                 .OrderBy(s => s.Name)
                                 .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
-                                                break;
+                        break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Caseyear
                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                .OrderBy(x => x.IsActive==0)
-                             .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+                                .OrderByDescending(s => s.IsActive)
+                                .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -53,16 +53,16 @@ namespace Libraries.Repository.EntityRepository
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Caseyear
-                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                 .OrderByDescending(x => x.Name)
-                                  .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+                                .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                .OrderByDescending(s => s.Name)
+                                .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Caseyear
                                 .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                                .OrderByDescending(x => x.IsActive==0)
-                                 .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
+                                .OrderBy(s => s.IsActive)
+                                .GetPaged<Caseyear>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

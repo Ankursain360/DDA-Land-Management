@@ -69,7 +69,11 @@ namespace SiteMaster.Controllers
                 await BindDropDown(rate);
                 if (ModelState.IsValid)
                 {
-
+                    if (rate.ToDate <= rate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rate);
+                    }
                     var result = await _rateService.Create(rate);
 
                     if (result == true)
@@ -119,6 +123,11 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    if (rate.ToDate <= rate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rate);
+                    }
                     var result = await _rateService.Update(id, rate);
                     if (result == true)
                     {
@@ -141,7 +150,7 @@ namespace SiteMaster.Controllers
             return View(rate);
         }
         [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _rateService.Delete(id);

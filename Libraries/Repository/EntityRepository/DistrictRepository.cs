@@ -22,26 +22,40 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<District>> GetPagedDistrict(DistrictSearchDto model)
         {
             var data = await _dbContext.District
-                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-                 .OrderByDescending(s => s.IsActive)
-
-                .GetPaged<District>(model.PageNumber, model.PageSize); 
+                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                  && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                 .GetPaged<District>(model.PageNumber, model.PageSize); 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderBy(s => s.Name)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
+
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderBy(s => s.Code)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
                         break;
-                   
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderByDescending(x => x.IsActive)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
                         break;
+
                 }
             }
             else if (SortOrder == 2)
@@ -49,15 +63,31 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderByDescending(s => s.Name)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderByDescending(x => x.Code)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
                         break;
                    
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.District
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                           .OrderBy(x => x.IsActive)
+                           .GetPaged<District>(model.PageNumber, model.PageSize);
                         break;
+                      
                 }
             }
             return data;

@@ -23,17 +23,17 @@ namespace Libraries.Model.Entity
             Planning = new HashSet<Planning>();
         }
 
-        [Required(ErrorMessage = "Division name is required")]
+        [Required(ErrorMessage = "Division name is mandatory")]
         [Remote(action: "Exist", controller: "Division", AdditionalFields = "Id")]
 
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Division Code is mandatory")]
         public string Code { get; set; }
         public byte IsActive { get; set; }
-        [Required(ErrorMessage = "The Zone field is required")]
+        [Required(ErrorMessage = "Zone is mandatory")]
 
         public int ZoneId { get; set; }
-        [Required(ErrorMessage = "The Department field is required")]
+        [Required(ErrorMessage = "Department is mandatory")]
 
         public int DepartmentId { get; set; }
 
