@@ -67,7 +67,7 @@ namespace EncroachmentDemolition.Controllers
             encroachmentRegisterations.DivisionList = await _encroachmentRegisterationService.GetAllDivisionList(encroachmentRegisterations.ZoneId);
             encroachmentRegisterations.LocalityList = await _encroachmentRegisterationService.GetAllLocalityList(encroachmentRegisterations.DivisionId);
             encroachmentRegisterations.KhasraList = await _encroachmentRegisterationService.GetAllKhasraList(encroachmentRegisterations.LocalityId);
-
+            var Msgddl = encroachmentRegisterations.ApprovalStatus;
             #region Approval Proccess At Further level start Added by Renu 4 Dec 2020
             var DataFlow = await DataAsync();
             for (int i = 0; i < DataFlow.Count; i++)
@@ -76,7 +76,7 @@ namespace EncroachmentDemolition.Controllers
                 {
                     if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
                     {
-                      result = true; 
+                        result = true;
                         if (result)
                         {
                             Approvalproccess approvalproccess = new Approvalproccess();
@@ -87,6 +87,7 @@ namespace EncroachmentDemolition.Controllers
                             approvalproccess.PendingStatus = 1;
                             approvalproccess.Remarks = encroachmentRegisterations.ApprovalRemarks; ///May be comment
                             approvalproccess.Status = Convert.ToInt32(encroachmentRegisterations.ApprovalStatus);
+
                             if (i == DataFlow.Count - 1)
                                 approvalproccess.SendTo = null;
                             else
@@ -117,8 +118,19 @@ namespace EncroachmentDemolition.Controllers
             }
 
             #endregion
+           
 
-            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+            
+            
+             if(Msgddl=="3")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+             else
+            {
+
+                ViewBag.Message = Alert.Show(Messages.Forwardsuccesfuly, "", AlertType.Success);
+            }
             return View("Index");
         }
 
