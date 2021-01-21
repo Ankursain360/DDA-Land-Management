@@ -182,5 +182,27 @@ namespace EncroachmentDemolition.Controllers
 
 
 
+
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            try { 
+            FileHelper file = new FileHelper();
+            var Data = await _onlinecomplaintService.FetchSingleResult(Id);
+            string path = Data.PhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+            return File(FileBytes, file.GetContentType(path));
+                }
+            catch(Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _onlinecomplaintService.FetchSingleResult(Id);
+                string path = Data.PhotoPath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(path);
+                return File(FileBytes, file.GetContentType(path));
+
+            }
+        }
+
     }
 }

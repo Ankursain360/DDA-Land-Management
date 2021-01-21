@@ -65,8 +65,12 @@
 
                         <input asp-for="Photo" id="Photo" type="file" class="floating-label-field floating-label-field--s3" disabled multiple />
 
+                        <a class="badge badge-primary px-2" asp-action="ViewLetter"  asp-route-id="@Model.Id
+                           "> (View Existing Photo )</a>
+
+
                         <label class="floating-label">Photograph</label>
-                        <a target="_blank" href="@Model.PhotoPath">View</a>
+                        
                     </div>
                 </div>
 
