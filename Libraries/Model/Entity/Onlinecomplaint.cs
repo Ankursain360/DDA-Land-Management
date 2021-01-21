@@ -20,12 +20,12 @@ namespace Libraries.Model.Entity
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
                    ErrorMessage = "Invalid Contact Format.")]
         public string Contact { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter   Mobile No ",AllowEmptyStrings =false)]
         public int? ComplaintTypeId { get; set; }
         [Required(ErrorMessage = " The Address field is required")]
 
         public string AddressOfComplaint { get; set; }
-        [Required(ErrorMessage = "Please Select Location")]
+        [Required(ErrorMessage = "Please Select Location", AllowEmptyStrings = false)]
         public int? LocationId { get; set; }
         public string Lattitude { get; set; }
         public string Longitude { get; set; }

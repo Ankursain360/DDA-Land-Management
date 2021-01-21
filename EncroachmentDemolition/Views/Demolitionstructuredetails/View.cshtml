@@ -13,7 +13,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
+                    <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="DepartmentId"
                             asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))"
                             onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
@@ -25,7 +25,7 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
+                    <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="ZoneId"
                             asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))"
                             onchange="return onChangeZone(this.options[this.selectedIndex].value)">
@@ -39,7 +39,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
+                    <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="DivisionId"
                             asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))"
                             onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
@@ -52,7 +52,7 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3"
+                    <select disabled class="floating-label-field floating-label-field--s3"
                             asp-for="LocalityId"
                             asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                         <option value="">--Select--</option>
@@ -66,7 +66,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="FileNo" placeholder="File No" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="FileNo" placeholder="File No" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="FileNo"></span>
                     <label class="floating-label">File No.</label>
                 </div>
@@ -84,7 +84,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Area" placeholder="Area" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="Area" placeholder="Area" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Area"></span>
                     <label class="floating-label">Area</label>
                 </div>
@@ -92,7 +92,7 @@
 
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="PoliceStation" placeholder="Police Station" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="PoliceStation" placeholder="Police Station" class="floating-label-field floating-label-field--s3"></textarea>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="PoliceStation"></span>
                     <label class="floating-label">Police Station</label>
                 </div>
@@ -102,7 +102,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="NameOfAreaSite" placeholder="Name of the Area/Site" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="NameOfAreaSite" placeholder="Name of the Area/Site" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="NameOfAreaSite"></span>
                     <label class="floating-label">Name of the Area/Site</label>
                 </div>
@@ -120,7 +120,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="DateOfApprovalDemolition" type="date" placeholder="Date of Approval of Demolition" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="DateOfApprovalDemolition" type="date" placeholder="Date of Approval of Demolition" class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="DateOfApprovalDemolition"></span>
                     <label class="floating-label">Date of Approval of Demolition</label>
                 </div>
@@ -138,7 +138,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="StartOfDemolitionActionDate" type="date" placeholder="Start of Demolition Action"
+                    <input disabled asp-for="StartOfDemolitionActionDate" type="date" placeholder="Start of Demolition Action"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="StartOfDemolitionActionDate"></span>
                     <label class="floating-label">Start of Demolition Action</label>
@@ -174,7 +174,7 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="EndOfDemolitionActionDate" type="date" placeholder="End of Demolition Action"
+                    <input disabled asp-for="EndOfDemolitionActionDate" type="date" placeholder="End of Demolition Action"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="EndOfDemolitionActionDate"></span>
                     <label class="floating-label">End of Demolition Action</label>
@@ -229,7 +229,7 @@
                                         <td>@(item.Structure.Name)</td>
                                         <td>
                                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                                <input type="text" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" readonly="readonly"/>
+                                                <input disabled type="text" asp-for="NoOfStructrure" value="@(item.NoOfStructrure)" class="floating-label-field floating-label-field--s3" readonly="readonly"/>
                                                 <input type="hidden" asp-for="Id" value="@(item.Id)" />
                                                 <input type="hidden" asp-for="StructrureId" value="@(item.StructureId)" />
                                             </div>
@@ -246,7 +246,7 @@
         <div class="row pt-4">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
+                    <input disabled asp-for="AreaReclaimed" type="text" placeholder="Area Reclaimed(approx.)"
                            class="floating-label-field floating-label-field--s3" />
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="AreaReclaimed"></span>
                     <label class="floating-label">Area Reclaimed(approx.)</label>
@@ -254,7 +254,7 @@
             </div>
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" type="text" placeholder="Remarks"
+                    <textarea disabled asp-for="Remarks" type="text" placeholder="Remarks"
                               class="floating-label-field floating-label-field--s3"></textarea>
                     <span class="d-block text-danger field-validation-valid" asp-validation-for="Remarks"></span>
                     <label class="floating-label">Remarks, If Any</label>
