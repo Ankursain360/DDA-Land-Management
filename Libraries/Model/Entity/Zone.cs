@@ -26,7 +26,7 @@ namespace Libraries.Model.Entity
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
         }
 
-        [Required(ErrorMessage = " Department is mandatory")]
+        [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings = false)]
         public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Zone Name is mandatory")]
