@@ -17,9 +17,9 @@ namespace Libraries.Model.Entity
             
         }
 
-        [Required(ErrorMessage = "The Zone field is required")]
+        [Required(ErrorMessage = " Zone is mandatory")]
         public int ZoneId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Village name is mandatory")]
         [Remote(action: "Exist", controller: "Village", AdditionalFields = "Id")]
         public string Name { get; set; }
         public byte IsActive { get; set; } 
@@ -27,10 +27,10 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
-        [Required(ErrorMessage = "Division name is required")]
+        [Required(ErrorMessage = "Division is mandatory")]
         [NotMapped]
         public int DivisionId { get; set; }
-        [Required(ErrorMessage = "The Department field is required")]
+        [Required(ErrorMessage = " Department is mandatory")]
         [NotMapped]
         public int DepartmentId { get; set; }
         public virtual Zone Zone { get; set; }

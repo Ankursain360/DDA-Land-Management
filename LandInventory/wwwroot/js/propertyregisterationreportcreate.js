@@ -112,6 +112,9 @@ function GetDivisionList(id) {
     });
 };
 
+$("#btnGenerate").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
 function GetDetails(pageNumber, pageSize, sortOrder) {
     var param = GetSearchParam(pageNumber, pageSize, sortOrder);
@@ -202,13 +205,13 @@ $("#btnReset").click(function () {
     $('#LocalityId').val('0').trigger('change');
     $('#InventoriedInId').val('0').trigger('change')
     $('#ClassificationOfLandId').val('0').trigger('change');
-    $('#PlannedUnplannedLand').val('0').trigger('change');
+    $('#PlannedUnplannedLand').val('Planned Land').trigger('change');
     $('#Colony').val('');
     $('#Sector').val('');
     $('#Block').val('');
     $('#Pocket').val('');
     $('#PlotNo').val('');
-    $('#MainLandUseId').val('0').trigger('change')
+    $('#MainLandUseId').val('0').trigger('change');
     $('#LitigationStatus').val('0').trigger('change');
     $('#Encroached').val('0').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);

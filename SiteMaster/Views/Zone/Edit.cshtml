@@ -22,7 +22,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                           class="floating-label-field floating-label-field--s3" limit="30" />
 
                     <span asp-validation-for="Name" class="text-danger"></span>
 
@@ -35,7 +35,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Code" type="text" class="floating-label-field floating-label-field--s3" placeholder="Zone Code"
-                           limit="100">
+                           limit="10">
                     <span asp-validation-for="Code" class="text-danger "></span>
                     <label class="floating-label">Zone Code</label>
                 </div>

@@ -69,7 +69,11 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+                    if (interest.ToDate <= interest.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(interest);
+                    }
                     var result = await _interestService.Create(interest);
 
                     if (result == true)
@@ -118,6 +122,11 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    if (interest.ToDate <= interest.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(interest);
+                    }
                     var result = await _interestService.Update(id, interest);
                     if (result == true)
                     {
@@ -140,7 +149,7 @@ namespace SiteMaster.Controllers
             return View(interest);
         }
         [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _interestService.Delete(id);

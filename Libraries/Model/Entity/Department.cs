@@ -25,11 +25,11 @@ namespace Libraries.Model.Entity
             Planning = new HashSet<Planning>();
         }
 
-        [Required(ErrorMessage = "Department name is required")]
+        [Required(ErrorMessage = "Department name is mandatory")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
 
         public string Name { get; set; }
-        [Required(ErrorMessage = "Status feild is required")]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte? IsActive { get; set; }
         public virtual ICollection<Zone> Zone { get; set; }
         public virtual ICollection<Locality> Locality { get; set; }

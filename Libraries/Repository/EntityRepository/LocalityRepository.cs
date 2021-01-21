@@ -41,22 +41,87 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("DEPARTMENT"):
-                       data.Results= data.Results.OrderBy(x => x.Department.Name).ToList(); 
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x => x.Department.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
                     case ("ZONE"):
-                        data.Results = data.Results.OrderBy(x => x.Zone.Name).ToList(); 
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x => x.Zone.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                     
                         break;
                     case ("DIVISION"):
-                        data.Results = data.Results.OrderBy(x => x.Division.Name).ToList(); 
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x => x.Division.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                      
                         break;
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x =>x.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                       
                         break;
                     case ("LOCALITYCODE"):
-                        data.Results = data.Results.OrderBy(x => x.LocalityCode).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x => x.LocalityCode)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                      
                         break;
                 }
             }
@@ -64,24 +129,89 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                   
+
                     case ("DEPARTMENT"):
-                        data.Results = data.Results.OrderByDescending(x => x.Department.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.Department.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
                     case ("ZONE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Zone.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.Zone.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
                         break;
                     case ("DIVISION"):
-                        data.Results = data.Results.OrderByDescending(x => x.Division.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.Division.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
                         break;
                     case ("LOCALITY"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+
                         break;
                     case ("LOCALITYCODE"):
-                        data.Results = data.Results.OrderByDescending(x => x.LocalityCode).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderByDescending(x => x.LocalityCode)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
+                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
+                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
                         break;
                 }
             }

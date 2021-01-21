@@ -10,11 +10,11 @@ namespace Libraries.Model.Entity
     {
         public Caseyear()
         { }
-        [Required(ErrorMessage = "Case Year name is required")]
+        [Required(ErrorMessage = "Case Year is mandatory")]
         [Remote(action: "Exist", controller: "caseyear", AdditionalFields = "Id")]
 
         public string Name { get; set; }
-        [Required(ErrorMessage = "Status field is required")]
+        [Required(ErrorMessage = "Status is mandatory")]
         public byte IsActive { get; set; }
 
     }

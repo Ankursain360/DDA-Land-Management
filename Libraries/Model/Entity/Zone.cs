@@ -26,15 +26,15 @@ namespace Libraries.Model.Entity
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
         }
 
-        [Required(ErrorMessage = "The Department field is required")]
+        [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings = false)]
         public int DepartmentId { get; set; }
 
-        [Required(ErrorMessage = "The Zone Name field is required")]
+        [Required(ErrorMessage = "Zone Name is mandatory")]
         [Remote(action: "Exist", controller: "Zone", AdditionalFields = "Id")]
         [StringLength(100)]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "The Zone Code field is required")]
+        [Required(ErrorMessage = " Zone Code is mandatory")]
         [Remote(action: "IsCodeExist", controller: "Zone", AdditionalFields = "Id")]
         [StringLength(100)]
         public string Code { get; set; }

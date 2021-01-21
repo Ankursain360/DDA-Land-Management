@@ -24,16 +24,16 @@ namespace Libraries.Model.Entity
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
 
-        [Required(ErrorMessage = "Classification Of Land is Mandatory Field")]
+        [Required(ErrorMessage = "Classification Of Land is Mandatory Field", AllowEmptyStrings = false)]
         public int ClassificationOfLandId { get; set; }
 
-        [Required(ErrorMessage = "Department is Mandatory Field")]
+        [Required(ErrorMessage = "Department is Mandatory Field", AllowEmptyStrings = false)]
         public int DepartmentId { get; set; }
 
-        [Required(ErrorMessage = "Zone is Mandatory Field")]
+        [Required(ErrorMessage = "Zone is Mandatory Field", AllowEmptyStrings = false)]
         public int ZoneId { get; set; }
 
-        [Required(ErrorMessage = "Division is Mandatory Field")]
+        [Required(ErrorMessage = "Division is Mandatory Field", AllowEmptyStrings = false)]
         public int DivisionId { get; set; }
 
         public int? LocalityId { get; set; }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Dto.Search;
 using System.Threading.Tasks;
 using Libraries.Model;
@@ -9,7 +7,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using Dto.Master;
+
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -22,9 +20,10 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Casenature>> GetPagedcasenature(CasenatureSearchDto model)
         {
-            var data= await _dbContext.Casenature
-                                //.Where(x => x.IsActive == 1)
-                                .OrderByDescending(s => s.IsActive)
+          
+           var  data= await _dbContext.Casenature
+                                .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            // .OrderByDescending(s => s.IsActive)
                             .GetPaged<Casenature>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -32,14 +31,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results
-                             .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Casenature
+                               .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                            .OrderBy(s => s.Name)
+                        .GetPaged<Casenature>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results
+                        data = null;
+                        data = await _dbContext.Casenature
                              .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderBy(x => x.IsActive == 0).ToList();
+                            .OrderBy(x => x.IsActive == 0)
+                        .GetPaged<Casenature>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -48,14 +51,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results
+                        data = null;
+                        data = await _dbContext.Casenature
                              .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                            .OrderByDescending(x => x.Name).ToList();
+                            .OrderByDescending(x => x.Name)
+                        .GetPaged<Casenature>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results
+                        data = null;
+                        data = await _dbContext.Casenature
                              .Where(x => string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             .OrderByDescending(x => x.IsActive == 0).ToList();
+                             .OrderByDescending(x => x.IsActive == 0)
+                              .GetPaged<Casenature>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -77,7 +84,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Casenature>> Getcasenature()
         {
-            return await _dbContext.Casenature.Where(x => x.IsActive == 0).ToListAsync();
+            return await _dbContext.Casenature.Where(x => x.IsActive == 1).ToListAsync();
 
         }
     }

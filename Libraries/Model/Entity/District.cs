@@ -16,10 +16,10 @@ namespace Libraries.Model.Entity
             Userprofile = new HashSet<Userprofile>();
           
         }
-        [Required(ErrorMessage = "District name is required")]
+        [Required(ErrorMessage = "District name is Mandatory")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "District code is Mandatory Field")]
+        [Required(ErrorMessage = "District code is Mandatory ")]
 
         public string Code { get; set; }
         [Required]
