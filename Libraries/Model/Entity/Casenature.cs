@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
         public Casenature()
         {                   }
         [Required(ErrorMessage = "Case Nature name is required")]
-        [Remote(action: "Exist", controller: "casenature", AdditionalFields = "Id")]
+        [Remote(action: "Exist", controller: "CaseNature", AdditionalFields = "Id")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Status field is required")]
         public byte? IsActive { get; set; }
