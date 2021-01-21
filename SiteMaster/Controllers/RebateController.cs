@@ -29,15 +29,15 @@ namespace SiteMaster.Controllers
             _rebateService = rebateService;
         }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
-        {
-            var result = await _rebateService.GetAllRebate();
-            return View(result);
-        }
-        //public IActionResult Index()
+        //public async Task<IActionResult> Index()
         //{
-        //    return View();
+        //    var result = await _rebateService.GetAllRebate();
+        //    return View(result);
         //}
+        public IActionResult Index()
+        {
+            return View();
+        }
 
         [HttpPost]
        
@@ -64,6 +64,11 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if(rebate.ToDate <= rebate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rebate);
+                    }
                     if (rebate.IsRebateOn == 0)
                         rebate.IsRebateOn = 0;
                     else if (rebate.IsRebateOn == 1)
@@ -88,6 +93,7 @@ namespace SiteMaster.Controllers
                 }
                 else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(rebate);
                 }
             }
@@ -117,6 +123,17 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    if (rebate.ToDate <= rebate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rebate);
+                    }
+                    if (rebate.IsRebateOn == 0)
+                        rebate.IsRebateOn = 0;
+                    else if (rebate.IsRebateOn == 1)
+                        rebate.IsRebateOn = 1;
+                    else if (rebate.IsRebateOn == 2)
+                        rebate.IsRebateOn = 2;
                     var result = await _rebateService.Update(id, rebate);
                     if (result == true)
                     {

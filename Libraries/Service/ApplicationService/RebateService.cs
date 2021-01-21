@@ -83,7 +83,7 @@ namespace Libraries.Service.ApplicationService
             return _rebateRepository.GetFromDateData(propertyId);
         }
 
-        public async Task<PagedResult<Rebate>> GetPagedRebate(RebateSearchDto model)
+        public async Task<List<Rebate>> GetPagedRebate(RebateSearchDto model)
         {
             return await _rebateRepository.GetPagedRebate(model);
         }
