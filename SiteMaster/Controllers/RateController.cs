@@ -150,7 +150,7 @@ namespace SiteMaster.Controllers
             return View(rate);
         }
         [AuthorizeContext(ViewAction.Delete)]
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _rateService.Delete(id);

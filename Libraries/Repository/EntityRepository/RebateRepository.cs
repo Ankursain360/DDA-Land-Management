@@ -79,6 +79,9 @@ namespace Libraries.Repository.EntityRepository
                     case ("PERCENTAGE"):
                         data = data.OrderBy(x => x.RebatePercentage).ToList();
                         break;
+                    case ("ISACTIVE"):
+                        data = data.OrderByDescending(x => x.IsActive).ToList();
+                        break;
 
                 }
             }
@@ -98,6 +101,10 @@ namespace Libraries.Repository.EntityRepository
                     case ("PERCENTAGE"):
                         data = data.OrderByDescending(x => x.RebatePercentage).ToList();
                         break;
+                    case ("ISACTIVE"):
+                        data = data.OrderBy(x => x.IsActive).ToList();
+                        break;
+
                 }
             }
             return data;
