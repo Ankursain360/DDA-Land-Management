@@ -1,15 +1,7 @@
 ﻿@model Libraries.Model.Entity.Doortodoorsurvey
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Door To Door Survey" })
-<br />
-<br />
 
-@*<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
-        </div>
-        <div class="panel-body">*@
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">Add Details</h3>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -21,6 +13,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="PropertyAddress" placeholder="Location/Address of Property" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="PropertyAddress" class="text-danger"></span>
                 <label class="floating-label">Location/Address of Property</label>
             </div>
         </div>
@@ -28,6 +21,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="MuncipalNo" placeholder="Municipal Number" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="MuncipalNo" class="text-danger"></span>
                 <label class="floating-label">Municipal Number, if any</label>
             </div>
         </div>
@@ -38,6 +32,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="GeoReferencing" placeholder="Geo Referencing" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="GeoReferencing" class="text-danger"></span>
                 <label class="floating-label">Geo Referencing</label>
             </div>
         </div>
@@ -66,6 +61,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="ApproxPropertyArea" placeholder="Approx Area of the Property" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="ApproxPropertyArea" class="text-danger"></span>
                 <label class="floating-label">Approx Area of the Property</label>
             </div>
         </div>
@@ -73,6 +69,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="NumberOfFloors" placeholder="Number of Floors" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="NumberOfFloors" class="text-danger"></span>
                 <label class="floating-label">Number of Floors</label>
             </div>
         </div>
@@ -102,6 +99,7 @@
                             <td>
                                 <div class="floating-label-wrap mb-3 mb-md-0">
                                     <input type="text" asp-for="Name" id="txtPersonalName" class="floating-label-field floating-label-field--s3" />
+                                   
                                 </div>
                             </td>
                             <td>
@@ -147,6 +145,8 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="CaelectricityNo" placeholder="CA-Number of Electricity Connection" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="CaelectricityNo" class="text-danger"></span>
+              
                 <label class="floating-label">CA-Number of Electricity Connection(s)</label>
             </div>
         </div>
@@ -154,6 +154,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="KwaterNo" placeholder="K-Number of Water Connection(s)" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="KwaterNo" class="text-danger"></span>
                 <label class="floating-label">K-Number of Water Connection(s)</label>
             </div>
         </div>
@@ -164,6 +165,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="PropertyHouseTaxNo" placeholder="Property/House Tax Number" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="PropertyHouseTaxNo" class="text-danger"></span>
                 <label class="floating-label">Property/House Tax Number issued by MCD/local body</label>
             </div>
         </div>
@@ -171,6 +173,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="OccupantName" placeholder="Name of Occupant" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="OccupantName" class="text-danger"></span>
                 <label class="floating-label">Name of Occupant</label>
             </div>
         </div>
@@ -180,6 +183,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="Address" placeholder="Address" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="Address" class="text-danger"></span>
                 <label class="floating-label">Address</label>
             </div>
         </div>
@@ -187,6 +191,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="Email" placeholder="E-mail" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="Email" class="text-danger"></span>
                 <label class="floating-label">E-mail</label>
             </div>
         </div>
@@ -196,6 +201,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="TelephoneNo" placeholder="Telephone" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="TelephoneNo" class="text-danger"></span>
                 <label class="floating-label">Telephone</label>
             </div>
         </div>
@@ -203,6 +209,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="MobileNo" placeholder="Mobile" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
                 <label class="floating-label">Mobile</label>
             </div>
         </div>
@@ -212,6 +219,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="OccupantAadharNo" placeholder="Aadhar Number" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="OccupantAadharNo" class="text-danger"></span>
                 <label class="floating-label">Aadhar Number of Occupant</label>
             </div>
         </div>
@@ -219,6 +227,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="VoterIdNo" placeholder="Voter ID" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="VoterIdNo" class="text-danger"></span>
                 <label class="floating-label">Voter ID Number</label>
 
             </div>
@@ -230,6 +239,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="file" asp-for="OccupantIdentityPrrofFilePath" placeholder="Identity Proof" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="OccupantIdentityPrrofFilePath" class="text-danger"></span>
                 <label class="floating-label">Identity Proof of the Occupants; Aadhar,Voter Card, DL, Passport</label>
             </div>
         </div>
@@ -237,6 +247,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="text" asp-for="DamagePaidPast" placeholder="Damage Paid" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="DamagePaidPast" class="text-danger"></span>
                 <label class="floating-label">Damage Paid in the Past, if any </label>
             </div>
         </div>
@@ -247,6 +258,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <input type="file" asp-for="PropertyFilePath" placeholder="Document of Property" class="floating-label-field floating-label-field--s3" />
+                <span asp-validation-for="PropertyFilePath" class="text-danger"></span>
                 <label class="floating-label">Document of Property, if any</label>
             </div>
         </div>
@@ -268,6 +280,7 @@
             <div class="floating-label-wrap mb-3 mb-md-0">
 
                 <textarea type="text" asp-for="Remarks" placeholder="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                <span asp-validation-for="Remarks" class="text-danger"></span>
                 <label class="floating-label">Remarks</label>
             </div>
         </div>
@@ -359,3 +372,4 @@
         }
     });
 </script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

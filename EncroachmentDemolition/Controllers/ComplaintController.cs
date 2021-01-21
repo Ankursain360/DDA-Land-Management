@@ -18,6 +18,10 @@ using Dto.Common;
 using EncroachmentDemolition.Filters;
 
 
+using System.Drawing;
+using System.Drawing.Imaging;
+
+
 
 using Core.Enum;
 
@@ -87,12 +91,13 @@ namespace EncroachmentDemolition.Controllers
               
                 if (ModelState.IsValid)
                 {
-                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
+                   string targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
-                        onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
+                        string PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
+                        GetLattLongDetails(PhotoPath, onlinecomplaint.Lattitude, onlinecomplaint.Longitude);
                         var LattitudeValue = TempData["LattitudeValue"] as string;
                         onlinecomplaint.Lattitude = LattitudeValue;
                         var LongitudeValue = TempData["LongitudeValue"] as string;
@@ -272,6 +277,73 @@ namespace EncroachmentDemolition.Controllers
             return ObjList;
         }
 
+
+
+
+
+        [HttpGet]
+        public void GetLattLongDetails(string path, string Latt, string Long)
+        {
+            double? latitdue = null;
+            double? longitude = null;
+            string url = null;
+            if (path != null)
+            {
+                Bitmap bmp = new Bitmap(path);
+                foreach (PropertyItem propItem in bmp.PropertyItems)
+                {
+                    switch (propItem.Type)
+                    {
+                        case 5:
+                            if (propItem.Id == 2) // Latitude Array
+                            {
+                                latitdue = GetLatitudeAndLongitude(propItem);
+                            }
+                            if (propItem.Id == 4) //Longitude Array
+                            {
+                                longitude = GetLatitudeAndLongitude(propItem);
+                            }
+                            break;
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(latitdue.ToString()) && !string.IsNullOrEmpty(longitude.ToString()))
+                {
+                    url = $"https://www.google.com/maps/place/{latitdue},{longitude}";
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show("Uploaded Image does not contain any geo location.please enter your request location in below textbox", "", AlertType.Error);
+
+                }
+                bmp.Dispose();
+            }
+            TempData["LattitudeValue"] = latitdue.ToString();
+            TempData["LongitudeValue"] = longitude.ToString();
+            TempData["url"] = url;
+        }
+
+
+
+        private static double? GetLatitudeAndLongitude(PropertyItem propItem)
+        {
+            try
+            {
+                uint degreesNumerator = BitConverter.ToUInt32(propItem.Value, 0);
+                uint degreesDenominator = BitConverter.ToUInt32(propItem.Value, 4);
+                uint minutesNumerator = BitConverter.ToUInt32(propItem.Value, 8);
+                uint minutesDenominator = BitConverter.ToUInt32(propItem.Value, 12);
+                uint secondsNumerator = BitConverter.ToUInt32(propItem.Value, 16);
+                uint secondsDenominator = BitConverter.ToUInt32(propItem.Value, 20);
+                return (Convert.ToDouble(degreesNumerator) / Convert.ToDouble(degreesDenominator)) + (Convert.ToDouble(Convert.ToDouble(minutesNumerator) / Convert.ToDouble(minutesDenominator)) / 60) +
+                       (Convert.ToDouble((Convert.ToDouble(secondsNumerator) / Convert.ToDouble(secondsDenominator)) / 3600));
+            }
+            catch (Exception)
+            {
+
+                return null;
+            }
+        }
 
 
     }

@@ -56,7 +56,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PhotoPath)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
 

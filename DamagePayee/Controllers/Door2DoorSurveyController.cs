@@ -37,9 +37,17 @@ namespace DamagePayee.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DoortodoorsurveySearchDto model)
         {
-            var result = await _doortodoorsurveyService.GetPagedDoortodoorsurvey(model);
+            try
+            {
+                var result = await _doortodoorsurveyService.GetPagedDoortodoorsurvey(model);
 
-            return PartialView("_List", result);
+                return PartialView("_List", result);
+            }
+            catch (Exception Ex)
+            {
+
+                return PartialView("_List", Ex);
+            }
         }
 
 
