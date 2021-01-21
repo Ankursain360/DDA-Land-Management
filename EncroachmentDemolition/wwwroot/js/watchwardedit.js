@@ -70,3 +70,9 @@ $("#collapse").click(function () {
         });
     })
 });
+
+$("input[name='grpEncroachment']").click(function () {
+    var selected = $("input[type='radio'][name='grpEncroachment']:checked");
+    $("#Encroachment").val(selected.val());
+
+});
