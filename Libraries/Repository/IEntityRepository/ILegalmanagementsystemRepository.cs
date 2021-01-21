@@ -22,6 +22,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Legalmanagementsystem>> GetPagedLegalReport(LegalReportSearchDto model);
         Task<List<Legalmanagementsystem>> GetLegalmanagementsystemList();
 
+
         Task<PagedResult<Legalmanagementsystem>> GetLegalmanagementsystemReportData(HearingReportSearchDto hearingReportSearchDto);
 
         string GetDownload(int id);
