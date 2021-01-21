@@ -74,7 +74,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Khasra)
                                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
                                         && (x.IsActive == 1))
-                                .OrderBy(x => x.Locality.Name)
+                                .OrderBy(x => x.PrimaryListNoNavigation.Locality.Name)
                                .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
 
                         //data.Results = data.Results.OrderBy(x => x.Locality).ToList();
@@ -88,7 +88,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Khasra)
                                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
                                         && (x.IsActive == 1))
-                                .OrderBy(x => x.IsActive)
+                                .OrderBy(x => x.StatusOnGround)
                                .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
                       //  data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
@@ -147,7 +147,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Khasra)
                                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
                                         && (x.IsActive == 1))
-                                .OrderByDescending(x => x.IsActive)
+                                .OrderByDescending(x => x.StatusOnGround)
                                .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
                         //  data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
                         break;
