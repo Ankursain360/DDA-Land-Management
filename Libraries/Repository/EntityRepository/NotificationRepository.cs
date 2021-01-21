@@ -28,10 +28,8 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<LandNotification>> GetPagedZone(NotificationSearchDto model)
         {
-            //return await _dbContext.LandNotification.GetPagedZone<LandNotification>(model.PageNumber, model.PageSize);
             var data = await _dbContext.LandNotification
                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-                          // .OrderBy(s => s.Name)
                            .GetPaged<LandNotification>(model.PageNumber, model.PageSize); ;
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -39,10 +37,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.LandNotification
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                           .OrderBy(s => s.Name)
+                           .GetPaged<LandNotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.LandNotification
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                           .OrderByDescending(s => s.IsActive)
+                           .GetPaged<LandNotification>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -51,10 +57,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.LandNotification
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                           .OrderByDescending(s => s.Name)
+                           .GetPaged<LandNotification>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.LandNotification
+                           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                           .OrderBy(s => s.IsActive)
+                           .GetPaged<LandNotification>(model.PageNumber, model.PageSize);
                         break;
 
                 }

@@ -12,10 +12,10 @@ namespace Libraries.Model.Entity
    public partial class Demolitionchecklist : AuditableEntity<int>
     {
 
-        [Required(ErrorMessage = "The Checklist Description field is required")]
+        [Required(ErrorMessage = "Checklist Description is mandatory")]
 
         public string ChecklistDescription { get; set; }
-        [Required(ErrorMessage = "The Is Active field is required")]
+        [Required(ErrorMessage = "Status is mandatory")]
 
         public byte IsActive { get; set; }
 

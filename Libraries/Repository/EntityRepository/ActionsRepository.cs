@@ -26,10 +26,9 @@ namespace Libraries.Repository.EntityRepository
             //return await _dbContext.Actions.GetPaged<Actions>(model.PageNumber, model.PageSize);
             var data = await _dbContext.Actions
                              .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
-                            && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
                              && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
-                               //  .OrderByDescending(x => x.IsActive)
-                                 .GetPaged<Actions>(model.PageNumber, model.PageSize);
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -37,17 +36,41 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderBy(s => s.Name)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                     case ("ICON"):
-                        data.Results = data.Results.OrderBy(x => x.Icon).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderBy(s => s.Icon)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                     case ("COLOR"):
-                        data.Results = data.Results.OrderBy(x => x.Color).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderBy(s => s.Color)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                    
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive==0).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderByDescending(s => s.IsActive)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -56,17 +79,41 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderByDescending(s => s.Name)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                     case ("ICON"):
-                        data.Results = data.Results.OrderByDescending(x => x.Icon).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderByDescending(s => s.Icon)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                     case ("COLOR"):
-                        data.Results = data.Results.OrderByDescending(x => x.Color).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderByDescending(s => s.Color)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
-                   
+
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive==0).ToList();
+                        data = null;
+                        data = await _dbContext.Actions
+                             .Where(x => (string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                             && (string.IsNullOrEmpty(model.Icon) || x.Icon.Contains(model.Icon))
+                             && (string.IsNullOrEmpty(model.Color) || x.Color.Contains(model.Color)))
+                             .OrderBy(s => s.IsActive)
+                             .GetPaged<Actions>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
