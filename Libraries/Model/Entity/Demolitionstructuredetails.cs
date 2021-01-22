@@ -17,15 +17,21 @@ namespace Libraries.Model.Entity
             Demolitionstructurebeforedemolitionphotofiledetails = new HashSet<Demolitionstructurebeforedemolitionphotofiledetails>();
         }
 
-        
+        [Required(ErrorMessage = " Department is mandatory")]
         public int? DepartmentId { get; set; }
+        [Required(ErrorMessage = " Zone is mandatory")]
         public int? ZoneId { get; set; }
+        [Required(ErrorMessage = " Division is mandatory")]
         public int? DivisionId { get; set; }
+        [Required(ErrorMessage = " Locality is mandatory")]
         public int? LocalityId { get; set; }
+        [Required(ErrorMessage = " File No is mandatory")]
         public string FileNo { get; set; }
         //public string Name { get; set; }
         public DateTime? Date { get; set; }
+        [Required(ErrorMessage = " Area is mandatory")]
         public string Area { get; set; }
+        [Required(ErrorMessage = " Police Station is mandatory")]
         public string PoliceStation { get; set; }
         public string NameOfAreaSite { get; set; }
         public DateTime? EncroachmentSinceDate { get; set; }
@@ -33,6 +39,7 @@ namespace Libraries.Model.Entity
         public string NameOfEncroacherIfAny { get; set; }
         public DateTime? StartOfDemolitionActionDate { get; set; }
         public DateTime? EndOfDemolitionActionDate { get; set; }
+        [Required(ErrorMessage = " Area is mandatory")]
         public decimal? AreaReclaimed { get; set; }
         public string Remarks { get; set; }
         public byte? IsActive { get; set; }
