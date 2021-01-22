@@ -26,8 +26,11 @@ namespace Libraries.Model.Entity
 
         public string AddressOfComplaint { get; set; }
         [Required(ErrorMessage = "Please Select Location", AllowEmptyStrings = false)]
+     
         public int? LocationId { get; set; }
+        [Required]
         public string Lattitude { get; set; }
+        [Required]
         public string Longitude { get; set; }
         public byte? IsActive { get; set; }
 

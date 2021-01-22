@@ -188,18 +188,18 @@ namespace EncroachmentDemolition.Controllers
             try { 
             FileHelper file = new FileHelper();
             var Data = await _onlinecomplaintService.FetchSingleResult(Id);
-            string path = Data.PhotoPath;
-            byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-            return File(FileBytes, file.GetContentType(path));
+            string targetPhotoPathLayout = Data.PhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
                 }
             catch(Exception ex)
             {
 
                 FileHelper file = new FileHelper();
                 var Data = await _onlinecomplaintService.FetchSingleResult(Id);
-                string path = Data.PhotoPath;
-                byte[] FileBytes = System.IO.File.ReadAllBytes(path);
-                return File(FileBytes, file.GetContentType(path));
+                string targetPhotoPathLayout = Data.PhotoPath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
 
             }
         }
