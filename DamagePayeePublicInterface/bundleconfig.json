@@ -1,0 +1,26 @@
+[
+  {
+    "outputFileName": "wwwroot/js/selfassessmentdamagecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/selfassessmentdamagecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/selfassessmentdamageprint.min.js",
+    "inputFiles": [
+      "wwwroot/js/selfassessmentdamageprint.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/selfassessmentdamageview.min.js",
+    "inputFiles": [
+      "wwwroot/js/selfassessmentdamageview.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  }
+]

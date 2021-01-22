@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
             Demolitionstructure = new HashSet<Demolitionstructure>();
         }
 
-      
+        [Required(ErrorMessage = " Structure name is mandatory")]
         public string Name { get; set; }
         
         public byte? IsActive { get; set; }

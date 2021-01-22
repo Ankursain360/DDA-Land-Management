@@ -151,16 +151,10 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-
-     
-
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Division.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
-
-
-
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive==1).ToListAsync();
@@ -171,11 +165,5 @@ namespace Libraries.Repository.EntityRepository
             List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
-
-
-     
-
-
-
     }
 }

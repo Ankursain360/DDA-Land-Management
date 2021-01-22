@@ -21,9 +21,11 @@ namespace Libraries.Model.Entity
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Mutationdetails = new HashSet<Mutationdetails>();
             Demandletters = new HashSet<Demandletters>();
-
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
+            Datastoragedetails = new HashSet<Datastoragedetails>();
         }
+
+
         [Required(ErrorMessage = " Department is mandatory")]
         public int DepartmentId { get; set; }
         [Required(ErrorMessage = " Zone is mandatory")]
@@ -66,5 +68,6 @@ namespace Libraries.Model.Entity
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Demandletters> Demandletters { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
     }
 }

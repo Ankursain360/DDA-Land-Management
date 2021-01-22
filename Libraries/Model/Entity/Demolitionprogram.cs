@@ -10,12 +10,13 @@ namespace Libraries.Model.Entity
   public  class Demolitionprogram : AuditableEntity<int>
     {
 
-        [Required(ErrorMessage = "The Items field is required")]
+        [Required(ErrorMessage = " Items is mandatory")]
 
         public string Items { get; set; }
-        [Required(ErrorMessage = "The Items Type field is required")]
+        [Required(ErrorMessage = "Items Type is mandatory")]
 
         public string ItemsType { get; set; }
+        [Required(ErrorMessage = "Status is mandatory", AllowEmptyStrings = false)]
         public byte IsActive { get; set; }
        // public virtual ICollection<Fixingdemolition> Fixingdemolition { get; set; }
         public virtual ICollection<Fixingprogram> Fixingprogram { get; set; }

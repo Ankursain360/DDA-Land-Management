@@ -23,7 +23,6 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Structure
 
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-                            .OrderByDescending(s => s.IsActive)
                             .GetPaged<Structure>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -32,10 +31,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Structure
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Structure>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Structure
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Structure>(model.PageNumber, model.PageSize);
                         break;
 
                 }
@@ -45,10 +52,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Structure
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Structure>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Structure
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Structure>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

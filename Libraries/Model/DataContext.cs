@@ -128,6 +128,12 @@ namespace Libraries.Model
         public virtual DbSet<Column> Column { get; set; }
 
         public virtual DbSet<Bundle> Bundle { get; set; }
+
+
+        public virtual DbSet<Datastoragedetails> Datastoragedetails { get; set; }
+
+        public virtual DbSet<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
+
         //**********  Damage Payee **********
 
         public virtual DbSet<Allottetype> Allottetype { get; set; }
@@ -252,6 +258,19 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
             modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
+
+
+            //************* Data Loading **********************
+            modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
+
+            modelBuilder.ApplyConfiguration(new DataStorageConfiguration());
+
+            modelBuilder.ApplyConfiguration(new AlmirahConfiguration());
+            modelBuilder.ApplyConfiguration(new RowConfiguration());
+            modelBuilder.ApplyConfiguration(new ColumnConfiguration());
+
+            modelBuilder.ApplyConfiguration(new BundleConfiguration());
+
 
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 

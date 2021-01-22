@@ -14,16 +14,17 @@ namespace Libraries.Model.Entity
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
 
-        [Required(ErrorMessage = "Module Name field field is Mandatory")]
+        [Required(ErrorMessage = "Module Name is mandatory")]
         public int? ModuleId { get; set; }
 
-        [Required(ErrorMessage = "Menu Name field field is Mandatory")]
+        [Required(ErrorMessage = "Menu Name is mandatory")]
         [Remote(action: "Exist", controller: "Menu", AdditionalFields = "Id,ModuleId")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Sort By field is Mandatory")]
+        [Required(ErrorMessage = "Sort By field is mandatory")]
         public int? SortBy { get; set; }
         public string Url { get; set; }
+       
         public int? ParentMenuId { get; set; }
         public byte? IsActive { get; set; }
         public byte? OpenInNewTab { get; set; }

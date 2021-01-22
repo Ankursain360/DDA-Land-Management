@@ -239,8 +239,7 @@ namespace Repository.EntityRepository
         {
             var data = await _dbContext.Roles
                            .Where(x =>string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
-                           .OrderByDescending(s => s.IsActive)
-                       .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
+                           .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
            
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -248,10 +247,18 @@ namespace Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Roles
+                           .Where(x => string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderBy(x => x.Name)
+                           .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Roles
+                           .Where(x => string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderByDescending(x => x.IsActive)
+                           .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -260,10 +267,18 @@ namespace Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Roles
+                           .Where(x => string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderByDescending(x => x.Name)
+                           .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Roles
+                           .Where(x => string.IsNullOrEmpty(model.Name) || x.Name.Contains(model.Name))
+                           .OrderBy(x => x.IsActive)
+                           .GetPaged<ApplicationRole>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

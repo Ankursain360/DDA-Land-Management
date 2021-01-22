@@ -1,8 +1,9 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
-var sortby = 1;
+var sortOrder = 1;//default Ascending 
+
 $(document).ready(function () {
-    GetModule(currentPageNumber, currentPageSize, sortby);
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
 });
 function GetModule(pageNumber, pageSize,order) {
     var param = GetSearchParam(pageNumber, pageSize,order);
@@ -11,36 +12,43 @@ function GetModule(pageNumber, pageSize,order) {
         $('#divModuleTable').html(response);
     });
 }
-$("#btnSearch1").click(function () {
-    //  alert("Check");
-    GetModule(currentPageNumber, currentPageSize, sortby);
-});
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
     $('#txtDescription').val('');
     $('#txtUrl').val('')
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
+});
 
-    GetModule(currentPageNumber, currentPageSize, sortby);
+
+$("#btnSearch").click(function () {
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetModule(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
 
 
 function GetSearchParam(pageNumber, pageSize,sortOrder) {
-    var sorbyname = $('#Sortbyd').val();
-    var sortdesc = $("#sortdesc").val();
-    if (sorbyname) { } else {
-        sorbyname = 'Name';
-    }
-
+   
     var model = {
         name: $('#txtName').val(),
         description: $('#txtDescription').val(),
-        colname: sorbyname,
-        orderby: sortdesc,
         url: $('#txtUrl').val(),
-
+        sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
@@ -48,35 +56,14 @@ function GetSearchParam(pageNumber, pageSize,sortOrder) {
     return model;
 }
 
-$("#Sortbyd").change(function () {
-
-    GetModule(currentPageNumber, currentPageSize, sortby);
-
-});
-
-$("#ascId").click(function () {
-    $("#descId").removeClass("active");
-    $("#ascId").addClass("active");
-    $("#sortdesc").val(2);
-    GetModule(currentPageNumber, currentPageSize, sortby);
-});
-$("#descId").click(function () {
-    $("#ascId").removeClass("active");
-    $("#descId").addClass("active");
-    $("#sortdesc").val(1);
-    GetModule(currentPageNumber, currentPageSize, sortby );
-});
-
-
-
 
 
 function onPaging(pageNo) {
-    GetModule(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    GetModule(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetModule(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    GetModule(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
