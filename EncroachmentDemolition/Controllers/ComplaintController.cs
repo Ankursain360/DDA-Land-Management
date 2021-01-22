@@ -261,9 +261,6 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
-
-
-
         private async Task<List<TemplateStructure>> dataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(18);
@@ -271,8 +268,6 @@ namespace EncroachmentDemolition.Controllers
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
-
-
 
     }
 }
