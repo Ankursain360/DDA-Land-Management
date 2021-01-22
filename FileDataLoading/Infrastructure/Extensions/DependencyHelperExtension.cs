@@ -36,7 +36,7 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IRowRepository, RowRepository>();
             services.AddScoped<IColumnRepository,ColumnRespository>();
             services.AddScoped<IBundleRepository, BundleRespository>();
-
+            services.AddScoped<IDataStorageRepository, DataStorageRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -53,6 +53,7 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IRowService, RowService>();
             services.AddScoped<IColumnService, ColumnService>();
             services.AddScoped<IBundleService, BundleService>();
+            services.AddScoped<IDataStorageService,DatastorageService>();
 
         }
 

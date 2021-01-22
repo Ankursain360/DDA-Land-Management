@@ -9,8 +9,15 @@ namespace Libraries.Model.Entity
 {
     public class Row : AuditableEntity<int>
     {
+
+        public Row()
+        {
+            Datastoragedetails = new HashSet<Datastoragedetails>();
+        }
+
         [Required(ErrorMessage = "Row No is Mandatory Field")]
         public string RowNo { get; set; }
         public byte? IsActive { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
     }
 }
