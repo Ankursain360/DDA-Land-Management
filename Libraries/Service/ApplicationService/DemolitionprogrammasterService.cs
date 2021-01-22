@@ -44,6 +44,7 @@ namespace Libraries.Service.ApplicationService
             var result = await _demolitionprogrammasterRepository.FindBy(a => a.Id == id);
             Demolitionprogram model = result.FirstOrDefault();
             model.Items = demolitionprogrammaster.Items;
+            model.IsActive = demolitionprogrammaster.IsActive;
             model.ItemsType = demolitionprogrammaster.ItemsType;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
