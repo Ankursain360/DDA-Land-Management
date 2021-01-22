@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using CourtCasesManagement.Filters;
+using Core.Enum;
 
 namespace CourtCasesManagement.Controllers
 {
@@ -24,7 +26,7 @@ namespace CourtCasesManagement.Controllers
         {
             _casenatureService = casenatureService;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -35,13 +37,15 @@ namespace CourtCasesManagement.Controllers
             var result = await _casenatureService.GetPagedcasenature(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Casenature casenature)
         {
             try
@@ -79,6 +83,7 @@ namespace CourtCasesManagement.Controllers
             }
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _casenatureService.FetchSingleResult(id);
@@ -91,6 +96,7 @@ namespace CourtCasesManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Casenature casenature)
         {
             if (ModelState.IsValid)
@@ -164,7 +170,7 @@ namespace CourtCasesManagement.Controllers
             //}
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _casenatureService.FetchSingleResult(id);
@@ -174,7 +180,7 @@ namespace CourtCasesManagement.Controllers
             }
             return View(Data);
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try

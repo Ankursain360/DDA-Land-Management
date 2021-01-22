@@ -18,7 +18,8 @@ using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Microsoft.AspNetCore.Http;
 using System.IO;
-
+using CourtCasesManagement.Filters;
+using Core.Enum;
 namespace CourtCasesManagement.Controllers
 {
     public class LegalmanagementsystemController : BaseController
@@ -39,7 +40,9 @@ namespace CourtCasesManagement.Controllers
             legalmanagementsystem.CourttypeList = await _legalmanagementsystemService.GetCourttypeList();
             legalmanagementsystem.LocalityList = await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(legalmanagementsystem.ZoneId));
         }
-        
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Legalmanagementsystem model = new Legalmanagementsystem();
@@ -61,6 +64,8 @@ namespace CourtCasesManagement.Controllers
             zoneId = zoneId ?? 0;
             return Json(await _legalmanagementsystemService.GetLocalityList(Convert.ToInt32(zoneId)));
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Legalmanagementsystem model = new Legalmanagementsystem();
@@ -69,6 +74,7 @@ namespace CourtCasesManagement.Controllers
         }
        
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Legalmanagementsystem legalmanagementsystem)
         {
             await BindDropDownView(legalmanagementsystem);
@@ -122,6 +128,8 @@ namespace CourtCasesManagement.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _legalmanagementsystemService.FetchSingleResult(id);
@@ -136,6 +144,8 @@ namespace CourtCasesManagement.Controllers
             { return NotFound(); }
             return View(Data);
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _legalmanagementsystemService.FetchSingleResult(id);
@@ -155,6 +165,7 @@ namespace CourtCasesManagement.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Legalmanagementsystem legalmanagementsystem,IFormFile Assignfile, IFormFile AssignJfile, IFormFile AssignSIfile)
         {
             await BindDropDownView(legalmanagementsystem);
@@ -354,6 +365,8 @@ namespace CourtCasesManagement.Controllers
             return File(memory, GetContentType(filename), Path.GetFileName(filename));
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
