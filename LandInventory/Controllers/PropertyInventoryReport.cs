@@ -7,7 +7,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using Dto.Search;
-
+using Core.Enum;
+using Dto.Search;
+using LandInventory.Filters;
 namespace LandInventory.Controllers
 {
     public class PropertyInventoryReport : BaseController
@@ -30,6 +32,8 @@ namespace LandInventory.Controllers
             propertyregistration.KhasraNoList = await _propertyregistrationService.GetKhasraReportList();
             //    propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
