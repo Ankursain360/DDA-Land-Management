@@ -2,18 +2,11 @@
 @{int Photo = 0;}
 @{int ReportFile = 0;}
 
-    <style>
-    
-[aria-expanded="false"] > .expanded, [aria-expanded="true"] > .collapsed {display: none;}
-    </style>
-
 <form asp-action="Edit" enctype="multipart/form-data" disabled class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <a data-toggle="collapse" href="#collapseApprroval" id="collapseapp" role="button" aria-expanded="false" aria-controls="collapseApprroval">
-        <span class="collapsed"><b>+</b></span>
-        <span class="expanded"><b>-</b></span>
-        
-        <h3 class="my-3 d-flex sub-heading">View Watch & Ward Details</h3><i class="arrow ri-arrow-drop-down-line slow"></i>
+       
+        <h3 class="my-3 d-flex sub-heading">View Watch & Ward Details</h3>
     </a>
     <div class="collapse" id="collapseApprroval">
         <div class="row">
@@ -38,10 +31,10 @@
                     </div>
                 </div>
             </div>
-            <div id="InventoryOtherDiv">
+            <div id="InventoryOtherDiv" class="mt-md-3">
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Landmark" type="text" disabled class="floating-label-field floating-label-field--s3" />
@@ -74,14 +67,14 @@
                 @*<label class="floating-label"> Encroachment<span style="color:red">*</span></label>*@
             </div>
         </div>
-        <div class="row pt-3">
+        <div class="row mt-md-3">
             <div class="col-md-12">
                 <textarea asp-for="StatusOnGround" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
                 <span asp-validation-for="StatusOnGround" class="text-danger"></span>
                 <label class="floating-label">Status on Ground<span style="color:red">*</span></label>
             </div>
         </div>
-        <div class="row pt-3">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @{
@@ -90,7 +83,7 @@
                             <br />
                             foreach (var item in Model.Watchandwardphotofiledetails)
                             {
-                                <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+                                <a asp-action="ViewDocument" asp-route-id="@item.Id"> (View Photo @(Photo += 1 ))</a>
 
                                 if (item.LattLongUrl != null)
                                 {
@@ -119,7 +112,7 @@
                             <br />
                             foreach (var item in Model.Watchandwardreportfiledetails)
                             {
-                                <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Existing Document @(ReportFile += 1 ))</a>
+                                <a asp-action="DownloadReportFile" asp-route-id="@item.Id"> (View Document @(ReportFile += 1 ))</a>
                                 <br />
                             }
                             <input disabled type="file" class="floating-label-field floating-label-field--s3" asp-for="ReportFile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" multiple />
@@ -135,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6" style="display:none;">
                 <div class="floating-label-wrap">
                     <label class="floating-label">Status</label>
@@ -148,7 +141,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-12" style="display:none;">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <textarea asp-for="Remarks" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>

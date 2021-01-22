@@ -28,22 +28,27 @@ namespace Repository.EntityRepository
         public async Task<PagedResult<Demolitionprogram>> GetPagedDemolitionprogrammaster(DemolitionprogrammasterSearchDto model)
         {
            
-                var data= await _dbContext.Demolitionprogram.Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
-                    //.OrderBy(x => x.Id)
-                    .OrderByDescending(s => s.IsActive)
-                   //.ThenByDescending(x => x.IsActive == 1)
-                   .ThenBy(x => x.Items)
-                   .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
+                var data= await _dbContext.Demolitionprogram
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                        .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
                     case ("ITEM"):
-                        data.Results = data.Results.OrderBy(x => x.Items).ToList();
+                        data = null;
+                        data = await _dbContext.Demolitionprogram
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                        .OrderBy(x => x.Items)
+                        .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Demolitionprogram
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                        .OrderByDescending(x => x.IsActive)
+                        .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -52,10 +57,18 @@ namespace Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("ITEM"):
-                        data.Results = data.Results.OrderByDescending(x => x.Items).ToList();
+                        data = null;
+                        data = await _dbContext.Demolitionprogram
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                        .OrderByDescending(x => x.Items)
+                        .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Demolitionprogram
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Items.Contains(model.name)))
+                        .OrderBy(x => x.IsActive)
+                        .GetPaged<Demolitionprogram>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

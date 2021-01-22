@@ -20,8 +20,6 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
-
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Landuse.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
@@ -30,10 +28,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Landuse>> GetPagedLandUse(LandUseSearchDto model)
         {
                  var data = await _dbContext.Landuse
-                 .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
-                       .OrderByDescending(s => s.IsActive)
-                            .ThenBy(x => x.Name)
-                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
+                         .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                         .GetPaged<Landuse>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -41,11 +37,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Landuse
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                        .OrderBy(x => x.Name)
+                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results
-                                       .OrderBy(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Landuse
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                        .OrderByDescending(x => x.IsActive)
+                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -54,10 +57,18 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Landuse
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                        .OrderByDescending(x => x.Name)
+                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
                         break;
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Landuse
+                        .Where(s => (string.IsNullOrEmpty(model.name) || s.Name.Contains(model.name)))
+                        .OrderBy(x => x.IsActive)
+                        .GetPaged<Landuse>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

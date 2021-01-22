@@ -13,7 +13,7 @@ namespace Libraries.Model.Entity
         {
             Propertyregistration = new HashSet<Propertyregistration>();
         }
-        [Required(ErrorMessage = "The Land Use Name field is required")]
+        [Required(ErrorMessage = " Land Use name is mandatory")]
         public string Name { get; set; }
         public byte IsActive { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }

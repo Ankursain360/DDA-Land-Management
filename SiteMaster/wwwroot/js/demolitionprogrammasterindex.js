@@ -1,14 +1,13 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
-var currentSortAsc = 1;
-var currentSortDesc = 2;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetDemolitionprogrammaster(currentPageNumber, currentPageSize);
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDemolitionprogrammaster(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetDemolitionprogrammaster(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Demolitionprogrammaster/List`, 'html', param, function (response) {
         $('#divDemolitionprogrammasterTable').html("");
         $('#divDemolitionprogrammasterTable').html(response);
@@ -16,70 +15,50 @@ function GetDemolitionprogrammaster(pageNumber, pageSize) {
 
 }
 
-function Descending() {
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-
-    if (value !== "0") {
-    GetDemolitionprogrammasterOrderby(currentPageNumber, currentPageSize, currentSortDesc);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-function Ascending() {
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-    if (value !== "0") {
-      //  debugger
-        GetDemolitionprogrammasterOrderby(currentPageNumber, currentPageSize, currentSortAsc);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
-    var model = {
-         name: $('#txtName').val(),
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: pageSize,
-        pageNumber: pageNumber
-    }
-      return model;
-}
-function GetDemolitionprogrammasterOrderby(pageNumber, pageSize, order) {
-    var param = GetSearchParamOrderby(pageNumber, pageSize, order);
-    HttpPost(`/Demolitionprogrammaster/List`, 'html', param, function (response) {
-        $('#divDemolitionprogrammasterTable').html("");
-        $('#divDemolitionprogrammasterTable').html(response);
-    });
-}
 
 $("#btnSearch").click(function () {
-    GetDemolitionprogrammaster(currentPageNumber, currentPageSize);
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
     $("#txtName").val('');
-    GetDemolitionprogrammaster(currentPageNumber, currentPageSize);
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetSearchParam(pageNumber, pageSize) {
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDemolitionprogrammaster(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
 
 function onPaging(pageNo) {
-    GetDemolitionprogrammaster(parseInt(pageNo), parseInt(currentPageSize));
+    GetDemolitionprogrammaster(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDemolitionprogrammaster(parseInt(currentPageNumber), parseInt(pageSize));
+    GetDemolitionprogrammaster(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

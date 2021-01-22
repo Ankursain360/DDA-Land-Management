@@ -1,85 +1,62 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
-var currentSortAsc = 1;
-var currentSortDesc = 2;
+var sortOrder = 1;//default Ascending 
 $(document).ready(function () {
-    GetDemolitionchecklist(currentPageNumber, currentPageSize);
+    GetDemolitionchecklist(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDemolitionchecklist(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetDemolitionchecklist(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Demolitionchecklist/List`, 'html', param, function (response) {
         $('#divDemolitionchecklistTable').html("");
         $('#divDemolitionchecklistTable').html(response);
     });
    
 }
-function Descending() {
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-
-    if (value !== "0") {
-        GetDemolitionchecklistOrderby(currentPageNumber, currentPageSize, currentSortDesc);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-function Ascending() {
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-    if (value !== "0") {
-        debugger
-        GetDemolitionchecklistOrderby(currentPageNumber, currentPageSize, currentSortAsc);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-function GetDemolitionchecklistOrderby(pageNumber, pageSize, order) {
-    var param = GetSearchParamOrderby(pageNumber, pageSize, order);
-    HttpPost(`/Demolitionchecklist/List`, 'html', param, function (response) {
-        $('#divDemolitionchecklistTable').html("");
-        $('#divDemolitionchecklistTable').html(response);
-    });
-}
 
 $("#btnSearch").click(function () {
-    GetDemolitionchecklist(currentPageNumber, currentPageSize);
+    GetDemolitionchecklist(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
     $("#txtName").val('');
-    GetDemolitionchecklist(currentPageNumber, currentPageSize);
+    GetDemolitionchecklist(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetSearchParam(pageNumber, pageSize) {
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDemolitionchecklist(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDemolitionchecklist(currentPageNumber, currentPageSize, sortOrder);
+});
+
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         //name: "test",
         name: $('#txtName').val(),
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
-function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
-    var model = {
-        name: $('#txtName').val(),
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: pageSize,
-        pageNumber: pageNumber
-    }
-     return model;
-}
 
 function onPaging(pageNo) {
-    GetDemolitionchecklist(parseInt(pageNo), parseInt(currentPageSize));
+    GetDemolitionchecklist(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
-
-
 function onChangePageSize(pageSize) {
-    GetDemolitionchecklist(parseInt(currentPageNumber), parseInt(pageSize));
+    GetDemolitionchecklist(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

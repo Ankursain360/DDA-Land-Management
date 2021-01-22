@@ -13,5 +13,7 @@ namespace Notification.Constants
         public const string ValidationFailed = "Please fill all fields";
         public const string RegistrationConfirm = "You Are Registered Successfully";
         public const string Verifiedsuccesfuly = "Record verified successfully.";
+        public const string Forwardsuccesfuly = "Record forwareded successfully.";
+        public const string Approvedsuccesfuly = "Record approved successfully.";
     }
 }
