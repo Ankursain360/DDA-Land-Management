@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class PenaltyImpositionReportController : BaseController
@@ -29,6 +30,9 @@ namespace DamagePayee.Controllers
         //{
         //    return View();
         //}
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Demandletters model = new Demandletters();

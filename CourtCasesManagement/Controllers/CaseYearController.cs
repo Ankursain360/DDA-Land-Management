@@ -14,7 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
-
+using CourtCasesManagement.Filters;
+using Core.Enum;
 namespace CourtCasesManagement.Controllers
 {
     public class CaseYearController : BaseController
@@ -24,8 +25,10 @@ namespace CourtCasesManagement.Controllers
         public CaseYearController(ICaseyearService caseyearService) {
             _caseyearService = caseyearService;
         }
-        
-            public IActionResult Index()
+
+
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
             {
                 return View();
             }
@@ -35,14 +38,20 @@ namespace CourtCasesManagement.Controllers
             var result = await _caseyearService.GetPagedcaseyear(model);
             return PartialView("_List", result);
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
             {
                 return View();
             }
-            [HttpPost]
-            [ValidateAntiForgeryToken]
 
-            public async Task<IActionResult> Create(Caseyear caseyear)
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(Caseyear caseyear)
             {
                 try
                 {
@@ -79,7 +88,9 @@ namespace CourtCasesManagement.Controllers
                 }
             }
 
-            public async Task<IActionResult> Edit(int id)
+
+        [AuthorizeContext(ViewAction.Edit)]
+        public async Task<IActionResult> Edit(int id)
             {
                 var Data = await _caseyearService.FetchSingleResult(id);
                 if (Data == null)
@@ -91,7 +102,8 @@ namespace CourtCasesManagement.Controllers
 
             [HttpPost]
             [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Caseyear caseyear)
+           [AuthorizeContext(ViewAction.Edit)]
+           public async Task<IActionResult> Edit(int id, Caseyear caseyear)
         {
             if (ModelState.IsValid)
             {
@@ -164,7 +176,9 @@ namespace CourtCasesManagement.Controllers
 
             }
 
-            public async Task<IActionResult> View(int id)
+
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
             {
                 var Data = await _caseyearService.FetchSingleResult(id);
                 if (Data == null)
@@ -174,7 +188,8 @@ namespace CourtCasesManagement.Controllers
                 return View(Data);
             }
 
-            public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
             {
                 try
                 {

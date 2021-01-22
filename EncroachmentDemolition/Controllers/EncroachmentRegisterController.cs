@@ -13,6 +13,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -33,6 +35,8 @@ namespace EncroachmentDemolition.Controllers
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -43,6 +47,8 @@ namespace EncroachmentDemolition.Controllers
             var result = await _encroachmentRegisterationService.GetPagedEncroachmentRegisteration(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             EncroachmentRegisteration encroachmentRegisterations = new EncroachmentRegisteration();
@@ -67,6 +73,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(EncroachmentRegisteration encroachmentRegisterations)
         {
             encroachmentRegisterations.DepartmentList = await _encroachmentRegisterationService.GetAllDepartment();
@@ -221,6 +228,7 @@ namespace EncroachmentDemolition.Controllers
                 return View(encroachmentRegisterations);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -235,6 +243,9 @@ namespace EncroachmentDemolition.Controllers
             }
             return View(encroachmentRegisterations);
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var encroachmentRegisterations = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -256,7 +267,10 @@ namespace EncroachmentDemolition.Controllers
             //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
             return Json(data.Select(x => new { x.CountOfStructure,  x.DateOfEncroachment, x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus , x.ReligiousStructure}));
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, EncroachmentRegisteration encroachmentRegisterations)
         {
             var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -375,6 +389,8 @@ namespace EncroachmentDemolition.Controllers
                 return View(encroachmentRegisterations);
             }
         }
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _encroachmentRegisterationService.Delete(id);

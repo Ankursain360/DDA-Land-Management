@@ -12,7 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Dto.Search;
 using System.IO;
 using System.Linq;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class EncroachmentRegisterApprovalController : BaseController
@@ -35,6 +36,9 @@ namespace EncroachmentDemolition.Controllers
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -47,6 +51,8 @@ namespace EncroachmentDemolition.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _encroachmentRegisterationApprovalService.FetchSingleResult(id);
@@ -57,7 +63,10 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
+
         [HttpPost]
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, EncroachmentRegisteration encroachmentRegisterations)
         {
             var result = false;
@@ -119,8 +128,6 @@ namespace EncroachmentDemolition.Controllers
 
             #endregion
            
-
-            
             
              if(Msgddl=="3")
             {

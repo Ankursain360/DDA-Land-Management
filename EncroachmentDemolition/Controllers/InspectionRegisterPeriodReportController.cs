@@ -93,6 +93,9 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class InspectionRegisterPeriodReportController : Controller
@@ -123,6 +126,8 @@ namespace EncroachmentDemolition.Controllers
             DivisionId = DivisionId ?? 0;
             return Json(await _encroachmentregistrationService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             EncroachmentRegisteration model = new EncroachmentRegisteration();

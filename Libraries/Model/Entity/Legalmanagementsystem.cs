@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
     public partial class Legalmanagementsystem : AuditableEntity<int>
     {
-
+             [Required(ErrorMessage = "File number name is required")]
         public string FileNo { get; set; }
         public string CourtCaseNo { get; set; }
         public string CourtCaseTitle { get; set; }

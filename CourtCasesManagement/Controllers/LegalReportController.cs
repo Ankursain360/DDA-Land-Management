@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using CourtCasesManagement.Filters;
+using Core.Enum;
 namespace CourtCasesManagement.Controllers
 {
     public class LegalReportController : BaseController
@@ -27,8 +28,8 @@ namespace CourtCasesManagement.Controllers
             legalmanagementsystem.ZoneList = await _legalmanagementsystemservice.GetZoneList();
             legalmanagementsystem.FileNoList = await _legalmanagementsystemservice.GetFileNoList();
         }
-       
-      
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Legalmanagementsystem model = new Legalmanagementsystem();

@@ -1,25 +1,5 @@
 ﻿@model Libraries.Model.Entity.Menu
 @await Component.InvokeAsync("PageHeader", new { pageName = "Menu" })
-@*<style>
-       form .error
-        {
-            position: absolute;
-            color: #f00;
-            font-size: .7rem;
-            bottom: -14px;
-            font-weight: 600;
-        }
-
-        .success {
-            color: #28a745;
-        }
-    </style>*@
-
-<br />
-
-<br />
-
-
 
 <form asp-action="Edit" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
     <h3 class="mb-3 d-flex">View Details</h3>
@@ -34,7 +14,7 @@
                         asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
                     <option selected="selected" disabled="disabled" value="">--Select--</option>
                 </select>
-                <label asp-validation-for="ModuleId" class="error"></label>
+                <span asp-validation-for="ModuleId" class="error"></span>
                 <label asp-for="ModuleId" class="floating-label">Module Name</label>
             </div>
         </div>
@@ -45,7 +25,7 @@
                         asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
                     <option selected="selected" disabled="disabled" value="">--Select--</option>
                 </select>
-                <label asp-validation-for="ModuleId" class="error"></label>
+                <span asp-validation-for="ParentMenuId" class="error"></span>
                 <label asp-for="ParentMenuId" class="floating-label">Parent Menu</label>
             </div>
         </div>

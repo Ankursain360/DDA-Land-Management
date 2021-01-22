@@ -1,0 +1,147 @@
+﻿using Libraries.Model.Entity;
+using Libraries.Repository.Common;
+using Libraries.Service.Common;
+using Libraries.Service.IApplicationService;
+using Libraries.Repository.IEntityRepository;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using Libraries.Model;
+using Dto.Search;
+
+namespace Libraries.Service.ApplicationService
+{
+    public class DatastorageService : EntityService<Datastoragedetails>, IDataStorageService
+    {
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IDataStorageRepository _datastoragedetailRepository;
+        protected readonly DataContext _dbContext;
+
+
+        public DatastorageService(IUnitOfWork unitOfWork, IDataStorageRepository datastoragedetailRepository, DataContext dbContext)
+       : base(unitOfWork, datastoragedetailRepository)
+        {
+            _unitOfWork = unitOfWork;
+            _datastoragedetailRepository = datastoragedetailRepository;
+            _dbContext = dbContext;
+        }
+
+        public async Task<List<Datastoragedetails>> GetAllDataStorageDetail()
+        {
+            return await _datastoragedetailRepository.GetAll();
+        }
+
+        public async Task<List<Datastoragedetails>> GetDataStorageDetailsUsingReport()
+        {
+            return await _datastoragedetailRepository.GetDataStorageDetails();
+        }
+
+        public async Task<bool> Update(int id, Datastoragedetails dataStorageDetails)
+        {
+            var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = result.FirstOrDefault();
+            //model.AlmirahNo = almirah.AlmirahNo;
+            //model.ModifiedDate = DateTime.Now;
+            //model.IsActive = almirah.IsActive;
+            model.ModifiedBy = 1;
+            _datastoragedetailRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public bool CheckUniqueName(int id, Datastoragedetails dataStoragedetails)
+        {
+            var result = _dbContext.Datastoragedetails.Any(t => t.Id != id && t.AlmirahId == dataStoragedetails.AlmirahId);
+            return result;
+        }
+
+        public async Task<Datastoragedetails> FetchSingleResult(int id)
+        {
+            var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = result.FirstOrDefault();
+            return model;
+        }
+
+        public async Task<bool> Create(Datastoragedetails dataStorageDetails)
+        {
+
+            dataStorageDetails.CreatedBy = 1;
+            dataStorageDetails.CreatedDate = DateTime.Now;
+            _datastoragedetailRepository.Add(dataStorageDetails);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+
+        public async Task<bool> SaveDetailsOfPartFile(List<Datastoragepartfilenodetails> datastoragepartfilenodetails)
+        {
+
+            return await _datastoragedetailRepository.SaveDetailsOfPartFile(datastoragepartfilenodetails);
+        }
+
+
+        public async Task<bool> CheckUniqueName(int id, string almirah)
+        {
+            bool result = await _datastoragedetailRepository.Any(id, almirah);
+
+            return result;
+        }
+
+
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _datastoragedetailRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedDataStorageDetails(model);
+        }
+
+        public async Task<List<Almirah>> GetAlmirahs()
+        {
+            List<Almirah> almirhaList = await _datastoragedetailRepository.GetAlmirahs();
+            return almirhaList;
+        }
+
+        public async Task<List<Row>> GetRows()
+        {
+            List<Row> rowList = await _datastoragedetailRepository.GetRows();
+            return rowList;
+        }
+
+        public async Task<List<Column>> GetColumns()
+        {
+            List<Column> columnList = await _datastoragedetailRepository.GetColumns();
+            return columnList;
+        }
+
+        public async Task<List<Bundle>> GetBundles()
+        {
+            List<Bundle> bundleList = await _datastoragedetailRepository.GetBundles();
+            return bundleList;
+        }
+
+        public async Task<List<Locality>> GetLocalities()
+        {
+            List<Locality> localityList = await _datastoragedetailRepository.GetLocalities();
+            return localityList;
+        }
+
+        public async Task<List<Zone>> GetZones()
+        {
+            List<Zone> zoneList = await _datastoragedetailRepository.GetZones();
+            return zoneList;
+        }
+
+
+        public async Task<List<Scheme>> GetSchemes()
+        {
+            List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
+            return schemesList;
+        }
+    }
+}

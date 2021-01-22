@@ -91,11 +91,13 @@
 
 });
 function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
+    debugger;
     var show = true;
     if ($("#rdbPayeeYes").is(":checked")) {
         $("#DivForPayeeNo").hide();
     } else {
         $("#DivOpenSubstitutionForm").find("input,select,textarea").each(function () {
+            debugger;
             if (($(this).is('[required]') || $(this).is('[data-val-required]')) && (!$(this).is(':hidden')) && (!$(this).is(':disabled'))) {
                 if (show == true) {
                     if ($(this).val() != null && $(this).val() != undefined && $(this).val() != '') {

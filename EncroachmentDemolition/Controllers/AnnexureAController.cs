@@ -13,6 +13,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
 using Utility.Helper;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
+using System.Data;
 namespace EncroachmentDemolition.Controllers
 {
     public class AnnexureAController : BaseController
@@ -37,16 +40,22 @@ namespace EncroachmentDemolition.Controllers
             _workflowtemplateService = workflowtemplateService;
             _approvalproccessService = approvalproccessService;
         }
+
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] AnnexureASearchDto model)
         {
             var result = await _annexureAService.GetPagedDetails(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Fixingdemolition Model = new Fixingdemolition();
@@ -64,7 +73,10 @@ namespace EncroachmentDemolition.Controllers
                 Model.Encroachment.WatchWardId = 0;
             return View(Model);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
             var Data = await _encroachmentRegisterationService.FetchSingleResult(id);
@@ -171,6 +183,9 @@ namespace EncroachmentDemolition.Controllers
                 return View(fixingdemolition);
             }
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             List<Fixingdemolition> list = await _annexureAService.GetFixingdemolition(id);

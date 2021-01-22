@@ -15,7 +15,8 @@ using Dto.Search;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class OnlineComplaintApprovalController : BaseController
@@ -36,6 +37,8 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -60,7 +63,7 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _onlinecomplaintApprovalService.FetchSingleResult(id);
@@ -73,6 +76,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Onlinecomplaint onlinecomplaint)
         {
             var result = false;

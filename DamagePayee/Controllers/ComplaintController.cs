@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class ComplaintController : Controller
@@ -40,6 +41,8 @@ namespace DamagePayee.Controllers
         //    }
         //    return View();
         //}
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             //var CmplnDetails = await _context.TblOlComplaint.ToListAsync();

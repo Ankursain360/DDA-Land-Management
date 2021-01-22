@@ -15,7 +15,8 @@ using Dto.Search;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class WatchWardController : BaseController
@@ -38,6 +39,8 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -50,6 +53,8 @@ namespace EncroachmentDemolition.Controllers
             return PartialView("_List", result);
         }
 
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Watchandward watchandward = new Watchandward();
@@ -59,7 +64,10 @@ namespace EncroachmentDemolition.Controllers
             watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             return View(watchandward);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Watchandward watchandward)
         {
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
@@ -180,6 +188,8 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
@@ -210,6 +220,8 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         [HttpPost]
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Watchandward watchandward)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
@@ -339,7 +351,7 @@ namespace EncroachmentDemolition.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
@@ -353,6 +365,8 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _watchandwardService.Delete(id);

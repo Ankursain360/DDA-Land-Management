@@ -42,7 +42,8 @@ namespace Libraries.Service.ApplicationService
             var result = await _demolitionchecklistRepository.FindBy(a => a.Id == id);
             Demolitionchecklist model = result.FirstOrDefault();
             model.ChecklistDescription = Demolitionchecklist.ChecklistDescription;
-          
+            model.IsActive = Demolitionchecklist.IsActive;
+
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
             _demolitionchecklistRepository.Edit(model);

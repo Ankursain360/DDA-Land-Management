@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Hosting;
 using Model.Entity;
 using Microsoft.AspNetCore.Http;
 using DamagePayee.Helper;
+using DamagePayee.Filters;
+using Core.Enum;
 
 namespace DamagePayee.Controllers
 {
@@ -59,7 +61,7 @@ namespace DamagePayee.Controllers
             signatureOfSpec = _configuration.GetSection("FilePaths:MutationDetaliFiles:SignatureOfSpecimen").Value.ToString();
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index1()
         {
             return View();
@@ -92,6 +94,9 @@ namespace DamagePayee.Controllers
         //    DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
         //    DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
         //}
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
@@ -109,6 +114,7 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Mutationdetailstemp mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);

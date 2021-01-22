@@ -14,7 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System.IO;
 using System.Text.Json;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     //This is right user yes : 1, This is right user No : 0
@@ -38,6 +39,9 @@ namespace DamagePayee.Controllers
             _selfAssessmentDamageService = selfAssessmentDamageService;
             _proccessWorkflowService = proccessWorkflowService;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -55,6 +59,8 @@ namespace DamagePayee.Controllers
             damagepayeeregistertemp.LocalityList = await _damagepayeeregisterService.GetLocalityList();
             damagepayeeregistertemp.DistrictList = await _damagepayeeregisterService.GetDistrictList();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
@@ -71,6 +77,8 @@ namespace DamagePayee.Controllers
             return View(Data);
         }
         [HttpPost]
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Damagepayeeregister damagepayeeregistertemp)
         {
             var result = false;

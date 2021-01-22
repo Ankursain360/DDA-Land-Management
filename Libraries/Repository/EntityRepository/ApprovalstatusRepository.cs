@@ -22,23 +22,27 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Approvalstatus>> GetPagedApprovalStatus(ApprovalstatusSearchDto model)
         {
             var data = await _dbContext.Approvalstatus
-                       
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-                            .OrderByDescending(s => s.IsActive)
-                            .ThenBy(s => s.Name)
-                           
-                        .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
+                            .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Approvalstatus
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
                         break;
+
                     case ("STATUS"):
-                        data.Results = data.Results
-                                       .OrderBy(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Approvalstatus
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -47,11 +51,19 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Approvalstatus
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
                         break;
+
                     case ("STATUS"):
-                        data.Results = data.Results
-                                       .OrderByDescending(x => x.IsActive == 0).ToList();
+                        data = null;
+                        data = await _dbContext.Approvalstatus
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Approvalstatus>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
