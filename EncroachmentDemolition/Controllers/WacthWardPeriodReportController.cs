@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class WacthWardPeriodReportController : Controller
@@ -19,6 +21,9 @@ namespace EncroachmentDemolition.Controllers
         {
             _watchandwardService = watchandwardService;
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Watchandward model = new Watchandward();

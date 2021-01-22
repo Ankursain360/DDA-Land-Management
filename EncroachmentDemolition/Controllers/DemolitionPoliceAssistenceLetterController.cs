@@ -15,6 +15,9 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using Microsoft.AspNetCore.Hosting;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
+using System.Data;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -51,6 +54,9 @@ namespace EncroachmentDemolition.Controllers
             _annexureAApprovalService = annexureAApprovalService;
             _hostingEnvironment = en;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -73,7 +79,7 @@ namespace EncroachmentDemolition.Controllers
             //}
            
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var demolitionpoliceData = await _demolitionPoliceAssistenceLetterService.FetchSingleResultButOnAneexureId(id);
@@ -93,6 +99,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
         {
             var result = false;
@@ -179,6 +186,8 @@ namespace EncroachmentDemolition.Controllers
                 return View(demolitionpoliceassistenceletter);
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _demolitionPoliceAssistenceLetterService.FetchSingleResult(id);
@@ -188,7 +197,10 @@ namespace EncroachmentDemolition.Controllers
             }
             return View(Data);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Demolitionpoliceassistenceletter demolitionpoliceassistenceletter)
         {
             targetPathDocument = _configuration.GetSection("FilePaths:DemolitionPoliceAssistenceFiles:LetterFilePath").Value.ToString();
