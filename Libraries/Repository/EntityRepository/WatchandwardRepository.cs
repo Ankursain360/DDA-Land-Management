@@ -282,7 +282,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetAllPrimaryList()
         {
-            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0 && x.PrimaryListNo !=null).ToListAsync();
         }
 
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)
