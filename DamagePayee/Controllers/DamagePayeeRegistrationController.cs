@@ -9,7 +9,6 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System.Web;
 using DamagePayee.Models;
-
 using System.Net;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
@@ -24,7 +23,8 @@ using CCA.Util;
 using System.Linq;
 using Unidecode.NET;
 using Microsoft.AspNetCore.Http;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegistrationController : BaseController
@@ -44,6 +44,7 @@ namespace DamagePayee.Controllers
             _hostingEnvironment = en;
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -57,6 +58,8 @@ namespace DamagePayee.Controllers
             return PartialView("_List", result);
         }
 
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             var Msg = TempData["Message"] as string;
@@ -69,6 +72,7 @@ namespace DamagePayee.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Payeeregistration payeeregistration)
         {
             try
@@ -194,6 +198,7 @@ namespace DamagePayee.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _damagePayeeRegistrationService.FetchSingleResult(id);
@@ -207,6 +212,7 @@ namespace DamagePayee.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
 
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Payeeregistration payeeregistration)
         {
             if (ModelState.IsValid)
@@ -242,6 +248,7 @@ namespace DamagePayee.Controllers
 
 
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _damagePayeeRegistrationService.Delete(id);
@@ -288,6 +295,7 @@ namespace DamagePayee.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _damagePayeeRegistrationService.FetchSingleResult(id);

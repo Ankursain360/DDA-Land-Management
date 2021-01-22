@@ -10,7 +10,8 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 using Utility.Helper;
-
+using LandTransfer.Filters;
+using Core.Enum;
 namespace LandTransfer.Controllers
 {
     public class LandTransferController : BaseController
@@ -52,6 +53,8 @@ namespace LandTransfer.Controllers
             landtransfer.Propertyregistration = propertyRegistration;
             return View(landtransfer);
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Landtransfer landtransfer = new Landtransfer();
@@ -64,6 +67,9 @@ namespace LandTransfer.Controllers
             landtransfer.Propertyregistration = propertyRegistration;
             return View(landtransfer);
         }
+
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = new Landtransfer();//await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
@@ -110,6 +116,9 @@ namespace LandTransfer.Controllers
             }
             return View(Data);
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _landTransferService.FetchSingleResultWithPropertyRegistration(id);
@@ -202,7 +211,10 @@ namespace LandTransfer.Controllers
             }
             return View(Data);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> Verify(Landtransfer landtransfer)
         {
             //var Data = await _landTransferService.FetchSingleResult(landtransfer.Id);
@@ -329,6 +341,7 @@ namespace LandTransfer.Controllers
             }
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(Landtransfer landtransfer)
         {
             //var Data = await _landTransferService.FetchSingleResult(landtransfer.Id);

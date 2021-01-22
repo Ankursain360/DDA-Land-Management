@@ -8,7 +8,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class DemandsLetterController : Controller
@@ -19,8 +20,8 @@ namespace DamagePayee.Controllers
             _demandLetterService = demandLetterService;
         }
 
-
-       public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
         {
             return View();
         }
@@ -30,6 +31,9 @@ namespace DamagePayee.Controllers
             demandletters.LocalityList = await _demandLetterService.GetLocalityList();
             //demandletters.FileNoList = await _demandLetterService.GetFileNoList();
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demandletters model = new Demandletters();
@@ -43,6 +47,8 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demandletters demandletter)
         {
             await BindDropDownView(demandletter);
@@ -96,7 +102,7 @@ namespace DamagePayee.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -112,6 +118,8 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Demandletters demandletter)
         {
             await BindDropDownView(demandletter);
@@ -142,7 +150,7 @@ namespace DamagePayee.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _demandLetterService.FetchSingleResult(id);

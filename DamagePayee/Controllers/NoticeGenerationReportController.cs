@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class NoticeGenerationReportController : BaseController
@@ -20,6 +21,8 @@ namespace DamagePayee.Controllers
         {
             _noticeToDamagePayeeService = noticeToDamagePayeeService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Noticetodamagepayee model = new Noticetodamagepayee();

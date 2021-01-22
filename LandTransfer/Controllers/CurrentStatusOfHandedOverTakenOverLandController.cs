@@ -13,7 +13,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Service.IApplicationService;
 using Utility.Helper;
-
+using LandTransfer.Filters;
+using Core.Enum;
 namespace LandTransfer.Controllers
 {
     public class CurrentStatusOfHandedOverTakenOverLandController : BaseController
@@ -38,12 +39,17 @@ namespace LandTransfer.Controllers
             var result = await _landTransferService.GetPagedLandTransfer(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             //List<Landtransfer> list = await _landTransferService.GetAllLandTransfer();
             //return View(list);
             return View();
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Currentstatusoflandhistory Model = new Currentstatusoflandhistory();
@@ -77,7 +83,10 @@ namespace LandTransfer.Controllers
             Model.LandTransfer = Data;
             return View(Model);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Currentstatusoflandhistory currentstatusoflandhistory)
         {
             var Data = await _landTransferService.FetchSingleResult(id);
