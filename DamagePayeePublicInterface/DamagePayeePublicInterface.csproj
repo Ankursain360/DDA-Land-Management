@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
     <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 
@@ -495,6 +496,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="bundleconfig.json" />
     <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 </Project>

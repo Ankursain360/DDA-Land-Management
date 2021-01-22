@@ -59,6 +59,9 @@ namespace DamagePayee.Controllers
 
         public IActionResult Create()
         {
+            var Msg = TempData["Message"] as string;
+            if (Msg != null)
+                ViewBag.Message = Msg;
             return View();
         }
 
@@ -68,19 +71,16 @@ namespace DamagePayee.Controllers
 
         public async Task<IActionResult> Create(Payeeregistration payeeregistration)
         {
-
-
             try
             {
-
                 if (ModelState.IsValid)
                 {
                     //    // Validate Captcha Code
                     if (!Captcha.ValidateCaptchaCode(payeeregistration.CaptchaCode, HttpContext))
                     {
                         ViewBag.Message = Alert.Show("Invalid Catacha.", "", AlertType.Error);
+                        return View(payeeregistration);
                     }
-                   
                     var AesKey = _configuration.GetSection("EncryptionKey").Value.ToString();
                     payeeregistration.IsVerified = "F";
                     var result = await _damagePayeeRegistrationService.Create(payeeregistration);
@@ -110,20 +110,15 @@ namespace DamagePayee.Controllers
                         WebResponse response = request.GetResponse();
                         string Result = new StreamReader(response.GetResponseStream()).ReadToEnd();
                         // Using WebClien
-                      
-
 
                         GenerateMailOTP mail = new GenerateMailOTP();
-  string Res1 = new WebClient().DownloadString(url);
+                        string Res1 = new WebClient().DownloadString(url);
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
 
                         mail.GenerateMailFormatForPassword(DisplayName, EmailID, LoginName, link, path, Action);
 
-                        ViewData["Msg"] = new Message { Msg = "Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", Status = "E", BackPageAction = "ForgetPassword", BackPageController = "Login" };
-                        //return RedirectToAction("Create", "DamagePayeeRegistration");
-
-                        //return View("Index", list);
-                        return View("Create");
+                        TempData["Message"] = Alert.Show("Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", "", AlertType.Success);
+                        return RedirectToAction("Create", "DamagePayeeRegistration");
                     }
                     else
                     {
@@ -166,26 +161,23 @@ namespace DamagePayee.Controllers
                 {
                     payeeregistration.Id = UniqueId;
                     var result1 = await _damagePayeeRegistrationService.UpdateVerification(payeeregistration);
-                    if (result1 == true)
-                        ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
+                    //if (result1 == true)
+                    //    ViewBag.Message = Alert.Show(Messages.RegistrationConfirm, "", AlertType.Success);
 
-                  
-                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                   
                     return View("RegistrationConfirmed");
                 }
                 else
                 {
                     ViewBag.Message = Alert.Show("User Not Found", "", AlertType.Error);
-                    return View("RegistrationConfirmed");
+                    return RedirectToAction("Create", "DamagePayeeRegistration");
                 }
 
 
             }
-
-            return View();
-
-
+            else
+            {
+               return View("Create", "DamagePayeeRegistration");
+            }
         }
 
 
@@ -199,7 +191,7 @@ namespace DamagePayee.Controllers
             HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
             Stream s = new MemoryStream(result.CaptchaByteData);
             return new FileStreamResult(s, "image/png");
-            
+
         }
 
         public async Task<IActionResult> Edit(int id)
