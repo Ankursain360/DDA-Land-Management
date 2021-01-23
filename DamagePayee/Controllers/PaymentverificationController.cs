@@ -10,7 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class PaymentverificationController : BaseController
@@ -24,6 +25,8 @@ namespace DamagePayee.Controllers
             _paymentverificationService = paymentverificationService;
            
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         
         {

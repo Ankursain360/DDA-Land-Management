@@ -14,7 +14,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
-
+using FileDataLoading.Filters;
+using Core.Enum;
 namespace FileDataLoading.Controllers
 {
     public class DataStorageDetailsController : BaseController
@@ -26,11 +27,13 @@ namespace FileDataLoading.Controllers
             _datastorageService = datastorageService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Datastoragedetails datastoragedetails = new Datastoragedetails();
@@ -56,6 +59,8 @@ namespace FileDataLoading.Controllers
 
 
         [HttpPost]
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Datastoragedetails dataStorageDetails)
         {
             try
@@ -125,7 +130,7 @@ namespace FileDataLoading.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _datastorageService.FetchSingleResult(id);
@@ -137,6 +142,7 @@ namespace FileDataLoading.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Datastoragedetails datastoragedetails)
         {
             if (ModelState.IsValid)
@@ -158,7 +164,7 @@ namespace FileDataLoading.Controllers
             return View(datastoragedetails);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _datastorageService.FetchSingleResult(id);
@@ -184,7 +190,7 @@ namespace FileDataLoading.Controllers
             return RedirectToAction("Index", "DataStorageDetailsDetails");
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try

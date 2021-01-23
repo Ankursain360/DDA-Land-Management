@@ -18,7 +18,8 @@ using DamagePayee.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Extensions;
 using Dto.Master;
-
+using Core.Enum;
+using DamagePayee.Filters;
 namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegisterController : BaseController
@@ -32,6 +33,10 @@ namespace DamagePayee.Controllers
             _damagepayeeregisterService = damagepayeeregisterService;
             _hostingEnvironment = en;
         }
+
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -50,6 +55,8 @@ namespace DamagePayee.Controllers
             damagepayeeregister.LocalityList = await _damagepayeeregisterService.GetLocalityList();
             damagepayeeregister.DistrictList = await _damagepayeeregisterService.GetDistrictList();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Damagepayeeregister damagepayeeregister = new Damagepayeeregister();
@@ -58,7 +65,7 @@ namespace DamagePayee.Controllers
             return View(damagepayeeregister);
         }
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregister)
         {
             await BindDropDown(damagepayeeregister);
@@ -367,7 +374,7 @@ namespace DamagePayee.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Damagepayeeregister damagepayeeregister)
         {
 

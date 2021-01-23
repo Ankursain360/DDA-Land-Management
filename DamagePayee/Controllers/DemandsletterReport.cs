@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
 using Dto.Master;
+using DamagePayee.Filters;
+using Core.Enum;
 
 
 namespace DamagePayee.Controllers
@@ -25,8 +26,8 @@ namespace DamagePayee.Controllers
             _demandLetterService = demandLetterService;
         }
 
-     
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             DemandletterReportDto demandletter = new DemandletterReportDto();
