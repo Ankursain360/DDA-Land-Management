@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
+
 namespace EncroachmentDemolition.Controllers
 {
     public class DemolitionReportController : Controller
@@ -20,6 +23,8 @@ namespace EncroachmentDemolition.Controllers
         {
             _encroachmentRegisterationService = encroachmentRegisterationService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             EncroachmentRegisteration model = new EncroachmentRegisteration();

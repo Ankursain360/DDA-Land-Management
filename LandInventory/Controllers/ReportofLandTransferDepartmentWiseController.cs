@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using LandInventory.Filters;
+using Core.Enum;
 namespace LandInventory.Controllers
 {
     public class ReportofLandTransferDepartmentWiseController : BaseController
@@ -26,6 +27,7 @@ namespace LandInventory.Controllers
             landtransfer.DepartmentList = await _landTransferService.GetAllDepartment();
 
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Landtransfer landtransfer = new Landtransfer();

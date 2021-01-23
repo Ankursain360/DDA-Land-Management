@@ -25,6 +25,8 @@ namespace SiteMaster.Controllers
             _districtService = districtService;
         }
 
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {

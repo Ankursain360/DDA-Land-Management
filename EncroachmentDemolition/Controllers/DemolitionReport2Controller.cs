@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class DemolitionReport2Controller : Controller
@@ -39,6 +41,8 @@ namespace EncroachmentDemolition.Controllers
             DivisionId = DivisionId ?? 0;
             return Json(await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitionstructuredetails demolitionstructuredetails = new Demolitionstructuredetails();
@@ -48,6 +52,7 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
             return View(demolitionstructuredetails);
         }
+
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] DemolitionReportZoneDivisionLocalityWiseSearchDto dto)
         {

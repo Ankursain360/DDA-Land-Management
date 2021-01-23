@@ -12,6 +12,11 @@ using Microsoft.Extensions.Configuration;
 using Dto.Search;
 using System.IO;
 using System.Linq;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
+using System.Data;
+using Newtonsoft.Json;
+
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -40,6 +45,8 @@ namespace EncroachmentDemolition.Controllers
             _annexureAService = annexureAService;
             _annexureAApprovalService = annexureAApprovalService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -52,6 +59,10 @@ namespace EncroachmentDemolition.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
+
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _annexureAApprovalService.FetchSingleResult(id);
@@ -63,6 +74,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Fixingdemolition fixingdemolition)
         {
             var result = false;
@@ -139,6 +151,9 @@ namespace EncroachmentDemolition.Controllers
 
             return PartialView("_WatchWard", Data);
         }
+
+
+
         public async Task<FileResult> ViewDocument(int Id)
         {
             FileHelper file = new FileHelper();
@@ -162,6 +177,10 @@ namespace EncroachmentDemolition.Controllers
 
             return PartialView("_EncroachmentRegisterView", encroachmentRegisterations);
         }
+
+
+
+
         public async Task<IActionResult> DownloadPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
