@@ -61,5 +61,8 @@ namespace Libraries.Model.Entity
         public IFormFile JudgementFile { get; set; }
         [NotMapped]
         public IFormFile StayFile { get; set; }
+        
+             [NotMapped]
+        public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
     }
 }

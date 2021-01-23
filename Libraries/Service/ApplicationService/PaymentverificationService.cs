@@ -38,7 +38,11 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaymentListVerified(model);
         }
-       
+        public async Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
+        {
+            return await _paymentverificationRepository.GetPaymentTransactionReportData(paymentTransactionReportSearchDto);
+        }
+
         public async Task<Paymentverification> FetchSingleResult(int id)
         {
             var result = await _paymentverificationRepository.FindBy(a => a.Id == id);
