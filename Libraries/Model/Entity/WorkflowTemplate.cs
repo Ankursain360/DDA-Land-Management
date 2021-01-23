@@ -13,8 +13,11 @@ namespace Libraries.Model.Entity
         {
             Processworkflow = new HashSet<Processworkflow>();
         }
+        [Required(ErrorMessage = " Proccess Name is mandatory")]
         public string Name { get; set; }
+        [Required(ErrorMessage = " Proccess Description is mandatory")]
         public string Description { get; set; }
+        [Required(ErrorMessage = " Module is mandatory")]
         public int ModuleId { get; set; }
         public string UserType { get; set; }
         public string Template { get; set; }

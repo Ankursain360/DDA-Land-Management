@@ -32,7 +32,7 @@ namespace EncroachmentDemolition.Controllers
         string targetReportfilePathLayout = string.Empty;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
-       
+
         public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IConfiguration configuration)
         {
@@ -43,7 +43,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-       
+
 
 
         public IActionResult Index()
@@ -69,7 +69,7 @@ namespace EncroachmentDemolition.Controllers
             onlinecomplaint.IsActive = 1;
             onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
             onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-             return View(onlinecomplaint);
+            return View(onlinecomplaint);
         }
 
 
@@ -84,22 +84,22 @@ namespace EncroachmentDemolition.Controllers
                 onlinecomplaint.ReferenceNo = "TRN" + finalString;
                 onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
                 onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-              
+
                 if (ModelState.IsValid)
                 {
                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
-                   // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
-                        var LattitudeValue = TempData["LattitudeValue"] as string;
-                        onlinecomplaint.Lattitude = LattitudeValue;
-                        var LongitudeValue = TempData["LongitudeValue"] as string;
-                        onlinecomplaint.Longitude = LongitudeValue;
-                       // var lattlongurlvalue = TempData["url"] as string;
+                     //   var LattitudeValue = TempData["LattitudeValue"] as string;
+                      //  onlinecomplaint.Lattitude = LattitudeValue;
+                      //  var LongitudeValue = TempData["LongitudeValue"] as string;
+                      //  onlinecomplaint.Longitude = LongitudeValue;
+                        // var lattlongurlvalue = TempData["url"] as string;
                     }
-                   
+
 
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
 
@@ -135,9 +135,9 @@ namespace EncroachmentDemolition.Controllers
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
                         string EmailID = onlinecomplaint.Email.ToString();
-                       
-                        string Action = "Dear Requester, <br> Your Request for <b>"+ onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
-                        String Mobile = onlinecomplaint. Contact;
+
+                        string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
+                        String Mobile = onlinecomplaint.Contact;
                         SendMailDto mail = new SendMailDto();
                         SendSMSDto SMS = new SendSMSDto();
                         SMS.GenerateSendSMS(Action, Mobile);
@@ -146,15 +146,15 @@ namespace EncroachmentDemolition.Controllers
                             mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
 
 
-                           TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
-  
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
+
                             return Redirect("/Complaint/Create");
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
-                          
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo+ " system is unable to send the complaint details on mail.", "", AlertType.Success);
-                           return Redirect("/Complaint/Create");
+
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo + " system is unable to send the complaint details on mail.", "", AlertType.Success);
+                            return Redirect("/Complaint/Create");
 
                         }
 
@@ -261,9 +261,6 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
-
-
-
         private async Task<List<TemplateStructure>> dataAsync()
         {
             var Data = await _workflowtemplateService.FetchSingleResult(18);
@@ -271,8 +268,6 @@ namespace EncroachmentDemolition.Controllers
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;
         }
-
-
 
     }
 }

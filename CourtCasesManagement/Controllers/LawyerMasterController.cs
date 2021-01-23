@@ -10,6 +10,7 @@ using Dto.Search;
 using CourtCasesManagement.Filters;
 using Core.Enum;
 
+
 namespace CourtCasesManagement.Controllers
 {
     public class LawyerMasterController : BaseController
@@ -22,6 +23,7 @@ namespace CourtCasesManagement.Controllers
             _lawyerService = lawyerService;
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _lawyerService.GetAllLawyer();
@@ -35,12 +37,13 @@ namespace CourtCasesManagement.Controllers
             return PartialView("_List", result);
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Lawyer lawyer)
         {
             try
@@ -75,7 +78,7 @@ namespace CourtCasesManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _lawyerService.FetchSingleResult(id);
@@ -87,6 +90,7 @@ namespace CourtCasesManagement.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Lawyer lawyer)
         {
             if (ModelState.IsValid)
@@ -108,8 +112,8 @@ namespace CourtCasesManagement.Controllers
             return View(lawyer);
         }
 
-        
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _lawyerService.FetchSingleResult(id);
@@ -134,6 +138,7 @@ namespace CourtCasesManagement.Controllers
             return RedirectToAction("Index", "Lawyer");
         }
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
             try

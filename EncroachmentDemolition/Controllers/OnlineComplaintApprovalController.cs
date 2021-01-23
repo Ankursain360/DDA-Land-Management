@@ -15,7 +15,8 @@ using Dto.Search;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class OnlineComplaintApprovalController : BaseController
@@ -36,6 +37,8 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -60,7 +63,7 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _onlinecomplaintApprovalService.FetchSingleResult(id);
@@ -73,6 +76,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Onlinecomplaint onlinecomplaint)
         {
             var result = false;
@@ -181,6 +185,28 @@ namespace EncroachmentDemolition.Controllers
 
 
 
+
+
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            try { 
+            FileHelper file = new FileHelper();
+            var Data = await _onlinecomplaintService.FetchSingleResult(Id);
+            string targetPhotoPathLayout = Data.PhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+            return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+                }
+            catch(Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _onlinecomplaintService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.PhotoPath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+
+            }
+        }
 
     }
 }

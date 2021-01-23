@@ -14,7 +14,7 @@
                         asp-items="@(new SelectList(Model.modulelist, "Id","Name"))">
                     <option selected="selected" disabled="disabled" value="">--Select--</option>
                 </select>
-                <label asp-validation-for="ModuleId" class="error"></label>
+                <span asp-validation-for="ModuleId" class="text-danger"></span>
                 <label asp-for="ModuleId" class="floating-label">Module Name</label>
             </div>
         </div>
@@ -25,7 +25,7 @@
                         asp-items="@(new SelectList(Model.parentmenulist, "Id","Name"))">
                     <option selected="selected" disabled="disabled" value="">--Select--</option>
                 </select>
-                <label asp-validation-for="ModuleId" class="error"></label>
+                <span asp-validation-for="ParentMenuId" class="text-danger"></span>
                 <label asp-for="ParentMenuId" class="floating-label">Parent Menu</label>
             </div>
         </div>

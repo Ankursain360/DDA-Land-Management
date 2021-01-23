@@ -589,7 +589,7 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
+    
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             int userId = SiteContext.UserId;

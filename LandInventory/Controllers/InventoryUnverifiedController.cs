@@ -50,7 +50,9 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
 
         }
-        [AuthorizeContext(ViewAction.View)]
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;

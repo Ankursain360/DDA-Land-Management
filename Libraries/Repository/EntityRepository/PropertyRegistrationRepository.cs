@@ -14,7 +14,6 @@ namespace Libraries.Repository.EntityRepository
 {
     public class PropertyRegistrationRepository : GenericRepository<Propertyregistration>, IPropertyRegistrationRepository
     {
-
         public PropertyRegistrationRepository(DataContext dbContext) : base(dbContext)
         {
 
@@ -159,6 +158,7 @@ namespace Libraries.Repository.EntityRepository
                                                 .ToListAsync();
             return LocalityList;
         }
+
 
         public async Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model)
         {

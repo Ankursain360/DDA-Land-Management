@@ -13,8 +13,9 @@ namespace Libraries.Model.Entity
         {
             Propertyregistration = new HashSet<Propertyregistration>();
         }
-        [Required(ErrorMessage = "The Classification of Land Name field is required")]
+        [Required(ErrorMessage = " Classification of Land Name is mandatory")]
         public string Name { get; set; }
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte IsActive { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
     }

@@ -8,8 +8,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class NoticeToDamagePayeeController : Controller
@@ -20,18 +20,21 @@ namespace DamagePayee.Controllers
         {
             _noticeToDamagePayeeService = noticeToDamagePayeeService;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
         }
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _noticeToDamagePayeeService.FetchSingleResult(id);
@@ -45,6 +48,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Noticetodamagepayee noticetodamagepayee)
         {
             if (ModelState.IsValid)
@@ -80,6 +84,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Noticetodamagepayee noticetodamagepayee)
         {
             try
@@ -124,7 +129,7 @@ namespace DamagePayee.Controllers
             return PartialView("_List1", result);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _noticeToDamagePayeeService.FetchSingleResult(id);

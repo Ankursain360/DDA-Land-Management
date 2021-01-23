@@ -8,7 +8,8 @@ using Notification.OptionEnums;
 using System;
 using Dto.Search;
 using Dto.Master;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class ImpositionOfChargesController : BaseController
@@ -20,6 +21,8 @@ namespace DamagePayee.Controllers
             _demandLetterService = demandLetterService;
         }
 
+
+       [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             ImpositionOfChargesDtoProfile demandletter = new ImpositionOfChargesDtoProfile();

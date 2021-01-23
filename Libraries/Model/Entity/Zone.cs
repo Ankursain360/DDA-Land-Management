@@ -66,6 +66,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
 
     }
 }

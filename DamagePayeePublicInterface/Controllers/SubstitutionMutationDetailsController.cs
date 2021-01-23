@@ -70,28 +70,6 @@ namespace DamagePayeePublicInterface.Controllers
             var result = await _mutationDetailsService.GetPagedSubsitutionMutationDetails(model);
             return PartialView("_List", result);
         }
-        //public async Task<IActionResult> Index(int id)
-        //{
-        //    Mutationdetails Model = new Mutationdetails();
-        //    var Data = await _damagepayeeregisterService.FetchSingleResult(id);
-
-        //    Data.PropLocalityList = await _damagepayeeregisterService.GetLocalityList();
-        //    Data.PropDistrictList = await _damagepayeeregisterService.GetDistrictList();
-
-        //    Data.PersonalInfoDamageList = await _damagepayeeregisterService.GetPersonalInfoTemp(id);
-        //    Data.AlloteeTypeDamageList = await _damagepayeeregisterService.GetAllottetypeTemp(id);
-        //    Model.DamagePayeeRegister = Data;
-
-        //    return View(Model);
-        //}
-
-        //async Task BindDropDown(Damagepayeeregistertemp DamagePayeeRegister)
-        //{
-        //    Damagepayeeregistertemp damage = new Damagepayeeregistertemp();
-
-        //    DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
-        //    DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
-        //}
         public async Task<IActionResult> Create(int id)
         {
             Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();

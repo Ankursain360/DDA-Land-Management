@@ -11,7 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Utility.Helper;
-
+using DamagePayee.Filters;
+using Core.Enum;
 
 namespace DamagePayee.Controllers
 {
@@ -28,7 +29,7 @@ namespace DamagePayee.Controllers
             _doortodoorsurveyService = doortodoorsurveyService;
             _configuration = configuration;
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -37,12 +38,20 @@ namespace DamagePayee.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DoortodoorsurveySearchDto model)
         {
-            var result = await _doortodoorsurveyService.GetPagedDoortodoorsurvey(model);
+            try
+            {
+                var result = await _doortodoorsurveyService.GetPagedDoortodoorsurvey(model);
 
-            return PartialView("_List", result);
+                return PartialView("_List", result);
+            }
+            catch (Exception Ex)
+            {
+
+                return PartialView("_List", Ex);
+            }
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
@@ -54,6 +63,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Doortodoorsurvey doortodoorsurvey)
         {
             try
@@ -149,7 +159,7 @@ namespace DamagePayee.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
@@ -164,6 +174,7 @@ namespace DamagePayee.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Doortodoorsurvey doortodoorsurvey)
         {
             if (ModelState.IsValid)
@@ -220,7 +231,7 @@ namespace DamagePayee.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -244,6 +255,9 @@ namespace DamagePayee.Controllers
             return View("Index", list);
         }
 
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);

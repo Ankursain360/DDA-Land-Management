@@ -11,7 +11,8 @@ using Utility.Helper;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class SelfAssessmentDamageController : BaseController
@@ -23,6 +24,9 @@ namespace DamagePayee.Controllers
             _configuration = configuration;
             _selfAssessmentDamageService = selfAssessmentDamageService;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -38,6 +42,9 @@ namespace DamagePayee.Controllers
             damagepayeeregistertemp.LocalityList = await _selfAssessmentDamageService.GetLocalityList();
             damagepayeeregistertemp.DistrictList = await _selfAssessmentDamageService.GetDistrictList();
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Damagepayeeregister damagepayeeregistertemp = new Damagepayeeregister();
@@ -58,7 +65,7 @@ namespace DamagePayee.Controllers
             
         }
         [HttpPost]
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Damagepayeeregister damagepayeeregistertemp)
         {
             await BindDropDown(damagepayeeregistertemp);

@@ -53,6 +53,8 @@ namespace LandInventory.Controllers
             planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
             return View(planning);
         }
+
+
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Planning planning)
@@ -115,6 +117,8 @@ namespace LandInventory.Controllers
             }
             return View(planning);
         }
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -128,6 +132,8 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
         [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> VerifyPropertyView(int id)
         {
@@ -141,6 +147,8 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -154,6 +162,8 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
         [HttpPost]
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(Planning planning)

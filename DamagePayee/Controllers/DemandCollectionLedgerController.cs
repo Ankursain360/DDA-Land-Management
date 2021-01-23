@@ -8,7 +8,8 @@ using Notification.OptionEnums;
 using System;
 using Dto.Search;
 using Dto.Master;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class DemandCollectionLedgerController : BaseController
@@ -20,6 +21,9 @@ namespace DamagePayee.Controllers
             _demandLetterService = demandLetterService;
         }
 
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             DemandCollectionLedgerReportDtoProfile demandletter = new DemandCollectionLedgerReportDtoProfile();

@@ -131,6 +131,8 @@ namespace LandInventory.Controllers
             return View(list);
             //return View();  
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult History(int id)
         {

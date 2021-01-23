@@ -73,7 +73,9 @@ namespace LandInventory.Controllers
             landtransfer.Propertyregistration = propertyRegistration;
             return View(landtransfer);
         }
-        [AuthorizeContext(ViewAction.Add)]
+
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = new Landtransfer();//await _landTransferService.FetchSingleResultWithPropertyRegistration(id);

@@ -1,0 +1,105 @@
+﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Libraries.Model.Entity
+{
+    public class Datastoragedetails : AuditableEntity<int>
+    {
+
+        public int IsFileDocument { get; set; }
+        public string FileNo { get; set; }
+        public string Name { get; set; }
+        public int? IsPartOfMainFile { get; set; }
+        public string RecordRoomNo { get; set; }
+        public int? AlmirahId { get; set; }
+
+        [Required(ErrorMessage = "Row no is Mandatory Field")]
+        public int? RowId { get; set; }
+        public int? ColumnId { get; set; }
+        public int? BundleId { get; set; }
+        public int? ZoneId { get; set; }
+        public int? LocalityId { get; set; }
+
+        [Required(ErrorMessage = "Khasra No/Property No is Mandatory Field")]
+        public string KhasraNoPropertyNo { get; set; }
+        public string Area { get; set; }
+
+        public byte? IsActive { get; set; }
+        public string SectorId { get; set; }
+        public string PocketId { get; set; }
+        public string BlockId { get; set; }
+        public string FlatNo { get; set; }
+        public string FlatCategoryId { get; set; }
+        public string CompactorNo { get; set; }
+        public string SequenceNo { get; set; }
+        public string SttsNo { get; set; }
+        public int? BranchSno { get; set; }
+        public int? YearTo { get; set; }
+        public string IsFreeHold { get; set; }
+        public string DocumentSequenceNo { get; set; }
+        public string DocumentType { get; set; }
+        public int? DeptId { get; set; }
+        public int? UserId { get; set; }
+        public int? Year { get; set; }
+        public string CategoryNo { get; set; }
+        public string HeaderNo { get; set; }
+
+        public Almirah Almirah { get; set; }
+        public Bundle Bundle { get; set; }
+        public Column Column { get; set; }
+        public Locality Locality { get; set; }
+        public Row Row { get; set; }
+        public Zone Zone { get; set; }
+
+        [NotMapped]
+        public int? SchemeId { get; set; }
+
+
+
+        [NotMapped]
+        public List<Almirah> AlmirahList { get; set; }
+        [NotMapped]
+        public List<Row> RowList { get; set; }
+        [NotMapped]
+        public List<Column> ColumnList { get; set; }
+        [NotMapped]
+        public List<Bundle> BundleList { get; set; }
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Zone> ZoneList { get; set; }
+        [NotMapped]
+        public List<Scheme> schemaList { get; set; }
+
+
+        [NotMapped]
+        public List<string> Category { get; set; }
+        [NotMapped]
+        public List<string> Header { get; set; }
+        [NotMapped]
+        public List<string> SequenceNoForPartFile { get; set; }
+
+        public void Add(Datastoragedetails datastoragedetails)
+        {
+            throw new NotImplementedException();
+        }
+
+        [NotMapped]
+        public List<string> Subject { get; set; }
+
+        [NotMapped]
+        public List<int> LocalityIdForPartFile { get; set; }
+
+        [NotMapped]
+        public List<int> SchemeDptBranch { get; set; }
+
+        [NotMapped]
+        public List<int> YearForPartFile { get; set; }
+     
+    }
+}
+
