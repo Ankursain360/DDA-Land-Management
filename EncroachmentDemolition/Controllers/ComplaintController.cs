@@ -138,27 +138,27 @@ namespace EncroachmentDemolition.Controllers
 
                         string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
                         String Mobile = onlinecomplaint.Contact;
-                        SendMailDto mail = new SendMailDto();
-                        SendSMSDto SMS = new SendSMSDto();
-                        SMS.GenerateSendSMS(Action, Mobile);
-                        try
-                        {
-                            mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
 
+                        #region Mail Generation Added By Renu
+                        MailSMSHelper mailG = new MailSMSHelper();
 
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
+                        #region HTML Body Generation
+                        string strBodyMsg = Action;
+                        #endregion
 
-                            return Redirect("/Complaint/Create");
-                        }
-                        catch (Exception ex)
-                        {
+                        string strMailSubject = "DDA Alert-Your Complaint has been successfully submitted.";
+                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                        var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                        #endregion
 
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo + " system is unable to send the complaint details on mail.", "", AlertType.Success);
-                            return Redirect("/Complaint/Create");
+                        mailG.SendSMS(Action, Mobile);
+                        if (sendMailResult)
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo + " and These Details send on your Registered email and Mobile No", "", AlertType.Success);
+                        else
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo + " system is unable to send the complaint details on mail.", "", AlertType.Info);
+                        return Redirect("/Complaint/Create");
 
-                        }
-
-                        return View(onlinecomplaint);
+                       // return View(onlinecomplaint);
 
                     }
                     else
@@ -324,7 +324,7 @@ namespace EncroachmentDemolition.Controllers
             TempData["LongitudeValue"] = longitude.ToString();
             TempData["url"] = url;
         }
-   private static double? GetLatitudeAndLongitude(PropertyItem propItem)
+        private static double? GetLatitudeAndLongitude(PropertyItem propItem)
         {
             try
             {
