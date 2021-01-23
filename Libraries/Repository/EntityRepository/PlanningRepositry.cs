@@ -32,7 +32,15 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Planning>> GetPagedPlanning(PlanningSearchDto dto)
         {
-            return await _dbContext.Planning.Include(x => x.PlanningProperties).ThenInclude(x => x.PropertyRegistration).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Zone).Where(x => x.IsActive == 1 && x.IsVerify == 1).GetPaged(dto.PageNumber, dto.PageSize);
+            return await _dbContext.Planning
+                                    .Include(x => x.PlanningProperties)
+                                    .ThenInclude(x => x.PropertyRegistration)
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Zone)
+                                    .Include(x => x.Division)
+                                    .Include(x => x.Zone)
+                                    .Where(x => x.IsActive == 1 && x.IsVerify == 1)
+                                .GetPaged(dto.PageNumber, dto.PageSize);
         }
         public async Task<PagedResult<Planning>> GetUnverifiedPagedPlanning(PlanningSearchDto dto)
         {
