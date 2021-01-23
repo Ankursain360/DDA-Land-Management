@@ -234,7 +234,7 @@
 
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="PropertyNo" type="text" class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
+                            <input asp-for="PropertyNo" type="text" required class="floating-label-field floating-label-field--s3" placeholder="Municipal No." />
                             <span asp-validation-for="PropertyNo" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Property/House/Municipal No.<span style="color:red">*</span></label>
 
@@ -243,7 +243,7 @@
 
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
+                            <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" required
                                     asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                                 <option value="0">---Select---</option>
                             </select>
@@ -257,14 +257,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="FloorNo" type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
+                            <input asp-for="FloorNo" required type="text" placeholder="Floor No" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="FloorNo" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Floor No(if purchased floor wise)</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="StreetNo" type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
+                            <input asp-for="StreetNo" required type="text" placeholder="Street Name" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="StreetNo" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Road/Street Name<span style="color:red">*</span></label>
                         </div>
@@ -273,14 +273,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="PinCode" type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
+                            <input asp-for="PinCode" required type="text" placeholder="Pin Code" class="floating-label-field floating-label-field--s3" />
                             <span asp-validation-for="PinCode" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Pin Code<span style="color:red">*</span></label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap">
-                            <select asp-for="DistrictId" class="floating-label-field floating-label-field--s3"
+                            <select asp-for="DistrictId" required class="floating-label-field floating-label-field--s3"
                                     asp-items="@(new SelectList(Model.DistrictList,"Id","Name"))">
                                 <option value="0">---Select---</option>
                             </select>
@@ -292,14 +292,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="PlotAreaSqYard" type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
+                            <input asp-for="PlotAreaSqYard" required type="text" placeholder="Plot Area in Sq.yds." class="floating-label-field floating-label-field--s3" id="txtPlotyds" />
                             <span asp-validation-for="PlotAreaSqYard" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Plot Area in Sq.yds.<span style="color:red">*</span></label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0 ">
-                            <input asp-for="PlotAreaSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" readonly="readonly" />
+                            <input asp-for="PlotAreaSqMt" required type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtPlotmts" readonly="readonly" />
                             <span asp-validation-for="PlotAreaSqMt" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Sq. Mtr.-</label>
                         </div>
@@ -308,14 +308,14 @@
                 <div class="row mt-md-3">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input asp-for="FloorAreaSqYard" type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
+                            <input asp-for="FloorAreaSqYard" required type="text" placeholder="Floor Area in Sq. yds" class="floating-label-field floating-label-field--s3" id="txtFlooryds" />
                             <span asp-validation-for="FloorAreaSqYard" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Floor Area in Sq. yds.(if purchased floor wise)</label>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0 ">
-                            <input asp-for="FloorAreaSqMt" type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" readonly="readonly" />
+                            <input asp-for="FloorAreaSqMt" required type="text" placeholder="Sq. Mtr.-" class="floating-label-field floating-label-field--s3" id="txtFloormts" readonly="readonly" />
                             <span asp-validation-for="FloorAreaSqMt" class="d-block text-danger field-validation-valid"></span>
                             <label class="floating-label">Sq. Mtr.-</label>
                         </div>
