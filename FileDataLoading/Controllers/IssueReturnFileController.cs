@@ -2,23 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 //using FileDataLoading.Models;
 
 namespace FileDataLoading.Controllers
 {
-    public class IssueReturnFileController : Controller
-    {
-        //private readonly lmsContext _context;
-        //public IssueReturnFileController(lmsContext context)
-        //{
-        //    _context = context;
-        //}
-        public IActionResult Index()
+   
+        public class IssueReturnFileController : BaseController
         {
+            private readonly IIssueReturnFileService _issueReturnFileService;
+            public IssueReturnFileController(IIssueReturnFileService issueReturnFileService)
+            {
+            _issueReturnFileService = issueReturnFileService;
+            }
+
+            async Task BindDropDownView(Datastoragedetails model)
+            {
+               
+               model.FileNoList = await _issueReturnFileService.GetFileNoList();
+            }
+            public async Task<IActionResult> Index()
+            {
+            Datastoragedetails model = new Datastoragedetails();
+           
+            await BindDropDownView(model);
+           
             //ViewBag.localdata = _context.TblMasterDesignation.ToList();
-            return View();
-        }
+            return View(model);
+            }
         //[HttpPost]
         //public JsonResult GetAutocmplete(string Prefix)
         //{
@@ -28,12 +41,12 @@ namespace FileDataLoading.Controllers
         //    //                 select new { c.DesignationName, c.DesignationId });
         //    //return Json(Countries);
         //}
-        [HttpPost]
-        public IActionResult Index(int id)
-        {
-            ViewBag.IsShowData = "Yes";
-            return View();
-        }
+        //[HttpPost]
+        //public IActionResult Index(int id)
+        //{
+        //    ViewBag.IsShowData = "Yes";
+        //    return View();
+        //}
 
         //public async Task<IActionResult> AutocompleteParameter(string term)
         //{
