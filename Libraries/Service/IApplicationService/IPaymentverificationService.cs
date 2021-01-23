@@ -19,5 +19,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Verify(int id,int userid);
        
         Task<Paymentverification> FetchSingleResult(int id);
+        Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto);
     }
 }

@@ -1,151 +1,87 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Paymentverification
+@await Component.InvokeAsync("PageHeader", new { pageName = "Payement Transaction Report" })
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Payment Transaction Repor" })
 
-@*<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-    <script src="~/js/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Payment Transaction Report</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Details</h3>
+        <div class="row">
+
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtFromDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
+                    <label class="floating-label">From Date</label>
                 </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="date" asp-for="CreatedDate" placeholder="Date" id="txtToDate" class="floating-label-field floating-label-field--s3" value="" />
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CreatedDate"></span>
+                    <label class="floating-label">To Date</label>
+                </div>
+
             </div>
         </div>
-    </div>*@
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        @*<div class="panel-heading  myapp-hed1">
-                <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details</h6>
-            </div>*@
-        <div class="panel-body">
-            <form method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" asp-action="Index" id="1">
-                <h2 class="my-3 sub-heading">Details</h2>
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 ">
+                <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
+                @*<input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />*@
+                <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                    <i class="ri-refresh-line mr-2"></i>Reset
+                </button>
 
-                <div class="row pt-3">
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap">
-                            <select style="width:100%" id="" required="" class="floating-label-field floating-label-field--s3">
-                                <option value="0">---Select---</option>
-                                <option value="1">Nimri</option>
-                            </select>
-                            <label class="floating-label">Locality Name(Village)</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                            <label class="floating-label">From Date</label>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="date" class="floating-label-field floating-label-field--s3" placeholder="Date" />
-                            <label class="floating-label">To Date</label>
-                        </div>
-                    </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="0">Select One</option>
+                        <option value="D">Date</option>
+                        <option value="0">Locality Name (Village)</option>
+
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
                 </div>
-
-                <div class="row pt-3">
-                    <div class="col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Generate" class="btn btn-theme" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "DemandReport", null, new { @class = "btn btn-theme" })
-                    </div>
-                </div>
-
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-            <div id="DivReportDetails">
-                @*<div class="row" style="margin-bottom:35px;">
-            <div class="col-sm-12">
-                <div class=" myapp-hed2">
-                    <div class="col-md-12">
-                        <h6 class="pull-left" style="color:white;margin-top:5px;">Report</h6>
-                    </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span id="btndescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
-        </div>*@
-                <h2 class="my-3 sub-heading">Report</h2>
-                <div class="table-section">
-                    <div class="table-responsive px-2">
-                        <table class="table table-sm table-bordered mb-0 table-striped">
-
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>Locality(Village)</th>
-                                    <th>File No.</th>
-                                    <th>Payee Name</th>
-                                    <th>Property No.</th>
-                                    <th>Address</th>
-                                    <th>Property/Plot Area(Sq. Yds)</th>
-                                    <th>Amount Paid</th>
-                                    <th>Payment Date</th>
-                                    <th>Mode of Payment</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbody">
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
 
 
-                            </tbody>
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                @*<a href="/Zone/create" class="d-flex align-items-center btn btn-primary mr-2">
+                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                        <small>Add More</small>
+                    </a>*@
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2">
+            <div id="LoadReportView">
 
-                        </table>
-
-                    </div>
-                </div>
-                </div>
-        
-
-                    }
-                    else
-                    {
-
-                    }
-                }
-
-
-            </form>
+            </div>
         </div>
     </div>
+
 </div>
 
 
-
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/paymenttransactionreportindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/paymenttransactionreportindex.min.js" asp-append-version="true"></script>
+</environment>
