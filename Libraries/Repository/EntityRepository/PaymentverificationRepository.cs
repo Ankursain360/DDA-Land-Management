@@ -81,5 +81,59 @@ namespace Libraries.Repository.EntityRepository
            .Where(x => x.IsActive == 1)
            .ToListAsync();
         }
+        public async Task<List<Locality>> GetAllLocality()
+        {
+            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
+            return localityList;
+        }
+        public async Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
+        {
+            var data = await _dbContext.Paymentverification
+                //.Include(x => x.Locality)
+
+                .Where(x => x.CreatedDate >= paymentTransactionReportSearchDto.fromDate
+             
+               && x.CreatedDate <= paymentTransactionReportSearchDto.toDate)
+                .OrderByDescending(x => x.Id).GetPaged(paymentTransactionReportSearchDto.PageNumber, paymentTransactionReportSearchDto.PageSize);
+
+            int SortOrder = (int)paymentTransactionReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (paymentTransactionReportSearchDto.SortBy.ToUpper())
+                {
+
+                    //case ("LOCALITY"):
+                    //    data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                    //    break;
+
+                    case ("CREATEDDATE"):
+                        data.Results = data.Results.OrderBy(x => x.CreatedDate).ToList();
+                        break;
+                    //case ("LANDMARK"):
+                    //    data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                    //    break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (paymentTransactionReportSearchDto.SortBy.ToUpper())
+                {
+
+                    //case ("LOCALITY"):
+                    //    data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                    //    break;
+
+                    case ("CREATEDDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.CreatedDate).ToList();
+                        break;
+                    //case ("LANDMARK"):
+                    //    data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
+                    //    break;
+
+                }
+            }
+            return data;
+        }
     }
 }
