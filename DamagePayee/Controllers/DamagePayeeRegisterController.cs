@@ -17,6 +17,7 @@ using System.Net;
 using DamagePayee.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Extensions;
+using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
@@ -36,7 +37,7 @@ namespace DamagePayee.Controllers
             return View();
         }
 
-       
+
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeregistertempSearchDto model)
@@ -106,22 +107,37 @@ namespace DamagePayee.Controllers
 
                     var resultpassword = await _damagepayeeregisterService.CreateUser(damagepayeeregister);
                     if (!resultpassword.Equals("False"))
-                    { 
+                    {
                         //At successfull completion send mail and sms
-                    string DisplayName = damagepayeeregister.payeeName[0].ToString();
-                    string EmailID = damagepayeeregister.EmailId[0].ToString();
-                    string Id = damagepayeeregister.Id.ToString().Unidecode();
-                    string LoginName = damagepayeeregister.payeeName[0].ToString();
-                    string ContactNo = damagepayeeregister.MobileNo[0].ToString();
-                    string Password = resultpassword;
-                    string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
+                        string DisplayName = damagepayeeregister.payeeName[0].ToString();
+                        string EmailID = damagepayeeregister.EmailId[0].ToString();
+                        string Id = damagepayeeregister.Id.ToString().Unidecode();
+                        string LoginName = damagepayeeregister.payeeName[0].ToString();
+                        string ContactNo = damagepayeeregister.MobileNo[0].ToString();
+                        string Password = resultpassword;
+                        string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "UserMailDetails.html");
 
+                        #region Mail Generation Added By Renu
 
-                    GenerateMailUser mail = new GenerateMailUser();
+                        MailSMSHelper mailG = new MailSMSHelper();
 
+                        #region HTML Body Generation
+                        DamageRegisterBodyDTO bodyDTO = new DamageRegisterBodyDTO();
+                        bodyDTO.displayName = DisplayName;
+                        bodyDTO.loginName = LoginName;
+                        bodyDTO.password = Password;
+                        bodyDTO.path = path;
+                        bodyDTO.emailId = EmailID;
+                        bodyDTO.contactNo = ContactNo;
+                        string strBodyMsg = mailG.PopulateBodyRegister(bodyDTO);
+                        #endregion
 
-                    mail.GenerateMailFormatForUserDetails(DisplayName, EmailID, LoginName, path, Password, ContactNo);
+                        string strMailSubject = "Damage Payee User Details ";
+                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                        var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                        #endregion
                     }
+
 
                     //****** code for saving  Damage payee personal info *****
 
@@ -173,7 +189,7 @@ namespace DamagePayee.Controllers
                                                                 damagepayeeregister.SignatureFilePath[i] : string.Empty
 
 
-                                    });
+                                });
                             }
                             foreach (var item in damagepayeepersonelinfo)
                             {
@@ -181,7 +197,7 @@ namespace DamagePayee.Controllers
                             }
                         }
                     }
-                
+
 
                     //****** code for saving  Allotte Type *****
                     if (damagepayeeregister.Name != null &&
@@ -253,15 +269,15 @@ namespace DamagePayee.Controllers
                                     DamagePayeeRegisterTempId = damagepayeeregister.Id
 
 
-                                   
-                                  
-                                    
-                                   
-                                   
 
-                                     //RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
 
-                                   
+
+
+
+
+                                    //RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+
+
                                 });
                             }
 
@@ -293,7 +309,8 @@ namespace DamagePayee.Controllers
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetPersonalInfo(Convert.ToInt32(Id));
             //return Json(data.Select(x => new { x.CountOfStructure, DateOfEncroachment = Convert.ToDateTime(x.DateOfEncroachment).ToString("yyyy-MM-dd"), x.Area, x.NameOfStructure, x.ReferenceNoOnLocation, x.Type, x.ConstructionStatus }));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -313,7 +330,8 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetAllottetype(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.FatherName,
@@ -325,7 +343,8 @@ namespace DamagePayee.Controllers
         {
             Id = Id ?? 0;
             var data = await _damagepayeeregisterService.GetPaymentHistory(Convert.ToInt32(Id));
-            return Json(data.Select(x => new {
+            return Json(data.Select(x => new
+            {
                 x.Id,
                 x.Name,
                 x.RecieptNo,
@@ -338,8 +357,8 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
-           await BindDropDown(Data);
-           
+            await BindDropDown(Data);
+
             if (Data == null)
             {
                 return NotFound();
@@ -443,9 +462,9 @@ namespace DamagePayee.Controllers
                                                                 damagepayeeregister.SignatureFilePath[i] != null || damagepayeeregister.SignatureFilePath[i] != "" ?
                                                                 damagepayeeregister.SignatureFilePath[i] : string.Empty
 
-                                     });
+                                });
 
-                              
+
                             }
                             foreach (var item in damagepayeepersonelinfo)
                             {
@@ -465,7 +484,7 @@ namespace DamagePayee.Controllers
                          damagepayeeregister.Date.Count > 0
                          )
                         {
-                           
+
                             List<Allottetype> allottetype = new List<Allottetype>();
                             result = await _damagepayeeregisterService.DeleteAllotteType(id);
                             for (int i = 0; i < damagepayeeregister.Name.Count; i++)
@@ -525,9 +544,9 @@ namespace DamagePayee.Controllers
                                                                 damagepayeeregister.RecieptFilePath[i] : string.Empty,
                                     DamagePayeeRegisterTempId = damagepayeeregister.Id
 
-                  //  RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
+                                    //  RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
 
-                                   
+
                                 });
                             }
 
@@ -546,8 +565,17 @@ namespace DamagePayee.Controllers
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(damagepayeeregister);
                     }
-                
+
+                }
+
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(damagepayeeregister);
+                }
+
             }
+
 
             else
             {
@@ -555,15 +583,6 @@ namespace DamagePayee.Controllers
                 return View(damagepayeeregister);
             }
 
-        } 
-
-          
-            else
-            {
-                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return View(damagepayeeregister);
-            }
-           
         }
         //******************  download files **************************
         public async Task<IActionResult> DownloadPropertyPhoto(int Id)
@@ -630,7 +649,7 @@ namespace DamagePayee.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
-        
+
         public async Task<FileResult> ViewATSFile(int Id)
         {
             FileHelper file = new FileHelper();

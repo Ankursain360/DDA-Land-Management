@@ -36,7 +36,7 @@ namespace EncroachmentDemolition.Controllers
         string targetReportfilePathLayout = string.Empty;
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IApprovalProccessService _approvalproccessService;
-       
+
         public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
             IWorkflowTemplateService workflowtemplateService, IConfiguration configuration)
         {
@@ -47,7 +47,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
 
-       
+
 
 
         public IActionResult Index()
@@ -73,7 +73,7 @@ namespace EncroachmentDemolition.Controllers
             onlinecomplaint.IsActive = 1;
             onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
             onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-             return View(onlinecomplaint);
+            return View(onlinecomplaint);
         }
 
 
@@ -88,11 +88,11 @@ namespace EncroachmentDemolition.Controllers
                 onlinecomplaint.ReferenceNo = "TRN" + finalString;
                 onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
                 onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-              
+
                 if (ModelState.IsValid)
                 {
-                   string targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
-                   // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                    string targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
+                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
@@ -102,9 +102,9 @@ namespace EncroachmentDemolition.Controllers
                         onlinecomplaint.Lattitude = LattitudeValue;
                         var LongitudeValue = TempData["LongitudeValue"] as string;
                         onlinecomplaint.Longitude = LongitudeValue;
-                       // var lattlongurlvalue = TempData["url"] as string;
+                        // var lattlongurlvalue = TempData["url"] as string;
                     }
-                   
+
 
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
 
@@ -140,30 +140,30 @@ namespace EncroachmentDemolition.Controllers
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
                         string EmailID = onlinecomplaint.Email.ToString();
-                       
-                        string Action = "Dear Requester, <br> Your Request for <b>"+ onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
-                        String Mobile = onlinecomplaint. Contact;
-                        SendMailDto mail = new SendMailDto();
-                        SendSMSDto SMS = new SendSMSDto();
-                        SMS.GenerateSendSMS(Action, Mobile);
-                        try
-                        {
-                            mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
 
+                        string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
+                        String Mobile = onlinecomplaint.Contact;
 
-                           TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
-  
-                            return Redirect("/Complaint/Create");
-                        }
-                        catch(Exception ex)
-                        {
-                          
-                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo+ " system is unable to send the complaint details on mail.", "", AlertType.Success);
-                           return Redirect("/Complaint/Create");
+                        #region Mail Generation Added By Renu
 
-                        }
+                        MailSMSHelper mailG = new MailSMSHelper();
 
-                        return View(onlinecomplaint);
+                        #region HTML Body Generation
+                        string strBodyMsg = Action;
+                        #endregion
+
+                        string strMailSubject = "DDA Alert-Your Complaint has been successfully submitted.";
+                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                        var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                        #endregion
+
+                        mailG.SendSMS(Action, Mobile);
+                        if (sendMailResult)
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo + " and These Details send on your Registered email and Mobile No", "", AlertType.Success);
+                        else
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo + " system is unable to send the complaint details on mail.", "", AlertType.Info);
+                        return Redirect("/Complaint/Create");
+                        // return View(onlinecomplaint);
 
                     }
                     else

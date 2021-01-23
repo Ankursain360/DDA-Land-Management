@@ -24,13 +24,12 @@ using CCA.Util;
 using System.Linq;
 using Unidecode.NET;
 using Microsoft.AspNetCore.Http;
+using Dto.Master;
 
 namespace DamagePayee.Controllers
 {
     public class DamagePayeeRegistrationController : BaseController
-
     {
-
         //private readonly IDataProtector protector;
         static string result = string.Empty;
         private readonly IHostingEnvironment _hostingEnvironment;
@@ -89,35 +88,46 @@ namespace DamagePayee.Controllers
                     {
                         EncryptionHelper encryptionHelper = new EncryptionHelper();
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-
-                        var list = await _damagePayeeRegistrationService.GetAllPayeeregistration();
                         //At successfull completion send mail and sms
                         string DisplayName = payeeregistration.Name.ToString();
                         string EmailID = payeeregistration.EmailId.ToString();
                         string Id = payeeregistration.Id.ToString().Unidecode();
                         string LoginName = payeeregistration.Name.ToString();
-
-
                         string contactno = payeeregistration.MobileNumber.ToString();
+
                         Uri uri = new Uri("http://localhost:1011/DamagePayeeRegistration");
                         string Action = "Dear " + LoginName + ",  You are succesfully registered with DDA Portal. For verify your email click  below link :-  " + uri;
                         var aburl = Request.GetDisplayUrl().Replace("Create", "RegistrationConfirmed");
                         string url = "https://www.google.com/search?q=yahoo+mail&rlz=1C1CHBF_enIN923IN923&oq=&aqs=chrome.1.69i59i450l5.24765349j0j15&sourceid=chrome&ie=UTF-8#=" + contactno + "&message= " + Action + " Thank you .&priority=11";
 
                         string link = "<a target=\"_blank\" href=\"" + aburl + "?" + encryptionHelper.EncryptString(AesKey, "EmailID") + "=" + encryptionHelper.EncryptString(AesKey, EmailID) + "&" + encryptionHelper.EncryptString(AesKey, "Id") + "=" + encryptionHelper.EncryptString(AesKey, Id) + "\">Click Here</a>";
-                        // Using WebRequest
-                        WebRequest request = WebRequest.Create(url);
-                        WebResponse response = request.GetResponse();
-                        string Result = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                        // Using WebClien
-
-                        GenerateMailOTP mail = new GenerateMailOTP();
-                        string Res1 = new WebClient().DownloadString(url);
                         string path = Path.Combine(Path.Combine(_hostingEnvironment.WebRootPath, "VirtualDetails"), "MailDetails.html");
+                        
+                        #region Mail Generation Added By Renu
 
-                        mail.GenerateMailFormatForPassword(DisplayName, EmailID, LoginName, link, path, Action);
+                        MailSMSHelper mailG = new MailSMSHelper();
 
-                        TempData["Message"] = Alert.Show("Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", "", AlertType.Success);
+                        #region HTML Body Generation
+                        RegisterationBodyDTO bodyDTO = new RegisterationBodyDTO();
+                        bodyDTO.displayName = DisplayName;
+                        bodyDTO.loginName = LoginName;
+                        bodyDTO.password = "";
+                        bodyDTO.link = link;
+                        bodyDTO.action = Action;
+                        bodyDTO.path = path;
+                        string strBodyMsg = mailG.PopulateBody(bodyDTO);
+                        #endregion
+
+                        string strMailSubject = "User Login Details ";
+                        string strMailCC = "", strMailBCC = "", strAttachPath = "";
+                        var sendMailResult = mailG.SendMailWithAttachment(strMailSubject, strBodyMsg, EmailID, strMailCC, strMailBCC, strAttachPath);
+                        #endregion
+
+                        if (sendMailResult)
+                            TempData["Message"] = Alert.Show("Dear User,<br/>" + LoginName + " Login Details send on your Registered email and Mobile No, Please check and Login with details", "", AlertType.Success);
+                        else
+                            TempData["Message"] = Alert.Show("Dear User,<br/>" + LoginName + " Enable to send mail or sms ", "", AlertType.Info);
+
                         return RedirectToAction("Create", "DamagePayeeRegistration");
                     }
                     else
@@ -176,7 +186,7 @@ namespace DamagePayee.Controllers
             }
             else
             {
-               return View("Create", "DamagePayeeRegistration");
+                return View("Create", "DamagePayeeRegistration");
             }
         }
 
