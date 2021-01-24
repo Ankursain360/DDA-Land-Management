@@ -469,6 +469,19 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        
+
+
+
+
+        #region Renu Approval Proccess
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
+        {
+            var result = await _damagePayeeApprovalService.GetPagedDamageForApproval(model, SiteContext.UserId);
+            ViewBag.IsApproved = model.StatusId;
+            return PartialView("_List", result);
+        }
+        #endregion
     }
 }
