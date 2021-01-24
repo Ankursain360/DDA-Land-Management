@@ -176,7 +176,7 @@ h6 {
 #LoginPage {
     min-height: 100vh;
     width: 100%;
-    background-image: url(../img/login/login-bg.jpg);
+    background-image: url(../login/login-bg.jpg);
     position: relative;
 }
 
@@ -246,7 +246,7 @@ figcaption h6 {
 .icon i {
     position: absolute;
     z-index: 1;
-    top: 0;
+    top: 32px;
     bottom: 0;
     margin: auto;
     font-size: 1rem;

@@ -129,7 +129,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Bundle> Bundle { get; set; }
 
-
+        public virtual DbSet<Issuereturnfile> Issuereturnfile { get; set; }
         public virtual DbSet<Datastoragedetails> Datastoragedetails { get; set; }
 
         public virtual DbSet<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
@@ -270,7 +270,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
 
             modelBuilder.ApplyConfiguration(new BundleConfiguration());
-
+            modelBuilder.ApplyConfiguration(new IssuereturnfileConfiguration());
 
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 

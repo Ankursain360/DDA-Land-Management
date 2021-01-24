@@ -1,312 +1,152 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Datastoragedetails
+@await Component.InvokeAsync("PageHeader", new { pageName = "Issue/Return File" })
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" 
+                         asp-for="Id" asp-items="@(new SelectList(Model.FileNoList,"Id","FileNo"))">
+                        <option  value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label class="floating-label">File No </label>
+                </div>
 
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-@*<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-    <script src="~/js/site.js"></script>*@
-
-<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
-<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
-<script>
-    $(function () {
-        $("#txtDesignation").keypress(function (e) {
-            var keyCode = e.keyCode || e.which;
-
-            $("#lblError").html("");
-
-            //Regex for Valid Characters i.e. Alphabets and Numbers.
-            var regex = /^[A-Za-z0-9]+$/;
-
-            //Validate TextBox value against the Regex.
-            var isValid = regex.test(String.fromCharCode(keyCode));
-            if (!isValid) {
-                $("#lblError").html("Only Alphabets and Numbers allowed.");
-            }
-
-            return isValid;
-        });
-    });
-
-</script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Issue/Return File</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                @*<div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtName" class="floating-label"> Structure Name</label>
+                </div>*@
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Find</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Name">Structure Name</option>
+                        <option value="Status">Status</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Issue/Return File</h6>
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
         </div>
-        <div class="panel-body">
-            <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
 
-                    <div class="form-group col-md-2">
-                        <label class="control-label lb-sm">Enter Parameter </label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        @*<ejs-autocomplete id="country" dataSource="@ViewBag.localdata" placeholder="e.g. Australia" autofill="true" filterType="StartsWith" sortOrder="@ViewBag.sort">
-                                <e-autocomplete-fields value="Name"></e-autocomplete-fields>
-                            </ejs-autocomplete>*@
-                        <input type="text" class="form-control" id="txtParameter">
-                    </div>
-                </div>
-                <div class="form-row">
+        <div class="table-responsive ">
+            <div id="divStructureTable"></div>
 
-                </div>
+            <table class="table table-sm table-bordered mb-0 table-striped">
+                <thead class="text-nowrap">
+                    <tr>
 
+                        <th>File No.</th>
+                        <th>File Name</th>
+                        <th>File Particulars/Compactor Details</th>
+                        <th>Status</th>
+                        <th>Issue / Return</th>
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            @*<td>@item.Role.Name</td>*@
+                        <td>
+                            <label class="control-label lb-sm">Location Details</label>
+                            <div class="table-responsive ">
+                                <table class="table table-sm table-bordered mb-0 table-striped">
+                                    <thead class="text-nowrap">
+                                        <tr>
+                                            <th>Record Room No.</th>
+                                            <th>Al. No./Compactor No.</th>
+                                            <th>Row No</th>
+                                            <th>Col.No.</th>
+                                            <th>Bn No.</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                        </tr>
 
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Find" class="btn btn-primary myapp-hed1" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-
-
-            </form>
-
-            <div>
-                <br /> <br /> <br /> <br />
-                <br />
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-                        <div class="form-row" id="divDataLoad">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered" border="0">
-                                        <thead class="thead">
-                                            <tr>
-                                                <th>Sr.No</th>
-                                                <th>File No.</th>
-                                                <th>File Name</th>
-                                                <th>File Particulars/Compactor Details</th>
-                                                <th>Status</th>
-                                                <th>Issue / Return</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    F1(RTIMIS)/2017-2018/COORDINATION/RTI
-                                                </td>
-                                                <td>
-                                                    ONLINE RTI FILE
-                                                </td>
-                                                <td>
-                                                    <label class="control-label lb-sm">Location(Village) Details</label>
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Record Room No.</th>
-                                                                <th>Al. No./Compactor No.</th>
-                                                                <th>Row No</th>
-                                                                <th>Col.No.</th>
-                                                                <th>Bn No.</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    308
-                                                                </td>
-                                                                <td>
-                                                                    B
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                                <td>
-                                                                    B
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    Available
-                                                </td>
-
-                                                <td>
-                                                    <a onclick="showInPopup('@Url.Action("IssueFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')" data-toggle="modal" data-target="#form-modal" class="btn btn-primary myapp-hed1">Issue</a>
-
-                                                    @*<a asp-action="IssueFileData" asp-controller="IssueReturnFile">Issue</a>*@
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    F5(29)/2018-2019/COORDINATION/RNR
-                                                </td>
-                                                <td>
-                                                    REPLY FILES
-                                                </td>
-                                                <td>
-                                                    <label class="control-label lb-sm">Location(Village) Details</label>
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Record Room No.</th>
-                                                                <th>Al. No./Compactor No.</th>
-                                                                <th>Row No</th>
-                                                                <th>Col.No.</th>
-                                                                <th>Bn No.</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    308
-                                                                </td>
-                                                                <td>
-                                                                    C
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                                <td>
-                                                                    A
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    Available
-                                                </td>
-
-                                                <td>
-                                                    <a onclick="showInPopup('@Url.Action("IssueFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')" data-toggle="modal" data-target="#form-modal" class="btn btn-primary myapp-hed1">Issue</a>
-                                                    @*<a asp-action="IssueFileData" asp-controller="IssueReturnFile" >Issue</a>*@
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                        
-                    }
-                    else
-                    {
-
-                    }
-                }
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<div class="modal" tabindex="-1" role="dialog" id="form-modal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-            </div>
-        </div>
-    </div>
-</div>
-
-@if (ViewData["Msg"] != null)
-{
-    FileDataLoading.Models.Message msg = ViewData["Msg"] as FileDataLoading.Models.Message;
-@await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
-
-
-<script>
-    showInPopup = (url, title) => {
-        $.ajax({
-            type: 'GET',
-            url: url,
-            success: function (res) {
-                $('#form-modal .modal-body').html(res);
-                $('#form-modal .modal-title').html(title);
-                $('#form-modal').modal('show');
-            }
-        })
-    }
-
-</script>
-<script>
-    $(function () {
-        $("input[name='btnFind']").click(function () {
-            $("#divDataLoad").toggle();
-            $(this).toggleClass('class1')
-        });
-    });
-</script>
-
-<style>
-
-    .class1 {
-        color: orange;
-    }
-</style>
-
-<script>
-    //For autocomplete in textbox
-    $(document).ready(function () {
-        $("#txtParameter").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '/IssueReturnFile/AutocompleteParameter',
-                    type: 'GET',
-                    cache: false,
-                    data: request,
-                    dataType: 'json',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item,
-                                value: item + ""
+                        </td>
+                            <td>Available</td>
+                            <td> <button class="btn btn-theme btn-block" id="" type="submit">Issue</button></td>
+                            @*<td>
+                            @if (item.IsActive == 1)
+                            {
+                                <span class="badge badge-primary px-2 py-1">Active</span>
                             }
-                        }))
-                    }
-                });
-            },
-            minLength: 2,
-            //select: function (event, ui) {
-            //    alert('you have selected ' + ui.item.label + ' ID: ' + ui.item.value);
-            //    $('#txtSearch').val(ui.item.label);
-            //    return false;
-            //}
-        });
-    });
-</script>
+                            else
+                            {
+                                <span class="badge badge-danger px-2 py-1">Inactive</span>
+                            }
+                        </td>*@
+                            @*<td>
+                            <div class="action-btns">
+                                <a asp-action="View" asp-route-id="@item.User.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                                <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" class="remove"
+                                   onclick="return confirm('Are you sure, you want to delete this record?')">
+                                    <i class="ri-delete-bin-5-fill"></i>
+                                </a>
+                            </div>
+                        </td>*@
+                        </tr>
+                  
+                </tbody>
+            </table>
 
+        </div>
+
+
+    </div>
+
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/issuereturnfileindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuereturnfileindex.min.js" asp-append-version="true"></script>
+</environment>
