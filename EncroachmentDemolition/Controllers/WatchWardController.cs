@@ -144,6 +144,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 watchandward.ApprovedStatus = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                watchandward.ModifiedBy = SiteContext.UserId;
                                 result = await _watchandwardService.UpdateBeforeApproval(watchandward.Id, watchandward);  //Update Table details 
                                 if (result)
                                 {
@@ -534,7 +535,7 @@ namespace EncroachmentDemolition.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;

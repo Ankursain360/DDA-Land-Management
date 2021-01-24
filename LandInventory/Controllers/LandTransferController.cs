@@ -315,7 +315,7 @@ namespace LandInventory.Controllers
                         propertyregistration.DepartmentId = landtransfer.HandedOverDepartmentId??0;
                         propertyregistration.ZoneId = landtransfer.HandedOverZoneId;
                         propertyregistration.DivisionId = landtransfer.HandedOverDivisionId;
-
+                        propertyregistration.ModifiedBy = SiteContext.UserId;
                         result = await _propertyregistrationService.UpdatePropertyRegistrationForLandTransfer(landtransfer.PropertyRegistrationId, propertyregistration);
                     }
                 }

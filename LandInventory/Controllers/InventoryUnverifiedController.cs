@@ -23,7 +23,7 @@ using Core.Enum;
 
 namespace LandInventory.Controllers
 {
-    public class InventoryUnverifiedController :  BaseController
+    public class InventoryUnverifiedController : BaseController
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
@@ -56,8 +56,8 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
-            if(Msg !=null)
-            ViewBag.Message = Msg;
+            if (Msg != null)
+                ViewBag.Message = Msg;
             Propertyregistration propertyregistration = new Propertyregistration();
             await BindDropDown(propertyregistration);
             return View(propertyregistration);
@@ -400,44 +400,28 @@ namespace LandInventory.Controllers
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
         {
             Deletedproperty model = new Deletedproperty();
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-            if (userId == 13)
+            model.Reason = propertyregistration.Reason;
+            model.DeletedBy = SiteContext.UserId;
+            var result = await _propertyregistrationService.Delete(id);
+            var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+            if (result == true)
             {
-                model.Reason = propertyregistration.Reason;
-                var result = await _propertyregistrationService.Delete(id);
-                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
-                if (result == true)
-                {
-                    userId = 2;
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    Propertyregistration propertyregistration1 = new Propertyregistration();
-                    await BindDropDown(propertyregistration1);
-                    return RedirectToAction("Create", propertyregistration1);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    Propertyregistration propertyregistration1 = new Propertyregistration();
-                    await BindDropDown(propertyregistration1);
-                    return RedirectToAction("Create", propertyregistration1);
-                }
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 Propertyregistration propertyregistration1 = new Propertyregistration();
                 await BindDropDown(propertyregistration1);
                 return RedirectToAction("Create", propertyregistration1);
             }
-
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                Propertyregistration propertyregistration1 = new Propertyregistration();
+                await BindDropDown(propertyregistration1);
+                return RedirectToAction("Create", propertyregistration1);
+            }
 
         }
         [AuthorizeContext(ViewAction.Delete)]
