@@ -390,6 +390,17 @@ namespace DamagePayee.Controllers
                 x.RecieptDocumentPath
             }));
         }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            await BindDropDown(Data);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
+        }
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
@@ -732,5 +743,6 @@ namespace DamagePayee.Controllers
                 return View("Index", result1);
             }
         }
+        
     }
 }
