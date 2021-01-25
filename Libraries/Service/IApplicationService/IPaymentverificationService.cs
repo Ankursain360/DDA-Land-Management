@@ -19,6 +19,9 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Verify(int id,int userid);
        
         Task<Paymentverification> FetchSingleResult(int id);
-        Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto);
+        //Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto);
+        Task<List<PaymentTransactionReportListDataDto>> GetPagedPaymentTransactionReportData(PaymentTransactionReportSearchDto model);
+        Task<List<Paymentverification>> BindFileNoList();
+        Task<List<Locality>> BindLoclityList();
     }
 }

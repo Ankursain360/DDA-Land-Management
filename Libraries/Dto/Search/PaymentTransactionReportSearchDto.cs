@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Dto.Search
 {
-
     public class PaymentTransactionReportSearchDto : BaseSearchDto
     {
-        public int localityId { get; set; }
-        public DateTime fromDate { get; set; }
-        public DateTime toDate { get; set; }
+        public string FileNo { get; set; }
+        public int Locality { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
+
     }
 }
+
