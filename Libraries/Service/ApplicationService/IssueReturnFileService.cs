@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -26,5 +27,9 @@ namespace Service.ApplicationService
             List<Datastoragedetails> fileNoList = await _issueReturnFileRepository.GetFileNoList();
             return fileNoList;
         }
-   }
+        public async Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model)
+        {
+            return await _issueReturnFileRepository.GetPagedIssueReturnFile(model);
+        }
+    }
 }

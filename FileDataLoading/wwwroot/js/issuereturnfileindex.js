@@ -14,9 +14,10 @@ function GetFileDetails(pageNumber, pageSize, sortOrder) {
         $('#LoadView').html(response);
     });
 }
-$("#btnGenerate").click(function () {
+$("#btnFind").click(function () {
     GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
@@ -28,15 +29,15 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
+    GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
+    GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnReset").click(function () {
     $('#Id').val('0').trigger('change');
   
-    GetFileDetails(fileNo);
+    GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
@@ -45,22 +46,20 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber,
-        departmentid: parseInt($('#DepartmentId option:selected').val()),
-        reportType: parseInt($('#ReportType option:selected').val())
-
+        FileNo: parseInt($('#Id option:selected').val())
     }
     return model;
 }
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
+    GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetReport(currentPageNumber, currentPageSize, sortOrder);
+    GetFileDetails(currentPageNumber, currentPageSize, sortOrder);
     currentPageSize = pageSize;
 }
 

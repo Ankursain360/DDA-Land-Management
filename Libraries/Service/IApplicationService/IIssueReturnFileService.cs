@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -11,5 +13,6 @@ namespace Libraries.Service.IApplicationService
 
     {
         Task<List<Datastoragedetails>> GetFileNoList();
+        Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model);
     }
 }
