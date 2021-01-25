@@ -2,13 +2,13 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Issue/Return File" })
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Search</h3>
+        <h3 class="mb-3 d-flex">Find</h3>
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" 
                          asp-for="Id" asp-items="@(new SelectList(Model.FileNoList,"Id","FileNo"))">
-                        <option  value="0">--Select-- </option>
+                        <option  value="0">All </option>
                     </select>
                     <span asp-validation-for="FileNo" class="text-danger"></span>
                     <label class="floating-label">File No </label>
@@ -29,7 +29,7 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Find</button>
+                        <button class="btn btn-theme btn-block" id="btnFind" type="submit">Find</button>
                     </div>
                 </div>
             </div>
@@ -40,7 +40,7 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">Structure Name</option>
+                      
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -52,10 +52,10 @@
             </div>
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
+                @*<a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
-                </a>
+                </a>*@
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>
@@ -64,77 +64,7 @@
         </div>
 
         <div class="table-responsive ">
-            <div id="divStructureTable"></div>
-
-            <table class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-                    <tr>
-
-                        <th>File No.</th>
-                        <th>File Name</th>
-                        <th>File Particulars/Compactor Details</th>
-                        <th>Status</th>
-                        <th>Issue / Return</th>
-                    </tr>
-                </thead>
-                <tbody>
-                 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            @*<td>@item.Role.Name</td>*@
-                        <td>
-                            <label class="control-label lb-sm">Location Details</label>
-                            <div class="table-responsive ">
-                                <table class="table table-sm table-bordered mb-0 table-striped">
-                                    <thead class="text-nowrap">
-                                        <tr>
-                                            <th>Record Room No.</th>
-                                            <th>Al. No./Compactor No.</th>
-                                            <th>Row No</th>
-                                            <th>Col.No.</th>
-                                            <th>Bn No.</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                            <td>Available</td>
-                            <td> <button class="btn btn-theme btn-block" id="" type="submit">Issue</button></td>
-                            @*<td>
-                            @if (item.IsActive == 1)
-                            {
-                                <span class="badge badge-primary px-2 py-1">Active</span>
-                            }
-                            else
-                            {
-                                <span class="badge badge-danger px-2 py-1">Inactive</span>
-                            }
-                        </td>*@
-                            @*<td>
-                            <div class="action-btns">
-                                <a asp-action="View" asp-route-id="@item.User.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
-                                <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
-                                <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" class="remove"
-                                   onclick="return confirm('Are you sure, you want to delete this record?')">
-                                    <i class="ri-delete-bin-5-fill"></i>
-                                </a>
-                            </div>
-                        </td>*@
-                        </tr>
-                  
-                </tbody>
-            </table>
+            <div id="LoadView"></div>
 
         </div>
 

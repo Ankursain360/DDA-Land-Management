@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
 //using FileDataLoading.Models;
 
 namespace FileDataLoading.Controllers
@@ -26,12 +30,24 @@ namespace FileDataLoading.Controllers
             public async Task<IActionResult> Index()
             {
             Datastoragedetails model = new Datastoragedetails();
-           
             await BindDropDownView(model);
-           
-            //ViewBag.localdata = _context.TblMasterDesignation.ToList();
             return View(model);
             }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] IssueReturnFileSearchDto model)
+        {
+            var result = await _issueReturnFileService.GetPagedIssueReturnFile(model);
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+        }
         //[HttpPost]
         //public JsonResult GetAutocmplete(string Prefix)
         //{
