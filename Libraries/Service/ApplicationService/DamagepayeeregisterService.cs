@@ -220,7 +220,6 @@ namespace Service.ApplicationService
             Damagepayeeregister model = result.FirstOrDefault();
             model.ApprovedStatus = damagepayeeregister.ApprovedStatus;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
             _damagepayeeregisterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

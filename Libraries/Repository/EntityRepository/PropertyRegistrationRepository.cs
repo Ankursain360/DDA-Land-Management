@@ -18,13 +18,6 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-
-        public async Task<bool> CheckDeleteAuthority(int id)
-        {
-            var result = true;
-            return result;
-        }
-
         public async Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId)
         {
             var Iscreated = _dbContext.Propertyregistration.Where(x => x.CreatedBy == UserId).Count();

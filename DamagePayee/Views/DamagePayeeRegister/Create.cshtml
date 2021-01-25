@@ -7,11 +7,12 @@
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h3 class="mb-3 d-flex">Add Details</h3>
+        <input type="hidden" asp-for="ApprovedStatus" />
         <div id="DivOpenSubstitutionForm">
             <div id="DivFileInformation">
 
                 <h3 class="my-3 d-flex sub-heading">File Information</h3>
-                    <div class="row">
+                <div class="row">
                     <div class="col-md-6">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input asp-for="FileNo" type="text" placeholder="File No." class="floating-label-field floating-label-field--s3" />
@@ -51,16 +52,16 @@
                                 <tr id="">
                                     <td style="text-align:center;"><span class="sn">1</span></td>
                                     <td>
-                                        <input asp-for="payeeName" maxlength="45" required type="text"  class="floating-label-field floating-label-field--s3 Namecheck" />
+                                        <input asp-for="payeeName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
                                         <span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>
                                     </td>
                                     <td>
-                                        <input asp-for="payeeFatherName" maxlength="45" required type="text"  class="floating-label-field floating-label-field--s3" />
+                                        <input asp-for="payeeFatherName" maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
-                                        <select asp-for="Gender" required class="floating-label-field floating-label-field--s3" >
+                                        <select asp-for="Gender" required class="floating-label-field floating-label-field--s3">
                                             <option value="0">---Select---</option>
                                             <option value="1">Male</option>
                                             <option value="2">Female</option>
@@ -75,12 +76,12 @@
 
                                     </td>
                                     <td>
-                                        <input asp-for="MobileNo" maxlength="12" required type="text"  class="floating-label-field floating-label-field--s3 NoCheck" />
+                                        <input asp-for="MobileNo" maxlength="12" required type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
                                         <span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>
 
                                     </td>
                                     <td>
-                                        <input asp-for="EmailId" maxlength="30" required type="text"  class="floating-label-field floating-label-field--s3 EmailCheck" />
+                                        <input asp-for="EmailId" maxlength="30" required type="text" class="floating-label-field floating-label-field--s3 EmailCheck" />
                                         <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid msg1"></span>
 
                                     </td>
@@ -88,9 +89,33 @@
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input asp-for="AadharNo" type="text" maxlength="15" placeholder="Aadhar No." class=" floating-label-field--s3" />
                                             <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
-                                           
+
                                             <input type="hidden" asp-for="AadharNoFilePath" />
-                                            <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                            <div class="d-flex align-items-center">
+
+                                                <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                                    <input type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                                    <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
+                                                </div>
+                                                <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                                    <figure class="m-0 img-thumbnail">
+                                                        <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                        <figcaption class="m-0">
+                                                            <a href="#" title="Update this file" class="bg-primary">
+                                                                <label for="fileImg">
+                                                                    <i class="ri-edit-2-line"></i>
+                                                                </label>
+                                                            </a>
+                                                            <a href="#" title="Download this file" class="bg-success">
+                                                                <label for="">
+                                                                    <i class="ri-download-2-line"></i>
+                                                                </label>
+                                                            </a>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                            @*<input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />*@
                                             <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
 
                                         </div>
@@ -99,7 +124,7 @@
                                         <div class="floating-label-wrap mb-3 mb-md-0">
                                             <input asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
                                             <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
-                                           
+
                                             <input type="hidden" asp-for="PanNoFilePath" />
                                             <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
@@ -513,7 +538,7 @@
                     </div>
                     <div class="form-group col-md-2">
                         <div class="form-check theme">
-                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo"  value="no">
+                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo" value="no">
                             <label class="form-check-label" for="radio">
                                 No
                             </label>
@@ -521,13 +546,13 @@
                     </div>
                 </div>
                 @*<div class="row mt-3">
-                    <div class="form-group col-md-12">
-                        <div class="form-group" id="DivForPayeeNo" style="display:none;">
-                            <label class="control-label lb-sm">Apply for mutation/ substitution</label>
-                            @Html.ActionLink("Open Substitution Form", "Create", "SubstitutionMutationDetails", null, new { })
+                        <div class="form-group col-md-12">
+                            <div class="form-group" id="DivForPayeeNo" style="display:none;">
+                                <label class="control-label lb-sm">Apply for mutation/ substitution</label>
+                                @Html.ActionLink("Open Substitution Form", "Create", "SubstitutionMutationDetails", null, new { })
+                            </div>
                         </div>
-                    </div>
-                </div>*@
+                    </div>*@
             </div>
         </div>
         <div id="DivDamagePropertyDocs">
@@ -700,3 +725,61 @@
 <environment exclude="Development">
     <script src="~/js/damagepayeeregistercreate.min.js" asp-append-version="true"></script>
 </environment>
+
+
+<script>
+   
+
+
+
+
+    $("#fileImg").change(function () {
+        var nme = document.getElementById("fileImg");
+        if (nme.value.length < 1) {
+            //                alert('Must Select any of your file for upload!');
+        } else {
+            $('#ImgPrivew').show();
+            getFileName(event);
+        }
+    });
+
+    function getFileName(event) {
+        if (!event || !event.target || !event.target.files || event.target.files.length === 0) {
+            return;
+        }
+        var name = event.target.files[0].name;
+        var lastDot = name.lastIndexOf('.');
+        var fileName = name.substring(0, lastDot);
+        var ext = name.substring(lastDot + 1);
+        //            alert(ext);
+        if (ext == "png") {
+            //                alert('png');
+            $('#uploadedfile').attr("src", '../images/png.png');
+        } else if (ext == "zip") {
+            //                alert('zip');
+            $('#uploadedfile').attr("src", '../images/zip.png');
+        } else if (ext == "jpg") {
+            //                alert('jpg');
+            $('#uploadedfile').attr("src", '../images/jpg.png');
+        } else if (ext == "jpeg") {
+            //                alert('jpg');
+            $('#uploadedfile').attr("src", '../images/jpg.png');
+        } else if (ext == "docx") {
+            //                alert('doc');
+            $('#uploadedfile').attr("src", '../images/doc.png');
+        } else if (ext == "ppt") {
+            //                alert('ppt');
+            $('#uploadedfile').attr("src", '../images/ppt.png');
+        } else if (ext == "xls") {
+            //                alert('xls');
+            $('#uploadedfile').attr("src", '../images/xls.png');
+        } else if (ext == "pdf") {
+            //                alert('pdf');
+            $('#uploadedfile').attr("src", '../images/pdf.png');
+        } else {
+            //                alert('file');
+            $('#uploadedfile').attr("src", '../images/file.png');
+        }
+    }
+
+</script>

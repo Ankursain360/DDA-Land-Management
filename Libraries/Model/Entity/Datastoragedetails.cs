@@ -9,8 +9,13 @@ namespace Libraries.Model.Entity
 {
     public class Datastoragedetails : AuditableEntity<int>
     {
+        public Datastoragedetails()
+        {
+            Issuereturnfile = new HashSet<Issuereturnfile>();
+        }
 
         public int IsFileDocument { get; set; }
+        [Required(ErrorMessage = "File No is mandatory")]
         public string FileNo { get; set; }
         public string Name { get; set; }
         public int? IsPartOfMainFile { get; set; }
@@ -99,7 +104,12 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<int> YearForPartFile { get; set; }
-     
+
+        public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
+
+        [NotMapped]
+        public List<Datastoragedetails> FileNoList { get; set; }
+
     }
 }
 
