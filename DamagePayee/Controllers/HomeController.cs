@@ -46,5 +46,14 @@ namespace DamagePayee.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        public IActionResult UnAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult ExceptionLog()
+        {
+            return View();
+        }
     }
 }
