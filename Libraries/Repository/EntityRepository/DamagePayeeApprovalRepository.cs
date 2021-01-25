@@ -25,7 +25,9 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Damagepayeeregister
                                         .Include(x => x.Locality)
                                         .Include(x => x.District)
-                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId)
+                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
+                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                        )
                                         .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -34,7 +36,9 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Damagepayeeregister
                                 .Include(x => x.Locality)
                                 .Include(x => x.District)
-                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId)
+                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
+                                && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                )
                                 .OrderBy(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? s.District.Name : model.SortBy.ToUpper() == "LOCALITY" ? s.Locality.Name : s.FileNo)
                                 )
@@ -46,7 +50,9 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Damagepayeeregister
                                 .Include(x => x.Locality)
                                 .Include(x => x.District)
-                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId)
+                                .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
+                                && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
+                                )
                                 .OrderByDescending(s =>
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? s.District.Name : model.SortBy.ToUpper() == "LOCALITY" ? s.Locality.Name : s.FileNo)
                                 )

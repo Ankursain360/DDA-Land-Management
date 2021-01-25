@@ -16,5 +16,6 @@ namespace Libraries.Service.IApplicationService
         int GetPreviousApprovalId(int proccessid, int serviceid);
         Task<bool> UpdatePreviousApprovalProccess(int previousApprovalId, Approvalproccess approvalproccess, int userId);
         Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
+        int CheckIsApprovalStart(int proccessid, int serviceid);
     }
 }
