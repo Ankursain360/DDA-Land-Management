@@ -235,7 +235,7 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         if (result)
                         {
-                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
                             if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
                             {
                                 #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
@@ -417,7 +417,7 @@ namespace DamagePayeePublicInterface.Controllers
                         }
                         if (result)
                         {
-                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregistertemp.Id);
                             if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
                             {
                                 #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
