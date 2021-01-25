@@ -40,5 +40,14 @@ namespace Libraries.Repository.EntityRepository
 
             return File;
         }
+        public int CheckIsApprovalStart(int proccessid, int serviceid)
+        {
+            var File = (from f in _dbContext.Approvalproccess
+                        where f.ProccessID == proccessid && f.ServiceId == serviceid
+                        orderby f.Id descending
+                        select f.Id).First();
+
+            return File;
+        }
     }
 }

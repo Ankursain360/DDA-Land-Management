@@ -286,7 +286,8 @@ namespace DamagePayee.Controllers
 
                     if(result)
                     {
-                        if(damagepayeeregister.ApprovedStatus != 1)
+                        var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                        if (isApprovalStart ==0 &&  damagepayeeregister.ApprovedStatus != 1)
                         {
                             #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
                             var DataFlow = await dataAsync();

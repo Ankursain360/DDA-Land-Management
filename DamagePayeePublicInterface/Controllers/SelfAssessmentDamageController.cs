@@ -18,10 +18,16 @@ namespace DamagePayeePublicInterface.Controllers
     {
         private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         public IConfiguration _configuration;
-        public SelfAssessmentDamageController(ISelfAssessmentDamageService selfAssessmentDamageService, IConfiguration configuration)
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        public SelfAssessmentDamageController(ISelfAssessmentDamageService selfAssessmentDamageService,
+            IConfiguration configuration, IApprovalProccessService approvalproccessService,
+            IWorkflowTemplateService workflowtemplateService)
         {
             _configuration = configuration;
             _selfAssessmentDamageService = selfAssessmentDamageService;
+            _approvalproccessService = approvalproccessService;
+            _workflowtemplateService = workflowtemplateService;
         }
         public IActionResult Index()
         {
@@ -227,8 +233,44 @@ namespace DamagePayeePublicInterface.Controllers
 
                             }
                         }
+                        if (result)
+                        {
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                            if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
+                            {
+                                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                                var DataFlow = await dataAsync();
+                                for (int i = 0; i < DataFlow.Count; i++)
+                                {
+                                    if (!DataFlow[i].parameterSkip)
+                                    {
+                                        damagepayeeregistertemp.ApprovedStatus = 0;
+                                        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
+                                        if (result)
+                                        {
+                                            Approvalproccess approvalproccess = new Approvalproccess();
+                                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
+                                            approvalproccess.SendFrom = SiteContext.UserId;
+                                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                            approvalproccess.PendingStatus = 1;   //1
+                                            approvalproccess.Status = null;   //1
+                                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                        }
 
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                                        break;
+                                    }
+                                }
+
+                                #endregion
+                            }
+
+                        }
+                        ViewBag.Message = Alert.Show(Messages.AddAndApprovalRecordSuccess, "", AlertType.Success);
                     }
                     else
                     {
@@ -373,7 +415,43 @@ namespace DamagePayeePublicInterface.Controllers
 
                             }
                         }
+                        if (result)
+                        {
+                            var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                            if (isApprovalStart == 0 && damagepayeeregistertemp.ApprovedStatus != 1)
+                            {
+                                #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                                var DataFlow = await dataAsync();
+                                for (int i = 0; i < DataFlow.Count; i++)
+                                {
+                                    if (!DataFlow[i].parameterSkip)
+                                    {
+                                        damagepayeeregistertemp.ApprovedStatus = 0;
+                                        damagepayeeregistertemp.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                        damagepayeeregistertemp.ModifiedBy = SiteContext.UserId;
+                                        result = await _selfAssessmentDamageService.UpdateBeforeApproval(damagepayeeregistertemp.Id, damagepayeeregistertemp);  //Update Table details 
+                                        if (result)
+                                        {
+                                            Approvalproccess approvalproccess = new Approvalproccess();
+                                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                            approvalproccess.ServiceId = damagepayeeregistertemp.Id;
+                                            approvalproccess.SendFrom = SiteContext.UserId;
+                                            approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                            approvalproccess.PendingStatus = 1;   //1
+                                            approvalproccess.Status = null;   //1
+                                            approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                        }
 
+                                        break;
+                                    }
+                                }
+
+                                #endregion
+                            }
+
+                        }
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
                     }
                     else
@@ -382,6 +460,8 @@ namespace DamagePayeePublicInterface.Controllers
                         return View(damagepayeeregistertemp);
                     }
                 }
+
+               
 
                 var LocalityCode = _selfAssessmentDamageService.GetLocalityName(damagepayeeregistertemp.LocalityId);
                 var paymentLink = "https://online.dda.org.in/onlinepmt/Forms/landspmt.aspx?FileNo=" + damagepayeeregistertemp.FileNo + "&Locality=" + LocalityCode.Trim() + "&Amount=" + damagepayeeregistertemp.TotalValueWithInterest + "&Interest=" + damagepayeeregistertemp.InterestDueAmountCompund;
@@ -571,5 +651,15 @@ namespace DamagePayeePublicInterface.Controllers
             var Data = await _selfAssessmentDamageService.GetPaymentHistoryTemp(id);
             return PartialView("_PaymentHistory", Data);
         }
+
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value));
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
     }
 }

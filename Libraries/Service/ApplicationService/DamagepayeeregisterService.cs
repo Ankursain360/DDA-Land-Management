@@ -219,6 +219,7 @@ namespace Service.ApplicationService
             var result = await _damagepayeeregisterRepository.FindBy(a => a.Id == id);
             Damagepayeeregister model = result.FirstOrDefault();
             model.ApprovedStatus = damagepayeeregister.ApprovedStatus;
+            model.PendingAt = damagepayeeregister.PendingAt;
             model.ModifiedDate = DateTime.Now;
             _damagepayeeregisterRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
