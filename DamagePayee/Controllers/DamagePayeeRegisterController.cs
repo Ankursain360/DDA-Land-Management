@@ -713,5 +713,23 @@ namespace DamagePayee.Controllers
         }
         #endregion
 
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _damagepayeeregisterService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+        }
     }
 }

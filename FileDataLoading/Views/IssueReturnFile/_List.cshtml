@@ -14,65 +14,101 @@
     <tbody>
         @foreach (var item in Model.Results)
         {
-        <tr>
-            <td>@item.FileNo</td>
-            <td>@item.Name</td>
-            <td>
-                <label class="control-label lb-sm">Location Details</label>
-                <div class="table-responsive ">
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Record Room No.</th>
-                                <th>Al. No./Compactor No.</th>
-                                <th>Row No</th>
-                                <th>Col.No.</th>
-                                <th>Bn No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@item.RecordRoomNo</td>
-                                <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
-                                <td>@(item.Row == null?"": item.Row.RowNo)</td>
-                                <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
-                                <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
-                                @*<td>@item.Almirah.AlmirahNo</td>*@
-                                @*<td>@item.Row.RowNo</td>
-                                <td>@item.Column.ColumnNo</td>
-                                <td>@item.Bundle.BundleNo</td>*@
-                            </tr>
+            <tr>
+                <td>@item.FileNo</td>
+                <td>@item.Name</td>
+                <td>
+                    <label class="control-label lb-sm">Location Details</label>
+                    <div class="table-responsive ">
+                        <table class="table table-sm table-bordered mb-0 table-striped">
+                            <thead class="text-nowrap">
+                                <tr>
+                                    <th>Record Room No.</th>
+                                    <th>Al. No./Compactor No.</th>
+                                    <th>Row No</th>
+                                    <th>Col.No.</th>
+                                    <th>Bn No.</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@item.RecordRoomNo</td>
+                                    <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
+                                    <td>@(item.Row == null?"": item.Row.RowNo)</td>
+                                    <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
+                                    <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
 
-                        </tbody>
-                    </table>
-                </div>
-            </td>
-            @*<td>@(item.District==null?"": item.District.Name)</td>*@
-           
-            <td>
-                @if (item.IsActive == 1)
-                {
-                    <span class="badge badge-primary px-2 py-1">Active</span>
-                }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Inactive</span>
-                }
-            </td>
-            @*<td>Available</td>*@
-            <td> <button class="btn btn-theme btn-block" id="" type="submit">Issue</button></td>
-            @*<td>
-            <div class="action-btns">
-                <a asp-action="View" asp-route-id="@item.User.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
-                <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" class="remove"
-                   onclick="return confirm('Are you sure, you want to delete this record?')">
-                    <i class="ri-delete-bin-5-fill"></i>
-                </a>
-            </div>
-        </td>*@
-        </tr>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+                @*<td>@(item.District==null?"": item.District.Name)</td>*@
+
+                <td>
+                    @if (item.IsActive == 1)
+                    {
+                        <span class="badge badge-primary px-2 py-1">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger px-2 py-1">Inactive</span>
+                    }
+                </td>
+                @*<td>Available</td>*@
+                <td>
+                    <a onclick="showInPopup('@Url.Action("IssueFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')" data-toggle="modal" data-target="#form-modal" asp-route-id="@item.Id" class="btn btn-theme btn-block" style="color:white;">Issue</a>
+                    @*<a asp-action="IssueFileData" asp-controller="IssueReturnFile" >Issue</a>*@
+                </td>
+
+                @*<td> <button class="btn btn-theme btn-block" id="" type="submit">Issue</button></td>*@
+                @*<td>
+                        <div class="action-btns">
+                            <a asp-action="View" asp-route-id="@item.User.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                            <a asp-action="Edit" asp-route-id="@item.User.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                            <a asp-action="Delete" asp-route-id="@item.User.Id" title="delete" class="remove"
+                               onclick="return confirm('Are you sure, you want to delete this record?')">
+                                <i class="ri-delete-bin-5-fill"></i>
+                            </a>
+                        </div>
+                    </td>*@
+            </tr>
         }
     </tbody>
 </table>
+
 @await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+
+
+<div class="modal" tabindex="-1" role="dialog" id="form-modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    showInPopup = (url, title) => {
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: function (res) {
+                $('#form-modal .modal-body').html(res);
+                $('#form-modal .modal-title').html(title);
+                $('#form-modal').modal('show');
+            }
+        })
+    }
+
+</script>
