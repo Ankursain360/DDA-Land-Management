@@ -1,35 +1,52 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 10;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetDamagePayeeRegister(currentPageNumber, currentPageSize);
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetDamagePayeeRegister(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDamagePayeeRegister(currentPageNumber, currentPageSize, sortOrder);
+});
+
+function GetDamagePayeeRegister(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/DamagePayeeRegister/List`, 'html', param, function (response) {
         $('#divDamagePayeeRegisterTable').html("");
         $('#divDamagePayeeRegisterTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: "damagepayeeregister",
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDamagePayeeRegister(pageNo, currentPageSize);
+    GetDamagePayeeRegister(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDamagePayeeRegister(currentPageNumber, pageSize);
-    currentPageSize = parseInt(pageSize);;
+    GetDamagePayeeRegister(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    currentPageSize = pageSize;
 }
-
