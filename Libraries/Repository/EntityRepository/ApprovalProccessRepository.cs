@@ -45,7 +45,7 @@ namespace Libraries.Repository.EntityRepository
             var File = (from f in _dbContext.Approvalproccess
                         where f.ProccessID == proccessid && f.ServiceId == serviceid
                         orderby f.Id descending
-                        select f.Id).First();
+                        select f.Id).Count();
 
             return File;
         }

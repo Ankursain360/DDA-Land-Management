@@ -217,3 +217,13 @@ function GetSearchParam() {
     debugger
     return model;
 }
+$("#btnReset").click(function () {
+    $('#PropertyTypeId').val('').trigger('change');
+    $('#EncroachmentDate').val('');
+    $('#StartDate').val('');
+    $('#EndDate').val('');
+    $('#LocalityId').val('').trigger('change');
+    $('#Area').val('');
+
+    $('#DivMainContentForm').html("");
+});

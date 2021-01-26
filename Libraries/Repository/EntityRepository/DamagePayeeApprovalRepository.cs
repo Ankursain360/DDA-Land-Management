@@ -54,7 +54,7 @@ namespace Libraries.Repository.EntityRepository
                                 && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                 )
                                 .OrderByDescending(s =>
-                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? s.District.Name : model.SortBy.ToUpper() == "LOCALITY" ? s.Locality.Name : s.FileNo)
+                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo : model.SortBy.ToUpper() == "DISTRICT" ? (s.District == null ? null : s.District.Name) : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null) : s.FileNo)
                                 )
                                 .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
             }
