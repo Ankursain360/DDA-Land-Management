@@ -12,7 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using SiteMaster.Filters;
+using Core.Enum;
 namespace SiteMaster.Controllers
 {
     public class ApprovalstatusController : BaseController
@@ -22,6 +23,8 @@ namespace SiteMaster.Controllers
        {
             _approvalstatusService = approvalstatusService;
        }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -32,6 +35,9 @@ namespace SiteMaster.Controllers
            var result = await _approvalstatusService.GetPagedApprovalStatus(model);
             return PartialView("_List", result);
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Approvalstatus model = new Approvalstatus();
@@ -40,6 +46,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Approvalstatus approvalstatus)
         {
             try
@@ -72,6 +79,8 @@ namespace SiteMaster.Controllers
                 return View(approvalstatus);
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _approvalstatusService.FetchSingleResult(id);
@@ -86,6 +95,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Approvalstatus approvalstatus)
         {        
             if (ModelState.IsValid)
@@ -113,6 +123,10 @@ namespace SiteMaster.Controllers
             }
             return View(approvalstatus);
         }
+
+
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _approvalstatusService.FetchSingleResult(id);           
@@ -141,6 +155,8 @@ namespace SiteMaster.Controllers
         //    return View(form);
         //}
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  
         {
 

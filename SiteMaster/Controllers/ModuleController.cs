@@ -11,7 +11,6 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
-
 using SiteMaster.Filters;
 using Core.Enum;
 
@@ -131,6 +130,8 @@ namespace SiteMaster.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Delete)]
+
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
             
@@ -166,6 +167,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _moduleService.FetchSingleResult(id);

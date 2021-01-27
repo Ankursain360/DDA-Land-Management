@@ -20,6 +20,8 @@ namespace SiteMaster.Controllers
         {
             _courtService = courtService;
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
@@ -31,6 +33,9 @@ namespace SiteMaster.Controllers
             var result = await _courtService.GetPagedCourt(model);
             return PartialView("_List", result);
         }
+
+
+
         [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
@@ -125,7 +130,7 @@ namespace SiteMaster.Controllers
             return View(court);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _courtService.FetchSingleResult(id);

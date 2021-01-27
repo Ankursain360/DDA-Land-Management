@@ -8,7 +8,8 @@ using Libraries.Service.IApplicationService;
 using Notification;
 using Service.IApplicationService;
 using Dto.Master;
-
+using SiteMaster.Filters;
+using Core.Enum;
 namespace SiteMaster.Controllers
 {
     public class PermissionsController : BaseController
@@ -26,6 +27,8 @@ namespace SiteMaster.Controllers
             _moduleService = moduleService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             List<Module> lstModule = await _moduleService.GetActiveModule();
@@ -34,6 +37,7 @@ namespace SiteMaster.Controllers
             ViewBag.Roles = lstRole;
             return View();
         }
+
 
         public async Task<JsonResult> AddUpdatePermission([FromBody] List<MenuActionRoleMapDto> model) 
         {

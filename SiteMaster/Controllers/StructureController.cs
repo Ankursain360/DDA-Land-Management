@@ -142,7 +142,6 @@ namespace SiteMaster.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _structureService.Delete(id);
@@ -160,7 +159,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _structureService.FetchSingleResult(id);

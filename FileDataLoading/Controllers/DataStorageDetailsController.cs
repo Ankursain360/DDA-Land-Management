@@ -28,12 +28,14 @@ namespace FileDataLoading.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+
+        
         public IActionResult Index()
         {
             return View();
         }
-        [AuthorizeContext(ViewAction.Add)]
+
+
         public async Task<IActionResult> Create()
         {
             Datastoragedetails datastoragedetails = new Datastoragedetails();
@@ -50,7 +52,7 @@ namespace FileDataLoading.Controllers
 
 
 
-        [HttpPost]
+    
         public async Task<PartialViewResult> List([FromBody] DataStorgaeDetailsSearchDto model)
         {
             var result = await _datastorageService.GetPagedDataStorageDetails(model);
@@ -59,8 +61,7 @@ namespace FileDataLoading.Controllers
 
 
         [HttpPost]
-
-        [AuthorizeContext(ViewAction.Add)]
+ 
         public async Task<IActionResult> Create(Datastoragedetails dataStorageDetails)
         {
             try
@@ -164,6 +165,7 @@ namespace FileDataLoading.Controllers
             return View(datastoragedetails);
         }
 
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
@@ -189,6 +191,10 @@ namespace FileDataLoading.Controllers
             }
             return RedirectToAction("Index", "DataStorageDetailsDetails");
         }
+
+
+
+
 
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Pankaj

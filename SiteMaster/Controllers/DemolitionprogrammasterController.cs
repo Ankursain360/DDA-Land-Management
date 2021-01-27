@@ -30,6 +30,9 @@ namespace SiteMaster.Controllers
             _demolitionprogrammasterService = demolitionprogrammasterService;
             _configuration = configuration;
         }
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
@@ -158,7 +161,7 @@ namespace SiteMaster.Controllers
             var list = await _demolitionprogrammasterService.GetDemolitionprogrammaster();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _demolitionprogrammasterService.FetchSingleResult(id);

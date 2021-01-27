@@ -28,6 +28,9 @@ namespace SiteMaster.Controllers
         {
             _divisionService = divisionService;
         }
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public  IActionResult Index()
         {
@@ -185,6 +188,9 @@ namespace SiteMaster.Controllers
             var list = await _divisionService.GetAllDivision();
             return View("Index", list);
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _divisionService.FetchSingleResult(id);

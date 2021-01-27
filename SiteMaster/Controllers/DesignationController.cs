@@ -8,6 +8,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -20,6 +22,8 @@ namespace SiteMaster.Controllers
         {
             _designationService = designationService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -31,6 +35,8 @@ namespace SiteMaster.Controllers
             var result = await _designationService.GetPagedDesignation(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -38,6 +44,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Designation designation)
         {
             try
@@ -70,6 +77,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _designationService.FetchSingleResult(id);
@@ -82,6 +91,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Designation designation)
         {
             if (ModelState.IsValid)
@@ -125,7 +135,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
             if (id == 0)
@@ -162,6 +172,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _designationService.FetchSingleResult(id);
