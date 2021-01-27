@@ -126,7 +126,7 @@ namespace SiteMaster.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _approvalstatusService.FetchSingleResult(id);           
