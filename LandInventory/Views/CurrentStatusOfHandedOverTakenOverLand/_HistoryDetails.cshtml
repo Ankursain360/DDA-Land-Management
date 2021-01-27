@@ -1,6 +1,4 @@
 ﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Currentstatusoflandhistory>
-
-@*@model IEnumerable<Libraries.Model.Entity.Currentstatusoflandhistory>*@
 @{int rowNo = 0;}
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
@@ -44,7 +42,7 @@
             <td>@item.LandTransfer.PropertyRegistration.Department.Name</td>
             <td>@item.LandTransfer.PropertyRegistration.Zone.Name</td>
             <td>@item.LandTransfer.PropertyRegistration.Division.Name</td>
-            <td>@(item.LandTransfer.PropertyRegistration.Locality.Name == null ? ""  : item.LandTransfer.PropertyRegistration.Locality.Name)</td>
+            <td>@(item.LandTransfer.PropertyRegistration.Locality == null ? ""  : item.LandTransfer.PropertyRegistration.Locality.Name)</td>
 
             @*<td>@item.LandTransfer.PropertyRegistration.Locality.Name</td>*@
             <td>@item.LandTransfer.PropertyRegistration.KhasraNo</td>

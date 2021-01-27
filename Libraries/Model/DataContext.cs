@@ -169,7 +169,7 @@ namespace Libraries.Model
         public virtual DbSet<Ressubencroacherstype> Ressubencroacherstype { get; set; }
         public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
         public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
-
+        public virtual DbSet<Branch> Branch { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -309,7 +309,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
-
+            modelBuilder.ApplyConfiguration(new BranchConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

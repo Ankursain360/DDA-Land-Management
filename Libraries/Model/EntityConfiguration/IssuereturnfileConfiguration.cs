@@ -14,8 +14,17 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("issuereturnfile", "lms");
 
+            builder.HasIndex(e => e.BranchId)
+                .HasName("fk_filebranch_idx");
+
             builder.HasIndex(e => e.DataStorageDetailsId)
                 .HasName("fk_datastoragedetails_idx");
+
+            builder.HasIndex(e => e.DepartmentId)
+                .HasName("fk_filedepartment_idx");
+
+            builder.HasIndex(e => e.DesignationId)
+                .HasName("Fk_filedesignation_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -41,11 +50,26 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
 
+            builder.HasOne(d => d.Branch)
+                .WithMany(p => p.Issuereturnfile)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("fk_filebranch");
+
             builder.HasOne(d => d.DataStorageDetails)
                 .WithMany(p => p.Issuereturnfile)
                 .HasForeignKey(d => d.DataStorageDetailsId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_datastoragedetails");
+
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Issuereturnfile)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("fk_filedepartment");
+
+            builder.HasOne(d => d.Designation)
+                .WithMany(p => p.Issuereturnfile)
+                .HasForeignKey(d => d.DesignationId)
+                .HasConstraintName("Fk_filedesignation");
 
         }
     }

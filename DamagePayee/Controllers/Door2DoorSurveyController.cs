@@ -21,15 +21,15 @@ namespace DamagePayee.Controllers
 
         private readonly IDoortodoorsurveyService _doortodoorsurveyService;
         public IConfiguration _configuration;
-        string targetPhotoPathLayout = string.Empty;
-        string targetReportfilePathLayout = string.Empty;
+        string documentPhotoPathLayout = string.Empty;
+        string propertyPhotoPathLayout = string.Empty;
 
         public Door2DoorSurveyController(IDoortodoorsurveyService doortodoorsurveyService, IConfiguration configuration)
         {
             _doortodoorsurveyService = doortodoorsurveyService;
             _configuration = configuration;
         }
-        [AuthorizeContext(ViewAction.View)]
+        //[AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -51,7 +51,7 @@ namespace DamagePayee.Controllers
             }
         }
 
-        [AuthorizeContext(ViewAction.Add)]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
@@ -62,26 +62,29 @@ namespace DamagePayee.Controllers
 
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        //[ValidateAntiForgeryToken]
+        //[AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Doortodoorsurvey doortodoorsurvey)
         {
             try
             {
                 doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+                documentPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
+                propertyPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:PropertyFilePath").Value.ToString();
+
 
                 if (ModelState.IsValid)
 
                 {
-                     targetPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
+                   
                     FileHelper file = new FileHelper();
-                    if (doortodoorsurvey.Photo != null)
+                    if (doortodoorsurvey.DocumentPhoto != null)
                     {
-                        doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(targetPhotoPathLayout, doortodoorsurvey.Photo);
+                        doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto);
                     }
-                    if (doortodoorsurvey.Photo != null)
+                    if (doortodoorsurvey.PropertyPhoto != null)
                     {
-                        doortodoorsurvey.PropertyFilePath = file.SaveFile(targetPhotoPathLayout, doortodoorsurvey.Photo);
+                        doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
                     }
 
 
@@ -122,7 +125,7 @@ namespace DamagePayee.Controllers
                 else
                 {
                     return View(doortodoorsurvey);
-                }
+               }
             }
             catch (Exception ex)
             {
@@ -130,10 +133,6 @@ namespace DamagePayee.Controllers
                 return View(doortodoorsurvey);
             }
         }
-
-
-
-
 
 
         public async Task<JsonResult> GetDetailsFamily(int? Id)
@@ -152,14 +151,7 @@ namespace DamagePayee.Controllers
 
 
 
-
-
-
-
-
-
-
-        [AuthorizeContext(ViewAction.Edit)]
+      //  [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
@@ -173,12 +165,28 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Edit)]
+       // [ValidateAntiForgeryToken]
+       // [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Doortodoorsurvey doortodoorsurvey)
         {
+            doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
+            documentPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:DocumentFilePath").Value.ToString();
+            propertyPhotoPathLayout = _configuration.GetSection("FilePaths:D2dSurveyFiles:PropertyFilePath").Value.ToString();
+
             if (ModelState.IsValid)
             {
+                FileHelper file = new FileHelper();
+                if (doortodoorsurvey.DocumentPhoto != null)
+                {
+                    doortodoorsurvey.OccupantIdentityPrrofFilePath = file.SaveFile(documentPhotoPathLayout, doortodoorsurvey.DocumentPhoto);
+                }
+                if (doortodoorsurvey.PropertyPhoto != null)
+                {
+                    doortodoorsurvey.PropertyFilePath = file.SaveFile(propertyPhotoPathLayout, doortodoorsurvey.PropertyPhoto);
+                }
+
+
+
                 try
                 {
                     var result = await _doortodoorsurveyService.Update(id, doortodoorsurvey);
@@ -202,10 +210,6 @@ namespace DamagePayee.Controllers
                     {
                         result = await _doortodoorsurveyService.SaveFamilyDetails(item);
                     }
-
-
-
-
 
                     if (result == true)
                     {
@@ -263,7 +267,6 @@ namespace DamagePayee.Controllers
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
             Data.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();
 
-
             if (Data == null)
             {
                 return NotFound();
@@ -272,6 +275,51 @@ namespace DamagePayee.Controllers
         }
 
 
+        public async Task<FileResult> ViewLetter(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.OccupantIdentityPrrofFilePath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.OccupantIdentityPrrofFilePath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+
+            }
+        }
+
+
+
+        public async Task<FileResult> ViewLetter1(int Id)
+        {
+            try
+            {
+                FileHelper file = new FileHelper();
+                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.PropertyFilePath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+            }
+            catch (Exception ex)
+            {
+
+                FileHelper file = new FileHelper();
+                var Data = await _doortodoorsurveyService.FetchSingleResult(Id);
+                string targetPhotoPathLayout = Data.PropertyFilePath;
+                byte[] FileBytes = System.IO.File.ReadAllBytes(targetPhotoPathLayout);
+                return File(FileBytes, file.GetContentType(targetPhotoPathLayout));
+
+            }
+        }
 
 
     }

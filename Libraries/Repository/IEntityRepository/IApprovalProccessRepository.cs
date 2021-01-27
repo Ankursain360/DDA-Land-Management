@@ -11,5 +11,6 @@ namespace Libraries.Repository.IEntityRepository
     {
         int GetPreviousApprovalId(int proccessid, int serviceid);
         Task<List<Approvalproccess>> GetHistoryDetails(int proccessid, int id);
+        int CheckIsApprovalStart(int proccessid, int serviceid);
     }
 }

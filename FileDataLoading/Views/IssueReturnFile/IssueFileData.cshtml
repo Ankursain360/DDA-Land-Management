@@ -1,191 +1,159 @@
-﻿
+﻿@model Libraries.Model.Entity.Issuereturnfile
+@await Component.InvokeAsync("PageHeader", new { pageName = "Issue File" })
+
 @{
     ViewData["Title"] = "IssueFileData";
     Layout = null;
 }
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+<div class="pt-3">
 
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">File Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
+                    <input asp-for="DataStorageDetails.FileNo" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.FileNo" class="text-danger"></span>
+                    <label class="floating-label">File No   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
 
-@*<div class="row">
-        <div class="col-sm-12">
-            <div class="myapp-hed">
-                <div class="col-md-12">
-                    <h6 class="pull-left" style="color:white;margin-top:5px;">Issue File</h6>
-                    <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                    <input asp-for="DataStorageDetails.Name" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.Name" class="text-danger"></span>
+                    <label class="floating-label">File Name   </label>
+                </div>
+            </div>
+
+        </div>
+
+        <h3 class="mb-3 d-flex sub-heading pt-3 ">Location Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DataStorageDetails.RecordRoomNo" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.RecordRoomNo" class="text-danger"></span>
+                    <label class="floating-label">Room No   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DataStorageDetails.AlmirahId" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.AlmirahId" class="text-danger"></span>
+                    <label class="floating-label">Almirah No    </label>
                 </div>
             </div>
         </div>
-    </div>
-    <br />*@
-
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Issue File</h6>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DataStorageDetails.RowId" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.RowId" class="text-danger"></span>
+                    <label class="floating-label">Row No   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DataStorageDetails.ColumnId" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.ColumnId" class="text-danger"></span>
+                    <label class="floating-label">Column No    </label>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="container-fluid" id="MainContentForm">
-                    <div class="panel">
-                        <div class="panel-heading  myapp-hed1">
-                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">File Details</h6>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">File No.</label>
-                                    <label class="control-label lb-sm" text="F1"></label>
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">File Name</label>
-                                    <label class="control-label lb-sm" text="Online"></label>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="DataStorageDetails.BundleId" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <span asp-validation-for="DataStorageDetails.BundleId" class="text-danger"></span>
+                    <label class="floating-label">Bundle No   </label>
                 </div>
-
-                <div class="container-fluid" id="MainContentForm">
-                    <div class="panel">
-                        <div class="panel-heading  myapp-hed1">
-                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Location(Village)</h6>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Room No.</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Almirah No/Compactor</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Row No.</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Column No.</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Bundle No.</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="container-fluid" id="MainContentForm">
-                    <div class="panel">
-                        <div class="panel-heading  myapp-hed1">
-                            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Issuing Details</h6>
-                        </div>
-                        <div class="panel-body">
-
-                            <div class="form-row">
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Issue to(Employee Name)</label>
-                                    <input type="text" class="form-control" />
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Department</label>
-                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Har</option>
-                                        <option value="2">Someother</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Zone</label>
-                                    <select class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1; width:10px;width:100%;max-width:100%;min-width:unset !important;">
-                                        <option value="0">--Select Zone--</option>
-                                        <option value="1">Gurgaon 61</option>
-                                        <option value="2">Dwarika</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Branch</label>
-                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Har</option>
-                                        <option value="2">Someother</option>
-                                    </select>
-                                </div>
-
-                               
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Designation</label>
-                                    <select class="form-control" id="drpKhasra" style="background-color:#dddddd; height:30px; border-color:#b1b1b1;">
-                                        <option value="0">---Select---</option>
-                                        <option value="1">Har</option>
-                                        <option value="2">Someother</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Issuing Date</label>
-                                    <input type="date" class="form-control" />
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Issue" class="btn btn-primary myapp-hed1" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Issue Receipt", "IssueReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
-                        @Html.ActionLink("Return Receipt", "ReturnReceipt", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
-                    </div>
-                </div>
-
-
-            </form>
+            </div>
         </div>
-    </div>
+
+        <h3 class="mb-3 d-flex sub-heading pt-3 ">Issuing Details</h3>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Issue to(Employee Name)  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value=""></option>
+
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Department </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value=""></option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Branch </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value=""></option>
+                    </select>
+                    <span class="text-danger"></span>
+                    <label class="floating-label">Designation </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="date" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="" class="text-danger"></span>*@
+                    <label class="floating-label">Issuing Date  </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit" id="Issue">Issue</button>
+                <button class="btn btn-theme " type="submit" id="IssueReceipt" style="display:none">Issue Receipt</button>
+                @*<button class="btn btn-theme " type="submit">Return Receipt</button>*@
+                @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
 </div>
 
 
-
-@if (ViewData["Msg"] != null)
-{
-    FileDataLoading.Models.Message msg = ViewData["Msg"] as FileDataLoading.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
 
+<environment include="Development">
+    <script src="~/js/issuefiledata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuefiledata.min.js" asp-append-version="true"></script>
+</environment>

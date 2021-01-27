@@ -36,31 +36,39 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Currentstatusoflandhistory>> GetPagedCurrentstatusoflandhistory(CurrentstatusoflandhistorySearchDto model)
         {
-            if (model.fromDate != null && model.toDate != null)
+            try
             {
-                return await _dbContext.Currentstatusoflandhistory
-                    .Include(x => x.LandTransfer)
-                    .Include(x => x.LandTransfer.PropertyRegistration)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Department)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Zone)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Division)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Locality)
-                    .Where(x => x.LandTransferId == model.landtransferId
-                     && (x.CreatedDate >= model.fromDate && x.CreatedDate <= model.toDate))
-                    .GetPaged<Currentstatusoflandhistory>(model.PageNumber, model.PageSize);
+                if (model.fromDate != null && model.toDate != null)
+                {
+                    return await _dbContext.Currentstatusoflandhistory
+                        .Include(x => x.LandTransfer)
+                        .Include(x => x.LandTransfer.PropertyRegistration)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Department)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Zone)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Division)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Locality)
+                        .Where(x => x.LandTransferId == model.landtransferId
+                         && (x.CreatedDate >= model.fromDate && x.CreatedDate <= model.toDate))
+                        .GetPaged<Currentstatusoflandhistory>(model.PageNumber, model.PageSize);
+                }
+                else
+                {
+                    return await _dbContext.Currentstatusoflandhistory
+                        .Include(x => x.LandTransfer)
+                        .Include(x => x.LandTransfer.PropertyRegistration)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Department)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Zone)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Division)
+                        .Include(x => x.LandTransfer.PropertyRegistration.Locality)
+                        .Where(x => x.LandTransferId == model.landtransferId)
+                          .GetPaged<Currentstatusoflandhistory>(model.PageNumber, model.PageSize);
+                }
             }
-            else
+            catch(Exception ex)
             {
-                return await _dbContext.Currentstatusoflandhistory
-                    .Include(x => x.LandTransfer)
-                    .Include(x => x.LandTransfer.PropertyRegistration)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Department)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Zone)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Division)
-                    .Include(x => x.LandTransfer.PropertyRegistration.Locality)
-                    .Where(x => x.LandTransferId == model.landtransferId)
-                      .GetPaged<Currentstatusoflandhistory>(model.PageNumber, model.PageSize);
+               return  null;
             }
+           
         }
     }
 }

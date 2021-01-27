@@ -38,16 +38,22 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " The Address field is required")]
         public string Address { get; set; }
         [Required(ErrorMessage = " The Email field is required")]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+            ErrorMessage = "Invalid Email Format")]
         public string Email { get; set; }
         [Required(ErrorMessage = " The Telephone No field is required")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Invalid Telephone No Format.")]
         public string TelephoneNo { get; set; }
         [Required(ErrorMessage = " The Mobile No field is required")]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Invalid Mobile No Format.")]
         public string MobileNo { get; set; }
         [Required(ErrorMessage = " The Occupant Aadhar No field is required")]
         public string OccupantAadharNo { get; set; }
         [Required(ErrorMessage = " The Voter Id No field is required")]
         public string VoterIdNo { get; set; }
-        [Required(ErrorMessage = " The Occupant Identity PrrofFile field is required")]
+       // [Required(ErrorMessage = " The Occupant Identity PrrofFile field is required")]
         public string OccupantIdentityPrrofFilePath { get; set; }
 
         [Required(ErrorMessage = "Damage Paid Past")]
@@ -78,7 +84,9 @@ namespace Libraries.Model.Entity
 
         public ICollection<Familydetails> Familydetails { get; set; }
         [NotMapped]
-        public IFormFile Photo { get; set; }
+        public IFormFile DocumentPhoto { get; set; }
+        [NotMapped]
+        public IFormFile PropertyPhoto { get; set; }
 
 
     }

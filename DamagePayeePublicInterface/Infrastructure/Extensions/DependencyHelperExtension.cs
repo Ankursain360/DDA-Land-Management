@@ -23,6 +23,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
@@ -37,6 +38,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IModuleService, ModuleService>();
