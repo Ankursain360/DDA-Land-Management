@@ -138,6 +138,8 @@ namespace SiteMaster.Controllers
                 return View(demolitionprogrammaster);
             }
         }
+
+
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {

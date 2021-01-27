@@ -134,7 +134,7 @@ namespace SiteMaster.Controllers
                 return Json($"Notification Name : {Name} already exist");
             }
         }
-        [AuthorizeContext(ViewAction.Delete)]
+  
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _notificationService.Delete(id);
