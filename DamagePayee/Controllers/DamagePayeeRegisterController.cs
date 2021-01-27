@@ -27,11 +27,17 @@ namespace DamagePayee.Controllers
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
         private readonly IHostingEnvironment _hostingEnvironment;
         public IConfiguration _configuration;
-        public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration, IHostingEnvironment en)
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
+        public DamagePayeeRegisterController(IDamagepayeeregisterService damagepayeeregisterService, 
+            IConfiguration configuration, IHostingEnvironment en, IApprovalProccessService approvalproccessService,
+            IWorkflowTemplateService workflowtemplateService)
         {
             _configuration = configuration;
             _damagepayeeregisterService = damagepayeeregisterService;
             _hostingEnvironment = en;
+            _approvalproccessService = approvalproccessService;
+            _workflowtemplateService = workflowtemplateService;
         }
 
 
@@ -80,10 +86,6 @@ namespace DamagePayee.Controllers
             string ShowCauseNoticeDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:ShowCauseNotice").Value.ToString();
             string FGFormDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:FGForm").Value.ToString();
             string BillDocument = _configuration.GetSection("FilePaths:DamagePayeeFiles:Bill").Value.ToString();
-
-
-
-
             if (ModelState.IsValid)
             {
                 FileHelper fileHelper = new FileHelper();
@@ -274,23 +276,50 @@ namespace DamagePayee.Controllers
                                                                 damagepayeeregister.RecieptFilePath[i] != null || damagepayeeregister.RecieptFilePath[i] != "" ?
                                                                 damagepayeeregister.RecieptFilePath[i] : string.Empty,
                                     DamagePayeeRegisterTempId = damagepayeeregister.Id
-
-
-
-
-
-
-
-
-                                    //RecieptDocumentPath = damagepayeeregistertemp.Reciept[i] == null ? "" : fileHelper.SaveFile(RecieptDocumentPathLayout, damagepayeeregistertemp.Reciept[i]),
-
-
                                 });
                             }
 
                             result = await _damagepayeeregisterService.SavePaymentHistory(damagepaymenthistory);
 
                         }
+                    }
+
+                    if(result)
+                    {
+                        var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                        if (isApprovalStart ==0 &&  damagepayeeregister.ApprovedStatus != 1)
+                        {
+                            #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
+                            var DataFlow = await dataAsync();
+                            for (int i = 0; i < DataFlow.Count; i++)
+                            {
+                                if (!DataFlow[i].parameterSkip)
+                                {
+                                    damagepayeeregister.ApprovedStatus = 0;
+                                    damagepayeeregister.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                    damagepayeeregister.ModifiedBy = SiteContext.UserId;
+                                    result = await _damagepayeeregisterService.UpdateBeforeApproval(damagepayeeregister.Id, damagepayeeregister);  //Update Table details 
+                                    if (result)
+                                    {
+                                        Approvalproccess approvalproccess = new Approvalproccess();
+                                        approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                        approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                                        approvalproccess.ServiceId = damagepayeeregister.Id;
+                                        approvalproccess.SendFrom = SiteContext.UserId;
+                                        approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                        approvalproccess.PendingStatus = 1;   //1
+                                        approvalproccess.Status = null;   //1
+                                        approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                        result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                                    }
+
+                                    break;
+                                }
+                            }
+
+                            #endregion
+                        }
+
                     }
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     //return View(damagepayeeregistertemp);
@@ -360,6 +389,17 @@ namespace DamagePayee.Controllers
                 x.Amount,
                 x.RecieptDocumentPath
             }));
+        }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            await BindDropDown(Data);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -675,5 +715,34 @@ namespace DamagePayee.Controllers
             return File(FileBytes, file.GetContentType(path));
         }
 
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value));
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+        #endregion
+
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _damagepayeeregisterService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+        }
+        
     }
 }

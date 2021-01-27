@@ -16,6 +16,7 @@
     localityid = $("#LocalityId option:selected").val();
     if (localityid != "") {
         $("#LocalityId").attr("disabled", "disabled");
+        $("#hdnIsLocality").val(1);
     }
 });
 
@@ -217,3 +218,15 @@ function GetSearchParam() {
     debugger
     return model;
 }
+
+$("#btnReset").click(function () {
+    $('#PropertyTypeId').val('').trigger('change');
+    $('#EncroachmentDate').val('');
+    $('#StartDate').val('');
+    $('#EndDate').val('');
+    if ($("#hdnIsLocality").val() != 1)
+    $('#LocalityId').val('').trigger('change');
+    $('#Area').val('');
+
+    $('#DivMainContentForm').html("");
+});

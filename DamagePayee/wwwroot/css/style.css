@@ -747,7 +747,7 @@ figcaption h6 {
 #rightSection {
     width: calc(100% - 50px);
     margin-left: auto;
-    margin-top: 60px;
+    margin-top: 45px;
     margin-bottom: 60px;
 }
 
@@ -1274,6 +1274,86 @@ textarea.floating-label-field--s3 {
     }
 }
 
+
+
+.ImgPrivew figure,
+.ImgPrivew {
+    position: relative;
+    overflow: hidden;
+}
+
+    .ImgPrivew figure {
+        width: 56px;
+    }
+
+    .ImgPrivew figure::after {
+        content: '';
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        -webkit-transition: all .5s ease-out;
+        -moz-transition: all .5s ease-out;
+        -ms-transition: all .5s ease-out;
+        -o-transition: all .5s ease-out;
+        transition: all .5s ease-out
+    }
+
+
+    .ImgPrivew figcaption {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -ms-flexbox;
+        display: flex;
+        left: 0;
+        top: 0;
+        margin: auto;
+        z-index: 2;
+        opacity: 0;
+        -webkit-transition: all .5s ease-out;
+        -moz-transition: all .5s ease-out;
+        -ms-transition: all .5s ease-out;
+        -o-transition: all .5s ease-out;
+        transition: all .5s ease-out
+    }
+
+        .ImgPrivew figcaption:hover,
+        .ImgPrivew figure:hover::after {
+            opacity: 1;
+            -webkit-transition: all .5s ease-out;
+            -moz-transition: all .5s ease-out;
+            -ms-transition: all .5s ease-out;
+            -o-transition: all .5s ease-out;
+            transition: all .5s ease-out
+        }
+
+        .ImgPrivew figcaption a,
+        .ImgPrivew figcaption a label {
+            display: block;
+            margin: 0;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .ImgPrivew figcaption a {
+            display: block;
+            width: 50%;
+            text-align: center;
+            background: #ccc;
+            color: #fff;
+            border-right: 1px solid #ccc;
+        }
+
+            .ImgPrivew figcaption a:nth-child(2) {
+                border-right: 0px solid #ccc;
+            }
 
 
 

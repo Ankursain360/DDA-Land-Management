@@ -67,5 +67,9 @@ namespace Libraries.Service.ApplicationService
         {
             return await _approvalproccessRepository.GetHistoryDetails(proccessid,  id);
         }
+        public int CheckIsApprovalStart(int proccessid, int serviceid)
+        {
+            return _approvalproccessRepository.CheckIsApprovalStart(proccessid, serviceid);
+        }
     }
 }

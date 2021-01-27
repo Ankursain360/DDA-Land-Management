@@ -25,5 +25,9 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         [NotMapped]
         public string verify { get; set; }
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Demandletters> FileNoList { get; set; }
     }
 }

@@ -22,13 +22,13 @@ namespace CourtCasesManagement.Controllers
         {
             _legalmanagementsystemService = legalmanagementsystemService;
         }
-        //public async Task<IActionResult> Index()
-        //{
-        //    Legalmanagementsystem model = new Legalmanagementsystem();
+        public async Task<IActionResult> Index()
+        {
+            Legalmanagementsystem model = new Legalmanagementsystem();
 
-        //    model.legalmanagementsytemlist = await _legalmanagementsystemService.GetLegalmanagementsystemList();
-        //    return View(model);
-        //}
+            model.legalmanagementsytemlist = await _legalmanagementsystemService.GetLegalmanagementsystemList();
+            return View(model);
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] HearingReportSearchDto hearingReportSearchDto)

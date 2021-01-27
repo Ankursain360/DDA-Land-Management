@@ -161,7 +161,6 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = propertyregistration.IsDeleted;
             model.IsActive = propertyregistration.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -205,12 +204,6 @@ namespace Libraries.Service.ApplicationService
         {
             return _propertyregistrationRepository.GetGeoFile(id);
         }
-
-        public Task<bool> CheckDeleteAuthority(int id)
-        {
-            return _propertyregistrationRepository.CheckDeleteAuthority(id);
-        }
-
         public async Task<List<Department>> GetDepartmentDropDownList()
         {
             List<Department> DepartmentList = await _propertyregistrationRepository.GetDepartmentDropDownList();
@@ -256,7 +249,6 @@ namespace Libraries.Service.ApplicationService
         {
             model.PropertyRegistrationId = id;
             model.IsDeleted = 0;
-            model.DeletedBy = 1;
             model.DeletedDate = DateTime.Now;
             return await _propertyregistrationRepository.InsertInDeletedProperty(model);
         }
@@ -326,7 +318,6 @@ namespace Libraries.Service.ApplicationService
         {
             model.PropertyRegistrationId = id;
             model.IsDisposed = 0;
-            model.DisposedBy = 1;
             model.DisposedDate = DateTime.Now;
             return await _propertyregistrationRepository.InsertInDisposedProperty(model);
         }
@@ -370,7 +361,6 @@ namespace Libraries.Service.ApplicationService
             model.ZoneId = propertyregistration.ZoneId;
             model.DivisionId = propertyregistration.DivisionId;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
             _propertyregistrationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

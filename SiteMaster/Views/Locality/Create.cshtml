@@ -14,7 +14,7 @@
                     <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChange(this.options[this.selectedIndex].value);" required="required" requiredmsg="The Department field is required">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <label asp-validation-for="DepartmentId" class="error"></label>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     <label asp-for="DepartmentId" class="floating-label">Department </label>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                     <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId" onchange="return onChangeZone(this.options[this.selectedIndex].value)" required="required" requiredmsg="The Zone field is required">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <label asp-validation-for="ZoneId" class="error"></label>
+                    <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                     <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId"  required="required" requiredMsg="The Division field is required">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <label asp-validation-for="DivisionId" class="error"></label>
+                    <span asp-validation-for="DivisionId" class="text-danger"></span>
                     <label asp-for="DivisionId" class="floating-label">Division </label>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Name" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                            limit="50">
-                    <span asp-validation-for="Name" class="text-danger "></span>
+                    <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Locality(Village) Name</label>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="LocalityCode" type="text" class="floating-label-field floating-label-field--s3" placeholder="LocalityCode"
                            limit="10">
-                    <span asp-validation-for="LocalityCode" class="text-danger "></span>
+                    <span asp-validation-for="LocalityCode" class="text-danger"></span>
                     <label class="floating-label">Locality(Village) Name Code</label>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         @*<span class="text-danger">*</span>*@
                         <input asp-for="Landmark" type="text" class="floating-label-field floating-label-field--s3" placeholder="Landmark"
                                limit="200">
-                        <span asp-validation-for="Landmark" class="text-danger "></span>
+                        <span asp-validation-for="Landmark" class="text-danger"></span>
                         <label class="floating-label">Landmark</label>
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Address" type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"
                            limit="600">
-                    <span asp-validation-for="Address" class="text-danger "></span>
+                    <span asp-validation-for="Address" class="text-danger"></span>
                     <label class="floating-label"> Locality Address</label>
                 </div>
                 </div>

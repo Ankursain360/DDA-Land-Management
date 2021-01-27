@@ -40,5 +40,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<Rebate> GetRebateValue();
         Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id);
         string GetLocalityName(int? localityId);
+        Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister);
     }
 }

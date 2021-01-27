@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
 {
     public partial class Legalmanagementsystem : AuditableEntity<int>
     {
-             [Required(ErrorMessage = "File number name is required")]
+             [Required(ErrorMessage = "File number is mandatory")]
         public string FileNo { get; set; }
         public string CourtCaseNo { get; set; }
         public string CourtCaseTitle { get; set; }
@@ -61,5 +61,8 @@ namespace Libraries.Model.Entity
         public IFormFile JudgementFile { get; set; }
         [NotMapped]
         public IFormFile StayFile { get; set; }
+        
+             [NotMapped]
+        public List<Legalmanagementsystem> legalmanagementsytemlist { get; set; }
     }
 }

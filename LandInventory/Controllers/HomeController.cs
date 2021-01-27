@@ -19,9 +19,6 @@ namespace LandInventory.Controllers
             _siteContext = siteContext;
             _userProfileService = userProfileService;
         }
-
-
-     
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);

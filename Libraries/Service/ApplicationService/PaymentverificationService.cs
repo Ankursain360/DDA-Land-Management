@@ -25,6 +25,15 @@ namespace Service.ApplicationService
             _paymentverificationRepository = paymentverificationRepository;
            // _userManager = userManager;
         }
+        public async Task<List<Paymentverification>> BindFileNoList()
+        {
+            return await _paymentverificationRepository.BindFileNoList();
+        }
+
+        public async Task<List<Locality>> BindLoclityList()
+        {
+            return await _paymentverificationRepository.BindLoclityList();
+        }
 
         public async Task<List<Paymentverification>> GetAllPaymentList()
         {
@@ -38,7 +47,15 @@ namespace Service.ApplicationService
         {
             return await _paymentverificationRepository.GetPagedPaymentListVerified(model);
         }
-       
+        //public async Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
+        //{
+        //    return await _paymentverificationRepository.GetPaymentTransactionReportData(paymentTransactionReportSearchDto);
+        //}
+        public async Task<List<PaymentTransactionReportListDataDto>> GetPagedPaymentTransactionReportData(PaymentTransactionReportSearchDto model)
+        {
+            return await _paymentverificationRepository.GetPagedPaymentTransactionReportData(model);
+        }
+
         public async Task<Paymentverification> FetchSingleResult(int id)
         {
             var result = await _paymentverificationRepository.FindBy(a => a.Id == id);

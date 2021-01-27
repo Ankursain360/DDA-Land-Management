@@ -9,13 +9,13 @@
         <form asp-route="Login" class="input-form">
             <input type="hidden" asp-for="ReturnUrl" />
 
-            <div class="form-group icon is-invalid">
-                @*<i class="ri-user-line"></i>*@
+            <div class="form-group icon">
+                <i class="ri-user-line"></i>
                 <label asp-for="Username"></label>
                 <input class="form-control" placeholder="Username" asp-for="Username" autofocus>
             </div>
-            <div class="form-group icon is-invalid">
-                @*<i class="ri-lock-line"></i>*@
+            <div class="form-group icon">
+                <i class="ri-lock-line"></i>
                 <label asp-for="Password"></label>
                 <input type="password" class="form-control" placeholder="Password" asp-for="Password" autocomplete="off">
             </div>
