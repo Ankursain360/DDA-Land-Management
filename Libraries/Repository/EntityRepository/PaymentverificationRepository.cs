@@ -97,7 +97,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Locality>> BindLoclityList()
         {
-            var InLocalitiesId = (from x in _dbContext.Demandletters
+            var InLocalitiesId = (from x in _dbContext.Damagepayeeregister
                                   where x.IsActive == 1
                                   select x.LocalityId).ToArray();
 
@@ -162,9 +162,11 @@ namespace Libraries.Repository.EntityRepository
             {
                 int SortOrder = (int)model.SortOrder;
                 var data = await _dbContext.LoadStoredProcedure("BindPaymentTransactionReport")
-                                            .WithSqlParams(("P_FileNo", model.FileNo), ("P_FromDate", model.FromDate)
+                                            .WithSqlParams(("P_FileNo", model.FileNo),
+                                            ("P_LocalityId", model.Locality)
+                                            , ("P_FromDate", model.FromDate)
                                             , ("P_ToDate", model.ToDate)
-                                            , ("P_LocalityId", model.Locality), ("P_SortOrder", SortOrder)
+                                            , ("P_SortOrder", SortOrder)
                                             , ("P_SortBy", model.SortBy))
                                             .ExecuteStoredProcedureAsync<PaymentTransactionReportListDataDto>();
 
