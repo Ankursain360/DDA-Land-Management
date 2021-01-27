@@ -13,7 +13,10 @@ namespace Libraries.Model.Entity
         public int? DesignationId { get; set; }
         public DateTime? IssuingDate { get; set; }
 
+        public Branch Branch { get; set; }
         public Datastoragedetails DataStorageDetails { get; set; }
+        public Department Department { get; set; }
+        public Designation Designation { get; set; }
 
     }
 }

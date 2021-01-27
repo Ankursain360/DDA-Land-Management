@@ -28,5 +28,17 @@
     "inputFiles": [
       "wwwroot/js/columnindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/issuereturnfileindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/issuereturnfileindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/issuefiledata.min.js",
+    "inputFiles": [
+      "wwwroot/js/issuefiledata.js"
+    ]
   }
 ]
