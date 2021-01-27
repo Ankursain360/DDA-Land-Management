@@ -106,58 +106,10 @@ namespace Libraries.Repository.EntityRepository
                                     && (InLocalitiesId).Contains(x.Id))
                                     .ToListAsync();
         }
-        //        public async Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
-        //        {
-        //            var data = await _dbContext.Paymentverification
-        //                //.Include(x => x.Locality)
-
-        //                .Where(x => x.CreatedDate >= paymentTransactionReportSearchDto.fromDate
-
-        //               && x.CreatedDate <= paymentTransactionReportSearchDto.toDate)
-        //                .OrderByDescending(x => x.Id).GetPaged(paymentTransactionReportSearchDto.PageNumber, paymentTransactionReportSearchDto.PageSize);
-
-        //            int SortOrder = (int)paymentTransactionReportSearchDto.SortOrder;
-        //            if (SortOrder == 1)
-        //            {
-        //                switch (paymentTransactionReportSearchDto.SortBy.ToUpper())
-        //                {
-
-        //                    //case ("LOCALITY"):
-        //                    //    data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
-        //                    //    break;
-
-        //                    case ("CREATEDDATE"):
-        //                        data.Results = data.Results.OrderBy(x => x.CreatedDate).ToList();
-        //                        break;
-        //                    //case ("LANDMARK"):
-        //                    //    data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
-        //                    //    break;
-
-        //                }
-        //            }
-        //            else if (SortOrder == 2)
-        //            {
-        //                switch (paymentTransactionReportSearchDto.SortBy.ToUpper())
-        //                {
-
-        //                    //case ("LOCALITY"):
-        //                    //    data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
-        //                    //    break;
-
-        //                    case ("CREATEDDATE"):
-        //                        data.Results = data.Results.OrderByDescending(x => x.CreatedDate).ToList();
-        //                        break;
-        //                    //case ("LANDMARK"):
-        //                    //    data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
-        //                    //    break;
-
-        //                }
-        //            }
-        //            return data;
-        //        }
+      
         public async Task<List<PaymentTransactionReportListDataDto>> GetPagedPaymentTransactionReportData(PaymentTransactionReportSearchDto model)
+
         {
-            
             try
             {
                 int SortOrder = (int)model.SortOrder;
@@ -167,13 +119,38 @@ namespace Libraries.Repository.EntityRepository
                                             , ("P_LocalityId", model.Locality), ("P_SortOrder", SortOrder)
                                             , ("P_SortBy", model.SortBy))
                                             .ExecuteStoredProcedureAsync<PaymentTransactionReportListDataDto>();
-
                 return (List<PaymentTransactionReportListDataDto>)data;
+        
             }
             catch (Exception ex)
             {
                 throw;
             }
         }
+        public async Task<List<PaymentTransactionReportListDataDto>> GetPagedPaidReportData(DueVsPaidReportSearchDto model)
+
+        {
+
+            try
+            {
+                int SortOrder = (int)model.SortOrder;
+                var data = await _dbContext.LoadStoredProcedure("BindDueVsPaidReport")
+                                            .WithSqlParams(("P_FileNo", model.FileNo),
+                                            ("P_LocalityId", model.Locality),
+                                            ("P_FromDate", model.FromDate)
+                                            , ("P_ToDate", model.ToDate),
+                                            ("P_SortOrder", SortOrder)
+                                            , ("P_SortBy", model.SortBy))
+                                            .ExecuteStoredProcedureAsync<PaymentTransactionReportListDataDto>();
+                return (List<PaymentTransactionReportListDataDto>)data;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+
     }
 }
