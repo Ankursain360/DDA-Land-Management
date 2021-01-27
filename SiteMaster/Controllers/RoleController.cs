@@ -146,7 +146,7 @@ namespace SiteMaster.Controllers
 
             return View("Index");
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var result = await _userProfileService.GetRoleById(id);

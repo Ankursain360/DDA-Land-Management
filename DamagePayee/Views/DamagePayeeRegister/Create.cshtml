@@ -91,10 +91,45 @@
                                             <span asp-validation-for="AadharNo" class="d-block text-danger field-validation-valid msg3"></span>
 
                                             <input type="hidden" asp-for="AadharNoFilePath" />
-                                            <div class="d-flex align-items-center">
+                                            @*<div class="d-flex align-items-center">
 
                                                 <div class="file-btn my-3 d-flex align-items-center mr-3">
-                                                    <input type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                                    <input asp-for="Aadhar" type="file" class="browes d-none" placeholder="Name"  value="">
+                                                    <label for="Aadhar" class="btn btn-theme px-4 mb-0">Browse</label>
+                                                </div>
+                                                <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                                    <figure class="m-0 img-thumbnail">
+                                                        <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                        <figcaption class="m-0">
+                                                            <a href="#" title="Update this file" class="bg-primary">
+                                                                <label for="Aadhar">
+                                                                    <i class="ri-edit-2-line"></i>
+                                                                </label>
+                                                            </a>
+                                                            <a href="#" title="Download this file" class="bg-success">
+                                                                <label for="">
+                                                                    <i class="ri-download-2-line"></i>
+                                                                </label>
+                                                            </a>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>*@
+                                            <input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />
+                                            <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
+
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="floating-label-wrap mb-3 mb-md-0">
+                                            <input asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
+                                            <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
+
+                                            <input type="hidden" asp-for="PanNoFilePath" />
+                                            @*<div class="d-flex align-items-center">
+
+                                                <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                                    <input asp-for="Pan" type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
                                                     <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
                                                 </div>
                                                 <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
@@ -114,31 +149,67 @@
                                                         </figcaption>
                                                     </figure>
                                                 </div>
-                                            </div>
-                                            @*<input asp-for="Aadhar" type="file" class="floating-label-field floating-label-field--s3 " />*@
-                                            <span asp-validation-for="Aadhar" class="d-block text-danger field-validation-valid"></span>
-
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="floating-label-wrap mb-3 mb-md-0">
-                                            <input asp-for="PanNo" maxlength="15" type="text" placeholder="Pan No." class="  floating-label-field floating-label-field--s3" />
-                                            <span asp-validation-for="PanNo" class="d-block text-danger field-validation-valid"></span>
-
-                                            <input type="hidden" asp-for="PanNoFilePath" />
-                                            <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
+                                            </div>*@
+                                          <input asp-for="Pan" type="file" class="floating-label-field floating-label-field--s3 " />
                                             <span asp-validation-for="Pan" class="d-block text-danger field-validation-valid msg4"></span>
 
                                         </div>
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="PhotographFilePath" />
+                                        @*<div class="d-flex align-items-center">
+
+                                            <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                                <input asp-for="Photograph" type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                                <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
+                                            </div>
+                                            <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                                <figure class="m-0 img-thumbnail">
+                                                    <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                    <figcaption class="m-0">
+                                                        <a href="#" title="Update this file" class="bg-primary">
+                                                            <label for="fileImg">
+                                                                <i class="ri-edit-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                        <a href="#" title="Download this file" class="bg-success">
+                                                            <label for="">
+                                                                <i class="ri-download-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>*@
                                         <input asp-for="Photograph" type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="Photograph" class="d-block text-danger field-validation-valid"></span>
 
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="SignatureFilePath" />
+                                        @*<div class="d-flex align-items-center">
+                                            <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                                <input asp-for="SignatureFile" type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                                <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
+                                            </div>
+                                            <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                                <figure class="m-0 img-thumbnail">
+                                                    <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                    <figcaption class="m-0">
+                                                        <a href="#" title="Update this file" class="bg-primary">
+                                                            <label for="fileImg">
+                                                                <i class="ri-edit-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                        <a href="#" title="Download this file" class="bg-success">
+                                                            <label for="">
+                                                                <i class="ri-download-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>*@
                                         <input asp-for="SignatureFile" type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="SignatureFile" class="d-block text-danger field-validation-valid"></span>
 
@@ -226,6 +297,29 @@
                                     </td>
                                     <td>
                                         <input type="hidden" asp-for="ATSGPAFilePath" />
+                                        @*<div class="d-flex align-items-center">
+                                            <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                                <input asp-for="ATSGPA" type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                                <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
+                                            </div>
+                                            <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                                <figure class="m-0 img-thumbnail">
+                                                    <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                    <figcaption class="m-0">
+                                                        <a href="#" title="Update this file" class="bg-primary">
+                                                            <label for="fileImg">
+                                                                <i class="ri-edit-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                        <a href="#" title="Download this file" class="bg-success">
+                                                            <label for="">
+                                                                <i class="ri-download-2-line"></i>
+                                                            </label>
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                            </div>
+                                        </div>*@
                                         <input asp-for="ATSGPA" type="file" class="floating-label-field floating-label-field--s3" />
                                         <span asp-validation-for="ATSGPA" class="d-block text-danger field-validation-valid"></span>
 
@@ -681,7 +775,30 @@
                                 </td>
                                 <td>
                                     <input type="hidden" asp-for="RecieptFilePath" />
-                                    <input asp-for="Reciept" class="floating-label-field floating-label-field--s3" type="file" />
+                                    @*<div class="d-flex align-items-center">
+                                        <div class="file-btn my-3 d-flex align-items-center mr-3">
+                                            <input asp-for="Reciept" type="file" class="browes d-none" placeholder="Name" id="fileImg" value="">
+                                            <label for="fileImg" class="btn btn-theme px-4 mb-0">Browse</label>
+                                        </div>
+                                        <div id="ImgPrivew" class="ImgPrivew" style="display: none;">
+                                            <figure class="m-0 img-thumbnail">
+                                                <img id="uploadedfile" src="img/doc.png" alt="" width="50" height="50">
+                                                <figcaption class="m-0">
+                                                    <a href="#" title="Update this file" class="bg-primary">
+                                                        <label for="fileImg">
+                                                            <i class="ri-edit-2-line"></i>
+                                                        </label>
+                                                    </a>
+                                                    <a href="#" title="Download this file" class="bg-success">
+                                                        <label for="">
+                                                            <i class="ri-download-2-line"></i>
+                                                        </label>
+                                                    </a>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>*@
+                                  <input asp-for="Reciept" class="floating-label-field floating-label-field--s3" type="file" />
                                     <span asp-validation-for="Reciept" class="d-block text-danger field-validation-valid"></span>
 
                                 </td>

@@ -78,7 +78,7 @@
         $("#TypeOfDamageAssessee").val("Original");
     }
 
-/*Is Document For*/
+    /*Is Document For*/
     if ($("#HouseBill").is(":checked")) {
         $("#IsDocumentFor").val("HouseTax Bill");
     } else if ($("#ElectricityBill").is(":checked")) {
@@ -89,6 +89,20 @@
         $("#IsDocumentFor").val("Any Other");
     }
 
+    debugger;
+    /*Declaration Checked*/
+    if (($('#Declaration1').val() == 1))
+        $('#DeclarationStatus1').prop('checked', true);
+    else
+        $('#DeclarationStatus1').prop('checked', false);
+    if (($('#Declaration2').val() == 1))
+        $('#DeclarationStatus2').prop('checked', true);
+    else
+        $('#DeclarationStatus2').prop('checked', false);
+    if (($('#Declaration3').val() == 1))
+        $('#DeclarationStatus3').prop('checked', true);
+    else
+        $('#DeclarationStatus3').prop('checked', false);
 });
 function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
     var show = true;
@@ -210,7 +224,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
             if (data[i].aadharNoFilePath != "" && data[i].aadharNoFilePath != null) {
                 $("#tbl_posts #add #viewAadharId").attr('href', '/SelfAssessmentDamage/ViewPersonelInfoAadharFile/' + data[i].id)
                 $("#tbl_posts #add #viewAadharId").show();
-            }  else {
+            } else {
                 $("#tbl_posts #add #viewAadharId").hide();
             }
             if (data[i].panNoFilePath != "" && data[i].panNoFilePath != null) {

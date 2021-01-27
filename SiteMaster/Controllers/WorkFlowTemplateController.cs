@@ -42,6 +42,9 @@ namespace SiteMaster.Controllers
             workflowtemplate.ModuleList = await _workflowtemplateService.GetAllModuleList();
         }
 
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             WorkflowTemplate model = new WorkflowTemplate();
@@ -68,6 +71,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
+
         public async Task<IActionResult> Create([FromBody] WorkflowTemplateCreateDto workflowtemplatecreatedto)
         {
             WorkflowTemplate model = new WorkflowTemplate();
@@ -175,6 +179,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _workflowtemplateService.FetchSingleResult(id);

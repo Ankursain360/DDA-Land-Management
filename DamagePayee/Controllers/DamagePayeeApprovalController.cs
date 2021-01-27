@@ -27,10 +27,11 @@ namespace DamagePayee.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         private readonly IProccessWorkflowService _proccessWorkflowService;
+        private readonly IApprovalProccessService _approvalproccessService;
         public DamagePayeeApprovalController(IDamagePayeeApprovalService damagePayeeApprovalService,
             IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration,
             IWorkflowTemplateService workflowtemplateService, ISelfAssessmentDamageService selfAssessmentDamageService,
-            IProccessWorkflowService proccessWorkflowService)
+            IProccessWorkflowService proccessWorkflowService, IApprovalProccessService approvalproccessService)
         {
             _configuration = configuration;
             _damagePayeeApprovalService = damagePayeeApprovalService;
@@ -38,6 +39,7 @@ namespace DamagePayee.Controllers
             _workflowtemplateService = workflowtemplateService;
             _selfAssessmentDamageService = selfAssessmentDamageService;
             _proccessWorkflowService = proccessWorkflowService;
+            _approvalproccessService = approvalproccessService;
         }
 
 
@@ -106,7 +108,7 @@ namespace DamagePayee.Controllers
 
         //                    Processworkflow proccess = new Processworkflow();
         //                    proccess.TransactionTemplate = JsonTransactionTemplateData;
-        //                    proccess.WorkflowTemplateId = Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value);
+        //                    proccess.WorkflowTemplateId = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
         //                    proccess.ActionId = SiteContext.UserId;
         //                    proccess.CreatedBy = SiteContext.UserId;
         //                    result = await _proccessWorkflowService.Create(proccess); //Create a row in ProccessWorkflow Table
@@ -222,7 +224,7 @@ namespace DamagePayee.Controllers
         }
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _proccessWorkflowService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value), id);
+            var Data = await _proccessWorkflowService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -232,7 +234,6 @@ namespace DamagePayee.Controllers
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             await BindDropDown(Data);
-
             return PartialView("_DamagePayeeRegister", Data);
         }
         public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
@@ -370,41 +371,41 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        #region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
-        private async Task<List<TemplateStructure>> DataAsync()
-        {
-            var Data = await _workflowtemplateService.FetchSingleResult(1);
-            var template = Data.Template;
-            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
-            return ObjList;
-        }
+        //#region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
+        //private async Task<List<TemplateStructure>> DataAsync()
+        //{
+        //    var Data = await _workflowtemplateService.FetchSingleResult(1);
+        //    var template = Data.Template;
+        //    List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+        //    return ObjList;
+        //}
 
-        [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        {
-            var DataFlow = await DataAsync();
+        //[HttpGet]
+        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        //{
+        //    var DataFlow = await DataAsync();
 
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                }
-                else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                }
-            }
-            return Json(DataFlow);
-        }
-        #endregion
+        //    for (int i = 0; i < DataFlow.Count; i++)
+        //    {
+        //        if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //        }
+        //        else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //        }
+        //    }
+        //    return Json(DataFlow);
+        //}
+        //#endregion
 
         #region Fetch ProccessWorkflow Data Added by Renu 28 Dec 2020
         private int ProccessWorkflowData()
         {
-            var Count = _proccessWorkflowService.FetchCountResultForProccessWorkflow(Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value));
+            var Count = _proccessWorkflowService.FetchCountResultForProccessWorkflow(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value));
             return Count;
         }
         private async Task<bool> CheckThisisUser()
@@ -474,13 +475,119 @@ namespace DamagePayee.Controllers
 
 
         #region Renu Approval Proccess
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id, Damagepayeeregister damagepayeeregister)
+        {
+            var result = false;
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            var value = await _selfAssessmentDamageService.GetRebateValue();
+            if (value == null)
+                ViewBag.RebateValue = 0;
+            else
+                ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
 
+            #region Approval Proccess At Further level start Added by Renu 23 jan 2021
+            var DataFlow = await DataAsync();
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (!DataFlow[i].parameterSkip)
+                {
+                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                    {
+                        result = true;  ///May be comment
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                            approvalproccess.ServiceId = damagepayeeregister.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = damagepayeeregister.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(damagepayeeregister.ApprovalStatus);
+                            if (i == DataFlow.Count - 1)
+                                approvalproccess.SendTo = null;
+                            else
+                            {
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                            }
+                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
+                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                            if (result)
+                            {
+                                if (i == DataFlow.Count - 1)
+                                {
+                                    damagepayeeregister.ApprovedStatus = 1;
+                                    damagepayeeregister.PendingAt = 0;
+                                }
+                                else
+                                {
+                                    damagepayeeregister.ApprovedStatus = 0;
+                                    damagepayeeregister.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                }
+                                result = await _damagepayeeregisterService.UpdateBeforeApproval(id, damagepayeeregister);
+                            }
+                        }
+                        break;
+                    }
+
+                }
+            }
+
+            #endregion
+            var Msgddl = damagepayeeregister.ApprovalStatus;
+            if (Msgddl == "3")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+            else if (Msgddl == "2")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+            else if (Msgddl == "1")
+            {
+
+                ViewBag.Message = Alert.Show(Messages.Forwardsuccesfuly, "", AlertType.Success);
+            }
+            return View("Index");
+        }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
         {
             var result = await _damagePayeeApprovalService.GetPagedDamageForApproval(model, SiteContext.UserId);
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
+        }
+        #endregion
+
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        private async Task<List<TemplateStructure>> DataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    var dropdown = DataFlow[i].parameterAction;
+                    return Json(dropdown);
+                    break;
+                }
+
+            }
+            return Json(DataFlow);
         }
         #endregion
     }

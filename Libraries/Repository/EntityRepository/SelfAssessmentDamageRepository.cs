@@ -143,5 +143,10 @@ namespace Libraries.Repository.EntityRepository
 
             return File;
         }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

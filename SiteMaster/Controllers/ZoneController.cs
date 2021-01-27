@@ -45,6 +45,8 @@ namespace SiteMaster.Controllers
         {
             zone.DepartmentList = await _zoneService.GetDropDownList();
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -165,7 +167,8 @@ namespace SiteMaster.Controllers
                 return Json($"Zone Code: {Code} already exist");
             }
         }
-        [AuthorizeContext(ViewAction.Delete)]
+
+
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _zoneService.Delete(id);
@@ -180,7 +183,7 @@ namespace SiteMaster.Controllers
             return RedirectToAction("Index", "Zone");
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _zoneService.FetchSingleResult(id);

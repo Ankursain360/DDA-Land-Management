@@ -8,7 +8,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
-
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -21,6 +22,8 @@ namespace SiteMaster.Controllers
         {
             _actionsService = actionsService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -32,6 +35,10 @@ namespace SiteMaster.Controllers
             var result = await _actionsService.GetPagedActions(model);
             return PartialView("_List", result);
         }
+
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -39,6 +46,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Actions actions)
         {
             try
@@ -73,6 +81,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _actionsService.FetchSingleResult(id);
@@ -85,6 +95,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Actions actions)
         {
             if (ModelState.IsValid)
@@ -129,6 +140,7 @@ namespace SiteMaster.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
             
@@ -166,6 +178,7 @@ namespace SiteMaster.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _actionsService.FetchSingleResult(id);

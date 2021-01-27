@@ -132,6 +132,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _districtService.FetchSingleResult(id);
@@ -141,7 +143,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-        [AuthorizeContext(ViewAction.Delete)]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _districtService.Delete(id);
@@ -156,6 +158,8 @@ namespace SiteMaster.Controllers
             return RedirectToAction("Index", "District");
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try

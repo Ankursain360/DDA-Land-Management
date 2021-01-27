@@ -28,6 +28,8 @@ namespace SiteMaster.Controllers
         {
             _classificationoflandService = classificationoflandService;
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
@@ -168,7 +170,7 @@ namespace SiteMaster.Controllers
             //ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             //return View(form);
         }
-        [AuthorizeContext(ViewAction.Delete)]
+      
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
@@ -187,7 +189,7 @@ namespace SiteMaster.Controllers
             }
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _classificationoflandService.FetchSingleResult(id);

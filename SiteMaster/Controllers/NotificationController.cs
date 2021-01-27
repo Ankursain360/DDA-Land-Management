@@ -23,6 +23,7 @@ namespace SiteMaster.Controllers
         {
             _notificationService = notificationService;
         }
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
@@ -133,7 +134,7 @@ namespace SiteMaster.Controllers
                 return Json($"Notification Name : {Name} already exist");
             }
         }
-        [AuthorizeContext(ViewAction.Delete)]
+  
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _notificationService.Delete(id);
@@ -151,6 +152,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -160,6 +163,9 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try

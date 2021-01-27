@@ -94,6 +94,8 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _localityService.FetchSingleResult(id);

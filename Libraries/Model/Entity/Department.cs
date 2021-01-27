@@ -10,6 +10,7 @@ namespace Libraries.Model.Entity
     {
         public Department()
         {
+            Branch = new HashSet<Branch>();
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             LandtransferHandedOverDepartment = new HashSet<Landtransfer>();
             LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
@@ -23,6 +24,7 @@ namespace Libraries.Model.Entity
             PropertyregistrationTakenOverDepartment = new HashSet<Propertyregistration>();
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Planning = new HashSet<Planning>();
+            Issuereturnfile = new HashSet<Issuereturnfile>();
         }
 
         [Required(ErrorMessage = "Department name is mandatory")]
@@ -48,5 +50,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<PropertyRegistrationHistory> Propertyregistrationhistory { get; set; }
         public virtual ICollection<Planning> Planning { get; set; }
         public virtual ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
+        public ICollection<Branch> Branch { get; set; }
+        public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
     }
 }

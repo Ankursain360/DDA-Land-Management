@@ -39,6 +39,8 @@ namespace SiteMaster.Controllers
             var result = await _departmentService.GetPagedDepartment(model);
             return PartialView("_List", result);
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
@@ -148,7 +150,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.Delete)]
+
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             //try
@@ -173,6 +175,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _departmentService.FetchSingleResult(id);

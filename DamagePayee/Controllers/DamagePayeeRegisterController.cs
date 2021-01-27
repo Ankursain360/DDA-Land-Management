@@ -286,7 +286,8 @@ namespace DamagePayee.Controllers
 
                     if(result)
                     {
-                        if(damagepayeeregister.ApprovedStatus != 1)
+                        var isApprovalStart = _approvalproccessService.CheckIsApprovalStart(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), damagepayeeregister.Id);
+                        if (isApprovalStart ==0 &&  damagepayeeregister.ApprovedStatus != 1)
                         {
                             #region Approval Proccess At 1st level start Added by Renu 26 Nov 2020
                             var DataFlow = await dataAsync();
@@ -388,6 +389,17 @@ namespace DamagePayee.Controllers
                 x.Amount,
                 x.RecieptDocumentPath
             }));
+        }
+        public async Task<IActionResult> View(int id)
+        {
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            await BindDropDown(Data);
+
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
         public async Task<IActionResult> Edit(int id)
         {
@@ -713,5 +725,24 @@ namespace DamagePayee.Controllers
         }
         #endregion
 
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var result = await _damagepayeeregisterService.Delete(id);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _damagepayeeregisterService.GetAllDamagepayeeregister();
+                return View("Index", result1);
+            }
+        }
+        
     }
 }

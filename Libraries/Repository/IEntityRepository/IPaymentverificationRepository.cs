@@ -15,6 +15,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<PagedResult<Paymentverification>> GetPagedPaymentListVerified(PaymentverificationSearchDto model);
         //Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto);
         Task<List<PaymentTransactionReportListDataDto>> GetPagedPaymentTransactionReportData(PaymentTransactionReportSearchDto model);
+        Task<List<PaymentTransactionReportListDataDto>> GetPagedPaidReportData(DueVsPaidReportSearchDto model);
+
         Task<List<Paymentverification>> BindFileNoList();
         Task<List<Locality>> BindLoclityList();
     }

@@ -20,17 +20,130 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model)
         {
-            return await _dbContext.Damagepayeeregister
-                .Where(x => x.IsActive == 1)
+            var data = await _dbContext.Damagepayeeregister
+                
                 .Include(x => x.Locality)
                 .Include(x => x.District)
                 .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.FileNo)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("TYPEOFASSESSEE"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.TypeOfDamageAssessee)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("PROPERTYNO"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.PropertyNo)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.Locality.Name)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ISDDADAMAGEPAYEE"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.IsDdadamagePayee)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.IsActive)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                           
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.FileNo)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("TYPEOFASSESSEE"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.TypeOfDamageAssessee)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("PROPERTYNO"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.PropertyNo)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.Locality.Name)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ISDDADAMAGEPAYEE"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderByDescending(x => x.IsDdadamagePayee)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Damagepayeeregister
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.District)
+                                               .OrderBy(x => x.IsActive)
+                                               .GetPaged<Damagepayeeregister>(model.PageNumber, model.PageSize);
+
+                        break;
+                }
+            }
+            return data;
         }
 
         public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregister()
         {
                  return await _dbContext.Damagepayeeregister
-                .Where(x => x.IsActive == 1)
                 .Include(x => x.Locality)
                 .Include(x => x.District)
                 .ToListAsync();

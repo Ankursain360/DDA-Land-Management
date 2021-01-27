@@ -19,7 +19,7 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Address)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.ApproxPropertyArea).HasColumnType("decimal(18,3)");
@@ -38,7 +38,7 @@ namespace Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.Email)
-                .HasMaxLength(30)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.GeoReferencing)
@@ -70,19 +70,29 @@ namespace Model.EntityConfiguration
                 .HasMaxLength(15)
                 .IsUnicode(false);
 
-            builder.Property(e => e.OccupantIdentityPrrofFilePath).HasColumnType("longtext");
+         //   builder.Property(e => e.OccupantIdentityPrrofFilePath).HasColumnType("longtext");
+
+
+            builder.Property(e => e.OccupantIdentityPrrofFilePath)
+              .HasMaxLength(200)
+              .IsUnicode(false);
 
             builder.Property(e => e.OccupantName)
-                .HasMaxLength(30)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.PresentUseId).HasColumnType("int(11)");
 
             builder.Property(e => e.PropertyAddress)
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PropertyFilePath).HasColumnType("longtext");
+         //   builder.Property(e => e.PropertyFilePath).HasColumnType("longtext");
+
+            builder.Property(e => e.PropertyFilePath)
+           .HasMaxLength(200)
+           .IsUnicode(false);
+
 
             builder.Property(e => e.PropertyHouseTaxNo)
                 .HasMaxLength(30)
