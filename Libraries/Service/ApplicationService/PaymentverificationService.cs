@@ -76,5 +76,15 @@ namespace Service.ApplicationService
             _paymentverificationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public Task<PagedResult<Paymentverification>> GetPaymentTransactionReportData(PaymentTransactionReportSearchDto paymentTransactionReportSearchDto)
+        {
+            throw new NotImplementedException();
+        }
+       
+        public async Task<List<PaymentTransactionReportListDataDto>> GetPagedPaidReportData(DueVsPaidReportSearchDto model)
+        {
+            return await _paymentverificationRepository.GetPagedPaidReportData(model);
+        }
     }
 }
