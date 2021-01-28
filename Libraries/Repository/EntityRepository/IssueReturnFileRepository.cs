@@ -18,6 +18,21 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
+        public async Task<List<Department>> GetAllDepartment()
+        {
+            List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return departmentList;
+        }
+        public async Task<List<Branch>> GetAllBranch()
+        {
+            List<Branch> branchList = await _dbContext.Branch.Where(x => x.IsActive == 1).ToListAsync();
+            return branchList;
+        }
+        public async Task<List<Designation>> GetAllDesignation()
+        {
+            List<Designation> designationList = await _dbContext.Designation.Where(x => x.IsActive == 1).ToListAsync();
+            return designationList;
+        }
         public async Task<List<Datastoragedetails>> GetFileNoList()
         {
             var fileNoList = await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).ToListAsync();

@@ -29,7 +29,7 @@ namespace DamagePayee.Controllers
             _doortodoorsurveyService = doortodoorsurveyService;
             _configuration = configuration;
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -51,7 +51,7 @@ namespace DamagePayee.Controllers
             }
         }
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Doortodoorsurvey doortodoorsurvey = new Doortodoorsurvey();
@@ -62,8 +62,8 @@ namespace DamagePayee.Controllers
 
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[AuthorizeContext(ViewAction.Add)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Doortodoorsurvey doortodoorsurvey)
         {
             try
@@ -151,7 +151,7 @@ namespace DamagePayee.Controllers
 
 
 
-      //  [AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _doortodoorsurveyService.FetchSingleResult(id);
@@ -165,8 +165,8 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
-       // [ValidateAntiForgeryToken]
-       // [AuthorizeContext(ViewAction.Edit)]
+        [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Doortodoorsurvey doortodoorsurvey)
         {
             doortodoorsurvey.PresentuseList = await _doortodoorsurveyService.GetAllPresentuse();

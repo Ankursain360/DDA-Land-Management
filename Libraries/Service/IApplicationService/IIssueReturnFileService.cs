@@ -13,6 +13,10 @@ namespace Libraries.Service.IApplicationService
 
     {
         Task<List<Datastoragedetails>> GetFileNoList();
+        Task<List<Department>> GetAllDepartment();
+        Task<List<Branch>> GetAllBranch();
+        Task<List<Designation>> GetAllDesignation();
+        Task<bool> Create(Issuereturnfile model);
         Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model);
     }
 }
