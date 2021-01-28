@@ -45,9 +45,17 @@
         </div>
     </div>
     <div class="row mt-md-3">
-        <div class=" col-md-12">
-            <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
-            @*@Html.ActionLink("Back", "Create", "PropertyInventoryReport", null, new { @class = "btn btn-theme " })*@
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+                    <button class="btn btn-theme btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                        <i class="ri-refresh-line mr-2"></i>Reset
+                    </button>
+                </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -55,16 +63,16 @@
     <div class="short-section d-md-flex align-items-center">
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3">
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
                     <option selected="selected" disabled="disabled">Select One</option>
-                    <option>File No.</option>
-                    <option>Locality</option>
+                    <option value="FileNo">File No.</option>
+                    <option value="Locality">Locality</option>
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
             <div class="short-btn d-flex align-items-center">
-                <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
             </div>
         </div>
 
@@ -80,6 +88,7 @@
 
     </div>
 </div>
+
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
