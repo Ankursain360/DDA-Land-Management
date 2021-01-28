@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Model.Entity;
 using Dto.Master;
 using Service.IApplicationService;
-using Dto.Search;
+
 using SiteMaster.Filters;
 using Core.Enum;
 
@@ -95,6 +95,7 @@ namespace SiteMaster.Controllers
                 return Json($"User: {UserName} already exist");
             }
         }
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -125,6 +126,9 @@ namespace SiteMaster.Controllers
             await _userProfileService.DeleteUser(id);
             return RedirectToAction(nameof(Index));
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var user = await _userProfileService.GetUserById(id);

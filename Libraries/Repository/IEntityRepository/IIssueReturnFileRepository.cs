@@ -13,5 +13,10 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Datastoragedetails>> GetFileNoList();
         Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model);
+
+        //Task<List<Zone>> GetAllZone(int departmentId);
+        Task<List<Department>> GetAllDepartment();
+        Task<List<Branch>> GetAllBranch();
+        Task<List<Designation>> GetAllDesignation();
     }
 }

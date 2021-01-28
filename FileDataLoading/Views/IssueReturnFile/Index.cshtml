@@ -10,7 +10,7 @@
                          asp-for="Id" asp-items="@(new SelectList(Model.FileNoList,"Id","FileNo"))">
                         <option  value="0">All </option>
                     </select>
-                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    @*<span asp-validation-for="FileNo" class="text-danger"></span>*@
                     <label class="floating-label">File No </label>
                 </div>
 

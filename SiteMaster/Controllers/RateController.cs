@@ -50,6 +50,8 @@ namespace SiteMaster.Controllers
         {
             rate.PropertyTypeList = await _rateService.GetDropDownList();
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -169,6 +171,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _rateService.FetchSingleResult(id);

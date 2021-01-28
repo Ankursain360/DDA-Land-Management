@@ -156,6 +156,9 @@ namespace SiteMaster.Controllers
             return View("Index", list);
         }
 
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _demolitionchecklistService.FetchSingleResult(id);

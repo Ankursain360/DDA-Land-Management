@@ -1,0 +1,219 @@
+.registrationBg {
+    display: block;
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background: rgb(79, 169, 238);
+    background: -moz-linear-gradient(311deg, rgba(79, 169, 238, 1) 0%, rgba(173, 210, 239, 1) 100%);
+    background: -webkit-linear-gradient(311deg, rgba(79, 169, 238, 1) 0%, rgba(173, 210, 239, 1) 100%);
+    background: linear-gradient(311deg, rgba(79, 169, 238, 1) 0%, rgba(173, 210, 239, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4fa9ee", endColorstr="#add2ef", GradientType=1);
+}
+
+    .registrationBg::after,
+    .registrationBg::before {
+        content: '';
+        display: block;
+        position: absolute;
+        background-position: center !important;
+        background-size: cover !important;
+        background-repeat: no-repeat !important;
+        max-width: 100%;
+    }
+
+    .registrationBg::after {
+        background: url(../images/bottom-img.png);
+        width: 236px;
+        height: 140px;
+        left: 0;
+        bottom: 0;
+    }
+
+    .registrationBg::before {
+        background: url(../images/top-img.png);
+        width: 281px;
+        height: 153px;
+        right: 0;
+        top: 0;
+    }
+
+.fromBg {
+    position: relative;
+    background: #fafdff;
+    border-radius: 30px;
+    padding: 20px;
+    z-index: 1;
+    overflow: hidden;
+}
+
+    .fromBg img.formBg {
+        position: absolute;
+        height: 100%;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        max-width: 100%;
+    }
+
+.logo img {
+    width: 70px;
+}
+
+.logo strong {
+    color: #002346;
+    font-weight: 700;
+    font-size: .85rem;
+}
+
+#form h1.heading {
+    color: #002346;
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+
+#form p.text {
+    color: #002346;
+    font-weight: 500;
+    font-size: .8rem;
+}
+
+#form .form-control {
+    color: #002346;
+    font-size: .85rem;
+    border-radius: 50px;
+    padding: 13px 20px 13px 50px;
+    box-shadow: 0px 3px 7px 2px rgba(0, 0, 0, 0.1);
+}
+
+#form .btn {
+    font-size: .85rem;
+    border-radius: 50px;
+    padding: 13px 19px 13px 25px;
+    box-shadow: 0px 3px 7px 2px rgba(0, 0, 0, 0.1);
+    line-height: 22px;
+    white-space: nowrap;
+}
+
+    #form .btn.btn-theme {
+        background: rgb(124, 77, 255);
+        background: -moz-linear-gradient(90deg, rgba(124, 77, 255, 1) 0%, rgba(83, 109, 254, 1) 100%);
+        background: -webkit-linear-gradient(90deg, rgba(124, 77, 255, 1) 0%, rgba(83, 109, 254, 1) 100%);
+        background: linear-gradient(90deg, rgba(124, 77, 255, 1) 0%, rgba(83, 109, 254, 1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#7c4dff", endColorstr="#536dfe", GradientType=1);
+    }
+
+.capcha {
+    position: absolute;
+    right: 20px;
+    top: 16px;
+}
+
+#form .btn i {
+    font-size: 1.2rem;
+    display: block;
+    height: 21px;
+    width: 21px;
+}
+
+#form a.btn {
+    color: #002346;
+    font-size: .85rem;
+    border-radius: 50px;
+    padding: 13px 25px;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+#form .form-icons {
+    position: relative;
+}
+
+    #form .form-icons i {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        left: 20px;
+        width: 16px;
+        height: 16px;
+        line-height: 16px;
+        text-align: center;
+        color: #808080;
+    }
+
+    #form .form-icons .capcha i {
+        position: relative;
+        right: 0px;
+        top: 0px;
+        left: 0;
+        margin-left: 10px;
+    }
+
+@media(min-width:768px) {
+    .registrationBg::before {
+        width: 439px;
+        height: 331px;
+    }
+
+    .registrationBg::after {
+        width: 415px;
+        height: 247px;
+    }
+
+    .image-right {
+        width: 380px;
+    }
+
+    .fromBg img.formBg {
+        right: -120px;
+    }
+}
+
+@media(min-width:992px) {
+
+    .image-right {
+        width: 400px;
+        margin-left: 50px
+    }
+
+    .fromBg img.formBg {
+        right: -50px;
+    }
+
+    .fromBg {
+        padding: 50px;
+        max-width: 900px;
+    }
+}
+
+@media(min-width:1200px) {
+
+    .image-right {
+        width: 430px;
+        margin-left: 40px;
+        margin-top: -10px;
+        margin-bottom: -10px;
+    }
+
+    .fromBg img.formBg {
+        right: 0px;
+    }
+
+    .fromBg {
+        padding: 40px 50px;
+    }
+
+    .logo strong {
+        color: #1363b1;
+        font-size: .9rem;
+    }
+
+    #form h1.heading {
+        color: #1363b1;
+    }
+
+    #form p.text {
+        color: #83b0d3;
+        font-weight: 400;
+    }
+}

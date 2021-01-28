@@ -34,6 +34,9 @@ namespace SiteMaster.Controllers
         //    var result = await _rebateService.GetAllRebate();
         //    return View(result);
         //}
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -46,6 +49,8 @@ namespace SiteMaster.Controllers
             var result = await _rebateService.GetPagedRebate(model);
             return PartialView("_List", result);
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -175,6 +180,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _rebateService.FetchSingleResult(id);

@@ -1,0 +1,87 @@
+﻿@model Libraries.Model.Entity.Payeeregistration
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+
+        <div class="container d-flex">
+            <div class="fromBg m-auto shadow-lg">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="logo d-flex align-items-center mb-4">
+                            <img src="~/images/logo.png" alt="DDA" class="d-block me-3">
+                            <strong>
+                                Delhi Development Authority<br>
+                                Government of India
+                            </strong>
+                        </div>
+                        <form asp-action="Create" method="post" class="d-block px-2" id="form">
+                            @*<h3 class="mb-3 d-flex">Add Details</h3>*@
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                               
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-user-line"></i>
+
+                                    <input type="text" class="form-control" placeholder="Name" asp-for="Name" autofocus>
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-smartphone-line"></i>
+                                    <input asp-for="MobileNumber" type="text" class="form-control" placeholder="Mobile Number *">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                              
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-mail-line"></i>
+                                    <input asp-for="EmailId" type="email" class="form-control" placeholder="Email Address *">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                              
+             
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-code-s-slash-line"></i>
+                                    <input type="text" class="form-control" placeholder="Captcha *">
+                                    <div class="capcha d-flex align-items-center">
+                                        <img src="~/get-captcha-image" id="img-captcha">
+                                        <i class="ri-refresh-line" id="refreshcaptcha"></i>
+                                    </div>
+                                </div>
+
+
+                              
+                            </div>
+
+                        <div class="d-flex align-items-center">
+                            <button class="btn ms-auto me-3" type="submit">Register</button>
+                            <a class="btn btn-theme text-white d-flex align-items-center" asp-action="Index" asp-controller="DamagePayeeRegistration">Go To Login <i class="ri-arrow-right-line ms-3"></i></a>
+                        </div>
+                        </form>
+
+                    </div>
+                    <div class="col-md-6 col-lg-7">
+                        <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
+                        <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
+                      
+                    </div>
+                </div>
+            </div>
+            </div>
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/CaptchaCreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/CaptchaCreate.min.js" asp-append-version="true"></script>
+</environment>

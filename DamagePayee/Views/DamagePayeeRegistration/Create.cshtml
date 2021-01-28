@@ -1,79 +1,81 @@
 ﻿@model Libraries.Model.Entity.Payeeregistration
-@await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Registration" })
+
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
 }
 
 
-<div class="pt-3">
+@*<div class="pt-3">*@
+    @*<section id="registration" class="registrationBg d-flex">*@
+        <div class="container d-flex">
+            <div class="fromBg m-auto shadow-lg">
+                <div class="row align-items-center">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="logo d-flex align-items-center mb-4">
+                            <img src="~/images/logo.png" alt="DDA" class="d-block me-3">
+                            <strong>
+                                Delhi Development Authority<br>
+                                Government of India
+                            </strong>
+                        </div>
+                        <form asp-action="Create" method="post" class="d-block px-2" id="form">
+                            
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                               
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-user-line"></i>
 
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="row">
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
-                    <span asp-for="Name" class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label"> Name <span style="color:red">*</span></label>
+                                    <input type="text" class="form-control" placeholder="Name" asp-for="Name" autofocus>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-smartphone-line"></i>
+                                    <input asp-for="MobileNumber" type="text" class="form-control" placeholder="Mobile Number *">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                               
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-mail-line"></i>
+                                    <input asp-for="EmailId" type="email" class="form-control" placeholder="Email Address *">
+                                </div>
+                            </div>
+
+                          
+                               
+                                <div class="mb-3 form-icons">
+                                    <i class="ri-code-s-slash-line"></i>
+                                    <input asp-for="CaptchaCode" type="text" class="form-control" placeholder="Captcha *">
+                                    <div class="capcha d-flex align-items-center">
+                                        <img src="~/get-captcha-image" id="img-captcha">
+                                        @*<img id="img-captcha" src="~/get-captcha-image" />*@
+                                        <i class="ri-refresh-line" id="refreshcaptcha"></i>
+                                    </div>
+                                </div>
+
+
+                                
+                        <div class="d-flex align-items-center">
+                            <button class="btn ms-auto me-3" type="submit">Register</button>
+                            <a class="btn btn-theme text-white d-flex align-items-center" asp-action="Index" asp-controller="DamagePayeeRegistration">Go To Login <i class="ri-arrow-right-line ms-3"></i></a>
+                        </div>
+                        </form>
+
+                    </div>
+                    <div class="col-md-6 col-lg-7">
+                        <img src="~/images/img.png" alt="DDA" class="d-none d-md-block image-right" width="450">
+                        <img src="~/images/formBg.png" alt="DDA" class="d-block formBg">
+                      
+                    </div>
                 </div>
             </div>
-
-
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="MobileNumber" placeholder="Mobile No." type="text"
-                           class="floating-label-field floating-label-field--s3" limit="10" />
-                    <span asp-validation-for="MobileNumber" class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label"> Mobile No. <span style="color:red">*</span></label>
-                </div>
             </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="EmailId" placeholder="Email ID" type="email"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
-                    <span asp-validation-for="EmailId" class="d-block text-danger field-validation-valid"></span>
-                    <label class="floating-label">Email ID<span style="color:red">*</span></label>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" asp-for="CaptchaCode" placeholder="Captcha Code" class="floating-label-field floating-label-field--s3" maxlength="4">
-                    <label class="floating-label">Captcha<span style="color:red">*</span></label>
-                </div>
-            </div>
-            <div class="col-md-2 pull-right">
-                <div class="codeImg">
-                    <img id="img-captcha" src="~/get-captcha-image" />
-                </div>
-            </div>
-            <div class="col-md-4 pull-left">
-                <span class="ri-refresh-line" style="font-size:26px" id="refreshcaptcha"></span>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "DamagePayeeRegistration ", null, new { @class = "btn btn-theme " })
-
-            </div>
-
-
-        </div>
-    </form>
-
-</div>
-
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
