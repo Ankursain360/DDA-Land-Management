@@ -1,87 +1,52 @@
-﻿
-var currentSortOrderAscending = 1;
-var currentSortOrderDescending = 2;
-
+﻿var currentPageNumber = 1;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetRate();
+    GetRate(sortOrder);
 });
 $("#btnSearch").click(function () {
-    GetRate();
+    GetRate(sortOrder);
 });
 
 $("#btnReset").click(function () {
     $('#txtProperty').val('');
-    GetRate();
+    GetRate(sortOrder);
 }); 
 
-function GetRate() {
-    var param = GetSearchParam();
-    HttpPost(`/Rate/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
-
-   
-}
-
-function GetSearchParam() {
-    var model = {
-        name: "rate",
-        property: $('#txtProperty').val()
-    };
-    return model;
-}
-
-
-// ********** Sorting Code  **********
-
-
-function GetRateOrderBy(order) {
-    var param = GetSearchParamaOrderby(order);
-    HttpPost(`/Rate/List`, 'html', param, function (response) {
-        $('#divTable').html("");
-        $('#divTable').html(response);
-    });
-}
-
-function Ascending() {
+$("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
+    sortOrder = 1;//for Ascending
+    GetRate(sortOrder);
+});
 
-    if (value !== "0") {
-        GetRateOrderBy(currentSortOrderAscending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-function Descending() {
+$("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
+    sortOrder = 2;//for Descending
+    GetRate(sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetRate(sortOrder);
+});
+function GetRate(sortOrder) {
+    var param = GetSearchParam(sortOrder);
+    HttpPost(`/Rate/List`, 'html', param, function (response) {
+        $('#divTable').html("");
+        $('#divTable').html(response);
+    });
+
    
-    if (value !== "0") {
-        GetRateOrderBy(currentSortOrderDescending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
+}
 
-
-
-function GetSearchParamaOrderby(sortOrder) {
+function GetSearchParam(sortOrder) {
     var model = {
         name: "rate",
         property: $('#txtProperty').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-       
-    }
+        sortOrder: parseInt(sortOrder)
+    };
     return model;
 }
 

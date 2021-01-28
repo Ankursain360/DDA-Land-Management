@@ -3,15 +3,11 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
-            @*<th>Module Name</th>*@
             <th> Department</th>
             <th> Zone </th>
             <th> Division </th>
             <th> Locality(Village) Name</th>
             <th> Locality(Village)  Code</th>
-            <th> Landmark</th>
-            <th> Locality Address</th>
             <th> Status</th>
             <th>Operations</th>
         </tr>
@@ -25,10 +21,6 @@
                 <td>@item.Division.Name</td>
                 <td>@item.Name</td>
                 <td>@item.LocalityCode</td>
-                <td>@item.Landmark</td>
-                <td>@item.Address</td>
-
-
                 <td>
                     @if (item.IsActive == 1)
                     {

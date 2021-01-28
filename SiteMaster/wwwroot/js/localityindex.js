@@ -30,8 +30,6 @@ $("#btnDescending").click(function () {
 $("#btnReset").click(function () {
     $('#txtName').val('');
     $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
     GetLocality(currentPageNumber, currentPageSize, sortby);
 });
 
@@ -49,8 +47,6 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
         localityCode: $('#txtCode').val(),
-        address: $('#txtAddress').val(),
-        landmark: $('#txtLandmark').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

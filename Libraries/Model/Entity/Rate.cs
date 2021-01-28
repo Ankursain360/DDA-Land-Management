@@ -9,7 +9,7 @@ namespace Libraries.Model.Entity
 {
     public class Rate : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "The Property Type field is required")]
+        [Required(ErrorMessage = "The Property Type field is required", AllowEmptyStrings = false)]
         public int PropertyId { get; set; }
 
         [Required(ErrorMessage = "The From Date field is required")]

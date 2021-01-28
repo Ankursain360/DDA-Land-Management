@@ -17,10 +17,12 @@ namespace FileDataLoading.Controllers
         public class IssueReturnFileController : BaseController
         {
             private readonly IIssueReturnFileService _issueReturnFileService;
-            public IssueReturnFileController(IIssueReturnFileService issueReturnFileService)
+            private readonly IDataStorageService _datastorageService;
+        public IssueReturnFileController(IIssueReturnFileService issueReturnFileService, IDataStorageService datastorageService)
             {
             _issueReturnFileService = issueReturnFileService;
-            }
+            _datastorageService = datastorageService;
+        }
 
             async Task BindDropDownView(Datastoragedetails model)
             {
@@ -78,17 +80,34 @@ namespace FileDataLoading.Controllers
         //{
         //    return View();
         //}
-
-        public async Task<IActionResult> IssueFileData(int id = 0)
+        public async Task<IActionResult> IssueFileData( int id)
         {
-            if (id == 0)
-                return View();
-            else
-            {
-               
-                return View();
-            }
+            Issuereturnfile model = new Issuereturnfile();
+            var Data = await _datastorageService.FetchSingleResult(id);
+          
+            model.DepartmentList = await _issueReturnFileService.GetAllDepartment();
+            model.BranchList = await _issueReturnFileService.GetAllBranch();
+            model.DesignationList = await _issueReturnFileService.GetAllDesignation();
+            //   model.ZoneList = await _localityService.GetAllZone(model.DepartmentId);
+            Data.AlmirahList = await _datastorageService.GetAlmirahs();
+            Data.RowList = await _datastorageService.GetRows();
+            Data.ColumnList = await _datastorageService.GetColumns();
+            Data.BundleList = await _datastorageService.GetBundles();
+            model.DataStorageDetails = Data;
+            return View(model);
         }
+
+        //[HttpPost]
+        //public async Task<IActionResult> IssueFileData(int id = 0)
+        //{
+        //    if (id == 0)
+        //        return View();
+        //    else
+        //    {
+               
+        //        return View();
+        //    }
+        //}
         public IActionResult IssueReceipt()
         {
             return PartialView("IssueReceipt");
@@ -96,6 +115,39 @@ namespace FileDataLoading.Controllers
         public IActionResult ReturnReceipt()
         {
             return PartialView("ReturnReceipt");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IssueFileData(int id, Issuereturnfile issuereturnfile)
+        {
+            var Data = await _datastorageService.FetchSingleResult(id);
+            issuereturnfile.CreatedBy = SiteContext.UserId;
+            issuereturnfile.DataStorageDetails = Data;
+            issuereturnfile.Id = 0;
+            if (issuereturnfile.DataStorageDetailsId == 0)
+            {
+                return NotFound();
+            }
+            //var errors = ModelState.Values.SelectMany(x => x.Errors);
+            //ModelState.Remove(null);
+            //if (ModelState.IsValid)
+            {
+
+                issuereturnfile.DataStorageDetailsId = issuereturnfile.DataStorageDetails.Id;
+                var result = await _issueReturnFileService.Create(issuereturnfile);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return View(issuereturnfile);
+                }
+
+            }
+
         }
 
     }

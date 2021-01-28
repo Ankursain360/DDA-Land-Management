@@ -1,6 +1,5 @@
 ﻿$(document).ready(function () {
 
-
     var param = GetSearchParam();
     HttpPost(`/WorkFlowTemplate/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').append(response);
