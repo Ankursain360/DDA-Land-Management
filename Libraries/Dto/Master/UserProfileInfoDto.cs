@@ -10,7 +10,7 @@ namespace Dto.Master
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Department is required")]
+        [Required(ErrorMessage = "Department is required", AllowEmptyStrings = false)]
         public int? DepartmentId { get; set; }
 
         [NotMapped]
@@ -22,7 +22,7 @@ namespace Dto.Master
         [NotMapped]
         public List<DistrictDto> DistrictList { get; set; }
 
-        [Required(ErrorMessage = "Role is required")]
+        [Required(ErrorMessage = "Role is required", AllowEmptyStrings = false)]
         public int? RoleId { get; set; }
 
         [NotMapped]

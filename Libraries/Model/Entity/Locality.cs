@@ -26,12 +26,12 @@ namespace Libraries.Model.Entity
         }
 
 
-        [Required(ErrorMessage = " Department is mandatory")]
+        [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings =false)]
         public int DepartmentId { get; set; }
-        [Required(ErrorMessage = " Zone is mandatory")]
+        [Required(ErrorMessage = " Zone is mandatory", AllowEmptyStrings = false)]
         public int ZoneId { get; set; }
 
-        [Required(ErrorMessage = " Division is mandatory")]
+        [Required(ErrorMessage = " Division is mandatory", AllowEmptyStrings = false)]
         public int DivisionId { get; set; }
         [Required(ErrorMessage = " Locality Name is mandatory")]
         [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id,DepartmentId,DivisionId,ZoneId")]
