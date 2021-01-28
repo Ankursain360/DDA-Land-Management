@@ -1,6 +1,6 @@
-﻿
-var currentSortOrderAscending = 1;
-var currentSortOrderDescending = 2;
+﻿var currentPageNumber = 1;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 
 $(document).ready(function () {

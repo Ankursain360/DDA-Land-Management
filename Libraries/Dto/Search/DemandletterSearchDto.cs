@@ -4,6 +4,8 @@ namespace Dto.Search
 {
    public class DemandletterSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string locality { get; set; }
+        public string demandno { get; set; }
+        public string fileno { get; set; }
     }
 }

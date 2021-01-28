@@ -14,7 +14,7 @@ namespace Libraries.Model.Entity
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
 
-        [Required(ErrorMessage = "Module Name is mandatory")]
+        [Required(ErrorMessage = "Module Name is mandatory", AllowEmptyStrings = false)]
         public int? ModuleId { get; set; }
 
         [Required(ErrorMessage = "Menu Name is mandatory")]

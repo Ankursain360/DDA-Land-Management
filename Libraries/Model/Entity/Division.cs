@@ -30,10 +30,10 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Division Code is mandatory")]
         public string Code { get; set; }
         public byte IsActive { get; set; }
-        [Required(ErrorMessage = "Zone is mandatory")]
+        [Required(ErrorMessage = "Zone is mandatory", AllowEmptyStrings = false)]
 
         public int ZoneId { get; set; }
-        [Required(ErrorMessage = "Department is mandatory")]
+        [Required(ErrorMessage = "Department is mandatory", AllowEmptyStrings = false)]
 
         public int DepartmentId { get; set; }
 
