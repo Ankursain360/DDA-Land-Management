@@ -146,6 +146,8 @@ namespace Libraries.Repository.EntityRepository
             List<Menu> parentmenulist = await _dbContext.Menu.Where(x => x.IsActive == 1).ToListAsync();
             return parentmenulist;
         }
+
+
         public async Task<bool> AnyName(int Id, int ModuleId, string Name)
         {
             return await _dbContext.Menu.AnyAsync(t => t.Id != Id && t.ModuleId == ModuleId && t.Name.ToLower() == Name.ToLower() && t.IsActive == 1);
@@ -171,7 +173,7 @@ namespace Libraries.Repository.EntityRepository
         public  int GetMenuIdByUrl(string url, int id)
         {
            int menuId =   (from x in _dbContext.Menu
-                 where x.ModuleId == id && x.Url.Contains(url) /*x.Url == url*/
+                 where x.ModuleId == id && x.Url.Contains(url) && x.IsActive==1 /*x.Url == url*/
                  select x.Id).First();
             return menuId;
         }
