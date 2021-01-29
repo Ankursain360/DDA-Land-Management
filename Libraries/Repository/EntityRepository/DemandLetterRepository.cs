@@ -137,13 +137,59 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
+         
             var data = await _dbContext.Demandletters
-                    .Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
-                    && x.UptoDate <= defaulterListingReportSearchDto.toDate)
-                    .OrderByDescending(x => x.Id)
+               .Include(x => x.Locality)
 
-                    .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
+               .Where(x => x.UptoDate >= defaulterListingReportSearchDto.fromDate
+                   && x.UptoDate <= defaulterListingReportSearchDto.toDate)
+                  .OrderByDescending(x => x.Id)
 
+                   .GetPaged(defaulterListingReportSearchDto.PageNumber, defaulterListingReportSearchDto.PageSize);
+
+            int SortOrder = (int)defaulterListingReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (defaulterListingReportSearchDto.SortBy.ToUpper())
+                {
+
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+
+                    case ("UPTODATE"):
+                        data.Results = data.Results.OrderBy(x => x.UptoDate).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("DEMANDNO"):
+                        data.Results = data.Results.OrderBy(x => x.DemandNo).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (defaulterListingReportSearchDto.SortBy.ToUpper())
+                {
+
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+
+                    case ("UPTODATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.UptoDate).ToList();
+                        break;
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                             case ("DEMANDNO"):
+                        data.Results = data.Results.OrderByDescending(x => x.DemandNo).ToList();
+                        break; 
+
+                }
+            }
             return data;
         }
 
@@ -306,17 +352,42 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderBy(s => s.Locality.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
+                   
                     case ("FILENO"):
-                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderBy(s => s.FileNo)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
                     case ("PROPERTYNO"):
-                        data.Results = data.Results.OrderBy(x => x.PropertyNo).ToList();
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderBy(s => s.PropertyNo)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
-                    case ("LOCALITY"):
-                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderBy(s => s.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
 
                 }
@@ -325,17 +396,43 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderByDescending(s => s.Locality.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
+
                     case ("FILENO"):
-                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderByDescending(s => s.FileNo)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
                     case ("PROPERTYNO"):
-                        data.Results = data.Results.OrderByDescending(x => x.PropertyNo).ToList();
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderByDescending(s => s.PropertyNo)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
-                    case ("LOCALITY"):
-                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Demandletters
+                                               .Include(x => x.Locality)
+                                               .Where(x => (x.Id == (model.fileNo == 0 ? x.Id : model.fileNo))
+                                               && (x.LocalityId == (model.locality == 0 ? x.LocalityId : model.locality)))
+                                               .OrderByDescending(s => s.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
                         break;
 
                 }
@@ -347,7 +444,16 @@ namespace Libraries.Repository.EntityRepository
         //*******  Imposition Of Charges Report**********
         public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
         {
-            return await _dbContext.Demandletters
+            //return await _dbContext.Demandletters
+            //                   .Include(x => x.Locality)
+            //                       .Where(x => (x.IsActive == 1)
+            //                       && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+            //                       && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
+            //                        && (x.GenerateDate >= model.FromDate && x.GenerateDate <= model.ToDate)
+            //                       )
+            //                       .OrderByDescending(x => x.Id)
+            //                   .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Demandletters
                                .Include(x => x.Locality)
                                    .Where(x => (x.IsActive == 1)
                                    && (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
@@ -356,6 +462,34 @@ namespace Libraries.Repository.EntityRepository
                                    )
                                    .OrderByDescending(x => x.Id)
                                .GetPaged<Demandletters>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderBy(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.LocalityId).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data.Results = data.Results.OrderByDescending(x => x.FileNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.LocalityId).ToList();
+                        break;
+
+                }
+            }
+            return data;
         }
 
         public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)

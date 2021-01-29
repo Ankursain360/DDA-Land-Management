@@ -3,14 +3,12 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-
+            <th>Locality</th>
             <th>File No.</th>
-            
-          
             <th>Demand No.</th>
             <th>Due Amount</th>
             <th>Payment Due Date</th>
-            
+
         </tr>
       
     </thead>
@@ -20,7 +18,7 @@
             @foreach (var item in Model.Results)
             {
         <tr>
-          
+            <td>@item.Locality.Name></td>
             <td>@item.FileNo</td>
             @*<td>@item.FileNo.Distinct()</td>*@
             <td>@item.DemandNo</td>

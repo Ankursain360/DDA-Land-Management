@@ -27,9 +27,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                              && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                               && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                              .OrderByDescending(s => s.IsActive)
                             .ThenBy(s => s.Zone.Name)
                             .ThenBy(s => s.Division.Name)
@@ -47,9 +45,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x => x.Department.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
@@ -60,9 +56,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x => x.Zone.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                      
@@ -74,9 +68,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x => x.Division.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                       
@@ -88,9 +80,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x =>x.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
 
@@ -103,9 +93,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x => x.LocalityCode)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
@@ -116,9 +104,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.IsActive)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                       
@@ -137,9 +123,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.Department.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
@@ -150,9 +134,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.Zone.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
 
@@ -164,9 +146,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.Division.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
 
@@ -178,9 +158,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.Name)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
 
@@ -193,9 +171,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderByDescending(x => x.LocalityCode)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
                         break;
@@ -206,9 +182,7 @@ namespace Libraries.Repository.EntityRepository
                         .Include(x => x.Department)
                         .Include(x => x.Division)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode))
-                             && (string.IsNullOrEmpty(model.landmark) || x.Landmark.Contains(model.landmark))
-                             && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address)))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
                             .OrderBy(x => x.IsActive)
                             .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
 

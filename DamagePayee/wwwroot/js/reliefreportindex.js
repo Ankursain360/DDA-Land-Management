@@ -114,7 +114,7 @@ $("#btnReset").click(function () {
     $('#LocalityId').val('0').trigger('change');
     $('#FromDate').val('');
     $('#ToDate').val('');
-    GetDetails(currentPageNumber, currentPageSize);
+    $('#LoadReportView').html("");
 });
 
 function ValidCheck() {

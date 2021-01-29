@@ -35,7 +35,7 @@ namespace Dto.Master
         [Required(ErrorMessage = "Phone Number is mandatory")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Department is mandatory")]
+        [Required(ErrorMessage = "Department is mandatory", AllowEmptyStrings = false)]
         public int? DepartmentId { get; set; }
 
         [NotMapped]
@@ -47,7 +47,7 @@ namespace Dto.Master
         [NotMapped]
         public List<DistrictDto> DistrictList { get; set; }
 
-        [Required(ErrorMessage = "Role is mandatory")]
+        [Required(ErrorMessage = "Role is mandatory", AllowEmptyStrings = false)]
         public int RoleId { get; set; }
 
         [NotMapped]

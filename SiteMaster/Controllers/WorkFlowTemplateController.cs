@@ -18,7 +18,7 @@ namespace SiteMaster.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly IUserProfileService _userProfileService;
 
-      
+
         public WorkFlowTemplateController(IWorkflowTemplateService workflowtemplateService, IUserProfileService userProfileService)
         {
             _workflowtemplateService = workflowtemplateService;
@@ -28,6 +28,11 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
+            var message = TempData["Msg"] as string;
+            if(message != null)
+            {
+                ViewBag.Message = message;
+            }
             return View();
         }
 
@@ -59,7 +64,7 @@ namespace SiteMaster.Controllers
             //  model.OperationId = WorkflowLevelDto.opertaionId;
             //if (WorkflowLevelDto.opertaionId == "Role")
             //{
-                ViewBag.Items = await _userProfileService.GetRole();
+            ViewBag.Items = await _userProfileService.GetRole();
             //}
             //else
             //{
@@ -91,7 +96,7 @@ namespace SiteMaster.Controllers
 
                     if (result == true)
                     {
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                        TempData["Msg"] = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         return Json(Url.Action("Index", "WorkFlowTemplate"));
                     }
                     else
