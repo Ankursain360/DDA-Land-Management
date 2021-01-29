@@ -32,7 +32,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedDate).HasColumnType("date");
+            builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.DataStorageDetailsId).HasColumnType("int(11)");
 
@@ -40,15 +40,39 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DesignationId).HasColumnType("int(11)");
 
-            builder.Property(e => e.IssueToEmployee)
-                .HasMaxLength(45)
+            builder.Property(e => e.FileCategoryId)
+                .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.IssuingDate).HasColumnType("date");
+            builder.Property(e => e.IssuedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.IssuedDate).HasColumnType("date");
+
+            builder.Property(e => e.IssuedToEmployee)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.LocalityHeader)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.LocalityId)
+                .HasMaxLength(100)
+                .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.ModifiedDate).HasColumnType("date");
+            builder.Property(e => e.ReturnedBy).HasColumnType("int(11)");
+
+            builder.Property(e => e.ReturnedDate).HasColumnType("date");
+
+            builder.Property(e => e.SchemeId)
+                .HasMaxLength(100)
+                .IsUnicode(false);
+
+            builder.Property(e => e.SequenceNo).HasColumnType("int(11)");
+
+            builder.Property(e => e.Year).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Branch)
                 .WithMany(p => p.Issuereturnfile)

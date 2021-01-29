@@ -134,7 +134,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input placeholder="date" type="date"
-                           class="floating-label-field floating-label-field--s3" asp-for="IssuedDate" />
+                           class="floating-label-field floating-label-field--s3" asp-for="ReturnedDate" />
                     @*<span asp-validation-for="" class="text-danger"></span>*@
                     <label class="floating-label">Issuing Date  </label>
                 </div>
@@ -143,11 +143,7 @@
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit" id="Issue">Issue</button>
-                @if (Model.Id != 0)
-                {
-                    <button class="btn btn-theme " type="submit" id="IssueReceipt" asp-action="IssueReceipt" >Issue Receipt</button>
-
-                }
+                <button class="btn btn-theme " type="submit" id="IssueReceipt" style="display:none">Issue Receipt</button>
                 @*<button class="btn btn-theme " type="submit">Return Receipt</button>*@
                 @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
 

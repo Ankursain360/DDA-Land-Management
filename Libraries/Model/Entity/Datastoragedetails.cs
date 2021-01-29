@@ -52,9 +52,12 @@ namespace Libraries.Model.Entity
         public int? Year { get; set; }
         public string CategoryNo { get; set; }
         public string HeaderNo { get; set; }
+        public string FileStatus { get; set; }
+        public int? BranchId { get; set; }
 
         public Almirah Almirah { get; set; }
         public Bundle Bundle { get; set; }
+        public Branch Branch { get; set; }
         public Column Column { get; set; }
         public Locality Locality { get; set; }
         public Row Row { get; set; }
