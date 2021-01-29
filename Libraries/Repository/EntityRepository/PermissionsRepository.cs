@@ -29,7 +29,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(a => a.Menu.Module)
                 .Include(a => a.Menu)
                 .Where(a => a.Menu.Module.Guid == moduleId
-                        && a.RoleId == roleId)
+                        && a.RoleId == roleId && a.Menu.IsActive == 1)
                 .ToListAsync();
             return result;
         }
@@ -41,7 +41,7 @@ namespace Libraries.Repository.EntityRepository
                 var result = await _dbContext.Menu
                 .Include(a => a.Menuactionrolemap)
                 .ThenInclude(a => a.Action)
-                .Where(a => a.ModuleId == moduleId)
+                .Where(a => a.ModuleId == moduleId && a.IsActive == 1)
                 .ToListAsync();
                 return result;
             }

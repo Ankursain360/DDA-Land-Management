@@ -1,12 +1,12 @@
 ﻿var currentPageNumber = 1;
 var currentPageSize = 5;
-var sortby = 1;
+var sortOrder = 1;
 
 $(document).ready(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetDetails(pageNumber, pageSize, order) {
-    var param = GetSearchParam(pageNumber, pageSize, order);
+function GetDetails(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/LandUse/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
@@ -26,38 +26,38 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnSearch").click(function () {
-    GetDetails(currentPageNumber, currentPageSize);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
-    sortby = 1;//for Ascending 
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    sortOrder = 1;//for Ascending 
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
-    sortby = 2;//for Descending
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    sortOrder = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
-    GetDetails(currentPageNumber, currentPageSize, sortby);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 function onPaging(pageNo) {
-    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
