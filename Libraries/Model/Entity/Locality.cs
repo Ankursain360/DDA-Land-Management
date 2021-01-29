@@ -23,6 +23,7 @@ namespace Libraries.Model.Entity
             Demandletters = new HashSet<Demandletters>();
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
             Datastoragedetails = new HashSet<Datastoragedetails>();
+            Dmsfileupload = new HashSet<Dmsfileupload>();
         }
 
 
@@ -64,7 +65,8 @@ namespace Libraries.Model.Entity
         public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
-      
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
+
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Demandletters> Demandletters { get; set; }

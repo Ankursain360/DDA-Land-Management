@@ -170,6 +170,7 @@ namespace Libraries.Model
         public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
         public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
+        public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -310,6 +311,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
