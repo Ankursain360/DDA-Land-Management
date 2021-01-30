@@ -8,19 +8,27 @@ namespace Libraries.Model.Entity
     public partial class Issuereturnfile : AuditableEntity<int>
     {
         public int DataStorageDetailsId { get; set; }
-        public string IssueToEmployee { get; set; }
+        public string IssuedToEmployee { get; set; }
+        public DateTime? IssuedDate { get; set; }
+        public DateTime? ReturnedDate { get; set; }
+        public string FileCategoryId { get; set; }
+        public string LocalityHeader { get; set; }
+        public int? SequenceNo { get; set; }
+        public int? Year { get; set; }
+        public string SchemeId { get; set; }
+        public string LocalityId { get; set; }
+        public int? IssuedBy { get; set; }
+        public int? ReturnedBy { get; set; }
         public int? DepartmentId { get; set; }
         public int? BranchId { get; set; }
         public int? DesignationId { get; set; }
-        public DateTime? IssuingDate { get; set; }
+       
 
         public Branch Branch { get; set; }
         public Datastoragedetails DataStorageDetails { get; set; }
         public Department Department { get; set; }
         public Designation Designation { get; set; }
 
-        //[NotMapped]
-        //public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]

@@ -121,6 +121,15 @@ namespace FileDataLoading.Controllers
         public async Task<IActionResult> IssueFileData(int id, Issuereturnfile issuereturnfile)
         {
             var Data = await _datastorageService.FetchSingleResult(id);
+            issuereturnfile.DepartmentList = await _issueReturnFileService.GetAllDepartment();
+            issuereturnfile.BranchList = await _issueReturnFileService.GetAllBranch();
+            issuereturnfile.DesignationList = await _issueReturnFileService.GetAllDesignation();
+
+            Data.AlmirahList = await _datastorageService.GetAlmirahs();
+            Data.RowList = await _datastorageService.GetRows();
+            Data.ColumnList = await _datastorageService.GetColumns();
+            Data.BundleList = await _datastorageService.GetBundles();
+
             issuereturnfile.CreatedBy = SiteContext.UserId;
             issuereturnfile.DataStorageDetails = Data;
             issuereturnfile.Id = 0;
@@ -138,7 +147,9 @@ namespace FileDataLoading.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    return View("Index");
+                    //return RedirectToAction("Index");
+                    return View(issuereturnfile);
+                    //ViewBag.vid = issuereturnfile.id;
                 }
                 else
                 {
