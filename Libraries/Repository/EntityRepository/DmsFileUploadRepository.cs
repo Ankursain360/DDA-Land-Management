@@ -148,5 +148,86 @@ namespace Libraries.Repository.EntityRepository
         {
             throw new NotImplementedException();
         }
+
+        public async Task<List<Department>> GetDepartmentList()
+        {
+            return await _dbContext.Department
+                                     .Where(x => x.IsActive == 1)
+                                     .ToListAsync();
+        }
+
+        public async Task<List<Propertyregistration>> GetKhasraNoList()
+        {
+            return await _dbContext.Propertyregistration
+                                     .Where(x => x.IsActive == 1 && x.IsDeleted !=0 && x.IsValidate == 1 && x.IsDisposed !=0
+                                     && (x.KhasraNo != null || x.KhasraNo != string.Empty)
+                                     )
+                                     .ToListAsync();
+        }
+
+        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
+        {
+            var data = await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId )
+                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        )
+                                        .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
+                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
+                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
+                                )
+                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
+                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
+                                        )
+                                .OrderByDescending(s =>
+                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
+                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
+                                )
+                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+            }
+            return data;
+        }
+
+        public async Task<Dmsfileupload> FetchSingleResult(int id)
+        {
+            return await _dbContext.Dmsfileupload
+                                        .Include(x => x.Department)
+                                        .Include(x => x.Locality)
+                                        .Include(x => x.KhasraNo)
+                                        .Where(x => x.Id == id)
+                                        .FirstOrDefaultAsync();
+
+
+        }
     }
 }

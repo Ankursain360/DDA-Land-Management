@@ -22,10 +22,12 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Damagepayeepersonelinfo>> GetPersonalInfoTemp(int id);
         Task<bool> DeletePayeePersonalInfoTemp(int Id);
         Task<Damagepayeepersonelinfo> GetPersonelInfoFilePath(int Id);
+        Task<List<Department>> GetDepartmentList();
 
         //********* rpt 2 Allotte Type **********
 
         Task<bool> SaveAllotteTypeTemp(List<Allottetype> allottetypetemp);
+        Task<List<Propertyregistration>> GetKhasraNoList();
         Task<List<Allottetype>> GetAllottetypeTemp(int id);
         Task<bool> DeleteAllotteTypeTemp(int Id);
         Task<Allottetype> GetAllotteTypeSingleResult(int id);
@@ -34,11 +36,13 @@ namespace Libraries.Repository.IEntityRepository
         //********* rpt 3 Damage payment history ***********
 
         Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistory> damagepaymenthistorytemp);
+        Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
         Task<List<Damagepaymenthistory>> GetPaymentHistoryTemp(int id);
         Task<bool> DeletePaymentHistoryTemp(int Id);
         Task<Damagepayeeregister> FetchSelfAssessmentUserId(int userId);
         Task<Rebate> GetRebateValue();
         Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id);
+        Task<Dmsfileupload> FetchSingleResult(int id);
         string GetLocalityName(int? localityId);
         Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister);
     }

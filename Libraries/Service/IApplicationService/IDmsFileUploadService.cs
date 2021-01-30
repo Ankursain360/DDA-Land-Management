@@ -47,5 +47,12 @@ namespace Libraries.Service.IApplicationService
         //Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id);
         //string GetLocalityName(int? localityId);
         //Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister);
+        Task<List<Department>> GetDepartmentList();
+        Task<List<Propertyregistration>> GetKhasraNoList();
+        Task<List<Locality>> GetLocalityList();
+        Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
+        Task<bool> Create(Dmsfileupload dmsfileupload);
+        Task<Dmsfileupload> FetchSingleResult(int id);
+        Task<bool> Update(int id, Dmsfileupload dmsfileupload);
     }
 }

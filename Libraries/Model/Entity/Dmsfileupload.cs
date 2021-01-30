@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
@@ -24,5 +25,16 @@ namespace Libraries.Model.Entity
         public Department Department { get; set; }
         public Propertyregistration KhasraNo { get; set; }
         public Locality Locality { get; set; }
+
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+
+        [NotMapped]
+        public List<Locality> LocalityList { get; set; }
+        [NotMapped]
+        public List<Propertyregistration> KhasraNoList { get; set; }
+
+        [NotMapped]
+        public IFormFile FileUpload { get; set; }
     }
 }

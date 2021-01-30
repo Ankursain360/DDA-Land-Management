@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Propertyregistration>
-@await Component.InvokeAsync("PageHeader", new { pageName = "Property Inventory" })
+﻿@model IEnumerable<Libraries.Model.Entity.Dmsfileupload>
+@await Component.InvokeAsync("PageHeader", new { pageName = "File Upload" })
 
 <div class="pt-3">
     <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -7,60 +7,31 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="InventoriedInId">
-                        <option selected="selected" value="0">All</option>
-                        <option value="1">VLMS</option>
-                        <option value="2">Used</option>
-                    </select>
-                    <label class="floating-label" for="ddlInventoried">Inventoried In</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="PlannedUnplannedLand">
-                        <option selected="selected" value="0">All</option>
-                        <option value="Planned Land">Planned Land</option>
-                        <option value="Unplanned Land">Unplanned Land</option>
-                    </select>
-                    <label class="floating-label" for="PlannedUnplannedLand">Planned/Unplanned Land</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="ClassificationOfLandId" asp-items="@(new SelectList(ViewBag.Items, "Id","Name"))">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label class="floating-label" for="ClassificationOfLandId">Classification of Land</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))" onchange="return GetZoneList(this.options[this.selectedIndex].value);">
+                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))">
                         <option selected="selected" value="0">All</option>
                     </select>
                     <label class="floating-label" for="DepartmentId">Department</label>
                 </div>
             </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="LocalityId" asp-items="@(new SelectList(ViewBag.LocalityList, "Id","Name"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="LocalityId">Locality</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="KhasraNoId" asp-items="@(new SelectList(ViewBag.KhasraNoList, "Id","KhasraNo"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="KhasraNoId">Khasra No.</label>
+                </div>
+            </div>
         </div>
 
-        <div class="row mt-md-3">
-            <div class="col-md-3">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="ZoneId" onchange="return GetDivisionList(this.options[this.selectedIndex].value);">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label class="floating-label" for="ZoneId">Zone</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="DivisionId">
-                        <option selected="selected" value="0">All</option>
-                    </select>
-                    <label class="floating-label" for="DivisionId">Division</label>
-                </div>
-            </div>
-        </div>
+        
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
                 <div class="row">
@@ -82,12 +53,10 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" value="inventoriedin">Inventoried In</option>
-                        <option value="plannedunplanned">Planned/Unplanned Land</option>
-                        <option value="classification">Classification of Land</option>
+                        <option selected="selected" value="fileno">File No.</option>
                         <option value="department">Department</option>
-                        <option value="zone">Zone</option>
-                        <option value="division">Division</option>
+                        <option value="locality">Locality</option>
+                        <option value="khasrano">Khasra No</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
@@ -98,7 +67,7 @@
             </div>
 
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/PropertyRegistration/create" class="d-flex align-items-center btn btn-primary mr-2">
+                <a href="/DMSFileUpload/Create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
                     <small>Add More</small>
                 </a>
@@ -116,9 +85,9 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/propertyregisterationindex.js"></script>
+    <script src="~/js/dmsfileuploadindex.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/propertyregisterationindex.min.js" asp-append-version="true"></script>
+    <script src="~/js/dmsfileuploadindex.min.js" asp-append-version="true"></script>
 </environment>
 

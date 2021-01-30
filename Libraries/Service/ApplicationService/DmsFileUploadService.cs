@@ -24,6 +24,58 @@ namespace Service.ApplicationService
             _dmsFileUploadRepository = dmsFileUploadRepository;
         }
 
+        public async Task<List<Department>> GetDepartmentList()
+        {
+            return await _dmsFileUploadRepository.GetDepartmentList();
+        }
+
+        public async Task<List<Propertyregistration>> GetKhasraNoList()
+        {
+            return await _dmsFileUploadRepository.GetKhasraNoList();
+        }
+
+        public async Task<List<Locality>> GetLocalityList()
+        {
+            return await _dmsFileUploadRepository.GetLocalityList();
+        }
+
+        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
+        {
+            return await _dmsFileUploadRepository.GetPagedDMSFileUploadList(model);
+        }
+
+        public async Task<bool> Create(Dmsfileupload dmsfileupload)
+        {
+            dmsfileupload.CreatedDate = DateTime.Now;
+            _dmsFileUploadRepository.Add(dmsfileupload);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Dmsfileupload> FetchSingleResult(int id)
+        {
+            return await _dmsFileUploadRepository.FetchSingleResult(id);
+        }
+
+        public async Task<bool> Update(int id, Dmsfileupload dmsfileupload)
+        {
+            var result = await _dmsFileUploadRepository.FindBy(a => a.Id == id);
+            Dmsfileupload model = result.FirstOrDefault();
+            model.FileNo = dmsfileupload.FileNo;
+            model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
+            model.AlloteeName = dmsfileupload.AlloteeName;
+            model.DepartmentId = dmsfileupload.DepartmentId;
+            model.LocalityId = dmsfileupload.LocalityId;
+            model.KhasraNoId = dmsfileupload.KhasraNoId;
+            model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
+            model.AlmirahNo = dmsfileupload.AlmirahNo;
+            model.Title = dmsfileupload.Title;
+            model.FileName = dmsfileupload.FileName;
+            model.FilePath = dmsfileupload.FilePath;
+            model.ModifiedDate = DateTime.Now;
+            _dmsFileUploadRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
         //public async Task<List<Locality>> GetLocalityList()
         //{
         //    List<Locality> localityList = await _dmsFileUploadRepository.GetLocalityList();
