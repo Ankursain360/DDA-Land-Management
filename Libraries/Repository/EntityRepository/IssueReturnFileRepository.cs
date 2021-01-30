@@ -54,13 +54,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    //case ("DEPARTMENT"):
-                    //    data = null;
-                    //    data = await _dbContext.Datastoragedetails
-                    //            .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
-                    //            .GetPaged(model.PageNumber, model.PageSize);
-                    //    break;
-
+                   
 
                     case ("STATUS"):
                         data = null;
@@ -70,7 +64,7 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
                                      .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
-                                     .OrderByDescending(x => x.IsActive)
+                                     .OrderByDescending(x => x.FileStatus)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
 
@@ -81,16 +75,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    //case ("DEPARTMENT"):
-                    //    data = null;
-                    //    data = await _dbContext.Zone
-                    //        .Include(s => s.Department)
-                    //        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-                    //         && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-                    //        .OrderByDescending(x => x.Department.Name)
-                    //        .GetPaged<Zone>(model.PageNumber, model.PageSize);
-                    //    break;
-
+                   
                    
                     case ("STATUS"):
                         data = null;
@@ -100,7 +85,7 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
-                                    .OrderBy(x => x.IsActive)
+                                    .OrderBy(x => x.FileStatus)
                                     .GetPaged(model.PageNumber, model.PageSize);
                         break;
 
@@ -110,6 +95,22 @@ namespace Libraries.Repository.EntityRepository
             return data;
 
 
+        }
+
+        public async Task<Issuereturnfile> FetchSingleReceiptResult(int id)
+        {
+            return await _dbContext.Issuereturnfile
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Branch)
+                                    .Include(x => x.Designation)
+                                     
+                                    .Include(x => x.DataStorageDetails)
+                                    .Include(x => x.DataStorageDetails.Almirah)
+                                    .Include(x => x.DataStorageDetails.Row)
+                                    .Include(x => x.DataStorageDetails.Column)
+                                    .Include(x => x.DataStorageDetails.Bundle)
+                                   .Where(x => x.Id == id)
+                                   .SingleOrDefaultAsync();
         }
     }
     
