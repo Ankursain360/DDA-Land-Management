@@ -10,7 +10,7 @@ namespace Dto.Master
     public class BulkUploadInfoDto
     {
         [Required(ErrorMessage = "Department is required", AllowEmptyStrings = false)]
-        public int? DepartmentId { get; set; }
+        public int DepartmentId { get; set; }
 
         [Required(ErrorMessage = "Pdf File Location is required")]
         public string PdfLocationPath { get; set; }

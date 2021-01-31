@@ -18,6 +18,8 @@ using DocumentManagementSystem.Filters;
 using Core.Enum;
 using Utility.Helper;
 using Dto.Master;
+using Newtonsoft.Json;
+using CsvHelper;
 
 namespace DocumentManagementSystem.Controllers
 {
@@ -119,6 +121,8 @@ namespace DocumentManagementSystem.Controllers
             }
 
         }
+
+
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
@@ -259,6 +263,121 @@ namespace DocumentManagementSystem.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> SaveBulkUploadDetails([FromBody] BulkUploadInfoDto model)
+        {
+            if (ModelState.IsValid)
+            {
+               
+                return Json(Url.Action("Index", "UserManagement"));
+            }
+            else
+            {
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        [DisableRequestSizeLimit]
+        public async Task<IActionResult> CreateBulkUpload(Dmsfileupload dmsfileupload)
+        {
+            await BindDropDown(dmsfileupload);
+            dmsfileupload.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
+            dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
+            dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            var result = false;
+            if (ModelState.IsValid)
+            {
+                
+                #region File Upload  Added by Renu 29 Jan 2021
+                /* For File Upload*/
+                UploadFilePath = _Configuration.GetSection("FilePaths:FileUpload:FilePath").Value.ToString();
+                if (dmsfileupload.FileUpload != null)
+                {
+                    if (!Directory.Exists(UploadFilePath))
+                    {
+                        DirectoryInfo di = Directory.CreateDirectory(UploadFilePath);// Try to create the directory.
+                    }
+                    dmsfileupload.FileName = Guid.NewGuid().ToString() + "_" + dmsfileupload.FileUpload.FileName;
+                    dmsfileupload.FilePath = Path.Combine(UploadFilePath, dmsfileupload.FileName);
+                    using (var stream = new FileStream(dmsfileupload.FilePath, FileMode.Create))
+                    {
+                        dmsfileupload.FileUpload.CopyTo(stream);
+                    }
+                }
+                #endregion
+                List<DMSCSVTableDTO> data;
+                string jsonString;
+                using (var sreader = new StreamReader(dmsfileupload.FileUpload.OpenReadStream()))
+                {
+                    string[] headers = sreader.ReadLine().Split(',');     //Title
+                    while (!sreader.EndOfStream)                          //get all the content in rows 
+                    {
+                        string[] rows = sreader.ReadLine().Split(',');
+                        dmsfileupload.FileNo = (rows[0].ToString());
+                        dmsfileupload.AlloteeName = (rows[1].ToString());
+                        dmsfileupload.LocalityId = int.Parse(rows[2].ToString());
+                        dmsfileupload.KhasraNoId = int.Parse(rows[3].ToString());
+                        dmsfileupload.PropertyNoAddress = (rows[4].ToString());
+                        dmsfileupload.Title = (rows[5].ToString());
+                        dmsfileupload.AlmirahNo = (rows[6].ToString());
+                        dmsfileupload.FileName = (rows[7].ToString());
+                        dmsfileupload.FilePath = dmsfileupload.PdfLocationPath;
+                        dmsfileupload.IsFileBulkUpload = "File Upload";
+                        dmsfileupload.IsActive = 1;
+                        dmsfileupload.CreatedBy = SiteContext.UserId;
+                        result = await _dmsfileuploadService.Create(dmsfileupload);
+                    }
+                }
+                //using (var fs = new StreamReader(dmsfileupload.FileName))
+                //{
+                //    data = new CsvReader((IParser)fs).GetRecords<DMSCSVTableDTO>().ToList();
+                //}
+
+                ////Csv data as Json string if needed
+                //jsonString = JsonConvert.SerializeObject(data);
+                //foreach (var details in data)
+                //{
+                //    dmsfileupload.FileNo = details.FileNo;
+                //    dmsfileupload.AlloteeName = details.AlloteeName;
+                //    dmsfileupload.LocalityId = details.LocalityId;
+                //    dmsfileupload.KhasraNoId = details.KhasraNoId;
+                //    dmsfileupload.PropertyNoAddress = details.PropertyNoAddress;
+                //    dmsfileupload.Title = details.Title;
+                //    dmsfileupload.AlmirahNo = details.AlmirahNo;
+                //    dmsfileupload.FileName = details.FileName;
+                //    dmsfileupload.FilePath = dmsfileupload.PdfLocationPath;
+                //    dmsfileupload.CreatedBy = SiteContext.UserId;
+                //    result = await _dmsfileuploadService.Create(dmsfileupload);
+                //}
+
+                
+
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
+                    ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
+                    ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+                    return View("Index");
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    await BindDropDown(dmsfileupload);
+                    return View(dmsfileupload);
+
+                }
+            }
+            else
+            {
+                return View(dmsfileupload);
+            }
+
+        }
     }
 
 }

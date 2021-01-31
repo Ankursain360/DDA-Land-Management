@@ -46,9 +46,21 @@ namespace Service.ApplicationService
 
         public async Task<bool> Create(Dmsfileupload dmsfileupload)
         {
-            dmsfileupload.IsActive =  1;
-            dmsfileupload.CreatedDate = DateTime.Now;
-            _dmsFileUploadRepository.Add(dmsfileupload);
+            Dmsfileupload model = new Dmsfileupload();
+            model.FileNo = dmsfileupload.FileNo;
+            model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
+            model.AlloteeName = dmsfileupload.AlloteeName;
+            model.DepartmentId = dmsfileupload.DepartmentId;
+            model.LocalityId = dmsfileupload.LocalityId;
+            model.KhasraNoId = dmsfileupload.KhasraNoId;
+            model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
+            model.AlmirahNo = dmsfileupload.AlmirahNo;
+            model.Title = dmsfileupload.Title;
+            model.FileName = dmsfileupload.FileName;
+            model.FilePath = dmsfileupload.FilePath;
+            model.IsActive =  1;
+            model.CreatedDate = DateTime.Now;
+            _dmsFileUploadRepository.Add(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
