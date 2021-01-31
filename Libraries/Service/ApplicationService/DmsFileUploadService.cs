@@ -46,6 +46,7 @@ namespace Service.ApplicationService
 
         public async Task<bool> Create(Dmsfileupload dmsfileupload)
         {
+            dmsfileupload.IsActive =  1;
             dmsfileupload.CreatedDate = DateTime.Now;
             _dmsFileUploadRepository.Add(dmsfileupload);
             return await _unitOfWork.CommitAsync() > 0;
@@ -71,7 +72,19 @@ namespace Service.ApplicationService
             model.Title = dmsfileupload.Title;
             model.FileName = dmsfileupload.FileName;
             model.FilePath = dmsfileupload.FilePath;
+            model.IsActive = dmsfileupload.IsActive;
             model.ModifiedDate = DateTime.Now;
+            _dmsFileUploadRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> Delete(int id, int userId)
+        {
+            var result = await _dmsFileUploadRepository.FindBy(a => a.Id == id);
+            Dmsfileupload model = result.FirstOrDefault();
+            model.IsActive = 0;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = userId;
             _dmsFileUploadRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }

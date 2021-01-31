@@ -159,8 +159,8 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Propertyregistration>> GetKhasraNoList()
         {
             return await _dbContext.Propertyregistration
-                                     .Where(x => x.IsActive == 1 && x.IsDeleted !=0 && x.IsValidate == 1 && x.IsDisposed !=0
-                                     && (x.KhasraNo != null || x.KhasraNo != string.Empty)
+                                     .Where(x => x.IsActive == 1 && x.IsDeleted != 0 && x.IsValidate == 1 && x.IsDisposed != 0
+                                    // && (x.KhasraNo != DBNull.Value || x.KhasraNo != null || x.KhasraNo != string.Empty)
                                      )
                                      .ToListAsync();
         }
@@ -171,7 +171,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Department)
                                         .Include(x => x.Locality)
                                         .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId )
+                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
                                         && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
                                         )

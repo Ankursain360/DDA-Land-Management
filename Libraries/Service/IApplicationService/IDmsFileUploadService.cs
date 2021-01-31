@@ -54,5 +54,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Dmsfileupload dmsfileupload);
         Task<Dmsfileupload> FetchSingleResult(int id);
         Task<bool> Update(int id, Dmsfileupload dmsfileupload);
+        Task<bool> Delete(int id, int userId);
     }
 }

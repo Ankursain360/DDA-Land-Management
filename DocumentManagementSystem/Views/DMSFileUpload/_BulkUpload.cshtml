@@ -1,0 +1,62 @@
+﻿@model Dto.Master.BulkUploadInfoDto
+
+
+<div class="pt-3">
+    <form id="frmInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div id="divBulkFileUpload" >
+            <h3 class="my-3 d-flex sub-heading">Bulk Upload</h3>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="PdfLocationPath" type="text" class="floating-label-field floating-label-field--s3 ">
+                        <span asp-validation-for="PdfLocationPath" class="text-danger"></span>
+                        <label class="floating-label">Enter Pdf File Location </label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))">
+                            <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                        <label asp-for="DepartmentId" class="floating-label">Department </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3">
+                        <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
+                        <label for="field-1" class="floating-label">Upload CSV File</label>
+
+                        <a class="badge badge-primary px-2" asp-action="DownloadCSVFormat"> (Download CSV Format)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="button" id="btnSaveBulkUploadInfo">Create</button>
+                @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
+            </div>
+        </div>
+    </form>
+
+
+</div>
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js" defer></script>
+<environment include="Development">
+    <script src="~/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+<environment include="Development">
+    <script src="~/js/dmsbulkupload.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/dmsbulkupload.min.js" asp-append-version="true"></script>
+</environment>

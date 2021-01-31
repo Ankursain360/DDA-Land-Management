@@ -28,5 +28,34 @@ function fileValidation(filePath, fileInput, size) {
 $("input[name='grpIsFileBulkUpload']").click(function () {
     var selected = $("input[type='radio'][name='grpIsFileBulkUpload']:checked");
     $("#IsFileBulkUpload").val(selected.val());
-
+    if ($("#rbtFileUpload").is(":checked")) {
+        $("#divfileupload").show();
+        $("#divBulkFileUpload").hide();
+    }
+    else {
+        $("#divfileupload").hide();
+        $("#divBulkFileUpload").show();
+    }
 });
+
+$("#rbtFileUpload").click(function (event) {
+    $("#divfileupload").show();
+    $('#divLoadData').html("");
+});
+
+$("#rbtBulkUpload").click(function (event) {
+    event.preventDefault();
+    var param = GetSearchParam();
+    HttpPost(`/DMSFileUpload/BulkUploadDetails`, 'html', param, function (response) {
+        $("#divfileupload").hide();
+        $('#divLoadData').html("");
+        $('#divLoadData').html(response);
+    });
+});
+function GetSearchParam() {
+    var id = $('#Id').val();
+    var model = {
+        
+    }
+    return model;
+}

@@ -17,6 +17,7 @@ using Dto.Search;
 using DocumentManagementSystem.Filters;
 using Core.Enum;
 using Utility.Helper;
+using Dto.Master;
 
 namespace DocumentManagementSystem.Controllers
 {
@@ -34,8 +35,8 @@ namespace DocumentManagementSystem.Controllers
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
-            ViewBag.LocalityList = await _dmsfileuploadService.GetDepartmentList();
-            ViewBag.DepartmentList = await _dmsfileuploadService.GetLocalityList();
+            ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
+            ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
             return View();
         }
@@ -56,6 +57,7 @@ namespace DocumentManagementSystem.Controllers
         public async Task<IActionResult> Create()
         {
             Dmsfileupload dmsfileupload = new Dmsfileupload();
+            dmsfileupload.IsActive = 1;
             await BindDropDown(dmsfileupload);
             return View(dmsfileupload);
         }
@@ -98,8 +100,8 @@ namespace DocumentManagementSystem.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    ViewBag.LocalityList = await _dmsfileuploadService.GetDepartmentList();
-                    ViewBag.DepartmentList = await _dmsfileuploadService.GetLocalityList();
+                    ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
+                    ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
                     return View("Index");
                 }
@@ -167,8 +169,8 @@ namespace DocumentManagementSystem.Controllers
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                    ViewBag.LocalityList = await _dmsfileuploadService.GetDepartmentList();
-                    ViewBag.DepartmentList = await _dmsfileuploadService.GetLocalityList();
+                    ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
+                    ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
                     return View("Index");
                 }
@@ -197,32 +199,23 @@ namespace DocumentManagementSystem.Controllers
             return View(Data);
         }
 
-        //[AuthorizeContext(ViewAction.Delete)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var result = await _dmsfileuploadService.Delete(id);
-        //    if (result == true)
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-        //    }
-        //    else
-        //    {
-        //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-        //    }
-        //    return View("Index");
-        //}
-
-        //[AuthorizeContext(ViewAction.Delete)]
-        //public async Task<IActionResult> Delete(int id)
-        //{
-        //    var Data = await _dmsfileuploadService.FetchSingleResult(id);
-        //    if (Data == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(Data);
-        //}
-
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _dmsfileuploadService.Delete(id, SiteContext.UserId);
+            if (result == true)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            ViewBag.LocalityList = await _dmsfileuploadService.GetDepartmentList();
+            ViewBag.DepartmentList = await _dmsfileuploadService.GetLocalityList();
+            ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            return View("Index");
+        }
         private string GetContentType(string path)
         {
             var types = GetMimeTypes();
@@ -256,6 +249,16 @@ namespace DocumentManagementSystem.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> BulkUploadDetails([FromBody] DMSBulkViewBindDTO dtodata)
+        {
+            BulkUploadInfoDto data = new BulkUploadInfoDto();
+            ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
+            return PartialView("_BulkUpload", data);
+
+        }
+
     }
 
 }

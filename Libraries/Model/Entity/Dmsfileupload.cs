@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
         public string AlmirahNo { get; set; }
         public string FileName { get; set; }
         public string FilePath { get; set; }
+        public byte IsActive { get; set; }
 
         public Department Department { get; set; }
         public Propertyregistration KhasraNo { get; set; }

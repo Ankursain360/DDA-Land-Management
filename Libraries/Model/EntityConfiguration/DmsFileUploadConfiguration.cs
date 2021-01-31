@@ -27,6 +27,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.AlloteeName)
                 .IsRequired()
                 .HasMaxLength(100)
