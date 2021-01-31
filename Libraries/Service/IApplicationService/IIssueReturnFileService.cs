@@ -17,6 +17,10 @@ namespace Libraries.Service.IApplicationService
         Task<List<Branch>> GetAllBranch();
         Task<List<Designation>> GetAllDesignation();
         Task<bool> Create(Issuereturnfile model);
+        Task<bool> UpdateIssueFileStatus(int id);
+        Task<bool> UpdateReturnFileStatus(int id);
+        Task<Issuereturnfile> FetchSingleResult(int id);
+        Task<Issuereturnfile> FetchSingleReceiptResult(int id);
         Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model);
     }
 }

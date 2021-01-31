@@ -60,16 +60,15 @@
             <td>
                 @if (item.FileStatus == null || item.FileStatus == "Return")
                 {
-                    <a class="btn btn-theme btn-block"  asp-action="IssueFileData" asp-route-id="@item.Id">Issue</a>
+                    <a class="btn btn-theme btn-block" asp-action="IssueFileData" asp-route-id="@item.Id">Issue</a>
                 }
                 else
                 {
+                    @*<a onclick="showInPopup('@Url.Action("ReturnFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')"
+            data-toggle="modal" data-target="#form-modal"  class="btn btn-theme btn-block" style="color:white;">Return</a>*@
                     <a class="btn btn-theme btn-block" asp-action="ReturnFileData" asp-route-id="@item.Id">Return</a>
                 }
 
-                @*<a onclick="showInPopup('@Url.Action("IssueFileData","IssueReturnFile",null,"@item.Id",Context.Request.Scheme)','Issue')"
-        data-toggle="modal" data-target="#form-modal"  class="btn btn-theme btn-block" style="color:white;">Issue</a>*@
-                @*<a class="btn btn-theme btn-block" asp-action="IssueFileData" asp-route-id="@item.Id">Issue</a>*@
             </td>
 
                
