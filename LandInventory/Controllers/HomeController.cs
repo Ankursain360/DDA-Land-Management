@@ -35,15 +35,19 @@ namespace LandInventory.Controllers
             return SignOut("Cookies", "oidc");
         }
 
-        public IActionResult ErrorLog()
-        {
-            return View();
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult UnAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult ExceptionLog()
+        {
+            return View();
         }
     }
 }

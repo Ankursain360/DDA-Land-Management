@@ -69,7 +69,11 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
-                    
+                    if (interest.ToDate <= interest.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(interest);
+                    }
                     var result = await _interestService.Create(interest);
 
                     if (result == true)
@@ -110,7 +114,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Interest interest)
         {
             await BindDropDown(interest);
@@ -118,6 +122,11 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    if (interest.ToDate <= interest.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(interest);
+                    }
                     var result = await _interestService.Update(id, interest);
                     if (result == true)
                     {
@@ -139,8 +148,8 @@ namespace SiteMaster.Controllers
             }
             return View(interest);
         }
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _interestService.Delete(id);
@@ -159,6 +168,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _interestService.FetchSingleResult(id);

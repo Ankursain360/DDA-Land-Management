@@ -11,9 +11,9 @@
 
 
     <div class="row">
-       
-        <div class="col-md-4">
-            <div class="floating-label-wrap mb-3 mb-md-0">
+
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
                 <input asp-for="Name" type="text"
                        class="floating-label-field floating-label-field--s3"
                        placeholder="Menu Name"
@@ -22,10 +22,7 @@
                 <label class="floating-label">Menu Name</label>
             </div>
         </div>
-    </div>
-    <div class="row">
-        
-        <div class=" col-md-4">
+        <div class="col-md-6">
             <div class="floating-label-wrap">
                 <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                     <option value="1">Active</option>
@@ -36,6 +33,7 @@
             </div>
         </div>
     </div>
+    
     <div class="row mt-md-3">
         <div class=" col-md-12">
             <button class="btn btn-theme " type="submit">Update</button>

@@ -47,23 +47,49 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Zone.Include(s => s.Department)
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-                            .OrderBy(s => s.Department.Name)
-                            .OrderBy(s => s.Name)
-                             .OrderByDescending(s => s.IsActive)
                         .GetPaged<Zone>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderBy(x => x.Department.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+                       
+                      
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderBy(x => x.Code)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
 
 
@@ -73,14 +99,43 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderByDescending(x => x.Department.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
+                        break;
+
+
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderByDescending(x => x.Code)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Zone
+                            .Include(s => s.Department)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Zone>(model.PageNumber, model.PageSize);
                         break;
 
 

@@ -90,7 +90,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportData(LandTransferSearchDto model)
         {
-            return await _dbContext.Landtransfer
+            var data = await _dbContext.Landtransfer
                 .Include(x => x.PropertyRegistration)
                 .Include(x => x.PropertyRegistration.Locality)
                 .Include(x => x.PropertyRegistration.Department)
@@ -100,8 +100,56 @@ namespace Libraries.Repository.EntityRepository
                 && (x.PropertyRegistration.ZoneId == (model.zoneId == 0 ? x.PropertyRegistration.ZoneId : model.zoneId))
                 && (x.PropertyRegistration.DivisionId == (model.divisionId == 0 ? x.PropertyRegistration.DivisionId : model.divisionId))
                 && (x.PropertyRegistration.LocalityId == (model.localityId == 0 ? x.PropertyRegistration.LocalityId : model.localityId)))
-                .OrderByDescending(x => x.Id)
-                .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+                .OrderBy(x => x.PropertyRegistration.Department.Name)
+                                                .OrderByDescending(x => x.IsActive)
+                                                .ThenBy(x => x.PropertyRegistration.Zone.Name)
+                                                .ThenBy(x => x.PropertyRegistration.Division.Name)
+                                            .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Division.Name : null)).ToList();
+                        break;
+                    case ("HANDEDOVERDATE"):
+                        data.Results = data.Results.OrderBy(x => x.HandedOverDate).ToList();
+                        break;
+                    case ("TAKENOVERDATE"):
+                        data.Results = data.Results.OrderBy(x => x.DateofTakenOver).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Division.Name : null)).ToList();
+                        break;
+                    case ("HANDEDOVERDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.HandedOverDate).ToList();
+                        break;
+                    case ("TAKENOVERDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.DateofTakenOver).ToList();
+                        break;
+                }
+            }
+            return data;
         }
 
         public async Task<List<Landtransfer>> GetLandTransferReportDataDepartmentWise(int reportType, int departmentId) //added by ishu
@@ -125,7 +173,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Landtransfer>> GetPagedLandtransferReportDeptWise(LandTransferSearchDto model)//added by ishu
         {
-            return await _dbContext.Landtransfer
+            var data= await _dbContext.Landtransfer
                                    .Include(x => x.PropertyRegistration)
                                    .Include(x => x.PropertyRegistration.Department)
                                    .Include(x => x.PropertyRegistration.Zone)
@@ -135,8 +183,56 @@ namespace Libraries.Repository.EntityRepository
                                     && (x.TakenOverDepartmentId == (model.reportType == 0 ? x.TakenOverDepartmentId :
                                     (model.departmentId == 0 ? x.TakenOverDepartmentId : model.departmentId)))
                                     && (x.IsActive == 1))
-                                   .OrderByDescending(x => x.Id)
-                                   .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+                                    .OrderBy(x => x.PropertyRegistration.Department.Name)
+                                                .OrderByDescending(x => x.IsActive)
+                                                .ThenBy(x => x.PropertyRegistration.Zone.Name)
+                                                .ThenBy(x => x.PropertyRegistration.Division.Name)
+                                            .GetPaged<Landtransfer>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderBy(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Division.Name : null)).ToList();
+                        break;
+                    case ("HANDEDOVERDATE"):
+                        data.Results = data.Results.OrderBy(x => x.HandedOverDate).ToList();
+                        break;
+                    case ("TAKENOVERDATE"):
+                        data.Results = data.Results.OrderBy(x => x.DateofTakenOver).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Department.Name : null)).ToList();
+                        break;
+                    case ("ZONE"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Zone.Name : null)).ToList();
+                        break;
+                    case ("DIVISION"):
+                        data.Results = data.Results.OrderByDescending(x => (x.PropertyRegistration != null ? x.PropertyRegistration.Division.Name : null)).ToList();
+                        break;
+                    case ("HANDEDOVERDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.HandedOverDate).ToList();
+                        break;
+                    case ("TAKENOVERDATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.DateofTakenOver).ToList();
+                        break;
+                }
+            }
+            return data;
         }
 
         public async Task<List<Landtransfer>> GetLandTransferReportDataKhasraNumberWise(int id)
@@ -148,7 +244,7 @@ namespace Libraries.Repository.EntityRepository
                  .Include(x => x.PropertyRegistration.Zone)
                  .Include(x => x.PropertyRegistration.Division)
                  .OrderByDescending(x => x.Id)
-                 .Where(x => x.Id == id && x.IsActive == 1&& x.Propertyregistration.Id==(id==0? x.Propertyregistration.Id:id)).ToListAsync();
+                 .Where(x => x.Id == id && x.IsActive == 1 ).ToListAsync();
         }
 
         public async Task<List<Landtransfer>> GetAllLandTransferList()
@@ -200,9 +296,65 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.DivisionId == (model.division == 0 ? x.DivisionId : model.division))
                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)) && (!data.Contains(x.Id))
 
-                                   ) 
-                                    .OrderByDescending(x => x.Id)
-                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                                   )
+                                    .OrderBy(x => x.InventoriedInId)
+                                                .OrderByDescending(x => x.IsActive)
+                                                .ThenBy(x => x.PlannedUnplannedLand)
+                                                .ThenBy(x => x.ClassificationOfLand.Name)
+                                                .ThenBy(x => x.Department.Name)
+                                                .ThenBy(x => x.Zone.Name)
+                                                .ThenBy(x => x.Division.Name)
+                                            .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("INVENTORIEDIN"):
+                            data1.Results = data1.Results.OrderBy(x => x.InventoriedInId).ToList();
+                            break;
+                        case ("PLANNEDUNPLANNED"):
+                            data1.Results = data1.Results.OrderBy(x => x.PlannedUnplannedLand).ToList();
+                            break;
+                        case ("CLASSIFICATION"):
+                            data1.Results = data1.Results.OrderBy(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                            break;
+                        case ("DEPARTMENT"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                            break;
+                        case ("ZONE"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                            break;
+                        case ("DIVISION"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                            break;
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("INVENTORIEDIN"):
+                            data1.Results = data1.Results.OrderByDescending(x => x.InventoriedInId).ToList();
+                            break;
+                        case ("PLANNEDUNPLANNED"):
+                            data1.Results = data1.Results.OrderByDescending(x => x.PlannedUnplannedLand).ToList();
+                            break;
+                        case ("CLASSIFICATION"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                            break;
+                        case ("DEPARTMENT"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                            break;
+                        case ("ZONE"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                            break;
+                        case ("DIVISION"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                            break;
+                    }
+                }
                 return data1;
             }
             catch (Exception ex)
@@ -229,8 +381,64 @@ namespace Libraries.Repository.EntityRepository
                                    && (x.PlannedUnplannedLand == (model.plannedUnplannedLand == "0" ? x.PlannedUnplannedLand : model.plannedUnplannedLand)) && (data.Contains(x.Id))
 
                                    )
-                                    .OrderByDescending(x => x.Id)
-                                .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+                                   .OrderBy(x => x.InventoriedInId)
+                                                .OrderByDescending(x => x.IsActive)
+                                                .ThenBy(x => x.PlannedUnplannedLand)
+                                                .ThenBy(x => x.ClassificationOfLand.Name)
+                                                .ThenBy(x => x.Department.Name)
+                                                .ThenBy(x => x.Zone.Name)
+                                                .ThenBy(x => x.Division.Name)
+                                            .GetPaged<Propertyregistration>(model.PageNumber, model.PageSize);
+
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("INVENTORIEDIN"):
+                            data1.Results = data1.Results.OrderBy(x => x.InventoriedInId).ToList();
+                            break;
+                        case ("PLANNEDUNPLANNED"):
+                            data1.Results = data1.Results.OrderBy(x => x.PlannedUnplannedLand).ToList();
+                            break;
+                        case ("CLASSIFICATION"):
+                            data1.Results = data1.Results.OrderBy(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                            break;
+                        case ("DEPARTMENT"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                            break;
+                        case ("ZONE"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                            break;
+                        case ("DIVISION"):
+                            data1.Results = data1.Results.OrderBy(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                            break;
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+                        case ("INVENTORIEDIN"):
+                            data1.Results = data1.Results.OrderByDescending(x => x.InventoriedInId).ToList();
+                            break;
+                        case ("PLANNEDUNPLANNED"):
+                            data1.Results = data1.Results.OrderByDescending(x => x.PlannedUnplannedLand).ToList();
+                            break;
+                        case ("CLASSIFICATION"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.ClassificationOfLand != null ? x.ClassificationOfLand.Name : null)).ToList();
+                            break;
+                        case ("DEPARTMENT"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Department != null ? x.Department.Name : null)).ToList();
+                            break;
+                        case ("ZONE"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Zone != null ? x.Zone.Name : null)).ToList();
+                            break;
+                        case ("DIVISION"):
+                            data1.Results = data1.Results.OrderByDescending(x => (x.Division != null ? x.Division.Name : null)).ToList();
+                            break;
+                    }
+                }
                 return data1;
             }
             catch (Exception ex)

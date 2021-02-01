@@ -14,23 +14,146 @@ using System.Threading.Tasks;
 namespace Libraries.Repository.EntityRepository
 {
 
-  public class WatchandwardRepository : GenericRepository<Watchandward>, IWatchandwardRepository
+    public class WatchandwardRepository : GenericRepository<Watchandward>, IWatchandwardRepository
     {
         public WatchandwardRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
-      
+
 
         public async Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model)
         {
-            return await _dbContext.Watchandward
+            var data = await _dbContext.Watchandward
                 .Include(x => x.PrimaryListNoNavigation)
                 .Include(x => x.PrimaryListNoNavigation.Locality)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x => x.IsActive == 1)
+                 .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                            && (x.IsActive == 1))
                 .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("KHASRANO"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                              && (x.IsActive == 1))
+                             .OrderBy(x => x.PrimaryListNoNavigation.KhasraNo)
+                            .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                           
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                              && (x.IsActive == 1))
+                             .OrderBy(x => x.PrimaryListNo)
+                            .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                       // data.Results = data.Results.OrderBy(x => x.PrimaryListNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                                        && (x.IsActive == 1))
+                                .OrderBy(x => x.PrimaryListNoNavigation.Locality.Name)
+                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                        //data.Results = data.Results.OrderBy(x => x.Locality).ToList();
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                                        && (x.IsActive == 1))
+                                .OrderBy(x => x.StatusOnGround)
+                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                      //  data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("KHASRANO"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                              && (x.IsActive == 1))
+                             .OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo)
+                            .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                     //   data.Results = data.Results.OrderByDescending(x => x.PrimaryListNoNavigation.KhasraNo).ToList();
+                        break;
+                    case ("PRIMARYLISTNO"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                              && (x.IsActive == 1))
+                             .OrderByDescending(x => x.PrimaryListNo)
+                            .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                        //  data.Results = data.Results.OrderByDescending(x => x.PrimaryListNo).ToList();
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))    )
+                                .OrderByDescending(x => x.PrimaryListNoNavigation.Locality.Name)
+                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+
+                        //data.Results = data.Results.OrderBy(x => x.Locality).ToList();
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Watchandward
+                                .Include(x => x.PrimaryListNoNavigation)
+                                .Include(x => x.PrimaryListNoNavigation.Locality)
+                                .Include(x => x.Locality)
+                                .Include(x => x.Khasra)
+                                .Where(x => (string.IsNullOrEmpty(model.locality) || x.PrimaryListNoNavigation.Locality.Name.Contains(model.locality))
+                                        && (x.IsActive == 1))
+                                .OrderByDescending(x => x.StatusOnGround)
+                               .GetPaged<Watchandward>(model.PageNumber, model.PageSize);
+                        //  data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        break;
+                }
+            }
+            return data;
         }
 
 
@@ -68,16 +191,53 @@ namespace Libraries.Repository.EntityRepository
             List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
-        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto)
+        public async Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
             var data = await _dbContext.Watchandward
                 .Include(x => x.Locality)
-                .Include(x => x.Khasra)
-                .Where(x => (x.LocalityId == (watchandwardSearchDto.localityId == 0 ? x.LocalityId : watchandwardSearchDto.localityId))
-               && x.Date >= watchandwardSearchDto.fromDate
-               && x.Date <= watchandwardSearchDto.toDate)
-                .OrderByDescending(x => x.Id).GetPaged(watchandwardSearchDto.PageNumber, watchandwardSearchDto.PageSize);
 
+                .Where(x => (x.LocalityId == (watchAndWardPeriodReportSearchDto.localityId == 0 ? x.LocalityId : watchAndWardPeriodReportSearchDto.localityId))
+               && x.Date >= watchAndWardPeriodReportSearchDto.fromDate
+               && x.Date <= watchAndWardPeriodReportSearchDto.toDate)
+                .OrderByDescending(x => x.Id).GetPaged(watchAndWardPeriodReportSearchDto.PageNumber, watchAndWardPeriodReportSearchDto.PageSize);
+
+            int SortOrder = (int)watchAndWardPeriodReportSearchDto.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (watchAndWardPeriodReportSearchDto.SortBy.ToUpper())
+                {
+                    
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderBy(x => x.Locality.Name).ToList();
+                        break;
+                    
+                    case ("DATE"):
+                        data.Results = data.Results.OrderBy(x => x.Date).ToList();
+                        break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderBy(x => x.Landmark).ToList();
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (watchAndWardPeriodReportSearchDto.SortBy.ToUpper())
+                {
+                   
+                    case ("LOCALITY"):
+                        data.Results = data.Results.OrderByDescending(x => x.Locality.Name).ToList();
+                        break;
+                   
+                    case ("DATE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Date).ToList();
+                        break;
+                    case ("LANDMARK"):
+                        data.Results = data.Results.OrderByDescending(x => x.Landmark).ToList();
+                        break;
+
+                }
+            }
             return data;
         }
 
@@ -97,7 +257,7 @@ namespace Libraries.Repository.EntityRepository
             var Result = await _dbContext.SaveChangesAsync();
             return Result > 0 ? true : false;
         }
-        
+
         public async Task<Watchandwardphotofiledetails> GetWatchandwardphotofiledetails(int watchandwardId)
         {
             return await _dbContext.Watchandwardphotofiledetails.Where(x => x.Id == watchandwardId && x.IsActive == 1).FirstOrDefaultAsync();
@@ -122,7 +282,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetAllPrimaryList()
         {
-            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 &&  x.IsValidate == 1 && x.IsDisposed != 0).ToListAsync();
+            return await _dbContext.Propertyregistration.Where(x => x.IsActive == 1 && x.IsDeleted == 1 && x.IsValidate == 1 && x.IsDisposed != 0 && x.PrimaryListNo !=null).ToListAsync();
         }
 
         public async Task<Propertyregistration> FetchSingleResultOnPrimaryList(int propertyId)

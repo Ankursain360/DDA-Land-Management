@@ -421,6 +421,20 @@ $(document).ready(function () {
         $("#IsDocumentFor").val("Any Other");
     }
 
+    debugger;
+    /*Declaration Checked*/
+    if (($('#Declaration1').val() == 1))
+        $('#DeclarationStatus1').prop('checked', true);
+    else
+        $('#DeclarationStatus1').prop('checked', false);
+    if (($('#Declaration2').val() == 1))
+        $('#DeclarationStatus2').prop('checked', true);
+    else
+        $('#DeclarationStatus2').prop('checked', false);
+    if (($('#Declaration3').val() == 1))
+        $('#DeclarationStatus3').prop('checked', true);
+    else
+        $('#DeclarationStatus3').prop('checked', false);
 });
 function CheckToApply() {/* -----------Check Validation before Apply for mutation Added by Renu  --------------- */
     var show = true;
@@ -450,7 +464,7 @@ function CheckToApply() {/* -----------Check Validation before Apply for mutatio
 }
 
 function PageValidation() {/* -----------check validation before create click Added by Renu  --------------- */
-    debugger;
+    
     var checkresult = false;
     var Damageamount = $('#TotalValueWithInterest').val();
     if (Damageamount == "") {
@@ -524,7 +538,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Personeel Info Repeator Added by Renu  --------------- */
     HttpGet(`/DamagePayeeApproval/GetDetailspersonelinfotemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+        
         for (var i = 0; i < data.length; i++) {
             $("#tbl_posts #add #payeeName").val(data[i].name);
             $("#tbl_posts #add #payeeFatherName").val(data[i].fatherName);
@@ -586,7 +600,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Allotte Type Repeator Added by Renu  --------------- */
     HttpGet(`/DamagePayeeApproval/GetDetailsAllottetypetemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+        
         for (var i = 0; i < data.length; i++) {
             $("#tbl_DamageAssessee #addDamageAssessee #Name").val(data[i].name);
             $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val(data[i].fatherName);
@@ -618,7 +632,7 @@ function FillRepeatorAtEdit() {/* -----------Added by Renu  --------------- */
 
     /* -----------Payment History Repeator Added by Renu  --------------- */
     HttpGet(`/DamagePayeeApproval/GetDetailspaymenthistorytemp/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
-        debugger
+        
         for (var i = 0; i < data.length; i++) {
             $("#tbl_Payment #addPayment #txtPaymentName").val(data[i].name);
             $("#tbl_Payment #addPayment #txtRecieptNo").val(data[i].recieptNo);
@@ -785,7 +799,7 @@ $("input[name='Bill']").click(function () {
 //****************** code for personal info Rpt ************************
 
 $(document).delegate('a.add-record', 'click', function (e) {
-    debugger
+    
 
     if ($("#tbl_posts #add #Gender").children("option:selected").val() != ''
         && $("#tbl_posts #add #payeeName").val() != ''
@@ -811,7 +825,7 @@ $(document).delegate('a.add-record', 'click', function (e) {
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();
-        debugger
+        
         /*$("#tbl_posts #add .form-control").val('');*/
         $("#tbl_posts #add .floating-label-field").val('');
     }
@@ -843,7 +857,7 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 //****************** code for Allotte type Rpt ************************
 
 $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
-    debugger
+    
 
     if ($("#tbl_DamageAssessee #addDamageAssessee #Name").val() != ''
         && $("#tbl_DamageAssessee #addDamageAssessee #FatherName").val() != ''
@@ -865,7 +879,7 @@ $(document).delegate('a.add-recordDamageAssessee', 'click', function (e) {
         $("#tbl_DamageAssessee #tbl_DamageAssessee_body .floating-label-field").attr("readonly", true);
         element.find(".add-recordDamageAssessee").hide();
         element.find(".delete-recordDamageAssessee").show();
-        debugger
+        
         /*$("#tbl_posts #add .form-control").val('');*/
         $("#tbl_DamageAssessee #addDamageAssessee .floating-label-field").val('');
     }
@@ -897,7 +911,7 @@ $(document).delegate('a.delete-recordDamageAssessee', 'click', function (e) {
 //****************** code for Payment History ************************
 
 $(document).delegate('a.add-recordPayment', 'click', function (e) {
-    debugger
+    
 
     if ($("#tbl_Payment #addPayment #txtPersonalName").val() != ''
         && $("#tbl_Payment #addPayment #txtPersonalFatherName").val() != ''
@@ -918,7 +932,7 @@ $(document).delegate('a.add-recordPayment', 'click', function (e) {
         $("#tbl_Payment #tbl_Payment_body .floating-label-field").attr("readonly", true);
         element.find(".add-recordPayment ").hide();
         element.find(".delete-recordPayment").show();
-        debugger
+        
 
         $("#tbl_Payment #addPayment .floating-label-field").val('');
     }

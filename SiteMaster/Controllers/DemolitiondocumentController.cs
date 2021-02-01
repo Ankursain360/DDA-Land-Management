@@ -46,7 +46,10 @@ namespace SiteMaster.Controllers
 
             return PartialView("_List", result);
         }
-                [AuthorizeContext(ViewAction.Add)]
+              
+        
+        
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitiondocument demolitiondocument = new Demolitiondocument();
@@ -101,7 +104,7 @@ namespace SiteMaster.Controllers
         }
          [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Demolitiondocument demolitiondocument)
         {
             if (ModelState.IsValid)
@@ -155,7 +158,7 @@ namespace SiteMaster.Controllers
             var list = await _demolitiondocumentService.GetDemolitiondocument();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _demolitiondocumentService.FetchSingleResult(id);

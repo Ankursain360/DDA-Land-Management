@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using LandInventory.Filters;
+using Core.Enum;
 namespace LandInventory.Controllers
 {
     public class ReportofLandTransferDivisionLocalityWiseController : BaseController
@@ -43,7 +45,7 @@ namespace LandInventory.Controllers
             return Json(await _landtransferService.GetAllLocalityList(Convert.ToInt32(DivisionId)));
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Landtransfer model = new Landtransfer();

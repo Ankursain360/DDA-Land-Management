@@ -1,30 +1,30 @@
 ﻿@model Libraries.Model.Entity.Rate
 
-
 @await Component.InvokeAsync("PageHeader", new { pageName = "Rate" })
 
 <div class="pt-3">
 
-    <form asp-action="Edit" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">View Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
 
 
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <label asp-validation-for="PropertyId" class="error"></label>
+                    <span asp-validation-for="PropertyId" class="text-danger"></span>
                     <label asp-for="PropertyId" class="floating-label">Property Type </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="FromDate" value="" placeholder="From Date" type="date"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <input asp-for="FromDate" placeholder="From Date" type="date"
+                           class="floating-label-field floating-label-field--s3" />
 
                     <span asp-validation-for="FromDate" class="text-danger"></span>
 
@@ -33,12 +33,12 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="ToDate" type="date" value="" class="floating-label-field floating-label-field--s3" placeholder="To Date"
-                           limit="100">
+                    <input asp-for="ToDate" type="date" class="floating-label-field floating-label-field--s3" placeholder="To Date">
+
                     <span asp-validation-for="ToDate" class="text-danger "></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -46,19 +46,19 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="RatePercentage" value="" type="text" class="floating-label-field floating-label-field--s3 numbers" placeholder="Rate Amount per Sqr Yrd"
+                    <input asp-for="RatePercentage" type="text" disabled class="floating-label-field floating-label-field--s3 numbers" placeholder="Rate Amount per Sqr Yrd"
                            limit="18">
                     <span asp-validation-for="RatePercentage" class="text-danger "></span>
                     <label class="floating-label">Rate Amount per Sqr Yrd</label>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
-                    <input asp-for="Scheme" value="" type="text" class="floating-label-field floating-label-field--s3" placeholder="Scheme"
-                           limit="18">
+                    <input asp-for="Scheme" type="text" disabled class="floating-label-field floating-label-field--s3" placeholder="Scheme"
+                           limit="1000">
                     <span asp-validation-for="Scheme" class="text-danger "></span>
                     <label class="floating-label">Scheme Name</label>
                 </div>
@@ -66,7 +66,7 @@
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
 
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
@@ -78,7 +78,7 @@
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="form-group col-md-12" style="margin-bottom:40px;">
+            <div class=" col-md-12">
                 @Html.ActionLink("Back", "Index", "Rate", null, new { @class = "btn btn-theme " })
 
             </div>
@@ -86,7 +86,6 @@
 
     </form>
 
-
 </div>
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />

@@ -9,8 +9,9 @@ using System.Threading.Tasks;
 namespace Libraries.Repository.IEntityRepository
 {
 
-    public interface IDamagePayeeApprovalRepository : IGenericRepository<Damagepayeeregistertemp>
+    public interface IDamagePayeeApprovalRepository : IGenericRepository<Damagepayeeregister>
     {
-        Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
+        Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser);
+        Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId);
     }
 }

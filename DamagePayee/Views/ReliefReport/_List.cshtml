@@ -1,0 +1,47 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Demandletters>
+@{int rowNo = 0; }
+
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+
+
+    <thead class="text-nowrap">
+        <tr>
+            <th> File No. </th>
+            <th> Locality </th>
+            <th> Property No </th>
+            <th> Demand Number </th>
+            <th> Demand Amount  </th>
+            <th> Rebate/Relief Amount </th>
+        </tr>
+
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.FileNo</td>
+                    <td>@(item.Locality == null ? "" : item.Locality.Name)</td>
+                    <td>@item.PropertyNo</td>
+                    <td>@item.DemandNo</td>
+                    <td>@item.DepositDue</td>
+                    <td>@item.ReliefAmount</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

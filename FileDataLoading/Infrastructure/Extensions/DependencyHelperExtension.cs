@@ -36,8 +36,9 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IRowRepository, RowRepository>();
             services.AddScoped<IColumnRepository,ColumnRespository>();
             services.AddScoped<IBundleRepository, BundleRespository>();
-
-
+            services.AddScoped<IDataStorageRepository, DataStorageRepository>();
+            services.AddScoped<IIssueReturnFileRepository, IssueReturnFileRepository>();
+            
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
@@ -53,8 +54,9 @@ namespace FileDataLoading.Infrastructure.Extensions
             services.AddScoped<IRowService, RowService>();
             services.AddScoped<IColumnService, ColumnService>();
             services.AddScoped<IBundleService, BundleService>();
-
-        }
+            services.AddScoped<IDataStorageService,DatastorageService>();
+            services.AddScoped<IIssueReturnFileService, IssueReturnFileService>();
+                   }
 
 
     }

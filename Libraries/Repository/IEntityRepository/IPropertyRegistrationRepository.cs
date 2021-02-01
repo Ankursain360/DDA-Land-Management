@@ -18,7 +18,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Propertyregistration>> GetAllPropertyregistration(int UserId);
         string GetFile(int id);
         string GetGeoFile(int id);
-        Task<bool> CheckDeleteAuthority(int id);
         Task<List<Department>> GetDepartmentDropDownList();
         Task<PagedResult<Propertyregistration>> GetPropertyRegisterationReportData(PropertyRegisterationReportSearchDto model);
         Task<List<Division>> GetDivisionDropDownList(int zoneId);
@@ -42,5 +41,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<bool> InsertInDisposedProperty(Disposedproperty model);
         Task<List<Propertyregistration>> GetKhasraReportList();
         Task<PagedResult<Propertyregistration>> GetInventoryUnverifiedVerified(InvnentoryUnverifiedVerifiedSearchDto model, int userId);
+        Task<PagedResult<Propertyregistration>> GetDeletedLandReportData(PropertyRegisterationSearchDto model);
     }
 }

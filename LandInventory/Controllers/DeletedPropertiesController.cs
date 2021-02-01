@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using LandInventory.Filters;
+using Core.Enum;
+
 namespace LandInventory.Controllers
 {
     public class DeletedPropertiesController : Controller
@@ -48,7 +51,7 @@ namespace LandInventory.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -60,10 +63,10 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestoreLandReportData(model);
+            var result = await _propertyregistrationService.GetDeletedLandReportData(model);
             if (result != null)
             {
-                return PartialView("Index", result);
+                return PartialView("_Index", result);
             }
             else
             {
@@ -81,6 +84,8 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);

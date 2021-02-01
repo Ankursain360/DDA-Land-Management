@@ -13,6 +13,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Utility.Helper;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 
 namespace EncroachmentDemolition.Controllers
 {
@@ -25,6 +27,8 @@ namespace EncroachmentDemolition.Controllers
             _demolitionstructuredetailsService = demolitionstructuredetailsService;
             _configuration = configuration;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -36,6 +40,8 @@ namespace EncroachmentDemolition.Controllers
             var result = await _demolitionstructuredetailsService.GetPagedDemolitionstructuredetailsList(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Demolitionstructuredetails demolitionstructuredetails = new Demolitionstructuredetails();
@@ -49,6 +55,7 @@ namespace EncroachmentDemolition.Controllers
 
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Demolitionstructuredetails demolitionstructuredetails)
         {
             demolitionstructuredetails.DepartmentList = await _demolitionstructuredetailsService.GetAllDepartment();
@@ -123,7 +130,7 @@ namespace EncroachmentDemolition.Controllers
                             demolitionstructure.Add(new Demolitionstructure
                             {
 
-                                StructureId = (int)demolitionstructuredetails.StructrureId[i],
+                                StructureId = demolitionstructuredetails.StructrureId[i],
                                 NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
                                 DemolitionStructureDetailsId = demolitionstructuredetails.Id
                             });
@@ -158,6 +165,8 @@ namespace EncroachmentDemolition.Controllers
                 return View(demolitionstructuredetails);
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var demolitionstructuredetails = await _demolitionstructuredetailsService.FetchSingleResult(id);
@@ -175,6 +184,7 @@ namespace EncroachmentDemolition.Controllers
             return View(demolitionstructuredetails);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Demolitionstructuredetails demolitionstructuredetails)
         {
             var Data = await _demolitionstructuredetailsService.FetchSingleResult(id);
@@ -215,6 +225,7 @@ namespace EncroachmentDemolition.Controllers
                             });
                         }
 
+
                         foreach (var item in demolitionstructureafterdemolitionphotofiledetails)
                         {
                             result = await _demolitionstructuredetailsService.SaveDemolitionstructureafterdemolitionphotofiledetails(item);
@@ -249,8 +260,7 @@ namespace EncroachmentDemolition.Controllers
                         {
                             demolitionstructure.Add(new Demolitionstructure
                             {
-
-                                StructureId = (int)demolitionstructuredetails.StructrureId[i],
+                                StructureId = demolitionstructuredetails.StructrureId[i],
                                 NoOfStructrure = demolitionstructuredetails.NoOfStructrure[i],
                                 DemolitionStructureDetailsId = demolitionstructuredetails.Id
                             });
@@ -285,6 +295,8 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var demolitionstructuredetails = await _demolitionstructuredetailsService.FetchSingleResult(id);
@@ -292,8 +304,9 @@ namespace EncroachmentDemolition.Controllers
             demolitionstructuredetails.ZoneList = await _demolitionstructuredetailsService.GetAllZone(Convert.ToInt32(demolitionstructuredetails.DepartmentId ?? 0));
             demolitionstructuredetails.DivisionList = await _demolitionstructuredetailsService.GetAllDivisionList(Convert.ToInt32(demolitionstructuredetails.ZoneId ?? 0));
             demolitionstructuredetails.LocalityList = await _demolitionstructuredetailsService.GetAllLocalityList(Convert.ToInt32(demolitionstructuredetails.DivisionId ?? 0));
-            demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
+            //demolitionstructuredetails.Structure = await _demolitionstructuredetailsService.GetMasterStructure();
             demolitionstructuredetails.DemolitionStructure = await _demolitionstructuredetailsService.GetStructure();
+
             if (demolitionstructuredetails == null)
             {
                 return NotFound();
@@ -301,7 +314,7 @@ namespace EncroachmentDemolition.Controllers
             return View(demolitionstructuredetails);
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _demolitionstructuredetailsService.Delete(id);
@@ -358,6 +371,7 @@ namespace EncroachmentDemolition.Controllers
             string filename = Data.BeforePhotoFilePath;
             return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
         }
+
 
         public IActionResult DemolitionstructuredetailsApproval()
         {

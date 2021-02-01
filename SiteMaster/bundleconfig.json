@@ -316,5 +316,35 @@
     "inputFiles": [
       "wwwroot/js/structureindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/caseyearindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/caseyearindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/courtindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/courtindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/approvalstatusindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/approvalstatusindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/permissions.min.js",
+    "inputFiles": [
+      "wwwroot/js/permissions.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/usermanagementcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/usermanagementcreate.js"
+    ]
   }
 ]

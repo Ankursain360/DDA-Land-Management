@@ -105,7 +105,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, RoleDto model)
         {
             if (ModelState.IsValid)
@@ -120,9 +120,9 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
-     
 
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id, RoleDto model)
         {
             try
@@ -146,7 +146,7 @@ namespace SiteMaster.Controllers
 
             return View("Index");
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var result = await _userProfileService.GetRoleById(id);

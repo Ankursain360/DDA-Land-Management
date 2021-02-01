@@ -35,7 +35,8 @@
                 <div class="col-md-6">
 
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId" required="required" requiredMsg="The Division field is required">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="DivisionId"  asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" 
+                            onchange="return onChangeZone(this.options[this.selectedIndex].value)" required="required" requiredMsg="The Division field is required">
                             <option selected="selected" disabled="disabled" value="">--Select-- </option>
                         </select>
                         <label asp-validation-for="DivisionId" class="error"></label>
@@ -82,7 +83,7 @@
                         <input asp-for="Address" type="text" class="floating-label-field floating-label-field--s3" placeholder="Address"
                                limit="600">
                         <span asp-validation-for="Address" class="text-danger "></span>
-                        <label class="floating-label">Address</label>
+                        <label class="floating-label"> Locality Address</label>
                     </div>
                 </div>
                 <div class=" col-md-6">

@@ -33,7 +33,7 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedDemandletter(model);
         }
-        public async Task<PagedResult<Demandletter>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
+        public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             return await _demandLetterRepository.GetDefaultListingReportData(defaulterListingReportSearchDto);
         }
@@ -78,10 +78,67 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<List<Demandletters>> BindPropertyNoList()
+        {
+          
+            return await _demandLetterRepository.BindPropertyNoList();
+          
+        }
+
+        public async Task<PagedResult<Demandletters>> GetPagedDemandletterReport(DemandletterreportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandletterReport(model);
+        }
 
 
+        /*-----------------Relief Report Start------------------*/
+        public async Task<PagedResult<Demandletters>> GetPagedReliefReport(ReliefReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedReliefReport(model);
+        }
 
+        public async Task<List<Demandletters>> BindFileNoList()
+        {
+            return await _demandLetterRepository.BindFileNoList();
+        }
 
+        public async Task<List<Locality>> BindLoclityList()
+        {
+            return await _demandLetterRepository.BindLoclityList();
+        }
+        /*-----------------Relief Report End------------------*/
 
+        //*******   Penalty Imposition Report**********
+
+        public async Task<List<Locality>> GetLocalityList()
+        {
+            List<Locality> localityList = await _demandLetterRepository.GetLocalityList();
+            return localityList;
+        }
+        public async Task<List<Demandletters>> GetFileNoList()
+        {
+            List<Demandletters> fileNoList = await _demandLetterRepository.GetFileNoList();
+            return fileNoList;
+        }
+
+        public async Task<PagedResult<Demandletters>> GetPagedPenaltyImpositionReport(PenaltyImpositionReportSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedPenaltyImpositionReport(model);
+        }
+        public async Task<PagedResult<Demandletters>> GetPagedImpositionReportOfCharges(ImpositionOfChargesSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedImpositionReportOfCharges(model);
+        }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
+        public async Task<PagedResult<Demandletters>> GetPagedDemandCollectionLedgerReport(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport(model);
+        }
+
+        public async Task<List<DemandCollectionLedgerListDataDto>> GetPagedDemandCollectionLedgerReport1(DemandCollectionLedgerSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDemandCollectionLedgerReport1(model);
+        }
+        /*-----------------Demand Collection Ledger Report Start------------------*/
     }
 }

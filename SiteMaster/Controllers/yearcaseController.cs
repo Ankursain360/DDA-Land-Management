@@ -25,12 +25,18 @@ namespace SiteMaster.Controllers
         {
             return View();
         }
-
         public async Task<PartialViewResult> List([FromBody] CaseyearSearchDto model)
         {
-            var result = await _caseService.GetPagedCaseyear(model);
-            return PartialView("_List",result);
+            var result = await _caseService.GetPagedcaseyear(model);
+            return PartialView("_List", result);
         }
+
+        //public async Task<PartialViewResult> List([FromBody] CaseyearSearchDto model)
+        //{
+        //    var result = await _caseService.GetPagedCaseyear(model);
+        //    return PartialView("_List",result);
+        //}
+
 
         [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
@@ -57,8 +63,13 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         //return View();
-                        var list = await _caseService.GetAllCaseyear();
+
+                        var list = await _caseService.GetAll();
                         return View("Index", list);
+
+                        //var list = await _caseService.GetAllCaseyear();
+                        return View("Index");
+
                     }
                     else
                     {
@@ -84,7 +95,7 @@ namespace SiteMaster.Controllers
 
 
 
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _caseService.FetchSingleResult(id);
@@ -112,8 +123,13 @@ namespace SiteMaster.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
 
-                        var list = await _caseService.GetAllCaseyear();
+
+                        var list = await _caseService.GetAll();
                         return View("Index", list);
+
+                       // var list = await _caseService.GetAllCaseyear();
+                        return View("Index");
+
                     }
                     else
                     {
@@ -134,7 +150,7 @@ namespace SiteMaster.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _caseService.FetchSingleResult(id);
@@ -147,7 +163,7 @@ namespace SiteMaster.Controllers
         }
 
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -167,8 +183,13 @@ namespace SiteMaster.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _caseService.GetAllCaseyear();
+
+            var list = await _caseService.GetAll();
             return View("Index", list);
+
+            //var list = await _caseService.GetAllCaseyear();
+            return View("Index");
+
         }
 
 

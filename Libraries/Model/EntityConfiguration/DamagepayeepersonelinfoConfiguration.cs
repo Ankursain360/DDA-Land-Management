@@ -7,15 +7,14 @@ using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
-     class DamagepayeepersonelinfoConfiguration : IEntityTypeConfiguration<Damagepayeepersonelinfo>
+    class DamagepayeepersonelinfoConfiguration : IEntityTypeConfiguration<Damagepayeepersonelinfo>
     {
         public void Configure(EntityTypeBuilder<Damagepayeepersonelinfo> builder)
         {
-
             builder.ToTable("damagepayeepersonelinfo", "lms");
 
-            builder.HasIndex(e => e.DamagePayeeRegisterId)
-                .HasName("FK_DamagePayeeRegisterId_idx");
+            builder.HasIndex(e => e.DamagePayeeRegisterTempId)
+                .HasName("FkDamagePayeeIdtemp_idx");
 
             builder.HasIndex(e => e.Id)
                 .HasName("Id_UNIQUE")
@@ -37,7 +36,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.DamagePayeeRegisterId).HasColumnType("int(11)");
+            builder.Property(e => e.DamagePayeeRegisterTempId).HasColumnType("int(11)");
 
             builder.Property(e => e.EmailId)
                 .HasMaxLength(30)
@@ -76,9 +75,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasOne(d => d.DamagePayeeRegister)
                 .WithMany(p => p.Damagepayeepersonelinfo)
-                .HasForeignKey(d => d.DamagePayeeRegisterId)
+                .HasForeignKey(d => d.DamagePayeeRegisterTempId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FkDamagePayeeId");
+                .HasConstraintName("FkDamagePayeeIdtemp");
 
 
         }

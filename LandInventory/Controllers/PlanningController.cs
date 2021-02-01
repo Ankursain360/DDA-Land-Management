@@ -1,4 +1,6 @@
-﻿using Dto.Search;
+﻿using Core.Enum;
+using Dto.Search;
+using LandInventory.Filters;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
@@ -22,10 +24,12 @@ namespace LandInventory.Controllers
             _planningService = planningService;
             _configuration = configuration;
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             return View();
         }
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> VerificationPage()
         {
             return View();
@@ -40,6 +44,7 @@ namespace LandInventory.Controllers
             var list = await _planningService.GetUnverifiedPagedPlanning(dto);
             return PartialView("_PlanningVerification", list);
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Planning planning = new Planning();
@@ -48,7 +53,10 @@ namespace LandInventory.Controllers
             planning.DivisionList = await _planningService.GetAllDivision(planning.ZoneId);
             return View(planning);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Planning planning)
         {
             planning.DepartmentList = await _planningService.GetAllDepartment();
@@ -109,6 +117,9 @@ namespace LandInventory.Controllers
             }
             return View(planning);
         }
+
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             Planning planning = await _planningService.FetchSingleResult(id);
@@ -121,6 +132,9 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> VerifyPropertyView(int id)
         {
             Planning planning = await _planningService.FetchSingleResult(id);
@@ -133,6 +147,9 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             Planning planning = await _planningService.FetchSingleResult(id);
@@ -145,7 +162,10 @@ namespace LandInventory.Controllers
             planning.UnplannedProperties = await _planningService.FetchUnplannedProperties(id);
             return View(planning);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(Planning planning)
         {
             planning.DepartmentList = await _planningService.GetAllDepartment();
@@ -213,6 +233,7 @@ namespace LandInventory.Controllers
             }
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> VerifyPropertyView(Planning planning)
         {
             planning.DepartmentList = await _planningService.GetAllDepartment();
@@ -226,7 +247,7 @@ namespace LandInventory.Controllers
                 result = await _planningService.VerifyProperties(planning.Id);
                 if (result)
                 {
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                    ViewBag.Message = Alert.Show(Messages.Verifiedsuccesfuly, "", AlertType.Success);
                     return View("VerificationPage");
                 }
                 else
@@ -241,6 +262,7 @@ namespace LandInventory.Controllers
                 return View(planning);
             }
         }
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _planningService.Delete(id);

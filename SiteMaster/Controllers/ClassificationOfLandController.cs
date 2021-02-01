@@ -28,6 +28,8 @@ namespace SiteMaster.Controllers
         {
             _classificationoflandService = classificationoflandService;
         }
+
+
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
@@ -94,7 +96,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Classificationofland classificationofland)
         {
             if (ModelState.IsValid)
@@ -141,21 +143,34 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            if (id == 0)
+            var result = await _classificationoflandService.Delete(id);
+            if (result == true)
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                return View("Index", result1);
             }
-
-            var form = await _classificationoflandService.Delete(id);
-            if (form == false)
+            else
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _classificationoflandService.GetAllClassificationOfLand();
+                return View("Index", result1);
             }
+            //if (id == 0)
+            //{
+            //    return NotFound();
+            //}
 
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
+            //var form = await _classificationoflandService.Delete(id);
+            //if (form == false)
+            //{
+            //    return NotFound();
+            //}
+
+            //ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+            //return View(form);
         }
-        [AuthorizeContext(ViewAction.Delete)]
+      
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
@@ -174,7 +189,7 @@ namespace SiteMaster.Controllers
             }
 
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _classificationoflandService.FetchSingleResult(id);

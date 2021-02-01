@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using LandInventory.Filters;
+using Core.Enum;
 namespace LandInventory.Controllers
 {
     public class ReportofLandTransferPropertyNoWiseController : BaseController
@@ -21,6 +22,8 @@ namespace LandInventory.Controllers
             _propertyRegistrationService = propertyRegistrationService;
             _landtransferService = landtransferService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             Landtransfer model = new Landtransfer();

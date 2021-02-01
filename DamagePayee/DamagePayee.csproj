@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<UserSecretsId>48e50305-c7b6-4cbd-a3ca-d58fd6f0bf96</UserSecretsId>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -22,22 +23,26 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<!--<ProjectReference Include="..\AuthServer\AuthServer.csproj" />-->
 		<ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
 		<ProjectReference Include="..\Libraries\Service\Service.csproj" />
 	</ItemGroup>
   
   <ItemGroup>
   <Content Remove="wwwroot\js\demandletterindex.min.js" />
+  <Content Remove="wwwroot\js\reliefreportindex.min.js" />
   <Content Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\js\demandletterindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\reliefreportindex.min.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\js\demandletterindex.min.js" />
+    <None Include="wwwroot\js\reliefreportindex.min.js" />
     <None Include="wwwroot\js\SubstitutionMutationDetailsCreate.min.js" />
   </ItemGroup>
 

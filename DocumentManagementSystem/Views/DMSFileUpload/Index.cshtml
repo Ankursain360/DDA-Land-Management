@@ -1,90 +1,93 @@
-﻿@*@model IEnumerable<DDAPropertyREG.Models.Tblzonemaster>
-    @{int rowNo = 0; }*@
+﻿@model IEnumerable<Libraries.Model.Entity.Dmsfileupload>
+@await Component.InvokeAsync("PageHeader", new { pageName = "File Upload" })
 
-
-
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">File Upload </h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+<div class="pt-3">
+    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="DepartmentId">Department</label>
+                </div>
             </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="LocalityId" asp-items="@(new SelectList(ViewBag.LocalityList, "Id","Name"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="LocalityId">Locality</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="KhasraNoId" asp-items="@(new SelectList(ViewBag.KhasraNoList, "Id","KhasraNo"))">
+                        <option selected="selected" value="0">All</option>
+                    </select>
+                    <label class="floating-label" for="KhasraNoId">Khasra No.</label>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" type="button" id="btnSearch">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" value="fileno">File No.</option>
+                        <option value="department">Department</option>
+                        <option value="locality">Locality</option>
+                        <option value="khasrano">Khasra No</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                </div>
+            </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                <a href="/DMSFileUpload/Create" class="d-flex align-items-center btn btn-primary mr-2">
+                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                    <small>Add More</small>
+                </a>
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive px-2" id="divTable">
+
         </div>
     </div>
 </div>
-<br />
-<br />
-<div>
-    <a asp-action="Create" class="btn btn-primary pull-right myapp-hed1 " style="margin-top: -10px;">Add New</a>
-    @*@Html.ActionLink("Add New", "Create", "ZoneMaster", null, new { @class = "btn btn-primary pull-right myapp-hed1 ", style = "margin-top: -10px;" })*@
-</div>
-<br />
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="card  table-card table-responsive ">
 
-        <table class="table table-bordered table-card">
-
-            <thead class="thead">
-                <tr class="myapp-hed1">
-                    <th>Sr.No</th>
-
-                    <th>File No</th>
-                    <th> Allotee Name </th>
-                    <th>Department </th>
-                    <th>Khasra No</th>
-                    <th>Village </th>
-                    <th>Property No./Address </th>
-                    <th> Pdf File Location</th>
-                    <th>Title </th>
-                    <th>Almirah No </th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody class="tbody">
-
-                <tr>
-                    <td>1</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-
-                        <a asp-action="ViewDetails" title="ViewDetails">
-                            <i class="glyphicon glyphicon-eye-open icon-white cl1" aria-hidden="true"></i>
-                        </a>
-                        <a asp-action="Edit" title="edit"> &nbsp; | &nbsp;  <i class="fa fa-pencil" aria-hidden="true"></i> </a>
-
-                        <a asp-action="Delete" title="delete">   &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </td>
-
-                </tr>
-
-
-            </tbody>
-
-        </table>
-
-    </div>
-</div>
-<br />
-<br />
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/dmsfileuploadindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/dmsfileuploadindex.min.js" asp-append-version="true"></script>
+</environment>
 

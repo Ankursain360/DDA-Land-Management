@@ -19,7 +19,7 @@ namespace Dto.Common
 
 
             string body = Action;
-            string Sub = "Complain Register ";
+            string Sub = "DDA Alert-Your Complaint has been successfully submitted.";
             string link = "";
 
             this.sendMail(EmailID, Sub, body, link);
@@ -34,8 +34,8 @@ namespace Dto.Common
             MailMessage msg = new MailMessage();
             try
             {
-               msg.From = new MailAddress("vedangofficeserver@gmail.com");
-            
+                 msg.From = new MailAddress("vedangofficeserver@gmail.com");
+             
                 if (EmailID != "" || EmailID != string.Empty)
                 {
                     msg.To.Add(EmailID);
@@ -44,8 +44,8 @@ namespace Dto.Common
                     msg.Subject = Subject;
                     SmtpClient smt = new SmtpClient("smtp.gmail.com");
                     smt.Port = 587;
-                    smt.Credentials = new NetworkCredential("vedangofficeserver@gmail.com", "Vedang@1234");
-                  
+                        smt.Credentials = new NetworkCredential("vedangofficeserver@gmail.com", "Vedang@1234");
+                
                     smt.EnableSsl = true;
                     smt.Send(msg);
                 }

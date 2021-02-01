@@ -28,90 +28,23 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="PrimaryListNo" asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PrimaryListNo" 
+                            asp-items="@(new SelectList(Model.PrimaryListNoList, "Id","PrimaryListNo"))" 
+                            onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
                         <option value="">--Select--</option>
                     </select>
-                    <label asp-validation-for="PrimaryListNo" class="error"></label>
+                    <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
                     <label class="floating-label">Primary List No.<span style="color:red">*</span></label>
                 </div>
             </div>
 
         </div>
     </div>
-    <div id="InventoryOtherDiv">
+    <div id="InventoryOtherDiv" class="mt-md-3">
 
     </div>
-    <div id="PlannedUnplanedDiv" class="row" style="display:none;">
-        <div class="col-md-6">
-            <div class="floating-label-wrap">
-                <select class="floating-label-field floating-label-field--s3" asp-for="PlannedUnplannedLand" disabled>
-                    <option value="Planned Land">Planned Land</option>
-                    <option value="Unplanned Land">Unplanned Land</option>
-                </select>
-                <span asp-validation-for="PrimaryListNo" class="text-danger"></span>
-                <label class="floating-label" asp-for="PlannedUnplannedLand">Planned/Unplanned Land</label>
-            </div>
-        </div>
-
-        <div id="divUnplannedSelection" style="display:none;">
-
-            <div class="floating-label-wrap">
-                <div class="col-md-6">
-
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" disabled>
-
-                        <option value="">--Select--</option>
-                    </select>
-                    <label asp-validation-for="LocalityId" class="error"></label>
-                    <label class="floating-label" asp-for="LocalityId">Locality(Village)</label>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="divPlannedSelection" style="display:none;">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="Colony" placeholder="Colony" type="text" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                    <span asp-validation-for="Colony" class="text-danger"></span>
-                    <label class="floating-label">Colony</label>
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-
-                    <input asp-for="Sector" placeholder="Sector" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                    <span asp-validation-for="Sector" class="text-danger"></span>
-                    <label class="floating-label">Sector</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Block" maxlength="50" asp-for="Block" disabled />
-                        <span asp-validation-for="Block" class="text-danger"></span>
-                        <label class="floating-label">Block</label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-
-                        <input asp-for="Pocket" placeholder="Pocket" class="floating-label-field floating-label-field--s3" maxlength="50" disabled />
-                        <span asp-validation-for="Pocket" class="text-danger"></span>
-                        <label class="floating-label">Pocket</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="InventoryOtherDiv">
-
-    </div>
-    @*</div>*@
-    <div class="row pt-3">
+    
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -121,25 +54,33 @@
             </div>
         </div>
         <div class="col-md-6">
-            <div class="row">
+
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <label>Encroachment</label>
+                </div>
+                <input type="hidden" asp-for="Encroachment" value="0" />
                 <div class="col-md-4">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>
-                        <label for="Encroachment" class="form-check-label">Yes </label>
+                        <input  class="form-check-input" type="radio" asp-for="Encroachment" name="grpEncroachment" value="0" checked>
+                        <label class="form-check-label">No </label>
+
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">
-                        <label for="Encroachment" class="form-check-label">No </label>
+                        <input  class="form-check-input" type="radio" asp-for="Encroachment" name="grpEncroachment" value="1">
+                        <label class="form-check-label">Yes </label>
                     </div>
                 </div>
             </div>
+
+
             <span asp-validation-for="Encroachment" class="text-danger"></span>
             @*<label class="floating-label"> Encroachment<span style="color:red">*</span></label>*@
         </div>
     </div>
-    <div class="row pt-3">
+    <div class="row mt-md-3">
         <div class="col-md-12">
             <div class="floating-label-wrap mb-3 mb-md-0">
                 <textarea asp-for="StatusOnGround" type="text" placeholder="Status on Ground" class="floating-label-field floating-label-field--s3"></textarea>
@@ -148,7 +89,7 @@
             </div>
         </div>
     </div>
-    <div class="row pt-3">
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -164,7 +105,7 @@
             <label class="floating-label">Report</label>
         </div>
     </div>
-    <div class="row" style="display:none;">
+    <div class="row mt-md-3" style="display:none;">
 
         <div class="col-md-6">
             <div class="floating-label-wrap">

@@ -65,7 +65,7 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
                             <i class="ri-refresh-line mr-2"></i>Reset
                         </button>
                     </div>
@@ -81,20 +81,19 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Inventoried In</option>
-                        <option>Planned/Unplanned Land</option>
-                        <option>Classification of Land</option>
-                        <option>Department</option>
-                        <option>Zone</option>
-                        <option>Division</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" value="inventoriedin">Inventoried In</option>
+                        <option value="plannedunplanned">Planned/Unplanned Land</option>
+                        <option value="classification">Classification of Land</option>
+                        <option value="department">Department</option>
+                        <option value="zone">Zone</option>
+                        <option value="division">Division</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

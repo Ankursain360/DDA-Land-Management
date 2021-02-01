@@ -10,7 +10,7 @@
         <div class="row">
             <div class="form-group col-md-4">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="radio" asp-for="IsRebateOn" id="rbdPricipal" value="0">
+                    <input class="form-check-input" type="radio" name="IsRebateOn" asp-for="IsRebateOn" id="rbdPricipal" value="0">
                     <label class="form-check-label" for="radio">
                         Rebate on Principal Amount
                     </label>
@@ -21,7 +21,7 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="radio" asp-for="IsRebateOn" id="rbdInterest" value="1">
+                    <input class="form-check-input" type="radio" name="IsRebateOn" asp-for="IsRebateOn" id="rbdInterest" value="1">
                     <label class="form-check-label" for="radio">
                         Rebate on Interest
                     </label>
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group col-md-4">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="radio" asp-for="IsRebateOn" id="rbdBoth" value="2">
+                    <input class="form-check-input" type="radio" name="IsRebateOn" asp-for="IsRebateOn" id="rbdBoth" value="2">
                     <label class="form-check-label" for="radio">
                         Both
                     </label>
@@ -44,7 +44,7 @@
 
         </div>
 
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="row pt-3">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -87,7 +87,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
 
             <div class=" col-md-6">
 
@@ -117,16 +117,16 @@
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 
-<environment include="Development">
+@*<environment include="Development">
     <script src="~/js/rebatecreate.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/js/rebatecreate.min.js" asp-append-version="true"></script>
-</environment>
+</environment>*@
 
-<environment include="Development">
+@*<environment include="Development">
     <script src="~/js/common.js"></script>
 </environment>
 <environment exclude="Development">
     <script src="~/js/common.min.js" asp-append-version="true"></script>
-</environment>
+</environment>*@

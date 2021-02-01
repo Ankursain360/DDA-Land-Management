@@ -8,7 +8,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System;
 using System.Threading.Tasks;
-
+using SiteMaster.Filters;
+using Core.Enum;
 namespace SiteMaster.Controllers
 {
     public class VillageController : BaseController
@@ -18,7 +19,9 @@ namespace SiteMaster.Controllers
         {
             _villageService = villageService;
         }
-        public async Task<IActionResult> Index()
+
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
         {
            // var list = await _villageService.GetAllVillage();
             return View();
@@ -29,6 +32,9 @@ namespace SiteMaster.Controllers
             var result = await _villageService.GetPagedVillage(model);
             return PartialView("_List", result);
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Village village = new Village();
@@ -38,6 +44,7 @@ namespace SiteMaster.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Village village)
         {
             try
@@ -84,6 +91,8 @@ namespace SiteMaster.Controllers
                 return Json($"Village: {Name} already exist");
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _villageService.FetchSingleResult(id);
@@ -96,6 +105,7 @@ namespace SiteMaster.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Village village)
         {
             if (ModelState.IsValid)
@@ -126,6 +136,10 @@ namespace SiteMaster.Controllers
                 return View(village);
             }
         }
+
+
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try
@@ -148,6 +162,10 @@ namespace SiteMaster.Controllers
             var list = await _villageService.GetAllVillage();
             return View("Index", list);
         }
+
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _villageService.FetchSingleResult(id);

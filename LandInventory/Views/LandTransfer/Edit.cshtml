@@ -774,7 +774,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="HandedOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input asp-for="HandedOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="HandedOverByNameDesingnation" class="text-danger lb-sm"></span>
                     <label class="floating-label">Name/Designation</label>
                 </div>
@@ -783,8 +783,8 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="HandedOverDate" type="date" placeholder="Date" class="floating-label-field floating-label-field--s3 numbers" />
-                    <span asp-validation-for="HandedOverDate" class="text-danger lb-sm"></span>
+                    <input asp-for="HandedOverDate" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="HandedOverDate" class="text-danger"></span>
                     <label class="floating-label">Date</label>
                 </div>
 
@@ -793,7 +793,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="HandedOverEmailId" type="email" placeholder="Email Id" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input asp-for="HandedOverEmailId" type="email" placeholder="Email Id" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="HandedOverEmailId" class="text-danger lb-sm"></span>
                     <label class="floating-label">Email Id</label>
                 </div>
@@ -804,7 +804,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="HandedOverMobileNo" placeholder="Mobile No." class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <input asp-for="HandedOverMobileNo" type="text" value="" placeholder="Mobile No." maxlength="10" class="floating-label-field floating-label-field--s3  onlynumbers "/>
                     <span asp-validation-for="HandedOverMobileNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Mobile No.</label>
                 </div>
@@ -813,7 +813,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="HandedOverLandLineNo" placeholder="Land Line No." class="floating-label-field floating-label-field--s3 onlynumbers" />
+                    <input asp-for="HandedOverLandLineNo" maxlength="10" type="text" value="" placeholder="Land Line No." class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="HandedOverLandLineNo" class="text-danger lb-sm"></span>
                     <label class="floating-label">Land Line No.</label>
                 </div>
@@ -913,7 +913,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TakenOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input asp-for="TakenOverByNameDesingnation" placeholder="Name/Designation" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="TakenOverByNameDesingnation" class="text-danger lb-sm"></span>
                     <label class="floating-label">Name/Designation</label>
                 </div>
@@ -922,7 +922,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="DateofTakenOver" type="date"placeholder="Date" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input asp-for="DateofTakenOver" type="date"placeholder="Date" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="DateofTakenOver" class="text-danger lb-sm"></span>
                     <label class="floating-label">Date</label>
                 </div>
@@ -931,7 +931,7 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="TakenOverEmailId" type="email"placeholder="Email Id" class="floating-label-field floating-label-field--s3 numbers" />
+                    <input asp-for="TakenOverEmailId" type="email"placeholder="Email Id" class="floating-label-field floating-label-field--s3 " />
                     <span asp-validation-for="TakenOverEmailId" class="text-danger lb-sm"></span>
                     <label class="floating-label">Email Id</label>
                 </div>

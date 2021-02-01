@@ -1,4 +1,6 @@
-﻿function GetZoneListForHandOver(id) {
+﻿
+
+function GetZoneListForHandOver(id) {
     debugger
     HttpGet(`/LandTransfer/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         debugger
@@ -106,6 +108,7 @@ $("#KhasraNo").change(function () {
         $('#LoadView').html(response);
     });
 });
+
 $("#collapse").click(function () {
     $('#collapseExample').collapse("toggle").promise().done(function () {
         $("select").select2({
@@ -120,6 +123,7 @@ function callSelect2() {
         allowClear: true
     });
 }
+
 $(document).ready(function () {
     $("input").each(function () {
         if ($(this).val() == '0') {
@@ -127,14 +131,15 @@ $(document).ready(function () {
         }
     });
 
-    var TakenOverLandLineNo = $("#TakenOverLandLineNo").val();
-    $("#TakenOverLandLineNo").val(Math.trunc(TakenOverLandLineNo));
-    var TakenOverMobileNo = $("#TakenOverMobileNo").val();
-    $("#TakenOverMobileNo").val(Math.trunc(TakenOverMobileNo));
-    var HandedOverMobileNo = $("#HandedOverMobileNo").val();
-    $("#HandedOverMobileNo").val(Math.trunc(HandedOverMobileNo));
-    var HandedOverLandLineNo = $("#HandedOverLandLineNo").val();
-    $("#HandedOverLandLineNo").val(Math.trunc(HandedOverLandLineNo));
+
+    //var TakenOverLandLineNo = $("#TakenOverLandLineNo").val();
+    //$("#TakenOverLandLineNo").val(Math.trunc(TakenOverLandLineNo));
+    //var TakenOverMobileNo = $("#TakenOverMobileNo").val();
+    //$("#TakenOverMobileNo").val(Math.trunc(TakenOverMobileNo));
+    //var HandedOverMobileNo = $("#HandedOverMobileNo").val();
+    //$("#HandedOverMobileNo").val(Math.trunc(HandedOverMobileNo));
+    //var HandedOverLandLineNo = $("#HandedOverLandLineNo").val();
+    //$("#HandedOverLandLineNo").val(Math.trunc(HandedOverLandLineNo));
 
     $(".numbers").keyup(function () {
         var buildupArea = $("input[name='BuildupArea']").val();
@@ -171,7 +176,7 @@ $(document).ready(function () {
         else if (value == 3)
             $('#LabelTotalAreaSqAcreHec').html('Total Area(' + "Hectare" + ')');
     }
-    
+
     var value = $('#Propertyregistration_PlannedUnplannedLand').val();
     if (value == 'Planned Land') {
         $('#divUnplannedSelection').hide();
@@ -249,4 +254,4 @@ function ChangeEncroachmentStatus(status) {
         $("#divEncroachmentYesSelectionForLandTransfer textarea").attr("disabled", "disabled");
     }
     callSelect2();
-};
+}

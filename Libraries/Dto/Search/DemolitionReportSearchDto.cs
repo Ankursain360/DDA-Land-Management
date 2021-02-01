@@ -5,13 +5,12 @@ using System.Text;
 
 namespace Dto.Search
 {
-   public class DemolitionReportSearchDto : BaseSearchDto
+
+    public class DemolitionReportSearchDto : BaseSearchDto
     {
         public string name { get; set; }
-        public DateTime? FromDate  { get; set; }
-        public DateTime? ToDate { get; set; }
-        public int Locality { get; set; }
-
-
+        public int localityId { get; set; }
+        public DateTime fromDate { get; set; }
+        public DateTime toDate { get; set; }
     }
 }

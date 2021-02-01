@@ -1,95 +1,32 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
-
-var currentSortOrderAscending = 1;
-var currentSortOrderDescending = 2;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetUser(currentPageNumber, currentPageSize);
+    GetUser(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetUser(currentPageNumber, currentPageSize);
+    GetUser(currentPageNumber, currentPageSize, sortOrder);
 });
 
-$("#btnReset").click(function () {
+$("#btnReset").click(function (){
     $('#txtUserName').val('');
     $('#txtName').val('');
     $('#txtPhoneNumber').val('');
     $('#txtEmail').val('')
-    GetUser(currentPageNumber, currentPageSize);
+    GetUser(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetUser(pageNumber, pageSize) {
-    var param = GetSearchParam(parseInt(pageNumber), parseInt(pageSize));
-    HttpPost(`/usermanagement/List`, 'html', param, function (response) {
-        $('#divUser').html("");
-        $('#divUser').html(response);
-    });
-
-  //if ($('table >tbody >tr').length <= 1) {
- //    GetUser(1, $("#ddlPageSize option:selected").val());
-   //}
-}
-
-function GetSearchParam(pageNumber, pageSize) {
-    var model = {
-        userName: $('#txtUserName').val(),
-        name: $('#txtName').val(),
-        phoneNumber: $('#txtPhoneNumber').val(),
-        email: $('#txtEmail').val(),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
-    }
-    return model;
-}
-
-function onPaging(pageNo) {
-    GetUser(pageNo, currentPageSize);
-    currentPageNumber = pageNo;
-}
-
-function onChangePageSize(pageSize) {
-    GetUser(currentPageNumber, pageSize);
-    currentPageSize = pageSize;
-}
-
-// ********** Sorting Code  **********
-
-
-function GetUserOrderBy(pageNumber, pageSize, order) {
-    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+function GetUser(pageNumber, pageSize, order){
+    var param = GetSearchParam(parseInt(pageNumber), parseInt(pageSize), order);
     HttpPost(`/usermanagement/List`, 'html', param, function (response) {
         $('#divUser').html("");
         $('#divUser').html(response);
     });
 }
 
-function Ascending() {
-    $("#btnDescending").removeClass("active");
-    $("#btnAscending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    if (value !== "0") {
-        GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderAscending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-function Descending() {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    if (value !== "0") {
-        GetUserOrderBy(currentPageNumber, currentPageSize, currentSortOrderDescending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-
-function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         userName: $('#txtUserName').val(),
         name: $('#txtName').val(),
@@ -102,3 +39,31 @@ function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
     }
     return model;
 }
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetUser(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetUser(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+function onPaging(pageNo) {
+    GetUser(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetUser(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    currentPageSize = pageSize;
+}
+

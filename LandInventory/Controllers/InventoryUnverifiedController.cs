@@ -18,10 +18,12 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
+using LandInventory.Filters;
+using Core.Enum;
 
 namespace LandInventory.Controllers
 {
-    public class InventoryUnverifiedController :  BaseController
+    public class InventoryUnverifiedController : BaseController
     {
         private readonly IPropertyRegistrationService _propertyregistrationService;
         public IConfiguration _Configuration;
@@ -48,11 +50,14 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
 
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             var Msg = TempData["Message"] as string;
-            if(Msg !=null)
-            ViewBag.Message = Msg;
+            if (Msg != null)
+                ViewBag.Message = Msg;
             Propertyregistration propertyregistration = new Propertyregistration();
             await BindDropDown(propertyregistration);
             return View(propertyregistration);
@@ -99,6 +104,7 @@ namespace LandInventory.Controllers
         #endregion
 
         #region Property Inventory changes
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -131,6 +137,7 @@ namespace LandInventory.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
+        [AuthorizeContext(ViewAction.Verify)]
         public async Task<IActionResult> Edit(int id, Propertyregistration propertyregistration, IFormFile Assignfile, IFormFile GeoAssignfile, IFormFile TakenOverAssignFile, IFormFile HandedOverAssignFile, IFormFile DisposalTypeAssignFile)
         {
             await BindDropDown(propertyregistration);
@@ -359,7 +366,7 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -368,6 +375,8 @@ namespace LandInventory.Controllers
             ViewBag.TakenOverDocView = Data.TakenOverFilePath;
             ViewBag.HandedOverDocView = Data.HandedOverFilePath;
             ViewBag.DisposalTypeDocView = Data.DisposalTypeFilePath;
+            ViewBag.EncroachAtrDocView = Data.EncroachAtrfilepath;
+            ViewBag.HandedOverCopyofOrderView = Data.HandedOverCopyofOrderFilepath;
             await BindDropDown(Data);
 
             Data.ZoneList = await _propertyregistrationService.GetZoneDropDownList(Data.DepartmentId);
@@ -387,40 +396,26 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
         {
             Deletedproperty model = new Deletedproperty();
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-            if (userId == 13)
+            model.Reason = propertyregistration.Reason;
+            model.DeletedBy = SiteContext.UserId;
+            var result = await _propertyregistrationService.Delete(id);
+            var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+            if (result == true)
             {
-                model.Reason = propertyregistration.Reason;
-                var result = await _propertyregistrationService.Delete(id);
-                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
-                if (result == true)
-                {
-                    userId = 2;
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    Propertyregistration propertyregistration1 = new Propertyregistration();
-                    await BindDropDown(propertyregistration1);
-                    return RedirectToAction("Create", propertyregistration1);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    Propertyregistration propertyregistration1 = new Propertyregistration();
-                    await BindDropDown(propertyregistration1);
-                    return RedirectToAction("Create", propertyregistration1);
-                }
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                Propertyregistration propertyregistration1 = new Propertyregistration();
+                await BindDropDown(propertyregistration1);
+                return RedirectToAction("Create", propertyregistration1);
             }
             else
             {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownList();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 Propertyregistration propertyregistration1 = new Propertyregistration();
@@ -428,9 +423,8 @@ namespace LandInventory.Controllers
                 return RedirectToAction("Create", propertyregistration1);
             }
 
-
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -548,9 +542,11 @@ namespace LandInventory.Controllers
                 {".csv", "text/csv"}
             };
         }
+
         #endregion
 
 
         #endregion
+
     }
 }

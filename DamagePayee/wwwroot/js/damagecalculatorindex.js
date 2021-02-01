@@ -12,6 +12,11 @@
     $('#EncroachmentDate').attr('max', maxDate);
     $('#StartDate').attr('max', maxDate);
     $('#EndDate').attr('max', maxDate);
+
+    localityid = $("#LocalityId option:selected").val();
+    if (localityid != "") {
+        $("#LocalityId").attr("readonly", "readonly");
+    }
 });
 
 $('#myForm').validate({
@@ -212,3 +217,13 @@ function GetSearchParam() {
     debugger
     return model;
 }
+$("#btnReset").click(function () {
+    $('#PropertyTypeId').val('').trigger('change');
+    $('#EncroachmentDate').val('');
+    $('#StartDate').val('');
+    $('#EndDate').val('');
+    $('#LocalityId').val('').trigger('change');
+    $('#Area').val('');
+
+    $('#DivMainContentForm').html("");
+});

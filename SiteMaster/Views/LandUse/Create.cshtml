@@ -1,12 +1,11 @@
 ﻿@model Libraries.Model.Entity.Landuse
 @await Component.InvokeAsync("PageHeader", new { pageName = "Land Use" })
-<div class="pt-3">
+        <div class="pt-3">
 
 
                 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
                     <h3 class="mb-3 d-flex">Add Details</h3>
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                     <div class="row">
                         <div class="col-md-6    ">
                             <div class="floating-label-wrap mb-3 mb-md-0">
@@ -16,17 +15,12 @@
 
                                 <span asp-validation-for="Name" class="text-danger"></span>
 
-                                <label class="floating-label">Land use Name  </label>
+                                <label class="floating-label">Land Use Name  </label>
                             </div>
                         </div>
 
                         <div class="col-md-6    ">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-
-
-
-
-
                                 <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
                                     <option value="1">Active</option>
                                     <option value="0">Inactive</option>
@@ -37,19 +31,16 @@
                             </div>
                         </div>
                     </div>
-
-
-                    <div class="row ">
+                    <div class="row mt-md-3">
                         <div class=" col-md-12">
                             <button class="btn btn-theme " type="submit">Create</button>
                             @Html.ActionLink("Back", "Index", "LandUse", null, new { @class = "btn btn-theme " })
-
                         </div>
                     </div>
                 </form>
            
    
-    </div>
+         </div>
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
         <script src="~/js/landusecreate.js"></script>

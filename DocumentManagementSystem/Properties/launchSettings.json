@@ -4,7 +4,7 @@
     "anonymousAuthentication": true,
     "iisExpress": {
       "applicationUrl": "http://localhost:59796",
-      "sslPort": 0
+      "sslPort": 44358
     }
   },
   "profiles": {
@@ -18,7 +18,7 @@
     "DocumentManagementSystem": {
       "commandName": "Project",
       "launchBrowser": true,
-      "applicationUrl": "http://localhost:5000",
+      "applicationUrl": "https://localhost:59796",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

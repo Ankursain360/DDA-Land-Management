@@ -28,27 +28,48 @@ namespace Libraries.Repository.EntityRepository
                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                               && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
                               && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
-
-                            .OrderByDescending(s => s.IsActive)
-
-                        .GetPaged<Court>(model.PageNumber, model.PageSize);
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                    
                     case ("ADDRESS"):
-                        data.Results = data.Results.OrderBy(x => x.Address).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderBy(x => x.Address)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                     case ("PHONENO"):
-                        data.Results = data.Results.OrderBy(x => x.PhoneNo).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderBy(x => x.PhoneNo)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -57,17 +78,41 @@ namespace Libraries.Repository.EntityRepository
                 switch (model.SortBy.ToUpper())
                 {
                     case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
-                  
+
                     case ("ADDRESS"):
-                        data.Results = data.Results.OrderByDescending(x => x.Address).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderByDescending(x => x.Address)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                     case ("PHONENO"):
-                        data.Results = data.Results.OrderByDescending(x => x.PhoneNo).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderByDescending(x => x.PhoneNo)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                     case ("ISACTIVE"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Court
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                              && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                              && (string.IsNullOrEmpty(model.phoneno) || x.PhoneNo.Contains(model.phoneno)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Court>(model.PageNumber, model.PageSize);
                         break;
                 }
             }

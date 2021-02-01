@@ -21,11 +21,40 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Fixingdemolition>> GetPagedAnnexureA(AnnexureAApprovalSearchDto model, int userId)
         {
 
-            return await _dbContext.Fixingdemolition
+            var data = await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                     .Include(x => x.Encroachment)
                                     .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
                                     && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0))
                                     .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.orderby;
+            if (SortOrder == 1)
+            {
+                switch (model.colname.ToUpper())
+                {
+                  
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderBy(x => x.Encroachment.KhasraNo).ToList();
+                        break;
+                  
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.colname.ToUpper())
+                {
+                
+                    case ("KHASRANO"):
+                        data.Results = data.Results.OrderByDescending(x => x.Encroachment.KhasraNo).ToList();
+                        break;
+                   
+                }
+            }
+            return data;
+
+
+
         }
 
 

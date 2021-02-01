@@ -74,7 +74,7 @@ namespace Libraries.Model.Entity
 
         public Locality Locality { get; set; }
         public Zone Zone { get; set; }
-        public Damagepayeeregistertemp DamagePayeeRegister { get; set; }
+        public Damagepayeeregister DamagePayeeRegister { get; set; }
 
         public ICollection<Mutationnewowner> Mutationnewowner { get; set; }
         public ICollection<Mutationnewownertemp> Mutationnewownertemp { get; set; }

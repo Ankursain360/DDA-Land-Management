@@ -1,0 +1,536 @@
+﻿@model Libraries.Model.Entity.Damagepayeeregister
+
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js" defer></script>
+
+<div class="pt-3">
+    <div id="LetterData" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" value="@ViewBag.MainDamagePayeeId" />
+        <input type="hidden" asp-for="IsMutaionYes" value="0" />
+        <h3 class="mb-3 d-flex">Add Details</h3>
+
+        <div id="DivOpenSubstitutionForm">
+            <div id="DivFileInformation">
+
+                <h3 class="my-3 d-flex sub-heading">File Information</h3>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">File No.</label>
+                            <label class="control-label">@Model.FileNo</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="DivPersonalInformationofDamageAssessee">
+                <h3 class="my-3 d-flex sub-heading">Personal Information of Damage Assessee</h3>
+                <div class="table-section bg-white border shadow rounded pb-3">
+                    <div class="table-responsive px-2" id="LoadPersonelInfoView">
+
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div id="Divclsification" class="mt-md-3">
+                <h3 class="my-3 d-flex sub-heading">Type of Damage Assessee</h3>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <input type="hidden" asp-for="TypeOfDamageAssessee" id="TypeOfDamageAssessee" value="Original" />
+
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rOriginal" value="Original" checked>
+                            <label class="form-check-label" for="radio">
+                                Original
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="TypeOfDamageAssessee" name="grpDamageAssesseeType" id="rSubsequent" value="Subsequent">
+                            <label class="form-check-label" for="radio">
+                                Subsequent Purchaser/Occupier
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="DivForSubsequentPurchaser" style="display:none">
+
+                <h3 class="my-3 d-flex sub-heading">Chain of Previous Damage Assessee, starting from Original Damage Assessee</h3>
+                <div class="table-section bg-white border shadow rounded pb-3">
+                    <div class="table-responsive px-2" id="LoadPreviousDamageAssesseeInfoView">
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="MainContentForm">
+                <h3 class="my-3 d-flex sub-heading">Property Identification Details</h3>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Property/House/Municipal No.</label>
+                            <label class="control-label">@Model.PropertyNo</label>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+
+                            <label class="label mr-5" style="color:black; font-weight:700;">Locality</label>
+                            <label class="control-label">@Model.Locality.Name</label>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Floor No(if purchased floor wise)</label>
+                            <label class="control-label">@Model.FloorNo</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Road/Street Name</label>
+                            <label class="control-label">@Model.StreetNo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Pin Code</label>
+                            <label class="control-label">@Model.PinCode</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <label class="label mr-5" style="color:black; font-weight:700;">District</label>
+                            <label class="control-label">@Model.District.Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Plot Area in Sq.yds.</label>
+                            <label class="control-label">@Model.PlotAreaSqYard</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0 ">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Sq. Mtr.-</label>
+                            <label class="control-label">@Model.PlotAreaSqMt</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Floor Area in Sq. yds.(if purchased floor wise)</label>
+                            <label class="control-label">@Model.FloorAreaSqYard</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0 ">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Sq. Mtr.-</label>
+                            <label class="control-label">@Model.PropertyNo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="form-group col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Upload Photograph of Property</label>
+                            <input type="hidden" asp-for="PropertyPhotoPath" />
+                            @{
+                                if (Model.PropertyPhotoPath != null)
+                                {
+                                    <a class="badge badge-primary px-2" asp-action="DownloadPropertyPhoto" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="DivMainContentForm">
+                <h3 class="my-3 d-flex sub-heading">Use of Property</h3>
+                <div class="row mt-md-3">
+                    <div class="col-md-2">
+                        <input type="hidden" asp-for="UseOfProperty" id="UseOfProperty" value="Residential" />
+
+                        <div class="form-check theme">
+                            <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbResidential" value="Residential">
+                            <label class="form-check-label" for="radio">
+                                Residential
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check theme">
+                            <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbCommercial" value="Commercial">
+                            <label class="form-check-label" for="radio">
+                                Commercial
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check theme">
+                            <input asp-for="UseOfProperty" class="form-check-input" type="radio" name="grpUseofpeoperty" id="rdbMixed" value="Mixed">
+                            <label class="form-check-label" for="radio">
+                                Mixed
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Residential floor area in Sq.yds.</label>
+                            <label class="control-label">@Model.ResidentialSqYard</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Commercial floor area in Sq.yds.</label>
+                            <label class="control-label">@Model.CommercialSqYard</label>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0 ">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Sq. Mtr.-</label>
+                            <label class="control-label">@Model.ResidentialSqMt</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Sq. Mtr.-</label>
+                            <label class="control-label">@Model.CommercialSqMt</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="DivMainContentForm">
+                <h3 class="my-3 d-flex sub-heading">Litigation Status</h3>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <input type="hidden" asp-for="LitigationStatus" id="LitigationStatus" value="no case" />
+
+                        <div class="form-check theme">
+                            <input asp-for="LitigationStatus" class="form-check-input" type="radio" name="grpLitigation" id="rdbNoLitigation" checked value="no case">
+                            <label class="form-check-label" for="radio">
+                                The Land Property is not a subject matter of any litigation/Court Case
+
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input asp-for="LitigationStatus" class="form-check-input" type="radio" name="grpLitigation" id="rbdYesLitigation" value="Under litigation">
+                            <label class="form-check-label" for="radio">
+                                LandProperty title is under litigation
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="DivForLitigationStatus" style="display:none">
+                <h3 class="my-3 d-flex sub-heading">Details of Court Case(if any)</h3>
+
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Name of Court</label>
+                            <label class="control-label">@Model.CourtName</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Case Number</label>
+                            <label class="control-label">@Model.CaseNo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <label class="label mr-5" style="color:black; font-weight:700;">Name of Opposition Party</label>
+                            <label class="control-label">@Model.OppositionName</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label>I am<span style="color:red">*</span></label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" asp-for="PetitionerRespondent" id="PetitionerRespondent" value="Petitioner" />
+
+                                <div class="form-check theme">
+                                    <input asp-for="PetitionerRespondent" class="form-check-input" type="radio" name="grpCaseperson" value="Petitioner">
+                                    <label class="form-check-label" for="radio">
+                                        Petitioner
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check theme">
+                                    <input asp-for="PetitionerRespondent" class="form-check-input" type="radio" name="grpCaseperson" value="Respondant">
+                                    <label class="form-check-label" for="radio">
+                                        Respondant
+                                    </label>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="DivMainContentForm">
+                <h3 class="my-3 d-flex sub-heading">Whether present occupant's is/are damage payee in DDA record<span style="color:red">*</span></h3>
+                <div class="row mt-3">
+                    <div class="form-group col-md-2">
+                        <input type="hidden" asp-for="IsDdadamagePayee" id="IsDdadamagePayee" value="Yes" />
+
+                        <div class="form-check theme">
+                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeYes" checked value="Yes">
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="form-check theme">
+                            <input asp-for="IsDdadamagePayee" class="form-check-input" type="radio" name="grpYESNO" id="rdbPayeeNo" value="No">
+                            <label class="form-check-label" for="radio">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="form-group col-md-12">
+                        <div class="form-group" id="DivForPayeeNo" style="display:none;">
+                            <label class="control-label lb-sm">Apply for mutation/ substitution</label>
+                            <input type="submit" value="Open Substitution Form" class="btn btn-theme" onclick="return CheckToApply();" />
+                            @* <a class="badge badge-primary px-2 btn btn-theme" asp-action="Create" asp-controller="SubstitutionMutationDetails" asp-route-id="3" onclick="return CheckToApply();">Open Substitution Form</a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="DivDamagePropertyDocs">
+            <h3 class="my-3 d-flex sub-heading"> Upload documents of damage property </h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <h6 class="my-3" style="color:blue;"> Note: If you have more than one document, create a single PDF and upload.</h6>
+
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Show Cause Notice(if issued)</label>
+                        <input type="hidden" asp-for="ShowCauseNoticePath" />
+                        @{
+                            if (Model.ShowCauseNoticePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadShowCauseNotice" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">F /G Form</label>
+                        <input type="hidden" asp-for="FgformPath" />
+                        @{
+                            if (Model.FgformPath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadFgform" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                               
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="form-group col-md-3">
+                    <input type="hidden" asp-for="IsDocumentFor" value="HouseTax Bill" />
+                    <div class="form-check theme">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="HouseBill" checked value="HouseTax Bill">
+                        <label class="form-check-label" for="radio">
+                            HouseTax Bill
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="form-check theme">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="ElectricityBill" value="Electricity Bill">
+                        <label class="form-check-label" for="radio">
+                            Electricity Bill
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="form-check theme">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="WaterBill" value="Water Bill">
+                        <label class="form-check-label" for="radio">
+                            Water Bill
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <div class="form-check theme">
+                        <input asp-for="IsDocumentFor" class="form-check-input" type="radio" name="Bill" id="Other" value="Any Other">
+                        <label class="form-check-label" for="radio">
+                            Any Other
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Upload copy of the document selected</label>
+                        <input type="hidden" asp-for="DocumentForFilePath" />
+                        @{
+                            if (Model.DocumentForFilePath != null)
+                            {
+                                <a class="badge badge-primary px-2" asp-action="DownloadBillfile" asp-route-id="@Model.Id" target="_blank"> (View File)</a>
+                                
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+
+
+
+            <br />
+        </div>
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Payment History</h3>
+
+            <div class="table-section bg-white border shadow rounded pb-3">
+                <div class="table-responsive px-2" id="LoadPaymentHistoryInfoView">
+
+                </div>
+            </div>
+
+        </div>
+
+        <div id="DivMainContentForm">
+            <h3 class="my-3 d-flex sub-heading">Online Payment</h3>
+            @*<input type="submit" value="Damage Calculator" class="btn btn-theme" onclick="return CheckToApply();" />*@
+            <a class="btn btn-theme" asp-action="Index" asp-controller="DamageCalculator" asp-route-id="@Model.LocalityId" onclick="return CheckToApply();">Damage Calculator</a>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-md-12">
+                <h5 class="my-3" style="color:Black;font:bold"> Note: Please calculate Damage CHARGES on FINANCIAL year basis. For any FINANCIAL year (or part thereof) & the due date of payment would be 31st MARCH of that FINANCIAL year.</h5>
+
+            </div>
+        </div>
+        <div id="divSelfAssessmentAmount">
+            <h3 class="my-3 d-flex sub-heading">Amount Payable as per self assessment</h3>
+            <input id="RebatePercentage" type="hidden" value="@ViewBag.RebateValue" />
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Damage Amount</label>
+                        <label class="control-label">@Model.TotalValueWithInterest</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Interest Amount</label>
+                        <label class="control-label">@Model.InterestDueAmountCompund</label>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0 ">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Rebate @ViewBag.RebateValue% of total Interest</label>
+                        <label class="control-label">@Model.Rebate</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <label class="label mr-5" style="color:black; font-weight:700;">Total Payable</label>
+                        <label class="control-label">@Model.TotalPayable</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="Declaration">
+
+            <h2 class="my-3 sub-heading">Declaration</h2>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input asp-for="DeclarationStatus1" type="checkbox" />
+                        <input type="hidden" asp-for="Declaration1" />
+
+                        I certify that the particulars filled in this form are true and correct to the best of my knowledge and i am authorized to sign this form. I am aware of the penel provisions of the Delhi Development Authority, 2019 which are attracted on wilful suppression and submission of false and in correct particulars.
+                        <span asp-validation-for="DeclarationStatus1" id="DeclarationStatus1Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <br />
+                        <input asp-for="DeclarationStatus2" type="checkbox" />
+                        <input type="hidden" asp-for="Declaration2" />
+                        I understand that any of the information supplied by me is found incorrect, my application shall be rejected.
+                        <span asp-validation-for="DeclarationStatus2" id="DeclarationStatus2Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <br />
+                        <input asp-for="DeclarationStatus3" type="checkbox" />
+                        <input type="hidden" asp-for="Declaration3" />
+                        I understand that any email sent to me on the ID provided by me shall be deemed service of notice to me.
+                        <span asp-validation-for="DeclarationStatus3" id="DeclarationStatus3Msg" class="text-danger" style="display:none;">Mandatory</span>
+                        <br /><br />
+                        Note: The compliance of above section will not entitle occupancy rights and super structure claim of the property and all the occupent will continue to be considered as unauthorised occupent of the property.
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<link href="~/lib/bootstrap/select2/select2.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/select2/select2.js" defer></script>
+<environment include="Development">
+    <script src="~/js/site.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+</environment>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/selfassessmentdamageprint.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/selfassessmentdamageprint.min.js" asp-append-version="true"></script>
+</environment>

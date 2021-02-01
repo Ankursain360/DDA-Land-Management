@@ -1,21 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using System;
+using Dto.Search;
+using Dto.Master;
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
-    public class DemandCollectionLedgerController : Controller
+    public class DemandCollectionLedgerController : BaseController
     {
-        public IActionResult Index()
+        private readonly IDemandLetterService _demandLetterService;
+
+        public DemandCollectionLedgerController(IDemandLetterService demandLetterService)
         {
-            return View();
+            _demandLetterService = demandLetterService;
         }
 
-        public IActionResult Create()
+
+
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            DemandCollectionLedgerReportDtoProfile demandletter = new DemandCollectionLedgerReportDtoProfile();
+            ViewBag.FileNoList = await _demandLetterService.BindFileNoList();
+            ViewBag.LocalityList = await _demandLetterService.BindLoclityList();
+            ViewBag.PropertyNo = await _demandLetterService.BindFileNoList();
+            return View(demandletter);
+        }
+
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] DemandCollectionLedgerSearchDto model)
+        {
+            var result = await _demandLetterService.GetPagedDemandCollectionLedgerReport1(model);
+
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
         }
     }
 }

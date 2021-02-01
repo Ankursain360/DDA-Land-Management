@@ -15,7 +15,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Watchandward>> GetWatchandwardUsingRepo();
         Task<List<Khasra>> GetAllKhasra();
-       
+
         Task<List<Locality>> GetAllLocality();
         Task<bool> Update(int id, Watchandward watchandward);
 
@@ -26,8 +26,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
 
 
-        Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto);
-       
+        Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto);
+
 
 
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);

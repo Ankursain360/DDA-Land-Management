@@ -43,12 +43,12 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    <label> फाइल सं. </label>
+                    <label> फाइल सं. - <b> @Model.FileNo</b></label>
                     <p style="color:black;">File No. -<b> @Model.FileNo</b></p>
                 </div>
                 <div class="col-md-6"></div>
                 <div class="col-md-3">
-                    <label> दिनांक</label>
+                    <label> दिनांक -  <b>@Model.GenerateDate</b></label>
 
                     <p style="color:black">Dated - <b>@Model.GenerateDate</b></p>
                 </div>
@@ -76,11 +76,11 @@
 
                         विषय : सरकारी स्थान (अप्राधिकृत  अभिभोगियो  की  बेदखली ) अधिनियम , 1971  की  धरा 4(1)/7(3) के <br />
                     </p>  <p style="color:black; margin-left:55px; text-align-last:justify">
-                        अंतर्गत...........................................................................................  दिल्ली  में  स्थित  सम्पति  सं.
-                        <br />
-                        .................................................के संबध में  श्री/श्रीमान................................................. के
+    अंतर्गत  दिल्ली  में  स्थित  सम्पति  सं.
+    <br />
+    <b>@Model.Address</b>  के संबध में  श्री/श्रीमान  के  <b>@Model.Name</b>&nbsp;&nbsp;<b>S/O @Model.FatherName</b>
 
-                    </p>
+</p>
 
                     <p style="color: black; margin-left: 55px; margin-top: -1.2%;">विरुद्ध कार्यवाही !</p>
 
@@ -95,9 +95,9 @@
 
                         Proceeedings U/S  4(1) / 7(3)  of the public premises ( Eviction of unauthorised <br />
                     </p>  <p style="color:black; margin-left:52px; text-align-last:justify">
-                        occupants ) Act , 1971 , against <b>@Model.Name</b>&nbsp;&nbsp;<b>S/O @Model.FatherName</b>in respect of permises <br />
+    occupants ) Act , 1971 , against <b>@Model.Name</b>&nbsp;&nbsp;<b>S/O @Model.FatherName</b>&nbsp;in respect of permises <br />
 
-                         </p>
+</p>
 
                     <p style="color: black; margin-left: 55px; margin-top: -1.2%;">
                         <b>@Model.Address</b>
@@ -116,12 +116,12 @@
                         <br />
                     </p>   <p style="color:black; text-align-last:justify">
                         अंतर्गत नोटिस के संम्बंध में आपको आयेतंत्द्वारा निर्देश दिया जाता है कि आप नोटिस की अपनी<br />
-                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक..................को
+                        आपतियो के समर्थन में प्रमाण प्रस्तुत करे और अधोहस्ताछरी के न्यायालय में दिनाक <b>@Model.UndersignedDate</b>को
 
                         <br />
 
                     </p>
-                    <p style="color: black;margin-top: -1.2%;"> __________ उपस्थित हो |</p>
+                    <p style="color: black;margin-top: -1.2%;"><b>@Model.UndersignedTime</b> उपस्थित हो |</p>
 
                 </div>
 

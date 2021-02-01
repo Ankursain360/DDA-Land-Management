@@ -5,25 +5,46 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Libraries.Model.Entity
 {
     public class Onlinecomplaint : AuditableEntity<int>
     {
 
-      
+
+        [Required]
         public string Name { get; set; }
+        //  [Required(ErrorMessage = "Please enter   Mobile No ")]
+
+        [Required]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
+                   ErrorMessage = "Invalid Contact Format.")]
         public string Contact { get; set; }
+        [Required(ErrorMessage = "Please enter   Mobile No ",AllowEmptyStrings =false)]
         public int? ComplaintTypeId { get; set; }
+        [Required(ErrorMessage = " The Address field is required")]
+
         public string AddressOfComplaint { get; set; }
+        [Required(ErrorMessage = "Please Select Location", AllowEmptyStrings = false)]
+     
         public int? LocationId { get; set; }
+        [Required]
         public string Lattitude { get; set; }
+        [Required]
         public string Longitude { get; set; }
         public byte? IsActive { get; set; }
-      
+
+     
         public string PhotoPath { get; set; }
+        [Required]
+        [RegularExpression(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$",
+            ErrorMessage = "Invalid Email Format")]
         public string Email { get; set; }
         public string ReferenceNo { get; set; }
         public int? ApprovedStatus { get; set; }
+        public int? PendingAt { get; set; }
+
+        public string Remarks { get; set; }
 
 
         [NotMapped]
@@ -37,7 +58,15 @@ namespace Libraries.Model.Entity
         public virtual Location Location { get; set; }
 
         [NotMapped]
+        [Required]
+        [DataType(DataType.Upload)]
         public IFormFile Photo { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
 
     }
 }

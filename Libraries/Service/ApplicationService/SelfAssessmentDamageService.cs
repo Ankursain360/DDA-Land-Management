@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Service.ApplicationService
 {
-    public class SelfAssessmentDamageService : EntityService<Damagepayeeregistertemp>, ISelfAssessmentDamageService
+    public class SelfAssessmentDamageService : EntityService<Damagepayeeregister>, ISelfAssessmentDamageService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISelfAssessmentDamageRepository _selfAssessmentDamageRepository;
@@ -34,7 +34,7 @@ namespace Service.ApplicationService
             List<District> districtList = await _selfAssessmentDamageRepository.GetDistrictList();
             return districtList;
         }
-        public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregisterTemp()
+        public async Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterTemp()
         {
             return await _selfAssessmentDamageRepository.GetAllDamagepayeeregisterTemp();
         }
@@ -46,17 +46,17 @@ namespace Service.ApplicationService
         //    return await _selfAssessmentDamageRepository.GetAllDamagepayeeregisterTemp();
         //}
 
-        public async Task<Damagepayeeregistertemp> FetchSingleResult(int id)
+        public async Task<Damagepayeeregister> FetchSingleResult(int id)
         {
             var result = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
-            Damagepayeeregistertemp model = result.FirstOrDefault();
+            Damagepayeeregister model = result.FirstOrDefault();
             return model;
         }
 
-        public async Task<bool> Update(Damagepayeeregistertemp damagepayeeregistertemp)
+        public async Task<bool> Update(Damagepayeeregister damagepayeeregistertemp)
         {
             var result = await _selfAssessmentDamageRepository.FindBy(a => a.Id == damagepayeeregistertemp.Id);
-            Damagepayeeregistertemp model = result.FirstOrDefault();
+            Damagepayeeregister model = result.FirstOrDefault();
             model.FileNo = damagepayeeregistertemp.FileNo;
             model.TypeOfDamageAssessee = damagepayeeregistertemp.TypeOfDamageAssessee;
             model.PropertyNo = damagepayeeregistertemp.PropertyNo;
@@ -107,7 +107,7 @@ namespace Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<bool> Create(Damagepayeeregistertemp damagepayeeregistertemp)
+        public async Task<bool> Create(Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.CreatedBy = 1;
             damagepayeeregistertemp.CreatedDate = DateTime.Now;
@@ -120,7 +120,7 @@ namespace Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
-            Damagepayeeregistertemp model = form.FirstOrDefault();
+            Damagepayeeregister model = form.FirstOrDefault();
             model.IsActive = 0;
             _selfAssessmentDamageRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
@@ -132,7 +132,7 @@ namespace Service.ApplicationService
         }
 
         //********* rpt 1 Persolnal info of damage assesse ***********
-        public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfotemp damagepayeepersonelinfotemp)
+        public async Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfo damagepayeepersonelinfotemp)
         {
             damagepayeepersonelinfotemp.CreatedBy = 1;
             damagepayeepersonelinfotemp.CreatedDate = DateTime.Now;
@@ -140,7 +140,7 @@ namespace Service.ApplicationService
             return await _selfAssessmentDamageRepository.SavePayeePersonalInfoTemp(damagepayeepersonelinfotemp);
         }
 
-        public async Task<List<Damagepayeepersonelinfotemp>> GetPersonalInfoTemp(int id)
+        public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfoTemp(int id)
         {
             return await _selfAssessmentDamageRepository.GetPersonalInfoTemp(id);
         }
@@ -148,21 +148,21 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeletePayeePersonalInfoTemp(Id);
         }
-        public async Task<Damagepayeepersonelinfotemp> GetPersonelInfoFilePath(int Id)
+        public async Task<Damagepayeepersonelinfo> GetPersonelInfoFilePath(int Id)
         {
             return await _selfAssessmentDamageRepository.GetPersonelInfoFilePath(Id);
         }
 
         //********* rpt 2 Allotte Type **********
 
-        public async Task<bool> SaveAllotteTypeTemp(List<Allottetypetemp> allottetypetemp)
+        public async Task<bool> SaveAllotteTypeTemp(List<Allottetype> allottetypetemp)
         {
             allottetypetemp.ForEach(x => x.CreatedBy = 1);
             allottetypetemp.ForEach(x => x.CreatedDate = DateTime.Now);
             allottetypetemp.ForEach(x => x.IsActive = 1);
             return await _selfAssessmentDamageRepository.SaveAllotteTypeTemp(allottetypetemp);
         }
-        public async Task<List<Allottetypetemp>> GetAllottetypeTemp(int id)
+        public async Task<List<Allottetype>> GetAllottetypeTemp(int id)
         {
             return await _selfAssessmentDamageRepository.GetAllottetypeTemp(id);
         }
@@ -170,21 +170,21 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeleteAllotteTypeTemp(Id);
         }
-        public async Task<Allottetypetemp> GetAllotteTypeSingleResult(int id)
+        public async Task<Allottetype> GetAllotteTypeSingleResult(int id)
         {
             return await _selfAssessmentDamageRepository.GetAllotteTypeSingleResult(id);
         }
 
         //********* rpt 3 Damage payment history ***********
 
-        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistorytemp> damagepaymenthistorytemp)
+        public async Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistory> damagepaymenthistorytemp)
         {
             damagepaymenthistorytemp.ForEach(x => x.CreatedBy = 1);
             damagepaymenthistorytemp.ForEach(x => x.CreatedDate = DateTime.Now);
             damagepaymenthistorytemp.ForEach(x => x.IsActive = 1);
             return await _selfAssessmentDamageRepository.SavePaymentHistoryTemp(damagepaymenthistorytemp);
         }
-        public async Task<List<Damagepaymenthistorytemp>> GetPaymentHistoryTemp(int id)
+        public async Task<List<Damagepaymenthistory>> GetPaymentHistoryTemp(int id)
         {
             return await _selfAssessmentDamageRepository.GetPaymentHistoryTemp(id);
         }
@@ -192,12 +192,12 @@ namespace Service.ApplicationService
         {
             return await _selfAssessmentDamageRepository.DeletePaymentHistoryTemp(Id);
         }
-        public async Task<Damagepaymenthistorytemp> GetPaymentHistorySingleResult(int id)
+        public async Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id)
         {
             return await _selfAssessmentDamageRepository.GetPaymentHistorySingleResult(id);
         }
 
-        public async Task<Damagepayeeregistertemp> FetchSelfAssessmentUserId(int userId)
+        public async Task<Damagepayeeregister> FetchSelfAssessmentUserId(int userId)
         {
             return await _selfAssessmentDamageRepository.FetchSelfAssessmentUserId(userId);
         }
@@ -207,6 +207,20 @@ namespace Service.ApplicationService
             return await _selfAssessmentDamageRepository.GetRebateValue();
         }
 
-        
+        public string GetLocalityName(int? localityId)
+        {
+            return _selfAssessmentDamageRepository.GetLocalityName(localityId);
+        }
+
+        public async Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister)
+        {
+            var result = await _selfAssessmentDamageRepository.FindBy(a => a.Id == id);
+            Damagepayeeregister model = result.FirstOrDefault();
+            model.ApprovedStatus = damagepayeeregister.ApprovedStatus;
+            model.PendingAt = damagepayeeregister.PendingAt;
+            model.ModifiedDate = DateTime.Now;
+            _selfAssessmentDamageRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
     }
 }

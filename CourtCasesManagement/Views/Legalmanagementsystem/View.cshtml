@@ -1,0 +1,318 @@
+﻿@model Libraries.Model.Entity.Legalmanagementsystem
+@await Component.InvokeAsync("PageHeader", new { pageName = "Legal Management System" })
+
+
+<div class="pt-3">
+    <form asp-action="Edit" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="FileNo" placeholder="LegalFileNo" type="text" class="floating-label-field floating-label-field--s3" limit="30" disabled/>
+
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+
+                    <label class="floating-label">Legal File No.   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="CourtCaseNo" placeholder="CourtCaseNo" type="text" class="floating-label-field floating-label-field--s3" limit="30" disabled />
+                    <span asp-validation-for="CourtCaseNo" class="text-danger"></span>
+                    <label class="floating-label"> Court Case No   </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="CourtCaseTitle" placeholder="CourtCaseTitle" class="floating-label-field floating-label-field--s3" type="text" limit="100" disabled />
+                    <span asp-validation-for="CourtCaseTitle" class="text-danger"></span>
+                    <label class="floating-label"> Court Case Title   </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Subject" placeholder="Subject" type="text" class="floating-label-field floating-label-field--s3" disabled/>
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                    <label class="floating-label">Subject</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="HearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled/>
+                    <span asp-validation-for="HearingDate" class="text-danger"></span>
+                    <label class="floating-label">Hearing Date</label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NextHearingDate" placeholder="HearingDate" class="floating-label-field floating-label-field--s3" type="date" onpaste="return false;" disabled/>
+                    <span asp-validation-for="NextHearingDate" class="text-danger"></span>
+                    <label class="floating-label">Next Hearing Date</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap" title="Contempt of court">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="ContemptOfCourt" disabled>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label" asp-for="ContemptOfCourt">Contempt of Court</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap" title="Court Type">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="CourtTypeId" asp-items="@(new SelectList(Model.CourttypeList, "Id","CourtType"))" disabled>
+
+                        <option value="0">All</option>
+
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CourtTypeId" a></span>
+                    <label class="floating-label" asp-for="CourtTypeId">Court Type</label>
+
+
+                </div>>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="CaseStatusId"
+                            asp-items="@(new SelectList(Model.CasestatusList, "Id","CaseStatus"))" disabled>
+                        <option value="0">All</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="CaseStatusId"></span>
+                    <label class="floating-label" asp-for="CaseStatusId">Case Status </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="LastDecision" placeholder="LastDecision" class="floating-label-field floating-label-field--s3" type="text" onpaste="return false;" disabled />
+                    <span asp-validation-for="LastDecision" class="text-danger"></span>
+                    <label class="floating-label">Last Decision</label>
+
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            asp-for="ZoneId"
+                            asp-items="@(new SelectList(Model.ZoneList, "Id","Name"))"
+                            onchange="return GetLocalityList(this.options[this.selectedIndex].value);" disabled>
+
+                        <option value="0">All</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="ZoneId"></span>
+                    <label asp-for="ZoneId" class="floating-label">Zone </label>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId"
+                            asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))" disabled>
+                        <option value="0">All</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid" asp-validation-for="LocalityId"></span>
+                    <label class="floating-label">Locality (Village) Name </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <input type="hidden" asp-for="CaseType" id="CaseType" value="24(2) Case" />
+                <label class="control-label lb-sm" asp-for="CaseType">Case Type</label>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline  ">
+                            <input type="radio" name="grpCaseType" id="Case" checked="checked" asp-for="CaseType" value="24(2) Case" disabled/>24(2) Case
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" name="grpCaseType" id="Other" asp-for="CaseType" value="Other" disabled/>Other
+                        </label>
+                    </div>
+                </div>
+                @*</div>*@
+
+            </div>
+            <div class="col-md-6">
+                <input type="hidden" asp-for="InFavour" id="InFavour" value="DDA" />
+                <label class="control-label lb-sm" asp-for="InFavour">In Favour of</label>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline  ">
+                            <input type="radio" name="grpInfavour" id="DDA" checked="checked" asp-for="InFavour" value="DDA" disabled/>DDA
+                        </label>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label class="radio-inline ">
+                            <input type="radio" name="grpInfavour" id="ADDA" asp-for="InFavour" value="Against DDA" disabled />Against DDA
+                        </label>
+                    </div>
+                </div>
+                @*</div>*@
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="form-group col-md-12">
+                <label class="control-label lb-sm">Panel Laywer</label>
+                <textarea required type="text" class="form-control" asp-for="PanelLawyer" disabled></textarea>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlStayInterim" asp-for="StayInterimGranted" disabled>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label" asp-for="StayInterimGranted">Stay Interim Granted</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3" id="DivStayInterim">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    @{
+                        @if (ViewBag.ExistStayFile != null)
+                        {
+
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink(" (View File)", "Download", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="AssignSfile" name="AssignSfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+                    <span asp-validation-for="StayFile" class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label" asp-for="StayFile">Stay Interim Granted Document(if any)</label>
+                    <input type="hidden" asp-for="StayInterimGrantedDocument" disabled />
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm" asp-for="StayInterimGrantedRemarks">Stay Interim Granted Remarks</label>
+                <input type="text" class="form-control" asp-for="StayInterimGrantedRemarks" disabled />
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlJudgement" asp-for="Judgement" disabled>
+                        <option value="0">No</option>
+                        <option value="1">Yes</option>
+                    </select>
+                    <label class="floating-label" asp-for="Judgement">Judgement</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    @{
+                        @if (ViewBag.ExistDocFile != null)
+                        {
+
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                            @Html.ActionLink("(View File)", "DocDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                        }
+                        else
+                        {
+                            <input type="file" class="floating-label-field floating-label-field--s3" id="Assignfile" name="Assignfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                        }
+                    }
+                    <span asp-validation-for="DocumentFile" class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label" asp-for="DocumentFile">Document(if any)</label>
+                    <input type="hidden" asp-for="DocumentFilePath" />
+                </div>
+            </div>
+        </div>
+        <div id="DivJudgement" class="row mt-md-3">
+            <div class="form-group col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+            @{
+                @if (ViewBag.ExistJFile != null)
+                {
+
+                    <input type="file" class="floating-label-field floating-label-field--s3" id="AssignJfile" name="AssignJfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                    @Html.ActionLink(" (View File)", "JDocDownload", new { id = Model.Id }, new { @class = "badge badge-primary px-2" })
+                }
+                else
+                {
+                    <input type="file" class="floating-label-field floating-label-field--s3" id="AssignJfile" name="AssignJfile" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif" />
+                }
+            }
+            <span asp-validation-for="JudgementFile" class="d-block text-danger field-validation-valid"></span>
+            <label class="floating-label" asp-for="JudgementFile">Judgement Document (if any)</label>
+            <input type="hidden" asp-for="JudgementFilePath" />
+        </div>
+                @*<div class="floating-label-wrap mb-3 mb-md-0">
+                    <a target="_blank" href="/CourtCasesManagement/JDocDownload?path=@(Model.JudgementFilePath)">@(Model.JudgementFilePath == "" || Model.JudgementFilePath == string.Empty || Model.JudgementFilePath == null ? "": "View Document")</a>
+                    <input type="file" placeholder="Judgement Document" class="floating-label-field floating-label-field--s3 "
+                           asp-for="JudgementFilePath" />
+                    <span asp-validation-for="JudgementFilePath" class="text-danger lb-sm"></span>
+                    <label class="floating-label">Judgement Document (if any)</label>
+                </div>*@
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label lb-sm" asp-for="JudgementRemarks">Judgement Remarks</label>
+                <input type="text" class="form-control " asp-for="JudgementRemarks" disabled/>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <input type="text" asp-for="Remarks" class="floating-label-field floating-label-field--s3" disabled/>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3" asp-for="IsActive"  disabled>
+                            <option value="1">Active</option>
+                            <option value="0">InActive</option>
+                        </select>
+                        <span class="text-danger"></span>
+                        <label class="floating-label">Status</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <div class="row ">
+            <div class=" col-md-12">
+                @*<button class="btn btn-theme " type="Submit">Update</button>*@
+
+                @Html.ActionLink("Back", "Index", "Legalmanagementsystem", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+
+
+    </form>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+<environment include="Development">
+    <script src="~/js/legalmanagementsystemcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/legalmanagementsystemcreate.js" asp-append-version="true"></script>
+</environment>

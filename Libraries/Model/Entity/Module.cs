@@ -17,10 +17,10 @@ namespace Libraries.Model.Entity
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
 
-        [Required]
+        [Required(ErrorMessage = " Module name is mandatory")]
         [Remote(action: "Exist", controller: "Module", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Status is mandatory")]
         public byte? IsActive { get; set; }
         public string Description { get; set; }
         public string Url { get; set; }

@@ -19,13 +19,13 @@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="email" id="txtEmail" class="floating-label-field floating-label-field--s3" placeholder="Email">
-                    <label for="txtEmail" class="floating-label">Email</label>
+                    <label for="txtEmail" class="floating-label">Email Id</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input type="email" id="txtPhoneNumber" class="floating-label-field floating-label-field--s3" placeholder="Phone Number">
-                    <label for="txtPhoneNumber" class="floating-label">Phone Number</label>
+                    <label for="txtPhoneNumber" class="floating-label">Contact Number</label>
                 </div>
             </div>
         </div>
@@ -50,18 +50,18 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="0" selected="selected" disabled="disabled">Select One</option>
-                        <option value="Name">Name</option>
                         <option value="UserName">User Name</option>
-                        <option value="Email">Email</option>
-                        <option value="PhoneNumber">Phone Number</option>
+                        <option value="Name">Name</option>
+                        <option value="Role">Role</option>
+                        <option value="PhoneNumber">Contact Number</option>
+                        <option value="Email">Email Id</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" id="btnDescending" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow"id="btnAscending" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

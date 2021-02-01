@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using LandInventory.Filters;
+using Core.Enum;
 namespace LandInventory.Controllers
 {
     public class RestorePropertyReportController : Controller
@@ -26,6 +27,7 @@ namespace LandInventory.Controllers
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
             //propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -36,7 +38,9 @@ namespace LandInventory.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody]PropertyRegisterationSearchDto model)
         {
-            var result = await _propertyregistrationService.GetRestorePropertyReportData(model);
+            dynamic result = null;
+            if(model!= null)
+            result = await _propertyregistrationService.GetRestorePropertyReportData(model);
 
             if (result != null)
             {
@@ -45,7 +49,7 @@ namespace LandInventory.Controllers
             else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                return PartialView();
+                return PartialView("_Index", result);
             }
 
         }
@@ -84,6 +88,8 @@ namespace LandInventory.Controllers
             propertyregistration.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList(); propertyregistration.TakenOverDepartmentList = await _propertyregistrationService.GetTakenDepartmentDropDownList();
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);

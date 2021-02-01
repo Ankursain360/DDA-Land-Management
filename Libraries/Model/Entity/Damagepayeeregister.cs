@@ -2,41 +2,65 @@
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
-    public  class Damagepayeeregister : AuditableEntity<int>
+    public partial class Damagepayeeregister : AuditableEntity<int>
     {
         public Damagepayeeregister()
         {
             Allottetype = new HashSet<Allottetype>();
             Damagepayeepersonelinfo = new HashSet<Damagepayeepersonelinfo>();
             Damagepaymenthistory = new HashSet<Damagepaymenthistory>();
-            Mutationdetailstemp = new HashSet<Mutationdetailstemp>();
+            Mutationdetails = new HashSet<Mutationdetails>();
         }
-
-       
+        [Required(ErrorMessage = "File No is mandatory feild")]
         public string FileNo { get; set; }
         public string TypeOfDamageAssessee { get; set; }
+        [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string PropertyNo { get; set; }
         public int? LocalityId { get; set; }
+        [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string FloorNo { get; set; }
+        [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string StreetNo { get; set; }
+        [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
+       
         public string PinCode { get; set; }
         public int? DistrictId { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? PlotAreaSqYard { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? FloorAreaSqYard { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? PlotAreaSqMt { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? FloorAreaSqMt { get; set; }
         public string UseOfProperty { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? ResidentialSqYard { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? ResidentialSqMt { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? CommercialSqYard { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? CommercialSqMt { get; set; }
         public string LitigationStatus { get; set; }
+        [StringLength(45,ErrorMessage = "Maximum 45 characters allowed")]
         public string CourtName { get; set; }
+       [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string CaseNo { get; set; }
+      [StringLength(45,ErrorMessage = "Maximum 45 characters allowed ")]
         public string OppositionName { get; set; }
         public string PetitionerRespondent { get; set; }
         public string IsDdadamagePayee { get; set; }
@@ -45,10 +69,20 @@ namespace Libraries.Model.Entity
         public string FgformPath { get; set; }
         public string IsDocumentFor { get; set; }
         public string DocumentForFilePath { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? InterestDueAmountCompund { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? TotalValueWithInterest { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? Rebate { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? TotalPayable { get; set; }
+        [RegularExpression(@"((\d+)((\.\d{1,3})?))$", ErrorMessage = "Please enter valid integer or decimal number with 3 decimal places.")]
+        [Range(0, 9999999999999999.99, ErrorMessage = "Invalid Total Area; Max 18 digits")]
         public decimal? CalculatorValue { get; set; }
         public int? Declaration1 { get; set; }
         public int? Declaration2 { get; set; }
@@ -64,84 +98,134 @@ namespace Libraries.Model.Entity
         public string PropertyPhotoPath { get; set; }
 
         public District District { get; set; }
+        public Locality Locality { get; set; }
         [NotMapped]
         public List<District> DistrictList { get; set; }
-        public Locality Locality { get; set; }
+       
         [NotMapped]
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
-        public List<IFormFile> PropertyPhoto { get; set; }
-
-       
+        public IFormFile PropertyPhoto { get; set; }
         [NotMapped]
-        public List<IFormFile> ShowCauseNotice { get; set; }
+        public IFormFile ShowCauseNotice { get; set; }
 
         [NotMapped]
-        public List<IFormFile> Fgform { get; set; }
+        public IFormFile Fgform { get; set; }
         [NotMapped]
-        public List<IFormFile> DocumentForFile { get; set; }
-
-      
+        public IFormFile DocumentForFile { get; set; }
+        public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Allottetype> Allottetype { get; set; }
         public ICollection<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public ICollection<Damagepaymenthistory> Damagepaymenthistory { get; set; }
 
 
-        //****** ALLOTTE TYPE *****
+        //****** ALLOTTE temp TYPE *****
 
         [NotMapped]
-       
-        public List <string> Name { get; set; }
+
+        public List<string> Name { get; set; }
         [NotMapped]
-        public List <string> FatherName { get; set; }
+        public List<string> FatherName { get; set; }
         [NotMapped]
-        public List <DateTime?> Date { get; set; }
+        public List<DateTime?> Date { get; set; }
+
+        [NotMapped]
+        public List<IFormFile> ATSGPA { get; set; }
+        [NotMapped]
+        public List<string> ATSGPAFilePath { get; set; }
+
+        //****** Damage payee personal info temp *****
+        [NotMapped]
       
-        [NotMapped]
-        public List <IFormFile> ATSGPA { get; set; }
-
-        //****** Damage payee personal info *****
-        [NotMapped]
         public List<string> payeeName { get; set; }
         [NotMapped]
-        public List <string> payeeFatherName { get; set; }
+      
+        public List<string> payeeFatherName { get; set; }
         [NotMapped]
-        public List <string> Gender { get; set; }
+      
+        public List<string> Gender { get; set; }
         [NotMapped]
-        public List <string> Address { get; set; }
+      
+        public List<string> Address { get; set; }
         [NotMapped]
-        public List <string> MobileNo { get; set; }
+      
+        public List<string> MobileNo { get; set; }
         [NotMapped]
-        public List <string> EmailId { get; set; }
+      
+        public List<string> EmailId { get; set; }
         [NotMapped]
+     
         public List<string> AadharNo { get; set; }
         [NotMapped]
-        public List<IFormFile> Aadhar { get; set; }
+
+        public List<string> AadharNoFilePath { get; set; }
         [NotMapped]
+        public List<IFormFile> Aadhar { get; set; }
+        [NotMapped]      
         public List<string> PanNo { get; set; }
+        [NotMapped]
+        public List<string> PanNoFilePath { get; set; }
         [NotMapped]
         public List<IFormFile> Pan { get; set; }
         [NotMapped]
         public List<IFormFile> Photograph { get; set; }
         [NotMapped]
+        public List<string> PhotographFilePath { get; set; }
+        [NotMapped]
         public List<IFormFile> SignatureFile { get; set; }
 
-        //****** Damagepaymenthistory ***
         [NotMapped]
-        public List <string> PaymntName { get; set; }
+        public List<string> SignatureFilePath { get; set; }
+
+
+        //****** Damagepaymenthistory temp ***
         [NotMapped]
-        public List <string> RecieptNo { get; set; }
+      
+        public List<string> PaymntName { get; set; }
         [NotMapped]
-        public List <string> PaymentMode { get; set; }
+       
+        public List<string> RecieptNo { get; set; }
         [NotMapped]
-        public List <DateTime?> PaymentDate { get; set; }
+      
+        public List<string> PaymentMode { get; set; }
         [NotMapped]
-        public List <decimal?> Amount { get; set; }
+        public List<DateTime?> PaymentDate { get; set; }
+        [NotMapped]
+       
+        public List<decimal?> Amount { get; set; }
+
+
         [NotMapped]
         public List<IFormFile> Reciept { get; set; }
-        public ICollection<Mutationdetailstemp> Mutationdetailstemp { get; set; }
+        [NotMapped]
 
+        public List<string> RecieptFilePath { get; set; }
 
+        //******* Mutation  **********//
+        [NotMapped]
+        public List<Locality> PropLocalityList { get; set; }
+        [NotMapped]
+        public List<District> PropDistrictList { get; set; }
+        [NotMapped]
+        public List<Damagepayeepersonelinfo> PersonalInfoDamageList { get; set; }
+        [NotMapped]
+        public List<Allottetype> AlloteeTypeDamageList { get; set; }
+        [NotMapped]
+        public List<Damagepayeeregister> DamagePayeeRegisterList { get; set; }
 
+        [NotMapped]
+        public bool DeclarationStatus1 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus2 { get; set; }
+        [NotMapped]
+        public bool DeclarationStatus3 { get; set; }
+        [NotMapped]
+        public int IsMutaionYes { get; set; }
+
+        [NotMapped]
+        public string ApprovalStatus { get; set; }
+
+        [NotMapped]
+        public string ApprovalRemarks { get; set; }
     }
 }

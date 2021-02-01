@@ -7,9 +7,6 @@
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
-
-
-
         <div class="row">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
@@ -21,12 +18,8 @@
                     <span asp-validation-for="DepartmentId" class="text-danger"></span>
                     <label asp-for="DepartmentId" class="floating-label">Department </label>
                 </div>
-
-
-
             </div>
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="ZoneId"
                               asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" 
@@ -37,44 +30,31 @@
                     <span asp-validation-for="ZoneId" class="text-danger"></span>
                     <label asp-for="ZoneId" class="floating-label">Zone </label>
                 </div>
-
             </div>
         </div>
-
-        <br />
-        <div class="row">
+        <div class="row mt-md-3">
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="100" />
-
                     <span asp-validation-for="Name" class="text-danger"></span>
-
                     <label class="floating-label">Division Name  </label>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="Code" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="100" />
+                    <input asp-for="Code" placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="10" />
 
                     <span asp-validation-for="Code" class="text-danger"></span>
 
-                    <label class="floating-label">Code   </label>
+                    <label class="floating-label"> Division Code   </label>
                 </div>
-
-
             </div>
         </div>
-
-
-        <div class="row">
-
+        <div class="row mt-md-3">
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
 
@@ -84,24 +64,15 @@
                     <span asp-validation-for="IsActive" class="text-danger"></span>
                     <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
-
-
-
             </div>
         </div>
 
-        <br />
-
-        <br />
-        <div class="row ">
+        <div class="row mt-md-3">
             <div class="col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "Division", null, new { @class = "btn btn-theme " })
-
-
-                </div>
+            </div>
         </div>
-
     </form>
        
 </div>

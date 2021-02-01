@@ -30,17 +30,14 @@
             </div>
         </div>
 
-        <br />
-        <div class="row">
+        <div class="row mt-md-3">
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" limit="30" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Division Name  </label>
                 </div>
-
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
@@ -49,19 +46,16 @@
 
                     <span asp-validation-for="Code" class="text-danger"></span>
 
-                    <label class="floating-label">Code   </label>
+                    <label class="floating-label"> Division Code   </label>
                 </div>
 
 
             </div>
         </div>
-
-
-        <div class="row">
+        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -71,14 +65,11 @@
             </div>
         </div>
 
-        <br />
-
-        <div class="row ">
+        <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "Division", null, new { @class = "btn btn-theme " })
-
-               </div>
+           </div>
         </div>
 
     </form>

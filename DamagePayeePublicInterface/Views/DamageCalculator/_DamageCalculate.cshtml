@@ -1,0 +1,139 @@
+﻿@model IEnumerable<Libraries.Model.Entity.DamageChargesCalculation>
+@{int rowNo = 0, rowNo2 = 0; }
+<h3 class="my-3 d-flex sub-heading">Details</h3>
+<div class="row">
+    <div class="form-group col-md-6">
+        <h2 class="my-3 sub-heading">Damage Calculation</h2>
+    </div>
+
+    <div class="form-group col-md-6">
+        <h2 class="my-3 sub-heading">Interest Calculation</h2>
+    </div>
+</div>
+<div class="row">
+    <div class=" form-group col-md-6">
+        <div class="table-section">
+            <div class="table-responsive px-2" id="divTableForRate">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Rate</th>
+                            <th>Area</th>
+                            <th>Month</th>
+                            <th>Damage Charges</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        @{
+                            @if (Model.Count() > 1)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowNo += 1)</td>
+                                        <td>@(item.StartDate == null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td style="text-align:right;">@item.Rate</td>
+                                        <td style="text-align:right;">@item.Area</td>
+                                        <td style="text-align:right;">@item.Months</td>
+                                        <td style="text-align:right;">@item.DamageCharges</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="14" style="text-align:center"> No Record Available! </th>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    @{
+                        @if (Model.Count() > 1)
+                        {
+                            <tfoot align="center">
+                                <tr>
+                                    <th colspan="6" style="color:red">Grand Total</th>
+                                    <th style="color:red">@ViewBag.GrandDamageTotoal</th>
+                                </tr>
+                            </tfoot>
+
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class=" form-group col-md-6">
+        <div class="table-section">
+            <div class="table-responsive px-2" id="divTableForInterest">
+                <table class="table table-sm table-bordered mb-0 table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Month</th>
+                            <th>O/S Damage</th>
+                            <th>Interest</th>
+                            <th>Cumlative Interest</th>
+                        </tr>
+                    </thead>
+                    <tbody class="tbody">
+                        @{
+                            @if (Model.Count() > 1)
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowNo2 += 1)</td>
+                                        <td>@(item.StartDate==null?"NA":Convert.ToDateTime(item.StartDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td>@(item.EndDate==null?"NA":Convert.ToDateTime(item.EndDate).ToString("dd-MMM-yyyy"))</td>
+                                        <td style="text-align:right;">@item.Months</td>
+                                        <td style="text-align:right;">@item.Compunding</td>
+                                        <td style="text-align:right;">@item.TotalInterest</td>
+                                        <td style="text-align:right;">@item.TotalPayAmount</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <th colspan="14" style="text-align:center"> No Record Available! </th>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                    @{
+                        @if (Model.Count() > 1)
+                        {
+                            <tfoot align="center">
+                                <tr>
+                                    <th colspan="4" style="color:red">Grand Total</th>
+                                    <th style="color:red">@ViewBag.GrandDamageTotoal</th>
+                                    <th></th>
+                                    <th style="color:red">@ViewBag.GrandCompoundInterest</th>
+                                </tr>
+                            </tfoot>
+
+                        }
+                        else
+                        {
+                           
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

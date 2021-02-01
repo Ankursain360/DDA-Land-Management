@@ -1,29 +1,93 @@
-﻿
-var currentPageNumber = 1;
+﻿var currentPageNumber = 1;
 var currentPageSize = 10;
-$(function () {
+var sortby = 1;//default Ascending 
+
+$(document).ready(function () {
     $("#btnGenerate").click(function () {
-        debugger;
         var result = ValidateForm();
+        var departmentid = $('#DepartmentId option:selected').val();
+        var zoneid = $('#ZoneId option:selected').val();
+        var divisionid = $('#DivisionId option:selected').val();
+        var localityid = $('#LocalityId option:selected').val();
+        var FromDate = $('#txtFromDate').val();
+        var ToDate = $('#txtToDate').val();
         if (result) {
-
-            var departmentid = $('#DepartmentId option:selected').val();
-            var zoneId = $('#ZoneId option:selected').val();
-            var divisionId = $('#DivisionId option:selected').val();
-
-            var localityid = $('#LocalityId option:selected').val();
-
-
-            GetReport(currentPageNumber, currentPageSize, departmentid, zoneId, divisionId, localityid)
+            GetDetails(currentPageNumber, currentPageSize, sortby);
         }
-
     });
-
     $(".linkdisabled").click(function () {
         return false;
     });
 });
+function GetDetails(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    debugger
+    HttpPost(`/ReportofLandTransferDivisionLocalityWise/List`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
+}
 
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
+    debugger;
+    var departmentid = $('#DepartmentId option:selected').val();
+    var zoneid = $('#ZoneId option:selected').val();
+    var divisionid = $('#DivisionId option:selected').val();
+    var localityid = $('#LocalityId option:selected').val();
+   
+    var model = {
+        name: "report",
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber),
+        departmentId: parseInt(departmentid),
+        zoneId: parseInt(zoneid),
+        divisionId: parseInt(divisionid),
+        localityId: parseInt(localityid),
+       
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+
+    }
+    return model;
+}
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortby = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+});
+
+$("#btnReset").click(function () {
+    $('#DepartmentId').val('0').trigger('change');
+    $('#ZoneId').val('0').trigger('change');
+    $('#DivisionId').val('0').trigger('change');
+    $('#LocalityId').val('0').trigger('change');
+   
+
+
+    GetDetails(currentPageNumber, currentPageSize, sortby);
+
+});
+
+function onPaging(pageNo) {
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    currentPageNumber = pageNo;
+}
+
+function onChangePageSize(pageSize) {
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    currentPageSize = pageSize;
+}
 function onChangeDepartment(id) {
     HttpGet(`/ReportofLandTransferDivisionLocalityWise/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
         var html = '<option value="0">All</option>';
@@ -33,9 +97,6 @@ function onChangeDepartment(id) {
         $("#ZoneId").html(html);
         $("#DivisionId").html('<option value="0">All</option>');
         $("#LocalityId").html('<option value="0">All</option>');
-        $("#ZoneId").select2('val', '0');
-        $("#DivisionId").select2('val', '0');
-        $("#LocalityId").select2('val', '0');
     });
 };
 function onChangeZone(id) {
@@ -57,47 +118,3 @@ function onChangeDivision(id) {
         $("#LocalityId").html(html);
     });
 };
-
-
-
-function GetReport(pageNumber, pageSize, departmentid, zoneid, divisionid, localityid) {
-    var param = GetSearchParam(pageNumber, pageSize, departmentid, zoneid, divisionid, localityid);
-    HttpPost(`/ReportofLandTransferDivisionLocalityWise/List`, 'html', param, function (response) {
-        $('#LoadReportView').html("");
-        $('#LoadReportView').html(response);
-    });
-}
-
-function GetSearchParam(pageNumber, pageSize, departmentid, zoneid, divisionid, localityid) {
-    var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber,
-        departmentid: parseInt(departmentid),
-        zoneid: parseInt(zoneid),
-        divisionid: parseInt(divisionid),
-        localityid: parseInt(localityid)
-    }
-    return model;
-}
-
-function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    var departmentid = $('#DepartmentId option:selected').val();
-    var zoneid = $('#ZoneId option:selected').val();
-    var divisionid = $('#DivisionId option:selected').val();
-    var localityid = $('#LocalityId option:selected').val();
-    GetReport(currentPageNumber, currentPageSize, departmentid, zoneid, divisionid, localityid);
-    currentPageNumber = pageNo;
-}
-
-function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    var departmentid = $('#DepartmentId option:selected').val();
-    var zoneid = $('#ZoneId option:selected').val();
-    var divisionid = $('#DivisionId option:selected').val();
-    var localityid = $('#LocalityId option:selected').val();
-    GetReport(currentPageNumber, currentPageSize, departmentid, zoneid, divisionid, localityid);
-    currentPageSize = pageSize;
-}
-

@@ -1,23 +1,47 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    var StatusId = 0;
-    GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetWatchandward(pageNumber, pageSize, StatusId) {
-    var param = GetSearchParam(pageNumber, pageSize, StatusId);
+function GetDetails(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/DamagePayeeApproval/List`, 'html', param, function (response) {
         $('#divDamagePayeeRegisterTable').html("");
         $('#divDamagePayeeRegisterTable').html(response);
     });
 }
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
 
-function GetSearchParam(pageNumber, pageSize, StatusId) {
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
+    var StatusId = 0;
+    if ($("#Pending").is(":checked"))
+        StatusId = 0;
+    else if ($("#Approved").is(":checked"))
+        StatusId = 1;
+
     var model = {
         name: "test",
         StatusId: StatusId,
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
@@ -26,13 +50,13 @@ function GetSearchParam(pageNumber, pageSize, StatusId) {
 
 function onPaging(pageNo) {
     pageNo = parseInt(pageNo);
-    GetWatchandward(pageNo, currentPageSize);
+    GetDetails(pageNo, currentPageSize, sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
     pageSize = parseInt(pageSize);
-    GetWatchandward(currentPageNumber, pageSize);
+    GetDetails(currentPageNumber, pageSize, sortOrder);
     currentPageSize = pageSize;
 }
 
@@ -40,12 +64,14 @@ function onChangePageSize(pageSize) {
 $("input[name='radioStatus']").click(function () {
     if ($("#Pending").is(":checked")) {
         var StatusId = 0;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+        $('#Pending').prop('checked', true);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
 
     }
     else if ($("#Approved").is(":checked")) {
         var StatusId = 1;
-        GetWatchandward(currentPageNumber, currentPageSize, StatusId);
+        $('#Approved').prop('checked', true);
+        GetDetails(currentPageNumber, currentPageSize, sortOrder);
     }
 
 });

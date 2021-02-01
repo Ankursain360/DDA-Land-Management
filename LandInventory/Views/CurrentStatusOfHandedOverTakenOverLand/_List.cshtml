@@ -8,11 +8,10 @@
             <th>Zone</th>
             <th>Division</th>
             <th>Locality(Village)</th>
-            <th>Khasra No.</th>
-            <th>Handed Over By</th>
+            @*<th>Handed Over By</th>
             <th>Date of Hand Over</th>
             <th>Taken Over By</th>
-            <th>Date of Taken Over</th>
+            <th>Date of Taken Over</th>*@
             <th style="min-width:150px;">Operation</th>
         </tr>
     </thead>
@@ -25,8 +24,7 @@
     <td>@item.PropertyRegistration.Zone.Name</td>
     <td>@item.PropertyRegistration.Division.Name</td>
     <td>@(item.PropertyRegistration.Locality==null?"": item.PropertyRegistration.Locality.Name)</td>
-    <td>@item.PropertyRegistration.KhasraNo</td>
-    <td>
+    @*<td>
         @item.HandedOverByNameDesingnation
     </td>
     <td>
@@ -37,14 +35,10 @@
     </td>
     <td>
         @(item.DateofTakenOver != null ? Convert.ToDateTime(item.DateofTakenOver).ToString("dd MMM yyyy") : "Not Available")
-    </td>
+    </td>*@
     <td style="min-width:150px;">
-        @*<div style="min-width:180px;" class="action-btns">*@
-
             <a asp-action="Create" asp-route-id="@item.Id" title="Add Status">Add Current Status </a>
-            @*<a asp-action="ViewHistory" asp-route-id="@item.Id" title="View History"> &nbsp; | &nbsp; View History </a>*@
     <a asp-action="History" asp-route-id="@item.Id" title="View History">&nbsp;|&nbsp; View History </a>
-        @*</div>*@
     </td>
 </tr>
 }

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class WacthWardPeriodReportController : Controller
@@ -19,18 +21,22 @@ namespace EncroachmentDemolition.Controllers
         {
             _watchandwardService = watchandwardService;
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Watchandward model = new Watchandward();
+
 
             model.LocalityList = await _watchandwardService.GetAllLocality();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<PartialViewResult> GetDetails([FromBody] WatchandwardSearchDto watchandwardSearchDto)
+        public async Task<PartialViewResult> GetDetails([FromBody] WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto)
         {
-            var result = await _watchandwardService.GetWatchandwardReportData(watchandwardSearchDto);
+            var result = await _watchandwardService.GetWatchandwardReportData(watchAndWardPeriodReportSearchDto);
             if (result != null)
             {
                 return PartialView("Index", result);

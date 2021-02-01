@@ -121,12 +121,20 @@ namespace Libraries.Model
         public virtual DbSet<Courttype> Courttype { get; set; }
         public virtual DbSet<Casestatus> Casestatus { get; set; }
         public virtual DbSet<Demolitionpoliceassistenceletter> Demolitionpoliceassistenceletter { get; set; }
+        public virtual DbSet<Casenature> Casenature { get; set; }
         //**********  File Loading **********
         public virtual DbSet<Almirah> Almirah { get; set; }
         public virtual DbSet<Row> Row { get; set; }
         public virtual DbSet<Column> Column { get; set; }
 
         public virtual DbSet<Bundle> Bundle { get; set; }
+
+        public virtual DbSet<Issuereturnfile> Issuereturnfile { get; set; }
+        
+        public virtual DbSet<Datastoragedetails> Datastoragedetails { get; set; }
+
+        public virtual DbSet<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
+
         //**********  Damage Payee **********
 
         public virtual DbSet<Allottetype> Allottetype { get; set; }
@@ -134,11 +142,8 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
         public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
-        public virtual DbSet<Allottetypetemp> Allottetypetemp { get; set; }
-        public virtual DbSet<Damagepayeepersonelinfotemp> Damagepayeepersonelinfotemp { get; set; }
-        public virtual DbSet<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
-        public virtual DbSet<Damagepaymenthistorytemp> Damagepaymenthistorytemp { get; set; }
-
+       
+        public virtual DbSet<Paymentverification> Paymentverification { get; set; }
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
         public virtual DbSet<Mutationdetails> Mutationdetails { get; set; }
@@ -165,7 +170,8 @@ namespace Libraries.Model
         public virtual DbSet<Ressubencroacherstype> Ressubencroacherstype { get; set; }
         public virtual DbSet<Comencrochmenttype> Comencrochmenttype { get; set; }
         public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
-
+        public virtual DbSet<Branch> Branch { get; set; }
+        public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -247,13 +253,26 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new ApprovalProccessConfiguration());
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
-
+            modelBuilder.ApplyConfiguration(new CasenatureConfiguration());
 
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
             modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
+
+
+            //************* Data Loading **********************
+            modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
+
+            modelBuilder.ApplyConfiguration(new DataStorageConfiguration());
+
+            modelBuilder.ApplyConfiguration(new AlmirahConfiguration());
+            modelBuilder.ApplyConfiguration(new RowConfiguration());
+            modelBuilder.ApplyConfiguration(new ColumnConfiguration());
+
+            modelBuilder.ApplyConfiguration(new BundleConfiguration());
+            modelBuilder.ApplyConfiguration(new IssuereturnfileConfiguration());
 
             //modelBuilder.ApplyConfiguration(new PayeeregistrationConfiguration());
 
@@ -275,10 +294,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DamagepaymenthistoryConfiguration());
             modelBuilder.ApplyConfiguration(new DoortodoorsurveyConfiguration());
             modelBuilder.ApplyConfiguration(new FamilydetailsConfiguration());
-            modelBuilder.ApplyConfiguration(new AllottetypetempConfiguration());
-            modelBuilder.ApplyConfiguration(new DamagepayeepersonelinfotempConfiguration());
-            modelBuilder.ApplyConfiguration(new DamagepayeeregistertempConfiguration());
-            modelBuilder.ApplyConfiguration(new DamagepaymenthistorytempConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentverificationConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowActionConfiguration());
             modelBuilder.ApplyConfiguration(new ProcessWorkflowConfiguration());
             modelBuilder.ApplyConfiguration(new NoticetodamagepayeeConfiguration());
@@ -295,7 +311,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemandletterConfiguration());
             modelBuilder.ApplyConfiguration(new MutationDetailsTempConfiguration());
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
-
+            modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

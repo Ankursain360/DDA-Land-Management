@@ -14,7 +14,7 @@
                     <select class="floating-label-field floating-label-field--s3" asp-for="PropertyId" asp-items="@(new SelectList(Model.PropertyTypeList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
-                    <label asp-validation-for="PropertyId" class="error"></label>
+                    <span asp-validation-for="PropertyId" class="text-danger"></span>
                     <label asp-for="PropertyId" class="floating-label">Property Type </label>
                 </div>
             </div>
@@ -31,7 +31,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
@@ -51,23 +51,18 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-md-3">
             <div class=" col-md-6">
-
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
-
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
                     <span asp-validation-for="IsActive" class="text-danger"></span>
                     <label asp-for="IsActive" class="floating-label">Status </label>
                 </div>
-
             </div>
         </div>
-
-
         <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>

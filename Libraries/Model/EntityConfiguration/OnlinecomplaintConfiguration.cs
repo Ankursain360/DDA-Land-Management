@@ -56,7 +56,7 @@ namespace Libraries.Model.EntityConfiguration
                 .IsUnicode(false);
 
             builder.Property(e => e.PhotoPath)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
 
@@ -64,7 +64,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.ReferenceNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
-
+            builder.Property(e => e.Remarks)
+               .HasMaxLength(200)
+               .IsUnicode(false);
 
 
             builder.HasOne(d => d.ComplaintType)
@@ -78,6 +80,7 @@ namespace Libraries.Model.EntityConfiguration
                 .HasConstraintName("LocationId");
 
             builder.Property(e => e.ApprovedStatus).HasColumnType("int(11)");
+            builder.Property(e => e.PendingAt).HasColumnType("int(11)");
 
         }
         }

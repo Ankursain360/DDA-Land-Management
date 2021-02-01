@@ -181,7 +181,7 @@ a.no-dec {
 #LoginPage {
     min-height: 100vh;
     width: 100%;
-    background-image: url(../img/login/login-bg.jpg);
+    background-image: url(../login/login-bg.jpg);
     position: relative;
 }
 
@@ -501,6 +501,7 @@ figcaption h6 {
     width: 100%;
     top: 58px;
     overflow: auto;
+    z-index: 99;
 }
 
 
@@ -747,7 +748,7 @@ figcaption h6 {
 #rightSection {
     width: calc(100% - 50px);
     margin-left: auto;
-    margin-top: 60px;
+    margin-top: 45px;
     margin-bottom: 60px;
 }
 
@@ -955,10 +956,34 @@ footer.footer {
     width: 100%;
 }
 
+.form-check.theme {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    line-height: 1.5;
+}
+
+    .form-check.theme .form-check-label {
+        font-size: .75rem;
+    }
+
+    .form-check.theme input {
+        top: 2px;
+        bottom: 0;
+        margin: auto;
+        margin-left: -1.25rem !important;
+    }
+
 .floating-label-field,
 .floating-label-wrap {
     position: relative;
 }
+
+    .floating-label-wrap a,
+    .floating-label-wrap span {
+        font-size: .7rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
 
 .floating-label-field--s1 {
     transition: border-color .25s ease-in-out;
@@ -1028,13 +1053,14 @@ textarea.floating-label-field--s3 {
 }
 
 .floating-label-field--s3 {
-    padding: .35rem .5rem;
+    padding: .4rem .5rem;
     transition: border-color .25s ease-in-out;
     color: rgb(0 0 0 / 100%);
     border: 1px solid rgb(216 216 216 / 75%);
     border-radius: 5px;
     background-color: transparent;
     font-size: .75rem;
+    overflow: hidden;
 }
 
     .floating-label-field--s3 ~ .floating-label {
@@ -1058,7 +1084,7 @@ textarea.floating-label-field--s3 {
         .floating-label-field--s3:focus ~ .floating-label,
         .floating-label-field--s3:not(:placeholder-shown) ~ .floating-label {
             z-index: 10;
-            padding: .35rem;
+            padding: .3rem .35rem;
             transform: translate(0, -.75rem) scale(.9);
             color: #2196F3;
             background-color: #ffffff;
@@ -1275,6 +1301,177 @@ textarea.floating-label-field--s3 {
 }
 
 
+.permission {
+    font-size: .8rem;
+}
+
+    .permission .card {
+        border-radius: .3rem !important;
+        margin-bottom: .5rem !important;
+        border: 1px solid rgba(0, 0, 0, .125) !important;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .permission a {
+        color: #555;
+    }
+
+    .permission li.form-check {
+        margin-left: 1rem;
+        -ms-flex-align: center !important;
+        align-items: center !important;
+        display: -ms-flexbox !important;
+        display: flex !important;
+    }
+
+        .permission li.form-check .form-check-input {
+            margin-top: 0rem;
+            margin-left: -1.1rem;
+        }
+
+
+.border-bottom:last-child {
+    border-bottom: 0px solid #dee2e6 !important;
+}
+
+.project-box .card-header {
+    background: #fff;
+}
+
+.project-box {
+    color: #222 !important;
+    text-decoration: none !important;
+    box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.09);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+    .project-box:hover {
+        box-shadow: 0px 0px 18px 10px rgba(0, 0, 0, 0.08);
+        border-radius: 0px;
+    }
+
+    .project-box .card-header .project-img {
+        width: 65px;
+        height: 65px;
+        margin-bottom: -45px;
+        border: 1px solid #3f51b563;
+        padding: 1px;
+        background: #fff;
+        text-align: center;
+        line-height: 60px;
+        font-size: 35px;
+        box-shadow: 0px 0px 10px 6px rgb(178 158 255 / 12%);
+        color: #3F51B5;
+    }
+
+    .project-box .card-header small {
+        margin-left: auto;
+        color: #fff;
+        line-height: 2;
+        font-weight: 500;
+        opacity: .75;
+    }
+
+    .project-box:hover .card-header small {
+        opacity: 1;
+    }
+
+.card-body .name {
+    margin-bottom: 0;
+    font-size: 81%;
+    color: #999;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.card-body h2 {
+    font-size: 16px;
+    margin: 6px 0;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.card-body .pro-detail {
+    margin-bottom: 0;
+    font-size: 13px;
+    color: #888;
+}
+
+.ImgPrivew figure,
+.ImgPrivew {
+    position: relative;
+    overflow: hidden;
+}
+
+    .ImgPrivew figure::after {
+        content: '';
+        background: rgba(0, 0, 0, 0.3);
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        position: absolute;
+        z-index: 1;
+        opacity: 0;
+        -webkit-transition: all .5s ease-out;
+        -moz-transition: all .5s ease-out;
+        -ms-transition: all .5s ease-out;
+        -o-transition: all .5s ease-out;
+        transition: all .5s ease-out
+    }
+
+
+    .ImgPrivew figcaption {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        -ms-flex-align: center;
+        align-items: center;
+        display: -ms-flexbox;
+        display: flex;
+        left: 0;
+        top: 0;
+        margin: auto;
+        z-index: 2;
+        opacity: 0;
+        -webkit-transition: all .5s ease-out;
+        -moz-transition: all .5s ease-out;
+        -ms-transition: all .5s ease-out;
+        -o-transition: all .5s ease-out;
+        transition: all .5s ease-out
+    }
+
+        .ImgPrivew figcaption:hover,
+        .ImgPrivew figure:hover::after {
+            opacity: 1;
+            -webkit-transition: all .5s ease-out;
+            -moz-transition: all .5s ease-out;
+            -ms-transition: all .5s ease-out;
+            -o-transition: all .5s ease-out;
+            transition: all .5s ease-out
+        }
+
+        .ImgPrivew figcaption a,
+        .ImgPrivew figcaption a label {
+            display: block;
+            margin: 0;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .ImgPrivew figcaption a {
+            display: block;
+            width: 50%;
+            text-align: center;
+            background: #ccc;
+            color: #fff;
+            border-right: 1px solid #ccc;
+        }
+
+            .ImgPrivew figcaption a:nth-child(2) {
+                border-right: 0px solid #ccc;
+            }
 
 
 /*

@@ -28,6 +28,9 @@ namespace SiteMaster.Controllers
         {
             _divisionService = divisionService;
         }
+
+
+
         [AuthorizeContext(ViewAction.View)]
         public  IActionResult Index()
         {
@@ -119,7 +122,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Division division)
         {
             division.DepartmentList = await _divisionService.GetAllDepartment();
@@ -162,7 +165,7 @@ namespace SiteMaster.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  
         {
             try
@@ -185,6 +188,9 @@ namespace SiteMaster.Controllers
             var list = await _divisionService.GetAllDivision();
             return View("Index", list);
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _divisionService.FetchSingleResult(id);

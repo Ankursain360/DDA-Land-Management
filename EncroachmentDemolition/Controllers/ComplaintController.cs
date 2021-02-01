@@ -15,26 +15,35 @@ using Dto.Search;
 using Microsoft.Extensions.Configuration;
 using Utility.Helper;
 using Dto.Common;
+using EncroachmentDemolition.Filters;
+
+
+
+using Core.Enum;
 
 
 namespace EncroachmentDemolition.Controllers
 {
-    public class ComplaintController : Controller
+    public class ComplaintController : BaseController
     {
         private readonly IOnlinecomplaintService _onlinecomplaintService;
         public IConfiguration _configuration;
         string targetPhotoPathLayout = string.Empty;
         string targetReportfilePathLayout = string.Empty;
+        private readonly IWorkflowTemplateService _workflowtemplateService;
+        private readonly IApprovalProccessService _approvalproccessService;
 
-
-        public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IConfiguration configuration)
+        public ComplaintController(IOnlinecomplaintService onlinecomplaintService, IApprovalProccessService approvalproccessService,
+            IWorkflowTemplateService workflowtemplateService, IConfiguration configuration)
         {
+            _workflowtemplateService = workflowtemplateService;
             _onlinecomplaintService = onlinecomplaintService;
             _configuration = configuration;
+            _approvalproccessService = approvalproccessService;
         }
 
 
-       
+
 
 
         public IActionResult Index()
@@ -52,19 +61,21 @@ namespace EncroachmentDemolition.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
+            ViewBag.Message = TempData["Message"] as string;
             Onlinecomplaint onlinecomplaint = new Onlinecomplaint();
             onlinecomplaint.IsActive = 1;
             onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
             onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-             return View(onlinecomplaint);
+            return View(onlinecomplaint);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Onlinecomplaint onlinecomplaint)
         {
             try
@@ -73,36 +84,82 @@ namespace EncroachmentDemolition.Controllers
                 onlinecomplaint.ReferenceNo = "TRN" + finalString;
                 onlinecomplaint.ComplaintList = await _onlinecomplaintService.GetAllComplaintType();
                 onlinecomplaint.LocationList = await _onlinecomplaintService.GetAllLocation();
-              
+
                 if (ModelState.IsValid)
                 {
-                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:WatchAndWard:Photo").Value.ToString();
-                   // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
+                    targetPhotoPathLayout = _configuration.GetSection("FilePaths:OnlineComplaint:Photo").Value.ToString();
+                    // targetReportfilePathLayout = _configuration.GetSection("FilePaths:WatchAndWard:ReportFile").Value.ToString();
                     FileHelper file = new FileHelper();
                     if (onlinecomplaint.Photo != null)
                     {
                         onlinecomplaint.PhotoPath = file.SaveFile(targetPhotoPathLayout, onlinecomplaint.Photo);
+                     //   var LattitudeValue = TempData["LattitudeValue"] as string;
+                      //  onlinecomplaint.Lattitude = LattitudeValue;
+                      //  var LongitudeValue = TempData["LongitudeValue"] as string;
+                      //  onlinecomplaint.Longitude = LongitudeValue;
+                        // var lattlongurlvalue = TempData["url"] as string;
                     }
-                   
+
 
                     var result = await _onlinecomplaintService.Create(onlinecomplaint);
+
+
+                    var DataFlow = await dataAsync();
+                    for (int i = 0; i < DataFlow.Count; i++)
+                    {
+                        if (!DataFlow[i].parameterSkip)
+                        {
+                            onlinecomplaint.ApprovedStatus = 0;
+                            onlinecomplaint.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                            result = await _onlinecomplaintService.UpdateBeforeApproval(onlinecomplaint.Id, onlinecomplaint);  //Update Table details 
+                            if (result)
+                            {
+                                Approvalproccess approvalproccess = new Approvalproccess();
+                                approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                                approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessOnlineComplaintId").Value);
+                                approvalproccess.ServiceId = onlinecomplaint.Id;
+                                approvalproccess.SendFrom = SiteContext.UserId;
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i].parameterName);
+                                approvalproccess.PendingStatus = 1;   //1
+                                approvalproccess.Status = null;   //1
+                                approvalproccess.Remarks = "Record Added and Send for Approval";///May be Uncomment
+                                result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+                            }
+
+                            break;
+                        }
+                    }
+
 
                     if (result == true)
                     {
                         string DisplayName = onlinecomplaint.Name.ToString();
                         string EmailID = onlinecomplaint.Email.ToString();
-                       
-                        string Action = "Dear " + DisplayName + ",  Your Complaint Register succesfully. Your Reference No is  "  +onlinecomplaint.ReferenceNo;
-                        String Mobile = onlinecomplaint. Contact;
+
+                        string Action = "Dear Requester, <br> Your Request for <b>" + onlinecomplaint.ComplaintType.Name + "</b> has been successfully submitted.Please note your reference No for future reference.<br> Your Ref. number is : <b>" + onlinecomplaint.ReferenceNo + "</b> <br><br><br> Regards,<br>DDA";
+                        String Mobile = onlinecomplaint.Contact;
                         SendMailDto mail = new SendMailDto();
                         SendSMSDto SMS = new SendSMSDto();
+                        SMS.GenerateSendSMS(Action, Mobile);
+                        try
+                        {
+                            mail.GenerateMailFormatForComplaint(DisplayName, EmailID, Action);
 
-                        mail.GenerateMailFormatForComplaint(DisplayName, EmailID,  Action);
-                        SMS.GenerateSendSMS(Action, Mobile); 
 
-                        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess+" Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
-                        var list = await _onlinecomplaintService.GetAllOnlinecomplaint();
-                        return View("Index", list);
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is  " + onlinecomplaint.ReferenceNo, "", AlertType.Success);
+
+                            return Redirect("/Complaint/Create");
+                        }
+                        catch (Exception ex)
+                        {
+
+                            TempData["Message"] = Alert.Show(Messages.AddRecordSuccess + " Your Reference No is " + onlinecomplaint.ReferenceNo + " system is unable to send the complaint details on mail.", "", AlertType.Success);
+                            return Redirect("/Complaint/Create");
+
+                        }
+
+                        return View(onlinecomplaint);
+
                     }
                     else
                     {
@@ -121,9 +178,6 @@ namespace EncroachmentDemolition.Controllers
                 return View(onlinecomplaint);
             }
         }
-
-
-
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -207,9 +261,13 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
-
-
-
+        private async Task<List<TemplateStructure>> dataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(18);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
 
     }
 }

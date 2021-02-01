@@ -44,7 +44,7 @@ using System.Threading.Tasks;
 using Dto.Master;
 using CourtCasesManagement.Controllers;
 
-namespace DamagePayee.Controllers
+namespace CourtCasesManagement.Controllers
 {
     public class HomeController : BaseController
     {
@@ -82,6 +82,16 @@ namespace DamagePayee.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult UnAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult ExceptionLog()
+        {
+            return View();
         }
     }
 }

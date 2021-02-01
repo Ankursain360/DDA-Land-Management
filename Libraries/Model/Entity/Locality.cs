@@ -20,25 +20,29 @@ namespace Libraries.Model.Entity
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Mutationdetails = new HashSet<Mutationdetails>();
-            Damagepayeeregistertemp = new HashSet<Damagepayeeregistertemp>();
+            Demandletters = new HashSet<Demandletters>();
             Legalmanagementsystem = new HashSet<Legalmanagementsystem>();
+            Datastoragedetails = new HashSet<Datastoragedetails>();
+            Dmsfileupload = new HashSet<Dmsfileupload>();
         }
-        [Required(ErrorMessage = "The Department field is required")]
+
+
+        [Required(ErrorMessage = " Department is mandatory", AllowEmptyStrings =false)]
         public int DepartmentId { get; set; }
-        [Required(ErrorMessage = "The Zone field is required")]
+        [Required(ErrorMessage = " Zone is mandatory", AllowEmptyStrings = false)]
         public int ZoneId { get; set; }
 
-        [Required(ErrorMessage = "The Division field is required")]
+        [Required(ErrorMessage = " Division is mandatory", AllowEmptyStrings = false)]
         public int DivisionId { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Locality Name is mandatory")]
         [Remote(action: "ExistName", controller: "Locality", AdditionalFields = "Id,DepartmentId,DivisionId,ZoneId")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "The Locality Code field is required")]
+        [Required(ErrorMessage = "Locality Code is mandatory")]
         [Remote(action: "ExistCode", controller: "Locality", AdditionalFields = "Id")]
         public string LocalityCode { get; set; }
-        [Required]
+        [Required (ErrorMessage = " Landmark is mandatory")]
         public string Landmark { get; set; }
-        [Required]
+        [Required(ErrorMessage = " Locality address is mandatory")]
         public string Address { get; set; }
         [Required]
         public byte IsActive { get; set; }
@@ -61,9 +65,12 @@ namespace Libraries.Model.Entity
         public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
-        public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
 
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
+        public ICollection<Demandletters> Demandletters { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
     }
 }

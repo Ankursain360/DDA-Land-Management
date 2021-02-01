@@ -18,18 +18,6 @@
                     <label for="txtCode" class="floating-label">Locality Code</label>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtAddress" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtAddress" class="floating-label">Address</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtLandmark" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtLandmark" class="floating-label">Landmark</label>
-                </div>
-            </div>
         </div>
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -40,7 +28,7 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Submit</button>
+                        <button id="btnSearch" class="btn btn-theme btn-block" type="submit">Search</button>
                     </div>
                 </div>
             </div>
@@ -51,11 +39,11 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="0">Select One</option>
-                        <option value="Name">Locality Name</option>
+                        <option value="Department">Department </option>
+                        <option value="Zone">Zone </option>
+                        <option value="Division">Division </option>
+                        <option value="Locality">Locality Name</option>
                         <option value="LocalityCode">Locality Code</option>
-                        <option value="Address">Address</option>
-                        <option value="Landmark">Landmark</option>
                         <option value="IsActive">Status</option>
 
 
@@ -63,8 +51,8 @@
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <button id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></button>
-                    <button id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

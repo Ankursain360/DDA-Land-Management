@@ -71,7 +71,7 @@
                                     <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
                                 </select>
-                                <label asp-validation-for="DepartmentId" class="error"></label>
+                                <span asp-validation-for="DepartmentId" class="text-danger"></span>
 
                                 <label class="floating-label">Department </label>
 
@@ -84,7 +84,7 @@
                             onchange="return onChangeZone(this.options[this.selectedIndex].value)">
                                     <option selected="selected" disabled="disabled" value="">--Select-- </option>
                                 </select>
-                                <label asp-validation-for="ZoneId" class="error"></label>
+                                <span asp-validation-for="ZoneId" class="text-danger"></span>
                                 <label asp-for="ZoneId" class="floating-label">Zone </label>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                     <option selected="selected" disabled="disabled" value="">--Select-- </option>
 
                                 </select>
-                                <label asp-validation-for="RoleId" class="error"></label>
+                                <span asp-validation-for="RoleId" class="text-danger"></span>
                                 <label asp-for="RoleId" class="floating-label">Role </label>
                             </div>
                         </div>
@@ -112,21 +112,14 @@
                         </div>
                     </div>
 
-                    <div class="row ">
+                    <div class="row mt-md-3 ">
                         <div class=" col-md-12">
                             <button class="btn btn-theme " type="submit">Create</button>
                             @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
 
                         </div>
-                    </div>  @*<div class="form-row">
-                            <div class=" form-group  col-md-12">
-                                <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
-                                <a asp-action="Index" class="btn btn-sm btn-outline-dark">Back</a>
-                            </div>
-                        </div>*@
+                    </div> 
+                  
                 </form>
            
 

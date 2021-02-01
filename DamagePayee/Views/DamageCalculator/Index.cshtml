@@ -8,7 +8,7 @@
 
 <div class="pt-3">
 
-    <div  id="frmInfo"   asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div id="frmInfo" asp-action="Index" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -80,15 +80,30 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-md-12">
-
-                <input type="submit" id="btnCalculate" value="Calculate" class="btn btn-theme" />
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-4">
+                <div class="row">
+                    <div class="col-4 col-md-4 col-xl-4">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-4 col-md-4 col-xl-4">
+                        <input type="submit" id="btnCalculate" value="Calculate" class="btn btn-theme" />
+                    </div>
+                    <div class="col-4 col-md-4 col-xl-4">
+                        @{
+                            @if (@ViewBag.BackButton == 1)
+                            {
+                                <a class="btn btn-theme" asp-action="Create" asp-controller="SelfAssessmentDamage">Back on Self Assessment Page</a>
+                            }
+                        }
+                    </div>
+                </div>
             </div>
         </div>
 
+        
         <br />
         <div id="DivMainContentForm">
 

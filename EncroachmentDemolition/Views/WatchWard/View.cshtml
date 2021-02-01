@@ -41,11 +41,11 @@
         </div>
 
 
-        <div id="InventoryOtherDiv">
+        <div id="InventoryOtherDiv" class="mt-md-3">
 
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -56,20 +56,22 @@
         </div>
         <div class="col-md-6">
 
-            <div class="row">
+            <div class="row mt-md-3">
+                <div class="col-md-4">
+                    <label>Encroachment</label>
+                </div>
+                <input type="hidden" asp-for="Encroachment" value="0"/>
                 <div class="col-md-4">
                     <div class="form-check theme">
+                        <input disabled class="form-check-input" type="radio" asp-for="Encroachment" name="grpEncroachment" value="0" checked>
+                        <label class="form-check-label">No </label>
 
-                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="1" checked>
-                        <label class="form-check-label">Yes </label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-check theme">
-
-                        <input class="form-check-input" type="radio" asp-for="Encroachment" name="grpDamageAssesseeType" value="0">
-                        <label class="form-check-label">No </label>
-
+                        <input disabled class="form-check-input" type="radio" asp-for="Encroachment" name="grpEncroachment" value="1" >
+                        <label class="form-check-label">Yes </label>
                     </div>
                 </div>
             </div>
@@ -80,15 +82,18 @@
         </div>
 
     </div>
-    <div class="row pt-3">
+    <div class="row mt-md-3">
         <div class="col-md-12">
+            <div class="floating-label-wrap">
+                <textarea asp-for="StatusOnGround" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
+                <span asp-validation-for="StatusOnGround" class="text-danger"></span>
+                <label class="floating-label">Status on Ground<span style="color:red">*</span></label>
+            </div>
 
-            <textarea asp-for="StatusOnGround" disabled type="text" class="floating-label-field floating-label-field--s3"></textarea>
-            <span asp-validation-for="StatusOnGround" class="text-danger"></span>
-            <label class="floating-label">Status on Ground<span style="color:red">*</span></label>
+           
         </div>
     </div>
-    <div class="row pt-3">
+    <div class="row mt-md-3">
         <div class="col-md-6">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -98,13 +103,13 @@
                        
                         foreach (var item in Model.Watchandwardphotofiledetails)
                         {
-                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"> (View Existing Photo @(Photo += 1 ))</a>
+                            <a class="badge badge-primary px-2" asp-action="ViewDocument" asp-route-id="@item.Id"> (View Photo @(Photo += 1 ))</a>
 
                             if (item.LattLongUrl != null)
                             {
                                 <a target="_blank" href="@item.LattLongUrl">View Location on Map</a>
                             }
-                           
+                           <br/>
                         }
                         <input type="file" class="floating-label-field floating-label-field--s3" disabled asp-for="Photo" id="PhotoFile" accept="image/png, image/jpeg, image/gif" multiple />
                         <span asp-validation-for="Photo" class="text-danger"></span>
@@ -144,7 +149,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-md-3">
 
         <div class="col-md-6" style="display:none;">
             <div class="floating-label-wrap">
@@ -158,7 +163,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row mt-md-3">
         <div class="col-md-12" style="display:none;">
             <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -169,7 +174,7 @@
         </div>
 
     </div>
-    <div class="row pt-3">
+    <div class="row mt-md-3">
         <div class="col-md-12">
             @Html.ActionLink("Back", "Index", "WatchWard", null, new { @class = "btn btn-theme " })
         </div>

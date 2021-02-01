@@ -8,7 +8,7 @@
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
@@ -22,7 +22,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                           class="floating-label-field floating-label-field--s3" limit="30" />
 
                     <span asp-validation-for="Name" class="text-danger"></span>
 
@@ -30,12 +30,12 @@
                 </div>
             </div>
         </div>
-        <div class="form-row">
+        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     @*<span class="text-danger">*</span>*@
                     <input asp-for="Code" type="text" class="floating-label-field floating-label-field--s3" placeholder="Zone Code"
-                           limit="100">
+                           limit="10">
                     <span asp-validation-for="Code" class="text-danger "></span>
                     <label class="floating-label">Zone Code</label>
                 </div>
@@ -52,9 +52,7 @@
                 </div>
             </div>
         </div>
-      
-
-        <div class="row ">
+        <div class="row mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "Zone", null, new { @class = "btn btn-theme " })

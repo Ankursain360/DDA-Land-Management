@@ -25,12 +25,6 @@ namespace Libraries.Repository.EntityRepository
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                       && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
                                         )
-
-                                .OrderByDescending(s =>s.IsActive )
-                                .ThenBy(s => s.Department.Name)
-                                .ThenBy(s => s.Zone.Name)
-                                .ThenBy(s => s.Name)
-                                
                             .GetPaged<Division>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -38,14 +32,56 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderBy(x => x.Department.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderBy(x => x.Zone.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderBy(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderBy(x => x.Code)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderBy(x => x.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+                        break;
+                  
                     case ("STATUS"):
-                        data.Results = data.Results.OrderBy(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -53,14 +89,56 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("NAME"):
-                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderByDescending(x => x.Department.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderByDescending(x => x.Zone.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
                     case ("CODE"):
-                        data.Results = data.Results.OrderByDescending(x => x.Code).ToList();
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderByDescending(x => x.Code)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderByDescending(x => x.Name)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
+                        break;
+
                     case ("STATUS"):
-                        data.Results = data.Results.OrderByDescending(x => x.IsActive).ToList();
+                        data = null;
+                        data = await _dbContext.Division
+                            .Include(x => x.Zone)
+                            .Include(x => x.Department)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                      && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
+                             .OrderBy(x => x.IsActive)
+                            .GetPaged<Division>(model.PageNumber, model.PageSize);
                         break;
                 }
             }
@@ -73,16 +151,10 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
-
-     
-
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Division.AnyAsync(t => t.Id != id && t.Name.ToLower() == name.ToLower());
         }
-
-
-
         public async Task<List<Zone>> GetAllZone(int departmentId)
         {
             List<Zone> zoneList = await _dbContext.Zone.Where(x => x.DepartmentId == departmentId && x.IsActive==1).ToListAsync();
@@ -93,11 +165,5 @@ namespace Libraries.Repository.EntityRepository
             List<Department> departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
             return departmentList;
         }
-
-
-     
-
-
-
     }
 }

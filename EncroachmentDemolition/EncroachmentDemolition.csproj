@@ -2,7 +2,23 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>f97777c7-b005-4009-a17b-2eaf77fbd39e</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\js\demolitionreportindex.min.js" />
+    <Content Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\demolitionreportindex.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\demolitionreportindex.min.js" />
+    <None Include="wwwroot\js\onlinecomplaintapprovalprocessindex.min.js" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />

@@ -8,25 +8,20 @@
         <div class="row">
             <div class="col-md-3    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Location" />
-                    <label for="txtName" class="floating-label">Location</label>
+                    <input type="text" id="txtLocation" class="floating-label-field floating-label-field--s3" placeholder="Location" />
+                    <label for="txtName" class="floating-label">Location/Address of Property</label>
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtUserName" class="floating-label-field floating-label-field--s3" placeholder="Municipal Number" />
+                    <input type="text" id="txtMunicipalNo" class="floating-label-field floating-label-field--s3" placeholder="Municipal Number" />
                     <label for="txtUserName" class="floating-label">Municipal Number</label>
                 </div>
             </div>
+           
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="email" id="txtEmail" class="floating-label-field floating-label-field--s3" placeholder="Geo Referencing">
-                    <label for="txtEmail" class="floating-label">Geo Referencing</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="email" id="txtPhoneNumber" class="floating-label-field floating-label-field--s3" placeholder="Number of Floors">
+                    <input type="text" id="txtFloorNo" class="floating-label-field floating-label-field--s3" placeholder="Number of Floors">
                     <label for="txtPhoneNumber" class="floating-label">Number of Floors</label>
                 </div>
             </div>
@@ -35,12 +30,12 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
                             <i class="ri-refresh-line mr-2"></i>Reset
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+                        <button id="btnSearch" class="btn btn-theme btn-block" type="button">Search</button>
                     </div>
                 </div>
             </div>
@@ -52,20 +47,20 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Location/Address of Property</option>
-                        <option>Municipal Number</option>
-                        <option>Geo Referencing</option>
-                        <option>Approx Area of the Property</option>
-                        <option>Number of Floors</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+
+                        <option value="Location">Location/Address of Property</option>
+                        <option value="MunicipalNo">Municipal Number</option>
+                        <option value="NumberFloor">Floor No</option>
+
+                     
 
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order">    <i class="ri-sort-asc">    </i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order">  <i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

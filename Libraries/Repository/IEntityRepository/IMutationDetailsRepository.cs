@@ -30,7 +30,7 @@ namespace Libraries.Repository.IEntityRepository
 
         /*Repeater*/
         //Task<bool> SaveMutationOldDamage(Mutationolddamageassesse oldDamage);
-        Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id);
+        Task<List<Damagepayeeregister>> FetchSingleResult(int id);
         Task<Damagepayeeregister> FetchDamageResult(int Id);
         Task<PagedResult<Damagepayeeregister>> GetPagedSubsitutionMutationDetails(SubstitutionMutationDetailsDto model);
         Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id);

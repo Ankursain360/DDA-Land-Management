@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using SiteMaster.Models;
@@ -14,6 +9,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,7 +23,8 @@ namespace SiteMaster.Controllers
         {
             _notificationService = notificationService;
         }
-       
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -38,7 +36,7 @@ namespace SiteMaster.Controllers
             var result = await _notificationService.GetPagedNotification(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -46,6 +44,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(LandNotification notification)
         {
             try
@@ -57,13 +56,14 @@ namespace SiteMaster.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _notificationService.GetAllNotification();
+                        return View("Index",list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(notification);
-
+                        
                     }
                 }
                 else
@@ -77,6 +77,7 @@ namespace SiteMaster.Controllers
                 return View(notification);
             }
         }
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -90,6 +91,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, LandNotification notification)
         {
             if (ModelState.IsValid)
@@ -132,7 +134,7 @@ namespace SiteMaster.Controllers
                 return Json($"Notification Name : {Name} already exist");
             }
         }
-
+  
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _notificationService.Delete(id);
@@ -150,6 +152,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _notificationService.FetchSingleResult(id);
@@ -158,6 +162,30 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
+        {
+            try
+            {
+                var result = await _notificationService.Delete(id);
+                if (result == true)
+                {
+                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                }
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            }
+            var list = await _notificationService.GetAllNotification();
+            return View("Index", list);
         }
     }
 

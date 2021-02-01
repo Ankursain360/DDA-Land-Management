@@ -333,7 +333,7 @@
 
                 <div class="col-md-6">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" name="grpPurpose" id="rdbPurchaser" value="Purchaser" checked="checked" />
+                        <input class="form-check-input" asp-for="MutationPurpose" type="radio" name="grpPurpose" id="rdbPurchaser" value="Purchaser" checked />
 
                         <label class="form-check-label">Purchaser</label>
                     </div>
@@ -341,7 +341,7 @@
                 <div class="col-md-6">
                     <div class="form-check theme">
 
-                        <input class="form-check-input" type="radio" name="grpPurpose" value="Inheritance" id="rdbInheritance" />
+                        <input class="form-check-input" asp-for="MutationPurpose" type="radio" name="grpPurpose" value="Inheritance" id="rdbInheritance" />
                         <label class="form-check-label">Inheritance </label>
                     </div>
 
@@ -614,14 +614,14 @@
 
             <div class="form-group col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbHouse" value="House" checked="checked" />
+                    <input class="form-check-input" asp-for="IsAddressProof"  type="radio" name="grpAddressProof" id="rdbHouse" value="House" checked="checked" />
                     <label class="form-check-label">House Tax Bill</label>
                 </div>
             </div>
             <div class="form-group col-md-3">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpAddressProof" value="Electricity" id="rdbElectricity" />
+                    <input class="form-check-input" asp-for="IsAddressProof"  type="radio" name="grpAddressProof" value="Electricity" id="rdbElectricity" />
                     <label class="form-check-label">Electricity Bill  </label>
                 </div>
             </div>
@@ -629,14 +629,14 @@
             <div class="form-group col-md-3">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbWater" value="Water" />
+                    <input class="form-check-input" asp-for="IsAddressProof"  type="radio" name="grpAddressProof" id="rdbWater" value="Water" />
                     <label class="form-check-label">Water Bill</label>
                 </div>
             </div>
             <div class="form-group col-md-3">
                 <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" name="grpAddressProof" id="rdbAny" value="Any" />
+                    <input class="form-check-input" asp-for="IsAddressProof"  type="radio" name="grpAddressProof" id="rdbAny" value="Any" />
                     <label class="form-check-label">Any Other </label>
                 </div>
 
@@ -831,7 +831,7 @@
                         I/WE hereby expressly warranty and declare that the above information provided in support of my/ our application is correct and genuine and We expressly acknowledge that I am / we are aware and accept that the decision on the application will be made by the DDA on the basis of the information supplied
                         by me/ us and may be immediately Cancelled in the event that such information is found to be false or misleading.<br />
                         <br />
-                        Note: Please fill all Details Crefully.You can't make any changes after final Submission
+                        Note: Please fill all Details Carefully.You can't make any changes after final Submission
 
                     </div>
                 </div>
@@ -841,7 +841,7 @@
             <div class="col-md-12">
 
                 <input type="submit" value="Create" class="btn btn-theme "  onclick="return PageValidation();" />
-                @Html.ActionLink("Back", "Create", "SubstitutionMutationDetails", null, new { @class = "btn btn-theme " })
+                <a class="btn btn-theme" asp-action="Create" asp-controller="SelfAssessmentDamage">Back on Self Assessment Page</a>
             </div>
         </div>
 </form>

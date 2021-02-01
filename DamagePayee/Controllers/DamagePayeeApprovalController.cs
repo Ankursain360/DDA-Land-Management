@@ -14,7 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using System.IO;
 using System.Text.Json;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     //This is right user yes : 1, This is right user No : 0
@@ -26,10 +27,11 @@ namespace DamagePayee.Controllers
         private readonly IWorkflowTemplateService _workflowtemplateService;
         private readonly ISelfAssessmentDamageService _selfAssessmentDamageService;
         private readonly IProccessWorkflowService _proccessWorkflowService;
+        private readonly IApprovalProccessService _approvalproccessService;
         public DamagePayeeApprovalController(IDamagePayeeApprovalService damagePayeeApprovalService,
             IDamagepayeeregisterService damagepayeeregisterService, IConfiguration configuration,
             IWorkflowTemplateService workflowtemplateService, ISelfAssessmentDamageService selfAssessmentDamageService,
-            IProccessWorkflowService proccessWorkflowService)
+            IProccessWorkflowService proccessWorkflowService, IApprovalProccessService approvalproccessService)
         {
             _configuration = configuration;
             _damagePayeeApprovalService = damagePayeeApprovalService;
@@ -37,24 +39,30 @@ namespace DamagePayee.Controllers
             _workflowtemplateService = workflowtemplateService;
             _selfAssessmentDamageService = selfAssessmentDamageService;
             _proccessWorkflowService = proccessWorkflowService;
+            _approvalproccessService = approvalproccessService;
         }
+
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
         }
-        [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
-        {
-            var IsUser = await CheckThisisUser();
-            var result = await _damagePayeeApprovalService.GetPagedDamagePayeeRegisterForApproval(model, IsUser);
-            ViewBag.IsApproved = model.StatusId;
-            return PartialView("_List", result);
-        }
-        async Task BindDropDown(Damagepayeeregistertemp damagepayeeregistertemp)
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
+        //{
+        //    var IsUser = await CheckThisisUser();
+        //    var result = await _damagePayeeApprovalService.GetPagedDamagePayeeRegisterForApproval(model, IsUser);
+        //    ViewBag.IsApproved = model.StatusId;
+        //    return PartialView("_List", result);
+        //}
+        async Task BindDropDown(Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.LocalityList = await _damagepayeeregisterService.GetLocalityList();
             damagepayeeregistertemp.DistrictList = await _damagepayeeregisterService.GetDistrictList();
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
@@ -71,78 +79,80 @@ namespace DamagePayee.Controllers
             return View(Data);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(int id, Damagepayeeregistertemp damagepayeeregistertemp)
-        {
-            var result = false;
+
+        //[AuthorizeContext(ViewAction.Add)]
+        //public async Task<IActionResult> Create(int id, Damagepayeeregister damagepayeeregistertemp)
+        //{
+        //    var result = false;
 
            
-            #region Approval Proccess At Further level start Added by Renu 28 Dec 2020
-            var DataFlow = await DataAsync();
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (!DataFlow[i].parameterSkip)
-                {
-                    if ((DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId) || (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId))
-                    {
-                        result = true; 
-                        if (result)
-                        {
-                            var Count = ProccessWorkflowData();
-                            TransactionTemplateStructure obj = new TransactionTemplateStructure();
-                            obj.TaskRequestId = damagepayeeregistertemp.Id;
-                            obj.ActionByUserId = SiteContext.UserId;
-                            obj.Remarks = damagepayeeregistertemp.ApprovalRemarks;
-                            obj.Status = damagepayeeregistertemp.ApprovalStatus;
-                            obj.Level = Count+1;
-                            string JsonTransactionTemplateData = JsonSerializer.Serialize(obj);
+        //    #region Approval Proccess At Further level start Added by Renu 28 Dec 2020
+        //    var DataFlow = await DataAsync();
+        //    for (int i = 0; i < DataFlow.Count; i++)
+        //    {
+        //        if (!DataFlow[i].parameterSkip)
+        //        {
+        //            if ((DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId) || (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId))
+        //            {
+        //                result = true; 
+        //                if (result)
+        //                {
+        //                    var Count = ProccessWorkflowData();
+        //                    TransactionTemplateStructure obj = new TransactionTemplateStructure();
+        //                    obj.TaskRequestId = damagepayeeregistertemp.Id;
+        //                    obj.ActionByUserId = SiteContext.UserId;
+        //                    obj.Remarks = damagepayeeregistertemp.ApprovalRemarks;
+        //                    obj.Status = damagepayeeregistertemp.ApprovalStatus;
+        //                    obj.Level = Count+1;
+        //                    string JsonTransactionTemplateData = JsonSerializer.Serialize(obj);
 
-                            Processworkflow proccess = new Processworkflow();
-                            proccess.TransactionTemplate = JsonTransactionTemplateData;
-                            proccess.WorkflowTemplateId = Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value);
-                            proccess.ActionId = SiteContext.UserId;
-                            proccess.CreatedBy = SiteContext.UserId;
-                            result = await _proccessWorkflowService.Create(proccess); //Create a row in ProccessWorkflow Table
+        //                    Processworkflow proccess = new Processworkflow();
+        //                    proccess.TransactionTemplate = JsonTransactionTemplateData;
+        //                    proccess.WorkflowTemplateId = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+        //                    proccess.ActionId = SiteContext.UserId;
+        //                    proccess.CreatedBy = SiteContext.UserId;
+        //                    result = await _proccessWorkflowService.Create(proccess); //Create a row in ProccessWorkflow Table
 
-                            if (result)
-                            {
-                                if (i == DataFlow.Count - 1)// Last Level 
-                                {
-                                    result =await UpdateTaskRequestedByTable(id, damagepayeeregistertemp);
+        //                    if (result)
+        //                    {
+        //                        if (i == DataFlow.Count - 1)// Last Level 
+        //                        {
+        //                            result =await UpdateTaskRequestedByTable(id, damagepayeeregistertemp);
 
-                                    if (result)
-                                    {
-                                        /*For Damage Payee Replicate Temp Table to Approved table */
-                                        result = await CreateAprrovedRecordsinActualTable(damagepayeeregistertemp);
+        //                            if (result)
+        //                            {
+        //                                /*For Damage Payee Replicate Temp Table to Approved table */
+        //                                result = await CreateAprrovedRecordsinActualTable(damagepayeeregistertemp);
                                         
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    }
-                    //else
-                    //{
-                    //    ViewBag.Message = Alert.Show("You are not allowed to Approve this record", "", AlertType.Success);
-                    //    return View("Index");
-                    //}
+        //                            }
+        //                        }
+        //                    }
+        //                }
+        //                break;
+        //            }
+        //            //else
+        //            //{
+        //            //    ViewBag.Message = Alert.Show("You are not allowed to Approve this record", "", AlertType.Success);
+        //            //    return View("Index");
+        //            //}
 
-                }
+        //        }
 
 
-            }
+        //    }
 
-            #endregion
+        //    #endregion
 
-            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-            return View("Index");
-        }
-        private async Task<bool> UpdateTaskRequestedByTable(int id, Damagepayeeregistertemp damagepayeeregistertemp)
+        //    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+        //    return View("Index");
+        //}
+        private async Task<bool> UpdateTaskRequestedByTable(int id, Damagepayeeregister damagepayeeregistertemp)
         {
             damagepayeeregistertemp.ApprovedStatus = 1;
             var result = await _damagepayeeregisterService.UpdateBeforeApproval(id, damagepayeeregistertemp);
             return result;
         }
-        private async Task<bool> CreateAprrovedRecordsinActualTable(Damagepayeeregistertemp damagepayeeregistertemp)
+        private async Task<bool> CreateAprrovedRecordsinActualTable(Damagepayeeregister damagepayeeregistertemp)
         {
             var result = false;
             if (damagepayeeregistertemp != null)
@@ -152,7 +162,7 @@ namespace DamagePayee.Controllers
                 result = await _damagepayeeregisterService.CreateApprovedDamagepayeeRegister(damagepayeeregistertemp, model);
 
                 List<Damagepayeepersonelinfo> damagepayeepersonelinfo = new List<Damagepayeepersonelinfo>();
-                var data = damagepayeeregistertemp.Damagepayeepersonelinfotemp.ToList();
+                var data = damagepayeeregistertemp.Damagepayeepersonelinfo.ToList();
                 for (int j = 0; j < data.Count; j++)
                 {
                     damagepayeepersonelinfo.Add(new Damagepayeepersonelinfo
@@ -169,14 +179,14 @@ namespace DamagePayee.Controllers
                         PanNoFilePath = data[j].PanNoFilePath,
                         PhotographPath = data[j].PhotographPath,
                         SignaturePath = data[j].SignaturePath,
-                        DamagePayeeRegisterId = model.Id,
+                        DamagePayeeRegisterTempId = model.Id,
                         CreatedBy = SiteContext.UserId
                     });
                 }
                 result = await _damagepayeeregisterService.SavePersonelInfo(damagepayeepersonelinfo);
 
                 List<Allottetype> allottetype = new List<Allottetype>();
-                var allottetmp = damagepayeeregistertemp.Allottetypetemp.ToList();
+                var allottetmp = damagepayeeregistertemp.Allottetype.ToList();
                 for (int k = 0; k < allottetmp.Count; k++)
                 {
                     allottetype.Add(new Allottetype
@@ -185,14 +195,14 @@ namespace DamagePayee.Controllers
                         FatherName = allottetmp[k].FatherName,
                         Date = allottetmp[k].Date,
                         AtsgpadocumentPath = allottetmp[k].AtsgpadocumentPath,
-                        DamagePayeeRegisterId = model.Id,
+                        DamagePayeeRegisterTempId = model.Id,
                         CreatedBy = SiteContext.UserId
                     });
                 }
                 result = await _damagepayeeregisterService.SaveAllotteType(allottetype);
 
                 List<Damagepaymenthistory> damagepaymenthistory = new List<Damagepaymenthistory>();
-                var historytmp = damagepayeeregistertemp.Damagepaymenthistorytemp.ToList();
+                var historytmp = damagepayeeregistertemp.Damagepaymenthistory.ToList();
                 for (int m = 0; m < historytmp.Count; m++)
                 {
                     damagepaymenthistory.Add(new Damagepaymenthistory
@@ -203,7 +213,7 @@ namespace DamagePayee.Controllers
                         PaymentDate = historytmp[m].PaymentDate,
                         Amount = historytmp[m].Amount,
                         RecieptDocumentPath = historytmp[m].RecieptDocumentPath,
-                        DamagePayeeRegisterId = model.Id,
+                        DamagePayeeRegisterTempId = model.Id,
                         CreatedBy = SiteContext.UserId
                     });
                 }
@@ -214,7 +224,7 @@ namespace DamagePayee.Controllers
         }
         public async Task<PartialViewResult> HistoryDetails(int id)
         {
-            var Data = await _proccessWorkflowService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value), id);
+            var Data = await _proccessWorkflowService.GetHistoryDetails(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value), id);
 
             return PartialView("_HistoryDetails", Data);
         }
@@ -224,7 +234,6 @@ namespace DamagePayee.Controllers
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
             await BindDropDown(Data);
-
             return PartialView("_DamagePayeeRegister", Data);
         }
         public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
@@ -280,7 +289,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewPersonelInfoAadharFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.AadharNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -288,7 +297,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewPersonelInfoPanFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PanNoFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -296,7 +305,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewPersonelInfoPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.PhotographPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -304,7 +313,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewPersonelInfoSignautreFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeepersonelinfotemp Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
+            Damagepayeepersonelinfo Data = await _selfAssessmentDamageService.GetPersonelInfoFilePath(Id);
             string path = Data.SignaturePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -312,7 +321,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewATSGPAFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Allottetypetemp Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
+            Allottetype Data = await _selfAssessmentDamageService.GetAllotteTypeSingleResult(Id);
             string path = Data.AtsgpadocumentPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -320,7 +329,7 @@ namespace DamagePayee.Controllers
         public async Task<FileResult> ViewRecieptFile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepaymenthistorytemp Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
+            Damagepaymenthistory Data = await _selfAssessmentDamageService.GetPaymentHistorySingleResult(Id);
             string path = Data.RecieptDocumentPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -330,7 +339,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> DownloadPropertyPhoto(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.PropertyPhotoPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -338,7 +347,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> DownloadShowCauseNotice(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.ShowCauseNoticePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -346,7 +355,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> DownloadFgform(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.FgformPath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -354,7 +363,7 @@ namespace DamagePayee.Controllers
         public async Task<IActionResult> DownloadBillfile(int Id)
         {
             FileHelper file = new FileHelper();
-            Damagepayeeregistertemp Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
+            Damagepayeeregister Data = await _selfAssessmentDamageService.FetchSingleResult(Id);
             string path = Data.DocumentForFilePath;
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
@@ -362,41 +371,41 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        #region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
-        private async Task<List<TemplateStructure>> DataAsync()
-        {
-            var Data = await _workflowtemplateService.FetchSingleResult(1);
-            var template = Data.Template;
-            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
-            return ObjList;
-        }
+        //#region Fetch workflow data for approval prrocess Added by Renu 28 Dec 2020
+        //private async Task<List<TemplateStructure>> DataAsync()
+        //{
+        //    var Data = await _workflowtemplateService.FetchSingleResult(1);
+        //    var template = Data.Template;
+        //    List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+        //    return ObjList;
+        //}
 
-        [HttpGet]
-        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
-        {
-            var DataFlow = await DataAsync();
+        //[HttpGet]
+        //public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        //{
+        //    var DataFlow = await DataAsync();
 
-            for (int i = 0; i < DataFlow.Count; i++)
-            {
-                if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                }
-                else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
-                {
-                    var dropdown = DataFlow[i].parameterAction;
-                    return Json(dropdown);
-                }
-            }
-            return Json(DataFlow);
-        }
-        #endregion
+        //    for (int i = 0; i < DataFlow.Count; i++)
+        //    {
+        //        if (DataFlow[i].parameterValue == "Role" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.RoleId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //        }
+        //        else if (DataFlow[i].parameterValue == "User" && Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+        //        {
+        //            var dropdown = DataFlow[i].parameterAction;
+        //            return Json(dropdown);
+        //        }
+        //    }
+        //    return Json(DataFlow);
+        //}
+        //#endregion
 
         #region Fetch ProccessWorkflow Data Added by Renu 28 Dec 2020
         private int ProccessWorkflowData()
         {
-            var Count = _proccessWorkflowService.FetchCountResultForProccessWorkflow(Convert.ToInt32(_configuration.GetSection("workflowTemplateIdDamagePayeeRegister").Value));
+            var Count = _proccessWorkflowService.FetchCountResultForProccessWorkflow(Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value));
             return Count;
         }
         private async Task<bool> CheckThisisUser()
@@ -461,6 +470,125 @@ namespace DamagePayee.Controllers
 
         #endregion
 
-        
+
+
+
+
+        #region Renu Approval Proccess
+        [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create(int id, Damagepayeeregister damagepayeeregister)
+        {
+            var result = false;
+            var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            await BindDropDown(Data);
+            var value = await _selfAssessmentDamageService.GetRebateValue();
+            if (value == null)
+                ViewBag.RebateValue = 0;
+            else
+                ViewBag.RebateValue = Math.Round((value.RebatePercentage), 2);
+
+            #region Approval Proccess At Further level start Added by Renu 23 jan 2021
+            var DataFlow = await DataAsync();
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (!DataFlow[i].parameterSkip)
+                {
+                    if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                    {
+                        result = true;  ///May be comment
+                        if (result)
+                        {
+                            Approvalproccess approvalproccess = new Approvalproccess();
+                            approvalproccess.ModuleId = Convert.ToInt32(_configuration.GetSection("approvalModuleId").Value);
+                            approvalproccess.ProccessID = Convert.ToInt32(_configuration.GetSection("workflowPreccessIdDamagePayee").Value);
+                            approvalproccess.ServiceId = damagepayeeregister.Id;
+                            approvalproccess.SendFrom = SiteContext.UserId;
+                            approvalproccess.PendingStatus = 1;
+                            approvalproccess.Remarks = damagepayeeregister.ApprovalRemarks; ///May be comment
+                            approvalproccess.Status = Convert.ToInt32(damagepayeeregister.ApprovalStatus);
+                            if (i == DataFlow.Count - 1)
+                                approvalproccess.SendTo = null;
+                            else
+                            {
+                                approvalproccess.SendTo = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                            }
+                            // if (i != DataFlow.Count - 1)  ///May be Uncomment
+                            result = await _approvalproccessService.Create(approvalproccess, SiteContext.UserId); //Create a row in approvalproccess Table
+
+                            if (result)
+                            {
+                                if (i == DataFlow.Count - 1)
+                                {
+                                    damagepayeeregister.ApprovedStatus = 1;
+                                    damagepayeeregister.PendingAt = 0;
+                                }
+                                else
+                                {
+                                    damagepayeeregister.ApprovedStatus = 0;
+                                    damagepayeeregister.PendingAt = Convert.ToInt32(DataFlow[i + 1].parameterName);
+                                }
+                                result = await _damagepayeeregisterService.UpdateBeforeApproval(id, damagepayeeregister);
+                            }
+                        }
+                        break;
+                    }
+
+                }
+            }
+
+            #endregion
+            var Msgddl = damagepayeeregister.ApprovalStatus;
+            if (Msgddl == "3")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+            else if (Msgddl == "2")
+            {
+                ViewBag.Message = Alert.Show(Messages.Approvedsuccesfuly, "", AlertType.Success);
+            }
+            else if (Msgddl == "1")
+            {
+
+                ViewBag.Message = Alert.Show(Messages.Forwardsuccesfuly, "", AlertType.Success);
+            }
+            return View("Index");
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DamagepayeeRegisterApprovalDto model)
+        {
+            var result = await _damagePayeeApprovalService.GetPagedDamageForApproval(model, SiteContext.UserId);
+            ViewBag.IsApproved = model.StatusId;
+            return PartialView("_List", result);
+        }
+        #endregion
+
+        #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
+        private async Task<List<TemplateStructure>> DataAsync()
+        {
+            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var template = Data.Template;
+            List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
+            return ObjList;
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> GetApprovalDropdownList()  //Bind Dropdown of Approval Status
+        {
+            var DataFlow = await DataAsync();
+
+            for (int i = 0; i < DataFlow.Count; i++)
+            {
+                if (Convert.ToInt32(DataFlow[i].parameterName) == SiteContext.UserId)
+                {
+                    var dropdown = DataFlow[i].parameterAction;
+                    return Json(dropdown);
+                    break;
+                }
+
+            }
+            return Json(DataFlow);
+        }
+        #endregion
     }
 }

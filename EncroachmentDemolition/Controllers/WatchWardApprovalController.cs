@@ -15,7 +15,8 @@ using Dto.Search;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class WatchWardApprovalController : BaseController
@@ -34,6 +35,8 @@ namespace EncroachmentDemolition.Controllers
             _configuration = configuration;
             _approvalproccessService = approvalproccessService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -46,6 +49,8 @@ namespace EncroachmentDemolition.Controllers
             ViewBag.IsApproved = model.StatusId;
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             var Data = await _watchAndWardApprovalService.FetchSingleResult(id);
@@ -60,6 +65,7 @@ namespace EncroachmentDemolition.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Watchandward watchandward)
         {
             var result = false;

@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register Approval Proccess" })
+@await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register Approval Process" })
 <br />
 <br />
 <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
@@ -27,6 +27,7 @@
     <div class="row pt-4">
         <div class="col-md-6">
             <div class="floating-label-wrap">
+                
                 <select class="floating-label-field floating-label-field--s3" asp-for="ApprovalStatus">
                     <option value="1">Forward</option>
                     <option value="2">Revert</option>

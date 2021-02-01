@@ -6,14 +6,12 @@
     <form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
         <div class="row">
             <div class=" col-md-6">
 
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                           class="floating-label-field floating-label-field--s3 onlynumbers" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Case Year  </label>
                 </div>
@@ -31,14 +29,10 @@
                 </div>
             </div>
         </div>
-
-
         <div class="row  mt-md-3">
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Update</button>
-
                 @Html.ActionLink("Back", "Index", "yearcase", null, new { @class = "btn btn-theme " })
-
             </div>
         </div>
 

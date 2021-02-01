@@ -1,0 +1,24 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Dto.Master
+{
+    public class FileStatusReportDtoProfile
+    {
+        [Required(ErrorMessage = "File No. is required")]
+        public int DeptId { get; set; }
+
+        //[Required(ErrorMessage = "Locality is required")]
+        //public int BranchId { get; set; }
+
+        [Required(ErrorMessage = "From Date  is required")]
+        public DateTime FromDate { get; set; }
+        [Required(ErrorMessage = "To Date  is required")]
+        public DateTime ToDate { get; set; }
+
+    }
+}
+

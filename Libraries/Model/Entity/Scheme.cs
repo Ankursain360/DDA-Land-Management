@@ -11,16 +11,20 @@ namespace Libraries.Model.Entity
     {
         public Scheme()
         {
+            Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
             Proposaldetails = new HashSet<Proposaldetails>();
         }
+
+     
         public string Name { get; set; }
         public string Code { get; set; }
         public DateTime? SchemeDate { get; set; }
         public string FileNo { get; set; }
         public string Description { get; set; }
         public byte IsActive { get; set; }
+       
 
+        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
         public ICollection<Proposaldetails> Proposaldetails { get; set; }
-
     }
 }

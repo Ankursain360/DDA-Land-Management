@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Mvc;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+using System.Data;
+using Newtonsoft.Json;
+using Utility.Helper;
+using System.Collections.Generic;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -25,6 +26,8 @@ namespace AcquiredLandInformationManagement.Controllers
             _acquiredlandvillageService = acquiredlandvillageService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 
@@ -41,7 +44,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Acquiredlandvillage acquiredlandvillage = new Acquiredlandvillage();
@@ -55,6 +58,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Acquiredlandvillage acquiredlandvillage)
         {
             try
@@ -93,7 +97,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
@@ -110,6 +114,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Acquiredlandvillage acquiredlandvillage)
         {
             if (ModelState.IsValid)
@@ -141,6 +146,8 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             try
@@ -164,6 +171,8 @@ namespace AcquiredLandInformationManagement.Controllers
             return View("Index", list);
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);

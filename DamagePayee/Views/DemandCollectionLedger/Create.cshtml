@@ -1,42 +1,23 @@
-﻿@await Component.InvokeAsync("PageHeader", new { pageName = "Demand & Collection Ledger" })
+﻿@*@await Component.InvokeAsync("PageHeader", new { pageName = "Demand & Collection Ledger" })
 
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    @{
+        ViewData["Title"] = "Create";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
 
 
 
-<div class="pt-3">
+    <div class="pt-3">
 
-    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+            <h3 class="mb-3 d-flex">Search</h3>
 
-        <div class="row">
-            <div class="col-md-2">
-                <div class="form-check theme">
-                    <input class="form-check-input" type="radio" name="grpSearch" id="rdbPayeename" value="" checked="checked">
-                    <label class="form-check-label" for="radio">
-                        Search by Payee Name
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option value="">Select</option>
-                        <option>payee</option>
-                    </select>
-                    <label class="floating-label">Payee Name  </label>
-                </div>
-            </div>
-
-     
+            <div class="row">
                 <div class="col-md-2">
                     <div class="form-check theme">
-                        <input class="form-check-input" type="radio" name="grpSearch" id="rdbFilename">
+                        <input class="form-check-input" type="radio" name="grpSearch" id="rdbPayeename" value="" checked="checked">
                         <label class="form-check-label" for="radio">
-                            Search by File Name
+                            Search by Payee Name
                         </label>
                     </div>
                 </div>
@@ -44,211 +25,312 @@
                     <div class="floating-label-wrap">
                         <select class="floating-label-field floating-label-field--s3">
                             <option value="">Select</option>
-                            <option>File</option>
+                            <option>payee</option>
                         </select>
-                        <label class="floating-label">File No  </label>
-                    </div>
-                </div>
-            </div>
-        
-        <br />
-        <div id="DivForPayeeName">
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Property/House/Municipal No." type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Property/House/Municipal No. </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Locality Name(Village)" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Locality Name(Village) </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Floor No (if purchased floor wise)" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Floor No (if purchased floor wise) </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Road/Street Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Road/Street Name </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Pincode" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Pincode </label>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Zone </label>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-md-3">
-                <div class="col-md-6">
-                    <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input placeholder="Name" type="text"
-                               class="floating-label-field floating-label-field--s3" />
-                        <span class="d-block text-danger field-validation-valid"></span>
-                        <label class="floating-label"> Plot Area in sq.yds </label>
+                        <label class="floating-label">Payee Name  </label>
                     </div>
                 </div>
 
+
+                    <div class="col-md-2">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" name="grpSearch" id="rdbFilename">
+                            <label class="form-check-label" for="radio">
+                                Search by File Name
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="floating-label-wrap">
+                            <select class="floating-label-field floating-label-field--s3">
+                                <option value="">Select</option>
+                                <option>File</option>
+                            </select>
+                            <label class="floating-label">File No  </label>
+                        </div>
+                    </div>
+                </div>
+
+            <br />
+            <div id="DivForPayeeName">
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Property/House/Municipal No." type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Property/House/Municipal No. </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Locality Name(Village)" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Locality Name(Village) </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Floor No (if purchased floor wise)" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Floor No (if purchased floor wise) </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Road/Street Name" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Road/Street Name </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Pincode" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Pincode </label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Name" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Zone </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-md-3">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap mb-3 mb-md-0">
+                            <input placeholder="Name" type="text"
+                                   class="floating-label-field floating-label-field--s3" />
+                            <span class="d-block text-danger field-validation-valid"></span>
+                            <label class="floating-label"> Plot Area in sq.yds </label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row mt-md-3">
+                <div class="col-md-12 ">
+                    <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
+                    <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div class="table-section bg-white border shadow rounded">
+            <div class="short-section d-md-flex align-items-center">
+                <div class="p-3 d-flex align-items-end mr-auto">
+                    <div class="floating-label-wrap">
+                        <select class="floating-label-field floating-label-field--s3">
+                            <option selected="selected" disabled="disabled">Select One</option>
+                            <option>Demand Date</option>
+                            <option>Demand Amount</option>
+
+                        </select>
+                        <label for="field-1" class="floating-label">Sort by</label>
+                    </div>
+                    <div class="short-btn d-flex align-items-center">
+                        <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
+                        <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    </div>
+                </div>
+
+
+                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                    <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                        <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                        <small>Download</small>
+                    </a>
+                </div>
+            </div>
+            <div class="table-responsive px-2">
+                <table id="mytable" class="table table-sm table-bordered mb-0 table-striped">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th></th>
+                            <th>Demand Date</th>
+                            <th>Demand Amount</th>
+
+                        </tr>
+
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <th style="cursor:pointer" onclick="showcollection();">
+                                <b>+</b>
+                            </th>
+                            <td>  </td>
+                            <td>  </td>
+
+                        </tr>
+                        <tr>
+                            <th style="cursor:pointer" onclick="showcollection();">
+                                <b>+</b>
+
+                            </th>
+                            <td>  </td>
+                            <td>  </td>
+
+                        </tr>
+                    </tbody>
+                    <thead class="thead" id="showcollection" style="display:none">
+                        <tr>
+
+                            <th>Collection Date</th>
+                            <th>Collection Amount</th>
+                            <th>Pay type</th>
+
+                        </tr>
+                    </thead>
+                    <tbody style="display:none" id="showtr">
+                        <tr>
+
+                            <td>02-02-2020</td>
+                            <td>50000</td>
+                            <td>Damage Amount</td>
+
+                        </tr>
+
+
+                        <tr>
+                            <td></td>
+                            <td>03-02-2020</td>
+                            <td>20000</td>
+
+
+                        </tr>
+                    </tbody>
+
+                </table>
+                <br /><br />
+            </div>
+        </div>
+
+
+    </div>
+
+    <script>
+        function showcollection() {
+            $("#showcollection").toggle();
+            $("#showtr").toggle();
+
+        }
+    </script>
+
+
+    <script>
+        $(function () {
+            $("input[name='grpSearch']").click(function () {
+                if ($("#rdbPayeename").is(":checked")) {
+                    $("#DivForPayeeName").show();
+                } else {
+                    $("#DivForPayeeName").hide();
+                }
+            });
+        });
+    </script>*@
+
+@*@model Libraries.Model.Entity.Demandletters*@
+@model Dto.Master.DemandCollectionLedgerReportDtoProfile
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Demand & Collection Ledger" })
+    <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Details</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="FileNo" asp-items="@(new SelectList( @ViewBag.FileNoList, "FileNo","FileNo"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label asp-validation-for="FileNo" class="error"></label>
+                    <label class="floating-label" asp-for="FileNo">File No.</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList( @ViewBag.LocalityList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label asp-validation-for="LocalityId" class="error"></label>
+                    <label class="floating-label" asp-for="LocalityId">Locality</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PropertyNo" asp-items="@(new SelectList( @ViewBag.PropertyNo, "PropertyNo","PropertyNo"))">
+                        <option value="0">All</option>
+                    </select>
+                    <label asp-validation-for="PropertyNo" class="error"></label>
+                    <label class="floating-label" asp-for="PropertyNo">Property No.</label>
+                </div>
             </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-12 ">
-                <input type="button" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                <input type="button" value="Refresh" onclick="location.reload(true);" class="btn btn-theme" />
-
-            </div>
-        </div>
-
-
-    </div>
-
-
-    <div class="table-section bg-white border shadow rounded">
-        <div class="short-section d-md-flex align-items-center">
-            <div class="p-3 d-flex align-items-end mr-auto">
-                <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Demand Date</option>
-                        <option>Demand Amount</option>
-
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
-                </div>
-                <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                    </div>
                 </div>
             </div>
-
-
-            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                @*<a href="/Zone/create" class="d-flex align-items-center btn btn-primary mr-2">
-                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                        <small>Add More</small>
-                    </a>*@
-                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                    <small>Download</small>
-                </a>
-            </div>
-        </div>
-        <div class="table-responsive px-2">
-            @*<div id="LoadReportView">
-
-                </div>*@
-            <table id="mytable" class="table table-sm table-bordered mb-0 table-striped">
-                <thead class="text-nowrap">
-
-                    <tr>
-                        <th></th>
-                        <th>Demand Date</th>
-                        <th>Demand Amount</th>
-
-                    </tr>
-
-                </thead>
-                <tbody>
-
-                    <tr>
-                        <th style="cursor:pointer" onclick="showcollection();">
-                            <b>+</b>
-                        </th>
-                        <td>  </td>
-                        <td>  </td>
-
-                    </tr>
-                    <tr>
-                        <th style="cursor:pointer" onclick="showcollection();">
-                            <b>+</b>
-
-                        </th>
-                        <td>  </td>
-                        <td>  </td>
-
-                    </tr>
-                </tbody>
-                <thead class="thead" id="showcollection" style="display:none">
-                    <tr>
-
-                        <th>Collection Date</th>
-                        <th>Collection Amount</th>
-                        <th>Pay type</th>
-
-                    </tr>
-                </thead>
-                <tbody style="display:none" id="showtr">
-                    <tr>
-
-                        <td>02-02-2020</td>
-                        <td>50000</td>
-                        <td>Damage Amount</td>
-
-                    </tr>
-
-
-                    <tr>
-                        <td></td>
-                        <td>03-02-2020</td>
-                        <td>20000</td>
-
-
-                    </tr>
-                </tbody>
-
-            </table>
-            <br /><br />
         </div>
     </div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" value="FileNo">File No.</option>
+                    <option value="Locality">Locality</option>
+                    <option value="PropertyNo">Property No.</option>
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+            </div>
+        </div>
 
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
 
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="LoadReportView">
+
+    </div>
 </div>
 
-<script>
-    function showcollection() {
-        $("#showcollection").toggle();
-        $("#showtr").toggle();
-
-    }
-</script>
-
-
-<script>
-    $(function () {
-        $("input[name='grpSearch']").click(function () {
-            if ($("#rdbPayeename").is(":checked")) {
-                $("#DivForPayeeName").show();
-            } else {
-                $("#DivForPayeeName").hide();
-            }
-        });
-    });
-</script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/demandcollectionledgercreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/demandcollectionledgercreate.js" asp-append-version="true"></script>
+</environment>

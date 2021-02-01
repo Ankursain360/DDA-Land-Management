@@ -1,13 +1,15 @@
-﻿using Dto.Search;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -20,6 +22,8 @@ namespace SiteMaster.Controllers
         {
             _actionsService = actionsService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -31,6 +35,10 @@ namespace SiteMaster.Controllers
             var result = await _actionsService.GetPagedActions(model);
             return PartialView("_List", result);
         }
+
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public IActionResult Create()
         {
             return View();
@@ -38,6 +46,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Actions actions)
         {
             try
@@ -72,6 +81,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _actionsService.FetchSingleResult(id);
@@ -84,6 +95,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Actions actions)
         {
             if (ModelState.IsValid)
@@ -128,21 +140,23 @@ namespace SiteMaster.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  //Not in use
         {
-            if (id == 0)
+            
+            var result = await _actionsService.Delete(id);
+            if (result == true)
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                var result1 = await _actionsService.GetAllActions();
+                return View("Index", result1);
             }
-
-            var form = await _actionsService.Delete(id);
-            if (form == false)
+            else
             {
-                return NotFound();
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                var result1 = await _actionsService.GetAllActions();
+                return View("Index", result1);
             }
-
-            ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-            return View(form);
         }
 
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
@@ -164,6 +178,7 @@ namespace SiteMaster.Controllers
 
         }
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _actionsService.FetchSingleResult(id);

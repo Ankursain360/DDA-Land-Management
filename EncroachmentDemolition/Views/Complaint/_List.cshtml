@@ -3,17 +3,17 @@
 
 <table class="table table-sm table-bordered mb-0 table-striped">
 
-
     <thead class="text-nowrap">
         <tr>
             <th>Sr.No</th>
-
+            <th>Reference No</th>
             <th>Complaint Name</th>
             <th>Contact No</th>
-            <th>Area/Address</th>
+            <th>Email</th>
+            @*<th>Area/Address</th>
             <th>Complaint Type</th>
-            <th>Location</th>
-            <th>Reference No</th>
+            <th>Location</th>*@
+
             <th>Approve Status</th>
             <th>Status</th>
             <th>Operation</th>
@@ -24,13 +24,15 @@
         {
         <tr>
             <td>@(rowNo += 1)</td>
+            <td>@item.ReferenceNo</td>
             <td>@item.Name</td>
             <td>@item.Contact</td>
-            <td>@item.AddressOfComplaint</td>
+            <td>@item.Email</td>
+            @*<td>@item.AddressOfComplaint</td>
             <td>@item.ComplaintType.Name</td>
 
-            <td>@item.Location.Name</td>
-            <td>@item.ReferenceNo</td>
+            <td>@item.Location.Name</td>*@
+
             <td>
                 @if (item.ApprovedStatus == 0)
                 {
@@ -47,7 +49,7 @@
                 }
 
             </td>
-         
+
             <td>
                 @if (item.IsActive == 1)
                 {
@@ -61,8 +63,11 @@
             <td>
                 <div class="action-btns">
                     <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" title="Approval" class="edit"><i class="ri-edit-line"></i> </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                    @if (item.ApprovedStatus == 1)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="Approval" class="edit"><i class="ri-edit-line"></i> </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')">  <i class="ri-delete-bin-5-fill"></i></a>
+                    }
                 </div>
             </td>
 

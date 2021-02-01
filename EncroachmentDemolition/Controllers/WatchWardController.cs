@@ -15,7 +15,8 @@ using Dto.Search;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class WatchWardController : BaseController
@@ -38,6 +39,8 @@ namespace EncroachmentDemolition.Controllers
             _approvalproccessService = approvalproccessService;
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -50,6 +53,8 @@ namespace EncroachmentDemolition.Controllers
             return PartialView("_List", result);
         }
 
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Watchandward watchandward = new Watchandward();
@@ -59,7 +64,10 @@ namespace EncroachmentDemolition.Controllers
             watchandward.PrimaryListNoList = await _watchandwardService.GetAllPrimaryList();
             return View(watchandward);
         }
+
+
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Watchandward watchandward)
         {
             watchandward.LocalityList = await _watchandwardService.GetAllLocality();
@@ -136,6 +144,7 @@ namespace EncroachmentDemolition.Controllers
                             {
                                 watchandward.ApprovedStatus = 0;
                                 watchandward.PendingAt = Convert.ToInt32(DataFlow[i].parameterName);
+                                watchandward.ModifiedBy = SiteContext.UserId;
                                 result = await _watchandwardService.UpdateBeforeApproval(watchandward.Id, watchandward);  //Update Table details 
                                 if (result)
                                 {
@@ -180,6 +189,8 @@ namespace EncroachmentDemolition.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             //  Watchandwardphotofiledetails watchandwardphotofiledetails = new Watchandwardphotofiledetails();
@@ -210,6 +221,8 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
         [HttpPost]
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Watchandward watchandward)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
@@ -339,7 +352,7 @@ namespace EncroachmentDemolition.Controllers
 
         }
 
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _watchandwardService.FetchSingleResult(id);
@@ -353,6 +366,8 @@ namespace EncroachmentDemolition.Controllers
             return View(Data);
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _watchandwardService.Delete(id);
@@ -520,7 +535,7 @@ namespace EncroachmentDemolition.Controllers
         #region Fetch workflow data for approval prrocess Added by Renu 26 Nov 2020
         private async Task<List<TemplateStructure>> dataAsync()
         {
-            var Data = await _workflowtemplateService.FetchSingleResult(2);
+            var Data = await _workflowtemplateService.FetchSingleResult(Convert.ToInt32(_configuration.GetSection("workflowPreccessId").Value));
             var template = Data.Template;
             List<TemplateStructure> ObjList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<TemplateStructure>>(template);
             return ObjList;

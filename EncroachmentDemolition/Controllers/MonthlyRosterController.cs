@@ -10,7 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-
+using EncroachmentDemolition.Filters;
+using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class MonthlyRosterController : BaseController
@@ -20,11 +21,14 @@ namespace EncroachmentDemolition.Controllers
         {
             _monthlyRosterService = monthlyRosterService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             return View();
         }
 
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             MonthlyRoaster model = new MonthlyRoaster();
@@ -34,6 +38,9 @@ namespace EncroachmentDemolition.Controllers
             model.MonthList = await GetMonthsList();
             return View(model);
         }
+
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             MonthlyRoaster model = new MonthlyRoaster();
@@ -48,6 +55,7 @@ namespace EncroachmentDemolition.Controllers
             return View(model);
         }
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create([FromBody] MonthlyRoasterDto monthlyRoasterDto)
         {
             MonthlyRoaster model = new MonthlyRoaster();

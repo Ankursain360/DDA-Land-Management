@@ -22,7 +22,7 @@
                         </button>
                     </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme " type="submit" id="btnSearch">Submit</button>
+                        <button class="btn btn-theme " type="submit" id="btnSearch">Search</button>
                     </div>
                 </div>
             </div>
@@ -34,18 +34,14 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort"class="floating-label-field floating-label-field--s3">
-                        <option value="0" >Select One</option>
                         <option value="Item">Items</option>
-
                         <option value="Status">Status</option>
-
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                     <button id="btndescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></button>
-                    <button id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button>
-
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
 

@@ -14,12 +14,12 @@ namespace Libraries.Model.Entity
         {
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Userprofile = new HashSet<Userprofile>();
-            Damagepayeeregistertemp = new HashSet<Damagepayeeregistertemp>();
+          
         }
-        [Required(ErrorMessage = "District name is required")]
+        [Required(ErrorMessage = "District name is Mandatory")]
         [Remote(action: "Exist", controller: "Department", AdditionalFields = "Id")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "District code is Mandatory Field")]
+        [Required(ErrorMessage = "District code is Mandatory ")]
 
         public string Code { get; set; }
         [Required]
@@ -28,7 +28,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Userprofile> Userprofile { get; set; }
         public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
-        public ICollection<Damagepayeeregistertemp> Damagepayeeregistertemp { get; set; }
+       
 
     }
 }

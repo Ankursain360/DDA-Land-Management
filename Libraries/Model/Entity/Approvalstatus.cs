@@ -8,7 +8,7 @@ namespace Libraries.Model.Entity
 {
     public class Approvalstatus : AuditableEntity<int>
     {
-        [Required(ErrorMessage = "The Approval Status field is required")]
+        [Required(ErrorMessage = "Approval Status is mandatory")]
         public string Name { get; set; }
         public int IsActive { get; set; }
     }

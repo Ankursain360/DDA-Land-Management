@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Damagepayeeregistertemp>
+﻿@model IEnumerable<Libraries.Model.Entity.Damagepayeeregister>
 @await Component.InvokeAsync("PageHeader", new { pageName = "Damage Payee Register" })
 <div class="pt-3">
     @*<form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -31,21 +31,19 @@
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>File No.</option>
-                        <option>Type of Damage Assessee</option>
-                        <option>Property/House/Municipal No.</option>
-                        <option>Locality</option>
-                        <option>Whether present occupant's is/are damage payee in DDA record</option>
-                        <option>Submitted On</option>
-                        <option>Status</option>
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="FileNo">File No</option>
+                        <option value="TypeOfAssessee">Type Of Damage Assessee</option>
+                        <option value="PropertyNo">Property No</option>
+                        <option value="Locality">Locality</option>
+                        <option value="IsDdadamagePayee">Is Dda damage Payee</option>
+                        <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">

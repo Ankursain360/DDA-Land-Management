@@ -1,30 +1,16 @@
 ﻿@model Libraries.Model.Entity.EncroachmentRegisteration
-@*<div class="row">
-        <div class="col-sm-12">
-            <div class="dda-topheading">
-                <div class="col-md-12">
-                    <h6 class="pull-left color-white" style="margin-top:5px;">Inspection/Encroachment Register Period Report</h6>
-                    <i class="glyphicon glyphicon-arrow-right pull-right" aria-hidden="true" style="padding-top:4px;"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <br />
-    <br />*@
-
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Inspection/Encroachment Register Period Report" })
-
 
 <div class="pt-3">
     <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Details</h3>
         <div class="row pt-3">
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-
-                    <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
-                        <option value="">Select</option>
+                    <select asp-for="DepartmentId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Department" asp-items="@(new SelectList(Model.DepartmentList,"Id","Name"))" onchange="return onChangeDepartment(this.options[this.selectedIndex].value);">
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="DepartmentId" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">Department</label>
@@ -33,8 +19,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
-                        <option value="value">Select</option>
+                    <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Zone" asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" onchange="return onChangeZone(this.options[this.selectedIndex].value)">
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="ZoneId" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">Zone</label>
@@ -45,11 +31,12 @@
 
 
         <div class="row pt-3">
+           
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select asp-for="DivisionId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
-                        <option value="value">Select</option>
+                    <select asp-for="DivisionId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Division" asp-items="@(new SelectList(Model.DivisionList,"Id","Name"))" onchange="return onChangeDivision(this.options[this.selectedIndex].value)">
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="DivisionId" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">Division</label>
@@ -58,8 +45,8 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
-                        <option value="value">Select</option>
+                    <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3" required="required" requiredMsg="Please Select Locality" asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                        <option value="0">All</option>
                     </select>
                     <span asp-validation-for="LocalityId" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">Locality(Village) Name</label>
@@ -74,7 +61,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="EncrochmentDate" type="date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="EncrochmentDate" type="date" value="" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="EncrochmentDate" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">From Date</label>
                 </div>
@@ -84,7 +71,7 @@
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
 
-                    <input asp-for="EncrochmentDate" type="date" id="txtToDate" class="floating-label-field floating-label-field--s3" />
+                    <input asp-for="EncrochmentDate" type="date" id="txtToDate" value="" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="EncrochmentDate" class="d-block text-danger field-validation-valid"></span>
                     <label class="floating-label">To Date</label>
                 </div>
@@ -95,64 +82,69 @@
 
 
         <div class="row mt-md-3">
-            <div class="col-md-12 ">
-                <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
-                @*@Html.ActionLink("Back", "Index", "RestoreLandReport", null, new { @class = "btn btn-primary dda-pageheading" })*@
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme" />
+
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-        <div class="table-section bg-white border shadow rounded">
-            <div class="short-section d-md-flex align-items-center">
-                <div class="p-3 d-flex align-items-end mr-auto">
-                    <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3">
-                            <option selected="selected" disabled="disabled">Select One</option>
-                            <option>Department</option>
-                            <option>Zone</option>
-                            <option>Division</option>
-                            <option>Locality</option>
-                            <option>From Date</option>
-                            <option>To Date</option>
-                        </select>
-                        <label for="field-1" class="floating-label">Sort by</label>
-                    </div>
-                    <div class="short-btn d-flex align-items-center">
-                        <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                        <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                    </div>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="Department">Department</option>
+                        <option value="Zone">Zone</option>
+                        <option value="Division">Division</option>
+                        <option value="Locality"> Locality(Village)</option>
+                        <option value="KhasraNo">Khasra No</option>
+                        <option value="Date">Date</option>
+                    </select>
+
+                    <label for="field-1" class="floating-label">Sort by</label>
                 </div>
-
-
-                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                    @*<a href="/Zone/create" class="d-flex align-items-center btn btn-primary mr-2">
-                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                        <small>Add More</small>
-                    </a>*@
-                    <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
-                        <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                        <small>Download</small>
-                    </a>
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
-            <div class="table-responsive px-2">
-                <div id="LoadReportView">
 
-                </div>
+
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
             </div>
         </div>
-      
-    </div>
+        <div class="table-responsive px-2">
+            <div id="LoadReportView">
 
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-   
+
 
     <script src="~/js/inspectionencroachmentregisterperiodreport.js"></script>
 </environment>
 <environment exclude="Development">
-    
+
 
     <script src="~/js/inspectionencroachmentregisterperiodreport.min.js" asp-append-version="true"></script>
 </environment>

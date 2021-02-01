@@ -14,6 +14,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
+using SiteMaster.Filters;
+using Core.Enum;
 
 namespace SiteMaster.Controllers
 {
@@ -26,22 +28,30 @@ namespace SiteMaster.Controllers
         {
             _rebateService = rebateService;
         }
-        public async Task<IActionResult> Index()
-        {
-            var result = await _rebateService.GetAllRebate();
-            return View(result);
-        }
-        //public IActionResult Index()
+        [AuthorizeContext(ViewAction.View)]
+        //public async Task<IActionResult> Index()
         //{
-        //    return View();
+        //    var result = await _rebateService.GetAllRebate();
+        //    return View(result);
         //}
 
+
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         [HttpPost]
+       
         public async Task<PartialViewResult> List([FromBody] RebateSearchDto model)
         {
             var result = await _rebateService.GetPagedRebate(model);
             return PartialView("_List", result);
         }
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Rebate rebate = new Rebate();
@@ -51,6 +61,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Rebate rebate)
         {
             try
@@ -58,6 +69,11 @@ namespace SiteMaster.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    if(rebate.ToDate <= rebate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rebate);
+                    }
                     if (rebate.IsRebateOn == 0)
                         rebate.IsRebateOn = 0;
                     else if (rebate.IsRebateOn == 1)
@@ -82,6 +98,7 @@ namespace SiteMaster.Controllers
                 }
                 else
                 {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(rebate);
                 }
             }
@@ -91,7 +108,7 @@ namespace SiteMaster.Controllers
                 return View(rebate);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _rebateService.FetchSingleResult(id);
@@ -104,12 +121,24 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Rebate rebate)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (rebate.ToDate <= rebate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rebate);
+                    }
+                    if (rebate.IsRebateOn == 0)
+                        rebate.IsRebateOn = 0;
+                    else if (rebate.IsRebateOn == 1)
+                        rebate.IsRebateOn = 1;
+                    else if (rebate.IsRebateOn == 2)
+                        rebate.IsRebateOn = 2;
                     var result = await _rebateService.Update(id, rebate);
                     if (result == true)
                     {
@@ -131,8 +160,8 @@ namespace SiteMaster.Controllers
             }
             return View(rebate);
         }
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _rebateService.Delete(id);
@@ -151,6 +180,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _rebateService.FetchSingleResult(id);

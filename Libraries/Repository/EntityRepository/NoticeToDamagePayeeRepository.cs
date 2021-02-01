@@ -28,29 +28,90 @@ namespace Libraries.Repository.EntityRepository
             try
             {
                 var data = await _dbContext.Noticetodamagepayee
-                    .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                    && x.CreatedDate >= model.FromDate
-                    && x.CreatedDate <= model.ToDate)
-                    .OrderByDescending(x => x.Id)
+                                 .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                 && x.CreatedDate >= model.FromDate
+                                 && x.CreatedDate <= model.ToDate)
+                                .GetPaged(model.PageNumber, model.PageSize);
 
-                    .GetPaged(model.PageNumber, model.PageSize);
+                int SortOrder = (int)model.SortOrder;
+                if (SortOrder == 1)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
 
-                //var data = await _dbContext.Noticetodamagepayee
-                //    .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
-                //    && x.CreatedDate >= model.FromDate
-                //    && x.CreatedDate <= model.ToDate)
-                //    //.OrderByDescending(x => x.Id)
-                //    .GroupBy(x => x.FileNo).Select(s => new
-                //    {
-                //        FileNo = s.Key,
-                //        count = s.Count()
-                //    })
-                //    .GetPaged(model.PageNumber, model.PageSize);
+                        case ("FILENO"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.FileNo)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.Name)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+                        case ("PROPERTYNO"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderBy(s => s.PropertyDetails)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+                       
+
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.SortBy.ToUpper())
+                    {
+
+                        case ("FILENO"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.FileNo)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+                        case ("NAME"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.Name)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+                        case ("PROPERTYNO"):
+                            data = null;
+                            data = await _dbContext.Noticetodamagepayee
+                                          .Where(x => x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)
+                                          && x.CreatedDate >= model.FromDate
+                                          && x.CreatedDate <= model.ToDate)
+                                          .OrderByDescending(s => s.PropertyDetails)
+                                          .GetPaged(model.PageNumber, model.PageSize);
+                            break;
+
+
+
+                    }
+                }
 
                 return data;
-                //return _context.Sates.Where(a => a.Id == id)
-                //                        .GroupBy(a => a.State)
-                //                        .Select(n => new { n.StateId, n.Count() });
+   
             }
             catch (System.Exception ex)
             {
@@ -59,20 +120,7 @@ namespace Libraries.Repository.EntityRepository
             }
 
         }
-        //public async Task<List<Damagepayeeregistertemp>> Getpersonelinfotemp(int Id)
-        //{
-        //    return await _dbContext.Damagepayeeregistertemp.Include(x => x.Damagepayeepersonelinfotemp).Where(x => x.Id == Id).ToListAsync();
-        //}
-
-        //public async Task<List<Damagepayeeregistertemp>> GetAllDamagepayeeregister(string fileNo)
-        //{
-        //    return await _dbContext.Damagepayeeregistertemp.Where(x => x.FileNo == fileNo && x.IsActive == 1).ToListAsync();
-
-        //}
-        //public async Task<List<Noticetodamagepayee>> GetSingleData()
-        //{
-        //    return await _dbContext.Noticetodamagepayee.Where(x => x.IsActive == 1).FirstOrDefaultAsync();
-        //}
+      
 
 
         public async Task<List<Noticetodamagepayee>> GetAllNoticetoDamagePayee()
@@ -81,7 +129,139 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Noticetodamagepayee>> GetPagedNoticetodamagepayee(NoticetodamagepayeeSearchDto model)
         {
-            return await _dbContext.Noticetodamagepayee.OrderByDescending(x => x.Id).GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                        && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  )
+                 .
+
+                     GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderBy(s => s.FileNo)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderBy(s => s.Name)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("ADDRESS"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderBy(s => s.Address)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("AREA"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderBy(s => s.Area)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderByDescending(s => s.FileNo)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderByDescending(s => s.Name)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("ADDRESS"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderByDescending(s => s.Address)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("AREA"):
+                        data = null;
+                        data = await _dbContext.Noticetodamagepayee
+                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                   && (string.IsNullOrEmpty(model.address) || x.Address.Contains(model.address))
+                    && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                     && (string.IsNullOrEmpty(model.area) || x.Area.Contains(model.area))
+                    && (x.IsActive == 1)
+                  ).OrderByDescending(s => s.Area)
+                                .GetPaged<Noticetodamagepayee>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                }
+            }
+
+
+
+
+
+
+        
+            return data;
         }
 
     }

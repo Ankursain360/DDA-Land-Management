@@ -1,24 +1,6 @@
-﻿@model Dto.Master.AddUserDto
+﻿@model Libraries.Model.Entity.Datastoragedetails
 @await Component.InvokeAsync("PageHeader", new { pageName = "Data Storage Details" })
-
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
-
-
-
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
 <div class="pt-3">
-
-
-
-
     <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
 
@@ -27,6 +9,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label class="radio-inline">
+                    <input type="hidden" asp-for="IsFileDocument" id="IsFileDocument" value="0" />
                     <input type="radio" name="grpSearchby" id="rdbFilename" value="" checked="checked" />File
                 </label>
                 <label class="radio-inline">
@@ -46,30 +29,38 @@
 
                     <div class="col-md-1">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Cat." />
-                            <label class="floating-label">Cat.   </label>
+                            <input asp-for="CategoryNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                   limit="10">
+                            <span asp-validation-for="CategoryNo" class="text-danger "></span>
+                            <label class="floating-label">CategoryNo</label>
                         </div>
                     </div>
 
                     <div class="col-md-1">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Header" />
-                            <label class="floating-label">Header</label>
+                            <input asp-for="HeaderNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                   limit="10">
+                            <span asp-validation-for="HeaderNo" class="text-danger "></span>
+                            <label class="floating-label">Header No</label>
                         </div>
                     </div>
 
 
                     <div class="col-md-2">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Sequence No" />
+                            <input asp-for="SequenceNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                   limit="10">
+                            <span asp-validation-for="SequenceNo" class="text-danger "></span>
                             <label class="floating-label">Sequence No</label>
                         </div>
                     </div>
 
                     <div class="col-md-1">
                         <div class="floating-label-wrap mb-3 mb-md-0">
-                            <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Year" />
-                            <label class="floating-label">Year</label>
+                            <input asp-for="Year" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                   limit="10">
+                            <span asp-validation-for="Year" class="text-danger "></span>
+                            <label class="floating-label">Year No</label>
                         </div>
                     </div>
                     <div class="col-md-1">
@@ -79,16 +70,15 @@
                         </div>
                     </div>
 
+
+
                     <div class="col-md-2">
                         <div class="floating-label-wrap">
 
-                            <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                <option value="0">--Select Scheme--</option>
-                                <option value="1">Scheme1</option>
-                                <option value="2">Scheme2</option>
-                                <option value="3">Scheme3</option>
-                                <option value="4">Scheme4</option>
-                                <option value="5">Scheme5</option>
+                            <select asp-for="SchemeId" class="floating-label-field floating-label-field--s3"
+                                    asp-items="@(new SelectList(Model.schemaList,"Id","Name"))">
+                                <option value="">---Select---</option>
+
                             </select>
                             <label class="floating-label">Scheme </label>
                         </div>
@@ -97,10 +87,9 @@
                     <div class="col-md-2">
                         <div class="floating-label-wrap">
 
-                            <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                <option value="0">--Select Zone--</option>
-                                <option value="1">Gurgaon 61</option>
-                                <option value="2">Dwarika</option>
+                            <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3"
+                                    asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))">
+                                <option value="">---Select---</option>
 
                             </select>
                             <label class="floating-label">Zone </label>
@@ -110,61 +99,56 @@
                     <div class="col-md-2">
                         <div class="floating-label-wrap">
 
-                            <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                <option value="0">--Select--</option>
-                                <option value="1">Gurgaon 61</option>
-                                <option value="2">Locality</option>
-                                <option value="3">Locality</option>
-                                <option value="4">Locality</option>
-                                <option value="5">Locality</option>
+                            <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3"
+                                    asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                                <option value="">---Select---</option>
+
                             </select>
                             <label class="floating-label">Locality(Village) </label>
                         </div>
                     </div>
-
-
 
                 </div>
 
                 <div class="row mt-md-3">
 
 
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="floating-label-wrap mb-3 mb-md-0">
                             <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Name/Subject" />
                             <label class="floating-label">Name/Subject</label>
                         </div>
                     </div>
 
+                    <div class="col-md-3">
+                        <input type="hidden" asp-for="IsPartOfMainFile" id="TypeOfDamageAssessee" value="0" />
 
-                    <div class="form-group col-md-6">
-                        <br />
-                        <label class="control-label lb-sm">Is part of this main file?</label><span style="color:red">*</span>
-                        <label class="radio-inline">
-                            <input type="radio" name="grpMainFile" id="rSubsequent" checked>Yes
-                        </label>
-                        <label class="radio-inline">
-                            <input type="radio" name="grpMainFile" id="rOriginal">No
-                        </label>
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="IsPartOfMainFile" name="grpDamageAssesseeType" id="rOriginal" value="1" >
+                            <label class="form-check-label" for="radio">
+                                Yes
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="IsPartOfMainFile" name="grpDamageAssesseeType" id="rSubsequent" value="0" checked>
+                            <label class="form-check-label" for="radio">
+                               No
+                            </label>
+                        </div>
                     </div>
 
                 </div>
-
 
 
             </div>
         </div>
 
 
-        <div id="DivForSubsequentPurchaser">
+        <div id="DivForSubsequentPurchaser" style="display:none">
 
             <h3 class="mb-3 d-flex">File No</h3>
-
-
-
-
-
-
 
             <div class="table-section bg-white border shadow rounded">
 
@@ -184,39 +168,50 @@
                                 <th>Operation</th>
                             </tr>
                         </thead>
-                        <tbody id="tbl_file_body">
+                        <tbody id="tbl_posts_body">
                         </tbody>
-                        <tbody class="tbody" id="addDamageAssessee">
+                        <tbody class="tbody" id="add">
                             <tr>
-                                <td>1</td>
+                                <td style="text-align:center;"><span class="sn">1</span></td>
+
                                 <td>
-                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtCategoryName" />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" asp-for="Category" placeholder="Category" class="floating-label-field floating-label-field--s3"  />
+                                    </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtHeader" />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" asp-for="Header" placeholder="Header" class="floating-label-field floating-label-field--s3" />
+                                    </div>
                                 </td>
                                 <td>
-                                    <input type="number" class="floating-label-field floating-label-field--s3" id="txtNumber" />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" asp-for="SequenceNoForPartFile" placeholder="Sequence No" class="floating-label-field floating-label-field--s3"  />
+                                    </div>
                                 </td>
                                 <td>
-                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtDate" />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" asp-for="YearForPartFile" placeholder="Year No" class="floating-label-field floating-label-field--s3"  />
+                                    </div>
                                 </td>
                                 <td>
-                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="floating-label-field floating-label-field--s3">
-                                        <option value="1">DDA</option>
-                                        <option value="2">DDA2</option>
-                                        <option value="3">DDA3</option>
+                                    <select asp-for="SchemeDptBranch" class="floating-label-field floating-label-field--s3"
+                                            asp-items="@(new SelectList(Model.schemaList,"Id","Name"))">
+                                        <option value="">---Select---</option>
+
                                     </select>
                                 </td>
                                 <td>
-                                    <select style="height:30px; background-color: #dddddd;" id="ActiveStatus" required="" class="floating-label-field floating-label-field--s3">
-                                        <option value="1">LMTYPE</option>
-                                        <option value="2">Engineering</option>
-                                        <option value="3">Horticulture</option>
+                                    <select asp-for="LocalityIdForPartFile" class="floating-label-field floating-label-field--s3"
+                                            asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                                        <option value="">---Select---</option>
+
                                     </select>
                                 </td>
                                 <td>
-                                    <input type="text" class="floating-label-field floating-label-field--s3" id="txtSubject" />
+                                    <div class="floating-label-wrap mb-3 mb-md-0">
+                                        <input type="text" asp-for="Subject" placeholder="Subject" class="floating-label-field floating-label-field--s3" />
+                                    </div>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
@@ -224,10 +219,6 @@
                                         <a class="btn btn-theme add-record" data-added="0" style="color:white;"><i class="fa fa-plus"></i></a>
                                     </div>
                                 </td>
-
-
-
-                                
                             </tr>
 
                         </tbody>
@@ -240,32 +231,29 @@
 
 
         <div id="DivLocation">
-
-            <h3 class="mb-3 d-flex">Loaction(Village) Details</h3>
-
-
-
+            <h3 class="mb-3 d-flex">Location(Village) Details</h3>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Record Room No" />
-                        <label class="floating-label">Record Room No</label>
+                        <input asp-for="RecordRoomNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                               limit="50">
+                        <span asp-validation-for="RecordRoomNo" class="text-danger "></span>
+                        <label class="floating-label">RecordRoom No</label>
                     </div>
                 </div>
 
+
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
+                        <select asp-for="AlmirahId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.AlmirahList,"Id","AlmirahNo"))">
+                            <option value="">---Select---</option>
 
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Almirah--</option>
-                            <option value="1">Almirah</option>
-                            <option value="2">Almirah</option>
-                            <option value="3">Almirah</option>
-                            <option value="4">Almirah</option>
-                            <option value="5">Almirah</option>
                         </select>
-                        <label class="floating-label">Almirah No/Compactor No </label>
+                        <span asp-validation-for="AlmirahId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Almirah No<span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -278,31 +266,28 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
+                       <select class="floating-label-field floating-label-field--s3" asp-for="RowId" asp-items="@(new SelectList(Model.RowList, "Id","RowNo"))"  required="required" requiredmsg="Row No is Mandatory">
 
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Row No--</option>
-                            <option value="1">col1</option>
-                            <option value="2">col2</option>
-                            <option value="3">col3</option>
-                            <option value="4">col4</option>
-                            <option value="5">col5</option>
+                             
+                            <option value="">---Select---</option>
+
                         </select>
-                        <label class="floating-label">Row No</label>
+                        <span asp-validation-for="RowId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Row No<span style="color:red">*</span></label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
+                        <select asp-for="ColumnId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.ColumnList,"Id","ColumnNo"))" required="required" requiredmsg="Column No is Mandatory">
+                            <option value="">---Select---</option>
 
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Column No--</option>
-                            <option value="1">col1</option>
-                            <option value="2">col2</option>
-                            <option value="3">col3</option>
-                            <option value="4">col4</option>
-                            <option value="5">col5</option>
                         </select>
-                        <label class="floating-label">Column No</label>
+                        <span asp-validation-for="ColumnId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Column No<span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -314,17 +299,17 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Bundle No--</option>
-                            <option value="1">col1</option>
-                            <option value="2">col2</option>
-                            <option value="3">col3</option>
-                            <option value="4">col4</option>
-                            <option value="5">col5</option>
+                        <select asp-for="BundleId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.BundleList,"Id","BundleNo"))" required="required" requiredmsg="Bundle No is Mandatory">
+                            <option value="">---Select---</option>
+
                         </select>
-                        <label class="floating-label">Bundle No</label>
+                        <span asp-validation-for="BundleId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Bundle No<span style="color:red">*</span></label>
                     </div>
                 </div>
+
 
 
 
@@ -338,33 +323,29 @@
             <h3 class="mb-3 d-flex">Property/Khasra No</h3>
 
             <div class="row">
-
-
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Zone--</option>
-                            <option value="1">East</option>
-                            <option value="2">West</option>
-                            <option value="3">Central</option>
-                            <option value="4">North</option>
-                            <option value="5">South</option>
+                        <select asp-for="ZoneId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.ZoneList,"Id","Name"))" required="required" requiredmsg="Zone No is Mandatory">>
+                            <option value="">---Select---</option>
+
                         </select>
-                        <label class="floating-label">Zone</label>
+                        <span asp-validation-for="ZoneId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Zone No<span style="color:red">*</span></label>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
-                        <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                            <option value="0">--Select Locality--</option>
-                            <option value="1">Locality1</option>
-                            <option value="2">Locality2</option>
-                            <option value="3">Locality3</option>
-                            <option value="4">Locality4</option>
-                            <option value="5">Locality5</option>
+                        <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3"
+                                asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))" required="required" requiredmsg="Locality No is Mandatory">>
+                            <option value="">---Select---</option>
+
                         </select>
-                        <label class="floating-label">Locality(Village)</label>
+                        <span asp-validation-for="LocalityId" class="d-block text-danger field-validation-valid"></span>
+
+                        <label class="floating-label">Locality <span style="color:red">*</span></label>
                     </div>
                 </div>
 
@@ -377,44 +358,23 @@
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Khasra No/Property No" />
-                        <label class="floating-label">Khasra No/Property No</label>
+                        <input asp-for="KhasraNoPropertyNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                               limit="50">
+                        <span asp-validation-for="KhasraNoPropertyNo" class="text-danger "></span>
+                        <label class="floating-label"> KhasraNo Property No</label>
                     </div>
                 </div>
-
 
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Area" />
-                        <label class="floating-label">Area</label>
+                        <input asp-for="Area" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                               limit="50">
+                        <span asp-validation-for="Area" class="text-danger "></span>
+                        <label class="floating-label"> Area</label>
                     </div>
                 </div>
-
-
             </div>
-            @*<div class="form-row">
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Pocket</label><span style="color:red">*</span>
-                    <input type="text" required class="form-control" />
-                </div>
-                <div class="form-group col-md-6">
-                    <label class="control-label lb-sm">Flat/Plot No</label><span style="color:red">*</span>
-                    <input type="text" required class="form-control" />
-                </div>
-
-            </div>*@
-
-            @*</div>
-            </div>*@
         </div>
-
-        @*</div>
-        </div>*@
-
-
-        @*</div>*@
-
-
         <div class="container-fluid" id="DivForDocumentName" style="display:none">
             <div class="panel-group">
                 <div class="panel">
@@ -425,29 +385,37 @@
 
                         <div class="col-md-1">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Category" />
-                                <label class="floating-label">Category</label>
+                                <input asp-for="CategoryNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                       limit="50">
+                                <span asp-validation-for="CategoryNo" class="text-danger "></span>
+                                <label class="floating-label">CategoryNo</label>
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Header" />
-                                <label class="floating-label">Header</label>
+                                <input asp-for="HeaderNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                       limit="50">
+                                <span asp-validation-for="HeaderNo" class="text-danger "></span>
+                                <label class="floating-label">Header No</label>
                             </div>
                         </div>
 
 
                         <div class="col-md-2">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Sequence No" />
+                                <input asp-for="SequenceNo" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                       limit="50">
+                                <span asp-validation-for="SequenceNo" class="text-danger "></span>
                                 <label class="floating-label">Sequence No</label>
                             </div>
                         </div>
 
                         <div class="col-md-2">
                             <div class="floating-label-wrap mb-3 mb-md-0">
-                                <input type="text" class="floating-label-field floating-label-field--s3" placeholder="Year" />
+                                <input asp-for="Year" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                                       limit="50">
+                                <span asp-validation-for="Year" class="text-danger "></span>
                                 <label class="floating-label">Year</label>
                             </div>
                         </div>
@@ -463,14 +431,10 @@
 
                         <div class="col-md-2">
                             <div class="floating-label-wrap">
+                                <select asp-for="SchemeId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.schemaList,"Id","Name"))">
+                                    <option value="">---Select---</option>
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select Scheme--</option>
-                                    <option value="1">Scheme1</option>
-                                    <option value="2">Scheme2</option>
-                                    <option value="3">Scheme3</option>
-                                    <option value="4">Scheme4</option>
-                                    <option value="5">Scheme5</option>
                                 </select>
                                 <label class="floating-label">Scheme/Department/Branch </label>
                             </div>
@@ -478,11 +442,10 @@
                         <div class="col-md-2">
                             <div class="floating-label-wrap">
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select--</option>
-                                    <option value="1">Horticulture</option>
-                                    <option value="2">LandManagement</option>
-                                    <option value="3">Engineering</option>
+                                <select asp-for="LocalityId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
+                                    <option value="">---Select---</option>
+
                                 </select>
                                 <label class="floating-label">Locality(Village)</label>
                             </div>
@@ -518,40 +481,26 @@
                         <div class="col-md-6">
                             <div class="floating-label-wrap">
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select Almirah--</option>
-                                    <option value="1">Almirah</option>
-                                    <option value="2">Almirah</option>
-                                    <option value="3">Almirah</option>
-                                    <option value="4">Almirah</option>
-                                    <option value="5">Almirah</option>
+                                <select asp-for="AlmirahId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.AlmirahList,"Id","AlmirahNo"))">
+                                    <option value="">---Select---</option>
+
                                 </select>
-                                <label class="floating-label">Almirah No/Compactor No</label>
+                                <label class="floating-label">Almirah Id/Compactor No</label>
                             </div>
-
-
-
                         </div>
-
 
                     </div>
                     <div class="row mt-md-3">
                         <div class="col-md-6">
-
-
                             <div class="floating-label-wrap">
+                                <select asp-for="RowId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.RowList,"Id","RowNo"))">
+                                    <option value="">---Select---</option>
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select Row No--</option>
-                                    <option value="1">col1</option>
-                                    <option value="2">col2</option>
-                                    <option value="3">col3</option>
-                                    <option value="4">col4</option>
-                                    <option value="5">col5</option>
                                 </select>
-                                <label class="floating-label">Row No</label>
+                                <label class="floating-label">Row Id</label>
                             </div>
-
                         </div>
 
                         <div class="col-md-6">
@@ -559,35 +508,24 @@
 
                             <div class="floating-label-wrap">
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select Column No--</option>
-                                    <option value="1">col1</option>
-                                    <option value="2">col2</option>
-                                    <option value="3">col3</option>
-                                    <option value="4">col4</option>
-                                    <option value="5">col5</option>
+                                <select asp-for="ColumnId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.ColumnList,"Id","ColumnNo"))">
+                                    <option value="">---Select---</option>
+
                                 </select>
-                                <label class="floating-label">Column No</label>
+                                <label class="floating-label">Column Id</label>
                             </div>
-
                         </div>
-
-
-
-
                     </div>
                     <div class="row mt-md-3">
                         <div class="col-md-6">
 
                             <div class="floating-label-wrap">
 
-                                <select class="floating-label-field floating-label-field--s3" style="height:30px;">
-                                    <option value="0">--Select Bundle No--</option>
-                                    <option value="1">col1</option>
-                                    <option value="2">col2</option>
-                                    <option value="3">col3</option>
-                                    <option value="4">col4</option>
-                                    <option value="5">col5</option>
+                                <select asp-for="BundleId" class="floating-label-field floating-label-field--s3"
+                                        asp-items="@(new SelectList(Model.BundleList,"Id","BundleNo"))">
+                                    <option value="">---Select---</option>
+
                                 </select>
                                 <label class="floating-label">Bundle No</label>
                             </div>
@@ -595,12 +533,23 @@
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class=" col-md-6">
+                            <div class="floating-label-wrap">
+                                <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
 
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                                <label asp-for="IsActive" class="floating-label">Status </label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
-
+        
         <div class="row mt-md-3">
             <div class="col-md-12">
                 <input type="submit" value="Create" class="btn btn-theme" />
@@ -608,53 +557,13 @@
                 @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
             </div>
         </div>
-
-     
     </form>
-
-
 </div>
 
 
-
-<script>
-
-    $(function () {
-        $("input[name='grpSearchby']").click(function () {
-            if ($("#rdbFilename").is(":checked")) {
-                $("#DivForFileName").show();
-                $("#DivForDocumentName").hide();
-                $("#DivForGenerate").hide();
-            }
-            else if ($("#rdbDocumentname").is(":checked")) {
-                $("#DivForFileName").hide();
-                $("#DivForDocumentName").show();
-                $("#DivForGenerate").hide();
-            }
-            //else {
-            //    $("#DivForFileName").hide();
-            //    $("#DivForPayeeName").hide();
-            //}
-        });
-    });
-
-</script>
-
-<script>
-    $(function () {
-        $("input[name='grpMainFile']").click(function () {
-            if ($("#rSubsequent").is(":checked")) {
-                $("#DivForSubsequentPurchaser").show();
-            } else {
-                $("#DivForSubsequentPurchaser").hide();
-            }
-        });
-    });
-</script>
-@*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
-    </script>*@
-@*<script>
-            $(function() {
-                $("#date").datepicker({ dateFormat: 'yy' });
-             });
-    </script>*@
+<environment include="Development">
+    <script src="~/js/DataStoragecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/DataStoragecreate.min.js" asp-append-version="true"></script>
+</environment>

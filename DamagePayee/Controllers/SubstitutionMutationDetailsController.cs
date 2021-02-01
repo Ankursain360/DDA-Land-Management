@@ -18,6 +18,8 @@ using Microsoft.AspNetCore.Hosting;
 using Model.Entity;
 using Microsoft.AspNetCore.Http;
 using DamagePayee.Helper;
+using DamagePayee.Filters;
+using Core.Enum;
 
 namespace DamagePayee.Controllers
 {
@@ -28,20 +30,38 @@ namespace DamagePayee.Controllers
         private readonly IDamagepayeeregisterService _damagepayeeregisterService;
 
         string PropPhotofilePath = "";
-        string AtsfilePath = "";
-        string GPAfilePath = "";
-        string MoneyRecfilePath = "";
+        string AtsfilePath = "", ATSGPADocument ="", RecieptDocument="", AadharNoDocument="", PanNoDocument="";
+        string GPAfilePath = "" , PhotographPersonelDocument="", SignaturePersonelDocument="", PropertyPhotograph="";
+        string MoneyRecfilePath = "", ShowCauseNotice="", FGForm="", Bill="";
         string SignspcfilePath = "";
         string AddprooffilePath = "";
         string AffidevitfilePath = "";
         string IndemnityfilePath = "";
+        string deathCertificate = "";
+        string relationshipProof = "";
+        string affitDevitLegal = "";
+        string noObjectionCertificate = "";
+        string signatureOfSpec = "";
         public SubstitutionMutationDetailsController(IMutationDetailsService detailsService, IConfiguration configuration, IDamagepayeeregisterService damagePayeeReg)
         {
             _mutationDetailsService = detailsService;
             _configuration = configuration;
             _damagepayeeregisterService = damagePayeeReg;
-        }
+            AtsfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ATSFilePath").Value.ToString();
+            GPAfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:GPAFilePath").Value.ToString();
+            IndemnityfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:INDEMNITYFIRFilePath").Value.ToString();
+            AffidevitfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:AFFIDEVITFIRFilePath").Value.ToString();
+            AddprooffilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ADDPROOFFIRFilePath").Value.ToString();
+            SignspcfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:SIGNSPECFIRFilePath").Value.ToString();
+            MoneyRecfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:MONEYRECFilePath").Value.ToString();
+            deathCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:DeathCertificate").Value.ToString();
+            relationshipProof = _configuration.GetSection("FilePaths:MutationDetaliFiles:RelationshipProof").Value.ToString();
+            affitDevitLegal = _configuration.GetSection("FilePaths:MutationDetaliFiles:AffitdevitLegal").Value.ToString();
+            noObjectionCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:NoObjectionCertificate").Value.ToString();
+            signatureOfSpec = _configuration.GetSection("FilePaths:MutationDetaliFiles:SignatureOfSpecimen").Value.ToString();
 
+        }
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index1()
         {
             return View();
@@ -74,6 +94,9 @@ namespace DamagePayee.Controllers
         //    DamagePayeeRegister.LocalityList = await _mutationDetailsService.GetLocalityList();
         //    DamagePayeeRegister.DistrictList = await _mutationDetailsService.GetDistrictList();
         //}
+
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id)
         {
             Mutationdetailstemp mutationdetailstemp = new Mutationdetailstemp();
@@ -91,24 +114,16 @@ namespace DamagePayee.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(int id, Mutationdetailstemp mutationDetails)
         {
             var Data = await _damagepayeeregisterService.FetchSingleResult(id);
+            ViewBag.Locality = await _mutationDetailsService.GetLocalityList();
+            ViewBag.District = await _mutationDetailsService.GetDistrictList();
+            ViewBag.DamagePayeeId = mutationDetails.DamagePayeeRegisterId;
+            ViewBag.Id = (Data == null ? 0 : mutationDetails.Id);
 
-
-            AtsfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ATSFilePath").Value.ToString();
-            GPAfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:GPAFilePath").Value.ToString();
-            IndemnityfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:INDEMNITYFIRFilePath").Value.ToString();
-            AffidevitfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:AFFIDEVITFIRFilePath").Value.ToString();
-            AddprooffilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:ADDPROOFFIRFilePath").Value.ToString();
-            SignspcfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:SIGNSPECFIRFilePath").Value.ToString();
-            MoneyRecfilePath = _configuration.GetSection("FilePaths:MutationDetaliFiles:MONEYRECFilePath").Value.ToString();
-            string deathCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:DeathCertificate").Value.ToString();
-            string relationshipProof = _configuration.GetSection("FilePaths:MutationDetaliFiles:RelationshipProof").Value.ToString();
-            string affitDevitLegal = _configuration.GetSection("FilePaths:MutationDetaliFiles:AffitdevitLegal").Value.ToString();
-            string noObjectionCertificate = _configuration.GetSection("FilePaths:MutationDetaliFiles:NoObjectionCertificate").Value.ToString();
-            string signatureOfSpec = _configuration.GetSection("FilePaths:MutationDetaliFiles:SignatureOfSpecimen").Value.ToString();
-
+          
             var result = false;
             if (true)
             {
@@ -264,6 +279,7 @@ namespace DamagePayee.Controllers
                 {
                     if (mutationDetails.PurchaseDate == null || mutationDetails.AtsfilePath == null || mutationDetails.GpafilePath == null || mutationDetails.MoneyRecieptFilePath == null || mutationDetails.SignatureSpecimenFilePath == null)
                     {
+                        mutationDetails.DamagePayeeRegister = await _mutationDetailsService.FetchDamageResult(mutationDetails.DamagePayeeRegisterId ?? 0);
                         ViewBag.Message = Alert.Show("Purchaser Section related Document is Mandatory", "", AlertType.Warning);
                         return View(mutationDetails);
                     }
@@ -272,10 +288,12 @@ namespace DamagePayee.Controllers
                 {
                     if (mutationDetails.DeathCertificatePath == null || mutationDetails.RelationshipUploadPath == null || mutationDetails.AffidevitLegalUploadPath == null || mutationDetails.NonObjectHeirUploadPath == null || mutationDetails.SpecimenSignLegalUpload == null)
                     {
+                        mutationDetails.DamagePayeeRegister = await _mutationDetailsService.FetchDamageResult(mutationDetails.DamagePayeeRegisterId ?? 0);
                         ViewBag.Message = Alert.Show("Inheritance Section related Document is Mandatory", "", AlertType.Warning);
                         return View(mutationDetails);
                     }
                 }
+                
                 if(mutationDetails.Id ==0)
                 {
                     mutationDetails.CreatedBy = SiteContext.UserId;
@@ -293,6 +311,7 @@ namespace DamagePayee.Controllers
                 }
                 else
                 {
+                    mutationDetails.DamagePayeeRegister = await _mutationDetailsService.FetchDamageResult(mutationDetails.DamagePayeeRegisterId ?? 0);
                     ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(mutationDetails);
                 }
@@ -302,85 +321,97 @@ namespace DamagePayee.Controllers
         {
             FileHelper file = new FileHelper();
             Allottetype Data = await _mutationDetailsService.GetAlloteeTypeFile(Id);
-            string filename = _configuration.GetSection("FilePaths:DamagePayeeFiles:ATSGPADocument").Value.ToString() + Data.AtsgpadocumentPath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = ATSGPADocument + Data.AtsgpadocumentPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewPersonelInfoAadharFile(int Id)
         {
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _mutationDetailsService.GetPersonelInfoFile(Id);
-            string filename = Data.AadharNoFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = AadharNoDocument + Data.AadharNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewPersonelInfoPanFile(int Id)
         {
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _mutationDetailsService.GetPersonelInfoFile(Id);
-            string filename = Data.PanNoFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = PanNoDocument +  Data.PanNoFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewPersonelInfoPhotoFile(int Id)
         {
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _mutationDetailsService.GetPersonelInfoFile(Id);
-            string filename = Data.PhotographPath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = PhotographPersonelDocument +  Data.PhotographPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewPersonelInfoSignautreFile(int Id)
         {
             FileHelper file = new FileHelper();
             Damagepayeepersonelinfo Data = await _mutationDetailsService.GetPersonelInfoFile(Id);
-            string filename = Data.SignaturePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = SignaturePersonelDocument + Data.SignaturePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadAgreementFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.AtsfilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = AtsfilePath +  Data.AtsfilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadGPAFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.GpafilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = GPAfilePath +  Data.GpafilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadMoneyReceiptFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.MoneyRecieptFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = MoneyRecfilePath + Data.MoneyRecieptFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadSignSpecFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.SignatureSpecimenFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = SignspcfilePath +Data.SignatureSpecimenFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadAddressProofFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.AddressProofFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = AddprooffilePath + Data.AddressProofFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadAffitDevitFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.AffidavitFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = AffidevitfilePath + Data.AffidavitFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> DownloadIndemnityFile(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string filename = Data.IndemnityFilePath;
-            return File(file.GetMemory(filename), file.GetContentType(filename), Path.GetFileName(filename));
+            string filename = IndemnityfilePath + Data.IndemnityFilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<JsonResult> GetDetailspersonelinfotemp(int? Id)
         {
@@ -418,50 +449,57 @@ namespace DamagePayee.Controllers
         {
             FileHelper file = new FileHelper();
             Damagepayeeregister Data = await _mutationDetailsService.FetchDamageResult(Id);
-            string path = Data.PropertyPhotoPath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = PropertyPhotograph +  Data.PropertyPhotoPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewAtsFileMutation(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = AtsfilePath + Data.AtsfilePath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = AtsfilePath + Data.AtsfilePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewDeathCertificate(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = Data.DeathCertificatePath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = deathCertificate + Data.DeathCertificatePath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewRelationshipUpload(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = Data.RelationshipUploadPath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = relationshipProof + Data.RelationshipUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewAffidevitLegalUpload(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = Data.AffidevitLegalUploadPath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = affitDevitLegal + Data.AffidevitLegalUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewNonObjectHeirUpload(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = Data.NonObjectHeirUploadPath;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = noObjectionCertificate + Data.NonObjectHeirUploadPath;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
         public async Task<IActionResult> ViewSpecimenSignLegalUpload(int Id)
         {
             FileHelper file = new FileHelper();
             Mutationdetailstemp Data = await _mutationDetailsService.FetchSingleResultMutationId(Id);
-            string path = Data.SpecimenSignLegalUpload;
-            return File(file.GetMemory(path), file.GetContentType(path), Path.GetFileName(path));
+            string filename = signatureOfSpec + Data.SpecimenSignLegalUpload;
+            byte[] FileBytes = System.IO.File.ReadAllBytes(filename);
+            return File(FileBytes, file.GetContentType(filename));
         }
     }
 }

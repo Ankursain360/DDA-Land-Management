@@ -50,6 +50,8 @@ namespace SiteMaster.Controllers
         {
             rate.PropertyTypeList = await _rateService.GetDropDownList();
         }
+
+
         [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
@@ -69,7 +71,11 @@ namespace SiteMaster.Controllers
                 await BindDropDown(rate);
                 if (ModelState.IsValid)
                 {
-
+                    if (rate.ToDate <= rate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rate);
+                    }
                     var result = await _rateService.Create(rate);
 
                     if (result == true)
@@ -111,7 +117,7 @@ namespace SiteMaster.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Rate rate)
         {
             await BindDropDown(rate);
@@ -119,6 +125,11 @@ namespace SiteMaster.Controllers
             {
                 try
                 {
+                    if (rate.ToDate <= rate.FromDate)
+                    {
+                        ViewBag.Message = Alert.Show("To Date Must be Greater Than From Date", "", AlertType.Warning);
+                        return View(rate);
+                    }
                     var result = await _rateService.Update(id, rate);
                     if (result == true)
                     {
@@ -140,8 +151,8 @@ namespace SiteMaster.Controllers
             }
             return View(rate);
         }
-
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Renu
         {
 
             var result = await _rateService.Delete(id);
@@ -160,6 +171,8 @@ namespace SiteMaster.Controllers
 
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _rateService.FetchSingleResult(id);

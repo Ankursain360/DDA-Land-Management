@@ -55,6 +55,7 @@ namespace Libraries.Service.ApplicationService
             model.Icon = module.Icon;
             model.Target = module.Target;
             model.ModifiedDate = DateTime.Now;
+            model.IsActive = module.IsActive;
             model.ModifiedBy = 1;
             _moduleRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;

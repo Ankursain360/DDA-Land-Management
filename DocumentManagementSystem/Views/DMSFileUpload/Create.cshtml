@@ -1,254 +1,217 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Dmsfileupload
 
+@await Component.InvokeAsync("PageHeader", new { pageName = "File Upload" })
+<br />
+<br />
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Add Details</h3>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
+    <div class="pt-3">
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+        <div asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+            <ul class="nav nav-tabs md-tabs" id="myTabMD" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="rbtFileUpload" data-toggle="tab" href="#home-md" role="tab" aria-controls="home-md"
+                       aria-selected="true">File Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="rbtBulkUpload" data-toggle="tab" href="#profile-md" role="tab" aria-controls="profile-md"
+                       aria-selected="false">Bulk Upload</a>
+                </li>
+            </ul>
+            <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
+            <br />
+            <div id="divfileupload">
 
+                <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+                    <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
+                    @*<div class="row">
+                    <div class="col-md-3">
+                        <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
 
-<script src="js/bootstrap.min.js"></script>
-<link href="Styles/bootstrap.css" rel="stylesheet" />
-<style>
-    table, tr, td {
-        border: none !important;
-    }
-</style>
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="IsFileBulkUpload" name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked>
 
-<script>
-    $(function () {
-        $("#txtDesignation").keypress(function (e) {
-            var keyCode = e.keyCode || e.which;
+                            <label class="form-check-label" for="radio">
+                                File Upload
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input class="form-check-input" type="radio" asp-for="IsFileBulkUpload" name="grpIsFileBulkUpload" id="rbtBulkUpload" value="Bulk Upload">
+                            <label class="form-check-label" for="radio">
+                                Bulk Upload
+                            </label>
+                        </div>
+                    </div>
+                </div>*@
+                    <div>
+                        <h3 class="my-3 d-flex sub-heading">File Upload</h3>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="FileNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                                    <label class="floating-label">File No.</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="AlloteeName" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="AlloteeName" class="text-danger"></span>
+                                    <label class="floating-label">Allotee Name</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                                    <label asp-for="DepartmentId" class="floating-label">Department </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="LocalityId" class="text-danger"></span>
+                                    <label asp-for="LocalityId" class="floating-label">Locality </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraNoId" asp-items="@(new SelectList(Model.KhasraNoList, "Id","KhasraNo"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="KhasraNoId" class="text-danger"></span>
+                                    <label asp-for="KhasraNoId" class="floating-label">Khasra No. </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="PropertyNoAddress" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="PropertyNoAddress" class="text-danger"></span>
+                                    <label class="floating-label">Property No./Address</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="Title" class="text-danger"></span>
+                                    <label class="floating-label">Title</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="AlmirahNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="AlmirahNo" class="text-danger"></span>
+                                    <label class="floating-label">Almirah No.</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3">
+                                    <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
+                                    <label for="field-1" class="floating-label">Upload File</label>
+                                </div>
+                            </div>
+                            <div class=" col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive" disabled>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
+                                    </select>
+                                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                                    <label asp-for="IsActive" class="floating-label">Status </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-md-3">
+                        <div class=" col-md-12">
+                            <button class="btn btn-theme " type="submit">Create</button>
+                            @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
-            $("#lblError").html("");
+                        </div>
+                    </div>
 
-            //Regex for Valid Characters i.e. Alphabets and Numbers.
-            var regex = /^[A-Za-z0-9]+$/;
+                </form>
 
-            //Validate TextBox value against the Regex.
-            var isValid = regex.test(String.fromCharCode(keyCode));
-            if (!isValid) {
-                $("#lblError").html("Only Alphabets and Numbers allowed.");
-            }
+            </div>
+            <div id="divBulkFileUpload" style="display:none;">
+                @*divLoadData*@
 
-            return isValid;
-        });
-    });
+                <form asp-action="CreateBulkUpload" method="post" id="frmInfo" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+                    <div>
+                        <h3 class="my-3 d-flex sub-heading">Bulk Upload</h3>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input asp-for="PdfLocationPath" type="text" class="floating-label-field floating-label-field--s3 ">
+                                    <span asp-validation-for="PdfLocationPath" class="text-danger"></span>
+                                    <label class="floating-label">Enter Pdf File Location </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap">
+                                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                                    </select>
+                                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                                    <label asp-for="DepartmentId" class="floating-label">Department </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-md-3">
+                            <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+                                    <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3">
+                                    <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
+                                    <label for="field-1" class="floating-label">Upload CSV File</label>
 
-</script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">File Upload</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                                    <a class="badge badge-primary px-2" asp-action="DownloadCSVFormat"> (Download CSV Format)</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-md-3">
+                        <div class=" col-md-12">
+                            <button class="btn btn-theme " type="submit">Create</button>
+                            @Html.ActionLink("Back", "Index", "UserManagement", null, new { @class = "btn btn-theme " })
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
+
+
     </div>
-</div>
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Details </h6>
-        </div>
-        <div class="panel-body">
-            <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                        <label class="radio-inline ">
-                            <input type="radio" name="upload" id="fileupload" value="" checked />File Upload
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label class="radio-inline">
-                            <input type="radio" name="upload" id="bulkfileupload" value="" />Bulk Upload
-                        </label>
-                    </div>
-                    <div class="form-group col-md-4">
-
-                    </div>
-
-                </div>
-
-
-
-                <div id="divfileupload" >
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">File Upload</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> File No   </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Allotee  Name  </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Department    </label>
-                            <select style="height:30px;    background-color: #dddddd;"
-                                    required class="form-control">
-                                <option>dept 1</option>
-                                <option>dept 2 </option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Khasra No   </label>
-                            <select style="height:30px;    background-color: #dddddd;"
-                                    required class="form-control">
-                                <option> Khasra 1</option>
-                                <option>Khasra 2</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Village    </label>
-                            <select style="height:30px;    background-color: #dddddd;"
-                                    required class="form-control">
-                                <option>Village 1</option>
-                                <option>Village 2 </option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Property No./Address   </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Title    </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Almirah No   </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Select File </label>
-                            <input class="form-control" required type="file" />
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div id="divbulkupload" style="display:none;">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" myapp-hed2">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Bulk Upload</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Enter Pdf File Location   </label>
-                            <input class="form-control" required type="text" />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Select Csv File </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="D:\VedangWorkFromHome\DDA_LandManagement_Project\ProjectsModules\DDAPropertyREGLatest\DDAPropertyREG\CSVFormat.csv">Download CSV Format</a>
-                            <input class="form-control" required type="file" />
-                        </div>
-                        
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Select Department  </label>
-                            <select style="height:30px;    background-color: #dddddd;"
-                                    required class="form-control">
-                                <option>Engg </option>
-                                <option>LM</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-                </div>
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        @Html.ActionLink("Upload", "Create", "DMSFileUpload", null, new { @class = "btn btn-primary myapp-hed1", target = "_blank", style = "width:auto;" })
-                        @*<input type="submit" value="Generate" class="btn btn-primary myapp-hed1" id="btnprintreq" />*@
-                        <a asp-action="Index" class="btn btn-primary myapp-hed1 ">Back</a>
-                        @*@Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })*@
-                    </div>
-                </div>
-
-
-
-            </form>
-        </div>
-    </div>
 </div>
 
 
 
-@if (ViewData["Msg"] != null)
-{
-    DocumentManagementSystem.Models.Message msg = ViewData["Msg"] as DocumentManagementSystem.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/dmsfileuploadcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/dmsfileuploadcreate.js" asp-append-version="true"></script>
+</environment>
 
 
 
-
-<script>
-    $(function () {
-        $("input[name='upload']").click(function () {
-            if ($("#fileupload").is(":checked")) {
-                $("#divfileupload").show();
-                $("#divbulkupload").hide();
-            }
-            if ($("#bulkfileupload").is(":checked")) {
-                $("#divbulkupload").show();
-                $("#divfileupload").hide();
-
-            }
-        });
-    });
-</script>
-
-
-<script>
-    $("#btnprintreq").click(function () {
-
-        $('#printrequest').show();
-    });
-</script>
-
-@*<script>
-        $("#btnDisplay").click(function () {
-            window.open("@Url.Action("PrintLabel", "DisplayLabel")", "_blank",
-                "menubar=no, toolbar=no, resizable=no, top=100, left=200, width=500, height=500");
-        });
-    </script>*@
-
-
-<script>
-
-</script>

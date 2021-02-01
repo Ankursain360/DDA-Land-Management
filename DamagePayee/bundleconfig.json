@@ -88,5 +88,83 @@
     "inputFiles": [
       "wwwroot/js/noticegenerationreportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/penaltyimpositionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/penaltyimpositionreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/reliefreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/reliefreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/selfassessmentdamagecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/selfassessmentdamagecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandcollectionledgercreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandcollectionledgercreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandletterreport.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandletterreport.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/doortodoorsurveyedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/doortodoorsurveyedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/impositionofchargesindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/impositionofchargesindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticetodamagepayeeindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticetodamagepayeeindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/noticetodamagepayeelist.min.js",
+    "inputFiles": [
+      "wwwroot/js/noticetodamagepayeelist.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/paymentverificationindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/paymentverificationindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/subsitutionmutationdetailsindex1.min.js",
+    "inputFiles": [
+      "wwwroot/js/subsitutionmutationdetailsindex1.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/CaptchaCreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/CaptchaCreate.js"
+    ]
   }
 ]

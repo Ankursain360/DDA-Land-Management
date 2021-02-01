@@ -11,7 +11,8 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Service.ApplicationService;
-
+using LandInventory.Filters;
+using Core.Enum;
 namespace LandInventory.Controllers
 {
     public class FormN1Controller : Controller
@@ -23,6 +24,8 @@ namespace LandInventory.Controllers
         {
             _nazullandService = nazullandService;
         }
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             var result = await _nazullandService.GetAllNazulland();
@@ -36,6 +39,8 @@ namespace LandInventory.Controllers
             var result = await _nazullandService.GetPagedNazulland(model);
             return PartialView("_List", result);
         }
+
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Nazulland nazulland = new Nazulland();
@@ -50,6 +55,7 @@ namespace LandInventory.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Nazulland nazulland)
         {
             try
@@ -85,6 +91,8 @@ namespace LandInventory.Controllers
                 return View(nazulland);
             }
         }
+
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -99,6 +107,7 @@ namespace LandInventory.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Nazulland nazulland)
         {
             if (ModelState.IsValid)
@@ -144,8 +153,8 @@ namespace LandInventory.Controllers
         //}
 
 
-       
 
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _nazullandService.FetchSingleResult(id);
@@ -156,6 +165,9 @@ namespace LandInventory.Controllers
             }
             return View(Data);
         }
+
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id) 
         {
             try

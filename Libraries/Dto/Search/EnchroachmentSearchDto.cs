@@ -8,5 +8,7 @@ namespace Dto.Search
         public int zoneId { get; set; }
         public int divisionId { get; set; }
         public int localityId { get; set; }
+
+       
     }
 }

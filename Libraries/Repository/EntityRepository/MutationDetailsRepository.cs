@@ -103,12 +103,12 @@ namespace Libraries.Repository.EntityRepository
         //    return Result > 0 ? true : false;
         //}
 
-        public async Task<List<Damagepayeeregistertemp>> FetchSingleResult(int id)
+        public async Task<List<Damagepayeeregister>> FetchSingleResult(int id)
         {
-            var data = await _dbContext.Damagepayeeregistertemp
-                .Include(x =>x.Damagepayeepersonelinfotemp)
-                 .Include(x => x.Damagepaymenthistorytemp)
-                  .Include(x => x.Allottetypetemp)
+            var data = await _dbContext.Damagepayeeregister
+                .Include(x =>x.Damagepayeepersonelinfo)
+                 .Include(x => x.Damagepaymenthistory)
+                  .Include(x => x.Allottetype)
                .Include(x => x.Locality)
                .Include(x => x.District)
                .OrderByDescending(x => x.Id)
@@ -139,11 +139,11 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Damagepayeepersonelinfo>> GetPersonalInfo(int id)
         {
-            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Damagepayeepersonelinfo.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
         public async Task<List<Allottetype>> GetAllottetype(int id)
         {
-            return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterId == id && x.IsActive == 1).ToListAsync();
+            return await _dbContext.Allottetype.Where(x => x.DamagePayeeRegisterTempId == id && x.IsActive == 1).ToListAsync();
         }
 
         public async Task<Mutationdetailstemp> FetchMutationSingleResult(int id)

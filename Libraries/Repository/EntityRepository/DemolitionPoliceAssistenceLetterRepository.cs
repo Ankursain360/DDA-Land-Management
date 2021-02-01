@@ -48,19 +48,61 @@ namespace Repository.EntityRepository
 
             if (model.StatusId == 1)
             {
-                return await _dbContext.Fixingdemolition
+                var data= await _dbContext.Fixingdemolition.Include(x => x.Encroachment.Locality)
                                         .Include(x => x.Encroachment)
                                         .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
                                         && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                        // && !(InDemolitionPoliceAssistenceTable).Contains(x.Id)
                                         )
                                         .GetPaged<Fixingdemolition>(model.PageNumber, model.PageSize);
+
+                int SortOrder = (int)model.orderby;
+                if (SortOrder == 1)
+                {
+                    switch (model.colname.ToUpper())
+                    {
+
+                        case ("INSPECTIONDATE"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.EncrochmentDate).ToList();
+                            break;
+                        case ("LOCALITY"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.Locality.Name).ToList();
+                            break;
+
+                        case ("KHASRA"):
+                            data.Results = data.Results.OrderBy(x => x.Encroachment.KhasraNo).ToList();
+                            break;
+                    
+
+                    }
+                }
+                else if (SortOrder == 2)
+                {
+                    switch (model.colname.ToUpper())
+                    {
+
+                        case ("INSPECTIONDATE"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.EncrochmentDate).ToList();
+                            break;
+                        case ("LOCALITY"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.Locality.Name).ToList();
+                            break;
+                        case ("KHASRA"):
+                            data.Results = data.Results.OrderByDescending(x => x.Encroachment.KhasraNo).ToList();
+                            break;
+
+                    }
+                }
+                return data;
+
+
+
             }
             else
             {
 
                 return await _dbContext.Fixingdemolition
-                                       .Include(x => x.Encroachment)
+                                       .Include(x => x.Encroachment).Include(x => x.Encroachment.Locality)
                                        .Where(x => x.IsActive == 1 && x.ApprovedStatus == model.StatusId
                                        && (model.StatusId == 0 ? x.PendingAt == userId : x.PendingAt == 0)
                                        && !(InDemolitionPoliceAssistenceTable).Contains(x.Id))

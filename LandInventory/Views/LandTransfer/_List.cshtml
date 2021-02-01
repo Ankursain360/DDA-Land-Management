@@ -4,7 +4,6 @@
     <table class="table table-responsive table-bordered table-card">
         <thead class="thead">
             <tr>
-                <th rowspan="2">Sr.No</th>
                 <th rowspan="2">Inventoried In</th>
                 <th rowspan="2">Classification of Land</th>
                 <th rowspan="2">Planned/Unplanned Land</th>
@@ -21,18 +20,17 @@
             {
                 @foreach (var item in Model.Results)
                 {
-                    <tr>
-                        <td>@(rowNo += 1)</td>
-                        <td>@item.PrimaryListNo</td>
-                        <td>@item.ClassificationOfLand.Name</td>
-                        <td>@(item.PlannedUnplannedLand)</td>
-                        <td>@item.Department.Name</td>
-                        <td>@item.Zone.Name</td>
-                        <td>@item.Division.Name</td>
-                        <td>@item.PrimaryListNo</td>
-                        <td>@item.Palandmark</td>
-                        <td><a asp-action="Edit" asp-route-Id="@item.Id">Hand Over/Take Over</a></td>
-                    </tr>
+            <tr>
+                <td>@(item.InventoriedInId.ToString() == "1" ? "VLMS" : "Used" ) </td>
+                <td>@item.ClassificationOfLand.Name</td>
+                <td>@(item.PlannedUnplannedLand)</td>
+                <td>@item.Department.Name</td>
+                <td>@item.Zone.Name</td>
+                <td>@item.Division.Name</td>
+                <td>@item.PrimaryListNo</td>
+                <td>@item.Palandmark</td>
+                <td><a asp-action="Edit" asp-route-Id="@item.Id">Hand Over/Take Over</a></td>
+            </tr>
                 }
             }
             else

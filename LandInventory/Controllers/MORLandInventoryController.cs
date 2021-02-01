@@ -18,6 +18,8 @@ using Microsoft.Extensions.Configuration;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
+using LandInventory.Filters;
+using Core.Enum;
 
 namespace LandInventory.Controllers
 {
@@ -45,6 +47,7 @@ namespace LandInventory.Controllers
         //    var result = await _propertyregistrationService.GetAllPropertyregistration(userId);
         //    return View(result);
         //}
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
             ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
@@ -75,6 +78,7 @@ namespace LandInventory.Controllers
             propertyregistration.HandOverDepartmentList = await _propertyregistrationService.GetHandedDepartmentDropDownList();
             //  propertyregistration.DivisionList = await _propertyregistrationService.GetDivisionDropDownList();
         }
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Propertyregistration propertyregistration = new Propertyregistration();
@@ -84,6 +88,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Add)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
@@ -285,6 +290,7 @@ namespace LandInventory.Controllers
                 }
                 #endregion
 
+                propertyregistration.ModifiedBy = SiteContext.UserId;
                 var result = await _propertyregistrationService.Create(propertyregistration);
 
                 if (result == true)
@@ -311,7 +317,7 @@ namespace LandInventory.Controllers
             }
 
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -341,6 +347,7 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Edit)]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         [DisableRequestSizeLimit]
@@ -583,39 +590,26 @@ namespace LandInventory.Controllers
             return View(propertyregistration);
         }
 
+
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-            if (userId == 3)
+            var result = await _propertyregistrationService.Delete(id);
+            if (result == true)
             {
-                var result = await _propertyregistrationService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                return View("Index");
             }
             else
             {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
-                var result1 = await _propertyregistrationService.GetAllPropertyregistration(userId);
-                return View("Index", result1);
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                return View("Index");
             }
-
-
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -643,44 +637,30 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id, Propertyregistration propertyregistration)
         {
             Deletedproperty model = new Deletedproperty();
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-            if (userId == 13)
+            model.Reason = propertyregistration.Reason;
+            model.DeletedBy = SiteContext.UserId;
+            var result = await _propertyregistrationService.Delete(id);
+            var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
+            if (result == true)
             {
-                model.Reason = propertyregistration.Reason;
-                var result = await _propertyregistrationService.Delete(id);
-                var result2 = await _propertyregistrationService.InsertInDeletedProperty(id, model);
-                if (result == true)
-                {
-                    userId = 2;
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show("You are not Authorized to Delete Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 return View("Index");
             }
-
-
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                return View("Index");
+            }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -823,7 +803,7 @@ namespace LandInventory.Controllers
             return Json(await _propertyregistrationService.GetDivisionDropDownList(Convert.ToInt32(zoneId)));
         }
         #endregion
-
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id)
         {
             var Data = await _propertyregistrationService.FetchSingleResult(id);
@@ -836,44 +816,31 @@ namespace LandInventory.Controllers
         }
 
         [HttpPost]
+        [AuthorizeContext(ViewAction.Dispose)]
         public async Task<IActionResult> Dispose(int id, Propertyregistration propertyregistration)
         {
             Disposedproperty model = new Disposedproperty();
-            int userId = SiteContext.UserId;
-            var deleteAuthority = _propertyregistrationService.CheckDeleteAuthority(userId);
-
-            if (userId == 15)
+            model.DisposalTypeId = propertyregistration.DisposalTypeId;
+            model.DisposalDate = propertyregistration.DisposalDate;
+            model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
+            model.DisposalComments = propertyregistration.DisposalComments;
+            model.DisposedBy = SiteContext.UserId;
+            var result = await _propertyregistrationService.DisposeDetails(id, model);
+            var result2 = await _propertyregistrationService.InsertInDisposedProperty(id, model);
+            if (result == true)
             {
-                model.DisposalTypeId = propertyregistration.DisposalTypeId;
-                model.DisposalDate = propertyregistration.DisposalDate;
-                model.DisposalTypeFilePath = propertyregistration.DisposalTypeFilePath;
-                model.DisposalComments = propertyregistration.DisposalComments;
-                var result = await _propertyregistrationService.DisposeDetails(id, model);
-                var result2 = await _propertyregistrationService.InsertInDisposedProperty(id, model);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
-                    ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
-                    return View("Index");
-                }
-            }
-            else
-            {
-                ViewBag.Message = Alert.Show("You are not Authorized to Dispose Record", "", AlertType.Warning);
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
                 ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
                 ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
                 return View("Index");
             }
-
-
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                ViewBag.Items = await _propertyregistrationService.GetClassificationOfLandDropDownListMOR();
+                ViewBag.DepartmentList = await _propertyregistrationService.GetDepartmentDropDownList();
+                return View("Index");
+            }
         }
 
 

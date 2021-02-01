@@ -13,7 +13,8 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Master;
 using System.Globalization;
-
+using DamagePayee.Filters;
+using Core.Enum;
 namespace DamagePayee.Controllers
 {
     public class DamageCalculatorController : BaseController
@@ -31,11 +32,19 @@ namespace DamagePayee.Controllers
             _damagecalculationService = damagecalculationService;
 
         }
-        public async Task<IActionResult> Index()
+
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index(int? Id)
         {
+            int LocalityId = Id ?? 0;
             Damagecalculation damagecalculation = new Damagecalculation();
             damagecalculation.PropertyType1 = await _damagecalculationService.GetPropertyTypes();
             damagecalculation.LocalityList = await _damagecalculationService.GetLocalities();
+            if(LocalityId !=0)
+            {
+                damagecalculation.LocalityId = LocalityId;
+                ViewBag.BackButton = 1;
+            }
             return View(damagecalculation);
         }
 

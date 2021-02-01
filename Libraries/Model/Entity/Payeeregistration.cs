@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
         public string IsVerified { get; set; }
         public byte? IsActive { get; set; }
         
-        [Required]
+        [NotMapped]
         [StringLength(4)]
         public string CaptchaCode { get; set; }
 

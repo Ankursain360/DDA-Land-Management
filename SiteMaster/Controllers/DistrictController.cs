@@ -9,6 +9,10 @@ using Notification.OptionEnums;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using System.Data;
+using Newtonsoft.Json;
+using Utility.Helper;
+using System.Collections.Generic;
 
 namespace SiteMaster.Controllers
 {
@@ -20,6 +24,8 @@ namespace SiteMaster.Controllers
         {
             _districtService = districtService;
         }
+
+
 
         [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
@@ -90,7 +96,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        [AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, District district)
         {
             if (ModelState.IsValid)
@@ -126,6 +132,8 @@ namespace SiteMaster.Controllers
             }
         }
 
+
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _districtService.FetchSingleResult(id);
@@ -135,7 +143,7 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
-
+        
         public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
         {
             var result = await _districtService.Delete(id);
@@ -150,6 +158,8 @@ namespace SiteMaster.Controllers
             return RedirectToAction("Index", "District");
         }
 
+
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
             try
@@ -170,6 +180,16 @@ namespace SiteMaster.Controllers
             }
             var list = await _districtService.GetAllDistrict();
             return View("Index", list);
+        }
+
+        public async Task<IActionResult> Download()
+        {
+            List<District> result = await _districtService.GetAllDistrict();
+            DataTable dt = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(result), (typeof(DataTable)));
+            var memory = ExcelHelper.CreateExcel(dt);
+            string sFileName = @"Employees.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

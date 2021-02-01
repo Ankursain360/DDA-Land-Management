@@ -9,6 +9,7 @@
     <None Remove="DataAccess\**" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Entity\Demandletters.cs~RF88588d8d.TMP" />
     <None Remove="Entity\Proposalplotdetails.cs~RFabbb842.TMP" />
   </ItemGroup>
   <ItemGroup>

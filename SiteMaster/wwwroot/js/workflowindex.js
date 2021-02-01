@@ -1,78 +1,68 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
     // debugger;
-    GetDetails(currentPageNumber, currentPageSize);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-$("#btnSearch2").click(function () {
-    GetDetails(currentPageNumber, currentPageSize);
+
+$("#btnSearch").click(function () {
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+
 $("#btnReset").click(function () {
     $('#txtName').val('');
     $('#txtModule').val('');
 
-    GetDetails(currentPageNumber, currentPageSize);
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
-function GetDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-    //  debugger;
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
+});
+
+function GetDetails(pageNumber, pageSize,order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+   
     HttpPost(`/WorkFlowTemplate/List`, 'html', param, function (response) {
         $('#divTable').html("");
         $('#divTable').html(response);
     });
 
-    if ($('table >tbody >tr').length <= 1) {
-        GetDetails(1, $("#ddlPageSize option:selected").val());
-    }
+
 }
 
-function GetSearchParam(pageNumber, pageSize) {
-    var sorbyname = $('#Sortbyd').val();
-    var sortdesc = $("#sortdesc").val();
-    // alert(sorbyname);
-    if (sorbyname) {
-        sorbyname = sorbyname;
-    } else {
-        sorbyname = 'Name';
-    }
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
+   
     var model = {
         name: $('#txtName').val(),
         module: $('#txtModule').val(),
-        colname: sorbyname,
-        orderby: sortdesc,
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
 function onPaging(pageNo) {
-    pageNo = parseInt(pageNo);
-    GetDetails(pageNo, currentPageSize);
+    GetDetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    pageSize = parseInt(pageSize);
-    GetDetails(currentPageNumber, pageSize);
+    GetDetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
-$("#Sortbyd").change(function () {
-
-    GetDetails(currentPageNumber, currentPageSize);
-
-});
-$("#ascId").click(function () {
-
-    $("#descId").removeClass("active");
-    $("#ascId").addClass("active");
-    $("#sortdesc").val(2);
-    GetDetails(currentPageNumber, currentPageSize);
-});
-$("#descId").click(function () {
-    $("#ascId").removeClass("active");
-    $("#descId").addClass("active");
-    $("#sortdesc").val(1);
-    GetDetails(currentPageNumber, currentPageSize);
-});

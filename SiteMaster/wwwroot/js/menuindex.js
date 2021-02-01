@@ -1,9 +1,9 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
-var sortby = 1;//default Ascending 
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetMenu(currentPageNumber, currentPageSize, sortby);
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });
 
 function GetMenu(pageNumber, pageSize, order) {
@@ -24,34 +24,34 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-    debugger
+  
     return model;
 }
 
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
-    sortby = 1;//for Ascending
-    GetMenu(currentPageNumber, currentPageSize, sortby);
+    sortOrder = 1;//for Ascending
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
 $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
-    sortby = 2;//for Descending
-    GetMenu(currentPageNumber, currentPageSize, sortby);
+    sortOrder = 2;//for Descending
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnSearch").click(function () {
-    GetMenu(currentPageNumber, currentPageSize, sortby);
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
     $('#txtMenuName').val('');
     $('#txtName').val('');
     $('#txtParent').val('');
-    GetMenu(currentPageNumber, currentPageSize, sortby);
+    GetMenu(currentPageNumber, currentPageSize, sortOrder);
 
 });
 
@@ -59,11 +59,11 @@ $("#btnReset").click(function () {
 
 
 function onPaging(pageNo) {
-    GetMenu(parseInt(pageNo), parseInt(currentPageSize), sortby);
+    GetMenu(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetMenu(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+    GetMenu(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }

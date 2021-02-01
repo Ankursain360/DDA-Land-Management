@@ -23,6 +23,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             /* Respository */
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IApprovalProccessRepository, ApprovalProccessRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
@@ -31,11 +32,13 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IMutationDetailsRepository, MutationDetailsRepository>();
             services.AddScoped<IDamagePayeeRegistrationRepository, DamagePayeeRegistrationRepository>();
             services.AddScoped<IDamagepayeeregisterRepository, DamagepayeeregisterRepository>();
+            services.AddScoped<IDamageCalculationRepository, DamageCalculationRepository>();
 
             /* Application Services */
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IApprovalProccessService, ApprovalProccessService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IModuleService, ModuleService>();
@@ -43,6 +46,7 @@ namespace DamagePayeePublicInterface.Infrastructure.Extensions
             services.AddScoped<IMutationDetailsService, MutationDetailsService>();
             services.AddScoped<IDamagePayeeRegistrationService, DamagePayeeRegistrationService>();
             services.AddScoped<IDamagepayeeregisterService, DamagepayeeregisterService>();
+            services.AddScoped<IDamageCalculationService, DamageCalculationService>();
         }
     }
 }

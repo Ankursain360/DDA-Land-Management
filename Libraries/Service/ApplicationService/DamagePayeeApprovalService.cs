@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace Service.ApplicationService
 {
   
-    public class DamagePayeeApprovalService : EntityService<Damagepayeeregistertemp>, IDamagePayeeApprovalService
+    public class DamagePayeeApprovalService : EntityService<Damagepayeeregister>, IDamagePayeeApprovalService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDamagePayeeApprovalRepository _damagePayeeApprovalRepository;
@@ -26,9 +26,13 @@ namespace Service.ApplicationService
             _damagePayeeApprovalRepository = damagePayeeApprovalRepository;
         }
 
-        public async Task<PagedResult<Damagepayeeregistertemp>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser)
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamagePayeeRegisterForApproval(DamagepayeeRegisterApprovalDto model, bool IsUser)
         {
             return await _damagePayeeApprovalRepository.GetPagedDamagePayeeRegisterForApproval(model,  IsUser);
+        }
+        public async Task<PagedResult<Damagepayeeregister>> GetPagedDamageForApproval(DamagepayeeRegisterApprovalDto model, int userId)
+        {
+            return await _damagePayeeApprovalRepository.GetPagedDamageForApproval(model, userId);
         }
     }
 }

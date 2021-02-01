@@ -71,7 +71,11 @@ namespace DamagePayeePublicInterface
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
-
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(20);
+                options.Cookie.HttpOnly = true;
+            });
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
             services.AddAuthentication(options =>
@@ -80,6 +84,7 @@ namespace DamagePayeePublicInterface
                 options.DefaultChallengeScheme = "oidc";
                 options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
+
             .AddCookie("Cookies")
             .AddOpenIdConnect("oidc", options =>
             {
@@ -116,6 +121,7 @@ namespace DamagePayeePublicInterface
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute().RequireAuthorization();

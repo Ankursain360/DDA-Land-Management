@@ -1,91 +1,54 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
-var currentSortOrderAscending = 1;
-var currentSortOrderDescending = 2;
+var currentPageSize = 5;
+var sortby = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetLocality(currentPageNumber, currentPageSize);
+    GetLocality(currentPageNumber, currentPageSize, sortby);
 });
 
 $("#btnSearch").click(function () {
-    GetLocality(currentPageNumber, currentPageSize);
+    GetLocality(currentPageNumber, currentPageSize, sortby);
 });
-function Descending() {
-    $("#btnAscending").removeClass("active");
-    $("#btnDescending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
-    if (value !== "0") {
-        GetLocalityOrderby(currentPageNumber, currentPageSize, currentSortOrderDescending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
-function Ascending() {
+
+
+
+$("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
-    var value = $("#ddlSort").children("option:selected").val();
-    $('#txtName').val('');
-    $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
-    if (value !== "0") {
-        
-        GetLocalityOrderby(currentPageNumber, currentPageSize, currentSortOrderAscending);
-    }
-    else {
-        alert('Please select SortBy Value');
-    }
-};
+    sortby = 1;//for Ascending
+    GetLocality(currentPageNumber, currentPageSize, sortby);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortby = 2;//for Descending
+    GetLocality(currentPageNumber, currentPageSize, sortby);
+});
 
 $("#btnReset").click(function () {
     $('#txtName').val('');
     $('#txtCode').val('');
-    $('#txtAddress').val('');
-    $('#txtLandmark').val('')
-    GetLocality(currentPageNumber, currentPageSize);
+    GetLocality(currentPageNumber, currentPageSize, sortby);
 });
 
-function GetLocalityOrderby(pageNumber, pageSize, order) {
-    var param = GetSearchParamaOrderby(pageNumber, pageSize, order);
+
+function GetLocality(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/locality/List`, 'html', param, function (response) {
         $('#divLocalityTable').html("");
         $('#divLocalityTable').html(response);
     });
 }
 
-function GetLocality(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/locality/List`, 'html', param, function (response) {
-        $('#divLocalityTable').html("");
-        $('#divLocalityTable').html(response);
-    });
-}
 
-function GetSearchParamaOrderby(pageNumber, pageSize, sortOrder) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: $('#txtName').val(),
         localityCode: $('#txtCode').val(),
-        address: $('#txtAddress').val(),
-        landmark: $('#txtLandmark').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
-        pageSize: parseInt(pageSize),
-        pageNumber: parseInt(pageNumber)
-    } 
-    return model;
-}
-
-function GetSearchParam(pageNumber, pageSize) {
-    var model = {
-        name: $('#txtName').val(),
-        localityCode: $('#txtCode').val(),
-        address: $('#txtAddress').val(),
-        landmark: $('#txtLandmark').val(),
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
@@ -93,11 +56,11 @@ function GetSearchParam(pageNumber, pageSize) {
 }
 
 function onPaging(pageNo) {
-    GetLocality(parseInt(pageNo), parseInt(currentPageSize));
+    GetLocality(parseInt(pageNo), parseInt(currentPageSize), sortby);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetLocality(parseInt(currentPageNumber), parseInt(pageSize));
+    GetLocality(parseInt(currentPageNumber), parseInt(pageSize), sortby);
     currentPageSize = pageSize;
 }

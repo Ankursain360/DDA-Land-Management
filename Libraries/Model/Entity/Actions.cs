@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         {
             Menuactionrolemap = new HashSet<Menuactionrolemap>();
         }
-        [Required]
+        [Required(ErrorMessage = " Actions name is mandatory")]
         //[Remote("IsAdvertisement_Exist", "RemotDataEx", AdditionalFields = "AdvertisementNo,AdvertisementID", ErrorMessage = "Entered Advertisement No Already exist in database. Please give unique Advertisement No.")]
         [Remote(action: "Exist", controller: "Actions", AdditionalFields = "Id")]
         public string Name { get; set; }

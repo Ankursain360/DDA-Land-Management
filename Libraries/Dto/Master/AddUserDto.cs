@@ -11,31 +11,31 @@ namespace Dto.Master
     {
         public int? Id { get; set; } 
 
-        [Required(ErrorMessage = "Name is required")]
+        [Required(ErrorMessage = "Name is mandatory")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "User Name is required")]
+        [Required(ErrorMessage = "User Name is mandatory")]
         [Remote(action: "ExistLoginName", controller: "UserManagement", AdditionalFields = "Id")]
         public string UserName { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
+        [Required(ErrorMessage = "Password is mandatory")]
         [StringLength(255, ErrorMessage = "Password between 8 to 20", MinimumLength = 8)]
         public string Password { get; set; }
 
 
         [NotMapped]
-        [Required(ErrorMessage = "Confirm password is required")]
+        [Required(ErrorMessage = "Confirm password is mandatory")]
         [StringLength(20, ErrorMessage = "Password between 8 to 20", MinimumLength = 8)]
         [Compare("Password", ErrorMessage = "Password confirm password not match")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
+        [Required(ErrorMessage = "Email is mandatory")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "Phone Number is required")]
+        [Required(ErrorMessage = "Phone Number is mandatory")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Department is required")]
+        [Required(ErrorMessage = "Department is mandatory", AllowEmptyStrings = false)]
         public int? DepartmentId { get; set; }
 
         [NotMapped]
@@ -47,7 +47,7 @@ namespace Dto.Master
         [NotMapped]
         public List<DistrictDto> DistrictList { get; set; }
 
-        [Required(ErrorMessage = "Role is required")]
+        [Required(ErrorMessage = "Role is mandatory", AllowEmptyStrings = false)]
         public int RoleId { get; set; }
 
         [NotMapped]

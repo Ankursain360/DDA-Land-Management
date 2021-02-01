@@ -14,10 +14,10 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Watchandward>> GetWatchandward();
         Task<List<Watchandward>> GetAllWatchandward();
         Task<List<Locality>> GetAllLocality();
-      
+
         Task<List<Khasra>> GetAllKhasra();
         Task<Watchandward> FetchSingleResult(int id); //added by ishu
-        Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchandwardSearchDto watchandwardSearchDto);
+        Task<PagedResult<Watchandward>> GetWatchandwardReportData(WatchAndWardPeriodReportSearchDto watchAndWardPeriodReportSearchDto);
         //Task<PagedResult<Page>> GetPagedPage(PageSearchDto model);
 
         Task<PagedResult<Watchandward>> GetPagedWatchandward(WatchandwardSearchDto model);
