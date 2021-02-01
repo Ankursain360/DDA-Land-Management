@@ -42,7 +42,7 @@ function GetSearchParam(pageNumber, pageSize) {
     if (sorbyname) {
         sorbyname = sorbyname;
     } else {
-        sorbyname = 'PropertyNo';
+        sorbyname = 'Locality';
     }
 
 

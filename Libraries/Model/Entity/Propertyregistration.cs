@@ -20,6 +20,7 @@ namespace Libraries.Model.Entity
             PlanningProperties = new HashSet<PlanningProperties>();
             Watchandward = new HashSet<Watchandward>();
             AssignedPropertyDailyRoaster = new HashSet<AssignedPropertyDailyRoaster>();
+            Dmsfileupload = new HashSet<Dmsfileupload>();
         }
         public int? InventoriedInId { get; set; }
         public string PlannedUnplannedLand { get; set; }
@@ -274,5 +275,6 @@ namespace Libraries.Model.Entity
         public int unverifiedverfied { get; set; }
 
         public ICollection<Watchandward> Watchandward { get; set; }
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
     }
 }

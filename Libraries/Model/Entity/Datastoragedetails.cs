@@ -52,9 +52,12 @@ namespace Libraries.Model.Entity
         public int? Year { get; set; }
         public string CategoryNo { get; set; }
         public string HeaderNo { get; set; }
+        public string FileStatus { get; set; }
+        public int? BranchId { get; set; }
 
         public Almirah Almirah { get; set; }
         public Bundle Bundle { get; set; }
+        public Branch Branch { get; set; }
         public Column Column { get; set; }
         public Locality Locality { get; set; }
         public Department Department { get; set; }
@@ -115,7 +118,8 @@ namespace Libraries.Model.Entity
         public List<int> YearForPartFile { get; set; }
 
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
-
+       
+    
         [NotMapped]
         public List<Datastoragedetails> FileNoList { get; set; }
 

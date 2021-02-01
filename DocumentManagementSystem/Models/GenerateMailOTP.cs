@@ -31,12 +31,12 @@ namespace DocumentManagementSystem.Models
             {
                 body = reader.ReadToEnd();
             }
+
             body = body.Replace("{DisplayName}", DisplayName);
             body = body.Replace("{LoginName}", LoginName);
             body = body.Replace("{Password}", Password);
             body = body.Replace("{Link}", Link);
             body = body.Replace("{Action}", Action);
-
 
             return body;
         }

@@ -11,7 +11,10 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("datastoragedetails", "lms");
 
             builder.HasIndex(e => e.AlmirahId)
-                     .HasName("fk_AlmirahId");
+                .HasName("fk_AlmirahId");
+
+            builder.HasIndex(e => e.BranchId)
+                .HasName("fk_BranchId_idx");
 
             builder.HasIndex(e => e.BundleId)
                 .HasName("BundleNo_idx");
@@ -39,6 +42,8 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.BlockId)
                 .HasMaxLength(45)
                 .IsUnicode(false);
+
+            builder.Property(e => e.BranchId).HasColumnType("int(11)");
 
             builder.Property(e => e.BranchSno).HasColumnType("int(11)");
 
@@ -70,6 +75,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.FileNo)
                 .HasMaxLength(500)
+                .IsUnicode(false);
+
+            builder.Property(e => e.FileStatus)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.FlatCategoryId)
@@ -142,6 +151,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Datastoragedetails)
                 .HasForeignKey(d => d.AlmirahId)
                 .HasConstraintName("fk_AlmirahId");
+
+            builder.HasOne(d => d.Branch)
+                .WithMany(p => p.Datastoragedetails)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("fk_BranchId");
 
             builder.HasOne(d => d.Bundle)
                 .WithMany(p => p.Datastoragedetails)

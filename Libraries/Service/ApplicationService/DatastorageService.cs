@@ -161,5 +161,11 @@ namespace Libraries.Service.ApplicationService
             List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
             return schemesList;
         }
+        public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
+        }
+
+        
     }
 }

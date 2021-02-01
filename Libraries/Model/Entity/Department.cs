@@ -25,6 +25,8 @@ namespace Libraries.Model.Entity
             Propertyregistrationhistory = new HashSet<PropertyRegistrationHistory>();
             Planning = new HashSet<Planning>();
             Issuereturnfile = new HashSet<Issuereturnfile>();
+            Dmsfileupload = new HashSet<Dmsfileupload>();
+
         }
 
         [Required(ErrorMessage = "Department name is mandatory")]
@@ -52,5 +54,6 @@ namespace Libraries.Model.Entity
         public virtual ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
         public ICollection<Branch> Branch { get; set; }
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
+        public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
     }
 }

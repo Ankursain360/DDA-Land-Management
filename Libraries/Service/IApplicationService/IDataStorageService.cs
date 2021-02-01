@@ -37,5 +37,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Zone>> GetZones();
 
         Task<List<Scheme>> GetSchemes();
+        Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
     }
 }
