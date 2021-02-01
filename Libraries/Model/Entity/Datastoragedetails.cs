@@ -15,17 +15,27 @@ namespace Libraries.Model.Entity
         }
 
         public int IsFileDocument { get; set; }
-        [Required(ErrorMessage = "File No is mandatory")]
+       
         public string FileNo { get; set; }
         public string Name { get; set; }
         public int? IsPartOfMainFile { get; set; }
         public string RecordRoomNo { get; set; }
+
+        [Required(ErrorMessage = "Almirah no is Mandatory Field", AllowEmptyStrings = false)]
+
         public int? AlmirahId { get; set; }
 
-        [Required(ErrorMessage = "Row no is Mandatory Field")]
+        [Required(ErrorMessage = "Row no is Mandatory Field", AllowEmptyStrings = false)]
         public int? RowId { get; set; }
+
+
+        [Required(ErrorMessage = "Coloumn no is Mandatory Field", AllowEmptyStrings = false)]
         public int? ColumnId { get; set; }
+
+        [Required(ErrorMessage = "Bundle is Mandatory Field", AllowEmptyStrings = false)]
         public int? BundleId { get; set; }
+
+
         public int? ZoneId { get; set; }
         public int? LocalityId { get; set; }
 
@@ -40,6 +50,9 @@ namespace Libraries.Model.Entity
         public string FlatNo { get; set; }
         public string FlatCategoryId { get; set; }
         public string CompactorNo { get; set; }
+
+
+        [Required(ErrorMessage = "Sequence No is Mandatory Field")]
         public string SequenceNo { get; set; }
         public string SttsNo { get; set; }
         public int? BranchSno { get; set; }
@@ -50,8 +63,14 @@ namespace Libraries.Model.Entity
         public int? DeptId { get; set; }
         public int? UserId { get; set; }
         public int? Year { get; set; }
+
+        [Required(ErrorMessage = "Category No is Mandatory Field")]
         public string CategoryNo { get; set; }
+
+        [Required(ErrorMessage = "Header No is Mandatory Field")]
         public string HeaderNo { get; set; }
+
+
         public string FileStatus { get; set; }
         public int? BranchId { get; set; }
 
@@ -91,10 +110,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> SequenceNoForPartFile { get; set; }
 
-        public void Add(Datastoragedetails datastoragedetails)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         [NotMapped]
         public List<string> Subject { get; set; }
