@@ -1,0 +1,56 @@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Dmsfileupload>
+
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+            <th scope="col">File No.</th>
+            <th scope="col">Allotee Name</th>
+            <th scope="col">Department</th>
+            <th scope="col">Locality</th>
+            <th scope="col">Khasra No.</th>
+            <th scope="col">Status</th>
+            <th scope="col" style="min-width: 105px;">Operation</th>
+        </tr>
+
+    </thead>
+    <tbody class="tbody">
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+        <tr>
+            <td>@item.FileNo </td>
+            <td>@item.AlloteeName</td>
+            <td>@(item.Department == null ? "" :item.Department.Name)</td>
+            <td>@(item.Locality == null ? "" :item.Locality.Name)</td>
+            <td>@(item.KhasraNo == null ? "" :item.KhasraNo.KhasraNo)</td>
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>
+                }
+            </td>
+            <td>
+                <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
+
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

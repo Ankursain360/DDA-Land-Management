@@ -8,6 +8,7 @@ namespace Libraries.Model.Entity
     {
         public Branch()
         {
+            Datastoragedetails = new HashSet<Datastoragedetails>();
             Issuereturnfile = new HashSet<Issuereturnfile>();
         }
 
@@ -18,5 +19,6 @@ namespace Libraries.Model.Entity
         public byte? IsActive { get; set; }
         public Department Department { get; set; }
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
     }
 }
