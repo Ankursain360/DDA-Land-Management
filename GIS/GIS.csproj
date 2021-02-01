@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>9eb41b81-99d2-4409-94a2-d895f7021fae</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
@@ -19,9 +18,4 @@
     <ProjectReference Include="..\Libraries\Notification\Notification.csproj" />
     <ProjectReference Include="..\Libraries\Service\Service.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="nlog.config" CopyToOutputDirectory="PreserveNewest" />
-  </ItemGroup>
-
 </Project>
