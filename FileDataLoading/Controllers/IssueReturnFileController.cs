@@ -13,28 +13,28 @@ using Notification.OptionEnums;
 
 namespace FileDataLoading.Controllers
 {
-   
-        public class IssueReturnFileController : BaseController
-        {
-            private readonly IIssueReturnFileService _issueReturnFileService;
-            private readonly IDataStorageService _datastorageService;
+
+    public class IssueReturnFileController : BaseController
+    {
+        private readonly IIssueReturnFileService _issueReturnFileService;
+        private readonly IDataStorageService _datastorageService;
         public IssueReturnFileController(IIssueReturnFileService issueReturnFileService, IDataStorageService datastorageService)
-            {
+        {
             _issueReturnFileService = issueReturnFileService;
             _datastorageService = datastorageService;
         }
 
-            async Task BindDropDownView(Datastoragedetails model)
-            {
-               
-               model.FileNoList = await _issueReturnFileService.GetFileNoList();
-            }
-            public async Task<IActionResult> Index()
-            {
+        async Task BindDropDownView(Datastoragedetails model)
+        {
+
+            model.FileNoList = await _issueReturnFileService.GetFileNoList();
+        }
+        public async Task<IActionResult> Index()
+        {
             Datastoragedetails model = new Datastoragedetails();
             await BindDropDownView(model);
             return View(model);
-            }
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] IssueReturnFileSearchDto model)
@@ -50,13 +50,13 @@ namespace FileDataLoading.Controllers
                 return PartialView();
             }
         }
-      
-      
-        public async Task<IActionResult> IssueFileData( int id)
+
+
+        public async Task<IActionResult> IssueFileData(int id)
         {
             Issuereturnfile model = new Issuereturnfile();
             var Data = await _datastorageService.FetchSingleResult(id);
-          
+
             model.DepartmentList = await _issueReturnFileService.GetAllDepartment();
             model.BranchList = await _issueReturnFileService.GetAllBranch();
             model.DesignationList = await _issueReturnFileService.GetAllDesignation();
@@ -70,14 +70,32 @@ namespace FileDataLoading.Controllers
         }
 
 
-       
-        public IActionResult IssueReceipt()
+
+        public async Task<IActionResult> IssueReceipt(int id)
         {
-            return PartialView("IssueReceipt");
+            var Data = await _issueReturnFileService.FetchSingleReceiptResult(id);
+            var datastorageid = Data.DataStorageDetailsId;
+            var data2 = await _datastorageService.FetchSingleResult(datastorageid);
+            Data.DataStorageDetails = data2;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
         }
-        public IActionResult ReturnReceipt()
+        public async Task<IActionResult> ReturnReceipt(int id)
         {
-            return PartialView("ReturnReceipt");
+            var Data = await _issueReturnFileService.FetchSingleReceiptResult(id);
+            var datastorageid = Data.DataStorageDetailsId;
+            var data2 = await _datastorageService.FetchSingleResult(datastorageid);
+            Data.DataStorageDetails = data2;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
         }
 
         [HttpPost]
@@ -100,7 +118,7 @@ namespace FileDataLoading.Controllers
             {
                 return NotFound();
             }
-          
+
             {
 
                 issuereturnfile.DataStorageDetailsId = issuereturnfile.DataStorageDetails.Id;
@@ -125,7 +143,9 @@ namespace FileDataLoading.Controllers
 
         public async Task<IActionResult> ReturnFileData(int id)
         {
+            //Issuereturnfile model = await _issueReturnFileService.FetchfiletResult(id);
             Issuereturnfile model = new Issuereturnfile();
+
             var Data = await _datastorageService.FetchSingleResult(id);
 
             model.DepartmentList = await _issueReturnFileService.GetAllDepartment();
@@ -143,47 +163,55 @@ namespace FileDataLoading.Controllers
         [HttpPost]
         public async Task<IActionResult> ReturnFileData(int id, Issuereturnfile issuereturnfile)
         {
-            var Data = await _datastorageService.FetchSingleResult(id);
-            issuereturnfile.DepartmentList = await _issueReturnFileService.GetAllDepartment();
-            issuereturnfile.BranchList = await _issueReturnFileService.GetAllBranch();
-            issuereturnfile.DesignationList = await _issueReturnFileService.GetAllDesignation();
+            //var Data = await _datastorageService.FetchSingleResult(id);
+            //issuereturnfile.DepartmentList = await _issueReturnFileService.GetAllDepartment();
+            //issuereturnfile.BranchList = await _issueReturnFileService.GetAllBranch();
+            //issuereturnfile.DesignationList = await _issueReturnFileService.GetAllDesignation();
 
-            Data.AlmirahList = await _datastorageService.GetAlmirahs();
-            Data.RowList = await _datastorageService.GetRows();
-            Data.ColumnList = await _datastorageService.GetColumns();
-            Data.BundleList = await _datastorageService.GetBundles();
+            //Data.AlmirahList = await _datastorageService.GetAlmirahs();
+            //Data.RowList = await _datastorageService.GetRows();
+            //Data.ColumnList = await _datastorageService.GetColumns();
+            //Data.BundleList = await _datastorageService.GetBundles();
 
-            issuereturnfile.CreatedBy = SiteContext.UserId;
-            issuereturnfile.DataStorageDetails = Data;
-            issuereturnfile.Id = 0;
-            if (issuereturnfile.DataStorageDetailsId == 0)
-            {
-                return NotFound();
-            }
-            //if (ModelState.IsValid)
-            {
+            //issuereturnfile.CreatedBy = SiteContext.UserId;
+            //issuereturnfile.DataStorageDetails = Data;
+            //issuereturnfile.Id = 0;
+            //if (issuereturnfile.DataStorageDetailsId == 0)
+            //{
+            //    return NotFound();
+            //}
+            ////if (ModelState.IsValid)
+            //{
 
-                issuereturnfile.DataStorageDetailsId = issuereturnfile.DataStorageDetails.Id;
-                var result = await _issueReturnFileService.Create(issuereturnfile);
-                if (result == true)
-                {
-                    var result1 = await _issueReturnFileService.UpdateReturnFileStatus(id);
-                   
-                    ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                    return View(issuereturnfile);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                    return View(issuereturnfile);
-                }
+            //    issuereturnfile.DataStorageDetailsId = issuereturnfile.DataStorageDetails.Id;
+            //    var result = await _issueReturnFileService.Create(issuereturnfile);
+            //    if (result == true)
+            //    {
+            //        var result1 = await _issueReturnFileService.UpdateReturnFileStatus(id);
 
-            }
+            //        ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+            //        return View(issuereturnfile);
+            //    }
+            //    else
+            //    {
+            //        ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+            //        return View(issuereturnfile);
+            //    }
+
+            //}
             //else
             //{
             //    return View(issuereturnfile);
             //}
-
+            var Data = await _issueReturnFileService.FetchfiletResult(id);
+            var datastorageid = Data.DataStorageDetailsId;
+            var data2 = await _datastorageService.FetchSingleResult(datastorageid);
+            Data.DataStorageDetails = data2;
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return View(Data);
         }
     }
 }
