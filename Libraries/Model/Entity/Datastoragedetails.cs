@@ -57,6 +57,10 @@ namespace Libraries.Model.Entity
         public Bundle Bundle { get; set; }
         public Column Column { get; set; }
         public Locality Locality { get; set; }
+        public Department Department { get; set; }
+
+        
+        public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
 
@@ -79,9 +83,14 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Scheme> schemaList { get; set; }
-
-
         [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Branch> BranchList { get; set; }
+        
+
+
+[NotMapped]
         public List<string> Category { get; set; }
         [NotMapped]
         public List<string> Header { get; set; }

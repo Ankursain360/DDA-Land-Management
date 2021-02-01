@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dto.Search;
@@ -7,6 +8,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -44,7 +46,16 @@ namespace Libraries.Repository.EntityRepository
             var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
-
+        public async Task<List<Department>> GetDepartment()
+        {
+            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return departmentList;
+        }
+        public async Task<List<Branch>> GetBranch()
+        {
+            var branchList = await _dbContext.Branch.Where(x => x.IsActive == 1).ToListAsync();
+            return branchList;
+        }
         public async Task<List<Zone>> GetZones()
         {
             var zoneList = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
@@ -79,5 +90,28 @@ namespace Libraries.Repository.EntityRepository
             var result = await _dbContext.SaveChangesAsync();
             return result > 0;
         }
+        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto)
+       
+        {
+            try
+            {
+               
+                var data = await _dbContext.LoadStoredProcedure("FileStatus")
+                                            .WithSqlParams(("P_departmentId", fileStatusReportSearchDto.Department),
+                                            ("UserId", fileStatusReportSearchDto.Userprofile)
+                                            , ("P_From_Date", fileStatusReportSearchDto.FromDate)
+                                            , ("P_To_Date", fileStatusReportSearchDto.ToDate))
+
+
+                                            .ExecuteStoredProcedureAsync<FileStatusReportListDataDto>();
+                return (List<FileStatusReportListDataDto>)data;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+       
     }
 }
