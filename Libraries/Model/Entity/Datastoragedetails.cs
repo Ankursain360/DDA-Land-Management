@@ -63,7 +63,7 @@ namespace Libraries.Model.Entity
         public Department Department { get; set; }
 
         
-        public Branch Branch { get; set; }
+        //public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
 
