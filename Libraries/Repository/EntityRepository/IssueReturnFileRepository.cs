@@ -112,6 +112,20 @@ namespace Libraries.Repository.EntityRepository
                                    .Where(x => x.Id == id)
                                    .SingleOrDefaultAsync();
         }
+        public async Task<Issuereturnfile> FetchfiletResult(int id)
+        {
+            return await _dbContext.Issuereturnfile
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Branch)
+                                    .Include(x => x.Designation)
+                                     .Include(x => x.DataStorageDetails)
+                                    .Include(x => x.DataStorageDetails.Almirah)
+                                    .Include(x => x.DataStorageDetails.Row)
+                                    .Include(x => x.DataStorageDetails.Column)
+                                    .Include(x => x.DataStorageDetails.Bundle)
+                                   .Where(x => x.DataStorageDetailsId == id && x.DataStorageDetails.FileStatus=="Issued")
+                                   .SingleOrDefaultAsync();
+        }
     }
     
 }

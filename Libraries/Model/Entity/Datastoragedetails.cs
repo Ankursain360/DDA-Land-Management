@@ -47,7 +47,7 @@ namespace Libraries.Model.Entity
         public string IsFreeHold { get; set; }
         public string DocumentSequenceNo { get; set; }
         public string DocumentType { get; set; }
-        public int? DeptId { get; set; }
+        public int? DepartmentId { get; set; }
         public int? UserId { get; set; }
         public int? Year { get; set; }
         public string CategoryNo { get; set; }
