@@ -11,6 +11,7 @@ namespace Libraries.Model.Entity
         public Department()
         {
             Branch = new HashSet<Branch>();
+            Datastoragedetails = new HashSet<Datastoragedetails>();
             MonthlyRoaster = new HashSet<MonthlyRoaster>();
             LandtransferHandedOverDepartment = new HashSet<Landtransfer>();
             LandtransferTakenOverDepartment = new HashSet<Landtransfer>();
@@ -55,5 +56,6 @@ namespace Libraries.Model.Entity
         public ICollection<Branch> Branch { get; set; }
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
         public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
+        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
     }
 }

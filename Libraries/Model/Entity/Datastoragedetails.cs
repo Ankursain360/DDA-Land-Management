@@ -60,7 +60,7 @@ namespace Libraries.Model.Entity
         public string IsFreeHold { get; set; }
         public string DocumentSequenceNo { get; set; }
         public string DocumentType { get; set; }
-        public int? DeptId { get; set; }
+        public int? DepartmentId { get; set; }
         public int? UserId { get; set; }
         public int? Year { get; set; }
 
@@ -79,6 +79,10 @@ namespace Libraries.Model.Entity
         public Branch Branch { get; set; }
         public Column Column { get; set; }
         public Locality Locality { get; set; }
+        public Department Department { get; set; }
+
+        
+        //public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
 
@@ -101,6 +105,22 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Scheme> schemaList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Branch> BranchList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentName { get; set; }
+        [NotMapped]
+        public int? TotalFiles { get; set; }
+            [NotMapped]
+            public int? IssuedFiles { get; set; }
+        [NotMapped]
+        public int? UnissuedFiles { get; set; }
+
+        
+
+
 
 
         [NotMapped]
@@ -125,7 +145,8 @@ namespace Libraries.Model.Entity
         public List<int> YearForPartFile { get; set; }
 
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
-
+       
+    
         [NotMapped]
         public List<Datastoragedetails> FileNoList { get; set; }
 

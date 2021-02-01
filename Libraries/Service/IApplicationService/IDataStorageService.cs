@@ -24,14 +24,19 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueName(int id, string dataStorageDetails);
 
         Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model);
+        //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
+        Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
         Task<List<Almirah>> GetAlmirahs();
         Task<List<Row>> GetRows();
         Task<List<Column>> GetColumns();
         Task<List<Bundle>> GetBundles();
         Task<List<Locality>> GetLocalities();
+        Task<List<Department>> GetDepartment();
+        Task<List<Branch>> GetBranch();
 
         Task<List<Zone>> GetZones();
 
         Task<List<Scheme>> GetSchemes();
+        Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
     }
 }

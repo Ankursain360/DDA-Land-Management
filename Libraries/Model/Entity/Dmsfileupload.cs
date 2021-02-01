@@ -37,5 +37,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile FileUpload { get; set; }
+
+        [NotMapped]
+        public string PdfLocationPath { get; set; }
     }
 }

@@ -15,9 +15,7 @@ namespace Dto.Search
        
         public string PaymentMode { get; set; }
         public DateTime CreatedDate { get; set; }
-
-
-       
+               
         public Decimal AmountPaid { get; set; }
 
        
