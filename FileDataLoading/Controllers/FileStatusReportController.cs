@@ -10,10 +10,15 @@ using Dto.Search;
 using Dto.Master;
 using FileDataLoading.Filters;
 using Core.Enum;
+using FileDataLoading.Helper;
+using System.Collections.Generic;
+using System.Linq;
+
+
 namespace FileDataLoading.Controllers
 {
-    public class FileStatusReportController : Controller
-           {
+    public class FileStatusReportController : BaseController
+    {
                private readonly IDataStorageService _datastorageService;
 
                 public FileStatusReportController(IDataStorageService datastorageService)
@@ -25,7 +30,7 @@ namespace FileDataLoading.Controllers
         {
             FileStatusReportDtoProfile datastoragedetails = new FileStatusReportDtoProfile();
            
-            ViewBag.BranchList = await _datastorageService.GetBranch();
+            //ViewBag.BranchList = await _datastorageService.GetBranch();
             ViewBag.DepartmentList = await _datastorageService.GetDepartment();
 
             return View(datastoragedetails);
@@ -34,7 +39,8 @@ namespace FileDataLoading.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] FileStatusReportSearchDto model)
         {
-            var result = await _datastorageService.GetPagedFileStatusReportData(model);
+            int UserId = SiteContext.UserId;
+            var result = await _datastorageService.GetPagedFileStatusReportData(model, UserId);
 
             if (result != null)
             {

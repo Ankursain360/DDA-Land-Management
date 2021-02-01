@@ -12,9 +12,9 @@ namespace Dto.Search
         public string BranchName { get; set; }
         public DateTime CreatedDate { get; set; }
 
-        public int TotalFiles { get; set; }
-        public int IssuedFiles { get; set; }
-        public int UnissuedFiles { get; set; }
+        public long TotalFiles { get; set; }
+        public long IssuedFiles { get; set; }
+        public long UnissuedFiles { get; set; }
         
 
 

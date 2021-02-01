@@ -25,7 +25,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model);
         //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
-        Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
+        Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
         Task<List<Almirah>> GetAlmirahs();
         Task<List<Row>> GetRows();
         Task<List<Column>> GetColumns();

@@ -90,10 +90,21 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
         public List<Branch> BranchList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentName { get; set; }
+        [NotMapped]
+        public int? TotalFiles { get; set; }
+            [NotMapped]
+            public int? IssuedFiles { get; set; }
+        [NotMapped]
+        public int? UnissuedFiles { get; set; }
+
         
 
 
-[NotMapped]
+
+
+        [NotMapped]
         public List<string> Category { get; set; }
         [NotMapped]
         public List<string> Header { get; set; }

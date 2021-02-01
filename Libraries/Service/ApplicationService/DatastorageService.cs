@@ -104,9 +104,9 @@ namespace Libraries.Service.ApplicationService
         //{
         //    return await _datastoragedetailRepository.GetFileStatusReportData(fileStatusReportSearchDto);
         //}
-        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto)
+        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId)
         {
-            return await _datastoragedetailRepository.GetPagedFileStatusReportData(fileStatusReportSearchDto);
+            return await _datastoragedetailRepository.GetPagedFileStatusReportData(fileStatusReportSearchDto, UserId);
         }
 
         public async Task<List<Almirah>> GetAlmirahs()

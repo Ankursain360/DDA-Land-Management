@@ -97,7 +97,7 @@ namespace Libraries.Repository.EntityRepository
             return result > 0;
         }
 
-        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto)
+        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId)
 
         {
             try
@@ -105,7 +105,7 @@ namespace Libraries.Repository.EntityRepository
 
                 var data = await _dbContext.LoadStoredProcedure("FileStatus")
                                             .WithSqlParams(("P_departmentId", fileStatusReportSearchDto.Department),
-                                            ("UserId", fileStatusReportSearchDto.Userprofile)
+                                            ("UserId", UserId)
                                             , ("P_From_Date", fileStatusReportSearchDto.FromDate)
                                             , ("P_To_Date", fileStatusReportSearchDto.ToDate))
 
