@@ -106,7 +106,8 @@ namespace Libraries.Model.Entity
         public List<int> YearForPartFile { get; set; }
 
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
-
+       
+    
         [NotMapped]
         public List<Datastoragedetails> FileNoList { get; set; }
 

@@ -19,5 +19,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Zone>> GetZones();
         Task<List<Scheme>> GetSchemes();
         Task<bool> SaveDetailsOfPartFile(List<Datastoragepartfilenodetails> datastoragepartfilenodetails);
+        Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId);
+
     }
 }
