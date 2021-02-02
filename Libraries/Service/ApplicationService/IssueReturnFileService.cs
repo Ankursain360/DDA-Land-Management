@@ -6,6 +6,7 @@ using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,12 +16,14 @@ namespace Service.ApplicationService
    {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IIssueReturnFileRepository _issueReturnFileRepository;
-
-        public IssueReturnFileService(IUnitOfWork unitOfWork, IIssueReturnFileRepository issueReturnFileRepository)
+        private readonly IDataStorageRepository _datastoragedetailRepository;
+        public IssueReturnFileService(IUnitOfWork unitOfWork, IIssueReturnFileRepository issueReturnFileRepository,
+            IDataStorageRepository datastoragedetailRepository)
         : base(unitOfWork, issueReturnFileRepository)
         {
             _unitOfWork = unitOfWork;
             _issueReturnFileRepository = issueReturnFileRepository;
+            _datastoragedetailRepository = datastoragedetailRepository;
         }
         public async Task<List<Department>> GetAllDepartment()
         {
@@ -53,6 +56,57 @@ namespace Service.ApplicationService
         public async Task<PagedResult<Datastoragedetails>> GetPagedIssueReturnFile(IssueReturnFileSearchDto model)
         {
             return await _issueReturnFileRepository.GetPagedIssueReturnFile(model);
+        }
+
+      
+        public async Task<bool> UpdateIssueFileStatus(int id)
+        {
+            var form = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = form.FirstOrDefault();
+            model.FileStatus = "Issued";
+            _datastoragedetailRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<bool> UpdateReturnFileStatus(int id)
+        {
+            var form = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = form.FirstOrDefault();
+            model.FileStatus = "Return";
+            _datastoragedetailRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+        public async Task<Issuereturnfile> FetchSingleResult(int id)
+        {
+            var result = await _issueReturnFileRepository.FindBy(a => a.Id == id);
+            Issuereturnfile model = result.FirstOrDefault();
+            return model;
+        }
+        public async Task<Issuereturnfile> FetchSingleReceiptResult(int id)
+        {
+            Issuereturnfile model = await _issueReturnFileRepository.FetchSingleReceiptResult(id);
+            return model;
+        }
+        public async Task<Issuereturnfile> FetchReturnReceiptResult(int id)
+        {
+            Issuereturnfile model = await _issueReturnFileRepository.FetchReturnReceiptResult(id);
+            return model;
+        }
+        public async Task<Issuereturnfile> FetchfiletResult(int id) 
+        {
+            Issuereturnfile model = await _issueReturnFileRepository.FetchfiletResult(id);
+            return model;
+        }
+        public async Task<bool> Update(int id, Issuereturnfile issuereturnfile)
+        {
+
+            Issuereturnfile model =  await _issueReturnFileRepository.FetchfiletResult(id);
+            model.ReturnedDate = issuereturnfile.ReturnedDate;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = issuereturnfile.ModifiedBy;
+            _issueReturnFileRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+
+
         }
     }
 }

@@ -8,16 +8,23 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Datastoragedetails> builder)
         {
+
             builder.ToTable("datastoragedetails", "lms");
 
             builder.HasIndex(e => e.AlmirahId)
-                     .HasName("fk_AlmirahId");
+                .HasName("fk_AlmirahId");
+
+            builder.HasIndex(e => e.BranchId)
+                .HasName("fk_BranchId_idx");
 
             builder.HasIndex(e => e.BundleId)
                 .HasName("BundleNo_idx");
 
             builder.HasIndex(e => e.ColumnId)
                 .HasName("ColumnNo_idx");
+
+            builder.HasIndex(e => e.DepartmentId)
+                .HasName("fk_DataDeartment_idx");
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("LocalityId_idx");
@@ -40,6 +47,8 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(45)
                 .IsUnicode(false);
 
+            builder.Property(e => e.BranchId).HasColumnType("int(11)");
+
             builder.Property(e => e.BranchSno).HasColumnType("int(11)");
 
             builder.Property(e => e.BundleId).HasColumnType("int(11)");
@@ -58,7 +67,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasColumnType("date");
 
-            builder.Property(e => e.DeptId).HasColumnType("int(11)");
+            builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DocumentSequenceNo)
                 .HasMaxLength(45)
@@ -70,6 +79,10 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.FileNo)
                 .HasMaxLength(500)
+                .IsUnicode(false);
+
+            builder.Property(e => e.FileStatus)
+                .HasMaxLength(50)
                 .IsUnicode(false);
 
             builder.Property(e => e.FlatCategoryId)
@@ -143,6 +156,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.AlmirahId)
                 .HasConstraintName("fk_AlmirahId");
 
+            builder.HasOne(d => d.Branch)
+                .WithMany(p => p.Datastoragedetails)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("fk_BranchId");
+
             builder.HasOne(d => d.Bundle)
                 .WithMany(p => p.Datastoragedetails)
                 .HasForeignKey(d => d.BundleId)
@@ -152,6 +170,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Datastoragedetails)
                 .HasForeignKey(d => d.ColumnId)
                 .HasConstraintName("fk_ColumnId");
+
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Datastoragedetails)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("fk_DataDeartment");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Datastoragedetails)

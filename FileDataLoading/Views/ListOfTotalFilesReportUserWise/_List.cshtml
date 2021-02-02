@@ -1,0 +1,67 @@
+﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Datastoragedetails>*@
+@model IEnumerable<Dto.Search.ListofTotalFileReportListDataDto>
+@{int rowNo = 0; }
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+        <tr>
+
+            <th>File No.</th>
+            <th>File Name</th>
+            <th>File Particulars/Compactor Details</th>
+            <th>UserDetails</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Count() > 0)
+        {
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FileNo</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <label class="control-label lb-sm">Location Details</label>
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Record Room No.</th>
+                                        <th>Al. No./Compactor No.</th>
+                                        <th>Row No</th>
+                                        <th>Col.No.</th>
+                                        <th>Bn No.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.RecordRoomNo</td>
+                                        <td>@item.AlmirahNo)</td>
+                                        <td>@(item.RowNo)</td>
+                                        <td>@(item.ColumnNo)</td>
+                                        <td>@(item.BundleNo)</td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+
+
+                    <td>
+                        @item.UserId,<br />@item.Desig,<br />@item.Zone,<br />@item.Dept
+
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+    </tbody>
+</table>
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

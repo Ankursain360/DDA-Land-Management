@@ -1,8 +1,8 @@
-﻿$(function () {
-    $("#Issue").click(function () {
-        $("#IssueReceipt").show();
-    } 
-      );  //else {
-        //    $("#IssueReceipt").hide();
-        //}
+﻿
+$(function () {
+    $("#btnPrint").click(function () {
+        $('.jhide').hide();
+        window.print();
+        $('.jhide').show();
+    });
 });

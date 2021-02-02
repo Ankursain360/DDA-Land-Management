@@ -61,7 +61,7 @@ namespace Libraries.Service.ApplicationService
             Datastoragedetails model = result.FirstOrDefault();
             return model;
         }
-
+        
         public async Task<bool> Create(Datastoragedetails dataStorageDetails)
         {
 
@@ -100,6 +100,14 @@ namespace Libraries.Service.ApplicationService
         {
             return await _datastoragedetailRepository.GetPagedDataStorageDetails(model);
         }
+        //public async Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto)
+        //{
+        //    return await _datastoragedetailRepository.GetFileStatusReportData(fileStatusReportSearchDto);
+        //}
+        public async Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedFileStatusReportData(fileStatusReportSearchDto, UserId);
+        }
 
         public async Task<List<Almirah>> GetAlmirahs()
         {
@@ -130,6 +138,16 @@ namespace Libraries.Service.ApplicationService
             List<Locality> localityList = await _datastoragedetailRepository.GetLocalities();
             return localityList;
         }
+        public async Task<List<Department>> GetDepartment()
+        {
+            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment();
+            return departmentList;
+        }
+        public async Task<List<Branch>> GetBranch()
+        {
+            List<Branch> branchList = await _datastoragedetailRepository.GetBranch();
+            return branchList;
+        }
 
         public async Task<List<Zone>> GetZones()
         {
@@ -143,5 +161,11 @@ namespace Libraries.Service.ApplicationService
             List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
             return schemesList;
         }
+        public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
+        }
+
+        
     }
 }

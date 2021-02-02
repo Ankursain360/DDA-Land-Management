@@ -1,0 +1,75 @@
+/*
+
+  * Author : Issac T Thomas
+  * Copyright 2016.
+  * Project: SiidculApp
+  
+*/
+
+@media (max-width:768px){
+
+.info .infomore, #Header, #latlonginfo, .map_status, .scaleDist, .scaleRuler {
+	display:none !important;
+	visibility:hidden !important;
+}
+.footer .right {
+	float:left !important;
+	padding-right:20px;
+	padding-left:20px;
+    
+}
+.footer .right span {
+	display:inline-block;
+	float:none;
+	line-height:25px;
+}
+.footer {
+	height:auto;
+	text-align:left !important;
+}
+.map_wrapper {
+	/*height:100% !important;*/
+}
+.info {
+	width:80% !important;
+	left:0 !important;
+	top:0 !important;
+	bottom:0 !important;
+	right:0 !important;
+	margin:auto;
+	height:50%;
+}
+.info .infolower {
+	position: absolute;
+    top: 0;
+    right: 15px;
+    width: 40px !important;
+}
+.info .infolower .infoClose {
+	color:#fff !important;
+}
+.info .infomain {
+	border:none !important;
+	width:100% !important;
+	margin:0 !important;
+	float:none !important;
+	background-color:#fff;
+}
+.info .infomain table tr td {
+	padding-left:10px;
+	padding-right:10px;
+}
+.ui-dialog {
+	left:0 !important;
+	right:0 !important;
+	top:0 !important;
+	margin:10% auto !important;
+	width:90% !important;
+    height:50%;
+}
+.info .infomain {
+	border-bottom:none !important;
+}
+}
+
+    

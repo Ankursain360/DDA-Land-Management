@@ -9,6 +9,7 @@ namespace Libraries.Repository.IEntityRepository
     public interface IDemandLetterRepository : IGenericRepository<Demandletters>
     {
         Task<PagedResult<Demandletters>> GetPagedDemandletter(DemandletterSearchDto model);
+        Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model);
         Task<List<Demandletters>> GetAllDemandletter();
         Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto);
         

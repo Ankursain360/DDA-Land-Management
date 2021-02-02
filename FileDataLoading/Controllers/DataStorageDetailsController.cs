@@ -63,63 +63,75 @@ namespace FileDataLoading.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
+                if (dataStorageDetails.IsPartOfMainFile == 0)
                 {
-                    var result = await _datastorageService.Create(dataStorageDetails);
-
-                    if (result)
+                    ModelState.Remove("SchemeDptBranch");
+                    ModelState.Remove("YearForPartFile");
+                    ModelState.Remove("LocalityIdForPartFile");
+                    ModelState.Remove("IsPartOfMainFile");
+                }
+                    if (ModelState.IsValid)
                     {
-                        FileHelper fileHelper = new FileHelper();
-                        if (
-                            dataStorageDetails.Category != null &&
-                            dataStorageDetails.Header != null &&
-                            dataStorageDetails.SequenceNoForPartFile != null &&
-                            dataStorageDetails.Subject != null &&
-                            dataStorageDetails.LocalityIdForPartFile.Count > 0 &&
-                            dataStorageDetails.SchemeDptBranch.Count > 0)
-                        {
-                            List<Datastoragepartfilenodetails> datastoragepartfilenodetails = new List<Datastoragepartfilenodetails>();
-                            for (int i = 0; i < dataStorageDetails.Category.Count; i++)
-                            {
-                                datastoragepartfilenodetails.Add(new Datastoragepartfilenodetails
-                                {
-                                    Category = dataStorageDetails.Category[i],
-                                    Header = dataStorageDetails.Header[i],
-                                    SequenceNo = dataStorageDetails.SequenceNoForPartFile[i],
-                                    Subject = dataStorageDetails.Subject[i],
-                                    LocalityId = dataStorageDetails.LocalityIdForPartFile[i],
-                                    SchemeDptBranch = dataStorageDetails.SchemeDptBranch[i],
-                                    Year = dataStorageDetails.YearForPartFile[i],
-                                    DataStorageDetailsId = dataStorageDetails.Id,
-                                    CreatedBy = SiteContext.UserId,
-                                    CreatedDate = DateTime.Now
-                                });
-                            }
-                            result = await _datastorageService.SaveDetailsOfPartFile(datastoragepartfilenodetails);
-                        }
+                        var result = await _datastorageService.Create(dataStorageDetails);
 
                         if (result)
                         {
-                            ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                            var list = await _datastorageService.GetAllDataStorageDetail();
-                            return View("Index", list);
+                            FileHelper fileHelper = new FileHelper();
+                            if (
+                                dataStorageDetails.Category != null &&
+                                dataStorageDetails.Header != null &&
+                                dataStorageDetails.SequenceNoForPartFile != null &&
+                                dataStorageDetails.Subject != null &&
+                                dataStorageDetails.LocalityIdForPartFile.Count > 0 &&
+                                dataStorageDetails.SchemeDptBranch.Count > 0)
+                            {
+                                List<Datastoragepartfilenodetails> datastoragepartfilenodetails = new List<Datastoragepartfilenodetails>();
+                                for (int i = 0; i < dataStorageDetails.Category.Count; i++)
+                                {
+                                    datastoragepartfilenodetails.Add(new Datastoragepartfilenodetails
+                                    {
+                                        Category = dataStorageDetails.Category[i],
+                                        Header = dataStorageDetails.Header[i],
+                                        SequenceNo = dataStorageDetails.SequenceNoForPartFile[i],
+                                        Subject = dataStorageDetails.Subject[i],
+                                        LocalityId = dataStorageDetails.LocalityIdForPartFile[i],
+                                        SchemeDptBranch = dataStorageDetails.SchemeDptBranch[i],
+                                        Year = dataStorageDetails.YearForPartFile[i],
+                                        DataStorageDetailsId = dataStorageDetails.Id,
+                                        CreatedBy = SiteContext.UserId,
+                                        CreatedDate = DateTime.Now
+                                    });
+                                }
+
+                                //For File No Add Category No,Header No,Sequence No,From Year and To Year
+
+                                dataStorageDetails.FileNo = dataStorageDetails.CategoryNo + "/" + dataStorageDetails.SequenceNo + "/"+dataStorageDetails.HeaderNo+dataStorageDetails.Year;
+                                result = await _datastorageService.SaveDetailsOfPartFile(datastoragepartfilenodetails);
+                            }
+
+                            if (result)
+                            {
+                                ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
+                                var list = await _datastorageService.GetAllDataStorageDetail();
+                                return View("Index", list);
+                            }
+                            else
+                            {
+                                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                                return View(dataStorageDetails);
+
+                            }
                         }
                         else
                         {
-                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                             return View(dataStorageDetails);
-
                         }
                     }
                     else
                     {
+
                         return View(dataStorageDetails);
                     }
-                }
-                else
-                {
-                    return View(dataStorageDetails);
-                }
             }
             catch (Exception ex)
             {
@@ -140,6 +152,10 @@ namespace FileDataLoading.Controllers
             }
             return View(Data);
         }
+
+
+
+
 
         [HttpPost]
         [AuthorizeContext(ViewAction.Edit)]
@@ -163,6 +179,7 @@ namespace FileDataLoading.Controllers
             }
             return View(datastoragedetails);
         }
+
 
 
         [AuthorizeContext(ViewAction.View)]
@@ -190,6 +207,8 @@ namespace FileDataLoading.Controllers
             }
             return RedirectToAction("Index", "DataStorageDetailsDetails");
         }
+
+
 
 
         [AuthorizeContext(ViewAction.Delete)]

@@ -1,10 +1,8 @@
 ﻿using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 
 namespace Libraries.Model.Entity
 {
@@ -12,9 +10,8 @@ namespace Libraries.Model.Entity
     {
         public Village()
         {
-          
             Nazul = new HashSet<Nazul>();
-            
+            Plot = new HashSet<Plot>();
         }
 
         [Required(ErrorMessage = " Zone is mandatory")]
@@ -22,7 +19,11 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = " Village name is mandatory")]
         [Remote(action: "Exist", controller: "Village", AdditionalFields = "Id")]
         public string Name { get; set; }
-        public byte IsActive { get; set; } 
+        public decimal? Xcoordinate { get; set; }
+        public decimal? Ycoordinate { get; set; }
+        public decimal? TotalArea { get; set; }
+        public string Polygon { get; set; }
+        public byte IsActive { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
@@ -35,6 +36,7 @@ namespace Libraries.Model.Entity
         public int DepartmentId { get; set; }
         public virtual Zone Zone { get; set; }
         public virtual ICollection<Nazul> Nazul { get; set; }
-       
+        public ICollection<Plot> Plot { get; set; }
+
     }
 }

@@ -167,7 +167,7 @@ function ErrorMessage(message) {
 }
 
 function WarningMessage(message) {
-    toastr.warning(message, 'Warning', { timeOut: 3000, "progressBar": true });
+    toastr.warning(message, 'Warning', { timeOut: 0, "progressBar": true });
 }
 
 function InfoMessage(message) {

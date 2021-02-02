@@ -4,5 +4,35 @@
     "inputFiles": [
       "wwwroot/js/site.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsfileuploadcreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsfileuploadcreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsfileuploadedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsfileuploadedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsfileuploadindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsfileuploadindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsretrivefilecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsretrivefilecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsbulkupload.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsbulkupload.js"
+    ]
   }
 ]

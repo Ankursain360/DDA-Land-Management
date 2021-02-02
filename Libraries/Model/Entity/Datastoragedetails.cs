@@ -15,17 +15,27 @@ namespace Libraries.Model.Entity
         }
 
         public int IsFileDocument { get; set; }
-        [Required(ErrorMessage = "File No is mandatory")]
+       
         public string FileNo { get; set; }
         public string Name { get; set; }
         public int? IsPartOfMainFile { get; set; }
         public string RecordRoomNo { get; set; }
+
+        [Required(ErrorMessage = "Almirah no is Mandatory Field", AllowEmptyStrings = false)]
+
         public int? AlmirahId { get; set; }
 
-        [Required(ErrorMessage = "Row no is Mandatory Field")]
+        [Required(ErrorMessage = "Row no is Mandatory Field", AllowEmptyStrings = false)]
         public int? RowId { get; set; }
+
+
+        [Required(ErrorMessage = "Coloumn no is Mandatory Field", AllowEmptyStrings = false)]
         public int? ColumnId { get; set; }
+
+        [Required(ErrorMessage = "Bundle is Mandatory Field", AllowEmptyStrings = false)]
         public int? BundleId { get; set; }
+
+
         public int? ZoneId { get; set; }
         public int? LocalityId { get; set; }
 
@@ -40,6 +50,9 @@ namespace Libraries.Model.Entity
         public string FlatNo { get; set; }
         public string FlatCategoryId { get; set; }
         public string CompactorNo { get; set; }
+
+
+        [Required(ErrorMessage = "Sequence No is Mandatory Field")]
         public string SequenceNo { get; set; }
         public string SttsNo { get; set; }
         public int? BranchSno { get; set; }
@@ -47,16 +60,29 @@ namespace Libraries.Model.Entity
         public string IsFreeHold { get; set; }
         public string DocumentSequenceNo { get; set; }
         public string DocumentType { get; set; }
-        public int? DeptId { get; set; }
+        public int? DepartmentId { get; set; }
         public int? UserId { get; set; }
         public int? Year { get; set; }
+
+        [Required(ErrorMessage = "Category No is Mandatory Field")]
         public string CategoryNo { get; set; }
+
+        [Required(ErrorMessage = "Header No is Mandatory Field")]
         public string HeaderNo { get; set; }
+
+
+        public string FileStatus { get; set; }
+        public int? BranchId { get; set; }
 
         public Almirah Almirah { get; set; }
         public Bundle Bundle { get; set; }
+        public Branch Branch { get; set; }
         public Column Column { get; set; }
         public Locality Locality { get; set; }
+        public Department Department { get; set; }
+
+        
+        //public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
 
@@ -79,6 +105,22 @@ namespace Libraries.Model.Entity
         public List<Zone> ZoneList { get; set; }
         [NotMapped]
         public List<Scheme> schemaList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Branch> BranchList { get; set; }
+        [NotMapped]
+        public List<Department> DepartmentName { get; set; }
+        [NotMapped]
+        public int? TotalFiles { get; set; }
+            [NotMapped]
+            public int? IssuedFiles { get; set; }
+        [NotMapped]
+        public int? UnissuedFiles { get; set; }
+
+        
+
+
 
 
         [NotMapped]
@@ -88,10 +130,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> SequenceNoForPartFile { get; set; }
 
-        public void Add(Datastoragedetails datastoragedetails)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         [NotMapped]
         public List<string> Subject { get; set; }
@@ -106,7 +145,8 @@ namespace Libraries.Model.Entity
         public List<int> YearForPartFile { get; set; }
 
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
-
+       
+    
         [NotMapped]
         public List<Datastoragedetails> FileNoList { get; set; }
 

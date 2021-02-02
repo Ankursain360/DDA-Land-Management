@@ -1,251 +1,129 @@
-﻿
-@{
-    ViewData["Title"] = "ListOfTotalFilesReportUserWise";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@*@model Libraries.Model.Entity.Datastoragedetails*@
 
+@await Component.InvokeAsync("PageHeader", new { pageName = "LIST OF TOTAL FILES REPORT USER WISE" })
+<div class="=pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
 
+        <div class="row">
+            <div class="col-md-3">
 
-<style>
-    .bg {
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-    }
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" id="ddlColName" onchange="OnddlColNameChanged();">
 
-    .alert-info {
-        color: #31708F;
-        background-color: rebeccapurple;
-        border-color: #BCE8F1;
-    }
+                        <option value="0">Select from here</option>
+                        <option value="FileNo">File No</option>
+                        <option value="RecordRoomNo">Record Room No</option>
+                        <option value="AlmirahNo">Almirah No</option>
+                        <option value="RowNo">Row No</option>
+                        <option value="BundleNo">Bundle No</option>
+                        <option value="ColumnNo">Column No</option>
+                        <option value="UserId">User Name</option>
+                    </select>
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">Search List </label>
 
-    .hedingcss {
-        background-color: rebeccapurple;
-    }
-
-    .panel-default > .panel-heading-custom {
-        background: #2c3091;
-        color: #fff;
-        height: 44px;
-        margin-bottom: 2px;
-        font-size: 16px;
-    }
-
-    .alert-custom {
-        top: -10px;
-        color: #fff;
-        background: linear-gradient(to left, #9e1c32, #991141, #900f50, #83155d, #721e68, #68226f, #5d2675, #4f2a7a, #492b80, #422c85, #392e8b, #2c3091);
-        position: relative;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .btn {
-        width: 143px !important;
-    }
-</style>
-
-
-<style>
-    .btn {
-        Background: linear-gradient(33deg, #8c1f47,#362c85);
-        Font-size: 1.0rem;
-        Font-Family: Open SansSemibold;
-        color: #ffffff
-    }
-</style>
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">List of Total Files Report User Wise</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-<br />
-
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">
-                List of Total Files Report User Wise
-            </h6>
-        </div>
-        <div class="panel-body">
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
 
 
-
-
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-
-                        <div class="card-body ">
-                            <div class="table-responsive">
-                                <table id="mytable" class="table table-striped table-bordered" border="0">
-                                    <thead class="thead">
-                                        <tr>
-                                            <th>Sr.No</th>
-                                            <th>File No </th>
-                                            <th> File Name  </th>
-                                            <th>File Particulars/Details  </th>
-                                            <th>User Details  </th>
-
-                                        </tr>
-                                    </thead>
-                                    <tbody class="tbody">
-                                        <tr>
-                                            <td>1</td>
-                                            <td>F75(59)2001-2002/LM/SEZ/CTC</td>
-                                            <td>CAPTAIN SG SHARMA VS ATTALI DEVI & ORS</td>
-                                            <td>
-                                                <h4> Location Details</h4>
-                                                <div class="card-body ">
-                                                    <div class="table-responsive">
-                                                        <table id="mytable" class="table table-striped table-bordered" border="0">
-                                                            <thead class="thead">
-                                                                <tr>
-                                                                    <th>Rec.Ro.No.</th>
-                                                                    <th>Ai.No./Compactor.No. </th>
-                                                                    <th>Row No </th>
-                                                                    <th>Col No. </th>
-                                                                    <th>Bn No.   </th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>1</td>
-                                                                    <td>122</td>
-                                                                    <td>10</td>
-                                                                    <td>10</td>
-                                                                    <td>10</td>
-                                                                </tr>
-                                                        </table>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                            </td>
-                                            <td>Shabnam Kundra,Deputy Director,South East Zone,Land Management</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>F75(59)2001-2002/LM/SEZ/CTC</td>
-                                            <td>CAPTAIN SG SHARMA VS ATTALI DEVI & ORS</td>
-                                            <td>
-                                                <h4> Location Details</h4>
-                                                <div class="card-body ">
-                                                    <div class="table-responsive">
-                                                        <table id="mytable" class="table table-striped table-bordered" border="0">
-                                                            <thead class="thead">
-                                                                <tr>
-                                                                    <th>Rec.Ro.No.</th>
-                                                                    <th>Ai.No./Compactor.No. </th>
-                                                                    <th>Row No </th>
-                                                                    <th>Col No. </th>
-                                                                    <th>Bn No.   </th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>2</td>
-                                                                    <td>77</td>
-                                                                    <td>4</td>
-                                                                    <td>7</td>
-                                                                    <td>10</td>
-                                                                </tr>
-                                                        </table>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                            </td>
-                                            <td>Shabnam Kundra,Deputy Director,South East Zone,Land Management</td>
-
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>F75(59)2001-2002/LM/SEZ/CTC</td>
-                                            <td>CAPTAIN SG SHARMA VS ATTALI DEVI & ORS</td>
-                                            <td>
-                                                <h4> Location Details</h4>
-                                                <div class="card-body ">
-                                                    <div class="table-responsive">
-                                                        <table id="mytable" class="table table-striped table-bordered" border="0">
-                                                            <thead class="thead">
-                                                                <tr>
-                                                                    <th>Rec.Ro.No.</th>
-                                                                    <th>Ai.No./Compactor.No. </th>
-                                                                    <th>Row No </th>
-                                                                    <th>Col No. </th>
-                                                                    <th>Bn No.   </th>
-
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody class="tbody">
-                                                                <tr>
-                                                                    <td>3</td>
-                                                                    <td>52</td>
-                                                                    <td>12</td>
-                                                                    <td>19</td>
-                                                                    <td>1</td>
-                                                                </tr>
-                                                        </table>
-
-                                                    </div>
-
-                                                </div>
-
-
-                                            </td>
-                                            <td>Shabnam Kundra,Deputy Director,South East Zone,Land Management</td>
-
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            <div style="text-align:center;">
-                                <input type="submit" value="Print" class="btn btn-primary" style="width:200px;margin-bottom:20px;" />
-                            </div>
-
-                        </div>
-
-
-
-                    </div>
+                    <input type="text" id="txtsearchtxt" class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">Search Value </label>
                 </div>
             </div>
 
 
         </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" type="submit" id="btnSearch">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
-</div>
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3" >
+        <h3 class="mb-3 d-flex">
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <label>
+                        Is Freehold ?
+
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <input type="radio"  id="ryes" onchange="FreeHoldYes();" name="freeholdcheck">  Yes
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <input type="radio"  id="rno" checked="checked"  onchange="FreeHoldNo();"  name="freeholdcheck" >  No
+                </div>
+            </div>
+        </h3>
+            
+                    
+            
+
+       
+           </div>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="short-section d-md-flex align-items-center">
+                <div class="p-3 d-flex align-items-end mr-auto">
+
+                    <div class="floating-label-wrap">
+                        <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                            <option value="FileNo">File No</option>
+                            <option value="RecordRoomNo">Record Room No</option>
+                            <option value="AlmirahNo">Almirah No</option>
+                            <option value="RowNo">Row No</option>
+                            <option value="BundleNo">Bundle No</option>
+                            <option value="ColumnNo">Column No</option>
+                            <option value="UserId">User Name</option>
+
+                        </select>
+                        <label for="field-1" class="floating-label">Sort by</label>
+                    </div>
+                    <div class="short-btn d-flex align-items-center">
+                        <span>  <button id="btnAscending" class="btn slow active" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button></span>
+                        <span>   <button id="btnDescending" class="btn slow " title="Descending order" onclick="Descending();"><i class="ri-sort-desc"></i></button></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="table-responsive px-2 ">
+                <div id="LoadView"></div>
+
+            </div>
 
 
+        </div>
+    </div>
 
-
-
-@*@if (ViewData["Msg"] != null)
-    {
-        DDAPropertyREG.Models.Message msg = ViewData["Msg"] as DDAPropertyREG.Models.Message;
-        @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-    }*@
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/listoftotalreportuserwise.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/listoftotalreportuserwise.min.js" asp-append-version="true"></script>
+    </environment>
 
 
 

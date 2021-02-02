@@ -654,10 +654,6 @@ $(document).delegate('a.delete-recordPayment', 'click', function (e) {
     }
 });
 
-function Print() {
-    window.print();
-}
-
 $("#btnGenerate").click(function () {
     debugger;
     var param = GetSearchParam(currentPageNumber, currentPageSize);
