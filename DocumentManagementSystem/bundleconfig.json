@@ -22,5 +22,17 @@
     "inputFiles": [
       "wwwroot/js/dmsfileuploadindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsretrivefilecreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsretrivefilecreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/dmsbulkupload.min.js",
+    "inputFiles": [
+      "wwwroot/js/dmsbulkupload.js"
+    ]
   }
 ]
