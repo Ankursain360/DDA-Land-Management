@@ -29,23 +29,30 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
   //  debugger
     return model;
 }
+$('#ddlColName').change(function () {
+    $("#txtsearchtxt").val('');
+});
 $("#btnSearch").click(function () {
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 });
 
 $("#btnReset").click(function () {
+    var temp = "0";
     $("#txtsearchtxt").val('');
+    $("#ddlColName").val(temp);
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 });
 function Descending() {
-    $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
+    $("#btnAscending").removeClass("active");
+    
     sortby = 2;     //for Descending
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 };
 function Ascending() {
-    $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
+    $("#btnDescending").removeClass("active");
+   
     sortby = 1;    //for Asc
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 
