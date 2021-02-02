@@ -45,6 +45,7 @@ $("#rbtFileUpload").click(function (event) {
     var selected = $("input[type='radio'][name='grpIsFileBulkUpload']:checked");
     $("#IsFileBulkUpload").val(selected.val());
     $("#divfileupload").show();
+    $("#divBulkFileUpload").hide();
     $('#divLoadData').html("");
     callSelect2();
 });

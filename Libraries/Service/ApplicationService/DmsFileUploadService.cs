@@ -46,22 +46,30 @@ namespace Service.ApplicationService
 
         public async Task<bool> Create(Dmsfileupload dmsfileupload)
         {
-            Dmsfileupload model = new Dmsfileupload();
-            model.FileNo = dmsfileupload.FileNo;
-            model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
-            model.AlloteeName = dmsfileupload.AlloteeName;
-            model.DepartmentId = dmsfileupload.DepartmentId;
-            model.LocalityId = dmsfileupload.LocalityId;
-            model.KhasraNoId = dmsfileupload.KhasraNoId;
-            model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
-            model.AlmirahNo = dmsfileupload.AlmirahNo;
-            model.Title = dmsfileupload.Title;
-            model.FileName = dmsfileupload.FileName;
-            model.FilePath = dmsfileupload.FilePath;
-            model.IsActive =  1;
-            model.CreatedDate = DateTime.Now;
-            _dmsFileUploadRepository.Add(model);
-            return await _unitOfWork.CommitAsync() > 0;
+            try
+            {
+                Dmsfileupload model = new Dmsfileupload();
+                model.FileNo = dmsfileupload.FileNo;
+                model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
+                model.AlloteeName = dmsfileupload.AlloteeName;
+                model.DepartmentId = dmsfileupload.DepartmentId;
+                model.LocalityId = dmsfileupload.LocalityId;
+                model.KhasraNoId = dmsfileupload.KhasraNoId;
+                model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
+                model.AlmirahNo = dmsfileupload.AlmirahNo;
+                model.Title = dmsfileupload.Title;
+                model.FileName = dmsfileupload.FileName;
+                model.FilePath = dmsfileupload.FilePath;
+                model.IsActive = 1;
+                model.CreatedDate = DateTime.Now;
+                _dmsFileUploadRepository.Add(model);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+           
         }
 
         public async Task<Dmsfileupload> FetchSingleResult(int id)
@@ -99,6 +107,21 @@ namespace Service.ApplicationService
             model.ModifiedBy = userId;
             _dmsFileUploadRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public int GetLocalityByName(string name)
+        {
+            return _dmsFileUploadRepository.GetLocalityByName(name);
+        }
+
+        public int GetKhasraByName(string name)
+        {
+            return _dmsFileUploadRepository.GetKhasraByName(name);
+        }
+
+        public async Task<bool> CheckUniqueName(string fileNo)
+        {
+            return await _dmsFileUploadRepository.Any(fileNo);
         }
 
         //public async Task<List<Locality>> GetLocalityList()

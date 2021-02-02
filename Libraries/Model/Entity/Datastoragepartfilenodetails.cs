@@ -16,7 +16,9 @@ namespace Libraries.Model.Entity
         public int SchemeDptBranch { get; set; }
         public int LocalityId { get; set; }
         public string Subject { get; set; }
+      
 
-
+        public Locality Locality { get; set; }
+        public Scheme SchemeDptBranchNavigation { get; set; }
     }
 }

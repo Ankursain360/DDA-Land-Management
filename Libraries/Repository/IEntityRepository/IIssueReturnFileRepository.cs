@@ -19,5 +19,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Branch>> GetAllBranch();
         Task<List<Designation>> GetAllDesignation();
         Task<Issuereturnfile> FetchSingleReceiptResult(int id);
+        Task<Issuereturnfile> FetchfiletResult(int id);
     }
 }

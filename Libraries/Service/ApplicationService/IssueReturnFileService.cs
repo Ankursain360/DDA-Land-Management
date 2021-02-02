@@ -83,9 +83,41 @@ namespace Service.ApplicationService
         }
         public async Task<Issuereturnfile> FetchSingleReceiptResult(int id)
         {
-            
             Issuereturnfile model = await _issueReturnFileRepository.FetchSingleReceiptResult(id);
             return model;
+        }
+       
+        public async Task<Issuereturnfile> FetchfiletResult(int id) 
+        {
+            Issuereturnfile model = await _issueReturnFileRepository.FetchfiletResult(id);
+            return model;
+        }
+        public async Task<bool> Update(int id, Issuereturnfile issuereturnfile)
+        {
+
+            var result = await _issueReturnFileRepository.FetchfiletResult(id);
+            //var datastorageid = result.DataStorageDetailsId;
+            //var data2 = await _datastoragedetailRepository.FindBy(a => a.Id == datastorageid);
+            //result.DataStorageDetails = data2;
+           
+            Issuereturnfile model = new Issuereturnfile();
+            model.ReturnedDate = issuereturnfile.ReturnedDate;
+           
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = 1;
+            _issueReturnFileRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+
+
+            //var result = await _structureRepository.FindBy(a => a.Id == id);
+            //Structure model = result.FirstOrDefault();
+            //model.Name = structure.Name;
+            //model.IsActive = structure.IsActive;
+            //model.ModifiedDate = DateTime.Now;
+            //model.ModifiedBy = 1;
+            //_structureRepository.Edit(model);
+            //return await _unitOfWork.CommitAsync() > 0;
+
         }
     }
 }

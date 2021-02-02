@@ -229,5 +229,28 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+
+        public int GetLocalityByName(string name)
+        {
+            var File = (from f in _dbContext.Locality
+                        where f.Name.ToUpper().Trim() == name.ToUpper().Trim()
+                        select f.Id).FirstOrDefault();
+
+            return File;
+        }
+
+        public int GetKhasraByName(string name)
+        {
+            var File = (from f in _dbContext.Propertyregistration
+                        where f.KhasraNo.ToUpper().Trim() == name.ToUpper().Trim()
+                        select f.Id).FirstOrDefault();
+
+            return File;
+        }
+
+        public async Task<bool> Any(string fileNo)
+        {
+            return await _dbContext.Dmsfileupload.AnyAsync(t =>  t.FileNo.ToLower() == fileNo.ToLower());
+        }
     }
 }

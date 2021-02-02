@@ -8,6 +8,7 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Datastoragedetails> builder)
         {
+
             builder.ToTable("datastoragedetails", "lms");
 
             builder.HasIndex(e => e.AlmirahId)
@@ -21,6 +22,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.HasIndex(e => e.ColumnId)
                 .HasName("ColumnNo_idx");
+
+            builder.HasIndex(e => e.DepartmentId)
+                .HasName("fk_DataDeartment_idx");
 
             builder.HasIndex(e => e.LocalityId)
                 .HasName("LocalityId_idx");
@@ -63,7 +67,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasColumnType("date");
 
-            builder.Property(e => e.DeptId).HasColumnType("int(11)");
+            builder.Property(e => e.DepartmentId).HasColumnType("int(11)");
 
             builder.Property(e => e.DocumentSequenceNo)
                 .HasMaxLength(45)
@@ -166,6 +170,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Datastoragedetails)
                 .HasForeignKey(d => d.ColumnId)
                 .HasConstraintName("fk_ColumnId");
+
+            builder.HasOne(d => d.Department)
+                .WithMany(p => p.Datastoragedetails)
+                .HasForeignKey(d => d.DepartmentId)
+                .HasConstraintName("fk_DataDeartment");
 
             builder.HasOne(d => d.Locality)
                 .WithMany(p => p.Datastoragedetails)

@@ -16,10 +16,17 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Column>> GetColumns();
         Task<List<Bundle>> GetBundles();
         Task<List<Locality>> GetLocalities();
+        Task<List<Department>> GetDepartment();
+        Task<List<Branch>> GetBranch();
         Task<List<Zone>> GetZones();
         Task<List<Scheme>> GetSchemes();
         Task<bool> SaveDetailsOfPartFile(List<Datastoragepartfilenodetails> datastoragepartfilenodetails);
+
+        //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
+        Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
+
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId);
+
 
     }
 }
