@@ -28,6 +28,9 @@ namespace DocumentManagementSystem.Infrastructure.Extensions
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IDmsFileUploadRepository, DmsFileUploadRepository>();
 
+            services.AddScoped<IUserRightRepository, UserRightRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
 
             /* Application Services */
             services.AddScoped<IModuleService, ModuleService>();
@@ -37,6 +40,9 @@ namespace DocumentManagementSystem.Infrastructure.Extensions
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
             services.AddScoped<IDmsFileUploadService, DmsFileUploadService>();
+
+            services.AddScoped<IUserRightService, UserRightService>();
+            services.AddScoped<IDepartmentService, DepartmentService>();
 
         }
     }
