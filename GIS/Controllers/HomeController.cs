@@ -30,7 +30,40 @@ namespace GIS.Controllers
         }
         public async Task<JsonResult> GetZoneList()
         {
-            return Json(await _GISService.GetZoneList());
+            return null;
+        }
+        public async Task<JsonResult> GetAllSectorList(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetSectorList(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetAllPlotList(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetAllPlotList(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetZoneList(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetVillageCompanywise(int? location)
+        {
+            return null;
+        }
+        public async Task<JsonResult> GetAllZoneList(int? location)
+        {
+            return null;
+        }
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
