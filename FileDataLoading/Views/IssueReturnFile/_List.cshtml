@@ -6,7 +6,7 @@
 
             <th>File No.</th>
             <th>File Name</th>
-            <th>File Particulars/Compactor Details</th>
+            <th>File Location Details</th>
             <th>Status</th>
             <th>Issue / Return</th>
         </tr>
@@ -14,65 +14,69 @@
     <tbody>
         @foreach (var item in Model.Results)
         {
-            <tr>
-                <td>@item.FileNo</td>
-                <td>@item.Name</td>
-                <td>
-                    <label class="control-label lb-sm">Location Details</label>
-                    <div class="table-responsive ">
-                        <table class="table table-sm table-bordered mb-0 table-striped">
-                            <thead class="text-nowrap">
-                                <tr>
-                                    <th>Record Room No.</th>
-                                    <th>Al. No./Compactor No.</th>
-                                    <th>Row No</th>
-                                    <th>Col.No.</th>
-                                    <th>Bn No.</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>@item.RecordRoomNo</td>
-                                    <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
-                                    <td>@(item.Row == null?"": item.Row.RowNo)</td>
-                                    <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
-                                    <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
-
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </div>
-                </td>
-                @*<td>@(item.District==null?"": item.District.Name)</td>*@
-
-                <td>
-                    @if (item.FileStatus == null || item.FileStatus == "Return" )
-                    {
-                        <span class="badge badge-primary px-2 py-1">Available</span>
-                    }
-                    else
-                    {
-                <span class="badge badge-danger px-2 py-1">Not Available</span>
-                    }
-                </td>
-                @*<td>Available</td>*@
+        <tr>
+            <td>@item.FileNo</td>
+            <td>@(item.Name == null?"": item.Name)</td>
             <td>
-                @if (item.FileStatus == null || item.FileStatus == "Return")
+              
+                <div class="table-responsive ">
+                    <table class="table table-sm table-bordered mb-0 table-striped">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Record Room No.</th>
+                                <th>Al. No./Compactor No.</th>
+                                <th>Row No</th>
+                                <th>Col.No.</th>
+                                <th>Bn No.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>@item.RecordRoomNo</td>
+                                <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
+                                <td>@(item.Row == null?"": item.Row.RowNo)</td>
+                                <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
+                                <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </td>
+
+
+            <td>
+                @if (item.FileStatus == null || item.FileStatus == String.Empty || item.FileStatus == "Return")
                 {
-                    <a class="btn btn-theme btn-block" asp-action="IssueFileData" asp-route-id="@item.Id">Issue</a>
+                    <span class="badge badge-primary px-2 py-1">Available</span>
+                }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Not Available</span>
+                }
+            </td>
+
+            <td>
+                @if (item.FileStatus == null || item.FileStatus == String.Empty || item.FileStatus == "Return")
+                {
+                    <div class="action-btns">
+                        <a title="Issue" class="view" asp-action="IssueFileData" asp-route-id="@item.Id" ><i style="font-size:28px;" class="ri-file-upload-fill"></i></a>
+                    </div>
                 }
                 else
                 {
                     @*<a onclick="showInPopup('@Url.Action("ReturnFileData","IssueReturnFile",null,Context.Request.Scheme)','Issue')"
             data-toggle="modal" data-target="#form-modal"  class="btn btn-theme btn-block" style="color:white;">Return</a>*@
-                    <a class="btn btn-theme btn-block" asp-action="ReturnFileData" asp-route-id="@item.Id">Return</a>
+                    <div class="action-btns">
+                          <a title="Return" class="remove" asp-action="ReturnFileData" asp-route-id="@item.Id"><i style="font-size:28px;" class="ri-file-download-fill"></i></a>
+                    </div>
                 }
 
-            </td>
+                </td>
 
-               
-            </tr>
+
+        </tr>
         }
     </tbody>
 </table>
