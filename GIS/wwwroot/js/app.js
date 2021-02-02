@@ -272,15 +272,15 @@ function Zoom_change(map) {
 
 //added by sachin 4 july
 function getAccordionData(estate_recno) {
-
-    ajaxReq('Home', 'GetZoneList', { "location": estate_recno }, function (resp) { BindDistrictName(resp) }, true);
+    ajaxReq('Home', 'GetZoneList', {}, function (resp) { BindZoneName(resp) }, true);
 }
 
-function BindDistrictName(resp) {
+function BindZoneName(resp) {
     //// debugger;
     $("#accordion").empty();
     if (resp.status === true) {
         var DISTRICT = $.map(resp.data, function (el) { return el; })
+        debugger
         for (i = 0; i < DISTRICT.length; i++) {
             $("#accordion").append('<h3 title="Click Here to View the Industrial List!" style="font-size:12px; font-weight: 700;" id="d' + DISTRICT[i].District_Recno + '" onclick="showDistrict(this.id)">' + DISTRICT[i].District_Name + '</h3><div style="margin-left: 16px;"></div>');
             id_accord = 'd' + DISTRICT[i].District_Recno;
@@ -1657,11 +1657,12 @@ function loadZoomControl(z) {
 function getAllDISTRICT(city_name) {
 
     var city = city_name;
-    ajaxReq('Home', 'GetAllZoneList', { "location": city }, function (resp) { BindAllDISTRICT(resp) }, true);
+    ajaxReq('Home', 'GetZoneList', {}, function (resp) { BindAllDISTRICT(resp) }, true);
 
 }
 
 function BindAllDISTRICT(resp) {
+    debugger
     $("#ddldistrict").empty();
     $("#ddlPhase").empty();
     if (resp.status === true) {

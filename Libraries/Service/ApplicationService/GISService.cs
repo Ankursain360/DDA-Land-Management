@@ -3,6 +3,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
@@ -11,26 +12,22 @@ namespace Libraries.Service.ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IGISSRepository _iGISSRepository;
-
         public GISService(IUnitOfWork unitOfWork, IGISSRepository iGisSRepository) : base(unitOfWork, iGisSRepository)
         {
             _unitOfWork = unitOfWork;
             _iGISSRepository = iGisSRepository;
         }
-
-        public async Task<object> GetPlotList(int? VillageId)
+        public async Task<List<Plot>> GetPlotList(int VillageId)
         {
-            throw new System.NotImplementedException();
+            return await _iGISSRepository.GetPlotList(VillageId);
         }
-
-        public async Task<Village> GetVillageList(int? ZoneId)
+        public async Task<List<Village>> GetVillageList(int ZoneId)
         {
-            throw new System.NotImplementedException();
+            return await _iGISSRepository.GetVillageList(ZoneId);
         }
-
-        public async Task<Zone> GetZoneList()
+        public async Task<List<Zone>> GetZoneList()
         {
-            throw new System.NotImplementedException();
+            return await _iGISSRepository.GetZoneList();
         }
     }
 }
