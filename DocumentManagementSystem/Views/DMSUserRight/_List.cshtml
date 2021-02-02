@@ -1,0 +1,85 @@
+﻿
+@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
+
+        <tr>
+
+            <th>User Name</th>
+            <th>Department</th>
+            <th>View</th>
+
+            <th>DownloadFile</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @item.User.UserName
+
+                    </td>
+                    <td>@item.Department.Name</td>
+
+                    @if (item.Dmsfileright.Count > 0)
+                    {
+                        @foreach (var newitem in item.Dmsfileright)
+
+                        {
+                            <td>
+                                @if (newitem.Viewright == 0)
+                                {
+                                    <input type="checkbox" class="chkView" id="view-@item.User.Id" value="@item.User.Id" name="View">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="chkView" id="view-@item.User.Id" name="View" value="@item.User.Id" checked="checked">
+                                }
+                            </td>
+                            <td>
+                                @if (newitem.Downloadright == 0)
+                                {
+                                    <input type="checkbox" class="chkView" id="download-@item.User.Id" value="@item.User.Id" name="Download">
+                                }
+                                else
+                                {
+                                    <input type="checkbox" class="chkView" id="view-@item.User.Id" value="@item.User.Id" name="Download" checked="checked">
+                                }
+
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        <td> <input type="checkbox" class="chkView" id="view-@item.User.Id" value="@item.User.Id" name="View"></td>
+                        <td><input type="checkbox" class="chkView" id="download-@item.User.Id" value="@item.User.Id" name="Download"></td>
+                    }
+                    
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="12" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
+
+
+
+
+
+    </tbody>
+
+</table>
+
+
+
+
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

@@ -1,172 +1,64 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Dto.Master.AddUserDto
 
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
+@await Component.InvokeAsync("PageHeader", new { pageName = "DMS User Rights" })
 
 
-<style>
-    .p {
-        color: black;
-    }
-</style>
+<div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <h3 class="mb-3 d-flex">Details</h3>
 
-<style>
+   
 
-    .bg {
-        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
-        Color: #ffffff;
-        Font-size: 0.95rem;
-        Font-Family: Open SansRegular;
-        height: 28px;
-    }
-</style>
+    <div class="row mt-md-3">
 
+        <div class="col-md-6">
+            <div class="floating-label-wrap">
+                <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
+                        asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
+                    <option value="0">All</option>
 
-<script src="js/bootstrap.min.js"></script>
-<link href="Styles/bootstrap.css" rel="stylesheet" />
+                </select>
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">User Right</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                <label class="floating-label">Department </label>
             </div>
         </div>
-    </div>
-</div>
-<br />
 
-<br />
 
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div id="DivDetails">
-            <div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class=" myapp-hed2">
-                        <div class="col-md-12">
-                            <h6 class="pull-left" style="color:white;margin-top:5px;">User Right</h6>
-                        </div>
-                    </div>
+
+        <div class="col-md-12 col-xl-3">
+            <div class="row">
+                <div class="col-6 col-md-5 col-xl-6">
+                    <input type="submit" value="View" id="btnGenerate" class="btn btn-theme " />
+                            </div>
+                <div class="col-6 col-md-7 col-xl-6">
+                    <a class="btn btn-link btn-block d-flex align-items-center justify-content-center" href="/DMSUserRight/Create"> <i class="ri-refresh-line mr-2"></i>Reset</a>
+
                 </div>
             </div>
-            <div class="panel-body">
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        </div>
 
-                    <div id="DivForFileName">
-                       
-                        <div class="form-row">
+    </div>
 
-                           
-                            <div class="form-group col-md-6">
-                                <label class="control-label lb-sm">Department</label><span style="color:red">*</span>
-                                <select id="department" class="form-control" style="background-color:#dddddd; height:30px; border-color:#b1b1b1; width:10px;width:100%;max-width:100%;min-width:unset !important;">
-                                    <option value="0">--Select---</option>
-                                    <option value="1">Land Management</option>
-                                    <option value="2">Horticulture</option>
-                                    <option value="3">Finance</option>
-                                </select>
-                            </div>
+</div>
+<div class="table-section bg-white border shadow rounded">
 
-                        </div>
-                        </div>
-                       
+    
+    <div class="table-responsive px-2" id="LoadReportView">
 
-
-                    <div id="DivUserRight" style="display:none;">
-                        <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class=" myapp-hed2">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">User Right</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-responsive table-bordered table-card">
-
-                                        <thead class="thead">
-                                            <tr>
-                                                <th>Sr.No</th>
-                                                <th>User Name</th>
-                                                <th>View</th>
-
-                                                <th>DownloadFile</th>
-                                                @*<th>Operation</th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Jitender</td>
-                                                <td>@*<label class="control-label lb-sm">View</label>*@<input type="checkbox" name="View"></td>
-                                                <td>@*<label class="control-label lb-sm">Download File</label>*@<input type="checkbox" name="download"></td>
-                                                @*<td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>*@
-
-                                            </tr>
-
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Shyam</td>
-                                                <td>@*<label class="control-label lb-sm">View</label>*@<input type="checkbox" name="View"></td>
-                                                <td>@*<label class="control-label lb-sm">Download File</label>*@<input type="checkbox" name="download"></td>
-                                                @*<td> <i class="glyphicon glyphicon-eye-open icon-white cl1"></i> &nbsp; | &nbsp;<i class="fa fa-pencil" aria-hidden="true"></i> &nbsp;|&nbsp;<i class="fa fa-trash" aria-hidden="true"></i></td>*@
-
-                                            </tr>
-                                        </tbody>
-
-                                    </table>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-
-
-
-
-
-                        <div class="form-row">
-                            <div class="form-group  col-md-12" style="justify-content:center">
-                                <input type="submit" value="Create" class="btn btn-primary myapp-hed1" />
-                                @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                @Html.ActionLink("Back", "Create", "DMSUserRight", null, new { @class = "btn btn-primary myapp-hed1" })
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <button id="btnSaveBottom" class="tn btn-theme btn-block">Save</button>
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-        $("#department").change(function () {
-            var id = $("#department").val();
-            if (id == 0)
-           {
-                $("#DivUserRight").hide();
-            } else {
-                $("#DivUserRight").show();
-            }
-        });
-    });
-</script>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+
+    <script src="~/js/userrightindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/userrightindex.min.js" asp-append-version="true"></script>
+</environment>
