@@ -71,5 +71,6 @@ namespace Libraries.Model.Entity
         public ICollection<Damagecalculation> Damagecalculation { get; set; }
         public ICollection<Demandletters> Demandletters { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
     }
 }

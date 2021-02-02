@@ -41,7 +41,7 @@ namespace FileDataLoading.Controllers
             return View();
         }
         
-        public IActionResult Create()
+        public IActionResult Create()   
         {
             return View();
         }

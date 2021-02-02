@@ -1,0 +1,1470 @@
+﻿@{ ViewData["Title"] = "DDA-GIS"; }
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>DDA</title>
+    <meta charset="utf-8" />
+    <link rel="SHORTCUT ICON" href="~/Images/jjj.icon.png" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="~/js/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKdXoEy8iDv_7yvzRJkH2mW9LFieOIT4g&libraries=places"></script>
+    <link href="~/css/map.css" rel="stylesheet" />
+    <script src="~/js/fullscreen.js"></script>
+    <link href="~/css/app.css" rel="stylesheet" />
+    <link href="~/css/theme.css" rel="stylesheet" />
+    <script src="~/js/jquery-ui.min.js"></script>
+    <link href="~/css/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/js/Zoom.js"></script>
+    <!-- CSS file -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="~/css/ziehharmonika.js"></script>
+    <link href="~/css/ziehharmonika.css" rel="stylesheet" />
+    <link href="~/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/Mainstyle.css" rel="stylesheet" />
+    <script type="text/javascript" src="JS/app.js"></script>
+    <script src="~/js/jsapiChart.js"></script>
+    <script src="~/js/gOverlay.js"></script>
+    <script src="~/js/ChartLoader.js"></script>
+    <script src="~/js/BlockUI.js"></script>
+    <script src="~/js/data.js"></script>
+    <script src="~/js/appLoader.js"></script>
+    <script src="~/js/RichMarker.js"></script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../JS/html5shiv.js"></script>
+      <script src="../JS/respond.min.js"></script>
+     <![endif]-->
+    <style>
+        .new {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 6px;
+        }
+
+        .ui-widget-header {
+            color: #fff;
+            background-color: #337ab7;
+        }
+    </style>
+    <style>
+        .nav > li > a {
+            position: relative;
+            display: block;
+            padding: 5px 5px 5px 5px;
+        }
+
+        .not-active {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+            padding: 4px 10px 4px 10px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        /*sachin*/
+
+        .list-type5 {
+            width: auto;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+            .list-type5 ul {
+                list-style-type: none;
+                /*list-style-type: decimal !ie; /*IE 7- hack*/ */ margin: 0;
+                margin-left: -3em;
+                padding: 0;
+                /*counter-reset: li-counter;*/
+            }
+
+                .list-type5 ul li {
+                    position: relative;
+                    margin-bottom: 0.2em;
+                    cursor: pointer;
+                    padding: 0.5em;
+                    background-color: #F0D756;
+                    padding-left: 58px;
+                }
+
+            .list-type5 a {
+                text-decoration: none;
+                color: black;
+                font-size: 11px;
+                font-family: sans-serif;
+                font-weight: 800;
+                margin-left: -45px;
+            }
+
+            .list-type5 li:hover {
+                box-shadow: inset -35em 0 #6CD6CC;
+                -webkit-transition: box-shadow 0.5s; /* For Safari 3.1 to 6.0 */
+                transition: box-shadow 0.5s;
+            }
+
+            .list-type5 ul li:before {
+                position: absolute;
+                top: -0.3em;
+                left: -0.5em;
+                width: 1.8em;
+                height: 1.2em;
+                font-size: 2em;
+                line-height: 1.2;
+                font-weight: bold;
+                text-align: center;
+                color: white;
+                background-color: #6CD6CC;
+                transform: rotate(-20deg);
+                -ms-transform: rotate(-20deg);
+                -webkit-transform: rotate(-20deg);
+                z-index: 99;
+                overflow: hidden;
+                /*content: counter(li-counter);*/
+                counter-increment: li-counter;
+            }
+    </style>
+    <style>
+        .foo {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            border: 1px solid black;
+        }
+
+        .tbl {
+            border: 1px solid lightgrey;
+            margin-top: -5px;
+            width: 100%;
+        }
+
+            .tbl td {
+                border: 1px solid lightgrey;
+                padding: 7px;
+                background-color: white;
+            }
+
+        .scaleDiv {
+            position: absolute;
+            right: 20px;
+            bottom: 50px;
+        }
+
+            .scaleDiv .scaleDist {
+                float: right;
+                margin-right: 8px;
+            }
+
+            .scaleDiv .scaleDisclaimer {
+                float: left;
+                margin-right: 136px;
+                margin-left: -4px;
+                color: red;
+            }
+
+        /* The switch - the box around the slider */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+            /* Hide default HTML checkbox */
+            .switch input {
+                display: none;
+            }
+
+        /* The slider */
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            /*top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;*/
+            background-color: #818181;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .RightSideSecondTD {
+            text-align: left;
+            padding-left: 10px;
+            border: 1px solid lightgrey;
+            border-collapse: collapse;
+            font-size: 10px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            /*height: 26px;*/
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #006e2e;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #006e2e;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+        /*------------------------------*/
+    </style>
+    <script type="text/javascript">
+        function printMaps() {
+            var body = $('body');
+            var mapContainer = $('#map-canvas');
+            var mapContainerParent = mapContainer.parent();
+            var printContainer = $('<div>');
+
+            printContainer
+              .addClass('print-container')
+              //.css('position', 'fixed')
+              .height(mapContainer.height())
+              .append(mapContainer)
+              .prependTo(body);
+
+            var content = body
+              .children()
+              .not('script')
+              .not(printContainer)
+              .detach();
+
+            // Patch for some Bootstrap 3.3.x `@*@media*@ print` styles. :|
+            var patchedStyle = $('<style>')
+              .attr('media', 'print')
+              .text('img { max-width: none !important; }' +
+                    'a[href]:after { content: ""; }')
+              .appendTo('head');
+
+            window.print();
+
+            body.prepend(content);
+            mapContainerParent.prepend(mapContainer);
+
+            printContainer.remove();
+            patchedStyle.remove();
+        }
+    </script>
+    <style>
+        .material-switch > input[type="checkbox"] {
+            display: none;
+        }
+
+        .material-switch > label {
+            cursor: pointer;
+            height: 0px;
+            position: relative;
+            width: 40px;
+        }
+
+            .material-switch > label::before {
+                background: rgb(0, 0, 0);
+                box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+                border-radius: 8px;
+                content: '';
+                height: 16px;
+                margin-top: -8px;
+                position: absolute;
+                opacity: 0.3;
+                transition: all 0.4s ease-in-out;
+                width: 40px;
+            }
+
+            .material-switch > label::after {
+                background: rgb(255, 255, 255);
+                border-radius: 16px;
+                box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+                content: '';
+                height: 24px;
+                left: -4px;
+                margin-top: -8px;
+                position: absolute;
+                top: -4px;
+                transition: all 0.3s ease-in-out;
+                width: 24px;
+            }
+
+        .material-switch > input[type="checkbox"]:checked + label::before {
+            background: inherit;
+            opacity: 0.5;
+        }
+
+        .material-switch > input[type="checkbox"]:checked + label::after {
+            background: inherit;
+            left: 20px;
+        }
+    </style>
+    <style>
+        .ui-state-default .ui-icon {
+            background-image: url(images/ui-icons_6da8d5_256x240.png);
+        }
+
+        .ui-button-icon-only .ui-icon {
+            left: 50%;
+            margin-left: -8px;
+        }
+
+        .ui-button-icon-only .ui-icon, .ui-button-text-icon-primary .ui-icon, .ui-button-text-icon-secondary .ui-icon, .ui-button-text-icons .ui-icon, .ui-button-icons-only .ui-icon {
+            position: absolute;
+            top: 50%;
+            margin-top: -8px;
+        }
+
+        .ui-icon-closethick {
+            background-position: -96px -128px;
+        }
+
+        .ui-icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .ui-icon {
+            display: block;
+            text-indent: -99999px;
+            overflow: hidden;
+            background-repeat: no-repeat;
+        }
+
+        .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+            border: 1px solid #c5dbec;
+            background: #dfeffc url(images/ui-bg_glass_85_dfeffc_1x400.png) 50% 50% repeat-x;
+            font-weight: bold;
+            color: #2e6e9e;
+        }
+    </style>
+    <script>
+        $(document).on('click', '#Searchindustrye', function (e) {
+            e.preventDefault();
+            $("#Searchindustry").show();
+            $("#legend").hide();
+            $("#Findroute").hide();
+            $("#print").hide();
+            $("#basemap").hide();
+            $("#plotstatus").hide();
+        });
+        $(document).on('click', '#legende', function (e) {
+            e.preventDefault();
+            $("#legend").show();
+            $("#Searchindustry").hide();
+            $("#Findroute").hide();
+            $("#print").hide();
+            $("#basemap").hide();
+            $("#plotstatus").hide();
+        });
+        $(document).on('click', '#Findroutee', function (e) {
+            e.preventDefault();
+            $("#Findroute").show();
+            $("#Searchindustry").hide();
+            $("#basemap").hide();
+            $("#plotstatus").hide();
+            $("#print").hide();
+        });
+        $(document).on('click', '#printe', function (e) {
+            e.preventDefault();
+            $("#print").show();
+            $("#Findroute").hide();
+            $("#Searchindustry").hide();
+            $("#basemap").hide();
+            $("#plotstatus").hide();
+        });
+        $(document).on('click', '#basemape', function (e) {
+            e.preventDefault();
+            $("#basemap").show();
+            $("#Findroute").hide();
+            $("#Searchindustry").hide();
+            $("#print").hide();
+            $("#plotstatus").hide();
+
+        });
+        $(document).on('click', '#plotstatuse', function (e) {
+            e.preventDefault();
+            $("#plotstatus").show();
+            $("#Findroute").hide();
+            $("#Searchindustry").hide();
+            $("#print").hide();
+            $("#basemap").hide();
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
+            $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
+        });
+    </script>
+    <script type="text/javascript">
+        var source, destination;
+        var directionsDisplay;
+        var directionsService = new google.maps.DirectionsService();
+        google.maps.event.addDomListener(window, 'load', function () {
+            new google.maps.places.SearchBox(document.getElementById('txtSource'));
+            new google.maps.places.SearchBox(document.getElementById('txtDestination'));
+            directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+        });
+
+        function GetRoute() {
+            var UP = new google.maps.LatLng(26.449923, 80.331874);
+            var mapOptions = {
+                zoom: 7,
+                center: UP
+            };
+
+            directionsDisplay.setMap(map);
+            directionsDisplay.setPanel(document.getElementById('dvPanel'));
+
+            //*********DIRECTIONS AND ROUTE**********************//
+            source = document.getElementById("txtSource").value;
+            destination = document.getElementById("txtDestination").value;
+            var Mode = $('input[name=radio]:checked').val();
+            var request = {
+                origin: source,
+                destination: destination,
+                travelMode: google.maps.TravelMode[Mode]
+            };
+            directionsService.route(request, function (response, status) {
+                if (status == google.maps.DirectionsStatus.OK) {
+                    directionsDisplay.setDirections(response);
+                }
+            });
+
+            //*********DISTANCE AND DURATION**********************//
+            var dvDistance = document.getElementById("dvDistance");
+            dvDistance.innerHTML = "";
+            var dvPanel = document.getElementById("dvPanel");
+            dvPanel.innerHTML = "";
+            var service = new google.maps.DistanceMatrixService();
+            service.getDistanceMatrix({
+                origins: [source],
+                destinations: [destination],
+                travelMode: google.maps.TravelMode[Mode],
+                unitSystem: google.maps.UnitSystem.METRIC,
+                avoidHighways: true,
+                avoidTolls: true
+            }, function (response, status) {
+                if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                    var distance = response.rows[0].elements[0].distance.text;
+                    var duration = response.rows[0].elements[0].duration.text;
+                    var dvDistance = document.getElementById("dvDistance");
+                    dvDistance.innerHTML = "";
+                    dvDistance.innerHTML += "Distance: " + distance + "<br />";
+                    dvDistance.innerHTML += "Duration:" + duration;
+
+                } else {
+                    alert("Unable to find the Route.");
+                }
+            });
+        }
+
+
+    </script>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        .jumbotron {
+            margin-top: 30px;
+        }
+
+        #content,
+        #sidebar {
+            min-height: 500px;
+        }
+
+        #row-main {
+            overflow-x: hidden; /* necessary to hide collapsed sidebar */
+        }
+
+        #content {
+            background-color: lightyellow;
+            -webkit-transition: width 0.3s ease;
+            -moz-transition: width 0.3s ease;
+            -o-transition: width 0.3s ease;
+            transition: width 0.3s ease;
+        }
+
+            #content .btn-group {
+                margin-bottom: 10px;
+            }
+
+        .col-md-9 .width-12,
+        .col-md-12 .width-9 {
+            display: none; /* just hiding labels for demo purposes */
+        }
+
+        #sidebar {
+            background-color: #fff;
+            -webkit-transition: margin 0.3s ease;
+            -moz-transition: margin 0.3s ease;
+            -o-transition: margin 0.3s ease;
+            transition: margin 0.3s ease;
+        }
+
+        .collapsed {
+            display: none; /* hide it for small displays */
+        }
+
+        @*@media (min-width: 992px) {
+            .collapsed {
+                display: block;
+                margin-left: -30%; /* same width as sidebar */
+            }
+        }*@
+
+        #slidecontainer {
+            width: 100%;
+            margin-left: -15px;
+        }
+        .panel-heading {
+    padding: 5px 37px;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 3px;
+            border-radius: 5px;
+            background: #507BA1;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+        }
+
+            .slider:hover {
+                opacity: 1;
+            }
+
+            .slider::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 8px;
+                height: 18px;
+                border-bottom-left-radius: 80%;
+                border-bottom-right-radius: 80%;
+                background: #5CB85C;
+                cursor: pointer;
+            }
+
+            .slider::-moz-range-thumb {
+                width: 25px;
+                height: 25px;
+                border-radius: 50%;
+                background: #4CAF50;
+                cursor: pointer;
+            }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $(".toggle-sidebar").click(function () {
+                $("#sidebar").toggleClass("collapsed");
+                $("#content").toggleClass("col-md-12 col-md-9");
+
+                return false;
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btn-toggle-left').click(function () {
+                $(this).find('i').toggleClass('glyphicon glyphicon-arrow-left').toggleClass('glyphicon glyphicon-arrow-right');
+            })
+        });
+        /*-- btn Right direction --*/
+        $(document).ready(function () {
+            $('#btn-toggle-right').click(function () {
+                $(this).find('i').toggleClass('glyphicon glyphicon-arrow-right').toggleClass('glyphicon glyphicon-arrow-left');
+            })
+        });
+    </script>
+
+</head>
+<body style="background: #f2f2f2; /* old browsers */
+             background: -moz-linear-gradient(top, #f2f2f2 0%, #dadada 100%); /* ff3.6-15 */
+             background: -webkit-linear-gradient(top, #f2f2f2 0%,#dadada 100%); /* chrome10-25,safari5.1-6 */
+             background: linear-gradient(to bottom, #f2f2f2 0%,#dadada 100%); /* w3c, ie10+, ff16+, chrome26+, opera12+, safari7+ */
+             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#dadada',GradientType=0 );">
+    <div class="container-fluid" style="position:fixed; width:100%;">
+        <br />
+        <div class="row" id="row-main">
+            <div class="col-lg-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading" style="padding: 0px 0px; background: #0f3f6a; /* old browsers */
+                                                                        background: -moz-linear-gradient(top, #0f3f6a 0%, #155793 100%); /* ff3.6-15 */
+                                                                        background: -webkit-linear-gradient(top, #0f3f6a 0%,#155793 100%); /* chrome10-25,safari5.1-6 */
+                                                                        background: linear-gradient(to bottom, #0f3f6a 0%,#155793 100%); /* w3c, ie10+, ff16+, chrome26+, opera12+, safari7+ */
+                                                                        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0f3f6a', endColorstr='#155793',GradientType=0 );">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <div class="col-lg-4">
+                                    <a href="#">
+                                        <img src="images/ddalogo1.jpg" alt="DDA" id="uplogo" />
+                                    </a>
+                                </div>
+                                <div class="col-lg-4">
+                                    <h4 style="margin-top: 15px; color: #fff; text-align: Left"><b>DDA-Geographical Information System</b></h4>
+                                </div>
+                                <div class="col-lg-2" style="padding-top: 15px;"><a href="https://dda.org.in/ddaweb/index.aspx" class="btn btn-primary btn-xs btn-sm btn-md btn-lg" type="button" id="Button1" title="DDA Website Home" aria-expanded="false" target="_blank" aria-controls="collapseExample"><span class="glyphicon glyphicon-home"></span>&nbsp;DDA Website Home</a></div>
+                                <div class="col-lg-2" style="padding-top: 15px;"><a href="http://49.50.87.108:8555/data/login.aspx" class="btn btn-warning btn-xs btn-sm btn-md btn-lg" type="button" id="A1" title="Dashboard" aria-expanded="false" target="_blank" aria-controls="collapseExample"><span class="glyphicon glyphicon-home"></span>&nbsp;Data Updation</a></div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="panel-body" style="padding: 0px;">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-3 col-sm-3 col-xs-3" id="sidebar">
+                                    <div class="row">
+                                        <div class="panel panel-primary">
+                                            <div class="panel-body" style="padding: 2px;">
+                                                <ul class="nav nav-tabs bg-primary" id="menesli" role="tablist">
+                                                    <li role="presentation" class="active" id="LiIndustrialList">
+                                                        <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab" style="height: 35px; padding: 10px 10px 10px 10px;">
+                                                            <p style="font-size: 9px; font-weight: bold;">List</p>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation" id="LiQuery">
+                                                        <a href="#home" data-toggle="tab" style="height: 35px; padding: 10px 10px 10px 10px;">
+                                                            <p style="font-size: 9px; font-weight: bold;">Query</p>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation" id="LiLayers">
+                                                        <a href="#profile" data-toggle="tab" style="height: 35px; padding: 10px 10px 10px 10px;">
+                                                            <p style="font-size: 9px; font-weight: bold;">Layers</p>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation" id="LiLegends">
+                                                        <a href="#messages" data-toggle="tab" style="height: 35px; padding: 10px 10px 10px 10px;">
+                                                            <p style="font-size: 9px; font-weight: bold;">Legends</p>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation" id="Liinformation">
+                                                        <a id="aIIEInformation" href="#legends" data-toggle="tab" style="height: 35px; padding: 10px 10px 10px 10px;">
+                                                            <p style="font-size: 9px; font-weight: bold;">Information</p>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                                <!-- Tab panes -->
+                                                <div class="tab-content">
+                                                    <div role="tabpanel" class="tab-pane fade" id="home">
+                                                        <div class="w3-accordion w3-light-grey w3-section">
+                                                            <button id="Searchindustrye" class="btn btn-success btn-sm btn-group btn-group-justified" style="padding: 3px;"><span class="glyphicon glyphicon-search"></span>Query</button>
+                                                            <div id="Searchindustry" class="w3-accordion-content">
+                                                                <div class="panel with-nav-tabs panel-success">
+                                                                    <ul class="nav nav-tabs">
+                                                                        <li class="active"><a href="#tabDistrict" style="font-size: 9px" data-toggle="tab"><b style="font-size: 9px">Zone wise</b> </a></li>
+                                                                        <li><a href="#tabCompany" data-toggle="tab" style="font-size: 9px"><b style="font-size: 9px">Allottee wise</b>  </a></li>
+                                                                    </ul>
+                                                                    <div class="panel-body">
+                                                                        <div class="tab-content">
+                                                                            <div class="tab-pane fade in active" id="tabDistrict">
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="input-sm" style="font-size: 10px">Zone :</label>
+                                                                                    <select class="form-control input-sm" id="ddldistrict">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="inputsm" style="font-size: 10px"> Locality :</label>
+                                                                                    <select class="form-control input-sm" id="ddlIIE">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="input-sm" style="font-size: 10px">Plot:</label>
+
+                                                                                    <select class="form-control input-sm" id="ddlPlot">
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tab-pane fade" id="tabCompany">
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="input-xs" style="font-size: 10px">Zone :</label>
+                                                                                    <select class="form-control input-lg" id="ddlIIECompanywise">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="inputlg" style="font-size: 10px">Locality :</label>
+
+                                                                                    <select class="form-control input-sm" id="ddlCompany">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="inputlg" style="font-size: 10px">Allotee :</label>
+
+                                                                                    <select class="form-control input-sm" id="Select1">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group-sm">
+                                                                                    <input type="button" id="btnCompanywise" value="Find" style="margin-left: 30%" class="w3-btn col-md-4" />
+
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="tab-pane fade" id="tabCheckplot">
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="inputlg" style="font-size: 10px">Industry type:</label>
+
+                                                                                    <select class="form-control inputlg" id="ddlCategory">
+                                                                                    </select>
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group-sm">
+                                                                                    <label for="inputsm" style="font-size: 10px">Required Plot Area(in sqr mtr) :</label>
+                                                                                    <input type="text" id="txtPlotArea" class="form-control" />
+
+                                                                                </div>
+                                                                                <br />
+                                                                                <div class="form-group">
+                                                                                    <input type="button" id="btnCategorywise" style="margin-left: 25%" value="Check Availability" class="w3-btn" />
+                                                                                </div>
+
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w3-accordion w3-light-grey w3-section w3-col.s12 w3-col-l4">
+                                                            <button id="Findroutee" class="btn btn-danger btn-sm btn-group btn-group-justified" style="padding: 3px;"><span class="glyphicon glyphicon-road"></span>Find Routes</button>
+                                                            <div id="Findroute" class="w3-accordion-content">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <div class="panel-danger">
+                                                                            <div class="panel-body">
+                                                                                <table class="tabel table-responsive">
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label><b>Travel:</b> </label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <label>
+                                                                                                <input type="radio" id="radio1" value="DRIVING" name="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-automobile" style="font-size: 18px; color: #216ea8"></i>&nbsp;Driving
+                                                                                            </label>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                            <label>
+                                                                                                <input type="radio" id="radio2" value="TRANSIT" checked="checked" name="radio" />&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-subway" style="font-size: 18px; color: #bfa403"></i>&nbsp;Transit
+                                                                                            </label>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label>Source:</label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="text" id="txtSource" value="Vikas Sadan New Delhi" class="form-control input-sm" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>&nbsp;</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>
+                                                                                            <label>Destination:</label>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            <input type="text" id="txtDestination" value="Delhi, India" class="form-control input-sm" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td>&nbsp;</td>
+                                                                                        <td>&nbsp;</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <td></td>
+                                                                                        <td colspan="2">
+                                                                                            <input type="button" id="btnSearchRoute" value="Get Route" class="btn btn-danger btn-sm" onclick="GetRoute()" />
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade" id="profile" style="overflow-x: scroll; height: 500px">
+                                                        <div class="panel panel-primary" style="margin-bottom: 1px;">
+                                                            <div class="panel-heading"><b>Important Infrastructure</b></div>
+                                                            <div class="panel-body" style="padding: 0px;">
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <table class="table table-responsive panel-heading" style="width: 100%; margin-bottom: 0px; border: 0px; font-weight: bold">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td colspan="6">
+                                                                                        <span class="pull-right text-danger">
+                                                                                            <b>Select All&nbsp; </b>
+                                                                                            <input type="checkbox" id="chkAllImpInfra" />
+                                                                                        </span>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span class="glyphicon glyphicon-stop" style="color: #cccccc"></span></td>
+                                                                                    <td>Road Network</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkRoad" checked="checked" />
+                                                                                    </td>
+                                                                                    <td><span class="glyphicon glyphicon-stop" style="color: #8BBDEB;"></span></td>
+                                                                                    <td>Water Connection</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkWaterSupplyLine" checked="checked" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span class="glyphicon glyphicon-minus" style="color: #4679BD;"></span></td>
+                                                                                    <td>HT Line</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkElectricityLine" />
+                                                                                    </td>
+                                                                                    <td><span class="glyphicon glyphicon-screenshot" style="color: #333;"></span></td>
+                                                                                    <td>Electricity Pole</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkElectricityPole" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span class="glyphicon glyphicon-minus" style="color: #333;"></span></td>
+                                                                                    <td>Railway Track</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkRailwayTrack" />
+                                                                                    </td>
+                                                                                    <td><span class="glyphicon glyphicon-stop" style="color: #5B5BA2;"></span></td>
+                                                                                    <td>Sewerage Connection </td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkManHoles" checked="checked" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td><span class="glyphicon glyphicon-record"></span></td>
+                                                                                    <td>Gas Connection</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkgas" />
+                                                                                    </td>
+                                                                                    <td><span class="glyphicon glyphicon-stop" style="color: #AF7AC5;"></span></td>
+                                                                                    <td>Utility</td>
+                                                                                    <td>
+                                                                                        <input type="checkbox" id="chkutitlity" checked="checked" />
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-primary" style="margin-bottom: 1px;">
+                                                            <div class="panel-heading"><b>Additional Infrastructure</b> </div>
+                                                            <div class="panel-body" style="padding: 0px;">
+                                                                <table class="table table-responsive" style="width: 100%; margin-bottom: 0px; border: 0px; font-weight: bold">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td colspan="6"><span class="pull-right text-danger"><b>Select All &nbsp;</b><input type="checkbox" id="chkallAddiInfra" /></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #4679BD;"></span></td>
+                                                                            <td>Bridge</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkBridge" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #55E82D;"></span></td>
+                                                                            <td>Green Belt</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkvegitation" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #BFC0C0;"></span></td>
+                                                                            <td>Footpath</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkFootPath" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-hourglass" style="color: #FF0000;"></span></td>
+                                                                            <td>Lamp Post </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkLampPost" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #cc00ff"></span></td>
+                                                                            <td>Metro Station </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkcomman" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #b3b300"></span></td>
+                                                                            <td style="display:none">Divider </td>
+                                                                            <td style="display:none">
+                                                                                <input type="checkbox" id="chkpublicpurpose" />
+                                                                            </td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="panel panel-primary" style="margin-bottom: 1px;">
+                                                            <div class="panel-heading"><b>Miscellaneous</b>  </div>
+                                                            <div class="panel-body" style="padding: 0px;">
+                                                                <table class="table table-responsive" style="width: 100%; margin-bottom: 0px; border: 0px; font-weight: bold">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td colspan="6"><span class="pull-right text-danger"><b>Select All &nbsp;</b><input type="checkbox" id="chkAllMiscel" /></span></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #333;"></span></td>
+                                                                            <td>Boundary</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkBoundary" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #393939;"></span></td>
+                                                                            <td>Sector </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkSector" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #ffc34d;"></span></td>
+                                                                            <td>Others </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkother" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #b3b3ff;"></span></td>
+                                                                            <td>Water HEAD Tanks </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkwatertank" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #bf80ff;"></span></td>
+                                                                            <td>Parking </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkparking" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color:#B2D1EA;"></span></td>
+                                                                            <td>Water Body</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkWaterBody" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #99ffcc;"></span></td>
+                                                                            <td>Nala</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chknala" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #F76085;"></span></td>
+                                                                            <td>Police Station</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkpolice" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #cc0000;"></span></td>
+                                                                            <td>Fire Stations </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="chkfire" checked="checked" />
+                                                                            </td>
+                                                                            <td><span class="glyphicon glyphicon-stop"></span></td>
+                                                                            <td>Telecom Towers</td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="Checkbox24" checked="checked" />
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td><span class="glyphicon glyphicon-stop" style="color: #999966;"></span></td>
+                                                                            <td>Encroachment Area </td>
+                                                                            <td>
+                                                                                <input type="checkbox" id="checkEncroachment" checked="checked" />
+                                                                            </td>
+                                                                            <td></td>
+
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade" id="messages" style="overflow:scroll; height:500px">
+                                                        <table class="table table-responsive" style="font-size: 12px;">
+                                                            <tr style="background-color:#337AB7">
+                                                                <td><b>Plot Legends</b></td>
+                                                                <td><b>All</b> </td>
+                                                                <th>
+                                                                    <input type="checkbox" id="chkCheckAllPlotStatus" checked="checked" />
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #E222AB; border: 1px solid black; font-weight: bold"></span>&nbsp  Available for Allotment
+                                                                </td>
+                                                                <td></td>
+                                                                <td colspan="3">
+                                                                    <input type="checkbox" id="chkUnalloted" checked="checked" />
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #55E82D; border: 1px solid black; font-weight: bold"></span>&nbsp Park
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="Checkbox5" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #12F6E5; border: 1px solid black; font-weight: bold"></span>&nbsp Alloted
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkVacant" checked="checked" />
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #3498DB; border: 1px solid black; font-weight: bold"></span>&nbsp Free Hold
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkUnderConstruction" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #ECE92B; border: 1px solid black; font-weight: bold"></span>&nbsp; Sold In Last Auction
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkInProduction" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #FFA07A; border: 1px solid black; font-weight: bold"></span>&nbsp; Cancel
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkclosed" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #927503; border: 1px solid black; font-weight: bold"></span>&nbsp; Sick
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chksick" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #CCCC99; border: 1px solid black; font-weight: bold"></span>&nbsp; No Status
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkNoStatus" checked="checked" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <table class="table table-responsive" style="font-size: 12px;">
+                                                            <tr style="background-color: #337AB7">
+                                                                <%--
+                                                                <th><span>Plot Status</span></th>
+                                                                <th><span>Select All</span></th>--%>
+                                                                <td><b>Land Use</b></td>
+                                                                <td><b>All</b></td>
+                                                                <th>
+                                                                    <input type="checkbox" id="chlAllLandUser" />
+                                                                </th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #6C6C6C; border: 1px solid black; font-weight: bold"></span>&nbsp Industrial Plot
+                                                                </td>
+                                                                <td></td>
+                                                                <td colspan="3">
+                                                                    <input type="checkbox" id="chkIndustrialPlot" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #008C89; border: 1px solid black; font-weight: bold"></span>&nbsp Commercial Estate
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkCommercialPlot" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #400040; border: 1px solid black; font-weight: bold"></span>&nbsp Commercial Land
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="Checkbox4" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #D4CF17; border: 1px solid black; font-weight: bold"></span>&nbsp Residential Plot
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkResidentialplot" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #0000cc; border: 1px solid black; font-weight: bold"></span>&nbsp; Institutional/Banking
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chkInstitutionalplot" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #5252FF; border: 1px solid black; font-weight: bold"></span>&nbsp; Emergency Services
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="Checkbox1" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #A7855F; border: 1px solid black; font-weight: bold"></span>&nbsp; Land Sale Branch
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="Checkbox2" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="tdWidth">
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #6A903E; border: 1px solid black; font-weight: bold"></span>&nbsp; Land Administrative Block
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="Checkbox3" />
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <span class="glyphicon glyphicon-stop" style="color: #CCCC99; border: 1px solid black; font-weight: bold"></span>&nbsp; No Status
+                                                                </td>
+                                                                <td></td>
+                                                                <td>
+                                                                    <input type="checkbox" id="chklandUseNostatus" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade in active" id="settings">
+                                                        <div class="row">
+
+                                                            <div class="col-sm-12  col-md-12">
+                                                                <div class="input-group">
+                                                                    <input id="tags" placeholder="Area Name" type="text" class="form-control input-sm" />
+                                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-sm-12 col-md-12">
+                                                                <div id="industriallist" style="overflow-x: scroll; height: 450px">
+                                                                    <div id="accordion" class="ziehharmonika">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div role="tabpanel" class="tab-pane fade " id="legends" style="display: block">
+
+                                                        <div style="overflow-y: scroll; height: 500px; display: none" id="diviieinfor">
+                                                            <table style="border-collapse: collapse; width: 100%" class="table table-bordered">
+                                                                <tr>
+                                                                    <td colspan="3" style="border-bottom: 1px solid black; text-align: center">
+                                                                        <div id="iieInfo_name" style="font-size: 11px; margin-top: 2px; width: 100%; font-weight: bold; font-family: Arial; color: #4679bd;">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="RightSideTD">
+                                                                        <div style="margin-top: 2px;" id="iieInfo_TotalArea">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="RightSideTD">
+                                                                        <div style="margin-top: 2px;" id="iieInfo_Rate">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </table>
+                                                            <div style="border-bottom: 1px solid lightgrey; margin-top: -12px; font-size: 11px;"><b style="color: #4679bd;">Details of acquired and developed lands:</b></div>
+                                                            <table style="border-collapse: collapse; margin-bottom: 0px;" class="table table-bordererd" id="iieInfo_LandUse">
+                                                            </table>
+                                                            <br />
+                                                            <table style="border-collapse: collapse;">
+                                                                <tr>
+                                                                    <td style="font-size: 11px;">
+                                                                        <div style="color: black; margin-top: -1px;">
+                                                                            <div style="border-bottom: 1px solid lightgrey">
+                                                                                <b style="color: #4679bd;">Details of Alloted And Vacant Plots:</b>
+                                                                            </div>
+                                                                            <ul style="list-style-type: disc; margin-top: 5px;" id="iieInfo_allottedplots">
+                                                                            </ul>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <div id="DivNodata" style="display: none">
+                                                            <div id="Div2" class="text-center" style="font-size: 11px; margin-top: 2px; width: 100%; font-weight: bold; font-family: Arial; color: red;">
+                                                                <b>No Industrial Information Found.</b>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="DivRoute" title="Find Routes" style="width: 130px; font-size: 11px; display: none;">
+                                                    <table style="height: 50px">
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div id="dvDistance">
+                                                                </div>
+                                                            </td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">
+                                                                <div id="dvPanel">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                                <div class="statsDIv">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9 col-sm-9 col-xs-9" id="content">
+                                    <div class="row">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading">
+                                                <div class="row">
+                                                    <div class="col-md-1 col-sm-1 col-xs-1">
+                                                        <button type="button" class="btn btn-primary btn-xs toggle-sidebar" id="btn-toggle-left" style="border-radius: 50px;"><i class="glyphicon glyphicon-arrow-left"></i></button>
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                                        <table class="tbl">
+                                                            <tr>
+                                                                <td>
+                                                                    <label id="lblArea"></label>
+                                                                    <label id="lblAreaName"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblType"></label>
+                                                                    <label id="lblNoOfValue"></label>
+                                                                </td>
+                                                                <td>
+                                                                    <label id="lblTotalArea"></label>
+                                                                    <label id="lblAreaValue"></label>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        <div id="slidecontainer">
+                                                            <b style="color: #337ab7;">Transparency : <span id="demo">100</span>%</b>
+                                                            <br />
+                                                            <br />
+                                                            <input type="range" min="0.0" max="1.0" value="1.0" step="0.01" class="slider" id="OpacityRange" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 col-sm-2 col-xs-2">
+                                                        <table>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="btn btn-primary btn-xs" onclick="printMaps();"><span class="glyphicon glyphicon-print"></span></div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                                                        <ul class="nav navbar-nav navbar-right">
+                                                                            <li class="dropdown">
+                                                                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa-map-o fa"></span><span style="color: #337ab7; font-size: 9px; font-weight: bold;">&nbsp;Base Map </span><span class="caret"></span></a>
+                                                                                <ul class="dropdown-menu dropdown-cart" role="menu">
+                                                                                    <li id="mapsatellite">
+                                                                                        <span class="item">
+                                                                                            <span class="item-left">
+                                                                                                <img src="images/imagery.jpg" class="img-thumbnail" />
+                                                                                                <span class="item-info">
+                                                                                                    <span>Satellite</span>
+                                                                                                </span>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                    <li id="maproad">
+                                                                                        <span class="item">
+                                                                                            <span class="item-left">
+                                                                                                <img src="images/osm.jpg" class="img-thumbnail" />
+                                                                                                <span class="item-info">
+                                                                                                    <span>Roads</span>
+                                                                                                </span>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                    <li id="maphybrid">
+                                                                                        <span class="item">
+                                                                                            <span class="item-left">
+                                                                                                <img src="images/topographic.jpg" class="img-thumbnail" />
+                                                                                                <span class="item-info">
+                                                                                                    <span>Topographic</span>
+                                                                                                </span>
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </li>
+                                                                                    <li class="divider"></li>
+                                                                                    <li><a class="text-center" href="#">Base Map</a></li>
+                                                                                </ul>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body" style="padding: 0px;">
+                                                <div id="map-canvas" class="col-md-12" style="height: 500px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="navbar navbar-default navbar-fixed-bottom" style="background: rgb(255,255,255); /* old browsers */
+background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* ff3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* chrome10-25,safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* w3c, ie10+, ff16+, chrome26+, opera12+, safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 );">
+        <div class="container-fluid">
+            <div class="footer">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div><span style="color: #337ab7; font-size: 9px; font-weight: bold; padding-top: 5px;">Lat & Long -</span>&nbsp;<span id="tdCursor" class="Codi" style="padding-top: 5px;"></span></div>
+                    </div>
+                    <div class="col-md-10" style="padding-top: 5px;">
+                        <div class="right" id="mapstype" style="border: 1px solid; "></div>
+                        <div class="right" id="allottedStatus" style="border: 1px solid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="thematic">
+        <span class="glyphicon glyphicon-stop red" title="Map showing status of Plots"></span>
+        <span class="glyphicon glyphicon-stop green" title="Map showing type of Plots"></span>
+    </div>
+    <div id="DivCategoryResult" title="Industrial State wise Plot Availability" style="width: 130px; font-size: 12.5px; display: none;">
+        <div id="div1">
+            <span style="font-size: smaller; color: red">(Click on Markers to see Available plots on map)</span>
+            <table id="sa" style="width: 100%">
+            </table>
+        </div>
+    </div>
+    <div id="Div3" class="info" title="Vacant Plot Information" style="font-size: 12px; display: none;">
+        <div class="infomain" style="max-height: 300px; top: 100px; overflow: auto; padding: 5px;">
+            <table class="table table-bordered" style="padding: 5px">
+            </table>
+        </div>
+    </div>
+    <div id="Plotinfo" class="info" title="DDA Plot Information" style="font-size: 11px;  display: none;">
+        <table runat="server" id="Table1" style="color:#fff; height:35px; background-color:#337ab7; width:100%; text-align:center; border-collapse: collapse; font-size:11px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive">
+            <tr><td><span id="spanIIE" style="">Sector-XIV(GIS Map View)</span></td></tr>
+        </table>
+        <table style="border-collapse: collapse; font-size:9px !important; margin-bottom: 0px;" class="table table-bordererd table-primary table-responsive" id="iieInfo_plot">
+            <tr><td>Plot No</td><td><span id="spanPlotNo" style=""></span></td></tr>
+            <tr><td>Plot Area (sq.mt)</td><td><span id="spanPlotArea" style=""></span></td></tr>
+            <tr><td>Sector Name</td><td><span id="spanSectorName" style=""></span></td></tr>
+            <tr><td>Location</td><td><span id="spanDistrictName" style=""></span></td></tr>
+            <tr><td>Allotte name</td><td><span id="spanAllotteeName" style=""></span></td></tr>
+            <tr><td>Plot Status</td><td><span id="spanPlotStatus" style=""></span></td></tr>
+        </table><br />
+        <table><tr><td><a id="link" href="http://118.185.3.27/ddanewgis/user/Applicationform.aspx" title="Apply for Available Plot"></a></td></tr></table>
+        <div class="infolower1" style="margin-left:20px;">
+
+        </div> <br />
+        <div class="infolower2" style="margin-left:20px;">
+
+        </div> <br />
+        <div class="infolower3" style="margin-left:20px;">
+
+        </div>
+        <br />
+    </div>
+    <div class="scaleDiv">
+        <div class="row">
+            <div class="col-md-10">
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
