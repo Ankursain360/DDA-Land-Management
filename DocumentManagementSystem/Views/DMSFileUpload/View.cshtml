@@ -8,26 +8,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div id="allDetails">
-        <div class="row">
-            <div class="col-md-3">
-                <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
-
-                <div class="form-check theme">
-                    <input class="form-check-input" disabled type="radio" name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked>
-                    <label class="form-check-label" for="radio">
-                        File Upload
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" disabled type="radio" name="grpIsFileBulkUpload" id="rbtBulkUpload" value="Bulk Upload">
-                    <label class="form-check-label" for="radio">
-                        Bulk Upload
-                    </label>
-                </div>
-            </div>
-        </div>
+        
         <div id="divfileupload">
             <h3 class="my-3 d-flex sub-heading">File Upload</h3>
             <div class="row mt-md-3">

@@ -81,11 +81,6 @@
 
             <table class="table" border="0" style="border:none; border-top: none;  ">
 
-                @*<tr>
-                <td  style="border-top:none; " align="center">
-                <p><u>Issue Receipt</u></p>
-                </td>
-            </tr>*@
                 <tr>
                     <td style="border-top:none;">
                         <p style="color:black; font-weight:700;">File No.</p>
@@ -124,7 +119,7 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.DataStorageDetails.Almirah == null?"": Model.DataStorageDetails.Almirah.AlmirahNo)
-                                @*@Model.DataStorageDetails.Almirah.AlmirahNo*@
+
                             </label>
                         </td>
                     </tr>
@@ -135,7 +130,7 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.DataStorageDetails.Row == null?"": Model.DataStorageDetails.Row.RowNo)
-                                @*@Model.DataStorageDetails.Row.RowNo*@
+
                             </label>
                         </td>
                         <td style="border-top:none;">
@@ -144,7 +139,7 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.DataStorageDetails.Column == null?"": Model.DataStorageDetails.Column.ColumnNo)
-                                @*@Model.DataStorageDetails.Column.ColumnNo*@
+
                             </label>
                         </td>
                     </tr>
@@ -155,7 +150,7 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.DataStorageDetails.Bundle == null?"": Model.DataStorageDetails.Bundle.BundleNo)
-                                @*@Model.DataStorageDetails.Bundle.BundleNo*@
+
                             </label>
                         </td>
                     </tr>
@@ -183,24 +178,24 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.Department == null?"": Model.Department.Name)
-                                @*@Model.Department.Name*@
+
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-top:none;">
-                            <p style="color:black; font-weight:700;">Zone : </p>
-                        </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">Sharda LM</label>
-                        </td>
+                        @*<td style="border-top:none;">
+                                <p style="color:black; font-weight:700;">Zone : </p>
+                            </td>
+                            <td style="border-top:none;">
+                                <label class="control-label" style="font-weight: 500;">Sharda LM</label>
+                            </td>*@
                         <td style="border-top:none;">
                             <p style="color:black; font-weight:700;">Branch Society :</p>
                         </td>
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.Branch == null?"": Model.Branch.Name)
-                                @*@Model.Branch.Name*@
+
                             </label>
                         </td>
 
@@ -212,14 +207,17 @@
                         <td style="border-top:none;">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.Designation == null?"": Model.Designation.Name)
-                                @*@Model.Designation.Name*@
+
                             </label>
                         </td>
                         <td style="border-top:none;">
                             <p style="color:black; font-weight:700;">Issued Date :</p>
                         </td>
                         <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.IssuedDate</label>
+                            <label class="control-label" style="font-weight: 500;">
+                                @(Convert.ToDateTime(Model.IssuedDate).ToString("dd MMM yyyy"))
+
+                            </label>
                         </td>
                     </tr>
 
@@ -237,8 +235,8 @@
                 </tr>
 
             </table>
-            @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
-
+            <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
+            <a asp-action="Index" asp-controller="IssueReturnFile" class="btn btn-primary jhide">Back</a>
         </div>
     </div>
 </div>
@@ -250,13 +248,12 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
 
-<script>
-    $(document).ready(function () {
-        window.print();
-    });
-
-</script>
 
 
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/issuefiledata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuefiledata.min.js" asp-append-version="true"></script>
+</environment>

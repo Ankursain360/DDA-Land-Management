@@ -2,23 +2,24 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Return File" })
 
 <div class="pt-3">
-    <form asp-action="ReturnFileData" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <form asp-action="ReturnFileData" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" target="_blank">
         <h3 class="mb-3 d-flex">File Details</h3>
-        <input type="hidden" asp-for="DataStorageDetailsId" value="@(Model.DataStorageDetails.Id)" />
+        <input type="hidden" asp-for="Id"/>
+        @*<input type="hidden" asp-for="DataStorageDetailsId" value="@(Model.DataStorageDetails.Id)" />*@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="DataStorageDetails.FileNo" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <input disabled asp-for="DataStorageDetails.FileNo" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="DataStorageDetails.FileNo" class="text-danger"></span>
                     <label class="floating-label">File No   </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="DataStorageDetails.Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <input disabled asp-for="DataStorageDetails.Name" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="DataStorageDetails.Name" class="text-danger"></span>
                     <label class="floating-label">File Name   </label>
                 </div>
@@ -28,15 +29,15 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="DataStorageDetails.RecordRoomNo" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                    <input disabled asp-for="DataStorageDetails.RecordRoomNo" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="DataStorageDetails.RecordRoomNo" class="text-danger"></span>
                     <label class="floating-label">Room No   </label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.AlmirahId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.AlmirahId"
                             asp-items="@(new SelectList(Model.DataStorageDetails.AlmirahList,"Id","AlmirahNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -48,7 +49,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.RowId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.RowId"
                             asp-items="@(new SelectList(Model.DataStorageDetails.RowList, "Id","RowNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -58,7 +59,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.ColumnId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.ColumnId"
                             asp-items="@(new SelectList(Model.DataStorageDetails.ColumnList,"Id","ColumnNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -70,7 +71,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.BundleId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DataStorageDetails.BundleId"
                             asp-items="@(new SelectList(Model.DataStorageDetails.BundleList,"Id","BundleNo"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -83,7 +84,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="Name" type="text" asp-for="IssuedToEmployee"
+                    <input disabled placeholder="Name" type="text" asp-for="IssuedToEmployee"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="IssuedToEmployee" class="text-danger"></span>
                     <label class="floating-label">Returned from (Employee Name)  </label>
@@ -91,7 +92,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"
                             asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -103,9 +104,9 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="BranchId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="BranchId"
                             asp-items="@(new SelectList(Model.BranchList, "Id","Name"))">
-                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                        <option selected="selected" disabled value="">--Select-- </option>
                     </select>
                     <span asp-validation-for="BranchId" class="text-danger"></span>
                     <label class="floating-label">Branch </label>
@@ -113,7 +114,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="DesignationId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="DesignationId"
                             asp-items="@(new SelectList(Model.DesignationList, "Id","Name"))">
                         <option selected="selected" disabled="disabled" value="">--Select-- </option>
                     </select>
@@ -125,7 +126,15 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input placeholder="date" type="date"
+                    <input disabled placeholder="date" type="date"
+                           class="floating-label-field floating-label-field--s3" asp-for="IssuedDate" />
+                    <span asp-validation-for="IssuedDate" class="text-danger"></span>
+                    <label class="floating-label">Issued Date  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="date" type="date" required
                            class="floating-label-field floating-label-field--s3" asp-for="ReturnedDate" />
                     <span asp-validation-for="ReturnedDate" class="text-danger"></span>
                     <label class="floating-label">Return Date  </label>
@@ -134,13 +143,13 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit" id="Issue">Return</button>
-                @if (Model.Id != 0)
+                <button class="btn btn-theme " type="submit" id="Issue" onclick="$(this).hide();">Return</button>
+                @*@if (Model.Id != 0)
                 {
-                     <button class="btn btn-theme " type="submit" id="ReturnReceipt" asp-route-id="@Model.Id"  asp-action="ReturnReceipt">Return Receipt</button>
+                    <button class="btn btn-theme " type="submit" id="ReturnReceipt" asp-route-id="@Model.Id" asp-action="ReturnReceipt">Return Receipt</button>
 
-                }
-              
+                }*@
+
                 @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
             </div>
         </div>
