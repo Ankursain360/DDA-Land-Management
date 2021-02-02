@@ -173,6 +173,7 @@ namespace Libraries.Model
         public virtual DbSet<Branch> Branch { get; set; }
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual DbSet<Plot> Plot { get; set; }
+        public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -314,6 +315,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
+            modelBuilder.ApplyConfiguration(new DmsfilerightConfiguration());
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             base.OnModelCreating(modelBuilder);
