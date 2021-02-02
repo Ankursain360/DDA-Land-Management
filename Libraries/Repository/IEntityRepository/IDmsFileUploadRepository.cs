@@ -45,5 +45,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<Dmsfileupload> FetchSingleResult(int id);
         string GetLocalityName(int? localityId);
         Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister);
+        int GetLocalityByName(string name);
+        int GetKhasraByName(string name);
+        Task<bool> Any(string fileNo);
     }
 }
