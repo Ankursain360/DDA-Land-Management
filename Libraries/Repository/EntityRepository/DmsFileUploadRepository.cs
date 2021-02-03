@@ -197,10 +197,10 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
-        public async Task<List<Dmsfileupload>> GetDMSUserRights(int userId)
+        public async Task<List<Dmsfileright>> GetDMSUserRights(int userId)
         {
-            return await _dbContext.Dmsfileupload
-                                     .Where(x => x.IsActive == 1)
+            return await _dbContext.Dmsfileright
+                                     //.Where(x => x.IsActive == 1)
                                      .ToListAsync();
         }
     }
