@@ -139,5 +139,116 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+        // **************DISPLAY LABEL *********
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
+        {
+            var data = await _dbContext.Datastoragedetails
+                                .Include(x => x.Almirah)
+                                .Include(x => x.Row)
+                                .Include(x => x.Column)
+                                .Include(x => x.Bundle)
+                                 .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                 && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                // && (Convert.ToString(model.almirah) || x.Almirah.AlmirahNo.Contains(model.almirah)))
+                                //&& (string.IsNullOrEmpty(model.row) || x.Name.Contains(model.row))
+                                //&& (string.IsNullOrEmpty(model.column) || x.Name.Contains(model.bundle))
+                                //&& (string.IsNullOrEmpty(model.bundle) || x.Name.Contains(model.bundle)))
+                                //.Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                .GetPaged(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderBy(x => x.FileNo)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderBy(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.FileStatus)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.FileNo)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                    .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                    .OrderBy(x => x.FileStatus)
+                                    .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            return data;
+        }
+
     }
 }

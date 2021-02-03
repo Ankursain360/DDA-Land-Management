@@ -166,6 +166,9 @@ namespace Libraries.Service.ApplicationService
             return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
         }
 
-        
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedDisplayLabel(model);
+        }
     }
 }

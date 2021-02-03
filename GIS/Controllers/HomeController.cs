@@ -44,10 +44,10 @@ namespace GIS.Controllers
         {
             return null;
         }
-        public async Task<JsonResult> GetAllPlotList(int? location)
-        {
-            return null;
-        }
+        //public async Task<JsonResult> GetAllPlotList(int? location)
+        //{
+        //    return null;
+        //}
         public async Task<JsonResult> GetZoneList(int? location)
         {
             return null;
@@ -60,10 +60,10 @@ namespace GIS.Controllers
         {
             return null;
         }
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+       // [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }
