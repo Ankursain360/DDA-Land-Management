@@ -196,5 +196,12 @@ namespace Libraries.Repository.EntityRepository
                                      .Where(x => x.IsActive == 1)
                                      .ToListAsync();
         }
+
+        public async Task<List<Dmsfileright>> GetDMSUserRights(int userId)
+        {
+            return await _dbContext.Dmsfileright
+                                     //.Where(x => x.IsActive == 1)
+                                     .ToListAsync();
+        }
     }
 }

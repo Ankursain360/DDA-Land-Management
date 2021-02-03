@@ -6,6 +6,7 @@ using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Model.Entity;
 using Service.IApplicationService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -64,10 +65,34 @@ namespace Libraries.Service.ApplicationService
         {
             return await _monthlyRosterRepository.GetAllRoasterDetails(monthlyRoasterSearchDto);
         }
-
+        public async Task<bool> Update(int id, MonthlyRoaster monthlyRoaster)
+        {
+            var result = await _monthlyRosterRepository.FindBy(a => a.Id == id);
+            var model = result.FirstOrDefault();
+            model.Month = monthlyRoaster.Month;
+            model.Year = monthlyRoaster.Year;
+            model.ZoneId = monthlyRoaster.ZoneId;
+            model.DivisionId = monthlyRoaster.DivisionId;
+            model.LocalityId = monthlyRoaster.LocalityId;
+            model.Template = monthlyRoaster.Template;
+            model.ModifiedBy = monthlyRoaster.ModifiedBy;
+            model.ModifiedDate = DateTime.Now;
+            model.UserprofileId = monthlyRoaster.UserprofileId;
+            _monthlyRosterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
         public async Task<MonthlyRoaster> GetMonthlyRoasterById(int id)
         {
             return (await _monthlyRosterRepository.FindBy(x => x.Id == id)).SingleOrDefault();
+        }
+
+        public async Task<bool> DeleteRoaster(int id)
+        {
+            var result = await _monthlyRosterRepository.FindBy(a => a.Id == id);
+            var model = result.FirstOrDefault();
+            model.IsActive = 0;
+            _monthlyRosterRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
         }
     }
 }

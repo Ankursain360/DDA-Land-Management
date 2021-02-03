@@ -44,6 +44,7 @@ namespace DocumentManagementSystem.Controllers
 
             if (result != null)
             {
+                var data = await _dmsfileuploadService.GetDMSUserRights(SiteContext.UserId);
                 return PartialView("_List", result);
             }
             else

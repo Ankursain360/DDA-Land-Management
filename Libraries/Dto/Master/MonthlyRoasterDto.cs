@@ -2,6 +2,7 @@
 {
     public class MonthlyRoasterDto
     {
+        public int Id { get; set; }
         public int Department { get; set; }
         public int Zone { get; set; }
         public int Division { get; set; }

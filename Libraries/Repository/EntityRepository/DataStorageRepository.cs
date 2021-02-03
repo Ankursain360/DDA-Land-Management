@@ -16,6 +16,7 @@ using System.Text;
 
 using Repository.Common;
 
+
 namespace Libraries.Repository.EntityRepository
 {
     public class DataStorageRepository : GenericRepository<Datastoragedetails>, IDataStorageRepository
@@ -52,10 +53,19 @@ namespace Libraries.Repository.EntityRepository
             var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
-        public async Task<List<Department>> GetDepartment()
+        public async Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId)
         {
-            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
-            return departmentList;
+            if (roleId == 1)
+            {
+                var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+                return departmentList;
+            }
+            else
+            {
+                var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1 && x.Id == userDepartmentId).ToListAsync();
+                return departmentList;
+            }
+
         }
         public async Task<List<Branch>> GetBranch()
         {
@@ -102,12 +112,14 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-
+                int SortOrder = (int)fileStatusReportSearchDto.SortOrder;
                 var data = await _dbContext.LoadStoredProcedure("FileStatus")
                                             .WithSqlParams(("P_departmentId", fileStatusReportSearchDto.Department),
-                                            ("UserId", UserId)
+                                            ("P_UserId", UserId)
                                             , ("P_From_Date", fileStatusReportSearchDto.FromDate)
-                                            , ("P_To_Date", fileStatusReportSearchDto.ToDate))
+                                            , ("P_To_Date", fileStatusReportSearchDto.ToDate)
+                                            , ("P_SortOrder", SortOrder)
+                                            , ("P_SortBy", fileStatusReportSearchDto.SortBy))
 
 
                                             .ExecuteStoredProcedureAsync<FileStatusReportListDataDto>();
@@ -124,7 +136,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId)
         {
-            
+
             int SortOrder = (int)model.SortOrder;
             var data = await _dbContext.LoadStoredProcedure("BindListofTotalFilesUserWiseReport")
                                              .WithSqlParams(("UserId", UserId),
@@ -139,6 +151,15 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
+
+        public int? GetDepartmentIdFromProfile(int userId)
+        {
+            var File = (from a in _dbContext.Userprofile
+                        where a.IsActive == 1 && a.User.Id == userId
+                        select a.DepartmentId).FirstOrDefault();
+
+            return File;
+        }
         // **************DISPLAY LABEL *********
 
 
@@ -268,5 +289,7 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+
     }
 }
+

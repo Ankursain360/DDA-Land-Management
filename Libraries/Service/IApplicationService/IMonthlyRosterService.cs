@@ -19,5 +19,7 @@ namespace Service.IApplicationService
         Task<List<Propertyregistration>> GetPrimaryListNoList(int divisionId, int departmentId, int zoneId, int localityId);
         Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto);
         Task<MonthlyRoaster> GetMonthlyRoasterById(int id);
+        Task<bool> Update(int id, MonthlyRoaster monthlyRoaster);
+        Task<bool> DeleteRoaster(int id);
     }
 }
