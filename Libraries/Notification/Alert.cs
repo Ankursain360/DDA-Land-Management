@@ -52,7 +52,7 @@ namespace Notification
             builder.Append((onclick ?? "null"));
             builder.Append(",'showDuration': '300','hideDuration': '1000','timeOut': '");
             builder.Append(timeOut);
-            builder.Append("','extendedTimeOut': '1000','showEasing': 'swing','hideEasing': 'linear','showMethod': 'fadeIn','hideMethod': 'fadeOut'");
+            builder.Append("','extendedTimeOut': '"+ timeOut + "','showEasing': 'swing','hideEasing': 'linear','showMethod': 'fadeIn','hideMethod': 'fadeOut'");
             builder.Append("};");
             builder.Append("toastr['");
             builder.Append(StringValueOf(type));

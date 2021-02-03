@@ -8,15 +8,14 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div id="allDetails">
-
-        <div class="row">
+        <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
+        @*<div class="row">
             <div class="col-md-3">
                 <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
 
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio"  name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked> @*asp-for is not used as want to always checked fileUpload at edit*@
-                    @*<input class="form-check-input" type="radio" asp-for="IsFileBulkUpload" name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked>*@
-                    <label class="form-check-label" for="radio">
+                    <input class="form-check-input" type="radio"  name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked>
+                   <label class="form-check-label" for="radio">
                         File Upload
                     </label>
                 </div>
@@ -29,7 +28,7 @@
                     </label>
                 </div>
             </div>
-        </div>
+        </div>*@
         <div id="divfileupload">
             <h3 class="my-3 d-flex sub-heading">File Upload</h3>
             <div class="row mt-md-3">
@@ -115,7 +114,7 @@
                             }
                             else
                             {
-                                <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3"  accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
+                                <input type="file" asp-for="FileUpload" class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
                                 <label for="field-1" class="floating-label">Upload File</label>
                             }

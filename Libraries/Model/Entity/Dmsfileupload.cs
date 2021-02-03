@@ -13,6 +13,8 @@ namespace Libraries.Model.Entity
         public string IsFileBulkUpload { get; set; }
         public string FileNo { get; set; }
         public string AlloteeName { get; set; }
+
+        [Required(ErrorMessage = "Mandatory", AllowEmptyStrings =false)]
         public int DepartmentId { get; set; }
         public int? KhasraNoId { get; set; }
         public int? LocalityId { get; set; }
@@ -37,6 +39,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public IFormFile FileUpload { get; set; }
+
+        [NotMapped]
+        public IFormFile BulkUpload { get; set; }
 
         [NotMapped]
         public string PdfLocationPath { get; set; }
