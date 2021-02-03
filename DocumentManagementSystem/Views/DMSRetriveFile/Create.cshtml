@@ -1,308 +1,119 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Dto.Master.DMSRetriveFileReportDtoProfile
 
+@await Component.InvokeAsync("PageHeader", new { pageName = "Retrive File" })
+    <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Details</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
 
-<script src="~/js/jquery.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
-
-<style>
-    .p {
-        color: black;
-    }
-</style>
-
-<style>
-
-    .bg {
-        background: linear-gradient(to left,#9e1c32, #991141, #900f50,#83155d, #721e68, #68226f,#5d2675,#4f2a7a, #492b80,#422c85, #392e8b,#2c3091);
-        Color: #ffffff;
-        Font-size: 0.95rem;
-        Font-Family: Open SansRegular;
-        height: 28px;
-    }
-</style>
-
-
-<script src="js/bootstrap.min.js"></script>
-<link href="Styles/bootstrap.css" rel="stylesheet" />
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Retrive File</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id", "Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="DepartmentId">Department</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList(ViewBag.LocalityList, "Id","Name"))">
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="LocalityId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="LocalityId">Locality</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraNoId" asp-items="@(new SelectList(ViewBag.KhasraNoList, "Id", "KhasraNo"))">
+                        <option value="0">All</option>
+                    </select>
+                    <span asp-validation-for="KhasraNoId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="KhasraNoId">Khasra No.</label>
+                </div>
             </div>
         </div>
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="FileNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="FileNo" class="text-danger"></span>
+                    <label class="floating-label">File No.</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="PropertyNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="PropertyNo" class="text-danger"></span>
+                    <label class="floating-label">Property No./Address</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AlmirahNo" type="text" class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="AlmirahNo" class="text-danger"></span>
+                    <label class="floating-label">Almirah No.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                    <label class="floating-label">Title</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <input type="submit" value="Generate" id="btnGenerate" class="btn btn-theme " />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="table-section bg-white border shadow rounded">
+    <div class="short-section d-md-flex align-items-center">
+        <div class="p-3 d-flex align-items-end mr-auto">
+            <div class="floating-label-wrap">
+                <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                    <option selected="selected" value="department">Department</option>
+                    <option value="Locality">Locality</option>
+                    <option value="fileno">File No.</option>
+                </select>
+                <label for="field-1" class="floating-label">Sort by</label>
+            </div>
+            <div class="short-btn d-flex align-items-center">
+                <span id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
+                <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+            </div>
+        </div>
+
+        <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+
+            <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                <small>Download</small>
+            </a>
+        </div>
+    </div>
+    <div class="table-responsive px-2" id="LoadReportView">
+
     </div>
 </div>
-<br />
-<br />
 
-
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="Create" method="post" id="1">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-                @*<div class="row" style="margin-bottom:35px;">
-            <div class="col-sm-12">
-                <div class=" myapp-hed2">
-                    <div class="col-md-12">
-                        <h6 class="pull-left" style="color:white;margin-top:5px;">Filing Date is between specified period</h6>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-
-
-                <div class="container-fluid" id="DivForFileName">
-                    <div class="panel-group">
-                        <div class="panel">
-                            @*<div class="form-row ">
-            <div class="form-group col-md-12 bg">Status Report DateWise</div>
-
-        </div>*@
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Department</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="1">Delhi</option>
-                                        <option value="2">Mumbai</option>
-                                        <option value="3">Chennai</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Zone</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="1">Delhi</option>
-                                        <option value="2">Mumbai</option>
-                                        <option value="3">Chennai</option>
-                                    </select>
-                                </div>
-
-
-
-
-
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Village</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="1">Delhi</option>
-                                        <option value="2">Mumbai</option>
-                                        <option value="3">Chennai</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">File No.</label>
-                                    <input type="text" class="form-control" />
-
-                                </div>
-
-
-
-
-
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Property No./Address</label>
-                                    <input type="text" class="form-control" />
-
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Khasra No</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="">Select</option>
-                                        <option value="1">Delhi</option>
-                                        <option value="2">Mumbai</option>
-                                        <option value="3">Chennai</option>
-                                    </select>
-                                </div>
-
-
-
-
-
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Almirah No</label>
-                                    <input type="text" class="form-control" />
-
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                    <label class="control-label lb-sm">Subject(Title)</label>
-                                    <input type="text" class="form-control" />
-
-                                </div>
-
-
-
-
-                            </div>
-
-
-
-
-
-
-                            <br />
-
-                        </div>
-                    </div>
-
-
-                    <div class="form-row">
-                        <div class="form-group  col-md-12" style="justify-content:center">
-                            <input type="button" value="Reterive" onclick="showcollection();" class="btn btn-primary myapp-hed1" />
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="container-fluid" id="showcollection" style="display:none">
-
-                    <div class="card  table-card" style="overflow:scroll;">
-
-                        <table class="table table-responsive table-bordered table-card" style="display:none" id="showtr">
-
-
-                            <thead class="thead">
-                                <tr>
-                                    <th>Sr.No</th>
-                                    <th>
-                                       
-                                           File No
-                                       
-                                    </th>
-                                    <th>
-                                        Allotte Name
-                                    </th>
-                                    <th>
-                                        Khasra No
-                                    </th>
-                                    <th>
-                                       Property No
-                                    </th>
-                                    <th>Locality</th>
-                                    <th>Zone</th>
-                                    <th>Almirah No</th>
-                                    <th>Subject(Title)</th>
-                                    <th colspan="2">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody class="tbody">
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        F-1(73)CM
-
-                                    </td>
-                                    <td>
-                                        K.L Singh
-                                    </td>
-                                    <td>
-                                        0//1/2
-                                    </td>
-                                    <td>FC-90</td>
-                                    <td>Okhla</td>
-                                    <td>Haryana</td>
-                                    <td>005</td>
-                                    <td></td>
-                                    <td>
-
-                                        <a>View File </a><br />
-                                        <a>Download File </a>
-
-
-                                    </td>
-
-                                </tr>
-
-
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        G-2(74)CM
-
-                                    </td>
-                                    <td>
-                                        P.K Aggarwal
-                                    </td>
-                                    <td>
-                                        0//1/2
-                                    </td>
-                                    <td>FC-90</td>
-                                    <td>Okhla</td>
-                                    <td>Haryana</td>
-                                    <td>007</td>
-                                    <td></td>
-                                    <td>
-
-
-                                        <a>View File </a><br />
-                                        <a>Download File </a>
-
-
-                                    </td>
-
-                                </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-                    <br /><br />
-
-                </div>
-
-
-
-            </form>
-        </div>
-    </div>
-    <script>
-        $(function () {
-            $("input[name=btnsubmit]").click(function () {
-                if ($(this).val() == "Search") {
-                    $("#DivForSubsequentPurchaser").show();
-                } else {
-                    $("#DivForSubsequentPurchaser").hide();
-                }
-            });
-        });
-
-    </script>
-
-
-    <script>
-        function showcollection() {
-            $("#showcollection").toggle();
-            $("#showtr").toggle();
-
-        }
-    </script>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/dmsretrivefilecreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/dmsretrivefilecreate.min.js" asp-append-version="true"></script>
+</environment>

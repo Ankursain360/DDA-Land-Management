@@ -16,7 +16,6 @@ using System.Text;
 
 using Repository.Common;
 
-
 namespace Libraries.Repository.EntityRepository
 {
     public class DataStorageRepository : GenericRepository<Datastoragedetails>, IDataStorageRepository
@@ -53,19 +52,10 @@ namespace Libraries.Repository.EntityRepository
             var localityList = await _dbContext.Locality.Where(x => x.IsActive == 1).ToListAsync();
             return localityList;
         }
-        public async Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId)
+        public async Task<List<Department>> GetDepartment()
         {
-            if(roleId == 1)
-            {
-                var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
-                return departmentList;
-            }
-            else
-            {
-                var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1 && x.Id== userDepartmentId).ToListAsync();
-                return departmentList;
-            }
-            
+            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return departmentList;
         }
         public async Task<List<Branch>> GetBranch()
         {
@@ -112,14 +102,12 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-                int SortOrder = (int)fileStatusReportSearchDto.SortOrder;
+
                 var data = await _dbContext.LoadStoredProcedure("FileStatus")
                                             .WithSqlParams(("P_departmentId", fileStatusReportSearchDto.Department),
-                                            ("P_UserId", UserId)
+                                            ("UserId", UserId)
                                             , ("P_From_Date", fileStatusReportSearchDto.FromDate)
-                                            , ("P_To_Date", fileStatusReportSearchDto.ToDate)
-                                            , ("P_SortOrder", SortOrder)
-                                            , ("P_SortBy", fileStatusReportSearchDto.SortBy))
+                                            , ("P_To_Date", fileStatusReportSearchDto.ToDate))
 
 
                                             .ExecuteStoredProcedureAsync<FileStatusReportListDataDto>();
@@ -151,13 +139,116 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public int? GetDepartmentIdFromProfile(int userId)
+        // **************DISPLAY LABEL *********
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
         {
-            var File = (from a in _dbContext.Userprofile
-                        where  a.IsActive == 1 && a.User.Id == userId
-                        select a.DepartmentId).FirstOrDefault();
+            var data = await _dbContext.Datastoragedetails
+                                .Include(x => x.Almirah)
+                                .Include(x => x.Row)
+                                .Include(x => x.Column)
+                                .Include(x => x.Bundle)
+                                 .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                 && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                // && (Convert.ToString(model.almirah) || x.Almirah.AlmirahNo.Contains(model.almirah)))
+                                //&& (string.IsNullOrEmpty(model.row) || x.Name.Contains(model.row))
+                                //&& (string.IsNullOrEmpty(model.column) || x.Name.Contains(model.bundle))
+                                //&& (string.IsNullOrEmpty(model.bundle) || x.Name.Contains(model.bundle)))
+                                //.Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                .GetPaged(model.PageNumber, model.PageSize);
 
-            return File;
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderBy(x => x.FileNo)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderBy(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.FileStatus)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.FileNo)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                     .OrderByDescending(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                    .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
+                                      && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                    .OrderBy(x => x.FileStatus)
+                                    .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            return data;
         }
+
     }
 }

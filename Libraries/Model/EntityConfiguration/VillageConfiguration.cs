@@ -1,43 +1,51 @@
 ﻿using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Libraries.Model.EntityConfiguration
 {
     public class VillageConfiguration : IEntityTypeConfiguration<Village>
     {
-        public void Configure(EntityTypeBuilder<Village> builder)
-        {
-            builder.ToTable("village");
 
-            builder.HasIndex(e => e.ZoneId)
+        public void Configure(EntityTypeBuilder<Village> entity)
+        {
+            entity.ToTable("village", "lms");
+
+            entity.HasIndex(e => e.ZoneId)
                 .HasName("ZoneId_idx");
 
-            builder.Property(e => e.Id).HasColumnType("int(11)");
+            entity.Property(e => e.Id).HasColumnType("int(11)");
 
-            builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
+            entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+            entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
-            builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
+            entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.Name)
+            entity.Property(e => e.Name)
                 .IsRequired()
                 .HasMaxLength(300)
                 .IsUnicode(false);
 
-            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+            entity.Property(e => e.Polygon).HasColumnType("longtext");
 
-            builder.HasOne(d => d.Zone)
+            entity.Property(e => e.TotalArea).HasColumnType("decimal(12,8)");
+
+            entity.Property(e => e.Xcoordinate)
+                .HasColumnName("XCoordinate")
+                .HasColumnType("decimal(12,8)");
+
+            entity.Property(e => e.Ycoordinate)
+                .HasColumnName("YCoordinate")
+                .HasColumnType("decimal(12,8)");
+
+            entity.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            entity.HasOne(d => d.Zone)
                 .WithMany(p => p.Village)
                 .HasForeignKey(d => d.ZoneId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("ZoneId");
-
         }
     }
-
 }

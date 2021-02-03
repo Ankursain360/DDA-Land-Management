@@ -58,3 +58,20 @@ $(document).delegate('a.delete-record', 'click', function (e) {
         return false;
     }
 });
+
+  if ($("#rSubsequent").is(":checked")) {
+        $("#DivForSubsequentPurchaser").hide();
+      $("#IsPartOfMainFile").val("Subsequent");
+    } else {
+        $("#DivForSubsequentPurchaser").show();
+      $("#IsPartOfMainFile").val("Original");
+}
+
+
+$("input[name='grpDamageAssesseeType']").click(function () {
+    if ($("#rSubsequent").is(":checked")) {
+        $("#DivForSubsequentPurchaser").hide();
+    } else {
+        $("#DivForSubsequentPurchaser").show();
+    }
+});

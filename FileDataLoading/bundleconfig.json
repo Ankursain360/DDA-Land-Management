@@ -40,5 +40,11 @@
     "inputFiles": [
       "wwwroot/js/issuefiledata.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/displaylabelindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/displaylabelindex.js"
+    ]
   }
 ]

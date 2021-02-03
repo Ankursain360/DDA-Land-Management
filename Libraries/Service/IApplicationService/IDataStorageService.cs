@@ -40,5 +40,10 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Scheme>> GetSchemes();
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
+   
+        
+        // ********* DISPLAY LABEL**********
+
+        Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
     }
 }

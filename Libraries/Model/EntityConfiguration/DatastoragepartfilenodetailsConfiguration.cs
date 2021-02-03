@@ -44,7 +44,22 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+
+
             builder.Property(e => e.Year).HasColumnType("int(11)");
+
+
+            builder.HasOne(d => d.Locality)
+                  .WithMany(p => p.Datastoragepartfilenodetails)
+                  .HasForeignKey(d => d.LocalityId)
+                  .OnDelete(DeleteBehavior.ClientSetNull)
+                  .HasConstraintName("fk_Locality");
+
+            builder.HasOne(d => d.SchemeDptBranchNavigation)
+                .WithMany(p => p.Datastoragepartfilenodetails)
+                .HasForeignKey(d => d.SchemeDptBranch)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_SchemeDptBranch");
 
         }
     }

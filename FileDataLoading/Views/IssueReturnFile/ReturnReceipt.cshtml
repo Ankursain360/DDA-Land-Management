@@ -166,11 +166,11 @@
                     </tr>
                     <tr>
                         @*<td style="border-top:none;">
-                            <p style="color:black; font-weight:700;">Zone : </p>
-                        </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">Sharda LM</label>
-                        </td>*@
+                                <p style="color:black; font-weight:700;">Zone : </p>
+                            </td>
+                            <td style="border-top:none;">
+                                <label class="control-label" style="font-weight: 500;">Sharda LM</label>
+                            </td>*@
                         <td style="border-top:none;">
                             <p style="color:black; font-weight:700;">Branch Society :</p>
                         </td>
@@ -190,7 +190,10 @@
                             <p style="color:black; font-weight:700;">Issued Date :</p>
                         </td>
                         <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.IssuedDate</label>
+                            <label class="control-label" style="font-weight: 500;">
+                                @(Convert.ToDateTime(Model.IssuedDate).ToString("dd MMM yyyy"))
+
+                            </label>
                         </td>
 
                     </tr>
@@ -199,7 +202,10 @@
                             <p style="color:black; font-weight:700;">Return On :</p>
                         </td>
                         <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.ReturnedDate</label>
+                            <label class="control-label" style="font-weight: 500;">
+                                @(Convert.ToDateTime(Model.ReturnedDate).ToString("dd MMM yyyy"))
+
+                            </label>
                         </td>
                     </tr>
 
@@ -218,6 +224,8 @@
 
             </table>
 
+            <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
+            <a asp-action="Index" asp-controller="IssueReturnFile" class="btn btn-primary jhide">Back</a>
         </div>
     </div>
 </div>
@@ -229,14 +237,14 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
 
-<script>
-    $(document).ready(function () {
-        window.print();
-    });
 
-</script>
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/issuefiledata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuefiledata.min.js" asp-append-version="true"></script>
+</environment>
 
 
 

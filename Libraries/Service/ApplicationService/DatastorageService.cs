@@ -138,9 +138,9 @@ namespace Libraries.Service.ApplicationService
             List<Locality> localityList = await _datastoragedetailRepository.GetLocalities();
             return localityList;
         }
-        public async Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId)
+        public async Task<List<Department>> GetDepartment()
         {
-            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment( roleId,  userDepartmentId);
+            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment();
             return departmentList;
         }
         public async Task<List<Branch>> GetBranch()
@@ -166,9 +166,9 @@ namespace Libraries.Service.ApplicationService
             return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
         }
 
-        public int? GetDepartmentIdFromProfile(int userId)
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
         {
-            return _datastoragedetailRepository.GetDepartmentIdFromProfile(userId);
+            return await _datastoragedetailRepository.GetPagedDisplayLabel(model);
         }
     }
 }
