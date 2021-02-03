@@ -1,23 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Libraries.Model.Entity;
+using Libraries.Service.IApplicationService;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+using System;
+using Dto.Search;
+using Dto.Master;
+using DocumentManagementSystem.Filters;
+using Core.Enum;
+using Microsoft.Extensions.Configuration;
 
 namespace DocumentManagementSystem.Controllers
 {
-    public class DMSRetriveFileController : Controller
+    public class DMSRetriveFileController : BaseController
     {
-        public IActionResult Index()
+        private readonly IDmsFileUploadService _dmsfileuploadService;
+        public IConfiguration _Configuration;
+
+        public DMSRetriveFileController(IDmsFileUploadService dmsfileuploadService, IConfiguration configuration)
         {
-            return View();
+            _dmsfileuploadService = dmsfileuploadService;
+            _Configuration = configuration;
         }
 
-        public IActionResult Create()
+
+
+        [AuthorizeContext(ViewAction.Add)]
+        public async Task<IActionResult> Create()
         {
-            return View();
+            DMSRetriveFileReportDtoProfile data = new DMSRetriveFileReportDtoProfile();
+            ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
+            ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
+            ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
+            return View(data);
         }
 
+        [HttpPost]
+        public async Task<PartialViewResult> GetDetails([FromBody] DMSRetriveFileSearchDto model)
+        {
+            var result = await _dmsfileuploadService.GetPagedDMSRetriveFileReport(model);
 
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
+        }
     }
 }
