@@ -12,9 +12,16 @@
         var Locality = $("#Locality option:selected").val();
 
         $('#dialog').load("/MonthlyRoster/GetMonthlyDetails", { month: months, year: years, department: DepartmentId, zone: ZoneId, division: DivisionId, Locality: Locality });
+    })
+    var data = JSON.parse($('#Template').val());
+    var rowno = 0;
+    $('#RoasterTable tbody tr #PrimaryListNo').each(function () {
+        console.log(data[rowno].PrimaryListNo);
+        debugger
+        $(this).select2('val', JSON.parse(data[rowno].PrimaryListNo));
+        rowno++;
     });
 });
-
 function onChangeDepartment(id) {
 
     HttpGet(`/MonthlyRoster/GetZoneList/?DepartmentId=${id}`, 'json', function (response) {
@@ -106,33 +113,12 @@ function onSubmitForm() {
     } else if (checkresult) {
         $("#LocalityMessage").hide();
     }
-    //var condition = 0;
-
-    //$('table#RoasterTable tr').each(function () {
-    //    var ddlValue = $(this).find('td').map(function () {
-    //        return $(this).find('select').map(function () {
-    //            if ($(this).prop("tagName") == "SELECT") {
-    //                return JSON.stringify($(this).select2('val'));
-    //            } else {
-    //                return $(this).val();
-    //            }
-    //        }).get();
-    //    }).get();
-    //    if (condition > 0) {
-    //        if (ddlValue == "[]") {
-    //            checkresult = false;
-    //            $(this).find("#PrimaryNoMessage").show();
-    //        } else if (checkresult) {
-    //            $(this).find("#PrimaryNoMessage").hide();
-    //        }
-    //    }
-    //    condition++;
-    //});
     debugger
     if (checkresult) {
         var param = GetListData();
-        HttpPost(`/MonthlyRoster/Create`, 'json', param, function (response) {
+        HttpPost(`/MonthlyRoster/Edit`, 'json', param, function (response) {
             window.location.href = response;  //'/WorkFlowTemplate/Index';
+            console.log(response);
             SuccessMessage('Data updated successfully.');
         });
     }
@@ -143,8 +129,10 @@ function GetListData() {
     var DepartmentId = $("#DepartmentId option:selected").val();
     var ZoneId = $("#ZoneId option:selected").val();
     var DivisionId = $("#DivisionId option:selected").val();
-    var Locality = $("#Locality option:selected").val();
+    var Locality = $("#LocalityId option:selected").val();
     var SecurityGuard = $("#UserProfileId option:selected").val();
+    var Ids = $("#Id").val();
+    debugger
     var tableData = [];
     var Model = [];
     var condition = 0;
@@ -172,8 +160,8 @@ function GetListData() {
     console.log(JsonData);
     return {
         month: months,
+        Id: Ids,
         year: years,
-        Id: 0,
         Department: DepartmentId,
         Zone: ZoneId,
         Division: DivisionId,
