@@ -140,6 +140,23 @@ namespace Libraries.Repository.EntityRepository
         }
 
         // **************DISPLAY LABEL *********
+
+
+       
+
+       
+
+        public async Task<Datastoragedetails> FetchPrintLabel(int id)
+        {
+            return await _dbContext.Datastoragedetails
+                                   .Include(x => x.Almirah)
+                                   .Include(x => x.Row)
+                                   .Include(x => x.Column)
+                                   .Include(x => x.Bundle)
+                                   .Where(x => x.Id == id)
+                                   .FirstOrDefaultAsync();
+        }
+
         public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
         {
             var data = await _dbContext.Datastoragedetails
@@ -149,6 +166,7 @@ namespace Libraries.Repository.EntityRepository
                                 .Include(x => x.Bundle)
                                  .Where(x => (string.IsNullOrEmpty(model.fileNo) || x.FileNo.Contains(model.fileNo))
                                  && (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+                                 // && (string.IsNullOrEmpty(model.almirah) || x.Almirah.AlmirahNo.Contains(model.almirah)))
                                 // && (Convert.ToString(model.almirah) || x.Almirah.AlmirahNo.Contains(model.almirah)))
                                 //&& (string.IsNullOrEmpty(model.row) || x.Name.Contains(model.row))
                                 //&& (string.IsNullOrEmpty(model.column) || x.Name.Contains(model.bundle))
