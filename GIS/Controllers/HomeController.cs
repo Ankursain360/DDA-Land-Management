@@ -52,10 +52,10 @@ namespace GIS.Controllers
         {
             return null;
         }
-        public async Task<JsonResult> GetAllPlotList(int? location)
-        {
-            return null;
-        }
+        //public async Task<JsonResult> GetAllPlotList(int? location)
+        //{
+        //    return null;
+        //}
         public async Task<JsonResult> GetZoneList(int? location)
         {
             return null;
