@@ -35,9 +35,19 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Dmsfileright)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("useridfk");
+                .HasConstraintName("fkaspuser");
 
 
+
+
+
+
+
+            //builder.HasOne(d => d.User)
+            //  .WithMany(p => p.Dmsfileright)
+            //  .HasForeignKey(d => d.UserId)
+            //  .OnDelete(DeleteBehavior.ClientSetNull)
+            //  .HasConstraintName("useridfk");
 
 
         }
