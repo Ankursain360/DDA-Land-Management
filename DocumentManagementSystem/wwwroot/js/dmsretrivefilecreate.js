@@ -4,21 +4,18 @@ var sortOrder = 1;//default Ascending
 
 $(document).ready(function () {
 
-    
+    GetDetails(currentPageNumber, currentPageSize, sortOrder);
 
 });
 $("#btnGenerate").click(function () {
-    GetDetails(pageNumber, pageSize, sortOrder)
+    GetDetails(currentPageNumber, currentPageSize, sortOrder)
 });
-function GetDetails(pageNumber, pageSize, sortOrder) {
-    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
-    var IsValid = ValidCheck();
-    if (IsValid) {
-        HttpPost(`/DMSRetriveFile/GetDetails`, 'html', param, function (response) {
-            $('#LoadReportView').html("");
-            $('#LoadReportView').html(response);
-        });
-    }
+function GetDetails(currentPageNumber, currentPageSize, sortOrder) {
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortOrder);
+    HttpPost(`/DMSRetriveFile/GetDetails`, 'html', param, function (response) {
+        $('#LoadReportView').html("");
+        $('#LoadReportView').html(response);
+    });
 }
 
 $("#btnAscending").click(function () {
