@@ -16,7 +16,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Column>> GetColumns();
         Task<List<Bundle>> GetBundles();
         Task<List<Locality>> GetLocalities();
-        Task<List<Department>> GetDepartment();
+        Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId);
         Task<List<Branch>> GetBranch();
         Task<List<Zone>> GetZones();
         Task<List<Scheme>> GetSchemes();
@@ -26,7 +26,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
 
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId);
-
-
+        int? GetDepartmentIdFromProfile(int userId);
     }
 }
