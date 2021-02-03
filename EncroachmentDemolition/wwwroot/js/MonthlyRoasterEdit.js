@@ -10,7 +10,6 @@
         var ZoneId = $("#ZoneId option:selected").val();
         var DivisionId = $("#DivisionId option:selected").val();
         var Locality = $("#Locality option:selected").val();
-
         $('#dialog').load("/MonthlyRoster/GetMonthlyDetails", { month: months, year: years, department: DepartmentId, zone: ZoneId, division: DivisionId, Locality: Locality });
     })
     var data = JSON.parse($('#Template').val());

@@ -83,7 +83,7 @@ namespace EncroachmentDemolition.Controllers
                 return Json(Url.Action("Create", "MonthlyRoster"));
             }
         }
-        [AuthorizeContext(ViewAction.Edit)]
+        //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             MonthlyRoaster model = new MonthlyRoaster();
