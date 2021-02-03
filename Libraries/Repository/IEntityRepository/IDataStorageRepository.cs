@@ -27,6 +27,8 @@ namespace Libraries.Repository.IEntityRepository
 
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId);
 
+        // ********* DISPLAY LABEL**********
 
+        Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
     }
 }
