@@ -63,27 +63,35 @@ namespace Service.ApplicationService
 
         public async Task<bool> AddUpdateDmsRight(List<UserRightsMapDto> model)
         {
-            for (var i = 0; i < model.Count; i++)
+            try
             {
-                int userid = model[i].UserId;
+                for (var i = 0; i < model.Count; i++)
+                {
+                    int userid = model[i].UserId;
 
-                var result = await _userrightRepository.FindBy(a => a.UserId == userid);
-                _userrightRepository.RemoveRange(result);
+                    var result = await _userrightRepository.FindBy(a => a.UserId == userid);
+                    _userrightRepository.RemoveRange(result);
+                }
+                List<Dmsfileright> permission = model.Select(a => new Dmsfileright()
+                {
+                    UserId = a.UserId,
+                    Downloadright = a.Downloadright,
+                    Viewright = a.Viewright,
+
+                    CreatedBy = 1,
+                    CreatedDate = DateTime.Now
+                }).ToList();
+
+                await _userrightRepository.AddRange(permission);
+                int saved = await _unitOfWork.CommitAsync();
+
+                return saved > 0;
             }
-            List<Dmsfileright> permission = model.Select(a => new Dmsfileright()
+            catch(Exception ex)
             {
-                UserId = a.UserId,
-                Downloadright = a.Downloadright,
-                Viewright = a.Viewright,
-               
-                CreatedBy = 1,
-                CreatedDate = DateTime.Now
-            }).ToList();
-
-            await _userrightRepository.AddRange(permission);
-            int saved = await _unitOfWork.CommitAsync();
-
-            return saved > 0;
+                return false;
+            }
+            
         }
 
 

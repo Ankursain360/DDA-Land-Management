@@ -80,6 +80,7 @@ $("#btnSaveBottom").click(function () {
         } else {
             var vtrue = 0;
         }
+        
         if(v != y) {
             var model = {
                 userId: v,
@@ -90,7 +91,7 @@ $("#btnSaveBottom").click(function () {
              y = v;
         }
     });
-   // console.log(arrRight);
+  // console.log(arrRight);
     
     
     HttpPost('/DMSUserRight/AddUpdateDmsRight', 'json', arrRight, function (response) {
