@@ -61,7 +61,7 @@ namespace Libraries.Service.ApplicationService
             Datastoragedetails model = result.FirstOrDefault();
             return model;
         }
-        
+
         public async Task<bool> Create(Datastoragedetails dataStorageDetails)
         {
 
@@ -138,9 +138,9 @@ namespace Libraries.Service.ApplicationService
             List<Locality> localityList = await _datastoragedetailRepository.GetLocalities();
             return localityList;
         }
-        public async Task<List<Department>> GetDepartment()
+        public async Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId)
         {
-            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment();
+            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment(roleId, userDepartmentId);
             return departmentList;
         }
         public async Task<List<Branch>> GetBranch()
@@ -161,14 +161,20 @@ namespace Libraries.Service.ApplicationService
             List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
             return schemesList;
         }
-        public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId)
+        public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId)
         {
-            return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
+            return await _datastoragedetailRepository.GetPagedListofReportFile(model, UserId);
         }
 
+
+        public int? GetDepartmentIdFromProfile(int userId)
+        {
+            return _datastoragedetailRepository.GetDepartmentIdFromProfile(userId);
+        }
         public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
         {
             return await _datastoragedetailRepository.GetPagedDisplayLabel(model);
+
         }
     }
 }
