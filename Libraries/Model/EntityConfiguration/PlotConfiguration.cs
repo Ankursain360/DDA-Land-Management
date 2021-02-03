@@ -4,32 +4,34 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class VillageConfiguration : IEntityTypeConfiguration<Village>
+    class PlotConfiguration : IEntityTypeConfiguration<Plot>
     {
-
-        public void Configure(EntityTypeBuilder<Village> entity)
+        public void Configure(EntityTypeBuilder<Plot> entity)
         {
-            entity.ToTable("village", "lms");
+            entity.ToTable("plot", "lms");
 
-            entity.HasIndex(e => e.ZoneId)
-                .HasName("ZoneId_idx");
+            entity.HasIndex(e => e.VillageId)
+                .HasName("FKGisVillageId_idx");
 
             entity.Property(e => e.Id).HasColumnType("int(11)");
 
             entity.Property(e => e.CreatedBy).HasColumnType("int(11)");
+
+            entity.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.Name)
-                .IsRequired()
-                .HasMaxLength(300)
+                .HasMaxLength(500)
                 .IsUnicode(false);
+
+            entity.Property(e => e.PlotArea).HasColumnType("decimal(12,8)");
 
             entity.Property(e => e.Polygon).HasColumnType("longtext");
 
-            entity.Property(e => e.TotalArea).HasColumnType("decimal(12,8)");
+            entity.Property(e => e.VillageId).HasColumnType("int(11)");
 
             entity.Property(e => e.Xcoordinate)
                 .HasColumnName("XCoordinate")
@@ -39,13 +41,11 @@ namespace Libraries.Model.EntityConfiguration
                 .HasColumnName("YCoordinate")
                 .HasColumnType("decimal(12,8)");
 
-            entity.Property(e => e.ZoneId).HasColumnType("int(11)");
-
-            entity.HasOne(d => d.Zone)
-                .WithMany(p => p.Village)
-                .HasForeignKey(d => d.ZoneId)
+            entity.HasOne(d => d.Village)
+                .WithMany(p => p.Plot)
+                .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("ZoneId");
+                .HasConstraintName("FKGisVillageId");
         }
     }
 }

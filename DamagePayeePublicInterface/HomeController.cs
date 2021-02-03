@@ -1,5 +1,4 @@
-﻿using GIS.Models;
-using Libraries.Service.IApplicationService;
+﻿using DamagePayeePublicInterface.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
@@ -10,12 +9,10 @@ namespace GIS.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IGISService _GISService;
 
-        public HomeController(ILogger<HomeController> logger, IGISService GISService)
+        public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _GISService = GISService;
         }
 
         public IActionResult Index()
@@ -28,15 +25,15 @@ namespace GIS.Controllers
             return View();
         }
 
-        public async Task<JsonResult> GetVillageList(int? ZoneId)
+        public async Task<JsonResult> VacantPlot(int? location)
         {
-            return Json(await _GISService.GetVillageList(ZoneId ?? 0));
+            return null;
         }
-        public async Task<JsonResult> GetPlotList(int? VillageId)
+        public async Task<JsonResult> GetVillageList(int? location)
         {
-            return Json(await _GISService.GetPlotList(VillageId ?? 0));
+            return null;
         }
-        public async Task<JsonResult> GetZoneList()
+        public async Task<JsonResult> GetAllVillageList(int? location)
         {
             return null;
         }
@@ -52,7 +49,7 @@ namespace GIS.Controllers
         {
             return null;
         }
-        public async Task<JsonResult> GetAllPlotList(int? location)
+        public async Task<JsonResult> GetPlotList(int? location)
         {
             return null;
         }

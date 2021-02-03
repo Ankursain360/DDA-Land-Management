@@ -1,6 +1,8 @@
-﻿$(function () {
-    $("#Issue").click(function () {
-        $("#IssueReceipt").show();
-    } 
-      );  
+﻿
+$(function () {
+    $("#btnPrint").click(function () {
+        $('.jhide').hide();
+        window.print();
+        $('.jhide').show();
+    });
 });
