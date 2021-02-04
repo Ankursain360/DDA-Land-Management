@@ -14,7 +14,11 @@ using Libraries.Model;
 using NewLandAcquisition.Infrastructure.Extensions;
 using System.IdentityModel.Tokens.Jwt;
 using NewLandAcquisition.Filters;
-
+using Libraries.Model.Entity;
+using Model.Entity;
+using Microsoft.AspNetCore.Identity;
+using Service.Common;
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace NewLandAcquisition
 {
     public class Startup
@@ -30,6 +34,19 @@ namespace NewLandAcquisition
 
         public void ConfigureServices(IServiceCollection services)
         {
+            if (HostEnvironment.IsDevelopment())
+            {
+                services.AddControllersWithViews().AddRazorRuntimeCompilation().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+            else
+            {
+                services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                );
+            }
+
             services.Configure<CookiePolicyOptions>(options =>
             {
                 options.CheckConsentNeeded = context => true;
@@ -42,26 +59,30 @@ namespace NewLandAcquisition
             services.AddDbContext<DataContext>(a => a.UseMySQL(Configuration.GetSection("ConnectionString:Con").Value));
 
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-
-            
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+               .AddEntityFrameworkStores<DataContext>()
+               .AddDefaultTokenProviders();
 
             services.AddMvc(option =>
             {
                 option.Filters.Add(typeof(ExceptionLogFilter));
             });
-            
-            services.RegisterDependency();
 
-#if DEBUG
-            if (HostEnvironment.IsDevelopment())
-            {
-                services.AddControllersWithViews().AddRazorRuntimeCompilation();
-            }
-            else
-            {
-                services.AddControllersWithViews();
-            }
-#endif
+            services.RegisterDependency();
+            services.AddAutoMapperSetup();
+
+
+
+//#if DEBUG
+//            if (HostEnvironment.IsDevelopment())
+//            {
+//                services.AddControllersWithViews().AddRazorRuntimeCompilation();
+//            }
+//            else
+//            {
+//                services.AddControllersWithViews();
+//            }
+//#endif
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
 
@@ -69,19 +90,20 @@ namespace NewLandAcquisition
             {
                 options.DefaultScheme = "Cookies";
                 options.DefaultChallengeScheme = "oidc";
+                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             })
             .AddCookie("Cookies")
             .AddOpenIdConnect("oidc", options =>
             {
-                options.Authority = "https://localhost:5001";
-
+                options.SignInScheme = "Cookies";
+                options.Authority = Configuration.GetSection("AuthSetting:Authority").Value;
+                options.RequireHttpsMetadata = Convert.ToBoolean(Configuration.GetSection("AuthSetting:RequireHttpsMetadata").Value);
                 options.ClientId = "mvc";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-
                 options.Scope.Add("api1");
-
                 options.SaveTokens = true;
+
             });
         }
 
