@@ -28,6 +28,10 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetPlotList(VillageId ?? 0));
         }
+        public async Task<JsonResult> GetZoneDetails(int ZoneId)
+        {
+            return Json(await _GISService.GetZoneDetails(ZoneId));
+        }
         public async Task<JsonResult> GetZoneList()
         {
             return Json(await _GISService.GetZoneList());
