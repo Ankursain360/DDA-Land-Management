@@ -62,6 +62,7 @@ namespace DocumentManagementSystem.Controllers
             Dmsfileupload dmsfileupload = new Dmsfileupload();
             dmsfileupload.IsActive = 1;
             await BindDropDown(dmsfileupload);
+            ViewBag.PdfGenerate = "No";
             return View(dmsfileupload);
         }
 
@@ -399,8 +400,9 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.Summary = HtmlSummary.ToString();
                     HtmlSummaryUniq.Append("</ul>");
                     ViewBag.SummaryUniq = HtmlSummaryUniq.ToString();
+                    ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning);
                     ViewBag.PdfGenerate = "Yes";
-                    ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning,Position.BottomFullWidth,0,true,false);
+                    //ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning,Position.BottomFullWidth,0,true,false);
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();

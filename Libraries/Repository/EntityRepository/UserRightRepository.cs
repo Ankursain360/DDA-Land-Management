@@ -39,7 +39,6 @@ namespace Repository.EntityRepository
 
         public async Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model)
         {
-
             var data = await _dbContext.Userprofile.Include(a => a.User)
                 .Include(b => b.Department)
                 .Include(c => c.Dmsfileright)

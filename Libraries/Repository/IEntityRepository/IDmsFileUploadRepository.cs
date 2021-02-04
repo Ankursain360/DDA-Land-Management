@@ -20,6 +20,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Locality>> GetLocalityList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
         Task<Dmsfileupload> FetchSingleResult(int id);
-        Task<List<Dmsfileright>> GetDMSUserRights(int userId);
+        Task<Dmsfileright> GetDMSUserRights(int userId);
     }
 }
