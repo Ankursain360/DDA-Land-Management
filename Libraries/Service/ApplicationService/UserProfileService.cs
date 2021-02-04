@@ -211,6 +211,5 @@ namespace Service.ApplicationService
             List<Zone> zoneList = await _userProfileRepository.GetAllZone(departmentId);
             return zoneList;
         }
-
     }
 }

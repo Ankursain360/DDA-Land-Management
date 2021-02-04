@@ -62,9 +62,9 @@ namespace SiteMaster.Controllers
             AddUserDto model = new AddUserDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone(),
+              //  ZoneList = await _zoneService.GetZone(),
                 RoleList = await _userProfileService.GetRole(),
-                BranchList = await _branchService.GetBranch()
+               // BranchList = await _branchService.GetBranch()
             };
             return View(model);
         }
@@ -148,6 +148,13 @@ namespace SiteMaster.Controllers
             return Json(await _userProfileService.GetAllZone(Convert.ToInt32(DepartmentId)));
             
         }
+        [HttpGet]
+        public async Task<JsonResult> GetBranchList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            return Json(await _branchService.GetGetBranchList(Convert.ToInt32(DepartmentId)));
+
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> LoadPersonalDetails([FromBody] UsermanagementEditPartialLoad dtodata)
@@ -172,9 +179,11 @@ namespace SiteMaster.Controllers
             UserProfileInfoDto model = new UserProfileInfoDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone(),
                 RoleList = await _userProfileService.GetRole(),
                 DepartmentId = user.DepartmentId,
+                BranchList = await _branchService.GetGetBranchList(Convert.ToInt32(user.DepartmentId)),
+               // ZoneList = await _userProfileService.GetAllZone(Convert.ToInt32(user.DepartmentId)),
+                BranchId = user.BranchId,
                 RoleId = user.RoleId,
                 DistrictId = user.DistrictId,
                 ZoneId = user.ZoneId

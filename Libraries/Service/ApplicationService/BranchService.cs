@@ -121,6 +121,12 @@ namespace Libraries.Service.ApplicationService
             var result = _mapper.Map<List<BranchDto>>(branches);
             return result;
         }
+        public async Task<List<BranchDto>> GetGetBranchList(int departmentId)
+        {
+            var branches = await _branchRepository.GetGetBranchList(departmentId);
+            var result = _mapper.Map<List<BranchDto>>(branches);
+            return result;
+        }
     }
 }
 

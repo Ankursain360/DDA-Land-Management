@@ -37,6 +37,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Branch>> GetAllDetails();
         Task<List<Branch>> GetBranchUsingRepo();
         Task<PagedResult<Branch>> GetPagedBranch(BranchSearchDto model);
+        Task<List<BranchDto>> GetGetBranchList(int departmentid);
     }
 }
 

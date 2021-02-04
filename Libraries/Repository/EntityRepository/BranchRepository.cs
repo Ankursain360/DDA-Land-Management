@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model;
 using Libraries.Model.Entity;
@@ -152,6 +153,13 @@ namespace Libraries.Repository.EntityRepository
                 }
             }
             return data;
+        }
+
+        public async Task<List<Branch>> GetGetBranchList(int departmentId)
+        {
+            return await _dbContext.Branch
+                                    .Where(x => x.DepartmentId == departmentId && x.IsActive == 1)
+                                    .ToListAsync();
         }
     }
 

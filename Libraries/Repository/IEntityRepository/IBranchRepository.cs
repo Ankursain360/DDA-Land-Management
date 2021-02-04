@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Dto.Master;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
@@ -15,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetDepartmentList();
         Task<List<Branch>> GetAllDetails();
         Task<PagedResult<Branch>> GetPagedBranch(BranchSearchDto model);
+        Task<List<Branch>> GetGetBranchList(int departmentId);
     }
 }
