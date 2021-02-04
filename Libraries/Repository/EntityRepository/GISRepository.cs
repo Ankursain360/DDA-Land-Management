@@ -19,15 +19,13 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Plot.Where(x => x.VillageId == VillageId).ToListAsync();
         }
-
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
             return await _dbContext.Village.Where(x => x.ZoneId == ZoneId).ToListAsync();
         }
-
         public async Task<List<Zone>> GetZoneList()
         {
-            return await _dbContext.Zone.ToListAsync();
+            return await _dbContext.Zone.Include(x => x.Village).ToListAsync();
         }
     }
 }
