@@ -9,8 +9,8 @@ namespace Libraries.Model.Entity
         public int UserId { get; set; }
         public byte? Viewright { get; set; }
         public byte? Downloadright { get; set; }
-    
-     
+
+        //public virtual ApplicationUser User { get; set; }
         public Userprofile User { get; set; }
 
     }

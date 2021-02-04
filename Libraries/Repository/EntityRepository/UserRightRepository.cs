@@ -43,7 +43,8 @@ namespace Repository.EntityRepository
                 .Include(b => b.Department)
                 .Include(c => c.Dmsfileright)
                 .Where(x => (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)
-                && (x.IsActive == 0)
+                && (x.IsActive == 1)
+              //  && x.Department.IsActive == 1
                 )
                 ).GetPaged<Userprofile>(model.PageNumber, model.PageSize);
 
