@@ -56,7 +56,7 @@ namespace FileDataLoading.Controllers
         {
             Issuereturnfile model = new Issuereturnfile();
             var Data = await _datastorageService.FetchSingleResult(id);
-
+            model.IssuedDate = DateTime.Now;
             model.DepartmentList = await _issueReturnFileService.GetAllDepartment();
             model.BranchList = await _issueReturnFileService.GetAllBranch();
             model.DesignationList = await _issueReturnFileService.GetAllDesignation();
