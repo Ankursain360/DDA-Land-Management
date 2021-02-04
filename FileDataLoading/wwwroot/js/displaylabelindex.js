@@ -38,7 +38,7 @@ $("#btnReset").click(function () {
     //$('#Id').val('0').trigger('change');
     $('#txtFileNo').val('');
     $('#txtName').val('');
-    //$('#txtAlmirah').val('');
+   // $('#txtAlmirah').val('');
     //$('#txtRow').val('');
     //$('#txtColumn').val('');
     //$('#txtBundle').val('');
@@ -56,7 +56,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber,
-        FileNo: parseInt($('#Id option:selected').val())
+        
     }
     return model;
 }

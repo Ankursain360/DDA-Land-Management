@@ -59,6 +59,6 @@ namespace Libraries.Service.IApplicationService
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(string fileNo);
         Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
-        Task<List<Dmsfileright>> GetDMSUserRights(int userId);
+        Task<Dmsfileright> GetDMSUserRights(int userId);
     }
 }

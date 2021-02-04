@@ -45,5 +45,6 @@ namespace Libraries.Service.IApplicationService
         // ********* DISPLAY LABEL**********
 
         Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
+        Task<Datastoragedetails> FetchPrintLabel(int id);
     }
 }

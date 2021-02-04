@@ -6,5 +6,7 @@ namespace DocumentManagementSystem.Helper
         int UserId { get; set; }
         int ProfileId { get; set; }
         int? RoleId { get; set; }
+        int? DepartmentId { get; set; }
+        int? BranchId { get; set; }
     }
 }

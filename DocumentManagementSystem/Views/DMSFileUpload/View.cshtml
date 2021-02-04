@@ -88,7 +88,7 @@
                         @{
                             if (Model.FilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewFile" asp-route-id="@Model.Id" disabled target="_blank"> (View File)</a>
+                                <label class="badge badge-primary px-2">(View File)</label>
                                 <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
                             }
@@ -117,7 +117,6 @@
     </div>
     <div class="row mt-md-3">
         <div class=" col-md-12">
-            <button class="btn btn-theme " type="submit">Create</button>
             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
         </div>

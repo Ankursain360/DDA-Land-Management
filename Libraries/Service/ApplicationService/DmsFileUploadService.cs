@@ -129,7 +129,7 @@ namespace Service.ApplicationService
             return await _dmsFileUploadRepository.GetPagedDMSRetriveFileReport(model);
         }
 
-        public async Task<List<Dmsfileright>> GetDMSUserRights(int userId)
+        public async Task<Dmsfileright> GetDMSUserRights(int userId)
         {
             return await _dmsFileUploadRepository.GetDMSUserRights(userId);
         }
