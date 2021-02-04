@@ -124,6 +124,7 @@ namespace Service.ApplicationService
                 {
                     ZoneId = userDto.ZoneId,
                     DepartmentId = userDto.DepartmentId,
+                    BranchId = userDto.BranchId,
                     DistrictId = userDto.DistrictId,
                     RoleId = userDto.RoleId,
                     IsActive = 1,
@@ -180,6 +181,7 @@ namespace Service.ApplicationService
 
                 user.Id = 0;
                 user.DepartmentId = model.DepartmentId;
+                user.BranchId = model.BranchId;
                 user.RoleId = model.RoleId;
                 user.ZoneId = model.ZoneId;
                 user.IsActive = 1;
@@ -209,6 +211,5 @@ namespace Service.ApplicationService
             List<Zone> zoneList = await _userProfileRepository.GetAllZone(departmentId);
             return zoneList;
         }
-
     }
 }
