@@ -5,6 +5,10 @@ using Libraries.Service.IApplicationService;
 using Libraries.Service.ApplicationService;
 using Libraries.Repository.Common;
 using Service.ApplicationService;
+using AcquiredLandInformationManagement.Helper;
+using Service.IApplicationService;
+using Repository.IEntityRepository;
+using Repository.EntityRepository;
 
 namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 {
@@ -14,7 +18,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 		{
             /* Common Dependencies */
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+            services.AddScoped<ISiteContext, SiteContext>();
             /* Respository */
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
@@ -46,6 +50,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ISakanidetailRepository, SakanidetailRepository>(); //added by Nikita
             services.AddScoped<IJaraidetailRepository, JaraidetailRepository>(); //added by Nikita
             services.AddScoped<IUndersection17Repository, Undersection17Repository>();
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IMenuRepository, MenuRepository>();
+            services.AddScoped<IPermissionsRepository, PermissionsRepository>();
+            services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
+            services.AddScoped<IActionsRepository, ActionsRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -74,7 +85,14 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IBooktransferlandService, BooktransferlandService>();
             services.AddScoped<ISakanidetailService, SakanidetailService>(); //added by Nikita
             services.AddScoped<IJaraidetailService, JaraidetailService>(); 
-            services.AddScoped<IUndersection17Service, Undersection17Service>(); 
+            services.AddScoped<IUndersection17Service, Undersection17Service>();
+            services.AddScoped<IMenuService, MenuService>();
+            services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IModuleService, ModuleService>();
+            services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
+            services.AddScoped<IActionsService, ActionsService>();
+            services.AddScoped<IUserProfileService, UserProfileService>();
 
 
         }
