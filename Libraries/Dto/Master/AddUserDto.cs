@@ -52,5 +52,9 @@ namespace Dto.Master
 
         [NotMapped]
         public List<RoleDto> RoleList { get; set; }
+        public int BranchId { get; set; }
+
+        [NotMapped]
+        public List<BranchDto> BranchList { get; set; }
     }
 }

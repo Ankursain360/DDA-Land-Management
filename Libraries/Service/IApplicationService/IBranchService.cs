@@ -21,7 +21,8 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IBranchService : IEntityService<Branch>
     {
-        
+
+        Task<List<BranchDto>> GetBranch();
         Task<bool> Update(int id, Branch branch); 
 
         Task<bool> Create(Branch branch);

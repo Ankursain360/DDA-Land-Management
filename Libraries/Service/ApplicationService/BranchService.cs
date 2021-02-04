@@ -114,6 +114,13 @@ namespace Libraries.Service.ApplicationService
         {
             return await _branchRepository.GetPagedBranch(model);
         }
+
+        public async Task<List<BranchDto>> GetBranch()
+        {
+            var branches = await _branchRepository.FindBy(a => a.IsActive == 1);
+            var result = _mapper.Map<List<BranchDto>>(branches);
+            return result;
+        }
     }
 }
 

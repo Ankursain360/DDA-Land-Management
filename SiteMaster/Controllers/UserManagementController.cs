@@ -26,15 +26,18 @@ namespace SiteMaster.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IDepartmentService _departmentService;
         private readonly IZoneService _zoneService;
+        private readonly IBranchService _branchService;
         private readonly UserManager<ApplicationUser> _userManager;
         public UserManagementController(
             IDepartmentService departmentService,
             IZoneService zoneService,
+            IBranchService branchService,
             IUserProfileService userProfileService,
             UserManager<ApplicationUser> userManager)
         {
             _departmentService = departmentService;
             _zoneService = zoneService;
+            _branchService = branchService;
             _userProfileService = userProfileService;
             _userManager = userManager;
         }
@@ -60,7 +63,8 @@ namespace SiteMaster.Controllers
             {
                 DepartmentList = await _departmentService.GetDepartment(),
                 ZoneList = await _zoneService.GetZone(),
-                RoleList = await _userProfileService.GetRole()
+                RoleList = await _userProfileService.GetRole(),
+                BranchList = await _branchService.GetBranch()
             };
             return View(model);
         }
