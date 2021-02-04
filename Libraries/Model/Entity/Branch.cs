@@ -1,4 +1,5 @@
 ﻿using Libraries.Model.Common;
+using Model.Entity;
 using System;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace Libraries.Model.Entity
         {
             Datastoragedetails = new HashSet<Datastoragedetails>();
             Issuereturnfile = new HashSet<Issuereturnfile>();
+            Userprofile = new HashSet<Userprofile>();
         }
 
        
@@ -20,5 +22,6 @@ namespace Libraries.Model.Entity
         public Department Department { get; set; }
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+        public virtual ICollection<Userprofile> Userprofile { get; set; }
     }
 }

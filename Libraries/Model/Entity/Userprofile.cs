@@ -20,13 +20,15 @@ namespace Model.Entity
         public short? IsActive { get; set; }
         public int UserId { get; set; }
         public int? DepartmentId { get; set; }
+        public int? BranchId { get; set; }
+        public virtual Branch Branch { get; set; }
         public virtual Department Department { get; set; }
         public virtual District District { get; set; }
         public virtual ApplicationUser User { get; set; }
         public virtual ApplicationRole Role { get; set; }
         public virtual Zone Zone { get; set; }
         public ICollection<MonthlyRoaster> MonthlyRoaster { get; set; }
-          public ICollection<Dmsfileright> Dmsfileright { get; set; }
+        public ICollection<Dmsfileright> Dmsfileright { get; set; }
 
        
 

@@ -3,8 +3,9 @@
     if (($("#checkingIsError").val()) == "Yes") {
         jQuery('#rbtFileUpload').removeClass('active show');
         jQuery('#rbtBulkUpload').addClass('active show');
-        //$('#rbtFileUpload').removeAttr("class", "class"); 
-        //$('#rbtFileUpload').attr("class", "class="nav - link active""); 
+        $("#divfileupload").hide();
+        $("#divBulkFileUpload").show();
+        callSelect2();
     }
 });
 
