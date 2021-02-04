@@ -1,0 +1,362 @@
+body,
+html {
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 600;
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.slow {
+    -webkit-transition: all .5s ease-out;
+    -moz-transition: all .5s ease-out;
+    -ms-transition: all .5s ease-out;
+    -o-transition: all .5s ease-out;
+    transition: all .5s ease-out
+}
+
+.fixed-bg {
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+    background-size: cover !important;
+}
+
+a.no-dec {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+
+
+.theme-bg {
+    background: rgb(75, 80, 162);
+    background: -moz-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: -webkit-linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    background: linear-gradient(90deg, rgba(75, 80, 162, 1) 0%, rgba(125, 56, 101, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#4b50a2", endColorstr="#7d3865", GradientType=1);
+}
+
+
+.btn-theme {
+    font-size: .9rem;
+    border-radius: 50px;
+    font-weight: 600;
+    color: #fff;
+    font-size: 1rem;
+    background: rgb(140, 31, 71);
+    background: -moz-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: -webkit-linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    background: linear-gradient(33deg, rgba(140, 31, 71, 1) 0%, rgba(54, 44, 133, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#8c1f47", endColorstr="#362c85", GradientType=1);
+    border-color: transparent;
+}
+
+
+
+/*map css*/
+/*
+.MapContent,
+.map-section {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    min-height: 100vh;
+
+}
+*/
+
+.map-section .liveMap {
+    position: absolute;
+    z-index: 0;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.map-section .liveMap iframe {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    display: block;
+}
+
+.actionBtn {
+    position: relative;
+    background: #fff;
+    color: #666;
+    display: inline-block;
+    border-radius: 10px;
+    margin-left: 6px;
+    padding: 5px 10px;
+    font-size: 1.15rem;
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2)
+}
+
+.actionBtn .actionBtn {
+    background: #fff;
+    color: #666;
+    display: inline-block;
+    border-radius: 10px;
+    margin-left: 6px;
+    padding: 5px 10px;
+    font-size: 1.15rem;
+    box-shadow: none;
+}
+
+.actionBtn:hover {}
+
+.TopActionBtns {
+    position: fixed;
+    right: 1rem;
+    top: 1rem;
+    z-index: 99;
+}
+
+.BottomActionBtns {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 99;
+}
+
+.openAction {
+    display: none;
+    position: absolute;
+    bottom: 55px;
+    left: 0;
+    background: #fff;
+    border-radius: 5px;
+    padding: 8px 12px;
+    z-index: 100;
+    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2)
+}
+
+.actionBtn.show .openAction {
+    display: block;
+}
+
+.openAction::before {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    bottom: -5px;
+    left: 10px;
+    background: #fff;
+    z-index: -0;
+    transform: rotate(45deg);
+}
+
+.TransparencyMap {
+    min-width: 160px;
+}
+
+.TransparencyMap small {
+    font-size: .7rem;
+    text-align: left;
+    color: #4c4c4c;
+    margin-bottom: 3px;
+}
+
+.TransparencyMap input {
+    width: 100%;
+    display: block;
+}
+
+.MapOption figure {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.MapOption figure img {
+    display: block;
+}
+
+.MapOption figure figcaption {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    font-size: .65rem;
+    width: 100%;
+    text-align: center;
+}
+
+.leftSection {
+    position: absolute;
+    background: #fff;
+    padding: 8px 12px;
+    z-index: 100;
+    box-shadow: 0px 2px 5px 2px rgb(0 0 0 / 20%);
+    left: 1rem;
+    top: 1rem;
+    border-radius: 10px;
+    width: 340px;
+    min-height: calc(100vh - 2rem);
+}
+
+.leftSection.goleft {
+    left: -342px
+}
+
+.leftSection.goleft .MenuToggle i {
+    transform: rotate(180deg);
+}
+
+#LeftNavTab .nav-link {
+    font-size: .7rem;
+    color: #4c4c4c;
+    padding: 8px 11px;
+}
+
+#LeftNavTab .nav-link.active {
+    background: #fcfcfc;
+    border-bottom-color: transparent;
+}
+
+#LeftNavTabContent .tab-pane {
+    background: #fcfcfc;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-top: 0;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+#LeftNavTabContent .search {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+#LeftNavTabContent i {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    height: 24px;
+    left: .8rem;
+    color: #747474;
+}
+
+#LeftNavTabContent .search .form-control-sm {
+    font-size: .75rem;
+    padding: .45rem .5rem .45rem 2.5rem;
+    border-radius: .5rem;
+}
+
+#LeftNavTabContent .accordion-item {
+    border-radius: .3rem;
+    font-size: .8rem;
+    color: #4c4c4c;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, .125);
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+#LeftNavTabContent .accordion-item .accordion-button {
+    border: 0rem;
+    padding: .45rem .45rem .45rem 2.5rem;
+    font-size: .8rem;
+    color: #4c4c4c;
+    background: #fff;
+    box-shadow: none !important;
+}
+
+#LeftNavTabContent .accordion-collapse {
+    border: none;
+}
+
+#LeftNavTabContent .accordion-button::after {
+    content: "\ea12";
+    font-family: 'remixicon' !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: none;
+}
+
+
+#LeftNavTabContent .accordion-button:not(.collapsed)::after {
+    content: "\f1af";
+    background: none;
+}
+
+#LeftNavTabContent .accordion-button i {
+    height: 15px;
+    left: .9rem;
+}
+
+#LeftNavTabContent .accordion-body {
+    padding: 0rem .25rem 0 2.5rem;
+}
+
+#LeftNavTabContent .list-group-item {
+    position: relative;
+    display: block;
+    padding: .35rem 0rem;
+    text-decoration: none;
+    background-color: #fff;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    font-size: .75rem;
+    border-radius: 0;
+    position: relative;
+    display: block;
+    padding-left: 2.2rem;
+}
+
+#LeftNavTabContent .list-group-item i {
+    top: 5px;
+}
+
+#LeftNavTabContent .list-group-item.active {
+    color: #4c4c4c;
+    background-color: #f9f9f9;
+}
+
+#LeftNavTabContent .list-group-item:last-child {
+    border-bottom: none;
+}
+
+#leftSection .MenuToggle {
+    position: absolute;
+    padding: 3px 15px;
+    cursor: pointer;
+    right: -30px;
+    background: #fff;
+    z-index: -10;
+    border-radius: 10px;
+    width: 40px;
+    font-size: 1.7rem;
+    display: block;
+    top: 40px;
+    /*    box-shadow: 0px 2px 5px 2px rgba(0, 0, 0, 0.2);*/
+}
+
+#leftSection .MenuToggle i {
+    position: relative;
+    left: 0;
+    margin: 0 9px 0 -5px;
+
+}
+
+/*
+
+@media(min-width:576px) {}
+
+@media(min-width:768px) {}
+
+@media(min-width:992px) {}
+
+@media(min-width:1200px) {}
+*/
