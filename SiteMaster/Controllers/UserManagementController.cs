@@ -182,7 +182,7 @@ namespace SiteMaster.Controllers
                 RoleList = await _userProfileService.GetRole(),
                 DepartmentId = user.DepartmentId,
                 BranchList = await _branchService.GetGetBranchList(Convert.ToInt32(user.DepartmentId)),
-               // ZoneList = await _userProfileService.GetAllZone(Convert.ToInt32(user.DepartmentId)),
+                ZoneList = await _userProfileService.GetAllZone(Convert.ToInt32(user.DepartmentId)),
                 BranchId = user.BranchId,
                 RoleId = user.RoleId,
                 DistrictId = user.DistrictId,

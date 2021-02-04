@@ -339,7 +339,7 @@ namespace DocumentManagementSystem.Controllers
                         dmsfileupload.IsFileBulkUpload = "File Upload";
                         dmsfileupload.IsActive = 1;
                         dmsfileupload.CreatedBy = SiteContext.UserId;
-                        if(!await _dmsfileuploadService.CheckUniqueName(dmsfileupload.FileNo))
+                        if(!await _dmsfileuploadService.CheckUniqueName(0,dmsfileupload.FileNo))
                         {
                             result = await _dmsfileuploadService.Create(dmsfileupload);
                             if (!result)
@@ -422,6 +422,20 @@ namespace DocumentManagementSystem.Controllers
                 return View("Create");
             }
 
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _dmsfileuploadService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Department: {Name} already exist");
+            }
         }
     }
 
