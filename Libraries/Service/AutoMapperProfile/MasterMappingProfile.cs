@@ -11,6 +11,7 @@ namespace Service.AutoMapperProfile
         {
             CreateMap<Country, CoutryDto>().ReverseMap();
             CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();
             CreateMap<Zone, ZoneDto>().ReverseMap();
             CreateMap<ApplicationRole, RoleDto>().ReverseMap();
