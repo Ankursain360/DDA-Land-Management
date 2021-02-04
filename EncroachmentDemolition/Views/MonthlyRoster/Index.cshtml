@@ -27,19 +27,14 @@
             </div>
         </div>
     </div>
-
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-
                         <option value="0">Select One</option>
                         <option value="Name">Department Name</option>
                         <option value="IsActive">Status</option>
-
-
-
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
@@ -48,8 +43,6 @@
                     <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
                 </div>
             </div>
-
-
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
                 <a href="/MonthlyRoster/create" class="d-flex align-items-center btn btn-primary mr-2">
                     <i class="ri-add-fill mr-2 mr-lg-1"></i>
@@ -61,18 +54,10 @@
                 </a>
             </div>
         </div>
-
-     
-
         <div class="table-responsive px-2" id="divTable">
-
         </div>
     </div>
-   
 </div>
-   
-
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/MonthlyRoasterIndex.js"></script>

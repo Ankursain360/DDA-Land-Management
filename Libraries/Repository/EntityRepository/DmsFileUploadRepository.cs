@@ -27,11 +27,28 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Propertyregistration>> GetKhasraNoList()
         {
-            return await _dbContext.Propertyregistration
-                                     .Where(x => x.IsActive == 1 && x.IsDeleted != 0 && x.IsValidate == 1 && x.IsDisposed != 0
-                                    // && (x.KhasraNo != DBNull.Value || x.KhasraNo != null || x.KhasraNo != string.Empty)
-                                     )
-                                     .ToListAsync();
+            try
+            {
+                var InId = (from x in _dbContext.Propertyregistration
+                            where x.KhasraNo == null || x.KhasraNo == string.Empty
+                            select x.Id).ToArray();
+
+                var data =  await _dbContext.Propertyregistration
+                                         .Where(x => x.IsActive == 1 && x.IsDeleted != 0 && x.IsValidate == 1 && x.IsDisposed != 0
+                                         // && ( x.KhasraNo != null || x.KhasraNo != string.Empty)
+                                         && !(InId).Contains(x.Id)
+                                         )
+                                         .ToListAsync();
+                var result = data.GroupBy(x => x)
+                                  .Where(g => g.Count() > 1)
+                                  .Select(y => y.Key)
+                                  .ToList();
+                return data;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
@@ -119,7 +136,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<bool> Any(string fileNo)
         {
-            return await _dbContext.Dmsfileupload.AnyAsync(t =>  t.FileNo.ToLower() == fileNo.ToLower());
+            return await _dbContext.Dmsfileupload.AnyAsync(t => t.FileNo.ToLower() == fileNo.ToLower());
         }
 
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model)
@@ -182,7 +199,7 @@ namespace Libraries.Repository.EntityRepository
                                 (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
                                 : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
                                 : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
-                               // : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) 
+                                // : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) 
                                 : s.FileNo)
                                 )
                                 .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
@@ -197,11 +214,11 @@ namespace Libraries.Repository.EntityRepository
                                      .ToListAsync();
         }
 
-        public async Task<List<Dmsfileright>> GetDMSUserRights(int userId)
+        public async Task<Dmsfileright> GetDMSUserRights(int userId)
         {
             return await _dbContext.Dmsfileright
-                                     //.Where(x => x.IsActive == 1)
-                                     .ToListAsync();
+                                    .Where(x => x.UserId == userId)
+                                    .FirstOrDefaultAsync();
         }
     }
 }

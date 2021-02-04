@@ -35,14 +35,14 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="FileNo" type="text" class="floating-label-field floating-label-field--s3 ">
-                        <span asp-validation-for="FileNo" class="text-danger"></span>
+                        <span asp-validation-for="FileNo" id="FileNoMsg" class="text-danger" style="display:none;">Mandatory</span>
                         <label class="floating-label">File No.</label>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="AlloteeName" type="text" class="floating-label-field floating-label-field--s3 ">
-                        <span asp-validation-for="AlloteeName" class="text-danger"></span>
+                        <span asp-validation-for="AlloteeName" id="AlloteeNameMsg" class="text-danger" style="display:none;">Mandatory</span>
                         <label class="floating-label">Allotee Name</label>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap mb-3 mb-md-0">
                         <input asp-for="PropertyNoAddress" type="text" class="floating-label-field floating-label-field--s3 ">
-                        <span asp-validation-for="PropertyNoAddress" class="text-danger"></span>
+                        <span asp-validation-for="PropertyNoAddress" id="PropertyNoAddressMsg" class="text-danger" style="display:none;">Mandatory</span>
                         <label class="floating-label">Property No./Address</label>
                     </div>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="col-md-6">
                     <div class="floating-label-wrap">
                         <input asp-for="Title" type="text" class="floating-label-field floating-label-field--s3 ">
-                        <span asp-validation-for="Title" class="text-danger"></span>
+                        <span asp-validation-for="Title" id="TitleMsg" class="text-danger" style="display:none;">Mandatory</span>
                         <label class="floating-label">Title</label>
                     </div>
                 </div>
@@ -137,7 +137,7 @@
     </div>
     <div class="row mt-md-3">
         <div class=" col-md-12">
-            <button class="btn btn-theme " type="submit">Update</button>
+            <button class="btn btn-theme " type="submit"   onclick="return CheckFileValidation();">Update</button>
             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
         </div>

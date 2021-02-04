@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Core.Enum;
+﻿using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
-using Libraries.Service.ApplicationService;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
+using System;
+using System.Threading.Tasks;
 
 namespace SiteMaster.Controllers
 {
@@ -27,7 +23,7 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
-           
+
             return View();
         }
 
@@ -138,20 +134,12 @@ namespace SiteMaster.Controllers
         [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  // Used to Perform Delete Functionality added by Praveen
         {
-            try
+            var result = await _localityService.Delete(id);
+            if (result == true)
             {
-
-                var result = await _localityService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                }
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             }
-            catch (Exception ex)
+            else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
@@ -163,7 +151,7 @@ namespace SiteMaster.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExistName(int Id, string Name, int DepartmentId, int DivisionId, int ZoneId)
         {
-            var result = await _localityService.CheckUniqueName(Id, Name,DepartmentId,DivisionId,ZoneId);
+            var result = await _localityService.CheckUniqueName(Id, Name, DepartmentId, DivisionId, ZoneId);
             if (result == false)
             {
                 return Json(true);
@@ -189,16 +177,16 @@ namespace SiteMaster.Controllers
         }
 
         [HttpGet]
-        public async Task<JsonResult> GetZoneList(int?DepartmentId)
+        public async Task<JsonResult> GetZoneList(int? DepartmentId)
         {
-            DepartmentId= DepartmentId ?? 0;
+            DepartmentId = DepartmentId ?? 0;
             return Json(await _localityService.GetAllZone(Convert.ToInt32(DepartmentId)));
         }
-  
+
         [HttpGet]
-        public async Task<JsonResult> GetDivisionList(int?ZoneId)
+        public async Task<JsonResult> GetDivisionList(int? ZoneId)
         {
-            ZoneId= ZoneId ?? 0;
+            ZoneId = ZoneId ?? 0;
             return Json(await _localityService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
         }
     }

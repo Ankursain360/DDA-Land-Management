@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-//using FileDataLoading.Models;
+
 
 namespace FileDataLoading.Controllers
 {
@@ -31,6 +31,7 @@ namespace FileDataLoading.Controllers
         public async Task<PartialViewResult> List([FromBody] DisplayLabelSearchDto model)
         {
             var result = await _datastorageService.GetPagedDisplayLabel(model);
+            
             if (result != null)
             {
                 return PartialView("_List", result);
@@ -42,10 +43,22 @@ namespace FileDataLoading.Controllers
             }
         }
 
-
-        public IActionResult PrintLabel()
+        public async Task<IActionResult> PrintLabel(int id)
         {
-            return PartialView("PrintLabel");
+
+            var Data =  await _datastorageService.FetchPrintLabel(id);
+         
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
         }
+
+        //public IActionResult PrintLabel()
+        //{
+        //    return PartialView("PrintLabel");
+        //}
     }
 }

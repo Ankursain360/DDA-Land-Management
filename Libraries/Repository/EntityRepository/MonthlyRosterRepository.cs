@@ -42,7 +42,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto)
         {
-            return await _dbContext.MonthlyRoaster.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Include(x => x.Userprofile).ThenInclude(x => x.User).GetPaged(monthlyRoasterSearchDto.PageNumber, monthlyRoasterSearchDto.PageSize);
+            return await _dbContext.MonthlyRoaster.Where(x => x.IsActive == 1).Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Include(x => x.Userprofile).ThenInclude(x => x.User).GetPaged(monthlyRoasterSearchDto.PageNumber, monthlyRoasterSearchDto.PageSize);
         }
     }
 }

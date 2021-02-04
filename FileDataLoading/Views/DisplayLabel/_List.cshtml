@@ -12,60 +12,70 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Results)
+        @if (Model != null && Model.Results.Count() > 0)
         {
-        <tr>
-            <td>@item.FileNo</td>
-            <td>@(item.Name == null?"": item.Name)</td>
-            <td>
-              
-                <div class="table-responsive ">
-                    <table class="table table-sm table-bordered mb-0 table-striped">
-                        <thead class="text-nowrap">
-                            <tr>
-                                <th>Record Room No.</th>
-                                <th>Al. No./Compactor No.</th>
-                                <th>Row No</th>
-                                <th>Col.No.</th>
-                                <th>Bn No.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>@item.RecordRoomNo</td>
-                                <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
-                                <td>@(item.Row == null?"": item.Row.RowNo)</td>
-                                <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
-                                <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
 
-                            </tr>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.FileNo</td>
+                    <td>@(item.Name == null?"": item.Name)</td>
+                    <td>
 
-                        </tbody>
-                    </table>
-                </div>
-            </td>
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Record Room No.</th>
+                                        <th>Al. No./Compactor No.</th>
+                                        <th>Row No</th>
+                                        <th>Col.No.</th>
+                                        <th>Bn No.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.RecordRoomNo</td>
+                                        <td>@(item.Almirah == null?"": item.Almirah.AlmirahNo)</td>
+                                        <td>@(item.Row == null?"": item.Row.RowNo)</td>
+                                        <td>@(item.Column == null?"": item.Column.ColumnNo)</td>
+                                        <td>@(item.Bundle == null?"": item.Bundle.BundleNo)</td>
 
+                                    </tr>
 
-            <td>
-                @if (item.FileStatus == null || item.FileStatus == String.Empty || item.FileStatus == "Return")
-                {
-                    <span class="badge badge-primary px-2 py-1">Available</span>
-                }
-                else
-                {
-                    <span class="badge badge-danger px-2 py-1">Not Available</span>
-                }
-            </td>
-
-            <td>
-                <div class="action-btns">
-                    <a title="Display Label" target="_blank" class="view" asp-action="DisplayLabel" asp-route-id="@item.Id"><i style="font-size:28px;"  class="ri-unsplash-fill"></i></a>
-                </div>
-
-            </td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
 
 
-        </tr>
+                    <td>
+                        @if (item.FileStatus == null || item.FileStatus == String.Empty || item.FileStatus == "Return")
+                        {
+                            <span class="badge badge-primary px-2 py-1">Available</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-danger px-2 py-1">Issued</span>
+                        }
+                    </td>
+
+                    <td>
+                        <div class="action-btns">
+                            <a title="Display Label" target="_blank" class="view" asp-action="PrintLabel" asp-route-id="@item.Id"><i style="font-size:28px;" class="ri-unsplash-fill"></i></a>
+                        </div>
+
+                    </td>
+
+
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
         }
     </tbody>
 </table>

@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
         public int Year { get; set; }
         public int Month { get; set; }
         public string Template { get; set; }
-
+        public byte IsActive { get; set; }
         public Department Department { get; set; }
         public Division Division { get; set; }
         public Locality Locality { get; set; }
@@ -30,6 +30,10 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
+        [NotMapped]
+        public List<Propertyregistration> PrimaryList { get; set; }
+        [NotMapped]
+        public List<MonthlyRoasterPartial> MonthlyRoasterPartial { get; set; }
         [NotMapped]
         public List<int> PrimaryListNo { get; set; }
         [NotMapped]

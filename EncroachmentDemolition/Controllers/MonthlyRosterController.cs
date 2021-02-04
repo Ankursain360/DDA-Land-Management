@@ -1,5 +1,7 @@
-﻿using Dto.Master;
+﻿using Core.Enum;
+using Dto.Master;
 using Dto.Search;
+using EncroachmentDemolition.Filters;
 using Libraries.Model.Entity;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
@@ -10,8 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading.Tasks;
-using EncroachmentDemolition.Filters;
-using Core.Enum;
 namespace EncroachmentDemolition.Controllers
 {
     public class MonthlyRosterController : BaseController
@@ -41,6 +41,49 @@ namespace EncroachmentDemolition.Controllers
 
 
         [AuthorizeContext(ViewAction.Edit)]
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromBody] MonthlyRoasterDto monthlyRoasterDto)
+        {
+            MonthlyRoaster model = new MonthlyRoaster();
+            model = await _monthlyRosterService.GetMonthlyRoasterById(monthlyRoasterDto.Id);
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
+            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.ZoneList = await _monthlyRosterService.GetAllZone(model.DepartmentId);
+            model.DivisionList = await _monthlyRosterService.GetAllDivisionList(model.ZoneId);
+            model.LocalityList = await _monthlyRosterService.GetAllLocalityList(model.DivisionId);
+            model.PrimaryList = await _monthlyRosterService.GetPrimaryListNoList(model.DivisionId, model.DepartmentId, model.ZoneId, model.LocalityId ?? 0);
+            model.YearList = await GetYearList();
+            model.MonthList = await GetMonthsList();
+            if (ModelState.IsValid)
+            {
+                var monthlyRoaster = new MonthlyRoaster();
+                monthlyRoaster.Id = monthlyRoasterDto.Id;
+                monthlyRoaster.Month = monthlyRoasterDto.month;
+                monthlyRoaster.Year = monthlyRoasterDto.year;
+                monthlyRoaster.ZoneId = monthlyRoasterDto.Zone;
+                monthlyRoaster.DivisionId = monthlyRoasterDto.Division;
+                monthlyRoaster.LocalityId = monthlyRoasterDto.Locality;
+                monthlyRoaster.Template = monthlyRoasterDto.Template;
+                monthlyRoaster.ModifiedBy = SiteContext.UserId;
+                monthlyRoaster.UserprofileId = monthlyRoasterDto.securityGuard;
+                var result = await _monthlyRosterService.Update(monthlyRoasterDto.Id, monthlyRoaster);
+                if (result)
+                {
+                    ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                    return Json(Url.Action("Index", "MonthlyRoster"));
+                }
+                else
+                {
+                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    return Json(Url.Action("Create", "MonthlyRoster"));
+                }
+            }
+            else
+            {
+                return Json(Url.Action("Create", "MonthlyRoster"));
+            }
+        }
+        //[AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             MonthlyRoaster model = new MonthlyRoaster();
@@ -50,9 +93,61 @@ namespace EncroachmentDemolition.Controllers
             model.ZoneList = await _monthlyRosterService.GetAllZone(model.DepartmentId);
             model.DivisionList = await _monthlyRosterService.GetAllDivisionList(model.ZoneId);
             model.LocalityList = await _monthlyRosterService.GetAllLocalityList(model.DivisionId);
+            model.PrimaryList = await _monthlyRosterService.GetPrimaryListNoList(model.DivisionId, model.DepartmentId, model.ZoneId, model.LocalityId ?? 0);
             model.YearList = await GetYearList();
             model.MonthList = await GetMonthsList();
+            var dates = new List<MonthlyRoasterPartial>();
+            for (var date = new DateTime(model.Year, model.Month, 1); date.Month == model.Month; date = date.AddDays(1))
+            {
+                dates.Add(new MonthlyRoasterPartial
+                {
+                    Date = Convert.ToDateTime(date).ToString("dd-MMM-yyyy"),
+                    Day = Convert.ToDateTime(date).DayOfWeek.ToString()
+                });
+            }
+            model.MonthlyRoasterPartial = dates;
             return View(model);
+        }
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> View(int id)
+        {
+            MonthlyRoaster model = new MonthlyRoaster();
+            model = await _monthlyRosterService.GetMonthlyRoasterById(id);
+            model.SecurityGuardList = await _monthlyRosterService.SecurityGuardList();
+            model.DepartmentList = await _monthlyRosterService.GetAllDepartmentList();
+            model.ZoneList = await _monthlyRosterService.GetAllZone(model.DepartmentId);
+            model.DivisionList = await _monthlyRosterService.GetAllDivisionList(model.ZoneId);
+            model.LocalityList = await _monthlyRosterService.GetAllLocalityList(model.DivisionId);
+            model.PrimaryList = await _monthlyRosterService.GetPrimaryListNoList(model.DivisionId, model.DepartmentId, model.ZoneId, model.LocalityId ?? 0);
+            model.YearList = await GetYearList();
+            model.MonthList = await GetMonthsList();
+            var dates = new List<MonthlyRoasterPartial>();
+            for (var date = new DateTime(model.Year, model.Month, 1); date.Month == model.Month; date = date.AddDays(1))
+            {
+                dates.Add(new MonthlyRoasterPartial
+                {
+                    Date = Convert.ToDateTime(date).ToString("dd-MMM-yyyy"),
+                    Day = Convert.ToDateTime(date).DayOfWeek.ToString()
+                });
+            }
+            model.MonthlyRoasterPartial = dates;
+            return View(model);
+        }
+
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _monthlyRosterService.DeleteRoaster(id);
+            if (result)
+            {
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return View("Index");
+            }
         }
         [HttpPost]
         [AuthorizeContext(ViewAction.Add)]
@@ -76,7 +171,8 @@ namespace EncroachmentDemolition.Controllers
                     UserprofileId = monthlyRoasterDto.securityGuard,
                     CreatedBy = SiteContext.UserId,
                     CreatedDate = DateTime.Now,
-                    Template = monthlyRoasterDto.Template
+                    Template = monthlyRoasterDto.Template,
+                    IsActive = 1
                 };
                 bool result = await _monthlyRosterService.Create(modelData);
                 if (result == true)
@@ -106,7 +202,7 @@ namespace EncroachmentDemolition.Controllers
         public async Task<List<DropdownDto>> GetMonthsList()
         {
             var months = new List<DropdownDto>();
-            for (int i = 1; i < 12; i++)
+            for (int i = 1; i <= 12; i++)
             {
                 months.Add(new DropdownDto
                 {
