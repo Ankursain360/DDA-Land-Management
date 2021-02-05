@@ -24,6 +24,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> CheckUniqueName(int id, string dataStorageDetails);
 
         Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model);
+        int? GetDepartmentIdFromProfile(int userId);
+
         //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
         Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
         Task<List<Almirah>> GetAlmirahs();
@@ -31,7 +33,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Column>> GetColumns();
         Task<List<Bundle>> GetBundles();
         Task<List<Locality>> GetLocalities();
-        Task<List<Department>> GetDepartment();
+        Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId);
         Task<List<Branch>> GetBranch();
 
         Task<List<Zone>> GetZones();
@@ -44,5 +46,11 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DeleteDataStoragePartFile(int Id);
 
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
+   
+        
+        // ********* DISPLAY LABEL**********
+
+        Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
+        Task<Datastoragedetails> FetchPrintLabel(int id);
     }
 }

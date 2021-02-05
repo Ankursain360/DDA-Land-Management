@@ -41,23 +41,10 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
             Datastoragedetails model = result.FirstOrDefault();
-            model.CategoryNo = dataStorageDetails.CategoryNo;
-            model.HeaderNo = dataStorageDetails.HeaderNo;
-            model.SequenceNo = dataStorageDetails.SequenceNo;
-            model.Year = dataStorageDetails.Year;
-            model.YearTo = dataStorageDetails.YearTo;
-            model.SchemeId = dataStorageDetails.SchemeId;
-            model.ZoneId = dataStorageDetails.ZoneId;
-            model.LocalityId = dataStorageDetails.LocalityId;
-            model.Name = dataStorageDetails.Name;
-            model.AlmirahId = dataStorageDetails.AlmirahId;
-            model.RowId = dataStorageDetails.RowId;
-            model.ColumnId = dataStorageDetails.ColumnId;
-            model.BundleId = dataStorageDetails.BundleId;
-            model.RecordRoomNo = dataStorageDetails.RecordRoomNo;
-            model.IsActive = dataStorageDetails.IsActive;
+            //model.AlmirahNo = almirah.AlmirahNo;
+            //model.ModifiedDate = DateTime.Now;
+            //model.IsActive = almirah.IsActive;
             model.ModifiedBy = 1;
-            model.ModifiedDate = DateTime.Now;
             _datastoragedetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -151,9 +138,9 @@ namespace Libraries.Service.ApplicationService
             List<Locality> localityList = await _datastoragedetailRepository.GetLocalities();
             return localityList;
         }
-        public async Task<List<Department>> GetDepartment()
+        public async Task<List<Department>> GetDepartment(int? roleId, int? userDepartmentId)
         {
-            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment();
+            List<Department> departmentList = await _datastoragedetailRepository.GetDepartment(roleId, userDepartmentId);
             return departmentList;
         }
         public async Task<List<Branch>> GetBranch()
@@ -169,34 +156,29 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-       
-
-        //public async Task<List<Scheme>> GetSchemes()
-        //{
-        //    List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
-        //    return schemesList;
-        //}
-
-        public async Task<List<SchemeFileLoading>> GetSchemesFileLoading()
+        public async Task<List<Scheme>> GetSchemes()
         {
-            List<SchemeFileLoading> schemesList = await _datastoragedetailRepository.GetSchemesFileLoading();
+            List<Scheme> schemesList = await _datastoragedetailRepository.GetSchemes();
             return schemesList;
         }
-
-
-
         public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId)
         {
             return await _datastoragedetailRepository.GetPagedListofReportFile(model, UserId);
         }
-        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int Id)
-        {
-            return await _datastoragedetailRepository.GetDetailsOfPartFileDetails(Id);
-        }
 
-        public async Task<bool> DeleteDataStoragePartFile(int Id)
+
+        public int? GetDepartmentIdFromProfile(int userId)
         {
-            return await _datastoragedetailRepository.DeleteDataStoragePartFile(Id);
+            return _datastoragedetailRepository.GetDepartmentIdFromProfile(userId);
+        }
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedDisplayLabel(model);
+
+        }
+        public async Task<Datastoragedetails> FetchPrintLabel(int id)
+        {
+            return await _datastoragedetailRepository.FetchPrintLabel(id);
         }
     }
 }

@@ -8,6 +8,15 @@
         }
         $("#ZoneId").html(html);
     });
+
+    HttpGet(`/UserManagement/GetBranchList/?DepartmentId=${id}`, 'json', function (response) {
+        $("#BranchId").val('').trigger('change');
+        var html = '<option value="">Select</option>';
+        for (var i = 0; i < response.length; i++) {
+            html = html + '<option value=' + response[i].id + '>' + response[i].name + '</option>';
+        }
+        $("#BranchId").html(html);
+    });
 };
 
 $("#defaultpass").click(function () {

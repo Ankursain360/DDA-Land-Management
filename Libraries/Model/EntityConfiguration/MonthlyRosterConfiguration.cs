@@ -34,6 +34,7 @@ namespace Model.EntityConfiguration
             entity.Property(e => e.DivisionId).HasColumnType("int(11)");
 
             entity.Property(e => e.LocalityId).HasColumnType("int(11)");
+            entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 

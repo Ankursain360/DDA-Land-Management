@@ -5,6 +5,7 @@ using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using Model.Entity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,9 +41,307 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Propertyregistration.Where(x => x.DepartmentId == departmentId && x.ZoneId == zoneId && x.DivisionId == divisionId && x.LocalityId == localityId && x.IsActive == 1).ToListAsync();
         }
 
-        public async Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto monthlyRoasterSearchDto)
+        public async Task<PagedResult<MonthlyRoaster>> GetAllRoasterDetails(MonthlyRoasterSearchDto model)
         {
-            return await _dbContext.MonthlyRoaster.Include(x => x.Department).Include(x => x.Zone).Include(x => x.Division).Include(x => x.Locality).Include(x => x.Userprofile).ThenInclude(x => x.User).GetPaged(monthlyRoasterSearchDto.PageNumber, monthlyRoasterSearchDto.PageSize);
+            var data = await _dbContext.MonthlyRoaster
+                                       .Where(x => x.IsActive == 1)
+                                       .Include(x => x.Department)
+                                       .Include(x => x.Zone)
+                                       .Include(x => x.Division)
+                                       .Include(x => x.Locality)
+                                       .Include(x => x.Userprofile)
+                                       .ThenInclude(x => x.User)
+                                       .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                       && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                       && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                       && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                       && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                       //&& (string.IsNullOrEmpty(model.year) || Convert.ToString(x.Year).Contains(model.year)))
+                                      .GetPaged(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEP"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                                //&& (string.IsNullOrEmpty(model.year) || Convert.ToString(x.Year).Contains(model.year)))
+                                               .OrderBy(s => s.Department.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Zone.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("DIV"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Division.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("LOC"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Locality.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("SECURITY"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Userprofile.User.NormalizedUserName)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("YEAR"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Year)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("MONTH"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderBy(s => s.Month)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEP"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Department.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Zone.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("DIV"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Division.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("LOC"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Locality.Name)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("SECURITY"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Userprofile.User.NormalizedUserName)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("YEAR"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Year)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("MONTH"):
+                        data = null;
+                        data = await _dbContext.MonthlyRoaster
+                                               .Where(x => x.IsActive == 1)
+                                               .Include(x => x.Department)
+                                               .Include(x => x.Zone)
+                                               .Include(x => x.Division)
+                                               .Include(x => x.Locality)
+                                               .Include(x => x.Userprofile)
+                                               .ThenInclude(x => x.User)
+                                               .Where(x => (string.IsNullOrEmpty(model.department) || x.Department.Name.Contains(model.department))
+                                               && (string.IsNullOrEmpty(model.zone) || x.Zone.Name.Contains(model.zone))
+                                               && (string.IsNullOrEmpty(model.division) || x.Division.Name.Contains(model.division))
+                                               && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                               && (string.IsNullOrEmpty(model.guard) || x.Userprofile.User.NormalizedUserName.Contains(model.guard)))
+                                               //&& (string.IsNullOrEmpty(model.year) || x.Year.Contains(model.year)))
+                                               .OrderByDescending(s => s.Month)
+                                               .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
     }
 }

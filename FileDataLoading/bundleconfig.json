@@ -42,9 +42,9 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/DataStorageView.min.js",
+    "outputFileName": "wwwroot/js/displaylabelindex.min.js",
     "inputFiles": [
-      "wwwroot/js/DataStorageView.js"
+      "wwwroot/js/displaylabelindex.js"
     ]
   }
 ]

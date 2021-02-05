@@ -40,7 +40,8 @@
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
                     <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                      
+                        <option value="FileNo">File No</option>
+                        <option value="FileName">File Name</option>
                         <option value="Status">Status</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
@@ -50,12 +51,27 @@
                     <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
             </div>
-
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="radioStatus" id="File" value="0" checked>
+                    <label class="form-check-label" for="radio">
+                        File
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" name="radioStatus" id="Document" value="1">
+                    <label class="form-check-label" for="radio">
+                        Document
+                    </label>
+                </div>
+            </div>
             <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
                 @*<a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
-                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                    <small>Add More</small>
-                </a>*@
+                <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                <small>Add More</small>
+            </a>*@
                 <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
                     <i class="ri-download-2-line mr-2 mr-lg-1"></i>
                     <small>Download</small>

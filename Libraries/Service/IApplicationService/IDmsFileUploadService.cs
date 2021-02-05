@@ -57,6 +57,8 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id, int userId);
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
-        Task<bool> CheckUniqueName(string fileNo);
+        Task<bool> CheckUniqueName(int id, string fileNo);
+        Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
+        Task<Dmsfileright> GetDMSUserRights(int userId);
     }
 }

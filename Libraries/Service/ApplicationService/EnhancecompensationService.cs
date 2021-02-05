@@ -1,20 +1,17 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
+using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
-using Microsoft.EntityFrameworkCore;
-using Libraries.Repository.IEntityRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
-   public class EnhancecompensationService: EntityService<Enhancecompensation>, IEnhancecompensationService
+    public class EnhancecompensationService : EntityService<Enhancecompensation>, IEnhancecompensationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IEnhancecompensationRepository _EnhancecompensationRepository;
@@ -96,8 +93,8 @@ namespace Libraries.Service.ApplicationService
 
             model.VillageId = enhancecompensation.VillageId;
             model.KhasraId = enhancecompensation.KhasraId;
-         
-          
+
+
             model.Bigha = enhancecompensation.Bigha;
             model.Biswa = enhancecompensation.Biswa;
             model.Biswanshi = enhancecompensation.Biswanshi;
@@ -114,7 +111,7 @@ namespace Libraries.Service.ApplicationService
             model.PanelLawer = enhancecompensation.PanelLawer;
             model.IsActive = enhancecompensation.IsActive;
             model.Remarks = enhancecompensation.Remarks;
-        
+
 
 
             model.ModifiedDate = DateTime.Now;

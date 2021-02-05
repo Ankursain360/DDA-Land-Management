@@ -29,7 +29,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1 )
+                                        )
                                     .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -48,7 +50,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.User.UserName)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -63,7 +67,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.User.Name)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -79,7 +85,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.Role.Name)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -95,7 +103,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.User.PhoneNumber)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -110,7 +120,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.User.Email)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -126,7 +138,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.IsActive)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -147,7 +161,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.User.UserName)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -162,7 +178,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.User.Name)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -178,7 +196,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.Role.Name)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -194,7 +214,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.User.PhoneNumber)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -209,7 +231,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderByDescending(x => x.User.Email)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;
@@ -225,7 +249,9 @@ namespace Repository.EntityRepository
                                     .Where(a => (string.IsNullOrEmpty(model.UserName) || a.User.UserName.Contains(model.UserName))
                                         && (string.IsNullOrEmpty(model.Name) || a.User.Name.Contains(model.Name))
                                         && (string.IsNullOrEmpty(model.Email) || a.User.Email.Contains(model.Email))
-                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber)))
+                                        && (string.IsNullOrEmpty(model.PhoneNumber) || a.User.PhoneNumber.Contains(model.PhoneNumber))
+                                        && (a.IsActive == 1)
+                                        )
                                    .OrderBy(x => x.IsActive)
                                    .GetPaged<Userprofile>(model.PageNumber, model.PageSize);
                         break;

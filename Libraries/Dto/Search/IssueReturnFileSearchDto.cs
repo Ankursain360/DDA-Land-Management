@@ -9,6 +9,8 @@ namespace Dto.Search
     {
         public string name { get; set; }
         public int?  FileNo { get; set; }
-       
+        public int? filedoc { get; set; }
+        
+
     }
 }

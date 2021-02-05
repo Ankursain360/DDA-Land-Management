@@ -33,6 +33,10 @@ namespace Service.ApplicationService
         {
             return await _demandLetterRepository.GetPagedDemandletter(model);
         }
+        public async Task<PagedResult<Demandletters>> GetPagedDuplicateDemandletter(DuplicateDemandLetterSearchDto model)
+        {
+            return await _demandLetterRepository.GetPagedDuplicateDemandletter(model);
+        }
         public async Task<PagedResult<Demandletters>> GetDefaultListingReportData(DefaulterListingReportSearchDto defaulterListingReportSearchDto)
         {
             return await _demandLetterRepository.GetDefaultListingReportData(defaulterListingReportSearchDto);

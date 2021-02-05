@@ -10,6 +10,9 @@ namespace Model.EntityConfiguration
         {
             builder.ToTable("userprofile", "lms");
 
+            builder.HasIndex(e => e.BranchId)
+                    .HasName("fk_BranchIdUserprofile_idx");
+
             builder.HasIndex(e => e.DepartmentId)
                 .HasName("FK_Department_idx_idx");
 
@@ -26,6 +29,8 @@ namespace Model.EntityConfiguration
                 .HasName("FK_Zone_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.BranchId).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -46,6 +51,11 @@ namespace Model.EntityConfiguration
             builder.Property(e => e.UserId).HasColumnType("int(11)");
 
             builder.Property(e => e.ZoneId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Branch)
+                .WithMany(p => p.Userprofile)
+                .HasForeignKey(d => d.BranchId)
+                .HasConstraintName("fk_BranchIdUserprofile");
 
             builder.HasOne(d => d.Department)
                 .WithMany(p => p.Userprofile)

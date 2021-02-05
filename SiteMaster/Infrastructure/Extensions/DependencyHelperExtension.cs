@@ -47,6 +47,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICaseyearRepository, CaseyearRepository>();
             services.AddScoped<ICourtRepository, CourtRepository>();
             services.AddScoped<IApprovalstatusRepository, ApprovalstatusRepository>();
+            services.AddScoped<ISchemeFileLoadingRepository, SchemeFileLoadingRepository>();
+            services.AddScoped<IBranchRepository, BranchRepository>();
 
 
             /* Application Services */
@@ -77,6 +79,8 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<ICaseyearService, CaseyearService>();
             services.AddScoped<ICourtService, CourtService>();
             services.AddScoped<IApprovalstatusService, ApprovalstatusService>();
+            services.AddScoped<ISchemeFileLoadingService, SchemeFileLoadingService>();
+            services.AddScoped<IBranchService, BranchService>();
 
         }
     }

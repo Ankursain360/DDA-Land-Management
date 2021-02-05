@@ -8,26 +8,7 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div id="allDetails">
-        <div class="row">
-            <div class="col-md-3">
-                <input type="hidden" asp-for="IsFileBulkUpload" value="File Upload" />
 
-                <div class="form-check theme">
-                    <input class="form-check-input" disabled type="radio" name="grpIsFileBulkUpload" id="rbtFileUpload" value="File Upload" checked>
-                    <label class="form-check-label" for="radio">
-                        File Upload
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    <input class="form-check-input" disabled type="radio" name="grpIsFileBulkUpload" id="rbtBulkUpload" value="Bulk Upload">
-                    <label class="form-check-label" for="radio">
-                        Bulk Upload
-                    </label>
-                </div>
-            </div>
-        </div>
         <div id="divfileupload">
             <h3 class="my-3 d-flex sub-heading">File Upload</h3>
             <div class="row mt-md-3">
@@ -107,13 +88,13 @@
                         @{
                             if (Model.FilePath != null)
                             {
-                                <a class="badge badge-primary px-2" asp-action="ViewFile" asp-route-id="@Model.Id" disabled target="_blank"> (View File)</a>
+                                <label class="badge badge-primary px-2">(View File)</label>
                                 <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
                             }
                             else
                             {
-                                <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3"  accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
+                                <input type="file" asp-for="FileUpload" disabled class="floating-label-field floating-label-field--s3" accept="application/pdf, application/vnd.ms-excel, application/vnd.ms-word, image/png, image/jpeg, image/gif">
                                 <span asp-validation-for="FileUpload" class="d-block text-danger field-validation-valid"></span>
                                 <label for="field-1" class="floating-label">Upload File</label>
                             }
@@ -136,7 +117,6 @@
     </div>
     <div class="row mt-md-3">
         <div class=" col-md-12">
-            <button class="btn btn-theme " type="submit">Create</button>
             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
         </div>
@@ -152,8 +132,7 @@
     <script src="~/js/dmsfileuploadcreate.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/dmsfileuploadcreate.js" asp-append-version="true"></script>
+    <script src="~/js/dmsfileuploadedit.min.js" asp-append-version="true"></script>
 </environment>
-
 
 

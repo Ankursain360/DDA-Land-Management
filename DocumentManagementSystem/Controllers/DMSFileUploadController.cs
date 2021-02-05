@@ -62,6 +62,7 @@ namespace DocumentManagementSystem.Controllers
             Dmsfileupload dmsfileupload = new Dmsfileupload();
             dmsfileupload.IsActive = 1;
             await BindDropDown(dmsfileupload);
+            ViewBag.PdfGenerate = "No";
             return View(dmsfileupload);
         }
 
@@ -302,26 +303,9 @@ namespace DocumentManagementSystem.Controllers
             dmsfileupload.LocalityList = await _dmsfileuploadService.GetLocalityList();
             dmsfileupload.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
             var result = false;
-            int row = 1;
+            bool row = true;
             if (ModelState.IsValid)
             {
-
-                //#region File Upload  Added by Renu 29 Jan 2021
-                //UploadFilePath = _Configuration.GetSection("FilePaths:FileUpload:FilePath").Value.ToString();
-                //if (dmsfileupload.FileUpload != null)
-                //{
-                //    if (!Directory.Exists(UploadFilePath))
-                //    {
-                //        DirectoryInfo di = Directory.CreateDirectory(UploadFilePath);// Try to create the directory.
-                //    }
-                //    dmsfileupload.FileName = Guid.NewGuid().ToString() + "_" + dmsfileupload.FileUpload.FileName;
-                //    dmsfileupload.FilePath = Path.Combine(UploadFilePath, dmsfileupload.FileName);
-                //    using (var stream = new FileStream(dmsfileupload.FilePath, FileMode.Create))
-                //    {
-                //        dmsfileupload.FileUpload.CopyTo(stream);
-                //    }
-                //}
-                //#endregion
                 List<DMSCSVTableDTO> data;
                 string jsonString;
                 StringBuilder HtmlSummary = new StringBuilder();
@@ -330,7 +314,7 @@ namespace DocumentManagementSystem.Controllers
                 StringBuilder HtmlSummaryUniq = new StringBuilder();
                 string textuniq = "File No. Already Exists<ul>";
                 HtmlSummaryUniq.Append(textuniq);
-                using (var sreader = new StreamReader(dmsfileupload.FileUpload.OpenReadStream()))
+                using (var sreader = new StreamReader(dmsfileupload.BulkUpload.OpenReadStream()))
                 {
                     string[] headers = sreader.ReadLine().Split(',');     //Title
                     while (!sreader.EndOfStream)                          //get all the content in rows 
@@ -348,26 +332,28 @@ namespace DocumentManagementSystem.Controllers
                         dmsfileupload.FileName = (rows[7].ToString());
 
                         if ((dmsfileupload.PdfLocationPath[dmsfileupload.PdfLocationPath.Length - 1]).ToString() == @"\" ? true : false)
-                            dmsfileupload.FilePath = dmsfileupload.PdfLocationPath;
+                            dmsfileupload.FilePath = dmsfileupload.PdfLocationPath + (rows[7].ToString());
                         else
                             dmsfileupload.FilePath = dmsfileupload.PdfLocationPath + @"\" + (rows[7].ToString());
 
                         dmsfileupload.IsFileBulkUpload = "File Upload";
                         dmsfileupload.IsActive = 1;
                         dmsfileupload.CreatedBy = SiteContext.UserId;
-                        if(await _dmsfileuploadService.CheckUniqueName(dmsfileupload.FileNo))
+                        if(!await _dmsfileuploadService.CheckUniqueName(0,dmsfileupload.FileNo))
                         {
                             result = await _dmsfileuploadService.Create(dmsfileupload);
                             if (!result)
                             {
                                 text = "<li>" + dmsfileupload.FileNo + "</li>";
                                 HtmlSummary.Append(text);
+                                row = false;
                             }
                         }
                         else
                         {
                             textuniq = "<li>" + dmsfileupload.FileNo + "</li>";
                             HtmlSummaryUniq.Append(textuniq);
+                            row = false;
                         }
                     }
                 }
@@ -395,12 +381,13 @@ namespace DocumentManagementSystem.Controllers
 
 
 
-                if (result == true)
+                if (row)
                 {
                     HtmlSummary.Append("</ul>");
                     ViewBag.Summary = HtmlSummary.ToString();
                     HtmlSummaryUniq.Append("</ul>");
                     ViewBag.SummaryUniq = HtmlSummaryUniq.ToString();
+                    ViewBag.PdfGenerate = "No";
                     ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
@@ -413,11 +400,15 @@ namespace DocumentManagementSystem.Controllers
                     ViewBag.Summary = HtmlSummary.ToString();
                     HtmlSummaryUniq.Append("</ul>");
                     ViewBag.SummaryUniq = HtmlSummaryUniq.ToString();
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                    ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning);
+                    ViewBag.PdfGenerate = "Yes";
+                    //ViewBag.Message = Alert.Show("Either all or some rows in file not Saved check Msg", "", AlertType.Warning,Position.BottomFullWidth,0,true,false);
                     ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                     ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                     ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
-                    return View("Index");
+                    dmsfileupload.IsActive = 1;
+                    await BindDropDown(dmsfileupload);
+                    return View("Create", dmsfileupload);
 
                 }
             }
@@ -428,9 +419,23 @@ namespace DocumentManagementSystem.Controllers
                 ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
                 ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
                 ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
-                return View("Index");
+                return View("Create");
             }
 
+        }
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Exist(int Id, string Name)
+        {
+            var result = await _dmsfileuploadService.CheckUniqueName(Id, Name);
+            if (result == false)
+            {
+                return Json(true);
+            }
+            else
+            {
+                return Json($"Department: {Name} already exist");
+            }
         }
     }
 

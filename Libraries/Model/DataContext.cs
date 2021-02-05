@@ -44,9 +44,6 @@ namespace Libraries.Model
         public virtual DbSet<Khasra> Khasra { get; set; }
         public virtual DbSet<LandCategory> LandCategory { get; set; }
         public virtual DbSet<Scheme> Scheme { get; set; }
-        public virtual DbSet<SchemeFileLoading> SchemeFileLoading { get; set; }
-
-
         public virtual DbSet<Proposaldetails> Proposaldetails { get; set; }
         public virtual DbSet<Purpose> Purpose { get; set; }
         public virtual DbSet<Undersection4> Undersection4 { get; set; }
@@ -116,6 +113,7 @@ namespace Libraries.Model
         public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
+        public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -175,6 +173,8 @@ namespace Libraries.Model
         public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
+        public virtual DbSet<Plot> Plot { get; set; }
+        public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -257,7 +257,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
             modelBuilder.ApplyConfiguration(new CasenatureConfiguration());
-            modelBuilder.ApplyConfiguration(new SchemeFileLoadingConfiguration());
+
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
@@ -316,6 +316,9 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
+            modelBuilder.ApplyConfiguration(new DmsfilerightConfiguration());
+            //**********  Damage Payee **********
+            modelBuilder.ApplyConfiguration(new PlotConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }
