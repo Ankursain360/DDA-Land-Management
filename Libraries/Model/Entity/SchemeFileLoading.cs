@@ -1,25 +1,33 @@
 ﻿using Libraries.Model.Common;
-using Microsoft.AspNetCore.Http;
-using System;
+using Microsoft.AspNetCore.Mvc;
+using Model.Entity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
+{ 
+    public class Schemefileloading : AuditableEntity<int>
 {
-   public class SchemeFileLoading : AuditableEntity<int>
+
+    public Schemefileloading()
     {
-        public SchemeFileLoading()
-        {
-            Datastoragedetails = new HashSet<Datastoragedetails>();
-            Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
-        }
+        Datastoragedetails = new HashSet<Datastoragedetails>();
+        Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
+    }
+
+
+
+        [Required(ErrorMessage = "Scheme name is Mandatory")]
+        [Remote(action: "Exist", controller: "Schemefileloading", AdditionalFields = "Id")]
+        public string SchemeName { get; set; }
+        [Required(ErrorMessage = "Scheme code is Mandatory ")]
         public string SchemeCode { get; set; }
-        public string SchemeName { get; set; }       
+
+
         public byte? IsActive { get; set; }
 
-        public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+       public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
         public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
-
     }
 }
+

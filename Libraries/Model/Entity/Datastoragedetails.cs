@@ -82,7 +82,7 @@ namespace Libraries.Model.Entity
         public Locality Locality { get; set; }
         public Department Department { get; set; }
 
-        public SchemeFileLoading SchemeFileLoading { get; set; }
+        public Schemefileloading SchemeFileLoading { get; set; }
         //public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
@@ -118,7 +118,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int? UnissuedFiles { get; set; }
         [NotMapped]
-        public List<SchemeFileLoading> SchemeFileLoadingList { get; set; }
+        public List<Schemefileloading> SchemeFileLoadingList { get; set; }
 
 
 

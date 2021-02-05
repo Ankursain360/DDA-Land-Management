@@ -154,6 +154,11 @@ namespace Libraries.Service.ApplicationService
             List<Zone> zoneList = await _datastoragedetailRepository.GetZones();
             return zoneList;
         }
+        public async Task<List<Schemefileloading>> GetSchemesFileLoading()
+        {
+            var schemeList = await _datastoragedetailRepository.GetSchemesFileLoading();
+            return schemeList;
+        }
 
 
         public async Task<List<Scheme>> GetSchemes()
@@ -179,6 +184,17 @@ namespace Libraries.Service.ApplicationService
         public async Task<Datastoragedetails> FetchPrintLabel(int id)
         {
             return await _datastoragedetailRepository.FetchPrintLabel(id);
+        }
+
+        public async Task<bool> DeleteDataStoragePartFile(int Id)
+        {
+            return await _datastoragedetailRepository.DeleteDataStoragePartFile(Id);
+        }
+
+
+        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int Id)
+        {
+            return await _datastoragedetailRepository.GetDetailsOfPartFileDetails(Id);
         }
     }
 }

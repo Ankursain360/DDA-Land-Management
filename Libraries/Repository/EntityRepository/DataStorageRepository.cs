@@ -24,6 +24,14 @@ namespace Libraries.Repository.EntityRepository
         public DataStorageRepository(DataContext dbcontext) : base(dbcontext)
         { }
 
+
+        public async Task<List<Schemefileloading>> GetSchemesFileLoading()
+        {
+            var schemeList = await _dbContext.Schemefileloading.Where(x => x.IsActive == 1).ToListAsync();
+            return schemeList;
+        }
+
+
         public async Task<List<Almirah>> GetAlmirahs()
         {
             var almirahList = await _dbContext.Almirah.Where(x => x.IsActive == 1).ToListAsync();
@@ -289,6 +297,17 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<bool> DeleteDataStoragePartFile(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int DataStorageID)
+        {
+            return await _dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == DataStorageID).ToListAsync();
+        }
 
     }
 }

@@ -41,7 +41,7 @@ namespace Libraries.Service.IApplicationService
         //   Task<List<Scheme>> GetSchemes();
 
         Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int encroachmentId);
-        Task<List<SchemeFileLoading>> GetSchemesFileLoading();
+        Task<List<Schemefileloading>> GetSchemesFileLoading();
 
         Task<bool> DeleteDataStoragePartFile(int Id);
 
@@ -52,5 +52,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);
         Task<Datastoragedetails> FetchPrintLabel(int id);
+
+       
     }
 }

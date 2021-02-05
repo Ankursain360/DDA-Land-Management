@@ -74,6 +74,11 @@ namespace Libraries.Model.EntityConfiguration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_SchemeDptBranch");
 
+
+
+
+
+
         }
     }
 

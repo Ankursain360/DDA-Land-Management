@@ -21,7 +21,7 @@ namespace Libraries.Model.Entity
 
         public Datastoragedetails DataStorageDetails { get; set; }
         public Locality Locality { get; set; }
-        public SchemeFileLoading SchemeDptBranchNavigation { get; set; }
+        public Schemefileloading SchemeDptBranchNavigation { get; set; }
     }
     }
 
