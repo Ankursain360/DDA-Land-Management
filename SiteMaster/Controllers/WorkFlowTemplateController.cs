@@ -9,6 +9,8 @@ using Service.IApplicationService;
 using System.Threading.Tasks;
 using SiteMaster.Filters;
 using Core.Enum;
+using System.Collections.Generic;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -215,5 +217,18 @@ namespace SiteMaster.Controllers
                 return Json(data);
             }
         }
+
+
+        public async Task<IActionResult> Download()
+        {
+            List<WorkflowTemplate> result = await _workflowtemplateService.GetAllWorkflowTemplate();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"WorkFlowTemplate.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
+
     }
 }
