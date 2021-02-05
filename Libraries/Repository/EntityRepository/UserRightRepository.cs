@@ -7,10 +7,9 @@ using Repository.IEntityRepository;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
-
-
 using Dto.Search;
+using System;
+using Repository.Common;
 
 
 namespace Repository.EntityRepository
@@ -37,35 +36,31 @@ namespace Repository.EntityRepository
         }
 
 
-        public async Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model)
+
+
+
+        public async Task<List<UserrightsListDataDto>> GetPagedUserprofile(UserRightsSearchDto model)
+
         {
-            var data = await _dbContext.Userprofile.Include(a => a.User)
-                .Include(b => b.Department)
-                .Include(c => c.Dmsfileright)
-                .Where(x => (x.DepartmentId == (model.department == 0 ? x.DepartmentId : model.department)
-                && (x.IsActive == 1)
-              //  && x.Department.IsActive == 1
-                )
-                ).GetPaged<Userprofile>(model.PageNumber, model.PageSize);
+            try
+            {
 
-            return data;
+
+                var data = await _dbContext.LoadStoredProcedure("bindUserrights")
+                                            .WithSqlParams(("P_departmentId", model.department))
+
+
+
+                                            .ExecuteStoredProcedureAsync<UserrightsListDataDto>();
+
+                return (List<UserrightsListDataDto>)data;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
