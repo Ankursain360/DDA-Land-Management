@@ -36,7 +36,13 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Zone>> GetZones();
 
-        Task<List<Scheme>> GetSchemes();
+        //   Task<List<Scheme>> GetSchemes();
+
+        Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int encroachmentId);
+        Task<List<SchemeFileLoading>> GetSchemesFileLoading();
+
+        Task<bool> DeleteDataStoragePartFile(int Id);
+
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
     }
 }

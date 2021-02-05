@@ -19,14 +19,18 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Department>> GetDepartment();
         Task<List<Branch>> GetBranch();
         Task<List<Zone>> GetZones();
-        Task<List<Scheme>> GetSchemes();
+        //Task<List<Scheme>> GetSchemes();
+
+        Task<List<SchemeFileLoading>> GetSchemesFileLoading();
         Task<bool> SaveDetailsOfPartFile(List<Datastoragepartfilenodetails> datastoragepartfilenodetails);
 
         //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
         Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
 
-        Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model,int UserId);
+        Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
 
+        Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int encroachmentId);
 
+        Task<bool> DeleteDataStoragePartFile(int Id);
     }
 }

@@ -69,11 +69,19 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-        public async Task<List<Scheme>> GetSchemes()
+        //public async Task<List<Scheme>> GetSchemes()
+        //{
+        //    var schemeList = await _dbContext.Scheme.Where(x => x.IsActive == 1).ToListAsync();
+        //    return schemeList;
+        //}
+
+
+        public async Task<List<SchemeFileLoading>> GetSchemesFileLoading()
         {
-            var schemeList = await _dbContext.Scheme.Where(x => x.IsActive == 1).ToListAsync();
+            var schemeList = await _dbContext.SchemeFileLoading.Where(x => x.IsActive == 1).ToListAsync();
             return schemeList;
         }
+
 
         public async Task<List<Datastoragedetails>> GetDataStorageDetails()
         {
@@ -82,9 +90,66 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model)
         {
-            return await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Datastoragedetails
+                                        .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                        .Where(x => x.FileNo == (model.FileNo =="" ? x.FileNo : model.FileNo)
+                                        && (x.Name == (model.Name == "" ? x.Name : model.Name))                                       
+                                        ).GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Datastoragedetails
+                                        .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                        .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                         && (x.Name == (model.Name == "" ? x.Name : model.Name))
+                                        )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                                : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                                : model.SortBy.ToUpper() == "ALMIRAHNO" ? (s.Almirah != null ? s.Almirah.AlmirahNo : null)
+                                : model.SortBy.ToUpper() == "ROWNO" ? (s.Row != null ? s.Row.RowNo : null) : s.FileNo)
+                                )
+                                .GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                  data = null;
+                  data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                        .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                        && (x.Name == (model.Name == "" ? x.Name : model.Name))
+                                        )
+                                .OrderByDescending(s =>
+                               (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                                : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                                : model.SortBy.ToUpper() == "ALMIRAHNO" ? (s.Almirah != null ? s.Almirah.AlmirahNo : null)
+                                : model.SortBy.ToUpper() == "ROWNO" ? (s.Row != null ? s.Row.RowNo : null) : s.FileNo)
+                                )
+                                .GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            }
+       
+            return data;
         }
 
+
+
+        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int DataStorageID)
+        {
+            return await _dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == DataStorageID).ToListAsync();
+        }
+
+
+
+        public async Task<bool> DeleteDataStoragePartFile(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
         public async Task<bool> Any(int id, string name)
         {
             return await _dbContext.Datastoragedetails.AnyAsync(t => t.Id != id && t.FileNo.ToLower() == name.ToLower());
@@ -124,7 +189,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId)
         {
-            
+
             int SortOrder = (int)model.SortOrder;
             var data = await _dbContext.LoadStoredProcedure("BindListofTotalFilesUserWiseReport")
                                              .WithSqlParams(("UserId", UserId),
@@ -137,6 +202,179 @@ namespace Libraries.Repository.EntityRepository
             return (List<ListofTotalFileReportListDataDto>)data;
 
 
+        }
+
+
+        public async Task<PagedResult<Locality>> GetPagedLocality(LocalitySearchDto model)
+        {
+            var data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                             .OrderByDescending(s => s.IsActive)
+                            .ThenBy(s => s.Zone.Name)
+                            .ThenBy(s => s.Division.Name)
+                            .ThenBy(s => s.Name).GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.Department.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                        break;
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.Zone.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                    case ("DIVISION"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.Division.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+
+                        break;
+                    case ("LOCALITYCODE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.LocalityCode)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.IsActive)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("DEPARTMENT"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.Department.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                        break;
+                    case ("ZONE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.Zone.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                    case ("DIVISION"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.Division.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.Name)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+
+                        break;
+                    case ("LOCALITYCODE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderByDescending(x => x.LocalityCode)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+                        break;
+                    case ("ISACTIVE"):
+                        data = null;
+                        data = await _dbContext.Locality
+                        .Include(x => x.Zone)
+                        .Include(x => x.Department)
+                        .Include(x => x.Division)
+                            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.localityCode) || x.LocalityCode.Contains(model.localityCode)))
+                            .OrderBy(x => x.IsActive)
+                            .GetPaged<Locality>(model.PageNumber, model.PageSize); ;
+
+                        break;
+                }
+            }
+            return data;
         }
 
     }

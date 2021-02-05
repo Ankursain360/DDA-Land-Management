@@ -5,6 +5,8 @@ namespace Dto.Search
 {
     public class DataStorgaeDetailsSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string FileNo { get; set; }
+
+        public string Name { get; set; }
     }
 }

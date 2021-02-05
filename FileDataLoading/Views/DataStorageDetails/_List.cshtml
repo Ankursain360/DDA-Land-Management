@@ -3,25 +3,49 @@
     <thead class="text-nowrap">
         <tr>
 
-            @*<th>Module Name</th>*@
-            <th>Record Room No</th>
-            <th>Khasra No/PropertyNo</th>
-            <th>Satus</th>
-            <th>Operation</th>
+            <th scope="col">File No.</th>
+            <th scope="col">Name/Subject</th>
+            <th scope="col">File/Document Location Details</th>                
+            <th scope="col">Status</th>
+            <th scope="col" style="min-width: 105px;">Operation</th>
         </tr>
     </thead>
-    <tbody>
-        @{
-            if (Model.Results != null)
+    <tbody class="tbody">>
+        @if (Model != null && Model.Results.Count() > 0)
+        {
+            @foreach (var item in Model.Results)
             {
-                if (Model.Results.Count > 0)
-                {
-                    foreach (var item in Model.Results)
-                    {
                 <tr>
+                    <td>@item.FileNo </td>
+                    <td>@item.Name</td>
+                    <td>
+                        
+                        <div class="table-responsive ">
+                            <table class="table table-sm table-bordered mb-0 table-striped">
+                                <thead class="text-nowrap">
+                                    <tr>
+                                        <th>Record Room No.</th>
+                                        <th>Al. No./Compactor No.</th>
+                                        <th>Row No</th>
+                                        <th>Col.No.</th>
+                                        <th>Bn No.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@item.RecordRoomNo</td>
+                                        <td>@item.AlmirahId)</td>
+                                        <td>@(item.RowId)</td>
+                                        <td>@(item.ColumnId)</td>
+                                        <td>@(item.BundleId)</td>
 
-                    <td>@item.RecordRoomNo</td>
-                    <td>@item.KhasraNoPropertyNo</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                   
                     <td>
                         @if (item.IsActive == 1)
                         {
@@ -33,32 +57,22 @@
                         }
                     </td>
                     <td>
-                        <div class="action-btns">
-                            <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
-                            <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"><i class="ri-delete-bin-5-fill"></i></a>
-                        </div>
+                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i></a>
+                        <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"><i class="ri-edit-line"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" title="Delete" class="remove" onclick="return confirm('Are You Sure, You want to Delete this Record?')"> <i class="ri-delete-bin-5-fill"></i></a>
 
                     </td>
-
-                </tr>
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <th colspan="9" class="text-center">Data Not Found</th>
-                    </tr>
-                }
-            }
-            else
-            {
-                <tr>
-                    <th colspan="9" class="text-center">Data Not Found</th>
                 </tr>
             }
         }
+        else
+        {
+            <tr>
+                <th colspan="14" style="text-align:center"> No Record Available! </th>
+            </tr>
+        }
     </tbody>
-</table>
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
 
+</table>
+
+@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })

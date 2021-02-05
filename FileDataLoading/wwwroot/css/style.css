@@ -182,6 +182,7 @@ a.no-dec {
     min-height: 100vh;
     width: 100%;
     background-image: url(../login/login-bg.jpg);
+   
     position: relative;
 }
 
@@ -501,7 +502,7 @@ figcaption h6 {
     width: 100%;
     top: 58px;
     overflow: auto;
-    z-index: 99;
+    z-index:99;
 }
 
 
