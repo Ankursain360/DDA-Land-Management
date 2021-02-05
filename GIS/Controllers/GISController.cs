@@ -36,6 +36,5 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetZoneList());
         }
-
     }
 }
