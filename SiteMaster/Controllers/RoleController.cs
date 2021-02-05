@@ -12,7 +12,9 @@ using Notification.OptionEnums;
 using Service.IApplicationService;
 using SiteMaster.Filters;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -156,7 +158,15 @@ namespace SiteMaster.Controllers
             }
             return View(result);
         }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<RoleDto> result = await _userProfileService.GetActiveRole();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Role.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
 
     }
 }
