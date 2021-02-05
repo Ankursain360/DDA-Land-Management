@@ -18,7 +18,7 @@ namespace Libraries.Service.IApplicationService
 
         Task<bool> SaveDetailsOfPartFile(List<Datastoragepartfilenodetails> datastoragepartfilenodetails);
 
-
+        Task<Datastoragedetails> GetDatastorageListName(int id);
         Task<Datastoragedetails> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<bool> CheckUniqueName(int id, string dataStorageDetails);
@@ -38,5 +38,12 @@ namespace Libraries.Service.IApplicationService
 
         Task<List<Scheme>> GetSchemes();
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
+        Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId);
+
+        Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId);
+        Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model);
+        Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId);
+        Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model);
+
     }
 }

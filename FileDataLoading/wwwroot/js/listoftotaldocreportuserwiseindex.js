@@ -7,9 +7,9 @@ $(document).ready(function () {
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 });
 
-function GetDataStorage(pageNumber, pageSize,order) {
-    var param = GetSearchParam(pageNumber, pageSize,order);
-    HttpPost(`/ListOfTotalFilesReportUserWise/List`, 'html', param, function (response) {
+function GetDataStorage(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/ListOfTotalDocReportUserWise/List`, 'html', param, function (response) {
         $('#LoadView').html("");
         $('#LoadView').html(response);
     });
@@ -26,7 +26,7 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber)
     }
-  //  debugger
+    //  debugger
     return model;
 }
 $('#ddlColName').change(function () {
@@ -37,77 +37,58 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-   
+    var temp = "0";
     $("#txtsearchtxt").val('');
     $("#ddlColName").val('0').trigger('change');
+    
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 });
 function Descending() {
     $("#btnDescending").addClass("active");
     $("#btnAscending").removeClass("active");
-    
+
     sortby = 2;     //for Descending
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 };
 function Ascending() {
     $("#btnAscending").addClass("active");
     $("#btnDescending").removeClass("active");
-   
+
     sortby = 1;    //for Asc
-    GetDataStorage(currentPageNumber, currentPageSize, sortby);
-
-};
-function FreeHoldYes() {
-    $("#ryes").checked = true;
-   
-   
-    freeholdstatus = 1;    //for Asc
-    GetDataStorage(currentPageNumber, currentPageSize, sortby);
-
-};
-function FreeHoldNo() {
-     
-    freeholdstatus = 0;    //for Asc
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
 
 };
 
 function GetDataStorageOrderby(pageNumber, pageSize, order) {
     var param = GetSearchParamOrderby(pageNumber, pageSize, order);
-    HttpPost(`/ListOfTotalFilesReportUserWise/List`, 'html', param, function (response) {
+    HttpPost(`/ListOfTotalDocReportUserWise/List`, 'html', param, function (response) {
         $('#LoadView').html("");
         $('#LoadView').html(response);
     });
-function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
-    var model = {
-        name: freeholdstatus,
-        searchCol: $('#ddlColName').children("option:selected").val(),
-        searchText: $("#txtsearchtxt").val(),
-        sortBy: $("#ddlSort").children("option:selected").val(),
-        sortOrder: parseInt(sortOrder),
-        pageSize: pageSize,
-        pageNumber: pageNumber
+    function GetSearchParamOrderby(pageNumber, pageSize, sortOrder) {
+        var model = {
+            name: freeholdstatus,
+            searchCol: $('#ddlColName').children("option:selected").val(),
+            searchText: $("#txtsearchtxt").val(),
+            sortBy: $("#ddlSort").children("option:selected").val(),
+            sortOrder: parseInt(sortOrder),
+            pageSize: pageSize,
+            pageNumber: pageNumber
+        }
+        return model;
     }
-    return model;
-}
 
 
 
-function onPaging(pageNo) {
-    GetDataStorage(parseInt(pageNo), parseInt(currentPageSize), sortby);
-    currentPageNumber = pageNo;
-}
+    function onPaging(pageNo) {
+        GetDataStorage(parseInt(pageNo), parseInt(currentPageSize), sortby);
+        currentPageNumber = pageNo;
+    }
 
-function onChangePageSize(pageSize) {
-    GetDataStorage(parseInt(currentPageNumber), parseInt(pageSize), sortby);
-    currentPageSize = pageSize;
-}
+    function onChangePageSize(pageSize) {
+        GetDataStorage(parseInt(currentPageNumber), parseInt(pageSize), sortby);
+        currentPageSize = pageSize;
+    }
 
 
 }
-
-
-
-
-
-

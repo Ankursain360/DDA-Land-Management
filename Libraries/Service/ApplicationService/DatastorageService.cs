@@ -31,13 +31,18 @@ namespace Libraries.Service.ApplicationService
         {
             return await _datastoragedetailRepository.GetAll();
         }
-
+        public async Task<Datastoragedetails> GetDatastorageListName(int id)
+        {
+            Datastoragedetails model = await _datastoragedetailRepository.GetDatastorageListName(id);
+            return model;
+            
+        }
         public async Task<List<Datastoragedetails>> GetDataStorageDetailsUsingReport()
         {
             return await _datastoragedetailRepository.GetDataStorageDetails();
         }
 
-        public async Task<bool> Update(int id, Datastoragedetails dataStorageDetails)
+                public async Task<bool> Update(int id, Datastoragedetails dataStorageDetails)
         {
             var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
             Datastoragedetails model = result.FirstOrDefault();
@@ -57,6 +62,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<Datastoragedetails> FetchSingleResult(int id)
         {
+          
             var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
             Datastoragedetails model = result.FirstOrDefault();
             return model;
@@ -165,7 +171,27 @@ namespace Libraries.Service.ApplicationService
         {
             return await _datastoragedetailRepository.GetPagedListofReportFile(model,UserId);
         }
+        public async Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofReportDoc(model, UserId);
+        }
+        public async Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofSearchByParticular(model, UserId);
+        }
+        public async Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedListofFileHistory(model);
+        }
+        public async Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofSearchByParticularDoc(model, UserId);
+        }
+        public async Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedListofDocHistory(model);
+        }
 
-        
+       
     }
 }

@@ -3,17 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dto.Search;
-
-
 using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-
-
 using System.Text;
-
 using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
@@ -79,6 +74,19 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).ToListAsync();
         }
+        public async Task<Datastoragedetails> GetDatastorageListName(int id)
+        {
+            return await _dbContext.Datastoragedetails
+                            .Include(x => x.Zone)
+                            .Include(x => x.Locality)
+                            .Include(x => x.Almirah)
+                            .Include(x => x.Row)
+                            .Include(x => x.Bundle)
+                            .Include(x => x.Column)
+                            .Where(x => x.Id == id)
+                            .SingleOrDefaultAsync() ;
+         
+        }
 
         public async Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model)
         {
@@ -138,6 +146,92 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+        public async Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId)
+        {
 
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindListofTotalDocUserWiseReport")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("Search_Value", model.searchText),
+                                              ("Search_Column", model.searchCol))
+                                             .ExecuteStoredProcedureAsync<ListofTotalDocReportListDataDto>();
+            return (List<ListofTotalDocReportListDataDto>)data;
+
+
+        }
+        public async Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindFileListOfSearchByParameter")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("DeptId", model.DeptId),
+                                              ("LocalityId", model.LocalityId),
+                                              ("AlmirahId", model.AlmirahId),
+                                              ("RowId", model.RowId),
+                                              ("BundleId", model.BundleId),
+                                              ("ColId", model.ColId),
+                                              ("RecordRoomId", model.RRNo),
+                                              ("FileNo", model.FileNo),
+                                              ("FileName",model.FileName))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularListDataDto>();
+            return (List<SearchByParticularListDataDto>)data;
+
+
+        }
+        public async Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindFileIssueReturnHistory")
+                                             .WithSqlParams(("FileNo", model.FileNo))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularFileHistoryListDataDto>();
+            return (List<SearchByParticularFileHistoryListDataDto>)data;
+
+
+        }
+
+        public async Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindSearchByParameterDoc")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("DeptId", model.DeptId),
+                                              ("LocalityId", model.LocalityId),
+                                              ("AlmirahId", model.AlmirahId),
+                                              ("RowId", model.RowId),
+                                              ("BundleId", model.BundleId),
+                                              ("ColId", model.ColId),
+                                              ("RecordRoomId", model.RRNo),
+                                              ("FileNo", model.FileNo),
+                                              ("FileName", model.FileName))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularDocListDataDto>();
+            return (List<SearchByParticularDocListDataDto>)data;
+
+
+        }
+        public async Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindFileIssueReturnHistory")
+                                             .WithSqlParams(("FileNo", model.FileNo))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularDocHistoryListDataDto>();
+            return (List<SearchByParticularDocHistoryListDataDto>)data;
+
+
+        }
+
+       
     }
 }
