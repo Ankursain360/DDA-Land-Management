@@ -1,5 +1,6 @@
-﻿
-@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>
+﻿@*@model Libraries.Repository.Common.PagedResult<Model.Entity.Userprofile>*@
+@*@model IEnumerable<Model.Entity.Userprofile>*@
+@model IEnumerable<Dto.Search.UserrightsListDataDto>
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
 
@@ -14,53 +15,45 @@
         </tr>
     </thead>
     <tbody>
-        @if (Model != null && Model.Results.Count() > 0)
+        @if (Model != null && Model.Count() > 0)
         {
-            @foreach (var item in Model.Results)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
-                        @item.User.UserName
+                        @item.UserName
 
                     </td>
-                    <td>@item.Department.Name</td>
+                    <td>@item.DepartmentName</td>
 
-                    @if (item.Dmsfileright.Count > 0)
-                    {
-                        @foreach (var newitem in item.Dmsfileright)
-
-                        {
+               
                             <td>
-                                @if (newitem.Viewright == 0)
+                                @if (item.Viewright == 0)
                                 {
-                                    <input type="checkbox" class="chkView" id="view-@item.User.Id" value="@item.User.Id" name="View">
+                                    <input type="checkbox" class="chkView" id="view-@item.UserId" value="@item.UserId" name="View">
                                 }
                                 else
                                 {
-                                    <input type="checkbox" class="chkView" id="view-@item.User.Id" name="View" value="@item.User.Id" checked="checked">
+                                    <input type="checkbox" class="chkView" id="view-@item.UserId" name="View" value="@item.UserId" checked="checked">
                                 }
                             </td>
                             <td>
-                                @if (newitem.Downloadright == 0)
+                                @if (item.Downloadright == 0)
                                 {
-                                    <input type="checkbox" class="chkView" id="download-@item.User.Id" value="@item.User.Id" name="Download">
+                                    <input type="checkbox" class="chkView" id="download-@item.UserId" value="@item.UserId" name="Download">
                                 }
                                 else
                                 {
-                                    <input type="checkbox" class="chkView" id="download-@item.User.Id" value="@item.User.Id" name="Download" checked="checked">
+                                    <input type="checkbox" class="chkView" id="download-@item.UserId" value="@item.UserId" name="Download" checked="checked">
                                 }
 
                             </td>
-                        }
-                    }
-              
-                    
-                    else
-                    {
-                        <td> <input type="checkbox" class="chkView" id="view-@item.User.Id" value="@item.User.Id" name="View"></td>
-                        <td><input type="checkbox" class="chkView" id="download-@item.User.Id" value="@item.User.Id" name="Download"></td>
-                    }
-                    
+                        
+                 
+
+
+                
+
 
                 </tr>
             }
@@ -84,4 +77,4 @@
 
 
 
-@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })
+@*@await Component.InvokeAsync("Pager", new { totalCount = Model.RowCount, pageNumber = Model.CurrentPage, pageSize = Model.PazeSize })*@

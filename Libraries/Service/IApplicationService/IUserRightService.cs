@@ -12,7 +12,10 @@ namespace Service.IApplicationService
     public interface IUserRightService : IEntityService<Dmsfileright>
     {
         Task<List<Department>> GetDepartmentList();
-        Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model);
+        //Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model);
+
+        Task<List<UserrightsListDataDto>> GetPagedUserprofile(UserRightsSearchDto model);
+
         Task<bool> AddUpdateDmsRight(List<UserRightsMapDto> model);
         Task<List<Dmsfileright>> GetDMSFileRight();
 
