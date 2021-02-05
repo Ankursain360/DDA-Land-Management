@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
     public Schemefileloading()
     {
         Datastoragedetails = new HashSet<Datastoragedetails>();
+        Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
     }
 
 
@@ -25,7 +26,8 @@ namespace Libraries.Model.Entity
 
         public byte? IsActive { get; set; }
 
-    public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
-}
+       public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
+    }
 }
 
