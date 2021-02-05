@@ -11,6 +11,8 @@ namespace Libraries.Model.Entity
     public class Dmsfileupload : AuditableEntity<int>
     {
         public string IsFileBulkUpload { get; set; }
+
+        [Remote(action: "Exist", controller: "DMSFileUpload", AdditionalFields = "Id")]
         public string FileNo { get; set; }
         public string AlloteeName { get; set; }
 

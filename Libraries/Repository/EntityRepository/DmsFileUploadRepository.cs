@@ -134,9 +134,9 @@ namespace Libraries.Repository.EntityRepository
             return File;
         }
 
-        public async Task<bool> Any(string fileNo)
+        public async Task<bool> Any(int id, string fileNo)
         {
-            return await _dbContext.Dmsfileupload.AnyAsync(t => t.FileNo.ToLower() == fileNo.ToLower());
+            return await _dbContext.Dmsfileupload.AnyAsync(t => t.Id != id &&  t.FileNo.ToLower() == fileNo.ToLower());
         }
 
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model)

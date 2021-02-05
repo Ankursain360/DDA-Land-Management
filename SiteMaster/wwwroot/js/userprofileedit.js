@@ -41,7 +41,8 @@ function GetListData() {
         Id: parseInt(id),
         DepartmentId: parseInt(departmentid),
         ZoneId: parseInt(zoneid),
-        RoleId: parseInt(roleid)
+        RoleId: parseInt(roleid),
+        BranchId: parseInt($('#BranchId').val())
     }
     return model;
 }
