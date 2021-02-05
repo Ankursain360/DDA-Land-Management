@@ -185,9 +185,8 @@ namespace SiteMaster.Controllers
         public async Task<IActionResult> Download()
         {
             List<District> result = await _districtService.GetAllDistrict();
-            DataTable dt = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(result), (typeof(DataTable)));
-            var memory = ExcelHelper.CreateExcel(dt);
-            string sFileName = @"Employees.xlsx";
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"District.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }
