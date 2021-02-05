@@ -1,342 +1,107 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Datastoragedetails
+@await Component.InvokeAsync("PageHeader", new { pageName = "Display Label" })
+<div class="pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtFileNo" class="floating-label-field floating-label-field--s3" placeholder="File No" />
+                    <label for="txtFileNo" class="floating-label"> File No</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="File Name" />
+                    <label for="txtName" class="floating-label"> File Name</label>
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtAlmirah" class="floating-label-field floating-label-field--s3" placeholder="Almirah" />
+                    <label for="txtAlmirah" class="floating-label"> Almirah</label>
+                </div>
+            </div>*@
+        </div>
+        @*<div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtRow" class="floating-label-field floating-label-field--s3" placeholder="Row" />
+                    <label for="txtRow" class="floating-label"> Row</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtColumn" class="floating-label-field floating-label-field--s3" placeholder="Column" />
+                    <label for="txtColumn" class="floating-label">Column</label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input type="text" id="txtBundle" class="floating-label-field floating-label-field--s3" placeholder="Bundle" />
+                    <label for="txtBundle" class="floating-label">Bundle</label>
+                </div>
+            </div>
 
-
-
-
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-
-
-<script>
-    $(function () {
-        $("#txtDesignation").keypress(function (e) {
-            var keyCode = e.keyCode || e.which;
-
-            $("#lblError").html("");
-
-            //Regex for Valid Characters i.e. Alphabets and Numbers.
-            var regex = /^[A-Za-z0-9]+$/;
-
-            //Validate TextBox value against the Regex.
-            var isValid = regex.test(String.fromCharCode(keyCode));
-            if (!isValid) {
-                $("#lblError").html("Only Alphabets and Numbers allowed.");
-            }
-
-            return isValid;
-        });
-    });
-
-</script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Display Label</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+        </div>*@
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" id="btnReset" type="reset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" id="btnSearch" type="submit">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<br />
-
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  myapp-hed1">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Display Label</h6>
-        </div>
-        <div class="panel-body">
-            <form method="post" asp-action="Index" id="1">
-                @*asp-action="Create"*@
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-row">
-
-                    <div class="form-group col-md-2">
-                        <label class="control-label lb-sm">Enter Parameter </label>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="txtParameter" autocomplete="on">
-                    </div>
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="FileNo">File No</option>
+                        <option value="FileName">File Name</option>
+                        <option value="Status">Status</option>
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
                 </div>
-                <div class="form-row">
-
+                <div class="short-btn d-flex align-items-center">
+                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
                 </div>
+            </div>
 
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Find" class="btn btn-primary myapp-hed1" id="btnFind" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-primary myapp-hed1" })
-                    </div>
-                </div>
-
-
-
-            </form>
-
-            <div>
-                <br /> <br /> <br /> <br />
-                <br />
-                @{
-                    @if (ViewBag.IsShowData == "Yes")
-                    {
-                        <div class="form-row" id="divDataLoad">
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered" border="0">
-                                        <thead class="thead">
-                                            <tr>
-                                                <th>Sr.No</th>
-                                                <th>File No.</th>
-                                                <th>File Name</th>
-                                                <th>File Particulars/Compactor Details</th>
-                                                <th>Status</th>
-                                                <th>Display Label</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="tbody">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>
-                                                    F1(RTIMIS)/2017-2018/COORDINATION/RTI
-                                                </td>
-                                                <td>
-                                                    ONLINE RTI FILE
-                                                </td>
-                                                <td>
-                                                    <label class="control-label lb-sm">Location(Village) Details</label>
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Record Room No.</th>
-                                                                <th>Al. No./Compactor No.</th>
-                                                                <th>Row No</th>
-                                                                <th>Col.No.</th>
-                                                                <th>Bn No.</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    308
-                                                                </td>
-                                                                <td>
-                                                                    B
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                                <td>
-                                                                    B
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    Available
-                                                </td>
-
-                                                <td>
-                                                    <a id="btnDisplay" class="btn btn-primary myapp-hed1">Display</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>
-                                                    F5(29)/2018-2019/COORDINATION/RNR
-                                                </td>
-                                                <td>
-                                                    REPLY FILES
-                                                </td>
-                                                <td>
-                                                    <label class="control-label lb-sm">Location(Village) Details</label>
-                                                    <table class="table table-striped table-bordered">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Record Room No.</th>
-                                                                <th>Al. No./Compactor No.</th>
-                                                                <th>Row No</th>
-                                                                <th>Col.No.</th>
-                                                                <th>Bn No.</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    308
-                                                                </td>
-                                                                <td>
-                                                                    C
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                                <td>
-                                                                    A
-                                                                </td>
-                                                                <td>
-                                                                    1
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    Available
-                                                </td>
-
-                                                <td>
-                                                    <a id="btnDisplay" class="btn btn-primary myapp-hed1">Display</a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    }
-                    else
-                    {
-
-                    }
-                }
+            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                @*<a href="/Structure/create" class="d-flex align-items-center btn btn-primary mr-2">
+                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                        <small>Add More</small>
+                    </a>*@
+                <a href="javascript:void(0)" class="d-flex align-items-center btn btn-success">
+                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                    <small>Download</small>
+                </a>
             </div>
         </div>
+
+        <div class="table-responsive ">
+            <div id="LoadView"></div>
+
+        </div>
+
+
     </div>
+
 </div>
 
-
-
-@if (ViewData["Msg"] != null)
-{
-    FileDataLoading.Models.Message msg = ViewData["Msg"] as FileDataLoading.Models.Message;
-    @await Html.PartialAsync("~/Views/Shared/_ShowMsg.cshtml", msg);
-}
-
-<script>
-    $("#btnDisplay").click(function () {
-        window.open("@Url.Action("PrintLabel", "DisplayLabel")", "_blank",
-            "menubar=no, toolbar=no, resizable=no, top=100, left=200, width=500, height=500");
-    });
-</script>
-<script>
-    $(function () {
-        $("input[name='btnFind']").click(function () {
-            $("#divDataLoad").toggle();
-            $(this).toggleClass('class1')
-        });
-    });
-
-    function DeleteData(id) {
-
-        var Param = id;
-
-        $.ajax({
-            url: "/IssueReturnFile/IssueFileData",
-            // type: "POST",
-            data: { },
-            traditional: true,
-            //dataType: "Boolean",
-            //contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-            dataType: "text",
-            contentType: "application/text; charset=utf-8",
-            success: function (result) {
-                if (result) {
-                    //  alert("Done");
-                    $('#myModaldelete').modal('show');
-                } else {
-                    alert("Error occurs on the Database level!");
-                }
-            },
-            error: function () {
-                alert("An error has occured!!!");
-            }
-        });
-    }
-</script>
-
-<style>
-
-    .class1 {
-        color: orange;
-    }
-</style>
-
-<script>
-    //For autocomplete in textbox
-    $(document).ready(function () {
-        $("#txtParameter").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '/IssueReturnFile/AutocompleteParameter',
-                    type: 'GET',
-                    cache: false,
-                    data: request,
-                    dataType: 'json',
-                    success: function (data) {
-                        response($.map(data, function (item) {
-                            return {
-                                label: item,
-                                value: item + ""
-                            }
-                        }))
-                    }
-                });
-            },
-            minLength: 2,
-            //select: function (event, ui) {
-            //    alert('you have selected ' + ui.item.label + ' ID: ' + ui.item.value);
-            //    $('#txtSearch').val(ui.item.label);
-            //    return false;
-            //}
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        //Open popup
-        $('body').on("click", "a.popup", function (e) {
-            e.preventDefault();
-            var page = $(this).attr('href');
-            OpenPopup(page);
-        });
-    });
-
-
-    //open popup
-    function OpenPopup(Page) {
-        var $pageContent = $('<div/>');
-        $pageContent.load(Page);
-        $dialog = $('<div class="popupWindow" style="overflow:hidden"></div>')
-            .html($pageContent)
-            .dialog({
-                draggable: true,
-                autoOpen: false,
-                resizable: true,
-                model: true,
-                height: 600,
-                width: 600,
-                close: function () {
-                    $dialog.dialog('destroy').remove();
-                }
-            })
-        $dialog.dialog('open');
-    }
-
-</script>
-
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/displaylabelindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/displaylabelindex.min.js" asp-append-version="true"></script>
+</environment>

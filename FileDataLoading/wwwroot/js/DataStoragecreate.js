@@ -70,8 +70,10 @@ $(document).delegate('a.delete-record', 'click', function (e) {
 
 $("input[name='grpDamageAssesseeType']").click(function () {
     if ($("#rSubsequent").is(":checked")) {
+        $("#TypeOfDamageAssessee").val('0');
         $("#DivForSubsequentPurchaser").hide();
     } else {
+        $("#TypeOfDamageAssessee").val('1');
         $("#DivForSubsequentPurchaser").show();
     }
 });

@@ -1,26 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Dto.Master;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
+using Service.IApplicationService;
+using NewLandAcquisition.Helper;
 using NewLandAcquisition.Models;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace NewLandAcquisition.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ISiteContext _siteContext;
+        private readonly IUserProfileService _userProfileService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ISiteContext siteContext,
+           IUserProfileService userProfileService)
         {
-            _logger = logger;
+            _siteContext = siteContext;
+            _userProfileService = userProfileService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);
+            return View(user);
         }
 
         public IActionResult Privacy()
@@ -28,15 +31,25 @@ namespace NewLandAcquisition.Controllers
             return View();
         }
 
-        public IActionResult ErrorLog()
+        public IActionResult Logout()
         {
-            return View();
+            return SignOut("Cookies", "oidc");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult UnAuthorized()
+        {
+            return View();
+        }
+
+        public IActionResult ExceptionLog()
+        {
+            return View();
         }
     }
 }

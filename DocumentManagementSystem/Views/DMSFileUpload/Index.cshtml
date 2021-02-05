@@ -1,13 +1,12 @@
-﻿@model IEnumerable<Libraries.Model.Entity.Dmsfileupload>
+﻿@model Libraries.Model.Entity.Dmsfileupload
 @await Component.InvokeAsync("PageHeader", new { pageName = "File Upload" })
-
 <div class="pt-3">
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" id="DepartmentId" asp-items="@(new SelectList(ViewBag.DepartmentList, "Id", "Name"))">
                         <option selected="selected" value="0">All</option>
                     </select>
                     <label class="floating-label" for="DepartmentId">Department</label>
@@ -15,7 +14,7 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="LocalityId" asp-items="@(new SelectList(ViewBag.LocalityList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" id="LocalityId" asp-items="@(new SelectList(ViewBag.LocalityList, "Id", "Name"))">
                         <option selected="selected" value="0">All</option>
                     </select>
                     <label class="floating-label" for="LocalityId">Locality</label>
@@ -23,14 +22,14 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" id="KhasraNoId" asp-items="@(new SelectList(ViewBag.KhasraNoList, "Id","KhasraNo"))">
+                    <select class="floating-label-field floating-label-field--s3" id="KhasraNoId" asp-items="@(new SelectList(ViewBag.KhasraNoList, "Id", "KhasraNo"))">
                         <option selected="selected" value="0">All</option>
                     </select>
                     <label class="floating-label" for="KhasraNoId">Khasra No.</label>
                 </div>
             </div>
         </div>
-
+        
 
         <div class="row mt-md-3">
             <div class="col-md-12 col-xl-3">
@@ -46,25 +45,8 @@
                 </div>
             </div>
         </div>
-        <div id="insertSumaary">
-            @{
-                if (ViewBag.Summary != null)
-                {
-                    @Html.Raw(ViewBag.Summary);
-                }
-            }
-
-        </div>
-        <div id="insertSumaaryUniq">
-            @{
-                if (ViewBag.SummaryUniq != null)
-                {
-                    @Html.Raw(ViewBag.SummaryUniq);
-                }
-            }
-
-        </div>
-    </form>
+        
+    </div>
 
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
@@ -100,27 +82,6 @@
         </div>
     </div>
 </div>
-
-<div class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Modal body text goes here.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/dmsfileuploadindex.js"></script>

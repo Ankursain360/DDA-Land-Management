@@ -112,7 +112,8 @@ namespace Libraries.Model
         public virtual DbSet<Payeeregistration> Payeeregistration { get; set; }
         public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
-            public virtual DbSet<Demandletters> Demandletters { get; set; }
+        public virtual DbSet<Demandletters> Demandletters { get; set; }
+        public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -130,7 +131,7 @@ namespace Libraries.Model
         public virtual DbSet<Bundle> Bundle { get; set; }
 
         public virtual DbSet<Issuereturnfile> Issuereturnfile { get; set; }
-        
+
         public virtual DbSet<Datastoragedetails> Datastoragedetails { get; set; }
 
         public virtual DbSet<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
@@ -142,7 +143,7 @@ namespace Libraries.Model
         public virtual DbSet<Damagepayeepersonelinfo> Damagepayeepersonelinfo { get; set; }
         public virtual DbSet<Damagepayeeregister> Damagepayeeregister { get; set; }
         public virtual DbSet<Damagepaymenthistory> Damagepaymenthistory { get; set; }
-       
+
         public virtual DbSet<Paymentverification> Paymentverification { get; set; }
         public virtual DbSet<Mutationolddamageassesse> Mutationolddamageassesse { get; set; }
         public virtual DbSet<Mutationnewdamageassesse> Mutationnewdamageassesse { get; set; }
@@ -172,6 +173,8 @@ namespace Libraries.Model
         public virtual DbSet<Mutationdetailstemp> Mutationdetailstemp { get; set; }
         public virtual DbSet<Branch> Branch { get; set; }
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
+        public virtual DbSet<Plot> Plot { get; set; }
+        public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -313,6 +316,10 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DemandlettersConfiguration());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new DmsFileUploadConfiguration());
+            modelBuilder.ApplyConfiguration(new DmsfilerightConfiguration());
+            //**********  Damage Payee **********
+            modelBuilder.ApplyConfiguration(new PlotConfiguration());
+            modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

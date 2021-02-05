@@ -32,6 +32,9 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.RowId)
                 .HasName("RowNo_idx");
 
+            builder.HasIndex(e => e.SchemeId)
+                .HasName("fk_SchemeFileLoading_idx");
+
             builder.HasIndex(e => e.ZoneId)
                 .HasName("ZoneId_idx");
 
@@ -131,6 +134,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.RowId).HasColumnType("int(11)");
 
+            builder.Property(e => e.SchemeId).HasColumnType("int(11)");
+
             builder.Property(e => e.SectorId)
                 .HasMaxLength(45)
                 .IsUnicode(false);
@@ -185,6 +190,11 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Datastoragedetails)
                 .HasForeignKey(d => d.RowId)
                 .HasConstraintName("fk_RowId");
+
+            builder.HasOne(d => d.SchemeFileLoading)
+                .WithMany(p => p.Datastoragedetails)
+                .HasForeignKey(d => d.SchemeId)
+                .HasConstraintName("fk_SchemeFileLoading");
 
             builder.HasOne(d => d.Zone)
                 .WithMany(p => p.Datastoragedetails)

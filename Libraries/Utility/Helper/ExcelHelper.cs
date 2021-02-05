@@ -12,9 +12,9 @@ namespace Utility.Helper
    
     public static class ExcelHelper
     {
-        public static MemoryStream CreateExcel(DataTable dt)
+        public static byte[] CreateExcel<T>(List<T> data)
         {
-            DataTable table = dt; //(DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(data), (typeof(DataTable)));
+            DataTable table = (DataTable)JsonConvert.DeserializeObject(JsonConvert.SerializeObject(data), (typeof(DataTable)));
             var memory = new MemoryStream();
             using (var memoryStream = new MemoryStream()) //creating memoryStream
             {
@@ -46,10 +46,9 @@ namespace Utility.Helper
                     rowIndex++;
                 }
                 workbook.Write(memoryStream);
-                return memory;
+                byte[] bytes = memoryStream.ToArray();
+                return bytes;
             }
-           
-            
         }
     }
 }

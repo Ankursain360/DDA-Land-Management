@@ -2,53 +2,63 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Dto.Search;
+using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
-//using FileDataLoading.Models;
+using Notification;
+using Notification.Constants;
+using Notification.OptionEnums;
+
 
 namespace FileDataLoading.Controllers
 {
-    public class DisplayLabelController : Controller
+    public class DisplayLabelController : BaseController
     {
-        //private readonly lmsContext _context;
-        //public DisplayLabelController(lmsContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly IDataStorageService _datastorageService;
+
+        public DisplayLabelController(IDataStorageService datastorageService)
+        {
+            _datastorageService = datastorageService;
+
+        }
+
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Index(int id)
+        public async Task<PartialViewResult> List([FromBody] DisplayLabelSearchDto model)
         {
-            ViewBag.IsShowData = "Yes";
-            return View();
+            var result = await _datastorageService.GetPagedDisplayLabel(model);
+            
+            if (result != null)
+            {
+                return PartialView("_List", result);
+            }
+            else
+            {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                return PartialView();
+            }
         }
 
-        //public async Task<IActionResult> AutocompleteParameter(string term)
+        public async Task<IActionResult> PrintLabel(int id)
+        {
+
+            var Data =  await _datastorageService.FetchPrintLabel(id);
+         
+            if (Data == null)
+            {
+                return NotFound();
+            }
+            return PartialView(Data);
+
+        }
+
+        //public IActionResult PrintLabel()
         //{
-        //    return Json(_context.TblMasterDesignation.Where(x => x.DesignationName.Equals(term)).ToList());
+        //    return PartialView("PrintLabel");
         //}
-
-        public async Task<IActionResult> IssueFile()
-        {
-            return View();
-        }
-
-        public IActionResult IssueFileData()
-        {
-            return View();
-        }
-        
-        public IActionResult Create()   
-        {
-            return View();
-        }
-
-        public IActionResult PrintLabel()
-        {
-            return PartialView("PrintLabel");
-        }
     }
 }

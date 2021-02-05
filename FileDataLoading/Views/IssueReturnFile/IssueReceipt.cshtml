@@ -32,20 +32,20 @@
 
 <script src="js/bootstrap.min.js"></script>
 <link href="Styles/bootstrap.css" rel="stylesheet" />
+<link href="~/css/PrintLabel.css" rel="stylesheet" />
 
-<div class="content" id="DivDemandReport" style="max-width: 780px; margin: auto; background: white; padding: 10px;">
+<div class="content contentstyle" id="DivDemandReport">
 
 
     <div class="panel panel-default">
-
-        <div class="row" style="border: groove; height:110px">
+        <div class="panel-heading" style="border: groove;background-color:white;">
 
             <table class="table table-bordered" border="0">
 
 
                 <tr>
                     <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
+                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" class="img-responsive img" alt="">
                     </td>
                     <td align="center">
                         <div>
@@ -67,7 +67,7 @@
                         </div>
                     </td>
                     <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
+                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" class="img-responsive img" alt="">
 
                     </td>
                 </tr>
@@ -81,23 +81,18 @@
 
             <table class="table" border="0" style="border:none; border-top: none;  ">
 
-                @*<tr>
-                <td  style="border-top:none; " align="center">
-                <p><u>Issue Receipt</u></p>
-                </td>
-            </tr>*@
                 <tr>
-                    <td style="border-top:none;">
+                    <td class="tdstyle">
                         <p style="color:black; font-weight:700;">File No.</p>
                     </td>
-                    <td style="border-top:none;">
+                    <td class="tdstyle">
                         <label class="control-label" style="font-weight: 500;">@Model.DataStorageDetails.FileNo</label>
                     </td>
-                    <td style="border-top:none;">
+                    <td class="tdstyle">
                         <p style="color:black; font-weight:700;">File Name/Subject </p>
                     </td>
-                    <td style="border-top:none;">
-                        <label class="control-label" style="font-weight: 500;">@Model.DataStorageDetails.Name</label>
+                    <td class="tdstyle">
+                        <label class="control-label" >@Model.DataStorageDetails.Name</label>
                     </td>
                 </tr>
 
@@ -112,50 +107,49 @@
 
 
                     <tr>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Compactor/Room No. :</p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.DataStorageDetails.RecordRoomNo</label>
+                        <td class="tdstyle">
+                            <label class="control-label" >@Model.DataStorageDetails.RecordRoomNo</label>
                         </td>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Almirah No. : </p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.DataStorageDetails.Almirah == null?"": Model.DataStorageDetails.Almirah.AlmirahNo)
-                                @*@Model.DataStorageDetails.Almirah.AlmirahNo*@
+
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Row No. :</p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.DataStorageDetails.Row == null?"": Model.DataStorageDetails.Row.RowNo)
-                                @*@Model.DataStorageDetails.Row.RowNo*@
+
                             </label>
                         </td>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Column No. : </p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.DataStorageDetails.Column == null?"": Model.DataStorageDetails.Column.ColumnNo)
-                                @*@Model.DataStorageDetails.Column.ColumnNo*@
+
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Bundle No. :</p>
                         </td>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <label class="control-label" style="font-weight: 500;">
                                 @(Model.DataStorageDetails.Bundle == null?"": Model.DataStorageDetails.Bundle.BundleNo)
-                                @*@Model.DataStorageDetails.Bundle.BundleNo*@
                             </label>
                         </td>
                     </tr>
@@ -171,55 +165,58 @@
 
 
                     <tr>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Issued To (Employee Name) :</p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.IssuedToEmployee</label>
+                        <td class="tdstyle">
+                            <label class="control-label" >@Model.IssuedToEmployee</label>
                         </td>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Department : </p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.Department == null?"": Model.Department.Name)
-                                @*@Model.Department.Name*@
+
                             </label>
                         </td>
                     </tr>
                     <tr>
-                        <td style="border-top:none;">
-                            <p style="color:black; font-weight:700;">Zone : </p>
-                        </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">Sharda LM</label>
-                        </td>
-                        <td style="border-top:none;">
+                        @*<td style="border-top:none;">
+                                <p style="color:black; font-weight:700;">Zone : </p>
+                            </td>
+                            <td style="border-top:none;">
+                                <label class="control-label" style="font-weight: 500;">Sharda LM</label>
+                            </td>*@
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Branch Society :</p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.Branch == null?"": Model.Branch.Name)
-                                @*@Model.Branch.Name*@
+
                             </label>
                         </td>
 
                     </tr>
                     <tr>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Designation : </p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">
+                        <td class="tdstyle">
+                            <label class="control-label" >
                                 @(Model.Designation == null?"": Model.Designation.Name)
-                                @*@Model.Designation.Name*@
+
                             </label>
                         </td>
-                        <td style="border-top:none;">
+                        <td class="tdstyle">
                             <p style="color:black; font-weight:700;">Issued Date :</p>
                         </td>
-                        <td style="border-top:none;">
-                            <label class="control-label" style="font-weight: 500;">@Model.IssuedDate</label>
+                        <td class="tdstyle">
+                            <label class="control-label" >
+                                @(Convert.ToDateTime(Model.IssuedDate).ToString("dd MMM yyyy"))
+
+                            </label>
                         </td>
                     </tr>
 
@@ -231,14 +228,14 @@
             <table class="table" border="0" style="border:none; border-top: none;  ">
                 <tr>
 
-                    <td style="border-top:none; " align="right">
+                    <td class="tdstyle" align="right">
                         <label class="control-label">Signature</label>
                     </td>
                 </tr>
 
             </table>
-            @Html.ActionLink("Back", "Index", "IssueReturnFile", null, new { @class = "btn btn-theme " })
-
+            <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
+            <a asp-action="Index" asp-controller="IssueReturnFile" class="btn btn-primary jhide">Back</a>
         </div>
     </div>
 </div>
@@ -250,13 +247,12 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
 
-<script>
-    $(document).ready(function () {
-        window.print();
-    });
-
-</script>
 
 
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/issuefiledata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuefiledata.min.js" asp-append-version="true"></script>
+</environment>

@@ -11,42 +11,15 @@ namespace Libraries.Repository.IEntityRepository
 
     public interface IDmsFileUploadRepository : IGenericRepository<Dmsfileupload>
     {
-        //Task<bool> Any(int id, string name);
-        Task<List<Locality>> GetLocalityList();
-        Task<List<District>> GetDistrictList();
-        Task<List<Damagepayeeregister>> GetAllDamagepayeeregisterTemp();
-        Task<PagedResult<Damagepayeeregister>> GetPagedDamagepayeeregister(DamagepayeeregistertempSearchDto model);
-
-        //********* rpt 1 Persolnal info of damage assesse ***********
-        Task<bool> SavePayeePersonalInfoTemp(Damagepayeepersonelinfo damagepayeepersonelinfotemp);
-        Task<List<Damagepayeepersonelinfo>> GetPersonalInfoTemp(int id);
-        Task<bool> DeletePayeePersonalInfoTemp(int Id);
-        Task<Damagepayeepersonelinfo> GetPersonelInfoFilePath(int Id);
-        Task<List<Department>> GetDepartmentList();
-
-        //********* rpt 2 Allotte Type **********
-
-        Task<bool> SaveAllotteTypeTemp(List<Allottetype> allottetypetemp);
-        Task<List<Propertyregistration>> GetKhasraNoList();
-        Task<List<Allottetype>> GetAllottetypeTemp(int id);
-        Task<bool> DeleteAllotteTypeTemp(int Id);
-        Task<Allottetype> GetAllotteTypeSingleResult(int id);
-
-
-        //********* rpt 3 Damage payment history ***********
-
-        Task<bool> SavePaymentHistoryTemp(List<Damagepaymenthistory> damagepaymenthistorytemp);
-        Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
-        Task<List<Damagepaymenthistory>> GetPaymentHistoryTemp(int id);
-        Task<bool> DeletePaymentHistoryTemp(int Id);
-        Task<Damagepayeeregister> FetchSelfAssessmentUserId(int userId);
-        Task<Rebate> GetRebateValue();
-        Task<Damagepaymenthistory> GetPaymentHistorySingleResult(int id);
-        Task<Dmsfileupload> FetchSingleResult(int id);
-        string GetLocalityName(int? localityId);
-        Task<bool> UpdateBeforeApproval(int id, Damagepayeeregister damagepayeeregister);
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
-        Task<bool> Any(string fileNo);
+        Task<bool> Any(int id, string fileNo);
+        Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
+        Task<List<Department>> GetDepartmentList();
+        Task<List<Propertyregistration>> GetKhasraNoList();
+        Task<List<Locality>> GetLocalityList();
+        Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
+        Task<Dmsfileupload> FetchSingleResult(int id);
+        Task<Dmsfileright> GetDMSUserRights(int userId);
     }
 }

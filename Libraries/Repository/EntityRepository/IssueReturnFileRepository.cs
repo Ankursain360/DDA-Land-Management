@@ -46,7 +46,8 @@ namespace Libraries.Repository.EntityRepository
                              .Include(x => x.Row)
                              .Include(x => x.Column)
                              .Include(x => x.Bundle)
-                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                             && x.IsFileDocument == model.filedoc)
                              .GetPaged(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -54,8 +55,31 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                   
 
+                     case ("FILENO"):
+                        data = null;
+                data = await _dbContext.Datastoragedetails
+                             .Include(x => x.Almirah)
+                             .Include(x => x.Row)
+                             .Include(x => x.Column)
+                             .Include(x => x.Bundle)
+                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                              && x.IsFileDocument == model.filedoc)
+                             .OrderBy(x => x.FileNo)
+                             .GetPaged(model.PageNumber, model.PageSize);
+                break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
+                                     .OrderBy(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Datastoragedetails
@@ -63,7 +87,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
                                      .OrderByDescending(x => x.FileStatus)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -75,8 +100,31 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                   
-                   
+
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
+                                     .OrderByDescending(x => x.FileNo)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
+                    case ("FILENAME"):
+                        data = null;
+                        data = await _dbContext.Datastoragedetails
+                                     .Include(x => x.Almirah)
+                                     .Include(x => x.Row)
+                                     .Include(x => x.Column)
+                                     .Include(x => x.Bundle)
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
+                                     .OrderByDescending(x => x.Name)
+                                     .GetPaged(model.PageNumber, model.PageSize);
+                        break;
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Datastoragedetails
@@ -84,7 +132,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                    .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                    .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                     && x.IsFileDocument == model.filedoc)
                                     .OrderBy(x => x.FileStatus)
                                     .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -124,8 +173,27 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.DataStorageDetails.Column)
                                     .Include(x => x.DataStorageDetails.Bundle)
                                    .Where(x => x.DataStorageDetailsId == id && x.DataStorageDetails.FileStatus=="Issued")
-                                   .SingleOrDefaultAsync();
+                                   .OrderByDescending(s =>s.Id)
+                                   .FirstOrDefaultAsync();
         }
+
+        public async Task<Issuereturnfile> FetchReturnReceiptResult(int id)
+        {
+            return await _dbContext.Issuereturnfile
+                                    .Include(x => x.Department)
+                                    .Include(x => x.Branch)
+                                    .Include(x => x.Designation)
+                                     .Include(x => x.DataStorageDetails)
+                                    .Include(x => x.DataStorageDetails.Almirah)
+                                    .Include(x => x.DataStorageDetails.Row)
+                                    .Include(x => x.DataStorageDetails.Column)
+                                    .Include(x => x.DataStorageDetails.Bundle)
+                                   .Where(x => x.DataStorageDetailsId == id && x.DataStorageDetails.FileStatus == "return")
+                                   .OrderByDescending(s => s.Id)
+                                   .FirstOrDefaultAsync();
+        }
+
+
     }
     
 }
