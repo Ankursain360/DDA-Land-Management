@@ -11,7 +11,9 @@ namespace Repository.IEntityRepository
     {
         Task<List<Department>> GetDepartmentList();
 
-        Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model);
+        //Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model);
+
+        Task<List<UserrightsListDataDto>> GetPagedUserprofile(UserRightsSearchDto model);
 
         Task<List<Dmsfileright>> GetDMSFileRight();
 

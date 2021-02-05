@@ -40,13 +40,16 @@ namespace Service.ApplicationService
         }
 
 
-        public async Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model)
+        //public async Task<PagedResult<Userprofile>> GetPagedUserprofile(UserRightsSearchDto model)
+        //{
+        //    return await _userrightRepository.GetPagedUserprofile(model);
+        //}
+
+
+        public async Task<List<UserrightsListDataDto>> GetPagedUserprofile(UserRightsSearchDto model)
         {
             return await _userrightRepository.GetPagedUserprofile(model);
         }
-
-
-
 
 
         public async Task<List<Dmsfileright>> GetDMSFileRight()
@@ -65,13 +68,11 @@ namespace Service.ApplicationService
         {
             try
             {
-                for (var i = 0; i < model.Count; i++)
-                {
-                    int userid = model[i].UserId;
+               
 
-                    var result = await _userrightRepository.FindBy(a => a.UserId == userid);
-                    _userrightRepository.RemoveRange(result);
-                }
+                var result = await _userrightRepository.GetAll();
+                _userrightRepository.RemoveRange(result);
+           
                 List<Dmsfileright> permission = model.Select(a => new Dmsfileright()
                 {
                     UserId = a.UserId,
