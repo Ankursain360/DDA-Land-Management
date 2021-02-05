@@ -4,7 +4,7 @@ using Service.IApplicationService;
 using AcquiredLandInformationManagement.Helper;
 using System.Threading.Tasks;
 
-namespace SiteMaster.Components
+namespace AcquiredLandInformationManagement.Components
 {
     public class SignInProfileViewComponent : ViewComponent
     {

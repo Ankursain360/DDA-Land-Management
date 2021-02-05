@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace DamagePayee.Controllers
+namespace DamagePayeePublicInterface.Controllers
 {
     public class PaymentController : Controller
     {

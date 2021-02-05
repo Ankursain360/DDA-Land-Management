@@ -11,7 +11,7 @@ namespace Libraries.Model.Entity
     {
         public Scheme()
         {
-            Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
+          
             Proposaldetails = new HashSet<Proposaldetails>();
         }
 
@@ -24,7 +24,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
        
 
-        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
+     
         public ICollection<Proposaldetails> Proposaldetails { get; set; }
     }
 }

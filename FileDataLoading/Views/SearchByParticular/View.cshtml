@@ -1,0 +1,144 @@
+﻿@model Libraries.Model.Entity.Datastoragedetails
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "File Issue Return Details" })
+
+<div class="pt-3">
+
+    <form asp-action="View" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="FileNo" />
+
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Zone.Name" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Zone.Name" class="text-danger "></span>
+                    <label class="floating-label">Zone</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="Locality.Name" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Locality.Name" class="text-danger "></span>
+                    <label class="floating-label">Locality</label>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="SectorId" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="SectorId" class="text-danger "></span>
+                    <label class="floating-label">Sector</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="BlockId" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="BlockId" class="text-danger "></span>
+                    <label class="floating-label">Block</label>
+                </div>
+
+            </div> <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="PocketId" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="PocketId" class="text-danger "></span>
+                    <label class="floating-label">Pocket</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="FlatNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="FlatNo" class="text-danger "></span>
+                    <label class="floating-label">Flat</label>
+                </div>
+
+            </div> <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="RecordRoomNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="RecordRoomNo" class="text-danger "></span>
+                    <label class="floating-label">Room No</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="Almirah.AlmirahNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Almirah.AlmirahNo" class="text-danger "></span>
+                    <label class="floating-label">Almirah No</label>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Row.RowNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Row.RowNo" class="text-danger "></span>
+                    <label class="floating-label">Row No.</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+
+                <div class="floating-label-wrap">
+                    <input asp-for="Column.ColumnNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Column.ColumnNo" class="text-danger "></span>
+                    <label class="floating-label">Column No.</label>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="Bundle.BundleNo" type="text" class="floating-label-field floating-label-field--s3 " disabled="disabled" placeholder="Name"
+                           limit="100">
+                    <span asp-validation-for="Bundle.BundleNo" class="text-danger "></span>
+                    <label class="floating-label">Bundle</label>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="table-responsive px-2 ">
+                <div id="LoadView"></div>
+
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                @Html.ActionLink("Back", "Create", "SearchByParticular", null, new { @class = "btn btn-theme " })
+                <input type="submit" value="Print" id="btnPrint" class="btn btn-theme" />
+            </div>
+        </div>
+
+    </form>
+
+</div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/searchbyparticularview.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/searchbyparticularview.min.js" asp-append-version="true"></script>
+</environment>
