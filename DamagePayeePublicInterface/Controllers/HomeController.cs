@@ -5,6 +5,7 @@ using System.Diagnostics;
 using DamagePayeePublicInterface.Helper;
 using System.Threading.Tasks;
 using Dto.Master;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DamagePayeePublicInterface.Controllers
 {
@@ -19,6 +20,7 @@ namespace DamagePayeePublicInterface.Controllers
             _siteContext = siteContext;
             _userProfileService = userProfileService;
         }
+        [ActionName("Index1")]
         public async Task<IActionResult> Index()
         {
             UserProfileDto user = await _userProfileService.GetUserById(_siteContext.UserId);

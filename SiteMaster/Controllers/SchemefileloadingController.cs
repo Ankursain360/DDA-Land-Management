@@ -14,6 +14,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -204,6 +205,16 @@ namespace SiteMaster.Controllers
             }
             var list = await _schemeFileLoadingService.GetAllSchemeFileLoading();
             return View("Index", list);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Schemefileloading> result = await _schemeFileLoadingService.GetAllSchemeFileLoading();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Schemefileloading.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 
