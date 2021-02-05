@@ -30,9 +30,36 @@
                     <td>@item.PropertyNoAddress</td>
                     <td>@item.AlmirahNo</td>
                     <td>@item.Title</td>
-                    <td>
+                    @if (ViewBag.View == 0 && ViewBag.Download == 0)
+                    {
 
-                    </td>
+                        <td><span class="badge badge-info px-2 py-1">No Right</span></td>
+                    }
+                    else
+                    {
+                        <td>
+                            @{
+                                if (item.FilePath != null)
+                                {
+
+                                    if (ViewBag.View == 1)
+                                    {
+                                        <a asp-action="View" asp-route-id="@item.Id" title="View" class="view" target="_blank"><i class="ri-eye-fill" style="font-size:20px;"></i></a>
+                                    }
+                                    if (ViewBag.Download == 1)
+                                    {
+                                        <a asp-action="Download" asp-route-id="@item.Id" title="Download" class="view" target="_blank"><i class="ri-file-download-fill" style="font-size:20px;"></i></a>
+                                    }
+                                }
+                                else
+                                {
+                                    <p class="badge badge-warning px-2 py-1">No Document</p>
+                                }
+
+                            }
+                        </td>
+                    }
+
                 </tr>
             }
         }

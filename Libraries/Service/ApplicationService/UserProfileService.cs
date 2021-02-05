@@ -124,6 +124,7 @@ namespace Service.ApplicationService
                 {
                     ZoneId = userDto.ZoneId,
                     DepartmentId = userDto.DepartmentId,
+                    BranchId = userDto.BranchId,
                     DistrictId = userDto.DistrictId,
                     RoleId = userDto.RoleId,
                     IsActive = 1,
@@ -172,7 +173,7 @@ namespace Service.ApplicationService
         {
             int profileSaveResult = 1;
             Userprofile user = await _userProfileRepository.GetUserById(model.Id);
-            if (user.DepartmentId != model.DepartmentId || user.RoleId != model.RoleId || user.ZoneId != model.ZoneId)
+            if (user.DepartmentId != model.DepartmentId || user.RoleId != model.RoleId || user.ZoneId != model.ZoneId || user.BranchId != model.BranchId)
             {
                 user.IsActive = 0;
                 _userProfileRepository.Edit(user);
@@ -180,6 +181,7 @@ namespace Service.ApplicationService
 
                 user.Id = 0;
                 user.DepartmentId = model.DepartmentId;
+                user.BranchId = model.BranchId;
                 user.RoleId = model.RoleId;
                 user.ZoneId = model.ZoneId;
                 user.IsActive = 1;
@@ -204,11 +206,11 @@ namespace Service.ApplicationService
             _userProfileRepository.Edit(user);
             return await _unitOfWork.CommitAsync() > 0;
         }
-        public async Task<List<Zone>> GetAllZone(int departmentId)
+        public async Task<List<ZoneDto>> GetAllZone(int departmentId)
         {
-            List<Zone> zoneList = await _userProfileRepository.GetAllZone(departmentId);
-            return zoneList;
+            var zones = await _userProfileRepository.GetAllZone(departmentId);
+            var result = _mapper.Map<List<ZoneDto>>(zones);
+            return result;
         }
-
     }
 }

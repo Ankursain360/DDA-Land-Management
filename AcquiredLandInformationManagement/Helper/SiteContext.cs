@@ -51,5 +51,25 @@ namespace AcquiredLandInformationManagement.Helper
             }
             set => throw new NotImplementedException();
         }
+        public int? DepartmentId
+        {
+            get
+            {
+                string userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(a => a.Type == "sub").Value;
+                var user = _userProfileService.GetUserById(Convert.ToInt32(userId)).GetAwaiter().GetResult();
+                return user.DepartmentId;
+            }
+            set => throw new NotImplementedException();
+        }
+        public int? BranchId
+        {
+            get
+            {
+                string userId = _httpContextAccessor.HttpContext.User.Claims.FirstOrDefault(a => a.Type == "sub").Value;
+                var user = _userProfileService.GetUserById(Convert.ToInt32(userId)).GetAwaiter().GetResult();
+                return user.BranchId;
+            }
+            set => throw new NotImplementedException();
+        }
     }
 }

@@ -1,24 +1,4 @@
-﻿
-<style>
-    .p {
-        color: black;
-    }
-
-    fieldset {
-        border: 1px solid #ddd !important;
-        margin: 0;
-        xmin-width: 0;
-        padding: 10px;
-        position: relative;
-        border-radius: 4px;
-        background-color: #f5f5f5;
-        padding-left: 10px !important;
-    }
-
-    label {
-        font-weight: 500;
-    }
-</style>
+﻿@model Libraries.Model.Entity.Datastoragedetails
 
 
 
@@ -26,80 +6,62 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <link href="Styles/bootstrap.css" rel="stylesheet" />
-
-<div class="content" id="DivPrintLabelReport" style="max-width: 780px; margin: auto; background: white; padding: 10px;">
+<link href="~/css/PrintLabel.css" rel="stylesheet" />
+<div class="content contentstyle" id="DivPrintLabelReport" >
 
 
     <div class="panel panel-default">
-
-        <div class="row" style="border: groove; height:110px">
-            <table class="table table-bordered" border="0">
-
-
-                <tr>
-                    <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png" style="height:100px" class="img-responsive" alt="">
-                    </td>
-                    <td align="center">
-                        <div>
-                            <h style="font-size:20px; color:black">
-
-                                <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
-
-                            </h>
-                            <p style="color:black; font-size:16px; text-align:center;">
-
-                                <b align="center">
-                                    <u>
-                                        Vikas Sadan, New Delhi
-                                    </u>
-                                </b>
-                            </p>
-                        </div>
-                    </td>
-                    <td>
-                        <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg" style="height:100px" class="img-responsive" alt="">
-
-                    </td>
-                </tr>
+        <div class="panel-heading" style="border: groove;background-color:white;">
+                <table class="table " border="0">
+                    <tr >
+                        <td>
+                            <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596010902/ow9sj5vbbpymed9eydrl.png"  class="img-responsive img" alt="">
+                        </td>
+                        <td align="center">
+                            <div>
+                                <h style="font-size:20px; color:black;">
+                                    <u> <b> DELHI DEVELOPMENT AUTHORITY</b></u>
+                                </h>
+                                <p style="color:black; font-size:16px; text-align:center;">
+                                    <b align="center">
+                                        <u>
+                                            Vikas Sadan, New Delhi
+                                        </u>
+                                    </b>
+                                </p>
+                            </div>
+                        </td>
+                        <td>
+                            <img src="https://res.cloudinary.com/deb9cwxor/image/upload/v1596882092/dupx7btfcqjequcgsb00.jpg"  class="img-responsive img" alt="">
+                        </td>
+                    </tr>
 
 
-            </table>
+                </table>
+           
         </div>
-
         <div class="panel-body">
             <table class="table" border="0" style="border:none;">
-
-
                 <tr>
                     <td>
-                        <p style="color:black; font-weight:700;">File No.</p>
+                        <p class="datahead">File No.</p>
                     </td>
                     <td>
-                        <label class="control-label" style="font-size:25px;">F5(6)/2017-2017/NAZ/H.P</label>
+                        <label class="control-label datavalue" >@Model.FileNo</label>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <p style="color:black; font-weight:700;">File Name/Subject </p>
+                        <p class="datahead">File Name/Subject </p>
                     </td>
                     <td>
-                        <label class="control-label" style="font-size:25px;">F5(6)/2017-2017/NAZ/H.P</label>
+                        <label class="control-label datavalue" >@Model.Name</label>
                     </td>
                 </tr>
-
-
             </table>
-
-
-
-
-
             <fieldset>
-                <legend style="font-size:medium;font-weight:700;">Location(Village) Details</legend>
-
+                <legend class="datahead" style="font-size:medium;">Location Details</legend>
                 <div class="form-row col-md-12">
-
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered" border="0">
                             <thead class="thead">
@@ -113,33 +75,35 @@
                             </thead>
                             <tbody class="tbody">
                                 <tr>
-                                    <td style="font-size:25px;">308</td>
-                                    <td style="font-size:25px;">
-                                        B
+                                    <td class="datavalue">
+                                        @Model.RecordRoomNo
                                     </td>
-                                    <td style="font-size:25px;">
-                                        1
+                                    <td class="datavalue">
+                                        @(Model.Almirah == null?"": Model.Almirah.AlmirahNo)
                                     </td>
-
-                                    <td style="font-size:25px;">
-                                        A
+                                    <td class="datavalue">
+                                        @(Model.Row == null?"": Model.Row.RowNo)
                                     </td>
 
-                                    <td style="font-size:25px;">
-                                        1
+                                    <td class="datavalue">
+                                        @(Model.Column == null?"": Model.Column.ColumnNo)
+                                    </td>
+
+                                    <td class="datavalue">
+                                        @(Model.Bundle == null?"": Model.Bundle.BundleNo)
                                     </td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>
-
                 </div>
-
             </fieldset>
+            <br /> <br />
+            <button class="btn btn-success jhide" type="submit" id="btnPrint">Print</button>
+            <a asp-action="Index" asp-controller="DisplayLabel" class="btn btn-primary jhide">Back</a>
         </div>
     </div>
-</div>
+    </div>
 
 <br />
 <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
@@ -147,12 +111,12 @@
 <script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
 
 
-<script>
-    $(document).ready(function () {
-        window.print();
-    });
-
-</script>
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/issuefiledata.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/issuefiledata.min.js" asp-append-version="true"></script>
+</environment>
 
 

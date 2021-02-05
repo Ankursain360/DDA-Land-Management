@@ -46,7 +46,8 @@ namespace Libraries.Repository.EntityRepository
                              .Include(x => x.Row)
                              .Include(x => x.Column)
                              .Include(x => x.Bundle)
-                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                             && x.IsFileDocument == model.filedoc)
                              .GetPaged(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
@@ -62,7 +63,8 @@ namespace Libraries.Repository.EntityRepository
                              .Include(x => x.Row)
                              .Include(x => x.Column)
                              .Include(x => x.Bundle)
-                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                             .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                              && x.IsFileDocument == model.filedoc)
                              .OrderBy(x => x.FileNo)
                              .GetPaged(model.PageNumber, model.PageSize);
                 break;
@@ -73,7 +75,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
                                      .OrderBy(x => x.Name)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -84,7 +87,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
                                      .OrderByDescending(x => x.FileStatus)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -104,7 +108,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
                                      .OrderByDescending(x => x.FileNo)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -115,7 +120,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                     .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                      && x.IsFileDocument == model.filedoc)
                                      .OrderByDescending(x => x.Name)
                                      .GetPaged(model.PageNumber, model.PageSize);
                         break;
@@ -126,7 +132,8 @@ namespace Libraries.Repository.EntityRepository
                                      .Include(x => x.Row)
                                      .Include(x => x.Column)
                                      .Include(x => x.Bundle)
-                                    .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo)))
+                                    .Where(x => (x.Id == (model.FileNo == 0 ? x.Id : model.FileNo))
+                                     && x.IsFileDocument == model.filedoc)
                                     .OrderBy(x => x.FileStatus)
                                     .GetPaged(model.PageNumber, model.PageSize);
                         break;

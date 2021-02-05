@@ -26,15 +26,18 @@ namespace SiteMaster.Controllers
         private readonly IUserProfileService _userProfileService;
         private readonly IDepartmentService _departmentService;
         private readonly IZoneService _zoneService;
+        private readonly IBranchService _branchService;
         private readonly UserManager<ApplicationUser> _userManager;
         public UserManagementController(
             IDepartmentService departmentService,
             IZoneService zoneService,
+            IBranchService branchService,
             IUserProfileService userProfileService,
             UserManager<ApplicationUser> userManager)
         {
             _departmentService = departmentService;
             _zoneService = zoneService;
+            _branchService = branchService;
             _userProfileService = userProfileService;
             _userManager = userManager;
         }
@@ -59,8 +62,9 @@ namespace SiteMaster.Controllers
             AddUserDto model = new AddUserDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone(),
-                RoleList = await _userProfileService.GetRole()
+              //  ZoneList = await _zoneService.GetZone(),
+                RoleList = await _userProfileService.GetRole(),
+               // BranchList = await _branchService.GetBranch()
             };
             return View(model);
         }
@@ -144,6 +148,13 @@ namespace SiteMaster.Controllers
             return Json(await _userProfileService.GetAllZone(Convert.ToInt32(DepartmentId)));
             
         }
+        [HttpGet]
+        public async Task<JsonResult> GetBranchList(int? DepartmentId)
+        {
+            DepartmentId = DepartmentId ?? 0;
+            return Json(await _branchService.GetGetBranchList(Convert.ToInt32(DepartmentId)));
+
+        }
 
         [HttpPost]
         public async Task<PartialViewResult> LoadPersonalDetails([FromBody] UsermanagementEditPartialLoad dtodata)
@@ -168,9 +179,11 @@ namespace SiteMaster.Controllers
             UserProfileInfoDto model = new UserProfileInfoDto()
             {
                 DepartmentList = await _departmentService.GetDepartment(),
-                ZoneList = await _zoneService.GetZone(),
                 RoleList = await _userProfileService.GetRole(),
                 DepartmentId = user.DepartmentId,
+                BranchList = await _branchService.GetGetBranchList(Convert.ToInt32(user.DepartmentId)),
+                ZoneList = await _userProfileService.GetAllZone(Convert.ToInt32(user.DepartmentId)),
+                BranchId = user.BranchId,
                 RoleId = user.RoleId,
                 DistrictId = user.DistrictId,
                 ZoneId = user.ZoneId

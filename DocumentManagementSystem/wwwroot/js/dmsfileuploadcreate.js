@@ -1,5 +1,12 @@
 ﻿$(document).ready(function () {
 
+    if (($("#checkingIsError").val()) == "Yes") {
+        jQuery('#rbtFileUpload').removeClass('active show');
+        jQuery('#rbtBulkUpload').addClass('active show');
+        $("#divfileupload").hide();
+        $("#divBulkFileUpload").show();
+        callSelect2();
+    }
 });
 
 $('#FileUpload').change(function () {
@@ -118,6 +125,52 @@ function CheckBulkValidation() {/* -----------check validation before create cli
     return checkresult;
 }
 
+function CheckFileValidation() {/* -----------check validation before create click Added by Renu  --------------- */
+    debugger;
+    var checkresult = false;
+    var title = $('#Title').val();
+    if (title == "") {
+        checkresult = false;
+        $("#TitleMsg").show();
+    } else {
+        checkresult = true;
+        $("#TitleMsg").hide();
+    }
+    var address = $('#PropertyNoAddress').val();
+    if (address == "") {
+        checkresult = false;
+        $("#PropertyNoAddressMsg").show();
+    } else {
+        checkresult = true;
+        $("#PropertyNoAddressMsg").hide();
+    }
+    var allotte = $('#AlloteeName').val();
+    if (allotte == "") {
+        checkresult = false;
+        $("#AlloteeNameMsg").show();
+    } else {
+        checkresult = true;
+        $("#AlloteeNameMsg").hide();
+    }
+    var fileno = $('#FileNo').val();
+    if (fileno == "") {
+        checkresult = false;
+        $("#FileNoMsg").show();
+    } else {
+        checkresult = true;
+        $("#FileNoMsg").hide();
+    }
+
+
+    if (title == "" || address == "" || allotte == "" || fileno == "") {
+
+        checkresult = false;
+    }
+    else {
+        checkresult = true;
+    }
+    return checkresult;
+}
 $('#BulkUpload').change(function () {
     debugger;
     var fileInput = document.getElementById('BulkUpload');

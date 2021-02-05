@@ -119,9 +119,9 @@ namespace Service.ApplicationService
             return _dmsFileUploadRepository.GetKhasraByName(name);
         }
 
-        public async Task<bool> CheckUniqueName(string fileNo)
+        public async Task<bool> CheckUniqueName(int id, string fileNo)
         {
-            return await _dmsFileUploadRepository.Any(fileNo);
+            return await _dmsFileUploadRepository.Any( id, fileNo);
         }
 
         public async Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model)
@@ -129,7 +129,7 @@ namespace Service.ApplicationService
             return await _dmsFileUploadRepository.GetPagedDMSRetriveFileReport(model);
         }
 
-        public async Task<List<Dmsfileright>> GetDMSUserRights(int userId)
+        public async Task<Dmsfileright> GetDMSUserRights(int userId)
         {
             return await _dmsFileUploadRepository.GetDMSUserRights(userId);
         }

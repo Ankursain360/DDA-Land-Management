@@ -113,6 +113,7 @@ namespace Libraries.Model
         public virtual DbSet<Familydetails> Familydetails { get; set; }
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
+        public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }

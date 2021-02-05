@@ -25,6 +25,12 @@ namespace Libraries.Service.ApplicationService
         {
             return await _iGISSRepository.GetVillageList(ZoneId);
         }
+
+        public async Task<List<Zone>> GetZoneDetails(int zoneId)
+        {
+            return await _iGISSRepository.GetZoneDetails(zoneId);
+        }
+
         public async Task<List<Zone>> GetZoneList()
         {
             return await _iGISSRepository.GetZoneList();

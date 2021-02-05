@@ -10,6 +10,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<Zone>> GetZoneList();
         Task<List<Village>> GetVillageList(int ZoneId);
         Task<List<Plot>> GetPlotList(int VillageId);
-
+        Task<List<Zone>> GetZoneDetails(int zoneId);
     }
 }

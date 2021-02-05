@@ -18,7 +18,8 @@ namespace Dto.Master
         public short? IsActive { get; set; }
         public int UserId { get; set; }
         public int? DepartmentId { get; set; }
-
+        public int? BranchId { get; set; }
+        public virtual BranchDto Branch { get; set; }
         public virtual DepartmentDto Department { get; set; }
         public virtual DistrictDto District { get; set; }
         public virtual UserDto User { get; set; }
