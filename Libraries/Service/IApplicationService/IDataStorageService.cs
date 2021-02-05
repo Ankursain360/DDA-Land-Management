@@ -28,8 +28,10 @@ namespace Libraries.Service.IApplicationService
 
         //Task<PagedResult<Datastoragedetails>> GetFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto);
         Task<List<FileStatusReportListDataDto>> GetPagedFileStatusReportData(FileStatusReportSearchDto fileStatusReportSearchDto, int UserId);
+
         Task<List<Almirah>> GetAlmirahs();
         Task<List<Row>> GetRows();
+        Task<List<Department>> GetDepartments();
         Task<List<Column>> GetColumns();
         Task<List<Bundle>> GetBundles();
         Task<List<Locality>> GetLocalities();
@@ -46,8 +48,13 @@ namespace Libraries.Service.IApplicationService
         Task<bool> DeleteDataStoragePartFile(int Id);
 
         Task<List<ListofTotalFileReportListDataDto>> GetPagedListofReportFile(ListOfTotalFilesReportUserWiseSearchDto model, int UserId);
-   
-        
+
+        Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId);
+        Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId);
+        Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model);
+        Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId);
+        Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model);
+        Task<Datastoragedetails> GetDatastorageListName(int id);
         // ********* DISPLAY LABEL**********
 
         Task<PagedResult<Datastoragedetails>> GetPagedDisplayLabel(DisplayLabelSearchDto model);

@@ -30,7 +30,7 @@ namespace FileDataLoading.Controllers
             SearchByParameterDtoProfile datastoragedetails = new SearchByParameterDtoProfile();
             // ViewBag.FileNoList = await _dataStorageService.BindFileNoList();
             ViewBag.LocalityList = await _dataStorageService.GetLocalities();
-            ViewBag.departmentList = await _dataStorageService.GetDepartment();
+            ViewBag.departmentList = await _dataStorageService.GetDepartments();
             ViewBag.almirahList = await _dataStorageService.GetAlmirahs();
             ViewBag.rowList = await _dataStorageService.GetRows();
             ViewBag.bundleList = await _dataStorageService.GetBundles();

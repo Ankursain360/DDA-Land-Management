@@ -64,6 +64,7 @@ $("#btnGenerate").click(function () {
 });
 
 $("#btnReset").click(function () {
+    GetDataStorage(currentPageNumber, currentPageSize, sortby);
     $("#FileNo").val('');
     $("#FileName").val('');
     $("#txtRoomNo").val('');
@@ -75,7 +76,7 @@ $("#btnReset").click(function () {
     $('#ColId').val('0').trigger('change');
     $('#RecordRoomId').val('0').trigger('change');
 
-    GetDataStorage(currentPageNumber, currentPageSize, sortby);
+  
 });
 function Descending() {
     $("#btnDescending").addClass("active");

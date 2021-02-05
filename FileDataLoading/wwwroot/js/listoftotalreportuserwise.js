@@ -38,9 +38,9 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
    
+    GetDataStorage(currentPageNumber, currentPageSize, sortby);
     $("#txtsearchtxt").val('');
     $("#ddlColName").val('0').trigger('change');
-    GetDataStorage(currentPageNumber, currentPageSize, sortby);
 });
 function Descending() {
     $("#btnDescending").addClass("active");
