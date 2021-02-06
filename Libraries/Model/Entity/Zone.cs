@@ -42,6 +42,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string DepartmentName { get; set; }
+        public decimal? Xcoordinate { get; set; }
+        public decimal? Ycoordinate { get; set; }
+        public string Polygon { get; set; }
 
         public virtual Department Department { get; set; }
         public virtual ICollection<Village> Village { get; set; }
