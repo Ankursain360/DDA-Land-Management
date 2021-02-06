@@ -485,7 +485,7 @@ namespace LandInventory.Controllers
         // [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> DownloadIndex()
         {
-            List<Propertyregistration> result = await _.GetAllPropertyregistration(SiteContext.UserId);
+            List<Propertyregistration> result = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
             var memory = ExcelHelper.CreateExcel(result);
             string sFileName = @"HandOverTakenOver.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
