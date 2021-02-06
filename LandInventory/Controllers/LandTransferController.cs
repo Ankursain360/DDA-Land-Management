@@ -482,5 +482,14 @@ namespace LandInventory.Controllers
             byte[] FileBytes = System.IO.File.ReadAllBytes(path);
             return File(FileBytes, file.GetContentType(path));
         }
+        // [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> DownloadIndex()
+        {
+            List<Propertyregistration> result = await _.GetAllPropertyregistration(SiteContext.UserId);
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"HandOverTakenOver.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
     }
 }
