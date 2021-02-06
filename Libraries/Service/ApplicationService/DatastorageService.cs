@@ -127,6 +127,11 @@ namespace Libraries.Service.ApplicationService
             return columnList;
         }
 
+        public async Task<List<Department>> GetDepartments()
+        {
+            List<Department> departmentlist = await _datastoragedetailRepository.GetDepartments();
+            return departmentlist;
+        }
         public async Task<List<Bundle>> GetBundles()
         {
             List<Bundle> bundleList = await _datastoragedetailRepository.GetBundles();
@@ -154,6 +159,11 @@ namespace Libraries.Service.ApplicationService
             List<Zone> zoneList = await _datastoragedetailRepository.GetZones();
             return zoneList;
         }
+        public async Task<List<Schemefileloading>> GetSchemesFileLoading()
+        {
+            var schemeList = await _datastoragedetailRepository.GetSchemesFileLoading();
+            return schemeList;
+        }
 
 
         public async Task<List<Scheme>> GetSchemes()
@@ -166,7 +176,33 @@ namespace Libraries.Service.ApplicationService
             return await _datastoragedetailRepository.GetPagedListofReportFile(model, UserId);
         }
 
+        public async Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofReportDoc(model, UserId);
+        }
 
+        public async Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofSearchByParticular(model, UserId);
+        }
+
+        public async Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedListofFileHistory(model);
+        }
+        public async Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId)
+        {
+            return await _datastoragedetailRepository.GetPagedListofSearchByParticularDoc(model, UserId);
+        }
+        public async Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model)
+        {
+            return await _datastoragedetailRepository.GetPagedListofDocHistory(model);
+        }
+        public async Task<Datastoragedetails> GetDatastorageListName(int id)
+        {
+            Datastoragedetails model = await _datastoragedetailRepository.GetDatastorageListName(id);
+            return model;
+        }
         public int? GetDepartmentIdFromProfile(int userId)
         {
             return _datastoragedetailRepository.GetDepartmentIdFromProfile(userId);
@@ -179,6 +215,17 @@ namespace Libraries.Service.ApplicationService
         public async Task<Datastoragedetails> FetchPrintLabel(int id)
         {
             return await _datastoragedetailRepository.FetchPrintLabel(id);
+        }
+
+        public async Task<bool> DeleteDataStoragePartFile(int Id)
+        {
+            return await _datastoragedetailRepository.DeleteDataStoragePartFile(Id);
+        }
+
+
+        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int Id)
+        {
+            return await _datastoragedetailRepository.GetDetailsOfPartFileDetails(Id);
         }
     }
 }

@@ -24,6 +24,14 @@ namespace Libraries.Repository.EntityRepository
         public DataStorageRepository(DataContext dbcontext) : base(dbcontext)
         { }
 
+
+        public async Task<List<Schemefileloading>> GetSchemesFileLoading()
+        {
+            var schemeList = await _dbContext.Schemefileloading.Where(x => x.IsActive == 1).ToListAsync();
+            return schemeList;
+        }
+
+
         public async Task<List<Almirah>> GetAlmirahs()
         {
             var almirahList = await _dbContext.Almirah.Where(x => x.IsActive == 1).ToListAsync();
@@ -65,8 +73,13 @@ namespace Libraries.Repository.EntityRepository
                 var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1 && x.Id == userDepartmentId).ToListAsync();
                 return departmentList;
             }
-
         }
+        public async Task<List<Department>> GetDepartments()
+        {
+            var departmentList = await _dbContext.Department.Where(x => x.IsActive == 1).ToListAsync();
+            return departmentList;
+        }
+
         public async Task<List<Branch>> GetBranch()
         {
             var branchList = await _dbContext.Branch.Where(x => x.IsActive == 1).ToListAsync();
@@ -150,7 +163,98 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
+        public async Task<List<ListofTotalDocReportListDataDto>> GetPagedListofReportDoc(ListOfTotalDocReportUserWiseSearchDto model, int UserId)
+        {
 
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindListofTotalDocUserWiseReport")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("Search_Value", model.searchText),
+                                              ("Search_Column", model.searchCol))
+                                             .ExecuteStoredProcedureAsync<ListofTotalDocReportListDataDto>();
+            return (List<ListofTotalDocReportListDataDto>)data;
+
+
+        }
+        public async Task<List<SearchByParticularListDataDto>> GetPagedListofSearchByParticular(SearchByParticularSearchDto model, int UserId)
+        {
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindFileListOfSearchByParameter")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("DeptId", model.DeptId),
+                                              ("LocalityId", model.LocalityId),
+                                              ("AlmirahId", model.AlmirahId),
+                                              ("RowId", model.RowId),
+                                              ("BundleId", model.BundleId),
+                                              ("ColId", model.ColId),
+                                              ("RecordRoomId", model.RRNo),
+                                              ("FileNo", model.FileNo),
+                                              ("FileName", model.FileName)
+                                              )
+                                             .ExecuteStoredProcedureAsync<SearchByParticularListDataDto>();
+            return (List<SearchByParticularListDataDto>)data;
+
+        }
+        public async Task<List<SearchByParticularFileHistoryListDataDto>> GetPagedListofFileHistory(SearchByParticularFileHistorySearchDto model)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindFileIssueReturnHistory")
+                                             .WithSqlParams(("FileNo", model.FileNo))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularFileHistoryListDataDto>();
+            return (List<SearchByParticularFileHistoryListDataDto>)data;
+
+
+        }
+        public async Task<List<SearchByParticularDocListDataDto>> GetPagedListofSearchByParticularDoc(SearchByParticularDocSearchDto model, int UserId)
+        {
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindSearchByParameterDoc")
+                                             .WithSqlParams(("UserId", UserId),
+                                             ("FreeHoldStatus", model.name),
+                                             ("P_SortOrder", SortOrder),
+                                             ("P_SortBy", model.SortBy),
+                                              ("DeptId", model.DeptId),
+                                              ("LocalityId", model.LocalityId),
+                                              ("AlmirahId", model.AlmirahId),
+                                              ("RowId", model.RowId),
+                                              ("BundleId", model.BundleId),
+                                              ("ColId", model.ColId),
+                                              ("RecordRoomId", model.RRNo),
+                                              ("FileNo", model.FileNo),
+                                              ("FileName", model.FileName)
+                                              )
+                                             .ExecuteStoredProcedureAsync<SearchByParticularDocListDataDto>();
+            return (List<SearchByParticularDocListDataDto>)data;
+
+        }
+        public async Task<List<SearchByParticularDocHistoryListDataDto>> GetPagedListofDocHistory(SearchByParticularDocHistorySearchDto model)
+        {
+
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindDocIssueReturnHistory")
+                                             .WithSqlParams(("FileNo", model.FileNo))
+                                             .ExecuteStoredProcedureAsync<SearchByParticularDocHistoryListDataDto>();
+            return (List<SearchByParticularDocHistoryListDataDto>)data;
+
+
+        }
+        public async Task<Datastoragedetails> GetDatastorageListName(int id)
+            {
+            return await _dbContext.Datastoragedetails
+                                    .Include(x=>x.Locality)
+                                    .Include(x=>x.Zone)
+                                    .Where(x => x.Id == id)
+                                    .SingleOrDefaultAsync();
+
+            }
+       
 
         public int? GetDepartmentIdFromProfile(int userId)
         {
@@ -289,6 +393,17 @@ namespace Libraries.Repository.EntityRepository
             return data;
         }
 
+        public async Task<bool> DeleteDataStoragePartFile(int Id)
+        {
+            _dbContext.RemoveRange(_dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == Id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<List<Datastoragepartfilenodetails>> GetDetailsOfPartFileDetails(int DataStorageID)
+        {
+            return await _dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == DataStorageID).ToListAsync();
+        }
 
     }
 }

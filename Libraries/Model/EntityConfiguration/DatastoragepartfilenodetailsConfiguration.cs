@@ -7,7 +7,18 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<Datastoragepartfilenodetails> builder)
         {
+
+
             builder.ToTable("datastoragepartfilenodetails", "lms");
+
+            builder.HasIndex(e => e.DataStorageDetailsId)
+                .HasName("fk_DataStorageDetailsId_idx");
+
+            builder.HasIndex(e => e.LocalityId)
+                .HasName("fk_Locality_idx");
+
+            builder.HasIndex(e => e.SchemeDptBranch)
+                .HasName("fk_SchemeDptBranch_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -44,22 +55,29 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+            builder.Property(e => e.YearofPartFile).HasColumnType("int(11)");
 
-
-            builder.Property(e => e.Year).HasColumnType("int(11)");
-
+            builder.HasOne(d => d.DataStorageDetails)
+                .WithMany(p => p.Datastoragepartfilenodetails)
+                .HasForeignKey(d => d.DataStorageDetailsId)
+                .HasConstraintName("fk_DataStorageId");
 
             builder.HasOne(d => d.Locality)
-                  .WithMany(p => p.Datastoragepartfilenodetails)
-                  .HasForeignKey(d => d.LocalityId)
-                  .OnDelete(DeleteBehavior.ClientSetNull)
-                  .HasConstraintName("fk_Locality");
+                .WithMany(p => p.Datastoragepartfilenodetails)
+                .HasForeignKey(d => d.LocalityId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_Locality");
 
             builder.HasOne(d => d.SchemeDptBranchNavigation)
                 .WithMany(p => p.Datastoragepartfilenodetails)
                 .HasForeignKey(d => d.SchemeDptBranch)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_SchemeDptBranch");
+
+
+
+
+
 
         }
     }

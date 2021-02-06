@@ -4,18 +4,18 @@
 <div class="pt-3">
 
 
-    <form class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Search</h3>
         <div class="row">
             <div class="col-md-3    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label">Record  No</label>
+                    <input type="text" id="FileNo" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtName" class="floating-label">File No</label>
                 </div>
             </div>
             <div class="col-md-3    ">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <input type="text" id="Name" class="floating-label-field floating-label-field--s3" placeholder="Name" />
                     <label for="txtCode" class="floating-label">Name/Subject </label>
                 </div>
             </div>
@@ -25,35 +25,37 @@
             <div class="col-md-12 col-xl-3">
                 <div class="row">
                     <div class="col-6 col-md-5 col-xl-6">
-                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
+                        <button id="btnReset" class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset">
                             <i class="ri-refresh-line mr-2"></i>Reset
                         </button>
-                    </div>
+                         </div>
                     <div class="col-6 col-md-7 col-xl-6">
-                        <button class="btn btn-theme btn-block" type="submit">Submit</button>
+                        <input type="submit" value="Submit" id="btnGenerate" class="btn btn-theme " />
                     </div>
                 </div>
             </div>
         </div>
-    </form>
+        
+    </div>
 
 
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3">
-                        <option selected="selected" disabled="disabled">Select One</option>
-                        <option>Almirah No</option>
-                        <option>Row No</option>
-                        <option>Column No</option>
-
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option selected="selected" value="fileno">File No.</option>
+                        <option value="Name">Name/Subject</option>
+                        <option value="almirahNo">Almirha No</option>
+                        <option value="rowNo">Row No</option>
                     </select>
                     <label for="field-1" class="floating-label">Sort by</label>
                 </div>
                 <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" title="Descending order"><i class="ri-sort-desc"></i></span>
-                    <span class="btn slow" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                    <div class="short-btn d-flex align-items-center">
+                        <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                        <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    </div>
                 </div>
             </div>
 
@@ -77,6 +79,7 @@
 
     </div>
 </div>
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
     <script src="~/js/datastorageindex.js"></script>

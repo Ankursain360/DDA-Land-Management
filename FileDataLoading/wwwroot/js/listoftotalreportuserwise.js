@@ -37,10 +37,10 @@ $("#btnSearch").click(function () {
 });
 
 $("#btnReset").click(function () {
-    var temp = "0";
-    $("#txtsearchtxt").val('');
-    $("#ddlColName").val(temp);
+   
     GetDataStorage(currentPageNumber, currentPageSize, sortby);
+    $("#txtsearchtxt").val('');
+    $("#ddlColName").val('0').trigger('change');
 });
 function Descending() {
     $("#btnDescending").addClass("active");

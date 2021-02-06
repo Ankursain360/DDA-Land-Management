@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Utility.Helper;
 
-namespace SiteMaster.Components
+namespace AcquiredLandInformationManagement.Components
 {
     public class PagerViewComponent : ViewComponent
     {

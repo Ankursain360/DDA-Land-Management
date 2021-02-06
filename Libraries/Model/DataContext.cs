@@ -319,6 +319,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DmsfilerightConfiguration());
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
+            modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

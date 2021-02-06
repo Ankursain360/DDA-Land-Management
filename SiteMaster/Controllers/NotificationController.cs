@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using System.Collections.Generic;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -186,6 +188,16 @@ namespace SiteMaster.Controllers
             }
             var list = await _notificationService.GetAllNotification();
             return View("Index", list);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<LandNotification> result = await _notificationService.GetAllNotification();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"LandNotification.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 
