@@ -9,5 +9,9 @@ namespace Dto.Search
       public class ProposaldetailsSearchDto : BaseSearchDto
     {
         public string name { get; set; }
+        public string requiredAgency { get; set; }
+       
+        public string proposalFileNo { get; set; }
+        //public DateTime? proposalDate { get; set; }
     }
 }
