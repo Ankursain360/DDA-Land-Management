@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Identity;
 using Model.Entity;
 using Dto.Master;
 using Service.IApplicationService;
-
+using Utility.Helper;
 using SiteMaster.Filters;
 using Core.Enum;
 
@@ -219,6 +219,19 @@ namespace SiteMaster.Controllers
                 return View(model);
             }
         }
+
+
+
+        public async Task<IActionResult> Download()
+        {
+            List<Userprofile> result = await _userProfileService.GetAll();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"UserProfile.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
 
     }
 }

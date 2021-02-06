@@ -27,7 +27,7 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
+       // [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> Index()
         {
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -10,12 +12,13 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 
 {
     
-        public class ProposalDetailsController : Controller
+        public class ProposalDetailsController : BaseController
         {
             private readonly IProposaldetailsService _proposaldetailsService;
 
@@ -171,6 +174,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Proposaldetails> result = await _proposaldetailsService.GetAllProposaldetails();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Proposaldetails.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
     }
 }

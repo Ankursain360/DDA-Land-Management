@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -177,6 +178,16 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Module> result = await _moduleService.GetAllModule();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Module.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

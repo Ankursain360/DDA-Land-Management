@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace SiteMaster.Components
+namespace AcquiredLandInformationManagement.Components
 {
     public class PageHeaderViewComponent : ViewComponent
     {

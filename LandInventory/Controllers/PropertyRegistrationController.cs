@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
 using LandInventory.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace LandInventory.Controllers
 {
@@ -857,8 +858,15 @@ namespace LandInventory.Controllers
                 return View("Index");
             }
         }
+       // [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> DownloadIndex()
+        {
+            List<Propertyregistration> result = await _propertyregistrationService.GetAllPropertyregistration(SiteContext.UserId);
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"LandInventory.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
-
+        }
     }
 
 }
