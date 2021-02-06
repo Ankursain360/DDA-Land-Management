@@ -170,6 +170,14 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+        public async Task<IActionResult> Download()
+        {
+            List<Demolitiondocument> result = await _demolitiondocumentService.GetDemolitiondocument();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Demolitiondocument.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
 
 
 

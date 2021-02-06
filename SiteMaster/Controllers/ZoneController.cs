@@ -18,6 +18,10 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 
+
+
+using Utility.Helper;
+
 namespace SiteMaster.Controllers
 {
     public class ZoneController : BaseController
@@ -194,5 +198,17 @@ namespace SiteMaster.Controllers
             }
             return View(Data);
         }
+
+
+        public async Task<IActionResult> Download()
+        {
+            List<Zone> result = await _zoneService.GetAll();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Zone.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
     }
 }

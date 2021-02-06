@@ -21,12 +21,134 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Proposalplotdetails>> GetPagedProposalplotdetails(ProposalplotdetailSearchDto model)
         {
-            return await _dbContext.Proposalplotdetails
-                .Include(x => x.Proposaldetails)
-                .Include(x => x.Locality)
-                .Include(x => x.Khasra)
-                .Where(x => x.IsActive==1)
-                .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Proposalplotdetails
+                         .Include(x => x.Proposaldetails)
+                         .Include(x => x.Locality)
+                         .Include(x => x.Khasra)
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                          && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                         .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.Proposaldetails.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.Locality.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.Khasra.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.IsActive)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.Proposaldetails.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.Locality.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.Khasra.Name)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Proposalplotdetails
+                                     .Include(x => x.Proposaldetails)
+                                     .Include(x => x.Locality)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.IsActive)
+                                    .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            return data;
         }
         public async Task<List<Proposalplotdetails>> GetProposalplotdetails()
         {
@@ -38,7 +160,7 @@ namespace Libraries.Repository.EntityRepository
                 .Include(x => x.Proposaldetails)
                 .Include(x => x.Locality)
                 .Include(x => x.Khasra)
-                .Where(x => x.IsActive == 1).ToListAsync();
+                .ToListAsync();
 
 
         }

@@ -12,6 +12,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -141,7 +142,7 @@ namespace SiteMaster.Controllers
                 return Json($"Structure Name : {Name} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _structureService.Delete(id);
@@ -168,6 +169,16 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Structure> result = await _structureService.GetAllStructure();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Structure.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

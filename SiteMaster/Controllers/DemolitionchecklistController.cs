@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -169,6 +170,14 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        public async Task<IActionResult> Download()
+        {
+            List<Demolitionchecklist> result = await _demolitionchecklistService.GetDemolitionchecklist();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Demolitionchecklist.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
 
 

@@ -181,7 +181,7 @@ namespace SiteMaster.Controllers
             var list = await _districtService.GetAllDistrict();
             return View("Index", list);
         }
-
+        [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<District> result = await _districtService.GetAllDistrict();

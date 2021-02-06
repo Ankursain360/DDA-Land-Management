@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -199,6 +200,15 @@ namespace SiteMaster.Controllers
                 string newFromDate = NewDate.ToString("dd-MMM-yyyy");
                 return newFromDate;
             }
+        }
+
+        public async Task<IActionResult> Download()
+        {
+            List<Interest> result = await _interestService.GetAllInterest();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Interest.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 

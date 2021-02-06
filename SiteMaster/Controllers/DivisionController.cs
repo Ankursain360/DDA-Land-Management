@@ -17,6 +17,10 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 
+
+using Utility.Helper;
+
+
 namespace SiteMaster.Controllers
 {
     public class DivisionController : BaseController
@@ -213,6 +217,19 @@ namespace SiteMaster.Controllers
             DepartmentId = DepartmentId ?? 0;
             return Json(await _divisionService.GetAllZone(Convert.ToInt32(DepartmentId)));
         }
+
+
+
+
+        public async Task<IActionResult> Download()
+        {
+            List<Division> result = await _divisionService.GetAllDivision();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Division.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
 
 
     }

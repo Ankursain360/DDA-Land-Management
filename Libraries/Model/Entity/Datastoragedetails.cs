@@ -12,10 +12,11 @@ namespace Libraries.Model.Entity
         public Datastoragedetails()
         {
             Issuereturnfile = new HashSet<Issuereturnfile>();
+            Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
         }
 
         public int IsFileDocument { get; set; }
-       
+
         public string FileNo { get; set; }
         public string Name { get; set; }
         public int? IsPartOfMainFile { get; set; }
@@ -39,7 +40,7 @@ namespace Libraries.Model.Entity
         public int? ZoneId { get; set; }
         public int? LocalityId { get; set; }
 
-        [Required(ErrorMessage = "Khasra No/Property No is Mandatory Field")]
+      
         public string KhasraNoPropertyNo { get; set; }
         public string Area { get; set; }
 
@@ -81,12 +82,11 @@ namespace Libraries.Model.Entity
         public Locality Locality { get; set; }
         public Department Department { get; set; }
 
-        
+        public Schemefileloading SchemeFileLoading { get; set; }
         //public Branch Branch { get; set; }
         public Row Row { get; set; }
         public Zone Zone { get; set; }
 
-        [NotMapped]
         public int? SchemeId { get; set; }
 
 
@@ -103,8 +103,8 @@ namespace Libraries.Model.Entity
         public List<Locality> LocalityList { get; set; }
         [NotMapped]
         public List<Zone> ZoneList { get; set; }
-        [NotMapped]
-        public List<Scheme> schemaList { get; set; }
+        //[NotMapped]
+        //public List<Scheme> schemaList { get; set; }
         [NotMapped]
         public List<Department> DepartmentList { get; set; }
         [NotMapped]
@@ -113,12 +113,12 @@ namespace Libraries.Model.Entity
         public List<Department> DepartmentName { get; set; }
         [NotMapped]
         public int? TotalFiles { get; set; }
-            [NotMapped]
-            public int? IssuedFiles { get; set; }
+        [NotMapped]
+        public int? IssuedFiles { get; set; }
         [NotMapped]
         public int? UnissuedFiles { get; set; }
-
-        
+        [NotMapped]
+        public List<Schemefileloading> SchemeFileLoadingList { get; set; }
 
 
 
@@ -130,7 +130,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> SequenceNoForPartFile { get; set; }
 
-      
+
 
         [NotMapped]
         public List<string> Subject { get; set; }
@@ -145,11 +145,11 @@ namespace Libraries.Model.Entity
         public List<int> YearForPartFile { get; set; }
 
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
-       
-    
+      
         [NotMapped]
         public List<Datastoragedetails> FileNoList { get; set; }
 
+        public ICollection<Datastoragepartfilenodetails> Datastoragepartfilenodetails { get; set; }
     }
 }
 
