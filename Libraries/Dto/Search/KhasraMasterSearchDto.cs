@@ -8,15 +8,11 @@ namespace Dto.Search
     public class KhasraMasterSearchDto : BaseSearchDto
     {
        
-        public string Name { get; set; }
+        public string name { get; set; }
 
-        public int LocalityId { get; set; }
-        public int LandCategoryId { get; set; }
+        //public int? localityId { get; set; }
+        //public int landCategoryId { get; set; }
 
-        public string Bigha { get; set; }
-        public string Biswa { get; set; }
-        public string Biswanshi { get; set; }
-        public string Description { get; set; }
-        public string RectNo { get; set; }
+        
     }
 }

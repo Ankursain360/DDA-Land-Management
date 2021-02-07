@@ -1,21 +1,48 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 10;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
     GetKhasraMaster(currentPageNumber, currentPageSize);
 });
+$("#btnSearch").click(function () {
+    GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
+});
 
-function GetKhasraMaster(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtCode').val('')
+    GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
+});
+function GetKhasraMaster(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/khasramaster/List`, 'html', param, function (response) {
         $('#divKhasraTable').html("");
         $('#divKhasraTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: "test",
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
         pageSize: pageSize,
         pageNumber: pageNumber
     }
@@ -24,12 +51,12 @@ function GetSearchParam(pageNumber, pageSize) {
 
 
 function onPaging(pageNo) {
-    GetDepartment(parseInt(pageNo), parseInt(currentPageSize));
+    GetKhasraMaster(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetDepartment(parseInt(currentPageNumber), parseInt(pageSize));
+    GetKhasraMaster(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
 

@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -198,6 +199,14 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        public async Task<IActionResult> Download()
+        {
+            List<Classificationofland> result = await _classificationoflandService.GetAllClassificationOfLand();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"ClassificationOfLand.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -29,7 +30,7 @@ namespace SiteMaster.Controllers
         {
             _branchService = branchService;
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public IActionResult Index()
         {
             return View();
@@ -47,7 +48,7 @@ namespace SiteMaster.Controllers
         }
 
 
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Branch branch = new Branch();
@@ -57,7 +58,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Add)]
+        [AuthorizeContext(ViewAction.Add)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Branch branch)
         {
@@ -92,7 +93,7 @@ namespace SiteMaster.Controllers
                 return View(branch);
             }
         }
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _branchService.FetchSingleResult(id);
@@ -105,7 +106,7 @@ namespace SiteMaster.Controllers
         }
 
         [HttpPost]
-        //[AuthorizeContext(ViewAction.Edit)]
+        [AuthorizeContext(ViewAction.Edit)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Branch branch)
         {
@@ -183,7 +184,7 @@ namespace SiteMaster.Controllers
             return RedirectToAction("Index", "Branch");
 
         }
-        //[AuthorizeContext(ViewAction.View)]
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _branchService.FetchSingleResult(id);
@@ -193,6 +194,14 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        public async Task<IActionResult> Download()
+        {
+            List<Branch> result = await _branchService.GetAllDetails();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Branch.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }
