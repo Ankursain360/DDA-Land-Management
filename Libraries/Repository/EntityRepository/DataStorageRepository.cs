@@ -408,6 +408,8 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Datastoragedetails
                                         .Include(x => x.Almirah)
                                         .Include(x => x.Row)
+                                        .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
                                         .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
                                         && (x.Name == (model.Name == "" ? x.Name : model.Name))
                                         ).GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
@@ -418,6 +420,8 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Datastoragedetails
                                         .Include(x => x.Almirah)
                                         .Include(x => x.Row)
+                                           .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
                                         .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
                                          && (x.Name == (model.Name == "" ? x.Name : model.Name))
                                         )
@@ -435,6 +439,8 @@ namespace Libraries.Repository.EntityRepository
                 data = await _dbContext.Datastoragedetails
                                    .Include(x => x.Almirah)
                                       .Include(x => x.Row)
+                                         .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
                                       .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
                                       && (x.Name == (model.Name == "" ? x.Name : model.Name))
                                       )

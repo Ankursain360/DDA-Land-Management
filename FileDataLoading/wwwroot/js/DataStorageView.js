@@ -24,11 +24,16 @@
         debugger
         /*$("#tbl_posts #add .form-control").val('');*/
         $("#tbl_posts #add .floating-label-field").val('');
+
+        //For Next Row
+        $("#tbl_posts #add #SchemeDptBranch").select2('val', '');
+        $("#tbl_posts #add #LocalityIdForPartFile").select2('val', '');
     }
     else {
         alert('Please fill record before add new record ');
     }
 });
+
 $(document).delegate('a.delete-record', 'click', function (e) {
     e.preventDefault();
     var didConfirm = confirm("Are you sure You want to delete");
@@ -69,7 +74,20 @@ $("input[name='grpDamageAssesseeType']").click(function () {
     }
 });
 
+
+
+
 $(document).ready(function () {
+    $('#SchemeDptBranch').removeAttr('multiple');
+    $('#LocalityIdForPartFile').removeAttr('multiple');
+    if ($('#TypeOfDamageAssessee').val() == '0') {
+        $("#rSubsequent").prop('checked', 'checked');
+        $("#DivForSubsequentPurchaser").hide();
+    } else {
+        $("#DivForSubsequentPurchaser").show();
+        $("#rOriginal").prop('checked', 'checked');
+    }
+    console.log($('#TypeOfDamageAssessee').val());
     HttpGet(`/DataStorageDetails/DetailsOfRepeater/?Id=${$("#Id").val() == null ? "" : $("#Id").val()}`, 'json', function (data) {
         debugger
         console.log(data);
@@ -94,7 +112,7 @@ $(document).ready(function () {
                 element.find('.delete-record').attr('data-id', size);
                 element.appendTo('#tbl_posts_body');
                 $('#tbl_posts_body #rec-' + size + ' #LocalityIdForPartFile').val(LocalityIdForPartFile);
-                $('#tbl_posts_body #rec-' + size + ' #SchemeDptBranch').val(schemeDptBranch);
+                $('#tbl_posts_body #rec-' + size + ' #SchemeDptBranch').val(SchemeDptBranch);
                 element.find('.sn').html(size);
                 $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
                 $("#tbl_posts #add .add").remove();

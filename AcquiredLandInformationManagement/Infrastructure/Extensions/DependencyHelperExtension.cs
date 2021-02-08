@@ -57,6 +57,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<ITehsilRepository, TehsilRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -93,6 +94,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
+            services.AddScoped<ITehsilService, TehsilService>();
 
 
         }
