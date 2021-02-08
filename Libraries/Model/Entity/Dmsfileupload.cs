@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
     {
         public string IsFileBulkUpload { get; set; }
 
-        [Remote(action: "Exist", controller: "DMSFileUpload", AdditionalFields = "Id")]
+        //[Remote(action: "Exist", controller: "DMSFileUpload", AdditionalFields = "Id")]
         public string FileNo { get; set; }
         public string AlloteeName { get; set; }
 

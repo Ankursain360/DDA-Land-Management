@@ -9,7 +9,28 @@ $(document).ready(function () {
 $("#btnSearch").click(function () {
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
+$("#btnDownload").click(function () {
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortOrder);
+    HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
+        //var blob = new Blob([response], { type: 'application/ms.excel' });
+        //var downloadurl = URL.createObjectURL(blob);
+        //var a = document.createElement("a");
+        //a.href = downloadurl;
+        //a.download = "LandInventory.xlsx";
+        //document.body.appendChild(a);
+        //a.click();
 
+    });
+});
+function download() {
+    var param = GetSearchParam(currentPageNumber, currentPageSize, sortOrder);
+    HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
+       // $('#divTable').html("");
+
+        window.location = `/PropertyRegistration/DownloadIndex`;
+//$('#divTable').html(response);
+    });
+}
 $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");

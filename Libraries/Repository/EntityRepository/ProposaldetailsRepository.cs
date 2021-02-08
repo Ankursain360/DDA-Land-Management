@@ -19,14 +19,14 @@ namespace Libraries.Repository.EntityRepository
         public ProposaldetailsRepository(DataContext dbContext) : base(dbContext)
         {
 
-        }
+        }//date is not defined in dto???? where r u ishu???
         public async Task<PagedResult<Proposaldetails>> GetPagedProposaldetails(ProposaldetailsSearchDto model)
         {
             var data = await _dbContext.Proposaldetails
                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
-                            /* &&( model.proposalDate == ' '  ? x.ProposalDate : (model.proposalDate == x.ProposalDate))*/)
+                            /* && ( x.ProposalDate==model.proposalDate??x.ProposalDate)*/)
                 .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;

@@ -15,13 +15,17 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("undersection4", "lms");
 
             builder.HasIndex(e => e.Number)
-                    .HasName("Number_UNIQUE")
-                    .IsUnique();
+                   .HasName("Number_UNIQUE")
+                   .IsUnique();
 
-            builder.HasIndex(e => e.PurposeId)
-                .HasName("puproseid_idx");
+            builder.HasIndex(e => e.ProposalId)
+                .HasName("fkproposalId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.BoundaryDescription)
+                .HasMaxLength(400)
+                .IsUnicode(false);
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
 
@@ -38,7 +42,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.Npurpose)
                 .IsRequired()
                 .HasColumnName("NPurpose")
-                .HasMaxLength(100)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
             builder.Property(e => e.Number)
@@ -46,24 +50,18 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
-            builder.Property(e => e.PurposeId).HasColumnType("int(11)");
+            builder.Property(e => e.ProposalId).HasColumnType("int(11)");
 
             builder.Property(e => e.TypeDetails)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
-            builder.Property(e => e.TypePurpose)
-                .IsRequired()
-                .HasMaxLength(200)
-                .IsUnicode(false);
-
-            builder.HasOne(d => d.Purpose)
+            builder.HasOne(d => d.Proposal)
                 .WithMany(p => p.Undersection4)
-                .HasForeignKey(d => d.PurposeId)
+                .HasForeignKey(d => d.ProposalId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("puproseid");
-
+                .HasConstraintName("fkproposalId");
 
         }
 

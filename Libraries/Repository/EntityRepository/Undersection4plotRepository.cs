@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
+
 
 namespace Libraries.Repository.EntityRepository
 {
@@ -45,7 +47,12 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Undersection4plot.Include(x => x.UnderSection4).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
 
-
+        public async Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model)
+        {
+            return await _dbContext.Undersection4plot.Include(x => x.UnderSection4)
+                .Include(x=>x.Village).Include(x=>x.Khasra)
+                .OrderByDescending(x => x.Id).GetPaged<Undersection4plot>(model.PageNumber, model.PageSize);
+        }
 
 
 
