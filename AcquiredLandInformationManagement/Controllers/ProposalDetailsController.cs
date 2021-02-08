@@ -26,7 +26,8 @@ namespace AcquiredLandInformationManagement.Controllers
             {
             _proposaldetailsService = proposaldetailsService;
             }
-            public async Task<IActionResult> Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
             {
                 var result = await _proposaldetailsService.GetAllProposaldetails();
                 return View(result);
@@ -39,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_List", result);
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Proposaldetails proposaldeatils = new Proposaldetails();
@@ -50,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
-       
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Proposaldetails proposaldeatils)
         {
             try
@@ -86,7 +87,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(proposaldeatils);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -101,6 +102,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Proposaldetails proposaldeatils)
         {
             if (ModelState.IsValid)
@@ -145,7 +147,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  
         {
             if (id == 0)
@@ -162,7 +164,7 @@ namespace AcquiredLandInformationManagement.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _proposaldetailsService.FetchSingleResult(id);

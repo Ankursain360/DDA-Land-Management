@@ -4,8 +4,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    @*<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKdXoEy8iDv_7yvzRJkH2mW9LFieOIT4g&libraries=places"></script>*@
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBKdXoEy8iDv_7yvzRJkH2mW9LFieOIT4g&libraries=places"></script>
     <link href="~/img/favicon.ico" rel="shortcut icon" type="image/x-icon" sizes="16x16" />
     <link rel="icon" href="~/img/favicon.png" type="image/png" sizes="16x16" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -28,8 +27,8 @@
 <body>
     <section class="map-section">
         <!--live map-->
-        <div class="liveMap">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448181.163741622!2d76.81306442366602!3d28.64727993557044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1612367296523!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <div class="liveMap" id="map-canvas">
+            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d448181.163741622!2d76.81306442366602!3d28.64727993557044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b715389640!2sDelhi!5e0!3m2!1sen!2sin!4v1612367296523!5m2!1sen!2sin" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>*@
         </div>
         <!--live map end-->
         <div class="container-fluid p-4 MapContent position-relative">
@@ -146,5 +145,7 @@
     <script src="~/js/js.js"></script>
     <script src="~/js/site.js"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/Zoom.js"></script>
+    <script src="~/js/fullscreen.js"></script>
 </body>
 </html>

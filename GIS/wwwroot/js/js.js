@@ -1,4 +1,8 @@
 ﻿var zoomZone = [];
+var map;
+var zoomZone = [];
+var zoomvillage = [];
+var ZoomPlot = [];
 $(document).ready(function () {
     console.log('f9');
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
@@ -18,19 +22,44 @@ $(document).ready(function () {
                 html = html + '<a href="#" class="list-group-item list-group-item-action"><i class="ri-eye-line"></i> Village Not Found</a>';
             }
             html = html + '</div></div></div></div>';
-            zoomZone.push(response);
+            // zoomZone.push(response);
         }
         $("#accordionData").html('');
         $("#accordionData").html(html);
     });
-    initialize();
+    //initialize();
 });
+
+function CoordMapType() { }
+
+CoordMapType.prototype.tileSize = new google.maps.Size(256, 256);
+CoordMapType.prototype.maxZoom = 25;
+
+CoordMapType.prototype.getTile = function (coord, zoom, ownerDocument) {
+    var div = ownerDocument.createElement('div');
+    // div.innerHTML = coord;
+    div.style.width = this.tileSize.width + 'px';
+    div.style.height = this.tileSize.height + 'px';
+    //div.style.fontSize = '10';
+    //div.style.borderStyle = 'solid';
+    //div.style.borderWidth = '1px';
+    //div.style.borderColor = '#AAAAAA';
+    div.style.backgroundColor = '#E5E3DF';
+    return div;
+};
+
+CoordMapType.prototype.name = 'Tile #s';
+CoordMapType.prototype.alt = 'Tile Coordinate Map Type';
+var coordinateMapType = new CoordMapType();
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
 function initialize() {
     var mapOptions = {
         zoom: 10,
         disableDefaultUI: true,
-        mapTypeId: 'coordinate',
-        // mapTypeId: google.maps.MapTypeId.ROADMAP,//SATELLITE
+        //  mapTypeId: 'coordinate',
+        mapTypeId: google.maps.MapTypeId.ROADMAP,//SATELLITE
         scaleControl: false,
         disableDefaultUI: true,
         zoomControl: false,
@@ -55,7 +84,7 @@ function initialize() {
     };
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
     map.mapTypes.set('coordinate', coordinateMapType);
-    //map.mapTypes.set(google.maps.MapTypeId.ROADMAP);
+    map.mapTypes.set(google.maps.MapTypeId.ROADMAP);
     //Added by Sachin 08/09/2017
     map.addListener('zoom_changed', function () {
         Zoom_change(map);
@@ -67,10 +96,10 @@ function initialize() {
     this.map.controls[google.maps.ControlPosition.LEFT_CENTER].push(zoomDiv);
     this.map.controls[google.maps.ControlPosition.TOP_RIGHT].push(FullScreenControl(map, 'Full Screen', 'Exit Full Screen'));
     //End of Code 
-    showLegend();
-    $('.statsDIv .close').click(function () { $('.statsDIv').hide(); });
-    GetCurrentDetails("State", "4");
-    showLegend();
+    // showLegend();
+    //$('.statsDIv .close').click(function () { $('.statsDIv').hide(); });
+    //GetCurrentDetails("State", "4");
+    //  showLegend();
 }
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
@@ -92,6 +121,33 @@ function showDisBoundaries(ploygn, xaixis, yaixis) {
 }
 
 
+//common function
+
+function createPolygon(_path) {
+    var tmpLine = new google.maps.Polygon({
+        strokeColor: '#666666',
+        fillColor: '#FF8800',
+        fillOpacity: 0.7,
+        strokeOpacity: 1,
+        strokeWeight: 1,
+        clickable: !1,
+        map: map,
+        path: _path
+    });
+    return tmpLine;
+}
+
+
+function getLatLongArr(pgString) {
+    var latLngArr = [];
+    pgString = pgString.substring(pgString.lastIndexOf('(') + 1, pgString.indexOf(')'));
+    var longLatArr = pgString.split(',');
+    for (var i = 0; i < longLatArr.length; i++) {
+        var LongLatsingle = longLatArr[i].split(' ');
+        latLngArr.push(new google.maps.LatLng(parseFloat(LongLatsingle[1]), parseFloat(LongLatsingle[0])));
+    }
+    return latLngArr;
+}
 
 
 

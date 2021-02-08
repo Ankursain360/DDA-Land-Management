@@ -142,7 +142,7 @@ namespace SiteMaster.Controllers
                 return Json($"Structure Name : {Name} already exist");
             }
         }
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _structureService.Delete(id);
