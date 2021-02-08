@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -31,6 +32,18 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection4PlotService.GetAllUndersection4Plot();
             return View(list);
         }
+
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] NotificationUndersection4plotDto model)
+        {
+            var result = await _undersection4PlotService.GetPagedNoUndersection4plot(model);
+
+            return PartialView("_List", result);
+        }
+
+
+
 
         public async Task<IActionResult> Create()
         {
@@ -161,7 +174,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _undersection4PlotService.FetchSingleResult(id);
             Data.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-           // Data.KhasraList = await _undersection4PlotService.GetAllKhasra();
+            Data.KhasraList = await _undersection4PlotService.BindKhasra();
             Data.VillageList = await _undersection4PlotService.GetAllVillage();
 
 
@@ -171,10 +184,6 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
-
-
-
-
 
 
 

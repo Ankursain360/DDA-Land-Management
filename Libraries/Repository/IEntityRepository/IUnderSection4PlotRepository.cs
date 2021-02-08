@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -13,5 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection4>> GetAllNotificationNo();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();
+
+        Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
     }
 }

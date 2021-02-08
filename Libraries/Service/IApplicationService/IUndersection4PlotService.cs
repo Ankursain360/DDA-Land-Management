@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using Dto.Search;
+using Libraries.Repository.Common;
+
 namespace Libraries.Service.IApplicationService
 {
     public interface IUndersection4PlotService
@@ -18,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Undersection4plot undersection4plot);
         Task<Undersection4plot> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
 
     }
 }
