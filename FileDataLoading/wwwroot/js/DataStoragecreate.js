@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
     $('#SchemeDptBranch').removeAttr('multiple');
     $('#LocalityIdForPartFile').removeAttr('multiple');
+
+
+    $('#SchemeDptBranch').removeAttr('multiple');
+    $('#LocalityIdForPartFile').removeAttr('multiple');
     $("input[name='grpSearchby']").click(function () {
         if ($("#rdbDocumentname").is(":checked")) {
             $("#IsFileDocument").val("1");
@@ -29,6 +33,8 @@ $(document).delegate('a.add-record', 'click', function (e) {
         element.find('.sn').html(size);
         $("#tbl_posts #add .sn").text($('#tbl_posts >tbody >tr').length);
         $("#tbl_posts #add .add").remove();
+        $("#tbl_posts #add #SchemeDptBranch").select2('val', '');
+        $("#tbl_posts #add #LocalityIdForPartFile").select2('val', '');
         $("#tbl_posts #tbl_posts_body .floating-label-field").attr("readonly", true);
         element.find(".add-record").hide();
         element.find(".delete-record").show();

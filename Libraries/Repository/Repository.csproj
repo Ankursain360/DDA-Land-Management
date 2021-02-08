@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Dto\Dto.csproj" />
     <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\Notification\Notification.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

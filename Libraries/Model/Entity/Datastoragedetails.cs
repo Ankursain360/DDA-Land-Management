@@ -33,11 +33,15 @@ namespace Libraries.Model.Entity
         [Required(ErrorMessage = "Coloumn no is Mandatory Field", AllowEmptyStrings = false)]
         public int? ColumnId { get; set; }
 
+
         [Required(ErrorMessage = "Bundle is Mandatory Field", AllowEmptyStrings = false)]
         public int? BundleId { get; set; }
 
 
         public int? ZoneId { get; set; }
+
+
+        [Required(ErrorMessage = "Locality is Mandatory Field", AllowEmptyStrings = false)]
         public int? LocalityId { get; set; }
 
       
@@ -63,6 +67,8 @@ namespace Libraries.Model.Entity
         public string DocumentType { get; set; }
         public int? DepartmentId { get; set; }
         public int? UserId { get; set; }
+
+
         public int? Year { get; set; }
 
         [Required(ErrorMessage = "Category No is Mandatory Field")]
@@ -130,7 +136,8 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<string> SequenceNoForPartFile { get; set; }
 
-
+        [NotMapped]
+        public Schemefileloading SchemeDptBranchNavigation { get; set; }
 
         [NotMapped]
         public List<string> Subject { get; set; }

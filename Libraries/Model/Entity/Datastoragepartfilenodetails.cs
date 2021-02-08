@@ -1,8 +1,9 @@
 ﻿using Libraries.Model.Common;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
-
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Libraries.Model.Entity
 {
@@ -13,6 +14,7 @@ namespace Libraries.Model.Entity
         public string Category { get; set; }
         public string Header { get; set; }
         public string SequenceNo { get; set; }
+       
         public int YearofPartFile { get; set; }
         public int SchemeDptBranch { get; set; }
         public int LocalityId { get; set; }
