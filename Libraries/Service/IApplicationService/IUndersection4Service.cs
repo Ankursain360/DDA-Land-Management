@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Undersection4>> GetAllUndersection4();
 
-        Task<List<Purpose>> GetAllPurpose();
+        Task<List<Proposaldetails>> GetAllProposal();
         Task<List<Undersection4>> GetUndersection4UsingRepo();
         Task<bool> Update(int id, Undersection4 undersection4);
         Task<bool> Create(Undersection4 undersection4);

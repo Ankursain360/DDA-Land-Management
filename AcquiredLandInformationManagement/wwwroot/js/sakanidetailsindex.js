@@ -1,5 +1,5 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 1;
+var currentPageSize = 5;
 
 $(document).ready(function () {
     GetSakaniDetails(currentPageNumber, currentPageSize);
