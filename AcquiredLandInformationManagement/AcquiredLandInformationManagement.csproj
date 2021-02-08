@@ -45,6 +45,30 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="wwwroot\js\khasramasterindex - Copy.min.js">
+      <DependentUpon>khasramasterindex.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy %282%29 - Copy.min.js">
+      <DependentUpon>proposaldetailsindex - Copy (2).min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy %282%29.min.js">
+      <DependentUpon>proposaldetailsindex.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy %283%29.min.js">
+      <DependentUpon>proposaldetailsindex.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy - Copy %282%29.min.js">
+      <DependentUpon>proposaldetailsindex - Copy.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy - Copy - Copy.min.js">
+      <DependentUpon>proposaldetailsindex - Copy - Copy.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy - Copy.min.js">
+      <DependentUpon>proposaldetailsindex - Copy.min.js</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\js\proposaldetailsindex - Copy.min.js">
+      <DependentUpon>proposaldetailsindex.min.js</DependentUpon>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
