@@ -4,7 +4,7 @@
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Data Storage Details" })
 <div class="pt-3">
-    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
+    <form asp-action="Create" autocomplete="off" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div id="Divclsification" class="mt-md-3">
