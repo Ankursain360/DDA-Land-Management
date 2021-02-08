@@ -174,7 +174,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
             return View(Data);
         }
-      //  [AuthorizeContext(ViewAction.Download)]
+       [AuthorizeContext(ViewAction.Download)]
         public async Task<IActionResult> Download()
         {
             List<Proposalplotdetails> result = await _proposalplotdetailsService.GetAllProposalplotdetails();
