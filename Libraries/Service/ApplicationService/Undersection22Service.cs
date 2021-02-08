@@ -52,7 +52,7 @@ namespace Libraries.Service.ApplicationService
 
 
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = undersection22.ModifiedBy;
             _undersection22Repository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -60,7 +60,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Undersection22 undersection22)
         {
 
-            undersection22.CreatedBy = 1;
+            undersection22.CreatedBy = undersection22.CreatedBy;
             undersection22.CreatedDate = DateTime.Now;
             _undersection22Repository.Add(undersection22);
             return await _unitOfWork.CommitAsync() > 0;
