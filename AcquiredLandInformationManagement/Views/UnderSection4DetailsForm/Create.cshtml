@@ -1,118 +1,71 @@
 ﻿@model Libraries.Model.Entity.Undersection4
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-4 Details Master</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-4 Details Master" })
+
+
+<div class="pt-3">
+    <form asp-action="Create" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+
+        <h3 class="mb-3 d-flex">Add Details</h3>
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="PurposeId"
+                            asp-items="@(new SelectList(Model.PurposeList, "Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+
+                    </select>
+                    <span asp-validation-for="PurposeId" class="text-danger"></span>
+                    <label asp-for="PurposeId" class="floating-label">Purpose Name </label>
+                </div>
+
+
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" asp-for="Number" placeholder="Notification No" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Notification No</label>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="Date" asp-for="Ndate" placeholder="Notification Date" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Notification Date</label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input type="text" asp-for="Npurpose" placeholder="Purpose" class="floating-label-field floating-label-field--s3" />
+                    <label class="floating-label">Purpose</label>
+                </div>
+            </div>
+
+
+        </div>
+
+
+
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-theme " })
             </div>
         </div>
-    </div>
+
+
+    </form>
 </div>
-<br />
-
-<br />
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-
-                <div class="row" style="margin-bottom:35px;">
-                    <div class="col-sm-12">
-                        <div class=" dda-innerheading">
-                            <div class="col-md-12">
-                                <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-4 Details</h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Purpose Name</label>
-                        <select class="form-control dda-dropdown" asp-for="PurposeId" asp-items="@(new SelectList(Model.PurposeList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="PurposeId" class="text-danger"></span>
-
-                    </div>
-                </div>
-                <div id="Divnotification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-4 Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Notification No</label>
-                        <input type="text" asp-for="Number" class="form-control"/>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Notification Date</label>
-                        <input type="Date" asp-for="Ndate" class="form-control"/>
-                    </div>
-                </div>
-                <div class="form-row">
-
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Purpose</label>
-                        <input type="text" asp-for="Npurpose" class="form-control"/>
-                    </div>
-                </div>
-                @*<div id="Divnotificationtype">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Type U/S-4 Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="TypeDetails" value="Khasra" checked="checked" />Khasra
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio"  asp-for="TypeDetails"  value="Boundary" />Boundary
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-row">
-
-                        <div class="form-group col-md-12">
-                            <label class="control-label lb-sm">Purpose</label>
-                            <textarea type="text" asp-for="TypePurpose" class="form-control" style=" background-color: #dddddd;"></textarea>
-                        </div>
-                    </div>
-                </div>*@
-
-
-
-
-
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="Submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
-        </div>
-    </div>
-</div>
-
+ 

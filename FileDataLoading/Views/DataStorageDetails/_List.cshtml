@@ -34,10 +34,10 @@
                                 <tbody>
                                     <tr>
                                         <td>@item.RecordRoomNo</td>
-                                        <td>@item.AlmirahId)</td>
-                                        <td>@(item.RowId)</td>
-                                        <td>@(item.ColumnId)</td>
-                                        <td>@(item.BundleId)</td>
+                                        <td>@item.Almirah.AlmirahNo)</td>
+                                        <td>@(item.Row.RowNo)</td>
+                                        <td>@(item.Column == null ? "" : item.Column.ColumnNo)</td>
+                                        <td>@(item.BundleId == null ? "" : item.Bundle.BundleNo)</td>
 
                                     </tr>
 

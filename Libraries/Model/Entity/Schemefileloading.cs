@@ -15,8 +15,6 @@ namespace Libraries.Model.Entity
         Datastoragepartfilenodetails = new HashSet<Datastoragepartfilenodetails>();
     }
 
-
-
         [Required(ErrorMessage = "Scheme name is Mandatory")]
         [Remote(action: "Exist", controller: "Schemefileloading", AdditionalFields = "Id")]
         public string SchemeName { get; set; }

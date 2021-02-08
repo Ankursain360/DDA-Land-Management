@@ -27,8 +27,8 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-       // [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+       [AuthorizeContext(ViewAction.View)]
+      public  IActionResult Index()
         {
 
             return View();
@@ -75,7 +75,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _acquiredlandvillageService.GetAcquiredlandvillage();
-                        return View("Index", list);
+                        return View("Index");
                     }
                     else
                     {
@@ -188,7 +188,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> Download()
+        {
+            List<Acquiredlandvillage> result = await _acquiredlandvillageService.GetAcquiredlandvillage();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Acquiredlandvillage.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
 
 
     }
