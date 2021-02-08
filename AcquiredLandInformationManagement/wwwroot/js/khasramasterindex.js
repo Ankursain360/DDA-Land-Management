@@ -3,7 +3,7 @@ var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
 $(document).ready(function () {
-    GetKhasraMaster(currentPageNumber, currentPageSize);
+    GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
 });
 $("#btnSearch").click(function () {
     GetKhasraMaster(currentPageNumber, currentPageSize, sortOrder);
