@@ -12,6 +12,6 @@ namespace Dto.Search
         public string requiredAgency { get; set; }
        
         public string proposalFileNo { get; set; }
-        //public DateTime? proposalDate { get; set; }
+        public DateTime? proposalDate { get; set; }
     }
 }

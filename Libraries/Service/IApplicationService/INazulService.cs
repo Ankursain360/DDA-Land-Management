@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -18,7 +20,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Nazul nazul);
         Task<Nazul> FetchSingleResult(int id);
         Task<bool> Delete(int id);
-
+        Task<PagedResult<Nazul>> GetPagedNazul(NazulSearchDto model);
 
 
 

@@ -67,16 +67,20 @@ namespace FileDataLoading.Controllers
               
                 if (dataStorageDetails.IsPartOfMainFile == 0)
                 {
-                    ModelState.Remove("SchemeDptBranch");
-                   
+                    ModelState.Remove("SchemeDptBranch");                   
                     ModelState.Remove("LocalityIdForPartFile");
                     ModelState.Remove("IsPartOfMainFile");
                     ModelState.Remove("YearForPartFile");
                 }
                 if (ModelState.IsValid)
                 {
-                    var result = await _datastorageService.Create(dataStorageDetails);
+                    dataStorageDetails.FileNo = (dataStorageDetails.CategoryNo + "/" + dataStorageDetails.SequenceNo + "/" + dataStorageDetails.HeaderNo + dataStorageDetails.Year).ToString();
+                    dataStorageDetails.DepartmentId = SiteContext.DepartmentId;
 
+                    var result = await _datastorageService.Create(dataStorageDetails);
+                    //For File No Add Category No,Header No,Sequence No,From Year and To Year//
+
+                   
                     if (result)
                     {
                         FileHelper fileHelper = new FileHelper();
@@ -107,14 +111,14 @@ namespace FileDataLoading.Controllers
                                 });
                             }
 
-                            //For File No Add Category No,Header No,Sequence No,From Year and To Year
-
-                            dataStorageDetails.FileNo = dataStorageDetails.CategoryNo + "/" + dataStorageDetails.SequenceNo + "/" + dataStorageDetails.HeaderNo + dataStorageDetails.Year;
+                           
                             result = await _datastorageService.SaveDetailsOfPartFile(datastoragepartfilenodetails);
                         }
 
                         if (result)
-                        {
+                        { 
+                           
+                          
                             ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                             var list = await _datastorageService.GetAllDataStorageDetail();
                             return View("Index", list);
@@ -151,18 +155,27 @@ namespace FileDataLoading.Controllers
         {
             try
             {
+                datastoragedetails.AlmirahList = await _datastorageService.GetAlmirahs();
+                datastoragedetails.RowList = await _datastorageService.GetRows();
+                datastoragedetails.ZoneList = await _datastorageService.GetZones();
+                datastoragedetails.BundleList = await _datastorageService.GetBundles();
+                datastoragedetails.ColumnList = await _datastorageService.GetColumns();
                 datastoragedetails.LocalityList = await _datastorageService.GetLocalities();
                 datastoragedetails.SchemeFileLoadingList = await _datastorageService.GetSchemesFileLoading();
+                datastoragedetails.ZoneList = await _datastorageService.GetZones();
                 if (datastoragedetails.IsPartOfMainFile == 0)
                 {
                     ModelState.Remove("SchemeDptBranch");
-
                     ModelState.Remove("LocalityIdForPartFile");
                     ModelState.Remove("IsPartOfMainFile");
                     ModelState.Remove("YearForPartFile");
                 }
                 if (ModelState.IsValid)
                 {
+
+                    //For File No Add Category No,Header No,Sequence No,From Year and To Year
+                    datastoragedetails.FileNo = (datastoragedetails.CategoryNo + "/" + datastoragedetails.SequenceNo + "/" + datastoragedetails.HeaderNo + datastoragedetails.Year).ToString();
+                    datastoragedetails.DepartmentId = SiteContext.DepartmentId;
                     var result = await _datastorageService.Update(id, datastoragedetails);
 
                     if (result)
@@ -185,6 +198,8 @@ namespace FileDataLoading.Controllers
 
                                     datastoragepartfilenodetails.Add(new Datastoragepartfilenodetails
                                     {
+
+                                        Id = 0,
                                         Category = datastoragedetails.Category[i],
                                         Header = datastoragedetails.Header[i],
                                         SequenceNo = datastoragedetails.SequenceNoForPartFile[i],
@@ -193,13 +208,12 @@ namespace FileDataLoading.Controllers
                                         SchemeDptBranch = datastoragedetails.SchemeDptBranch[i],
                                         YearofPartFile = datastoragedetails.YearForPartFile[i],
                                         DataStorageDetailsId = datastoragedetails.Id,
-                                        CreatedBy = SiteContext.UserId,
-                                        CreatedDate = DateTime.Now
-                                    });
+
+                                    }) ;
+                                   
+                                   
                                 }
-                                //For File No Add Category No,Header No,Sequence No,From Year and To Year
-                                 datastoragedetails.FileNo = datastoragedetails.CategoryNo + "/" + datastoragedetails.SequenceNo + "/" + datastoragedetails.HeaderNo + datastoragedetails.Year;
-                                 result = await _datastorageService.SaveDetailsOfPartFile(datastoragepartfilenodetails);
+                                    result = await _datastorageService.SaveDetailsOfPartFile(datastoragepartfilenodetails);
                             }
 
                             

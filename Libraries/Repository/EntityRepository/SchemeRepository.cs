@@ -11,6 +11,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
 
+
+
+
+
 namespace Libraries.Repository.EntityRepository
 {
     public class SchemeRepository : GenericRepository<Scheme>, ISchemeRepository
@@ -31,7 +35,135 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Scheme>> GetPagedScheme(SchemeSearchDto model)
         {
-            return await _dbContext.Scheme.GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+
+
+            var data = await _dbContext.Scheme
+              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                 && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+               //  && (x.IsActive == 1)
+               )
+
+
+
+
+             . GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Scheme
+              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                 && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+               //  && (x.IsActive == 1)
+               )
+                                .OrderBy(s => s.Name)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("CODE"):
+                        data = null;
+                        data = await _dbContext.Scheme
+               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                  && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+                //  && (x.IsActive == 1)
+                )
+                                 .OrderBy(s => s.Code)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Scheme
+               .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                  && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+              
+                )
+                                 .OrderBy(s => s.FileNo)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Scheme
+                                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+                                 && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno)))
+                                .OrderByDescending(s => s.IsActive)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Scheme
+            .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+              && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+               && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+           
+             )
+
+                             .OrderByDescending(s => s.Name)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("CODE"):
+                        data = null;
+                        data = await _dbContext.Scheme
+          .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+            && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+             && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+
+           )
+                              .OrderByDescending(s => s.Code)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("FILENO"):
+                        data = null;
+                        data = await _dbContext.Scheme
+           .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+              && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno))
+
+            )
+                            .OrderByDescending(s => s.FileNo)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Scheme
+                                 .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+             && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code))
+              && (string.IsNullOrEmpty(model.fileno) || x.FileNo.Contains(model.fileno)))
+                                .OrderBy(s => s.IsActive)
+                                .GetPaged<Scheme>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
+
+
+
+
+
+          
+
         }
 
     }

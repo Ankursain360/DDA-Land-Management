@@ -42,6 +42,9 @@ namespace Libraries.Model.Entity
         public List<Scheme> SchemeList { get; set; }
         public virtual Scheme Scheme { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+        public virtual ICollection<Undersection4> Undersection4 { get; set; }
+
+
 
     }
 }

@@ -29,7 +29,12 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection17Service.GetAllUndersection17();
             return View(list);
         }
-
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] KhasraMasterSearchDto model)
+        //{
+        //    var result = await _undersection17Service.GetPagedKhasra(model);
+        //    return PartialView("_List", result);
+        //}
 
         public async Task<IActionResult> Create()
 

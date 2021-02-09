@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -10,11 +12,12 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
    
-   public class LDOlandController : Controller
+   public class LDOlandController : BaseController
     {
         private readonly ILdolandService _ldolandService;
 
@@ -22,10 +25,11 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             _ldolandService = ldolandService;
         }
-        public async Task<IActionResult> Index()
-        {
-            var result = await _ldolandService.GetAllLdoland();
-            return View(result);
+
+        [AuthorizeContext(ViewAction.View)]
+        public IActionResult Index()
+        { 
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] LdolandSearchDto model)
@@ -33,11 +37,12 @@ namespace AcquiredLandInformationManagement.Controllers
             var result = await _ldolandService.GetPagedLdoland(model);
             return PartialView("_List", result);
         }
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Ldoland ldoland = new Ldoland();
             ldoland.IsActive = 1;
+
             ldoland.LandNotificationList = await _ldolandService.GetAllLandNotification();
             ldoland.SerialnumberList = await _ldolandService.GetAllSerialnumber();
             return View(ldoland);
@@ -45,7 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
-      
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Ldoland ldoland)
         {
             try
@@ -55,7 +60,8 @@ namespace AcquiredLandInformationManagement.Controllers
                 if (ModelState.IsValid)
                 {
 
-
+                    ldoland.IsActive = 1;
+                    ldoland.CreatedBy = SiteContext.UserId;
                     var result = await _ldolandService.Create(ldoland);
 
                     if (result == true)
@@ -82,7 +88,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(ldoland);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -97,14 +103,14 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
         [HttpPost]
-      
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Ldoland ldoland)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-
+                    ldoland.ModifiedBy = SiteContext.UserId;
                     var result = await _ldolandService.Update(id, ldoland);
                     if (result == true)
                     {
@@ -127,23 +133,10 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(ldoland);
         }
 
-       // [AcceptVerbs("Get", "Post")]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> Exist(int Id, string Name)
-        //{
-        //    var result = await _pageService.CheckUniqueName(Id, Name);
-        //    if (result == false)
-        //    {
-        //        return Json(true);
-        //    }
-        //    else
-        //    {
-        //        return Json($"Page: {Name} already exist");
-        //    }
-        //}
+      
 
-
-        public async Task<IActionResult> Delete(int id)  //Not in use
+        [AuthorizeContext(ViewAction.Delete)]
+        public async Task<IActionResult> Delete(int id)  
         {
             if (id == 0)
             {
@@ -159,7 +152,7 @@ namespace AcquiredLandInformationManagement.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _ldolandService.FetchSingleResult(id);
@@ -173,6 +166,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Ldoland> result = await _ldolandService.GetAllLdoland();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Ldoland.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
     }
 }

@@ -37,18 +37,7 @@ namespace Libraries.Service.ApplicationService
             return await _datastoragedetailRepository.GetDataStorageDetails();
         }
 
-        public async Task<bool> Update(int id, Datastoragedetails dataStorageDetails)
-        {
-            var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
-            Datastoragedetails model = result.FirstOrDefault();
-            //model.AlmirahNo = almirah.AlmirahNo;
-            //model.ModifiedDate = DateTime.Now;
-            //model.IsActive = almirah.IsActive;
-            model.ModifiedBy = 1;
-            _datastoragedetailRepository.Edit(model);
-            return await _unitOfWork.CommitAsync() > 0;
-        }
-
+    
         public bool CheckUniqueName(int id, Datastoragedetails dataStoragedetails)
         {
             var result = _dbContext.Datastoragedetails.Any(t => t.Id != id && t.AlmirahId == dataStoragedetails.AlmirahId);
@@ -227,5 +216,31 @@ namespace Libraries.Service.ApplicationService
         {
             return await _datastoragedetailRepository.GetDetailsOfPartFileDetails(Id);
         }
+
+        public async Task<bool> Update(int id, Datastoragedetails dataStorageDetails)
+        {
+            var result = await _datastoragedetailRepository.FindBy(a => a.Id == id);
+            Datastoragedetails model = result.FirstOrDefault();
+            model.AlmirahId = dataStorageDetails.AlmirahId;
+            model.RowId = dataStorageDetails.RowId;
+            model.BundleId = dataStorageDetails.BundleId;
+            model.ColumnId = dataStorageDetails.ColumnId;
+            model.CategoryNo = dataStorageDetails.CategoryNo;
+            model.SequenceNo = dataStorageDetails.SequenceNo;
+            model.Year = dataStorageDetails.Year;
+            model.YearTo = dataStorageDetails.YearTo;
+            model.SchemeId = dataStorageDetails.SchemeId;
+            model.ZoneId = dataStorageDetails.ZoneId;
+            model.LocalityId = dataStorageDetails.LocalityId;
+            model.Name = dataStorageDetails.Name;
+            model.IsPartOfMainFile = dataStorageDetails.IsPartOfMainFile;
+            model.IsActive = dataStorageDetails.IsActive;
+            model.ModifiedDate= DateTime.Now;
+            model.ModifiedBy = 1;
+            model.FileNo = dataStorageDetails.FileNo;
+            _datastoragedetailRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
     }
 }

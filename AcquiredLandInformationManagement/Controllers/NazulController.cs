@@ -13,6 +13,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using Microsoft.AspNetCore.Authorization;
+using Dto.Search;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -29,6 +30,12 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var result = await _nazulService.GetAllNazul();
             return View(result);
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] NazulSearchDto model)
+        {
+            var result = await _nazulService.GetPagedNazul(model);
+            return PartialView("_List", result);
         }
 
         public async Task<IActionResult> Create()
