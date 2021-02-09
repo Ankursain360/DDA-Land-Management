@@ -3,7 +3,7 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Locality</th>
+            <th>Village</th>
             <th>Rect No</th>
             <th>Land Category</th>
             <th>Khasra No</th>
@@ -21,7 +21,7 @@
         {
         <tr>
             @*<td>@item.Locality.Name</td>*@
-            <td> @(item.Locality == null?"": item.Locality.Name)</td>
+            <td> @(item.Acquiredlandvillage == null?"": item.Acquiredlandvillage.Name)</td>
             <td>@item.RectNo</td>
             @*<td>@item.LandCategory.Name</td>*@
             <td> @(item.LandCategory == null?"": item.LandCategory.Name)</td>

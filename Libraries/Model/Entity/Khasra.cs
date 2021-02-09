@@ -23,7 +23,8 @@ namespace Libraries.Model.Entity
         }
         public string Name { get; set; }
 
-        public int LocalityId { get; set; }
+        //public int LocalityId { get; set; }
+        public int AcquiredlandvillageId { get; set; }
         public int LandCategoryId { get; set; }
        
         public string Bigha { get; set; }
@@ -43,9 +44,13 @@ namespace Libraries.Model.Entity
 
 
 
+        //[NotMapped]
+        //public List<Locality> LocalityList { get; set; }
         [NotMapped]
-        public List<Locality> LocalityList { get; set; }
-        public virtual Locality Locality { get; set; }
+        public List<Acquiredlandvillage> VillageList { get; set; }
+
+        //public virtual Locality Locality { get; set; }
+        public virtual Acquiredlandvillage Acquiredlandvillage { get; set; }
         public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
         public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }

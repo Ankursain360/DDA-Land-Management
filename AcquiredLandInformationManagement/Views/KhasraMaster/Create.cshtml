@@ -19,11 +19,11 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="LocalityId" asp-items="@(new SelectList(Model.LocalityList, "Id","Name"))">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
                         <option selected="selected" value="">Select</option>
                     </select>
-                    <span asp-validation-for="LocalityId" class="text-danger"></span>
-                    <label class="floating-label">Locality</label>
+                    <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
+                    <label class="floating-label">Village</label>
                 </div>
             </div>
             <div class="col-md-6">
