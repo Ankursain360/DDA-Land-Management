@@ -909,6 +909,15 @@ namespace LandInventory.Controllers
             //}
             var memory = ExcelHelper.CreateExcel(data);
             string sFileName = @"LandInventory.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadIndex1(List<PropertyRegisterationDownloadDto> data)
+        {
+            var memory = ExcelHelper.CreateExcel(data);
+            string sFileName = @"LandInventory.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
         }

@@ -13,7 +13,7 @@ $(document).ready(function () {
             if (response[i].village.length > 0) {
                 for (var j = 0; j < response[i].village.length; j++) {
                     if (response[i].village[j].isActive == 1) {
-                        html = html + '<a href="#" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
+                        html = html + '<a href="javascript:void(0);" id="V' + response[i].village[j].id + '" class="list-group-item list-group-item-action" onclick="showVillage(this.id, ' + response[i].id + ')"><i class="ri-eye-line"></i> ' + response[i].village[j].name + '</a>';
                         check++;
                     }
                 }
@@ -101,10 +101,12 @@ function initialize() {
     //GetCurrentDetails("State", "4");
     //  showLegend();
 }
+
+/*Zone Boundary Start*/
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
     HttpGet(`/GIS/GetZoneDetails?ZoneId=${parseInt(newdis_id)}`, 'json', function (response) {
-        showDisBoundaries(response.Polygon, response.xCoordinate, response.yCoordinate);
+        showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
     });
 }
 function showDisBoundaries(ploygn, xaixis, yaixis) {
@@ -115,12 +117,53 @@ function showDisBoundaries(ploygn, xaixis, yaixis) {
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
     zoomZone.push(sl);
-    map.setZoom(12);
+    map.setZoom(14);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
 }
+/*Zone Boundary End*/
 
+/*Village Boundary Start*/
+function showVillage(maxima, zoneId) {
+    var villageid = maxima.replace('V', '');
+    HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid) + "&ZoneId=" + zoneId, 'json', function (response, villageid) {
+        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, villageid);
+    });
+}
+function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 
+    for (var x = 0; x < zoomvillage.length; x++) {
+        zoomvillage[x].setMap(null);
+    }
+    var sl = createPolygon(getLatLongArr(ploygn));
+    sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
+    zoomvillage.push(sl);
+    map.setZoom(14);
+    map.panTo(new google.maps.LatLng(yaixis, xaixis));
+    showvillagelayers(villageid);
+}
+function showvillagelayers(villageid) {
+
+    HttpGet(`/GIS/GetAbadiDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesAbadi(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+    });
+
+}
+
+function showDisBoundariesAbadi(ploygn, xaixis, yaixis) {
+
+    //for (var x = 0; x < zoomvillage.length; x++) {
+    //    zoomvillage[x].setMap(null);
+    //}
+    var sl = createLine(getLatLongArr(ploygn));
+    sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
+    zoomvillage.push(sl);
+    //map.setZoom(14);
+    //map.panTo(new google.maps.LatLng(yaixis, xaixis));
+    //showvillagelayers(villageid);
+}
+
+/*Village Boundary End*/
 //common function
 
 function createPolygon(_path) {
@@ -136,6 +179,28 @@ function createPolygon(_path) {
     });
     return tmpLine;
 }
+
+function createLine(_path) {
+    var tmpLine = new google.maps.Polyline({
+        strokeColor: '#4679BD',
+        strokeWeight: 1,
+        clickable: !1,
+        map: map,
+        path: _path
+    });
+    return tmpLine;
+}
+
+function createPoint(pos) {
+    var pt = new google.maps.Marker({
+        position: pos,
+        icon: 'images/marker.png',
+        map: map,
+        clickable: !1
+    });
+    return pt;
+}
+
 
 
 function getLatLongArr(pgString) {
