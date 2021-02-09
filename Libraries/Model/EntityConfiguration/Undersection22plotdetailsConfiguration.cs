@@ -17,7 +17,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkKhasraid_idx");
 
-            builder.HasIndex(e => e.LocalityId)
+            builder.HasIndex(e => e.AcquiredlandvillageId)
                 .HasName("fkAcqlandVillageid_idx");
 
             builder.HasIndex(e => e.UnderSection17Id)
@@ -50,7 +50,7 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
-            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
+            builder.Property(e => e.AcquiredlandvillageId).HasColumnType("int(11)");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -71,9 +71,9 @@ namespace Libraries.Model.EntityConfiguration
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fkKhasraid");
 
-            builder.HasOne(d => d.Locality)
+            builder.HasOne(d => d.Acquiredlandvillage)
                 .WithMany(p => p.Undersection22plotdetails)
-                .HasForeignKey(d => d.LocalityId)
+                .HasForeignKey(d => d.AcquiredlandvillageId)
                 .HasConstraintName("fkAcqlandVillageid");
 
             builder.HasOne(d => d.UnderSection17)
