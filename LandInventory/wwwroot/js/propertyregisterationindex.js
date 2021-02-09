@@ -12,14 +12,30 @@ $("#btnSearch").click(function () {
 $("#btnDownload").click(function () {
     var param = GetSearchParam(currentPageNumber, currentPageSize, sortOrder);
     HttpPost(`/PropertyRegistration/DownloadIndex`, 'html', param, function (response) {
-        //var blob = new Blob([response], { type: 'application/ms.excel' });
+        var blob = new Blob([response], { type: 'application/ms.excel' });
         //var downloadurl = URL.createObjectURL(blob);
         //var a = document.createElement("a");
         //a.href = downloadurl;
         //a.download = "LandInventory.xlsx";
         //document.body.appendChild(a);
         //a.click();
-
+       // window.location = '/PropertyRegistration/DownloadIndex1?data=' + response;
+        //HttpGet(`/PropertyRegistration/DownloadIndex1/?data=${response}`, 'json', function (response) {
+          
+        //});
+        var isIE = false || !!document.documentMode;
+        if (isIE) {
+            window.navigator.msSaveBlob(blob, "LandInventory.xlsx");
+        } else {
+            var url = window.URL || window.webkitURL;
+            link = url.createObjectURL(blob);
+            var a = $("<a />");
+            a.attr("download", "LandInventory.xlsx");
+            a.attr("href", link);
+            $("body").append(a);
+            a[0].click();
+            $("body").remove(a);
+        }
     });
 });
 function download() {

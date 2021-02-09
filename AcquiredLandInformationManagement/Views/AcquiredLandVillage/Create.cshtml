@@ -2,7 +2,6 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Village" })
 
 <div class="pt-3">
-
     <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
         <h3 class="mb-3 d-flex">Add Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -134,13 +133,8 @@
             <div class=" col-md-12">
                 <button class="btn btn-theme " type="submit">Create</button>
                 @Html.ActionLink("Back", "Index", "AcquiredLandVillage", null, new { @class = "btn btn-theme " })
-
             </div>
         </div>
-
     </form>
-
 </div>
-
-
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />

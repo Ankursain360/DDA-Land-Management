@@ -22,7 +22,88 @@ namespace Libraries.Repository.EntityRepository
 
          public async Task<PagedResult<Ldoland>> GetPagedLdoland(LdolandSearchDto model)
         {
-            return await _dbContext.Ldoland.GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderBy(a => a.LandNotification.Name)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderBy(a => a.NotificationDate)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderByDescending(a => a.IsActive)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderByDescending(a => a.LandNotification.Name)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderByDescending(a => a.NotificationDate)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Ldoland
+                                       .Include(x => x.LandNotification)
+                                       .Include(x => x.Serialnumber)
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.LandNotification.Name.Contains(model.notification)))
+                                       .OrderBy(a => a.IsActive)
+                                       .GetPaged<Ldoland>(model.PageNumber, model.PageSize);
+
+                        break;
+                }
+            }
+            return data;
         }
 
         public async Task<List<Ldoland>> GetLdoland()
