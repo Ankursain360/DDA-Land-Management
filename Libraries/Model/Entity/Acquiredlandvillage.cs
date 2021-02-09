@@ -9,7 +9,16 @@ namespace Libraries.Model.Entity
 {
     public class Acquiredlandvillage : AuditableEntity<int>
     {
-     
+        public Acquiredlandvillage()
+        {
+            Awardplotdetails = new HashSet<Awardplotdetails>();
+            Enchroachment = new HashSet<Enchroachment>();
+            Enhancecompensation = new HashSet<Enhancecompensation>();
+            Jointsurvey = new HashSet<Jointsurvey>();
+            Sakanidetail = new HashSet<Sakanidetail>();
+            Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+            Undersection4plot = new HashSet<Undersection4plot>();
+        }
         public string Name { get; set; }
         public string Code { get; set; }
         public int TehsilId { get; set; }
@@ -39,14 +48,13 @@ namespace Libraries.Model.Entity
         public List<Villagetype> VillagetypeList { get; set; }
         public virtual Villagetype VillageType { get; set; }
 
-        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
-
-        public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
-        public virtual ICollection<Enchroachment> Enchroachment { get; set; }
-        public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
-        public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
-
-        public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+        public ICollection<Awardplotdetails> Awardplotdetails { get; set; }
+        public ICollection<Enchroachment> Enchroachment { get; set; }
+        public ICollection<Enhancecompensation> Enhancecompensation { get; set; }
+        public ICollection<Jointsurvey> Jointsurvey { get; set; }
+        public ICollection<Sakanidetail> Sakanidetail { get; set; }
+        public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+        public ICollection<Undersection4plot> Undersection4plot { get; set; }
 
 
     }

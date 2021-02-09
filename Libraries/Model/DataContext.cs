@@ -114,6 +114,7 @@ namespace Libraries.Model
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
+        public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -275,17 +276,14 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
             modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
-
+            modelBuilder.ApplyConfiguration(new Undersection22plotdetailsConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
-
             modelBuilder.ApplyConfiguration(new DataStorageConfiguration());
-
             modelBuilder.ApplyConfiguration(new AlmirahConfiguration());
             modelBuilder.ApplyConfiguration(new RowConfiguration());
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
-
             modelBuilder.ApplyConfiguration(new BundleConfiguration());
             modelBuilder.ApplyConfiguration(new IssuereturnfileConfiguration());
 

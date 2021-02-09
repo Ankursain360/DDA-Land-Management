@@ -26,8 +26,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _morlandService.GetAllMorland();
-            return View(list);
+            //var list = await _morlandService.GetAllMorland();
+            //return View(list);
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] MorLandsSearchDto model)

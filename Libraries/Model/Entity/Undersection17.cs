@@ -10,7 +10,10 @@ namespace Libraries.Model.Entity
 {
     public class Undersection17 : AuditableEntity<int>
     {
-
+        public Undersection17()
+        {
+            Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+        }
         public int? UnderSection6Id { get; set; }
         public int? LandNotificationId { get; set; }
         public DateTime? NotificationDate { get; set; }
@@ -25,6 +28,6 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<LandNotification> LandNotificationList { get; set; }
         public virtual LandNotification LandNotification { get; set; }
-
+        public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
     }
 }

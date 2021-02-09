@@ -17,10 +17,22 @@ namespace Libraries.Service.ApplicationService
             _unitOfWork = unitOfWork;
             _iGISSRepository = iGisSRepository;
         }
+
+        public async Task<List<Gisaabadi>> GetAbadiDetails(int villageId)
+        {
+            return await _iGISSRepository.GetAbadiDetails(villageId);
+        }
+
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _iGISSRepository.GetPlotList(VillageId);
         }
+
+        public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)
+        {
+            return await _iGISSRepository.GetVillageDetails(villageId, zoneId);
+        }
+
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
             return await _iGISSRepository.GetVillageList(ZoneId);

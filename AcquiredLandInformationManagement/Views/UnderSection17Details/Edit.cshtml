@@ -1,99 +1,77 @@
 ﻿@model Libraries.Model.Entity.Undersection17
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-17" })
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-17</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+
+<div class="pt-3">
+    <form asp-action="Edit" id="create_user" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">Edit Details</h3>
+
+       
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="form-control dda-dropdown" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="LandNotificationId" class="text-danger"></span>
+                    <label class="floating-label">Notification No</label>
+                </div>
+                </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NotificationDate" type="date" class="form-control" />
+                    <span asp-validation-for="NotificationDate" class="text-danger"></span>
+                    <label class="floating-label"> Notification Date</label>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
-<br />
+            </div>
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
-        </div>
-        <div class="panel-body">
-            <form asp-action="Edit" id="create_user">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                <div id="Divclsification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-17 Details</h6>
-                                </div>
+            <div id="Divclsification">
+               
+                <h2 class="my-3 sub-heading">Notification Type</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="floating-label-wrap">
+                            <div class="form-group col-md-6">
+                                <label class="control-label lb-sm">Notification U/S-6</label>
+                                <select class="form-control dda-dropdown" asp-for="UnderSection6Id" asp-items="@(new SelectList(Model.Undersection6List, "Id","UnderSectionNotificationNumber"))">
+                                    <option>Select</option>
+                                </select>
+                                <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
+                                <label class="floating-label">Notification U/S-6</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+                               
+                                <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                                    <option value="1">Active</option>
+                                    <option value="0">InActive</option>
+                                </select>
+                                <span asp-validation-for="IsActive" class="text-danger"></span>
+                                <label class="floating-label"> Status</label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Notification No</label>
-                        <select class="form-control dda-dropdown" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
                     </div>
+                </div>
+               
 
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm"> Notification Date</label>
-                        <input asp-for="NotificationDate" type="date" class="form-control" />
+
+                <div class="row mt-md-3">
+                    <div class=" col-md-12">
+                        <input type="submit" value="Update" class="btn btn-theme" onclick="return PasswordMatch();" />
+                        @Html.ActionLink("Back", "Index", "UnderSection17Details", null, new { @class = "btn btn-theme" })
                     </div>
                 </div>
 
-                <div id="Divclsification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Type</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Notification U/S-6</label>
-                            <select class="form-control dda-dropdown" asp-for="UnderSection6Id" asp-items="@(new SelectList(Model.Undersection6List, "Id","UnderSectionNotificationNumber"))">
-                                <option>Select</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm"> Status</label>
-                            <select asp-for="IsActive" class="form-control dda-dropdown">
-                                <option value="1">Active</option>
-                                <option value="0">InActive</option>
-                            </select>
-                            <span asp-validation-for="IsActive" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
-                        @Html.ActionLink("Back", "Index", "UnderSection17Details", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
+</form>
         </div>
-    </div>
-</div>
+   
 

@@ -64,7 +64,7 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = ldoland.IsActive;
 
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = ldoland.ModifiedBy;
             _ldolandRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -72,7 +72,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Ldoland ldoland)
         {
 
-            ldoland.CreatedBy = 1;
+            ldoland.CreatedBy = ldoland.CreatedBy;
             ldoland.CreatedDate = DateTime.Now;
             _ldolandRepository.Add(ldoland);
             return await _unitOfWork.CommitAsync() > 0;

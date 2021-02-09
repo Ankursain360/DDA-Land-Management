@@ -5,9 +5,10 @@ using System.Text;
 
 namespace Dto.Search
 {
-   
-     public class LdolandSearchDto : BaseSearchDto
+
+    public class NazulSearchDto : BaseSearchDto
     {
-        public string notification { get; set; }
+        
+        public int villageId { get; set; }
     }
 }

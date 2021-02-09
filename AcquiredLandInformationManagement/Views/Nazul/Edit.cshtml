@@ -1,4 +1,5 @@
 ﻿@model Libraries.Model.Entity.Nazul
+@await Component.InvokeAsync("PageHeader", new { pageName = "Nazul Villages" })
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -6,107 +7,125 @@
 
 
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Nazul Villages</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+<div class="pt-3">
+    <form asp-action="Edit" id="create_user" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                        <option>Select</option>
+                    </select>
+                    <span asp-validation-for="VillageId" class="text-danger"></span>
+                    <label class="floating-label">Village Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="YearOfConsolidation" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="YearOfConsolidation" class="text-danger"></span>
+                    <label class="floating-label">Year of Consolidation</label>
+                </div>
+
             </div>
         </div>
-    </div>
-</div>
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details</h6>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    @*<label class="control-label lb-sm">Jarai/Sakni</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">*@
+
+                    <input class="form-check-input" type="radio" asp-for="JaraiSakni" id="rdbJarai" value="1" />
+                    <label class="form-check-label" for="radio">
+                        Jarai
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" asp-for="JaraiSakni" id="rdbsakni" value="2" />
+                    <label class="form-check-label" for="radio">
+                        Sakani
+                    </label>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    @*<label class="control-label lb-sm">Language</label>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">*@
+
+                    <input class="form-check-input" type="radio" asp-for="Language" id="rdbhindi" value="1" />
+                    <label class="form-check-label" for="radio">
+                        Hindi
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+
+                    <input class="form-check-input" type="radio" asp-for="Language" id="rdburdu" value="2" />
+                    <label class="form-check-label" for="radio">
+                        Urdu
+                    </label>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <form asp-action="Edit" id="create_user">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Year of Consolidation</label>
-                        <input asp-for="YearOfConsolidation" type="date" class="form-control" />
-                    </div>
 
+        <div class="row pt-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+                    <input asp-for="YearOfJamabandi" type="date" class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="YearOfJamabandi" class="text-danger"></span>
+                    <label class="floating-label">Year of Jamabandi</label>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Jarai/Sakni</label>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="JaraiSakni" id="rdbJarai" value="1" />Jarai
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="JaraiSakni" id="rdbsakni" value="2" />Sakani
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Language</label>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="Language" id="rdbhindi" value="1" />Hindi
-                                </label>
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="radio-inline">
-                                    <input type="radio" asp-for="Language" id="rdburdu" value="2" />Urdu
-                                </label>
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                   
+                    <input asp-for="LastMutationNo" class="floating-label-field floating-label-field--s3"/>
+                    <span asp-validation-for="LastMutationNo" class="text-danger"></span>
+                    <label class="floating-label">Last Mutation No.</label>
                 </div>
-                <div class="form-row">
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Year of Jamabandi</label>
-                        <input asp-for="YearOfJamabandi" type="date" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Last Mutation No.</label>
-                        <input asp-for="LastMutationNo" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea asp-for="Remarks" class="form-control"></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-row">
-                    <div class=" form-group  col-md-12">
-                        <input type="submit" value="Update" class="btn btn-primary dda-pageheading" onclick="return PasswordMatch();" />
-                        @Html.ActionLink("Back", "Index", "Nazul", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
-    </div>
-</div>
 
+        <div class="row pt-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea asp-for="Remarks" class="floating-label-field floating-label-field--s3"></textarea>
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+        </div>
+
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+                    <input type="submit" value="Update" class="btn btn-theme" onclick="return PasswordMatch();" />
+                    @Html.ActionLink("Back", "Index", "Nazul", null, new { @class = "btn btn-theme" })
+                </div>
+            </div>
+
+</form>
+</div>
+   
 
 
 
