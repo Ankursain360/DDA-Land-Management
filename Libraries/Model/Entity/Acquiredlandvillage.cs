@@ -32,29 +32,36 @@ namespace Libraries.Model.Entity
         public int VillageTypeId { get; set; }
         public byte IsActive { get; set; }
 
-      
+
         [NotMapped]
         public List<District> DistrictList { get; set; }
         public virtual District District { get; set; }
 
-       
+
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
         public virtual Tehsil Tehsil { get; set; }
 
 
-     
+
         [NotMapped]
         public List<Villagetype> VillagetypeList { get; set; }
         public virtual Villagetype VillageType { get; set; }
 
-        public ICollection<Awardplotdetails> Awardplotdetails { get; set; }
-        public ICollection<Enchroachment> Enchroachment { get; set; }
-        public ICollection<Enhancecompensation> Enhancecompensation { get; set; }
-        public ICollection<Jointsurvey> Jointsurvey { get; set; }
-        public ICollection<Sakanidetail> Sakanidetail { get; set; }
+
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
+
+        public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
+        public virtual ICollection<Enchroachment> Enchroachment { get; set; }
+        public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
+        public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
+        public virtual ICollection<Khasra> Khasra { get; set; }
+        public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+
+       
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
-        public ICollection<Undersection4plot> Undersection4plot { get; set; }
+       
+
 
 
     }
