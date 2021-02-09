@@ -10,7 +10,11 @@ namespace Libraries.Model.Entity
 {
     public class Undersection4: AuditableEntity<int>
     {
-
+        public Undersection4()
+        {
+            Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+            Undersection4plot = new HashSet<Undersection4plot>();
+        }
         public int ProposalId { get; set; }
         public string Number { get; set; }
         public DateTime? Ndate { get; set; }
@@ -25,7 +29,7 @@ namespace Libraries.Model.Entity
         public List<Proposaldetails> ProposalList { get; set; }
      
         public Proposaldetails Proposal { get; set; }
-        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
-
+        public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+        public ICollection<Undersection4plot> Undersection4plot { get; set; }
     }
 }
