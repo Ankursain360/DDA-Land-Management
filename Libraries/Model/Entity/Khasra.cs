@@ -19,11 +19,13 @@ namespace Libraries.Model.Entity
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
+            Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Watchandward = new HashSet<Watchandward>();
         }
         public string Name { get; set; }
 
-        public int LocalityId { get; set; }
+        //public int LocalityId { get; set; }
+        public int AcquiredlandvillageId { get; set; }
         public int LandCategoryId { get; set; }
        
         public string Bigha { get; set; }
@@ -43,9 +45,13 @@ namespace Libraries.Model.Entity
 
 
 
+        //[NotMapped]
+        //public List<Locality> LocalityList { get; set; }
         [NotMapped]
-        public List<Locality> LocalityList { get; set; }
-        public virtual Locality Locality { get; set; }
+        public List<Acquiredlandvillage> VillageList { get; set; }
+
+        //public virtual Locality Locality { get; set; }
+        public virtual Acquiredlandvillage Acquiredlandvillage { get; set; }
         public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
         public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }
@@ -53,7 +59,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
-
+        public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Booktransferland> Booktransferland { get; set; }

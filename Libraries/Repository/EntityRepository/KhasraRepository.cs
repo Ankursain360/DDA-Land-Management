@@ -20,7 +20,7 @@ namespace Libraries.Repository.EntityRepository
         public async Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model)
         {
             return await _dbContext.Khasra.
-                Where(x => x.IsActive == 1).Include(x => x.Locality).
+                Where(x => x.IsActive == 1).Include(x => x.Acquiredlandvillage).
                 Include(x => x.LandCategory).GetPaged<Khasra>(model.PageNumber, model.PageSize);
             //var data = await _dbContext.Khasra.Include(s => s.Locality)
             //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
@@ -130,10 +130,10 @@ namespace Libraries.Repository.EntityRepository
             return landcategoryList;
         }
 
-        public async Task<List<Locality>> GetAllLocalityList()
+        public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
-            List<Locality> localityList = await _dbContext.Locality.ToListAsync();
-            return localityList;
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.ToListAsync();
+            return villageList;
         }
 
 
@@ -141,7 +141,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Khasra>> GetAllKhasra()
         {
-            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Locality).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Acquiredlandvillage).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 
