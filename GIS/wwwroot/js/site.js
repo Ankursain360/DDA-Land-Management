@@ -1,4 +1,46 @@
-﻿function HttpGet(url, dataType, callback) {
+﻿
+function SuccessMessage(message) {
+    toastr.success(message, 'Success', { timeOut: 3000, "progressBar": true });
+}
+
+function ErrorMessage(message) {
+    toastr.error(message, 'Error', { timeOut: 3000, "progressBar": true });
+}
+
+function WarningMessage(message) {
+    toastr.warning(message, 'Warning', { timeOut: 3000, "progressBar": true });
+}
+
+function InfoMessage(message) {
+    toastr.info(message, 'Warning', { timeOut: 3000, "progressBar": true });
+}
+
+
+function DisplayErrorMessages(response) {
+    var messageList = "";
+    if (response.status === 401) {
+        ErrorMessage('401 :: Un-authorized Request.');
+    } else if (response.status === 400) {
+        if (response.responseJSON === undefined) {
+            jsonObj = JSON.parse(response.responseText);
+            for (i = 0; i <= jsonObj.error.length - 1; i++) {
+                messageList += `<li>${jsonObj.error[i]}</li>`;
+            }
+        }
+        else {
+            for (i = 0; i <= response.responseJSON.error.length - 1; i++) {
+                messageList += `<li>${response.responseJSON.error[i]}</li>`;
+            }
+        }
+
+        var formattedMessage = `<ul>${messageList}</ul>`
+        ErrorMessage(formattedMessage);
+    } else {
+        ErrorMessage(response.statusText);
+    }
+}
+
+function HttpGet(url, dataType, callback) {
     DisplayLoader(true);
     $.ajax({
         cache: false,

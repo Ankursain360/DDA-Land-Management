@@ -12,7 +12,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Khasra>> GetAllKhasra();
        
         Task<List<LandCategory>> GetAllLandCategory();
-        Task<List<Locality>> GetAllLocalityList();
+        Task<List<Acquiredlandvillage>> GetAllVillageList();
        
 
     }

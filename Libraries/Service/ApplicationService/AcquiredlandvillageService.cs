@@ -90,7 +90,7 @@ namespace Libraries.Service.ApplicationService
             model.Acquired = acquiredlandvillage.Acquired;
             model.Circle = acquiredlandvillage.Circle;
             model.WorkingVillage = acquiredlandvillage.WorkingVillage;
-            model.VillageTypeId = acquiredlandvillage.VillageTypeId;
+            
             model.IsActive = acquiredlandvillage.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

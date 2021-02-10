@@ -15,32 +15,31 @@ namespace Libraries.Model.EntityConfiguration
         public void Configure(EntityTypeBuilder<Acquiredlandvillage> builder)
         {
 
-
             builder.ToTable("acquiredlandvillage", "lms");
 
             builder.HasIndex(e => e.DistrictId)
-                    .HasName("districtid_idx");
-
-            builder.HasIndex(e => e.TehsilId)
                 .HasName("tehsilid_idx");
 
-            builder.HasIndex(e => e.VillageTypeId)
+            builder.HasIndex(e => e.TehsilId)
+                .HasName("districtid_idx");
+
+            builder.HasIndex(e => e.VillageType)
                 .HasName("villagetypeid_idx");
+
+            builder.HasIndex(e => e.ZoneId)
+                .HasName("fkAcqZoneId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.Acquired)
-                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.Circle)
-                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.Code)
-                .IsRequired()
                 .HasMaxLength(50)
                 .IsUnicode(false);
 
@@ -50,63 +49,49 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.DistrictId).HasColumnType("int(11)");
 
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+            builder.Property(e => e.IsActive)
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.Name)
-                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
             builder.Property(e => e.TehsilId).HasColumnType("int(11)");
 
-            builder.Property(e => e.TotalNoOfSheet)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.TotalNoOfSheet).HasColumnType("int(11)");
 
-            builder.Property(e => e.VillageTypeId).HasColumnType("int(11)");
+            builder.Property(e => e.VillageType)
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             builder.Property(e => e.WorkingVillage)
-                .IsRequired()
-                .HasMaxLength(100)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.YearofConsolidation)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.YearofConsolidation).HasColumnType("int(11)");
 
-            builder.Property(e => e.Zone)
-                .IsRequired()
-                .HasMaxLength(100)
-                .IsUnicode(false);
+            builder.Property(e => e.ZoneId).HasColumnType("int(11)");
 
             builder.HasOne(d => d.District)
                 .WithMany(p => p.Acquiredlandvillage)
                 .HasForeignKey(d => d.DistrictId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("districtid");
+                .HasConstraintName("fkAcqDistrictId");
 
             builder.HasOne(d => d.Tehsil)
                 .WithMany(p => p.Acquiredlandvillage)
                 .HasForeignKey(d => d.TehsilId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("tehsilid");
+                .HasConstraintName("fkAcqTehsilId");
 
-            builder.HasOne(d => d.VillageType)
+            builder.HasOne(d => d.Zone)
                 .WithMany(p => p.Acquiredlandvillage)
-                .HasForeignKey(d => d.VillageTypeId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("villagetypeid");
-
+                .HasForeignKey(d => d.ZoneId)
+                .HasConstraintName("fkAcqZoneId");
 
 
         }
-
-
-
 
     }
 }

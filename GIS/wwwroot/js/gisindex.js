@@ -3,6 +3,10 @@ var map;
 var zoomZone = [];
 var zoomvillage = [];
 var ZoomPlot = [];
+var ABADI_LAYER = [];
+var BURJI_LAYER = [];
+var CLEAN_LAYER = [];
+var CLEANTEXT_LAYER = [];
 $(document).ready(function () {
     console.log('f9');
     HttpGet(`/GIS/GetZoneList`, 'json', function (response) {
@@ -102,6 +106,7 @@ function initialize() {
     //  showLegend();
 }
 
+
 /*Zone Boundary Start*/
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
@@ -117,7 +122,7 @@ function showDisBoundaries(ploygn, xaixis, yaixis) {
     var sl = createPolygon(getLatLongArr(ploygn));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
     zoomZone.push(sl);
-    map.setZoom(14);
+    map.setZoom(10);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
 
 }
@@ -127,7 +132,7 @@ function showDisBoundaries(ploygn, xaixis, yaixis) {
 function showVillage(maxima, zoneId) {
     var villageid = maxima.replace('V', '');
     HttpGet("/GIS/GetVillageDetails?VillageId=" + parseInt(villageid) + "&ZoneId=" + zoneId, 'json', function (response, villageid) {
-        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, villageid);
+        showDisBoundariesVillage(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate, response[0].id);
     });
 }
 function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
@@ -136,7 +141,7 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
         zoomvillage[x].setMap(null);
     }
     var sl = createPolygon(getLatLongArr(ploygn));
-    sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
+    sl.setOptions({ strokeWeight: 5, strokeColor: '#FF5733', fillOpacity: 0, clickable: !1 });
     zoomvillage.push(sl);
     map.setZoom(14);
     map.panTo(new google.maps.LatLng(yaixis, xaixis));
@@ -145,87 +150,70 @@ function showDisBoundariesVillage(ploygn, xaixis, yaixis, villageid) {
 function showvillagelayers(villageid) {
 
     HttpGet(`/GIS/GetAbadiDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
-        showDisBoundariesAbadi(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
+        showDisBoundariesAbadi(response);
+    });
+
+    HttpGet(`/GIS/GetBurjiDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesBurji(response);
+    });
+    //HttpGet(`/GIS/GetCleanDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+    //    showDisBoundariesClean(response);
+    //});
+
+    HttpGet(`/GIS/GetCleantextDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesCleantext(response);
+    });
+
+    HttpGet(`/GIS/GetDimDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesDim(response);
+    });
+    HttpGet(`/GIS/GetDimDetails?VillageId=${parseInt(villageid)}`, 'json', function (response) {
+        showDisBoundariesDim(response);
     });
 
 }
 
-function showDisBoundariesAbadi(ploygn, xaixis, yaixis) {
-
-    //for (var x = 0; x < zoomvillage.length; x++) {
-    //    zoomvillage[x].setMap(null);
-    //}
-    var sl = createLine(getLatLongArr(ploygn));
-    sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
-    zoomvillage.push(sl);
-    //map.setZoom(14);
-    //map.panTo(new google.maps.LatLng(yaixis, xaixis));
-    //showvillagelayers(villageid);
-}
-
-/*Village Boundary End*/
-//common function
-
-function createPolygon(_path) {
-    var tmpLine = new google.maps.Polygon({
-        strokeColor: '#666666',
-        fillColor: '#FF8800',
-        fillOpacity: 0.7,
-        strokeOpacity: 1,
-        strokeWeight: 1,
-        clickable: !1,
-        map: map,
-        path: _path
-    });
-    return tmpLine;
-}
-
-function createLine(_path) {
-    var tmpLine = new google.maps.Polyline({
-        strokeColor: '#4679BD',
-        strokeWeight: 1,
-        clickable: !1,
-        map: map,
-        path: _path
-    });
-    return tmpLine;
-}
-
-function createPoint(pos) {
-    var pt = new google.maps.Marker({
-        position: pos,
-        icon: 'images/marker.png',
-        map: map,
-        clickable: !1
-    });
-    return pt;
-}
-
-
-
-function getLatLongArr(pgString) {
-    var latLngArr = [];
-    pgString = pgString.substring(pgString.lastIndexOf('(') + 1, pgString.indexOf(')'));
-    var longLatArr = pgString.split(',');
-    for (var i = 0; i < longLatArr.length; i++) {
-        var LongLatsingle = longLatArr[i].split(' ');
-        latLngArr.push(new google.maps.LatLng(parseFloat(LongLatsingle[1]), parseFloat(LongLatsingle[0])));
+function showDisBoundariesAbadi(response) {
+    var abadi = $.map(response, function (el) { return el; })
+    for (i = 0; i < abadi.length; i++) {
+        var ln = createLine(getLatLongArr(abadi[i].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#900C3F' });
+        ABADI_LAYER.push(ln);
     }
-    return latLngArr;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
+function showDisBoundariesBurji(response) {
+    var burji = $.map(response, function (el) { return el; })
+    for (e = 0; e < burji.length; e++) {
+        var ln = createLine(getLatLongArr(burji[e].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#83FF33' });
+        BURJI_LAYER.push(ln);
+    }
+}
+function showDisBoundariesClean(response) {
+    var clean = $.map(response, function (el) { return el; })
+    for (f = 0; f < clean.length; f++) {
+        var ln = createLine(getLatLongArr(clean[f].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#AB41AF' });
+        CLEAN_LAYER.push(ln);
+    }
+}
+function showDisBoundariesCleantext(response) {
+    var cleantext = $.map(response, function (el) { return el; })
+    for (g = 0; g < cleantext.length; g++) {
+        var ln = createPoint(getLatLongArr(cleantext[g].polygon)[0]);
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#AF4167 ' });
+        CLEANTEXT_LAYER.push(ln);
+    }
+}
+function showDisBoundariesDim(response) {
+    var clean = $.map(response, function (el) { return el; })
+    for (f = 0; f < clean.length; f++) {
+        var ln = createLine(getLatLongArr(clean[f].polygon));
+        ln.setOptions({ strokeWeight: 3, strokeColor: '#41AF78' });
+        CLEAN_LAYER.push(ln);
+    }
+}
+/*Village Boundary End*/
 
 $('#TransparencyRange, #MapOption').on('click', function () {
     if ($(this).hasClass('show')) {

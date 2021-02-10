@@ -23,6 +23,26 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetAbadiDetails(villageId);
         }
 
+        public async Task<List<Gisburji>> GetBurjiDetails(int villageId)
+        {
+            return await _iGISSRepository.GetBurjiDetails(villageId);
+        }
+
+        public async Task<List<GISClean>> GetCleanDetails(int villageId)
+        {
+            return await _iGISSRepository.GetCleanDetails(villageId);
+        }
+
+        public async Task<List<GisCleanText>> GetCleantextDetails(int villageId)
+        {
+            return await _iGISSRepository.GetCleantextDetails(villageId);
+        }
+
+        public async Task<List<Gisdim>> GetDimDetails(int villageId)
+        {
+            return await _iGISSRepository.GetDimDetails(villageId);
+        }
+
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _iGISSRepository.GetPlotList(VillageId);

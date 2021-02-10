@@ -58,7 +58,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<ITehsilRepository, TehsilRepository>();
-
+            services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -95,7 +95,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<ITehsilService, TehsilService>();
-
+            services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
 
         }
     }

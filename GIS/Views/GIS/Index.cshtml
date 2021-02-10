@@ -140,12 +140,51 @@
     </section>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS , any custom js-->
-    <script src="~/js/main.js"></script>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/main.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/main.min.js" asp-append-version="true"></script>
+    </environment>
     <script src="~/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/js.js"></script>
-    <script src="~/js/site.js"></script>
+    <environment include="Development">
+        <script src="~/js/gisindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/gisindex.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/site.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/js/Zoom.js"></script>
-    <script src="~/js/fullscreen.js"></script>
+    <environment include="Development">
+        <script src="~/js/Zoom.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/Zoom.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/fullscreen.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/fullscreen.min.js" asp-append-version="true"></script>
+    </environment>
+    <environment include="Development">
+        <script src="~/js/common.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/common.min.js" asp-append-version="true"></script>
+    </environment>
+    @*<script src="~/js/main.js"></script>
+        <script src="~/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/js.js"></script>
+        <script src="~/js/site.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/js/Zoom.js"></script>
+        <script src="~/js/fullscreen.js"></script>*@
 </body>
 </html>

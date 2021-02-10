@@ -4,5 +4,47 @@
     "inputFiles": [
       "wwwroot/js/jquery-ui.min.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/gisindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/gisindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/fullscreen.min.js",
+    "inputFiles": [
+      "wwwroot/js/fullscreen.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/main.min.js",
+    "inputFiles": [
+      "wwwroot/js/main.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/popper.min.js",
+    "inputFiles": [
+      "wwwroot/js/popper.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/site.min.js",
+    "inputFiles": [
+      "wwwroot/js/site.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/Zoom.min.js",
+    "inputFiles": [
+      "wwwroot/js/Zoom.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/common.min.js",
+    "inputFiles": [
+      "wwwroot/js/common.js"
+    ]
   }
 ]

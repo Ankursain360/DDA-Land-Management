@@ -44,5 +44,21 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetAbadiDetails(VillageId));
         }
+        public async Task<JsonResult> GetBurjiDetails(int VillageId)
+        {
+            return Json(await _GISService.GetBurjiDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCleanDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCleanDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCleantextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCleantextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetDimDetails(int VillageId)
+        {
+            return Json(await _GISService.GetDimDetails(VillageId));
+        }
     }
 }
