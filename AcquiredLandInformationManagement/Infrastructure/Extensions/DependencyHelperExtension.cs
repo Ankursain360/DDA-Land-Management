@@ -51,13 +51,14 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IJaraidetailRepository, JaraidetailRepository>(); //added by Nikita
             services.AddScoped<IUndersection17Repository, Undersection17Repository>();
             services.AddScoped<IModuleRepository, ModuleRepository>();
-            services.AddScoped<IActionsRepository, ActionsRepository>();
+           
             services.AddScoped<IMenuRepository, MenuRepository>();
             services.AddScoped<IPermissionsRepository, PermissionsRepository>();
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-
+            services.AddScoped<ITehsilRepository, TehsilRepository>();
+            services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -88,12 +89,13 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection17Service, Undersection17Service>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
-            services.AddScoped<IActionsService, ActionsService>();
+           
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-
+            services.AddScoped<ITehsilService, TehsilService>();
+            services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
 
         }
     }

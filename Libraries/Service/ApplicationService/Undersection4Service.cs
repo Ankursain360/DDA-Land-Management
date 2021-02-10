@@ -43,9 +43,9 @@ namespace Libraries.Service.ApplicationService
             return model;
         }
 
-        public async Task<List<Purpose>> GetAllPurpose()
+        public async Task<List<Proposaldetails>> GetAllProposal()
         {
-            List<Purpose> purposeList = await _undersection4Repository.GetAllPurpose();
+            List<Proposaldetails> purposeList = await _undersection4Repository.GetAllProposal();
             return purposeList;
         }
 
@@ -66,12 +66,12 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _undersection4Repository.FindBy(a => a.Id == id);
             Undersection4 model = result.FirstOrDefault();
-            model.PurposeId = undersection4.PurposeId;
+            model.ProposalId = undersection4.ProposalId;
             model.Number = undersection4.Number;
             model.Ndate = undersection4.Ndate;
             model.Npurpose = undersection4.Npurpose;
             model.TypeDetails = undersection4.TypeDetails;
-            model.TypePurpose = undersection4.TypePurpose;
+         //   model.TypePurpose = undersection4.TypePurpose;
           
             model.IsActive = undersection4.IsActive;
             model.ModifiedDate = DateTime.Now;
@@ -84,6 +84,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Undersection4 undersection4)
         {
             undersection4.CreatedBy = 1;
+            undersection4.IsActive = 1;
             undersection4.CreatedDate = DateTime.Now;
 
             _undersection4Repository.Add(undersection4);

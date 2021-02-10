@@ -43,7 +43,7 @@ namespace AcquiredLandInformationManagement.Controllers
             khasra.IsActive = 1;
             khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
            
-            khasra.LocalityList = await _khasraService.GetAllLocalityList();
+            khasra.VillageList = await _khasraService.GetAllVillageList();
             return View(khasra);
         }
 
@@ -56,7 +56,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 khasra.LandCategoryList = await _khasraService.GetAllLandCategory();
 
-                khasra.LocalityList = await _khasraService.GetAllLocalityList();
+                khasra.VillageList = await _khasraService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
@@ -94,7 +94,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _khasraService.FetchSingleResult(id);
             Data.LandCategoryList = await _khasraService.GetAllLandCategory();
           
-            Data.LocalityList = await _khasraService.GetAllLocalityList();
+            Data.VillageList = await _khasraService.GetAllVillageList();
 
             if (Data == null)
             {
@@ -164,7 +164,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _khasraService.FetchSingleResult(id);
            
             Data.LandCategoryList = await _khasraService.GetAllLandCategory();
-            Data.LocalityList = await _khasraService.GetAllLocalityList();
+            Data.VillageList = await _khasraService.GetAllVillageList();
 
 
             if (Data == null)

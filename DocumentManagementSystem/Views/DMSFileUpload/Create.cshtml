@@ -121,7 +121,7 @@
                     </div>
                     <div class="row mt-md-3">
                         <div class=" col-md-12">
-                            <button class="btn btn-theme " type="submit"   onclick="return CheckFileValidation();">Create</button>
+                            <button class="btn btn-theme " type="submit" onclick="return CheckFileValidation();">Create</button>
                             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
 
                         </div>
@@ -165,16 +165,16 @@
 
                                 </div>
                             </div>
-                                <a asp-action="DownloadCSVFormat" class="d-flex align-items-center btn btn-success">
-                                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                                    <small>Download CSV Format</small>
-                                </a>
+                            <a asp-action="DownloadCSVFormat" class="d-flex align-items-center btn btn-success">
+                                <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                                <small>Download CSV Format</small>
+                            </a>
                         </div>
                     </div>
 
                     <div class="row mt-md-3">
                         <div class=" col-md-12">
-                            <button class="btn btn-theme " type="submit"  onclick="return CheckBulkValidation();">Create</button>
+                            <button class="btn btn-theme " type="submit" onclick="return CheckBulkValidation();">Create</button>
                             @Html.ActionLink("Back", "Index", "DMSFileUpload", null, new { @class = "btn btn-theme " })
                         </div>
                     </div>
@@ -185,7 +185,7 @@
                     @{
                         if (ViewBag.Summary != null)
                         {
-                            @Html.Raw(ViewBag.Summary);
+                        @Html.Raw(ViewBag.Summary);
                         }
                     }
 
@@ -194,7 +194,7 @@
                     @{
                         if (ViewBag.SummaryUniq != null)
                         {
-                            @Html.Raw(ViewBag.SummaryUniq);
+                        @Html.Raw(ViewBag.SummaryUniq);
                         }
                     }
 
@@ -203,13 +203,13 @@
             @{
                 if (ViewBag.PdfGenerate == "Yes")
                 {
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>You Can Download!</strong> Error while Bulk Uploading .
-                            <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>You Can Download!</strong> Error while Bulk Uploading .
+                    <button onclick="saveDiv('pdf','Title')" class="btn btn-theme">Download Error List</button>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
 
                 }
             }

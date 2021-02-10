@@ -19,14 +19,14 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<List<Purpose>> GetAllPurpose()
+        public async Task<List<Proposaldetails>> GetAllProposal()
         {
-            List<Purpose> purposeList = await _dbContext.Purpose.Where(x => x.IsActive == 1).ToListAsync();
+            List<Proposaldetails> purposeList = await _dbContext.Proposaldetails.Where(x => x.IsActive == 1).ToListAsync();
             return purposeList;
         }
         public async Task<List<Undersection4>> GetAllUndersection4()
         {
-            return await _dbContext.Undersection4.Include(x => x.Purpose).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Undersection4.Include(x => x.Proposal).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 
@@ -41,7 +41,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Undersection4>> GetPagedUndersection4details(Undersection4SearchDto model)
         {
-            return await _dbContext.Undersection4.Include(x => x.Purpose).OrderByDescending(x => x.Id).GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+            return await _dbContext.Undersection4.Include(x => x.Proposal).OrderByDescending(x => x.Id).GetPaged<Undersection4>(model.PageNumber, model.PageSize);
         }
 
     }

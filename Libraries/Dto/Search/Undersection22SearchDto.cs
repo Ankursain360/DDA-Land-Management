@@ -8,6 +8,6 @@ namespace Dto.Search
     
     public class Undersection22SearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string notification { get; set; }
     }
 }

@@ -9,7 +9,9 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -188,6 +190,16 @@ namespace SiteMaster.Controllers
         {
             ZoneId = ZoneId ?? 0;
             return Json(await _localityService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Locality> result = await _localityService.GetAllLocality();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Locality.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

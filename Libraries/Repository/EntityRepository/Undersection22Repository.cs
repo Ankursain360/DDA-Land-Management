@@ -6,6 +6,7 @@ using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,7 +22,77 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Undersection22>> GetPagedUndersection22(Undersection22SearchDto model)
         {
-            return await _dbContext.Undersection22.GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Undersection22
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                       .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                       .OrderBy(a => a.NotificationNo)
+                                       .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                         .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                         .OrderBy(a => a.NotificationDate)
+                                         .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+                   
+                   
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                         .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                         .OrderByDescending(a => a.IsActive)
+                                         .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                       .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                       .OrderByDescending(a => a.NotificationNo)
+                                       .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("DATE"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                         .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                         .OrderByDescending(a => a.NotificationDate)
+                                         .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection22
+                                         .Where(x => (string.IsNullOrEmpty(model.notification) || x.NotificationNo.Contains(model.notification)))
+                                         .OrderBy(a => a.IsActive)
+                                         .GetPaged<Undersection22>(model.PageNumber, model.PageSize);
+
+                        break;
+                }
+            }
+            return data;
         }
 
 

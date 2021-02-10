@@ -7,20 +7,20 @@
 <div class="pt-3">
 
 
-    <form asp-action="View" enctype="multipart/form-data" disabled="disabled" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex"> View Details</h3>
+    <form asp-action="View" enctype="multipart/form-data" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex"> View  Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div id="Divclsification" class="mt-md-3">
             <h3 class="my-3 d-flex sub-heading">Type</h3>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+            <input type="hidden" asp-for="Id" />
             <div class="row">
                 <div class="col-md-3">
                     <input type="hidden" asp-for="IsFileDocument" id="Type" value="0" />
 
                     <div class="form-check theme">
-                        <input class="form-check-input" disabled="disabled" type="radio" asp-for="IsFileDocument" name="A" id="rFile" value="0" checked>
+                        <input class="form-check-input"  disabled="disabled" type="radio" asp-for="IsFileDocument" name="A" id="rFile" value="0" checked>
                         <label class="form-check-label" for="radio">
                             File
                         </label>
@@ -90,6 +90,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="SchemeId" class="text-danger "></span>
                     <label class="floating-label">Scheme </label>
                 </div>
             </div>
@@ -100,6 +101,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="ZoneId" class="text-danger "></span>
                     <label class="floating-label">Zone </label>
                 </div>
             </div>
@@ -110,6 +112,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="LocalityId" class="text-danger "></span>
                     <label class="floating-label">Locality </label>
                 </div>
             </div>
@@ -135,7 +138,7 @@
             </div>
 
             <div class="col-md-2">
-                <input type="hidden" asp-for="IsPartOfMainFile" id="TypeOfDamageAssessee" value="0" />
+                <input type="hidden" asp-for="IsPartOfMainFile" id="TypeOfDamageAssessee" />
 
                 <div class="form-check theme">
                     <input class="form-check-input" disabled="disabled" type="radio" asp-for="IsPartOfMainFile" name="grpDamageAssesseeType" id="rOriginal" value="1">
@@ -203,22 +206,21 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <select asp-for="SchemeDptBranch" disabled="disabled" class="floating-label-field floating-label-field--s3"
+                                    <select asp-for="SchemeDptBranch" disabled="disabled" class="floating-label-field floating-label-field--s3" id="SchemeDptBranch"
                                             asp-items="@(new SelectList(Model.SchemeFileLoadingList,"Id","SchemeName"))">
                                         <option value="">---Select---</option>
 
                                     </select>
                                 </td>
                                 <td>
-                                    <select asp-for="LocalityIdForPartFile" disabled="disabled" class="floating-label-field floating-label-field--s3"
+                                    <select asp-for="LocalityIdForPartFile" disabled="disabled" class="floating-label-field floating-label-field--s3" id="LocalityIdForPartFile"
                                             asp-items="@(new SelectList(Model.LocalityList,"Id","Name"))">
                                         <option value="">---Select---</option>
-
                                     </select>
                                 </td>
                                 <td>
                                     <div class="floating-label-wrap mb-3 mb-md-0">
-                                        <input type="text" asp-for="Subject" disabled="disabled" placeholder="Subject" class="floating-label-field floating-label-field--s3" />
+                                        <input type="text" disabled="disabled" asp-for="Subject" placeholder="Subject" class="floating-label-field floating-label-field--s3" />
                                     </div>
                                 </td>
                                 <td>
@@ -242,7 +244,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="RecordRoomNo" type="text" disabled="disabled" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                    <input asp-for="RecordRoomNo" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
                            limit="10">
                     <span asp-validation-for="RecordRoomNo" class="text-danger "></span>
                     <label class="floating-label">Record Room No</label>
@@ -250,11 +252,12 @@
             </div>
             <div class="col-md-3">
                 <div class="floating-label-wrap">
-                    <select asp-for="AlmirahId" disabled="disabled" class="floating-label-field floating-label-field--s3"
+                    <select asp-for="AlmirahId"  disabled="disabled" class="floating-label-field floating-label-field--s3"
                             asp-items="@(new SelectList(Model.AlmirahList,"Id","AlmirahNo"))">
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="AlmirahId" class="text-danger "></span>
                     <label class="floating-label">Almirah No </label>
                 </div>
             </div>
@@ -265,6 +268,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="RowId" class="text-danger "></span>
                     <label class="floating-label">Row No </label>
                 </div>
             </div>
@@ -275,6 +279,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for="ColumnId" class="text-danger "></span>
                     <label class="floating-label">Column No </label>
                 </div>
             </div>
@@ -288,6 +293,7 @@
                         <option value="">---Select---</option>
 
                     </select>
+                    <span asp-validation-for=" BundleId" class="text-danger "></span>
                     <label class="floating-label">Bundle No </label>
                 </div>
             </div>
@@ -311,12 +317,10 @@
 
 
             <div class="col-md-12">
-               
-
+             
                 @Html.ActionLink("Back", "Index", "DataStorageDetails", null, new { @class = "btn btn-theme" })
             </div>
     </form>
-    
     <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
     <environment include="Development">
         <script src="~/js/DataStorageView.js"></script>

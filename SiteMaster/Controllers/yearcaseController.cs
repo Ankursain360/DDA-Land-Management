@@ -10,6 +10,10 @@ using SiteMaster.Filters;
 using System;
 using System.Threading.Tasks;
 
+using System.Collections.Generic;
+
+using Utility.Helper;
+
 namespace SiteMaster.Controllers
 {
     public class yearcaseController : BaseController
@@ -192,7 +196,14 @@ namespace SiteMaster.Controllers
 
         }
 
+        public async Task<IActionResult> Download()
+        {
+            List<Caseyear> result = await _caseService.GetAll();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"CaseYear.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
 
 
 

@@ -55,10 +55,10 @@ namespace Libraries.Service.ApplicationService
             return landcategoryList;
         }
 
-        public async Task<List<Locality>> GetAllLocalityList()
+        public async Task<List<Acquiredlandvillage>> GetAllVillageList()
         {
-            List<Locality> localityList = await _khasraRepository.GetAllLocalityList();
-            return localityList;
+            List<Acquiredlandvillage> villageList = await _khasraRepository.GetAllVillageList();
+            return villageList;
         }
 
         public async Task<List<Khasra>> GetKhasraUsingRepo()
@@ -74,7 +74,7 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _khasraRepository.FindBy(a => a.Id == id);
             Khasra model = result.FirstOrDefault();
-            model.LocalityId = khasra.LocalityId;
+            model.AcquiredlandvillageId = khasra.AcquiredlandvillageId;
             model.Name = khasra.Name;
             model.LandCategoryId = khasra.LandCategoryId;
             model.RectNo = khasra.RectNo;

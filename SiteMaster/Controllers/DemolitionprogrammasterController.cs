@@ -177,7 +177,14 @@ namespace SiteMaster.Controllers
         }
 
 
+        public async Task<IActionResult> Download()
+        {
+            List<Demolitionprogram> result = await _demolitionprogrammasterService.GetDemolitionprogrammaster();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"DemolitionProgrammaster.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
 
 
 

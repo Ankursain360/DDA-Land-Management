@@ -47,7 +47,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             Undersection4 undersection4 = new Undersection4();
             undersection4.IsActive = 1;
-            undersection4.PurposeList = await _undersection4service.GetAllPurpose();
+            undersection4.ProposalList = await _undersection4service.GetAllProposal();
            
             return View(undersection4);
         }
@@ -59,7 +59,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                undersection4.PurposeList = await _undersection4service.GetAllPurpose();
+                undersection4.ProposalList = await _undersection4service.GetAllProposal();
 
                 if (ModelState.IsValid)
                 {
@@ -93,7 +93,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _undersection4service.FetchSingleResult(id);
          
-            Data.PurposeList = await _undersection4service.GetAllPurpose();
+            Data.ProposalList = await _undersection4service.GetAllProposal();
 
             if (Data == null)
             {
@@ -161,7 +161,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _undersection4service.FetchSingleResult(id);
-            Data.PurposeList = await _undersection4service.GetAllPurpose();
+            Data.ProposalList = await _undersection4service.GetAllProposal();
            
 
             if (Data == null)

@@ -1,160 +1,150 @@
-﻿
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model Libraries.Model.Entity.Undersection22plotdetails
+@await Component.InvokeAsync("PageHeader", new { pageName = "Notification U/S-22 Plot Form" })
 
-<link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-<script src="~/js/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.10.2.js" integrity="sha256-it5nQKHTz+34HijZJQkpNBIHsjpV8b6QzMJs9tmOBSo=" crossorigin="anonymous"></script>
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-22 Plot Form</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+
+<div class="pt-3">
+
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection22Id"
+                            asp-items="@(new SelectList(Model.Undersection22List,"Id","NotificationNo"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="UnderSection22Id" class="text-danger"></span>
+                    <label asp-for="UnderSection22Id" class="floating-label">Notification No(U/S-22) </label>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
 
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading  dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId"
+                            asp-items="@(new SelectList(Model.AcquiredlandvillageList,"Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
+                    <label asp-for="AcquiredlandvillageId" class="floating-label">Village Name </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId"
+                            asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No. </label>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div id="DivSection">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class="dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Notification U/S-22 Details</h6>
-                                </div>
-                            </div>
-                        </div>
+        <div id="Divclsification">
+            <h3 class="my-3 d-flex sub-heading"> Area </h3>
+            <div class="row mt-md-3">
+                <div class="col-md-2">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Bigha" placeholder="Name" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Bigha" class="text-danger"></span>
+                        <label class="floating-label">Bigha    </label>
                     </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Biswa" placeholder="Name" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Biswa" class="text-danger"></span>
+                        <label class="floating-label">Biswa  </label>
                     </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label class="control-label lb-sm">Notification No(U/S-22)</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">F.4(25)/62-L&H</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Village Name</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">Nimri</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Khasra No</label>
-                            <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                <option value="0">0//10</option>
-                            </select>
-                        </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="floating-label-wrap mb-3 mb-md-0">
+                        <input asp-for="Biswanshi" placeholder="Name" type="text"
+                               class="floating-label-field floating-label-field--s3" />
+                        <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                        <label class="floating-label">Biswanshi </label>
                     </div>
-                    <div id="DivArea">
-                        <div class="row" style="margin-bottom:35px;">
-                            <div class="col-sm-12">
-                                <div class="dda-innerheading">
-                                    <div class="col-md-12">
-                                        <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Bigha</label>
-
-                                <input type="text" class="form-control" />
-
-                            </div>
-
-                            <div class="form-group col-md-4">
-
-                                <label class="control-label lb-sm">Biswa</label>
-
-                                <input type="text" class="form-control" />
-                            </div>
-                            <div class="form-group col-md-4">
-                                <label class="control-label lb-sm">Biswanshi</label>
-                                <input type="text" class="form-control" placeholder="0" />
-                            </div>
-                        </div></div>
-                        <div id="DivNotificationTaken">
-                            <div class="row" style="margin-bottom:35px;">
-                                <div class="col-sm-12">
-                                    <div class="dda-innerheading">
-                                        <div class="col-md-12">
-                                            <h6 class="pull-left" style="color:white;margin-top:5px;">Notification Taken</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-
-
-                                <div class="form-group col-md-4">
-                                    <label class="control-label lb-sm">Notification U/S-4</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="0">F.4(25)/62-L&H</option>
-                                        <option value="1">Acquired/Nazul-2 Land</option>
-                                        <option value="2">(MOR)Ministry of Rehabilitation Land</option>
-                                        <option value="3">Planned Land</option>
-                                        <option value="4">L&DO Land</option>
-                                        <option value="5">Damage Payee Properties Land</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-
-                                    <label class="control-label lb-sm">Notification U/S-6</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="0">F.4(25)/62-L&H</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label class="control-label lb-sm">Notification U/S-17</label>
-                                    <select style="height:30px; background-color: #dddddd;" id="" required="" class="form-control">
-                                        <option value="0">F.4(25)/62-L&H</option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-                                <div class="form-row">
-                                    <div class="form-group col-md-12">
-                                        <label class="control-label lb-sm">Remarks</label>
-                                        <textarea type="text" class="form-control" style=" background-color: #dddddd;"></textarea>
-                                    </div>
-                                </div>
-
-
-
-
-
-
-                                <div class="form-row ">
-                                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                                        @Html.ActionLink("Back", "Index", "UnderSection22PlotDetails", null, new { @class = "btn btn-primary dda-pageheading" })
-                                    </div>
-                                </div>
-                            </div>
-</form>
+                </div>
+            </div>
         </div>
-    </div>
+        <h3 class="my-3 d-flex sub-heading"> Notifications </h3>
+        <div class="row mt-md-3">
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection4Id"
+                            asp-items="@(new SelectList(Model.Undersection4List,"Id","Number"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="UnderSection4Id" class="text-danger"></span>
+                    <label asp-for="UnderSection4Id" class="floating-label">Notification No(U/S-4) </label>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id"
+                            asp-items="@(new SelectList(Model.Undersection6List,"Id","UnderSectionNotificationNumber"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
+                    <label asp-for="UnderSection6Id" class="floating-label">Notification No(U/S-6) </label>
+                </div>
+            </div>
+            @*<div class="col-md-4">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
+                            asp-items="@(new SelectList(Model.Undersection17List,"Id","NotificationNo"))">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="UnderSection17Id" class="text-danger"></span>
+                    <label asp-for="UnderSection17Id" class="floating-label">Notification No(U/S-17) </label>
+                </div>
+            </div>*@
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-2">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Remarks" placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="Remarks" class="text-danger"></span>
+                    <label class="floating-label">Remarks </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "UnderSection22PlotDetails", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
 </div>
 
 
 
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/us22plotcreate.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/us22plotcreate.min.js" asp-append-version="true"></script>
+</environment>

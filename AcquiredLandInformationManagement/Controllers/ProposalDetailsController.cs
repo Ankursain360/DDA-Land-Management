@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
 using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
@@ -10,12 +12,13 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 
 {
     
-        public class ProposalDetailsController : Controller
+        public class ProposalDetailsController : BaseController
         {
             private readonly IProposaldetailsService _proposaldetailsService;
 
@@ -23,7 +26,8 @@ namespace AcquiredLandInformationManagement.Controllers
             {
             _proposaldetailsService = proposaldetailsService;
             }
-            public async Task<IActionResult> Index()
+        [AuthorizeContext(ViewAction.View)]
+        public async Task<IActionResult> Index()
             {
                 var result = await _proposaldetailsService.GetAllProposaldetails();
                 return View(result);
@@ -36,7 +40,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return PartialView("_List", result);
         }
 
-
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create()
         {
             Proposaldetails proposaldeatils = new Proposaldetails();
@@ -47,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         [HttpPost]
-       
+        [AuthorizeContext(ViewAction.Add)]
         public async Task<IActionResult> Create(Proposaldetails proposaldeatils)
         {
             try
@@ -83,7 +87,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 return View(proposaldeatils);
             }
         }
-
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id)
         {
 
@@ -98,6 +102,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Proposaldetails proposaldeatils)
         {
             if (ModelState.IsValid)
@@ -142,7 +147,7 @@ namespace AcquiredLandInformationManagement.Controllers
             }
         }
 
-
+        [AuthorizeContext(ViewAction.Delete)]
         public async Task<IActionResult> Delete(int id)  
         {
             if (id == 0)
@@ -159,7 +164,7 @@ namespace AcquiredLandInformationManagement.Controllers
             ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             return View("Index", result);
         }
-
+        [AuthorizeContext(ViewAction.View)]
         public async Task<IActionResult> View(int id)
         {
             var Data = await _proposaldetailsService.FetchSingleResult(id);
@@ -171,6 +176,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Proposaldetails> result = await _proposaldetailsService.GetAllProposaldetails();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Proposaldetails.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
     }
 }

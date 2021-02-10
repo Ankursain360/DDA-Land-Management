@@ -27,8 +27,8 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
-        [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+       [AuthorizeContext(ViewAction.View)]
+      public  IActionResult Index()
         {
 
             return View();
@@ -51,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
             acquiredlandvillage.IsActive = 1;
             acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            acquiredlandvillage.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
+           
             return View(acquiredlandvillage);
         }
 
@@ -65,7 +65,7 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
                 acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-                acquiredlandvillage.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
+               
 
                 if (ModelState.IsValid)
                 {
@@ -75,7 +75,7 @@ namespace AcquiredLandInformationManagement.Controllers
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
                         var list = await _acquiredlandvillageService.GetAcquiredlandvillage();
-                        return View("Index", list);
+                        return View("Index");
                     }
                     else
                     {
@@ -103,8 +103,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
             Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            Data.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
-
+           
             if (Data == null)
             {
                 return NotFound();
@@ -178,8 +177,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
             Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            Data.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
-
+            
 
             if (Data == null)
             {
@@ -188,7 +186,14 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(Data);
         }
 
+        public async Task<IActionResult> Download()
+        {
+            List<Acquiredlandvillage> result = await _acquiredlandvillageService.GetAcquiredlandvillage();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Acquiredlandvillage.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
 
 
     }

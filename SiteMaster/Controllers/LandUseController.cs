@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using Core.Enum;
 using SiteMaster.Filters;
+using Utility.Helper;
+
 namespace SiteMaster.Controllers
 {
     public class LandUseController : BaseController
@@ -183,6 +185,16 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Landuse> result = await _landuseService.GetAllLandUse();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Landuse.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -95,7 +96,10 @@ namespace Libraries.Service.ApplicationService
             _nazulRepository.Add(nazul);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
+        public async Task<PagedResult<Nazul>> GetPagedNazul(NazulSearchDto model)
+        {
+            return await _nazulRepository.GetPagedNazul(model);
+        }
 
 
 

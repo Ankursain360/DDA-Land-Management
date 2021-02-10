@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
     {
         public Zone()
         {
+            Acquiredlandvillage = new HashSet<Acquiredlandvillage>();
             PropertyregistrationHandedOverZone = new HashSet<Propertyregistration>();
             PropertyregistrationTakenOverZone = new HashSet<Propertyregistration>();
             LandtransferHandedOverZone = new HashSet<Landtransfer>();
@@ -42,6 +43,9 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public string DepartmentName { get; set; }
+        public decimal? Xcoordinate { get; set; }
+        public decimal? Ycoordinate { get; set; }
+        public string Polygon { get; set; }
 
         public virtual Department Department { get; set; }
         public virtual ICollection<Village> Village { get; set; }
@@ -67,6 +71,6 @@ namespace Libraries.Model.Entity
         public ICollection<Mutationdetails> Mutationdetails { get; set; }
         public ICollection<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
-
+        public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
     }
 }

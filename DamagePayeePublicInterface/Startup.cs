@@ -122,9 +122,15 @@ namespace DamagePayeePublicInterface
             app.UseAuthorization();
             app.UseCookiePolicy();
             app.UseSession();
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapDefaultControllerRoute().RequireAuthorization();
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute().RequireAuthorization();
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index1}/{id?}").RequireAuthorization();
             });
         }
     }

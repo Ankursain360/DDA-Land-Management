@@ -32,7 +32,7 @@ function fileValidation(filePath, fileInput, size) {
     }
 
 }
-divBulkFileUpload
+
 $("input[name='grpIsFileBulkUpload']").click(function () {
     var selected = $("input[type='radio'][name='grpIsFileBulkUpload']:checked");
     $("#IsFileBulkUpload").val(selected.val());

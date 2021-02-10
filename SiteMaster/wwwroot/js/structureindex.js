@@ -32,7 +32,9 @@ $("#btnDescending").click(function () {
     sortOrder = 2;//for Descending
     GetStructure(currentPageNumber, currentPageSize, sortOrder);
 });
-
+$('#ddlSort').change(function () {
+    GetStructure(currentPageNumber, currentPageSize, sortOrder);
+});
 function GetStructure(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     HttpPost(`/Structure/List`, 'html', param, function (response) {

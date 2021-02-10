@@ -30,7 +30,7 @@ $('#ddlSort').change(function () {
 
 $("#btnReset").click(function () {
     $('#FileNo').val('');
-    $('#Name').val('');   
+    $('#Name').val('');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -49,8 +49,8 @@ function GetDetails(pageNumber, pageSize) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
         name: "test",
-        FileNo:($('#FileNo').val()),
-        Name: ($('#Name').val()),    
+        FileNo: ($('#FileNo').val()),
+        Name: ($('#Name').val()),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: pageSize,

@@ -12,6 +12,17 @@ namespace Libraries.Model.Entity
         {
             Nazul = new HashSet<Nazul>();
             Plot = new HashSet<Plot>();
+            Gisaabadi = new HashSet<Gisaabadi>();
+            Gisburji = new HashSet<Gisburji>();
+            Gisclean = new HashSet<GISClean>();
+            Giscleantext = new HashSet<GisCleanText>();
+            Gisdim = new HashSet<Gisdim>();
+            Gisencroachment = new HashSet<GISEncroachment>();
+            Gisgosha = new HashSet<Gisgosha>();
+            Gisgrid = new HashSet<Gisgrid>();
+            Gisnala = new HashSet<GISnala>();
+            Gistext = new HashSet<Gistext>();
+            Gistrijunction = new HashSet<Gistrijunction>();
         }
 
         [Required(ErrorMessage = " Zone is mandatory")]
@@ -37,6 +48,16 @@ namespace Libraries.Model.Entity
         public virtual Zone Zone { get; set; }
         public virtual ICollection<Nazul> Nazul { get; set; }
         public ICollection<Plot> Plot { get; set; }
-
+        public ICollection<Gisaabadi> Gisaabadi { get; set; }
+        public ICollection<Gisburji> Gisburji { get; set; }
+        public ICollection<GISClean> Gisclean { get; set; }
+        public ICollection<GisCleanText> Giscleantext { get; set; }
+        public ICollection<Gisdim> Gisdim { get; set; }
+        public ICollection<GISEncroachment> Gisencroachment { get; set; }
+        public ICollection<Gisgosha> Gisgosha { get; set; }
+        public ICollection<Gisgrid> Gisgrid { get; set; }
+        public ICollection<GISnala> Gisnala { get; set; }
+        public ICollection<Gistext> Gistext { get; set; }
+        public ICollection<Gistrijunction> Gistrijunction { get; set; }
     }
 }

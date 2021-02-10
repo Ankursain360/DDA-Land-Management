@@ -35,11 +35,11 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Purpose Name</label>
-                        <select class="form-control dda-dropdown" asp-for="PurposeId" asp-items="@(new SelectList(Model.PurposeList, "Id","Name"))">
+                        <label class="control-label lb-sm">Proposal Name</label>
+                        <select class="form-control dda-dropdown" asp-for="ProposalId" asp-items="@(new SelectList(Model.ProposalList, "Id","Name"))">
                             <option>Select</option>
                         </select>
-                        <span asp-validation-for="PurposeId" class="text-danger"></span>
+                        <span asp-validation-for="ProposalId" class="text-danger"></span>
 
                     </div>
                 </div>
@@ -89,13 +89,13 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-row">
+                    @*<div class="form-row">
 
                         <div class="form-group col-md-12">
                             <label class="control-label lb-sm">Purpose</label>
                             <textarea type="text" asp-for="TypePurpose" class="form-control" style=" background-color: #dddddd;"></textarea>
                         </div>
-                    </div>
+                    </div>*@
                 </div>
 
 

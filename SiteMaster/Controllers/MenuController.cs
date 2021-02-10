@@ -14,6 +14,7 @@ using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
 using SiteMaster.Filters;
+using Utility.Helper;
 
 namespace SiteMaster.Controllers
 {
@@ -198,9 +199,15 @@ namespace SiteMaster.Controllers
         }
 
 
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Menu> result = await _menuService.GetAllMenu();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Menu.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
-
-
+        }
 
     }
 }

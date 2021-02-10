@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Hosting;
 using Dto.Search;
 using LandInventory.Filters;
 using Core.Enum;
+using Utility.Helper;
 
 namespace LandInventory.Controllers
 {
@@ -857,8 +858,69 @@ namespace LandInventory.Controllers
                 return View("Index");
             }
         }
+        //[HttpPost]
+        //public async Task<PartialViewResult> List([FromBody] PropertyRegisterationSearchDto model)
+        //{
+        //    int userId = SiteContext.UserId;
+        //    var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model, userId);
+        //    ViewBag.IsDisposedRightsUser = SiteContext.UserId;
+        //    ViewBag.IsUserCanEdit = SiteContext.UserId;
+        //    return PartialView("_List", result);
+        //}
+        [AuthorizeContext(ViewAction.Download)]
+        [HttpPost]
+        public async Task<IActionResult> DownloadIndex([FromBody] PropertyRegisterationSearchDto model)
+        {
+            var result = await _propertyregistrationService.GetPagedPropertyRegisteration(model, SiteContext.UserId);
+            List<PropertyRegisterationDownloadDto> data = new List<PropertyRegisterationDownloadDto>();
+            if (result != null)
+            {
+                for (int i = 0; i < result.Results.Count; i++)
+                {
+                    data.Add(new PropertyRegisterationDownloadDto()
+                    {
+                        Id = result.Results[i].Id,
+                        InventoriedInId = result.Results[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
+                        PlannedUnplannedLand = result.Results[i].PlannedUnplannedLand,
+                        ClassificationOfLand = result.Results[i].ClassificationOfLand.Name,
+                        Department = result.Results[i].Department.Name,
+                        Zone = result.Results[i].Zone.Name,
+                        Division = result.Results[i].Division == null ? "" : result.Results[i].Division.Name,
+                        PrimaryListNo = result.Results[i].PrimaryListNo == null ? "" : result.Results[i].PrimaryListNo
+                    });
+                }
+            }
+            //if (result != null)
+            //{
+            //    for (int i = 0; i < result.Count; i++)
+            //    {
+            //        data.Add(new PropertyRegisterationDownloadDto()
+            //        {
+            //            Id = result[i].Id,
+            //            InventoriedInId = result[i].InventoriedInId.ToString() == "1" ? "VLMS" : "Used",
+            //            PlannedUnplannedLand = result[i].PlannedUnplannedLand,
+            //            ClassificationOfLand = result[i].ClassificationOfLand.Name,
+            //            Department = result[i].Department.Name,
+            //            Zone = result[i].Zone.Name,
+            //            Division = result[i].Division == null ? "" : result[i].Division.Name,
+            //            PrimaryListNo = result[i].PrimaryListNo == null ? "" : result[i].PrimaryListNo
+            //        });
+            //    }
+            //}
+            var memory = ExcelHelper.CreateExcel(data);
+            string sFileName = @"LandInventory.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadIndex1(List<PropertyRegisterationDownloadDto> data)
+        {
+            var memory = ExcelHelper.CreateExcel(data);
+            string sFileName = @"LandInventory.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
     }
 
 }

@@ -32,9 +32,33 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetZoneDetails(ZoneId));
         }
+        public async Task<JsonResult> GetVillageDetails(int VillageId, int ZoneId)
+        {
+            return Json(await _GISService.GetVillageDetails(VillageId,ZoneId));
+        }
         public async Task<JsonResult> GetZoneList()
         {
             return Json(await _GISService.GetZoneList());
+        }
+        public async Task<JsonResult> GetAbadiDetails(int VillageId)
+        {
+            return Json(await _GISService.GetAbadiDetails(VillageId));
+        }
+        public async Task<JsonResult> GetBurjiDetails(int VillageId)
+        {
+            return Json(await _GISService.GetBurjiDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCleanDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCleanDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCleantextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCleantextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetDimDetails(int VillageId)
+        {
+            return Json(await _GISService.GetDimDetails(VillageId));
         }
     }
 }

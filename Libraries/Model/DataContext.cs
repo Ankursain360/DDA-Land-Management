@@ -114,6 +114,7 @@ namespace Libraries.Model
         public virtual DbSet<Lawyer> Lawyer { get; set; }
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
+        public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -175,8 +176,18 @@ namespace Libraries.Model
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual DbSet<Plot> Plot { get; set; }
         public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
-        public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 
+        public virtual DbSet<Gisaabadi> Gisaabadi { get; set; }
+        public virtual DbSet<Gisburji> Gisburji { get; set; }
+        public virtual DbSet<GISClean> Gisclean { get; set; }
+        public virtual DbSet<GisCleanText> Giscleantext { get; set; }
+        public virtual DbSet<Gisdim> Gisdim { get; set; }
+        public virtual DbSet<GISEncroachment> Gisencroachment { get; set; }
+        public virtual DbSet<Gisgosha> Gisgosha { get; set; }
+        public virtual DbSet<Gisgrid> Gisgrid { get; set; }
+        public virtual DbSet<GISEncroachment> Gisnala { get; set; }
+        public virtual DbSet<Gistext> Gistext { get; set; }
+        public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -259,23 +270,20 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
             modelBuilder.ApplyConfiguration(new CasenatureConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
             modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
-
+            modelBuilder.ApplyConfiguration(new Undersection22plotdetailsConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
-
             modelBuilder.ApplyConfiguration(new DataStorageConfiguration());
-
             modelBuilder.ApplyConfiguration(new AlmirahConfiguration());
             modelBuilder.ApplyConfiguration(new RowConfiguration());
             modelBuilder.ApplyConfiguration(new ColumnConfiguration());
-
             modelBuilder.ApplyConfiguration(new BundleConfiguration());
             modelBuilder.ApplyConfiguration(new IssuereturnfileConfiguration());
 
@@ -322,7 +330,19 @@ namespace Libraries.Model
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
-           
+            //**********  GIS **********
+            modelBuilder.ApplyConfiguration(new GisaabadiConfiguration());
+            modelBuilder.ApplyConfiguration(new GisburjiConfiguration());
+            modelBuilder.ApplyConfiguration(new GISCleanConfiguration());
+            modelBuilder.ApplyConfiguration(new GisCleanTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisdimConfiguration());
+            modelBuilder.ApplyConfiguration(new GISEncroachmentConfiguration());
+            modelBuilder.ApplyConfiguration(new GisgoshaConfiguration());
+            modelBuilder.ApplyConfiguration(new GisgridConfiguration());
+            modelBuilder.ApplyConfiguration(new GisnalaConfiguration());
+            modelBuilder.ApplyConfiguration(new GistextConfiguration());
+            modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

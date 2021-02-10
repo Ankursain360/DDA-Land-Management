@@ -17,6 +17,10 @@ using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
 
+
+using Utility.Helper;
+
+
 namespace SiteMaster.Controllers
 {
     public class DepartmentController : BaseController
@@ -209,6 +213,24 @@ namespace SiteMaster.Controllers
             var list = await _departmentService.GetAllDepartment();
             return View("Index", list);
         }
+
+
+
+
+        public async Task<IActionResult> Download()
+        {
+            List<Department> result = await _departmentService.GetAllDepartment();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Department.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
+
+
+
+
     }
 
 }

@@ -10,6 +10,15 @@ using System;
 using System.Threading.Tasks;
 using SiteMaster.Filters;
 using Core.Enum;
+
+using System.Collections.Generic;
+
+
+
+using Utility.Helper;
+
+
+
 namespace SiteMaster.Controllers
 {
     public class VillageController : BaseController
@@ -189,6 +198,20 @@ namespace SiteMaster.Controllers
             ZoneId = ZoneId ?? 0;
             return Json(await _villageService.GetAllDivisionList(Convert.ToInt32(ZoneId)));
         }
+
+
+         public async Task<IActionResult> Download()
+        {
+            List<Village> result = await _villageService.GetAll();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Village.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
+        }
+
+
+
+
 
     }
 }

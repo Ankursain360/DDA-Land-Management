@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Dto.Search;
+
 namespace Libraries.Service.ApplicationService
 {
   public  class Undersection4PlotService : EntityService<Undersection4plot>, IUndersection4PlotService
@@ -103,6 +105,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model)
+        {
+            return await _undersection4plotRepository.GetPagedNoUndersection4plot(model);
+        }
 
 
 

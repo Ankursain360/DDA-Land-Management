@@ -98,10 +98,7 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).ToListAsync();
         }
 
-        public async Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model)
-        {
-            return await _dbContext.Datastoragedetails.Where(x => x.IsActive == 1).GetPaged(model.PageNumber, model.PageSize);
-        }
+     
 
         public async Task<bool> Any(int id, string name)
         {
@@ -399,6 +396,63 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Datastoragepartfilenodetails.Where(x => x.DataStorageDetailsId == DataStorageID).ToListAsync();
         }
+
+
+
+
+        public async Task<PagedResult<Datastoragedetails>> GetPagedDataStorageDetails(DataStorgaeDetailsSearchDto model)
+        {
+            var data = await _dbContext.Datastoragedetails
+                                        .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                        .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
+                                        .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                        && (x.Name == (model.Name == "" ? x.Name : model.Name))
+                                        ).GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Datastoragedetails
+                                        .Include(x => x.Almirah)
+                                        .Include(x => x.Row)
+                                           .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
+                                        .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                         && (x.Name == (model.Name == "" ? x.Name : model.Name))
+                                        )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                                : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                                : model.SortBy.ToUpper() == "ALMIRAHNO" ? (s.Almirah != null ? s.Almirah.AlmirahNo : null)
+                                : model.SortBy.ToUpper() == "ROWNO" ? (s.Row != null ? s.Row.RowNo : null) : s.FileNo)
+                                )
+                                .GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Datastoragedetails
+                                   .Include(x => x.Almirah)
+                                      .Include(x => x.Row)
+                                         .Include(x => x.Column)
+                                        .Include(x => x.Bundle)
+                                      .Where(x => x.FileNo == (model.FileNo == "" ? x.FileNo : model.FileNo)
+                                      && (x.Name == (model.Name == "" ? x.Name : model.Name))
+                                      )
+                              .OrderByDescending(s =>
+                             (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
+                              : model.SortBy.ToUpper() == "NAME" ? (s.Name)
+                              : model.SortBy.ToUpper() == "ALMIRAHNO" ? (s.Almirah != null ? s.Almirah.AlmirahNo : null)
+                              : model.SortBy.ToUpper() == "ROWNO" ? (s.Row != null ? s.Row.RowNo : null) : s.FileNo)
+                              )
+                              .GetPaged<Datastoragedetails>(model.PageNumber, model.PageSize);
+            }
+
+            return data;
+        }
+
 
     }
 }

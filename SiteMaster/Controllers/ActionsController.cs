@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Authorization;
 using Dto.Search;
 using SiteMaster.Filters;
 using Core.Enum;
+using Utility.Helper;
+using System.Collections.Generic;
 
 namespace SiteMaster.Controllers
 {
@@ -187,6 +189,14 @@ namespace SiteMaster.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        public async Task<IActionResult> Download()
+        {
+            List<Actions> result = await _actionsService.GetAllActions();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"Actions.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }
