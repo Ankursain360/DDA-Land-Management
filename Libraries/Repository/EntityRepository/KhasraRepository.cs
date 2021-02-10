@@ -19,107 +19,138 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model)
         {
-            return await _dbContext.Khasra.
-                Where(x => x.IsActive == 1).Include(x => x.Acquiredlandvillage).
-                Include(x => x.LandCategory).GetPaged<Khasra>(model.PageNumber, model.PageSize);
-            //var data = await _dbContext.Khasra.Include(s => s.Locality)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-
-            //            .GetPaged<Khasra>(model.PageNumber, model.PageSize);
-            //int SortOrder = (int)model.SortOrder;
-            //if (SortOrder == 1)
-            //{
-            //    switch (model.SortBy.ToUpper())
-            //    {
-            //        case ("DEPARTMENT"):
-            //            data = null;
-            //            data = await _dbContext.Khasra
-            //                .Include(s => s.Locality)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
-
-            //                .OrderBy(x => x.Locality.Name)
-            //                .GetPaged<Khasra>(model.PageNumber, model.PageSize);
-            //            break;
+            //return await _dbContext.Khasra.
+            //    Where(x => x.IsActive == 1).Include(x => x.Acquiredlandvillage).
+            //    Include(x => x.LandCategory).GetPaged<Khasra>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Khasra
+                         .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.LandCategory)
+                        
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                          && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                         .GetPaged<Khasra>(model.PageNumber, model.PageSize);
 
 
-            //        case ("NAME"):
-            //            data = null;
-            //            data = await _dbContext.Khasra
-            //                .Include(s => s.Locality)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name)))
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                     .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.LandCategory)
 
-            //                .OrderBy(x => x.Name)
-            //                .GetPaged<Khasra>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("CODE"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderBy(x => x.Code)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("ISACTIVE"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderByDescending(x => x.IsActive)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                          && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderBy(a => a.Name)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
 
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                     .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.LandCategory)
 
-            //    }
-            //}
-            //else if (SortOrder == 2)
-            //{
-            //    switch (model.SortBy.ToUpper())
-            //    {
-            //        case ("DEPARTMENT"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderByDescending(x => x.Department.Name)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                          && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderBy(a => a.Acquiredlandvillage.Name)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("RECTNO"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                    .Include(x => x.Acquiredlandvillage)
+                        .Include(x => x.LandCategory)
+
+                        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                   .OrderBy(a => a.RectNo)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
 
 
-            //        case ("NAME"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderByDescending(x => x.Name)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("CODE"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderByDescending(x => x.Code)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
-            //        case ("ISACTIVE"):
-            //            data = null;
-            //            data = await _dbContext.Branch
-            //                .Include(s => s.Department)
-            //                .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
-            //                 && (string.IsNullOrEmpty(model.code) || x.Code.Contains(model.code)))
-            //                .OrderBy(x => x.IsActive)
-            //                .GetPaged<Branch>(model.PageNumber, model.PageSize);
-            //            break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                    .Include(x => x.Acquiredlandvillage)
+                        .Include(x => x.LandCategory)
+
+                        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderByDescending(a => a.IsActive)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
 
 
-            //    }
-            //}
-            //return data;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                     .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.LandCategory)
+
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                          && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderByDescending(a => a.Name)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                     .Include(x => x.Acquiredlandvillage)
+                         .Include(x => x.LandCategory)
+
+                         .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                          && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                          && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderByDescending(a => a.Acquiredlandvillage.Name)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("RECTNO"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                    .Include(x => x.Acquiredlandvillage)
+                        .Include(x => x.LandCategory)
+
+                        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                   .OrderByDescending(a => a.RectNo)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                    .Include(x => x.Acquiredlandvillage)
+                        .Include(x => x.LandCategory)
+
+                        .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.rectNo) || x.RectNo.Contains(model.rectNo)))
+                                    .OrderBy(a => a.IsActive)
+                                    .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
         }
 
 
