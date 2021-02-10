@@ -84,6 +84,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Undersection4 undersection4)
         {
             undersection4.CreatedBy = 1;
+            undersection4.IsActive = 1;
             undersection4.CreatedDate = DateTime.Now;
 
             _undersection4Repository.Add(undersection4);

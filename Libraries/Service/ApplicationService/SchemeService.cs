@@ -47,6 +47,9 @@ namespace Libraries.Service.ApplicationService
             Scheme model = result.FirstOrDefault();
             model.Name = scheme.Name;
             model.Code = scheme.Code;
+            model.SchemeDate = scheme.SchemeDate;
+            model.FileNo = scheme.FileNo;
+            model.Description = scheme.Description;
             model.IsActive = scheme.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

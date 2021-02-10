@@ -20,7 +20,7 @@
 
                     </select>
                     <span asp-validation-for="ProposalId" class="text-danger"></span>
-                    <label asp-for="ProposalId" class="floating-label">Purpose Name </label>
+                    <label asp-for="ProposalId" class="floating-label">Proposal Name </label>
                 </div>
 
 
@@ -55,17 +55,70 @@
 
 
         </div>
+        <div class="pt-3">
+            <h3 class="mb-3 d-flex">Notification Type</h3>
+
+            <div class="row">
 
 
 
-        <div class="row mt-md-3">
-            <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
-                @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-theme " })
+                <div class="col-md-3">
+                    <div class="form-check theme">
+
+
+                        <input class="form-check-input" type="radio" id="khasra_id" asp-for="TypeDetails" value="Khasra" checked="checked" />    <label class="radio-inline">
+                            Khasra
+                        </label>
+                    </div>
+                </div>   <div class="col-md-3">
+                    <div class="form-check theme">
+
+
+                        <input class="form-check-input" type="radio" id="boundary_id" asp-for="TypeDetails" value="Boundary"  />
+                        <label class="radio-inline">
+                            Boundary
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
 
-    </form>
+        <div class="row mt-md-3" id="boundary_div" style="display:none" >
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <textarea type="text" asp-for="BoundaryDescription" placeholder="Purpose" class="floating-label-field floating-label-field--s3"></textarea>
+                    <label class="floating-label">Boundary Description</label>
+                </div>
+
+
+            </div>
+            </div>
+
+
+
+            <div class="row mt-md-3">
+                <div class=" col-md-12">
+                    <button class="btn btn-theme " type="submit">Create</button>
+                    @Html.ActionLink("Back", "Index", "UnderSection4DetailsForm", null, new { @class = "btn btn-theme " })
+                </div>
+            </div>
+
+
+</form>
 </div>
  
+<script>
+
+
+    $('#khasra_id').click(function () {
+        $("#boundary_div").hide();
+    });
+
+    $('#boundary_id').click(function () {
+        $("#boundary_div").show();
+    });
+
+</script>
