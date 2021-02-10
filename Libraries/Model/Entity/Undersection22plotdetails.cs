@@ -12,7 +12,7 @@ namespace Libraries.Model.Entity
         public int? UnderSection4Id { get; set; }
         public int? UnderSection6Id { get; set; }
         public int? UnderSection17Id { get; set; }
-        public int? LocalityId { get; set; }
+        public int? AcquiredlandvillageId { get; set; }
         public int? KhasraId { get; set; }
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }
@@ -25,9 +25,16 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public List<Acquiredlandvillage> AcquiredlandvillageList { get; set; }
         [NotMapped]
+        public List<Undersection4> Undersection4List { get; set; }
+        [NotMapped]
+        public List<Undersection6> Undersection6List { get; set; }
+        [NotMapped]
         public List<Undersection17> Undersection17List { get; set; }
+        [NotMapped]
+
+        public List<Undersection22> Undersection22List { get; set; }
         public Khasra Khasra { get; set; }
-        public Acquiredlandvillage Locality { get; set; }
+        public Acquiredlandvillage Acquiredlandvillage { get; set; }
         public Undersection17 UnderSection17 { get; set; }
         public Undersection22 UnderSection22 { get; set; }
         public Undersection4 UnderSection4 { get; set; }

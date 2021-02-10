@@ -12,6 +12,7 @@ namespace Libraries.Model.Entity
     {
         public District()
         {
+            Acquiredlandvillage = new HashSet<Acquiredlandvillage>();
             Damagepayeeregister = new HashSet<Damagepayeeregister>();
             Userprofile = new HashSet<Userprofile>();
           
@@ -26,7 +27,7 @@ namespace Libraries.Model.Entity
         public byte IsActive { get; set; }
 
         public virtual ICollection<Userprofile> Userprofile { get; set; }
-        public virtual ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
+        public ICollection<Acquiredlandvillage> Acquiredlandvillage { get; set; }
         public ICollection<Damagepayeeregister> Damagepayeeregister { get; set; }
        
 
