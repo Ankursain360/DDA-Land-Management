@@ -41,7 +41,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
-
+       
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
         public Zone Zone { get; set; }
