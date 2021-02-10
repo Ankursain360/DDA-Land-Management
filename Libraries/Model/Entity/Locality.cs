@@ -57,7 +57,7 @@ namespace Libraries.Model.Entity
         public List<Division> DivisionList { get; set; }
         public ICollection<Propertyregistration> Propertyregistration { get; set; }
         public virtual ICollection<EncroachmentRegisteration> EncroachmentRegisteration { get; set; }
-        public ICollection<Khasra> Khasra { get; set; }
+      
         public ICollection<Booktransferland> Booktransferland { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
