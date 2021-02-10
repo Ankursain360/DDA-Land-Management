@@ -3,6 +3,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +23,52 @@ namespace Libraries.Repository.EntityRepository
                                     .Include(x => x.Village)
                                     .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                     .ToListAsync();
+        }
+
+        public async Task<List<Gisburji>> GetBurjiDetails(int villageId)
+        {
+            return await _dbContext.Gisburji
+                                   .Include(x => x.Village)
+                                   .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                   .ToListAsync();
+        }
+
+        public async Task<List<GISClean>> GetCleanDetails(int villageId)
+        {
+            try
+            {
+
+                return await _dbContext.Gisclean
+                                       .Include(x => x.Village)
+                                       .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                       .ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<GisCleanText>> GetCleantextDetails(int villageId)
+        {
+            try
+            {
+
+                return await _dbContext.Giscleantext
+                                       .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                       .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Gisdim>> GetDimDetails(int villageId)
+        {
+            return await _dbContext.Gisdim
+                                 .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                 .ToListAsync();
         }
 
         public async Task<List<Plot>> GetPlotList(int VillageId)

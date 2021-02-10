@@ -6,6 +6,13 @@
 
   <ItemGroup>
     <Content Remove="bundleconfig.json" />
+    <Content Remove="wwwroot\js\common.min.js" />
+    <Content Remove="wwwroot\js\fullscreen.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\common.min.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\fullscreen.min.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -67,7 +74,9 @@
     <None Include="wwwroot\font\open-sans\OpenSans-Regular.woff2" />
     <None Include="wwwroot\font\open-sans\OpenSans-SemiBold.woff2" />
     <None Include="wwwroot\font\open-sans\OpenSans-SemiBoldItalic.woff2" />
-    <None Include="wwwroot\js\js.js" />
+    <None Include="wwwroot\js\common.min.js" />
+    <None Include="wwwroot\js\fullscreen.min.js" />
+    <None Include="wwwroot\js\gisindex.js" />
     <None Include="wwwroot\js\main.js" />
     <None Include="wwwroot\js\popper.js" />
   </ItemGroup>

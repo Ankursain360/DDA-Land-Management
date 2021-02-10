@@ -13,5 +13,9 @@ namespace Libraries.Service.IApplicationService
         Task<List<Zone>> GetZoneDetails(int zoneId);
         Task<List<Village>> GetVillageDetails(int villageId, int zoneId);
         Task<List<Gisaabadi>> GetAbadiDetails(int villageId);
+        Task<List<Gisburji>> GetBurjiDetails(int villageId);
+        Task<List<GISClean>> GetCleanDetails(int villageId);
+        Task<List<GisCleanText>> GetCleantextDetails(int villageId);
+        Task<List<Gisdim>> GetDimDetails(int villageId);
     }
 }
