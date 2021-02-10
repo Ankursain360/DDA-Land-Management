@@ -160,5 +160,11 @@
     "inputFiles": [
       "wwwroot/js/UnderSection4PlotForm.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/acqvillagecreateedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/acqvillagecreateedit.js"
+    ]
   }
 ]
