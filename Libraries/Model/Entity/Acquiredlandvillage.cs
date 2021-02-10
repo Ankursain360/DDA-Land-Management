@@ -13,6 +13,12 @@ namespace Libraries.Model.Entity
         {
             Khasra = new HashSet<Khasra>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
+            Awardplotdetails = new HashSet<Awardplotdetails>();
+            Enchroachment = new HashSet<Enchroachment>();
+            Enhancecompensation = new HashSet<Enhancecompensation>();
+            Jointsurvey = new HashSet<Jointsurvey>();
+            Sakanidetail = new HashSet<Sakanidetail>();
+            Undersection4plot = new HashSet<Undersection4plot>();
         }
         public string Name { get; set; }
         public string Code { get; set; }
@@ -42,6 +48,15 @@ namespace Libraries.Model.Entity
         public ICollection<Khasra> Khasra { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
 
+
+        public virtual ICollection<Undersection4plot> Undersection4plot { get; set; }
+
+        public virtual ICollection<Awardplotdetails> Awardplotdetails { get; set; }
+        public virtual ICollection<Enchroachment> Enchroachment { get; set; }
+        public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
+        public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
+
+        public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 
 
     }
