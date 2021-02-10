@@ -13,7 +13,6 @@ namespace Libraries.Model.Entity
         }
         public string Number { get; set; }
         public DateTime? Ndate { get; set; }
-
         public byte IsActive { get; set; }
         public int? Undersection4Id { get; set; }
 
