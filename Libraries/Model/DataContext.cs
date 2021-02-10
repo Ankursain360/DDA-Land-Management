@@ -175,6 +175,8 @@ namespace Libraries.Model
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual DbSet<Plot> Plot { get; set; }
         public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
+        public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -257,7 +259,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new StructureConfiguration());
             modelBuilder.ApplyConfiguration(new ApprovalstatusConfiguration());
             modelBuilder.ApplyConfiguration(new CasenatureConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
             modelBuilder.ApplyConfiguration(new LegalmanagementsystemConfiguration());
             modelBuilder.ApplyConfiguration(new CourtConfiguration());
             modelBuilder.ApplyConfiguration(new CaseyearConfiguration());
@@ -320,6 +322,7 @@ namespace Libraries.Model
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
+           
             base.OnModelCreating(modelBuilder);
         }
     }
