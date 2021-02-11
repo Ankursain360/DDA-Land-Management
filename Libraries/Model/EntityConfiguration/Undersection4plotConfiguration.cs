@@ -15,13 +15,13 @@ namespace Libraries.Model.EntityConfiguration
             builder.ToTable("undersection4plot", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                    .HasName("KhasraId_idx");
+                .HasName("KhasraId_idx");
 
             builder.HasIndex(e => e.UnderSection4Id)
                 .HasName("undersection4no_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("Villageidfk_idx");
+                .HasName("fkvillageId_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -62,7 +62,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.HasOne(d => d.Village)
                 .WithMany(p => p.Undersection4plot)
                 .HasForeignKey(d => d.VillageId)
-                .HasConstraintName("Villageidfk");
+                .HasConstraintName("fkvillageId");
 
         }
     }

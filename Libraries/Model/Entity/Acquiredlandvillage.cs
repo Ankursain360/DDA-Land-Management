@@ -64,6 +64,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+      
 
 
     }
