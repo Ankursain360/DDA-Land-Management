@@ -20,16 +20,22 @@ namespace Libraries.Model.Entity
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
         }
+        [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
+      
         public string Code { get; set; }
+        [Required(ErrorMessage = "District name is mandatory", AllowEmptyStrings = false)]
         public int? DistrictId { get; set; }
+        [Required(ErrorMessage = "Tehsil name is mandatory", AllowEmptyStrings = false )]
         public int? TehsilId { get; set; }
         public int? YearofConsolidation { get; set; }
         public int? TotalNoOfSheet { get; set; }
+        [Required(ErrorMessage = "Zone name is mandatory", AllowEmptyStrings = false)]
         public int? ZoneId { get; set; }
         public string Acquired { get; set; }
         public string Circle { get; set; }
         public string WorkingVillage { get; set; }
+        [Required(ErrorMessage = "Village type is mandatory ")]
         public string VillageType { get; set; }
         public byte? IsActive { get; set; }
 
@@ -41,7 +47,7 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
-
+       
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }
         public Zone Zone { get; set; }

@@ -115,7 +115,8 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
-       
+        public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
+
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
         public virtual DbSet<Court> Court { get; set; }
@@ -185,9 +186,10 @@ namespace Libraries.Model
         public virtual DbSet<GISEncroachment> Gisencroachment { get; set; }
         public virtual DbSet<Gisgosha> Gisgosha { get; set; }
         public virtual DbSet<Gisgrid> Gisgrid { get; set; }
-        public virtual DbSet<GISEncroachment> Gisnala { get; set; }
+        public virtual DbSet<GISnala> Gisnala { get; set; }
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
+        public virtual DbSet<State> State { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -342,7 +344,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisnalaConfiguration());
             modelBuilder.ApplyConfiguration(new GistextConfiguration());
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+            modelBuilder.ApplyConfiguration(new StateConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

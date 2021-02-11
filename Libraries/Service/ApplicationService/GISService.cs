@@ -43,9 +43,44 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetDimDetails(villageId);
         }
 
+        public async Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId)
+        {
+            return await _iGISSRepository.GetEncroachmentDetails(villageId);
+        }
+
+        public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
+        {
+            return await _iGISSRepository.GetGoshaDetails(villageId);
+        }
+
+        public async Task<List<Gisgrid>> GetGridDetails(int villageId)
+        {
+            return await _iGISSRepository.GetGridDetails(villageId);
+        }
+
+        public async Task<List<State>> GetInitiallyStateDetails()
+        {
+            return await _iGISSRepository.GetInitiallyStateDetails();
+        }
+
+        public async Task<List<GISnala>> GetNalaDetails(int villageId)
+        {
+            return await _iGISSRepository.GetNalaDetails(villageId);
+        }
+
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _iGISSRepository.GetPlotList(VillageId);
+        }
+
+        public async Task<List<Gistext>> GetTextDetails(int villageId)
+        {
+            return await _iGISSRepository.GetTextDetails(villageId);
+        }
+
+        public async  Task<List<Gistrijunction>> GetTriJunctionDetails(int villageId)
+        {
+            return await _iGISSRepository.GetTriJunctionDetails(villageId);
         }
 
         public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)

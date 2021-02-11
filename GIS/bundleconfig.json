@@ -46,5 +46,11 @@
     "inputFiles": [
       "wwwroot/js/common.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/gOverlay.min.js",
+    "inputFiles": [
+      "wwwroot/js/gOverlay.js"
+    ]
   }
 ]

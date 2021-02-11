@@ -8,10 +8,7 @@ using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Microsoft.EntityFrameworkCore;
-
-
 using System.Text;
-
 using Repository.Common;
 
 

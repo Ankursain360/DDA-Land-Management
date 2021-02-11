@@ -6,6 +6,7 @@
         <h3 class="mb-3 d-flex">Edit Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="Id" />
+
         <div class="row">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
@@ -16,26 +17,30 @@
                     <label asp-for="SchemeId" class="floating-label">Scheme </label>
                 </div>
             </div>
+
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="Name" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" limit="100" />
+                           class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                     <label class="floating-label">Proposal Name    </label>
                 </div>
             </div>
-        </div>
-        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
                     <input asp-for="RequiredAgency" placeholder="Name" type="text"
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="RequiredAgency" class="text-danger"></span>
-                    <label class="floating-label">Requiring Body     </label>
+                    <label class="floating-label">Requiring Agency     </label>
                 </div>
             </div>
+
+        </div>
+        <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
@@ -43,6 +48,14 @@
                            class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="ProposalFileNo" class="text-danger"></span>
                     <label class="floating-label">Proposal No./ File No.  </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="ProposalDate" placeholder="Name" type="date"
+                           class="floating-label-field floating-label-field--s3" />
+                    <span asp-validation-for="ProposalDate" class="text-danger"></span>
+                    <label class="floating-label">ProposalDate </label>
                 </div>
             </div>
         </div>
@@ -87,16 +100,6 @@
                     <label class="floating-label">Description  </label>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="ProposalDate" placeholder="Name" type="date"
-                           class="floating-label-field floating-label-field--s3" />
-                    <span asp-validation-for="ProposalDate" class="text-danger"></span>
-                    <label class="floating-label">ProposalDate </label>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-md-3">
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">

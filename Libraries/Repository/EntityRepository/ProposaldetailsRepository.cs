@@ -19,10 +19,11 @@ namespace Libraries.Repository.EntityRepository
         public ProposaldetailsRepository(DataContext dbContext) : base(dbContext)
         {
 
-        }//date is not defined in dto???? where r u ishu???
+        }
         public async Task<PagedResult<Proposaldetails>> GetPagedProposaldetails(ProposaldetailsSearchDto model)
         {
             var data = await _dbContext.Proposaldetails
+                 .Include(x => x.Scheme)        
                  .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -34,9 +35,22 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("SCHEME"):
+                        data = null;
+                        data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
+                             && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo)))
+                            //&& (model.proposalDate == x.ProposalDate? model.proposalDate: x.ProposalDate))
+                             .OrderBy(a => a.Scheme.Name)
+                             .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
+
+                        break;
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -48,6 +62,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("BODY"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -59,6 +74,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("FILE"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -70,6 +86,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("DATE"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -81,6 +98,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -95,9 +113,22 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("SCHEME"):
+                        data = null;
+                        data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
+                             .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
+                             && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
+                             && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo)))
+                             //&& (model.proposalDate == x.ProposalDate? model.proposalDate: x.ProposalDate))
+                             .OrderByDescending(a => a.Scheme.Name)
+                             .GetPaged<Proposaldetails>(model.PageNumber, model.PageSize);
+
+                        break;
                     case ("NAME"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -109,6 +140,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("BODY"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -120,6 +152,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("FILE"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -131,6 +164,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("DATE"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -142,6 +176,7 @@ namespace Libraries.Repository.EntityRepository
                     case ("STATUS"):
                         data = null;
                         data = await _dbContext.Proposaldetails
+                            .Include(x => x.Scheme)
                              .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                              && (string.IsNullOrEmpty(model.requiredAgency) || x.RequiredAgency.Contains(model.requiredAgency))
                              && (string.IsNullOrEmpty(model.proposalFileNo) || x.ProposalFileNo.Contains(model.proposalFileNo))
@@ -155,7 +190,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Proposaldetails>> GetProposaldetails()
         {
-            return await _dbContext.Proposaldetails.ToListAsync();
+            return await _dbContext.Proposaldetails.Include(x => x.Scheme).ToListAsync();
         }
         public async Task<List<Proposaldetails>> GetAllProposaldetails()
         {
@@ -165,7 +200,7 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<List<Scheme>> GetAllScheme()
         {
-            List<Scheme> schemeList = await _dbContext.Scheme.ToListAsync();
+            List<Scheme> schemeList = await _dbContext.Scheme.Where(x => x.IsActive==1).ToListAsync();
             return schemeList;
         }
         public async Task<bool> Any(int id, string name)
