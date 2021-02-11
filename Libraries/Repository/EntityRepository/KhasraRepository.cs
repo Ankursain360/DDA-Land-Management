@@ -50,7 +50,7 @@ namespace Libraries.Repository.EntityRepository
                                     .GetPaged<Khasra>(model.PageNumber, model.PageSize);
                         break;
 
-                    case ("VILLAGE"):
+                    case ("ACQUIREDLANDVILLAGE"):
                         data = null;
                         data = await _dbContext.Khasra
                                      .Include(x => x.Acquiredlandvillage)

@@ -15,19 +15,19 @@ namespace Libraries.Model.Entity
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
         }
         public int? UnderSection6Id { get; set; }
-        public int? LandNotificationId { get; set; }
+        public string Number { get; set; }
         public DateTime? NotificationDate { get; set; }
-
         public byte IsActive { get; set; }
         [NotMapped]
         public List<Undersection6> Undersection6List { get; set; }
-        public virtual Undersection6 Undersection6 { get; set; }
+        public virtual Undersection6 UnderSection6 { get; set; }
 
 
 
-        [NotMapped]
-        public List<LandNotification> LandNotificationList { get; set; }
-        public virtual LandNotification LandNotification { get; set; }
+        //[NotMapped]
+        //public List<LandNotification> LandNotificationList { get; set; }
+        //public virtual LandNotification LandNotification { get; set; }
+      
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
     }
 }

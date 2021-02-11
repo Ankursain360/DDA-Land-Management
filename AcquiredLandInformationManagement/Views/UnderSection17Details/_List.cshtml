@@ -1,18 +1,12 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Khasra>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Undersection17>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            <th>Village</th>
-            <th>Rect No</th>
-            <th>Land Category</th>
-            <th>Khasra No</th>
-
-
-
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+            
+            <th>Notification No.</th>
+            <th>Notification Date</th>
+            <th>Notification U/S-6</th>
             <th>Status</th>
             <th>Operations</th>
         </tr>
@@ -21,17 +15,12 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-            @*<td>@item.Locality.Name</td>*@
-            <td> @(item.Acquiredlandvillage == null?"": item.Acquiredlandvillage.Name)</td>
-            <td>@item.RectNo</td>
-            @*<td>@item.LandCategory.Name</td>*@
-            <td> @(item.LandCategory == null?"": item.LandCategory.Name)</td>
 
+            <td>@item.Number</td>
+            <td>@item.NotificationDate</td>
+            @*<td>@item.UnderSection6.Number</td>*@
+            <td> @(item.UnderSection6 == null?"": item.UnderSection6.Number)</td>
 
-            <td>@item.Name</td>
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-            <td>@item.Biswanshi</td>
             <td>
                 @if (item.IsActive == 1)
                 {
@@ -40,11 +29,7 @@
                 {
                     <span class="badge badge-danger px-2 py-1">Inactive</span>}
             </td>
-            @*<td>
-            <a asp-action="View" asp-route-id="@item.Id" title="View">  <i class="glyphicon glyphicon-eye-open" aria-hidden="true"></i> </a>
-            <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-            <a asp-action="Delete" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-        </td>*@
+
             <td>
                 <div class="action-btns">
                     <a asp-action="View" asp-route-id="@item.Id" title="View" class="view"><i class="ri-eye-fill"></i> </a>

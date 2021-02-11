@@ -8,17 +8,17 @@ $(document).ready(function () {
 
 function GetProposalplotdetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/khasramaster/List`, 'html', param, function (response) {
-        $('#divKhasraTable').html("");
-        $('#divKhasraTable').html(response);
+    HttpPost(`/underSection17Details/List`, 'html', param, function (response) {
+        $('#divUnderSection17Table').html("");
+        $('#divUnderSection17Table').html(response);
     });
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: $('#txtName').val(),
-        village: $('#txtLoc').val(),
-        rectNo: $('#txtRectNo').val(),
+        number: $('#txtNumber').val(),
+        undersection6: $('#txtNotification6').val(),
+     
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -33,15 +33,15 @@ $("#btnSearch").click(function () {
 
 $("#btnReset").click(function () {
 
-    $('#txtName').val('');
-    $('#txtLoc').val(''),
-        $('#txtRectNo').val(''),
-        //$('#txtDate').val(''),
+    $('#txtNumber').val('');
+    $('#txtNotification6').val(''),
+        
         GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
 $("#btnAscending").click(function () {
+    debugger;
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
@@ -50,6 +50,7 @@ $("#btnAscending").click(function () {
 
 
 $("#btnDescending").click(function () {
+    debugger;
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending

@@ -18,5 +18,6 @@ namespace Libraries.Model.Entity
 
         public Undersection4 Undersection4 { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+        public ICollection<Undersection17> Undersection17 { get; set; }
     }
 }
