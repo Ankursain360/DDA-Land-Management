@@ -1,0 +1,44 @@
+﻿
+.nlLabelCleantext {
+    color: #000;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nlLabelGosha {
+    color: #DC2A32;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nlLabelKhasraText {
+    color: #1630EE;
+    font-weight: bolder;
+    white-space: nowrap;
+    display: block;
+    position: relative;
+    font-size: 11px;
+    border-radius: 2px;
+    left: -50%;
+    max-width: 181px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+    .nlLabelKhasraText:hover {
+        font-size: 13px;
+    }

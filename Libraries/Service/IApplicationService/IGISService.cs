@@ -17,5 +17,11 @@ namespace Libraries.Service.IApplicationService
         Task<List<GISClean>> GetCleanDetails(int villageId);
         Task<List<GisCleanText>> GetCleantextDetails(int villageId);
         Task<List<Gisdim>> GetDimDetails(int villageId);
+        Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId);
+        Task<List<Gisgosha>> GetGoshaDetails(int villageId);
+        Task<List<Gisgrid>> GetGridDetails(int villageId);
+        Task<List<GISnala>> GetNalaDetails(int villageId);
+        Task<List<Gistext>> GetTextDetails(int villageId);
+        Task<List<Gistrijunction>> GetTriJunctionDetails(int villageId);
     }
 }

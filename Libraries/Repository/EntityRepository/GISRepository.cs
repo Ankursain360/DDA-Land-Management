@@ -20,7 +20,6 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Gisaabadi>> GetAbadiDetails(int villageId)
         {
             return await _dbContext.Gisaabadi
-                                    .Include(x => x.Village)
                                     .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                     .ToListAsync();
         }
@@ -28,7 +27,6 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Gisburji>> GetBurjiDetails(int villageId)
         {
             return await _dbContext.Gisburji
-                                   .Include(x => x.Village)
                                    .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                    .ToListAsync();
         }
@@ -37,9 +35,7 @@ namespace Libraries.Repository.EntityRepository
         {
             try
             {
-
                 return await _dbContext.Gisclean
-                                       .Include(x => x.Village)
                                        .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                        .ToListAsync();
             }
@@ -71,9 +67,60 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
+        public async Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId)
+        {
+            try
+            {
+                return await _dbContext.Gisencroachment
+                                       .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                       .ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
+        {
+            return await _dbContext.Gisgosha
+                                .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                .ToListAsync();
+        }
+
+        public async Task<List<Gisgrid>> GetGridDetails(int villageId)
+        {
+            return await _dbContext.Gisgrid
+                                 .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                 .ToListAsync();
+        }
+
+        public async Task<List<GISnala>> GetNalaDetails(int villageId)
+        {
+            return await _dbContext.Gisnala
+                                 .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                 .ToListAsync();
+        }
+
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _dbContext.Plot.Where(x => x.VillageId == VillageId && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<List<Gistext>> GetTextDetails(int villageId)
+        {
+            
+            var data = await _dbContext.Gistext
+                                .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                .ToListAsync();
+            return data;
+        }
+
+        public async Task<List<Gistrijunction>> GetTriJunctionDetails(int villageId)
+        {
+            return await _dbContext.Gistrijunction
+                                .Where(x => x.VillageId == villageId && x.IsActive == 1)
+                                .ToListAsync();
         }
 
         public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)

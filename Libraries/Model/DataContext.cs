@@ -185,7 +185,7 @@ namespace Libraries.Model
         public virtual DbSet<GISEncroachment> Gisencroachment { get; set; }
         public virtual DbSet<Gisgosha> Gisgosha { get; set; }
         public virtual DbSet<Gisgrid> Gisgrid { get; set; }
-        public virtual DbSet<GISEncroachment> Gisnala { get; set; }
+        public virtual DbSet<GISnala> Gisnala { get; set; }
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -60,5 +60,29 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetDimDetails(VillageId));
         }
+        public async Task<JsonResult> GetEncroachmentDetails(int VillageId)
+        {
+            return Json(await _GISService.GetEncroachmentDetails(VillageId));
+        }
+        public async Task<JsonResult> GetGoshaDetails(int VillageId)
+        {
+            return Json(await _GISService.GetGoshaDetails(VillageId));
+        }
+        public async Task<JsonResult> GetGridDetails(int VillageId)
+        {
+            return Json(await _GISService.GetGridDetails(VillageId));
+        }
+        public async Task<JsonResult> GetNalaDetails(int VillageId)
+        {
+            return Json(await _GISService.GetNalaDetails(VillageId));
+        }
+        public async Task<JsonResult> GetTextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetTextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetTriJunctionDetails(int VillageId)
+        {
+            return Json(await _GISService.GetTriJunctionDetails(VillageId));
+        }
     }
 }

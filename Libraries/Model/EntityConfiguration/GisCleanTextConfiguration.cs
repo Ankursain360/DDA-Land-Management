@@ -8,7 +8,6 @@ namespace Libraries.Model.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<GisCleanText> entity)
         {
-
             entity.ToTable("giscleantext", "lms");
 
             entity.HasIndex(e => e.VillageId)
@@ -22,6 +21,10 @@ namespace Libraries.Model.EntityConfiguration
 
             entity.Property(e => e.IsActive).HasColumnType("tinyint(4)");
 
+            entity.Property(e => e.Label)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
             entity.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             entity.Property(e => e.Polygon).HasColumnType("longtext");
@@ -30,18 +33,19 @@ namespace Libraries.Model.EntityConfiguration
 
             entity.Property(e => e.Xcoordinate)
                 .HasColumnName("XCoordinate")
-                .HasColumnType("decimal(12,8)");
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.Property(e => e.Ycoordinate)
                 .HasColumnName("YCoordinate")
-                .HasColumnType("decimal(12,8)");
+                .HasMaxLength(50)
+                .IsUnicode(false);
 
             entity.HasOne(d => d.Village)
                 .WithMany(p => p.Giscleantext)
                 .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("GisCleanTextVillageId");
-
         }
     }
 }
