@@ -84,5 +84,9 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetTriJunctionDetails(VillageId));
         }
+        public async Task<JsonResult> GetInitiallyStateDetails()
+        {
+            return Json(await _GISService.GetInitiallyStateDetails());
+        }
     }
 }

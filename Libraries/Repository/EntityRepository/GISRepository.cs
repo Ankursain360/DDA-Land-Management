@@ -95,6 +95,13 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
+        public async Task<List<State>> GetInitiallyStateDetails()
+        {
+            return await _dbContext.State
+                                 .Where(x =>  x.IsActive == 1)
+                                 .ToListAsync();
+        }
+
         public async Task<List<GISnala>> GetNalaDetails(int villageId)
         {
             return await _dbContext.Gisnala

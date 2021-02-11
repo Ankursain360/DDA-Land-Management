@@ -189,6 +189,7 @@ namespace Libraries.Model
         public virtual DbSet<GISnala> Gisnala { get; set; }
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
+        public virtual DbSet<State> State { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
@@ -344,6 +345,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GistextConfiguration());
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+            modelBuilder.ApplyConfiguration(new StateConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

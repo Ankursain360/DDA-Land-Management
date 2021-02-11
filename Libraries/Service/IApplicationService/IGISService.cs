@@ -23,5 +23,6 @@ namespace Libraries.Service.IApplicationService
         Task<List<GISnala>> GetNalaDetails(int villageId);
         Task<List<Gistext>> GetTextDetails(int villageId);
         Task<List<Gistrijunction>> GetTriJunctionDetails(int villageId);
+        Task<List<State>> GetInitiallyStateDetails();
     }
 }

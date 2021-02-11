@@ -58,6 +58,11 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetGridDetails(villageId);
         }
 
+        public async Task<List<State>> GetInitiallyStateDetails()
+        {
+            return await _iGISSRepository.GetInitiallyStateDetails();
+        }
+
         public async Task<List<GISnala>> GetNalaDetails(int villageId)
         {
             return await _iGISSRepository.GetNalaDetails(villageId);

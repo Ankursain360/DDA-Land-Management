@@ -113,9 +113,27 @@ function initialize() {
     //$('.statsDIv .close').click(function () { $('.statsDIv').hide(); });
     //GetCurrentDetails("State", "4");
     //  showLegend();
+    getStateboundary();
 }
 
+function getStateboundary() {
+    HttpGet(`/GIS/GetInitiallyStateDetails`, 'json', function (response) {
+        setStateboundary(response);
+    });
+}
 
+function setStateboundary(resp) {
+    if (resp.status === true) {
+        var arr = $.map(resp.data, function (el) { return el; })
+
+        for (i = 0; i < arr.length; i++) {
+            var ln = createPolygon(getLatLongArr(arr[i][0]));
+            ln.setOptions({ visibleZoom: 5, fillColor: '#FF8633', hideZoom: 9, visible: true, map: map, strokeWeight: 4, strokeColor: '#E74C3C', fillOpacity: 0.1, clickable: !1 });
+            maplayer.push(ln);
+        }
+
+    }
+}
 /*Zone Boundary Start*/
 function showZone(maxima) {
     var newdis_id = maxima.replace('Z', '');
