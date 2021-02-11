@@ -15,16 +15,18 @@ namespace Libraries.Model.EntityConfiguration
         {
             builder.ToTable("proposalplotdetails", "lms");
 
+            builder.HasIndex(e => e.AcquiredlandvillageId)
+                .HasName("fkAcqVillage_idx");
+
             builder.HasIndex(e => e.KhasraId)
                 .HasName("fkProposalKhasra_idx");
-
-            builder.HasIndex(e => e.LocalityId)
-                .HasName("fkProposalLocality_idx");
 
             builder.HasIndex(e => e.ProposaldetailsId)
                 .HasName("fkProposalDetails_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
+
+            builder.Property(e => e.AcquiredlandvillageId).HasColumnType("int(11)");
 
             builder.Property(e => e.Bigha).HasColumnType("decimal(18,3)");
 
@@ -42,27 +44,26 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
-            builder.Property(e => e.LocalityId).HasColumnType("int(11)");
-
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
             builder.Property(e => e.ProposaldetailsId).HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Acquiredlandvillage)
+                .WithMany(p => p.Proposalplotdetails)
+                .HasForeignKey(d => d.AcquiredlandvillageId)
+                .HasConstraintName("fkAcqVillage");
 
             builder.HasOne(d => d.Khasra)
                 .WithMany(p => p.Proposalplotdetails)
                 .HasForeignKey(d => d.KhasraId)
                 .HasConstraintName("fkProposalKhasra");
 
-            builder.HasOne(d => d.Locality)
-                .WithMany(p => p.Proposalplotdetails)
-                .HasForeignKey(d => d.LocalityId)
-                .HasConstraintName("fkProposalLocality");
-
             builder.HasOne(d => d.Proposaldetails)
                 .WithMany(p => p.Proposalplotdetails)
                 .HasForeignKey(d => d.ProposaldetailsId)
                 .HasConstraintName("fkProposalDetails");
+
         }
-     
-     }
+
+    }
 }

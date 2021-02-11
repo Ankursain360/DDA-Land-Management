@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
-
 namespace Libraries.Model.Entity
 {
     public class Acquiredlandvillage : AuditableEntity<int>
@@ -20,6 +19,7 @@ namespace Libraries.Model.Entity
             Jointsurvey = new HashSet<Jointsurvey>();
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -36,7 +36,7 @@ namespace Libraries.Model.Entity
         public string Acquired { get; set; }
         public string Circle { get; set; }
         public string WorkingVillage { get; set; }
-        [Required(ErrorMessage = "Village type is mandatory ")]
+      //  [Required(ErrorMessage = "Village type is mandatory ")]
         public string VillageType { get; set; }
         public byte? IsActive { get; set; }
 
@@ -62,9 +62,9 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }
         public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
-        public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
-
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+      
 
 
     }

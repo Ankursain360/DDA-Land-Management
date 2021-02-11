@@ -23,10 +23,10 @@ namespace Libraries.Repository.EntityRepository
         {
             var data = await _dbContext.Proposalplotdetails
                          .Include(x => x.Proposaldetails)
-                         .Include(x => x.Locality)
+                         .Include(x => x.Acquiredlandvillage)
                          .Include(x => x.Khasra)
                          .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                          && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                          && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                           && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                          .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
 
@@ -40,10 +40,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderBy(a => a.Proposaldetails.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -53,22 +53,22 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
-                                    .OrderBy(a => a.Locality.Name)
+                                    .OrderBy(a => a.Acquiredlandvillage.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
                         break;
                     case ("KHASRA"):
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderBy(a => a.Khasra.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -79,10 +79,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderByDescending(a => a.IsActive)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -99,10 +99,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderByDescending(a => a.Proposaldetails.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -112,22 +112,22 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
-                                    .OrderByDescending(a => a.Locality.Name)
+                                    .OrderByDescending(a => a.Acquiredlandvillage.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
                         break;
                     case ("KHASRA"):
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderByDescending(a => a.Khasra.Name)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -138,10 +138,10 @@ namespace Libraries.Repository.EntityRepository
                         data = null;
                         data = await _dbContext.Proposalplotdetails
                                      .Include(x => x.Proposaldetails)
-                                     .Include(x => x.Locality)
+                                     .Include(x => x.Acquiredlandvillage)
                                      .Include(x => x.Khasra)
                                      .Where(x => (string.IsNullOrEmpty(model.name) || x.Proposaldetails.Name.Contains(model.name))
-                                     && (string.IsNullOrEmpty(model.locality) || x.Locality.Name.Contains(model.locality))
+                                     && (string.IsNullOrEmpty(model.locality) || x.Acquiredlandvillage.Name.Contains(model.locality))
                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
                                     .OrderBy(a => a.IsActive)
                                     .GetPaged<Proposalplotdetails>(model.PageNumber, model.PageSize);
@@ -158,7 +158,7 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Proposalplotdetails
                 .Include(x => x.Proposaldetails)
-                .Include(x => x.Locality)
+                .Include(x => x.Acquiredlandvillage)
                 .Include(x => x.Khasra)
                 .ToListAsync();
 
@@ -169,15 +169,17 @@ namespace Libraries.Repository.EntityRepository
             List<Proposaldetails> proposaldetailsList = await _dbContext.Proposaldetails.Where(x => x.IsActive == 1).ToListAsync();
             return proposaldetailsList;
         }
-        public async Task<List<Locality>> GetAllLocality()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Locality> localityList = await _dbContext.Locality.Where(x => x.IsActive==1).ToListAsync();
-            return localityList;
+            List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.Where(x => x.IsActive==1).ToListAsync();
+            return villageList;
         }
+      
 
-        public async Task<List<Khasra>> GetAllKhasra()
+      
+        public async Task<List<Khasra>> GetAllKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.IsActive == 1).ToListAsync();
+            List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
             return khasraList;
         }
 
