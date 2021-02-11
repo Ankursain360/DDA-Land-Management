@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Libraries.Model.Entity
 {
     public class Acquiredlandvillage : AuditableEntity<int>
@@ -61,6 +62,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }
         public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
+        public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
 
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 

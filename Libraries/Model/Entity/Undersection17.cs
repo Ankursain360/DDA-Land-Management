@@ -29,5 +29,6 @@ namespace Libraries.Model.Entity
         //public virtual LandNotification LandNotification { get; set; }
       
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+        public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
     }
 }

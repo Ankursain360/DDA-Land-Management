@@ -194,8 +194,11 @@ namespace Libraries.Model
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
         public virtual DbSet<State> State { get; set; }
+        public virtual DbSet<Undersection17plotdetail> Undersection17plotdetail { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
+            
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
