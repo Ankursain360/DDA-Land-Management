@@ -14,10 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Acquiredlandvillage>> GetAcquiredlandvillage();
         Task<List<District>> GetAllDistrict();
         Task<List<Tehsil>> GetAllTehsil();
-        Task<List<Villagetype>> GetAllVillagetype();
+        Task<List<Zone>> GetAllZone();
         Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
-
-       
-
     }
 }

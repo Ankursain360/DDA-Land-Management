@@ -15,6 +15,9 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.ToTable("undersection6", "lms");
 
+            builder.HasIndex(e => e.Undersection4Id)
+                .HasName("usd4id_idx");
+
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
             builder.Property(e => e.CreatedBy).HasColumnType("int(11)");
@@ -25,11 +28,23 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.UnderSectionDate).HasColumnType("date");
+            builder.Property(e => e.Ndate)
+                .HasColumnName("NDate")
+                .HasColumnType("date");
 
-            builder.Property(e => e.UnderSectionNotificationNumber)
+            builder.Property(e => e.Number)
+                .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
+
+            builder.Property(e => e.Undersection4Id)
+                .HasColumnName("undersection4Id")
+                .HasColumnType("int(11)");
+
+            builder.HasOne(d => d.Undersection4)
+                .WithMany(p => p.Undersection6)
+                .HasForeignKey(d => d.Undersection4Id)
+                .HasConstraintName("fkundersection4Id");
         }
 
 

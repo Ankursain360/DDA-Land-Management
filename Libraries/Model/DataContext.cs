@@ -115,6 +115,7 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+        public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 
         //**********  Court case management**********
         public virtual DbSet<Legalmanagementsystem> Legalmanagementsystem { get; set; }
@@ -342,7 +343,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisnalaConfiguration());
             modelBuilder.ApplyConfiguration(new GistextConfiguration());
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
-
+            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
             base.OnModelCreating(modelBuilder);
         }
     }

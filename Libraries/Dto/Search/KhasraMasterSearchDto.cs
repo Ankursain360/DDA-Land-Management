@@ -9,10 +9,14 @@ namespace Dto.Search
     {
        
         public string name { get; set; }
+       
+        public string village { get; set; }
+        
+        public string rectNo { get; set; }
 
         //public int? localityId { get; set; }
         //public int landCategoryId { get; set; }
 
-        
+
     }
 }

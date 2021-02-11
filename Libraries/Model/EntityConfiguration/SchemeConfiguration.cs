@@ -35,7 +35,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.Description)
-                .IsRequired()
+              
                 .HasMaxLength(500)
                 .IsUnicode(false);
 

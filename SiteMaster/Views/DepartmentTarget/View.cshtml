@@ -1,0 +1,75 @@
+﻿@model Libraries.Model.Entity.Departmenttarget
+@await Component.InvokeAsync("PageHeader", new { pageName = "Department Target" })
+
+
+<div class="pt-3">
+
+
+    <form asp-action="Edit" disabled="disabled" id="myForm" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row">
+            <div class="col-md-6    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <select asp-for="DepartmentId" disabled="disabled" asp-items="@(new SelectList(Model.DepartmentList, "Id","Name"))"
+                            placeholder="Name" type="text" class="floating-label-field floating-label-field--s3" limit="100">
+                    </select>
+                    <span asp-validation-for="DepartmentId" class="text-danger"></span>
+                    <label class="floating-label" asp-for="DepartmentId">Department Name   </label>
+                </div>
+            </div>
+            <div class="col-md-6    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="FilesToBeDone" placeholder="Name" type="text" disabled="disabled"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+
+                    <span asp-validation-for="FilesToBeDone" class="text-danger"></span>
+
+                    <label class="floating-label">Files to  be done   </label>
+                </div>
+            </div>
+            <div class="col-md-6    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                    <input asp-for="WeeklyToBeDone" placeholder="Name" type="text" disabled="disabled"
+                           class="floating-label-field floating-label-field--s3" limit="100" />
+
+                    <span asp-validation-for="WeeklyToBeDone" class="text-danger"></span>
+
+                    <label class="floating-label">Weekly to  be done   </label>
+                </div>
+            </div>
+            <div class="col-md-6    ">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+
+
+
+                    <select asp-for="IsActive" class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+
+                    <label for="field-1" class="floating-label">Status</label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row ">
+            <div class=" col-md-12">
+              
+                @Html.ActionLink("Back", "Index", "DepartmentTarget", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+

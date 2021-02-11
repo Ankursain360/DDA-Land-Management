@@ -10,11 +10,8 @@ namespace Libraries.Model.EntityConfiguration
 
         public void Configure(EntityTypeBuilder<Proposaldetails> builder)
         {
-            builder.ToTable("proposaldetails", "lms");
 
-            builder.HasIndex(e => e.Name)
-                .HasName("Name_UNIQUE")
-                .IsUnique();
+            builder.ToTable("proposaldetails", "lms");
 
             builder.HasIndex(e => e.SchemeId)
                 .HasName("fkProposalSchemeId_idx");
@@ -32,10 +29,12 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
             builder.Property(e => e.Description)
-                .HasMaxLength(200)
+                .HasMaxLength(1000)
                 .IsUnicode(false);
 
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+            builder.Property(e => e.IsActive)
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
@@ -60,6 +59,10 @@ namespace Libraries.Model.EntityConfiguration
                 .WithMany(p => p.Proposaldetails)
                 .HasForeignKey(d => d.SchemeId)
                 .HasConstraintName("fkProposalSchemeId");
+
+
+
+
         }
     }
 }

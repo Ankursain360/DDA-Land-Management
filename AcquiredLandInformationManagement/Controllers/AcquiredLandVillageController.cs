@@ -16,7 +16,7 @@ using System.Collections.Generic;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class AcquiredLandVillageController : Controller
+    public class AcquiredLandVillageController : BaseController
     {
         private readonly IAcquiredlandvillageService _acquiredlandvillageService;
 
@@ -51,7 +51,7 @@ namespace AcquiredLandInformationManagement.Controllers
             acquiredlandvillage.IsActive = 1;
             acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            acquiredlandvillage.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
+            acquiredlandvillage.ZoneList = await _acquiredlandvillageService.GetAllZone();
             return View(acquiredlandvillage);
         }
 
@@ -65,10 +65,11 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
                 acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-                acquiredlandvillage.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
+                acquiredlandvillage.ZoneList = await _acquiredlandvillageService.GetAllZone();
 
                 if (ModelState.IsValid)
                 {
+                    acquiredlandvillage.CreatedBy = SiteContext.UserId;
                     var result = await _acquiredlandvillageService.Create(acquiredlandvillage);
 
                     if (result == true)
@@ -103,8 +104,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
             Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            Data.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
-
+            Data.ZoneList = await _acquiredlandvillageService.GetAllZone();
             if (Data == null)
             {
                 return NotFound();
@@ -117,10 +117,16 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Acquiredlandvillage acquiredlandvillage)
         {
+
+            acquiredlandvillage.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
+            acquiredlandvillage.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
+            acquiredlandvillage.ZoneList = await _acquiredlandvillageService.GetAllZone();
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    acquiredlandvillage.ModifiedBy = SiteContext.UserId;
                     var result = await _acquiredlandvillageService.Update(id, acquiredlandvillage);
                     if (result == true)
                     {
@@ -178,8 +184,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _acquiredlandvillageService.FetchSingleResult(id);
             Data.DistrictList = await _acquiredlandvillageService.GetAllDistrict();
             Data.TehsilList = await _acquiredlandvillageService.GetAllTehsil();
-            Data.VillagetypeList = await _acquiredlandvillageService.GetAllVillagetype();
-
+            Data.ZoneList = await _acquiredlandvillageService.GetAllZone();
 
             if (Data == null)
             {
