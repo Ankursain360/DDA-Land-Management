@@ -36,7 +36,7 @@ function createLine(_path) {
 function createPoint(pos) {
     var pt = new google.maps.Marker({
         position: pos,
-        icon: 'images/marker.png',
+       // icon: 'images/marker.png',
         map: map,
         clickable: !1
     });

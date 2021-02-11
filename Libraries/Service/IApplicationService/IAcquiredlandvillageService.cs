@@ -12,7 +12,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<Acquiredlandvillage>> GetAcquiredlandvillage();
         Task<List<District>> GetAllDistrict();
         Task<List<Tehsil>> GetAllTehsil();
-        Task<List<Villagetype>> GetAllVillagetype();
+        Task<List<Zone>> GetAllZone();
         Task<List<Acquiredlandvillage>> GetACquiredlandvillageUsingRepo();
         Task<bool> Update(int id, Acquiredlandvillage acquiredlandvillage);
         Task<bool> Create(Acquiredlandvillage acquiredlandvillage);

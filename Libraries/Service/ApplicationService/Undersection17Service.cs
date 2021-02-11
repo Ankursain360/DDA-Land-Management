@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -44,7 +45,11 @@ namespace Libraries.Service.ApplicationService
             return model;
         }
 
-
+        public async Task<List<Undersection6>> GetAllUndersection6List()
+        {
+            List<Undersection6> undersection6List = await _undersection17Repository.GetAllUndersection6List();
+            return undersection6List;
+        }
 
         public async Task<List<Undersection17>> GetAllUndersection17()
         {
@@ -52,17 +57,12 @@ namespace Libraries.Service.ApplicationService
             return await _undersection17Repository.GetAllUndersection17();
         }
 
-        public async Task<List<LandNotification>> GetAllLandNotification()
+        public async Task<PagedResult<Undersection17>> GetPagedUndersection17(UnderSection17SearchDto model)
         {
-            List<LandNotification> landnotificationList = await _undersection17Repository.GetAllLandNotification();
-            return landnotificationList;
+            return await _undersection17Repository.GetPagedUndersection17(model);
         }
 
-        public async Task<List<Undersection6>> GetAllUndersection6()
-        {
-            List<Undersection6> undersection6List = await _undersection17Repository.GetAllUndersection6();
-            return undersection6List;
-        }
+       
 
         public async Task<List<Undersection17>> GetUndersection17UsingRepo()
         {
@@ -73,13 +73,11 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _undersection17Repository.FindBy(a => a.Id == id);
             Undersection17 model = result.FirstOrDefault();
-            model.LandNotificationId = undersection17.LandNotificationId;
-            model.NotificationDate = undersection17.NotificationDate;
             model.UnderSection6Id = undersection17.UnderSection6Id;
-            
+            model.Number = undersection17.Number;
 
-            
-
+            model.NotificationDate = undersection17.NotificationDate;
+          
             model.IsActive = undersection17.IsActive;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;

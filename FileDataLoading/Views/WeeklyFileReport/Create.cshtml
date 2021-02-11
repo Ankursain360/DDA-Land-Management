@@ -1,0 +1,96 @@
+﻿@*@model Libraries.Model.Entity.Datastoragedetails*@
+@model Dto.Master.WeeklyFileReportDtoProfile
+@await Component.InvokeAsync("PageHeader", new { pageName = "Weekly File Report" })
+<div class="=pt-3">
+    <div class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Search</h3>
+
+        <div class="row">
+            <div class="col-md-3">
+
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="DepartmentId"  asp-items="@(new SelectList(@ViewBag.departmentList, "Id", "Name"))"> onchange="return onChange(this.options[this.selectedIndex].value);" required="required" requiredmsg="The Department field is required">
+                        <option selected="selected" disabled="disabled" value="0">--Select-- </option>
+                    </select>
+
+
+                    <label class="floating-label">Department Name </label>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+
+
+                    <input type="date" id="txtFromDate" class="floating-label-field floating-label-field--s3" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">From Date </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+
+
+                    <input type="date" id="txtToDate" class="floating-label-field floating-label-field--s3" onload="getDate()" />
+                    <span class="d-block text-danger field-validation-valid"></span>
+                    <label class="floating-label">To Date </label>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12 col-xl-3">
+                <div class="row">
+                    <div class="col-6 col-md-5 col-xl-6">
+                        <button class="btn btn-link btn-block d-flex align-items-center justify-content-center" type="reset" id="btnReset">
+                            <i class="ri-refresh-line mr-2"></i>Reset
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-7 col-xl-6">
+                        <button class="btn btn-theme btn-block" type="submit" id="btnSearch">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-section bg-white border shadow rounded">
+        <div class="short-section d-md-flex align-items-center">
+            <div class="p-3 d-flex align-items-end mr-auto">
+
+                <div class="floating-label-wrap">
+                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                        <option value="DeptId">Department</option>
+
+                    </select>
+                    <label for="field-1" class="floating-label">Sort by</label>
+                </div>
+                <div class="short-btn d-flex align-items-center">
+                    <span>  <button id="btnAscending" class="btn slow active" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></button></span>
+                    <span>   <button id="btnDescending" class="btn slow " title="Descending order" onclick="Descending();"><i class="ri-sort-desc"></i></button></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="table-responsive px-2 ">
+            <div id="LoadView"></div>
+
+        </div>
+
+
+    </div>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/weeklyfilereportindex.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/weeklyfilereportindex.min.js" asp-append-version="true"></script>
+</environment>
+
+

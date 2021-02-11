@@ -62,11 +62,11 @@ namespace Libraries.Service.ApplicationService
             List<Tehsil> tehsilList = await _acquiredlandvillageRepository.GetAllTehsil();
             return tehsilList;
         }
-
-        public async Task<List<Villagetype>> GetAllVillagetype()
+       
+        public async Task<List<Zone>> GetAllZone()
         {
-            List<Villagetype> villagetypeList = await _acquiredlandvillageRepository.GetAllVillagetype();
-            return villagetypeList;
+            List<Zone> zoneList = await _acquiredlandvillageRepository.GetAllZone();
+            return zoneList;
         }
 
         public async Task<List<Acquiredlandvillage>> GetACquiredlandvillageUsingRepo()
@@ -78,22 +78,22 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _acquiredlandvillageRepository.FindBy(a => a.Id == id);
             Acquiredlandvillage model = result.FirstOrDefault();
-            model.DistrictId = acquiredlandvillage.DistrictId;
+           
             model.Name = acquiredlandvillage.Name;
             model.Code = acquiredlandvillage.Code;
-            model.TehsilId = acquiredlandvillage.TehsilId;
             model.DistrictId = acquiredlandvillage.DistrictId;
+            model.TehsilId = acquiredlandvillage.TehsilId;
             model.YearofConsolidation = acquiredlandvillage.YearofConsolidation;
             model.TotalNoOfSheet = acquiredlandvillage.TotalNoOfSheet;
 
-            model.Zone = acquiredlandvillage.Zone;
+            model.ZoneId = acquiredlandvillage.ZoneId;
             model.Acquired = acquiredlandvillage.Acquired;
             model.Circle = acquiredlandvillage.Circle;
             model.WorkingVillage = acquiredlandvillage.WorkingVillage;
-            
+            model.VillageType = acquiredlandvillage.VillageType;
             model.IsActive = acquiredlandvillage.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = acquiredlandvillage.ModifiedBy;
             _acquiredlandvillageRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
@@ -101,7 +101,7 @@ namespace Libraries.Service.ApplicationService
 
         public async Task<bool> Create(Acquiredlandvillage acquiredlandvillage)
         {
-            acquiredlandvillage.CreatedBy = 1;
+            acquiredlandvillage.CreatedBy = acquiredlandvillage.CreatedBy;
             acquiredlandvillage.CreatedDate = DateTime.Now;
 
             _acquiredlandvillageRepository.Add(acquiredlandvillage);
@@ -113,10 +113,6 @@ namespace Libraries.Service.ApplicationService
         {
             return await _acquiredlandvillageRepository.GetPagedAcquiredlandvillage(model);
         }
-
-
-
-
 
     }
 }

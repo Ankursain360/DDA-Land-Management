@@ -32,11 +32,11 @@ namespace Libraries.Repository.EntityRepository
             List<Tehsil> tehsilList = await _dbContext.Tehsil.Where(x => x.IsActive == 1).ToListAsync();
             return tehsilList;
         }
-
-        public async Task<List<Villagetype>> GetAllVillagetype()
+       
+        public async Task<List<Zone>> GetAllZone()
         {
-            List<Villagetype> villagetypelist = await _dbContext.Villagetype.Where(x => x.IsActive == 1).ToListAsync();
-            return villagetypelist;
+            List<Zone> zonelist = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
+            return zonelist;
         }
 
 
@@ -44,7 +44,7 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillage()
         {
-            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x=>x.VillageType).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x=>x.Zone).ToListAsync();
         }
 
 
@@ -53,7 +53,7 @@ namespace Libraries.Repository.EntityRepository
             var data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -69,7 +69,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -81,7 +81,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -94,7 +94,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -106,7 +106,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -120,7 +120,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -140,7 +140,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -152,7 +152,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -165,7 +165,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -177,7 +177,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))
@@ -191,7 +191,7 @@ namespace Libraries.Repository.EntityRepository
                         data = await _dbContext.Acquiredlandvillage
                                    .Include(x => x.District)
                                    .Include(x => x.Tehsil)
-                                   .Include(x => x.VillageType)
+                                   .Include(x => x.Zone)
                                    .Where(x => (string.IsNullOrEmpty(model.name) || x.Name.Contains(model.name))
                                     && (string.IsNullOrEmpty(model.tehsil) || x.Tehsil.Name.Contains(model.tehsil))
                                     && (string.IsNullOrEmpty(model.district) || x.District.Name.Contains(model.district)))

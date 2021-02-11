@@ -27,7 +27,7 @@ namespace Libraries.Model.Entity
             Planning = new HashSet<Planning>();
             Issuereturnfile = new HashSet<Issuereturnfile>();
             Dmsfileupload = new HashSet<Dmsfileupload>();
-
+          //  Departmenttarget = new HashSet<Departmenttarget>();
         }
 
         [Required(ErrorMessage = "Department name is mandatory")]
@@ -57,5 +57,6 @@ namespace Libraries.Model.Entity
         public ICollection<Issuereturnfile> Issuereturnfile { get; set; }
         public ICollection<Dmsfileupload> Dmsfileupload { get; set; }
         public ICollection<Datastoragedetails> Datastoragedetails { get; set; }
+        public ICollection<Departmenttarget> Departmenttarget { get; set; }
     }
 }

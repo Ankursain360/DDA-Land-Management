@@ -27,10 +27,10 @@ namespace AcquiredLandInformationManagement.Controllers
             _proposaldetailsService = proposaldetailsService;
             }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public  IActionResult Index()
             {
-                var result = await _proposaldetailsService.GetAllProposaldetails();
-                return View(result);
+               
+                return View();
             }
 
         [HttpPost]

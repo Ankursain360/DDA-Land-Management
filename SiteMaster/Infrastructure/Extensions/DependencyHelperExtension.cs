@@ -49,7 +49,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalstatusRepository, ApprovalstatusRepository>();
             services.AddScoped<ISchemeFileLoadingRepository, SchemeFileLoadingRepository>();
             services.AddScoped<IBranchRepository, BranchRepository>();
-
+            services.AddScoped<IDepartmenttargetRepository, DepartmenttargetRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -81,7 +81,7 @@ namespace SiteMaster.Infrastructure.Extensions
             services.AddScoped<IApprovalstatusService, ApprovalstatusService>();
             services.AddScoped<ISchemeFileLoadingService, SchemeFileLoadingService>();
             services.AddScoped<IBranchService, BranchService>();
-
+            services.AddScoped<IDepartmenttargetService, DepartmenttargetService>();
         }
     }
 }
