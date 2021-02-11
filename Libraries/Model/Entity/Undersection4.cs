@@ -16,9 +16,13 @@ namespace Libraries.Model.Entity
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection6 = new HashSet<Undersection6>();
         }
+        [Required]
         public int ProposalId { get; set; }
+        [Required]
         public string Number { get; set; }
+        [Required]
         public DateTime? Ndate { get; set; }
+        [Required]
         public string Npurpose { get; set; }
         public string TypeDetails { get; set; }
         public byte IsActive { get; set; }

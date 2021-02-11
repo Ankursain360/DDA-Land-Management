@@ -71,6 +71,7 @@ namespace Libraries.Service.ApplicationService
             model.Ndate = undersection4.Ndate;
             model.Npurpose = undersection4.Npurpose;
             model.TypeDetails = undersection4.TypeDetails;
+            model.BoundaryDescription = undersection4.BoundaryDescription;
          //   model.TypePurpose = undersection4.TypePurpose;
           
             model.IsActive = undersection4.IsActive;
@@ -84,7 +85,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Undersection4 undersection4)
         {
             undersection4.CreatedBy = 1;
-            undersection4.IsActive = 1;
+          
             undersection4.CreatedDate = DateTime.Now;
 
             _undersection4Repository.Add(undersection4);
