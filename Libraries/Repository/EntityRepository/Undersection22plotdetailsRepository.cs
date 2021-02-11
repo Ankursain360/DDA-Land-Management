@@ -1,4 +1,5 @@
-﻿using Libraries.Model;
+﻿using Dto.Search;
+using Libraries.Model;
 using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
@@ -40,6 +41,11 @@ namespace Libraries.Repository.EntityRepository
             List<Khasra> khasraList = await _dbContext.Khasra.Where(x => x.AcquiredlandvillageId == villageId && x.IsActive == 1).ToListAsync();
             return khasraList;
         }
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
         public async Task<List<Undersection4>> GetAllUndersection4()
         {
             List<Undersection4> us4List = await _dbContext.Undersection4.Where(x => x.IsActive == 1).ToListAsync();
@@ -61,10 +67,172 @@ namespace Libraries.Repository.EntityRepository
             return us22List;
         }
 
-        //public async Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model)
-        //{
+        public async Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model)
+        {
+            var data = await _dbContext.Undersection22plotdetails
+                              .Include(x => x.UnderSection22)
+                              .Include(x => x.UnderSection4)
+                              .Include(x => x.UnderSection6)
+                              .Include(x => x.UnderSection17)
+                              .Include(x => x.Acquiredlandvillage)
+                              .Include(x => x.Khasra)
+                             .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                             && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                             && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                            .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
 
-        //}
-       
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                     .Include(x => x.UnderSection22)
+                                     .Include(x => x.UnderSection4)
+                                     .Include(x => x.UnderSection6)
+                                     .Include(x => x.UnderSection17)
+                                     .Include(x => x.Acquiredlandvillage)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderBy(a => a.UnderSection22.NotificationNo)
+                                      .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+  
+                        break;
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderBy(a => a.Acquiredlandvillage.Name)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+  
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderBy(a => a.Khasra.Name)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderByDescending(a => a.IsActive)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                     .Include(x => x.UnderSection22)
+                                     .Include(x => x.UnderSection4)
+                                     .Include(x => x.UnderSection6)
+                                     .Include(x => x.UnderSection17)
+                                     .Include(x => x.Acquiredlandvillage)
+                                     .Include(x => x.Khasra)
+                                     .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                     && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                     && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.UnderSection22.NotificationNo)
+                                    .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+
+                        break;
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderByDescending(a => a.Acquiredlandvillage.Name)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderByDescending(a => a.Khasra.Name)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection22plotdetails
+                                      .Include(x => x.UnderSection22)
+                                      .Include(x => x.UnderSection4)
+                                      .Include(x => x.UnderSection6)
+                                      .Include(x => x.UnderSection17)
+                                      .Include(x => x.Acquiredlandvillage)
+                                      .Include(x => x.Khasra)
+                                      .Where(x => (string.IsNullOrEmpty(model.usno) || x.UnderSection22.NotificationNo.Contains(model.usno))
+                                      && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                     .OrderBy(a => a.IsActive)
+                                     .GetPaged<Undersection22plotdetails>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            return data;
+        }
+
     }
 }

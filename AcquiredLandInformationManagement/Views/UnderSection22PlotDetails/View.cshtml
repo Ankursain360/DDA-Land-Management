@@ -4,9 +4,11 @@
 
 <div class="pt-3">
 
-    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
-        <h3 class="mb-3 d-flex">Add Details</h3>
+    <form asp-action="View" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">View Details</h3>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" asp-for="Id" />
 
         <div class="row mt-md-3">
             <div class="col-md-6">
@@ -50,7 +52,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Bigha" placeholder="Name" type="text" 
+                        <input asp-for="Bigha" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
                         <label class="floating-label">Bigha    </label>
@@ -58,7 +60,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswa" placeholder="Name" type="text" 
+                        <input asp-for="Biswa" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa  </label>
@@ -66,7 +68,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswanshi" placeholder="Name" type="text" 
+                        <input asp-for="Biswanshi" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi </label>
@@ -130,7 +132,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Create</button>
+                <button class="btn btn-theme " type="submit">Update</button>
                 @Html.ActionLink("Back", "Index", "UnderSection22PlotDetails", null, new { @class = "btn btn-theme " })
 
             </div>
