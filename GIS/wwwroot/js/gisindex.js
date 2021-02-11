@@ -14,6 +14,7 @@ var GRID_LAYER = [];
 var NALA_LAYER = [];
 var TEXT_LAYER = [];
 var TRIJUNCTION_LAYER = [];
+var STATE_LAYER = [];
 
 
 $(document).ready(function () {
@@ -91,7 +92,7 @@ function initialize() {
         }],
 
         fullscreenControl: false,
-        center: new google.maps.LatLng(28.66667, 77.21667),
+        center: new google.maps.LatLng(28.6614731487349, 77.32841229395385), 
         //scaleControlOptions: { position: google.maps.ControlPosition.RIGHT_CENTER }
 
     };
@@ -122,17 +123,20 @@ function getStateboundary() {
     });
 }
 
-function setStateboundary(resp) {
-    if (resp.status === true) {
-        var arr = $.map(resp.data, function (el) { return el; })
+function setStateboundary(response) {
+    //  if (response.status === true) {
+    var arr = $.map(response, function (el) { return el; })
 
-        for (i = 0; i < arr.length; i++) {
-            var ln = createPolygon(getLatLongArr(arr[i][0]));
-            ln.setOptions({ visibleZoom: 5, fillColor: '#FF8633', hideZoom: 9, visible: true, map: map, strokeWeight: 4, strokeColor: '#E74C3C', fillOpacity: 0.1, clickable: !1 });
-            maplayer.push(ln);
-        }
-
+    for (i = 0; i < arr.length; i++) {
+        var ln = createPolygon(getLatLongArr(arr[i].polygon));
+        ln.setOptions({ visibleZoom: 7, fillColor: arr[i].colorcode, hideZoom: 9, visible: true, map: map, strokeWeight: 1, strokeColor: '#47C4C8', fillOpacity: 0.3, clickable: !1 });
+        var lp = new google.maps.LatLng(parseFloat(arr[i].ycoordinate), parseFloat(arr[i].xcoordinate));
+        var _label = new google.maps.Label({ visibleZoom: 0, hideZoom: 18, visible: true, map: map, cssName: 'nlLabelState', position: lp, text: arr[i].label });
+        
+        STATE_LAYER.push(_label);
     }
+
+    // }
 }
 /*Zone Boundary Start*/
 function showZone(maxima) {
@@ -141,12 +145,12 @@ function showZone(maxima) {
         showDisBoundaries(response[0].polygon, response[0].xcoordinate, response[0].ycoordinate);
     });
 }
-function showDisBoundaries(ploygn, xaixis, yaixis) {
+function showDisBoundaries(polygon, xaixis, yaixis) {
 
     for (var x = 0; x < zoomZone.length; x++) {
         zoomZone[x].setMap(null);
     }
-    var sl = createPolygon(getLatLongArr(ploygn));
+    var sl = createPolygon(getLatLongArr(polygon));
     sl.setOptions({ strokeWeight: 5, strokeColor: '#0242BD', fillOpacity: 0, clickable: !1 });
     zoomZone.push(sl);
     map.setZoom(10);

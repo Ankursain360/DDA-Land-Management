@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
@@ -28,19 +29,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _disposallandRepository.GetAllDisposalland();
         }
-
         public async Task<List<Disposalland>> GetDisposallandUsingRepo()
         {
             return await _disposallandRepository.GetDisposalland();
         }
-
         public async Task<Disposalland> FetchSingleResult(int id)
         {
             var result = await _disposallandRepository.FindBy(a => a.Id == id);
             Disposalland model = result.FirstOrDefault();
             return model;
         }
-
         public async Task<bool> Update(int id, Disposalland disposalland)
         {
             var result = await _disposallandRepository.FindBy(a => a.Id == id);
@@ -71,7 +69,6 @@ namespace Libraries.Service.ApplicationService
             _disposallandRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
         public async Task<bool> Create(Disposalland disposalland)
         {
 
@@ -95,9 +92,6 @@ namespace Libraries.Service.ApplicationService
             List<Khasra> khasraList = await _disposallandRepository.GetAllKhasra();
             return khasraList;
         }
-
-       
-
         public async Task<bool> Delete(int id)
         {
             var form = await _disposallandRepository.FindBy(a => a.Id == id);
@@ -106,8 +100,10 @@ namespace Libraries.Service.ApplicationService
             _disposallandRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-
-
+        public async Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model)
+        {
+            return await _disposallandRepository.GetPagedDisposalLand(model);
+        }
+        //Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model);
     }
 }
