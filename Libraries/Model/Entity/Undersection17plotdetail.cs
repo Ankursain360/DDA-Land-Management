@@ -23,7 +23,15 @@ namespace Libraries.Model.Entity
             public Khasra Khasra { get; set; }
             public Undersection17 UnderSection17 { get; set; }
             public Acquiredlandvillage Acquiredlandvillage { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
+        [NotMapped]
+        public List<Undersection17> Undersection17List { get; set; }
+        
 
-        }
+
+    }
     }
 
