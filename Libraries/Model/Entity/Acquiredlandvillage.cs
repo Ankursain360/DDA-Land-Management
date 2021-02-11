@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Libraries.Model.Entity
 {
     public class Acquiredlandvillage : AuditableEntity<int>
@@ -19,17 +20,24 @@ namespace Libraries.Model.Entity
             Jointsurvey = new HashSet<Jointsurvey>();
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
+            Proposalplotdetails = new HashSet<Proposalplotdetails>();
         }
+        [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
+
         public string Code { get; set; }
+        [Required(ErrorMessage = "District name is mandatory", AllowEmptyStrings = false)]
         public int? DistrictId { get; set; }
+        [Required(ErrorMessage = "Tehsil name is mandatory", AllowEmptyStrings = false)]
         public int? TehsilId { get; set; }
         public int? YearofConsolidation { get; set; }
         public int? TotalNoOfSheet { get; set; }
+        [Required(ErrorMessage = "Zone name is mandatory", AllowEmptyStrings = false)]
         public int? ZoneId { get; set; }
         public string Acquired { get; set; }
         public string Circle { get; set; }
         public string WorkingVillage { get; set; }
+        //  [Required(ErrorMessage = "Village type is mandatory ")]
         public string VillageType { get; set; }
         public byte? IsActive { get; set; }
 
@@ -56,7 +64,13 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
 
+        public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
+
+
+        public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
+
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+
 
 
     }

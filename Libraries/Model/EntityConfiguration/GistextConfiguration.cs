@@ -27,6 +27,10 @@ namespace Libraries.Model.EntityConfiguration
 
             entity.Property(e => e.VillageId).HasColumnType("int(11)");
 
+            entity.Property(e => e.Label)
+               .HasMaxLength(45)
+               .IsUnicode(false);
+
             entity.Property(e => e.Xcoordinate)
                 .HasColumnName("XCoordinate")
                 .HasColumnType("decimal(12,8)");

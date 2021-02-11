@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Libraries.Model.Common;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Libraries.Model.Entity
 {
     public class Khasra : AuditableEntity<int>
@@ -65,5 +66,6 @@ namespace Libraries.Model.Entity
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Booktransferland> Booktransferland { get; set; }
+        public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
     }
 }

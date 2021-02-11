@@ -3,26 +3,24 @@
 <table class="table table-sm table-bordered mb-0 table-striped">
     <thead class="text-nowrap">
         <tr>
-            @*<th>Scheme Name</th>*@
+            <th>Scheme Name</th>
             <th>Proposal Name</th>
-            <th>Required Body</th>
+            <th>Required Agency</th>
             <th>Proposal No./ File No</th>
             <th>Proposal Date</th>
             <th>Bigha</th>
             <th>Biswa</th>
-
             <th>Biswanshi</th>
             <th>Description</th>
-
             <th>Status</th>
-            <th>Operation</th>
+            <th>Operations</th>
         </tr>
     </thead>
     <tbody >
         @foreach (var item in Model.Results)
         {
             <tr>
-                @*<td>@item.Scheme.Name</td>*@
+                <td> @(item.Scheme == null?"": item.Scheme.Name)</td>
                 <td>@item.Name</td>
                 <td>@item.RequiredAgency</td>
                 <td>@item.ProposalFileNo</td>

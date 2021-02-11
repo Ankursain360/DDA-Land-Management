@@ -13,8 +13,9 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Proposalplotdetails>> GetProposalplotdetails();
         Task<List<Proposaldetails>> GetAllProposaldetails();
-        Task<List<Locality>> GetAllLocality();
-        Task<List<Khasra>> GetAllKhasra();
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+        
+        Task<List<Khasra>> GetAllKhasra( int? villageId);
 
         //Task<bool> Any(int id, string name);
         Task<List<Proposalplotdetails>> GetAllProposalplotdetails();

@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public Proposaldetails()
         {
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Undersection4 = new HashSet<Undersection4>();
         }
 
         [Required]

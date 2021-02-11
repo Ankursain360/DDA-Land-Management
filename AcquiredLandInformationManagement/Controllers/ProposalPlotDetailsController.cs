@@ -26,10 +26,9 @@ namespace AcquiredLandInformationManagement.Controllers
             _proposalplotdetailsService = proposalplotdetailsService;
             }
         [AuthorizeContext(ViewAction.View)]
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
             {
-                var result = await _proposalplotdetailsService.GetAllProposalplotdetails();
-                return View(result);
+                return View();
             }
 
         [HttpPost]
@@ -45,8 +44,8 @@ namespace AcquiredLandInformationManagement.Controllers
             //proposalplotdetails.IsActive = 1;
 
             proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            proposalplotdetails.LocalityList = await _proposalplotdetailsService.GetAllLocality();
-            proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+            proposalplotdetails.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
+            proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra(proposalplotdetails.AcquiredlandvillageId);
 
 
             return View(proposalplotdetails);
@@ -60,8 +59,9 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-                proposalplotdetails.LocalityList = await _proposalplotdetailsService.GetAllLocality();
-                proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+                proposalplotdetails.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
+                proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra(proposalplotdetails.AcquiredlandvillageId);
+
                 if (ModelState.IsValid)
                 {
 
@@ -98,9 +98,9 @@ namespace AcquiredLandInformationManagement.Controllers
 
             var Data = await _proposalplotdetailsService.FetchSingleResult(id);
             Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            Data.LocalityList = await _proposalplotdetailsService.GetAllLocality();
-            
-            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+            Data.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
+
 
 
             if (Data == null)
@@ -114,6 +114,11 @@ namespace AcquiredLandInformationManagement.Controllers
         [AuthorizeContext(ViewAction.Edit)]
         public async Task<IActionResult> Edit(int id, Proposalplotdetails proposalplotdetails)
         {
+
+            proposalplotdetails.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
+            proposalplotdetails.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
+            proposalplotdetails.KhasraList = await _proposalplotdetailsService.GetAllKhasra(proposalplotdetails.AcquiredlandvillageId);
+
             if (ModelState.IsValid)
             {
                 try
@@ -166,8 +171,10 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _proposalplotdetailsService.FetchSingleResult(id);
            
             Data.ProposaldetailsList = await _proposalplotdetailsService.GetAllProposaldetails();
-            Data.LocalityList = await _proposalplotdetailsService.GetAllLocality();
-            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra();
+
+            Data.AcquiredlandvillageList = await _proposalplotdetailsService.GetAllVillage();
+            Data.KhasraList = await _proposalplotdetailsService.GetAllKhasra(Data.AcquiredlandvillageId);
+
             if (Data == null)
             {
                 return NotFound();
@@ -182,6 +189,12 @@ namespace AcquiredLandInformationManagement.Controllers
             string sFileName = @"Proposalplotdetails.xlsx";
             return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
 
+        }
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? villageId)
+        {
+            villageId = villageId ?? 0;
+            return Json(await _proposalplotdetailsService.GetAllKhasra(Convert.ToInt32(villageId)));
         }
     }
 }

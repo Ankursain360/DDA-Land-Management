@@ -41,7 +41,124 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Undersection4>> GetPagedUndersection4details(Undersection4SearchDto model)
         {
-            return await _dbContext.Undersection4.Include(x => x.Proposal).OrderByDescending(x => x.Id).GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                 && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+            
+               )
+               .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+
+
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                 && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+                                .OrderBy(s => s.Proposal.Name)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NUMBER"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+                && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                 && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+                                 .OrderBy(s => s.Number)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("TYPE"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+               && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+                                 .OrderBy(s => s.TypeDetails)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+               && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+                                .OrderByDescending(s => s.IsActive)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+               && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+
+                             .OrderByDescending(s => s.Proposal.Name)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NUMBER"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+               && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+                && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+               )
+                              .OrderByDescending(s => s.Number)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("TYPE"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+             && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+              && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+             )
+                          .OrderByDescending(s => s.TypeDetails)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection4.Include(x => x.Proposal).Where(x => (string.IsNullOrEmpty(model.name) || x.Proposal.Name.Contains(model.name))
+             && (string.IsNullOrEmpty(model.notificationno) || x.Number.Contains(model.notificationno))
+              && (string.IsNullOrEmpty(model.type) || x.TypeDetails.Contains(model.type))
+
+             )
+                                .OrderBy(s => s.IsActive)
+                                .GetPaged<Undersection4>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+
+
+
+
+
+
+            return data;
+
         }
 
     }

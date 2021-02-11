@@ -5,10 +5,16 @@
             <tr>
                 <th>Village Code</th>
                 <th>Village Name</th>
-                <th>Tehsil Name</th>
                 <th>District Name</th>
+                <th>Tehsil Name</th>
+                <th>Year Of Consolidation</th>
+                <th>Zone Name</th>
+                <th>Acquired</th>
+                <th>Circle</th>
+                <th>Working Village</th>
+                <th>Village Type</th>
                 <th>Status</th>
-                <th>Operation</th>
+                <th>Operations</th>
             </tr>
         </thead>
         <tbody >
@@ -18,9 +24,15 @@
 
                 <td>@item.Code</td>
                 <td>@item.Name</td>
-                <td>@(item.Tehsil == null?"": item.Tehsil.Name)</td>
                 <td>@(item.District == null?"": item.District.Name)</td>
-               
+
+                <td>@(item.Tehsil == null?"": item.Tehsil.Name)</td>
+                <td>@item.YearofConsolidation</td>
+                <td>@(item.Zone == null?"": item.Zone.Name)</td>
+                <td>@item.Acquired</td>
+                <td>@item.Circle</td>
+                <td>@item.WorkingVillage</td>
+                <td>@item.VillageType</td>
                 <td>
                     @if (item.IsActive == 1)
                     {
