@@ -61,6 +61,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
+            services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -100,6 +101,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
             services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
+            services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
 
         }
     }

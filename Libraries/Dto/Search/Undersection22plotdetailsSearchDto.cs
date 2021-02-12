@@ -7,6 +7,8 @@ namespace Dto.Search
 {
     public class Undersection22plotdetailsSearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string usno { get; set; }
+        public string village { get; set; }
+        public string khasra { get; set; }
     }
 }

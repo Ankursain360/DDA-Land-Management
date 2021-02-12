@@ -21,10 +21,150 @@ namespace Libraries.Repository.EntityRepository
         }
         public async Task<PagedResult<Undersection17plotdetail>> GetPagedUndersection17plotdetail(Undersection17plotdetailSearchDto model)
         {
-            return await _dbContext.Undersection17plotdetail.
-                Where(x => x.IsActive == 1).Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage)
-                .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
-           
+            //return await _dbContext.Undersection17plotdetail.
+            //    Where(x => x.IsActive == 1).Include(x => x.UnderSection17).Include(x => x.Khasra).Include(x => x.Acquiredlandvillage)
+            //    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Undersection17plotdetail
+                       .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                        .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.Khasra.Name)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.Acquiredlandvillage.Name)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                   .OrderBy(a => a.UnderSection17.Number)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.IsActive)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                   
+               
+                    case ("NAME"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.Khasra.Name)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderByDescending(a => a.Acquiredlandvillage.Name)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("NOTIFICATION"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                   .OrderByDescending(a => a.UnderSection17.Number)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Undersection17plotdetail
+                                    .Include(x => x.UnderSection17)
+                       .Include(x => x.Khasra)
+                       .Include(x => x.Acquiredlandvillage)
+
+                        .Where(x => (string.IsNullOrEmpty(model.undersection17) || x.UnderSection17.Number.Contains(model.undersection17))
+                         && (string.IsNullOrEmpty(model.village) || x.Acquiredlandvillage.Name.Contains(model.village))
+                         && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra)))
+                                    .OrderBy(a => a.IsActive)
+                                    .GetPaged<Undersection17plotdetail>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
+
         }
 
 
