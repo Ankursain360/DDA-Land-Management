@@ -48,7 +48,7 @@ namespace Libraries.Service.ApplicationService
             Proposalplotdetails model = result.FirstOrDefault();
           
             model.ProposaldetailsId = proposalplotdetails.ProposaldetailsId;
-            model.LocalityId = proposalplotdetails.LocalityId;
+            model.AcquiredlandvillageId = proposalplotdetails.AcquiredlandvillageId;
             model.KhasraId = proposalplotdetails.KhasraId;
 
           
@@ -58,7 +58,7 @@ namespace Libraries.Service.ApplicationService
             model.IsActive = proposalplotdetails.IsActive;
 
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = proposalplotdetails.ModifiedBy;
             _proposalplotdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
@@ -66,7 +66,7 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Create(Proposalplotdetails proposalplotdetails)
         {
 
-            proposalplotdetails.CreatedBy = 1;
+            proposalplotdetails.CreatedBy = proposalplotdetails.CreatedBy;
             proposalplotdetails.CreatedDate = DateTime.Now;
             _proposalplotdetailsRepository.Add(proposalplotdetails);
             return await _unitOfWork.CommitAsync() > 0;
@@ -76,14 +76,14 @@ namespace Libraries.Service.ApplicationService
             List<Proposaldetails> proposaldetailsList = await _proposalplotdetailsRepository.GetAllProposaldetails();
             return proposaldetailsList;
         }
-        public async Task<List<Locality>> GetAllLocality()
+        public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
-            List<Locality> localityList = await _proposalplotdetailsRepository.GetAllLocality();
-            return localityList;
+            List<Acquiredlandvillage> villageList = await _proposalplotdetailsRepository.GetAllVillage();
+            return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasra()
+        public async Task<List<Khasra>> GetAllKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _proposalplotdetailsRepository.GetAllKhasra();
+            List<Khasra> khasraList = await _proposalplotdetailsRepository.GetAllKhasra(villageId);
             return khasraList;
         }
 

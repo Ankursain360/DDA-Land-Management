@@ -20,7 +20,7 @@
                 <div class="floating-label-wrap">
 
                     <select class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                        <option selected="selected" value="">Select</option>
+                        <option>Select</option>
                     </select>
                     <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
                     <label class="floating-label">Village</label>
@@ -55,15 +55,7 @@
             </div>
         </div>
         <div id="Divclsification">
-            @*<div class="row" style="margin-bottom:35px;">
-                <div class="col-sm-12">
-                    <div class=" dda-innerheading">
-                        <div class="col-md-12">
-                            <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
-                        </div>
-                    </div>
-                </div>
-            </div>*@
+           
             <h2 class="my-3 sub-heading">Area</h2>
             <div class="row pt-3">
                 <div class="col-md-3">

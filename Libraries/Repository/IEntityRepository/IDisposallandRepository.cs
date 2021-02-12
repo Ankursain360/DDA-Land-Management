@@ -1,4 +1,5 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using System;
 using System.Collections.Generic;
@@ -17,8 +18,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetAllKhasra();
 
+        Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model);
 
-     
-     
+
     }
 }

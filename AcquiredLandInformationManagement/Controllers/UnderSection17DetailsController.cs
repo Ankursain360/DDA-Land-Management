@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-
+using Dto.Search;
 namespace AcquiredLandInformationManagement.Controllers
 {
     public class UnderSection17DetailsController : Controller
@@ -21,7 +21,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public UnderSection17DetailsController(IUndersection17Service undersection17Service)
         {
-            _undersection17Service = undersection17Service;
+          _undersection17Service = undersection17Service;
         }
 
         public async Task<IActionResult> Index()
@@ -29,21 +29,21 @@ namespace AcquiredLandInformationManagement.Controllers
             var list = await _undersection17Service.GetAllUndersection17();
             return View(list);
         }
-        //[HttpPost]
-        //public async Task<PartialViewResult> List([FromBody] KhasraMasterSearchDto model)
-        //{
-        //    var result = await _undersection17Service.GetPagedKhasra(model);
-        //    return PartialView("_List", result);
-        //}
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] UnderSection17SearchDto model)
+        {
+            var result = await _undersection17Service.GetPagedUndersection17(model);
+            return PartialView("_List", result);
+        }
 
         public async Task<IActionResult> Create()
 
         {
             Undersection17 undersection17 = new Undersection17();
             undersection17.IsActive = 1;
-            undersection17.LandNotificationList = await _undersection17Service.GetAllLandNotification();
 
-            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6();
+
+            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
             return View(undersection17);
         }
 
@@ -54,9 +54,9 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                undersection17.LandNotificationList = await _undersection17Service.GetAllLandNotification();
 
-                undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6();
+
+                undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
 
                 if (ModelState.IsValid)
                 {
@@ -92,9 +92,9 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _undersection17Service.FetchSingleResult(id);
-            Data.LandNotificationList = await _undersection17Service.GetAllLandNotification();
+           
 
-            Data.Undersection6List = await _undersection17Service.GetAllUndersection6();
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
 
             if (Data == null)
             {
@@ -163,8 +163,8 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _undersection17Service.FetchSingleResult(id);
 
-            Data.LandNotificationList = await _undersection17Service.GetAllLandNotification();
-            Data.Undersection6List = await _undersection17Service.GetAllUndersection6();
+         
+            Data.Undersection6List = await _undersection17Service.GetAllUndersection6List();
 
 
             if (Data == null)
@@ -179,3 +179,4 @@ namespace AcquiredLandInformationManagement.Controllers
 
     }
 }
+

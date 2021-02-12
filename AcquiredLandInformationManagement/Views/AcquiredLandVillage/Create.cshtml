@@ -119,10 +119,10 @@
                         </label>
                     </div>
                     <div class="col-md-3">
-                        <input type="hidden" asp-for="VillageType" />
+                        <input type="hidden" value="Dead" asp-for="VillageType" />
 
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rDead" value="Dead" checked="checked">
+                            <input class="form-check-input" type="radio"  name="villageradio" id="rDead" value="Dead" checked="checked">
                             <label class="form-check-label" for="radio">
                                 Dead Village
                             </label>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rNazul" value="Nazul">
+                            <input class="form-check-input" type="radio"  name="villageradio" id="rNazul" value="Nazul">
                             <label class="form-check-label" for="radio">
                                 Nazul Village
                             </label>
@@ -138,13 +138,15 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-check theme">
-                            <input class="form-check-input" type="radio" asp-for="VillageType" name="villageradio" id="rUrban" value="Urban">
+                            <input class="form-check-input" type="radio"  name="villageradio" id="rUrban" value="Urban">
                             <label class="form-check-label" for="radio">
                                 Urban Village
                             </label>
                         </div>
                     </div>
+
                 </div>
+                <span asp-validation-for="VillageType" class="text-danger"></span>
             </div>
 
             <div class=" col-md-6">

@@ -23,6 +23,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<ICountryRepository, CountryRepository>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
+            services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
 
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
@@ -57,7 +58,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-            services.AddScoped<ITehsilRepository, TehsilRepository>();
+            services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
+            services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -89,12 +91,14 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUndersection17Service, Undersection17Service>();
             services.AddScoped<IMenuService, MenuService>();
             services.AddScoped<IPermissionsService, PermissionsService>();
+            services.AddScoped<IUndersection4PlotService, Undersection4PlotService>();
            
             services.AddScoped<IModuleService, ModuleService>();
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<ITehsilService, TehsilService>();
+            services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+            services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
 
         }

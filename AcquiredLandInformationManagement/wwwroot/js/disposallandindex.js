@@ -2,23 +2,26 @@
 var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
 
+
 $(document).ready(function () {
-    GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetProposalplotdetails(pageNumber, pageSize, order) {
+
+function GetDisposalLand(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/khasramaster/List`, 'html', param, function (response) {
-        $('#divKhasraTable').html("");
-        $('#divKhasraTable').html(response);
+    HttpPost(`/DisposalLand/List`, 'html', param, function (response) {
+        $('#divDisposalLandTable').html("");
+        $('#divDisposalLandTable').html(response);
     });
 }
 
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
+       
         name: $('#txtName').val(),
-        village: $('#txtLoc').val(),
-        rectNo: $('#txtRectNo').val(),
+        Khasra: $('#txtKhasra').val(),
+        //district: $('#txtDistrict').val(),
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),
@@ -28,16 +31,16 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 }
 
 $("#btnSearch").click(function () {
-    GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 
 $("#btnReset").click(function () {
 
     $('#txtName').val('');
-    $('#txtLoc').val(''),
-        $('#txtRectNo').val(''),
-        //$('#txtDate').val(''),
-        GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    $('#txtKhasra').val(''),
+    //$('#txtDistrict').val(''),
+     
+        GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -45,7 +48,7 @@ $("#btnAscending").click(function () {
     $("#btnDescending").removeClass("active");
     $("#btnAscending").addClass("active");
     sortOrder = 1;//for Ascending
-    GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 
 
@@ -53,20 +56,18 @@ $("#btnDescending").click(function () {
     $("#btnAscending").removeClass("active");
     $("#btnDescending").addClass("active");
     sortOrder = 2;//for Descending
-    GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 $('#ddlSort').change(function () {
-    GetProposalplotdetails(currentPageNumber, currentPageSize, sortOrder);
+    GetDisposalLand(currentPageNumber, currentPageSize, sortOrder);
 });
 
 function onPaging(pageNo) {
-    GetProposalplotdetails(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
+    GetDisposalLand(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetProposalplotdetails(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
+    GetDisposalLand(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
-
-
