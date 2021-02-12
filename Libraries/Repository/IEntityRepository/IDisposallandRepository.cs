@@ -11,7 +11,7 @@ namespace Libraries.Repository.IEntityRepository
     
     public interface IDisposallandRepository : IGenericRepository<Disposalland>
     {
-        Task<List<Disposalland>> GetDisposalland();
+        //Task<List<Disposalland>> GetDisposalland();
         Task<List<Disposalland>> GetAllDisposalland();
 
         Task<List<Utilizationtype>> GetAllUtilizationtype();
