@@ -21,8 +21,11 @@ namespace Libraries.Model.Entity
         public string Remarks { get; set; }
   
         public byte IsActive { get; set; }
-
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
         public Khasra Khasra { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
         public Acquiredlandvillage Village { get; set; }
     }
 }

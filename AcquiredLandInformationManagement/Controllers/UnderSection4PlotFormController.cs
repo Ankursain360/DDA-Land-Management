@@ -118,6 +118,11 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Undersection4plot undersection4plot)
         {
+
+            undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
+            undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
+            undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
+
             if (ModelState.IsValid)
             {
                 try

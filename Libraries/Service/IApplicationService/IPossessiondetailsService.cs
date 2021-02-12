@@ -1,0 +1,32 @@
+﻿using Libraries.Model.Entity;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+
+using Dto.Search;
+using Libraries.Repository.Common;
+
+namespace Libraries.Service.IApplicationService
+{
+    public interface IPossessiondetailsService
+    {
+        Task<List<Khasra>> BindKhasra(int? villageId);
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+
+        Task<List<Possessiondetails>> GetAllPossessiondetails();
+        Task<List<Possessiondetails>> GetPossessiondetailsUsingRepo();
+        Task<bool> Update(int id, Possessiondetails possessiondetails);
+        Task<bool> Create(Possessiondetails possessiondetails);
+        Task<Possessiondetails> FetchSingleResult(int id);
+        Task<bool> Delete(int id);
+        Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model);
+
+
+
+
+
+
+
+    }
+}

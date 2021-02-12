@@ -75,7 +75,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("UNDERSECTION6NO"):
+                    case ("UNDERSECTION4NO"):
                         data = null;
                         data = await _dbContext.Undersection6plot.Include(x => x.Undersection6)
                 .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification6) || x.Undersection6.Number.Contains(model.numbernotification6))
@@ -115,7 +115,7 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
-                    case ("UNDERSECTION6NO"):
+                    case ("UNDERSECTION4NO"):
                         data = null;
                         data = await _dbContext.Undersection6plot.Include(x => x.Undersection6)
                 .Include(x => x.Village).Include(x => x.Khasra).Where(x => (string.IsNullOrEmpty(model.numbernotification6) || x.Undersection6.Number.Contains(model.numbernotification6))
