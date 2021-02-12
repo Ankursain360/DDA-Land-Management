@@ -31,7 +31,7 @@ namespace Libraries.Repository.EntityRepository
                                    .ToListAsync();
         }
 
-        public async Task<List<GISClean>> GetCleanDetails(int villageId)
+        public async Task<List<GISclean>> GetCleanDetails(int villageId)
         {
             try
             {
@@ -45,7 +45,7 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-        public async Task<List<GisCleanText>> GetCleantextDetails(int villageId)
+        public async Task<List<Giscleantext>> GetCleantextDetails(int villageId)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
-        public async Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId)
+        public async Task<List<GISencroachment>> GetEncroachmentDetails(int villageId)
         {
             try
             {

@@ -28,12 +28,12 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetBurjiDetails(villageId);
         }
 
-        public async Task<List<GISClean>> GetCleanDetails(int villageId)
+        public async Task<List<GISclean>> GetCleanDetails(int villageId)
         {
             return await _iGISSRepository.GetCleanDetails(villageId);
         }
 
-        public async Task<List<GisCleanText>> GetCleantextDetails(int villageId)
+        public async Task<List<Giscleantext>> GetCleantextDetails(int villageId)
         {
             return await _iGISSRepository.GetCleantextDetails(villageId);
         }
@@ -43,7 +43,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetDimDetails(villageId);
         }
 
-        public async Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId)
+        public async Task<List<GISencroachment>> GetEncroachmentDetails(int villageId)
         {
             return await _iGISSRepository.GetEncroachmentDetails(villageId);
         }

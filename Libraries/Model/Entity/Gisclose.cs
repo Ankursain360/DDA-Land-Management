@@ -2,7 +2,7 @@
 
 namespace Libraries.Model.Entity
 {
-    public partial class GISencroachment : AuditableEntity<int>
+    public class Gisclose : AuditableEntity<int>
     {
         public int VillageId { get; set; }
         public decimal? Xcoordinate { get; set; }
@@ -10,5 +10,6 @@ namespace Libraries.Model.Entity
         public string Polygon { get; set; }
         public byte? IsActive { get; set; }
         public Village Village { get; set; }
+
     }
 }
