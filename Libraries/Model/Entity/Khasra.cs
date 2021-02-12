@@ -67,5 +67,7 @@ namespace Libraries.Model.Entity
         public ICollection<Watchandward> Watchandward { get; set; }
         public ICollection<Booktransferland> Booktransferland { get; set; }
         public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
+
+        public ICollection<Undersection6plot> Undersection6plot { get; set; }
     }
 }

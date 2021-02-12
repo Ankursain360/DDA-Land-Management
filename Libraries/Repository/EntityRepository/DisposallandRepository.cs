@@ -56,7 +56,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Include(x => x.Utilizationtype)
 
                                       .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
-                                     // && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                      && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
                                       //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
                                       )
                                       .GetPaged<Disposalland>(model.PageNumber, model.PageSize);
@@ -69,7 +69,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Include(x => x.Khasra)
                                       .Include(x => x.Utilizationtype)
                                       .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
-                                      // && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                       && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
                                       //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
                                       )
                                 .OrderBy(s =>
@@ -87,7 +87,7 @@ namespace Libraries.Repository.EntityRepository
                                       .Include(x => x.Khasra)
                                       .Include(x => x.Utilizationtype)
                                       .Where(x => (string.IsNullOrEmpty(model.village) || x.Village.Name.Contains(model.village))
-                                      // && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
+                                       && (string.IsNullOrEmpty(model.khasra) || x.Khasra.Name.Contains(model.khasra))
                                       //&& (string.IsNullOrEmpty(model.utilizationtype) || x.Utilizationtype.Name.Contains(model.utilizationtype))
                                       )
                                 .OrderByDescending(s =>

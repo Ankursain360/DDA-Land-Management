@@ -14,10 +14,10 @@ namespace Libraries.Service.IApplicationService
         Task<List<Village>> GetVillageDetails(int villageId, int zoneId);
         Task<List<Gisaabadi>> GetAbadiDetails(int villageId);
         Task<List<Gisburji>> GetBurjiDetails(int villageId);
-        Task<List<GISClean>> GetCleanDetails(int villageId);
-        Task<List<GisCleanText>> GetCleantextDetails(int villageId);
+        Task<List<GISclean>> GetCleanDetails(int villageId);
+        Task<List<Giscleantext>> GetCleantextDetails(int villageId);
         Task<List<Gisdim>> GetDimDetails(int villageId);
-        Task<List<GISEncroachment>> GetEncroachmentDetails(int villageId);
+        Task<List<GISencroachment>> GetEncroachmentDetails(int villageId);
         Task<List<Gisgosha>> GetGoshaDetails(int villageId);
         Task<List<Gisgrid>> GetGridDetails(int villageId);
         Task<List<GISnala>> GetNalaDetails(int villageId);
