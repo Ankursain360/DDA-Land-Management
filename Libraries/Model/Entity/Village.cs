@@ -14,14 +14,14 @@ namespace Libraries.Model.Entity
             Plot = new HashSet<Plot>();
             Gisaabadi = new HashSet<Gisaabadi>();
             Gisburji = new HashSet<Gisburji>();
-            Gisclean = new HashSet<GISClean>();
-            Giscleantext = new HashSet<GisCleanText>();
+            Gisclean = new HashSet<GISclean>();
+            Giscleantext = new HashSet<Giscleantext>();
             Gisclose = new HashSet<Gisclose>();
             Gisclosetext = new HashSet<Gisclosetext>();
             Gisdashed = new HashSet<Gisdashed>();
             Gisdim = new HashSet<Gisdim>();
             Gisdimtext = new HashSet<Gisdimtext>();
-            Gisencroachment = new HashSet<GISEncroachment>();
+            Gisencroachment = new HashSet<GISencroachment>();
             Gisfieldboun = new HashSet<Gisfieldboun>();
             Gisgosha = new HashSet<Gisgosha>();
             Gisgrid = new HashSet<Gisgrid>();
@@ -68,14 +68,14 @@ namespace Libraries.Model.Entity
         public ICollection<Plot> Plot { get; set; }
         public ICollection<Gisaabadi> Gisaabadi { get; set; }
         public ICollection<Gisburji> Gisburji { get; set; }
-        public ICollection<GISClean> Gisclean { get; set; }
-        public ICollection<GisCleanText> Giscleantext { get; set; }
+        public ICollection<GISclean> Gisclean { get; set; }
+        public ICollection<Giscleantext> Giscleantext { get; set; }
         public ICollection<Gisclose> Gisclose { get; set; }
         public ICollection<Gisclosetext> Gisclosetext { get; set; }
         public ICollection<Gisdashed> Gisdashed { get; set; }
         public ICollection<Gisdim> Gisdim { get; set; }
         public ICollection<Gisdimtext> Gisdimtext { get; set; }
-        public ICollection<GISEncroachment> Gisencroachment { get; set; }
+        public ICollection<GISencroachment> Gisencroachment { get; set; }
         public ICollection<Gisfieldboun> Gisfieldboun { get; set; }
         public ICollection<Gisgosha> Gisgosha { get; set; }
         public ICollection<Gisgrid> Gisgrid { get; set; }
