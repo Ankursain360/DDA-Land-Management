@@ -45,6 +45,9 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+    <Content Update="wwwroot\js\acquiredlandvillageindex - Copy.min.js">
+      <DependentUpon>acquiredlandvillageindex.min.js</DependentUpon>
+    </Content>
     <Content Update="wwwroot\js\khasramasterindex - Copy.min.js">
       <DependentUpon>khasramasterindex.min.js</DependentUpon>
     </Content>

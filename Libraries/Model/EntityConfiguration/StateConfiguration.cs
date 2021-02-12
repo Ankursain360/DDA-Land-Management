@@ -32,6 +32,10 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Colorcode)
+                .HasMaxLength(45)
+                .IsUnicode(false);
+
             builder.Property(e => e.Polygon).HasColumnType("longtext");
 
             builder.Property(e => e.Xcoordinate)

@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AcquiredLandInformationManagement.Filters;
+using Core.Enum;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Utility.Helper;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
@@ -22,8 +26,14 @@ namespace AcquiredLandInformationManagement.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var result = await _disposallandService.GetAllDisposalland();
-            return View(result);
+            //var result = await _disposallandService.GetAllDisposalland();
+            return View();
+        }
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DisposalLandSearchDto model)
+        {
+            var result = await _disposallandService.GetPagedDisposalLand(model);
+            return PartialView("_List", result);
         }
         public async Task<IActionResult> Create()
         {
@@ -156,6 +166,15 @@ namespace AcquiredLandInformationManagement.Controllers
                 return NotFound();
             }
             return View(Data);
+        }
+        [AuthorizeContext(ViewAction.Download)]
+        public async Task<IActionResult> Download()
+        {
+            List<Disposalland> result = await _disposallandService.GetAllDisposalland();
+            var memory = ExcelHelper.CreateExcel(result);
+            string sFileName = @"LandDisposal.xlsx";
+            return File(memory, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", sFileName);
+
         }
     }
 }

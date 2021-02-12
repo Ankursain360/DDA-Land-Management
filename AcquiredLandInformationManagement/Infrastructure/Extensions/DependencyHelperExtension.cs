@@ -24,7 +24,6 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
-            services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
@@ -59,9 +58,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateRepository, WorkflowTemplateRepository>();
             services.AddScoped<IActionsRepository, ActionsRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
-            services.AddScoped<ITehsilRepository, TehsilRepository>();
+            services.AddScoped<ITehsilRepository, TehsilRepository>();//added by anuj 8-feb-21
+            services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
-            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+            services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -79,7 +79,6 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INazulService, NazulService>();
             services.AddScoped<IDisposallandService, DisposallandService>();
             services.AddScoped<IMorlandService, MorlandService>();
-            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
 
             services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
             services.AddScoped<IEnchroachmentService, EnchroachmentService>(); //added by Nikita
@@ -99,9 +98,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IWorkflowTemplateService, WorkflowTemplateService>();
             services.AddScoped<IActionsService, ActionsService>();
             services.AddScoped<IUserProfileService, UserProfileService>();
-            services.AddScoped<ITehsilService, TehsilService>();
+            services.AddScoped<ITehsilService, TehsilService>();//added by anuj 8-feb-21
+            services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
-            services.AddScoped<IUndersection6plotService, Undersection6plotService>();
+            services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
 
         }
     }

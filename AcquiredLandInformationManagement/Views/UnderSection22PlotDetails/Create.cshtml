@@ -50,7 +50,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Bigha" placeholder="Name" type="text"
+                        <input asp-for="Bigha" placeholder="Name" type="text" 
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
                         <label class="floating-label">Bigha    </label>
@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswa" placeholder="Name" type="text"
+                        <input asp-for="Biswa" placeholder="Name" type="text" 
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa  </label>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswanshi" placeholder="Name" type="text"
+                        <input asp-for="Biswanshi" placeholder="Name" type="text" 
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi </label>
@@ -89,32 +89,33 @@
             <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id"
-                            asp-items="@(new SelectList(Model.Undersection6List,"Id","UnderSectionNotificationNumber"))">
+                            asp-items="@(new SelectList(Model.Undersection6List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
                     <span asp-validation-for="UnderSection6Id" class="text-danger"></span>
                     <label asp-for="UnderSection6Id" class="floating-label">Notification No(U/S-6) </label>
                 </div>
             </div>
-            @*<div class="col-md-4">
+            <div class="col-md-4">
                 <div class="floating-label-wrap">
                     <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
-                            asp-items="@(new SelectList(Model.Undersection17List,"Id","NotificationNo"))">
+                            asp-items="@(new SelectList(Model.Undersection17List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
                     <span asp-validation-for="UnderSection17Id" class="text-danger"></span>
                     <label asp-for="UnderSection17Id" class="floating-label">Notification No(U/S-17) </label>
                 </div>
-            </div>*@
+            </div>
         </div>
         <div class="row mt-md-3">
-            <div class="col-md-2">
+            <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input asp-for="Remarks" placeholder="Name" type="text"
-                           class="floating-label-field floating-label-field--s3" />
+                    <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
                     <span asp-validation-for="Remarks" class="text-danger"></span>
-                    <label class="floating-label">Remarks </label>
+                    <label class="floating-label">Remarks  </label>
                 </div>
+
             </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">

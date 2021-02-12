@@ -14,6 +14,7 @@ namespace Libraries.Model.Entity
         public decimal? Ycoordinate { get; set; }
         public string Polygon { get; set; }
         public string Label { get; set; }
+        public string Colorcode { get; set; }
         public byte? IsActive { get; set; }
     }
 }

@@ -1,0 +1,37 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Libraries.Model.Common;
+using Microsoft.AspNetCore.Mvc;
+
+namespace Libraries.Model.Entity
+{
+        public class Undersection17plotdetail : AuditableEntity<int>
+        {
+          
+            public int? UnderSection17Id { get; set; }
+            public int? VillageId { get; set; }
+            public int? KhasraId { get; set; }
+            public decimal Bigha { get; set; }
+            public decimal Biswa { get; set; }
+            public decimal Biswanshi { get; set; }
+            public string Remarks { get; set; }
+          
+            public byte IsActive { get; set; }
+
+            public Khasra Khasra { get; set; }
+            public Undersection17 UnderSection17 { get; set; }
+            public Acquiredlandvillage Acquiredlandvillage { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
+        [NotMapped]
+        public List<Khasra> KhasraList { get; set; }
+        [NotMapped]
+        public List<Undersection17> Undersection17List { get; set; }
+        
+
+
+    }
+    }
+

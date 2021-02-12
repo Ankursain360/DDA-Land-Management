@@ -1,4 +1,6 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
+using Libraries.Repository.Common;
 using Libraries.Service.Common;
 using System;
 using System.Collections.Generic;
@@ -12,17 +14,14 @@ namespace Libraries.Service.IApplicationService
     {
         Task<List<Disposalland>> GetAllDisposalland();
         Task<List<Disposalland>> GetDisposallandUsingRepo();
+
+        Task<Disposalland> FetchSingleResult(int id);
+        Task<bool> Update(int id, Disposalland disposalland);
+        Task<bool> Create(Disposalland disposalland);
         Task<List<Utilizationtype>> GetAllUtilizationtype();
         Task<List<Village>> GetAllVillage();
         Task<List<Khasra>> GetAllKhasra();
-        Task<bool> Update(int id, Disposalland disposalland);
-
-        Task<bool> Create(Disposalland disposalland);
-
-        Task<Disposalland> FetchSingleResult(int id);
-
         Task<bool> Delete(int id);
-
-      
+        Task<PagedResult<Disposalland>> GetPagedDisposalLand(DisposalLandSearchDto model);
     }
 }

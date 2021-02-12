@@ -182,21 +182,24 @@ namespace Libraries.Model
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual DbSet<Plot> Plot { get; set; }
         public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
+        public virtual DbSet<State> State { get; set; }
+        public virtual DbSet<Undersection17plotdetail> Undersection17plotdetail { get; set; }
 
         public virtual DbSet<Gisaabadi> Gisaabadi { get; set; }
         public virtual DbSet<Gisburji> Gisburji { get; set; }
-        public virtual DbSet<GISClean> Gisclean { get; set; }
-        public virtual DbSet<GisCleanText> Giscleantext { get; set; }
+        public virtual DbSet<GISclean> Gisclean { get; set; }
+        public virtual DbSet<Giscleantext> Giscleantext { get; set; }
         public virtual DbSet<Gisdim> Gisdim { get; set; }
-        public virtual DbSet<GISEncroachment> Gisencroachment { get; set; }
+        public virtual DbSet<GISencroachment> Gisencroachment { get; set; }
         public virtual DbSet<Gisgosha> Gisgosha { get; set; }
         public virtual DbSet<Gisgrid> Gisgrid { get; set; }
         public virtual DbSet<GISnala> Gisnala { get; set; }
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
-        public virtual DbSet<State> State { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
+            
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
@@ -338,6 +341,7 @@ namespace Libraries.Model
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
             //**********  GIS **********
             modelBuilder.ApplyConfiguration(new GisaabadiConfiguration());
             modelBuilder.ApplyConfiguration(new GisburjiConfiguration());
@@ -350,8 +354,26 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisnalaConfiguration());
             modelBuilder.ApplyConfiguration(new GistextConfiguration());
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+            modelBuilder.ApplyConfiguration(new GisCloseConfiguartion());
+            modelBuilder.ApplyConfiguration(new GisCloseTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisDashedConfiguration());
+            modelBuilder.ApplyConfiguration(new GisDimTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisFieldBounConfiguration());
+            modelBuilder.ApplyConfiguration(new GisInnerConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKachaPakaLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraBoundaryConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraNoConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKillaConfiguration());
+            modelBuilder.ApplyConfiguration(new GisNaliConfiguration());
+            modelBuilder.ApplyConfiguration(new GisRailwayLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisRoadConfiguartion());
+            modelBuilder.ApplyConfiguration(new GisSahedaConfiguration());
+            modelBuilder.ApplyConfiguration(new GisVillageBoundaryConfiguration());
+            modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            //**********  GIS End**********
             base.OnModelCreating(modelBuilder);
         }
     }
