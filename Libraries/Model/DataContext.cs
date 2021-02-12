@@ -116,6 +116,7 @@ namespace Libraries.Model
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
+        public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
 
 
 
@@ -288,6 +289,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection22plotdetailsConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection6plotConfiguration());
+            modelBuilder.ApplyConfiguration(new PossessiondetailsConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
