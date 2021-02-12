@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-    public class GISEncroachmentConfiguration : IEntityTypeConfiguration<GISencroachment>
+    public class GISEncroachmentConfiguration : IEntityTypeConfiguration<Gisencroachment>
     {
-        public void Configure(EntityTypeBuilder<GISencroachment> entity)
+        public void Configure(EntityTypeBuilder<Gisencroachment> entity)
         {
 
             entity.ToTable("gisencroachment", "lms");

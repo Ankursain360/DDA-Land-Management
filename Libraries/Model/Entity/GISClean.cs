@@ -2,7 +2,7 @@
 
 namespace Libraries.Model.Entity
 {
-    public class GISclean : AuditableEntity<int>
+    public class Gisclean : AuditableEntity<int>
     {
         public int Id { get; set; }
         public int VillageId { get; set; }

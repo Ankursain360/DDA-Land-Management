@@ -185,18 +185,35 @@ namespace Libraries.Model
         public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Undersection17plotdetail> Undersection17plotdetail { get; set; }
-
         public virtual DbSet<Gisaabadi> Gisaabadi { get; set; }
         public virtual DbSet<Gisburji> Gisburji { get; set; }
-        public virtual DbSet<GISclean> Gisclean { get; set; }
+        public virtual DbSet<Gisclean> Gisclean { get; set; }
         public virtual DbSet<Giscleantext> Giscleantext { get; set; }
+        public virtual DbSet<Gisclose> Gisclose { get; set; }
+        public virtual DbSet<Gisclosetext> Gisclosetext { get; set; }
+        public virtual DbSet<Gisdashed> Gisdashed { get; set; }
         public virtual DbSet<Gisdim> Gisdim { get; set; }
-        public virtual DbSet<GISencroachment> Gisencroachment { get; set; }
+        public virtual DbSet<Gisdimtext> Gisdimtext { get; set; }
+        public virtual DbSet<Gisencroachment> Gisencroachment { get; set; }
+        public virtual DbSet<Gisfieldboun> Gisfieldboun { get; set; }
         public virtual DbSet<Gisgosha> Gisgosha { get; set; }
         public virtual DbSet<Gisgrid> Gisgrid { get; set; }
-        public virtual DbSet<GISnala> Gisnala { get; set; }
+        public virtual DbSet<Gisinner> Gisinner { get; set; }
+        public virtual DbSet<Giskachapakaline> Giskachapakaline { get; set; }
+        public virtual DbSet<Giskhasraboundary> Giskhasraboundary { get; set; }
+        public virtual DbSet<Giskhasraline> Giskhasraline { get; set; }
+        public virtual DbSet<Giskhasrano> Giskhasrano { get; set; }
+        public virtual DbSet<Giskilla> Giskilla { get; set; }
+        public virtual DbSet<Gisnala> Gisnala { get; set; }
+        public virtual DbSet<Gisnali> Gisnali { get; set; }
+        public virtual DbSet<Gisrailwayline> Gisrailwayline { get; set; }
+        public virtual DbSet<Gisroad> Gisroad { get; set; }
+        public virtual DbSet<Gissaheda> Gissaheda { get; set; }
         public virtual DbSet<Gistext> Gistext { get; set; }
         public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
+        public virtual DbSet<Gisvillageboundary> Gisvillageboundary { get; set; }
+        public virtual DbSet<Gisvillagetext> Gisvillagetext { get; set; }
+        public virtual DbSet<Giszero> Giszero { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
