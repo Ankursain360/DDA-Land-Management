@@ -13,31 +13,31 @@ using Notification.Constants;
 using Notification.OptionEnums;
 using Dto.Search;
 
+
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class UnderSection4PlotFormController : Controller
+    public class UnderSection6plotDetails : Controller
     {
+        private readonly IUndersection6plotService _undersection6plotservice;
 
-        private readonly IUndersection4PlotService _undersection4PlotService;
-
-
-        public UnderSection4PlotFormController(IUndersection4PlotService undersection4PlotService)
+        public UnderSection6plotDetails(IUndersection6plotService undersection6plotservice)
         {
-            _undersection4PlotService = undersection4PlotService;
+            _undersection6plotservice = undersection6plotservice;
         }
+
 
 
         public async Task<IActionResult> Index()
         {
-            var list = await _undersection4PlotService.GetAllUndersection4Plot();
-            return View(list);
+
+            return View();
         }
 
 
         [HttpPost]
-        public async Task<PartialViewResult> List([FromBody] NotificationUndersection4plotDto model)
+        public async Task<PartialViewResult> List([FromBody] NotificationUndersection6plotDto model)
         {
-            var result = await _undersection4PlotService.GetPagedNoUndersection4plot(model);
+            var result = await _undersection6plotservice.GetPagedNoUndersection6plot(model);
 
             return PartialView("_List", result);
         }
@@ -47,34 +47,34 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Create()
         {
-            Undersection4plot undersection4plot = new Undersection4plot();
+            Undersection6plot undersection4plot = new Undersection6plot();
             undersection4plot.IsActive = 1;
-            undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
-            undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
+            undersection4plot.NotificationList = await _undersection6plotservice.GetAllNotificationNo();
+            undersection4plot.KhasraList = await _undersection6plotservice.BindKhasra(undersection4plot.VillageId);
+            undersection4plot.VillageList = await _undersection6plotservice.GetAllVillage();
 
             return View(undersection4plot);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Undersection4plot undersection4plot)
+        public async Task<IActionResult> Create(Undersection6plot undersection4plot)
         {
             try
             {
-                undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-               undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
-                undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
+                undersection4plot.NotificationList = await _undersection6plotservice.GetAllNotificationNo();
+                undersection4plot.KhasraList = await _undersection6plotservice.BindKhasra(undersection4plot.VillageId);
+                undersection4plot.VillageList = await _undersection6plotservice.GetAllVillage();
 
 
                 if (ModelState.IsValid)
                 {
-                    var result = await _undersection4PlotService.Create(undersection4plot);
+                    var result = await _undersection6plotservice.Create(undersection4plot);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4PlotService.GetAllUndersection4Plot();
+                        var list = await _undersection6plotservice.GetAllUndersection6Plot();
                         return View("Index", list);
                     }
                     else
@@ -99,12 +99,12 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _undersection4PlotService.FetchSingleResult(id);
+            var Data = await _undersection6plotservice.FetchSingleResult(id);
 
-           
-            Data.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            Data.KhasraList = await _undersection4PlotService.BindKhasra(Data.VillageId);
-            Data.VillageList = await _undersection4PlotService.GetAllVillage();
+
+            Data.NotificationList = await _undersection6plotservice.GetAllNotificationNo();
+            Data.KhasraList = await _undersection6plotservice.BindKhasra(Data.VillageId);
+            Data.VillageList = await _undersection6plotservice.GetAllVillage();
 
 
             if (Data == null)
@@ -116,17 +116,17 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Undersection4plot undersection4plot)
+        public async Task<IActionResult> Edit(int id, Undersection6plot undersection4plot)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = await _undersection4PlotService.Update(id, undersection4plot);
+                    var result = await _undersection6plotservice.Update(id, undersection4plot);
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _undersection4PlotService.GetAllUndersection4Plot();
+                        var list = await _undersection6plotservice.GetAllUndersection6Plot();
                         return View("Index", list);
                     }
                     else
@@ -152,7 +152,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
 
-                var result = await _undersection4PlotService.Delete(id);
+                var result = await _undersection6plotservice.Delete(id);
                 if (result == true)
                 {
                     ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
@@ -166,16 +166,16 @@ namespace AcquiredLandInformationManagement.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            var list = await _undersection4PlotService.GetAllUndersection4Plot();
+            var list = await _undersection6plotservice.GetAllUndersection6Plot();
             return View("Index", list);
         }
 
         public async Task<IActionResult> View(int id)
         {
-            var Data = await _undersection4PlotService.FetchSingleResult(id);
-            Data.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            Data.KhasraList = await _undersection4PlotService.BindKhasra(Data.VillageId);
-            Data.VillageList = await _undersection4PlotService.GetAllVillage();
+            var Data = await _undersection6plotservice.FetchSingleResult(id);
+            Data.NotificationList = await _undersection6plotservice.GetAllNotificationNo();
+            Data.KhasraList = await _undersection6plotservice.BindKhasra(Data.VillageId);
+            Data.VillageList = await _undersection6plotservice.GetAllVillage();
 
 
             if (Data == null)
@@ -190,8 +190,13 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<JsonResult> GetKhasraList(int? villageId)
         {
             villageId = villageId ?? 0;
-            return Json(await _undersection4PlotService.BindKhasra(Convert.ToInt32(villageId)));
+            return Json(await _undersection6plotservice.BindKhasra(Convert.ToInt32(villageId)));
         }
+
+
+
+
+
 
 
     }

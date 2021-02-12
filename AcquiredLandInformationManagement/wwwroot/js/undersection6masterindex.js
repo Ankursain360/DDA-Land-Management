@@ -1,6 +1,5 @@
 ﻿
 
-
 var currentPageNumber = 1;
 var currentPageSize = 5;
 var sortOrder = 1;//default Ascending 
@@ -18,7 +17,7 @@ $("#btnSearch").click(function () {
 $("#btnReset").click(function () {
     $('#txtPName').val('');
     $('#txtNotificationN').val('');
-
+   
     GetDivision(currentPageNumber, currentPageSize, sortOrder);
 });
 
@@ -39,11 +38,11 @@ $("#btnDescending").click(function () {
 
 function GetDivision(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/UnderSection4PlotForm/List`, 'html', param, function (response) {
+    HttpPost(`/UnderSection6Master/List`, 'html', param, function (response) {
         console.log(response);
 
-        $('#divUnderSection4Plot').html("");
-        $('#divUnderSection4Plot').html(response);
+        $('#divUnderSection6').html("");
+        $('#divUnderSection6').html(response);
     });
 
 
@@ -53,8 +52,8 @@ function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
     var model = {
         numbernotification4: $('#txtPName').val(),
-        villageid: $('#txtNotificationN').val(),
-
+        notificationno: $('#txtNotificationN').val(),
+      
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
         pageSize: parseInt(pageSize),

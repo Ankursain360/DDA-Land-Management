@@ -4,6 +4,10 @@ namespace Dto.Search
 {
   public  class NotificationUndersection4plotDto : BaseSearchDto
     {
-        public string name { get; set; }
+      
+        public string numbernotification4 { get; set; }
+      
+        public string villageid { get; set; }
+      
     }
 }

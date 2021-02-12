@@ -39,11 +39,11 @@ $("#btnDescending").click(function () {
 
 function GetDivision(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
-    HttpPost(`/UnderSection4PlotForm/List`, 'html', param, function (response) {
+    HttpPost(`/UnderSection6plotDetails/List`, 'html', param, function (response) {
         console.log(response);
 
-        $('#divUnderSection4Plot').html("");
-        $('#divUnderSection4Plot').html(response);
+        $('#divUnderSection6Plot').html("");
+        $('#divUnderSection6Plot').html(response);
     });
 
 
@@ -52,7 +52,7 @@ function GetDivision(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
 
     var model = {
-        numbernotification4: $('#txtPName').val(),
+        numbernotification6: $('#txtPName').val(),
         villageid: $('#txtNotificationN').val(),
 
         sortBy: $("#ddlSort").children("option:selected").val(),

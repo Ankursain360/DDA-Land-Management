@@ -8,10 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Libraries.Model.Entity
 {
-    public  class Undersection4plot: AuditableEntity<int>
+    public class Undersection6plot : AuditableEntity<int>
     {
+
         [Required]
-        public int? UnderSection4Id { get; set; }
+        public int? UnderSection6Id { get; set; }
         [Required]
         public int? VillageId { get; set; }
         [Required]
@@ -19,29 +20,18 @@ namespace Libraries.Model.Entity
         public decimal Bigha { get; set; }
         public decimal Biswa { get; set; }
         public decimal Biswanshi { get; set; }
-        public string Remarks { get; set; }
+      
         public byte IsActive { get; set; }
-
-
         [NotMapped]
-        public List<Undersection4> NotificationList { get; set; }
-        public virtual Undersection4 UnderSection4 { get; set; }
-
+        public List<Khasra> KhasraList { get; set; }
+        public Khasra Khasra { get; set; }
 
         [NotMapped]
         public List<Acquiredlandvillage> VillageList { get; set; }
-        public virtual Acquiredlandvillage Village { get; set; }
+        public Acquiredlandvillage Village { get; set; }
 
-
-
-       [NotMapped]
-       public List<Khasra> KhasraList { get; set; }
-       public virtual Khasra Khasra { get; set; }
-
-
-
-
-
-
+        [NotMapped]
+        public List<Undersection6> NotificationList { get; set; }
+        public Undersection6 Undersection6 { get; set; }
     }
 }

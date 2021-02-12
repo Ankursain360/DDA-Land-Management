@@ -24,6 +24,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
+            services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
@@ -60,6 +61,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<ITehsilRepository, TehsilRepository>();
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
+            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -77,6 +79,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INazulService, NazulService>();
             services.AddScoped<IDisposallandService, DisposallandService>();
             services.AddScoped<IMorlandService, MorlandService>();
+            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
 
             services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
             services.AddScoped<IEnchroachmentService, EnchroachmentService>(); //added by Nikita
@@ -98,6 +101,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IUserProfileService, UserProfileService>();
             services.AddScoped<ITehsilService, TehsilService>();
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
+            services.AddScoped<IUndersection6plotService, Undersection6plotService>();
 
         }
     }

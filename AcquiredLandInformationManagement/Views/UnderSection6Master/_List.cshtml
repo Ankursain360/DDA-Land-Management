@@ -1,18 +1,16 @@
-﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Undersection4plot>
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Undersection6>
 
 <table class="table table-sm table-bordered mb-0 table-striped">
 
     <thead class="text-nowrap">
         <tr>
-
+            <th>UnderSection 4 No</th>
             <th>Notification No.</th>
-            <th>Village Name</th>
-            <th>Khasra No</th>
-            <th>Bigha</th>
-            <th>Biswa</th>
-            <th>Biswanshi</th>
+         <th>Notification Date</th>
+         
+            
             <th>Status</th>
-            <th>Operation</th>
+            <th>Operations</th>
 
         </tr>
     </thead>
@@ -20,14 +18,11 @@
         @foreach (var item in Model.Results)
         {
         <tr>
-
-            <td>@item.UnderSection4.Number</td>
-            <td>@item.Village.Name</td>
-            <td>@item.Khasra.Name</td>
-            <td>@item.Bigha</td>
-            <td>@item.Biswa</td>
-
-            <td>@item.Biswanshi</td>
+            <td>@item.Undersection4.Number</td>
+            <td>@item.Number</td>
+         
+            <td>@item.Ndate</td>
+            
 
             <td>
                 @if (item.IsActive == 1)
