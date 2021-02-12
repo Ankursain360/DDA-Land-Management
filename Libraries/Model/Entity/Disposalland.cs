@@ -9,23 +9,28 @@ namespace Libraries.Model.Entity
     public class Disposalland : AuditableEntity<int>
   
     {
-        [Required]
-        public int? VillageId { get; set; }
-        [Required]
-        public int? KhasraId { get; set; }
-        [Required]
+        public Disposalland()
+        {
+        }
+
+        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
+        public int VillageId { get; set; }
+        [Required(ErrorMessage = "Khasra is Mandatory Field", AllowEmptyStrings = false)]
+        public int KhasraId { get; set; }
+        [Required(ErrorMessage = "Transfer To Which Dept is Mandatory Field")]
+
         public string TransferToWhichDept { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Area Disposed is Mandatory Field")]
         public decimal AreaDisposed { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Date Of Disposed is Mandatory Field")]
         public DateTime? DateOfDisposed { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Transfer To is Mandatory Field")]
         public string TransferTo { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Transfer By is Mandatory Field")]
         public string TransferBy { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Utilization Type is Mandatory Field", AllowEmptyStrings = false)]
         public int? UtilizationtypeId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "FileNo/RefNo is Mandatory Field")]
         public string FileNoRefNo { get; set; }
         [Required]
         public string Remarks { get; set; }
