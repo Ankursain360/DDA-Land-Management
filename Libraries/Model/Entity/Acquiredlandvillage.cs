@@ -72,6 +72,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 
 
+        public ICollection<Undersection6plot> Undersection6plot { get; set; }
 
     }
 }
