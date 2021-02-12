@@ -1,141 +1,142 @@
 ﻿@model Libraries.Model.Entity.Jointsurvey
+@{ ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@await Component.InvokeAsync("PageHeader", new { pageName = "Joint Survey Details" })
+<div class="pt-3">
+    <form asp-action="Create" autocomplete="off" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data">
 
-<div class="row">
-    <div class="col-sm-12">
-        <div class="myapp-hed">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Joint Survey Details</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <h3 class="mb-3 d-flex">Edit Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Id" />
+        <div class="row" mt-md-3">
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select asp-for="VillageId" disabled="disabled" class="floating-label-field floating-label-field--s3"
+                            asp-items="@(new SelectList(Model.VillageList,"Id","Name"))">
+                        <option value="">---Select---</option>
+
+                    </select>
+                    <span asp-validation-for="VillageId" class="text-danger "></span>
+                    <label class="floating-label">Village </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap">
+                    <select asp-for="KhasraId" disabled="disabled" class="floating-label-field floating-label-field--s3"
+                            asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
+                        <option value="">---Select---</option>
+
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger "></span>
+                    <label class="floating-label">Khasra </label>
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <h3 class="my-3 d-flex sub-heading">Site Position</h3>
+
+        <div class="row">
+            <div class="col-md-3">
+                <input type="hidden" disabled="disabled" asp-for="SitePosition" id="Type" value="0" />
+
+                <div class="form-check theme">
+                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rFile" value="B" checked>
+                    <label class="form-check-label" for="radio">
+                        Built Up
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="P">
+                    <label class="form-check-label" for="radio">
+                        Partial Built Up
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="V">
+                    <label class="form-check-label" for="radio">
+                        Vacant
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-check theme">
+                    <input class="form-check-input" disabled="disabled" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="W">
+                    <label class="form-check-label" for="radio">
+                        Boundry Wall
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
 
-<br />
-<div class="container-fluid">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">View details</h6>
+        <h3 class="my-3 d-flex sub-heading">Area</h3>
+        <div class="row" mt-md-3">
+
+
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaInBigha" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
+
+                    <span asp-validation-for="AreaInBigha" class="text-danger "></span>
+                    <label class="floating-label">Area in Bigha</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="AreaInBiswa" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name" />
+
+                    <span asp-validation-for="AreaInBiswa" class="text-danger "></span>
+                    <label class="floating-label">Area in Biswa</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NatureOfStructure" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
+                           limit="10">
+                    <span asp-validation-for="NatureOfStructure" class="text-danger "></span>
+                    <label class="floating-label">Nature of Structure</label>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <form asp-action="View">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="VillageId" class="text-danger"></span>
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Khasra No.</label>
-                        <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="KhasraId" class="text-danger"></span>
-
-                    </div>
+        <div class="row" mt-md-3">
+            <div class="col-md-3">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="JointSurveyDate" disabled="disabled" type="date" class="floating-label-field floating-label-field--s3">
+                    <span asp-validation-for="JointSurveyDate" class="text-danger "></span>
+                    <label class="floating-label">Joint Survey Date</label>
                 </div>
+            </div>
 
-                <div id="DivMainContentForm">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Site Possition</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition" value="Built Up" />Built Up
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition" value="Partial Built Up" />Partial Built Up
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition" value="Vacant" />Vacant
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" asp-for="SitePosition" value="Boundary Wall" />Boundary Wall
-                            </label>
-                        </div>
-
-                    </div>
+            <div class="col-md-9">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="Remarks" disabled="disabled" type="text" class="floating-label-field floating-label-field--s3" limit="500">
+                    <span asp-validation-for="Remarks" class="text-danger "></span>
+                    <label class="floating-label">Remarks</label>
                 </div>
-
-                <div id="Divclsification">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Area</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Bigha</label>
-
-                            <input type="text" asp-for="Bigha" class="form-control" />
-
-                        </div>
-
-                        <div class="form-group col-md-4">
-
-                            <label class="control-label lb-sm">Biswa</label>
-
-                            <input type="text" asp-for="Biswa" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Biswanshi</label>
-                            <input type="text" asp-for="Biswanshi" class="form-control" placeholder="0" />
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Nature of Structure</label>
-                        <input type="text" asp-for="NatureOfStructure" class="form-control" />
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Joint Survey Date</label>
-                        <input type="Date" asp-for="JointSurveyDate" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" asp-for="Remarks" class="form-control"></textarea>
-                    </div>
-                </div>
-
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                         @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
+            </div>
         </div>
-    </div>
+
+
+        <div class="col-md-12">
+
+
+            @Html.ActionLink("Back", "Index", "JointSurvey", null, new { @class = "btn btn-theme" })
+        </div>
+
+
+
+
+
+
+    </form>
+
 </div>
-
-
-
-
-

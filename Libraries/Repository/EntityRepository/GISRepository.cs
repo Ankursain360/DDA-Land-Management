@@ -60,11 +60,31 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
+        public async Task<Gisclose> GetCloseDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Gisclosetext> GetCloseTextDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Gisdashed> GetDashedDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Gisdim>> GetDimDetails(int villageId)
         {
             return await _dbContext.Gisdim
                                  .Where(x => x.VillageId == villageId && x.IsActive == 1)
                                  .ToListAsync();
+        }
+
+        public async Task<Gisdimtext> GetDimTextDetails(int villageId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<GISencroachment>> GetEncroachmentDetails(int villageId)
@@ -79,6 +99,11 @@ namespace Libraries.Repository.EntityRepository
             {
                 return null;
             }
+        }
+
+        public async Task<Gisfieldboun> GetFieldBounDetails(int villageId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Gisgosha>> GetGoshaDetails(int villageId)
@@ -102,6 +127,36 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
+        public async Task<Gisinner> GetInnerDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giskachapakaline> GetKachaPakaLineDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giskhasraboundary> GetKhasraBoundaryDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giskhasraline> GetKhasraLineDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giskhasrano> GetKhasraNoDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giskilla> GetKillaDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<GISnala>> GetNalaDetails(int villageId)
         {
             return await _dbContext.Gisnala
@@ -109,9 +164,29 @@ namespace Libraries.Repository.EntityRepository
                                  .ToListAsync();
         }
 
+        public async Task<Gisnali> GetNaliDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Plot>> GetPlotList(int VillageId)
         {
             return await _dbContext.Plot.Where(x => x.VillageId == VillageId && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<Gisrailwayline> GetRailwayLineDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Gisroad> GetRoadDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Gissaheda> GetSahedaDetails(int villageId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Gistext>> GetTextDetails(int villageId)
@@ -130,6 +205,11 @@ namespace Libraries.Repository.EntityRepository
                                 .ToListAsync();
         }
 
+        public Task<Gisvillageboundary> GetVillageBoundaryDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<List<Village>> GetVillageDetails(int villageId, int zoneId)
         {
             return await _dbContext.Village
@@ -140,6 +220,16 @@ namespace Libraries.Repository.EntityRepository
         public async Task<List<Village>> GetVillageList(int ZoneId)
         {
             return await _dbContext.Village.Where(x => x.ZoneId == ZoneId && x.IsActive == 1).ToListAsync();
+        }
+
+        public async Task<Gisvillagetext> GetVillageTextDetails(int villageId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Giszero> GetZeroDetails(int villageId)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<List<Zone>> GetZoneDetails(int zoneId)
