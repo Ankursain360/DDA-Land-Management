@@ -69,5 +69,6 @@ namespace Libraries.Model.Entity
         public ICollection<Undersection17plotdetail> Undersection17plotdetail { get; set; }
 
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
+        public ICollection<Possessiondetails> Possessiondetails { get; set; }
     }
 }
