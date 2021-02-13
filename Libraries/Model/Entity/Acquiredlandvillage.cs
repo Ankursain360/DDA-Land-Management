@@ -21,6 +21,7 @@ namespace Libraries.Model.Entity
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -74,6 +75,7 @@ namespace Libraries.Model.Entity
 
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
 
     }
 }
