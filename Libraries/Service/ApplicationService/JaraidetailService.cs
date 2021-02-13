@@ -14,12 +14,12 @@ using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class JaraidetailService : EntityService<Jaraidetail>, IJaraidetailService
+    public class JaraidetailService : EntityService<Jaraidetails>, IJaraidetailService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJaraidetailRepository _jaraidetailRepository;
 
-        public async Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
+        public async Task<PagedResult<Jaraidetails>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
         {
             return await _jaraidetailRepository.GetPagedJaraidetail(model);
         }
@@ -40,16 +40,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _jaraidetailRepository.FindBy(a => a.Id == id);
-            Jaraidetail model = form.FirstOrDefault();
+            Jaraidetails model = form.FirstOrDefault();
             model.IsActive = 0;
             _jaraidetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<Jaraidetail> FetchSingleResult(int id)
+        public async Task<Jaraidetails> FetchSingleResult(int id)
         {
             var result = await _jaraidetailRepository.FindBy(a => a.Id == id);
-            Jaraidetail model = result.FirstOrDefault();
+            Jaraidetails model = result.FirstOrDefault();
             return model;
         }
 
@@ -86,7 +86,7 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Jaraidetail>> GetJaraidetail()
+        public async Task<List<Jaraidetails>> GetJaraidetail()
         {
 
             return await _jaraidetailRepository.GetJaraidetail();
@@ -94,25 +94,21 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Jaraidetail>> GetJaraidetailUsingRepo()
+        public async Task<List<Jaraidetails>> GetJaraidetailUsingRepo()
         {
             return await _jaraidetailRepository.GetJaraidetail();
         }
 
-        public async Task<bool> Update(int id, Jaraidetail jaraidetail)
+        public async Task<bool> Update(int id, Jaraidetails jaraidetail)
         {
             var result = await _jaraidetailRepository.FindBy(a => a.Id == id);
-            Jaraidetail model = result.FirstOrDefault();
-            model.KhewatId = jaraidetail.KhewatId;
+            Jaraidetails model = result.FirstOrDefault();
+            
             model.VillageId = jaraidetail.VillageId;
             model.KhasraId = jaraidetail.KhasraId;
-            model.KhatauniId = jaraidetail.KhatauniId;
-            model.TarafId = jaraidetail.TarafId;
-            model.OwnerDetails = jaraidetail.OwnerDetails;
-            model.FarmerDetails = jaraidetail.FarmerDetails;
-            model.Kaifiyat = jaraidetail.Kaifiyat;
+           
 
-            model.Ahwal = jaraidetail.Ahwal;
+           
             model.Revenue = jaraidetail.Revenue;
             model.OldMutationNo = jaraidetail.OldMutationNo;
           
@@ -125,7 +121,7 @@ namespace Libraries.Service.ApplicationService
 
         }
 
-        public async Task<bool> Create(Jaraidetail jaraidetail)
+        public async Task<bool> Create(Jaraidetails jaraidetail)
         {
             jaraidetail.CreatedBy = 1;
             jaraidetail.CreatedDate = DateTime.Now;

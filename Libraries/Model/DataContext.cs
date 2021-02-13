@@ -70,7 +70,10 @@ namespace Libraries.Model
         public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
         public virtual DbSet<Khatauni> Khatauni { get; set; }
         public virtual DbSet<Taraf> Taraf { get; set; }
-        public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
+        public virtual DbSet<Jaraidetails> Jaraidetails { get; set; }
+        public virtual DbSet<Jaraifarmer> Jaraifarmer { get; set; }
+        public virtual DbSet<Jarailessee> Jarailessee { get; set; }
+        public virtual DbSet<Jaraiowner> Jaraiowner { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
@@ -260,7 +263,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
-            modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
+           
+            modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
+            modelBuilder.ApplyConfiguration(new JarailesseeConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraifarmerConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
