@@ -1,36 +1,55 @@
-﻿@*@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Jaraidetail>*@
+﻿@model Libraries.Repository.Common.PagedResult<Libraries.Model.Entity.Jaraidetails>
 
-<table class="table table-responsive table-bordered table-card">
-    <thead class="thead">
+<table class="table table-sm table-bordered mb-0 table-striped">
+    <thead class="text-nowrap">
         <tr>
-            <th>Sr.No</th>
+
             <th>Village Name</th>
-            <th>No. Of Khewat</th>
-            <th>No. Of Khatauni</th>
-            <th>Owner Details</th>
-            <th>Khasra no</th>
+            <th>Khasra No.</th>
+            <th>Year Of jamabandi</th>
+            <th>No Of Khewat</th>
+            <th>No Of Khatauni</th>
+            <th>Naam Patti</th>
+            <th>Naam Malik</th>
+            <th>Revenue</th>
+            <th>Old Mutation No</th>
+            <th>Remarks</th>
             <th>Status</th>
-            <th>Operation</th>
+            <th>Operations</th>
         </tr>
     </thead>
-    <tbody class="tbody">
+    <tbody>
+
         @foreach (var item in Model.Results)
         {
-        @*<tr>
-            <td>@item.Village</td>
-            <td>@item.Khewat</td>
-            <td>@item.Khatauni</td>
-            <td>@item.OwnerDetails</td>
+        <tr>
+            <td> @(item.Village==null?"": item.Village.Name)</td>
+            <td> @(item.Khasra == null?"": item.Khasra.Name)</td>
+            <td>@item.YearOfjamabandi  </td>
+            <td>@item.NoOfKhewat   </td>
+            <td>@item.NoOfKhatauni  </td>
+            <td>@item.NaamPatti  </td>
+            <td>@item.NaamMalik  </td>
+            <td>@item.Revenue  </td>
+            <td>@item.OldMutationNo  </td>
+            <td>@item.Remarks  </td>
+            <td>
+                @if (item.IsActive == 1)
+                {
+                    <span class="badge badge-primary px-2 py-1">Active</span> }
+                else
+                {
+                    <span class="badge badge-danger px-2 py-1">Inactive</span>}
+            </td>
+            <td>
+                <div class="action-btns">
+                    <a asp-action="View" asp-route-id="@item.Id" title="View" class="view">  <i class="ri-eye-fill"></i> </a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" title="edit" class="edit"> <i class="ri-edit-line"></i> </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" title="delete" class="remove" onclick="return confirm('Are you sure, you want to delete this record?')"><i class="ri-delete-bin-5-fill"></i></a>
+                </div>
+            </td>
 
-            <td>@item.Khasra</td>
-            <td>
-                @(item.IsActive  == 1 ? "Active" : "Inactive" )
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" title="edit"> &nbsp; | &nbsp;  <i class="glyphicon glyphicon-pencil" aria-hidden="true"></i> </a>
-                <a asp-action="DeleteConfirmed" asp-route-id="@item.Id" title="delete" onclick="return confirm('Are You Sure, You want to Delete this Record?')">   &nbsp;|&nbsp;<i class="glyphicon glyphicon-trash" aria-hidden="true"></i></a>
-            </td>
-        </tr>*@
+        </tr>
         }
     </tbody>
 </table>

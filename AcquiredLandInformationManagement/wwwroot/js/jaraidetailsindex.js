@@ -1,77 +1,69 @@
-﻿var currentPageNumber = 1;
-var currentPageSize = 1;
+﻿
+var currentPageNumber = 1;
+var currentPageSize = 5;
+var sortOrder = 1;//default Ascending 
+
 
 $(document).ready(function () {
-    GetJaraiDetails(currentPageNumber, currentPageSize);
+    GetJarai(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetJaraiDetails(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
-    HttpPost(`/jaraiDetails/List`, 'html', param, function (response) {
-        $('#divJaraidetailsTable').html("");
-        $('#divJaraidetailsTable').html(response);
+function GetJarai(pageNumber, pageSize, order) {
+    var param = GetSearchParam(pageNumber, pageSize, order);
+    HttpPost(`/JaraiDetails/List`, 'html', param, function (response) {
+        $('#divJaraiTable').html("");
+        $('#divJaraiTable').html(response);
     });
 }
 
-function GetSearchParam(pageNumber, pageSize) {
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        locality: $('#txtLoc').val(),
+        khasra: $('#txtKhasra').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
     return model;
 }
 
+$("#btnSearch").click(function () {
+    GetJarai(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnReset").click(function () {
+    $('#txtLoc').val(''),
+    $('#txtKhasra').val(''),
+       
+        GetJarai(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending
+    GetJarai(currentPageNumber, currentPageSize, sortOrder);
+});
+
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetJarai(currentPageNumber, currentPageSize, sortOrder);
+});
+$('#ddlSort').change(function () {
+    GetJarai(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function onPaging(pageNo) {
-    GetJaraiDetails(pageNo, currentPageSize);
+    GetJarai(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetJaraiDetails(currentPageNumber, pageSize);
+    GetJarai(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
-
-
-//    function DeleteData(id) {
-
-//        var Param = id;
-
-//        $.ajax({
-//            url: "/Designation/DeleteConfirmed",
-//            data: {id: Param },
-//            traditional: true,
-//            dataType: "text",
-//            contentType: "application/text; charset=utf-8",
-//            success: function (result) {
-//                if (result) {
-//                    $('#myModaldelete').modal('show');
-//                } else {
-//                    alert("Error occurs on the Database level!");
-//                }
-//            },
-//            error: function () {
-//                alert("An error has occured!!!");
-//            }
-//        });
-//}
-
-//    $(function () {
-//        $('[name=deletepopup]').click(function () {
-
-//            $('#myModal').modal('show');
-//            var href = $(this).attr('href');
-//            var myStringArray = href.split('=');
-//            var Findid = myStringArray[1];
-//            var s = $('#popupid').attr('href', href);
-//            return false;
-//        });
-//        if (window.location.search == "?result=DeleteSuccess") {
-//            $('#myModaldelete').modal('show');
-//            $.gritter.add({
-//                title: 'Record Deleted',
-//                text: 'Record Deleted Successfully !!!',
-//                class_name: 'with-icon exclamation-circle warning'
-//            });
-//        }
-//    });
