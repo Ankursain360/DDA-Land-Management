@@ -37,13 +37,13 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Create()
         {
-            Jaraidetail jaraidetail = new Jaraidetail();
+            Jaraidetails jaraidetail = new Jaraidetails();
             jaraidetail.IsActive = 1;
-            jaraidetail.KhewatList = await _jaraidetailService.GetAllKhewat();
-            jaraidetail.KhasraList = await _jaraidetailService.BindKhasra();
-            jaraidetail.VillageList = await _jaraidetailService.GetAllVillage();
-            jaraidetail.TarafList = await _jaraidetailService.GetAllTaraf();
-            jaraidetail.KhatauniList = await _jaraidetailService.GetAllKhatauni();
+            //jaraidetail.KhewatList = await _jaraidetailService.GetAllKhewat();
+            //jaraidetail.KhasraList = await _jaraidetailService.BindKhasra();
+            //jaraidetail.VillageList = await _jaraidetailService.GetAllVillage();
+            //jaraidetail.TarafList = await _jaraidetailService.GetAllTaraf();
+            //jaraidetail.KhatauniList = await _jaraidetailService.GetAllKhatauni();
 
 
             return View(jaraidetail);
@@ -51,15 +51,15 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Jaraidetail jaraidetail)
+        public async Task<IActionResult> Create(Jaraidetails jaraidetail)
         {
             try
             {
-                jaraidetail.KhewatList = await _jaraidetailService.GetAllKhewat();
-                jaraidetail.KhasraList = await _jaraidetailService.BindKhasra();
-                jaraidetail.VillageList = await _jaraidetailService.GetAllVillage();
-                jaraidetail.TarafList = await _jaraidetailService.GetAllTaraf();
-                jaraidetail.KhatauniList = await _jaraidetailService.GetAllKhatauni();
+                //jaraidetail.KhewatList = await _jaraidetailService.GetAllKhewat();
+                //jaraidetail.KhasraList = await _jaraidetailService.BindKhasra();
+                //jaraidetail.VillageList = await _jaraidetailService.GetAllVillage();
+                //jaraidetail.TarafList = await _jaraidetailService.GetAllTaraf();
+                //jaraidetail.KhatauniList = await _jaraidetailService.GetAllKhatauni();
 
                 if (ModelState.IsValid)
                 {
@@ -96,11 +96,11 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _jaraidetailService.FetchSingleResult(id);
 
 
-            Data.KhewatList = await _jaraidetailService.GetAllKhewat();
-            Data.KhasraList = await _jaraidetailService.BindKhasra();
-            Data.VillageList = await _jaraidetailService.GetAllVillage();
-            Data.TarafList = await _jaraidetailService.GetAllTaraf();
-            Data.KhatauniList = await _jaraidetailService.GetAllKhatauni();
+            //Data.KhewatList = await _jaraidetailService.GetAllKhewat();
+            //Data.KhasraList = await _jaraidetailService.BindKhasra();
+            //Data.VillageList = await _jaraidetailService.GetAllVillage();
+            //Data.TarafList = await _jaraidetailService.GetAllTaraf();
+            //Data.KhatauniList = await _jaraidetailService.GetAllKhatauni();
 
 
             if (Data == null)
@@ -112,7 +112,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Jaraidetail jaraidetail)
+        public async Task<IActionResult> Edit(int id, Jaraidetails jaraidetail)
         {
             if (ModelState.IsValid)
             {
@@ -169,11 +169,11 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _jaraidetailService.FetchSingleResult(id);
-            Data.KhewatList = await _jaraidetailService.GetAllKhewat();
-            Data.KhasraList = await _jaraidetailService.BindKhasra();
-            Data.VillageList = await _jaraidetailService.GetAllVillage();
-            Data.TarafList = await _jaraidetailService.GetAllTaraf();
-            Data.KhatauniList = await _jaraidetailService.GetAllKhatauni();
+            //Data.KhewatList = await _jaraidetailService.GetAllKhewat();
+            //Data.KhasraList = await _jaraidetailService.BindKhasra();
+            //Data.VillageList = await _jaraidetailService.GetAllVillage();
+            //Data.TarafList = await _jaraidetailService.GetAllTaraf();
+            //Data.KhatauniList = await _jaraidetailService.GetAllKhatauni();
 
 
             if (Data == null)

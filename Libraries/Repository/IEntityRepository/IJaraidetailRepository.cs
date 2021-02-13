@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.IEntityRepository
 {
-    public interface IJaraidetailRepository : IGenericRepository<Jaraidetail>
+    public interface IJaraidetailRepository : IGenericRepository<Jaraidetails>
     {
-        Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model);
-        Task<List<Jaraidetail>> GetJaraidetail();
+        Task<PagedResult<Jaraidetails>> GetPagedJaraidetail(JaraiDetailsSearchDto model);
+        Task<List<Jaraidetails>> GetJaraidetail();
         Task<List<Khewat>> GetAllKhewat();
         Task<List<Acquiredlandvillage>> GetAllVillage();
         Task<List<Khasra>> BindKhasra();

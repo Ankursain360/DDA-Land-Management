@@ -13,7 +13,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection22Id"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="UnderSection22Id"
                             asp-items="@(new SelectList(Model.Undersection22List,"Id","NotificationNo"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
@@ -26,7 +26,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId"
                             asp-items="@(new SelectList(Model.AcquiredlandvillageList,"Id","Name"))"
                             onchange="return onChange(this.options[this.selectedIndex].value);">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="KhasraId"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="KhasraId"
                             asp-items="@(new SelectList(Model.KhasraList,"Id","Name"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
@@ -52,7 +52,7 @@
             <div class="row mt-md-3">
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Bigha" placeholder="Name" type="text"
+                        <input disabled asp-for="Bigha" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Bigha" class="text-danger"></span>
                         <label class="floating-label">Bigha    </label>
@@ -60,7 +60,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswa" placeholder="Name" type="text"
+                        <input disabled asp-for="Biswa" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswa" class="text-danger"></span>
                         <label class="floating-label">Biswa  </label>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="floating-label-wrap mb-3 mb-md-0">
-                        <input asp-for="Biswanshi" placeholder="Name" type="text"
+                        <input disabled asp-for="Biswanshi" placeholder="Name" type="text"
                                class="floating-label-field floating-label-field--s3" />
                         <span asp-validation-for="Biswanshi" class="text-danger"></span>
                         <label class="floating-label">Biswanshi </label>
@@ -80,7 +80,7 @@
         <div class="row mt-md-3">
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection4Id"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="UnderSection4Id"
                             asp-items="@(new SelectList(Model.Undersection4List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id"
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="UnderSection6Id"
                             asp-items="@(new SelectList(Model.Undersection6List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-4">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
+                    <select  disabled class="floating-label-field floating-label-field--s3" asp-for="UnderSection17Id"
                             asp-items="@(new SelectList(Model.Undersection17List,"Id","Number"))">
                         <option selected="selected" disabled="disabled" value="0">--Select-- </option>
                     </select>
@@ -112,7 +112,7 @@
         <div class="row mt-md-3">
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <textarea asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+                    <textarea disabled asp-for="Remarks" placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
 
                     <span asp-validation-for="Remarks" class="text-danger"></span>
                     <label class="floating-label">Remarks  </label>
@@ -121,7 +121,7 @@
             </div>
             <div class=" col-md-6">
                 <div class="floating-label-wrap">
-                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="IsActive">
                         <option value="1">Active</option>
                         <option value="0">Inactive</option>
                     </select>
@@ -132,7 +132,7 @@
         </div>
         <div class="row mt-md-3">
             <div class=" col-md-12">
-                <button class="btn btn-theme " type="submit">Update</button>
+               
                 @Html.ActionLink("Back", "Index", "UnderSection22PlotDetails", null, new { @class = "btn btn-theme " })
 
             </div>
