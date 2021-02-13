@@ -25,6 +25,8 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
         public async Task<IActionResult> Index()
+
+
         {
 
             return View();
@@ -40,14 +42,15 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Create()
         {
+
             Jointsurvey jointsurvey = new Jointsurvey();
-            jointsurvey.IsActive = 1;
-           
             jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
             jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
 
             return View(jointsurvey);
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,7 +58,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-              
+
                 jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
                 jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
 
@@ -90,69 +93,72 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var Data = await _jointsurveyService.FetchSingleResult(id);
+            Jointsurvey jointsurvey = new Jointsurvey();
+            jointsurvey = await _jointsurveyService.FetchSingleResult(id);
+
+            jointsurvey.KhasraList = await _jointsurveyService.BindKhasra();
+            jointsurvey.VillageList = await _jointsurveyService.GetAllVillage();
 
 
-            Data.KhasraList = await _jointsurveyService.BindKhasra();
-            Data.VillageList = await _jointsurveyService.GetAllVillage();
-
-
-            if (Data == null)
+            if (jointsurvey == null)
             {
                 return NotFound();
             }
-            return View(Data);
+            return View(jointsurvey);
         }
+
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Jointsurvey jointsurvey)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    var result = await _jointsurveyService.Update(id, jointsurvey);
-                    if (result == true)
+                    try
                     {
-                        ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        var list = await _jointsurveyService.GetAllJointSurvey();
-                        return View("Index", list);
+                        var result = await _jointsurveyService.Update(id, jointsurvey);
+                        if (result == true)
+                        {
+                            ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
+                            var list = await _jointsurveyService.GetAllJointSurvey();
+                            return View("Index", list);
+                        }
+                        else
+                        {
+                            ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
+                            return View(jointsurvey);
+                        }
                     }
-                    else
+                    catch (Exception ex)
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(jointsurvey);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                     return View(jointsurvey);
                 }
             }
-            else
+            catch (Exception ex)
             {
+                ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                 return View(jointsurvey);
+
             }
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Pankaj
         {
-            try
+            var result = await _jointsurveyService.Delete(id);
+            if (result == true)
             {
-
-                var result = await _jointsurveyService.Delete(id);
-                if (result == true)
-                {
-                    ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
-                }
-                else
-                {
-                    ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
-                }
+                ViewBag.Message = Alert.Show(Messages.DeleteSuccess, "", AlertType.Success);
             }
-            catch (Exception ex)
+            else
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
@@ -160,10 +166,16 @@ namespace AcquiredLandInformationManagement.Controllers
             return View("Index", list);
         }
 
+
+
+
+
         public async Task<IActionResult> View(int id)
         {
+
+            Jointsurvey jointsurvey = new Jointsurvey();
             var Data = await _jointsurveyService.FetchSingleResult(id);
-          
+
             Data.KhasraList = await _jointsurveyService.BindKhasra();
             Data.VillageList = await _jointsurveyService.GetAllVillage();
 

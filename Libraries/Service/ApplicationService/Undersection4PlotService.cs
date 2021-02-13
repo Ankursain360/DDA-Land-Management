@@ -50,11 +50,13 @@ namespace Libraries.Service.ApplicationService
             List<Undersection4> notificationList = await _undersection4plotRepository.GetAllNotificationNo();
             return notificationList;
         }
-        public async Task<List<Khasra>> BindKhasra()
+        public async Task<List<Khasra>> BindKhasra(int? villageId)
         {
-            List<Khasra> khasraList = await _undersection4plotRepository.BindKhasra();
+            List<Khasra> khasraList = await _undersection4plotRepository.BindKhasra(villageId);
             return khasraList;
         }
+
+
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage>  villageList = await _undersection4plotRepository.GetAllVillage();
