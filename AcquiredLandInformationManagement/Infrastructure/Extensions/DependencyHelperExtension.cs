@@ -62,6 +62,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
+            services.AddScoped<IAppealdetailRepository, AppealdetailRepository>();
+            services.AddScoped<IPaymentdetailRepository, PaymentdetailRepository>();
+
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -102,6 +105,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
             services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
+            services.AddScoped<IAppealdetailService, AppealdetailService>();
+            services.AddScoped<IPaymentdetailService, PaymentdetailService>();
 
         }
     }

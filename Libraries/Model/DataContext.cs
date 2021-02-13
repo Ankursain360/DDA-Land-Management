@@ -115,8 +115,8 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
-
-
+        public virtual DbSet<Appealdetail> Appealdetail { get; set; }
+        public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 

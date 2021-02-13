@@ -13,7 +13,7 @@ namespace Libraries.Service.IApplicationService
 
        
         Task<List<Acquiredlandvillage>> GetAllVillageList();
-        Task<List<Khasra>> GetAllKhasraList();
+        Task<List<Khasra>> GetAllKhasraList(int? villageId);
         Task<List<Undersection17>> GetAllUndersection17List();
 
         Task<List<Undersection17plotdetail>> GetUndersection17plotdetailUsingRepo();
