@@ -28,7 +28,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetBurjiDetails(villageId);
         }
 
-        public async Task<List<GISclean>> GetCleanDetails(int villageId)
+        public async Task<List<Gisclean>> GetCleanDetails(int villageId)
         {
             return await _iGISSRepository.GetCleanDetails(villageId);
         }
@@ -63,7 +63,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetDimTextDetails(villageId);
         }
 
-        public async Task<List<GISencroachment>> GetEncroachmentDetails(int villageId)
+        public async Task<List<Gisencroachment>> GetEncroachmentDetails(int villageId)
         {
             return await _iGISSRepository.GetEncroachmentDetails(villageId);
         }
@@ -118,7 +118,7 @@ namespace Libraries.Service.ApplicationService
             return await _iGISSRepository.GetKillaDetails(villageId);
         }
 
-        public async Task<List<GISnala>> GetNalaDetails(int villageId)
+        public async Task<List<Gisnala>> GetNalaDetails(int villageId)
         {
             return await _iGISSRepository.GetNalaDetails(villageId);
         }

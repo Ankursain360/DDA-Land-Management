@@ -31,7 +31,7 @@ namespace Libraries.Repository.EntityRepository
                                    .ToListAsync();
         }
 
-        public async Task<List<GISclean>> GetCleanDetails(int villageId)
+        public async Task<List<Gisclean>> GetCleanDetails(int villageId)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
 
-        public async Task<List<GISencroachment>> GetEncroachmentDetails(int villageId)
+        public async Task<List<Gisencroachment>> GetEncroachmentDetails(int villageId)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace Libraries.Repository.EntityRepository
             throw new NotImplementedException();
         }
 
-        public async Task<List<GISnala>> GetNalaDetails(int villageId)
+        public async Task<List<Gisnala>> GetNalaDetails(int villageId)
         {
             return await _dbContext.Gisnala
                                  .Where(x => x.VillageId == villageId && x.IsActive == 1)
