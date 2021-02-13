@@ -11,18 +11,15 @@ namespace Libraries.Service.IApplicationService
 {
     public interface IDemandListDetailsService : IEntityService<Demandlistdetails>
     {
-        Task<List<Department>> GetDepartmentList();
-        Task<List<Propertyregistration>> GetKhasraNoList();
-        Task<List<Locality>> GetLocalityList();
-        Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
-      //  Task<bool> Create(Dmsfileupload dmsfileupload);
-        Task<Dmsfileupload> FetchSingleResult(int id);
-      //  Task<bool> Update(int id, Dmsfileupload dmsfileupload);
-      //  Task<bool> Delete(int id, int userId);
+        Task<List<Acquiredlandvillage>> GetVillageList();
+        Task<List<Khasra>> GetKhasraList(int id);
+        Task<PagedResult<Demandlistdetails>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model);
+        Task<bool> Create(Demandlistdetails demandlistdetails);
+        Task<Demandlistdetails> FetchSingleResult(int id);
+        Task<bool> Update(int id, Demandlistdetails demandlistdetails);
+        Task<bool> Delete(int id, int userId);
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
-        Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model);
-        Task<Dmsfileright> GetDMSUserRights(int userId);
     }
 }

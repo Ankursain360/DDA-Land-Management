@@ -18,97 +18,58 @@ namespace Libraries.Repository.EntityRepository
         {
 
         }
-        public async Task<List<Department>> GetDepartmentList()
+        public async Task<PagedResult<Demandlistdetails>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model)
         {
-            return await _dbContext.Department
-                                     .Where(x => x.IsActive == 1)
-                                     .ToListAsync();
-        }
-
-        public async Task<List<Propertyregistration>> GetKhasraNoList()
-        {
-            try
-            {
-                var InId = (from x in _dbContext.Propertyregistration
-                            where x.KhasraNo == null || x.KhasraNo == string.Empty
-                            select x.Id).ToArray();
-
-                var data = await _dbContext.Propertyregistration
-                                         .Where(x => x.IsActive == 1 && x.IsDeleted != 0 && x.IsValidate == 1 && x.IsDisposed != 0
-                                         // && ( x.KhasraNo != null || x.KhasraNo != string.Empty)
-                                         && !(InId).Contains(x.Id)
-                                         )
-                                         .ToListAsync();
-                var result = data.GroupBy(x => x)
-                                  .Where(g => g.Count() > 1)
-                                  .Select(y => y.Key)
-                                  .ToList();
-                return data;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-
-        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
-        {
-            var data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
+            var data = await _dbContext.Demandlistdetails
+                                        .Include(x => x.Village)
                                         .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
-                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        .Where(x => x.VillageId == (model.villageId == 0 ? x.VillageId : model.villageId)
+                                        && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
                                         )
-                                        .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+                                        .GetPaged<Demandlistdetails>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
             {
                 data = null;
-                data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
+                data = await _dbContext.Demandlistdetails
+                                        .Include(x => x.Village)
                                         .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
-                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        .Where(x => x.VillageId == (model.villageId == 0 ? x.VillageId : model.villageId)
+                                        && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
                                         )
                                 .OrderBy(s =>
-                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
-                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
-                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
-                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
+                                (model.SortBy.ToUpper() == "DEMANDLIST" ? s.DemandListNo
+                                : model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.Name : null) : s.DemandListNo)
                                 )
-                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+                                .GetPaged<Demandlistdetails>(model.PageNumber, model.PageSize);
             }
             else if (SortOrder == 2)
             {
                 data = null;
-                data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
+                data = await _dbContext.Demandlistdetails
+                                        .Include(x => x.Village)
                                         .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.departmentId == 0 ? x.DepartmentId : model.departmentId)
-                                        && (x.LocalityId == (model.localityId == 0 ? x.LocalityId : model.localityId))
+                                        .Where(x => x.VillageId == (model.villageId == 0 ? x.VillageId : model.villageId)
+                                        && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
                                         && (x.KhasraNoId == (model.KhasraId == 0 ? x.KhasraNoId : model.KhasraId))
                                         )
                                 .OrderByDescending(s =>
-                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
-                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
-                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
-                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) : s.FileNo)
+                                 (model.SortBy.ToUpper() == "DEMANDLIST" ? s.DemandListNo
+                                : model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.Name : null) : s.DemandListNo)
                                 )
-                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
+                                .GetPaged<Demandlistdetails>(model.PageNumber, model.PageSize);
             }
             return data;
         }
 
-        public async Task<Dmsfileupload> FetchSingleResult(int id)
+        public async Task<Demandlistdetails> FetchSingleResult(int id)
         {
-            return await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
+            return await _dbContext.Demandlistdetails
+                                        .Include(x => x.Village)
                                         .Include(x => x.KhasraNo)
                                         .Where(x => x.Id == id)
                                         .FirstOrDefaultAsync();
@@ -138,87 +99,18 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Dmsfileupload.AnyAsync(t => t.Id != id && t.FileNo.ToLower() == fileNo.ToLower());
         }
-
-        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model)
+        public async Task<List<Acquiredlandvillage>> GetVillageList()
         {
-
-            var data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
-                                        && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                                        && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
-                                        && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
-                                        && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
-                                        && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
-                                        && (x.Title.ToUpper().Trim().Contains(model.Title == "" ? x.Title.ToUpper().Trim() : model.Title.ToUpper().Trim()))
-                                        )
-                                        .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
-            int SortOrder = (int)model.SortOrder;
-            if (SortOrder == 1)
-            {
-                data = null;
-                data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
-                                        && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                                        && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
-                                        && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
-                                        && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
-                                        && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
-                                        && (x.Title.ToUpper().Trim().Contains(model.Title == "" ? x.Title.ToUpper().Trim() : model.Title.ToUpper().Trim()))
-                                        )
-                                .OrderBy(s =>
-                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
-                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
-                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
-                                //: model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null)
-                                : s.FileNo)
-                                )
-                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
-            }
-            else if (SortOrder == 2)
-            {
-                data = null;
-                data = await _dbContext.Dmsfileupload
-                                        .Include(x => x.Department)
-                                        .Include(x => x.Locality)
-                                        .Include(x => x.KhasraNo)
-                                        .Where(x => x.DepartmentId == (model.Department == 0 ? x.DepartmentId : model.Department)
-                                        && (x.LocalityId == (model.Locality == 0 ? x.LocalityId : model.Locality))
-                                        && (x.KhasraNoId == (model.Khasra == 0 ? x.KhasraNoId : model.Khasra))
-                                        && (x.FileNo.ToUpper().Trim().Contains(model.FileNo == "" ? x.FileNo.ToUpper().Trim() : model.FileNo.ToUpper().Trim()))
-                                        && (x.PropertyNoAddress.ToUpper().Trim().Contains(model.PropertyNo == "" ? x.PropertyNoAddress.ToUpper().Trim() : model.PropertyNo.ToUpper().Trim()))
-                                        && (x.AlmirahNo.ToUpper().Trim().Contains(model.AlmirahNo == "" ? x.AlmirahNo.ToUpper().Trim() : model.AlmirahNo.ToUpper().Trim()))
-                                        && (x.Title.ToUpper().Trim().Contains(model.Title == "" ? x.Title.ToUpper().Trim() : model.Title.ToUpper().Trim()))
-                                        )
-                                .OrderByDescending(s =>
-                                (model.SortBy.ToUpper() == "FILENO" ? s.FileNo
-                                : model.SortBy.ToUpper() == "DEPARTMENT" ? (s.Department == null ? null : s.Department.Name)
-                                : model.SortBy.ToUpper() == "LOCALITY" ? (s.Locality != null ? s.Locality.Name : null)
-                                // : model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.KhasraNo : null) 
-                                : s.FileNo)
-                                )
-                                .GetPaged<Dmsfileupload>(model.PageNumber, model.PageSize);
-            }
-            return data;
-        }
-
-        public async Task<List<Locality>> GetLocalityList()
-        {
-            return await _dbContext.Locality
+            return await _dbContext.Acquiredlandvillage
                                      .Where(x => x.IsActive == 1)
                                      .ToListAsync();
         }
 
-        public async Task<Dmsfileright> GetDMSUserRights(int userId)
+        public async Task<List<Khasra>> GetKhasraList(int id)
         {
-            return await _dbContext.Dmsfileright
-                                    .Where(x => x.UserId == userId)
-                                    .FirstOrDefaultAsync();
+            return await _dbContext.Khasra
+                                     .Where(x => x.IsActive == 1 && x.AcquiredlandvillageId == id)
+                                     .ToListAsync();
         }
     }
 }

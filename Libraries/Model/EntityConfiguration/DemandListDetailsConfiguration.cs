@@ -57,6 +57,8 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ExistingRatePerBigha).HasColumnType("decimal(18,3)");
 
+            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+
             builder.Property(e => e.KhasraNoId).HasColumnType("int(11)");
 
             builder.Property(e => e.LacfileNo)

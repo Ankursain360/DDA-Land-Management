@@ -24,90 +24,78 @@ namespace Service.ApplicationService
             _demandListDetailsRepository = demandListDetailsRepository;
         }
 
-        public async Task<List<Department>> GetDepartmentList()
-        {
-            return await _demandListDetailsRepository.GetDepartmentList();
-        }
-
-        public async Task<List<Propertyregistration>> GetKhasraNoList()
-        {
-            return await _demandListDetailsRepository.GetKhasraNoList();
-        }
-
-        public async Task<List<Locality>> GetLocalityList()
-        {
-            return await _demandListDetailsRepository.GetLocalityList();
-        }
-
-        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model)
+        public async Task<PagedResult<Demandlistdetails>> GetPagedDMSFileUploadList(DemandListDetailsSearchDto model)
         {
             return await _demandListDetailsRepository.GetPagedDMSFileUploadList(model);
         }
 
-        //public async Task<bool> Create(Dmsfileupload dmsfileupload)
-        //{
-        //    try
-        //    {
-        //        Dmsfileupload model = new Dmsfileupload();
-        //        model.FileNo = dmsfileupload.FileNo;
-        //        model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
-        //        model.AlloteeName = dmsfileupload.AlloteeName;
-        //        model.DepartmentId = dmsfileupload.DepartmentId;
-        //        model.LocalityId = dmsfileupload.LocalityId;
-        //        model.KhasraNoId = dmsfileupload.KhasraNoId;
-        //        model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
-        //        model.AlmirahNo = dmsfileupload.AlmirahNo;
-        //        model.Title = dmsfileupload.Title;
-        //        model.FileName = dmsfileupload.FileName;
-        //        model.FilePath = dmsfileupload.FilePath;
-        //        model.IsActive = 1;
-        //        model.CreatedDate = DateTime.Now;
-        //        _demandListDetailsRepository.Add(model);
-        //        return await _unitOfWork.CommitAsync() > 0;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return false;
-        //    }
+        public async Task<bool> Create(Demandlistdetails demandlistdetails)
+        {
+            try
+            {
+                demandlistdetails.IsActive = 1;
+                demandlistdetails.CreatedDate = DateTime.Now;
+                _demandListDetailsRepository.Add(demandlistdetails);
+                return await _unitOfWork.CommitAsync() > 0;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
 
-        //}
+        }
 
-        public async Task<Dmsfileupload> FetchSingleResult(int id)
+        public async Task<Demandlistdetails> FetchSingleResult(int id)
         {
             return await _demandListDetailsRepository.FetchSingleResult(id);
         }
 
-        //public async Task<bool> Update(int id, Dmsfileupload dmsfileupload)
-        //{
-        //    var result = await _demandListDetailsRepository.FindBy(a => a.Id == id);
-        //    Dmsfileupload model = result.FirstOrDefault();
-        //    model.FileNo = dmsfileupload.FileNo;
-        //    model.IsFileBulkUpload = dmsfileupload.IsFileBulkUpload;
-        //    model.AlloteeName = dmsfileupload.AlloteeName;
-        //    model.DepartmentId = dmsfileupload.DepartmentId;
-        //    model.LocalityId = dmsfileupload.LocalityId;
-        //    model.KhasraNoId = dmsfileupload.KhasraNoId;
-        //    model.PropertyNoAddress = dmsfileupload.PropertyNoAddress;
-        //    model.AlmirahNo = dmsfileupload.AlmirahNo;
-        //    model.Title = dmsfileupload.Title;
-        //    model.FileName = dmsfileupload.FileName;
-        //    model.FilePath = dmsfileupload.FilePath;
-        //    model.IsActive = dmsfileupload.IsActive;
-        //    model.ModifiedDate = DateTime.Now;
-        //    _demandListDetailsRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
+        public async Task<bool> Update(int id, Demandlistdetails demandlistdetails)
+        {
+            var result = await _demandListDetailsRepository.FindBy(a => a.Id == id);
+            Demandlistdetails model = result.FirstOrDefault();
+            model.DemandListNo = demandlistdetails.DemandListNo;
+            model.Enmsno = demandlistdetails.Enmsno;
+            model.Lacno = demandlistdetails.Lacno;
+            model.LacfileNo = demandlistdetails.LacfileNo;
+            model.Lbno = demandlistdetails.Lbno;
+            model.LbrefDate = demandlistdetails.LbrefDate;
+            model.Rfano = demandlistdetails.Rfano;
+            model.Slpno = demandlistdetails.Slpno;
+            model.NotificationDate = demandlistdetails.NotificationDate;
+            model.DdafileNo = demandlistdetails.DdafileNo;
+            model.BalanceInterestCase = demandlistdetails.BalanceInterestCase;
+            model.PayableAppealable = demandlistdetails.PayableAppealable;
+            model.AwardDate = demandlistdetails.AwardDate;
+            model.AwardNo = demandlistdetails.AwardNo;
+            model.VillageId = demandlistdetails.VillageId;
+            model.KhasraNoId = demandlistdetails.KhasraNoId;
+            model.PartyName = demandlistdetails.PartyName;
+            model.EnhancedRatePerBigha = demandlistdetails.EnhancedRatePerBigha;
+            model.ExistingRatePerBigha = demandlistdetails.ExistingRatePerBigha;
+            model.CourtInvolves = demandlistdetails.CourtInvolves;
+            model.PayableAmt = demandlistdetails.PayableAmt;
+            model.ApealableAmt = demandlistdetails.ApealableAmt;
+            model.JundgementDate = demandlistdetails.JundgementDate;
+            model.ReasonForNonPay = demandlistdetails.ReasonForNonPay;
+            model.Remarks = demandlistdetails.Remarks;
+            model.TotalAmount = demandlistdetails.TotalAmount;
+            model.IsActive = demandlistdetails.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            _demandListDetailsRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
-        //public async Task<bool> Delete(int id, int userId)
-        //{
-        //    var result = await _demandListDetailsRepository.FindBy(a => a.Id == id);
-        //    Dmsfileupload model = result.FirstOrDefault();
-        //    model.IsActive = 0;
-        //    model.ModifiedDate = DateTime.Now;
-        //    model.ModifiedBy = userId;
-        //    _demandListDetailsRepository.Edit(model);
-        //    return await _unitOfWork.CommitAsync() > 0;
-        //}
+        public async Task<bool> Delete(int id, int userId)
+        {
+            var result = await _demandListDetailsRepository.FindBy(a => a.Id == id);
+            Demandlistdetails model = result.FirstOrDefault();
+            model.IsActive = 0;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = userId;
+            _demandListDetailsRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
 
         public int GetLocalityByName(string name)
         {
@@ -123,15 +111,14 @@ namespace Service.ApplicationService
         {
             return await _demandListDetailsRepository.Any(id, fileNo);
         }
-
-        public async Task<PagedResult<Dmsfileupload>> GetPagedDMSRetriveFileReport(DMSRetriveFileSearchDto model)
+        public async Task<List<Acquiredlandvillage>> GetVillageList()
         {
-            return await _demandListDetailsRepository.GetPagedDMSRetriveFileReport(model);
+            return await _demandListDetailsRepository.GetVillageList();
         }
 
-        public async Task<Dmsfileright> GetDMSUserRights(int userId)
+        public async Task<List<Khasra>> GetKhasraList(int id)
         {
-            return await _demandListDetailsRepository.GetDMSUserRights(userId);
+            return await _demandListDetailsRepository.GetKhasraList( id);
         }
     }
 }
