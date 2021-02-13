@@ -21,6 +21,7 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Create(Undersection4plot undersection4plot);
         Task<Undersection4plot> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
 
     }
