@@ -44,7 +44,7 @@ namespace AcquiredLandInformationManagement.Controllers
            
 
             undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList();
+            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
             undersection17plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
             return View(undersection17plotdetail);
         }
@@ -59,7 +59,7 @@ namespace AcquiredLandInformationManagement.Controllers
                 undersection17Plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
 
                 undersection17Plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-                undersection17Plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList();
+                undersection17Plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17Plotdetail.VillageId);
 
                 if (ModelState.IsValid)
                 {
@@ -98,7 +98,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Data.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
 
             Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList();
+            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
 
             if (Data == null)
             {
@@ -111,6 +111,9 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Undersection17plotdetail undersection17plotdetail)
         {
+            undersection17plotdetail.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
+            undersection17plotdetail.VillageList = await _undersection17plotdetailService.GetAllVillageList();
+            undersection17plotdetail.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(undersection17plotdetail.VillageId);
             if (ModelState.IsValid)
             {
                 try
@@ -169,7 +172,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
             Data.Undersection17List = await _undersection17plotdetailService.GetAllUndersection17List();
             Data.VillageList = await _undersection17plotdetailService.GetAllVillageList();
-            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList();
+            Data.KhasraList = await _undersection17plotdetailService.GetAllKhasraList(Data.VillageId);
 
 
             if (Data == null)

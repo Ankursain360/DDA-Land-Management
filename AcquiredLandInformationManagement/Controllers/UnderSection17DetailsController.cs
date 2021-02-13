@@ -107,6 +107,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Undersection17 undersection17)
         {
+            undersection17.Undersection6List = await _undersection17Service.GetAllUndersection6List();
             if (ModelState.IsValid)
             {
                 try

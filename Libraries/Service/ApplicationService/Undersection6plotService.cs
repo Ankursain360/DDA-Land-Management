@@ -87,6 +87,8 @@ namespace Libraries.Service.ApplicationService
             Undersection6plot model = result.FirstOrDefault();
             model.UnderSection6Id = undersection4plot.UnderSection6Id;
             model.VillageId = undersection4plot.VillageId;
+            model.KhasraId = undersection4plot.KhasraId;
+          
             model.IsActive = undersection4plot.IsActive;
             model.Bigha = undersection4plot.Bigha;
             model.Biswa = undersection4plot.Biswa;

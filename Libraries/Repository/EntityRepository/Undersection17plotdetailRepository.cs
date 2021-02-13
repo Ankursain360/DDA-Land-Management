@@ -173,7 +173,7 @@ namespace Libraries.Repository.EntityRepository
             List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.ToListAsync();
             return villageList;
         }
-        public async Task<List<Khasra>> GetAllKhasraList()
+        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
         {
             List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
             return khasraList;
