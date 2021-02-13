@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class DemandListDetails : Controller
+    public class DemandListDetailsController : Controller
     {
         public IActionResult Index()
         {

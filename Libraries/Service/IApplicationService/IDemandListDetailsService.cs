@@ -9,16 +9,16 @@ using System.Threading.Tasks;
 
 namespace Libraries.Service.IApplicationService
 {
-    public interface IDmsFileUploadService : IEntityService<Dmsfileupload>
+    public interface IDemandListDetailsService : IEntityService<Demandlistdetails>
     {
         Task<List<Department>> GetDepartmentList();
         Task<List<Propertyregistration>> GetKhasraNoList();
         Task<List<Locality>> GetLocalityList();
         Task<PagedResult<Dmsfileupload>> GetPagedDMSFileUploadList(DMSFileUploadSearchDto model);
-        Task<bool> Create(Dmsfileupload dmsfileupload);
+      //  Task<bool> Create(Dmsfileupload dmsfileupload);
         Task<Dmsfileupload> FetchSingleResult(int id);
-        Task<bool> Update(int id, Dmsfileupload dmsfileupload);
-        Task<bool> Delete(int id, int userId);
+      //  Task<bool> Update(int id, Dmsfileupload dmsfileupload);
+      //  Task<bool> Delete(int id, int userId);
         int GetLocalityByName(string name);
         int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);

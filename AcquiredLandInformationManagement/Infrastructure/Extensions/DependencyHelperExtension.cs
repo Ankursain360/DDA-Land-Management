@@ -69,7 +69,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
 
 
             services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
-     
+            services.AddScoped<IDemandListDetailsRepository, DemandListDetailsRepository>();
 
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
@@ -117,6 +117,7 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
           
             services.AddScoped<IUnderSection6Service, UnderSection6Service>();
+            services.AddScoped<IDemandListDetailsService, DemandListDetailsService>();
 
         }
     }
