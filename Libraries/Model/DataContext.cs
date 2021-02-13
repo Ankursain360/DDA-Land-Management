@@ -118,8 +118,13 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+
+        public virtual DbSet<Appealdetail> Appealdetail { get; set; }
+        public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
+
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
+
 
 
 
@@ -220,7 +225,7 @@ namespace Libraries.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
-            
+
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
@@ -263,7 +268,7 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
-           
+
             modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
             modelBuilder.ApplyConfiguration(new JarailesseeConfiguration());
