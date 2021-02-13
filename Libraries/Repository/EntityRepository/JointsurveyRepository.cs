@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using Dto.Search;
 namespace Libraries.Repository.EntityRepository
 {
-   public class JointsurveyRepository : GenericRepository<Jointsurvey>, IJointsurveyRepository
+    public class JointsurveyRepository : GenericRepository<Jointsurvey>, IJointsurveyRepository
     {
         public JointsurveyRepository(DataContext dbContext) : base(dbContext)
         {
@@ -22,7 +22,7 @@ namespace Libraries.Repository.EntityRepository
 
 
 
-       
+
         public async Task<List<Jointsurvey>> GetAllJointSurvey()
         {
             return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
@@ -46,7 +46,52 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Jointsurvey>> GetPagedJointsurvey(JointSurveySearchDto model)
         {
-            return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Jointsurvey
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
+                                        && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
+                                        ).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Jointsurvey
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
+                                        && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
+                                        )
+                                .OrderBy(s =>
+                                (
+                                  model.SortBy.ToUpper() == "VILLAGENAME" ? (s.Village != null ? s.Village.Name : null)
+                                : model.SortBy.ToUpper() == "KHASRANAME" ? (s.Khasra != null ? s.Khasra.Name : null) : s.Village.Name)
+                                )
+                                .GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
+            }
+
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Jointsurvey
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.Village.Name == (model.VillageName == "" ? x.Village.Name : model.VillageName)
+                                        && (x.Khasra.Name == (model.KhasraName == "" ? x.Khasra.Name : model.KhasraName))
+                                        )
+                                .OrderByDescending(s =>
+                                (
+                                model.SortBy.ToUpper() == "villagename" ? (s.Village != null ? s.Village.Name : null)
+                                : model.SortBy.ToUpper() == "khasraname" ? (s.Khasra != null ? s.Khasra.Name : null) : s.Village.Name)
+                                )
+                                .GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
+            }
+
+            return data;
+
+
+
+            //return await _dbContext.Jointsurvey.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).GetPaged<Jointsurvey>(model.PageNumber, model.PageSize);
         }
 
     }

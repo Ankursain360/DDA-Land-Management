@@ -17,7 +17,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection6>> GetAllUndersection6();
         Task<List<Undersection17>> GetAllUndersection17();
         Task<List<Undersection22>> GetAllUndersection22();
-
-       // Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
+        Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model);
         }
 }

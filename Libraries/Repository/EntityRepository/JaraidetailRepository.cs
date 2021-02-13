@@ -14,15 +14,15 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class JaraidetailRepository : GenericRepository<Jaraidetail>, IJaraidetailRepository
+    public class JaraidetailRepository : GenericRepository<Jaraidetails>, IJaraidetailRepository
     {
         public JaraidetailRepository(DataContext dbContext) : base(dbContext)
         {
 
         }
-        public async Task<PagedResult<Jaraidetail>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
+        public async Task<PagedResult<Jaraidetails>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
         {
-            return await _dbContext.Jaraidetail.GetPaged<Jaraidetail>(model.PageNumber, model.PageSize);
+            return await _dbContext.Jaraidetails.GetPaged<Jaraidetails>(model.PageNumber, model.PageSize);
         }
 
         public async Task<List<Khewat>> GetAllKhewat()
@@ -30,9 +30,9 @@ namespace Libraries.Repository.EntityRepository
             List<Khewat> awardList = await _dbContext.Khewat.Where(x => x.IsActive == 1).ToListAsync();
             return awardList;
         }
-        public async Task<List<Jaraidetail>> GetJaraidetail()
+        public async Task<List<Jaraidetails>> GetJaraidetail()
         {
-            return await _dbContext.Jaraidetail.Include(x => x.Khewat).Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Khatauni).Include(x => x.Taraf).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Jaraidetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 

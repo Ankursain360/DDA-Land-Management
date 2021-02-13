@@ -13,6 +13,7 @@ namespace Libraries.Model.Entity
         public Acquiredlandvillage()
         {
             Khasra = new HashSet<Khasra>();
+            Jaraidetails = new HashSet<Jaraidetails>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Awardplotdetails = new HashSet<Awardplotdetails>();
             Enchroachment = new HashSet<Enchroachment>();
@@ -71,7 +72,9 @@ namespace Libraries.Model.Entity
 
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
 
-
+        public ICollection<Jaraidetails> Jaraidetails { get; set; }
+        public ICollection<Undersection6plot> Undersection6plot { get; set; }
+        public ICollection<Possessiondetails> Possessiondetails { get; set; }
 
     }
 }

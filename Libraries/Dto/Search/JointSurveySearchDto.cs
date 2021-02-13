@@ -2,8 +2,10 @@
 
 namespace Dto.Search
 {
-   public class JointSurveySearchDto : BaseSearchDto
+    public class JointSurveySearchDto : BaseSearchDto
     {
-        public string name { get; set; }
+        public string VillageName { get; set; }
+
+        public string KhasraName { get; set; }
     }
 }

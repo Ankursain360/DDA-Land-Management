@@ -1,10 +1,12 @@
-﻿using Libraries.Model.Entity;
+﻿using Dto.Search;
+using Libraries.Model.Entity;
 using Libraries.Repository.Common;
 using Libraries.Repository.IEntityRepository;
 using Libraries.Service.Common;
 using Libraries.Service.IApplicationService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +38,11 @@ namespace Libraries.Service.ApplicationService
             List<Khasra> khasraList = await _undersection22plotdetailsRepository.GetAllKhasra(villageId);
             return khasraList;
         }
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _undersection22plotdetailsRepository.FetchSingleKhasraResult(khasraId);
+        }
         public async Task<List<Undersection4>> GetAllUndersection4()
         {
             List<Undersection4> us4List = await _undersection22plotdetailsRepository.GetAllUndersection4();
@@ -57,12 +64,52 @@ namespace Libraries.Service.ApplicationService
             return us22List;
         }
 
-        //public async Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model);
+        public async Task<PagedResult<Undersection22plotdetails>> GetPagedUndersection22plotdetails(Undersection22plotdetailsSearchDto model)
+        {
+            return await _undersection22plotdetailsRepository.GetPagedUndersection22plotdetails(model);
+        }
         public async Task<bool> Create(Undersection22plotdetails us22plot)
         {
             us22plot.CreatedBy = us22plot.CreatedBy;
             us22plot.CreatedDate = DateTime.Now;
             _undersection22plotdetailsRepository.Add(us22plot);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<Undersection22plotdetails> FetchSingleResult(int id)
+        {
+            var result = await _undersection22plotdetailsRepository.FindBy(a => a.Id == id);
+            Undersection22plotdetails model = result.FirstOrDefault();
+            return model;
+        }
+        public async Task<bool> Update(int id, Undersection22plotdetails us22plot)
+        {
+            var result = await _undersection22plotdetailsRepository.FindBy(a => a.Id == id);
+            Undersection22plotdetails model = result.FirstOrDefault();
+
+            model.UnderSection22Id = us22plot.UnderSection22Id;
+            model.UnderSection4Id = us22plot.UnderSection4Id;
+            model.UnderSection6Id = us22plot.UnderSection6Id;
+            model.UnderSection17Id = us22plot.UnderSection17Id;
+            model.AcquiredlandvillageId = us22plot.AcquiredlandvillageId;
+            model.KhasraId = us22plot.KhasraId;
+            model.Bigha = us22plot.Bigha;
+            model.Biswa = us22plot.Biswa;
+            model.Biswanshi = us22plot.Biswanshi;
+            model.Remarks = us22plot.Remarks;
+            model.IsActive = us22plot.IsActive;
+            model.ModifiedDate = DateTime.Now;
+            model.ModifiedBy = us22plot.ModifiedBy;
+            _undersection22plotdetailsRepository.Edit(model);
+            return await _unitOfWork.CommitAsync() > 0;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var form = await _undersection22plotdetailsRepository.FindBy(a => a.Id == id);
+            Undersection22plotdetails model = form.FirstOrDefault();
+            model.IsActive = 0;
+            _undersection22plotdetailsRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
     }

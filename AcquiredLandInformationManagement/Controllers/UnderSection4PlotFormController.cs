@@ -50,7 +50,7 @@ namespace AcquiredLandInformationManagement.Controllers
             Undersection4plot undersection4plot = new Undersection4plot();
             undersection4plot.IsActive = 1;
             undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra();
+            undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
             undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
 
             return View(undersection4plot);
@@ -63,7 +63,7 @@ namespace AcquiredLandInformationManagement.Controllers
             try
             {
                 undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-               undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra();
+               undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
                 undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
 
 
@@ -103,7 +103,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
            
             Data.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            Data.KhasraList = await _undersection4PlotService.BindKhasra();
+            Data.KhasraList = await _undersection4PlotService.BindKhasra(Data.VillageId);
             Data.VillageList = await _undersection4PlotService.GetAllVillage();
 
 
@@ -118,6 +118,11 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Undersection4plot undersection4plot)
         {
+
+            undersection4plot.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
+            undersection4plot.KhasraList = await _undersection4PlotService.BindKhasra(undersection4plot.VillageId);
+            undersection4plot.VillageList = await _undersection4PlotService.GetAllVillage();
+
             if (ModelState.IsValid)
             {
                 try
@@ -174,7 +179,7 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             var Data = await _undersection4PlotService.FetchSingleResult(id);
             Data.NotificationList = await _undersection4PlotService.GetAllNotificationNo();
-            Data.KhasraList = await _undersection4PlotService.BindKhasra();
+            Data.KhasraList = await _undersection4PlotService.BindKhasra(Data.VillageId);
             Data.VillageList = await _undersection4PlotService.GetAllVillage();
 
 
@@ -186,6 +191,21 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<JsonResult> GetKhasraList(int? villageId)
+        {
+            villageId = villageId ?? 0;
+            return Json(await _undersection4PlotService.BindKhasra(Convert.ToInt32(villageId)));
+        }
+
+
+        [HttpGet]
+        public async Task<JsonResult> GetAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+          
+            return Json(await _undersection4PlotService.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
 
 
 

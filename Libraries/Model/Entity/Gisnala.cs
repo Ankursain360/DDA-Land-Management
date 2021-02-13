@@ -2,7 +2,7 @@
 
 namespace Libraries.Model.Entity
 {
-    public class GISnala : AuditableEntity<int>
+    public class Gisnala : AuditableEntity<int>
     {
         public int VillageId { get; set; }
         public decimal? Xcoordinate { get; set; }

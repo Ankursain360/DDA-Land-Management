@@ -70,7 +70,10 @@ namespace Libraries.Model
         public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
         public virtual DbSet<Khatauni> Khatauni { get; set; }
         public virtual DbSet<Taraf> Taraf { get; set; }
-        public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
+        public virtual DbSet<Jaraidetails> Jaraidetails { get; set; }
+        public virtual DbSet<Jaraifarmer> Jaraifarmer { get; set; }
+        public virtual DbSet<Jarailessee> Jarailessee { get; set; }
+        public virtual DbSet<Jaraiowner> Jaraiowner { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
@@ -115,8 +118,10 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
-        public virtual DbSet<Appealdetail> Appealdetail { get; set; }
-        public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
+        public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
+        public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
+
+
 
         public virtual DbSet<Departmenttarget> Departmenttarget { get; set; }
 
@@ -181,20 +186,37 @@ namespace Libraries.Model
         public virtual DbSet<Dmsfileupload> Dmsfileupload { get; set; }
         public virtual DbSet<Plot> Plot { get; set; }
         public virtual DbSet<Dmsfileright> Dmsfileright { get; set; }
-
-        public virtual DbSet<Gisaabadi> Gisaabadi { get; set; }
-        public virtual DbSet<Gisburji> Gisburji { get; set; }
-        public virtual DbSet<GISClean> Gisclean { get; set; }
-        public virtual DbSet<GisCleanText> Giscleantext { get; set; }
-        public virtual DbSet<Gisdim> Gisdim { get; set; }
-        public virtual DbSet<GISEncroachment> Gisencroachment { get; set; }
-        public virtual DbSet<Gisgosha> Gisgosha { get; set; }
-        public virtual DbSet<Gisgrid> Gisgrid { get; set; }
-        public virtual DbSet<GISnala> Gisnala { get; set; }
-        public virtual DbSet<Gistext> Gistext { get; set; }
-        public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
         public virtual DbSet<State> State { get; set; }
         public virtual DbSet<Undersection17plotdetail> Undersection17plotdetail { get; set; }
+        public virtual DbSet<Gisaabadi> Gisaabadi { get; set; }
+        public virtual DbSet<Gisburji> Gisburji { get; set; }
+        public virtual DbSet<Gisclean> Gisclean { get; set; }
+        public virtual DbSet<Giscleantext> Giscleantext { get; set; }
+        public virtual DbSet<Gisclose> Gisclose { get; set; }
+        public virtual DbSet<Gisclosetext> Gisclosetext { get; set; }
+        public virtual DbSet<Gisdashed> Gisdashed { get; set; }
+        public virtual DbSet<Gisdim> Gisdim { get; set; }
+        public virtual DbSet<Gisdimtext> Gisdimtext { get; set; }
+        public virtual DbSet<Gisencroachment> Gisencroachment { get; set; }
+        public virtual DbSet<Gisfieldboun> Gisfieldboun { get; set; }
+        public virtual DbSet<Gisgosha> Gisgosha { get; set; }
+        public virtual DbSet<Gisgrid> Gisgrid { get; set; }
+        public virtual DbSet<Gisinner> Gisinner { get; set; }
+        public virtual DbSet<Giskachapakaline> Giskachapakaline { get; set; }
+        public virtual DbSet<Giskhasraboundary> Giskhasraboundary { get; set; }
+        public virtual DbSet<Giskhasraline> Giskhasraline { get; set; }
+        public virtual DbSet<Giskhasrano> Giskhasrano { get; set; }
+        public virtual DbSet<Giskilla> Giskilla { get; set; }
+        public virtual DbSet<Gisnala> Gisnala { get; set; }
+        public virtual DbSet<Gisnali> Gisnali { get; set; }
+        public virtual DbSet<Gisrailwayline> Gisrailwayline { get; set; }
+        public virtual DbSet<Gisroad> Gisroad { get; set; }
+        public virtual DbSet<Gissaheda> Gissaheda { get; set; }
+        public virtual DbSet<Gistext> Gistext { get; set; }
+        public virtual DbSet<Gistrijunction> Gistrijunction { get; set; }
+        public virtual DbSet<Gisvillageboundary> Gisvillageboundary { get; set; }
+        public virtual DbSet<Gisvillagetext> Gisvillagetext { get; set; }
+        public virtual DbSet<Giszero> Giszero { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -241,7 +263,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
-            modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
+           
+            modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
+            modelBuilder.ApplyConfiguration(new JarailesseeConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraifarmerConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
@@ -286,6 +312,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new CourttypeConfiguration());
             modelBuilder.ApplyConfiguration(new CasestatusConfiguration());
             modelBuilder.ApplyConfiguration(new Undersection22plotdetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new Undersection6plotConfiguration());
+            modelBuilder.ApplyConfiguration(new PossessiondetailsConfiguration());
 
             //************* Data Loading **********************
             modelBuilder.ApplyConfiguration(new DatastoragepartfilenodetailsConfiguration());
@@ -339,6 +367,7 @@ namespace Libraries.Model
             //**********  Damage Payee **********
             modelBuilder.ApplyConfiguration(new PlotConfiguration());
             modelBuilder.ApplyConfiguration(new SchemefileloadingConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
             //**********  GIS **********
             modelBuilder.ApplyConfiguration(new GisaabadiConfiguration());
             modelBuilder.ApplyConfiguration(new GisburjiConfiguration());
@@ -351,8 +380,26 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisnalaConfiguration());
             modelBuilder.ApplyConfiguration(new GistextConfiguration());
             modelBuilder.ApplyConfiguration(new GistrijunctionConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmenttargetConfiguration());
+            modelBuilder.ApplyConfiguration(new GisCloseConfiguartion());
+            modelBuilder.ApplyConfiguration(new GisCloseTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisDashedConfiguration());
+            modelBuilder.ApplyConfiguration(new GisDimTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisFieldBounConfiguration());
+            modelBuilder.ApplyConfiguration(new GisInnerConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKachaPakaLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraBoundaryConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKhasraNoConfiguration());
+            modelBuilder.ApplyConfiguration(new GisKillaConfiguration());
+            modelBuilder.ApplyConfiguration(new GisNaliConfiguration());
+            modelBuilder.ApplyConfiguration(new GisRailwayLineConfiguration());
+            modelBuilder.ApplyConfiguration(new GisRoadConfiguartion());
+            modelBuilder.ApplyConfiguration(new GisSahedaConfiguration());
+            modelBuilder.ApplyConfiguration(new GisVillageBoundaryConfiguration());
+            modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
+            modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            //**********  GIS End**********
             base.OnModelCreating(modelBuilder);
         }
     }

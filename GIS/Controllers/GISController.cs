@@ -88,5 +88,77 @@ namespace GIS.Controllers
         {
             return Json(await _GISService.GetInitiallyStateDetails());
         }
+        public async Task<JsonResult> GetDashedDetails(int VillageId)
+        {
+            return Json(await _GISService.GetDashedDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCloseDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCloseDetails(VillageId));
+        }
+        public async Task<JsonResult> GetCloseTextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetCloseTextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetDimTextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetDimTextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetFieldBounDetails(int VillageId)
+        {
+            return Json(await _GISService.GetFieldBounDetails(VillageId));
+        }
+        public async Task<JsonResult> GetKillaDetails(int VillageId)
+        {
+            return Json(await _GISService.GetKillaDetails(VillageId));
+        }
+        public async Task<JsonResult> GetKhasraNoDetails(int VillageId)
+        {
+            return Json(await _GISService.GetKhasraNoDetails(VillageId));
+        }
+        public async Task<JsonResult> GetKhasraLineDetails(int VillageId)
+        {
+            return Json(await _GISService.GetKhasraLineDetails(VillageId));
+        }
+        public async Task<JsonResult> GetKhasraBoundaryDetails(int VillageId)
+        {
+            return Json(await _GISService.GetKhasraBoundaryDetails(VillageId));
+        }
+        public async Task<JsonResult> GetKachaPakaLineDetails(int VillageId)
+        {
+            return Json(await _GISService.GetKachaPakaLineDetails(VillageId));
+        }
+        public async Task<JsonResult> GetInnerDetails(int VillageId)
+        {
+            return Json(await _GISService.GetInnerDetails(VillageId));
+        }
+        public async Task<JsonResult> GetNaliDetails(int VillageId)
+        {
+            return Json(await _GISService.GetNaliDetails(VillageId));
+        }
+        public async Task<JsonResult> GetRailwayLineDetails(int VillageId)
+        {
+            return Json(await _GISService.GetRailwayLineDetails(VillageId));
+        }
+        public async Task<JsonResult> GetSahedaDetails(int VillageId)
+        {
+            return Json(await _GISService.GetSahedaDetails(VillageId));
+        }
+        public async Task<JsonResult> GetRoadDetails(int VillageId)
+        {
+            return Json(await _GISService.GetRoadDetails(VillageId));
+        }
+        public async Task<JsonResult> GetZeroDetails(int VillageId)
+        {
+            return Json(await _GISService.GetZeroDetails(VillageId));
+        }
+        public async Task<JsonResult> GetVillageTextDetails(int VillageId)
+        {
+            return Json(await _GISService.GetVillageTextDetails(VillageId));
+        }
+        public async Task<JsonResult> GetVillageBoundaryDetails(int VillageId)
+        {
+            return Json(await _GISService.GetVillageBoundaryDetails(VillageId));
+        }
     }
 }

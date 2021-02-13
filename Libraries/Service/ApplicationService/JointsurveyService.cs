@@ -55,7 +55,7 @@ namespace Libraries.Service.ApplicationService
             return villageList;
         }
 
-      
+
         public async Task<List<Jointsurvey>> GetAllJointSurvey()
         {
 
@@ -73,18 +73,18 @@ namespace Libraries.Service.ApplicationService
         {
             var result = await _JointsurveyRepository.FindBy(a => a.Id == id);
             Jointsurvey model = result.FirstOrDefault();
-         
+            model.SitePosition = jointsurvey.SitePosition;
+            model.AreaInBigha = jointsurvey.AreaInBigha;
+            model.AreaInBiswa = jointsurvey.AreaInBiswa;
             model.VillageId = jointsurvey.VillageId;
             model.KhasraId = jointsurvey.KhasraId;
             model.SitePosition = jointsurvey.SitePosition;
             model.Remarks = jointsurvey.Remarks;
-            model.Bigha = jointsurvey.Bigha;
-            model.Biswa = jointsurvey.Biswa;
-            model.Biswanshi = jointsurvey.Biswanshi;
             model.NatureOfStructure = jointsurvey.NatureOfStructure;
             model.JointSurveyDate = jointsurvey.JointSurveyDate;
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
+            model.IsActive = jointsurvey.IsActive;
             _JointsurveyRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 

@@ -13,8 +13,8 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection4plot>> GetAllUndersection4Plot();
         Task<List<Undersection4>> GetAllNotificationNo();
         Task<List<Acquiredlandvillage>> GetAllVillage();
-        Task<List<Khasra>> BindKhasra();
-
+        Task<List<Khasra>> BindKhasra(int? villageId);
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Undersection4plot>> GetPagedNoUndersection4plot(NotificationUndersection4plotDto model);
     }
 }

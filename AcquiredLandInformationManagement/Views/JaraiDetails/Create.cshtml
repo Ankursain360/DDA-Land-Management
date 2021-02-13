@@ -1,173 +1,292 @@
-﻿@model Libraries.Model.Entity.Jaraidetail
-<div class="row">
-    <div class="col-sm-12">
-        <div class="dda-topheading">
-            <div class="col-md-12">
-                <h6 class="pull-left" style="color:white;margin-top:5px;">Jarai Details Form</h6>
-                <i class="fa fa-arrow-left pull-right" aria-hidden="true" style="padding-top:4px;"></i>
+﻿@*@model Libraries.Model.Entity.Undersection22*@
+@await Component.InvokeAsync("PageHeader", new { pageName = "Jarai Details" })
+
+
+<div class="pt-3">
+
+    <form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <h3 class="mb-3 d-flex">Add Details</h3>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+
+                    <select class="floating-label-field floating-label-field--s3"
+                            @*asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.AcquiredlandvillageList, "Id","Name"))"
+                            onchange="return onChange(this.options[this.selectedIndex].value);"*@>
+
+                        <option>Select</option>
+                    </select>
+                    @*<span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
+                    <label asp-for="AcquiredlandvillageId" class="floating-label">Village Name </label>*@
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"
+                            @*asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))"*@>
+
+                        <option>Select</option>
+                    </select>
+                    @*<span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No </label>*@
+                </div>
+            </div>
+
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Notification" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationNo" class="text-danger"></span>*@
+                    <label class="floating-label">Year Of Jamabandi    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationDate" class="text-danger"></span>*@
+                    <label class="floating-label">No Of Khewat </label>
+                </div>
             </div>
         </div>
-    </div>
-</div>
-<br />
-<div class="container-fluid" id="MainContentForm">
-    <div class="panel">
-        <div class="panel-heading dda-pageheading">
-            <h6 class="pull-left" style="color:white; margin-top:-0.4%">Add Details </h6>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Notification" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationNo" class="text-danger"></span>*@
+                    <label class="floating-label">No Of Khatauni    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationDate" class="text-danger"></span>*@
+                    <label class="floating-label">Naam Patti/Traf Naam </label>
+                </div>
+            </div>
         </div>
-        <div class="panel-body">
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <div id="DivSection">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-topheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Jarai Details</h6>
+        <h3 class="my-3 d-flex sub-heading pt-4"> Naam Malik va Ahwal(Owner Details) </h3>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Owner Name</th>
+                            <th>Father's Name</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts_body">
+                    </tbody>
+                    <tbody class="tbody" id="add">
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn">1</span></td>
+                            <td>
+                                <input maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                @*<span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>*@
+                            </td>
+                            <td>
+                                <input maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
+                                @*<span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+
+                            <td>
+                                <input maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />
+                                @*<span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+                            <td>
+                                <div class="action-btns">
+                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            </td>
+                        </tr>
 
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Village Name</label>
-                        <select class="form-control dda-dropdown" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="VillageId" class="text-danger"></span>
-
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Year Of Jamabandi</label>
-                        <input type="Date" asp-for="YearOfJamabandi" class="form-control" />
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">No. Of Khewat</label>
-                        <select class="form-control dda-dropdown" asp-for="KhewatId" asp-items="@(new SelectList(Model.KhewatList, "Id","Number"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="KhewatId" class="text-danger"></span>
-
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">No. Of Khatauni</label>
-                        <select class="form-control dda-dropdown" asp-for="KhatauniId" asp-items="@(new SelectList(Model.KhatauniList, "Id","Number"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="KhatauniId" class="text-danger"></span>
-
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label class="control-label lb-sm">Naam Patti/Taraf Naam </label>
-                        <select class="form-control dda-dropdown" asp-for="TarafId" asp-items="@(new SelectList(Model.TarafList, "Id","Name"))">
-                            <option>Select</option>
-                        </select>
-                        <span asp-validation-for="TarafId" class="text-danger"></span>
-
-                    </div>
-                </div>
-                <div id="DivDetails">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Owner Details</label>
-
-                            <input type="text" asp-for="OwnerDetails" class="form-control" />
-
-                        </div>
-
-                        <div class="form-group col-md-4">
-
-                            <label class="control-label lb-sm">Farmer Details</label>
-
-                            <input type="text" asp-for="FarmerDetails" class="form-control" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label lb-sm">Kaifiyat</label>
-                            <input type="text" asp-for="Kaifiyat" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div id="DivKhasra">
-                    <div class="row" style="margin-bottom:35px;">
-                        <div class="col-sm-12">
-                            <div class=" dda-innerheading">
-                                <div class="col-md-12">
-                                    <h6 class="pull-left" style="color:white;margin-top:5px;">Khasra Details</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Khasra No</label>
-                            <select class="form-control dda-dropdown" asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraList, "Id","Name"))">
-                                <option>Select</option>
-                            </select>
-                            <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    </tbody>
+                </table>
+            </div>
 
 
-                        </div>
-
-                        <div class="form-group col-md-6">
-
-                            <label class="control-label lb-sm">Ahwal</label>
-                            <input type="Text" class="form-control" asp-for="Ahwal" />
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Revenue</label>
-                            <input type="Text" class="form-control" asp-for="Revenue" />
-                        </div>
-
-                        <div class="form-group col-md-6">
-                            <label class="control-label lb-sm">Old Mutation No</label>
-                            <input type="Text" class="form-control" asp-for="OldMutationNo" />
-                        </div>
-
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12">
-                        <label class="control-label lb-sm">Remarks</label>
-                        <textarea type="text" class="form-control" asp-for="Remarks" style=" background-color: #dddddd;"></textarea>
-                    </div>
-                </div>
-
-
-
-                <div class="form-row ">
-                    <div class="form-group col-md-12" style="margin-bottom:40px;">
-                        <input type="submit" value="Create" class="btn btn-primary dda-pageheading" />
-                        @*<input type="submit" value="Back" class="btn btn-primary myapp-hed1" />*@
-                        @Html.ActionLink("Back", "Index", "JaraiDetails", null, new { @class = "btn btn-primary dda-pageheading" })
-                    </div>
-                </div>
-
-            </form>
         </div>
-    </div>
+
+
+        <h3 class="my-3 d-flex sub-heading pt-4"> Naam Kashtkar va Ahawal(Lessee Details)</h3>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                    <thead class="text-nowrap">
+
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Lessee Name</th>
+                            <th>Father's Name</th>
+                            <th>Address</th>
+                            <th>Mortgage Details</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_posts_body">
+                    </tbody>
+                    <tbody class="tbody" id="add">
+                        <tr id="">
+                            <td style="text-align:center;"><span class="sn">1</span></td>
+                            <td>
+                                <input maxlength="45" required type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
+                                @*<span asp-validation-for="payeeName" class="d-block text-danger field-validation-valid msg"></span>*@
+                            </td>
+                            <td>
+                                <input maxlength="45" required type="text" class="floating-label-field floating-label-field--s3" />
+                                @*<span asp-validation-for="payeeFatherName" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+
+                            <td>
+                                <input maxlength="100" required type="text" class="floating-label-field floating-label-field--s3" />
+                                @*<span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+                            <td>
+                                <input maxlength="12" required type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                @*<span asp-validation-for="MobileNo" class="d-block text-danger field-validation-valid msg2"></span>*@
+
+                            </td>
+                           
+                            <td>
+                                <div class="action-btns">
+                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+
+
+
+        <h3 class="my-3 d-flex sub-heading pt-4"> Farmer Details</h3>
+        <div class="table-section bg-white border shadow rounded">
+            <div class="table-responsive">
+                <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_DamageAssessee">
+                    <thead class="text-nowrap">
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Farmer Name</th> 
+                            <th>Father's Name</th>
+                            <th>Address</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbl_DamageAssessee_body">
+                    </tbody>
+                    <tbody class="tbody" id="addDamageAssessee">
+                        <tr id="">
+
+                            <td style="text-align:center;"><span class="sn1">1</span></td>
+                            <td>
+                                <input type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
+                                @*<span asp-validation-for="Name" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+                            <td>
+                                <input required maxlength="45" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
+                                @*<span asp-validation-for="FatherName" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+                            <td>
+                                <input type="date" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
+                                @*<span asp-validation-for="Date" class="d-block text-danger field-validation-valid"></span>*@
+
+                            </td>
+
+                            <td>
+                                <div class="action-btns">
+                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row mt-md-3 pt-4">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Notification" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationNo" class="text-danger"></span>*@
+                    <label class="floating-label">Naam Malik/Aalla Ahwal    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationDate" class="text-danger"></span>*@
+                    <label class="floating-label">Mutaliba va Tashrih Mamla va Soni (Revenue)  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input placeholder="Name" type="text"
+                           class="floating-label-field floating-label-field--s3" />
+                    @*<span asp-validation-for="NotificationDate" class="text-danger"></span>*@
+                    <label class="floating-label">Old Mutation No.  </label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    @*<span asp-validation-for="IsActive" class="text-danger"></span>*@
+                    <label class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea placeholder="Description" class="floating-label-field floating-label-field--s3"></textarea>
+
+                    @*<span asp-validation-for="Description" class="text-danger"></span>*@
+                    <label class="floating-label">Kaifiat(Remarks)  </label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class=" col-md-12">
+                <button class="btn btn-theme " type="submit">Create</button>
+                @Html.ActionLink("Back", "Index", "JaraiDetails", null, new { @class = "btn btn-theme " })
+
+            </div>
+        </div>
+
+    </form>
+
 </div>
 
 
-
-
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 

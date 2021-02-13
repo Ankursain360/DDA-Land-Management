@@ -31,7 +31,7 @@ namespace Libraries.Service.ApplicationService
         }
         public async Task<List<Disposalland>> GetDisposallandUsingRepo()
         {
-            return await _disposallandRepository.GetDisposalland();
+            return await _disposallandRepository.GetAllDisposalland();
         }
         public async Task<Disposalland> FetchSingleResult(int id)
         {

@@ -24,7 +24,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IJointsurveyRepository, JointsurveyRepository>();
             services.AddScoped<IUnderSection4PlotRepository, Undersection4plotRepository>();
-
+            services.AddScoped<IUnderSection6Repository, UnderSection6Repository>();
+            services.AddScoped<IUndersection6plotRepository, Undersection6plotRepository>();
 
             services.AddScoped<IAcquiredlandvillageRepository, AcquiredlandvillageRepository>();
             services.AddScoped<ISchemeRepository, SchemeRepository>();
@@ -62,9 +63,8 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandRepository, DisposallandRepository>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsRepository, Undersection22plotdetailsRepository>();
             services.AddScoped<IUndersection17plotdetailRepository, Undersection17plotdetailRepository>();
-            services.AddScoped<IAppealdetailRepository, AppealdetailRepository>();
-            services.AddScoped<IPaymentdetailRepository, PaymentdetailRepository>();
-
+            services.AddScoped<IPossessiondetailsRepository, PossessiondetailsRepository>();
+     
             /* Application Services */
             services.AddScoped<ICountryService, CountryService>();
             services.AddScoped<INotificationService, NotificationService>();
@@ -82,10 +82,10 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<INazulService, NazulService>();
             services.AddScoped<IDisposallandService, DisposallandService>();
             services.AddScoped<IMorlandService, MorlandService>();
-
+            services.AddScoped<IUndersection6plotService, Undersection6plotService>();
             services.AddScoped<IEnhancecompensationService, EnhancecompensationService>(); //added by Nikita
             services.AddScoped<IEnchroachmentService, EnchroachmentService>(); //added by Nikita
-
+        
 
             services.AddScoped<ILdolandService, LdolandService>();
 
@@ -105,8 +105,9 @@ namespace AcquiredLandInformationManagement.Infrastructure.Extensions
             services.AddScoped<IDisposallandService, DisposallandService>();//added by anuj 10-feb-21
             services.AddScoped<IUndersection22plotdetailsService, Undersection22plotdetailsService>();
             services.AddScoped<IUndersection17plotdetailService, Undersection17plotdetailService>();
-            services.AddScoped<IAppealdetailService, AppealdetailService>();
-            services.AddScoped<IPaymentdetailService, PaymentdetailService>();
+            services.AddScoped<IPossessiondetailsService, PossessiondetailsService>();
+          
+            services.AddScoped<IUnderSection6Service, UnderSection6Service>();
 
         }
     }
