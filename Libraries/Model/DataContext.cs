@@ -222,6 +222,7 @@ namespace Libraries.Model
         public virtual DbSet<Gisvillageboundary> Gisvillageboundary { get; set; }
         public virtual DbSet<Gisvillagetext> Gisvillagetext { get; set; }
         public virtual DbSet<Giszero> Giszero { get; set; }
+        public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -404,6 +405,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
             modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            modelBuilder.ApplyConfiguration(new DemandListDetailsConfiguration());
+
             //**********  GIS End**********
             base.OnModelCreating(modelBuilder);
         }
