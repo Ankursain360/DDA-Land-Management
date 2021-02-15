@@ -101,6 +101,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Nazul nazul)
         {
+            nazul.VillageList = await _nazulService.GetAllVillageList();
             if (ModelState.IsValid)
             {
                 try

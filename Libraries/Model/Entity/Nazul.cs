@@ -22,12 +22,13 @@ namespace Libraries.Model.Entity
         //public Acquiredlandvillage Acquiredlandvillage { get; set; }
         //[NotMapped]
         //public List<Acquiredlandvillage> VillageList { get; set; }
-     
+        [Required(ErrorMessage = "Village is Mandatory Field", AllowEmptyStrings = false)]
         public int VillageId { get; set; }
         public string JaraiSakani { get; set; }
         public string Language { get; set; }
         public DateTime YearOfConsolidation { get; set; }
         public DateTime YearOfJamabandi { get; set; }
+        [Required(ErrorMessage = "LastMutationNo is Mandatory Field")]
         public string LastMutationNo { get; set; }
         public byte IsActive { get; set; }
       

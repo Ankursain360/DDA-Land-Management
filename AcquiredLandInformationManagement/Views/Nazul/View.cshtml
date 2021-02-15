@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="VillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
                         <option>Select</option>
                     </select>
                     <span asp-validation-for="VillageId" class="text-danger"></span>
@@ -21,59 +21,76 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="YearOfConsolidation" type="date" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="YearOfConsolidation" type="date" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="YearOfConsolidation" class="text-danger"></span>
-                    <label class="floating-label">Year of Consolidation</label>
+                    <label class="floating-label">Date of Consolidation</label>
                 </div>
 
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    @*<label class="control-label lb-sm">Jarai/Sakni</label>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">*@
+        <div class="row pt-3">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Jarai/Sakani:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
 
-                    <input class="form-check-input" type="radio" asp-for="JaraiSakani" id="rdbJarai" value="1" />
-                    <label class="form-check-label" for="radio">
-                        Jarai
-                    </label>
+
+                        <div class="form-check theme">
+                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Jarai">
+                            <label class="form-check-label" for="radio">
+                                Jarai
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input asp-for="JaraiSakani" class="form-check-input" type="radio" value="Sakani">
+                            <label class="form-check-label" for="radio">
+                                Sakani
+                            </label>
+                        </div>
+                    </div>
+
+
                 </div>
+                <span asp-validation-for="JaraiSakani" class="text-danger"></span>
             </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
 
-                    <input class="form-check-input" type="radio" asp-for="JaraiSakani" id="rdbsakni" value="2" />
-                    <label class="form-check-label" for="radio">
-                        Sakani
-                    </label>
+
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <label>
+                            Language:
+                        </label>
+                    </div>
+                    <div class="col-md-3">
+
+
+                        <div class="form-check theme">
+                            <input asp-for="Language" class="form-check-input" type="radio" value="Hindi">
+                            <label class="form-check-label" for="radio">
+                                Hindi
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-check theme">
+                            <input asp-for="Language" class="form-check-input" type="radio" value="Urdu">
+                            <label class="form-check-label" for="radio">
+                                Urdu
+                            </label>
+                        </div>
+                    </div>
+
+
                 </div>
-            </div>
-
-
-
-            <div class="col-md-3">
-                <div class="form-check theme">
-                    @*<label class="control-label lb-sm">Language</label>
-                    <div class="form-row">
-                        <div class="form-group col-md-4">*@
-
-                    <input class="form-check-input" type="radio" asp-for="Language" id="rdbhindi" value="1" />
-                    <label class="form-check-label" for="radio">
-                        Hindi
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-check theme">
-
-                    <input class="form-check-input" type="radio" asp-for="Language" id="rdburdu" value="2" />
-                    <label class="form-check-label" for="radio">
-                        Urdu
-                    </label>
-                </div>
+                <span asp-validation-for="Language" class="text-danger"></span>
             </div>
         </div>
 
@@ -85,22 +102,33 @@
 
 
 
-                    <input asp-for="YearOfJamabandi" type="date" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="YearOfJamabandi" type="date" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="YearOfJamabandi" class="text-danger"></span>
-                    <label class="floating-label">Year of Jamabandi</label>
+                    <label class="floating-label">Date of Jamabandi</label>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="floating-label-wrap mb-3 mb-md-0">
 
-                    <input asp-for="LastMutationNo" class="floating-label-field floating-label-field--s3" />
+                    <input disabled asp-for="LastMutationNo" class="floating-label-field floating-label-field--s3" />
                     <span asp-validation-for="LastMutationNo" class="text-danger"></span>
                     <label class="floating-label">Last Mutation No.</label>
                 </div>
             </div>
         </div>
+        <div class="row pt-3">
+            <div class=" col-md-6">
+                <div disabled class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
 
-        
 
         <div class="row mt-md-3">
             <div class=" col-md-12">
@@ -112,5 +140,5 @@
 </div>
     
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-@*<script src="~/js/UserManagement.js"></script>*@
+
 
