@@ -166,5 +166,11 @@
     "inputFiles": [
       "wwwroot/js/acqvillagecreateedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/JointSurveyView.min.js",
+    "inputFiles": [
+      "wwwroot/js/JointSurveyView.js"
+    ]
   }
 ]
