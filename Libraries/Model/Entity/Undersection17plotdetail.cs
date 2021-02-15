@@ -9,10 +9,12 @@ namespace Libraries.Model.Entity
 {
         public class Undersection17plotdetail : AuditableEntity<int>
         {
-          
-            public int? UnderSection17Id { get; set; }
-            public int? VillageId { get; set; }
-            public int? KhasraId { get; set; }
+        [Required(ErrorMessage = " UnderSection 17 is mandatory", AllowEmptyStrings = false)]
+        public int? UnderSection17Id { get; set; }
+        [Required(ErrorMessage = " Village is mandatory", AllowEmptyStrings = false)]
+        public int? VillageId { get; set; }
+        [Required(ErrorMessage = " Khasra is mandatory", AllowEmptyStrings = false)]
+        public int? KhasraId { get; set; }
             public decimal Bigha { get; set; }
             public decimal Biswa { get; set; }
             public decimal Biswanshi { get; set; }

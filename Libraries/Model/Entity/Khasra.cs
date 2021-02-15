@@ -23,7 +23,9 @@ namespace Libraries.Model.Entity
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Watchandward = new HashSet<Watchandward>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
         }
+        [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
 
         //public int LocalityId { get; set; }
@@ -34,6 +36,7 @@ namespace Libraries.Model.Entity
         public string Biswa { get; set; }
         public string Biswanshi { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
         public byte IsActive { get; set; }
 
@@ -72,5 +75,6 @@ namespace Libraries.Model.Entity
 
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
     }
 }
