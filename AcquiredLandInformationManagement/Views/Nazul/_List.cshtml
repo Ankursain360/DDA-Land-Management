@@ -15,9 +15,9 @@
                     <th>Year Of Consolidation</th>
                     <th>Year Of Jamabandi</th>
                     <th>Last Mutation No</th>
-                    <th>Remarks</th>
-                    <th>Active Status</th>
-                    <th>Operation</th>
+                   
+                    <th>Status</th>
+                    <th>Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,16 +25,18 @@
                 {
                 <tr>
                     <td>@(rowNo += 1)</td>
-                    @*<td>@item.VillageId</td>*@
-                   
+                  
+
                     <td> @(item.Village == null?"": item.Village.Name)</td>
-                    <td>@(item.JaraiSakni == 0 ? "Jarai" : "Sakani")</td>
-                    <td>@(item.Language == 0 ? "Hindi" : "Urdu")</td>
-                    <td>@item.YearOfConsolidation.ToString("dd-MMM-yyyy")</td>
-                    <td>@item.YearOfJamabandi.ToString("dd-MMM-yyyy")</td>
+                    <td>@item.JaraiSakani</td>
+                    <td>@item.Language</td>
+
+                    <td>@item.YearOfConsolidation</td>
+                    <td>@item.YearOfJamabandi</td>
+                  
 
                     <td>@item.LastMutationNo</td>
-                    <td>@item.Remarks</td>
+                   
 
                     <td>
                         @if (item.IsActive == 1)
