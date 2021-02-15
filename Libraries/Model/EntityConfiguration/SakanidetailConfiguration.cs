@@ -66,11 +66,7 @@ namespace Libraries.Model.EntityConfiguration
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk9khasraid");
 
-            builder.HasOne(d => d.Khewat)
-                .WithMany(p => p.Sakanidetail)
-                .HasForeignKey(d => d.KhewatId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("khewatid");
+          
 
             builder.HasOne(d => d.Village)
                 .WithMany(p => p.Sakanidetail)

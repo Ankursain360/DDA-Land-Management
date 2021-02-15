@@ -17,12 +17,15 @@ namespace Libraries.Model.Entity
             Enchroachment = new HashSet<Enchroachment>();
             Enhancecompensation = new HashSet<Enhancecompensation>();
             Jointsurvey = new HashSet<Jointsurvey>();
+            Jaraidetails = new HashSet<Jaraidetails>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Watchandward = new HashSet<Watchandward>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
         }
+        [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
 
         //public int LocalityId { get; set; }
@@ -33,6 +36,7 @@ namespace Libraries.Model.Entity
         public string Biswa { get; set; }
         public string Biswanshi { get; set; }
         public string Description { get; set; }
+        [Required(ErrorMessage = "Rect No is mandatory")]
         public string RectNo { get; set; }
         public byte IsActive { get; set; }
 
@@ -60,6 +64,7 @@ namespace Libraries.Model.Entity
         public virtual ICollection<Enchroachment> Enchroachment { get; set; }
 
         public virtual ICollection<Enhancecompensation> Enhancecompensation { get; set; }
+        public ICollection<Jaraidetails> Jaraidetails { get; set; }
         public virtual ICollection<Jointsurvey> Jointsurvey { get; set; }
         public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
         public ICollection<Undersection22plotdetails> Undersection22plotdetails { get; set; }
@@ -70,5 +75,6 @@ namespace Libraries.Model.Entity
 
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
     }
 }

@@ -41,11 +41,14 @@ namespace Libraries.Repository.EntityRepository
             return khasraList;
         }
 
-    
 
 
 
-      
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
 
 
 

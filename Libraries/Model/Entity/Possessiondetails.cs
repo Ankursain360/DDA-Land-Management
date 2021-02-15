@@ -9,14 +9,21 @@ namespace Libraries.Model.Entity
 {
     public class Possessiondetails : AuditableEntity<int>
     {
-      
+       
+        [Required]
         public int? VillageId { get; set; }
+        [Required]
         public int? KhasraId { get; set; }
+        [Required]
         public string PossType { get; set; }
+        [Required]
         public string ReasonNonPoss { get; set; }
+        [Required]
         public DateTime PossDate { get; set; }
         public string PlotNo { get; set; }
+        [Required]
         public decimal Bigha { get; set; }
+        [Required]
         public decimal Biswa { get; set; }
         public string Remarks { get; set; }
   

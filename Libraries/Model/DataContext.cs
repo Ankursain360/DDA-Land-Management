@@ -70,7 +70,10 @@ namespace Libraries.Model
         public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
         public virtual DbSet<Khatauni> Khatauni { get; set; }
         public virtual DbSet<Taraf> Taraf { get; set; }
-        public virtual DbSet<Jaraidetail> Jaraidetail { get; set; }
+        public virtual DbSet<Jaraidetails> Jaraidetails { get; set; }
+        public virtual DbSet<Jaraifarmer> Jaraifarmer { get; set; }
+        public virtual DbSet<Jarailessee> Jarailessee { get; set; }
+        public virtual DbSet<Jaraiowner> Jaraiowner { get; set; }
         public virtual DbSet<Undersection6> Undersection6 { get; set; }
         public virtual DbSet<WorkflowTemplate> WorkflowTemplate { get; set; }
         public virtual DbSet<Landtransfer> Landtransfer { get; set; }
@@ -115,8 +118,13 @@ namespace Libraries.Model
         public virtual DbSet<Demandletters> Demandletters { get; set; }
         public virtual DbSet<Schemefileloading> Schemefileloading { get; set; }
         public virtual DbSet<Undersection22plotdetails> Undersection22plotdetails { get; set; }
+
+        public virtual DbSet<Appealdetail> Appealdetail { get; set; }
+        public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
+
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
+
 
 
 
@@ -214,10 +222,11 @@ namespace Libraries.Model
         public virtual DbSet<Gisvillageboundary> Gisvillageboundary { get; set; }
         public virtual DbSet<Gisvillagetext> Gisvillagetext { get; set; }
         public virtual DbSet<Giszero> Giszero { get; set; }
+        public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
-            
+
             modelBuilder.ApplyConfiguration(new SystemUserConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new DesignationConfiguration());
@@ -260,7 +269,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
             modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
-            modelBuilder.ApplyConfiguration(new JaraidetailConfiguration());
+
+            modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
+            modelBuilder.ApplyConfiguration(new JarailesseeConfiguration());
+            modelBuilder.ApplyConfiguration(new JaraifarmerConfiguration());
             modelBuilder.ApplyConfiguration(new WorkflowTemplateConfiguration());
             modelBuilder.ApplyConfiguration(new LandtransferConfiguration());
             modelBuilder.ApplyConfiguration(new ActionsConfiguration());
@@ -392,6 +405,8 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
             modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+            modelBuilder.ApplyConfiguration(new DemandListDetailsConfiguration());
+
             //**********  GIS End**********
             base.OnModelCreating(modelBuilder);
         }

@@ -168,9 +168,21 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/JointSurveyView.min.js",
+    "outputFileName": "wwwroot/js/demandlistdetailscreate.min.js",
     "inputFiles": [
-      "wwwroot/js/JointSurveyView.js"
+      "wwwroot/js/demandlistdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlistdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlistdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlistdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlistdetailsindex.js"
     ]
   }
 ]

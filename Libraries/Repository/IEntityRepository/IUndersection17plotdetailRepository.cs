@@ -14,7 +14,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Undersection17plotdetail>> GetAllUndersection17plotdetail();
 
         Task<List<Acquiredlandvillage>> GetAllVillageList();
-        Task<List<Khasra>> GetAllKhasraList();
+        Task<List<Khasra>> GetAllKhasraList(int? villageId);
         Task<List<Undersection17>> GetAllUndersection17List();
 
 
