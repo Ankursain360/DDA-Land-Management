@@ -120,6 +120,10 @@ namespace Libraries.Service.ApplicationService
 
 
 
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _undersection6plotRepository.FetchSingleKhasraResult(khasraId);
+        }
 
 
 
