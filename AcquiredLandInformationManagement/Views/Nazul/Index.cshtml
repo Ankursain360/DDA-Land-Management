@@ -6,22 +6,11 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtName" class="floating-label-field floating-label-field--s3" placeholder="Name" />
-                    <label for="txtName" class="floating-label">Locality/Name</label>
+                    <input type="text" id="txtLoc" class="floating-label-field floating-label-field--s3" placeholder="Name" />
+                    <label for="txtLoc" class="floating-label">Village</label>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtProperty" class="floating-label-field floating-label-field--s3" placeholder="Property/Site No" />
-                    <label for="txtProperty" class="floating-label">Property/Site No</label>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="floating-label-wrap mb-3 mb-md-0">
-                    <input type="text" id="txtDescription" class="floating-label-field floating-label-field--s3" placeholder="Site Description" />
-                    <label for="txtDescription" class="floating-label">Site Description</label>
-                </div>
-            </div>
+
 
         </div>
         <div class="row mt-md-3">
@@ -42,50 +31,53 @@
     <div class="table-section bg-white border shadow rounded">
         <div class="short-section d-md-flex align-items-center">
             <div class="p-3 d-flex align-items-end mr-auto">
-                <div class="floating-label-wrap">
-                    <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                        <option value="Name">Locality Name</option>
-                        <option value="LandNotificationId">Notification No</option>
-                        <option value="SerialnumberId">Serial No</option>
-                        <option value="IsActive">Status</option>
-                    </select>
-                    <label for="field-1" class="floating-label">Sort by</label>
+               
+                    <div class="floating-label-wrap">
+                        <select id="ddlSort" class="floating-label-field floating-label-field--s3">
+                            <option value="ACQUIREDLANDVILLAGE">Village Name</option>
+                            <option value="YEAROFJAMABANDI">Date Of Jamabandi</option>
+                            <option value="YEAROFCONSOLIDATION">Date Of Consolidation</option>
+
+                            <option value="NUMBER">Last Mutation No</option>
+                            <option value="STATUS">Status</option>
+                        </select>
+                        <label for="field-1" class="floating-label">Sort by</label>
+                    </div>
+                    <div class="short-btn d-flex align-items-center">
+                        <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                        <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+                    </div>
                 </div>
-                <div class="short-btn d-flex align-items-center">
-                    <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
-                    <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
+
+
+
+
+                <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
+                    <a href="/Nazul/create" class="d-flex align-items-center btn btn-primary mr-2">
+                        <i class="ri-add-fill mr-2 mr-lg-1"></i>
+                        <small>Add More</small>
+                    </a>
+                    <a href="/Nazul/download" class="d-flex align-items-center btn btn-success">
+                        <i class="ri-download-2-line mr-2 mr-lg-1"></i>
+                        <small>Download</small>
+                    </a>
                 </div>
+
+
             </div>
 
+            <div class="table-responsive px-2" id="divNazulTable">
 
-
-
-            <div class="download-table d-flex align-items-center px-3 mb-3 mb-md-0">
-                <a href="/Nazul/create" class="d-flex align-items-center btn btn-primary mr-2">
-                    <i class="ri-add-fill mr-2 mr-lg-1"></i>
-                    <small>Add More</small>
-                </a>
-                <a href="/Nazul/download" class="d-flex align-items-center btn btn-success">
-                    <i class="ri-download-2-line mr-2 mr-lg-1"></i>
-                    <small>Download</small>
-                </a>
             </div>
 
 
         </div>
-
-        <div class="table-responsive px-2" id="divNazulTable">
-
-        </div>
-
-
     </div>
-</div>
 
-<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
-<environment include="Development">
-    <script src="~/js/nazulindex.js"></script>
-</environment>
-<environment exclude="Development">
-    <script src="~/js/nazulindex.min.js" asp-append-version="true"></script>
-</environment>
+    <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+    <environment include="Development">
+        <script src="~/js/nazulindex.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="~/js/nazulindex.min.js" asp-append-version="true"></script>
+    </environment>

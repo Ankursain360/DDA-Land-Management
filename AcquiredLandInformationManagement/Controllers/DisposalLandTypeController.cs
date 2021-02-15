@@ -9,8 +9,12 @@ using Microsoft.AspNetCore.Mvc;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
+using Dto.Search;
 
-namespace DDAPropertyREG.Controllers
+
+
+
+namespace AcquiredLandInformationManagement.Controllers
 {
     
     public class DisposalLandTypeController : Controller
@@ -21,12 +25,24 @@ namespace DDAPropertyREG.Controllers
         {
             _disposallandtypeService = disposallandtypeService;
         }
+
+
         public async Task<IActionResult> Index()
         {
-            var result = await _disposallandtypeService.GetAllDisposallandtype();
-            return View(result);
 
+            return View();
         }
+
+        [HttpPost]
+        public async Task<PartialViewResult> List([FromBody] DisposalLandTypeSearchDto model)
+        {
+            var result = await _disposallandtypeService.GetPagedDisposalLandType(model);
+
+            return PartialView("_List", result);
+        }
+
+
+
 
         public IActionResult Create()
         {
@@ -49,7 +65,8 @@ namespace DDAPropertyREG.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _disposallandtypeService.GetAllDisposallandtype();
+                        return View("Index", list);
                     }
                     else
                     {
@@ -94,7 +111,8 @@ namespace DDAPropertyREG.Controllers
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.UpdateRecordSuccess, "", AlertType.Success);
-                        return View();
+                        var list = await _disposallandtypeService.GetAllDisposallandtype();
+                        return View("Index", list);
                     }
                     else
                     {

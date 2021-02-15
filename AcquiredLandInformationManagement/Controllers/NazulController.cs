@@ -44,7 +44,7 @@ namespace AcquiredLandInformationManagement.Controllers
             nazul.IsActive = 1;
            
 
-            nazul.VillageList = await _nazulService.GetAllVillage();
+            nazul.VillageList = await _nazulService.GetAllVillageList();
             return View(nazul);
         }
 
@@ -54,29 +54,24 @@ namespace AcquiredLandInformationManagement.Controllers
         {
             try
             {
-                nazul.VillageList = await _nazulService.GetAllVillage();
+              
+
+                nazul.VillageList = await _nazulService.GetAllVillageList();
 
                 if (ModelState.IsValid)
                 {
-                    if (nazul.JaraiSakni == 0)
-                        nazul.JaraiSakni = 0;
-                    else if (nazul.JaraiSakni == 1)
-                        nazul.JaraiSakni = 1;
-                    else if (nazul.JaraiSakni == 2)
-                        nazul.JaraiSakni = 2;
-
                     var result = await _nazulService.Create(nazul);
 
                     if (result == true)
                     {
                         ViewBag.Message = Alert.Show(Messages.AddRecordSuccess, "", AlertType.Success);
-                        return View(nazul);
+                        var list = await _nazulService.GetAllNazul();
+                        return View("Index", list);
                     }
                     else
                     {
                         ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
                         return View(nazul);
-
                     }
                 }
                 else
@@ -94,7 +89,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             var Data = await _nazulService.FetchSingleResult(id);
-            Data.VillageList = await _nazulService.GetAllVillage();
+            Data.VillageList = await _nazulService.GetAllVillageList();
             if (Data == null)
             {
                 return NotFound();
@@ -106,6 +101,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Nazul nazul)
         {
+            nazul.VillageList = await _nazulService.GetAllVillageList();
             if (ModelState.IsValid)
             {
                 try
@@ -132,7 +128,7 @@ namespace AcquiredLandInformationManagement.Controllers
             return View(nazul);
         }
 
-        public async Task<IActionResult> DeleteConfirmed(int id)  // Used to Perform Delete Functionality added by Renu
+        public async Task<IActionResult> DeleteConfirmed(int id)  
         {
 
             var result = await _nazulService.Delete(id);
@@ -154,7 +150,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _nazulService.FetchSingleResult(id);
-            Data.VillageList = await _nazulService.GetAllVillage();
+            Data.VillageList = await _nazulService.GetAllVillageList();
 
             if (Data == null)
             {

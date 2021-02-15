@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Dto.Search;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -12,5 +13,8 @@ namespace Libraries.Repository.IEntityRepository
     {
         Task<List<Disposallandtype>> GetDisposallandtype();
         Task<bool> Any(int id, string name);
+        Task<PagedResult<Disposallandtype>> GetPagedDisposalLandType(DisposalLandTypeSearchDto model);
+
+
     }
 }
