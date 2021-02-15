@@ -28,7 +28,7 @@ $('#ddlSort').change(function () {
 });
 $("#btnReset").click(function () {
     $('#VillageId').val('0').trigger('change');
-    $('#demandListNo').val();
+    $('#demandListNo').val('');
     $('#KhasraNoId').val('0').trigger('change');
     GetDetails(currentPageNumber, currentPageSize, sortOrder);
 });
