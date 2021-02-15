@@ -38,6 +38,12 @@ namespace Libraries.Model.EntityConfiguration
                 .HasMaxLength(500)
                 .IsUnicode(false);
 
+            builder.Property(e => e.LandCode)
+                   .HasMaxLength(10)
+                   .IsUnicode(false);
+
+            builder.Property(e => e.RecState).HasColumnType("char(1)");
+
         }
     }
 }
