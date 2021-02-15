@@ -23,6 +23,8 @@ namespace Libraries.Model.Entity
             Undersection4plot = new HashSet<Undersection4plot>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
             Watchandward = new HashSet<Watchandward>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
+            Mutation = new HashSet<Mutation>();
         }
         [Required(ErrorMessage = "Khasra is mandatory")]
         public string Name { get; set; }
@@ -74,5 +76,7 @@ namespace Libraries.Model.Entity
 
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
+        public ICollection<Mutation> Mutation { get; set; }
     }
 }

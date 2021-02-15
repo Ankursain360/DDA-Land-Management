@@ -222,6 +222,9 @@ namespace Libraries.Model
         public virtual DbSet<Gisvillageboundary> Gisvillageboundary { get; set; }
         public virtual DbSet<Gisvillagetext> Gisvillagetext { get; set; }
         public virtual DbSet<Giszero> Giszero { get; set; }
+        public virtual DbSet<Demandlistdetails> Demandlistdetails { get; set; }
+        public virtual DbSet<Mutation> Mutation { get; set; }
+        public virtual DbSet<Mutationparticulars> Mutationparticulars { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new Undersection17plotdetailConfiguration());
@@ -404,7 +407,13 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new GisVillageTextConfiguration());
             modelBuilder.ApplyConfiguration(new GisZeroConfiguration());
             modelBuilder.ApplyConfiguration(new StateConfiguration());
+
             //**********  GIS End**********
+
+
+            modelBuilder.ApplyConfiguration(new MutationConfiguration());
+            modelBuilder.ApplyConfiguration(new MutationParticularsConfiguration());
+
             base.OnModelCreating(modelBuilder);
         }
     }

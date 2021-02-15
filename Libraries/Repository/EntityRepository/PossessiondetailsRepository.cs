@@ -132,6 +132,12 @@ namespace Libraries.Repository.IEntityRepository
 
 
 
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
+        }
+
+
 
 
 

@@ -166,5 +166,23 @@
     "inputFiles": [
       "wwwroot/js/acqvillagecreateedit.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlistdetailscreate.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlistdetailscreate.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlistdetailsedit.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlistdetailsedit.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/demandlistdetailsindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/demandlistdetailsindex.js"
+    ]
   }
 ]

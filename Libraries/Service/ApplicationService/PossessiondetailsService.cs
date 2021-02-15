@@ -78,10 +78,16 @@ namespace Libraries.Service.ApplicationService
             Possessiondetails model = result.FirstOrDefault();
           
             model.VillageId = possessiondetails.VillageId;
+            model.KhasraId = possessiondetails.KhasraId;
             model.IsActive = possessiondetails.IsActive;
+            model.PlotNo = possessiondetails.PlotNo;
+            model.PossDate = possessiondetails.PossDate;
+            model.PossType = possessiondetails.PossType;
             model.Bigha = possessiondetails.Bigha;
             model.Biswa = possessiondetails.Biswa;
-         
+            model.ReasonNonPoss = possessiondetails.ReasonNonPoss;
+            model.IsActive = possessiondetails.IsActive;
+            model.Remarks = possessiondetails.Remarks;
 
             model.ModifiedDate = DateTime.Now;
             model.ModifiedBy = 1;
@@ -109,6 +115,12 @@ namespace Libraries.Service.ApplicationService
 
 
 
+
+
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _possessiondetailsRepository.FetchSingleKhasraResult(khasraId);
+        }
 
 
 

@@ -12,7 +12,6 @@ namespace Libraries.Model.Entity
     {
         public Acquiredlandvillage()
         {
-            Nazul = new HashSet<Nazul>();
             Khasra = new HashSet<Khasra>();
             Jaraidetails = new HashSet<Jaraidetails>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
@@ -23,6 +22,8 @@ namespace Libraries.Model.Entity
             Sakanidetail = new HashSet<Sakanidetail>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
+            Mutation = new HashSet<Mutation>();
         }
         [Required(ErrorMessage = "Village name is mandatory feild")]
         public string Name { get; set; }
@@ -76,7 +77,8 @@ namespace Libraries.Model.Entity
         public ICollection<Jaraidetails> Jaraidetails { get; set; }
         public ICollection<Undersection6plot> Undersection6plot { get; set; }
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
-        public ICollection<Nazul> Nazul { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
+        public ICollection<Mutation> Mutation { get; set; }
 
     }
 }

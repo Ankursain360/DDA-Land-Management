@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Dto.Search;
 using System.Threading.Tasks;
 
 namespace Libraries.Service.ApplicationService
@@ -46,6 +47,8 @@ namespace Libraries.Service.ApplicationService
             var result = await _disposallandtypeRepository.FindBy(a => a.Id == id);
             Disposallandtype model = result.FirstOrDefault();
             model.Name = disposallandtype.Name;
+            model.LandCode = disposallandtype.LandCode;
+            model.RecState = disposallandtype.RecState;
             model.Remarks = disposallandtype.Remarks;
                 model.IsActive = disposallandtype.IsActive;
 
@@ -80,5 +83,16 @@ namespace Libraries.Service.ApplicationService
             _disposallandtypeRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
+
+        public async Task<PagedResult<Disposallandtype>> GetPagedDisposalLandType(DisposalLandTypeSearchDto model)
+        {
+            return await _disposallandtypeRepository.GetPagedDisposalLandType(model);
+        }
+
+
+
+
+
+
     }
 }
