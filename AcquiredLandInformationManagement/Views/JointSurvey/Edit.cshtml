@@ -41,10 +41,10 @@
 
         <div class="row">
             <div class="col-md-3">
-                <input type="hidden" asp-for="SitePosition" id="Type" value="A" />
+                <input type="hidden" asp-for="SitePosition" id="Type" />
 
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rFile" value="B" checked>
+                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="grpDamageAssesseeType" id="builtup" value="B">
                     <label class="form-check-label" for="radio">
                         Built Up
                     </label>
@@ -52,7 +52,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="P">
+                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="grpDamageAssesseeType" id="Partialbuiltup" value="P">
                     <label class="form-check-label" for="radio">
                         Partial Built Up
                     </label>
@@ -60,7 +60,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="V">
+                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="grpDamageAssesseeType" id="vacant" value="V">
                     <label class="form-check-label" for="radio">
                         Vacant
                     </label>
@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-check theme">
-                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="A" id="rDocument" value="W">
+                    <input class="form-check-input" type="radio" asp-for="SitePosition" name="grpDamageAssesseeType" id="boundry" value="W">
                     <label class="form-check-label" for="radio">
                         Boundry Wall
                     </label>
@@ -99,7 +99,7 @@
             <div class="col-md-3">
                 <div class="floating-label-wrap mb-3 mb-md-0">
                     <input asp-for="NatureOfStructure" type="text" class="floating-label-field floating-label-field--s3 " placeholder="Name"
-                           limit="10">
+                           limit="100">
                     <span asp-validation-for="NatureOfStructure" class="text-danger "></span>
                     <label class="floating-label">Nature of Structure</label>
                 </div>
@@ -139,7 +139,9 @@
             </div>
         </div>
 
+        <div class="row" mt-md-3">
 
+        </div>
         <div class="col-md-12">
             <input type="submit" value="Update" class="btn btn-theme" />
 
@@ -154,3 +156,10 @@
     </form>
 
 </div>
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/JointSurveyView.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/JointSurveyView.min.js" asp-append-version="true"></script>
+</environment>

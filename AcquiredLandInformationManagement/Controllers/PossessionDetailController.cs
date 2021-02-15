@@ -115,6 +115,10 @@ namespace AcquiredLandInformationManagement.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Possessiondetails undersection4plot)
         {
+
+            undersection4plot.KhasraList = await _Possessiondetailservice.BindKhasra(undersection4plot.VillageId);
+            undersection4plot.VillageList = await _Possessiondetailservice.GetAllVillage();
+
             if (ModelState.IsValid)
             {
                 try
@@ -192,6 +196,14 @@ namespace AcquiredLandInformationManagement.Controllers
 
 
 
+
+        [HttpGet]
+        public async Task<JsonResult> GetAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _Possessiondetailservice.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
 
 
 

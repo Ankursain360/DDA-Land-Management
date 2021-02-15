@@ -23,7 +23,7 @@ namespace Libraries.Service.IApplicationService
         Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model);
 
 
-
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
 
 
 

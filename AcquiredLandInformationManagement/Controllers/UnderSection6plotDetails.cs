@@ -200,6 +200,13 @@ namespace AcquiredLandInformationManagement.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<JsonResult> GetAreaList(int? khasraid)
+        {
+            khasraid = khasraid ?? 0;
+
+            return Json(await _undersection6plotservice.FetchSingleKhasraResult(Convert.ToInt32(khasraid)));
+        }
 
 
 
