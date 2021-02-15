@@ -75,11 +75,18 @@ namespace Libraries.Service.ApplicationService
             
             model.VillageId = jarai.VillageId;
             model.KhasraId = jarai.KhasraId;
+            model.YearOfjamabandi = jarai.YearOfjamabandi;
+            model.NoOfKhewat = jarai.NoOfKhewat;
+            model.NoOfKhatauni = jarai.NoOfKhatauni;
+            model.NaamPatti = jarai.NaamPatti;
+            model.NaamMalik = jarai.NaamMalik;
+            model.KhasraId = jarai.KhasraId;
             model.Revenue = jarai.Revenue;
             model.OldMutationNo = jarai.OldMutationNo;
             model.Remarks = jarai.Remarks;
+            model.IsActive = jarai.IsActive;
             model.ModifiedDate = DateTime.Now;
-            model.ModifiedBy = 1;
+            model.ModifiedBy = jarai.ModifiedBy;
             _jaraidetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
 
