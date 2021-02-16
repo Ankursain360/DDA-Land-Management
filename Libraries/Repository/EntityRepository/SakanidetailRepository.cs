@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Libraries.Repository.EntityRepository
 {
-    public class SakanidetailRepository : GenericRepository<Sakanidetail>,ISakanidetailRepository
+    public class SakanidetailRepository : GenericRepository<Saknidetails>,ISakanidetailRepository
         { 
 
         public SakanidetailRepository(DataContext dbContext) : base(dbContext)
@@ -21,18 +21,18 @@ namespace Libraries.Repository.EntityRepository
 
         }
 
-        public async Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
+        public async Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
         {
-            return await _dbContext.Sakanidetail.GetPaged<Sakanidetail>(model.PageNumber, model.PageSize);
+            return await _dbContext.Saknidetails.GetPaged<Saknidetails>(model.PageNumber, model.PageSize);
         }
         public async Task<List<Khewat>> GetAllKhewat()
         {
             List<Khewat> awardList = await _dbContext.Khewat.Where(x => x.IsActive == 1).ToListAsync();
             return awardList;
         }
-        public async Task<List<Sakanidetail>> GetSakanidetail()
+        public async Task<List<Saknidetails>> GetSakanidetail()
         {
-            return await _dbContext.Sakanidetail.Include(x => x.Khewat).Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
+            return await _dbContext.Saknidetails.Include(x => x.Village).Include(x => x.Khasra).OrderByDescending(x => x.Id).ToListAsync();
         }
 
 
