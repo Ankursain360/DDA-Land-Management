@@ -24,8 +24,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var list = await _sakanidetailService.GetSakanidetail();
-            return View(list);
+            return View();
         }
         [HttpPost]
         public async Task<PartialViewResult> List([FromBody] SakaniDetailsSearchDto model)
@@ -36,25 +35,19 @@ namespace AcquiredLandInformationManagement.Controllers
 
         public async Task<IActionResult> Create()
         {
-            Sakanidetail sakanidetail = new Sakanidetail();
+            Saknidetails sakanidetail = new Saknidetails();
             sakanidetail.IsActive = 1;
-            sakanidetail.KhewatList = await _sakanidetailService.GetAllKhewat();
-            sakanidetail.KhasraList = await _sakanidetailService.BindKhasra();
-            sakanidetail.VillageList = await _sakanidetailService.GetAllVillage();
-
+          
             return View(sakanidetail);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Sakanidetail sakanidetail)
+        public async Task<IActionResult> Create(Saknidetails sakanidetail)
         {
             try
             {
-                sakanidetail.KhewatList = await _sakanidetailService.GetAllKhewat();
-                sakanidetail.KhasraList = await _sakanidetailService.BindKhasra();
-                sakanidetail.VillageList = await _sakanidetailService.GetAllVillage();
-
+               
                 if (ModelState.IsValid)
                 {
                     var result = await _sakanidetailService.Create(sakanidetail);
@@ -90,10 +83,7 @@ namespace AcquiredLandInformationManagement.Controllers
             var Data = await _sakanidetailService.FetchSingleResult(id);
 
 
-            Data.KhewatList = await _sakanidetailService.GetAllKhewat();
-            Data.KhasraList = await _sakanidetailService.BindKhasra();
-            Data.VillageList = await _sakanidetailService.GetAllVillage();
-
+           
 
             if (Data == null)
             {
@@ -104,7 +94,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Sakanidetail sakanidetail)
+        public async Task<IActionResult> Edit(int id, Saknidetails sakanidetail)
         {
             if (ModelState.IsValid)
             {
@@ -161,10 +151,7 @@ namespace AcquiredLandInformationManagement.Controllers
         public async Task<IActionResult> View(int id)
         {
             var Data = await _sakanidetailService.FetchSingleResult(id);
-            Data.KhewatList = await _sakanidetailService.GetAllKhewat();
-            Data.KhasraList = await _sakanidetailService.BindKhasra();
-            Data.VillageList = await _sakanidetailService.GetAllVillage();
-
+            
 
             if (Data == null)
             {

@@ -14,7 +14,7 @@ using Dto.Search;
 
 namespace Libraries.Service.ApplicationService
 {
-    public class SakanidetailService : EntityService<Sakanidetail>, ISakanidetailService
+    public class SakanidetailService : EntityService<Saknidetails>, ISakanidetailService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly ISakanidetailRepository _sakanidetailRepository;
@@ -27,7 +27,7 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<PagedResult<Sakanidetail>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
+        public async Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model)
         {
             return await _sakanidetailRepository.GetPagedSakanidetail(model);
         }
@@ -39,16 +39,16 @@ namespace Libraries.Service.ApplicationService
         public async Task<bool> Delete(int id)
         {
             var form = await _sakanidetailRepository.FindBy(a => a.Id == id);
-            Sakanidetail model = form.FirstOrDefault();
+            Saknidetails model = form.FirstOrDefault();
             model.IsActive = 0;
             _sakanidetailRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
 
-        public async Task<Sakanidetail> FetchSingleResult(int id)
+        public async Task<Saknidetails> FetchSingleResult(int id)
         {
             var result = await _sakanidetailRepository.FindBy(a => a.Id == id);
-            Sakanidetail model = result.FirstOrDefault();
+            Saknidetails model = result.FirstOrDefault();
             return model;
         }
 
@@ -70,7 +70,7 @@ namespace Libraries.Service.ApplicationService
         }
 
 
-        public async Task<List<Sakanidetail>> GetSakanidetail()
+        public async Task<List<Saknidetails>> GetSakanidetail()
         {
 
             return await _sakanidetailRepository.GetSakanidetail();
@@ -78,23 +78,21 @@ namespace Libraries.Service.ApplicationService
 
 
 
-        public async Task<List<Sakanidetail>> GetSakanidetailUsingRepo()
+        public async Task<List<Saknidetails>> GetSakanidetailUsingRepo()
         {
             return await _sakanidetailRepository.GetSakanidetail();
         }
 
-        public async Task<bool> Update(int id, Sakanidetail sakanidetail)
+        public async Task<bool> Update(int id, Saknidetails sakanidetail)
         {
             var result = await _sakanidetailRepository.FindBy(a => a.Id == id);
-            Sakanidetail model = result.FirstOrDefault();
-            model.KhewatId = sakanidetail.KhewatId;
+            Saknidetails model = result.FirstOrDefault();
+           
             model.VillageId = sakanidetail.VillageId;
             model.KhasraId = sakanidetail.KhasraId;
-            model.YearOfJamabandi = sakanidetail.YearOfJamabandi;
+           
             model.Location = sakanidetail.Location;
-            model.OwnerDetails = sakanidetail.OwnerDetails;
-            model.LeaseDetails = sakanidetail.LeaseDetails;
-            model.Tenant = sakanidetail.Tenant;
+           
             model.Remarks = sakanidetail.Remarks;
           
             model.ModifiedDate = DateTime.Now;
@@ -104,7 +102,7 @@ namespace Libraries.Service.ApplicationService
 
         }
 
-        public async Task<bool> Create(Sakanidetail sakanidetail)
+        public async Task<bool> Create(Saknidetails sakanidetail)
         {
             sakanidetail.CreatedBy = 1;
             sakanidetail.CreatedDate = DateTime.Now;

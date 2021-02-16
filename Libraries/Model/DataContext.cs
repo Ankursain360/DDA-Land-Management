@@ -67,7 +67,10 @@ namespace Libraries.Model
         public virtual DbSet<Deletedproperty> Deletedproperty { get; set; }
         public virtual DbSet<Restoreproperty> Restoreproperty { get; set; }
         public virtual DbSet<Khewat> Khewat { get; set; }
-        public virtual DbSet<Sakanidetail> Sakanidetail { get; set; }
+        public virtual DbSet<Saknidetails> Saknidetails { get; set; }
+        public virtual DbSet<Saknilessee> Saknilessee { get; set; }
+        public virtual DbSet<Sakniowner> Sakniowner { get; set; }
+        public virtual DbSet<Saknitenant> Saknitenant { get; set; }
         public virtual DbSet<Khatauni> Khatauni { get; set; }
         public virtual DbSet<Taraf> Taraf { get; set; }
         public virtual DbSet<Jaraidetails> Jaraidetails { get; set; }
@@ -270,7 +273,11 @@ namespace Libraries.Model
             modelBuilder.ApplyConfiguration(new BooktransferlandConfiguration());
             modelBuilder.ApplyConfiguration(new DeletedPropertyConfiguration());
             modelBuilder.ApplyConfiguration(new RestorepropertyConfiguration());
-            modelBuilder.ApplyConfiguration(new SakanidetailConfiguration());
+
+            modelBuilder.ApplyConfiguration(new SaknidetailsConfiguration());
+            modelBuilder.ApplyConfiguration(new SaknilesseeConfiguration());
+            modelBuilder.ApplyConfiguration(new SakniownerConfiguration());
+            modelBuilder.ApplyConfiguration(new SaknitenantConfiguration());
 
             modelBuilder.ApplyConfiguration(new JaraidetailsConfiguration());
             modelBuilder.ApplyConfiguration(new JaraiownerConfiguration());
