@@ -1,0 +1,172 @@
+﻿@model Libraries.Model.Entity.Mutation
+
+@await Component.InvokeAsync("PageHeader", new { pageName = "Mutation Details" })
+<br />
+<br />
+<form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+    <h3 class="mb-3 d-flex">View Details</h3>@*id="myForm"*@
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+    <div id="allDetails">
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" disabled asp-for="AcquiredVillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))" onchange="return GetKhasraList(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="AcquiredVillageId" class="text-danger"></span>
+                    <label asp-for="AcquiredVillageId" class="floating-label">Village Name</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3"  disabled asp-for="KhasraId" asp-items="@(new SelectList(Model.KhasraNoList, "Id","Name"))" onchange="return GetOtherDetails(this.options[this.selectedIndex].value);">
+                        <option selected="selected" disabled="disabled" value="">--Select-- </option>
+                    </select>
+                    <span asp-validation-for="KhasraId" class="text-danger"></span>
+                    <label asp-for="KhasraId" class="floating-label">Khasra No.</label>
+                </div>
+            </div>
+        </div>
+        <div id="KhasraDetailsDiv" class="mt-md-3">
+
+        </div>
+        <div class="row mt-md-5">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="MutationOwnerLessee" type="text" disabled  class="floating-label-field floating-label-field--s3 " limit="45">
+                    <span asp-validation-for="MutationOwnerLessee" class="text-danger"></span>
+                    <label class="floating-label">Mutation Owner/Lessee</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="MutationNo" type="text"  disabled class="floating-label-field floating-label-field--s3 " limit="45">
+                    <span asp-validation-for="MutationNo" class="text-danger"></span>
+                    <label class="floating-label">Mutation No.</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="MutationFees" type="text" disabled  class="floating-label-field floating-label-field--s3 numbers">
+                    <span asp-validation-for="MutationFees" class="text-danger"></span>
+                    <label class="floating-label">Mutation Fees</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="MutationDate" type="date" disabled  class="floating-label-field floating-label-field--s3 ">
+                    <span asp-validation-for="MutationDate" class="text-danger"></span>
+                    <label class="floating-label">Mutation Date</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="NewAccountCode" type="text" disabled  class="floating-label-field floating-label-field--s3 " limit="45">
+                    <span asp-validation-for="NewAccountCode" class="text-danger"></span>
+                    <label class="floating-label">New Account Code</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="JaraiSakniCode" type="text"  disabled class="floating-label-field floating-label-field--s3 " limit="45">
+                    <span asp-validation-for="JaraiSakniCode" class="text-danger"></span>
+                    <label class="floating-label">Jarai/Sakni Code</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+
+            <div class="col-md-6">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <input asp-for="MutationType" type="text"  disabled class="floating-label-field floating-label-field--s3 " limit="45">
+                    <span asp-validation-for="MutationType" class="text-danger"></span>
+                    <label class="floating-label">Mutation Type</label>
+                </div>
+            </div>
+            <div class=" col-md-6">
+                <div class="floating-label-wrap">
+                    <select class="floating-label-field floating-label-field--s3" disabled  asp-for="IsActive">
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                    </select>
+                    <span asp-validation-for="IsActive" class="text-danger"></span>
+                    <label asp-for="IsActive" class="floating-label">Status </label>
+                </div>
+            </div>
+        </div>
+        <div id="DivMutationParticulars">
+            <h3 class="my-3 d-flex sub-heading">Mutation Particulars</h3>
+
+            <div class="table-section bg-white border shadow rounded">
+                <div class="table-responsive">
+                    <table class="table table-sm table-bordered mb-0 table-striped" id="tbl_posts">
+                        <thead class="text-nowrap">
+                            <tr>
+                                <th>Name</th>
+                                <th>Father's Name</th>
+                                <th>Address</th>
+                                <th>Share</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbl_posts_body">
+                        </tbody>
+                        <tbody class="tbody" id="add">
+                            <tr id="">
+                                <td>
+                                    <input asp-for="Name" disabled maxlength="45" type="text" class="floating-label-field floating-label-field--s3 " />
+                                    <span asp-validation-for="Name" class="d-block text-danger field-validation-valid msg"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="FatherName" disabled maxlength="45" type="text" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="FatherName" class="d-block text-danger field-validation-valid"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="Address" disabled maxlength="100" type="text" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
+                                </td>
+                                <td>
+                                    <input asp-for="Share" disabled maxlength="45" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
+                                    <span asp-validation-for="Share" class="d-block text-danger field-validation-valid msg2"></span>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-md-3">
+            <div class="col-md-12">
+                <div class="floating-label-wrap mb-3 mb-md-0">
+                    <textarea asp-for="Remark" type="text" disabled  class="floating-label-field floating-label-field--s3 " limit="4000"></textarea>
+                    <span asp-validation-for="Remark" class="text-danger"></span>
+                    <label class="floating-label">Remarks</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-md-3">
+        <div class=" col-md-12">
+            @Html.ActionLink("Back", "Index", "Mutation", null, new { @class = "btn btn-theme " })
+
+        </div>
+    </div>
+
+</form>
+
+
+
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+<environment include="Development">
+    <script src="~/js/mutationedit.js"></script>
+</environment>
+<environment exclude="Development">
+    <script src="~/js/mutationedit.min.js" asp-append-version="true"></script>
+</environment>
+

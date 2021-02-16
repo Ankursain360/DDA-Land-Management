@@ -54,32 +54,16 @@ namespace Service.ApplicationService
         {
             var result = await _mutationRepository.FindBy(a => a.Id == id);
             Mutation model = result.FirstOrDefault();
-            //model.DemandListNo = mutation.DemandListNo;
-            //model.Enmsno = mutation.Enmsno;
-            //model.Lacno = mutation.Lacno;
-            //model.LacfileNo = mutation.LacfileNo;
-            //model.Lbno = mutation.Lbno;
-            //model.LbrefDate = mutation.LbrefDate;
-            //model.Rfano = mutation.Rfano;
-            //model.Slpno = mutation.Slpno;
-            //model.NotificationDate = mutation.NotificationDate;
-            //model.DdafileNo = mutation.DdafileNo;
-            //model.BalanceInterestCase = mutation.BalanceInterestCase;
-            //model.PayableAppealable = mutation.PayableAppealable;
-            //model.AwardDate = mutation.AwardDate;
-            //model.AwardNo = mutation.AwardNo;
-            //model.VillageId = mutation.VillageId;
-            //model.KhasraNoId = mutation.KhasraNoId;
-            //model.PartyName = mutation.PartyName;
-            //model.EnhancedRatePerBigha = mutation.EnhancedRatePerBigha;
-            //model.ExistingRatePerBigha = mutation.ExistingRatePerBigha;
-            //model.CourtInvolves = mutation.CourtInvolves;
-            //model.PayableAmt = mutation.PayableAmt;
-            //model.ApealableAmt = mutation.ApealableAmt;
-            //model.JundgementDate = mutation.JundgementDate;
-            //model.ReasonForNonPay = mutation.ReasonForNonPay;
-            //model.Remarks = mutation.Remarks;
-            //model.TotalAmount = mutation.TotalAmount;
+            model.AcquiredVillageId = mutation.AcquiredVillageId;
+            model.KhasraId = mutation.KhasraId;
+            model.MutationOwnerLessee = mutation.MutationOwnerLessee;
+            model.MutationNo = mutation.MutationNo;
+            model.MutationFees = mutation.MutationFees;
+            model.MutationDate = mutation.MutationDate;
+            model.NewAccountCode = mutation.NewAccountCode;
+            model.JaraiSakniCode = mutation.JaraiSakniCode;
+            model.MutationType = mutation.MutationType;
+            model.Remark = mutation.Remark;
             model.IsActive = mutation.IsActive;
             model.ModifiedDate = DateTime.Now;
             _mutationRepository.Edit(model);
@@ -96,17 +80,6 @@ namespace Service.ApplicationService
             _mutationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-        public int GetLocalityByName(string name)
-        {
-            return _mutationRepository.GetLocalityByName(name);
-        }
-
-        public int GetKhasraByName(string name)
-        {
-            return _mutationRepository.GetKhasraByName(name);
-        }
-
         public async Task<bool> CheckUniqueName(int id, string fileNo)
         {
             return await _mutationRepository.Any(id, fileNo);
@@ -119,6 +92,22 @@ namespace Service.ApplicationService
         public async Task<List<Khasra>> GetKhasraList(int id)
         {
             return await _mutationRepository.GetKhasraList(id);
+        }
+
+        public async Task<List<Mutationparticulars>> GetMutationParticulars(int id)
+        {
+            return await _mutationRepository.GetMutationParticulars(id);
+        }
+
+        public async Task<bool> SaveMutationParticulars(List<Mutationparticulars> mutationparticulars)
+        {
+            mutationparticulars.ForEach(x => x.CreatedDate = DateTime.Now);
+            return await _mutationRepository.SaveMutationParticulars(mutationparticulars);
+        }
+
+        public async Task<bool> DeleteMutationParticulars(int id)
+        {
+            return await _mutationRepository.DeleteMutationParticulars(id);
         }
     }
 }

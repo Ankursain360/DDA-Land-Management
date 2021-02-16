@@ -4,23 +4,19 @@ using System.Text;
 using Libraries.Model.Entity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace Libraries.Model.EntityConfiguration
-{
-    public class SakanidetailConfiguration : IEntityTypeConfiguration<Sakanidetail>
-    {
-        public void Configure(EntityTypeBuilder<Sakanidetail> builder)
+{ 
+     class SaknidetailsConfiguration : IEntityTypeConfiguration<Saknidetails>
+     {
+        public void Configure(EntityTypeBuilder<Saknidetails> builder)
         {
-            builder.ToTable("sakanidetail", "lms");
+            builder.ToTable("saknidetails", "lms");
 
             builder.HasIndex(e => e.KhasraId)
-                   .HasName("fk9khasraid_idx");
-
-            builder.HasIndex(e => e.KhewatId)
-                .HasName("khewatid_idx");
+                .HasName("FKsaknikhasra_idx");
 
             builder.HasIndex(e => e.VillageId)
-                .HasName("fk9villageid_idx");
+                .HasName("FKsaknivillage_idx");
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
 
@@ -28,53 +24,52 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.CreatedDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
-            builder.Property(e => e.IsActive).HasColumnType("tinyint(4)");
+            builder.Property(e => e.IsActive)
+                .HasColumnType("tinyint(4)")
+                .HasDefaultValueSql("1");
 
             builder.Property(e => e.KhasraId).HasColumnType("int(11)");
 
-            builder.Property(e => e.KhewatId).HasColumnType("int(11)");
-
-            builder.Property(e => e.LeaseDetails)
-                .HasMaxLength(150)
-                .IsUnicode(false);
-
             builder.Property(e => e.Location)
-                .HasMaxLength(100)
+                .HasMaxLength(200)
                 .IsUnicode(false);
 
             builder.Property(e => e.ModifiedBy).HasColumnType("int(11)");
 
-            builder.Property(e => e.OwnerDetails)
-                .HasMaxLength(150)
+            builder.Property(e => e.Mortgage)
+                .HasMaxLength(500)
                 .IsUnicode(false);
 
-            builder.Property(e => e.Remarks)
-                .HasMaxLength(200)
-                .IsUnicode(false);
+            builder.Property(e => e.NoOfKhatauni).HasColumnType("int(11)");
 
-            builder.Property(e => e.Tenant)
+            builder.Property(e => e.NoOfKhewat).HasColumnType("int(11)");
+
+            builder.Property(e => e.OldMutationNo)
                 .HasMaxLength(100)
                 .IsUnicode(false);
 
+            builder.Property(e => e.Remarks)
+                .HasMaxLength(1000)
+                .IsUnicode(false);
+
+            builder.Property(e => e.RentAmount).HasColumnType("decimal(18,3)");
+
             builder.Property(e => e.VillageId).HasColumnType("int(11)");
 
-            builder.Property(e => e.YearOfJamabandi).HasColumnType("date");
+            builder.Property(e => e.YearOfjamabandi).HasColumnType("int(11)");
 
             builder.HasOne(d => d.Khasra)
-                .WithMany(p => p.Sakanidetail)
+                .WithMany(p => p.Saknidetails)
                 .HasForeignKey(d => d.KhasraId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk9khasraid");
-
-          
+                .HasConstraintName("FKsaknikhasra");
 
             builder.HasOne(d => d.Village)
-                .WithMany(p => p.Sakanidetail)
+                .WithMany(p => p.Saknidetails)
                 .HasForeignKey(d => d.VillageId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk9villageid");
-
+                .HasConstraintName("FKsaknivillage");
 
         }
     }
-    }
+}

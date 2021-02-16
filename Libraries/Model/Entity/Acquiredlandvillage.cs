@@ -20,7 +20,7 @@ namespace Libraries.Model.Entity
             Enchroachment = new HashSet<Enchroachment>();
             Enhancecompensation = new HashSet<Enhancecompensation>();
             Jointsurvey = new HashSet<Jointsurvey>();
-            Sakanidetail = new HashSet<Sakanidetail>();
+            Saknidetails = new HashSet<Saknidetails>();
             Undersection4plot = new HashSet<Undersection4plot>();
             Proposalplotdetails = new HashSet<Proposalplotdetails>();
             Demandlistdetails = new HashSet<Demandlistdetails>();
@@ -75,7 +75,7 @@ namespace Libraries.Model.Entity
 
         public ICollection<Proposalplotdetails> Proposalplotdetails { get; set; }
 
-        public virtual ICollection<Sakanidetail> Sakanidetail { get; set; }
+        public ICollection<Saknidetails> Saknidetails { get; set; }
 
         public ICollection<Jaraidetails> Jaraidetails { get; set; }
         public ICollection<Undersection6plot> Undersection6plot { get; set; }

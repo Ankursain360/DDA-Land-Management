@@ -1,0 +1,113 @@
+﻿@model Libraries.Model.Entity.Khasra
+
+<div class="pt-3">
+    <form asp-action="View" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <a data-toggle="collapse" href="#collapseExample" id="collapse" role="button" aria-expanded="false" aria-controls="collapseExample">
+            <h3 class="my-3 d-flex sub-heading">Khasra Details</h3>
+        </a>
+        <div class="collapse" id="collapseExample">
+            @if (Model != null)
+            {
+                <div>
+                    <div class="row">
+                        @*<div class="col-md-6">
+                                <div class="floating-label-wrap">
+
+                                    <select disabled class="floating-label-field floating-label-field--s3" asp-for="AcquiredlandvillageId" asp-items="@(new SelectList(Model.VillageList, "Id","Name"))">
+                                        <option>Select</option>
+                                    </select>
+                                    <span asp-validation-for="AcquiredlandvillageId" class="text-danger"></span>
+                                    <label class="floating-label">Village</label>
+                                </div>
+                            </div>*@
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                <input disabled asp-for="RectNo" class="floating-label-field floating-label-field--s3" />
+                                <span asp-validation-for="RectNo" class="text-danger"></span>
+                                <label class="floating-label">Rect No.</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+
+                                <select disabled class="floating-label-field floating-label-field--s3" asp-for="LandCategoryId" asp-items="@(new SelectList(Model.LandCategoryList, "Id","Name"))">
+                                    <option>Select</option>
+                                </select>
+                                <span asp-validation-for="LandCategoryId" class="text-danger"></span>
+                                <label class="floating-label">Land Category</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="row pt-3">
+                        <div class="col-md-6">
+                            <div class="floating-label-wrap">
+
+                                <select disabled class="floating-label-field floating-label-field--s3" asp-for="LandCategoryId" asp-items="@(new SelectList(Model.LandCategoryList, "Id","Name"))">
+                                    <option>Select</option>
+                                </select>
+                                <span asp-validation-for="LandCategoryId" class="text-danger"></span>
+                                <label class="floating-label">Land Category</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                    <input disabled asp-for="Name" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                    <label class="floating-label">Khasra No.</label>
+                                </div>
+                            </div>
+
+                    </div>*@
+                    <div id="Divclsification">
+                        <h2 class="my-3 sub-heading">Area</h2>
+                        <div class="row pt-3">
+                            <div class="col-md-3">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+
+                                    <input disabled asp-for="Bigha" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Bigha" class="text-danger"></span>
+
+                                    <label class="floating-label">Bigha</label>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-3">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                    <input disabled asp-for="Biswa" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Biswa" class="text-danger"></span>
+                                    <label class="floating-label">Biswa</label>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="floating-label-wrap mb-3 mb-md-0">
+
+                                    <input disabled asp-for="Biswanshi" class="floating-label-field floating-label-field--s3" />
+                                    <span asp-validation-for="Biswanshi" class="text-danger"></span>
+                                    <label class="floating-label">Biswanshi</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+            else
+            {
+                <div id="divNoData">
+                    <p>No Data Available</p>
+                </div>
+            }
+        </div>
+    </form>
+</div>
+
+<partial name="../Shared/_ValidationScriptsPartial.cshtml" />
+
+
