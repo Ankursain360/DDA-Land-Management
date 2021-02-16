@@ -184,5 +184,11 @@
     "inputFiles": [
       "wwwroot/js/demandlistdetailsindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/villagereportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/villagereportindex.js"
+    ]
   }
 ]
