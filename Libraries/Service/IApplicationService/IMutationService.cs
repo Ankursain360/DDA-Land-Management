@@ -18,8 +18,9 @@ namespace Libraries.Service.IApplicationService
         Task<Mutation> FetchSingleResult(int id);
         Task<bool> Update(int id, Mutation mutation);
         Task<bool> Delete(int id, int userId);
-        int GetLocalityByName(string name);
-        int GetKhasraByName(string name);
         Task<bool> CheckUniqueName(int id, string fileNo);
+        Task<List<Mutationparticulars>> GetMutationParticulars(int id);
+        Task<bool> SaveMutationParticulars(List<Mutationparticulars> mutationparticulars);
+        Task<bool> DeleteMutationParticulars(int id);
     }
 }

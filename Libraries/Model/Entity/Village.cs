@@ -10,7 +10,7 @@ namespace Libraries.Model.Entity
     {
         public Village()
         {
-            Nazul = new HashSet<Nazul>();
+            //Nazul = new HashSet<Nazul>();
             Plot = new HashSet<Plot>();
             Gisaabadi = new HashSet<Gisaabadi>();
             Gisburji = new HashSet<Gisburji>();
@@ -64,7 +64,7 @@ namespace Libraries.Model.Entity
         [NotMapped]
         public int DepartmentId { get; set; }
         public virtual Zone Zone { get; set; }
-        public virtual ICollection<Nazul> Nazul { get; set; }
+        //public virtual ICollection<Nazul> Nazul { get; set; }
         public ICollection<Plot> Plot { get; set; }
         public ICollection<Gisaabadi> Gisaabadi { get; set; }
         public ICollection<Gisburji> Gisburji { get; set; }

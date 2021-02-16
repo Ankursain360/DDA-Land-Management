@@ -124,7 +124,7 @@ namespace Libraries.Model
 
         public virtual DbSet<Appealdetail> Appealdetail { get; set; }
         public virtual DbSet<Paymentdetail> Paymentdetail { get; set; }
-
+      
         public virtual DbSet<Undersection6plot> Undersection6plot { get; set; }
         public virtual DbSet<Possessiondetails> Possessiondetails { get; set; }
 

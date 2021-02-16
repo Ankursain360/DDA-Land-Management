@@ -39,11 +39,11 @@ namespace Libraries.Repository.EntityRepository
                                         //  && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
                                         && (x.KhasraId == (model.KhasraId == 0 ? x.KhasraId : model.KhasraId))
                                         )
-                                //.OrderBy(s =>
-                                //(model.SortBy.ToUpper() == "DEMANDLIST" ? s.DemandListNo
-                                //: model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
-                                //: model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.Name : null) : s.DemandListNo)
-                                //)
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "OWNER" ? s.MutationOwnerLessee
+                                : model.SortBy.ToUpper() == "VILLAGE" ? (s.AcquiredVillage == null ? null : s.AcquiredVillage.Name)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.Khasra != null ? s.Khasra.Name : null) : s.MutationOwnerLessee)
+                                )
                                 .GetPaged<Mutation>(model.PageNumber, model.PageSize);
             }
             else if (SortOrder == 2)
@@ -56,11 +56,11 @@ namespace Libraries.Repository.EntityRepository
                                         //  && (x.DemandListNo != null ? x.DemandListNo.Contains(model.demandlistno == "" ? x.DemandListNo : model.demandlistno) : true)
                                         && (x.KhasraId == (model.KhasraId == 0 ? x.KhasraId : model.KhasraId))
                                         )
-                                //.OrderByDescending(s =>
-                                // (model.SortBy.ToUpper() == "DEMANDLIST" ? s.DemandListNo
-                                //: model.SortBy.ToUpper() == "VILLAGE" ? (s.AcquiredVillage == null ? null : s.AcquiredVillage.Name)
-                                //: model.SortBy.ToUpper() == "KHASRANO" ? (s.KhasraNo != null ? s.KhasraNo.Name : null) : s.DemandListNo)
-                                //)
+                                .OrderByDescending(s =>
+                                 (model.SortBy.ToUpper() == "OWNER" ? s.MutationOwnerLessee
+                                : model.SortBy.ToUpper() == "VILLAGE" ? (s.AcquiredVillage == null ? null : s.AcquiredVillage.Name)
+                                : model.SortBy.ToUpper() == "KHASRANO" ? (s.Khasra != null ? s.Khasra.Name : null) : s.MutationOwnerLessee)
+                                )
                                 .GetPaged<Mutation>(model.PageNumber, model.PageSize);
             }
             return data;
@@ -76,25 +76,6 @@ namespace Libraries.Repository.EntityRepository
 
 
         }
-
-        public int GetLocalityByName(string name)
-        {
-            var File = (from f in _dbContext.Locality
-                        where f.Name.ToUpper().Trim() == name.ToUpper().Trim()
-                        select f.Id).FirstOrDefault();
-
-            return File;
-        }
-
-        public int GetKhasraByName(string name)
-        {
-            var File = (from f in _dbContext.Propertyregistration
-                        where f.KhasraNo.ToUpper().Trim() == name.ToUpper().Trim()
-                        select f.Id).FirstOrDefault();
-
-            return File;
-        }
-
         public async Task<bool> Any(int id, string fileNo)
         {
             return await _dbContext.Dmsfileupload.AnyAsync(t => t.Id != id && t.FileNo.ToLower() == fileNo.ToLower());
@@ -111,6 +92,27 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Khasra
                                      .Where(x => x.IsActive == 1 && x.AcquiredlandvillageId == id)
                                      .ToListAsync();
+        }
+
+        public async Task<List<Mutationparticulars>> GetMutationParticulars(int id)
+        {
+            return await _dbContext.Mutationparticulars
+                                       .Where(x => x.MutationId == id)
+                                       .ToListAsync();
+        }
+
+        public async Task<bool> SaveMutationParticulars(List<Mutationparticulars> mutationparticulars)
+        {
+            await _dbContext.Mutationparticulars.AddRangeAsync(mutationparticulars);
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
+        }
+
+        public async Task<bool> DeleteMutationParticulars(int id)
+        {
+            _dbContext.RemoveRange(_dbContext.Mutationparticulars.Where(x => x.MutationId == id));
+            var Result = await _dbContext.SaveChangesAsync();
+            return Result > 0 ? true : false;
         }
     }
 }

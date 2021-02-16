@@ -96,17 +96,6 @@ namespace Service.ApplicationService
             _mutationRepository.Edit(model);
             return await _unitOfWork.CommitAsync() > 0;
         }
-
-        public int GetLocalityByName(string name)
-        {
-            return _mutationRepository.GetLocalityByName(name);
-        }
-
-        public int GetKhasraByName(string name)
-        {
-            return _mutationRepository.GetKhasraByName(name);
-        }
-
         public async Task<bool> CheckUniqueName(int id, string fileNo)
         {
             return await _mutationRepository.Any(id, fileNo);
@@ -119,6 +108,22 @@ namespace Service.ApplicationService
         public async Task<List<Khasra>> GetKhasraList(int id)
         {
             return await _mutationRepository.GetKhasraList(id);
+        }
+
+        public async Task<List<Mutationparticulars>> GetMutationParticulars(int id)
+        {
+            return await _mutationRepository.GetMutationParticulars(id);
+        }
+
+        public async Task<bool> SaveMutationParticulars(List<Mutationparticulars> mutationparticulars)
+        {
+            mutationparticulars.ForEach(x => x.CreatedDate = DateTime.Now);
+            return await _mutationRepository.SaveMutationParticulars(mutationparticulars);
+        }
+
+        public async Task<bool> DeleteMutationParticulars(int id)
+        {
+            return await _mutationRepository.DeleteMutationParticulars(id);
         }
     }
 }

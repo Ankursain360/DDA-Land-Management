@@ -8,7 +8,8 @@ namespace Dto.Search
 
     public class NazulSearchDto : BaseSearchDto
     {
+        public string village { get; set; }
+
         
-        public int villageId { get; set; }
     }
 }

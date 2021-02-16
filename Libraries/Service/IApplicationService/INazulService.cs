@@ -11,8 +11,9 @@ namespace Libraries.Service.IApplicationService
     public interface INazulService
     {
 
-        
-        Task<List<Village>> GetAllVillage();
+
+       
+        Task<List<Acquiredlandvillage>> GetAllVillageList();
         Task<List<Nazul>> GetNazulUsingRepo();
         Task<List<Nazul>> GetAllNazul();
 
