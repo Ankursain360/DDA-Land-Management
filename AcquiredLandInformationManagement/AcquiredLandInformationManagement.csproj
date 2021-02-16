@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\reliefreportindex.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.1.8" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.9" />
@@ -50,6 +54,10 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
     <Content Update="Views\Mutation\Index.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\PossessionReport\Index.cshtml">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>

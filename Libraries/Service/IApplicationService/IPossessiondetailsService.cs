@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Dto.Search;
 using Libraries.Repository.Common;
+using Dto.Master;
 
 namespace Libraries.Service.IApplicationService
 {
@@ -24,9 +25,7 @@ namespace Libraries.Service.IApplicationService
 
 
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
-
-
-
-
+        Task<PagedResult<Possessiondetails>> GetPagedPossessionReport(PossessionReportSearchDto model);
+        Task<List<PossessionReportDtoProfile>> BindPossessionDateList();
     }
 }

@@ -190,5 +190,11 @@
     "inputFiles": [
       "wwwroot/js/villagereportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessionreportindex.js"
+    ]
   }
 ]

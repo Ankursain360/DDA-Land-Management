@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
+using Repository.Common;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -137,10 +139,61 @@ namespace Libraries.Repository.IEntityRepository
             return await _dbContext.Khasra.Where(x => x.Id == khasraId).SingleOrDefaultAsync();
         }
 
+        public async Task<PagedResult<Possessiondetails>> GetPagedPossessionReport(PossessionReportSearchDto model)
+        {
+            var data = await _dbContext.Possessiondetails
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.PossDate ==( model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate) )
+                                        )
+                                        .GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                data = null;
+                data = await _dbContext.Possessiondetails
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        )
+                                .OrderBy(s =>
+                                (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra != null ? s.Khasra.Name : null) : (s.Village == null ? null : s.Village.Name))
+                                )
+                                .GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
+            }
+            else if (SortOrder == 2)
+            {
+                data = null;
+                data = await _dbContext.Possessiondetails
+                                        .Include(x => x.Village)
+                                        .Include(x => x.Khasra)
+                                        .Where(x => x.PossDate == (model.PossessionDate == "0" ? x.PossDate : Convert.ToDateTime(model.PossessionDate))
+                                        )
+                                .OrderByDescending(s =>
+                                 (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
+                                : model.SortBy.ToUpper() == "KHASRA" ? (s.Khasra != null ? s.Khasra.Name : null) : (s.Village == null ? null : s.Village.Name))
+                                )
+                                .GetPaged<Possessiondetails>(model.PageNumber, model.PageSize);
+            }
+            return data;
+        }
 
+        public async Task<List<PossessionReportDtoProfile>> BindPossessionDateList()
+        {
+            try
+            {
+                //int SortOrder = (int)model.SortOrder;
+                var data = await _dbContext.LoadStoredProcedure("BindDropdownForPossessionDate")
+                                            .WithOutParams()
+                                            .ExecuteStoredProcedureAsync<PossessionReportDtoProfile>();
 
-
-
-
+                return (List<PossessionReportDtoProfile>)data;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }
