@@ -113,6 +113,16 @@ namespace Libraries.Service.ApplicationService
         {
             return await _acquiredlandvillageRepository.GetPagedAcquiredlandvillage(model);
         }
+        public async Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model)
+        {
+            return await _acquiredlandvillageRepository.GetPagedVillageReport(model);
+
+        }
+        public async Task<List<Acquiredlandvillage>> GetAllVillageList()
+        {
+            List<Acquiredlandvillage> villageList = await _acquiredlandvillageRepository.GetAllVillageList();
+            return villageList;
+        }
 
     }
 }

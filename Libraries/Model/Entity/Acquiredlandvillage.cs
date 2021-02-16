@@ -53,6 +53,8 @@ namespace Libraries.Model.Entity
 
         [NotMapped]
         public List<Tehsil> TehsilList { get; set; }
+        [NotMapped]
+        public List<Acquiredlandvillage> VillageList { get; set; }
 
         public District District { get; set; }
         public Tehsil Tehsil { get; set; }

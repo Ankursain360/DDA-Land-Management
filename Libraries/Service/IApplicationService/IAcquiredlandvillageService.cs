@@ -13,6 +13,7 @@ namespace Libraries.Service.IApplicationService
         Task<List<District>> GetAllDistrict();
         Task<List<Tehsil>> GetAllTehsil();
         Task<List<Zone>> GetAllZone();
+        Task<List<Acquiredlandvillage>> GetAllVillageList();
         Task<List<Acquiredlandvillage>> GetACquiredlandvillageUsingRepo();
         Task<bool> Update(int id, Acquiredlandvillage acquiredlandvillage);
         Task<bool> Create(Acquiredlandvillage acquiredlandvillage);
@@ -21,6 +22,7 @@ namespace Libraries.Service.IApplicationService
         //  Task<bool> CheckUniqueLoginName(int id, string loginname);
 
         Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredlandvillage(AcquiredLandVillageSearchDto model);
+        Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model);
 
 
 
