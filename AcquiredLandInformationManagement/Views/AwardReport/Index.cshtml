@@ -1,4 +1,4 @@
-﻿@model Dto.Master.PossessionReportDtoProfile
+﻿@model Dto.Master.AwardReportDtoProfile
 
 @await Component.InvokeAsync("PageHeader", new { pageName = "Award Report" })
     <div id="frmReliefReport" class="d-block rounded border p-3 bg-white search-filer shadow mb-3">
@@ -8,7 +8,7 @@
             <div class="col-md-6">
                 <div class="floating-label-wrap">
 
-                    <select class="floating-label-field floating-label-field--s3" id="possessionDate"  asp-items="@(new SelectList( @ViewBag.AwardNoDateList, "Id","AwardName"))">
+                    <select class="floating-label-field floating-label-field--s3" id="awardDate"  asp-items="@(new SelectList( @ViewBag.AwardNoDateList, "Id","AwardName"))">
                         <option value="0">All</option>
                     </select>
                     <label class="floating-label">Award No.(Date)</label>
@@ -38,14 +38,14 @@
         <div class="p-3 d-flex align-items-end mr-auto">
             <div class="floating-label-wrap">
                 <select id="ddlSort" class="floating-label-field floating-label-field--s3">
-                    <option selected="selected"  value="village">Village</option>
+                    <option selected="selected" value="village">Village</option>
                     <option value="khasra">Khasra No.</option>
                 </select>
                 <label for="field-1" class="floating-label">Sort by</label>
             </div>
             <div class="short-btn d-flex align-items-center">
-                <span id="btnDescending" class="btn slow active" onclick="Descending();" title="Descending order"><i class="ri-sort-desc"></i></span>
-                <span id="btnAscending" class="btn slow" onclick="Ascending();" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow active" id="btnAscending" title="Ascending order"><i class="ri-sort-asc"></i></span>
+                <span class="btn slow" id="btnDescending" title="Descending order"><i class="ri-sort-desc"></i></span>
             </div>
         </div>
 

@@ -22,6 +22,6 @@ namespace Libraries.Service.IApplicationService
         Task<bool> Delete(int id);
         Task<PagedResult<Awardplotdetails>> GetPagedAwardplotdetails(AwardPlotDetailSearchDto model);
         Task<List<AwardReportDtoProfile>> BindAwardNoDateList();
-        Task<PagedResult<Awardplotdetails>> GetPagedPossessionReport(AwardReportSearchDto model);
+        Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model);
     }
 }

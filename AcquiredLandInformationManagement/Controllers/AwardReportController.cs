@@ -31,7 +31,7 @@ namespace AcquiredLandInformationManagement.Controllers
         [HttpPost]
         public async Task<PartialViewResult> GetDetails([FromBody] AwardReportSearchDto model)
         {
-            var result = await _awardPlotDetailsService.GetPagedPossessionReport(model);
+            var result = await _awardPlotDetailsService.GetPagedAwardReport(model);
 
             if (result != null)
             {

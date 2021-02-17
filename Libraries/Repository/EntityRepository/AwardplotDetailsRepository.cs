@@ -181,13 +181,14 @@ namespace Libraries.Repository.EntityRepository
             }
         }
 
-        public async Task<PagedResult<Awardplotdetails>> GetPagedPossessionReport(AwardReportSearchDto model)
+        public async Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model)
         {
             var data = await _dbContext.Awardplotdetails
                                         .Include(x => x.AwardMaster)
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        && x.IsActive == 1
                                         )
                                         .GetPaged<Awardplotdetails>(model.PageNumber, model.PageSize);
             int SortOrder = (int)model.SortOrder;
@@ -199,6 +200,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        && x.IsActive == 1
                                         )
                                 .OrderBy(s =>
                                 (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)
@@ -214,6 +216,7 @@ namespace Libraries.Repository.EntityRepository
                                         .Include(x => x.Village)
                                         .Include(x => x.Khasra)
                                         .Where(x => x.AwardMasterId == (model.Id == 0 ? x.AwardMasterId : model.Id)
+                                        && x.IsActive == 1
                                         )
                                 .OrderByDescending(s =>
                                  (model.SortBy.ToUpper() == "VILLAGE" ? (s.Village == null ? null : s.Village.Name)

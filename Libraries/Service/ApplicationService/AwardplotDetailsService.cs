@@ -115,9 +115,9 @@ namespace Libraries.Service.ApplicationService
             return await _awardplotDetailsRepository.BindAwardNoDateList();
         }
 
-        public async Task<PagedResult<Awardplotdetails>> GetPagedPossessionReport(AwardReportSearchDto model)
+        public async Task<PagedResult<Awardplotdetails>> GetPagedAwardReport(AwardReportSearchDto model)
         {
-            return await _awardplotDetailsRepository.GetPagedPossessionReport(model);
+            return await _awardplotDetailsRepository.GetPagedAwardReport(model);
         }
     }
 }
