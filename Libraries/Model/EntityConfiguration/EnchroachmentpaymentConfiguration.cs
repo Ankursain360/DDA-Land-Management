@@ -7,15 +7,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Libraries.Model.EntityConfiguration
 {
-   public class EncrocherPeopleConfiguration : IEntityTypeConfiguration<EncrocherPeople>
+    public class EnchroachmentpaymentConfiguration : IEntityTypeConfiguration<Enchroachmentpayment>
     {
-
-        public void Configure(EntityTypeBuilder<EncrocherPeople> builder)
+        public void Configure(EntityTypeBuilder<Enchroachmentpayment> builder)
         {
-            builder.ToTable("encrocherpeople", "lms");
+            builder.ToTable("enchroachmentpayment", "lms");
 
-            builder.HasIndex(e => e.NAME)
-                .HasName("Name_UNIQUE")
+            builder.HasIndex(e => e.ChequeNo)
+                .HasName("ChequeNo_UNIQUE")
                 .IsUnique();
 
             builder.Property(e => e.Id).HasColumnType("int(11)");
@@ -33,11 +32,11 @@ namespace Libraries.Model.EntityConfiguration
 
             builder.Property(e => e.ModifiedDate).HasColumnType("date");
 
-            builder.Property(e => e.NAME)
+            builder.Property(e => e.ChequeNo)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
-            builder.Property(e => e.ADDRESS)
+            builder.Property(e => e.ChequeDate)
                 .IsRequired()
                 .HasMaxLength(100)
                 .IsUnicode(false);
@@ -45,11 +44,11 @@ namespace Libraries.Model.EntityConfiguration
                .IsRequired()
                .HasMaxLength(100)
                .IsUnicode(false);
-            builder.Property(e => e.FileNo)
+            builder.Property(e => e.Amount)
                .IsRequired()
                .HasMaxLength(100)
                .IsUnicode(false);
+
         }
     }
-   
 }
