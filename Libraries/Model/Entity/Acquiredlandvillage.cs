@@ -12,7 +12,9 @@ namespace Libraries.Model.Entity
     {
         public Acquiredlandvillage()
         {
-           // Nazul = new HashSet<Nazul>();
+            Mutation = new HashSet<Mutation>();
+            Demandlistdetails = new HashSet<Demandlistdetails>();
+            Nazul = new HashSet<Nazul>();
             Khasra = new HashSet<Khasra>();
             Jaraidetails = new HashSet<Jaraidetails>();
             Undersection22plotdetails = new HashSet<Undersection22plotdetails>();
@@ -81,6 +83,9 @@ namespace Libraries.Model.Entity
         public ICollection<Possessiondetails> Possessiondetails { get; set; }
 
         public ICollection<Awardmasterdetail> Awardmasterdetail { get; set; }
-
+        public ICollection<Nazul> Nazul { get; set; }
+        public ICollection<Mutation> Mutation { get; set; }
+        public ICollection<Demandlistdetails> Demandlistdetails { get; set; }
+        
     }
 }
