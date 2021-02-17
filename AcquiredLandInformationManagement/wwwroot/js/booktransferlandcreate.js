@@ -1,10 +1,12 @@
 ﻿$(function () {
     $("input[name='grpLand']").click(function () {
+        debugger
         if ($("#A").is(":checked")) {
             $('#StatusOfLand').val('Alloted');
         }
        else if ($("#V").is(":checked")) {
             $('#StatusOfLand').val('Vacant');
+
         } else if ($("#E").is(":checked")) {
             $('#StatusOfLand').val('Enchroched');
         } 

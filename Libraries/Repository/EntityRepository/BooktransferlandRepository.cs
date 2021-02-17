@@ -38,6 +38,17 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("NOTIFICATIONNO"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.Khasra)
+                        .Include(x => x.LandNotification)
+                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                            .OrderBy(s => s.LandNotification.Name)
+                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+                        break;
                     case ("PART"):
                         data = null;
                         data = await _dbContext.Booktransferland
@@ -92,6 +103,17 @@ namespace Libraries.Repository.EntityRepository
             {
                 switch (model.SortBy.ToUpper())
                 {
+                    case ("NOTIFICATIONNO"):
+                        data = null;
+                        data = await _dbContext.Booktransferland
+                                   .Include(x => x.Locality)
+                                   .Include(x => x.Khasra)
+                        .Include(x => x.LandNotification)
+                 .Where(x => string.IsNullOrEmpty(model.name) || x.Part.Contains(model.name))
+                            .OrderByDescending(s => s.LandNotification.Name)
+                        .GetPaged<Booktransferland>(model.PageNumber, model.PageSize);
+
+                        break;
                     case ("PART"):
                         data = null;
                         data = await _dbContext.Booktransferland
