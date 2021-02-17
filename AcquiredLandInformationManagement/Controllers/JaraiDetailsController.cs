@@ -107,7 +107,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
                         {
                             List<Jarailessee> lessee = new List<Jarailessee>();
-                            for (int i = 0; i < jarai.OwnerName.Count; i++)
+                            for (int i = 0; i < jarai.LesseeName.Count; i++)
                             {
                                 lessee.Add(new Jarailessee
                                 {
@@ -140,7 +140,7 @@ namespace AcquiredLandInformationManagement.Controllers
 
                         {
                             List<Jaraifarmer> farmer = new List<Jaraifarmer>();
-                            for (int i = 0; i < jarai.OwnerName.Count; i++)
+                            for (int i = 0; i < jarai.FarmerName.Count; i++)
                             {
                                 farmer.Add(new Jaraifarmer
                                 {
@@ -296,7 +296,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         {
                             List<Jarailessee> lessee = new List<Jarailessee>();
                             result = await _jaraidetailService.DeleteJarailessee(id);
-                            for (int i = 0; i < jarai.OwnerName.Count; i++)
+                            for (int i = 0; i < jarai.LesseeName.Count; i++)
                             {
                                 lessee.Add(new Jarailessee
                                 {
@@ -330,7 +330,7 @@ namespace AcquiredLandInformationManagement.Controllers
                         {
                             List<Jaraifarmer> farmer = new List<Jaraifarmer>();
                             result = await _jaraidetailService.DeleteFarmer(id);
-                            for (int i = 0; i < jarai.OwnerName.Count; i++)
+                            for (int i = 0; i < jarai.FarmerName.Count; i++)
                             {
                                 farmer.Add(new Jaraifarmer
                                 {

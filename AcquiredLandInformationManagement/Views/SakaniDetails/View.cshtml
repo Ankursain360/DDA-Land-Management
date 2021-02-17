@@ -102,11 +102,11 @@
                                 <span asp-validation-for="Address" class="d-block text-danger field-validation-valid"></span>
                             </td>
                             @*<td>
-                                <div class="action-btns">
-                                    <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>
-                            </td>*@
+                                    <div class="action-btns">
+                                        <a class="remove delete-record " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+                                </td>*@
                         </tr>
 
                     </tbody>
@@ -126,6 +126,7 @@
                             <th>Lessee Name</th>
                             <th>Father's Name</th>
                             <th>Address</th>
+                            <th>Lessee Share</th>
                             <th>Mortgage Details</th>
                             @*<th>Action</th>*@
                         </tr>
@@ -136,8 +137,8 @@
                         <tr id="">
                             <td style="text-align:center;"><span class="sn1">1</span></td>
                             <td>
-                                <input disabled asp-for="LesseeName" type="text" class="floating-label-field floating-label-field--s3 Namecheck" />
-                                <span asp-validation-for="LesseeName" class="d-block text-danger field-validation-valid msg"></span>
+                                <input disabled asp-for="LesseeName" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LesseeName" class="d-block text-danger field-validation-valid "></span>
                             </td>
                             <td>
                                 <input disabled asp-for="LFather" type="text" class="floating-label-field floating-label-field--s3" />
@@ -145,27 +146,27 @@
 
                             </td>
                             <td>
-                                <input disabled asp-for="LAddress" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LAddress" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input disabled asp-for="LAddress" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LAddress" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
                             <td>
-                                <input disabled asp-for="LShare" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LShare" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input disabled asp-for="LShare" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LShare" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
                             <td>
-                                <input disabled asp-for="LMortgage" type="text" class="floating-label-field floating-label-field--s3 NoCheck" />
-                                <span asp-validation-for="LMortgage" class="d-block text-danger field-validation-valid msg2"></span>
+                                <input disabled asp-for="LMortgage" type="text" class="floating-label-field floating-label-field--s3 " />
+                                <span asp-validation-for="LMortgage" class="d-block text-danger field-validation-valid "></span>
 
                             </td>
 
                             @*<td>
-                                <div class="action-btns">
-                                    <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record1" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>
-                            </td>*@
+                                    <div class="action-btns">
+                                        <a class="remove delete-record1 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record1" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+                                </td>*@
                         </tr>
                     </tbody>
                 </table>
@@ -183,7 +184,7 @@
                     <thead class="text-nowrap">
                         <tr>
                             <th>Sr.No</th>
-                            <th>Farmer Name</th>
+                            <th>Tenant Name</th>
                             <th>Father's Name</th>
                             <th>Address</th>
                             @*<th>Action</th>*@
@@ -196,27 +197,27 @@
 
                             <td style="text-align:center;"><span class="sn2">1</span></td>
                             <td>
-                                <input disabled asp-for="TName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeName" />
+                                <input disabled asp-for="TName" type="text" class="floating-label-field floating-label-field--s3"  />
                                 <span asp-validation-for="TName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input disabled asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3" id="txtDamageAssesseeFather" />
+                                <input disabled asp-for="TFatherName" type="text" class="floating-label-field floating-label-field--s3"  />
                                 <span asp-validation-for="TFatherName" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
                             <td>
-                                <input disabled asp-for="TAddress" type="text" class="floating-label-field floating-label-field--s3" id="txtDateofWill" />
+                                <input disabled asp-for="TAddress" type="text" class="floating-label-field floating-label-field--s3" />
                                 <span asp-validation-for="TAddress" class="d-block text-danger field-validation-valid"></span>
 
                             </td>
 
                             @*<td>
-                                <div class="action-btns">
-                                    <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
-                                    <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
-                                </div>
-                            </td>*@
+                                    <div class="action-btns">
+                                        <a class="remove delete-record2 " title="delete" data-id="0" style="display:none;font-size:30px;"><i class="ri-delete-bin-fill"></i></a>
+                                        <a class="view add-record2" data-added="0" title="Add" style="font-size:30px;"><i class="ri-add-circle-fill"></i></a>
+                                    </div>
+                                </td>*@
                         </tr>
 
                     </tbody>
@@ -284,10 +285,11 @@
 
 
 
+
 <partial name="../Shared/_ValidationScriptsPartial.cshtml" />
 <environment include="Development">
-    <script src="~/js/jaraicreate.js"></script>
+    <script src="~/js/sakniedit.js"></script>
 </environment>
 <environment exclude="Development">
-    <script src="~/js/jaraicreate.min.js" asp-append-version="true"></script>
+    <script src="~/js/sakniedit.min.js" asp-append-version="true"></script>
 </environment>
