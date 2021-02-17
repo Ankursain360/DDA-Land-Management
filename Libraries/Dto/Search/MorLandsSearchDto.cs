@@ -7,6 +7,8 @@ namespace Dto.Search
 {
     public class MorLandsSearchDto : BaseSearchDto
     {
-        public string Name { get; set; }
+        public string name { get; set; }
+        public string propertyname { get; set; }
+        public string sitedesc { get; set; }
     }
 }

@@ -1,36 +1,99 @@
 ﻿var currentPageNumber = 1;
-var currentPageSize = 1;
+var currentPageSize = 5;
+var sortOrder = 1;
 
 $(document).ready(function () {
-    GetMorLands(currentPageNumber, currentPageSize);
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
 });
 
-function GetMorLands(pageNumber, pageSize) {
-    var param = GetSearchParam(pageNumber, pageSize);
+function GetMorLands(pageNumber, pageSize, sortOrder) {
+    var param = GetSearchParam(pageNumber, pageSize, sortOrder);
     HttpPost(`/morLands/List`, 'html', param, function (response) {
         $('#divMorlandTable').html("");
         $('#divMorlandTable').html(response);
     });
-}
 
-function GetSearchParam(pageNumber, pageSize) {
+}
+function GetSearchParam(pageNumber, pageSize, sortOrder) {
     var model = {
-        name: "test",
-        pageSize: pageSize,
-        pageNumber: pageNumber
+        name: $('#txtName').val(),
+        propertyname: $('#txtProperty').val(),
+        sitedesc: $('#txtDescription').val(),
+        sortBy: $("#ddlSort").children("option:selected").val(),
+        sortOrder: parseInt(sortOrder),
+        pageSize: parseInt(pageSize),
+        pageNumber: parseInt(pageNumber)
     }
+    //    debugger
     return model;
 }
 
+$("#btnSearch").click(function () {
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnAscending").click(function () {
+    $("#btnDescending").removeClass("active");
+    $("#btnAscending").addClass("active");
+    sortOrder = 1;//for Ascending 
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnDescending").click(function () {
+    $("#btnAscending").removeClass("active");
+    $("#btnDescending").addClass("active");
+    sortOrder = 2;//for Descending
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnSearch").click(function () {
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
+
+$("#btnReset").click(function () {
+    $('#txtName').val('');
+    $('#txtProperty').val('');
+    $('#txtDescription').val('');
+    GetMorLands(currentPageNumber, currentPageSize, sortOrder);
+});
+
 function onPaging(pageNo) {
-    GetMorLands(pageNo, currentPageSize);
+    GetMorLands(parseInt(pageNo), parseInt(currentPageSize), sortOrder);
     currentPageNumber = pageNo;
 }
 
 function onChangePageSize(pageSize) {
-    GetMorLands(currentPageNumber, pageSize);
+    GetMorLands(parseInt(currentPageNumber), parseInt(pageSize), sortOrder);
     currentPageSize = pageSize;
 }
+
+
+//function GetMorLands(pageNumber, pageSize) {
+//    var param = GetSearchParam(pageNumber, pageSize);
+//    HttpPost(`/morLands/List`, 'html', param, function (response) {
+//        $('#divMorlandTable').html("");
+//        $('#divMorlandTable').html(response);
+//    });
+//}
+
+//function GetSearchParam(pageNumber, pageSize) {
+//    var model = {
+//        name: "test",
+//        pageSize: pageSize,
+//        pageNumber: pageNumber
+//    }
+//    return model;
+//}
+
+//function onPaging(pageNo) {
+//    GetMorLands(pageNo, currentPageSize);
+//    currentPageNumber = pageNo;
+//}
+
+//function onChangePageSize(pageSize) {
+//    GetMorLands(currentPageNumber, pageSize);
+//    currentPageSize = pageSize;
+//}
 
 
 //    function DeleteData(id) {

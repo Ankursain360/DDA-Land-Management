@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿using Core.Enum;
+using Dto.Search;
 using Libraries.Model.Entity;
 using Libraries.Service.IApplicationService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Notification;
 using Notification.Constants;
 using Notification.OptionEnums;
-using Dto.Search;
+using AcquiredLandInformationManagement.Filters;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Utility.Helper;
 namespace AcquiredLandInformationManagement.Controllers
 {
-    public class AwardPlotDetailsController : Controller
+    public class AwardPlotDetailsController : BaseController
     {
 
         private readonly IAwardplotDetailService _awardplotDetailService;

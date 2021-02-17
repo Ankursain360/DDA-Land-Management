@@ -10,6 +10,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Repository.Common;
+
 namespace Libraries.Repository.EntityRepository
 
 {
@@ -55,6 +57,23 @@ namespace Libraries.Repository.EntityRepository
         {
             return await _dbContext.Enchroachment.Include(x => x.Village).Include(x => x.Khasra).Include(x => x.Natureofencroachment).Include(x => x.Reasons).OrderByDescending(x => x.Id).GetPaged<Enchroachment>(model.PageNumber, model.PageSize);
         }
+        public async Task<List<EncrochpeopleListDataDto>> GetPagedEncrocherPeople(EncrocherNameSearchDto model, int UserId)
+        {
+            //return await _dbContext.EncrocherPeople
+            //    .Where(x => x.FileNo == model.fileno)
+            //    .OrderByDescending(x => x.Id).GetPaged<EncrocherPeople>(model.PageNumber, model.PageSize);
+            int SortOrder = (int)model.SortOrder;
+            var data = await _dbContext.LoadStoredProcedure("BindEncrocmentpeople")
+                                             .WithSqlParams(("File_No", model.fileno),
+                                               ("Name", model.name),
+                                              ("Address", model.address),
+                                              ("Recstate", model.Recstate),
+                                              ("Cdate", DateTime.Now),
+                                                ("UserId", UserId)               )
+                                             .ExecuteStoredProcedureAsync<EncrochpeopleListDataDto>();
+            return (List<EncrochpeopleListDataDto>)data;
+        }
+
 
     }
 }

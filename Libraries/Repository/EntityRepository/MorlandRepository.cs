@@ -40,8 +40,120 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Morland>> GetPagedMorland(MorLandsSearchDto model)
         {
-            return await _dbContext.Morland.GetPaged<Morland>(model.PageNumber, model.PageSize);
+            // return await _dbContext.Morland.GetPaged<Morland>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderBy(x => x.LandNotification.Name)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+            
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                     
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderBy(x => x.LandNotification.Name)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("PROPERTY"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                         .Include(x => x.LandNotification)
+                                    
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                 .OrderBy(x => x.PropertySiteNo)
+                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("SITE"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                   .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderBy(x => x.SiteDescription)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Morland
+                               .Include(x => x.LandNotification)
+                               .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderBy(x => x.IsActive==1)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+                    case ("LOCALITY"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                        
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderByDescending(x => x.LandNotification.Name)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("PROPERTY"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                         .Include(x => x.LandNotification)
+                                         
+                                            .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                                && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                                && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                 .OrderByDescending(x => x.PropertySiteNo)
+                                 .GetPaged<Morland>(model.PageNumber, model.PageSize);
+
+                        break;
+                    case ("SITE"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                       
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderByDescending(x => x.SiteDescription)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("STATUS"):
+                        data = null;
+                        data = await _dbContext.Morland
+                                        .Include(x => x.LandNotification)
+                                       
+                                           .Where(x => (string.IsNullOrEmpty(model.name) || x.LandNotification.Name.Contains(model.name))
+                               && (string.IsNullOrEmpty(model.propertyname) || x.PropertySiteNo.Contains(model.propertyname))
+                               && (string.IsNullOrEmpty(model.sitedesc) || x.SiteDescription.Contains(model.sitedesc)))
+                                .OrderByDescending(x => x.IsActive == 1)
+                                .GetPaged<Morland>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            return data;
         }
+
 
 
 

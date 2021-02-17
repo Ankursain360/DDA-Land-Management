@@ -14,8 +14,8 @@ namespace Libraries.Model.EntityConfiguration
                      .HasName("LandNotificationId");
 
             builder.HasIndex(e => e.Name)
-                .HasName("Name_UNIQUE")
-                .IsUnique();
+                .HasName("Name");
+                
 
             builder.HasIndex(e => e.SerialnumberId)
                 .HasName("SerialnumberId");
@@ -69,6 +69,7 @@ namespace Libraries.Model.EntityConfiguration
             builder.Property(e => e.SiteDescription)
                 .HasMaxLength(200)
                 .IsUnicode(false);
+
 
             builder.Property(e => e.StatusOfLand)
                 .HasMaxLength(200)

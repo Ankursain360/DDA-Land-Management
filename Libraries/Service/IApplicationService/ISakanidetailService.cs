@@ -8,16 +8,33 @@ namespace Libraries.Service.IApplicationService
 {
     public interface ISakanidetailService
     {
-        Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
-        Task<List<Saknidetails>> GetSakanidetail();
-        Task<List<Khewat>> GetAllKhewat();
-        Task<List<Acquiredlandvillage>> GetAllVillage();
-        Task<List<Khasra>> BindKhasra();
-        Task<List<Saknidetails>> GetSakanidetailUsingRepo();
-        Task<bool> Update(int id, Saknidetails sakanidetail);
-        Task<bool> Create(Saknidetails sakanidetail);
+      
+        Task<bool> Update(int id, Saknidetails sakni);
+        Task<bool> Create(Saknidetails sakni);
         Task<Saknidetails> FetchSingleResult(int id);
         Task<bool> Delete(int id);
+        Task<PagedResult<Saknidetails>> GetPagedSaknidetail(SakaniDetailsSearchDto model);
+        Task<List<Saknidetails>> GetAllSaknidetail();
+        Task<List<Acquiredlandvillage>> GetAllVillage();
+        Task<List<Khasra>> GetAllKhasra(int? villageId);
+
+        //********* rpt ! Owner Details **********
+
+        Task<bool> SaveOwner(Sakniowner owner);
+        Task<List<Sakniowner>> GetAllOwner(int id);
+        Task<bool> DeleteOwner(int Id);
+
+        //********* rpt ! Lessee Details **********
+
+        Task<bool> Savelessee(Saknilessee lessee);
+        Task<List<Saknilessee>> GetAllSaknilessee(int id);
+        Task<bool> Deletelessee(int Id);
+
+        //********* rpt ! Tenant Details **********
+
+        Task<bool> SaveTenant(Saknitenant tenant);
+        Task<List<Saknitenant>> GetAllTenant(int id);
+        Task<bool> DeleteTenant(int Id);
 
 
     }

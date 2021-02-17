@@ -190,5 +190,17 @@
     "inputFiles": [
       "wwwroot/js/villagereportindex.js"
     ]
+  },
+  {
+    "outputFileName": "wwwroot/js/possessionreportindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/possessionreportindex.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/awardindex.min.js",
+    "inputFiles": [
+      "wwwroot/js/awardindex.js"
+    ]
   }
 ]

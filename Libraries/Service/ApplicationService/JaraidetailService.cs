@@ -19,16 +19,16 @@ namespace Libraries.Service.ApplicationService
         private readonly IUnitOfWork _unitOfWork;
         private readonly IJaraidetailRepository _jaraidetailRepository;
 
-        public async Task<PagedResult<Jaraidetails>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
-        {
-            return await _jaraidetailRepository.GetPagedJaraidetail(model);
-        }
+       
         public JaraidetailService(IUnitOfWork unitOfWork, IJaraidetailRepository jaraidetailRepository): base(unitOfWork, jaraidetailRepository)
         {
             _unitOfWork = unitOfWork;
             _jaraidetailRepository = jaraidetailRepository;
         }
-
+        public async Task<PagedResult<Jaraidetails>> GetPagedJaraidetail(JaraiDetailsSearchDto model)
+        {
+            return await _jaraidetailRepository.GetPagedJaraidetail(model);
+        }
         public async Task<List<Acquiredlandvillage>> GetAllVillage()
         {
             List<Acquiredlandvillage> villageList = await _jaraidetailRepository.GetAllVillage();

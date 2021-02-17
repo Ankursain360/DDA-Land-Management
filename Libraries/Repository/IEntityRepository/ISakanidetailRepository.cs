@@ -10,10 +10,29 @@ namespace Libraries.Repository.IEntityRepository
 {
     public interface ISakanidetailRepository : IGenericRepository<Saknidetails>
     {
-        Task<PagedResult<Saknidetails>> GetPagedSakanidetail(SakaniDetailsSearchDto model);
-        Task<List<Saknidetails>> GetSakanidetail();
-        Task<List<Khewat>> GetAllKhewat();
+        Task<PagedResult<Saknidetails>> GetPagedSaknidetail(SakaniDetailsSearchDto model);
+        Task<List<Saknidetails>> GetAllSaknidetail();
         Task<List<Acquiredlandvillage>> GetAllVillage();
-        Task<List<Khasra>> BindKhasra();
+        Task<List<Khasra>> GetAllKhasra(int? villageId);
+
+        //********* rpt ! Owner Details **********
+
+        Task<bool> SaveOwner(Sakniowner owner);
+        Task<List<Sakniowner>> GetAllOwner(int id);
+        Task<bool> DeleteOwner(int Id);
+
+        //********* rpt ! Lessee Details **********
+
+        Task<bool> Savelessee(Saknilessee lessee);
+        Task<List<Saknilessee>> GetAllSaknilessee(int id);
+        Task<bool> Deletelessee(int Id);
+
+        //********* rpt ! Tenant Details **********
+
+        Task<bool> SaveTenant(Saknitenant tenant);
+        Task<List<Saknitenant>> GetAllTenant(int id);
+        Task<bool> DeleteTenant(int Id);
+
+
     }
 }
