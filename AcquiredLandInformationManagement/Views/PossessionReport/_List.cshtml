@@ -24,7 +24,7 @@
                     <td>@(item.Village == null ? "" : item.Village.Name)</td>
                     <td>@(item.Khasra == null ? "" : item.Khasra.Name)</td>
                     <td>@(item.Khasra == null ? "" : (item.Khasra.Bigha +  '-' + item.Khasra.Biswa + '-' + item.Khasra.Biswanshi))</td>
-                    <td>@((item.Bigha.ToString() +  '-' + item.Biswa.ToString()))</td>
+                    <td>@((item.Bigha.ToString() +  '-' + item.Biswa.ToString() + '-' + '0'))</td>
                     <td> @(item.PossDate.ToString("dd-MMM-yyyy"))</td>
                 </tr>
             }

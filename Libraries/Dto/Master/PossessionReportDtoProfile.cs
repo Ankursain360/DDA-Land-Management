@@ -8,8 +8,7 @@ namespace Dto.Master
 {
     public class PossessionReportDtoProfile
     {
-        // public int Possession { get; set; }
-        public DateTime ID { get; set; }
+        public string ID { get; set; }
         public string POSSDATE { get; set; }
     }
 }
