@@ -21,7 +21,8 @@ namespace Libraries.Service.IApplicationService
         Task<Khasra> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Khasra>> GetPagedKhasra(KhasraMasterSearchDto model);
-
+        Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model);
+        Task<List<Khasra>> GetAllKhasraList(int? villageId);
 
 
 

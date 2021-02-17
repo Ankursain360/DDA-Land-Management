@@ -205,7 +205,16 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model)
         {
-            var data = await _dbContext.Acquiredlandvillage.GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Acquiredlandvillage
+
+
+                  .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -256,6 +265,43 @@ namespace Libraries.Repository.EntityRepository
         {
             List<Acquiredlandvillage> villageList = await _dbContext.Acquiredlandvillage.ToListAsync();
             return villageList;
+        }
+        public async Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredVillageReport(AcquiredVillageReportSearchDto model)
+        {
+            var data = await _dbContext.Acquiredlandvillage
+
+
+                   .Where(x => (x.Acquired == "yes")
+                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+                  
+                }
+            }
+            return data;
         }
     }
 }

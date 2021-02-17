@@ -17,6 +17,6 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Khasra>> GetAllKhasraList(int? villageId);
         Task<List<Undersection17>> GetAllUndersection17List();
 
-
+        Task<Khasra> FetchSingleKhasraResult(int? khasraId);
     }
 }

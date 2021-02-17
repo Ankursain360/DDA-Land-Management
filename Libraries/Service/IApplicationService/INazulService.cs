@@ -22,6 +22,7 @@ namespace Libraries.Service.IApplicationService
         Task<Nazul> FetchSingleResult(int id);
         Task<bool> Delete(int id);
         Task<PagedResult<Nazul>> GetPagedNazul(NazulSearchDto model);
+        Task<PagedResult<Nazul>> GetNazulReportData(NazulVillageReportSearchDto nazulVillageReportSearchDto);
 
 
 

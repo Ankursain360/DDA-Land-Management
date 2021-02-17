@@ -108,6 +108,11 @@ namespace Libraries.Service.ApplicationService
             return await _unitOfWork.CommitAsync() > 0;
         }
 
+        public async Task<Khasra> FetchSingleKhasraResult(int? khasraId)
+        {
+            return await _undersection17plotdetailRepository.FetchSingleKhasraResult(khasraId);
+        }
+
 
     }
 }

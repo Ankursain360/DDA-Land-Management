@@ -6,7 +6,7 @@ $(document).ready(function () {
         debugger;
         var result = ValidateForm();
         var name = $('#Name option:selected').val();
-       
+
 
         //if (localityid != '' && localityid != undefined && fromDate != '' && toDate != '' && localityid != null && fromDate != null && toDate != null) {
         if (result) {
@@ -26,7 +26,7 @@ $(document).ready(function () {
 function GetDetails(pageNumber, pageSize, order) {
     var param = GetSearchParam(pageNumber, pageSize, order);
     debugger
-    HttpPost(`/VillageReport/GetDetails`, 'html', param, function (response) {
+    HttpPost(`/AcquiredVillageReport/GetDetails`, 'html', param, function (response) {
         $('#LoadReportView').html("");
         $('#LoadReportView').html(response);
     });
@@ -35,13 +35,13 @@ function GetDetails(pageNumber, pageSize, order) {
 function GetSearchParam(pageNumber, pageSize, sortOrder) {
     debugger;
     var name = $('#Name option:selected').val();
-  
+
     var model = {
         name: "report",
         pageSize: parseInt(pageSize),
         pageNumber: parseInt(pageNumber),
         name: parseInt(name),
-       
+
         sortBy: $("#ddlSort").children("option:selected").val(),
         sortOrder: parseInt(sortOrder),
     }
@@ -65,7 +65,7 @@ $("#btnDescending").click(function () {
 $("#btnReset").click(function () {
 
     $('#Name').val('0').trigger('change');
-  
+
 
     GetDetails(currentPageNumber, currentPageSize, sortby);
 

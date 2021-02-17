@@ -100,7 +100,10 @@ namespace Libraries.Service.ApplicationService
         {
             return await _nazulRepository.GetPagedNazul(model);
         }
-
+        public async Task<PagedResult<Nazul>> GetNazulReportData(NazulVillageReportSearchDto nazulVillageReportSearchDto)
+        {
+            return await _nazulRepository.GetNazulReportData(nazulVillageReportSearchDto);
+        }
 
 
 

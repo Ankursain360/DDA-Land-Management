@@ -175,9 +175,80 @@ namespace Libraries.Repository.EntityRepository
             return await _dbContext.Khasra.Include(x => x.LandCategory).Include(x => x.Acquiredlandvillage).OrderByDescending(x => x.Id).ToListAsync();
         }
 
+        public async Task<PagedResult<Khasra>> GetPagedVillageKhasraReport(VillageDetailsKhasraWiseReportSearchDto model)
+        {
+            var data = await _dbContext.Khasra
+                .Include(x => x.Acquiredlandvillage)
+                 .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                 .GetPaged<Khasra>(model.PageNumber, model.PageSize);
 
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
 
+                    //case ("VILLAGE"):
+                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    //    break;
+                    //case ("KHASRA"):
+                    //    data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                    //    break;
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                   .Include(x => x.Acquiredlandvillage)
+                 .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderBy(a => a.Acquiredlandvillage.Name)
+                                   .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                   .Include(x => x.Acquiredlandvillage)
+                 .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderBy(a => a.Name)
+                                   .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
 
+                    case ("VILLAGE"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                   .Include(x => x.Acquiredlandvillage)
+                 .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderByDescending(a => a.Acquiredlandvillage.Name)
+                                   .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+                    case ("KHASRA"):
+                        data = null;
+                        data = await _dbContext.Khasra
+                                   .Include(x => x.Acquiredlandvillage)
+                 .Where(x => (x.AcquiredlandvillageId == (model.villageId == 0 ? x.AcquiredlandvillageId : model.villageId))
+                 && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+                                   .OrderByDescending(a => a.Name)
+                                   .GetPaged<Khasra>(model.PageNumber, model.PageSize);
+                        break;
+
+                }
+            }
+            return data;
+        }
+
+        public async Task<List<Khasra>> GetAllKhasraList(int? villageId)
+        {
+            List<Khasra> khasraList = await _dbContext.Khasra.ToListAsync();
+            return khasraList;
+        }
 
 
     }

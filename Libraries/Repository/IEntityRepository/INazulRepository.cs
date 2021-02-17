@@ -16,5 +16,6 @@ namespace Libraries.Repository.IEntityRepository
 
        
         Task<List<Acquiredlandvillage>> GetAllVillageList();
+        Task<PagedResult<Nazul>> GetNazulReportData(NazulVillageReportSearchDto nazulVillageReportSearchDto);
     }
 }
