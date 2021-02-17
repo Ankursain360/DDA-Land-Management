@@ -54,9 +54,8 @@ namespace Libraries.Service.ApplicationService
             model.PropertySiteNo = ldoland.PropertySiteNo;
             model.Location = ldoland.Location;
             model.SiteDescription = ldoland.SiteDescription;
-            model.Bigha = ldoland.Bigha;
-            model.Biswa = ldoland.Biswa;
-            model.Biswanshi = ldoland.Biswanshi;
+            model.Area = ldoland.Area;
+           
             model.StatusOfLand = ldoland.StatusOfLand;
             model.OccupiedBy = ldoland.OccupiedBy;
             model.DateofPossession = ldoland.DateofPossession;

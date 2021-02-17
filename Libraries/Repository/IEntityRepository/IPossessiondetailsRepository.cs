@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Repository.IEntityRepository
 {
@@ -17,7 +18,7 @@ namespace Libraries.Repository.IEntityRepository
         Task<List<Khasra>> BindKhasra(int? villageId);
         Task<Khasra> FetchSingleKhasraResult(int? khasraId);
         Task<PagedResult<Possessiondetails>> GetPagedNoPossessiondetails(PossessiondetailsSearchDto model);
-
-
+        Task<PagedResult<Possessiondetails>> GetPagedPossessionReport(PossessionReportSearchDto model);
+        Task<List<PossessionReportDtoProfile>> BindPossessionDateList();
     }
 }

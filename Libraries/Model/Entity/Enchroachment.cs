@@ -27,6 +27,8 @@ namespace Libraries.Model.Entity
         public string Payment { get; set; }
         public string PaymentAddress { get; set; }
         public byte IsActive { get; set; }
+        public string RecStatus { get; set; } 
+        public string ActionTaken { get; set; }
 
         [NotMapped]
         public List<Natureofencroachment> NencroachmentList { get; set; }

@@ -3,8 +3,8 @@
 @await Component.InvokeAsync("PageHeader", new { pageName = "Mutation Details" })
 <br />
 <br />
-<form asp-action="Create" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
-    <h3 class="mb-3 d-flex">Add Details</h3>@*id="myForm"*@
+<form asp-action="Edit" method="post" class="d-block rounded border p-3 bg-white search-filer shadow mb-3" enctype="multipart/form-data" autocomplete="off">
+    <h3 class="mb-3 d-flex">Edit Details</h3>@*id="myForm"*@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="Id" />
     <div id="allDetails">

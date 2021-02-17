@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Dto.Search;
+using Dto.Master;
 
 namespace Libraries.Service.ApplicationService
 {
@@ -122,9 +123,14 @@ namespace Libraries.Service.ApplicationService
             return await _possessiondetailsRepository.FetchSingleKhasraResult(khasraId);
         }
 
+        public async Task<PagedResult<Possessiondetails>> GetPagedPossessionReport(PossessionReportSearchDto model)
+        {
+            return await _possessiondetailsRepository.GetPagedPossessionReport(model);
+        }
 
-
-
-
+        public async Task<List<PossessionReportDtoProfile>> BindPossessionDateList()
+        {
+            return await _possessiondetailsRepository.BindPossessionDateList();
+        }
     }
 }

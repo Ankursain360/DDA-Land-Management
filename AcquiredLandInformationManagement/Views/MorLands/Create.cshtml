@@ -20,7 +20,7 @@
 
 
                         <select class="floating-label-field floating-label-field--s3" asp-for="LandNotificationId" asp-items="@(new SelectList(Model.LandNotificationList, "Id","Name"))">
-                            <option>Select</option>
+                            <option disabled="disabled">Select</option>
                         </select>
                         <span asp-validation-for="LandNotificationId" class="text-danger"></span>
                         <label class="floating-label">Notification No.</label>
@@ -44,11 +44,11 @@
                     <div class="floating-label-wrap">
                         <select asp-for="SerialnumberId" asp-items="@(new SelectList(Model.SerialnumberList, "Id","SerialNo"))"
                                 class="floating-label-field floating-label-field--s3">
-                            <option value="0">---Select---</option>
+                            <option  disabled="disabled">---Select---</option>
 
                         </select>
                         <span asp-validation-for="SerialnumberId" class="text-danger"></span>
-                        <label class="floating-label">Serial No</label>
+                        <label class="floating-label" asp-for="SerialnumberId">Serial No</label>
 
                     </div>
                 </div>

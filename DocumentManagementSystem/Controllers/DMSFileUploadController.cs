@@ -217,8 +217,8 @@ namespace DocumentManagementSystem.Controllers
             {
                 ViewBag.Message = Alert.Show(Messages.Error, "", AlertType.Warning);
             }
-            ViewBag.LocalityList = await _dmsfileuploadService.GetDepartmentList();
-            ViewBag.DepartmentList = await _dmsfileuploadService.GetLocalityList();
+            ViewBag.DepartmentList = await _dmsfileuploadService.GetDepartmentList();
+            ViewBag.LocalityList = await _dmsfileuploadService.GetLocalityList();
             ViewBag.KhasraNoList = await _dmsfileuploadService.GetKhasraNoList();
             return View("Index");
         }

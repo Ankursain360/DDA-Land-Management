@@ -186,33 +186,21 @@
     ]
   },
   {
-    "outputFileName": "wwwroot/js/jaraicreate.min.js",
+    "outputFileName": "wwwroot/js/villagereportindex.min.js",
     "inputFiles": [
-      "wwwroot/js/jaraicreate.js"
+      "wwwroot/js/villagereportindex.js"
     ]
   },
   {
-    "outputFileName": "wwwroot/js/jaraiedit.min.js",
+    "outputFileName": "wwwroot/js/possessionreportindex.min.js",
     "inputFiles": [
-      "wwwroot/js/jaraiedit.js"
+      "wwwroot/js/possessionreportindex.js"
     ]
   },
   {
-    "outputFileName": "wwwroot/js/saknicreate.min.js",
+    "outputFileName": "wwwroot/js/awardindex.min.js",
     "inputFiles": [
-      "wwwroot/js/saknicreate.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/sakniedit.min.js",
-    "inputFiles": [
-      "wwwroot/js/sakniedit.js"
-    ]
-  },
-  {
-    "outputFileName": "wwwroot/js/sakniindex.min.js",
-    "inputFiles": [
-      "wwwroot/js/sakniindex.js"
+      "wwwroot/js/awardindex.js"
     ]
   }
 ]
