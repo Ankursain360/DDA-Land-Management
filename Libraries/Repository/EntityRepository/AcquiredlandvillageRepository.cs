@@ -15,7 +15,7 @@ using Repository.Common;
 
 namespace Libraries.Repository.EntityRepository
 {
-  public  class AcquiredlandvillageRepository:GenericRepository<Acquiredlandvillage>,IAcquiredlandvillageRepository
+    public class AcquiredlandvillageRepository : GenericRepository<Acquiredlandvillage>, IAcquiredlandvillageRepository
     {
         public AcquiredlandvillageRepository(DataContext dbContext) : base(dbContext)
         {
@@ -34,7 +34,7 @@ namespace Libraries.Repository.EntityRepository
             List<Tehsil> tehsilList = await _dbContext.Tehsil.Where(x => x.IsActive == 1).ToListAsync();
             return tehsilList;
         }
-       
+
         public async Task<List<Zone>> GetAllZone()
         {
             List<Zone> zonelist = await _dbContext.Zone.Where(x => x.IsActive == 1).ToListAsync();
@@ -42,11 +42,11 @@ namespace Libraries.Repository.EntityRepository
         }
 
 
-       
+
 
         public async Task<List<Acquiredlandvillage>> GetAcquiredlandvillage()
         {
-            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x=>x.Zone).ToListAsync();
+            return await _dbContext.Acquiredlandvillage.Include(x => x.District).Include(x => x.Tehsil).Include(x => x.Zone).ToListAsync();
         }
 
 
@@ -207,7 +207,16 @@ namespace Libraries.Repository.EntityRepository
 
         public async Task<PagedResult<Acquiredlandvillage>> GetPagedVillageReport(VillageReportSearchDto model)
         {
-            var data = await _dbContext.Acquiredlandvillage.GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+            var data = await _dbContext.Acquiredlandvillage
+
+
+                  .Where(x => (x.IsActive == 1)
+                                   && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                   .OrderByDescending(x => x.Id)
+                               .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
 
             int SortOrder = (int)model.SortOrder;
             if (SortOrder == 1)
@@ -260,6 +269,45 @@ namespace Libraries.Repository.EntityRepository
             return villageList;
         }
 
+        public async Task<PagedResult<Acquiredlandvillage>> GetPagedAcquiredVillageReport(AcquiredVillageReportSearchDto model)
+        {
+            var data = await _dbContext.Acquiredlandvillage
+
+
+                   .Where(x => (x.Acquired == "yes")
+                                    && (x.Id == (model.Name == 0 ? x.Id : model.Name)))
+
+
+
+                                    .OrderByDescending(x => x.Id)
+                                .GetPaged<Acquiredlandvillage>(model.PageNumber, model.PageSize);
+
+            int SortOrder = (int)model.SortOrder;
+            if (SortOrder == 1)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderBy(x => x.Name).ToList();
+                        break;
+                }
+            }
+            else if (SortOrder == 2)
+            {
+                switch (model.SortBy.ToUpper())
+                {
+
+                    case ("VILLAGE"):
+                        data.Results = data.Results.OrderByDescending(x => x.Name).ToList();
+                        break;
+
+                }
+            }
+            return data;
+        }
+
+
 
         public async Task<List<VillageDetailsLitDataDto>> GetPagedvillagedetailsList(VillagedetailsSearchDto model)
 
@@ -283,6 +331,7 @@ namespace Libraries.Repository.EntityRepository
                 throw;
             }
         }
+
 
     }
 }
